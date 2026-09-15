@@ -105,6 +105,12 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(980000);
   });
 
+  it('kanagawaは年収750万円未満で授業料上乗せ年額22,800円を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'kanagawa', '年収750万円未満（目安・授業料上乗せ）')
+    ).toBe(22800);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
