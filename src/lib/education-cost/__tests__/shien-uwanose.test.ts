@@ -161,6 +161,12 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(336000);
   });
 
+  it('tochigiは住民税非課税世帯(全日制)で入学料減免7万円を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'tochigi', '住民税非課税世帯（全日制・入学料減免）')
+    ).toBe(70000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
