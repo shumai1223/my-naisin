@@ -123,6 +123,16 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(120000);
   });
 
+  it('hiroshimaは年収270万円未満で就学支援金との合計上限年額60万円を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'hiroshima',
+        '生活保護受給世帯・年収目安270万円未満（算定基準額0円）'
+      )
+    ).toBe(600000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
