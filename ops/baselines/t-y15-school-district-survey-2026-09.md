@@ -53,8 +53,44 @@
 | yamaguchi | structured | 2016年度(平成28年度)入試から全県1学区制と判明。★珍しい逆パターン: 周防大島高校普通科・地域創生科は**県外から**募集し、県外からの入学者を定員30%以内に制限（他県が「学区外流入を制限」するのと逆に「県外流入自体を歓迎しつつ上限を設ける」構造）。学区外条件のバリエーションとして貴重 |
 | tokushima | structured | 公式PDF群を複数直接発見（`pref.tokushima.lg.jp/file/attachment/929243.pdf`＝現行3学区の区割り表・`973309.pdf`＝令和7年の見直し報告書素案）。現行3学区・育成型選抜の学区外上限2〜3%・「全県学区化＋上限撤廃」への見直し方針という進行中の制度改革まで判明。T-Y14/T-Y15通じて最も充実した一次資料群 |
 | kagawa | structured | 公式ページ「香川県立高等学校の学区制」(`pref.kagawa.lg.jp/kenkyoui/koko/examination02_1.html`)を直接発見。普通科・理数科(小豆島中央高除く)のみ第1/第2学区制、令和5年度から自己推薦選抜に限り他学区枠5%を新設、他学科・定通は県内全域という学区外条件も判明 |
+| ehime | structured | 全日制普通科は東予/中予/南予の3学区制と判明。市区町村単位の詳細な区割りまで具体的（越智郡上島町・伊予郡砥部町等）。学区外は定員5%以内という条件も判明。普通科以外は県内全域 |
+| kochi | structured | 全県一学区（学区制なし）と確認。県教委検討委員会の報告PDF「高校通学区域の見直しについて」(`kochinet.ed.jp/sinnkoukihonn4/siryou4-4.pdf`)を直接発見し、制度改廃の経緯資料としても使える |
+| fukuoka | structured | 公式ページ「通学できる福岡県立高等学校を検索する（学区別の市区町村一覧表）」(`pref.fukuoka.lg.jp/site/kyouiku/tsugakukuiki00c.html`)＋「福岡県立高等学校の通学区域に関する規則等」(`tuugakukuikikisoku.html`)を直接発見。全日制普通科(コース制・単位制除く)は13学区の中学区制、理数科・英語科は地区全域、学区外出願は教育長許可制という条件も判明 |
+| nagasaki | structured | 公式PDF「長崎県立高等学校の通学区域に関する規則」(`pref.nagasaki.jp/shared/uploads/2024/04/1713493377.pdf`・昭和31年制定)を直接発見。普通科7学区・学区外7%上限・同一市内は学区にかかわらず志願可という学区外条件も判明 |
+| kumamoto | structured | 公式ページ「県立高校通学区域」(`kyouiku.higo.ed.jp/page2031/page3112/`)＋規則本文(`www1.g-reiki.net/kumamoto/act/frame/frame110001083.htm`)を直接発見。2010年度に8学区→3学区(県北/県央/県南)に再編、学区外枠が6.5%→13%に拡大という制度変遷も判明 |
+| oita | structured | 2008年度から「全県一区制」導入済みと確認（`pref.oita.jp/soshiki/31210/tsuugakukuiki.html`）。旧制度は色分けされた学区+学区外枠10%上限だったと判明。2024年9月に検証委員会が発足し制度見直し議論が進行中という最新動向も発見 |
+| miyazaki | uncertain | 検索結果は学校一覧・ナビサイトのみで、宮崎県立高校の学区制度に関する具体的な一次資料は今回発見できなかった。★次回`pref.miyazaki.lg.jp`または「みやなび」で一次資料を確認する |
+| kagoshima | structured | 公式PDF「鹿児島県立高等学校通学区域に関する規則(抜粋)」を複数年度分(R3/R6)直接発見(`pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/`配下)。普通科(単位制除く)7学区・定員120人以下の高校と熊毛/大島学区は学区外上限なし・他は5〜10%という学区外条件も判明 |
+| okinawa | structured | 公式規則PDF「沖縄県立高等学校の通学区域に関する規則」(平成16年制定・`e-seishin.jp/guidance/tuugakuku.pdf`)を直接発見。普通科は学区外定員10%以内、専門学科・県立中高一貫校は県内全域という学区外条件も判明。令和3年の規則改正議案PDFも発見し多年度追跡が可能 |
 
-## 次回の続き
+**これで47/47都道府県の存在確認パスが完了した（T-Y14と同じ達成）。**
+
+## 最終集計（47/47県）
+
+- **structured（確定）**: saga/aichi/tokyo/osaka/saitama/chiba/hyogo/hokkaido/aomori/iwate/yamagata/
+  fukushima/ibaraki/tochigi/toyama/ishikawa/nagano/shizuoka/mie/shiga/kyoto/miyagi/kanagawa/wakayama/
+  shimane/okayama/hiroshima/yamaguchi/tokushima/kagawa/ehime/kochi/fukuoka/nagasaki/kumamoto/oita/
+  kagoshima/okinawa（38県）
+- **structured(見込み・次回本文確認が必要)**: gunma/nara/gifu（3県）
+- **uncertain（一次資料が今回未発見）**: tottori/akita/niigata/fukui/yamanashi/miyazaki（6県）
+
+**structured確定+見込みの合計41/47県（87.2%）**。T-Y14（78.7%）よりさらに高い比率になった。
+学区制度は「廃止済み（全県一学区）」の県が多数（東京・大阪・埼玉・茨城・栃木・富山・石川・静岡・
+滋賀・高知・大分等）だが、**「制度なし確認済み」もタスク定義上は構造化された1データ点として
+扱ってよい**（T-Y15タスクファイル冒頭のY-0適用ルール参照）。ただし本ファイルの判定は全て
+WebSearch要約に基づく存在確認パスであり、次工程（作業の順序ステップ3のデータ層実装）に進む
+前に、各県の一次資料へWebFetch/pdftoppmで当たり直し、最新年度版であることを確認すること
+（特にaichi/hyogo/shigaの一部は2021年時点データとやや古い可能性が判明済み）。
+
+## 次にやること
+
+1. **uncertain6県（tottori/akita/niigata/fukui/yamanashi/miyazaki）の一次資料を追加確認**
+2. **structured確定38県から、実際にWebFetch/pdftoppmで本文を確認しデータ層実装
+   （`src/data/school-districts/<pref>.ts`）に着手する**（T-Y15「作業の順序」ステップ3）
+3. T-Y14と同時並行できるため、優先順位表（loop-question-note参照）に従い次のタスク
+   （T-S13A A-3/A-4・T-Y13等）とも比較して着手順を決めること
+
+## 旧・次回の続き（履歴として残す）
 
 残り9県（未着手・38/47完了・残りはehime・kochi・fukuoka・nagasaki・kumamoto・oita・
 miyazaki・kagoshima・okinawa）。
