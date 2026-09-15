@@ -124,6 +124,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '鹿児島県高校入試が気になったら初めに読むべき記事＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はHTTP403のため前回(08-05)未使用の第三者サイト(study-room.net)で代替。既存記載(targetGrades[3]のみ・coreMultiplier2・practicalMultiplier20・maxScore450)をWebSearch要約とstudy-room.netの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「5教科×2倍50点+実技4教科×20倍400点=450点満点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/report-card/kagoshima',
+      sourceTitle: '個別指導Axis「鹿児島県公立高校入試の内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で第3stale batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(axis-kobetsu.jp)+WebSearch要約で確認・既存記載(targetGrades[3]のみ・coreMultiplier2・practicalMultiplier20・maxScore450)に変更なし(両ソースとも「5教科×2倍50点+実技4教科×20倍400点=450点満点」で完全一致)。',
+    },
   ],
   fukuoka: [
     {
@@ -1284,6 +1290,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「秋田県の内申点の計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。08-05に記録済みの「144点満点・態度評価3段階」というWebSearchハルシネーションパターンが今回は出現しないことを確認。前回未使用の第三者サイト(jyuku-online.com)とWebSearch要約の2独立ソースで、既存記載(全学年等倍・practicalMultiplier2・maxScore195=各学年65点×3年)に変更が無いことを確認した(両ソースとも「5教科25点+実技4教科×2倍40点=65点×3年=195点満点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/akita/',
+      sourceTitle: '高校受験ラボ「秋田県高校入試情報」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で第3stale batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(jyuke-labo.com・直接WebFetch)+WebSearch要約で確認・08-05記録のハルシネーションパターン(144点満点)は今回も出現せず、既存記載(全学年等倍・practicalMultiplier2・maxScore195=各学年65点×3年)に変更なし(両ソースとも「5教科+実技4教科×2倍=65点×3年=195点満点」で完全一致)。',
+    },
   ],
   niigata: [
     {
@@ -1303,6 +1315,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://katekyo-niigata.com/school/kamo/high-school-exam-niigata/report',
       sourceTitle: 'KATEKYO学院加茂駅前校「新潟県公立高校入試：内申点とその出し方」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(katekyo-niigata.com)とWebSearch要約の2独立ソースでクロスチェックし、既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更が無いことを確認した(両ソースとも「5段階×9教科×3学年=135点満点」の算術で一致)。',
+    },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://shinyusya.net/archives/8140',
+      sourceTitle: '個別指導塾・予備校真友ゼミ「新潟県高校入試の内申点について」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で第3stale batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(shinyusya.net・直接WebFetch)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更なし(両ソースとも「5段階×9教科×3学年=135点満点」で完全一致)。',
     },
   ],
   shizuoka: [
