@@ -956,6 +956,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: 'W早稲田ゼミ「群馬県の内申点」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。⚠️今回WebFetchしたURL(column/gunma-naishinten/)は08-05に使用したURL(column/entrance-exam/gunma-naishinten/)とパスが微妙に異なる別記事だったが同一媒体(wasedazemi.com)・同一結論。既存記載(全学年等倍・9教科×5段階×3年=135点満点)をWebSearch要約とこの記事の2独立ソースでクロスチェックし変更なしと確認(両ソースとも「3年間オール5であれば135点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://katekyo-peacenet.com/exam-navi_high-school/10_gumma.html',
+      sourceTitle: 'オンライン家庭教師ピース「群馬県の高校入試情報・偏差値ランキング」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。08-05/09-14はいずれもwasedazemi.com系記事だったため今回は同一媒体を避け新しい第三者ソース(katekyo-peacenet.com)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更なし(両ソースとも完全一致)。',
+    },
   ],
   hiroshima: [
     {
