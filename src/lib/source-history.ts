@@ -178,6 +178,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「福岡県の内申点の計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(targetGrades[3]のみ・9教科×5段階=45点満点・note「一部高校で傾斜配点あり」)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中3のみ対象・45点満点・一部高校で特定教科1.5倍等の傾斜配点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/report-card/fukuoka',
+      sourceTitle: '個別指導Axis「福岡県の内申点アップ中学校別対策」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(axis-kobetsu.jp・直接WebFetch)+WebSearch要約で確認・既存記載(targetGrades[3]のみ・9教科×5段階=45点満点・note「一部高校で傾斜配点あり」)に変更なし。',
+    },
   ],
   tottori: [
     {
@@ -219,6 +225,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「鳥取県の内申点計算方法」＋axis-kobetsu.jpの2直接WebFetch',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。**⚠️WebSearch要約が「各学年65点満点×3年間=195点満点、その後130/195/260点へ換算」という既存記載と矛盾する説明を提示したため（学校指定倍率の換算後満点(130/195/260)を「3学年分の合計」と誤って解釈したとみられる誤読・[[fable5-loop-protocol]]既知の罠と同型）、直接WebFetchで裏取りした**。jyuku-online.com（既存08-05でも使用・「対象学年は中学3年のみ、中1・中2は含まれない」と明記）とaxis-kobetsu.jp（新規・「対象学年：中学3年生のみ」と明記）の2件の直接WebFetchで、既存記載(targetGrades[3]のみ・実技4教科×2倍・基本65点満点・学校指定倍率2〜4倍で130/195/260点)に変更が無いことを確認した。axis-kobetsu.jpは「特色選抜」では45点満点(倉吉東55点)の別方式が使われるという新しい情報も提示したが、これは既存記載が対象とする「一般選抜」とは別トラックのため、prefectures.tsの該当レコードへの変更は不要と判断した。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://www.sakusakura.jp/column_blog/archives/8700',
+      sourceTitle: 'サクナビ「令和8年度鳥取県公立高校入試｜受験情報まとめ」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(sakusakura.jp・直接WebFetch)+WebSearch要約で確認・既存記載(targetGrades[3]のみ・実技4教科×2倍・基本65点満点・学校指定倍率2〜4倍で130/195/260点)に変更なし。',
+    },
   ],
   fukui: [
     {
@@ -244,6 +256,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/fukui',
       sourceTitle: '個別指導Axis「福井県の公立高校入試概要」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回未使用の第三者ソース(axis-kobetsu.jp)+WebSearch要約で確認・既存記載(中3のみ・9教科×5段階=45点満点)に変更なし。',
+    },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://bibroom.com/naishinten-calculation/',
+      sourceTitle: 'Bibroom「高校受験の内申点とは？計算方法を都道府県別にやさしく解説【石川・福井・富山・長野・山梨】」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(bibroom.com・直接WebFetch)+WebSearch要約で確認・既存記載(中3のみ・9教科×5段階=45点満点)に変更なし。',
     },
   ],
   yamagata: [
@@ -472,6 +490,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '都立高のトリセツ「都立高校受験の内申点計算方法！換算内申の仕組みを解説」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(targetGrades[3]のみ・coreMultiplier1・practicalMultiplier2・maxScore65・reverseCalc.totalMaxScore1020)をWebSearch要約とtokyo-metropolitan-high-school.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「5教科×1倍25点+実技4教科×2倍40点=65点満点」「換算内申÷65×300で調査書点(300点)へ換算」「学力検査700+調査書300+ESAT-J20=1020点満点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://omoukoto.net/toritu-naisin-keisan/',
+      sourceTitle: '塾講師のおもうこと。「都立高校入試の換算内申点・調査書点の計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(omoukoto.net・直接WebFetch)+WebSearch要約で確認・既存記載(targetGrades[3]のみ・coreMultiplier1・practicalMultiplier2・maxScore65・reverseCalc.totalMaxScore1020)に変更なし。',
+    },
   ],
   hyogo: [
     {
@@ -509,6 +533,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://jyuku-online.com/blog/jj-hyogo/',
       sourceTitle: '塾オンラインドットコム「兵庫県の内申点計算」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(targetGrades[3]のみ・coreMultiplier4・practicalMultiplier7.5・maxScore250)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「主要5教科評定合計×4=100点+実技4教科評定合計×7.5=150点=250点満点」「学力検査250点+調査書250点=総合500点満点」で完全一致)。',
+    },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://www.kobetsukan.jp/blog/4jjvsyfw-iq/',
+      sourceTitle: 'アップ教育企画・個別館「兵庫県公立高校入試の内申点の計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(kobetsukan.jp・直接WebFetch)+WebSearch要約で確認・既存記載(targetGrades[3]のみ・coreMultiplier4・practicalMultiplier7.5・maxScore250)に変更なし。',
     },
   ],
   osaka: [
@@ -1520,6 +1550,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「長野県の内申点の計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(targetGrades[3]のみ・9教科×5段階=45点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「後期選抜で使うのは中3の必修9教科評定合計のみ・45点満点・実技教科も同等の重み」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://katekyo-peacenet.com/exam-navi_high-school/20_nagano.html',
+      sourceTitle: 'オンライン家庭教師ピース「長野県の高校入試情報・偏差値ランキング」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(katekyo-peacenet.com・直接WebFetch)+WebSearch要約で確認・既存記載(targetGrades[3]のみ・9教科×5段階=45点満点)に変更なし。',
+    },
   ],
   shimane: [
     {
@@ -1553,6 +1589,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '受験ラボ「島根県高校受験対策・高校入試情報」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(jyuke-labo.com)とWebSearch要約の2独立ソースでクロスチェックし、既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180・note「51点満点+特別活動9点=60点満点」)に変更が無いことを確認した(両ソースとも「180点×51/180=51点」+「特別活動9点」=60点満点、内申:学力比率は7:3/6:4/5:5/4:6の4択で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://katekyo-peacenet.com/exam-navi_high-school/32_shimane.html',
+      sourceTitle: 'オンライン家庭教師ピース「島根県の高校入試情報・偏差値ランキング」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。★naishinten.comが「135点満点・全学年等倍」というishikawaと同型の誤った汎用テンプレート値を返したため不採用とし、前回未使用の第三者ソース(katekyo-peacenet.com・直接WebFetch)+jyuke-labo.com再訪(WebFetch)で確認・既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180・51点+特別活動9点=60点満点)に変更なし。naishinten.comは石川県に続き2件目の既知不良ソース(学年別傾斜を持つ県で汎用135点均等テンプレートを返す)として記録。',
+    },
   ],
   tokushima: [
     {
@@ -1582,6 +1624,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '受験ラボ「徳島県公立高校入試の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回未使用の第三者ソース(jyuke-labo.com)+WebSearch要約で確認・既存記載(全学年等倍・実技4教科×2倍・各学年65点×3=195点満点)に変更なし。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://alpha-katekyo.jp/tips/tips286/',
+      sourceTitle: '家庭教師のアルファ「都道府県別・内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。★naishinten.comが石川・島根に続き3件目となる「135点満点・全教科等倍」という誤った汎用テンプレート値(実技×2倍を反映しない)を返したため不採用。前回未使用の第三者ソース(alpha-katekyo.jp・直接WebFetch)+WebSearch要約で確認・既存記載(全学年等倍・実技4教科×2倍・各学年65点×3=195点満点)に変更なし。naishinten.comは実技傾斜のある県で一貫して汎用135点均等値を返す既知不良ソースとして確定(3件目)。',
+    },
   ],
   tochigi: [
     {
@@ -1601,6 +1649,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/report-card/tochigi',
       sourceTitle: '個別指導Axis「栃木県の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回未使用の第三者ソース(axis-kobetsu.jp)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点・500点満点への換算)に変更なし。',
+    },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/tochigi/',
+      sourceTitle: '高校受験ラボ「栃木県高校受験対策・高校入試情報」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(jyuke-labo.com・直接WebFetch)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点・500点満点への換算)に変更なし。',
     },
   ],
   toyama: [
@@ -1622,6 +1676,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンライン「富山県の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回未使用の第三者ソース(jyuku-online.com)+WebSearch要約で確認・既存記載(中1対象外・中2 45点+中3×2倍90点=135点満点+特別活動15点=150点満点)に変更なし。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyukuerabi.com/column/6033',
+      sourceTitle: '塾選び富山「高校受験の合否判定のしくみと内申点の出し方を聞きました！」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(jyukuerabi.com・直接WebFetch)+WebSearch要約で確認・既存記載(中1対象外・中2 45点+中3×2倍90点=135点満点+特別活動15点=150点満点)に変更なし。',
+    },
   ],
   fukushima: [
     {
@@ -1641,6 +1701,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/fukushima/',
       sourceTitle: '受験ラボ「福島県公立高校入試の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回未使用の第三者ソース(jyuke-labo.com)+WebSearch要約で確認・既存記載(全学年等倍・実技4教科×2倍・195点満点=前期選抜・一般選抜の方式)に変更なし。**新発見(未反映・要旨のみ記録)**: jyuke-labo.comが「後期選抜(定員未充足校で実施)は9教科×3学年=135点満点という異なる計算式」と言及し、axis-kobetsu.jpも前期(特色/一般)・後期選抜の区分自体は現存すると確認したが、後期選抜の135点満点という具体的数値は2ソース目では裏取りできず断定を避けた。既存レコードは一般選抜(195点満点)を対象としているため変更は見送り、後期選抜の別方式は今後一次資料で確認する課題として記録。',
+    },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://tenten-f.info/article/1670/',
+      sourceTitle: 'tenten「福島県で子育てするなら知っておきたい！福島県立高校入試の仕組み」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(tenten-f.info・直接WebFetch)+WebSearch要約で確認・既存記載(全学年等倍・実技4教科×2倍・195点満点=一般選抜の方式)に変更なし。後期選抜135点満点説は今回も裏取りできず引き続き未反映のまま。',
     },
   ],
   wakayama: [
@@ -1707,6 +1773,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://www.nara-np.co.jp/news/20260318205840.html',
       sourceTitle: '奈良新聞デジタル「奈良県教委、高校入試調査書の評定変更へ」＋WebSearch要約(kec.gr.jp等)の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。現行(令和8年度)の4パターン(①144点/②234点/③198点/④180点)には変更が無いことをWebSearch要約とkec.gr.jpへの直接WebFetchで確認した。**新発見**: 既存記載の2026-03-17発表は令和8年度の即時改定(中1・中2を「主体的に学習に取り組む態度」3段階評価で算入)だけでなく、**令和10年度以降に向けて中1・中2を段階的に全観点を含む5段階評定へ移行し、その時点の新中1生が中3で受検する年度には満点が144点→最大180点に拡大する**という長期計画も同時に含んでいたことが判明(奈良新聞デジタルの見出し「高校入試調査書の評定変更へ」で確認・本文は有料会員限定のためWebSearch要約とkec.gr.jpの記事で補完)。**現時点ではprefectures.tsのnaraレコード(令和8年度=対象年度)には影響しないため変更していない**。令和10年度が近づいたら別途この段階移行の正式な満点・区分をprefectures.tsへ反映する必要がある。',
+    },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://machikadojuku.net/nara-koukou-nyushi-2025/',
+      sourceTitle: 'まちかど塾「奈良県公立高校入試制度と内申点の重要性｜令和8年度受験対策」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(machikadojuku.net・直接WebFetch)+WebSearch要約で確認・現行(令和8年度)の4パターン(①144点/②234点/③198点/④180点)に変更なし。令和10年度以降の段階移行計画(既存記載済み・prefectures.tsは令和8年度対象のため未反映)についても今回追加の新情報は無し。',
     },
   ],
 };
