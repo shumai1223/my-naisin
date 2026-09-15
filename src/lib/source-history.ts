@@ -633,6 +633,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾選（ジュクセン）「岡山県の内申点計算方法！志望校に合格するための理解すべき入試制度」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存note(中1中2各45点+中3が110点=200点満点)をWebSearch要約とbestjuku.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中3=9教科評定×2倍+実技4教科評定=110点(5×9×2+4×5)」「45+45+110=200点満点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://juku.ameba.jp/study/a000013527/',
+      sourceTitle: 'アメ塾「岡山県立高校の内申点ボーダー一覧｜中3で実技が3倍？計算方法と合格目安を解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(juku.ameba.jp)+WebSearch要約で確認・既存記載(中1・中2各45点[9教科×5段階]+中3=110点[5教科×5段階×2倍50点+実技4教科×5段階×3倍60点]・合計200点満点)に変更なし(両ソースとも200点満点・中3実技4教科3倍で一致)。',
+    },
   ],
   chiba: [
     {
