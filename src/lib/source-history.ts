@@ -930,6 +930,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '受験ラボ「熊本県高校入試情報」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はHTTP403のため代替。axis-kobetsu.jpとjyuke-labo.comはいずれも08-05で使用済みだったため今回はaxis-kobetsu.jp(今回は詳細記述なし)を試した後jyuke-labo.comへ切替、WebSearch要約は熊本県教育委員会の実施要項の計算方法(「5教科は第1第2学年の評定に第3学年の評定×2を加えて合計・4教科も同様」)を直接引用しており実質的に一次資料由来の新規情報として扱った。既存記載(gradeMultipliers{1,2,3の中3のみ2倍}・maxScore180=中1中2各45点+中3×2倍90点)に変更なしと確認。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://www.deskstyle.info/eria/kumamoto/juken.html',
+      sourceTitle: 'デスクスタイル「熊本県の高校受験、高校入試情報、日程、内申書」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(deskstyle.info)+WebSearch要約で確認・既存記載(中1中2各45点+中3×2倍90点=180点満点)に変更なし(両ソースとも完全一致)。',
+    },
   ],
   gunma: [
     {
