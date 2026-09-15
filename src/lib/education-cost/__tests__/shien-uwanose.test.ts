@@ -53,6 +53,32 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(630000);
   });
 
+  it('mieは授業料上乗せ(年額12,000円)と入学金補助(上限25,000円)を別tierで持つ', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'mie');
+    expect(record?.tiers).toHaveLength(2);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'mie',
+        '世帯年収 約590〜910万円未満（目安・授業料上乗せ）'
+      )
+    ).toBe(12000);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'mie',
+        '道府県民税・市町村民税所得割合算8万5,500円未満（入学金補助）'
+      )
+    ).toBe(25000);
+  });
+
+  it('yamanashiは入学金サポート(20万円)と入学準備サポート(5万円)を別tierで持つ', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'yamanashi');
+    expect(record?.tiers).toHaveLength(2);
+    const amounts = record?.tiers?.map((t) => t.annualAmountJpy).sort((a, b) => a - b);
+    expect(amounts).toEqual([50000, 200000]);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
