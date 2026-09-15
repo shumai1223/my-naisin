@@ -173,6 +173,12 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(96000);
   });
 
+  it('fukuiは世帯年収約270万円未満で年額9万円(月7,500円上乗せ)を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'fukui', '世帯年収 約270万円未満')
+    ).toBe(90000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
