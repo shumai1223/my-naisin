@@ -79,6 +79,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: 'W早稲田ゼミ「埼玉県公立高校入試情報」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=0・前回09-13検証)として選定・再検証(T-Y11F §11項目4「X-14は恒久的に尽きない」定義に従い継続)。前回未使用の第三者ソース(wasedazemi.com)+WebSearch要約で確認・既存記載(デフォルト1:1:2=180点満点・1:1:1/1:1:3も高校により採用)に変更なし。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://www.shozemi.com/column/test/23339/',
+      sourceTitle: '湘南ゼミナール「埼玉県公立高校の内申点｜算出方法・高校別に合格者内申点を解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(shozemi.com)+WebSearch要約で確認・既存記載(デフォルト1:1:2=180点満点・1:1:1/1:1:3等も高校により採用)に変更なし(両ソースとも完全一致)。',
+    },
   ],
   kagoshima: [
     {
