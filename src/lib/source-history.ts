@@ -592,6 +592,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '受験ラボ「茨城県高校受験対策・高校入試情報」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(全学年等倍・9教科×5段階×3年=135点満点・共通選抜A群/B群の2段階選考)をWebSearch要約とjyuke-labo.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1+中2+中3の9教科評定合計=135点満点」「学力検査500点満点」「A群(学力上位80%以内かつ内申順位も募集人員以内で原則合格)/B群(学力重視・内申重視の2方式)」で一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-ibaraki/',
+      sourceTitle: '塾オンラインドットコム「茨城県の内申点の計算方法」＋ameblo.jp「学習塾まえしまアカデミー」の2独立ソース(直接WebFetch)',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。⚠️今回のWebSearch要約は「中1・中2は2倍で90点満点、中3は3倍で135点満点、合計315点満点」という既存記載と矛盾する説明を提示したが、同じ要約内に「各学年45点満点、合計135点満点」という整合する記述も混在していたため([[fable5-loop-protocol]]既知の罠と同型の自己矛盾)、2件を直接WebFetchで裏取りした。jyuku-online.com・ameblo.jp/maeshima-ac(いずれも新規使用)とも「学年ごとの倍率差は無く、中1〜中3が均等に45点×3=135点満点」と明記しており、既存記載(全学年等倍・135点満点)に変更が無いことを確認した。',
+    },
   ],
   okayama: [
     {
