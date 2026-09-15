@@ -1051,6 +1051,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「高知県公立高校入試】内申点の計算方法と効果的な内申点対策」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(jyuku-online.com)とWebSearch要約の2独立ソースでクロスチェックし、既存記載(5段階換算195点満点・practicalMultiplier2・note「中3は10段階評価で260点満点」)に変更が無いことを確認した(jyuku-online.comは「中1中2各65点(5段階)+中3130点(10段階)=260点満点」という同一構造を独立に報告)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/kouchi/',
+      sourceTitle: '受験ラボ「高知県高校入試情報」(直接WebFetch)＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。候補tsubotajuku.comは高知県への言及なし・czemi.benesse.ne.jpはHTTP403のためいずれも断念し、jyuke-labo.com(08-05に参照済みだがサイト自体への直接WebFetchは今回が初)+WebSearch要約で確認。既存記載(中1中2各65点[5段階]+中3130点[10段階]=260点満点)の**最終合計に変更なし**と確認したが、⚠️jyuke-labo.comのWebFetch要約は中間の式で「実技4教科×5段階評定×3=85点満点」という既存記載(×2で65点)と食い違う記述を提示した([[fable5-loop-protocol]]既知の罠と同型の抽出時ノイズ)。ただし同じ要約内の最終結論(「中1と中2は各65点満点、中3は130点満点で、合計260点満点」)は既存記載と完全一致しており、中間式のみの抽出誤りと判断・既存記載は変更しない。',
+    },
   ],
   saga: [
     {
