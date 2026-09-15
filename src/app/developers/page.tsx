@@ -152,6 +152,20 @@ curl "${SITE_URL}/api/total-score/hyogo?academicRaw=420&reportRaw=200"`;
   -H "Content-Type: application/json" \\
   -d '{"kamoku":[{"kyoka":"理科","kamoku":"物理基礎","gakunen":1,"hyotei":3},{"kyoka":"理科","kamoku":"化学基礎","gakunen":2,"hyotei":3},{"kyoka":"理科","kamoku":"生物基礎","gakunen":1,"hyotei":5}]}'`;
 
+  // T-S13A A-4: データライセンス商品のサンプルCSV（実データ10行・捏造ゼロ）。
+  // buildFullExportRecords()の実出力から東京/大阪/千葉/愛知/福岡の各2校を抜粋。
+  const dataLicenseSampleCsv = `prefectureCode,prefectureName,schoolName,area,department,fiscalYear,quota,finalApplicants,finalRate,sourceUrl,docTitle,fetchedAt
+tokyo,東京都,日比谷,千代田,普通科,令和8年度（2026年度）,253,520,2.06,https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182440-757,東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況（最終応募状況）,2026-07-24
+tokyo,東京都,三田,港,普通科,令和8年度（2026年度）,236,343,1.45,https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/2026-02-13-182440-757,東京都教育委員会 令和8年度東京都立高等学校入学者選抜応募状況（最終応募状況）,2026-07-24
+osaka,大阪府,東淀川,,普通科,令和8年度（2026年度）,264,328,1.24,https://www.pref.osaka.lg.jp/documents/125698/r08_ippan_sigansya_0306.xlsx,大阪府教育委員会 令和8年度大阪府公立高等学校 一般入学者選抜（全日制の課程）の志願者数,2026-07-24
+osaka,大阪府,旭,,普通科,令和8年度（2026年度）,240,245,1.02,https://www.pref.osaka.lg.jp/documents/125698/r08_ippan_sigansya_0306.xlsx,大阪府教育委員会 令和8年度大阪府公立高等学校 一般入学者選抜（全日制の課程）の志願者数,2026-07-24
+chiba,千葉県,千葉,,普通科,令和8年度（2026年度）,240,331,1.38,https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/documents/r8kakuteiippan.pdf,千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等志願者確定数一覧,2026-07-24
+chiba,千葉県,千葉女子,,普通科,令和8年度（2026年度）,240,234,0.98,https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/documents/r8kakuteiippan.pdf,千葉県教育委員会 令和8年度公立高等学校一般入学者選抜等志願者確定数一覧,2026-07-24
+aichi,愛知県,旭丘,,普通,令和8年度（2026年度）,324,490,1.51,https://www.pref.aichi.jp/uploaded/attachment/600212.pdf,愛知県教育委員会高等学校教育課 令和8年度愛知県公立高等学校入学者選抜（全日制課程）における一般選抜等の志願変更後の志願者数（最終）について,2026-07-25
+aichi,愛知県,旭丘,,美術,令和8年度（2026年度）,26,85,3.27,https://www.pref.aichi.jp/uploaded/attachment/600212.pdf,愛知県教育委員会高等学校教育課 令和8年度愛知県公立高等学校入学者選抜（全日制課程）における一般選抜等の志願変更後の志願者数（最終）について,2026-07-25
+fukuoka,福岡県,青豊,,総合学科,令和8年度（2026年度）,280,286,1.02,https://www.pref.fukuoka.lg.jp/site/kyouiku/nyushi8.html,福岡県教育委員会 令和8年度公立高等学校一般入試志願状況,2026-07-25
+fukuoka,福岡県,築上西,,普通科,令和8年度（2026年度）,120,85,0.71,https://www.pref.fukuoka.lg.jp/site/kyouiku/nyushi8.html,福岡県教育委員会 令和8年度公立高等学校一般入試志願状況,2026-07-25`;
+
   // T-C8: 個人情報を受け取らない設計の実演。リクエスト/レスポンスの実例をそのまま並べ、
   // 個人が特定できるフィールドが1つも無いことを見せる（src/app/api/__tests__/no-pii-fields.test.tsで固定）。
   const noPiiRequestExample = `POST ${SITE_URL}/api/gakushu-seiseki
@@ -641,6 +655,44 @@ print(naishin["total"])  # -> 52`;
           <div className="mt-2">
             <CodeBlock>{gakushuSeisekiCurlExample}</CodeBlock>
           </div>
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦c-2 データライセンス商品（継続アーカイブ）</h3>
+          <p className="mb-2 text-sm leading-relaxed text-slate-600">
+            <strong>訴求の芯は「継続アーカイブ」です。</strong>{' '}
+            直近1年度のスナップショットではなく、<strong>47都道府県 × 複数年度（県により令和4〜8年度・平均約3年度分）を
+            継続的に積み上げている</strong>点に価値があります。教育委員会が公表後にPDFを削除し他社が再取得不能に
+            なった過年度分（一部県）も収録済みで、<strong>この差は時間でしか埋められません</strong>。今後も年次で追加されます。
+          </p>
+          <div className="mb-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <p className="text-sm font-bold text-amber-900">購入前に知っておくべき制約（3点）</p>
+            <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-amber-800">
+              <li><strong>公立高校のみ</strong>を収録しています（私立高校は含みません）</li>
+              <li><strong>最終応募倍率（finalRate）のみ</strong>が対象です（合格者数・実質倍率は収録していません）</li>
+              <li><strong>年度数は都道府県ごとに異なります</strong>（平均約3.0年度・県により1〜5年度）</li>
+            </ol>
+          </div>
+          <p className="mb-2 text-sm leading-relaxed text-slate-600">
+            サンプルCSV（実データ10行・東京/大阪/千葉/愛知/福岡から各2校を抜粋。捏造・加工なし）：
+          </p>
+          <CodeBlock>{dataLicenseSampleCsv}</CodeBlock>
+          <p className="mb-2 mt-2 text-xs text-slate-500">
+            列の仕様（1行=1校1学科1年度）：<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">prefectureCode</code>
+            都道府県コード / <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">schoolName</code>学校名 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">department</code>学科 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">fiscalYear</code>年度 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">quota</code>募集人員 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">finalApplicants</code>最終応募人員 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">finalRate</code>最終応募倍率（公表値をそのまま転記・独自計算はしません） /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">sourceUrl</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">docTitle</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">fetchedAt</code>
+            出典URL・文書名・取得日（1データ点1出典）。全件このスキーマで統一されています。
+            商用第三者資料のみを唯一の出典とするレコードは配布ポリシー上あらかじめ除外済みです。
+          </p>
+          <p className="mb-2 text-xs text-slate-500">
+            お見積り・全件データのご相談は<Link href="/contact" className="mx-1 font-semibold text-indigo-600 underline">お問い合わせ</Link>
+            から（{TIER_POLICIES.scale.label}）。
+          </p>
 
           <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦d 都道府県別 学校ごと入試競争率（Business以上）</h3>
           <p className="mb-2 text-sm text-slate-600">
