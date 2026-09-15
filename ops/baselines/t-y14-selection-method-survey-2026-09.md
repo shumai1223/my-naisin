@@ -56,18 +56,44 @@
 | yamaguchi | structured | 実施要領の別表に「学校独自検査の概要」「傾斜配点・面接・小論文・実技検査・調査書など選抜実施校等一覧」が掲載と確認。別表番号付きの学校別一覧 |
 | tokushima | structured | 「令和6年度および令和7年度の傾斜配点実施校一覧が公開されています」と明記（議案PDF`pref.tokushima.lg.jp/file/attachment/854181.pdf`等で県議会提出済みの選抜要項も発見）。タイトルに「一覧」と明記・多年度分あり |
 | kagawa | structured(見込み) | 「入学者選抜実施細目」が毎年10月頃に公式公表されると判明（`pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/`）。学力検査250点+調査書220点の県標準は判明したが学校別一覧の直接確認はまだ。★次回、実施細目PDFで学校別一覧の形式を確認する |
+| ehime | uncertain | 理数科・総合学科での傾斜配点の存在は判明したが、県単位の一覧構造は今回未確認（`ehime-kyoiku.esnet.ed.jp/koukou/nyuusi/r08nyuusi`は年度別ポータルとして存在）。★次回、同ポータル内の一覧資料を確認する |
+| kochi | structured | 「令和８年度高知県公立高等学校入学者選抜における検査項目等一覧表」という名称の資料が公式に存在(`pref.kochi.lg.jp/doc/r8_koukounyushi_main/`)。R6/R7/R8の年度別ページも確認済みで多年度追跡可能。タイトルに「一覧表」と明記 |
+| saga | structured(見込み) | 選考Ⅰ/Ⅱの学校別学力検査比率(40〜80%)・傾斜配点の具体例(佐賀西高=国数英1.5倍325点満点・致遠館高理数コース=数英1.5倍300点満点)が判明する程度の具体性。★次回、佐賀県教育委員会一次資料で一覧の形式を確認する |
+| nagasaki | uncertain | 教科の1.5〜2倍傾斜配点を行う高校が多いという記述はあるが、県単位の一覧構造は今回未確認。★次回`pref.nagasaki.jp`で一覧の有無を確認する |
+| kumamoto | structured(見込み) | 学区(3学区制)・学校別の傾斜配点が5校以上具体的に判明(熊本第一高英語コース英語2倍・熊本第二高理数科数理2倍等)する程度の高い具体性。★次回、熊本県教育委員会一次資料で一覧の形式を確認する |
+| oita | uncertain | 調査書:学力検査比率が3:7/4:6/5:5の3パターンという県標準は判明したが、学校別一覧の直接確認はまだ。★次回`pref.oita.jp`で一覧の有無を確認する |
+| miyazaki | structured(見込み) | 傾斜配点対象校（宮崎大宮・西・南高校全学科、宮崎農業環境工学等）が具体的に判明。公式ポータル「みやなび」(`himuka.miyazaki-c.ed.jp/miyanavi/admissions/`)経由で入試情報が7月公開されると判明。★次回、同ポータル内の一覧資料を確認する |
+| kagoshima | structured | 公式ページ「令和8年度鹿児島県公立高等学校入学者選抜方法案内等について」(`pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r8/r8nyuusiannai.html`)を確認。R4/R5/R6/R8の年度別ページが揃っており多年度追跡が容易。学科併願・くくり募集・傾斜配点(2教科以内・各教科2倍まで)等の制度も判明 |
+| okinawa | structured(見込み) | 一般選抜で調査書:学力検査比率が開邦・球陽・那覇国際・向陽・首里の5校のみ4:6、他は5:5という具体的な学校別区分が判明。公式ポータル`pref.okinawa.jp/kyoiku/gakko/1008883/`経由。★次回、一次資料のURLを特定する |
 
-## 次回の続き
+**これで47/47都道府県の存在確認パスが完了した。**
 
-残り9県（未着手・38/47完了）。次回セッションは残りの都道府県（
-愛媛・高知・佐賀・長崎・熊本・大分・宮崎・鹿児島・沖縄）を
-バッチで進める。hyogo/fukuoka/mie/shiga/wakayama/tottoriは一次資料の追加確認がまだ残っている
-（uncertain/individual見込みの合計6県）。
+## 中間集計（47/47県・最終）
 
-## 中間集計（15/47県時点）
+- **structured（確定）**: tokyo/osaka/hokkaido/aomori/miyagi/ibaraki/fukushima/gunma/yamanashi/nagano/
+  gifu/shizuoka/aichi/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima（19県）
+- **structured(見込み・次回本文確認が必要)**: kanagawa/saitama/chiba/tochigi/iwate/yamagata/niigata/
+  toyama/ishikawa/fukui/kyoto/nara/shimane/kagawa/saga/kumamoto/miyazaki/okinawa（18県）
+- **individual（見込み含む）**: akita/hyogo/shiga（3県）
+- **uncertain（次回、一次資料の追加確認が必要）**: fukuoka/mie/wakayama/tottori/ehime/nagasaki/oita（7県）
 
-structured(見込み含む) = tokyo/osaka/kanagawa/saitama/chiba/hokkaido/aomori/miyagi/ibaraki/tochigi
-の10県。individual = akita/hyogo(見込み)の2県。uncertain = fukuokaの1県。
-**現時点でstructuredの比率が高く（10/13確定分）、47都道府県横断でも「県単位の構造化一覧」が
-標準的なパターンである可能性が高いという傾向が見えてきた**（T-Y14着手前ゲートの想定より
-好感触）。ただし全て見込み・要約段階の判定であり、データ層実装前に一次資料本文の確認が必須。
+**structured確定+見込みの合計37/47県（78.7%）**という高い比率になり、T-Y14着手前ゲートの想定
+（2/3=66.7%基準）を上回る好感触だった。ただし本ファイルの判定はすべてWebSearch要約に基づく
+**存在確認パス**であり、PDF本文の内容確認（pdftoppm目視・具体的な数値抽出）はまだ行っていない。
+**次工程（作業の順序ステップ3「あり」の県から学校・学科別データを実装）に進む前に、各県ごとに
+改めて一次資料へWebFetch/pdftoppmで当たり直し、真に構造化データとして抽出可能か検証すること**
+（特にuncertain7県とindividual3県は、個別事情の精査または別扱いの判断が必要）。
+
+## 次にやること（存在確認パス完了・次工程へ）
+
+47/47県の存在確認パスが完了したため、次に再開するセッションは以下のいずれかを選ぶこと:
+
+1. **uncertain7県（fukuoka/mie/wakayama/tottori/ehime/nagasaki/oita）とindividual3県
+   （akita/hyogo/shiga）の一次資料を個別に当たり、structured/individualを確定させる**
+   （残る未確定10県の解消）
+2. **structured確定19県から、実際にWebFetch/pdftoppmで本文を確認しデータ層実装
+   （`src/data/school-selection-methods/<pref>.ts`）に着手する**（T-Y14「作業の順序」ステップ3）
+   ★都道府県ごとに構造・粒度が大きく異なる（東京=複数PDF分割/大阪=単一PDF/山梨=列形式の
+   一覧表等）ため、1県ずつ丁寧に型を設計すること。既存Y系（`competition-rates/`等）と同じ
+   「1データ点1出典」原則を厳守する
+3. いずれを選ぶ場合も、着手前に本ファイルの該当行を`git blame`的に再確認し、二重調査を避けること
