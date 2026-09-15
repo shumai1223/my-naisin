@@ -820,6 +820,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: 'オンライン家庭教師WAM「宮崎県の高校入試情報・受験対策」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)使用済みのedu-netz.comと重複しない新しい第三者ソース(wam.onl)を選定。既存記載(全学年等倍・9教科×5段階×3年=135点満点)をWebSearch要約とwam.onlの2独立ソースでクロスチェックし変更なしと確認(両ソースとも各学年45点満点×3年=135点満点で一致)。⚠️wam.onlのWebFetch要約が「各学年45点で合計180点となると記載されていますが、実際には135点満点」という内部的に矛盾した文言を返したが、45×3=135という算術と直後の「135点満点」という結論自体は既存記載と一致しており、「180点」表記はWebFetch要約側の誤記(算術的に破綻)と判断し採用しなかった。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuke-labo.com/koukoujyukentaisaku/miyazaki/',
+      sourceTitle: '受験ラボ「宮崎県高校受験対策・高校入試情報」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(jyuke-labo.com)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点・学力検査等との比率は非公表)に変更なし(両ソースとも各学年45点×3年=135点満点・比率非公表で一致)。',
+    },
   ],
   miyagi: [
     {
