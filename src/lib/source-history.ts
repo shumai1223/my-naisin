@@ -990,6 +990,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「広島県の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(中1中2各45点+中3×3倍135点=225点満点・実技傾斜なし)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1+中2+中3×3=225点満点」「主要5教科と実技4教科の倍率差なし」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://hirodaiken.jp/blog/%E5%BA%83%E5%B3%B6%E7%9C%8C%E7%AB%8B%EF%BC%88%E5%85%AC%E7%AB%8B%EF%BC%89%E9%AB%98%E6%A0%A1%E5%85%A5%E8%A9%A6%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%82%84%E3%83%9C%E3%83%BC%E3%83%80%E3%83%BC%E3%83%A9/',
+      sourceTitle: '広大研公式ブログ「広島県立（公立）高校入試の仕組みやボーダーラインは？対策方法も解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(hirodaiken.jp)+WebSearch要約で確認・既存記載(中1中2各45点+中3×3倍135点=225点満点)に変更なし(両ソースとも「中1:中2:中3=1:1:3」で完全一致)。',
+    },
   ],
   kagawa: [
     {
