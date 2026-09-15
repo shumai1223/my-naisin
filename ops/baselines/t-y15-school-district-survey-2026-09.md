@@ -43,8 +43,14 @@
 | mie | structured | 公式PDF「（付）三重県立高等学校通学区域に関する規則（抜粋）」(`pref.mie.lg.jp/common/content/001039271.pdf`)を直接発見。普通科(スポーツ科学コース除く)・理数科(松阪高除く)のみ北部/中部/南部の3学区制、他学科・定通・スポーツ特別枠は全県から出願可という学区外条件も判明 |
 | shiga | structured | 公式ページ「県立高校通学区域｜滋賀県教育委員会」(`pref.shiga.lg.jp/edu/nyuushi/high/305672/305698.html`)を直接発見。2006年度から全県一区・信楽高校のみ全国募集という特例も判明。T-Y14調査時の「リンク一覧」という印象とは異なり、学区制度そのものについては明確な一次資料が存在した |
 | kyoto | structured | 公式規則ページ「京都府立の中学校及び高等学校の通学区域に関する規則」(`pref.kyoto.jp/reiki/reiki_honbun/a300RG00000843.html`)を直接発見（昭和59年制定）。亀岡・宮津天橋・丹後緑風高校等で学区外(京都市等)からの入学者を定員30%以内に制限という具体的な学区外条件も判明 |
+| miyagi | structured | 公式ページ「県立高校の全県一学区化について」(`pref.miyagi.jp/soshiki/kyou-kikaku/gakku.html`)を直接発見。平成22年度(2010年度)に全日制普通科の学区を撤廃し全課程・全学科で全県一学区化と判明。Wikipedia「宮城県立高等学校学区制度」記事に旧制度(2009年まで)の詳細な変遷も掲載 |
+| kanagawa | structured | 2005年(平成17年)に県立高校の学区を撤廃済みと確認（`pen-kanagawa.ed.jp`＝神奈川県教育委員会公式サイト）。1950年19学区制発足→1963/1981/1990年に段階的縮小という変遷史も判明。★横浜市立・川崎市立高校は別途「学区外受検」制度が残る(市立は都道府県立と別扱い・osaka/shigaと同型の府省市区別パターン) |
+| nara | structured(見込み) | 北部学区・南部学区(十津川村等の一部地域のみ小学区制)の2学区制と判明。「通学区域の設定を各高校を所管する教育委員会の判断に委ねる」という規制緩和方針も判明。★次回、奈良県教育委員会一次資料(`pref.nara.lg.jp`)で現行制度の直接確認が必要（今回の情報源の質はやや低い） |
+| wakayama | structured | 公式ページ群(`pref.wakayama.lg.jp/prefg/500200/`配下に年度別入学者選抜ページ多数)経由で「全県一学区」（学区の定めなし）と確認 |
+| shimane | structured | 公式ページ「通学区域 - 高校教育」(`pref.shimane.lg.jp/education/kyoiku/koukou/saihen/tuugaku.html`)で「島根県教育委員会では島根県立高校の通学区域は定めておりません」と直接明記。例外として松江市内普通科3校のみ小学区制という具体的な例外も判明。「県立高等学校通学区域検討委員会」答申PDFという制度検討の歴史資料も発見 |
 
 ## 次回の続き
 
-残り19県（未着手・28/47完了）。次回セッションは残りの都道府県を全てバッチで進める。
+残り14県（未着手・33/47完了・残りはokayama・hiroshima・yamaguchi・tokushima・kagawa・
+ehime・kochi・fukuoka・nagasaki・kumamoto・oita・miyazaki・kagoshima・okinawa）。
 akita/niigata/fukui/yamanashiは今回もuncertainのまま（県立高校学区の一次資料が未発見）。
