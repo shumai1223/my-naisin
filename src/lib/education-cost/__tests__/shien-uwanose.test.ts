@@ -133,6 +133,12 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(600000);
   });
 
+  it('tottoriは生活保護受給世帯で年額86,400円(月7,200円上乗せ)を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'tottori', '生活保護受給世帯')
+    ).toBe(86400);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
