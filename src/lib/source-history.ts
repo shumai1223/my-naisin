@@ -897,6 +897,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '京進「京都府の公立高校入試は2027年度（令和９年度）から変わります」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(現行=中期選抜相当・全学年等倍・practicalMultiplier2・maxScore195/note「前期選抜は135点満点」)は令和8(2026)年度入試には変更が無いことを確認した。**新発見**: 令和9(2027)年度入試から前期・中期・後期の3区分を「前期・後期」の2区分に再編し、前期に「独自枠」（各校が独自の検査項目・配点で選抜）と「共通枠」（5教科×40点=200点満点の学力検査＋調査書195点満点で選抜）を新設する制度改革が確定していることをWebFetch(kec.gr.jp)で直接確認した(既存の/nyushi-seido-henkou掲載の「前期・中期を一本化予定」という記述より詳細な「独自枠/共通枠」構造まで確認できた・今回はX-14の計算方式再確認が主目的のためページ本文の更新は見送り、次にnyushi-seido-henkouを扱う回で反映を検討)。共通枠の調査書195点満点という総枠は現行のmaxScore(195)と一致するが、学年別配点・実技倍率の詳細までは公式一次資料未確認のため、令和9年度分のレコード更新はまだ行わない。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-kyoto/',
+      sourceTitle: '塾オンラインドットコム「京都府公立高校入試！内申点の計算方法と内申点対策を進路アドバイザーが解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(jyuku-online.com)+WebSearch要約で確認・既存記載(中期選抜・全学年等倍・実技4教科×2倍・195点満点)に令和8年度時点で変更なし(両ソースとも完全一致)。⚠️令和9年度からの「独自枠/共通枠」再編(09-14に発見済み)は今回も未反映のまま・次にnyushi-seido-henkouページを扱う回での反映が引き続き必要。',
+    },
   ],
   kumamoto: [
     {
