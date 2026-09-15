@@ -339,6 +339,49 @@ export function GET() {
           },
         },
       },
+      '/api/competition-rates': {
+        get: {
+          operationId: 'listCompetitionRatesPrefectures',
+          summary: '再配布許諾済み都道府県の学校別入試競争率インデックス',
+          description:
+            '教育委員会が「出典明記のうえ掲載して差し支えない」と個別に回答した都道府県のみの一覧。' +
+            '全47都道府県版はBusiness以上のAPIキーが必要な /api/schools/{pref} を参照。',
+          responses: {
+            '200': { description: '成功' },
+            '429': { description: 'レート上限または当月クォータを超過（Retry-After ヘッダ参照）' },
+          },
+        },
+      },
+      '/api/competition-rates/csv': {
+        get: {
+          operationId: 'getCompetitionRatesCsv',
+          summary: '再配布許諾済み都道府県の学校別入試競争率（CSV配布）',
+          description: '/api/competition-rates と同じ正準データをCSV（BOM付きUTF-8）で配布。表計算ソフト・データカタログ・引用向け。',
+          responses: { '200': { description: '成功（text/csv）' } },
+        },
+      },
+      '/api/competition-rates/{code}': {
+        get: {
+          operationId: 'getCompetitionRatesPrefecture',
+          summary: '単一都道府県の再配布許諾済み学校別入試競争率',
+          description:
+            '`redistribution: ok`の都道府県のみ200を返す。未回答・拒否・未収録の都道府県は404で ' +
+            '全47都道府県版（Business以上のAPIキー限定・/api/schools/{code}）を案内する。',
+          parameters: [
+            {
+              name: 'code',
+              in: 'path',
+              required: true,
+              description: '都道府県コード（英語小文字, 例: akita, chiba）。',
+              schema: { type: 'string', example: 'akita' },
+            },
+          ],
+          responses: {
+            '200': { description: '成功' },
+            '404': { description: '再配布許諾済みデータバンクに未収録（一覧は /api/competition-rates 参照）' },
+          },
+        },
+      },
       '/api/status': {
         get: {
           operationId: 'getApiStatus',

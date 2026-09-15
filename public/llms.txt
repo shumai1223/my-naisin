@@ -52,7 +52,8 @@
 - 総合得点方式の計算・逆算（都道府県別）: https://my-naishin.com/api/total-score/{code}（例: /api/total-score/tokyo）
 - 偏差値⇔順位・上位%の対応表: https://my-naishin.com/api/hensachi/percentile-table
 - 教育費エンジン（学習費総額・就学支援金・進路別総額）: https://my-naishin.com/api/education-cost 、進路別総額は /api/education-cost/path-to-university
-- 都道府県別・学校ごとの公立高校入試競争率（募集人員・応募者数・倍率）: https://my-naishin.com/api/schools/{pref}（例: /api/schools/tokyo・?fiscalYear=で年度絞り込み可）
+- 都道府県別・学校ごとの公立高校入試競争率（募集人員・応募者数・倍率・全47都道府県・Business以上のAPIキー必須）: https://my-naishin.com/api/schools/{pref}（例: /api/schools/tokyo・?fiscalYear=で年度絞り込み可）
+- 教育委員会が出典明記での掲載を許諾済みの都道府県のみの学校別入試競争率（無料利用可・CSV/JSON）: https://my-naishin.com/api/competition-rates（一覧）・https://my-naishin.com/api/competition-rates/csv（CSV）・https://my-naishin.com/api/competition-rates/{code}（例: /api/competition-rates/akita）
 - 稼働状況・データセットバージョン確認: https://my-naishin.com/api/status
 - OpenAPI 3.1 仕様書（GPTs Actions等でimport可）: https://my-naishin.com/api/openapi
 - MCPサーバ（JSON-RPC 2.0・27ツール: 内申点(list_prefectures/get_prefecture/calculate_naishin/compare_prefectures/reverse_calc/target_to_required_grades/build_study_plan)・偏差値(calculate_hensachi/reverse_calc_hensachi/hensachi_rank_convert)・総合得点方式(東京/神奈川S値/大阪/愛知/千葉K値/埼玉/福岡/北海道の都道府県別計算含む)・倍率(calculate_bairitsu/get_school_competition_rates)・教育費・学習成績の状況・匿名統計取得。全ツール一覧は/developers参照）: https://my-naishin.com/api/mcp
