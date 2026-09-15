@@ -24,13 +24,25 @@
 | kanagawa | structured(見込み) | 県公式ページ「令和９年度神奈川県公立高等学校入学者選抜選考基準及び特色検査の概要」(`pref.kanagawa.jp/docs/dc4/nyusen/nyusen/senko_kijun.html`)というタイトル自体が学校ごとの選考基準を指しており構造化の可能性が高い。★次回PDF本文で学校別配点の実例を確認すること |
 | saitama | structured(見込み) | 県公式ページ「令和８年度埼玉県公立高等学校入学者選抜における各高等学校の選抜基準」(`pref.saitama.lg.jp/f2208/r8senbatsu-kijun.html`)というタイトルが「各高等学校の」選抜基準と明記＝学校別一覧が強く示唆される。★次回本文確認 |
 | chiba | structured(見込み) | 県公式ページ「令和8年度千葉県公立高等学校「一般入学者選抜」の検査の内容等」(`pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8zennichi.html`)＋「学校設定検査の内容等」PDFで、傾斜配点を用いる学校（船橋理数・柏理数等8校8学科）を具体的に列挙できている（リセマム記事で二次確認済み）。★次回一次PDF本文確認 |
-| hyogo | uncertain | 学力検査:調査書=1:1が県標準という説明は見つかったが、学校別の傾斜配点一覧の構造は今回の検索では未確認。公式ページ`www2.hyogo-c.ed.jp/hpe/koko/nyuushi`から要項本体を次回確認する |
-| fukuoka | uncertain | 「令和8年度福岡県立高等学校入学者選抜要項」が公式に存在するが、学校別傾斜配点・面接実施の一覧構造は今回の検索では未確認。`pref.fukuoka.lg.jp/soshiki/2131109/`から要項本体を次回確認する |
+| hyogo | uncertain→individual(見込み) | `www2.hyogo-c.ed.jp/hpe/koko/nyuushi`をWebFetchで確認したが学校別選抜方法の一覧・PDFへのリンクは見当たらなかった。「各県立学校一覧のページや個別学校のホームページで確認する必要がある」との示唆。★次回、要綱本体PDF内部（別表相当）まで確認してから最終判定する |
+| fukuoka | uncertain | 「令和8年度福岡県立高等学校入学者選抜要項」PDF(`pref.fukuoka.lg.jp/uploaded/attachment/268332.pdf`・1.6MB)を確認したがWebFetchではテキスト抽出不能（暗号化）。69〜74頁に「入学定員等一覧表」はあるが傾斜配点・面接実施の一覧の有無は確認できていない。★次回pdftoppmで該当ページを目視確認する（ページ数が多いため範囲指定が必要） |
+| hokkaido | structured | 北海道教育委員会が2026-06-15に「学校裁量についての実施予定一覧表」を公表（リセマム記事で二次確認・傾斜配点実施12校12学科の具体例=札幌北(数学・英語×2.0)等を列挙）。県単位で毎年公表される定型の一覧と判明。★次回一次PDFのURLを確認 |
+| aomori | structured | 公式ページ`pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/R08motomeru.html`が「令和8年度青森県立高等学校入学者選抜における求める生徒像・選抜方法等一覧」を掲載。R06版PDF(`files/R06motomeru.pdf`)の存在も確認＝毎年更新される定型一覧で多年度追跡可能 |
+| miyagi | structured | 公式ページ`pref.miyagi.jp/site/sub-jigyou/kyo-r9-senbatsuhouhoutou.html`「選抜方法等一覧」が地区別（刈田柴田・伊具・仙台南等）に整理され学校名から個別選抜方法へリンクする構造。県単位で一覧化されたポータルとして構造化ありと判定 |
+| ibaraki | structured | 「令和7年度茨城県立高等学校入学者選抜実施細則」に別表1「高等学校別入学者選抜実施方法」・別表4「実技検査課題等」が掲載と確認（`kyoiku.pref.ibaraki.jp`）。別表番号まで明示された学校別一覧 |
+| tochigi | structured(見込み) | 学力検査:調査書比率が9:1〜5:5と学校ごとに異なり、宇都宮高・宇都宮女子高・栃木高の傾斜配点教科まで具体的に判明（三次情報だが具体性が高い）。★次回、栃木県教育委員会一次資料で学校別一覧の形式を確認する |
 
 ## 次回の続き
 
-残り39県（未着手）。次回セッションは上記`uncertain`2件（hyogo/fukuoka）の一次資料確認を先に
-済ませてから、残りの都道府県（北海道・青森・岩手・宮城・山形・福島・茨城・栃木・群馬・新潟・
+残り32県（未着手）。次回セッションは残りの都道府県（岩手・山形・福島・群馬・新潟・
 富山・石川・福井・山梨・長野・岐阜・静岡・愛知・三重・滋賀・京都・奈良・和歌山・鳥取・島根・
 岡山・広島・山口・徳島・香川・愛媛・高知・佐賀・長崎・熊本・大分・宮崎・鹿児島・沖縄）を
-バッチで進める。
+バッチで進める。hyogo/fukuokaは一次PDF本文の目視確認（pdftoppm）がまだ残っている。
+
+## 中間集計（15/47県時点）
+
+structured(見込み含む) = tokyo/osaka/kanagawa/saitama/chiba/hokkaido/aomori/miyagi/ibaraki/tochigi
+の10県。individual = akita/hyogo(見込み)の2県。uncertain = fukuokaの1県。
+**現時点でstructuredの比率が高く（10/13確定分）、47都道府県横断でも「県単位の構造化一覧」が
+標準的なパターンである可能性が高いという傾向が見えてきた**（T-Y14着手前ゲートの想定より
+好感触）。ただし全て見込み・要約段階の判定であり、データ層実装前に一次資料本文の確認が必須。
