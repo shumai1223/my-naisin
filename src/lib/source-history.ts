@@ -272,6 +272,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '個別指導Axis「山形県公立高校入試概要」の比率記述＋jyuku-online.comの2直接WebFetch',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。**回帰バグを発見・修正**: prefectures.tsのnote欄は「3:7〜5:5程度の範囲」だったが、これは08-05の再検証で誤って狭められた値だった(07-24の最初の確認では正しく「3:7〜7:3の中から高校が選択」と記録されていた)。今回jyuku-online.comとaxis-kobetsu.jpへの2件の直接WebFetchで「3:7/4:6/5:5/6:4/7:3の5パターンから高校が選択」という07-24と一致する記述を再確認し、prefectures.ts(yamagata)のnote欄とexam-system-change-history.tsの対応箇所を「3:7・4:6・5:5・6:4・7:3の5パターン」に修正した(45点満点の基礎計算式自体には変更なし)。教訓: 過去の再検証エントリが必ずしも直近が正しいとは限らない・複数エントリ間で数値が食い違う場合は最初の一次資料由来の記録まで遡って照合すること。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://alpha-katekyo.jp/tips/tips286/',
+      sourceTitle: '家庭教師のアルファ「【高校受験】都道府県別・内申点計算方法」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。候補czemi.benesse.ne.jpはHTTP403のため断念、前回未使用の第三者ソース(alpha-katekyo.jp・47県横断まとめページ)+WebSearch要約で確認・既存記載(中3のみ・45点満点)に変更なし。学力検査比率(3:7〜7:3の5パターン)についてはWebSearch要約が既存記載と完全一致を再確認(alpha-katekyo.jp側は比率の明記なし)。',
+    },
   ],
   aomori: [
     {
