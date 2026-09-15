@@ -33,8 +33,13 @@
 | tochigi | structured | 公式PDF「栃木県立高等学校の通学区域に関する規則は平成26年4月1日付けで廃止されました」(`pref.tochigi.lg.jp/m01/education/kyouikuzenpan/keikaku/documents/documents/kyuugakku.pdf`)を直接発見。廃止前の旧学区制度（普通科・総合学科のみ学区制、専門学科等は県内全域）の詳細も含む一次資料 |
 | gunma | structured(見込み) | 2021年度入試から普通科を含む全学科が全県一学区になったと複数の三次情報で一致。★次回、群馬県教育委員会一次資料で公式の制度改正発表を確認する |
 | niigata | uncertain | 「学区制は廃止されており、近隣市町村からも生徒を集めるようになった」という記述はあるが、廃止年度・一次資料とも今回未確認（検索結果の大半が新潟市立小中学校の学区情報でノイズが多かった）。★次回`pref.niigata.lg.jp/sec/kotogakko/`で一次資料を確認する |
+| toyama | structured | 公式ページ「富山県／県立高校の通学区域（学区）について」(`pref.toyama.jp/3003/tsugakukuiki.html`)を直接発見。令和6年度入学生から県下一円(学区制限なし)に移行・移行前は新川/富山/高岡/砺波の4学区制だった経緯も明記（専門学科等は従来から県内一学区）。令和5年7月10日の県教委議決日まで判明する高精度な一次資料 |
+| ishikawa | structured | 平成17年(2005年)4月から通学区域の制限を廃止し県内全域から出願可能になったと確認（`pref.ishikawa.lg.jp/kyoiku/gakkou/k-gakkou/gakkoushidou_02.html`）。旧3学区制だった経緯・県外居住者の入学志願特別事情具申書という学区外(県外)就学条件も判明 |
+| fukui | uncertain | 検索結果が福岡県教育委員会・福井市立小中学校の情報とノイズ混在し、福井県立高校の学区制度に関する一次資料は今回発見できなかった。★次回`pref.fukui.lg.jp/doc/koukou/`で一次資料を確認する |
+| yamanashi | uncertain | 検索結果が甲府市等の市町村立小中学校の学区情報中心で、山梨県立高校の学区制度に関する一次資料は今回発見できなかった。★次回`pref.yamanashi.jp/koukoukyo/`で一次資料を確認する |
+| nagano | structured | 公式ページ「長野県立高校の通学区について」(`pref.nagano.lg.jp/kyoiku/koko/jukense/nintei/ko-tsugakuku.html`)を直接発見。2004年度に12学区→4学区(北信/東信/南信/中信)に再編、2020年度から他学区への志願も可能になり実質「全県1学区」化したという多年度の変遷が判明。規則改正のH30県議会提出資料PDFも発見 |
 
 ## 次回の続き
 
-残り29県（未着手・18/47完了）。次回セッションは残りの都道府県を全てバッチで進める。
-akita/niigataは今回uncertainのまま（県立高校学区の一次資料が未発見）。
+残り24県（未着手・23/47完了）。次回セッションは残りの都道府県を全てバッチで進める。
+akita/niigata/fukui/yamanashiは今回uncertainのまま（県立高校学区の一次資料が未発見）。
