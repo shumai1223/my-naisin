@@ -394,6 +394,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '道コン「入試の仕組み」＋WebSearch要約の2独立ソース(sourceUrl2への直接WebFetchを含む)',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(gradeMultipliers{1:2,2:2,3:3}・maxScore315)を、既存sourceUrl2(do-con.com)への直接WebFetchとWebSearch要約(複数教育系サイト集約)の2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1×2倍90点+中2×2倍90点+中3×3倍135点=315点満点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://sapporoshingaku.uh-oh.jp/entry3.html',
+      sourceTitle: '「北海道公立高校入試の仕組み｜内申点・当日点・ランクと合否判定をわかりやすく解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(sapporoshingaku.uh-oh.jp・直接WebFetch)+WebSearch要約で確認・既存記載(gradeMultipliers{1:2,2:2,3:3}・maxScore315)に変更なし。',
+    },
   ],
   kanagawa: [
     {
@@ -1740,6 +1746,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/general-info/wakayama/',
       sourceTitle: '個別指導Axis「和歌山県の公立高校入試概要」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既知のwebSearchハルシネーションパターン(「態度評価3段階27点満点・144点満点」=nara固有の制度改定の誤帰属)が今回は出現しないことを確認しつつ、既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1中2各45点+中3×2倍90点=180点満点」で完全一致)。',
+    },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://www.takeda.tv/wakayama/blog/post-173986/',
+      sourceTitle: '武田塾和歌山校「和歌山県公立高校入試は内申点が大事？具体的な配点と対策を解説！」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で新batch(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(takeda.tv・直接WebFetch)+WebSearch要約で確認・既存記載(gradeMultipliers{1:1,2:1,3:2}・maxScore180)に変更なし。既知のハルシネーションパターン(「態度評価3段階27点満点・144点満点」)は今回も出現せず、takeda.tvにも明示的に不在を確認した。',
     },
   ],
   nara: [
