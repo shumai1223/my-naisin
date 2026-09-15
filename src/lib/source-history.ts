@@ -744,6 +744,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「岩手県の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。08-17に一次資料PDFで確定済みの数値(gradeMultipliers{1,2,3}・coreMultiplier2・practicalMultiplier3・maxScore660・actualMaxScore500=令和7年度以降)を、WebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1(110点)+中2(220点)+中3(330点)=660点満点を500点に圧縮」で完全一致・以前混乱していた440点への言及は無かった)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/report-card/iwate',
+      sourceTitle: '個別指導Axis「岩手県の内申点アップ中学校別対策」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(axis-kobetsu.jp)+WebSearch要約で確認・08-17に一次資料PDFで確定済みの数値(中1110点/中2220点/中3330点=660点満点→500点に圧縮)に変更なし。⚠️今回もWebSearch要約に旧値「440点」(660×2/3)への言及が混在していたが、axis-kobetsu.jpの直接WebFetch(令和8年度=500点満点)および08-17の一次資料確認結果と照合し、440点は令和6年度以前の旧値のままの古いウェブ記事と判断・既存記載は変更不要。',
+    },
   ],
   gifu: [
     {
