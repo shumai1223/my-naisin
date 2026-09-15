@@ -553,6 +553,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「愛媛県公立高校入試】内申点の計算方法と効果的な内申点対策」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。既存記載(全学年等倍・9教科×5段階×3年=135点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも各学年45点満点×3年=135点満点・具体例(中1オール3=27点+中2オール2=18点+中3オール4=36点=81点)で一致)。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403を返したため今回はcrosscheck対象から除外。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://aidaiken.com/blog/2019/09/27/ehime-junior-high-school-report/',
+      sourceTitle: '逆転合格専門塾愛大研「【愛媛県立高校入試】内申点の計算方法・重要な理由を受験のプロが解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(aidaiken.com)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更なし(両ソースとも各学年45点満点×3年=135点満点・具体例(オール4=36点×3年=108点)で一致)。',
+    },
   ],
   ibaraki: [
     {
