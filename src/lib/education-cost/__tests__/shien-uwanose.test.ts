@@ -79,6 +79,14 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(amounts).toEqual([50000, 200000]);
   });
 
+  it('nagasakiは3所得区分(590-720万/270万未満通信制/生活保護)を持つ', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'nagasaki');
+    expect(record?.tiers).toHaveLength(3);
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'nagasaki', '生活保護世帯等')
+    ).toBe(63600);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
