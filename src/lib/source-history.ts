@@ -47,6 +47,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '学習塾京進「愛知県公立高校入試の仕組みとは？」＋WebSearch要約(井ノ塾/塾オンライン等)の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=34)として選定・再検証。⚠️prefectures.tsのsourceUrl(pref.aichi.jp)はImperva WAFの一時ブロックが継続中([[cowork-division-of-labor]]既知の罠)のため、既存のsourceUrl2/前回確認済みの第三者サイトのみでクロスチェック。既存記載(targetGrades[3]・gradeMultipliers{3:2}・maxScore90)に変更なしと確認(両ソースとも「中3の9教科評定合計×2=90点満点(評定得点)」で一致・学校が選ぶⅠ〜Ⅴの校内順位算出方式(評定得点×1.5倍等)は本レコードが表す基礎点とは別の後段処理と再確認)。WebFetch先(manach.kyoshin.co.jp)は「2027年度から調査書の出欠の記録・行動の記録・性別を削除するが内申点(90点満点)の計算方式自体は維持」とも言及しており、既存記載と矛盾なし。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://axis-kobetsu.jp/outline/juni/exam-info/report-card/aichi',
+      sourceTitle: '個別指導Axis「愛知県の内申点アップ中学校別対策」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(axis-kobetsu.jp)+WebSearch要約で確認・既存記載(targetGrades[3]のみ・gradeMultipliers{3:2}・maxScore90)に変更なし(両ソースとも「中3のみ対象・9教科×5段階×2倍=90点満点」で一致)。',
+    },
   ],
   saitama: [
     {
