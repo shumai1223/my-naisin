@@ -151,6 +151,16 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(630000);
   });
 
+  it('gunmaはイ区分(年収400万円未満)の授業料減免で年額33.6万円を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'gunma',
+        'イ区分（年収400万円未満かつ資産700万円未満・授業料減免）'
+      )
+    ).toBe(336000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
