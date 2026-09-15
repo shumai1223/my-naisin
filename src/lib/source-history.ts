@@ -778,6 +778,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「岐阜県公立高校入試の内申点計算の仕方」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(中1中2各45点+中3×2倍90点=180点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1(45点)+中2(45点)+中3評定×2(90点)=180点満点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://toshin-seminar.co.jp/column/7877/',
+      sourceTitle: '岐阜県の学習塾 東進ゼミナール「岐阜県の受験生必読！『内申点』の仕組みや計算方法、合否への影響まで」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(toshin-seminar.co.jp)+WebSearch要約で確認・既存記載(中1中2各45点+中3×2倍90点=180点満点)に変更なし(両ソースとも完全一致・naishinten.comの異説(135点満点)への再言及は無かった)。',
+    },
   ],
   miyazaki: [
     {
