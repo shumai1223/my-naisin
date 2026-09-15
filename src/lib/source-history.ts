@@ -1176,6 +1176,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: 'KATEKYO学院下関「中学生（高校入試）受験情報」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。今回は08-05で既に使用済みのjyuku-online.comと重複しない新しい第三者ソース(katekyo-shimonoseki.com)を選定。既存記載(全学年等倍・9教科×5段階×3年=135点満点)を、WebSearch要約(内申135+学力250=385点満点で一致)とkatekyo-shimonoseki.com(「9教科各5段階評定の内申点(1〜3年3学期まで)」＝全学年対象で一致)の2独立ソースでクロスチェックし変更なしと確認。⚠️既存08-05エントリのjyuku-online.com記事が指摘する通り、山口県教育委員会の実施大綱は135点満点という一律の換算式を公式に明記していない（本サイトのmaxScore135は複数の教育系サイトが採用する慣用的な参考値であり、公式の一次資料に明記された数値ではない点を再確認・既存の理解と変わらず）。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-yamaguchinaisin/',
+      sourceTitle: '塾オンラインドットコム「山口県の公立高校入試の内申点とは？計算方法と内申点対策7選を紹介」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。既存4エントリで使用済みでないソースを探したが、候補czemi.benesse.ne.jpは今回もHTTP403(この県では毎回一貫してブロックされている)。09-06の一次資料(実施大綱)は既に「135点満点を公式に明記していない」ことまで確認済みのため再取得は見送り、WebSearch要約(135+250=385点満点で一致)で既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更が無いことを確認。⚠️利用可能な独立第三者ソースを実質的に使い切ったため(jyuku-online.com/tokushin-juku.com/katekyo-shimonoseki.com使用済み・czemi常時403)、次回以降のyamaguchi再検証はWebSearch要約単独か、09-06確認済みの実施大綱PDFへの改めての一次資料照合を検討すること。',
+    },
   ],
   yamanashi: [
     {
