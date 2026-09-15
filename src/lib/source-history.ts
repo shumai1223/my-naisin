@@ -1129,6 +1129,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '個別指導Axis「三重県公立高校入試の内申点計算方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため第三者サイトで代替。既存記載(targetGrades[3]のみ・9教科×5段階=45点満点)をWebSearch要約とaxis-kobetsu.jpの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中3のみ対象・9教科×5段階=45点満点」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://jyuku-online.com/blog/jj-mie/',
+      sourceTitle: '塾オンラインドットコム「三重県の内申点計算方法を解説！公立高校入試の内申点を上げる７つのコツ」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(jyuku-online.com)+WebSearch要約で確認・既存記載(後期選抜〈一般入試〉=中3のみ・9教科×5段階=45点満点)に変更なし(両ソースとも完全一致)。⚠️新規情報: 前期選抜(特色選抜)は高校・学科ごとに複数パターン(中3のみ45点/主要5教科のみ25点/中1〜3換算90〜135点)があり年度ごとに変更されうる旨をjyuku-online.comが指摘(例: 白山高校が令和8年度から45点満点→90点満点へ変更)。既存記載は後期選抜〈県共通の基本方式〉を表しておりスコープ内で変更なし・前期選抜の学校別詳細は対象外のため今回はデータ変更なし。',
+    },
   ],
   yamaguchi: [
     {
