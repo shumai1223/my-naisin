@@ -1246,6 +1246,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「滋賀県の内申点計算方法を解説」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で同率最古(daysSinceVerified=7・前回09-06はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はWebFetchがHTTP403のため、前回(08-05)未使用の第三者サイト(jyuku-online.com)で代替。既存記載(全学年等倍・9教科×5段階×3年=135点満点)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「中1+中2+中3の9教科評定合計=135点満点」「主要5教科と実技4教科は同等の重み」で完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://katekyo-peacenet.com/exam-navi_high-school/25_shiga.html',
+      sourceTitle: 'オンライン家庭教師ピース「滋賀県の高校入試情報・偏差値ランキング」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(katekyo-peacenet.com)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更なし(両ソースとも完全一致)。',
+    },
   ],
   akita: [
     {
