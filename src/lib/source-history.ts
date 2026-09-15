@@ -1208,6 +1208,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「山梨県】内申点の計算方法を（自動計算）解説」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。sourceUrl2(czemi.benesse.ne.jp)はHTTP403のため前回(08-05)未使用の第三者サイト(jyuku-online.com)で代替。既存記載(5教科×2倍+実技4教科×3倍・maxScore330・note「特別活動等で+30点」=合計360)をWebSearch要約とjyuku-online.comの2独立ソースでクロスチェックし変更なしと確認(両ソースとも「330点+特別活動等30点=360点満点」で完全一致)。08-05に検知したjyuke-labo.comの誤情報(225+30=255説)は今回のソースには出現せず。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://seed-sk.com/blog/%E5%B1%B1%E6%A2%A8%E7%9C%8C%E9%AB%98%E6%A0%A1%E5%85%A5%E8%A9%A6%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%A8%E3%81%AF%EF%BC%9F%E5%86%85%E7%94%B3%E7%82%B9%E3%82%84%E5%85%A5%E8%A9%A6%E3%81%AE%E7%82%B9/',
+      sourceTitle: 'SEED進学会「山梨県高校入試の仕組みとは？内申点や入試の点数について解説」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(seed-sk.com)+WebSearch要約で確認・既存記載(5教科×2倍50点+実技4教科×3倍60点=110点×3学年=330点+特別活動等30点=360点満点)に変更なし(両ソースとも完全一致)。',
+    },
   ],
   shiga: [
     {
