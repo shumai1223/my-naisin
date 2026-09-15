@@ -1016,6 +1016,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '香大研「香川県公立高校受験】内申点（調査書点）が超重要な理由とは」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で6日グループ(daysSinceVerified=6・前回09-07はT-W1様式調査のため計算方式の再確認は今回が初)として選定・再検証。前回(08-05)未使用の第三者サイト(kadaiken.com)とWebSearch要約の2独立ソースでクロスチェックし、note記載の実選抜計算(中1中2は倍率なし各45点+中3のみ主要5教科×2倍50点+実技4教科×4倍80点=130点、合計220点満点)に変更が無いことを確認した(両ソースとも完全一致)。',
     },
+    {
+      date: '2026-09-15',
+      sourceUrl: 'https://eqz.jp/naishikeisan/',
+      sourceTitle: '高松市国語塾EQZ「内申点計算(香川県内申点計算ツール)」＋WebSearch要約の2独立ソース',
+      note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。候補jitoujyuku.netは404のため代替、前回未使用の第三者ソース(eqz.jp)+WebSearch要約で確認・既存note記載の実選抜計算(中1中2倍率なし各45点+中3=主要5教科×2倍50点+実技4教科×4倍80点=130点、合計220点満点)に変更なし(両ソースとも完全一致)。',
+    },
   ],
   kochi: [
     {
