@@ -136,12 +136,20 @@
 同一校名・同一選抜区分でも学科(department)が異なれば別レコードを持てるよう
 `findSchoolSelectionRecord()`にdepartment引数（省略可・後方互換）を追加済み。
 
+**2026-09-17追記: aichi（愛知県）を2県目として完了した**（愛知県公式PDF「面接実施の有無及び
+校内順位の決定方式について」3〜4頁目・199レコード。公式集計表「総計198校1校舎」とほぼ一致し
+網羅性を確認済み）。愛知県独自のI〜V計算式（大阪府とは別物）はaichi.ts冒頭コメント参照。
+`interviewRequired`（面接実施有無）フィールドをSchoolSelectionMethodRecord型に追加した
+（後方互換）。yamanashiは前期募集選抜方法（調査書/面接/特色検査の比率）を採用しており
+examSubjectTypes/ratioTypeの枠組みに合わないため今回は見送った（前期/後期制度の違い）。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y14の2県目（structured確定県: tokyo/hokkaido/aomori/miyagi/ibaraki/fukushima/gunma/
-   yamanashi/nagano/gifu/shizuoka/aichi/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima
-   のいずれか）のデータ層実装に進む
+1. T-Y14の3県目（残るstructured確定県: tokyo/hokkaido/aomori/miyagi/ibaraki/fukushima/gunma/
+   nagano/gifu/shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima。yamanashiは
+   前期/後期制度が異なるため型の見直しが必要）のデータ層実装に進む
 2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている）
-3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
-   二重実装を避けること
+   指定されている・2026-09-17時点でtokyo/osaka/saitama/hyogo/aichi/miyagi/chiba/kanagawaの
+   8県実装済み）
+3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
+   または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
 individualの残り確定作業、②structured確定県からのデータ層実装、のいずれかに進むこと。
