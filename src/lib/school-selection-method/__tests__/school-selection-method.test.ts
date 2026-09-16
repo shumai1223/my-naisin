@@ -299,9 +299,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.interviewRequired).toBe(true);
   });
 
-  it('aichi: schoolsは106レコードを収録している(3頁目左右列・複数学科含む・を完全収録)', () => {
+  it('aichi: 豊田南(普通・一般)は令和9年度Vへ変更(令和8年度はIII)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aichi', '豊田南', '一般');
+    expect(record?.ratioType).toBe('V');
+    expect(record?.note).toContain('III');
+  });
+
+  it('aichi: schoolsは199レコードを収録している(3〜4頁目=一般選抜全校を完全収録・公式集計198校1校舎とほぼ一致)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aichi');
-    expect(record?.schools?.length).toBe(106);
+    expect(record?.schools?.length).toBe(199);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {

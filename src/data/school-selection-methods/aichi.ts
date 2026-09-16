@@ -14,13 +14,13 @@
 // 評定得点=調査書「学習の記録」の評定合計×2（満点90点）、学力検査合計得点=国数社理英5教科
 // の得点合計（満点110点）。
 //
-// ⚠️収録範囲: 全5頁のうち3頁目（別紙・一般選抜）の左列・右列（旭丘～豊田東・106レコード、
-// 複数学科を持つ学校は学科ごとに別レコード）を完全収録。4〜5頁目（推薦選抜等の別表があれば）は未収録。「令和9年度から校内順位の決定方式を
-// 変更する学校・学科」の情報（2頁目）から、春日井工科・一宮工科・稲沢緑風館(普通/農業)・常滑・
-// 豊田南・三谷水産の7件は令和8年度と令和9年度で方式が異なることが判明しており、3頁目に
-// 掲載されている該当校（春日井工科・一宮工科・稲沢緑風館・常滑）は変更前の値もnoteに記録した
-// （豊田南・三谷水産は3頁目に掲載が無いため未収録）。fiscalYearは令和9年度（本資料の時点）を
-// 基準とする。
+// ✅収録完了（2026-09-17）: 全5頁のうち3〜4頁目（別紙・一般選抜の全校）を完全収録した
+// （199レコード＝5頁目の集計表「総計198校1校舎」とほぼ一致し網羅性を裏付け）。5頁目は
+// 学区別・タイプ別の集計統計のみで個別校データは含まれないため未収録（収録不要）。1頁目は
+// 制度説明・2頁目は前年度比の変更校一覧で、いずれもデータ自体は3〜4頁目に含まれる。
+// 「令和9年度から校内順位の決定方式を変更する学校・学科」（2頁目の別表7件）は全て3〜4頁目に
+// 掲載されていたため、変更前後の値を両方noteに記録した（春日井工科・一宮工科・稲沢緑風館
+// 普通/農業・常滑・豊田南・三谷水産）。fiscalYearは令和9年度（本資料の時点）を基準とする。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -29,7 +29,7 @@ export const AICHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    '全5頁中3頁目（旭丘〜豊田東・106レコード）を完全収録。校内順位の決定方式はI〜Vの計算式定義参照(docTitle横のコメント)。4〜5頁目は未収録',
+    '全5頁を確認済み。3〜4頁目(別紙・一般選抜の全校)を完全収録(199レコード=公式集計198校1校舎とほぼ一致)。5頁目は集計統計のみで収録不要',
   schools: [
     { schoolName: '旭丘', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
     { schoolName: '旭丘', department: '美術', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
@@ -151,6 +151,99 @@ export const AICHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '武豊', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
     { schoolName: '豊田西', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
     { schoolName: '豊田東', department: '総合', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '衣台', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '豊田北', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '豊田南', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V', note: '令和8年度はIII(令和9年度からVへ変更)' },
+    { schoolName: '豊田', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '豊野', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '松平', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: 'I' },
+    { schoolName: '松平', department: 'ライフコーディネート', selectionCategory: '一般', interviewRequired: true, ratioType: 'II' },
+    { schoolName: '加茂丘', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: 'II' },
+    { schoolName: '足助', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: 'II' },
+    { schoolName: '足助', department: '観光', selectionCategory: '一般', interviewRequired: true, ratioType: 'II' },
+    { schoolName: '豊田工科', department: '工業', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '猿投農林', department: '農業', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '三好', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '三好', department: 'スポーツ科学', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '岡崎', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '岡崎北', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '岡崎北', department: '理数', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '岡崎東', department: '総合', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '岡崎西', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '岩津', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '岩津', department: '家庭', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '岡崎工科', department: '工業', selectionCategory: '一般', interviewRequired: false, ratioType: 'IV' },
+    { schoolName: '岡崎商業', department: '商業', selectionCategory: '一般', interviewRequired: false, ratioType: 'IV' },
+    { schoolName: '幸田', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '碧南', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '碧南', department: '総合ビジネス', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '碧南工科', department: '工業', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '刈谷', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '刈谷北', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '刈谷北', department: '国際探究', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '刈谷工科', department: '工業', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '安城', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '安城', department: '生活文化', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '安城東', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '安城南', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '安城農林', department: '農業', selectionCategory: '一般', interviewRequired: true, ratioType: 'I' },
+    { schoolName: '西尾', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '西尾東', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '鶴城丘', department: '総合', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '一色', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '一色', department: '生活デザイン', selectionCategory: '一般', interviewRequired: false, ratioType: 'IV' },
+    { schoolName: '吉良', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '吉良', department: '生活文化', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '知立東', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '知立', department: '総合', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '高浜', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '高浜', department: '福祉', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '時習館', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '豊橋東', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '豊丘', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '豊丘', department: '生活文化', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '豊橋南', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '豊橋南', department: '生活デザイン', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '豊橋西', department: '総合', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '豊橋工科', department: '工業', selectionCategory: '一般', interviewRequired: false, ratioType: 'IV' },
+    { schoolName: '豊橋商業', department: '商業', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '成章', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '成章', department: '総合ビジネス', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '成章', department: '生活文化', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '福江', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '渥美農業', department: '農業', selectionCategory: '一般', interviewRequired: true, ratioType: 'I' },
+    { schoolName: '国府', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '国府', department: '総合ビジネス', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '御津あおば', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '小坂井', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '豊川工科', department: '工業', selectionCategory: '一般', interviewRequired: false, ratioType: 'IV' },
+    { schoolName: '宝陵', department: '衛生看護', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '宝陵', department: '福祉', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '蒲郡', department: '総合', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '蒲郡東', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '三谷水産', department: '水産', selectionCategory: '一般', interviewRequired: false, ratioType: 'I', note: '令和8年度はIV(令和9年度からIへ変更)' },
+    { schoolName: '新城有教館', department: '総合(文理系)', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '新城有教館', department: '総合(専門系)', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '作手校舎', department: '人と自然', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '田口', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'IV' },
+    { schoolName: '田口', department: '林業', selectionCategory: '一般', interviewRequired: false, ratioType: 'IV' },
+    { schoolName: '市立菊里', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '市立菊里', department: '音楽', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '市立向陽', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '市立向陽', department: '国際科学', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '市立桜台', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '市立桜台', department: 'ファッション文化', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '市立北', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '市立緑', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '市立富田', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '市立山田', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '市立名東', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '市立名東', department: '国際英語', selectionCategory: '一般', interviewRequired: false, ratioType: 'V' },
+    { schoolName: '市立西陵', department: '総合', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '市立名古屋商業', department: '商業', selectionCategory: '一般', interviewRequired: false, ratioType: 'III' },
+    { schoolName: '市立若宮商業', department: '未来ビジネス', selectionCategory: '一般', interviewRequired: false, ratioType: 'II' },
+    { schoolName: '市立工業', department: '工業', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
+    { schoolName: '市立工芸', department: '工業', selectionCategory: '一般', interviewRequired: false, ratioType: 'I' },
   ],
   source: {
     url: 'https://www.pref.aichi.jp/uploaded/attachment/623173.pdf',
