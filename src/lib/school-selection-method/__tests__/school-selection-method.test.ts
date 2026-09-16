@@ -129,9 +129,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     ).toBeNull();
   });
 
-  it('osaka: schoolsは91校を収録している(普通科・普通科単位制・工業に関する学科を完全収録)', () => {
+  it('osaka: 住吉商業(商業に関する学科・一般)は3コースを持ちAAA問題', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '住吉商業',
+      '一般'
+    );
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'A', suugaku: 'A', eigo: 'A' });
+    expect(record?.ratioType).toBe('IV');
+  });
+
+  it('osaka: 住吉(総合科学科・一般)はCBC問題を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '住吉', '一般');
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'B', eigo: 'C' });
+  });
+
+  it('osaka: schoolsは98校を収録している(工業・商業・グローバルビジネス科・食物文化科を完全収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(91);
+    expect(record?.schools?.length).toBe(98);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {

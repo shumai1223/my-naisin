@@ -10,12 +10,14 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1〜25頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
-// 4校)・(5)工業に関する学科(21〜25頁・選抜区分「一般」の11校)は完全収録。(3)文理探究科は
-// 20頁目の2校のみ（次頁以降に続く）、(4)農業に関する学科も21頁目の2校のみ（同様に次頁以降に
-// 続く）を収録。掲載されている選抜区分のうち「一般」のみ転記し、「特別」（工芸科・岸和田市立
-// 産業等の特別選抜）や「日本語指導を要する生徒に対する特別入学者選抜」等は未収録（倍率の
-// タイプが適用されない別枠のため）。26頁目以降の(6)商業に関する学科等は次回以降に順次追加する。
+// ⚠️収録範囲: 全66頁のうち1〜29頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
+// 4校)・(5)工業に関する学科(21〜25頁)・(6)商業に関する学科(26〜27頁)・(7)グローバルビジネス科
+// (27頁)・(8)食物文化科(28頁)は選抜区分「一般」の範囲で完全収録。(3)文理探究科・(4)農業に
+// 関する学科は各2校のみ（部分収録）、(9)福祉ボランティア科・(10)理数科は「一般」区分で
+// 新規性のある学校が無かった（既収録校の別学科名としての再掲のみ）ため実質収録済み、
+// (11)総合科学科は住吉1校のみ（部分収録・次頁に続く可能性）。「特別」（工芸科等）・
+// 「帰国生」等の非「一般」選抜区分は一貫して未収録（倍率のタイプが適用されない別枠のため）。
+// 30頁目以降の残りの学科は次回以降に順次追加する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -24,7 +26,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1〜25頁目。普通科(72校)・普通科単位制(4校)・工業に関する学科(11校)は完全収録。文理探究科・農業に関する学科は各2校のみ(部分収録)。選抜区分は「一般」のみ転記（「特別」区分は未収録）',
+    '全66頁中1〜29頁目。普通科・普通科単位制・工業に関する学科・商業に関する学科・グローバルビジネス科・食物文化科は選抜区分「一般」の範囲で完全収録。文理探究科・農業に関する学科・総合科学科は部分収録',
   schools: [
     {
       schoolName: '東淀川',
@@ -696,6 +698,60 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'II',
       note: 'サイエンス・機械材料・建築インテリア・マネジメントの4創造科を設置。これで(5)工業に関する学科(21〜25頁)を完全収録(選抜区分「特別」の工芸科・岸和田市立産業(デザインシステム科等)は対象外のため未収録)',
+    },
+    {
+      schoolName: '淀商業',
+      department: '商業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '鶴見商業',
+      department: '商業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      ratioType: 'IV',
+    },
+    {
+      schoolName: '住吉商業',
+      department: '商業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'IV',
+      note: 'スペシャリストコース・観光コース・ジェネラリストコースの3コースを設置',
+    },
+    {
+      schoolName: '岸和田市立産業',
+      department: '商業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '商業科・情報科・デザインシステム科の3学科を併設(デザインシステム科は選抜区分「特別」のため別途未収録)。これで(6)商業に関する学科(26〜27頁)を選抜区分「一般」の範囲で完全収録',
+    },
+    {
+      schoolName: '大阪ビジネスフロンティア',
+      department: 'グローバルビジネス科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '高大7年間を見据えた教育プログラム。これで(7)グローバルビジネス科(27頁)を完全収録',
+    },
+    {
+      schoolName: '咲くやこの花',
+      department: '食物文化科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+      note: '総合学科・演劇科・食物文化科の3学科を併設。これで(8)食物文化科(28頁)を完全収録',
+    },
+    {
+      schoolName: '住吉',
+      department: '総合科学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'B', eigo: 'C' },
+      ratioType: 'I',
+      note: '選抜区分「帰国生」も別途設置(未収録)',
     },
   ],
   source: {
