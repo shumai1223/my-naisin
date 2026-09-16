@@ -143,13 +143,20 @@
 （後方互換）。yamanashiは前期募集選抜方法（調査書/面接/特色検査の比率）を採用しており
 examSubjectTypes/ratioTypeの枠組みに合わないため今回は見送った（前期/後期制度の違い）。
 
+**2026-09-17追記: ibaraki（茨城県）を3県目として完了した**（実施細則別表1「高等学校別入学者
+選抜実施方法」の全日制課程・65〜70頁・149レコード。71頁で表題が「定時制課程」に変わることを
+確認し範囲の終端を確定）。茨城県はA/B/C・I〜Vのような記号でなく「学力検査重視:調査書重視」の
+比率をパーセントで直接表記する方式（例'80:20'）で、ratioTypeフィールドにそのまま転記できた
+（型拡張不要）。fukushima（各高等学校の選抜方法一覧・192頁）は1校2頁の詳細プローズ形式で
+examSubjectTypes/ratioTypeの枠組みに合わないため見送った。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y14の3県目（残るstructured確定県: tokyo/hokkaido/aomori/miyagi/ibaraki/fukushima/gunma/
-   nagano/gifu/shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima。yamanashiは
-   前期/後期制度が異なるため型の見直しが必要）のデータ層実装に進む
+1. T-Y14の4県目（残るstructured確定県: tokyo/hokkaido/aomori/miyagi/fukushima/gunma/
+   nagano/gifu/shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima。fukushima/
+   yamanashiは既存schemaに合わないため型の見直しが必要）のデータ層実装に進む
 2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている・2026-09-17時点でtokyo/osaka/saitama/hyogo/aichi/miyagi/chiba/kanagawaの
-   8県実装済み）
+   指定されている・2026-09-17時点でtokyo/osaka/saitama/hyogo/aichi/miyagi/chiba/kanagawa/
+   hokkaidoの9県実装済み）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
 individualの残り確定作業、②structured確定県からのデータ層実装、のいずれかに進むこと。
