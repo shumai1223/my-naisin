@@ -126,4 +126,22 @@
 に集約する（本ファイルへの追記だと肥大化するため）。**2026-09-16、47/47県の存在確認パスを完了した**
 （structured確定19県・structured見込み18県・individual3県・uncertain7県。詳細・次にやることは
 同ファイル末尾「次にやること」を参照）。次回セッションは同ファイルの指示に従い、①uncertain/
+
+## ステップ3進行中（データ層実装・2026-09-17）
+
+`src/lib/school-selection-method/`（型・純関数）と`src/data/school-selection-methods/<pref>.ts`
+（県データ）を新設。**osaka（大阪府）を1県目として着手し、全66頁を確認して選抜区分「一般」の
+範囲で完全収録した**（全日制144校相当+定時制14校。54〜65頁の「Ⅱ知的障がい高等支援学校」は
+評価軸自体が別制度のため対象外と判断・66頁は奥付）。詳細はosaka.ts冒頭コメント参照。
+同一校名・同一選抜区分でも学科(department)が異なれば別レコードを持てるよう
+`findSchoolSelectionRecord()`にdepartment引数（省略可・後方互換）を追加済み。
+
+**次回セッションが選ぶべきこと**:
+1. T-Y14の2県目（structured確定県: tokyo/hokkaido/aomori/miyagi/ibaraki/fukushima/gunma/
+   yamanashi/nagano/gifu/shizuoka/aichi/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima
+   のいずれか）のデータ層実装に進む
+2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
+   指定されている）
+3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
+   二重実装を避けること
 individualの残り確定作業、②structured確定県からのデータ層実装、のいずれかに進むこと。
