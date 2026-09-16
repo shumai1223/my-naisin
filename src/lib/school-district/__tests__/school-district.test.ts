@@ -10,9 +10,20 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/tochigi/tokyo/toyamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/ibaraki/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shizuoka/tochigi/tokyo/toyamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'tochigi', 'tokyo', 'toyama']);
+    expect(abolished).toEqual(['aomori', 'ibaraki', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shizuoka', 'tochigi', 'tokyo', 'toyama']);
+  });
+
+  it('ibarakiは平成18年度(2006年度)に5学区制を廃止した', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'ibaraki');
+    expect(record?.abolishedFiscalYear).toBe('平成18年度（2006年度）');
+  });
+
+  it('shizuokaは平成20年度(2008年度)に10学区制(賀茂〜西遠)を廃止した', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'shizuoka');
+    expect(record?.abolishedFiscalYear).toBe('平成20年度（2008年度）');
+    expect(record?.outOfDistrictCondition).toContain('10学区');
   });
 
   it('shigaは平成18年度(2006年度)に学区を廃止した(信楽/伊香/虎姫は全国募集の特例)', () => {
