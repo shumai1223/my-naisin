@@ -19,10 +19,11 @@
 //
 // interviewRequiredフィールドは特色選抜における面接実施の有無を表す（○＝実施）。
 //
-// ⚠️収録範囲: 別表1全体（印刷頁65〜71）のうち65〜68頁（全日制課程・高萩清松〜江戸崎総合）を
-// 完全収録。69〜71頁（残りの学校）は未収録。定時制課程の別表2・連携型高等学校の別表3は対象外
-// （T-Y14は全日制課程の「一般」相当選抜を対象とするため）。★茨城東(30:70)は調査書重視の比率が
-// 学力検査を上回る珍しい配分。
+// ✅収録完了（2026-09-17）: 別表1のうち全日制課程（印刷頁65〜70・高萩清松〜伊奈）を完全収録
+// した。71頁からは「定時制課程」の表に変わるため、そこで全日制課程の一覧が終わることを確認
+// 済み（71頁以降は別表2〜3=定時制・連携型高等学校で対象外）。
+// ★調査書重視の比率が学力検査を上回る珍しい配分の学校: 茨城東(30:70)・筑波(地域キャリア
+// ビジネスコース・30:70)・石下紫峰(40:60)。多くの学校は学力検査重視(50:50〜80:20)。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -31,7 +32,7 @@ export const IBARAKI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = 
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '別表1(印刷頁65〜71)のうち65〜68頁(高萩清松〜江戸崎総合)を完全収録。ratioTypeは学力検査重視:調査書重視の比率(例80:20・茨城東は30:70で調査書重視が逆転)。69頁以降・定時制(別表2)・連携型(別表3)は未収録',
+    '別表1のうち全日制課程(印刷頁65〜70・高萩清松〜伊奈)を完全収録。ratioTypeは学力検査重視:調査書重視の比率(例80:20)。71頁以降は定時制(別表2)・連携型(別表3)で対象外',
   schools: [
     { schoolName: '高萩清松', department: '総合学科', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない。単位制' },
     { schoolName: '日立第一', department: '普通・サイエンス', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '普通科とサイエンス科はくくり募集。特色選抜は学力検査・調査書・面接(体育分野は実技、文化分野はプレゼンテーション)を実施。単位制' },
@@ -132,6 +133,56 @@ export const IBARAKI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = 
     { schoolName: '竜ヶ崎第二', department: '人間文化', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
     { schoolName: '竜ヶ崎南', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '50:50', note: '特色選抜は実施しない' },
     { schoolName: '江戸崎総合', department: '総合学科', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施。単位制' },
+    { schoolName: '取手第一', department: '総合学科', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '取手第二', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '取手第二', department: '家政', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '取手松陽', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接・実技検査(体育分野のみ)を実施' },
+    { schoolName: '取手松陽', department: '美術', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない' },
+    { schoolName: '取手松陽', department: '音楽', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない' },
+    { schoolName: '藤代', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '藤代紫水', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '60:40', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '牛久', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '牛久栄進', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない' },
+    { schoolName: '筑波', department: '普通(進学アドバンストコース)', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない' },
+    { schoolName: '筑波', department: '普通(地域キャリアビジネスコース)', selectionCategory: '一般', interviewRequired: false, ratioType: '30:70', note: '特色選抜は実施しない。調査書重視の比率が学力検査を上回る' },
+    { schoolName: '竹園', department: '普通・国際', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '普通科と国際科はくくり募集。特色選抜は実施しない' },
+    { schoolName: 'つくばサイエンス', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない。共通選抜で科学技術科を第2志望として志願可能' },
+    { schoolName: 'つくばサイエンス', department: '科学技術', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '岩瀬', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '岩瀬', department: '衛生看護', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない。5年一貫看護師養成教育' },
+    { schoolName: '真壁', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '真壁', department: '農業・環境緑地', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施。農業に関する学科はくくり募集' },
+    { schoolName: '真壁', department: '食品化学', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '下館第一', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施。単位制' },
+    { schoolName: '下館第二', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '下館工業', department: '機械', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '下館工業', department: '電気・電子', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '下館工業', department: '建設工学', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '下妻第一', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '下妻第二', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '結城第一', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない。単位制' },
+    { schoolName: '鬼怒商業', department: '商業に関する学科', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '商業科・情報ビジネス科はくくり募集。特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '石下紫峰', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '40:60', note: '特色選抜は実施しない。調査書重視の比率が学力検査を上回る' },
+    { schoolName: '水海道第一', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施。単位制' },
+    { schoolName: '水海道第二', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '水海道第二', department: '商業', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '水海道第二', department: '家政', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '八千代', department: '総合学科', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施。単位制' },
+    { schoolName: '古河第一', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '古河第一', department: '商業に関する学科', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '流通ビジネス科・会計ビジネス科・情報ビジネス科はくくり募集。特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '古河第二', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '古河第二', department: '福祉', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '古河第三', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '総和工業', department: '機械', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施。工業に関する学科はくくり募集' },
+    { schoolName: '総和工業', department: '電子機械', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '総和工業', department: '電気', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '三和', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '60:40', note: '特色選抜は実施しない' },
+    { schoolName: '三和', department: '普通(ヒューマンサービスコース)', selectionCategory: '一般', interviewRequired: false, ratioType: '60:40', note: '特色選抜は実施しない。共通選抜で同校普通科を第2志望として志願可能' },
+    { schoolName: '境', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '坂東清風', department: '農と食', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '坂東清風', department: '総合学科', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない。単位制' },
+    { schoolName: '守谷', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '伊奈', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施。これで別表1・全日制課程(65〜70頁)を完全収録' },
   ],
   source: {
     url: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2025/10/saisoku.pdf',

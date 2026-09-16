@@ -337,9 +337,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('30:70');
   });
 
-  it('ibaraki: schoolsは99レコードを収録している(別表1の65-68頁を完全収録)', () => {
+  it('ibaraki: 石下紫峰(普通・一般)は比率40:60で調査書重視', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ibaraki', '石下紫峰', '一般');
+    expect(record?.ratioType).toBe('40:60');
+  });
+
+  it('ibaraki: schoolsは149レコードを収録している(別表1・全日制課程を完全収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ibaraki');
-    expect(record?.schools?.length).toBe(99);
+    expect(record?.schools?.length).toBe(149);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
