@@ -10,9 +10,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでmiyagi/osaka/saitama/tokyoを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでkanagawa/miyagi/osaka/saitama/tokyoを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['miyagi', 'osaka', 'saitama', 'tokyo']);
+    expect(abolished).toEqual(['kanagawa', 'miyagi', 'osaka', 'saitama', 'tokyo']);
+  });
+
+  it('kanagawaは平成17年度(2005年度)に学区を廃止した', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'kanagawa');
+    expect(record?.abolishedFiscalYear).toBe('平成17年度（2005年度）');
   });
 
   it('miyagiは平成22年度(2010年度)に学区を廃止した', () => {
