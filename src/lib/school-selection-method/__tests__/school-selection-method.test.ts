@@ -145,9 +145,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'B', eigo: 'C' });
   });
 
-  it('osaka: schoolsは98校を収録している(工業・商業・グローバルビジネス科・食物文化科を完全収録)', () => {
+  it('osaka: 千里(総合科学科・一般)はCCC問題を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '千里', '一般');
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'C', eigo: 'C' });
+  });
+
+  it('osaka: schoolsは100校を収録している(総合科学科まで完全収録・30-37頁は重複/特別区分のみで新規性なし)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(98);
+    expect(record?.schools?.length).toBe(100);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {
