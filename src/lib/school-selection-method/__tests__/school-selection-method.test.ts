@@ -183,9 +183,35 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('IV');
   });
 
-  it('osaka: schoolsは125校を収録している(総合学科14校を追加)', () => {
+  it('osaka: 大手前は全日制(文理学科・CCC/I)と定時制(定時制の課程(普通科)・AAA/III)で別レコードを持つ', () => {
+    const zenjitsu = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '大手前',
+      '一般',
+      '文理学科'
+    );
+    const teijisei = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '大手前',
+      '一般',
+      '定時制の課程(普通科)'
+    );
+    expect(zenjitsu?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'C', eigo: 'C' });
+    expect(zenjitsu?.ratioType).toBe('I');
+    expect(teijisei?.examSubjectTypes).toEqual({ kokugo: 'A', suugaku: 'A', eigo: 'A' });
+    expect(teijisei?.ratioType).toBe('III');
+  });
+
+  it('osaka: department省略時のfindSchoolSelectionRecordは最初に見つかった1件を返す(大手前は文理学科が先)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '大手前', '一般');
+    expect(record?.department).toBe('文理学科');
+  });
+
+  it('osaka: schoolsは130校を収録している(東住吉総合+定時制4校を追加)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(125);
+    expect(record?.schools?.length).toBe(130);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {

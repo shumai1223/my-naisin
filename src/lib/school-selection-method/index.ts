@@ -71,17 +71,24 @@ export function getSchoolSelectionMethod(
 /**
  * 指定県・指定学校名・指定選抜区分に一致するレコードを返す。
  * status が 'structured' かつ収録済みの学校のみ見つかる（未収録校は null）。
+ * 同一校名・同一選抜区分でも学科（department）が異なる複数レコードが存在しうる
+ * （例: 全日制の文理学科と定時制の課程が同じ校名で別レコード）ため、
+ * department を渡すとそれも一致条件に含める。省略時は最初に見つかった1件を返す。
  */
 export function findSchoolSelectionRecord(
   byPrefecture: SchoolSelectionMethodByPrefecture,
   prefectureCode: string,
   schoolName: string,
-  selectionCategory: string
+  selectionCategory: string,
+  department?: string
 ): SchoolSelectionMethodRecord | null {
   const record = getSchoolSelectionMethod(byPrefecture, prefectureCode);
   if (!record || record.status !== 'structured' || !record.schools) return null;
   const school = record.schools.find(
-    (s) => s.schoolName === schoolName && s.selectionCategory === selectionCategory
+    (s) =>
+      s.schoolName === schoolName &&
+      s.selectionCategory === selectionCategory &&
+      (department === undefined || s.department === department)
   );
   return school ?? null;
 }
