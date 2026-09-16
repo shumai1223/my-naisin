@@ -10,9 +10,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでkanagawa/miyagi/oita/osaka/saga/saitama/tokyo/toyamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでkanagawa/kochi/miyagi/oita/osaka/saga/saitama/tokyo/toyamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['kanagawa', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'tokyo', 'toyama']);
+    expect(abolished).toEqual(['kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'tokyo', 'toyama']);
+  });
+
+  it('kochiは平成24年度(2012年度)に学区を廃止した(4学区→全県一区)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'kochi');
+    expect(record?.abolishedFiscalYear).toBe('平成24年度（2012年度）');
   });
 
   it('sagaは令和5年度(2023年度)に学区を廃止した(4学区→2学区を経て全県1区)', () => {
@@ -82,7 +87,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/nagano/okinawaを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/nagano/okayama/okinawaを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
@@ -90,6 +95,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'hyogo',
       'kagoshima',
       'nagano',
+      'okayama',
       'okinawa',
     ]);
   });
@@ -149,6 +155,13 @@ describe('T-Y15 学区（通学区域）DB', () => {
       '八重山学区',
     ]);
     expect(record?.outOfDistrictCondition).toContain('10%');
+  });
+
+  it('okayamaは districted で6学区(備北学区は対象校0)を持つ', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'okayama');
+    expect(record?.districts?.length).toBe(6);
+    const bihoku = record?.districts?.find((d) => d.name === '備北学区');
+    expect(bihoku?.note).toContain('無い');
   });
 
   it('districtedのレコードはdistricts配列を持つ', () => {
