@@ -121,21 +121,22 @@
 新設。型は`systemType`（'abolished'=学区廃止/'districted'=学区あり/'none-by-design'=元々学区
 なし）と`districts`（区割りの市区町村一覧）・`outOfDistrictCondition`（学区外就学条件）を持つ。
 
-**2026-09-17時点で21県を実装済み**:
-- abolished型(11県): tokyo(2003年度廃止)・osaka(2014年度府立廃止+2022年市立府移管で統合)・
+**2026-09-17時点で23県を実装済み**:
+- abolished型(12県): tokyo(2003年度廃止)・osaka(2014年度府立廃止+2022年市立府移管で統合)・
   saitama(2004年度廃止)・miyagi(2010年度廃止)・kanagawa(2005年度廃止)・toyama(2024年度廃止)・
   oita(2008年度廃止・廃止前は色分け学区+学区外上限10%)・saga(2023年度廃止・4学区→2016年度に
   東部/西部2学区を経て全県1区)・kochi(2012年度廃止・廃止前は東部/高知/高吾/幡多の4学区)・
   aomori(2005年度廃止・廃止前6学区の名称は未確認のまま記録)・tochigi(2014年度廃止・廃止前7学区
-  +調整地域の相互乗り入れ)
-- districted型(10県): hyogo(5学区)・aichi(尾張/三河学区)・chiba(9学区・隣接学区特例あり)・
+  +調整地域の相互乗り入れ)・shiga(2006年度廃止・信楽/伊香/虎姫3校の「全国募集」特例あり)
+- districted型(11県): hyogo(5学区)・aichi(尾張/三河学区)・chiba(9学区・隣接学区特例あり)・
   hokkaido(19学区・重層的な学区外就学例外規定あり)・nagano(4学区・実質全県1学区運用)・
   kagoshima(8学区・熊毛/大島学区と120人以下の高校は一定枠なしの特例、5〜10%の一定枠制度)・
   okinawa(7学区・学区外10%枠・専門学科と第2次募集は県全域)・okayama(6学区中5学区のみ対象校
   あり・備北学区は対象校0という珍しいケース・学区外上限は学校ごとに5〜20%)・tokushima(3学区+
   学区なし3校・学区外上限は育成型選抜2〜3%/一般選抜8〜20%と選抜方式ごとに異なる・令和7年に
   全県学区化の見直し報告書素案あり)・mie(北部/中部/南部の3学区54校・「志願学区=居住学区+
-  隣接学区」という他県に無い制度)
+  隣接学区」という他県に無い制度)・kagawa(第1/第2学区・令和5年度から自己推薦選抜に限り
+  他学区枠5%を新設)
 
 **🆕発見: 三重県のように「居住学区だけでなく隣接学区へも出願可能」という制度は他県調査時にも
 念頭に置くこと（機械的に「学区外は上限%以内」とだけ記録すると見落とす可能性がある）**
@@ -161,9 +162,9 @@ R5(予定) 佐賀✅
 つけられるため、次回セッションの着手候補として優先度が高い。
 
 **次回セッションが選ぶべきこと**:
-1. T-Y15の22県目（残るstructured確定県: iwate/yamagata/fukushima/ibaraki/
-   ishikawa/shizuoka/shiga/kyoto/wakayama/shimane/hiroshima/yamaguchi/
-   kagawa/ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む（上記の岩手県表で
+1. T-Y15の24県目（残るstructured確定県: iwate/yamagata/fukushima/ibaraki/
+   ishikawa/shizuoka/kyoto/wakayama/shimane/hiroshima/yamaguchi/
+   ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む（上記の岩手県表で
    abolished型と当たりが付いている県を優先すると効率的。ibaraki/ishikawaはH17、
    shizuokaはH20で廃止の当たりが付いている）
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
