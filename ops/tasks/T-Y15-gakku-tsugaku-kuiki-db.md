@@ -114,3 +114,22 @@
 （structured確定38県・見込み3県・uncertain6県=合計87.2%）。次回セッションは同ファイル末尾
 「次にやること」の指示に従い、①uncertain6県の追加確認、②structured確定県からのデータ層実装、
 のいずれかに進むこと。
+
+## ステップ3進行中（データ層実装・2026-09-17）
+
+`src/lib/school-district/`（型・純関数）と`src/data/school-districts/<pref>.ts`（県データ）を
+新設。型は`systemType`（'abolished'=学区廃止/'districted'=学区あり/'none-by-design'=元々学区
+なし）と`districts`（区割りの市区町村一覧）・`outOfDistrictCondition`（学区外就学条件）を持つ。
+
+**2026-09-17時点で10県を実装済み**:
+- abolished型(6県): tokyo(2003年度廃止)・osaka(2014年度府立廃止+2022年市立府移管で統合)・
+  saitama(2004年度廃止)・miyagi(2010年度廃止)・kanagawa(2005年度廃止)・toyama(2024年度廃止)
+- districted型(4県): hyogo(5学区)・aichi(尾張/三河学区)・chiba(9学区・隣接学区特例あり)・
+  hokkaido(19学区・重層的な学区外就学例外規定あり)
+
+**次回セッションが選ぶべきこと**:
+1. T-Y15の11県目（残るstructured確定県: aomori/gunma/ishikawa/nagano等）のデータ層実装に進む
+2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibarakiの
+   3県実装済み）
+3. いずれを選ぶ場合も、着手前に既存の`src/data/school-districts/index.ts`を確認し二重実装を
+   避けること
