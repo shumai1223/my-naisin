@@ -422,9 +422,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('数学300');
   });
 
-  it('gunma: schoolsは46レコードを収録している(先頭18校・2〜3段階選抜)', () => {
+  it('gunma: 伊勢崎興陽(特色型選抜②)は面接等の配点が調査書の4倍で最終選抜が実質面接重視', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma', '伊勢崎興陽', '特色型選抜②', '総合学科');
+    expect(record?.ratioType).toBe('学力検査33%:面接等53%:調査書13%');
+  });
+
+  it('gunma: schoolsは61レコードを収録している(先頭23校・2〜3段階選抜)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma');
-    expect(record?.schools?.length).toBe(46);
+    expect(record?.schools?.length).toBe(61);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
