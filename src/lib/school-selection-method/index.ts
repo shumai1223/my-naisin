@@ -38,8 +38,13 @@ export interface SchoolSelectionMethodRecord {
   selectionCategory: string;
   /** 教科ごとの学力検査問題の種類（例: 国語='B'）。資料に無い教科はキー自体を省略する。 */
   examSubjectTypes?: Partial<Record<'kokugo' | 'suugaku' | 'eigo' | 'rika' | 'shakai', string>>;
-  /** 学力検査の成績・調査書の評定にかける倍率のタイプ（資料の表記をそのまま転記。例: 'I'〜'V'）。 */
+  /** 学力検査の成績・調査書の評定にかける倍率のタイプ（資料の表記をそのまま転記。例: 'I'〜'V'）。
+   * 数値の計算式は都道府県ごとに異なる（同じ'I'〜'V'の表記でも県によって式が違う）ため、
+   * 比較する際は必ず該当県のPrefectureSchoolSelectionMethod.noteに記載の計算式定義と
+   * 合わせて解釈すること。 */
   ratioType?: string;
+  /** 面接の実施有無（資料に明記されている場合のみ設定）。 */
+  interviewRequired?: boolean;
   note?: string;
 }
 

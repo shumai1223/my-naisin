@@ -265,6 +265,35 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
+  it('aichi: 守山(普通・一般)は面接実施ありで校内順位タイプIを持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aichi', '守山', '一般');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.ratioType).toBe('I');
+  });
+
+  it('aichi: 旭丘(普通・一般)は面接なしで校内順位タイプVを持つ', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'aichi',
+      '旭丘',
+      '一般',
+      '普通'
+    );
+    expect(record?.interviewRequired).toBe(false);
+    expect(record?.ratioType).toBe('V');
+  });
+
+  it('aichi: 旭丘(美術・一般)は普通科とは異なる校内順位タイプIを持つ(同一校名別学科)', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'aichi',
+      '旭丘',
+      '一般',
+      '美術'
+    );
+    expect(record?.ratioType).toBe('I');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
