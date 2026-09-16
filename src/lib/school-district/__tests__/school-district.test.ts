@@ -72,13 +72,20 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogoを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/naganoを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
       'hokkaido',
       'hyogo',
+      'nagano',
     ]);
+  });
+
+  it('naganoは districted で4学区を持つ', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'nagano');
+    expect(record?.districts?.length).toBe(4);
+    expect(record?.districts?.[0].municipalities).toContain('長野市');
   });
 
   it('hokkaidoは districted で19学区を持つ', () => {
