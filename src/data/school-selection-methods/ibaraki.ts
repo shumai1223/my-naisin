@@ -19,9 +19,10 @@
 //
 // interviewRequiredフィールドは特色選抜における面接実施の有無を表す（○＝実施）。
 //
-// ⚠️収録範囲: 別表1全体（印刷頁65〜71）のうち65〜66頁（全日制課程の前半・高萩清松〜那珂湊）
-// のみ収録。67頁以降（残りの学校）は未収録。定時制課程の別表2・連携型高等学校の別表3は対象外
-// （T-Y14は全日制課程の「一般」相当選抜を対象とするため）。
+// ⚠️収録範囲: 別表1全体（印刷頁65〜71）のうち65〜68頁（全日制課程・高萩清松〜江戸崎総合）を
+// 完全収録。69〜71頁（残りの学校）は未収録。定時制課程の別表2・連携型高等学校の別表3は対象外
+// （T-Y14は全日制課程の「一般」相当選抜を対象とするため）。★茨城東(30:70)は調査書重視の比率が
+// 学力検査を上回る珍しい配分。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -30,7 +31,7 @@ export const IBARAKI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = 
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '別表1(印刷頁65〜71)のうち65〜66頁(高萩清松〜那珂湊)のみ収録。ratioTypeは学力検査重視:調査書重視の比率(例80:20)。67頁以降・定時制(別表2)・連携型(別表3)は未収録',
+    '別表1(印刷頁65〜71)のうち65〜68頁(高萩清松〜江戸崎総合)を完全収録。ratioTypeは学力検査重視:調査書重視の比率(例80:20・茨城東は30:70で調査書重視が逆転)。69頁以降・定時制(別表2)・連携型(別表3)は未収録',
   schools: [
     { schoolName: '高萩清松', department: '総合学科', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない。単位制' },
     { schoolName: '日立第一', department: '普通・サイエンス', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '普通科とサイエンス科はくくり募集。特色選抜は学力検査・調査書・面接(体育分野は実技、文化分野はプレゼンテーション)を実施。単位制' },
@@ -79,6 +80,58 @@ export const IBARAKI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = 
     { schoolName: '佐和', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
     { schoolName: '那珂湊', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施' },
     { schoolName: '那珂湊', department: '商業に関する学科', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '起業ビジネス科・情報ビジネス科はくくり募集。特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '海洋', department: '海洋技術', selectionCategory: '一般', interviewRequired: false, ratioType: '50:50', note: '特色選抜は実施しない。水産に関する学科はくくり募集' },
+    { schoolName: '海洋', department: '海洋食品', selectionCategory: '一般', interviewRequired: false, ratioType: '50:50', note: '特色選抜は実施しない' },
+    { schoolName: '海洋', department: '海洋産業', selectionCategory: '一般', interviewRequired: false, ratioType: '50:50', note: '特色選抜は実施しない' },
+    { schoolName: '笠間', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '笠間', department: '美術', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない' },
+    { schoolName: '笠間', department: 'メディア芸術', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない' },
+    { schoolName: '大洗', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '大洗', department: '普通(音楽コース)', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接・実技検査を実施。同一校の普通科を第2志望として志願可能' },
+    { schoolName: '東海', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '茨城東', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '30:70', note: '特色選抜は学力検査・調査書・面接を実施。調査書重視の比率が学力検査を上回る珍しい配分。単位制' },
+    { schoolName: '那珂', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '鉾田第一', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施。単位制' },
+    { schoolName: '鉾田第二', department: '総合学科', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施。単位制' },
+    { schoolName: '鉾田第二', department: '農業', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施。農業に関する学科はくくり募集' },
+    { schoolName: '鉾田第二', department: '食品技術', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '玉造工業', department: '工業に関する学科', selectionCategory: '一般', interviewRequired: false, ratioType: '50:50', note: '特色選抜は実施しない' },
+    { schoolName: '麻生', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '潮来', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '潮来', department: '地域ビジネス', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '潮来', department: '人間科学', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '鹿島', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施。単位制' },
+    { schoolName: '神栖', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '60:40', note: '特色選抜は実施しない' },
+    { schoolName: '波崎', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '波崎', department: '機械', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '波崎', department: '電気', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '波崎', department: '工業化学・情報', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '波崎柳川', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '70:30', note: '特色選抜は実施しない' },
+    { schoolName: '土浦第一', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない。単位制' },
+    { schoolName: '土浦第二', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '80:20', note: '特色選抜は実施しない' },
+    { schoolName: '土浦第三', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '土浦第三', department: '商業に関する学科', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '商業科・会計ビジネス科・情報処理科はくくり募集。特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '土浦工業', department: '機械', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '土浦工業', department: '電気', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '土浦工業', department: '情報技術', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '土浦工業', department: '建築', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '土浦工業', department: '土木', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '土浦湖北', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '石岡第一', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '石岡第一', department: '園芸', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施。農業に関する学科はくくり募集' },
+    { schoolName: '石岡第一', department: '造園', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '石岡第二', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '石岡第二', department: '生活デザイン', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '石岡商業', department: '商業', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '石岡商業', department: '情報処理', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '中央', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '中央', department: '普通(スポーツ科学コース)', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接・実技検査を実施。同一校の普通科を第2志望として志願可能' },
+    { schoolName: '竜ヶ崎第一', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '80:20', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '竜ヶ崎第二', department: '普通', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '竜ヶ崎第二', department: '商業', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '竜ヶ崎第二', department: '人間文化', selectionCategory: '一般', interviewRequired: true, ratioType: '70:30', note: '特色選抜は学力検査・調査書・面接を実施' },
+    { schoolName: '竜ヶ崎南', department: '普通', selectionCategory: '一般', interviewRequired: false, ratioType: '50:50', note: '特色選抜は実施しない' },
+    { schoolName: '江戸崎総合', department: '総合学科', selectionCategory: '一般', interviewRequired: true, ratioType: '50:50', note: '特色選抜は学力検査・調査書・面接を実施。単位制' },
   ],
   source: {
     url: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2025/10/saisoku.pdf',
