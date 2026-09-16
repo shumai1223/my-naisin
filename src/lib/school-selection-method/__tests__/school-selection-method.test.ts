@@ -40,6 +40,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('III');
   });
 
+  it('osaka: 清水谷(一般)は国語Cを含む学力検査問題タイプを持つ', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '清水谷',
+      '一般'
+    );
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'B', eigo: 'B' });
+    expect(record?.ratioType).toBe('I');
+  });
+
+  it('osaka: 池田(一般)は国数英すべてC問題を持つ', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '池田',
+      '一般'
+    );
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'C', eigo: 'C' });
+  });
+
+  it('osaka: schoolsは19校を収録している(5頁分)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
+    expect(record?.schools?.length).toBe(19);
+  });
+
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {
     expect(
       findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '未収録高校', '一般')

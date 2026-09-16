@@ -10,9 +10,9 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1頁目（全日制課程・普通教育を主とする学科（普通科）の一部4校）のみ。
-// 掲載されている選抜区分のうち「一般」のみ転記し、「日本語指導を要する生徒に対する特別入学者
-// 選抜」等は未収録（倍率のタイプが適用されない別枠のため）。残りの学科・学校は次回以降に
+// ⚠️収録範囲: 全66頁のうち1〜5頁目（全日制課程・普通教育を主とする学科（普通科）の一部19校）
+// のみ。掲載されている選抜区分のうち「一般」のみ転記し、「日本語指導を要する生徒に対する特別
+// 入学者選抜」等は未収録（倍率のタイプが適用されない別枠のため）。残りの学科・学校は次回以降に
 // 順次追加する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
@@ -22,7 +22,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1頁目（全日制課程・普通科の一部4校）のみ収録。選抜区分は「一般」のみ転記（日本語指導特別選抜等は未収録）',
+    '全66頁中1〜5頁目（全日制課程・普通科の一部19校）のみ収録。選抜区分は「一般」のみ転記（日本語指導特別選抜等は未収録）',
   schools: [
     {
       schoolName: '東淀川',
@@ -53,6 +53,114 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'I',
       note: '英語科・理数科志望者向けのアドミッションポリシーも同一選抜区分内に記載',
+    },
+    {
+      schoolName: '汎愛',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '体育科を併設（体育科志望者向けアドミッションポリシーも同一選抜区分内に記載）',
+    },
+    {
+      schoolName: '清水谷',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '夕陽丘',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+      note: '音楽科志望者向けアドミッションポリシーも同一選抜区分内に記載',
+    },
+    {
+      schoolName: '港',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '阿倍野',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '東住吉',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+      note: '芸能文化科を併設（芸能文化科志望者向けアドミッションポリシーも同一選抜区分内に記載）',
+    },
+    {
+      schoolName: '阪南',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '池田',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '渋谷',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '桜塚',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '豊島',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '刀根山',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '箕面',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '茨木西',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '北摂つばさ',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
     },
   ],
   source: {
