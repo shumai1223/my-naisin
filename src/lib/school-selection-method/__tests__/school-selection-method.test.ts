@@ -347,6 +347,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.schools?.length).toBe(149);
   });
 
+  it('yamanashi: 北杜(普通科・前期A)は特色適性検査を含む比重を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamanashi', '北杜', '前期A', '普通科');
+    expect(record?.ratioType).toBe('調査書45:面接30:所見5:特色適性検査20');
+  });
+
+  it('yamanashi: 甲府南(理数科・前期B)は特技を含む6項目中5項目の比重を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamanashi', '甲府南', '前期B', '理数科');
+    expect(record?.ratioType).toBe('調査書40:面接5:所見5:特色適性検査40:特技10');
+  });
+
+  it('yamanashi: 前期募集には学力検査が無いためexamSubjectTypesを持つレコードは1件もない', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamanashi');
+    for (const school of record?.schools ?? []) {
+      expect(school.examSubjectTypes).toBeUndefined();
+    }
+  });
+
+  it('yamanashi: schoolsは43レコードを収録している(1頁目15校・全トラック)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamanashi');
+    expect(record?.schools?.length).toBe(43);
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
