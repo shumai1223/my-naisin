@@ -57,8 +57,18 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでhyogoを含む', () => {
-    expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual(['hyogo']);
+  it('prefecturesBySystemTypeはdistrictedでaichi/hyogoを含む', () => {
+    expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
+      'aichi',
+      'hyogo',
+    ]);
+  });
+
+  it('aichiは districted で尾張学区・三河学区の2学区を持つ', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'aichi');
+    expect(record?.districts?.map((d) => d.name)).toEqual(['尾張学区', '三河学区']);
+    expect(record?.districts?.[0].municipalities).toContain('名古屋市');
+    expect(record?.districts?.[1].municipalities).toContain('豊橋市');
   });
 
   it('districtedのレコードはdistricts配列を持つ', () => {
