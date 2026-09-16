@@ -10,9 +10,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでkanagawa/miyagi/oita/osaka/saitama/tokyo/toyamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでkanagawa/miyagi/oita/osaka/saga/saitama/tokyo/toyamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['kanagawa', 'miyagi', 'oita', 'osaka', 'saitama', 'tokyo', 'toyama']);
+    expect(abolished).toEqual(['kanagawa', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'tokyo', 'toyama']);
+  });
+
+  it('sagaは令和5年度(2023年度)に学区を廃止した(4学区→2学区を経て全県1区)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'saga');
+    expect(record?.abolishedFiscalYear).toBe('令和5年度（2023年度）');
   });
 
   it('oitaは平成20年度(2008年度)に学区を廃止した', () => {
@@ -77,7 +82,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/naganoを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/nagano/okinawaを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
@@ -85,6 +90,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'hyogo',
       'kagoshima',
       'nagano',
+      'okinawa',
     ]);
   });
 
@@ -128,6 +134,21 @@ describe('T-Y15 学区（通学区域）DB', () => {
       '全県学区',
     ]);
     expect(record?.districts?.[0].municipalities).toContain('鹿児島市');
+  });
+
+  it('okinawaは districted で7学区(国頭/中頭/那覇/島尻/久米島/宮古/八重山)を持つ', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'okinawa');
+    expect(record?.districts?.length).toBe(7);
+    expect(record?.districts?.map((d) => d.name)).toEqual([
+      '国頭学区',
+      '中頭学区',
+      '那覇学区',
+      '島尻学区',
+      '久米島学区',
+      '宮古学区',
+      '八重山学区',
+    ]);
+    expect(record?.outOfDistrictCondition).toContain('10%');
   });
 
   it('districtedのレコードはdistricts配列を持つ', () => {
