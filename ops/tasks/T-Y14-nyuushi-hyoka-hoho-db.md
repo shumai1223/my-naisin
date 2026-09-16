@@ -186,19 +186,23 @@ fukushima（各高等学校の選抜方法一覧・192頁・1校2頁の詳細プ
 館林の6校を追加し35校91レコードへ拡大した(全日制67校中過半数到達)**。尾瀬(特色型選抜)は
 面接等40%が学力検査30%・調査書31%を上回る珍しい例。⚠️レコード数の見積もりを77+13=90と
 誤算しjestで発覚(実際は77+14=91)した教訓あり——追加後は必ずコードで数え直してからテストの
-期待値を書くこと。残り32校（渋川〜）とフレックススクール選抜・定時制課程選抜・連携型選抜
-（頁70〜92）は未収録のまま残っている。次に着手する際のPDF頁は「頁41」（渋川）から
-（index記載頁+3のオフセットは引き続き有効）。
+期待値を書くこと。
+
+**2026-09-17追記7: gunmaに館林女子・渋川・渋川女子・渋川青翠・渋川工業・藤岡中央の6校を
+追加し41校106レコードへ拡大した**。残り26校（頁47以降）とフレックススクール選抜・定時制
+課程選抜・連携型選抜（頁70〜92）は未収録のまま残っている。次に着手する際のPDF頁は「頁47」
+から（index記載頁+3のオフセットは引き続き有効。次の対象校は本文冒頭の目次で頁44以降を
+確認してから着手すること）。
 
 **次回セッションが選ぶべきこと**:
-1. gunmaの残り32校（頁41以降・渋川〜）を追加収録してgunmaを進める（1校1頁で作業単位が
+1. gunmaの残り26校（頁47以降）を追加収録してgunmaを進める（1校1頁で作業単位が
    明確・pdftoppmのpage offset=index記載頁+3が判明済みなのでそのまま流用できる）
 2. またはyamanashiの2頁目（笛吹〜甲府商業・11校）を追加収録してyamanashiを完了させる
 3. またはT-Y14の6県目（残るstructured確定県: tokyo/hokkaido/miyagi/
-   nagano/gifu/shizuoka/hiroshima/yamaguchi/kagoshima）の
-   データ層実装に進む（aomori/okayama/kochi/tokushima/tochigi/mie/shiga/kagawaはT-Y15で
-   使用済み。yamanashi/gunmaは実装済み）
+   nagano/gifu/hiroshima/yamaguchi/kagoshima）の
+   データ層実装に進む（aomori/okayama/kochi/tokushima/tochigi/mie/shiga/kagawa/ibaraki/
+   shizuokaはT-Y15で使用済み。yamanashi/gunmaは実装済み）
 4. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている・2026-09-17時点で23県実装済み・詳細はT-Y15タスクファイル参照）
+   指定されている・2026-09-17時点で25県実装済み・詳細はT-Y15タスクファイル参照）
 5. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
