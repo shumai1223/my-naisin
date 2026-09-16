@@ -427,9 +427,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('学力検査33%:面接等53%:調査書13%');
   });
 
-  it('gunma: schoolsは61レコードを収録している(先頭23校・2〜3段階選抜)', () => {
+  it('gunma: 伊勢崎工業(特色型選抜②)は面接等重視の割合を持つ(部活動意欲の個人面接)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma', '伊勢崎工業', '特色型選抜②', '機械科・電子機械科・電気科・工業化学科');
+    expect(record?.ratioType).toBe('学力検査31%:面接等44%:調査書25%');
+  });
+
+  it('gunma: schoolsは77レコードを収録している(先頭29校・2〜3段階選抜)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma');
-    expect(record?.schools?.length).toBe(61);
+    expect(record?.schools?.length).toBe(77);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
