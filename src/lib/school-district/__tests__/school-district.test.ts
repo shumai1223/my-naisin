@@ -62,11 +62,18 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/hyogoを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hyogoを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
+      'chiba',
       'hyogo',
     ]);
+  });
+
+  it('chibaは districted で9学区を持つ', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'chiba');
+    expect(record?.districts?.length).toBe(9);
+    expect(record?.districts?.[0].municipalities).toEqual(['千葉市']);
   });
 
   it('aichiは districted で尾張学区・三河学区の2学区を持つ', () => {
