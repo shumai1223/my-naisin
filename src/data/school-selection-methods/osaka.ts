@@ -10,10 +10,10 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1〜13頁目（全日制課程・普通教育を主とする学科（普通科）の一部51校）
-// のみ。掲載されている選抜区分のうち「一般」のみ転記し、「日本語指導を要する生徒に対する特別
-// 入学者選抜」等は未収録（倍率のタイプが適用されない別枠のため）。残りの学科・学校は次回以降に
-// 順次追加する。
+// ⚠️収録範囲: 全66頁のうち1〜19頁目（全日制課程・普通教育を主とする学科（普通科）72校）を
+// 完全収録。掲載されている選抜区分のうち「一般」のみ転記し、「日本語指導を要する生徒に対する
+// 特別入学者選抜」等は未収録（倍率のタイプが適用されない別枠のため）。20頁目以降の他学科
+// （普通科単位制・農業・工業・商業・理数科等）は次回以降に順次追加する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -22,7 +22,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1〜13頁目（全日制課程・普通科の一部51校）のみ収録。選抜区分は「一般」のみ転記（日本語指導特別選抜等は未収録）',
+    '全66頁中1〜19頁目（全日制課程・普通科72校）を完全収録。選抜区分は「一般」のみ転記（日本語指導特別選抜等は未収録）。20頁目以降の他学科は未収録',
   schools: [
     {
       schoolName: '東淀川',
@@ -397,6 +397,163 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'I',
       note: 'eコース（教育コース）制度を設置',
+    },
+    {
+      schoolName: '富田林',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+      note: 'スーパーサイエンスハイスクール(SSH)指定校',
+    },
+    {
+      schoolName: '金剛',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '懐風館',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '2つの専門コース(スポーツユースリーダー・チャイルドケアリーダー)を設置',
+    },
+    {
+      schoolName: '長野',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+      note: '国際文化科を併設',
+    },
+    {
+      schoolName: '藤井寺',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '登美丘',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '泉陽',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '金岡',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '東百舌鳥',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '堺西',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+      note: '専門コース「体育・芸術 表現創造コース」「看護・医療コース」を設置',
+    },
+    {
+      schoolName: '堺上',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '泉大津',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '信太',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'IV',
+      note: 'スポーツ科学専門コースを設置・共生推進教室を設置',
+    },
+    {
+      schoolName: '高石',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '和泉',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+      note: 'グローバル科を併設',
+    },
+    {
+      schoolName: '久米田',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+      note: '理数専門コースを設置',
+    },
+    {
+      schoolName: '佐野',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+      note: 'ユネスコスクール加盟校',
+    },
+    {
+      schoolName: '日根野',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+      note: '専門コース「看護メディカル専門コース」「子どもみらいコース」「アドバンスト人文社会コース」を設置',
+    },
+    {
+      schoolName: '貝塚南',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: 'りんくう翔南',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'IV',
+    },
+    {
+      schoolName: '東大阪市立日新',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '普通科(文理コース/スポーツコース)・商業科・英語科の3学科を併設する東大阪市唯一の市立高校。これで普通科(1〜19頁)を完全収録',
     },
   ],
   source: {

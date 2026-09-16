@@ -91,9 +91,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.examSubjectTypes).toEqual({ kokugo: 'A', suugaku: 'A', eigo: 'A' });
   });
 
-  it('osaka: schoolsは51校を収録している(13頁分)', () => {
+  it('osaka: 東大阪市立日新(一般)は普通科・商業科・英語科を併設する市立高校', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '東大阪市立日新',
+      '一般'
+    );
+    expect(record?.ratioType).toBe('III');
+  });
+
+  it('osaka: schoolsは72校を収録している(普通科1〜19頁を完全収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(51);
+    expect(record?.schools?.length).toBe(72);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {
