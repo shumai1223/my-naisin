@@ -10,7 +10,7 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1〜41頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
+// ⚠️収録範囲: 全66頁のうち1〜45頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
 // 4校)・(5)工業に関する学科(21〜25頁)・(6)商業に関する学科(26〜27頁)・(7)グローバルビジネス科
 // (27頁)・(8)食物文化科(28頁)・(11)総合科学科(29〜30頁)・(23)文理学科(39〜41頁・10校・
 // 大阪府の進学指導特色校群)は選抜区分「一般」の範囲で完全収録。(3)文理探究科・(4)農業に関する
@@ -22,7 +22,8 @@
 // 非「一般」選抜区分は一貫して未収録（倍率のタイプが適用されない別枠のため）。
 // ★教訓: 30頁目以降は「既収録校の重複」または「特別/帰国生」の頁が多いが、(23)文理学科の
 // ように単独名称の学科は毎回新規校である可能性が高い（大阪府の文理学科10校は全てCCC・
-// タイプIで統一）。42頁目以降の残りの学科は次回以降に順次確認する。
+// タイプIで統一）。(25)総合学科(42〜45頁・14校)も選抜区分「一般」の範囲で完全収録。
+// 46頁目以降の残りの学科は次回以降に順次確認する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -31,7 +32,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1〜41頁目。普通科・普通科単位制・工業/商業に関する学科・グローバルビジネス科・食物文化科・総合科学科・文理学科(10校)は選抜区分「一般」の範囲で完全収録。文理探究科・農業に関する学科・教育文理学科は部分収録',
+    '全66頁中1〜45頁目。普通科・普通科単位制・工業/商業に関する学科・グローバルビジネス科・食物文化科・総合科学科・文理学科(10校)・総合学科(14校)は選抜区分「一般」の範囲で完全収録。文理探究科・農業に関する学科・教育文理学科は部分収録',
   schools: [
     {
       schoolName: '東淀川',
@@ -855,6 +856,114 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       examSubjectTypes: { kokugo: 'C', suugaku: 'B', eigo: 'B' },
       ratioType: 'II',
       note: '令和4年開校・教育界をはじめ社会をリードする人材の育成を目的とする学科',
+    },
+    {
+      schoolName: '柴島',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '知的障がい生徒自立支援コースを設置',
+    },
+    {
+      schoolName: '今宮',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+      note: '共生推進教室設置校',
+    },
+    {
+      schoolName: '千里青雲',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '福井',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      ratioType: 'IV',
+      note: '選抜区分「日本語指導」も別途設置(未収録)',
+    },
+    {
+      schoolName: '枚方なぎさ',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+      note: '6系列(知的探究/国際文化/芸術表現/生活看護/地域創造/保育体育)を設置。知的障がい生徒自立支援コースも設置',
+    },
+    {
+      schoolName: '芦間',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '門真なみはや',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '選抜区分「日本語指導」も別途設置(未収録)',
+    },
+    {
+      schoolName: '枚岡樟風',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'IV',
+      note: '共生推進教室設置校',
+    },
+    {
+      schoolName: '八尾北',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'IV',
+      note: '多文化共生部(オアシス)を設置。選抜区分「日本語指導」も別途設置(未収録)',
+    },
+    {
+      schoolName: '松原',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'A' },
+      ratioType: 'IV',
+      note: 'インクルーシブ教育を推進(自立支援生等)',
+    },
+    {
+      schoolName: '堺東',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '成美',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '5系列(国際コミュニケーション/福祉・子ども/社会・情報/芸術クリエイト/看護・スポーツ・サイエンス)を設置。選抜区分「日本語指導」も別途設置(未収録)',
+    },
+    {
+      schoolName: '伯太',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '5系列(自然科学/生活と経済/健康と福祉/ITビジネス/ことばと文化)を設置',
+    },
+    {
+      schoolName: '貝塚',
+      department: '総合学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
     },
   ],
   source: {

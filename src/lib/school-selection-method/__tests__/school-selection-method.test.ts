@@ -172,9 +172,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('II');
   });
 
-  it('osaka: schoolsは111校を収録している(文理学科10校+教育文理学科1校を追加)', () => {
+  it('osaka: 枚岡樟風(総合学科・一般)はAAA問題・倍率タイプIVを持つ', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '枚岡樟風',
+      '一般'
+    );
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'A', suugaku: 'A', eigo: 'A' });
+    expect(record?.ratioType).toBe('IV');
+  });
+
+  it('osaka: schoolsは125校を収録している(総合学科14校を追加)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(111);
+    expect(record?.schools?.length).toBe(125);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {
