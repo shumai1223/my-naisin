@@ -158,12 +158,22 @@ examSubjectTypes/ratioTypeの枠組みに合わないため見送った。
 収録できた（型拡張不要）。2頁目（16番笛吹〜26番甲府商業・11校）は未収録のまま残っている。
 fukushima（各高等学校の選抜方法一覧・192頁・1校2頁の詳細プローズ形式）は引き続き見送り対象。
 
+**2026-09-17追記: gunma（群馬県）を5県目として着手した**（「各高等学校の選抜方法等について」
+全92頁のうち「I 全日制課程選抜」頁2〜68=67校中、先頭6校=前橋・前橋南・前橋西・前橋女子・
+前橋東・勢多農林の16レコードを収録）。群馬県は学校別の学力検査問題タイプ区分は無く、代わりに
+「総合型選抜/特色型選抜①/②」（2〜3段階）ごとに学力検査:面接等:調査書の得点配分割合(%)が
+学校別に異なる方式で、yamanashiと同型のratioTypeコロン区切り運用（例`'学力検査81%:面接等6%:
+調査書14%'`）で転記できた（型拡張不要）。残り61校（前橋工業〜）とフレックススクール選抜・
+定時制課程選抜・連携型選抜（頁70〜92）は未収録のまま残っている。
+
 **次回セッションが選ぶべきこと**:
-1. yamanashiの2頁目（笛吹〜甲府商業・11校）を追加収録してyamanashiを完了させる
-2. またはT-Y14の5県目（残るstructured確定県: tokyo/hokkaido/aomori/miyagi/gunma/
+1. gunmaの残り61校（頁8以降・前橋工業〜）を追加収録してgunmaを進める（1校1頁で作業単位が
+   明確・pdftoppmのpage offset=index記載頁+3が判明済みなのでそのまま流用できる）
+2. またはyamanashiの2頁目（笛吹〜甲府商業・11校）を追加収録してyamanashiを完了させる
+3. またはT-Y14の6県目（残るstructured確定県: tokyo/hokkaido/aomori/miyagi/
    nagano/gifu/shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima）の
    データ層実装に進む
-3. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている・2026-09-17時点でnagano等を含め11県実装済み・詳細はT-Y15タスクファイル参照）
-4. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
+4. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
+   指定されている・2026-09-17時点で13県実装済み・詳細はT-Y15タスクファイル参照）
+5. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
