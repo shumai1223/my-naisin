@@ -121,21 +121,43 @@
 新設。型は`systemType`（'abolished'=学区廃止/'districted'=学区あり/'none-by-design'=元々学区
 なし）と`districts`（区割りの市区町村一覧）・`outOfDistrictCondition`（学区外就学条件）を持つ。
 
-**2026-09-17時点で15県を実装済み**:
-- abolished型(8県): tokyo(2003年度廃止)・osaka(2014年度府立廃止+2022年市立府移管で統合)・
+**2026-09-17時点で17県を実装済み**:
+- abolished型(9県): tokyo(2003年度廃止)・osaka(2014年度府立廃止+2022年市立府移管で統合)・
   saitama(2004年度廃止)・miyagi(2010年度廃止)・kanagawa(2005年度廃止)・toyama(2024年度廃止)・
   oita(2008年度廃止・廃止前は色分け学区+学区外上限10%)・saga(2023年度廃止・4学区→2016年度に
-  東部/西部2学区を経て全県1区)
-- districted型(7県): hyogo(5学区)・aichi(尾張/三河学区)・chiba(9学区・隣接学区特例あり)・
+  東部/西部2学区を経て全県1区)・kochi(2012年度廃止・廃止前は東部/高知/高吾/幡多の4学区)
+- districted型(8県): hyogo(5学区)・aichi(尾張/三河学区)・chiba(9学区・隣接学区特例あり)・
   hokkaido(19学区・重層的な学区外就学例外規定あり)・nagano(4学区・実質全県1学区運用)・
   kagoshima(8学区・熊毛/大島学区と120人以下の高校は一定枠なしの特例、5〜10%の一定枠制度)・
-  okinawa(7学区・学区外10%枠・専門学科と第2次募集は県全域)
+  okinawa(7学区・学区外10%枠・専門学科と第2次募集は県全域)・okayama(6学区中5学区のみ対象校
+  あり・備北学区は対象校0という珍しいケース・学区外上限は学校ごとに5〜20%)
+
+**🆕発見: 岩手県公式PDF「高等学校の学区見直しにおける全国都道府県の状況」
+(`pref.iwate.jp/_res/projects/default_project/_page_/001/059/502/
+shiryou2_7gakkuminaoshijoukyou.pdf`・岩手県財政課調べ)に、通学区域を廃止した都道府県の
+実施年度一覧表（H15〜R5予定）が1枚にまとまっている。** 未着手のabolished型候補の年度を
+高速に裏取りできる（kochiの廃止年度確認で実際に使用した）。表の内容（他の記録との突合含む）:
+```
+H15 東京✅・和歌山　H16 埼玉✅・福井　H17 青森・秋田・茨城・神奈川✅・石川・奈良
+H18 滋賀・広島(※baselineはhiroshimaを"全日制全県一円"と記録・要整合確認)
+H19 群馬(※T-Y14で確認済のgunmaとは別データ)・山梨・鳥取
+H20 新潟・静岡・島根・大分✅・宮崎　H22 宮城✅　H24 高知✅
+H25 大阪(※osaka.tsは平成26年度と記録・1年のズレを要確認)　H26 栃木
+H27 山口(※baselineは2016年度/平成28年度と記録・1年のズレを要確認)　H29 岐阜
+R5(予定) 佐賀✅
+```
+⚠️**この表の「実施年度」表記と、他ソースが使う「入試年度」「入学年度」表記の間で1年ズレる
+ケースが複数見つかった（大阪・山口）。この表を使う場合は必ず単独の一次資料でも裏取りし、
+表の年度をそのまま鵜呑みにしないこと。** 未着手のうち青森/秋田/茨城/石川/奈良/新潟/静岡/
+栃木/岐阜/鳥取/山梨(既にT-Y14で別データ扱い)は「H17/H19/H20/H26/H29」等で廃止年度の当たりを
+つけられるため、次回セッションの着手候補として優先度が高い。
 
 **次回セッションが選ぶべきこと**:
-1. T-Y15の16県目（残るstructured確定県: aomori/iwate/yamagata/fukushima/ibaraki/
-   tochigi/ishikawa/shizuoka/mie/shiga/kyoto/wakayama/shimane/okayama/hiroshima/yamaguchi/
-   tokushima/kagawa/ehime/kochi/fukuoka/nagasaki/kumamoto）のデータ層実装に進む
+1. T-Y15の18県目（残るstructured確定県: aomori/iwate/yamagata/fukushima/ibaraki/
+   tochigi/ishikawa/shizuoka/mie/shiga/kyoto/wakayama/shimane/hiroshima/yamaguchi/
+   tokushima/kagawa/ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む（上記の岩手県表で
+   abolished型と当たりが付いている県を優先すると効率的）
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
-   yamanashi/gunma(6校)の5県実装済み。詳細はT-Y14タスクファイル参照）
+   yamanashi/gunma(12校)の5県実装済み。詳細はT-Y14タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-districts/index.ts`を確認し二重実装を
    避けること
