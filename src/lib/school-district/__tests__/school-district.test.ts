@@ -10,9 +10,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでkanagawa/kochi/miyagi/oita/osaka/saga/saitama/tokyo/toyamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/tokyo/toyamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'tokyo', 'toyama']);
+    expect(abolished).toEqual(['aomori', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'tokyo', 'toyama']);
+  });
+
+  it('aomoriは平成17年度(2005年度)に6学区制を廃止した(区割りの名称は未確認)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'aomori');
+    expect(record?.abolishedFiscalYear).toBe('平成17年度（2005年度）');
   });
 
   it('kochiは平成24年度(2012年度)に学区を廃止した(4学区→全県一区)', () => {
@@ -87,7 +92,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/nagano/okayama/okinawaを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/nagano/okayama/okinawa/tokushimaを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
@@ -97,6 +102,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'nagano',
       'okayama',
       'okinawa',
+      'tokushima',
     ]);
   });
 
@@ -162,6 +168,13 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(record?.districts?.length).toBe(6);
     const bihoku = record?.districts?.find((d) => d.name === '備北学区');
     expect(bihoku?.note).toContain('無い');
+  });
+
+  it('tokushimaは districted で3学区を持ち、学区外上限は学校ごとに異なる', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'tokushima');
+    expect(record?.districts?.length).toBe(3);
+    expect(record?.districts?.map((d) => d.name)).toEqual(['第1学区', '第2学区', '第3学区']);
+    expect(record?.outOfDistrictCondition).toContain('城東');
   });
 
   it('districtedのレコードはdistricts配列を持つ', () => {
