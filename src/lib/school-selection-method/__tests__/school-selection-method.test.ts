@@ -101,9 +101,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('III');
   });
 
-  it('osaka: schoolsは72校を収録している(普通科1〜19頁を完全収録)', () => {
+  it('osaka: 東淀工業(農業/工業区分ではなく工業に関する学科・一般)はAAA問題を持つ', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '東淀工業',
+      '一般'
+    );
+    expect(record?.department).toBe('工業に関する学科');
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'A', suugaku: 'A', eigo: 'A' });
+  });
+
+  it('osaka: schoolsは82校を収録している(普通科完全収録+他学科の部分収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(72);
+    expect(record?.schools?.length).toBe(82);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {

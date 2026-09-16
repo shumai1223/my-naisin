@@ -10,10 +10,11 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1〜19頁目（全日制課程・普通教育を主とする学科（普通科）72校）を
-// 完全収録。掲載されている選抜区分のうち「一般」のみ転記し、「日本語指導を要する生徒に対する
-// 特別入学者選抜」等は未収録（倍率のタイプが適用されない別枠のため）。20頁目以降の他学科
-// （普通科単位制・農業・工業・商業・理数科等）は次回以降に順次追加する。
+// ⚠️収録範囲: 全66頁のうち1〜21頁目。(1)普通科(1〜19頁・72校)と(2)普通科単位制(19〜20頁・
+// 4校)は完全収録。(3)文理探究科は20頁目の2校のみ（次頁以降に続く）、(4)農業に関する学科・
+// (5)工業に関する学科も21頁目の各2校のみ（同様に次頁以降に続く）を収録。掲載されている選抜
+// 区分のうち「一般」のみ転記し、「日本語指導を要する生徒に対する特別入学者選抜」等は未収録
+// （倍率のタイプが適用されない別枠のため）。22頁目以降の残りの学科は次回以降に順次追加する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -22,7 +23,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1〜19頁目（全日制課程・普通科72校）を完全収録。選抜区分は「一般」のみ転記（日本語指導特別選抜等は未収録）。20頁目以降の他学科は未収録',
+    '全66頁中1〜21頁目。普通科(72校)・普通科単位制(4校)は完全収録。文理探究科・農業に関する学科・工業に関する学科は各2校のみ(部分収録)。選抜区分は「一般」のみ転記',
   schools: [
     {
       schoolName: '東淀川',
@@ -554,6 +555,78 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'III',
       note: '普通科(文理コース/スポーツコース)・商業科・英語科の3学科を併設する東大阪市唯一の市立高校。これで普通科(1〜19頁)を完全収録',
+    },
+    {
+      schoolName: '市岡',
+      department: '普通科単位制',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '大阪府教育センター附属',
+      department: '普通科単位制',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '大阪府教育センターと一体となって取り組むナビゲーションスクール',
+    },
+    {
+      schoolName: '槻の木',
+      department: '普通科単位制',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '鳳',
+      department: '普通科単位制',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+      note: '普通科単位制の学科としては最後の掲載校。これで(2)普通科単位制を完全収録',
+    },
+    {
+      schoolName: '春日丘',
+      department: '文理探究科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '狭山',
+      department: '文理探究科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '園芸',
+      department: '農業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      ratioType: 'IV',
+    },
+    {
+      schoolName: '農芸',
+      department: '農業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '東淀工業',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '淀川工科',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
     },
   ],
   source: {
