@@ -437,9 +437,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('学力検査30%:面接等40%:調査書31%');
   });
 
-  it('gunma: schoolsは91レコードを収録している(先頭35校・2〜3段階選抜)', () => {
+  it('gunma: 藤岡中央(特色型選抜②)は面接等の配点が学力検査を上回る', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'gunma',
+      '藤岡中央',
+      '特色型選抜②',
+      'くくり募集(普通科・理数科)'
+    );
+    expect(record?.ratioType).toBe('学力検査20%:面接等30%:調査書50%');
+  });
+
+  it('gunma: schoolsは106レコードを収録している(先頭41校・2〜3段階選抜)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma');
-    expect(record?.schools?.length).toBe(91);
+    expect(record?.schools?.length).toBe(106);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
