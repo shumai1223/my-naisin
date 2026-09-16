@@ -10,9 +10,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでkanagawa/miyagi/osaka/saitama/tokyo/toyamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでkanagawa/miyagi/oita/osaka/saitama/tokyo/toyamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['kanagawa', 'miyagi', 'osaka', 'saitama', 'tokyo', 'toyama']);
+    expect(abolished).toEqual(['kanagawa', 'miyagi', 'oita', 'osaka', 'saitama', 'tokyo', 'toyama']);
+  });
+
+  it('oitaは平成20年度(2008年度)に学区を廃止した', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'oita');
+    expect(record?.abolishedFiscalYear).toBe('平成20年度（2008年度）');
   });
 
   it('toyamaは令和6年度(2024年度)に学区を廃止した', () => {
@@ -72,12 +77,13 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/naganoを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/naganoを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
       'hokkaido',
       'hyogo',
+      'kagoshima',
       'nagano',
     ]);
   });
@@ -106,6 +112,22 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(record?.districts?.map((d) => d.name)).toEqual(['尾張学区', '三河学区']);
     expect(record?.districts?.[0].municipalities).toContain('名古屋市');
     expect(record?.districts?.[1].municipalities).toContain('豊橋市');
+  });
+
+  it('kagoshimaは districted で8学区(熊毛/大島/全県学区含む)を持つ', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'kagoshima');
+    expect(record?.districts?.length).toBe(8);
+    expect(record?.districts?.map((d) => d.name)).toEqual([
+      '鹿児島学区',
+      '南薩学区',
+      '北薩学区',
+      '姶良・伊佐学区',
+      '大隅学区',
+      '熊毛学区',
+      '大島学区',
+      '全県学区',
+    ]);
+    expect(record?.districts?.[0].municipalities).toContain('鹿児島市');
   });
 
   it('districtedのレコードはdistricts配列を持つ', () => {
