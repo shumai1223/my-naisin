@@ -294,6 +294,16 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('I');
   });
 
+  it('aichi: 内海(普通・一般)は面接実施ありで校内順位タイプIを持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aichi', '内海', '一般');
+    expect(record?.interviewRequired).toBe(true);
+  });
+
+  it('aichi: schoolsは106レコードを収録している(3頁目左右列・複数学科含む・を完全収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aichi');
+    expect(record?.schools?.length).toBe(106);
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
