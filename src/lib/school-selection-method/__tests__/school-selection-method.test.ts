@@ -71,9 +71,29 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.examSubjectTypes).toEqual({ kokugo: 'B', suugaku: 'A', eigo: 'A' });
   });
 
-  it('osaka: schoolsは35校を収録している(9頁分)', () => {
+  it('osaka: 門真西(一般)は倍率タイプIVを持つ(初出)', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '門真西',
+      '一般'
+    );
+    expect(record?.ratioType).toBe('IV');
+  });
+
+  it('osaka: 野崎(一般)は国数英すべてA問題を持つ(初出)', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '野崎',
+      '一般'
+    );
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'A', suugaku: 'A', eigo: 'A' });
+  });
+
+  it('osaka: schoolsは51校を収録している(13頁分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(35);
+    expect(record?.schools?.length).toBe(51);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {
