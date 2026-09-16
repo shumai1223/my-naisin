@@ -4,6 +4,7 @@ import { OSAKA_SCHOOL_DISTRICT } from './osaka';
 import { SAITAMA_SCHOOL_DISTRICT } from './saitama';
 import { HYOGO_SCHOOL_DISTRICT } from './hyogo';
 import { AICHI_SCHOOL_DISTRICT } from './aichi';
+import { MIYAGI_SCHOOL_DISTRICT } from './miyagi';
 
 export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSchoolDistrict>> = {
   tokyo: TOKYO_SCHOOL_DISTRICT,
@@ -11,4 +12,5 @@ export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSch
   saitama: SAITAMA_SCHOOL_DISTRICT,
   hyogo: HYOGO_SCHOOL_DISTRICT,
   aichi: AICHI_SCHOOL_DISTRICT,
+  miyagi: MIYAGI_SCHOOL_DISTRICT,
 };
