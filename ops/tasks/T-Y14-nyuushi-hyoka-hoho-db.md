@@ -150,13 +150,20 @@ examSubjectTypes/ratioTypeの枠組みに合わないため今回は見送った
 （型拡張不要）。fukushima（各高等学校の選抜方法一覧・192頁）は1校2頁の詳細プローズ形式で
 examSubjectTypes/ratioTypeの枠組みに合わないため見送った。
 
+**2026-09-17追記（訂正）: yamanashi（山梨県）を4県目として完了した**（前期募集選抜方法等一覧・
+全2頁のうち1頁目15校43トラック）。上記で「examSubjectTypes/ratioTypeの枠組みに合わないため見送り」
+と記載していたが、**実際には合う**と判明した——前期募集は学力検査が無くexamSubjectTypesこそ
+使わないが、選抜資料比重（調査書:面接:所見:特色適性検査:特技:個性表現の6項目）をratioTypeへ
+コロン区切り文字列（例`'調査書45:面接30:所見5:特色適性検査20'`）として転記する形で無理なく
+収録できた（型拡張不要）。2頁目（16番笛吹〜26番甲府商業・11校）は未収録のまま残っている。
+fukushima（各高等学校の選抜方法一覧・192頁・1校2頁の詳細プローズ形式）は引き続き見送り対象。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y14の4県目（残るstructured確定県: tokyo/hokkaido/aomori/miyagi/fukushima/gunma/
-   nagano/gifu/shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima。fukushima/
-   yamanashiは既存schemaに合わないため型の見直しが必要）のデータ層実装に進む
-2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている・2026-09-17時点でtokyo/osaka/saitama/hyogo/aichi/miyagi/chiba/kanagawa/
-   hokkaidoの9県実装済み）
-3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
+1. yamanashiの2頁目（笛吹〜甲府商業・11校）を追加収録してyamanashiを完了させる
+2. またはT-Y14の5県目（残るstructured確定県: tokyo/hokkaido/aomori/miyagi/gunma/
+   nagano/gifu/shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima）の
+   データ層実装に進む
+3. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
+   指定されている・2026-09-17時点でnagano等を含め11県実装済み・詳細はT-Y15タスクファイル参照）
+4. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
-individualの残り確定作業、②structured確定県からのデータ層実装、のいずれかに進むこと。
