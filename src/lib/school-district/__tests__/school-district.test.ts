@@ -10,9 +10,15 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/tokyo/toyamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/tochigi/tokyo/toyamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'tokyo', 'toyama']);
+    expect(abolished).toEqual(['aomori', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'tochigi', 'tokyo', 'toyama']);
+  });
+
+  it('tochigiは平成26年度(2014年度)に7学区制を廃止した', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'tochigi');
+    expect(record?.abolishedFiscalYear).toBe('平成26年度（2014年度）');
+    expect(record?.outOfDistrictCondition).toContain('25%');
   });
 
   it('aomoriは平成17年度(2005年度)に6学区制を廃止した(区割りの名称は未確認)', () => {
@@ -92,13 +98,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/nagano/okayama/okinawa/tokushimaを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/mie/nagano/okayama/okinawa/tokushimaを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
       'hokkaido',
       'hyogo',
       'kagoshima',
+      'mie',
       'nagano',
       'okayama',
       'okinawa',
@@ -175,6 +182,13 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(record?.districts?.length).toBe(3);
     expect(record?.districts?.map((d) => d.name)).toEqual(['第1学区', '第2学区', '第3学区']);
     expect(record?.outOfDistrictCondition).toContain('城東');
+  });
+
+  it('mieは districted で北部/中部/南部の3学区を持ち隣接学区への出願も認める', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'mie');
+    expect(record?.districts?.length).toBe(3);
+    expect(record?.districts?.map((d) => d.name)).toEqual(['北部学区', '中部学区', '南部学区']);
+    expect(record?.outOfDistrictCondition).toContain('隣接する学区');
   });
 
   it('districtedのレコードはdistricts配列を持つ', () => {

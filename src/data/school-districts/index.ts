@@ -18,6 +18,8 @@ import { KOCHI_SCHOOL_DISTRICT } from './kochi';
 import { OKAYAMA_SCHOOL_DISTRICT } from './okayama';
 import { AOMORI_SCHOOL_DISTRICT } from './aomori';
 import { TOKUSHIMA_SCHOOL_DISTRICT } from './tokushima';
+import { TOCHIGI_SCHOOL_DISTRICT } from './tochigi';
+import { MIE_SCHOOL_DISTRICT } from './mie';
 
 export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSchoolDistrict>> = {
   tokyo: TOKYO_SCHOOL_DISTRICT,
@@ -39,4 +41,6 @@ export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSch
   okayama: OKAYAMA_SCHOOL_DISTRICT,
   aomori: AOMORI_SCHOOL_DISTRICT,
   tokushima: TOKUSHIMA_SCHOOL_DISTRICT,
+  tochigi: TOCHIGI_SCHOOL_DISTRICT,
+  mie: MIE_SCHOOL_DISTRICT,
 };
