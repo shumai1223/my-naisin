@@ -185,6 +185,12 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(60000);
   });
 
+  it('hokkaidoは世帯年収約590万円未満で年額2.4万円(月2,000円上乗せ)を返す', () => {
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'hokkaido', '世帯年収 約590万円未満')
+    ).toBe(24000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
