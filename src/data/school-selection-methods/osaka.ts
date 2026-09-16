@@ -10,17 +10,19 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1〜37頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
+// ⚠️収録範囲: 全66頁のうち1〜41頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
 // 4校)・(5)工業に関する学科(21〜25頁)・(6)商業に関する学科(26〜27頁)・(7)グローバルビジネス科
-// (27頁)・(8)食物文化科(28頁)・(11)総合科学科(29〜30頁・住吉/千里/泉北)は選抜区分「一般」の
-// 範囲で完全収録。(3)文理探究科・(4)農業に関する学科は各2校のみ（部分収録）。
-// (9)福祉ボランティア科・(10)理数科・(12)サイエンス創造科・(17)英語科・(18)国際文化科・
-// (19)グローバル科は「一般」区分で新規性のある学校が無かった（既収録校の別学科名としての
-// 再掲のみ、内容が完全一致）ため実質収録済み。(13)総合造形科・(14)美術科・(15)音楽科・
-// (16)体育に関する学科は掲載校が全て選抜区分「特別」のため対象外。「特別」・「帰国生」等の
+// (27頁)・(8)食物文化科(28頁)・(11)総合科学科(29〜30頁)・(23)文理学科(39〜41頁・10校・
+// 大阪府の進学指導特色校群)は選抜区分「一般」の範囲で完全収録。(3)文理探究科・(4)農業に関する
+// 学科・(24)教育文理学科(桜和1校のみ)は部分収録。(9)福祉ボランティア科・(10)理数科・
+// (12)サイエンス創造科・(17)英語科・(18)国際文化科・(19)グローバル科は「一般」区分で新規性の
+// ある学校が無かった（既収録校の別学科名としての再掲のみ、内容が完全一致）ため実質収録済み。
+// (13)総合造形科・(14)美術科・(15)音楽科・(16)体育に関する学科・(20)グローバル探究科・
+// (21)演劇科・(22)芸能文化科は掲載校が全て選抜区分「特別」のため対象外。「特別」・「帰国生」等の
 // 非「一般」選抜区分は一貫して未収録（倍率のタイプが適用されない別枠のため）。
-// ★教訓: 30頁目以降は多くの頁が「既収録校の重複」または「特別/帰国生」で新規性ゼロ。
-// 38頁目以降の残りの学科は次回以降に順次確認する。
+// ★教訓: 30頁目以降は「既収録校の重複」または「特別/帰国生」の頁が多いが、(23)文理学科の
+// ように単独名称の学科は毎回新規校である可能性が高い（大阪府の文理学科10校は全てCCC・
+// タイプIで統一）。42頁目以降の残りの学科は次回以降に順次確認する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -29,7 +31,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1〜37頁目。普通科・普通科単位制・工業に関する学科・商業に関する学科・グローバルビジネス科・食物文化科・総合科学科は選抜区分「一般」の範囲で完全収録。文理探究科・農業に関する学科は部分収録。30頁以降の他学科は既収録校の重複か「特別」区分のみで新規性なしと確認済み',
+    '全66頁中1〜41頁目。普通科・普通科単位制・工業/商業に関する学科・グローバルビジネス科・食物文化科・総合科学科・文理学科(10校)は選抜区分「一般」の範囲で完全収録。文理探究科・農業に関する学科・教育文理学科は部分収録',
   schools: [
     {
       schoolName: '東淀川',
@@ -771,6 +773,88 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'I',
       note: '国際文化科を併設。選抜区分「帰国生」も別途設置(未収録)。これで(11)総合科学科(29〜30頁)を完全収録',
+    },
+    {
+      schoolName: '北野',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+      note: '大阪府を代表する進学指導特色校の一つ',
+    },
+    {
+      schoolName: '大手前',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '高津',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+      note: 'グローバルリーダーズハイスクール(GLHS)指定校',
+    },
+    {
+      schoolName: '天王寺',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '豊中',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '茨木',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+      note: '1895年創立の大阪府第四尋常中学校を前身とする伝統校',
+    },
+    {
+      schoolName: '四條畷',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '生野',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '三国丘',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '岸和田',
+      department: '文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      ratioType: 'I',
+      note: 'グローバルリーダーズハイスクール(GLHS)・スーパーサイエンスハイスクール(SSH)指定校。これで(23)文理学科(39〜41頁)を完全収録(全10校とも学力検査問題CCC・倍率タイプI)',
+    },
+    {
+      schoolName: '桜和',
+      department: '教育文理学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+      note: '令和4年開校・教育界をはじめ社会をリードする人材の育成を目的とする学科',
     },
   ],
   source: {

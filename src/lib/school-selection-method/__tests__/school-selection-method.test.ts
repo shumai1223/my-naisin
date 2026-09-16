@@ -150,9 +150,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'C', eigo: 'C' });
   });
 
-  it('osaka: schoolsは100校を収録している(総合科学科まで完全収録・30-37頁は重複/特別区分のみで新規性なし)', () => {
+  it('osaka: 北野(文理学科・一般)はCCC問題・倍率タイプIを持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '北野', '一般');
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'C', eigo: 'C' });
+    expect(record?.ratioType).toBe('I');
+  });
+
+  it('osaka: 文理学科10校は全てCCC問題・倍率タイプIで統一されている', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(100);
+    const bunriSchools = record?.schools?.filter((s) => s.department === '文理学科') ?? [];
+    expect(bunriSchools.length).toBe(10);
+    for (const s of bunriSchools) {
+      expect(s.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'C', eigo: 'C' });
+      expect(s.ratioType).toBe('I');
+    }
+  });
+
+  it('osaka: 桜和(教育文理学科・一般)はCBB問題・倍率タイプIIを持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '桜和', '一般');
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'B', eigo: 'B' });
+    expect(record?.ratioType).toBe('II');
+  });
+
+  it('osaka: schoolsは111校を収録している(文理学科10校+教育文理学科1校を追加)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
+    expect(record?.schools?.length).toBe(111);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {
