@@ -67,12 +67,20 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hyogoを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogoを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
+      'hokkaido',
       'hyogo',
     ]);
+  });
+
+  it('hokkaidoは districted で19学区を持つ', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'hokkaido');
+    expect(record?.districts?.length).toBe(19);
+    expect(record?.districts?.[2].name).toBe('石狩学区');
+    expect(record?.districts?.[2].municipalities).toContain('札幌市');
   });
 
   it('chibaは districted で9学区を持つ', () => {
