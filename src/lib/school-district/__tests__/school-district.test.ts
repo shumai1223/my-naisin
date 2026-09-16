@@ -10,9 +10,15 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/tochigi/tokyo/toyamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/tochigi/tokyo/toyamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'tochigi', 'tokyo', 'toyama']);
+    expect(abolished).toEqual(['aomori', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'tochigi', 'tokyo', 'toyama']);
+  });
+
+  it('shigaは平成18年度(2006年度)に学区を廃止した(信楽/伊香/虎姫は全国募集の特例)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'shiga');
+    expect(record?.abolishedFiscalYear).toBe('平成18年度（2006年度）');
+    expect(record?.outOfDistrictCondition).toContain('全国募集');
   });
 
   it('tochigiは平成26年度(2014年度)に7学区制を廃止した', () => {
@@ -98,12 +104,13 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagoshima/mie/nagano/okayama/okinawa/tokushimaを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagawa/kagoshima/mie/nagano/okayama/okinawa/tokushimaを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
       'hokkaido',
       'hyogo',
+      'kagawa',
       'kagoshima',
       'mie',
       'nagano',
@@ -189,6 +196,12 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(record?.districts?.length).toBe(3);
     expect(record?.districts?.map((d) => d.name)).toEqual(['北部学区', '中部学区', '南部学区']);
     expect(record?.outOfDistrictCondition).toContain('隣接する学区');
+  });
+
+  it('kagawaは districted で2学区を持ち、自己推薦選抜に限り他学区枠5%を認める', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'kagawa');
+    expect(record?.districts?.length).toBe(2);
+    expect(record?.outOfDistrictCondition).toContain('5%');
   });
 
   it('districtedのレコードはdistricts配列を持つ', () => {
