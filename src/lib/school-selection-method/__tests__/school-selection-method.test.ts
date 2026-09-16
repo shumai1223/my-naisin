@@ -453,9 +453,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('学力検査10%:面接等50%:調査書40%');
   });
 
-  it('gunma: schoolsは119レコードを収録している(先頭47校・2〜3段階選抜)', () => {
+  it('gunma: 吾妻中央は4学科間で相互に第2志望を認める(普通科・生物生産科・環境工学科・福祉科)', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'gunma',
+      '吾妻中央',
+      '総合型選抜',
+      '普通科・生物生産科・環境工学科・福祉科'
+    );
+    expect(record?.note).toContain('4学科間で相互に第2志望');
+  });
+
+  it('gunma: schoolsは133レコードを収録している(先頭53校・2〜3段階選抜)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma');
-    expect(record?.schools?.length).toBe(119);
+    expect(record?.schools?.length).toBe(133);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
