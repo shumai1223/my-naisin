@@ -61,9 +61,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.examSubjectTypes).toEqual({ kokugo: 'C', suugaku: 'C', eigo: 'C' });
   });
 
-  it('osaka: schoolsは19校を収録している(5頁分)', () => {
+  it('osaka: 阿武野(一般)は数学・英語にA問題を持つ(A問題の初出)', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '阿武野',
+      '一般'
+    );
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'B', suugaku: 'A', eigo: 'A' });
+  });
+
+  it('osaka: schoolsは35校を収録している(9頁分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(19);
+    expect(record?.schools?.length).toBe(35);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {

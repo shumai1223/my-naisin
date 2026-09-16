@@ -10,7 +10,7 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1〜5頁目（全日制課程・普通教育を主とする学科（普通科）の一部19校）
+// ⚠️収録範囲: 全66頁のうち1〜9頁目（全日制課程・普通教育を主とする学科（普通科）の一部35校）
 // のみ。掲載されている選抜区分のうち「一般」のみ転記し、「日本語指導を要する生徒に対する特別
 // 入学者選抜」等は未収録（倍率のタイプが適用されない別枠のため）。残りの学科・学校は次回以降に
 // 順次追加する。
@@ -22,7 +22,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1〜5頁目（全日制課程・普通科の一部19校）のみ収録。選抜区分は「一般」のみ転記（日本語指導特別選抜等は未収録）',
+    '全66頁中1〜9頁目（全日制課程・普通科の一部35校）のみ収録。選抜区分は「一般」のみ転記（日本語指導特別選抜等は未収録）',
   schools: [
     {
       schoolName: '東淀川',
@@ -161,6 +161,122 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       selectionCategory: '一般',
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'II',
+    },
+    {
+      schoolName: '吹田',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '吹田東',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '北千里',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '山田',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '三島',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '高槻北',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '芥川',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '阿武野',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      ratioType: 'II',
+      note: '知的障がい生徒自立支援コースを設置',
+    },
+    {
+      schoolName: '大冠',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '摂津',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+      note: '体育科志望者向けアドミッションポリシーも同一選抜区分内に記載',
+    },
+    {
+      schoolName: '寝屋川',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'B' },
+      ratioType: 'I',
+    },
+    {
+      schoolName: '西寝屋川',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '北かわち皐が丘',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '2つの専門コースと総合系を設置',
+    },
+    {
+      schoolName: '枚方',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
+      note: '国際文化科を併設',
+    },
+    {
+      schoolName: '長尾',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '牧野',
+      department: '普通科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'I',
     },
   ],
   source: {
