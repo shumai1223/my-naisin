@@ -8,6 +8,7 @@ import { MIYAGI_SCHOOL_DISTRICT } from './miyagi';
 import { CHIBA_SCHOOL_DISTRICT } from './chiba';
 import { KANAGAWA_SCHOOL_DISTRICT } from './kanagawa';
 import { HOKKAIDO_SCHOOL_DISTRICT } from './hokkaido';
+import { TOYAMA_SCHOOL_DISTRICT } from './toyama';
 
 export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSchoolDistrict>> = {
   tokyo: TOKYO_SCHOOL_DISTRICT,
@@ -19,4 +20,5 @@ export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSch
   chiba: CHIBA_SCHOOL_DISTRICT,
   kanagawa: KANAGAWA_SCHOOL_DISTRICT,
   hokkaido: HOKKAIDO_SCHOOL_DISTRICT,
+  toyama: TOYAMA_SCHOOL_DISTRICT,
 };
