@@ -406,9 +406,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('学力検査29%:面接35%:調査書35%');
   });
 
-  it('gunma: schoolsは31レコードを収録している(先頭12校・2〜3段階選抜)', () => {
+  it('gunma: 高崎商業(特色型選抜①)は面接等の配点が学力検査を大きく上回る', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'gunma',
+      '高崎商業',
+      '特色型選抜①',
+      'くくり募集(グローバルビジネス科・会計ビジネス科・情報ビジネス科・総合ビジネス科)'
+    );
+    expect(record?.ratioType).toBe('学力検査25%:面接等60%:調査書15%');
+  });
+
+  it('gunma: 桐生(理数科・特色型選抜①)は数学・理科を重点配点する教科別配点の例外', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma', '桐生', '特色型選抜①', '理数科');
+    expect(record?.note).toContain('数学300');
+  });
+
+  it('gunma: schoolsは46レコードを収録している(先頭18校・2〜3段階選抜)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma');
-    expect(record?.schools?.length).toBe(31);
+    expect(record?.schools?.length).toBe(46);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
