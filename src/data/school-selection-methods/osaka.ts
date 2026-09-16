@@ -10,7 +10,7 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1〜49頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
+// ⚠️収録範囲: 全66頁のうち1〜52頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
 // 4校)・(5)工業に関する学科(21〜25頁)・(6)商業に関する学科(26〜27頁)・(7)グローバルビジネス科
 // (27頁)・(8)食物文化科(28頁)・(11)総合科学科(29〜30頁)・(23)文理学科(39〜41頁・10校・
 // 大阪府の進学指導特色校群)は選抜区分「一般」の範囲で完全収録。(3)文理探究科・(4)農業に関する
@@ -29,7 +29,12 @@
 // **全日制で既収録の校名と同名だが学科(department)が異なる別レコード**として登場する
 // （例: 大手前・桃谷・桜塚・春日丘の定時制普通科は全日制と異なる学力検査問題・倍率タイプを
 // 持つ）ため、findSchoolSelectionRecordにdepartment引数を追加して区別可能にした。
-// 49頁目以降の定時制の課程の残りは次回以降に順次確認する。
+// 「3 定時制の課程」(49〜52頁)は普通科・工業に関する学科・商業に関する学科・総合学科の
+// 全カテゴリで掲載校14校を完全収録。**全校が一律「学力検査問題AAA・倍率タイプIII」**という
+// 顕著な均質性を確認（多くは全日制と同名校の別課程。堺市立堺は工業/商業両カテゴリに同一内容で
+// 掲載されるため1レコードに統合）。「4 通信制の課程」（53頁〜）は学力検査問題・倍率タイプの
+// 列自体が斜線(該当なし)で、本DBが扱う評価方法データが存在しないため対象外と判断。
+// 54頁目以降（もしあれば）は次回以降に確認する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -38,7 +43,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1〜49頁目。普通科(全日制)・普通科単位制・工業/商業に関する学科・グローバルビジネス科・食物文化科・総合科学科・文理学科(10校)・総合学科(14校)は選抜区分「一般」の範囲で完全収録。定時制の課程は大手前/桃谷/桜塚/春日丘の4校を部分収録(全日制と別department)。文理探究科・農業に関する学科・教育文理学科は部分収録',
+    '全66頁中1〜52頁目。普通科(全日制)・普通科単位制・工業/商業に関する学科・グローバルビジネス科・食物文化科・総合科学科・文理学科(10校)・総合学科(全日制14校)・定時制の課程(14校)は選抜区分「一般」の範囲で完全収録。通信制の課程は評価方法データが無いため対象外。文理探究科・農業に関する学科・教育文理学科は部分収録',
   schools: [
     {
       schoolName: '東淀川',
@@ -1010,6 +1015,113 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
       ratioType: 'III',
       note: '全日制文理探究科(CCC/タイプI)とは別に定時制の課程も設置。創立70年以上の社会人生涯学習の場',
+    },
+    {
+      schoolName: '寝屋川',
+      department: '定時制の課程(普通科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '布施',
+      department: '定時制の課程(普通科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '昭和17年開校・昭和23年に定時制課程併置。学齢期の生徒から70歳代までの生徒が在籍',
+    },
+    {
+      schoolName: '三国丘',
+      department: '定時制の課程(普通科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '昭和26年設置・大阪府南部で唯一の定時制普通科。これで「3 定時制の課程」(1)普通科(49〜50頁)を完全収録(全日制と同名6校とも一律AAA問題・タイプIII)',
+    },
+    {
+      schoolName: '堺市立堺',
+      department: '定時制の課程(工業・商業に関する学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '機械・自動車・建築・マネジメント(商業)の複数分野を1つの定時制課程で提供。(2)工業に関する学科・(3)商業に関する学科の両方に同一内容で掲載されるため1レコードに統合',
+    },
+    {
+      schoolName: '岸和田市立産業',
+      department: '定時制の課程(商業に関する学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '平成29年に創立110周年・大阪府内で唯一の定時制商業科高校',
+    },
+    {
+      schoolName: '都島工業',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '今宮工科',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '工芸',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: 'インテリアクラフト・デザイン・造形教養の3系列。全日制美術科(選抜区分「特別」)とは別に定時制の課程(選抜区分「一般」)も設置',
+    },
+    {
+      schoolName: '茨木工科',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '自動車・機械・システムエンジニアリング・ヒューマンサイエンスの系列',
+    },
+    {
+      schoolName: '藤井寺工科',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '堺工科',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '「堺学」等の堺の伝統を継承する授業を実施',
+    },
+    {
+      schoolName: '佐野工科',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '成城',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '「ものづくり」「情報技術」「生活デザイン」「教養」の系列。定通併修制度により3年で卒業可能',
+    },
+    {
+      schoolName: '和泉総合',
+      department: '定時制の課程(総合学科)',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '全日制総合学科(選抜区分「特別」)とは別に定時制の課程(選抜区分「一般」)も設置。これで「3 定時制の課程」(2)〜(4)(50〜52頁)を完全収録(掲載校は一律AAA問題・タイプIII)',
     },
   ],
   source: {

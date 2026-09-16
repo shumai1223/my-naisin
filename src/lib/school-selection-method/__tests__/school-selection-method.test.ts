@@ -123,10 +123,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('II');
   });
 
-  it('osaka: 選抜区分「特別」の工芸科は未収録(findSchoolSelectionRecordはnull)', () => {
+  it('osaka: 工芸の全日制美術科(選抜区分「特別」)は未収録だが定時制総合学科(選抜区分「一般」)は収録済み', () => {
     expect(
-      findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '工芸', '一般')
+      findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '工芸', '特別')
     ).toBeNull();
+    expect(
+      findSchoolSelectionRecord(
+        SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+        'osaka',
+        '工芸',
+        '一般',
+        '定時制の課程(総合学科)'
+      )
+    ).not.toBeNull();
   });
 
   it('osaka: 住吉商業(商業に関する学科・一般)は3コースを持ちAAA問題', () => {
@@ -209,9 +218,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.department).toBe('文理学科');
   });
 
-  it('osaka: schoolsは130校を収録している(東住吉総合+定時制4校を追加)', () => {
+  it('osaka: 定時制の課程は全校がAAA問題・倍率タイプIIIで統一されている', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(130);
+    const teijiseiSchools =
+      record?.schools?.filter((s) => s.department.startsWith('定時制の課程')) ?? [];
+    expect(teijiseiSchools.length).toBe(18);
+    for (const s of teijiseiSchools) {
+      expect(s.examSubjectTypes).toEqual({ kokugo: 'A', suugaku: 'A', eigo: 'A' });
+      expect(s.ratioType).toBe('III');
+    }
+  });
+
+  it('osaka: 堺市立堺(定時制の課程(工業・商業に関する学科))は工業・商業両方の内容を1レコードに統合', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '堺市立堺',
+      '一般',
+      '定時制の課程(工業・商業に関する学科)'
+    );
+    expect(record?.ratioType).toBe('III');
+  });
+
+  it('osaka: schoolsは144校を収録している(定時制の課程14校を追加)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
+    expect(record?.schools?.length).toBe(144);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {
