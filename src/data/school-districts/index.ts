@@ -24,6 +24,8 @@ import { SHIGA_SCHOOL_DISTRICT } from './shiga';
 import { KAGAWA_SCHOOL_DISTRICT } from './kagawa';
 import { IBARAKI_SCHOOL_DISTRICT } from './ibaraki';
 import { SHIZUOKA_SCHOOL_DISTRICT } from './shizuoka';
+import { WAKAYAMA_SCHOOL_DISTRICT } from './wakayama';
+import { HIROSHIMA_SCHOOL_DISTRICT } from './hiroshima';
 
 export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSchoolDistrict>> = {
   tokyo: TOKYO_SCHOOL_DISTRICT,
@@ -51,4 +53,6 @@ export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSch
   kagawa: KAGAWA_SCHOOL_DISTRICT,
   ibaraki: IBARAKI_SCHOOL_DISTRICT,
   shizuoka: SHIZUOKA_SCHOOL_DISTRICT,
+  wakayama: WAKAYAMA_SCHOOL_DISTRICT,
+  hiroshima: HIROSHIMA_SCHOOL_DISTRICT,
 };

@@ -10,9 +10,20 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/ibaraki/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shizuoka/tochigi/tokyo/toyamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/hiroshima/ibaraki/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shizuoka/tochigi/tokyo/toyama/wakayamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'ibaraki', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shizuoka', 'tochigi', 'tokyo', 'toyama']);
+    expect(abolished).toEqual(['aomori', 'hiroshima', 'ibaraki', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama']);
+  });
+
+  it('hiroshimaは平成18年度(2006年度)に6学区制(全日制普通科)を廃止した', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'hiroshima');
+    expect(record?.abolishedFiscalYear).toBe('平成18年度（2006年度）');
+    expect(record?.outOfDistrictCondition).toContain('30%');
+  });
+
+  it('wakayamaは平成15年度(2003年度)に東京都と並び全国最速で学区を廃止した', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'wakayama');
+    expect(record?.abolishedFiscalYear).toBe('平成15年度（2003年度）');
   });
 
   it('ibarakiは平成18年度(2006年度)に5学区制を廃止した', () => {
