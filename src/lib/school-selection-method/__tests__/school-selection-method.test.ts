@@ -112,9 +112,26 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.examSubjectTypes).toEqual({ kokugo: 'A', suugaku: 'A', eigo: 'A' });
   });
 
-  it('osaka: schoolsは82校を収録している(普通科完全収録+他学科の部分収録)', () => {
+  it('osaka: 堺市立堺(工業に関する学科・一般)は4創造科を持つ', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'osaka',
+      '堺市立堺',
+      '一般'
+    );
+    expect(record?.department).toBe('工業に関する学科');
+    expect(record?.ratioType).toBe('II');
+  });
+
+  it('osaka: 選抜区分「特別」の工芸科は未収録(findSchoolSelectionRecordはnull)', () => {
+    expect(
+      findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', '工芸', '一般')
+    ).toBeNull();
+  });
+
+  it('osaka: schoolsは91校を収録している(普通科・普通科単位制・工業に関する学科を完全収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(82);
+    expect(record?.schools?.length).toBe(91);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {

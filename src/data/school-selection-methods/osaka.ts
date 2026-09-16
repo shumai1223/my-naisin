@@ -10,11 +10,12 @@
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
 // 学検/1.4倍調査書。詳細はPDF3頁）。
 //
-// ⚠️収録範囲: 全66頁のうち1〜21頁目。(1)普通科(1〜19頁・72校)と(2)普通科単位制(19〜20頁・
-// 4校)は完全収録。(3)文理探究科は20頁目の2校のみ（次頁以降に続く）、(4)農業に関する学科・
-// (5)工業に関する学科も21頁目の各2校のみ（同様に次頁以降に続く）を収録。掲載されている選抜
-// 区分のうち「一般」のみ転記し、「日本語指導を要する生徒に対する特別入学者選抜」等は未収録
-// （倍率のタイプが適用されない別枠のため）。22頁目以降の残りの学科は次回以降に順次追加する。
+// ⚠️収録範囲: 全66頁のうち1〜25頁目。(1)普通科(1〜19頁・72校)・(2)普通科単位制(19〜20頁・
+// 4校)・(5)工業に関する学科(21〜25頁・選抜区分「一般」の11校)は完全収録。(3)文理探究科は
+// 20頁目の2校のみ（次頁以降に続く）、(4)農業に関する学科も21頁目の2校のみ（同様に次頁以降に
+// 続く）を収録。掲載されている選抜区分のうち「一般」のみ転記し、「特別」（工芸科・岸和田市立
+// 産業等の特別選抜）や「日本語指導を要する生徒に対する特別入学者選抜」等は未収録（倍率の
+// タイプが適用されない別枠のため）。26頁目以降の(6)商業に関する学科等は次回以降に順次追加する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -23,7 +24,7 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全66頁中1〜21頁目。普通科(72校)・普通科単位制(4校)は完全収録。文理探究科・農業に関する学科・工業に関する学科は各2校のみ(部分収録)。選抜区分は「一般」のみ転記',
+    '全66頁中1〜25頁目。普通科(72校)・普通科単位制(4校)・工業に関する学科(11校)は完全収録。文理探究科・農業に関する学科は各2校のみ(部分収録)。選抜区分は「一般」のみ転記（「特別」区分は未収録）',
   schools: [
     {
       schoolName: '東淀川',
@@ -627,6 +628,74 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       selectionCategory: '一般',
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'III',
+    },
+    {
+      schoolName: '都島工業',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+      note: '機械電気科・建築科・都市工学科・電気電子工学科・理数工学科の5専門学科を設置',
+    },
+    {
+      schoolName: '泉尾工業',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '5つの専門学科を設置',
+    },
+    {
+      schoolName: '今宮工科',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      ratioType: 'II',
+    },
+    {
+      schoolName: '茨木工科',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '工学系大学進学専科を設置',
+    },
+    {
+      schoolName: '東大阪みらい工科',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '藤井寺工科',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '堺工科',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+    },
+    {
+      schoolName: '佐野工科',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
+      ratioType: 'III',
+      note: '地域産業連携重点型工科高校',
+    },
+    {
+      schoolName: '堺市立堺',
+      department: '工業に関する学科',
+      selectionCategory: '一般',
+      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      ratioType: 'II',
+      note: 'サイエンス・機械材料・建築インテリア・マネジメントの4創造科を設置。これで(5)工業に関する学科(21〜25頁)を完全収録(選抜区分「特別」の工芸科・岸和田市立産業(デザインシステム科等)は対象外のため未収録)',
     },
   ],
   source: {
