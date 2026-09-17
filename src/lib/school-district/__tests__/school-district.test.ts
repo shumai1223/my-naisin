@@ -147,13 +147,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukushima/hokkaido/hyogo/kagawa/kagoshima/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
       'fukushima',
       'hokkaido',
       'hyogo',
+      'iwate',
       'kagawa',
       'kagoshima',
       'kyoto',
@@ -164,6 +165,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'tokushima',
       'yamagata',
     ]);
+  });
+
+  it('iwateは districted で8学区を持ち、学区外入学は定員10%の範囲内に制限される', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'iwate');
+    expect(record?.systemType).toBe('districted');
+    expect(record?.districts?.length).toBe(8);
+    expect(record?.districts?.[0].name).toBe('盛岡学区');
+    expect(record?.outOfDistrictCondition).toContain('10%');
   });
 
   it('kyotoは districted で全日制普通科(単位制除く)のみ5学区(通学圏)を持つ(専門学科・総合学科・定通は府全域)', () => {
