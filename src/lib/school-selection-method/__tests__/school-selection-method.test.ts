@@ -746,12 +746,24 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
-  it('gifu: schoolsは頁1完全収録+頁2の学校番号19〜24(24校145レコード)を収録している(頁2残り・頁3〜4は未収録)', () => {
+  it('gifu: schoolsは頁1完全収録+頁2の学校番号19〜30(30校194レコード)を収録している(頁2残り・頁3〜4は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
-    expect(record?.schools?.length).toBe(145);
+    expect(record?.schools?.length).toBe(194);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(24);
+    expect(schoolNames.size).toBe(30);
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+  });
+
+  it('gifu: 大垣桜(4学科)は独自検査を含む選抜が実施されない(区分欄が全て空欄)', () => {
+    const fukushoku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '大垣桜', '第一次選抜(独自検査)', '服飾デザイン');
+    expect(fukushoku).toBeNull();
+  });
+
+  it('gifu: 海津明誠は普通・生活デザインに区分I/IIの2枠があるがビジネス情報は単一区分', () => {
+    const futsuu1 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '海津明誠', '第一次選抜(独自検査区分I)', '普通');
+    const business = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '海津明誠', '第一次選抜(独自検査)', 'ビジネス情報');
+    expect(futsuu1?.ratioType).toBe('募集人員の25%');
+    expect(business?.ratioType).toBe('募集人員の30%');
   });
 
   it('gifu: 大垣東は普通のみ独自検査(実技検査)があり理数には独自検査がない', () => {
