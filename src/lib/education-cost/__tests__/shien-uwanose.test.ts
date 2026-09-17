@@ -217,6 +217,25 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(record?.tiers?.[0].note).toContain('令和10年度');
   });
 
+  it('shizuokaは世帯年収590〜700万円未満で最大の上乗せ幅(年額277,200円)を返す(非単調な所得階層)', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'shizuoka');
+    expect(record?.schemeType).toBe('school-subsidy');
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'shizuoka',
+        '概ねの世帯年収 590万円以上700万円未満'
+      )
+    ).toBe(277200);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'shizuoka',
+        '概ねの世帯年収 350万円以上590万円未満'
+      )
+    ).toBe(0);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
