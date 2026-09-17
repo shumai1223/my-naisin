@@ -258,12 +258,26 @@ osaka/aichi/ibaraki/yamanashi/gunmaに続き完了。
 jest73件green確認済み（commit 5da7719・ローカルのみ）。頁13〜25(3校21レコード)まで到達・
 残り291頁(約145校)は未収録。
 
+**2026-09-17追記16（kagoshima着手・8県目）: 「令和8年度鹿児島県公立高等学校入学者選抜方法案内」
+の鹿児島学区18校38レコードを実装完了した**（`pref.kagoshima.jp/ba05/kyoiku-bunka/school/
+koukou/nyushi/r8/documents/124253_20251205110312-1.pdf`・全6頁）。★鹿児島県の公式資料は
+他県と異なり「学力検査:調査書の比重」表を持たず、代わりに学校・学科別の推薦入試定員枠(自己
+推薦/学校推薦の別)・学区外一定枠(%/人数)・学科併願可能学科・くくり募集・帰国生徒等特別選抜を
+一覧化した表だった。T-Y14タスクファイル本文の対象データ項目4「推薦選抜・特色選抜の実施有無と
+選抜方法概要」に該当すると判断し、ratioTypeフィールドは意図的に不使用として実装した(比重
+データそのものが公式資料に無いため)。interviewRequiredは資料のQ&Aページに書かれた鹿児島県
+推薦入試制度の一般的な説明(「学力検査を実施せず面接・作文等で選抜する」)に基づき全レコード
+trueとした(個別校ごとの確認ではないとnoteに明記)。★学校数の見積もり誤り(19校→実際は18校)を
+jestで検出し訂正(過去のgunma/naganoと同型の教訓)。tsc実exit0・jest76件green確認済み
+（commit 4b2412d・ローカルのみ）。全7学区中「鹿児島学区」のみで、残り6学区(南薩/北薩/姶良・
+伊佐/大隅/熊毛/大島)は未収録。
+
 **次回セッションが選ぶべきこと**:
-1. miyagiの続き（頁27以降・偶数頁スキップに注意）、またはT-Y14の8県目（残るstructured確定県:
-   tokyo/hokkaido/gifu/kagoshima）のデータ層実装に進む（aomori/okayama/kochi/tokushima/
-   tochigi/mie/shiga/kagawa/ibaraki/shizuoka/wakayama/hiroshima/yamaguchiはT-Y15で使用済み。
-   yamanashi/gunma/osaka/aichi/ibaraki/nagano/miyagiは実装済み）
-2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている・2026-09-17時点で35県実装済み・詳細はT-Y15タスクファイル参照）
-3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
+1. kagoshimaの続き（南薩学区以降・page1で既に画像取得済みの南薩学区から着手すると速い）、
+   またはT-Y14の9県目（残るstructured確定県: tokyo/hokkaido/aomori/fukushima/gifu/
+   shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi）のデータ層実装に進む
+2. またはmiyagiの続き（頁27以降・偶数頁スキップに注意）
+3. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
+   指定されている・2026-09-17時点で41県実装済み・詳細はT-Y15タスクファイル参照）
+4. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
