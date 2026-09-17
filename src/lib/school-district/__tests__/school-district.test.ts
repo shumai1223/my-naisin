@@ -147,10 +147,11 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kumamoto/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukuoka/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kumamoto/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
+      'fukuoka',
       'fukushima',
       'hokkaido',
       'hyogo',
@@ -166,6 +167,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'tokushima',
       'yamagata',
     ]);
+  });
+
+  it('fukuokaは districted で13学区(中学区制)を持ち、福岡市は複数学区にまたがって分割される', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'fukuoka');
+    expect(record?.systemType).toBe('districted');
+    expect(record?.districts?.length).toBe(13);
+    expect(record?.districts?.[3].name).toBe('第四学区');
+    expect(record?.outOfDistrictCondition).toContain('教育長');
   });
 
   it('iwateは districted で8学区を持ち、学区外入学は定員10%の範囲内に制限される', () => {
