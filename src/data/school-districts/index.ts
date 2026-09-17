@@ -35,6 +35,7 @@ import { YAMAGUCHI_SCHOOL_DISTRICT } from './yamaguchi';
 import { IWATE_SCHOOL_DISTRICT } from './iwate';
 import { KUMAMOTO_SCHOOL_DISTRICT } from './kumamoto';
 import { FUKUOKA_SCHOOL_DISTRICT } from './fukuoka';
+import { EHIME_SCHOOL_DISTRICT } from './ehime';
 
 export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSchoolDistrict>> = {
   tokyo: TOKYO_SCHOOL_DISTRICT,
@@ -73,4 +74,5 @@ export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSch
   iwate: IWATE_SCHOOL_DISTRICT,
   kumamoto: KUMAMOTO_SCHOOL_DISTRICT,
   fukuoka: FUKUOKA_SCHOOL_DISTRICT,
+  ehime: EHIME_SCHOOL_DISTRICT,
 };

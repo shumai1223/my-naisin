@@ -147,10 +147,11 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukuoka/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kumamoto/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/ehime/fukuoka/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kumamoto/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
+      'ehime',
       'fukuoka',
       'fukushima',
       'hokkaido',
@@ -167,6 +168,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'tokushima',
       'yamagata',
     ]);
+  });
+
+  it('ehimeは districted で東予/中予/南予の3学区を持ち、学区外は5%(教育長裁量で最大30%)まで', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'ehime');
+    expect(record?.systemType).toBe('districted');
+    expect(record?.districts?.length).toBe(3);
+    expect(record?.districts?.map((d) => d.name)).toEqual(['東予学区', '中予学区', '南予学区']);
+    expect(record?.outOfDistrictCondition).toContain('30%');
   });
 
   it('fukuokaは districted で13学区(中学区制)を持ち、福岡市は複数学区にまたがって分割される', () => {
