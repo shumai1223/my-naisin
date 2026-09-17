@@ -877,6 +877,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('理科130点');
   });
 
+  it('gifu: 第二次選抜の面接実施有無は学校番号の区間で切り替わる(岐阜=面接なし・岐南工業=出願者全員に面接実施)', () => {
+    const gifu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜', '第二次選抜', '普通');
+    expect(gifu?.interviewRequired).toBe(false);
+    expect(gifu?.note).toContain('面接・小論文・実技検査はなし');
+    const ginan = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐南工業', '第二次選抜', '機械工学');
+    expect(ginan?.interviewRequired).toBe(true);
+    expect(ginan?.note).toContain('面接は出願者全員に実施');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
