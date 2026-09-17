@@ -469,9 +469,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('学力検査28%:面接等8%:調査書8%:実技検査56%');
   });
 
-  it('gunma: schoolsは146レコードを収録している(先頭57校・2〜3段階選抜)', () => {
+  it('gunma: 前橋市立前橋(市立高校)は県立校と同じ枠組みで選抜方法が定義されている', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma', '前橋市立前橋', '総合型選抜', '普通科');
+    expect(record?.note).toContain('前橋市立高校');
+  });
+
+  it('gunma: 利根商業(組合立)は普通科→総合/情報ビジネス科への第2志望を認める', () => {
+    const record = findSchoolSelectionRecord(
+      SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
+      'gunma',
+      '利根商業',
+      '総合型選抜',
+      '普通科・総合ビジネス科・情報ビジネス科'
+    );
+    expect(record?.note).toContain('群馬県外から普通科10人');
+  });
+
+  it('gunma: 「I 全日制課程選抜」63校を完全収録している(全66レコード超・頁2〜68完結)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma');
-    expect(record?.schools?.length).toBe(146);
+    expect(record?.schools?.length).toBe(160);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.has('前橋市立前橋')).toBe(true);
+    expect(schoolNames.has('高崎経済大学附属')).toBe(true);
+    expect(schoolNames.has('桐生市立商業')).toBe(true);
+    expect(schoolNames.has('太田市立太田')).toBe(true);
+    expect(schoolNames.has('利根商業')).toBe(true);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
