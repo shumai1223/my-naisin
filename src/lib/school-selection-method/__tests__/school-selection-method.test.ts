@@ -746,6 +746,33 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
+  it('gifu: schoolsは頁1の学校番号1〜7(7校24レコード)を収録している(頁1残り・頁2〜4は未収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
+    expect(record?.schools?.length).toBe(24);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(7);
+    expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+  });
+
+  it('gifu: 加納(音楽)は美術科と音楽科の第1・第2志望の組み合わせが表脚注で禁止されている', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '加納', '第一次選抜(標準検査)', '音楽');
+    expect(record?.note).toContain('美術科を第2志望とすることはできない');
+    expect(record?.ratioType).toBe('調査書:学力検査=3:7');
+  });
+
+  it('gifu: 岐阜総合学園(総合)は同一学科に独自検査区分Iと区分IIの2枠を持つ', () => {
+    const region1 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜総合学園', '第一次選抜(独自検査区分I)', '総合');
+    const region2 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜総合学園', '第一次選抜(独自検査区分II)', '総合');
+    expect(region1?.ratioType).toBe('募集人員の29.5%');
+    expect(region2?.ratioType).toBe('募集人員の0.5%');
+  });
+
+  it('gifu: 岐山(理数)は学力検査で数学・理科を130点に傾斜配点する', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐山', '第一次選抜(標準検査)', '理数');
+    expect(record?.note).toContain('数学130点');
+    expect(record?.note).toContain('理科130点');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {

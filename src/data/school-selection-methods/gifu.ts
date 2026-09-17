@@ -1,0 +1,215 @@
+// 岐阜県: 令和9年度(2027年度)岐阜県公立高等学校入学者選抜の実施概要一覧(全日制)の
+// 頁1のうち学校番号1〜7(岐阜/岐阜北/長良/岐山/加納/羽島北/岐阜総合学園)を収録。
+//
+// 一次ソース: 岐阜県教育委員会「令和9年度岐阜県公立高等学校入学者選抜の実施概要一覧」PDF
+// (`https://www.pref.gifu.lg.jp/uploaded/attachment/503982.pdf`・全4頁・
+// 2026-09-18 curl+pdftoppm(200dpi、Pillowで行単位に拡大crop)で目視確認)。
+// ページ一覧は`https://www.pref.gifu.lg.jp/site/edu/61428.html`からWebFetch経由で特定した。
+// ★公表時点での最新年度が令和9年度(2027年度・次年度)のため、他県の令和8年度(2026年度)資料
+// とは対象年度が1年ずれる。fiscalYearはこの資料が扱う年度をそのまま転記する。
+//
+// 表の構成(岐阜県固有の型・マトリクス形式): 学校ごとに「第一次選抜(調査書及び標準検査による
+// 選抜)」「第一次選抜(独自検査を含む選抜・区分ー/I/II)」「第二次選抜」の最大3段構成。
+// selectionCategoryは'第一次選抜(標準検査)'/'第一次選抜(独自検査)'/'第二次選抜'の3区分。
+// ratioTypeには標準検査は'調査書:学力検査=X:Y'、独自検査は'募集人員のXX%'の形で転記する。
+// 独自検査が無い学校・学科(区分欄が空欄)は第一次選抜(独自検査)レコードを作らない。
+
+import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
+
+export const GIFU_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
+  prefectureCode: 'gifu',
+  fiscalYear: '令和9年度（2027年度）',
+  status: 'structured',
+  coverageNote:
+    '全4頁のうち頁1の学校番号1〜7(岐阜/岐阜北/長良/岐山[2学科]/加納[3学科]/羽島北/岐阜総合学園)のみ収録。頁1の残り(岐阜城北以降)および頁2〜4は未着手',
+  schools: [
+    {
+      schoolName: '岐阜',
+      department: '普通',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=3:7',
+      note: '志望できる学科(群)数1。学力検査は国語・社会・数学・理科・英語の5教科(全校共通)。面接・実技検査・学力検査の傾斜配点はいずれもなし。独自検査を含む選抜は実施なし(区分欄が空欄)',
+    },
+    {
+      schoolName: '岐阜',
+      department: '普通',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数1。学力検査(国語・数学・英語)のみ実施。面接・小論文・実技検査はなし',
+    },
+    {
+      schoolName: '岐阜北',
+      department: '普通',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=3:7',
+      note: '志望できる学科(群)数1。面接・実技検査・学力検査の傾斜配点はいずれもなし。独自検査を含む選抜は実施なし',
+    },
+    {
+      schoolName: '岐阜北',
+      department: '普通',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数1。学力検査(国語・数学・英語)のみ実施。面接・小論文・実技検査はなし',
+    },
+    {
+      schoolName: '長良',
+      department: '普通',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=3:7',
+      note: '志望できる学科(群)数1。面接・実技検査・学力検査の傾斜配点はいずれもなし',
+    },
+    {
+      schoolName: '長良',
+      department: '普通',
+      selectionCategory: '第一次選抜(独自検査)',
+      interviewRequired: true,
+      ratioType: '募集人員の5%',
+      note: '区分ー(単一区分)。志望できる学科(群)数1。独自検査の内容は面接。小論文・実技検査・自己表現の実施なし',
+    },
+    {
+      schoolName: '長良',
+      department: '普通',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数1。学力検査(国語・数学・英語)のみ実施。面接・小論文・実技検査はなし',
+    },
+    {
+      schoolName: '岐山',
+      department: '普通',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=3:7',
+      note: '志望できる学科(群)数2(普通・理数を第1・第2志望として併願可能)。面接・実技検査はなし。学力検査の傾斜配点なし(理数のみ傾斜配点あり)。独自検査を含む選抜は実施なし',
+    },
+    {
+      schoolName: '岐山',
+      department: '普通',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数2。学力検査(国語・数学・英語)のみ実施。面接・小論文・実技検査はなし',
+    },
+    {
+      schoolName: '岐山',
+      department: '理数',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=3:7',
+      note: '志望できる学科(群)数2(普通・理数を第1・第2志望として併願可能)。学力検査の傾斜配点:数学130点・理科130点(標準100点満点からの引き上げ)。面接・実技検査はなし。独自検査を含む選抜は実施なし',
+    },
+    {
+      schoolName: '岐山',
+      department: '理数',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数2。学力検査(国語・数学・英語)のみ実施。面接・小論文・実技検査はなし',
+    },
+    {
+      schoolName: '加納',
+      department: '普通',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=3:7',
+      note: '志望できる学科(群)数2(普通・音楽・美術のうち第1・第2志望を組み合わせ可能。ただし音楽↔美術の組み合わせのみ表脚注で禁止)。面接・実技検査・傾斜配点はなし。独自検査を含む選抜は実施なし',
+    },
+    {
+      schoolName: '加納',
+      department: '普通',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数2。学力検査(国語・数学・英語)のみ実施。面接・小論文・実技検査はなし',
+    },
+    {
+      schoolName: '加納',
+      department: '音楽',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=3:7',
+      note: '志望できる学科(群)数2。実技検査を実施(面接なし)。★表脚注:音楽科を第1志望とするとき美術科を第2志望とすることはできない。音楽科の比率は調査書:学力検査:実技検査=3:7:7とする(標準の3:7比率に加え実技検査の重みが別途加わる特殊配点)。独自検査を含む選抜は実施なし',
+    },
+    {
+      schoolName: '加納',
+      department: '音楽',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数2。学力検査(国語・数学・英語)に加え実技検査も実施。小論文はなし',
+    },
+    {
+      schoolName: '加納',
+      department: '美術',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: true,
+      ratioType: '調査書:学力検査=3:7',
+      note: '志望できる学科(群)数2。面接・実技検査の両方を実施。★表脚注:美術科を第1志望とするとき音楽科を第2志望とすることはできない。美術科の比率は調査書:学力検査:実技検査=3:7:2.5とする(標準の3:7比率に加え実技検査の重みが別途加わる特殊配点)。独自検査を含む選抜は実施なし',
+    },
+    {
+      schoolName: '加納',
+      department: '美術',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数2。学力検査(国語・数学・英語)に加え実技検査も実施。小論文はなし',
+    },
+    {
+      schoolName: '羽島北',
+      department: '普通',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=4:6',
+      note: '志望できる学科(群)数1。面接・実技検査・傾斜配点はなし',
+    },
+    {
+      schoolName: '羽島北',
+      department: '普通',
+      selectionCategory: '第一次選抜(独自検査)',
+      interviewRequired: false,
+      ratioType: '募集人員の3%',
+      note: '区分ー(単一区分)。志望できる学科(群)数1。独自検査の内容は自己表現。面接・小論文・実技検査の実施なし',
+    },
+    {
+      schoolName: '羽島北',
+      department: '普通',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数1。学力検査(国語・数学・英語)のみ実施。面接・小論文・実技検査はなし',
+    },
+    {
+      schoolName: '岐阜総合学園',
+      department: '総合',
+      selectionCategory: '第一次選抜(標準検査)',
+      interviewRequired: false,
+      ratioType: '調査書:学力検査=5:5',
+      note: '志望できる学科(群)数1。面接・実技検査・傾斜配点はなし',
+    },
+    {
+      schoolName: '岐阜総合学園',
+      department: '総合',
+      selectionCategory: '第一次選抜(独自検査区分I)',
+      interviewRequired: false,
+      ratioType: '募集人員の29.5%',
+      note: '志望できる学科(群)数1。独自検査の内容は自己表現。面接・小論文・実技検査の実施なし',
+    },
+    {
+      schoolName: '岐阜総合学園',
+      department: '総合',
+      selectionCategory: '第一次選抜(独自検査区分II)',
+      interviewRequired: false,
+      ratioType: '募集人員の0.5%',
+      note: '志望できる学科(群)数1。独自検査の内容は自己表現。面接・小論文・実技検査の実施なし。区分Iとは別枠の極小募集(0.5%)',
+    },
+    {
+      schoolName: '岐阜総合学園',
+      department: '総合',
+      selectionCategory: '第二次選抜',
+      interviewRequired: false,
+      note: '志望できる学科(群)数1。学力検査(国語・数学・英語)のみ実施。面接・小論文・実技検査はなし',
+    },
+  ],
+  source: {
+    url: 'https://www.pref.gifu.lg.jp/uploaded/attachment/503982.pdf',
+    docTitle: '令和9年度岐阜県公立高等学校入学者選抜の実施概要一覧',
+    lastChecked: '2026-09-18',
+  },
+  note: '全4頁のうち頁1の学校番号1〜7(岐阜/岐阜北/長良/岐山/加納/羽島北/岐阜総合学園)のみ収録。岐阜総合学園は同一学科(総合)に区分I(29.5%)と区分II(0.5%)の2つの独自検査枠が存在する初のケースのため、selectionCategoryを「第一次選抜(独自検査区分I)」「第一次選抜(独自検査区分II)」の2つに分けて両方収録した。ratioTypeは標準検査を「調査書:学力検査=X:Y」、独自検査を「募集人員のXX%」の形で転記',
+};
