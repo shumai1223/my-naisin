@@ -641,13 +641,26 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1+頁2(13校67レコード)を完全収録している(頁3〜7は未収録)', () => {
+  it('okayama: schoolsは頁1+頁2+頁3の一部(17校80レコード)を収録している(頁3残り・頁4〜7は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(67);
+    expect(record?.schools?.length).toBe(80);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(13);
+    expect(schoolNames.size).toBe(17);
     expect(record?.coverageNote).toContain('岡山一宮');
     expect(record?.coverageNote).toContain('興陽');
+    expect(record?.coverageNote).toContain('岡山南');
+  });
+
+  it('okayama: 岡山南(国際経済)は特別入学者選抜で英語検定2級以上合格を重視する実績に追加している(他の4学科には無い条件)', () => {
+    const kokusai = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '岡山南', '特別入学者選抜', '国際経済');
+    const shogyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '岡山南', '特別入学者選抜', '商業');
+    expect(kokusai?.note).toContain('英語検定2級以上合格');
+    expect(shogyo?.note).not.toContain('英語検定');
+  });
+
+  it('okayama: 倉敷青陵・倉敷南・倉敷古城池は特別入学者選抜の実施がない(一般入学者選抜のみ)', () => {
+    const seiryo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '倉敷青陵', '特別入学者選抜', '普通');
+    expect(seiryo).toBeNull();
   });
 
   it('okayama: 東岡山工業は機械・電子機械のくくり募集が結合セルで共通のため同一内容が複製されている(電気・設備システム・工業化学は一般入学者選抜なし)', () => {
