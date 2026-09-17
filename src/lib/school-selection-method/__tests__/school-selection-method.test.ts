@@ -672,13 +672,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スポーツ科学科');
   });
 
-  it('aomori: schoolsは東青地区分割版全12頁+西北五地区分割版全7頁(15校57レコード)を完全収録している(他4地区は未収録)', () => {
+  it('aomori: schoolsは東青地区・西北五地区・中弘南黒地区の分割版を完全収録している(23校93レコード・他3地区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori');
-    expect(record?.schools?.length).toBe(57);
+    expect(record?.schools?.length).toBe(93);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(15);
+    expect(schoolNames.size).toBe(23);
     expect(record?.coverageNote).toContain('東青地区');
     expect(record?.coverageNote).toContain('西北五地区');
+    expect(record?.coverageNote).toContain('中弘南黒地区');
+  });
+
+  it('aomori: 黒石(情報デザイン科)は実技検査(手の描画)を実施する', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '黒石', '一般選抜', '情報デザイン科');
+    expect(record?.note).toContain('描画');
+  });
+
+  it('aomori: 柏木農業(全学科)は「全国からの生徒募集」導入校で学科別に求める生徒像を定義している', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '柏木農業', '一般選抜', '全学科');
+    expect(record?.note).toContain('全国からの生徒募集');
+    expect(record?.note).toContain('生物生産科');
   });
 
   it('aomori: 五所川原は全日制(全学科)と定時制(普通科)の2レコード系統を別学科名で区別して収録している', () => {
