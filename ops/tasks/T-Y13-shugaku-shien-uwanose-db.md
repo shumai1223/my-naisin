@@ -148,14 +148,23 @@ hiroshima/tottori/yamaguchi/nara/gunma/tochigi/ibaraki/fukui/okayama/hokkaido/sa
 念のため次回以降のいずれかのセッションで「令和8年度時点でも制度が存続しているか」の抜き打ち
 再確認を1〜2県行うことを推奨する。
 
+**2026-09-18追記(shizuoka・22県目)**: 静岡県公式リーフレット(令和8年度版私立学校への助成制度
+概要)で授業料支援額(上限額)一覧を確認。school-subsidy型。③新修学支援対象者の6所得区分を転記。
+★所得階層と上乗せ額の関係が**非単調**(350-590万円未満と850-910万円未満の2区分で上乗せゼロ、
+590-700万円未満で最大277,200円)という他県に無いパターンを発見(国の支援額が相対的に高い区分と
+上乗せ不要区分が重なるための設計)。①新制度対象者②経過措置対象者の別区分(在校生向け等)は
+今回未転記。これでschool-subsidy型の実装例が2件(hokkaido/shizuoka)になり、`tiers`の意味付け
+(annualAmountJpyは「県単上乗せ分のみ」)が定着してきた。tsc実exit0・jest30件green確認済み
+（commit 8dcd9ac・ローカルのみ・push頻度制限ルールに従い保留中）。
+
 **次回セッションが選ぶべきこと**:
-1. 未実装の残り17県(direct型11県: fukuoka/shizuoka/iwate/miyagi/yamagata/niigata/toyama/
-   ishikawa/shiga/shimane/saga、school-subsidy型4県: nagano/tokushima/kagawa/kochi、
-   見込み1県: kagoshima、要再確認2県: wakayama/ehime)から一次資料(WebFetch/curl+pdftoppm)で
-   裏取りしながら実装を進める。**着手時は必ず「令和8年度時点でも制度が継続しているか」（廃止・
-   経過措置化されていないか）を確認すること**(chiba型の落とし穴)
-2. school-subsidy型4県は家庭への直接給付額が無いため、`tiers`の意味付け(annualAmountJpyを
-   「学校への補助上限額」とする設計)を最初の1県実装時に固め、他3県はそれに揃えること
+1. 未実装の残り16県(direct型10県: fukuoka/iwate/miyagi/yamagata/niigata/toyama/ishikawa/
+   shiga/shimane/saga、school-subsidy型4県: nagano/tokushima/kagawa/kochi、見込み1県:
+   kagoshima、要再確認2県: wakayama/ehime)から一次資料(WebFetch/curl+pdftoppm)で裏取りしながら
+   実装を進める。**着手時は必ず「令和8年度時点でも制度が継続しているか」（廃止・経過措置化
+   されていないか）を確認すること**(chiba型の落とし穴)
+2. school-subsidy型4県(nagano/tokushima/kagawa/kochi)はhokkaido/shizuokaの実装例
+   (annualAmountJpy=県単上乗せ分のみ)に揃えること
 3. wakayama/ehimeは「本当になしかもしれない」候補のため、優先的に一次資料へ当たり
    `confirmed-none`（なし確認済み）に倒すか`confirmed-yes`を発見するかを確定させる
 4. 着手前に`src/data/shien-uwanose/index.ts`を確認し二重実装を避けること
