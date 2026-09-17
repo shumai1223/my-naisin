@@ -43,6 +43,7 @@ import { NARA_SCHOOL_DISTRICT } from './nara';
 import { AKITA_SCHOOL_DISTRICT } from './akita';
 import { NIIGATA_SCHOOL_DISTRICT } from './niigata';
 import { FUKUI_SCHOOL_DISTRICT } from './fukui';
+import { YAMANASHI_SCHOOL_DISTRICT } from './yamanashi';
 
 export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSchoolDistrict>> = {
   tokyo: TOKYO_SCHOOL_DISTRICT,
@@ -89,4 +90,5 @@ export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSch
   akita: AKITA_SCHOOL_DISTRICT,
   niigata: NIIGATA_SCHOOL_DISTRICT,
   fukui: FUKUI_SCHOOL_DISTRICT,
+  yamanashi: YAMANASHI_SCHOOL_DISTRICT,
 };
