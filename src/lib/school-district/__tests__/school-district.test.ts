@@ -7,12 +7,18 @@ import { SCHOOL_DISTRICT_BY_PREFECTURE } from '@/data/school-districts';
 
 describe('T-Y15 学区（通学区域）DB', () => {
   it('getSchoolDistrictは未登録県にundefinedを返す', () => {
-    expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'niigata')).toBeUndefined();
+    expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'fukui')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでakita/aomori/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/nara/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでakita/aomori/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/nara/niigata/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['akita', 'aomori', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'nara', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+    expect(abolished).toEqual(['akita', 'aomori', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'nara', 'niigata', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+  });
+
+  it('niigataは平成20年度(2008年度)に学区を廃止した(岩手県比較表で一次確認・廃止前の学区名は未確認)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'niigata');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.abolishedFiscalYear).toBe('平成20年度（2008年度）');
   });
 
   it('akitaは平成17年度(2005年度)に3学区制を廃止した(岩手県比較表で一次確認・学区外枠なしが特徴)', () => {
@@ -152,7 +158,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
   });
 
   it('hasDistrictSystemは未登録県にnullを返す', () => {
-    expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'niigata')).toBeNull();
+    expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'fukui')).toBeNull();
   });
 
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
