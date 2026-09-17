@@ -249,3 +249,25 @@ hokkaido/saitama/chiba/shizuoka/niigata/toyama/saga)。tsc0/jest33 green。
 
 次回セッションが選ぶべきこと(更新): 上記iwate未解決に加え、前回追記のリスト
 (棚卸し/未着手県/T-Y14継続)は変更なし。
+
+## 追記 2026-09-18(続き3): yamagata(26県目)完了・T-Y14 tokushima3連続からの多様性確保で切替
+
+山形県公式ページ「山形県私立高等学校就学支援金制度について」(`pref.yamagata.jp/020023/
+syuugakusienkin.html`)を実装。school-subsidy型(私立学校が授業料減免を行い県が補助)。
+算定式(市町村民税課税標準額×6%－調整控除額)による3区分:
+①＜154,500円=月額34,000円(うち県独自1,000円・年額12,000円)
+②＜304,200円=月額22,000円(うち県独自12,100円・年額145,200円)
+③≧304,200円=月額9,900円(国のみ・上乗せ無し・「予定」表記で国確定待ち)。
+判定基準は年収目安でなく課税標準額ベースの算定式そのもの(niigataと同型)。
+
+**手順の教訓**: WebSearchのAI要約が示した数値(34,000円/22,000円/9,900円/154,500円/
+304,200円等)をそのまま信じず、`curl --ssl-no-revoke`で生HTMLを取得し`grep`で同じ数値が
+実在するか確認してから転記した(既存の[[fable5-loop-protocol]]「WebSearch/WebFetch要約は
+誤記・作話のリスクがある」既知の罠への対策を機械的に実行)。今回は完全一致で誤記は無かった。
+
+tsc実exit0・関連jest35件green・フルスイート549suites/8044tests green。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/akita/fukushima/nagano/gifu/
+wakayama/shimane/tokushima/kagawa/ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの
+15県(iwate/fukuoka/miyagi/ishikawa/shigaの5県は一次資料未特定で保留済み)。他は上記
+「次回セッションが選ぶべきこと」の1-3と変更なし。
