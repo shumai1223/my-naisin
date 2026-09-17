@@ -147,7 +147,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kumamoto/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
@@ -157,6 +157,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'iwate',
       'kagawa',
       'kagoshima',
+      'kumamoto',
       'kyoto',
       'mie',
       'nagano',
@@ -173,6 +174,14 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(record?.districts?.length).toBe(8);
     expect(record?.districts?.[0].name).toBe('盛岡学区');
     expect(record?.outOfDistrictCondition).toContain('10%');
+  });
+
+  it('kumamotoは districted で県北/県央/県南の3学区を持ち、対象は全日制普通科のみ(専門学科等は県下全域)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'kumamoto');
+    expect(record?.systemType).toBe('districted');
+    expect(record?.districts?.length).toBe(3);
+    expect(record?.districts?.map((d) => d.name)).toEqual(['県央学区', '県北学区', '県南学区']);
+    expect(record?.outOfDistrictCondition).toContain('総合学科');
   });
 
   it('kyotoは districted で全日制普通科(単位制除く)のみ5学区(通学圏)を持つ(専門学科・総合学科・定通は府全域)', () => {
