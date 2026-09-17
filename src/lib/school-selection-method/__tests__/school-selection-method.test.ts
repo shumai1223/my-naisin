@@ -672,12 +672,23 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スポーツ科学科');
   });
 
-  it('aomori: schoolsは東青地区分割版の頁1〜4(4校12レコード)を収録している(残り8頁・他5地区は未収録)', () => {
+  it('aomori: schoolsは東青地区分割版全12頁(12校36レコード)を完全収録している(他5地区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori');
-    expect(record?.schools?.length).toBe(12);
+    expect(record?.schools?.length).toBe(36);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(4);
+    expect(schoolNames.size).toBe(10);
     expect(record?.coverageNote).toContain('東青地区');
+  });
+
+  it('aomori: 北斗(普通科)は定時制課程で面接結果を特に重視すると明記されている', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '北斗', '一般選抜', '普通科');
+    expect(record?.note).toContain('定時制課程');
+    expect(record?.note).toContain('特に重視');
+  });
+
+  it('aomori: 青森南(グローバル探究科)の一般選抜はスピーチ形式の個人面接を実施する', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '青森南', '一般選抜', 'グローバル探究科');
+    expect(record?.note).toContain('スピーチ');
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
