@@ -198,3 +198,39 @@ toyama実装完了: 公式リーフレット「3.支給額」図で算定基準�
 5. wakayama/ehimeは「本当になしかもしれない」候補のため、優先的に一次資料へ当たり
    `confirmed-none`（なし確認済み）に倒すか`confirmed-yes`を発見するかを確定させる
 6. 着手前に`src/data/shien-uwanose/index.ts`を確認し二重実装を避けること
+
+## 追記 2026-09-18(続き): saga(25県目)完了・当初仮説「完全無償化」は誤りと判明
+
+佐賀県総合教育会議(第32回・R7.7.18)資料`3_115687_366136_up_u2oiadks.pdf`のタイトルが
+「私立高校の授業料完全無償化を受けた公立高校のあり方」だったため、佐賀県が独自に完全
+無償化を実施済みという仮説を立てて全9頁を目視確認した。結果、これは**国の「いわゆる
+高校無償化」制度改正の動向(令和8年度・所得制限撤廃+45.7万円支給の方向性がまだ「議論中」)**
+を指すものであり、佐賀県自身が独自に実施している制度ではないと判明。3頁目は東京都
+(都+国49万円上限)・大阪府(府+国63万円上限)を「先行して独自の支援制度を設けている」
+先行事例として挙げており、逆に佐賀県自身はこの時点で独自の授業料上乗せを持たないこと
+を示唆する内容だった。
+
+別途、佐賀県私立中学高等学校協会(`saga-shigaku.com/support/`)で入学金等補助制度
+(年収590万円未満世帯・保護者負担額1/4・上限27,000円)のみ確認。授業料の県独自上乗せ
+は無いと判断し、school-subsidy型・入学金1tierのみで記録してcommit(e22073b)。
+
+**教訓**: 会議資料のタイトルだけで判断せず必ず本文を読むこと。「完全無償化」という
+強い言葉が使われていても、国レベルの政策動向の議論資料であって当該県の確定済み制度
+とは限らない(今回は本文2頁目のグラフで「R8(議論中)」と明記されていた)。
+
+T-Y13進捗: 25県実装済み(tokyo/osaka/mie/yamanashi/nagasaki/hyogo/kyoto/kanagawa/
+aichi/oita/hiroshima/tottori/yamaguchi/nara/gunma/tochigi/ibaraki/fukui/okayama/
+hokkaido/saitama/chiba/shizuoka/niigata/toyama/saga)。tsc0/jest33 green。
+
+次回セッションが選ぶべきこと:
+1. T-Y13残り: 「棚卸し」推奨(fukuoka/miyagi/ishikawa/shigaの4県が原資料確認失敗→
+   国改正後に県独自制度が廃止/再編された可能性の検証)をまだ実施していない。次に
+   1件着手する前に、既存25県のうち古い(2026-09-16サーベイ由来の)エントリを2-3件
+   再確認する価値がある。
+2. T-Y13未着手: iwate/yamagata/ishikawa/shiga/shimane/saga系の残り、
+   school-subsidy型候補のnagano/tokushima/kagawa/kochi、kagoshima(見込み要確認)、
+   wakayama/ehime(confirmed-none候補)。
+3. T-Y14へ戻る場合: gifu頁3-4(未着手)、okayama頁3残り(岡山御津/倉敷天城/倉敷中央の
+   3校・結合セル要再挑戦)+頁4-7、aomori残り2地区(下北むつ/三八)、hiroshima再挑戦
+   (300dpi+Pillow技法)、または未着手7県(tokyo/hokkaido/fukushima/shizuoka/
+   hiroshima/yamaguchi/tokushima)。
