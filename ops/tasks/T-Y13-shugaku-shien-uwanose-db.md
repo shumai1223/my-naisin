@@ -234,3 +234,18 @@ hokkaido/saitama/chiba/shizuoka/niigata/toyama/saga)。tsc0/jest33 green。
    3校・結合セル要再挑戦)+頁4-7、aomori残り2地区(下北むつ/三八)、hiroshima再挑戦
    (300dpi+Pillow技法)、または未着手7県(tokyo/hokkaido/fukushima/shizuoka/
    hiroshima/yamaguchi/tokushima)。
+
+## 追記 2026-09-18(続き2): iwate着手→一次資料未特定のため保留
+
+検索エンジンのAI要約では繰り返し「岩手県は年収約590万円以上〜約620万円未満世帯を対象に
+月額11,550円を上限に授業料減免」という具体的数値が出てくるが、`pref.iwate.jp`の複数の
+関連ページ(`kyouikubunka/kyouiku/shigaku/1006751/index.html`・`.../1006752.html`・
+`kyouikubunka/kyouiku/ippan/gyousei/1061714.html`[これは公立向けと判明])をWebFetchで
+直接確認した限りでは、この数値を含む一次資料本文にたどり着けなかった。検索結果の要約が
+どこから来ているか特定できないまま記録するとY-0憲章(1データ点1出典)違反になるため、
+今回はiwateを追加せず保留。次回はリーフレットPDF(「私立高等学校等就学支援金」ページの
+下部にあるはずのPDFリンク)を直接辿るか、`ふるさと振興部・学事振興課`のページ構造を
+サイト内検索で洗い直す必要がある。
+
+次回セッションが選ぶべきこと(更新): 上記iwate未解決に加え、前回追記のリスト
+(棚卸し/未着手県/T-Y14継続)は変更なし。
