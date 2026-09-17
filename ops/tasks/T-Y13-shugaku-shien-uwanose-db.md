@@ -133,12 +133,27 @@ hokkaido/saitama。
 県独自上乗せは1年生の入学金補助(10万円)のみに限定される(施設費等・授業料への上乗せは
 基準①[約500万円未満]のみが対象)。tsc実exit0・jest28件green。
 
+**2026-09-18追記(chiba・21県目)★重要な制度リスク発見**: 千葉県の従来の県独自上乗せ制度は
+**令和8年度から廃止**されていた（国の就学支援金上限額が457,200円に拡充され、県内私立高校の
+授業料平均額429,756円を上回るようになったため、県は「もう不要」と判断し廃止・令和8年度
+新入生と在校生限りの経過措置=令和10年度までのみ残存）。survey時点(2026-09-16)の「あり」判定は
+令和7年度情報に基づくものだったが、令和8年度時点では実質的に状況が変わっていた。
+**★教訓（今後の全県実装・既存実装の再確認双方に適用）: 国の就学支援金制度改正(年収制限撤廃・
+上限457,200円への拡充)により、県平均授業料が457,200円を下回る県では、従来の県独自上乗せが
+「国の拡充で不要になり廃止」されているケースがありうる。一次資料を確認する際は必ず「これは
+現在も継続中の制度か、廃止・縮小されていないか」を年度表記(令和8年度)とともに確認すること。**
+既存の20県実装分（tokyo/osaka/mie/yamanashi/nagasaki/hyogo/kyoto/kanagawa/aichi/oita/
+hiroshima/tottori/yamaguchi/nara/gunma/tochigi/ibaraki/fukui/okayama/hokkaido/saitama）は
+実装時点で457,200円という現行の国上限を踏まえた記述になっているため直ちに誤りとは限らないが、
+念のため次回以降のいずれかのセッションで「令和8年度時点でも制度が存続しているか」の抜き打ち
+再確認を1〜2県行うことを推奨する。
+
 **次回セッションが選ぶべきこと**:
-1. 未実装の残り19県(direct型13県: chiba/fukuoka/shizuoka/iwate/miyagi/yamagata/niigata/
-   toyama/ishikawa/shiga/shimane/saga、school-subsidy型4県: nagano/tokushima/kagawa/kochi、
+1. 未実装の残り17県(direct型11県: fukuoka/shizuoka/iwate/miyagi/yamagata/niigata/toyama/
+   ishikawa/shiga/shimane/saga、school-subsidy型4県: nagano/tokushima/kagawa/kochi、
    見込み1県: kagoshima、要再確認2県: wakayama/ehime)から一次資料(WebFetch/curl+pdftoppm)で
-   裏取りしながら実装を進める。chiba(`pref.chiba.lg.jp/gakuji/shiritsutou/gakuhi-josei/
-   genmen/genmen.html`)は既にsurveyで公式ページを発見済みで着手しやすい
+   裏取りしながら実装を進める。**着手時は必ず「令和8年度時点でも制度が継続しているか」（廃止・
+   経過措置化されていないか）を確認すること**(chiba型の落とし穴)
 2. school-subsidy型4県は家庭への直接給付額が無いため、`tiers`の意味付け(annualAmountJpyを
    「学校への補助上限額」とする設計)を最初の1県実装時に固め、他3県はそれに揃えること
 3. wakayama/ehimeは「本当になしかもしれない」候補のため、優先的に一次資料へ当たり
