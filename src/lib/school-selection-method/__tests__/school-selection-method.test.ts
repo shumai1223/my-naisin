@@ -746,12 +746,26 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
-  it('gifu: schoolsは頁1の学校番号1〜14(14校78レコード)を収録している(頁1残り・頁2〜4は未収録)', () => {
+  it('gifu: schoolsは頁1(学校番号1〜18・18校121レコード)を完全収録している(頁2〜4は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
-    expect(record?.schools?.length).toBe(78);
+    expect(record?.schools?.length).toBe(121);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(14);
+    expect(schoolNames.size).toBe(18);
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+  });
+
+  it('gifu: 岐阜工業(航空・機械工学科群)は独自検査区分Iが実技検査・区分IIが面接という異なる検査内容を持つ', () => {
+    const region1 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜工業', '第一次選抜(独自検査区分I)', '航空・機械工学科群');
+    const region2 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜工業', '第一次選抜(独自検査区分II)', '航空・機械工学科群');
+    expect(region1?.note).toContain('実技検査');
+    expect(region2?.note).toContain('面接');
+  });
+
+  it('gifu: 岐阜農林(7学科)は学科間で完全併願可能(志望数3)かつ全学科同一配点', () => {
+    const doubutsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜農林', '第一次選抜(標準検査)', '動物科学');
+    const kankyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜農林', '第一次選抜(標準検査)', '環境科学');
+    expect(doubutsu?.ratioType).toBe(kankyo?.ratioType);
+    expect(doubutsu?.note).toContain('7学科');
   });
 
   it('gifu: 岐阜各務野は情報学科のみ独自検査が実施されない(ビジネス・福祉学科にはある)', () => {
