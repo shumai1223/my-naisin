@@ -971,11 +971,29 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(sougou?.note).toContain('男女ライフル射撃');
   });
 
-  it('tokushima: schoolsは頁8(育成型選抜1頁目・6校20レコード)+頁13(一般選抜傾斜配点・7校8学科)の計27レコードを収録している(頁9-12の育成型選抜残りは未収録)', () => {
+  it('tokushima: 徳島科学技術は育成型選抜で工業・水産が配点を共有するが文化・ポリシー分野は水産のみ★海洋分野を持つ', () => {
+    const kogyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '徳島科学技術', '育成型選抜(活動重視枠)', '工業(総合科学・機械技術・電気技術・建設技術)');
+    const suisan = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '徳島科学技術', '育成型選抜(活動重視枠)', '水産(海洋科学・海洋技術)');
+    expect(kogyo?.note).toContain('文化・ポリシー分野:ー');
+    expect(suisan?.note).toContain('文化・ポリシー分野:★海洋分野');
+    expect(kogyo?.note).toContain('総点500/調査書125/学力検査125');
+    expect(suisan?.note).toContain('総点500/調査書125/学力検査125');
+  });
+
+  it('tokushima: 小松島西は商業・家庭(食物生活文化)・福祉の3学科が育成型選抜の配点等を共有する(結合セル)', () => {
+    const shogyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '小松島西', '育成型選抜(活動重視枠)', '商業');
+    const kaji = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '小松島西', '育成型選抜(活動重視枠)', '家庭(食物生活文化)');
+    const fukushi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '小松島西', '育成型選抜(活動重視枠)', '福祉');
+    expect(shogyo?.note).toContain('総点500/調査書100/学力検査200');
+    expect(kaji?.note).toContain('★家庭探究活動');
+    expect(fukushi?.note).toContain('★福祉探究活動');
+  });
+
+  it('tokushima: schoolsは頁8-9(育成型選抜1-2頁目・13校41レコード)+頁13(一般選抜傾斜配点・7校8学科)の計48レコードを収録している(頁10-12の育成型選抜残りは未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima');
-    expect(record?.schools?.length).toBe(27);
+    expect(record?.schools?.length).toBe(48);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(8);
+    expect(schoolNames.size).toBe(14);
     expect(record?.coverageNote).toContain('育成型選抜');
   });
 
