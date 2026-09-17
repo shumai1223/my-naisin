@@ -215,13 +215,23 @@ fukushima（各高等学校の選抜方法一覧・192頁・1校2頁の詳細プ
 （commit aef3aa8・ローカルのみ）。gunma（5県目）はこれでosaka/aichi/ibaraki/yamanashiに
 続き完了。
 
+**2026-09-17追記12（yamanashi完了・4県目）: 2頁目(16番笛吹〜26番甲府商業・11校36トラック)を
+追加し、全2頁26校79トラックで完全収録に到達した**（1頁目15校43トラックは前セッション実装済み）。
+16番笛吹は同一校内でも学科ブロックによって評定の傾斜倍率が異なる初のケース（普通科=5教科の
+評定2倍、農業系(2)・総合学科=第1学年:第2学年:第3学年=1:2:3）。23番吉田の理数科は面接の
+実施時間が資料に記載されていないにもかかわらず選抜資料比重には面接15点が計上されている
+（推測で埋めず原文どおり転記・noteに明記）。末尾に1頁目掲載校の補足情報（北杜理数コース等の
+コース指定方法の注記表）があるが1頁目データの再取得が必要になるため今回は未統合と明記した。
+面接時間等はpdftoppm(300dpi/450dpi)複数箇所のzoomクロップで数値を検算した。tsc実exit0・
+関連jest64件green確認済み（commit 2d66899・ローカルのみ）。yamanashi(4県目)はこれで
+osaka/aichi/ibarakiに続き完了(gunmaと合わせ5県中4県が完了)。
+
 **次回セッションが選ぶべきこと**:
-1. yamanashiの2頁目（笛吹〜甲府商業・11校）を追加収録してyamanashiを完了させる
-2. またはT-Y14の6県目（残るstructured確定県: tokyo/hokkaido/miyagi/
-   nagano/gifu/yamaguchi/kagoshima）の
-   データ層実装に進む（aomori/okayama/kochi/tokushima/tochigi/mie/shiga/kagawa/ibaraki/
-   shizuoka/wakayama/hiroshimaはT-Y15で使用済み。yamanashi/gunmaは実装済み）
-3. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
+1. T-Y14の6県目（残るstructured確定県: tokyo/hokkaido/miyagi/
+   nagano/gifu/yamaguchi/kagoshima）のデータ層実装に進む（aomori/okayama/kochi/tokushima/
+   tochigi/mie/shiga/kagawa/ibaraki/shizuoka/wakayama/hiroshimaはT-Y15で使用済み。
+   yamanashi/gunma/osaka/aichi/ibarakiは実装済み）
+2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
    指定されている・2026-09-17時点で27県実装済み・詳細はT-Y15タスクファイル参照）
-4. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
+3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
