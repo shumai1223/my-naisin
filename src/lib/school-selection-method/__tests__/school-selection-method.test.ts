@@ -926,6 +926,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(ginan?.note).toContain('面接は出願者全員に実施');
   });
 
+  it('tokushima: 徳島北(外国語科)は一般選抜の学力検査で英語のみ2倍(200点)の傾斜配点を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '徳島北', '一般選抜', '外国語科');
+    expect(record?.note).toContain('英語200');
+    expect(record?.note).toContain('2倍');
+  });
+
+  it('tokushima: 徳島科学技術は工業科・水産科の両学科が同一の傾斜配点(600点・数学140/理科130/英語130)を共有する', () => {
+    const kogyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '徳島科学技術', '一般選抜', '工業科');
+    const suisan = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '徳島科学技術', '一般選抜', '水産科');
+    expect(kogyo?.note).toContain('数学140');
+    expect(suisan?.note).toContain('数学140');
+  });
+
+  it('tokushima: 富岡西(理数科)は表中唯一600点に満たない傾斜配点(総計590点)を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '富岡西', '一般選抜', '理数科');
+    expect(record?.note).toContain('590点');
+  });
+
+  it('tokushima: schoolsは頁13の一般選抜傾斜配点実施校一覧(7校8学科)のみ収録している(頁8-12の育成型選抜は未収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima');
+    expect(record?.schools?.length).toBe(7);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(6);
+    expect(record?.coverageNote).toContain('育成型選抜');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
