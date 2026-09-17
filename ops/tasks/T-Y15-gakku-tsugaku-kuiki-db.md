@@ -287,12 +287,23 @@ fukuiに差し替え済み(次にfukuiへ着手するセッションは同様の
 T-Y15は43県実装完了(abolished型23県+districted型20県)。structured確定の残りはfukui/
 yamanashi/miyazaki(baseline調査時点でいずれもuncertain=一次資料未発見)のみ。
 
+**2026-09-18追記: fukui(44県目・abolished型)を実装完了した**。岩手県比較表に「H16 埼玉、
+福井」と明記されているのを再確認し一次確認。WebSearchの二次資料で学区廃止と同時に「藤島・
+高志学校群選抜入試制度」(東京都の旧学校群制度に類似する仕組み)も廃止されたという珍しい詳細を
+発見したが一次資料未確認と正直に明記(Y-0)。★既存テストの「未登録県の例」がfukuiだったため、
+3回連続で発生している同型の副作用をここでも検知しtottoriに差し替え済み。
+
+T-Y15は44県実装完了(abolished型24県+districted型20県)。structured確定の残りはyamanashi/
+miyazaki(baseline調査時点でいずれもuncertain=一次資料未発見)のみ。★yamanashiはT-Y14で
+既に別データ(選抜方法)として実装済みだが、T-Y15(学区DB)としては未着手のため二重実装には
+あたらない。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y15の44県目として、fukui/yamanashi/miyazakiのいずれかを一次資料で裏取りする。
-   gunma/gifu/nara/akita/niigataで確立した手順（①岩手県比較表(既に取得済みのPDF)で実施年度を
-   確認→②見つからなければ県教育委員会サイトの「入学者選抜実施要項」ページや「教育委員会会議録」
-   を辿って一次資料を探す→③それでも見つからなければWikipedia等の二次資料に切り替え、その旨を
-   noteに明記）をそのまま踏襲するとよい。★fukuiは既存テストの「未登録県の例」として使われて
+1. T-Y15の45県目として、yamanashi/miyazakiのいずれかを一次資料で裏取りする。gunma/gifu/
+   nara/akita/niigata/fukuiで確立した手順（①岩手県比較表(既に取得済みのPDF)で実施年度を確認→
+   ②見つからなければ県教育委員会サイトの「入学者選抜実施要項」ページや「教育委員会会議録」を
+   辿って一次資料を探す→③それでも見つからなければWikipedia等の二次資料に切り替え、その旨を
+   noteに明記）をそのまま踏襲するとよい。★tottoriは既存テストの「未登録県の例」として使われて
    いる箇所があるので、着手前に`school-district.test.ts`を確認し別の未使用県に差し替えること
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
    yamanashi/gunma(63校)/nagano(20校)/miyagi(21レコード)/kagoshima(155レコード)/kochi(64
