@@ -308,9 +308,21 @@ jest green達成。tsc実exit0・jest80件green確認済み（commit b1ec917・�
 は8県目としてosaka/aichi/ibaraki/yamanashi/gunma/nagano/miyagi/kagoshimaで完了・全県公式
 「令和8年度公立高等学校入学者選抜方法案内」(全6頁)を完全収録した唯一の県となった。
 
+**2026-09-17追記20（kochi着手・9県目）: 「令和8年度高知県公立高等学校入学者選抜における検査
+項目等一覧表」(全5頁)の頁1「全日制の課程」面接内容一覧表を実装完了した**（全日制32行=分校2件
+(高知追手前吾北分校・中村西土佐分校)を含む・schoolNameとしては30校64レコード）。高知県は
+「A日程」「B日程」の2回選抜方式(A日程で定員充足ならB日程実施なし)でselectionCategoryをこの
+2区分に設計。頁5「傾斜配点実施校一覧表」(高知丸の内=音楽科の調査書音楽2倍・高知小津=理数科の
+学力検査数学理科1.5倍・高知商業=社会マネジメント科の学力検査英語1.5倍)は該当レコードのnoteに
+転記(ratioTypeは学校全体を指すフィールド設計のため、学科限定の傾斜配点を書くと誤解を招く
+と判断し不使用とした)。頁2(多部制単位制・定時制)・頁3-4(実技検査の概要一覧表)・頁5下(成人
+特別選抜の概要)は未収録。★kagoshima完了時の教訓を継続し今回もnode -eで事前カウントしてから
+記述・一発でjest green(83件)達成。tsc実exit0確認済み（commit 99f5492・ローカルのみ）。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y14の9県目（残るstructured確定県: tokyo/hokkaido/aomori/fukushima/gifu/shizuoka/
-   okayama/hiroshima/yamaguchi/tokushima/kochi）のデータ層実装に進む
+1. kochiの続き（頁2の多部制単位制・定時制、または頁3-4の実技検査の概要一覧表）、またはT-Y14
+   の10県目（残るstructured確定県: tokyo/hokkaido/aomori/fukushima/gifu/shizuoka/okayama/
+   hiroshima/yamaguchi/tokushima）のデータ層実装に進む
 2. またはmiyagiの続き（頁27以降・偶数頁スキップに注意）
 3. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
    指定されている・2026-09-17時点で41県実装済み・詳細はT-Y15タスクファイル参照）
