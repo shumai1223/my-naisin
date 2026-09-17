@@ -580,12 +580,17 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('第3志望まで');
   });
 
-  it('kagoshima: schoolsは鹿児島学区18校38レコードを収録している(他6学区は未収録)', () => {
+  it('kagoshima: schoolsは鹿児島学区+南薩学区28校58レコードを収録している(他5学区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kagoshima');
-    expect(record?.schools?.length).toBe(38);
+    expect(record?.schools?.length).toBe(58);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(18);
-    expect(record?.coverageNote).toContain('鹿児島学区');
+    expect(schoolNames.size).toBe(28);
+    expect(record?.coverageNote).toContain('南薩学区');
+  });
+
+  it('kagoshima: 薩南工業(機械)は4学科間で学力検査を第4志望まで併願できる(表中唯一の4学科併願)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kagoshima', '薩南工業', '推薦入試', '機械');
+    expect(record?.note).toContain('第4志望まで');
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
