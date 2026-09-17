@@ -6,13 +6,19 @@ import {
 import { SCHOOL_DISTRICT_BY_PREFECTURE } from '@/data/school-districts';
 
 describe('T-Y15 学区（通学区域）DB', () => {
-  it('getSchoolDistrictは未登録県にundefinedを返す', () => {
-    expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'tottori')).toBeUndefined();
+  it('getSchoolDistrictは未登録キーにundefinedを返す(47都道府県が全て登録済みのため実在しないキーで確認)', () => {
+    expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'not-a-real-prefecture')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでakita/aomori/fukui/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/miyazaki/nara/niigata/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchi/yamanashiを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでakita/aomori/fukui/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/miyazaki/nara/niigata/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/tottori/toyama/wakayama/yamaguchi/yamanashiを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['akita', 'aomori', 'fukui', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'miyazaki', 'nara', 'niigata', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi', 'yamanashi']);
+    expect(abolished).toEqual(['akita', 'aomori', 'fukui', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'miyazaki', 'nara', 'niigata', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'tottori', 'toyama', 'wakayama', 'yamaguchi', 'yamanashi']);
+  });
+
+  it('tottoriは平成19年度(2007年度)に学区を廃止した(岩手県比較表で一次確認・gunma/yamanashiと同一行)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'tottori');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.abolishedFiscalYear).toBe('平成19年度（2007年度）');
   });
 
   it('miyazakiは平成20年度(2008年度)に学区を廃止した(岩手県比較表で一次確認・niigataと同一行)', () => {
@@ -177,8 +183,12 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'tokyo')).toBe(false);
   });
 
-  it('hasDistrictSystemは未登録県にnullを返す', () => {
-    expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'tottori')).toBeNull();
+  it('hasDistrictSystemは未登録キーにnullを返す(47都道府県が全て登録済みのため実在しないキーで確認)', () => {
+    expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'not-a-real-prefecture')).toBeNull();
+  });
+
+  it('T-Y15は47都道府県すべてが登録済み(完全達成)', () => {
+    expect(Object.keys(SCHOOL_DISTRICT_BY_PREFECTURE).length).toBe(47);
   });
 
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {

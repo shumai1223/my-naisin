@@ -45,6 +45,7 @@ import { NIIGATA_SCHOOL_DISTRICT } from './niigata';
 import { FUKUI_SCHOOL_DISTRICT } from './fukui';
 import { YAMANASHI_SCHOOL_DISTRICT } from './yamanashi';
 import { MIYAZAKI_SCHOOL_DISTRICT } from './miyazaki';
+import { TOTTORI_SCHOOL_DISTRICT } from './tottori';
 
 export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSchoolDistrict>> = {
   tokyo: TOKYO_SCHOOL_DISTRICT,
@@ -93,4 +94,5 @@ export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSch
   fukui: FUKUI_SCHOOL_DISTRICT,
   yamanashi: YAMANASHI_SCHOOL_DISTRICT,
   miyazaki: MIYAZAKI_SCHOOL_DISTRICT,
+  tottori: TOTTORI_SCHOOL_DISTRICT,
 };
