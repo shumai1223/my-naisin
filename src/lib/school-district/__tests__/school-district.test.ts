@@ -10,9 +10,15 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/hiroshima/ibaraki/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shizuoka/tochigi/tokyo/toyama/wakayamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shizuoka/tochigi/tokyo/toyama/wakayamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'hiroshima', 'ibaraki', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama']);
+    expect(abolished).toEqual(['aomori', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama']);
+  });
+
+  it('ishikawaは平成17年度(2005年度)に学区を廃止した(一次資料で直接確認済み・廃止前3学区は二次資料のみ)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'ishikawa');
+    expect(record?.abolishedFiscalYear).toBe('平成17年度（2005年度）');
+    expect(record?.outOfDistrictCondition).toContain('加賀');
   });
 
   it('hiroshimaは平成18年度(2006年度)に6学区制(全日制普通科)を廃止した', () => {
