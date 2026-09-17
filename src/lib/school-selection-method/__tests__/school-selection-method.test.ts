@@ -788,13 +788,34 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
-  it('gifu: schoolsは頁1・頁2を完全収録している(42校260レコード・頁3〜4は未収録)', () => {
+  it('gifu: schoolsは頁1・頁2・頁3を完全収録している(63校381レコード・頁4は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
-    expect(record?.schools?.length).toBe(260);
+    expect(record?.schools?.length).toBe(381);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(42);
+    expect(schoolNames.size).toBe(63);
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
-    expect(record?.coverageNote).toContain('頁3〜4は未着手');
+    expect(record?.coverageNote).toContain('頁4');
+    expect(record?.coverageNote).toContain('未着手');
+  });
+
+  it('gifu: 土岐紅陵(総合)は独自検査区分I(27%)と区分II(3%)の2枠を持つ(頁3)', () => {
+    const region1 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '土岐紅陵', '第一次選抜(独自検査区分I)', '総合');
+    const region2 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '土岐紅陵', '第一次選抜(独自検査区分II)', '総合');
+    expect(region1?.ratioType).toBe('募集人員の27%');
+    expect(region2?.ratioType).toBe('募集人員の3%');
+  });
+
+  it('gifu: 恵那南(総合)の第二次選抜は頁3で唯一、面接に加え小論文も実施する', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '恵那南', '第二次選抜', '総合');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.note).toContain('小論文も実施');
+  });
+
+  it('gifu: 関商工は総合ビジネスのみ独自検査の志望数が1(他3学科は3)という例外を持つ(頁3)', () => {
+    const sogo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '関商工', '第一次選抜(独自検査)', '総合ビジネス');
+    const kikai = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '関商工', '第一次選抜(独自検査)', '機械');
+    expect(sogo?.note).toContain('志望できる学科(群)数1');
+    expect(kikai?.note).toContain('志望できる学科(群)数3');
   });
 
   it('gifu: 加茂農林は5学科で募集割合が学科ごとに異なる(25%/30%が混在)独自検査を持つ', () => {
