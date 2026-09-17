@@ -364,9 +364,24 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
-  it('yamanashi: schoolsは43レコードを収録している(1頁目15校・全トラック)', () => {
+  it('yamanashi: 笛吹(普通科・前期A)は5教科の評定2倍を持つが農業系(2)・前期Aは学年別傾斜を持つ(同一校でも学科で傾斜が異なる)', () => {
+    const seimon = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamanashi', '笛吹', '前期A', '普通科');
+    const nougyou = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamanashi', '笛吹', '前期A', '農業系(2)');
+    expect(seimon?.note).toContain('5教科の評定2倍');
+    expect(nougyou?.note).toContain('第1学年:第2学年:第3学年=1:2:3');
+  });
+
+  it('yamanashi: 吉田(理数科)は面接時間の記載がないが選抜資料比重には面接15点が計上されている', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamanashi', '吉田', '前期', '理数科');
+    expect(record?.ratioType).toBe('調査書30:面接15:所見5:特色適性検査50');
+  });
+
+  it('yamanashi: schoolsは79レコードを収録している(全2頁26校を完全収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamanashi');
-    expect(record?.schools?.length).toBe(43);
+    expect(record?.schools?.length).toBe(79);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.has('甲府商業')).toBe(true);
+    expect(schoolNames.size).toBe(26);
   });
 
   it('gunma: 前橋(普通科・総合型選抜)は学力検査重視の割合を持つ', () => {
