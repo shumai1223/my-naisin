@@ -267,7 +267,29 @@ syuugakusienkin.html`)を実装。school-subsidy型(私立学校が授業料減�
 
 tsc実exit0・関連jest35件green・フルスイート549suites/8044tests green。
 
-次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/akita/fukushima/nagano/gifu/
+次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/akita/nagano/gifu/
 wakayama/shimane/tokushima/kagawa/ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの
-15県(iwate/fukuoka/miyagi/ishikawa/shigaの5県は一次資料未特定で保留済み)。他は上記
+14県(iwate/fukuoka/miyagi/ishikawa/shigaの5県は一次資料未特定で保留済み)。他は上記
 「次回セッションが選ぶべきこと」の1-3と変更なし。
+
+## 追記 2026-09-18(続き4): fukushima(27県目)完了
+
+福島県私学・法人課「高校生等に対する修学支援について」(`pref.fukushima.lg.jp/sec/01135b/
+shigaku12.html`)を実装。school-subsidy型。授業料支援は「授業料額から就学支援金を除いた額が
+対象」という設計(=国と県の合算値でしか公表されていない)のため、saitama/hiroshimaと同型の
+「国+県合算上限額をそのまま転記」方式を採用: 生活保護世帯546,000円/年収450万円以下471,000円。
+入学料支援(50,000円/25,000円)は国とは別建ての県単独助成のため別tierとして追加。1人1台端末
+購入費用支援(60,000円/20,000円)は授業料・入学金と性質が異なる別カテゴリのため今回は対象外
+(次回検討候補)。検索の道筋: 「高校生等に対する就学支援について」(shigaku21.html)は中学生向け
+ページで高校向けの数値が無く、私学・法人課トップページのリンク一覧から「高校生等に対する
+修学支援について」(shigaku12.html・「就学」でなく「修学」表記)を発見して正しいページに
+たどり着いた。**教訓: 県サイトには似た名前の「就学支援」ページと「修学支援」ページが別に
+存在し、検索結果の上位ページだけでは対象外のライフステージ(中学/高校)を掴んでしまうことが
+ある。本文の対象学校種(「私立中学校」か「私立高等学校」か)を必ず確認すること**。
+WebFetch要約はcurl+grep生HTML確認で全数値一致を確認済み。
+
+tsc実exit0・関連jest37件green・フルスイート549suites/8046tests green。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/akita/nagano/gifu/wakayama/
+shimane/tokushima/kagawa/ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの14県
+(iwate/fukuoka/miyagi/ishikawa/shigaの5県は保留済み)。他は変更なし。
