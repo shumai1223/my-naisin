@@ -944,11 +944,38 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('590点');
   });
 
-  it('tokushima: schoolsは頁13の一般選抜傾斜配点実施校一覧(7校8学科)のみ収録している(頁8-12の育成型選抜は未収録)', () => {
+  it('tokushima: 城東(普通)は育成型選抜の活動重視枠と実績重視枠で調査書・学力検査の配点が異なる', () => {
+    const katsudou = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '城東', '育成型選抜(活動重視枠)', '普通');
+    const jisseki = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '城東', '育成型選抜(実績重視枠)', '普通');
+    expect(katsudou?.note).toContain('調査書100/学力検査150');
+    expect(jisseki?.note).toContain('調査書50/学力検査100');
+  });
+
+  it('tokushima: 城南は普通・理数(応用数理)で育成型選抜の配点等を共有する(結合セル)', () => {
+    const futsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '城南', '育成型選抜(活動重視枠)', '普通');
+    const risu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '城南', '育成型選抜(活動重視枠)', '理数(応用数理)');
+    expect(futsu?.note).toContain('総点500/調査書100/学力検査150/活動記録50/実技等150');
+    expect(risu?.note).toContain('総点500/調査書100/学力検査150/活動記録50/実技等150');
+    expect(risu?.note).toContain('★理数探究分野');
+  });
+
+  it('tokushima: 徳島北は育成型選抜の実績重視枠が実施されない(欄が全てー)ためレコードが存在しない', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '徳島北', '育成型選抜(実績重視枠)', '普通');
+    expect(record).toBeNull();
+  });
+
+  it('tokushima: 城西は農業・総合(総合学科)で育成型選抜の実績重視枠における運動部指定競技が異なる(農業はー・総合は男女ライフル射撃)', () => {
+    const nougyou = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '城西', '育成型選抜(実績重視枠)', '農業(生産技術・植物活用・食品科学・アグリビジネス)');
+    const sougou = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '城西', '育成型選抜(実績重視枠)', '総合(総合学科)');
+    expect(nougyou?.note).toContain('運動部指定競技:ー');
+    expect(sougou?.note).toContain('男女ライフル射撃');
+  });
+
+  it('tokushima: schoolsは頁8(育成型選抜1頁目・6校20レコード)+頁13(一般選抜傾斜配点・7校8学科)の計27レコードを収録している(頁9-12の育成型選抜残りは未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima');
-    expect(record?.schools?.length).toBe(7);
+    expect(record?.schools?.length).toBe(27);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(6);
+    expect(schoolNames.size).toBe(8);
     expect(record?.coverageNote).toContain('育成型選抜');
   });
 
