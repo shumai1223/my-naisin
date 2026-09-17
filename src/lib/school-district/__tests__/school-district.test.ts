@@ -10,9 +10,16 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/nara/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+    expect(abolished).toEqual(['aomori', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'nara', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+  });
+
+  it('naraは平成17年度(2005年度)に北部/南部2学区制を廃止した(岩手県比較表で一次確認)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'nara');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.abolishedFiscalYear).toBe('平成17年度（2005年度）');
+    expect(record?.outOfDistrictCondition).toContain('十津川');
   });
 
   it('gifuは平成30年度(2018年度)に旧6学区制(岐阜/西濃/美濃/可茂/東濃/飛騨)を廃止した(教育委員会会議録で一次確認)', () => {
