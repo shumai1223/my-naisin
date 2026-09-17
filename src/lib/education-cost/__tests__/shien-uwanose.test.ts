@@ -236,6 +236,19 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(0);
   });
 
+  it('niigataは「算定基準額」という技術的基準を用い、全額軽減分(全日制)で年額396,000円を返す', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'niigata');
+    expect(record?.schemeType).toBe('school-subsidy');
+    expect(record?.note).toContain('算定基準額');
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'niigata',
+        '授業料軽減補助・全額軽減分・全日制（生活保護対象者、または算定基準額51,300円未満）'
+      )
+    ).toBe(396000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
