@@ -200,9 +200,19 @@ WebFetchで全文確認し、県北/県央/県南の3学区制(対象は全日�
 
 T-Y15は35県実装完了(abolished型18県+districted型17県)。
 
+**2026-09-17追記: fukuoka(36県目・districted型)を実装完了した**。公式ページ
+(`pref.fukuoka.lg.jp/site/kyouiku/tuugakukuikikisoku.html`・令和8年4月1日施行)をWebFetchで
+全文確認し、第一〜第十三学区の13学区中学区制(対象は全日制普通科のコース制・単位制除くのみ)を
+転記。学区外出願は「特にやむを得ない事由」による教育長許可制(第4条・第5条)。★福岡市・
+久留米市は市域が複数学区(第四/五/六学区・第七/八/十学区)にまたがり中学校区単位で分割されて
+いるため、詳細な区割りまでは今回未確認と正直に記録した(Y-0)。
+
+T-Y15は36県実装完了(abolished型18県+districted型18県)。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y15の36県目（残るstructured確定県: ehime/fukuoka/nagasaki）のデータ層実装に進む
+1. T-Y15の37県目（残るstructured確定県: ehime/nagasaki）のデータ層実装に進む
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
-   yamanashi/gunma(63校)/nagano(20校)/miyagi(3校)の7県実装済み。詳細はT-Y14タスクファイル参照）
+   yamanashi/gunma(63校)/nagano(20校)/miyagi(21レコード)の7県実装済み。詳細はT-Y14タスク
+   ファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-districts/index.ts`を確認し二重実装を
    避けること
