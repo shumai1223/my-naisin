@@ -746,12 +746,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
-  it('gifu: schoolsは頁1完全収録+頁2の学校番号19〜36(36校218レコード)を収録している(頁2残り・頁3〜4は未収録)', () => {
+  it('gifu: schoolsは頁1・頁2を完全収録している(42校260レコード・頁3〜4は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
-    expect(record?.schools?.length).toBe(218);
+    expect(record?.schools?.length).toBe(260);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(36);
+    expect(schoolNames.size).toBe(42);
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+    expect(record?.coverageNote).toContain('頁3〜4は未着手');
+  });
+
+  it('gifu: 加茂農林は5学科で募集割合が学科ごとに異なる(25%/30%が混在)独自検査を持つ', () => {
+    const shokuhin = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '加茂農林', '第一次選抜(独自検査)', '食品科学');
+    const engei = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '加茂農林', '第一次選抜(独自検査)', '園芸流通');
+    expect(shokuhin?.ratioType).toBe('募集人員の25%');
+    expect(engei?.ratioType).toBe('募集人員の30%');
   });
 
   it('gifu: 関有知(普通)は独自検査で面接と自己表現の両方を実施する(生活デザインは独自検査なし)', () => {
