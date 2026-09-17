@@ -746,12 +746,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
-  it('gifu: schoolsは頁1(学校番号1〜18・18校121レコード)を完全収録している(頁2〜4は未収録)', () => {
+  it('gifu: schoolsは頁1完全収録+頁2の学校番号19〜24(24校145レコード)を収録している(頁2残り・頁3〜4は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
-    expect(record?.schools?.length).toBe(121);
+    expect(record?.schools?.length).toBe(145);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(18);
+    expect(schoolNames.size).toBe(24);
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+  });
+
+  it('gifu: 大垣東は普通のみ独自検査(実技検査)があり理数には独自検査がない', () => {
+    const futsuu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '大垣東', '第一次選抜(独自検査)', '普通');
+    const risu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '大垣東', '第一次選抜(独自検査)', '理数');
+    expect(futsuu?.note).toContain('実技検査');
+    expect(risu).toBeNull();
   });
 
   it('gifu: 岐阜工業(航空・機械工学科群)は独自検査区分Iが実技検査・区分IIが面接という異なる検査内容を持つ', () => {
