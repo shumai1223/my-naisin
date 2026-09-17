@@ -147,7 +147,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/ehime/fukuoka/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kumamoto/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/ehime/fukuoka/fukushima/hokkaido/hyogo/iwate/kagawa/kagoshima/kumamoto/kyoto/mie/nagano/nagasaki/okayama/okinawa/tokushima/yamagataを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
@@ -163,11 +163,21 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'kyoto',
       'mie',
       'nagano',
+      'nagasaki',
       'okayama',
       'okinawa',
       'tokushima',
       'yamagata',
     ]);
+  });
+
+  it('nagasakiは districted で県南/県央/島原/県北/五島/壱岐/対馬の7学区を持ち、学区外は定員7%以内(80%未満校は超過可)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'nagasaki');
+    expect(record?.systemType).toBe('districted');
+    expect(record?.districts?.length).toBe(7);
+    expect(record?.districts?.map((d) => d.name)).toEqual(['県南学区', '県央学区', '島原学区', '県北学区', '五島学区', '壱岐学区', '対馬学区']);
+    expect(record?.outOfDistrictCondition).toContain('7%');
+    expect(record?.outOfDistrictCondition).toContain('80%');
   });
 
   it('ehimeは districted で東予/中予/南予の3学区を持ち、学区外は5%(教育長裁量で最大30%)まで', () => {
