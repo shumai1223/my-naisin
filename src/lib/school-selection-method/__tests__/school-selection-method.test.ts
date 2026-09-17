@@ -1019,12 +1019,24 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kawashima).toBeNull();
   });
 
-  it('tokushima: schoolsは頁8-11(育成型選抜1-4頁目・28校80レコード)+頁13(一般選抜傾斜配点・7校8学科)の計87レコードを収録している(頁12の育成型選抜残りは未収録)', () => {
+  it('tokushima: 池田は普通・理数(探究)で育成型選抜の配点等を共有しつつ実績重視枠の運動部指定競技は普通のみ持つ(頁12)', () => {
+    const futsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '池田', '育成型選抜(実績重視枠)', '普通');
+    const risu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '池田', '育成型選抜(実績重視枠)', '理数(探究)');
+    expect(futsu?.note).toContain('男子レスリング・女子レスリング');
+    expect(risu?.note).toContain('運動部指定競技:ー');
+  });
+
+  it('tokushima: 池田・三好は育成型選抜の実績重視枠が実施されない単一枠のみの学校である(頁12)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '池田・三好', '育成型選抜(実績重視枠)', '農業(食農科学環境資源)');
+    expect(record).toBeNull();
+  });
+
+  it('tokushima: schoolsは育成型選抜実施概要一覧を全5頁(頁8-12・32校91レコード)完全収録し、頁13(一般選抜傾斜配点・7校8学科)と合わせて計98レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima');
-    expect(record?.schools?.length).toBe(87);
+    expect(record?.schools?.length).toBe(98);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(28);
-    expect(record?.coverageNote).toContain('育成型選抜');
+    expect(schoolNames.size).toBe(32);
+    expect(record?.coverageNote).toContain('全5頁完全収録');
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
