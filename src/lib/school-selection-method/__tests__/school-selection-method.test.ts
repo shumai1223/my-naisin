@@ -702,15 +702,29 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スポーツ科学科');
   });
 
-  it('aomori: schoolsは東青地区・西北五地区・中弘南黒地区・上十三地区の分割版を完全収録している(32校129レコード・他2地区は未収録)', () => {
+  it('aomori: schoolsは東青地区・西北五地区・中弘南黒地区・上十三地区・下北むつ地区の分割版を完全収録している(36校144レコード・他1地区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori');
-    expect(record?.schools?.length).toBe(129);
+    expect(record?.schools?.length).toBe(144);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(32);
+    expect(schoolNames.size).toBe(36);
     expect(record?.coverageNote).toContain('東青地区');
     expect(record?.coverageNote).toContain('西北五地区');
     expect(record?.coverageNote).toContain('中弘南黒地区');
     expect(record?.coverageNote).toContain('上十三地区');
+    expect(record?.coverageNote).toContain('下北むつ地区');
+  });
+
+  it('aomori: 田名部は全日制(普通科)と定時制単位制(普通科(定時制・単位制))の同名2校を別学科名で区別して収録している', () => {
+    const zennichi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '田名部', '一般選抜', '普通科');
+    const teiji = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '田名部', '特色化選抜', '普通科(定時制・単位制)');
+    expect(zennichi?.note).toContain('下北むつ地区分割版PDF');
+    expect(teiji?.note).toContain('仕事を続けながら学びたい');
+  });
+
+  it('aomori: 大間(普通科)は「全国からの生徒募集」導入校で群分け基準が90%(他地区の一般選抜と異なる)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '大間', '一般選抜', '普通科');
+    expect(record?.note).toContain('全国からの生徒募集');
+    expect(record?.note).toContain('90%以内');
   });
 
   it('aomori: 三沢は全日制(普通科)と定時制単位制(普通科(定時制・単位制))の同名2校を別学科名で区別して収録している', () => {
