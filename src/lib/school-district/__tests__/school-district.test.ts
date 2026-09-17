@@ -10,9 +10,15 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'tottori')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでakita/aomori/fukui/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/nara/niigata/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchi/yamanashiを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでakita/aomori/fukui/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/miyazaki/nara/niigata/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchi/yamanashiを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['akita', 'aomori', 'fukui', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'nara', 'niigata', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi', 'yamanashi']);
+    expect(abolished).toEqual(['akita', 'aomori', 'fukui', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'miyazaki', 'nara', 'niigata', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi', 'yamanashi']);
+  });
+
+  it('miyazakiは平成20年度(2008年度)に学区を廃止した(岩手県比較表で一次確認・niigataと同一行)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'miyazaki');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.abolishedFiscalYear).toBe('平成20年度（2008年度）');
   });
 
   it('yamanashiは平成19年度(2007年度)に学区を廃止した(岩手県比較表で一次確認・総合選抜制も同時廃止)', () => {
