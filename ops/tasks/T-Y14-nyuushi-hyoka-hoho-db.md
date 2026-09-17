@@ -574,3 +574,33 @@ green確認済み（commit fbe71b9・ローカルのみ・push頻度制限ルー
    fukushima/shizuoka/hiroshima/yamaguchi/tokushima）
 6. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
    二重実装を避けること
+
+## 追記35 2026-09-18: aomori下北むつ地区を完全収録(5地区目/全6地区)
+
+田名部(全日制+定時制単位制の2レコード群)/大湊/大間/むつ工業の5校15レコードを
+下北むつ地区分割版PDF(`R08motomeru_simokitamutu.pdf`・全5頁・頁番号44-47,63で
+非連続=全体版PDFからの抽出のため)から追加。curl -k(TLS回避)でダウンロード→
+pdftoppm 150dpiでPNG化→Read tool目視確認の定型手順で完了。
+
+特記事項:
+- 大間高等学校は「全国からの生徒募集」導入校(県外募集の明記あり)。一般選抜の
+  群分け基準が「募集人員の90%以内」(東青地区の青森等は同じく90%または100%と
+  学校により異なっており、大間固有の値ではなく既存パターンの一種)
+- 田名部高等学校は三沢(上十三地区)と同型の全日制/定時制単位制の同名2校パターン
+  (departmentで区別)。定時制は「仕事を続けながら学びたいという強い意志を持った
+  生徒」という特色化選抜固有の追加要件を持つ
+
+aomoriは32校129レコード→**36校144レコード**に増加。tsc0/jest118(該当ファイル)/
+jest8023(フルスイート)全green。commit 30b0009(未push)。
+
+残り1地区: 三八地区(八戸市周辺)のみ未着手。着手すれば青森県のT-Y14が完全収録
+(全6地区)となる。
+
+次回セッションが選ぶべきこと(更新):
+1. aomori三八地区(残り最後の1地区・完了間近なので優先度高)
+2. gifu頁3-4(未着手)
+3. okayama頁3残り(岡山御津/倉敷天城/倉敷中央の3校・結合セル要再挑戦)+頁4-7
+4. hiroshima再挑戦(300dpi+Pillow技法)
+5. 未着手7県(tokyo/hokkaido/fukushima/shizuoka/hiroshima/yamaguchi/tokushima)
+6. T-Y13へ戻る場合: iwateの一次資料特定(保留中)、または新規県(yamagata/ishikawa/
+   shiga/shimane等)
