@@ -7,12 +7,19 @@ import { SCHOOL_DISTRICT_BY_PREFECTURE } from '@/data/school-districts';
 
 describe('T-Y15 学区（通学区域）DB', () => {
   it('getSchoolDistrictは未登録県にundefinedを返す', () => {
-    expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
+    expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'niigata')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/nara/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでakita/aomori/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/nara/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'nara', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+    expect(abolished).toEqual(['akita', 'aomori', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'nara', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+  });
+
+  it('akitaは平成17年度(2005年度)に3学区制を廃止した(岩手県比較表で一次確認・学区外枠なしが特徴)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.abolishedFiscalYear).toBe('平成17年度（2005年度）');
+    expect(record?.outOfDistrictCondition).toContain('専門学科');
   });
 
   it('naraは平成17年度(2005年度)に北部/南部2学区制を廃止した(岩手県比較表で一次確認)', () => {
@@ -145,7 +152,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
   });
 
   it('hasDistrictSystemは未登録県にnullを返す', () => {
-    expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeNull();
+    expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'niigata')).toBeNull();
   });
 
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
