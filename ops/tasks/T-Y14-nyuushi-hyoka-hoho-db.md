@@ -450,13 +450,24 @@ aomori.tsは929行まで拡大(osaka.tsの1128行にはまだ余裕あり)。tsc
 岡山東商業もビジネス創造・情報ビジネスがくくり募集。累計13校29学科67レコード。tsc実exit0・
 jest101件green確認済み（commit 4458e82・ローカルのみ・push頻度制限ルールに従い保留中）。
 
+**2026-09-18追記28（gifu着手・12県目）: 頁1の学校番号1〜7(岐阜/岐阜北/長良/岐山/加納/羽島北/
+岐阜総合学園)7校24レコードを実装した**。gifuの資料は他県と違うマトリクス形式(学校×学科の行、
+選抜段階×検査種別の列)のため、selectionCategoryを'第一次選抜(標準検査)'/'第一次選抜(独自検査)'/
+'第二次選抜'の3区分とし、同一学科に複数の独自検査区分がある場合(岐阜総合学園=区分I 29.5%/
+区分II 0.5%)は'第一次選抜(独自検査区分I)'のようにさらに分割する設計を新設した。加納の音楽科・
+美術科は実技検査を実施し、表脚注により第1・第2志望の組み合わせ(音楽↔美術)が禁止される珍しい
+ケースを発見。公表時点での最新版が令和9年度(2027年度・次年度)のため他県の令和8年度資料とは
+対象年度が1年ずれる点をheader/noteに明記。tsc実exit0・jest105件green確認済み
+（commit 509eba1・ローカルのみ・push頻度制限ルールに従い保留中）。
+
 **次回セッションが選ぶべきこと**:
-1. okayamaの続き（頁3〜7は完全未着手。頁2までの手法[300dpi+Pillowクロップ]をそのまま使える）
-2. またはaomoriの続き（残り2地区[下北むつ/三八]。URLパターンは`R08motomeru_<地区名ローマ字>.pdf`。
+1. gifuの続き（頁1残り[岐阜城北以降、学校番号8〜18]、または頁2〜4）
+2. またはokayamaの続き（頁3〜7は完全未着手。頁2までの手法[300dpi+Pillowクロップ]をそのまま使える）
+3. またはaomoriの続き（残り2地区[下北むつ/三八]。URLパターンは`R08motomeru_<地区名ローマ字>.pdf`。
    下北むつ=`simokitamutu`、三八=`sanpachi`）
-3. またはhiroshimaへのリベンジ（300dpi等でより高解像度で全校一覧の点数マトリクス表(頁3〜)を
+4. またはhiroshimaへのリベンジ（300dpi等でより高解像度で全校一覧の点数マトリクス表(頁3〜)を
    再確認し、Y-0を満たせる精度で読み取れるか試す）
-4. またはkochi/miyagiの続き、またはT-Y14の12県目（残るstructured確定県: tokyo/hokkaido/
-   fukushima/gifu/shizuoka/hiroshima/yamaguchi/tokushima）
-5. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
+5. またはkochi/miyagiの続き、またはT-Y14の13県目（残るstructured確定県: tokyo/hokkaido/
+   fukushima/shizuoka/hiroshima/yamaguchi/tokushima）
+6. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
    二重実装を避けること
