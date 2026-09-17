@@ -672,14 +672,27 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スポーツ科学科');
   });
 
-  it('aomori: schoolsは東青地区・西北五地区・中弘南黒地区の分割版を完全収録している(23校93レコード・他3地区は未収録)', () => {
+  it('aomori: schoolsは東青地区・西北五地区・中弘南黒地区・上十三地区の分割版を完全収録している(32校129レコード・他2地区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori');
-    expect(record?.schools?.length).toBe(93);
+    expect(record?.schools?.length).toBe(129);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(23);
+    expect(schoolNames.size).toBe(32);
     expect(record?.coverageNote).toContain('東青地区');
     expect(record?.coverageNote).toContain('西北五地区');
     expect(record?.coverageNote).toContain('中弘南黒地区');
+    expect(record?.coverageNote).toContain('上十三地区');
+  });
+
+  it('aomori: 三沢は全日制(普通科)と定時制単位制(普通科(定時制・単位制))の同名2校を別学科名で区別して収録している', () => {
+    const zennichi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '三沢', '一般選抜', '普通科');
+    const teiji = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '三沢', '一般選抜', '普通科(定時制・単位制)');
+    expect(zennichi?.note).not.toContain('単位制');
+    expect(teiji?.note).toContain('単位制');
+  });
+
+  it('aomori: 三本木農業恵拓(普通科)の調査書は1〜3学年で傾斜する珍しい配点方式(1倍・2倍・3倍)を採る', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '三本木農業恵拓', '特色化選抜', '普通科');
+    expect(record?.note).toContain('3学年合計の3倍');
   });
 
   it('aomori: 黒石(情報デザイン科)は実技検査(手の描画)を実施する', () => {
