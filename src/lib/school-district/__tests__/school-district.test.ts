@@ -132,7 +132,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukushima/hokkaido/hyogo/kagawa/kagoshima/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukushima/hokkaido/hyogo/kagawa/kagoshima/kyoto/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
@@ -141,6 +141,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'hyogo',
       'kagawa',
       'kagoshima',
+      'kyoto',
       'mie',
       'nagano',
       'okayama',
@@ -148,6 +149,20 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'tokushima',
       'yamagata',
     ]);
+  });
+
+  it('kyotoは districted で全日制普通科(単位制除く)のみ5学区(通学圏)を持つ(専門学科・総合学科・定通は府全域)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'kyoto');
+    expect(record?.districts?.length).toBe(5);
+    expect(record?.districts?.map((d) => d.name)).toEqual([
+      '京都市・乙訓通学圏',
+      '山城通学圏',
+      '口丹通学圏',
+      '中丹通学圏',
+      '丹後通学圏',
+    ]);
+    expect(record?.outOfDistrictCondition).toContain('普通科');
+    expect(record?.outOfDistrictCondition).toContain('30');
   });
 
   it('fukushimaは districted で普通科8学区(県北/県中/県南/耶麻/会津/相馬/双葉/いわき)を持つ(それ以外の学科は県下一円)', () => {
