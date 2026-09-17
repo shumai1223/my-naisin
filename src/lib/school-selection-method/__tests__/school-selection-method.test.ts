@@ -641,12 +641,29 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1の8校28レコードを完全収録している(頁2〜7は未収録)', () => {
+  it('okayama: schoolsは頁1+頁2(13校67レコード)を完全収録している(頁3〜7は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(28);
+    expect(record?.schools?.length).toBe(67);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(8);
+    expect(schoolNames.size).toBe(13);
     expect(record?.coverageNote).toContain('岡山一宮');
+    expect(record?.coverageNote).toContain('興陽');
+  });
+
+  it('okayama: 東岡山工業は機械・電子機械のくくり募集が結合セルで共通のため同一内容が複製されている(電気・設備システム・工業化学は一般入学者選抜なし)', () => {
+    const kikai = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '東岡山工業', '一般入学者選抜', '機械');
+    const denshi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '東岡山工業', '一般入学者選抜', '電子機械');
+    const denki = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '東岡山工業', '一般入学者選抜', '電気');
+    expect(kikai?.note).toContain('くくり募集○');
+    expect(denshi?.note).toBe(kikai?.note);
+    expect(denki).toBeNull();
+  });
+
+  it('okayama: 興陽(4学科)は特別入学者選抜で同一の重視する実績(野球・サッカー等)を共有する', () => {
+    const nougyou = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '興陽', '特別入学者選抜', '農業');
+    const life = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '興陽', '特別入学者選抜', 'ライフデザイン');
+    expect(nougyou?.note).toContain('ソフトテニス');
+    expect(life?.note).toContain('ソフトテニス');
   });
 
   it('okayama: 岡山一宮(理数)は特別入学者選抜で数学検定準2級以上又は英語検定準2級以上合格を重視する実績としている', () => {
