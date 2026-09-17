@@ -219,10 +219,23 @@ T-Y15は36県実装完了(abolished型18県+districted型18県)。
 
 T-Y15は37県実装完了(abolished型18県+districted型19県)。
 
+**2026-09-17追記: nagasaki(38県目・districted型)を実装完了した**。★baselineに記録していた
+URL(`shared/uploads/2024/04/1713493377.pdf`)は404で消滅済みと判明したため、県教育委員会
+サイトを辿り令和8年度入学者選抜実施要領の最新付録PDF(`uploads/2025/09/1757565098.pdf`・全9頁)
+から規則抜粋を再発見(この種のリンク切れは次回以降も起こりうるので、baselineのURLが404なら
+同様に県教委サイトの「入学者選抜実施要領」ページを辿って再検索するとよい)。県南/県央/島原/
+県北/五島/壱岐/対馬の7学区・学区外7%枠(直近3年入学者数が定員80%未満の高校は超過可)・同一
+市内は学区にかかわらず志願可という緩和規定を転記。
+
+T-Y15は38県実装完了(abolished型18県+districted型20県)。structured確定の残りはakita/
+niigata/fukui/yamanashi/miyazaki(いずれもbaseline調査でuncertain=一次資料未発見)と
+gunma/gifu/nara(structured見込み=複数の三次情報で示唆されるが一次資料での確認は未了)のみ。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y15の38県目（残るstructured確定県: nagasaki）のデータ層実装に進む。nagasakiは公式PDF
-   「長崎県立高等学校の通学区域に関する規則」(`pref.nagasaki.jp/shared/uploads/2024/04/
-   1713493377.pdf`・昭和31年制定)が既に発見済みで次に着手しやすい
+1. T-Y15の39県目として、gunma(2021年度入試から全学科が全県一学区化との複数三次情報あり)・
+   gifu(全県一学区だが2017年入試までは6学区制だったと判明・一次資料で移行年を確認する必要)・
+   nara(北部/南部2学区制・十津川村等一部地域は小学区制)のいずれかを一次資料で裏取りしてから
+   実装に進む(baselineの`ops/baselines/t-y15-school-district-survey-2026-09.md`該当行を参照)
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
    yamanashi/gunma(63校)/nagano(20校)/miyagi(21レコード)の7県実装済み。詳細はT-Y14タスク
    ファイル参照）
