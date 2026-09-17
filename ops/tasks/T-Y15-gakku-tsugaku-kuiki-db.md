@@ -187,11 +187,22 @@ tsc実exit0・関連jest38件green確認済み(commit 99b5c52・ローカルの�
 
 **2026-09-17追記: fukushima(30県目)・kyoto(31県目)・shimane(32県目)・yamaguchi(33県目)・
 iwate(34県目)を実装完了した**（詳細はdocs/worklog/2026-09-17.mdの19:33以前の各エントリ参照）。
-T-Y15は34県実装完了(abolished型18県+districted型16県)。
+
+**2026-09-17追記: kumamoto(35県目・districted型)を実装完了した**。公式規則
+(`www1.g-reiki.net/pref.kumamoto/reiki_honbun/q401RG00001121.html`・最終改正令和4年7月22日)を
+WebFetchで全文確認し、県北/県央/県南の3学区制(対象は全日制普通科のみ・専門学科/総合学科/
+普通科コース/湧心館高普通科/定時制は県下全域)を転記。★2010年度の旧8学区→現行3学区再編と
+学区外6.5%→13%拡大はWebSearchの二次資料でのみ確認でき規則本文(一次資料)には明記が見当たら
+なかったため、その旨を正直に記録した(Y-0)。★環境の罠(新規): 検索結果に出てきた
+`kyouiku.higo.ed.jp`はDNS解決不可(ENOTFOUND)、最初に試した`www1.g-reiki.net/kumamoto/...`
+(pref.なし)はHTTP500だった。WebSearchで正しいドメイン(`pref.kumamoto`を含むパス)を
+見つけ直して解決(他のg-reiki系URLで詰まったら同様にWebSearchでドメイン変種を探すとよい)。
+
+T-Y15は35県実装完了(abolished型18県+districted型17県)。
 
 **次回セッションが選ぶべきこと**:
-1. T-Y15の35県目（残るstructured確定県: ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む
+1. T-Y15の36県目（残るstructured確定県: ehime/fukuoka/nagasaki）のデータ層実装に進む
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
-   yamanashi/gunma(63校)/nagano(20校)の6県実装済み。詳細はT-Y14タスクファイル参照）
+   yamanashi/gunma(63校)/nagano(20校)/miyagi(3校)の7県実装済み。詳細はT-Y14タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-districts/index.ts`を確認し二重実装を
    避けること
