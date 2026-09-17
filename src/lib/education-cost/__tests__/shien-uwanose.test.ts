@@ -296,6 +296,30 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(amount).toBe(0);
   });
 
+  it('fukushimaは授業料支援で国の就学支援金との合算上限額(生活保護546,000円/年収450万円以下471,000円)を返す(saitama/hiroshimaと同型の合算値方式)', () => {
+    const seikatsuhogo = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'fukushima',
+      '生活保護世帯（授業料支援・支給上限額）'
+    );
+    const nenshu450 = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'fukushima',
+      '生活保護世帯を除く年収450万円以下の世帯等（被災世帯・家計急変世帯を含む・授業料支援・支給上限額）'
+    );
+    expect(seikatsuhogo).toBe(546000);
+    expect(nenshu450).toBe(471000);
+  });
+
+  it('fukushimaは入学料支援(生活保護・非課税世帯50,000円/年収590万円未満25,000円)を授業料支援と別建てで持つ', () => {
+    const amount = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'fukushima',
+      '入学料支援（生活保護・非課税世帯・私立高等学校新入生）'
+    );
+    expect(amount).toBe(50000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
