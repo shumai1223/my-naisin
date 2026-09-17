@@ -210,6 +210,13 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(880200);
   });
 
+  it('chibaの従来の授業料減免制度は令和8年度から廃止され、経過措置のみが令和8年度新入生・在校生に限り令和10年度まで続く', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'chiba');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(record?.note).toContain('廃止');
+    expect(record?.tiers?.[0].note).toContain('令和10年度');
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
