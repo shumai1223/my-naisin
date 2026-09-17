@@ -10,9 +10,16 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+    expect(abolished).toEqual(['aomori', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+  });
+
+  it('gifuは平成30年度(2018年度)に旧6学区制(岐阜/西濃/美濃/可茂/東濃/飛騨)を廃止した(教育委員会会議録で一次確認)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'gifu');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.abolishedFiscalYear).toBe('平成30年度（2018年度）');
+    expect(record?.outOfDistrictCondition).toContain('西濃');
   });
 
   it('gunmaは平成19年度(2007年度)に全県一区化した(一次資料は令和3年度実施要項の資料1・二次資料の2021年説とは食い違う)', () => {
