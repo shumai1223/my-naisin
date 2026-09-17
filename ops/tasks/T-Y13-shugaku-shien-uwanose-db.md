@@ -118,3 +118,29 @@
 学校補助型）があることも発見**し、データ層実装時は`schemeType`フィールドでの区別が必須。
 次回セッションは同ファイル末尾の「最終集計」「データ層実装前に必ず対応すべき設計課題」の
 指示に従うこと。
+
+## データ層実装進捗（2026-09-17〜18）
+
+`src/data/shien-uwanose/<pref>.ts`（型・純関数は`src/lib/education-cost/shien-uwanose.ts`）へ
+実装中。**2026-09-18時点で20県実装済み**: tokyo/osaka/mie/yamanashi/nagasaki/hyogo/kyoto/
+kanagawa/aichi/oita/hiroshima/tottori/yamaguchi/nara/gunma/tochigi/ibaraki/fukui/okayama/
+hokkaido/saitama。
+
+**2026-09-18追記(saitama・20県目)**: 埼玉県公式リーフレットPDF(令和8年度)で「補助の概要」表
+(モデル世帯・目安年収別の入学金/施設費等納付金/授業料の合計額)を確認。hiroshimaと同型の
+「国の就学支援金との合算値をそのまま転記」方式(annualAmountJpyに合計額を入れる)を踏襲。
+★発見: 基準②(目安年収約500〜609万円未満)の2〜3年生は合計457,200円=就学支援金のみと同額で、
+県独自上乗せは1年生の入学金補助(10万円)のみに限定される(施設費等・授業料への上乗せは
+基準①[約500万円未満]のみが対象)。tsc実exit0・jest28件green。
+
+**次回セッションが選ぶべきこと**:
+1. 未実装の残り19県(direct型13県: chiba/fukuoka/shizuoka/iwate/miyagi/yamagata/niigata/
+   toyama/ishikawa/shiga/shimane/saga、school-subsidy型4県: nagano/tokushima/kagawa/kochi、
+   見込み1県: kagoshima、要再確認2県: wakayama/ehime)から一次資料(WebFetch/curl+pdftoppm)で
+   裏取りしながら実装を進める。chiba(`pref.chiba.lg.jp/gakuji/shiritsutou/gakuhi-josei/
+   genmen/genmen.html`)は既にsurveyで公式ページを発見済みで着手しやすい
+2. school-subsidy型4県は家庭への直接給付額が無いため、`tiers`の意味付け(annualAmountJpyを
+   「学校への補助上限額」とする設計)を最初の1県実装時に固め、他3県はそれに揃えること
+3. wakayama/ehimeは「本当になしかもしれない」候補のため、優先的に一次資料へ当たり
+   `confirmed-none`（なし確認済み）に倒すか`confirmed-yes`を発見するかを確定させる
+4. 着手前に`src/data/shien-uwanose/index.ts`を確認し二重実装を避けること
