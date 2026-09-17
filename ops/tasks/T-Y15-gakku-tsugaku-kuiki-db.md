@@ -254,12 +254,25 @@ T-Y15は39県実装完了(abolished型19県+districted型20県)。
 
 T-Y15は40県実装完了(abolished型20県+districted型20県)。
 
+**2026-09-17追記: nara(41県目・abolished型)を実装完了した**。岩手県比較表（資料2「高等学校の
+学区見直しにおける全国都道府県の状況」・岩手県財政課調べ・`pref.iwate.jp/_res/projects/
+default_project/_page_/001/059/502/shiryou2_7gakkuminaoshijoukyou.pdf`）を再度curl+pdftoppmで
+確認したところ、表に「H17　青森、秋田、茨城、神奈川、石川、奈良」と明記されており一次確認
+できた（Wikipedia「奈良県高等学校一覧」の2005年度説とも整合）。★副産物として、同じ表に
+「H19　群馬、山梨、鳥取」とあり、前回gunmaで一次資料(群馬県立高等学校管理規則・施行H19年
+1月1日)から導出した廃止年度=平成19年度が、この独立した第三の資料でも裏付けられた（施行日
+と「実施年度」表記のズレ＝施行日が年度途中でも、最初に適用される入学者選抜の年度で表記される
+という解釈が正しいと確認できた）。廃止前は北部/南部2学区(南部は十津川高校のみの小学区)だった
+ことは二次資料で確認できたが区割り詳細は未確認。
+
+T-Y15は41県実装完了(abolished型21県+districted型20県)。structured確定の残りはakita/
+niigata/fukui/yamanashi/miyazaki(baseline調査時点でいずれもuncertain=一次資料未発見)のみ。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y15の41県目として、nara(北部/南部2学区制・十津川村等一部地域は小学区制)を一次資料で
-   裏取りしてから実装に進む(baselineの`ops/baselines/t-y15-school-district-survey-2026-09.md`
-   該当行を参照。gunma/gifuと同様、県教育委員会サイトの「入学者選抜実施要項」ページや
-   「教育委員会会議録」を辿ると一次資料が見つかりやすい)。akita/niigata/fukui/yamanashi/
-   miyazakiはbaseline調査時点でuncertain(一次資料未発見)のため、他が尽きてから着手する
+1. T-Y15の42県目として、akita/niigata/fukui/yamanashi/miyazakiのいずれかを一次資料で
+   裏取りする。gunma/gifu/naraで確立した手順（①岩手県比較表で実施年度を確認→②県教育委員会
+   サイトの「入学者選抜実施要項」ページや「教育委員会会議録」を辿って一次資料を探す→③見つから
+   なければWikipedia等の二次資料に切り替え、その旨をnoteに明記）をそのまま踏襲するとよい
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
    yamanashi/gunma(63校)/nagano(20校)/miyagi(21レコード)の7県実装済み。詳細はT-Y14タスク
    ファイル参照）
