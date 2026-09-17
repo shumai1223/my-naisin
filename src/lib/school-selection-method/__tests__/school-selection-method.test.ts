@@ -611,6 +611,26 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('全学科');
   });
 
+  it('kochi: 高知小津(理数科)はB日程でも学力検査の数学・理科が1.5倍の傾斜配点と記録されている', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi', '高知小津', 'B日程');
+    expect(record?.note).toContain('1.5倍');
+  });
+
+  it('kochi: 須崎総合はB日程の面接がA日程より長い(6分→10分・表中最大の日程差)', () => {
+    const aNittei = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi', '須崎総合', 'A日程');
+    const bNittei = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi', '須崎総合', 'B日程');
+    expect(aNittei?.note).toContain('6分間');
+    expect(bNittei?.note).toContain('10分間');
+  });
+
+  it('kochi: schoolsは全日制32行(分校2件含む)64レコードを収録している(他課程は未収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi');
+    expect(record?.schools?.length).toBe(64);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(30);
+    expect(record?.coverageNote).toContain('定時制');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {

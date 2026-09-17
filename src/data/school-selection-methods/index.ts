@@ -7,6 +7,7 @@ import { GUNMA_SCHOOL_SELECTION_METHOD } from './gunma';
 import { NAGANO_SCHOOL_SELECTION_METHOD } from './nagano';
 import { MIYAGI_SCHOOL_SELECTION_METHOD } from './miyagi';
 import { KAGOSHIMA_SCHOOL_SELECTION_METHOD } from './kagoshima';
+import { KOCHI_SCHOOL_SELECTION_METHOD } from './kochi';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -19,4 +20,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   nagano: NAGANO_SCHOOL_SELECTION_METHOD,
   miyagi: MIYAGI_SCHOOL_SELECTION_METHOD,
   kagoshima: KAGOSHIMA_SCHOOL_SELECTION_METHOD,
+  kochi: KOCHI_SCHOOL_SELECTION_METHOD,
 };
