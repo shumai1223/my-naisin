@@ -278,6 +278,24 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(27000);
   });
 
+  it('yamagataは算定額154,500円未満区分で月額1,000円(年額12,000円)の県単上乗せを返す', () => {
+    const amount = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'yamagata',
+      '算定式による算出額（市町村民税課税標準額×6%－調整控除額）＜154,500円'
+    );
+    expect(amount).toBe(12000);
+  });
+
+  it('yamagataは算定額304,200円以上区分で県単上乗せが無い(0円)', () => {
+    const amount = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'yamagata',
+      '算定式による算出額≧304,200円'
+    );
+    expect(amount).toBe(0);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
