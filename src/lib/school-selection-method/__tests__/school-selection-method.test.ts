@@ -702,16 +702,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スポーツ科学科');
   });
 
-  it('aomori: schoolsは東青地区・西北五地区・中弘南黒地区・上十三地区・下北むつ地区の分割版を完全収録している(36校144レコード・他1地区は未収録)', () => {
+  it('aomori: schoolsは青森県内全6地区(東青・西北五・中弘南黒・上十三・下北むつ・三八)の分割版を完全収録している(46校180レコード)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori');
-    expect(record?.schools?.length).toBe(144);
+    expect(record?.schools?.length).toBe(180);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(36);
+    expect(schoolNames.size).toBe(46);
     expect(record?.coverageNote).toContain('東青地区');
     expect(record?.coverageNote).toContain('西北五地区');
     expect(record?.coverageNote).toContain('中弘南黒地区');
     expect(record?.coverageNote).toContain('上十三地区');
     expect(record?.coverageNote).toContain('下北むつ地区');
+    expect(record?.coverageNote).toContain('三八地区');
+    expect(record?.coverageNote).toContain('全6地区');
   });
 
   it('aomori: 田名部は全日制(普通科)と定時制単位制(普通科(定時制・単位制))の同名2校を別学科名で区別して収録している', () => {
@@ -725,6 +727,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '大間', '一般選抜', '普通科');
     expect(record?.note).toContain('全国からの生徒募集');
     expect(record?.note).toContain('90%以内');
+  });
+
+  it('aomori: 八戸西(スポーツ科学科)は実技検査を含む合計255点満点で群分けする(他校の一般選抜と異なる基準)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '八戸西', '一般選抜', 'スポーツ科学科');
+    expect(record?.note).toContain('三八地区分割版PDF');
+    expect(record?.note).toContain('255点満点');
+    expect(record?.ratioType).toContain('実技検査120点');
+  });
+
+  it('aomori: 八戸中央(普通科(定時制))は三八地区唯一の定時制単独校', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '八戸中央', '特色化選抜', '普通科(定時制)');
+    expect(record?.note).toContain('三八地区分割版PDF');
+    expect(record?.note).toContain('20点満点に換算');
   });
 
   it('aomori: 三沢は全日制(普通科)と定時制単位制(普通科(定時制・単位制))の同名2校を別学科名で区別して収録している', () => {
