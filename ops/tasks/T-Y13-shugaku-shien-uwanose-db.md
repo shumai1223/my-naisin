@@ -291,5 +291,28 @@ WebFetch要約はcurl+grep生HTML確認で全数値一致を確認済み。
 tsc実exit0・関連jest37件green・フルスイート549suites/8046tests green。
 
 次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/akita/nagano/gifu/wakayama/
-shimane/tokushima/kagawa/ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの14県
+shimane/tokushima/ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの13県
 (iwate/fukuoka/miyagi/ishikawa/shigaの5県は保留済み)。他は変更なし。
+
+## 追記 2026-09-18(続き5): akita保留・kagawa(28県目)完了
+
+**akita**: 「授業料・入学料について、県独自の軽減補助制度があります」という言及自体は
+複数ページ(いっしょにねっと/美の国あきたネット)で確認できたが、具体的な所得区分・金額を
+示す一次資料(要綱PDF等)に5回のWebSearch/WebFetchで到達できず保留(fukuoka/miyagi/
+ishikawa/shiga/iwateに次ぐ6件目の到達失敗)。次回は`pref.akita.lg.jp`のサイト内検索や
+「あきた私学魅力アップ支援事業費補助」(学校運営費補助・27063番)との関係を洗い直すか、
+教育庁総務課への言及先(018-860-5111)からページ構造を逆引きする必要がある。
+
+**kagawa(28県目)完了**: 「私立高等学校等の授業料等の負担軽減について」ページで、
+1節(授業料)は国の就学支援金(457,200円)の説明のみで香川県独自の上乗せは無いと確認
+(sagaと同型のconfirmed-yes・授業料上乗せ無し)。2節の入学金軽減補助のみ具体的な県独自
+金額を持つ(154,500円未満の課税標準額世帯で全日制50,000円/通信制15,000円)。同ページ
+5節の「家計急変世帯支援補助金」(月額28,000円)は私立中学校向けと明記されており高校とは
+別制度のため対象外と正しく判別(fukushimaの「就学支援」/「修学支援」ページ取り違えと同種の
+罠を、今回は本文の対象校種確認で未然に回避できた)。
+
+tsc実exit0・関連jest38件green・フルスイート549suites/8047tests green。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/nagano/gifu/wakayama/shimane/
+tokushima/ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの12県(iwate/fukuoka/miyagi/
+ishikawa/shiga/akitaの6県は保留済み)。他は変更なし。
