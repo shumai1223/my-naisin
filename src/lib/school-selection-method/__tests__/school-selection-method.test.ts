@@ -641,14 +641,33 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1+頁2+頁3の一部(17校80レコード)を収録している(頁3残り・頁4〜7は未収録)', () => {
+  it('okayama: schoolsは頁1+頁2+頁3を完全収録している(20校106レコード・頁4〜7は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(80);
+    expect(record?.schools?.length).toBe(106);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(17);
+    expect(schoolNames.size).toBe(20);
     expect(record?.coverageNote).toContain('岡山一宮');
     expect(record?.coverageNote).toContain('興陽');
     expect(record?.coverageNote).toContain('岡山南');
+    expect(record?.coverageNote).toContain('倉敷中央');
+  });
+
+  it('okayama: 岡山御津は6コースが特別入学者選抜(募集人員80%)とその他の選抜等「■」(フレックス制選抜20%)を共有する(頁3)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '岡山御津', '一般入学者選抜', '保育・福祉系列');
+    expect(record?.note).toContain('フレックス制');
+    expect(record?.note).toContain('20%');
+  });
+
+  it('okayama: 倉敷天城(理数)は隣接中学校からの進学者数を控除する特殊な募集人員算定式を持つ(頁3)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '倉敷天城', '特別入学者選抜', '理数');
+    expect(record?.note).toContain('倉敷天城中学校');
+    expect(record?.note).toContain('募集人員100%');
+  });
+
+  it('okayama: 倉敷中央は子どもコース・健康スポーツコース・家政・看護・福祉が重視する実績(スポーツ実績)を共有する(頁3)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '倉敷中央', '特別入学者選抜', '福祉');
+    expect(record?.note).toContain('ソフトボール');
+    expect(record?.note).toContain('5コースで共通');
   });
 
   it('okayama: 岡山南(国際経済)は特別入学者選抜で英語検定2級以上合格を重視する実績に追加している(他の4学科には無い条件)', () => {
