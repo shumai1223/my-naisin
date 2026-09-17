@@ -464,9 +464,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('4学科間で相互に第2志望');
   });
 
-  it('gunma: schoolsは133レコードを収録している(先頭53校・2〜3段階選抜)', () => {
+  it('gunma: 西邑楽(スポーツ科・特色型選抜①)は実技検査を含む4項目のratioTypeを持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma', '西邑楽', '特色型選抜①', 'スポーツ科');
+    expect(record?.ratioType).toBe('学力検査28%:面接等8%:調査書8%:実技検査56%');
+  });
+
+  it('gunma: schoolsは146レコードを収録している(先頭57校・2〜3段階選抜)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma');
-    expect(record?.schools?.length).toBe(133);
+    expect(record?.schools?.length).toBe(146);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
