@@ -283,6 +283,21 @@ jestで検出し訂正(過去のgunma/naganoと同型の教訓)。tsc実exit0・
 1. kagoshimaの続き（頁2の北薩学区・姶良伊佐学区から着手すると速い。頁2/3は既にpdftoppmで
    画像取得済み）、またはT-Y14の9県目（残るstructured確定県: tokyo/hokkaido/aomori/
    fukushima/gifu/shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi）のデータ層実装に進む
+
+**2026-09-17追記18（kagoshima続き）: 北薩学区(川内/川内商工/川薩清修館/薩摩中央/鶴翔/野田女子/
+出水/出水工業/出水商業)9校22レコード+姶良・伊佐学区(大口/伊佐農林/霧島/蒲生/加治木/加治木工業/
+隼人工業/国分/福山/国分中央)10校25レコードを頁2から追加し、4学区(鹿児島/南薩/北薩/姶良・伊佐)
+47校105レコードに拡大した**。加治木工業(機械科)は機械/電気/電子/工業化学/建築/土木の6学科間で
+推薦入試・学力検査を第3志望まで、第二次選抜は「全学科」で併願できる表中最大規模の併願範囲と
+判明(前回書いた「薩南工業4学科が最大」の記述を訂正)。★今回は事前に`node -e`でschoolName数・
+レコード数をコードから直接カウントしてから記述し、過去2回(gunma/nagano型)の見積もり誤りの
+教訓を反映して一発でjest green達成。tsc実exit0・jest78件green確認済み（commit fb78c61・
+ローカルのみ）。残り3学区(大隅/熊毛/大島)は未収録。
+
+**次回セッションが選ぶべきこと**:
+1. kagoshimaの続き（頁3の大隅学区・熊毛学区・大島学区。頁3は既にpdftoppmで画像取得済み）、
+   またはT-Y14の9県目（残るstructured確定県: tokyo/hokkaido/aomori/fukushima/gifu/
+   shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi）のデータ層実装に進む
 2. またはmiyagiの続き（頁27以降・偶数頁スキップに注意）
 3. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
    指定されている・2026-09-17時点で41県実装済み・詳細はT-Y15タスクファイル参照）
