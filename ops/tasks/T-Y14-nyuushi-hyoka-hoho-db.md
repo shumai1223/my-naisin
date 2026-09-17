@@ -272,10 +272,17 @@ jestで検出し訂正(過去のgunma/naganoと同型の教訓)。tsc実exit0・
 （commit 4b2412d・ローカルのみ）。全7学区中「鹿児島学区」のみで、残り6学区(南薩/北薩/姶良・
 伊佐/大隅/熊毛/大島)は未収録。
 
+**2026-09-17追記17（kagoshima続き）: 南薩学区(指宿/山川/頴娃/枕崎/鹿児島水産/加世田/加世田常潤/
+川辺/薩南工業/指宿商業・頁1下半分)の10校20レコードを追加し、鹿児島学区と合わせて28校58レコード
+とした**。薩南工業(機械科)は4学科間(機械/建築/情報技術/生活科学)で第4志望まで併願できる表中
+唯一の例と判明。★学校数の見積もり誤り(11校→実際は10校)をjestで再度検出し訂正(kagoshima着手
+時に続き2回連続で同型の教訓)。tsc実exit0・jest77件green確認済み（commit d8b205b・ローカル
+のみ）。残り5学区(北薩/姶良・伊佐/大隅/熊毛/大島)は未収録。
+
 **次回セッションが選ぶべきこと**:
-1. kagoshimaの続き（南薩学区以降・page1で既に画像取得済みの南薩学区から着手すると速い）、
-   またはT-Y14の9県目（残るstructured確定県: tokyo/hokkaido/aomori/fukushima/gifu/
-   shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi）のデータ層実装に進む
+1. kagoshimaの続き（頁2の北薩学区・姶良伊佐学区から着手すると速い。頁2/3は既にpdftoppmで
+   画像取得済み）、またはT-Y14の9県目（残るstructured確定県: tokyo/hokkaido/aomori/
+   fukushima/gifu/shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi）のデータ層実装に進む
 2. またはmiyagiの続き（頁27以降・偶数頁スキップに注意）
 3. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
    指定されている・2026-09-17時点で41県実装済み・詳細はT-Y15タスクファイル参照）
