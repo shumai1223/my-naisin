@@ -226,12 +226,25 @@ fukushima（各高等学校の選抜方法一覧・192頁・1校2頁の詳細プ
 関連jest64件green確認済み（commit 2d66899・ローカルのみ）。yamanashi(4県目)はこれで
 osaka/aichi/ibarakiに続き完了(gunmaと合わせ5県中4県が完了)。
 
+**2026-09-17追記13（nagano完了・6県目）: 第1通学区(北信地区)のみを実装完了した**
+（`r8-2-01.pdf`〜`r8-2-06.pdf`の計6分割PDFのうち1本目・20校38レコード）。長野県は
+「調査書:面接:学力検査:(作文):(実技検査)」の比重(%)を学校ごとに転記する方式で、
+gunma/yamanashiと同型のratioTypeコロン区切り運用で収録できた(型拡張不要)。全レコードで
+5項目合計=100%の自己検算を実施(全件一致)。飯山スポーツ科学=実技検査50%、長野西国際教養=
+作文30%、長野商業=観点別①②で異なる比重、を発見。第2〜6通学区は未収録とcoverageNoteに
+明記(Y-0)。★実装時の教訓（gunmaと同型の罠）: 1度目のコーディングで学校数を17校と見積もったが
+実装後にコードで数え直すと20校だったため訂正——見積もりでなく実データで数える原則を再確認。
+★環境の教訓: tscがハーネスの低メモリ監視で強制終了された後、修正(sourceフィールド欠落を検知)
+してNODE_OPTIONS=3072MBで再実行し実exit0を確認・jest68件green。commit待ち（データ+テスト+
+index配線・ローカルのみ・push頻度制限指示によりpush保留）。nagano(6県目)はこれで
+osaka/aichi/ibaraki/yamanashi/gunmaに続き完了。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y14の6県目（残るstructured確定県: tokyo/hokkaido/miyagi/
-   nagano/gifu/yamaguchi/kagoshima）のデータ層実装に進む（aomori/okayama/kochi/tokushima/
+1. T-Y14の7県目（残るstructured確定県: tokyo/hokkaido/miyagi/
+   gifu/yamaguchi/kagoshima）のデータ層実装に進む（aomori/okayama/kochi/tokushima/
    tochigi/mie/shiga/kagawa/ibaraki/shizuoka/wakayama/hiroshimaはT-Y15で使用済み。
-   yamanashi/gunma/osaka/aichi/ibarakiは実装済み）
+   yamanashi/gunma/osaka/aichi/ibaraki/naganoは実装済み）
 2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている・2026-09-17時点で27県実装済み・詳細はT-Y15タスクファイル参照）
+   指定されている・2026-09-17時点で33県実装済み・詳細はT-Y15タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
