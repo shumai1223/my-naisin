@@ -511,6 +511,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(schoolNames.has('利根商業')).toBe(true);
   });
 
+  it('nagano: 飯山(スポーツ科学・前期選抜)は面接なしで実技検査50%を含む割合を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '飯山', '前期選抜', 'スポーツ科学');
+    expect(record?.interviewRequired).toBe(false);
+    expect(record?.ratioType).toBe('調査書40%:学力検査10%:実技検査50%');
+  });
+
+  it('nagano: 長野西(国際教養・前期選抜)は作文30%を含む割合を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '長野西', '前期選抜', '国際教養');
+    expect(record?.ratioType).toBe('調査書40%:面接20%:学力検査10%:作文30%');
+  });
+
+  it('nagano: 長野商業は商業(前期選抜①)と会計(前期選抜②)で異なる割合を持つ', () => {
+    const kaikei = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '長野商業', '前期選抜②', '会計');
+    expect(kaikei?.ratioType).toBe('調査書60%:面接30%:学力検査10%');
+  });
+
+  it('nagano: schoolsは第1通学区(北信地区)20校38レコードを収録している(第2〜6通学区は未収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano');
+    expect(record?.schools?.length).toBe(38);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(20);
+    expect(record?.coverageNote).toContain('第1通学区');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {

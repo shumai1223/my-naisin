@@ -4,6 +4,7 @@ import { AICHI_SCHOOL_SELECTION_METHOD } from './aichi';
 import { IBARAKI_SCHOOL_SELECTION_METHOD } from './ibaraki';
 import { YAMANASHI_SCHOOL_SELECTION_METHOD } from './yamanashi';
 import { GUNMA_SCHOOL_SELECTION_METHOD } from './gunma';
+import { NAGANO_SCHOOL_SELECTION_METHOD } from './nagano';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -13,4 +14,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   ibaraki: IBARAKI_SCHOOL_SELECTION_METHOD,
   yamanashi: YAMANASHI_SCHOOL_SELECTION_METHOD,
   gunma: GUNMA_SCHOOL_SELECTION_METHOD,
+  nagano: NAGANO_SCHOOL_SELECTION_METHOD,
 };
