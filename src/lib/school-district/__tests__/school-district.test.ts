@@ -132,7 +132,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagawa/kagoshima/mie/nagano/okayama/okinawa/tokushimaを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagawa/kagoshima/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
@@ -145,7 +145,15 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'okayama',
       'okinawa',
       'tokushima',
+      'yamagata',
     ]);
+  });
+
+  it('yamagataは districted で普通科4学区(東/北/南/西)を持ち、理数科は東・北を統合した3区分になる', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'yamagata');
+    expect(record?.districts?.length).toBe(4);
+    expect(record?.districts?.map((d) => d.name)).toEqual(['東学区', '北学区', '南学区', '西学区']);
+    expect(record?.outOfDistrictCondition).toContain('教育長の裁量');
   });
 
   it('naganoは districted で4学区を持つ', () => {
