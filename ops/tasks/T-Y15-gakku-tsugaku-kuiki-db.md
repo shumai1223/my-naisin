@@ -185,14 +185,13 @@ pdftotext(-layout)で全文確認(この文書はテキスト層が正常でpdft
 著しい不便」「その他やむを得ない事情」の3要件による教育長裁量の調整規定という他県に無い方式。
 tsc実exit0・関連jest38件green確認済み(commit 99b5c52・ローカルのみ)。
 
+**2026-09-17追記: fukushima(30県目)・kyoto(31県目)・shimane(32県目)・yamaguchi(33県目)・
+iwate(34県目)を実装完了した**（詳細はdocs/worklog/2026-09-17.mdの19:33以前の各エントリ参照）。
+T-Y15は34県実装完了(abolished型18県+districted型16県)。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y15の30県目（残るstructured確定県: iwate/fukushima/
-   kyoto/shimane/yamaguchi/
-   ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む。fukushimaは公式PDF
-   「福島県立高等学校の通学区域に関する規則」(`pref.fukushima.lg.jp/uploaded/attachment/
-   653878.pdf`)が既に発見済み(普通科8学区・学区外進学20%上限・専門/総合/定通は県内全域)で
-   次に着手しやすい
+1. T-Y15の35県目（残るstructured確定県: ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
-   yamanashi/gunma(63校)の5県実装済み。詳細はT-Y14タスクファイル参照）
+   yamanashi/gunma(63校)/nagano(20校)の6県実装済み。詳細はT-Y14タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-districts/index.ts`を確認し二重実装を
    避けること
