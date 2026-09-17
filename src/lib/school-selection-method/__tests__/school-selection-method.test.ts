@@ -989,11 +989,27 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(fukushi?.note).toContain('★福祉探究活動');
   });
 
-  it('tokushima: schoolsは頁8-9(育成型選抜1-2頁目・13校41レコード)+頁13(一般選抜傾斜配点・7校8学科)の計48レコードを収録している(頁10-12の育成型選抜残りは未収録)', () => {
+  it('tokushima: 鳴門渦潮は体育(スポーツ科学)が実績重視枠のみ・総合(総合学科)が活動重視枠のみを持つ(頁10)', () => {
+    const taiiku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '鳴門渦潮', '育成型選抜(実績重視枠)', '体育(スポーツ科学)');
+    const sogo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '鳴門渦潮', '育成型選抜(活動重視枠)', '総合(総合学科)');
+    const taiikuKatsudo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '鳴門渦潮', '育成型選抜(活動重視枠)', '体育(スポーツ科学)');
+    expect(taiiku?.note).toContain('表中最多の指定競技数');
+    expect(sogo?.note).toContain('書道');
+    expect(taiikuKatsudo).toBeNull();
+  });
+
+  it('tokushima: 海部は普通・商業(情報ビジネス)・理数(数理科学)の3学科が育成型選抜の配点等を共有しつつ理数のみ★国際理解分野を持つ(頁10)', () => {
+    const futsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '海部', '育成型選抜(活動重視枠)', '普通');
+    const risu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '海部', '育成型選抜(活動重視枠)', '理数(数理科学)');
+    expect(futsu?.note).toContain('総点500/調査書150/学力検査100');
+    expect(risu?.note).toContain('★国際理解分野');
+  });
+
+  it('tokushima: schoolsは頁8-10(育成型選抜1-3頁目・20校64レコード)+頁13(一般選抜傾斜配点・7校8学科)の計71レコードを収録している(頁11-12の育成型選抜残りは未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima');
-    expect(record?.schools?.length).toBe(48);
+    expect(record?.schools?.length).toBe(71);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(14);
+    expect(schoolNames.size).toBe(20);
     expect(record?.coverageNote).toContain('育成型選抜');
   });
 
