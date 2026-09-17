@@ -7,12 +7,19 @@ import { SCHOOL_DISTRICT_BY_PREFECTURE } from '@/data/school-districts';
 
 describe('T-Y15 学区（通学区域）DB', () => {
   it('getSchoolDistrictは未登録県にundefinedを返す', () => {
-    expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'fukui')).toBeUndefined();
+    expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'tottori')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでakita/aomori/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/nara/niigata/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでakita/aomori/fukui/gifu/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/nara/niigata/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['akita', 'aomori', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'nara', 'niigata', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+    expect(abolished).toEqual(['akita', 'aomori', 'fukui', 'gifu', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'nara', 'niigata', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+  });
+
+  it('fukuiは平成16年度(2004年度)に学区を廃止した(岩手県比較表で一次確認・学校群選抜制度の廃止は二次資料のみ)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'fukui');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.abolishedFiscalYear).toBe('平成16年度（2004年度）');
+    expect(record?.outOfDistrictCondition).toContain('学校群');
   });
 
   it('niigataは平成20年度(2008年度)に学区を廃止した(岩手県比較表で一次確認・廃止前の学区名は未確認)', () => {
@@ -158,7 +165,7 @@ describe('T-Y15 学区（通学区域）DB', () => {
   });
 
   it('hasDistrictSystemは未登録県にnullを返す', () => {
-    expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'fukui')).toBeNull();
+    expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'tottori')).toBeNull();
   });
 
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
