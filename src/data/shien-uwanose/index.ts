@@ -28,6 +28,7 @@ import { SAITAMA_SHIEN_UWANOSE } from './saitama';
 import { CHIBA_SHIEN_UWANOSE } from './chiba';
 import { SHIZUOKA_SHIEN_UWANOSE } from './shizuoka';
 import { NIIGATA_SHIEN_UWANOSE } from './niigata';
+import { TOYAMA_SHIEN_UWANOSE } from './toyama';
 
 export const SHIEN_UWANOSE_BY_PREFECTURE: Partial<Record<string, PrefectureShienUwanose>> = {
   tokyo: TOKYO_SHIEN_UWANOSE,
@@ -54,4 +55,5 @@ export const SHIEN_UWANOSE_BY_PREFECTURE: Partial<Record<string, PrefectureShien
   chiba: CHIBA_SHIEN_UWANOSE,
   shizuoka: SHIZUOKA_SHIEN_UWANOSE,
   niigata: NIIGATA_SHIEN_UWANOSE,
+  toyama: TOYAMA_SHIEN_UWANOSE,
 };

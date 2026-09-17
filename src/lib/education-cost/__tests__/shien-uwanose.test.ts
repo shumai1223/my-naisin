@@ -249,6 +249,21 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(396000);
   });
 
+  it('toyamaは多子・ひとり親世帯で通常の3.5倍(年額277,200円)の授業料助成を返す', () => {
+    const normal = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'toyama',
+      '算定基準額154,500円以上304,200円未満（年収目安590万円以上910万円未満）・多子(3人以上)またはひとり親世帯以外'
+    );
+    const tashi = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'toyama',
+      '算定基準額154,500円以上304,200円未満（年収目安590万円以上910万円未満）・多子(3人以上)またはひとり親世帯'
+    );
+    expect(normal).toBe(79200);
+    expect(tashi).toBe(277200);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
