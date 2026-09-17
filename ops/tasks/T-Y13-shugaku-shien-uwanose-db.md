@@ -157,14 +157,26 @@ hiroshima/tottori/yamaguchi/nara/gunma/tochigi/ibaraki/fukui/okayama/hokkaido/sa
 (annualAmountJpyは「県単上乗せ分のみ」)が定着してきた。tsc実exit0・jest30件green確認済み
 （commit 8dcd9ac・ローカルのみ・push頻度制限ルールに従い保留中）。
 
+**2026-09-18追記(fukuoka保留・niigata・23県目)**: fukuokaは複数回のWebSearch/WebFetchで
+「学校納付金軽減補助金」(月額9,900円という情報はWebSearch要約にあるが)の現行年度詳細ページ/PDFに
+公式サイト(pref.fukuoka.lg.jp)上で到達できず、捏造回避のため実装を見送った。niigataへ切替し
+実装完了: 新潟県私立高等学校等学費軽減事業補助金交付要綱PDF(別表)で7tier確認。★他県の
+「目安年収」でなく「算定基準額」(市町村民税所得割額ベースの技術的基準)を用いる制度設計を発見し、
+年収目安への独自変換はせず要綱の表記のまま転記(Y-0)。tsc実exit0・jest31件green確認済み
+（commit 87eb01c・ローカルのみ・push頻度制限ルールに従い保留中）。
+
 **次回セッションが選ぶべきこと**:
-1. 未実装の残り16県(direct型10県: fukuoka/iwate/miyagi/yamagata/niigata/toyama/ishikawa/
-   shiga/shimane/saga、school-subsidy型4県: nagano/tokushima/kagawa/kochi、見込み1県:
-   kagoshima、要再確認2県: wakayama/ehime)から一次資料(WebFetch/curl+pdftoppm)で裏取りしながら
-   実装を進める。**着手時は必ず「令和8年度時点でも制度が継続しているか」（廃止・経過措置化
-   されていないか）を確認すること**(chiba型の落とし穴)
-2. school-subsidy型4県(nagano/tokushima/kagawa/kochi)はhokkaido/shizuokaの実装例
-   (annualAmountJpy=県単上乗せ分のみ)に揃えること
-3. wakayama/ehimeは「本当になしかもしれない」候補のため、優先的に一次資料へ当たり
+1. fukuokaは次回、県庁サイト内検索や私学振興課への別角度のアプローチ(例: 私学関連の予算資料
+   PDFや議会答弁記録等)で一次資料を再探索するか、それでも見つからなければ`unknown`のまま
+   スキップして他県を優先する
+2. 未実装の残り15県(direct型9県: iwate/miyagi/yamagata/toyama/ishikawa/shiga/shimane/saga、
+   school-subsidy型4県: nagano/tokushima/kagawa/kochi、見込み1県: kagoshima、要再確認2県:
+   wakayama/ehime)から一次資料(WebFetch/curl+pdftoppm)で裏取りしながら実装を進める。
+   **着手時は必ず「令和8年度時点でも制度が継続しているか」（廃止・経過措置化されていないか）を
+   確認すること**(chiba型の落とし穴)
+3. school-subsidy型4県(nagano/tokushima/kagawa/kochi)はhokkaido/shizuoka/niigataの実装例
+   (annualAmountJpy=県単上乗せ分のみ)に揃えること。niigataのように「目安年収でなく技術的な
+   算定基準額を使う県」もあるため、その場合は独自変換せず原文のまま転記すること
+4. wakayama/ehimeは「本当になしかもしれない」候補のため、優先的に一次資料へ当たり
    `confirmed-none`（なし確認済み）に倒すか`confirmed-yes`を発見するかを確定させる
-4. 着手前に`src/data/shien-uwanose/index.ts`を確認し二重実装を避けること
+5. 着手前に`src/data/shien-uwanose/index.ts`を確認し二重実装を避けること
