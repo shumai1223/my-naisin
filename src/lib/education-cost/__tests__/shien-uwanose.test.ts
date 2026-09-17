@@ -264,6 +264,20 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(tashi).toBe(277200);
   });
 
+  it('sagaは授業料の県独自上乗せは無く、入学金等補助（上限27,000円）のみ確認できる', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'saga');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(record?.schemeType).toBe('school-subsidy');
+    expect(record?.note).toContain('授業料上乗せ加算は、一次資料の範囲では確認できなかった');
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'saga',
+        '入学金等補助（年収目安590万円未満世帯・新入生および転入学者）'
+      )
+    ).toBe(27000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
