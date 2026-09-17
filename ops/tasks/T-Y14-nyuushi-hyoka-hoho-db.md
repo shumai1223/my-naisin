@@ -532,3 +532,24 @@ Cloudflareビルドは1回分のため、大きな区切りでまとめてpush�
    fukushima/shizuoka/hiroshima/yamaguchi/tokushima）
 6. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
    二重実装を避けること
+
+**2026-09-18追記33（gifu頁1+頁2完全収録達成）: 学校番号37〜42(加茂農林5学科/八百津/東濃/
+東濃実業3学科/可児/可児工業4学科)42レコードを実装し、gifu頁1(学校番号1〜18)+頁2(学校番号
+19〜42)を42校90学科260レコードで完全収録した**。加茂農林は5学科で独自検査の募集割合が
+25%/30%と学科ごとに異なるケース。tsc実exit0・jest114件green確認済み（commit 22852bb・
+ローカルのみ・push頻度制限ルールに従い保留中）。gifu.tsは頁1+頁2だけで約1700行に達している
+（osaka.tsの1128行を上回る規模）。
+
+**次回セッションが選ぶべきこと**:
+1. gifuの続き（頁3〜4は完全未着手。同じマトリクス形式のはず。ただし規模を考慮し県別ファイル
+   分割[例: gifu-p3.ts/gifu-p4.ts]を検討してもよい）
+2. またはokayamaの続き（頁3〜7は完全未着手。頁2までの手法[300dpi+Pillowクロップ]をそのまま
+   使える）
+3. またはaomoriの続き（残り2地区[下北むつ/三八]。URLパターンは`R08motomeru_<地区名ローマ字>.pdf`。
+   下北むつ=`simokitamutu`、三八=`sanpachi`）
+4. またはhiroshimaへのリベンジ（300dpi等でより高解像度で全校一覧の点数マトリクス表(頁3〜)を
+   再確認し、Y-0を満たせる精度で読み取れるか試す）
+5. またはkochi/miyagiの続き、またはT-Y14の13県目（残るstructured確定県: tokyo/hokkaido/
+   fukushima/shizuoka/hiroshima/yamaguchi/tokushima）
+6. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
+   二重実装を避けること
