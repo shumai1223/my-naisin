@@ -535,6 +535,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.coverageNote).toContain('第1通学区');
   });
 
+  it('miyagi: 白石(看護科・共通選抜)は学力検査7:調査書3の比重を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyagi', '白石', '共通選抜', '看護科');
+    expect(record?.ratioType).toBe('学力検査7:調査書3');
+    expect(record?.interviewRequired).toBe(false);
+  });
+
+  it('miyagi: 白石工業(機械科・特色選抜)は面接・実技・作文のいずれも実施しない', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyagi', '白石工業', '特色選抜', '機械科');
+    expect(record?.interviewRequired).toBe(false);
+    expect(record?.ratioType).toBe('調査書390点:学力検査500点');
+  });
+
+  it('miyagi: 白石工業(機械科・第二次募集)の面接は4段階評価(A〜D)で他校の3段階(A〜C)と異なる', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyagi', '白石工業', '第二次募集', '機械科');
+    expect(record?.ratioType).toContain('4段階評価');
+  });
+
+  it('miyagi: schoolsは3校9レコードを収録している(頁13/15/17の3校分のみ)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyagi');
+    expect(record?.schools?.length).toBe(9);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(3);
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
