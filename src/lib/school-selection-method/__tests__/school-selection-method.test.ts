@@ -641,12 +641,24 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1の一部5校15レコードを収録している(頁2〜7は未収録)', () => {
+  it('okayama: schoolsは頁1の8校28レコードを完全収録している(頁2〜7は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(15);
+    expect(record?.schools?.length).toBe(28);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(5);
+    expect(schoolNames.size).toBe(8);
     expect(record?.coverageNote).toContain('岡山一宮');
+  });
+
+  it('okayama: 岡山一宮(理数)は特別入学者選抜で数学検定準2級以上又は英語検定準2級以上合格を重視する実績としている', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '岡山一宮', '特別入学者選抜', '理数');
+    expect(record?.note).toContain('数学検定準2級');
+  });
+
+  it('okayama: 岡山城東は普通・国際教養分野・音楽分野の一般入学者選抜が結合セルで共通のため同一内容が複製されている', () => {
+    const futsuu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '岡山城東', '一般入学者選抜', '普通');
+    const ongaku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '岡山城東', '一般入学者選抜', '音楽分野');
+    expect(futsuu?.ratioType).toBe(ongaku?.ratioType);
+    expect(futsuu?.note).toContain('結合セル');
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
