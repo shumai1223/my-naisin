@@ -132,10 +132,11 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(hasDistrictSystem(SCHOOL_DISTRICT_BY_PREFECTURE, 'hyogo')).toBe(true);
   });
 
-  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/hokkaido/hyogo/kagawa/kagoshima/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
+  it('prefecturesBySystemTypeはdistrictedでaichi/chiba/fukushima/hokkaido/hyogo/kagawa/kagoshima/mie/nagano/okayama/okinawa/tokushima/yamagataを含む', () => {
     expect(prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'districted')).toEqual([
       'aichi',
       'chiba',
+      'fukushima',
       'hokkaido',
       'hyogo',
       'kagawa',
@@ -147,6 +148,23 @@ describe('T-Y15 学区（通学区域）DB', () => {
       'tokushima',
       'yamagata',
     ]);
+  });
+
+  it('fukushimaは districted で普通科8学区(県北/県中/県南/耶麻/会津/相馬/双葉/いわき)を持つ(それ以外の学科は県下一円)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'fukushima');
+    expect(record?.districts?.length).toBe(8);
+    expect(record?.districts?.map((d) => d.name)).toEqual([
+      '県北学区',
+      '県中学区',
+      '県南学区',
+      '耶麻学区',
+      '会津学区',
+      '相馬学区',
+      '双葉学区',
+      'いわき学区',
+    ]);
+    expect(record?.outOfDistrictCondition).toContain('普通科のみ');
+    expect(record?.outOfDistrictCondition).toContain('20%');
   });
 
   it('yamagataは districted で普通科4学区(東/北/南/西)を持ち、理数科は東・北を統合した3区分になる', () => {
