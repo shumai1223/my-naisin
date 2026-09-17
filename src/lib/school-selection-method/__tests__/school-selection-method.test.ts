@@ -1039,6 +1039,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.coverageNote).toContain('全5頁完全収録');
   });
 
+  it('hiroshima: 広島国泰寺(普通)は特色枠で数学・英語に2倍の傾斜配点があり学力検査合計350点になる', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島国泰寺', '特色枠による選抜', '普通');
+    expect(record?.note).toContain('数学100点(2倍傾斜)');
+    expect(record?.note).toContain('英語100点(2倍傾斜)');
+    expect(record?.note).toContain('合計350点');
+  });
+
+  it('hiroshima: 広島国泰寺(理数)は特色枠で普通科と異なり数学・理科に2倍の傾斜配点がある', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島国泰寺', '特色枠による選抜', '普通(理数)');
+    expect(record?.note).toContain('数学100点(2倍傾斜)');
+    expect(record?.note).toContain('理科100点(2倍傾斜)');
+  });
+
+  it('hiroshima: 広島国泰寺(普通)は一般枠に学校独自検査が無く比重欄が資料上空欄(標準6:2:2換算)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島国泰寺', '一般枠による選抜', '普通');
+    expect(record?.ratioType).toContain('6:2:2');
+    expect(record?.note).toContain('独自検査が無いため');
+  });
+
+  it('hiroshima: 広島国泰寺(普通)は二次選抜で学力検査を実施せず小論文のみの学校独自検査を持つ', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島国泰寺', '二次選抜', '普通');
+    expect(record?.note).toContain('小論文のみ実施(50点)');
+    expect(record?.note).toContain('1,000点満点換算');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
