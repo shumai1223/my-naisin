@@ -320,6 +320,24 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(amount).toBe(50000);
   });
 
+  it('kagawaは授業料への県独自上乗せは無く、入学金軽減補助(全日制50,000円/通信制15,000円)のみ確認できる', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'kagawa');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(record?.note).toContain('授業料についての県独自上乗せ制度は、一次資料の範囲(このページ)では確認できなかった');
+    const zennichi = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'kagawa',
+      '（市町村民税課税標準額×6%－調整控除額）154,500円未満（世帯年収目安590万円未満程度）・全日制高校'
+    );
+    const tsushin = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'kagawa',
+      '（市町村民税課税標準額×6%－調整控除額）154,500円未満（世帯年収目安590万円未満程度）・通信制高校'
+    );
+    expect(zennichi).toBe(50000);
+    expect(tsushin).toBe(15000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
