@@ -10,9 +10,17 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shizuoka/tochigi/tokyo/toyama/wakayamaを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayamaを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama']);
+    expect(abolished).toEqual(['aomori', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama']);
+  });
+
+  it('shimaneは学区制度が無く、松江市内3校・出雲高校のみ地域外入学制限(市外合格者10%/5%以内)を持つ', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'shimane');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.outOfDistrictCondition).toContain('松江');
+    expect(record?.outOfDistrictCondition).toContain('10%');
+    expect(record?.outOfDistrictCondition).toContain('5%');
   });
 
   it('ishikawaは平成17年度(2005年度)に学区を廃止した(一次資料で直接確認済み・廃止前3学区は二次資料のみ)', () => {

@@ -30,6 +30,7 @@ import { ISHIKAWA_SCHOOL_DISTRICT } from './ishikawa';
 import { YAMAGATA_SCHOOL_DISTRICT } from './yamagata';
 import { FUKUSHIMA_SCHOOL_DISTRICT } from './fukushima';
 import { KYOTO_SCHOOL_DISTRICT } from './kyoto';
+import { SHIMANE_SCHOOL_DISTRICT } from './shimane';
 
 export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSchoolDistrict>> = {
   tokyo: TOKYO_SCHOOL_DISTRICT,
@@ -63,4 +64,5 @@ export const SCHOOL_DISTRICT_BY_PREFECTURE: Partial<Record<string, PrefectureSch
   yamagata: YAMAGATA_SCHOOL_DISTRICT,
   fukushima: FUKUSHIMA_SCHOOL_DISTRICT,
   kyoto: KYOTO_SCHOOL_DISTRICT,
+  shimane: SHIMANE_SCHOOL_DISTRICT,
 };
