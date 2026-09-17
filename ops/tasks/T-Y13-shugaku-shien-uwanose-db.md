@@ -173,18 +173,28 @@ toyama実装完了: 公式リーフレット「3.支給額」図で算定基準�
 世帯は通常の3.5倍(277,200円 vs 79,200円)という大きな差を発見。tsc実exit0・jest32件green
 確認済み（commit 8ffce3a・ローカルのみ・push頻度制限ルールに従い保留中）。
 
-**次回セッションが選ぶべきこと**:
-1. fukuoka/miyagiは次回、県庁サイト内検索や私学振興課への別角度のアプローチ(例: 私学関連の
-   予算資料PDFや議会答弁記録等、miyagiは「私立学校運営費補助金交付要綱」内を確認)で一次資料を
-   再探索するか、それでも見つからなければ`unknown`のままスキップして他県を優先する
-2. 未実装の残り13県(direct型7県: iwate/yamagata/ishikawa/shiga/shimane/saga、school-subsidy型
-   4県: nagano/tokushima/kagawa/kochi、見込み1県: kagoshima、要再確認2県: wakayama/ehime)から
-   一次資料(WebFetch/curl+pdftoppm)で裏取りしながら実装を進める。**着手時は必ず「令和8年度
-   時点でも制度が継続しているか」（廃止・経過措置化されていないか）を確認すること**(chiba型の
-   落とし穴)
-3. school-subsidy型4県(nagano/tokushima/kagawa/kochi)はhokkaido/shizuoka/niigataの実装例
+**2026-09-18追記★★重要なメタ的発見**: fukuoka→miyagi→ishikawa→shigaの**4県連続**で一次資料への
+到達に失敗した(公式サイトのページ構成が変わっている・リンク切れ・該当制度への言及自体が消えている
+等)。shigaは特に象徴的で、「私立高校生等の保護者負担軽減補助事業の概要」ページに以前あったはずの
+「特別修学補助金」(上乗せ制度)への言及自体が消え、就学支援金(国)と奨学のための給付金(授業料以外)
+のみが記載される状態になっていた。**仮説: 2026-09-16のsurvey(WebSearch要約ベース)で「あり」と
+判定した県の一部は、令和8年度の国の就学支援金拡充(所得制限撤廃・上限457,200円への引き上げ)に
+伴い、chibaと同様に独自の上乗せ制度を整理・統合・廃止している可能性がある。**これは個別県の
+検索スキル不足ではなく、制度側の実態変化を反映している可能性が高い。
+
+**次回セッションへの推奨対応**:
+1. **新規県への着手ペースを落とし、まず「survey記載の情報源(WebSearch要約)」と「現在の公式
+   サイトの実際の記載」を突き合わせる棚卸しを行う**。具体的には、未実装の残り県のうち2〜3県を
+   選び、survey本文が引用したURL(`ops/baselines/t-y13-shien-uwanose-survey-2026-09.md`記載)に
+   直接アクセスして生存確認を行い、404/内容消失の発生率を把握する
+2. 到達できた県から実装を優先する。未実装の残り13県(direct型7県: iwate/yamagata/ishikawa/
+   shiga/shimane/saga、school-subsidy型4県: nagano/tokushima/kagawa/kochi、見込み1県:
+   kagoshima、要再確認2県: wakayama/ehime)のうちishikawa/shigaは今回到達失敗、他は未着手
+3. **着手時は必ず「令和8年度時点でも制度が継続しているか」（廃止・経過措置化されていないか）を
+   確認すること**(chiba型の落とし穴が想定以上に頻発している可能性)
+4. school-subsidy型4県(nagano/tokushima/kagawa/kochi)はhokkaido/shizuoka/niigataの実装例
    (annualAmountJpy=県単上乗せ分のみ)に揃えること。niigataのように「目安年収でなく技術的な
    算定基準額を使う県」もあるため、その場合は独自変換せず原文のまま転記すること
-4. wakayama/ehimeは「本当になしかもしれない」候補のため、優先的に一次資料へ当たり
+5. wakayama/ehimeは「本当になしかもしれない」候補のため、優先的に一次資料へ当たり
    `confirmed-none`（なし確認済み）に倒すか`confirmed-yes`を発見するかを確定させる
-5. 着手前に`src/data/shien-uwanose/index.ts`を確認し二重実装を避けること
+6. 着手前に`src/data/shien-uwanose/index.ts`を確認し二重実装を避けること
