@@ -746,12 +746,26 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
-  it('gifu: schoolsは頁1の学校番号1〜7(7校24レコード)を収録している(頁1残り・頁2〜4は未収録)', () => {
+  it('gifu: schoolsは頁1の学校番号1〜14(14校78レコード)を収録している(頁1残り・頁2〜4は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
-    expect(record?.schools?.length).toBe(24);
+    expect(record?.schools?.length).toBe(78);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(7);
+    expect(schoolNames.size).toBe(14);
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+  });
+
+  it('gifu: 岐阜各務野は情報学科のみ独自検査が実施されない(ビジネス・福祉学科にはある)', () => {
+    const business = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜各務野', '第一次選抜(独自検査)', 'ビジネス');
+    const jouhou = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '岐阜各務野', '第一次選抜(独自検査)', '情報');
+    expect(business?.ratioType).toBe('募集人員の30%');
+    expect(jouhou).toBeNull();
+  });
+
+  it('gifu: 各務原(普通)は同一学科に独自検査区分I(12%)と区分II(5%)の2枠を持つ', () => {
+    const region1 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '各務原', '第一次選抜(独自検査区分I)', '普通');
+    const region2 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '各務原', '第一次選抜(独自検査区分II)', '普通');
+    expect(region1?.ratioType).toBe('募集人員の12%');
+    expect(region2?.ratioType).toBe('募集人員の5%');
   });
 
   it('gifu: 加納(音楽)は美術科と音楽科の第1・第2志望の組み合わせが表脚注で禁止されている', () => {
