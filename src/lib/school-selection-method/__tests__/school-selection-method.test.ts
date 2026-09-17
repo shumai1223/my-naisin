@@ -672,12 +672,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スポーツ科学科');
   });
 
-  it('aomori: schoolsは東青地区分割版全12頁(12校36レコード)を完全収録している(他5地区は未収録)', () => {
+  it('aomori: schoolsは東青地区分割版全12頁+西北五地区分割版全7頁(15校57レコード)を完全収録している(他4地区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori');
-    expect(record?.schools?.length).toBe(36);
+    expect(record?.schools?.length).toBe(57);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(10);
+    expect(schoolNames.size).toBe(15);
     expect(record?.coverageNote).toContain('東青地区');
+    expect(record?.coverageNote).toContain('西北五地区');
+  });
+
+  it('aomori: 五所川原は全日制(全学科)と定時制(普通科)の2レコード系統を別学科名で区別して収録している', () => {
+    const zennichi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '五所川原', '一般選抜', '全学科');
+    const teiji = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '五所川原', '一般選抜', '普通科');
+    expect(zennichi?.note).not.toContain('定時制');
+    expect(teiji?.note).toContain('定時制');
+  });
+
+  it('aomori: 鰺ヶ沢(普通科)は「全国からの生徒募集」導入校と明記されている', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '鰺ヶ沢', '一般選抜', '普通科');
+    expect(record?.note).toContain('全国からの生徒募集');
   });
 
   it('aomori: 北斗(普通科)は定時制課程で面接結果を特に重視すると明記されている', () => {
