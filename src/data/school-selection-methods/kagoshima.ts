@@ -1,0 +1,78 @@
+// 鹿児島県: 「令和8年度鹿児島県公立高等学校入学者選抜方法案内」（鹿児島県教育委員会・令和7年12月
+// 5日修正版）。他県の多くが持つ「学力検査:調査書の比重」表とは異なり、本資料は学校・学科別の
+// 推薦入試定員（募集定員に対する上限%・自己推薦/学校推薦の別）・学区外からの一定枠（%・人数）・
+// 学科併願可能学科（推薦入試/学力検査/第二次選抜それぞれで併願できる学科）・くくり募集の有無・
+// 帰国生徒等特別選抜の実施有無を学校・学科ごとに一覧化した表形式で、県内公立高校全69校の全日制
+// 課程を1つの資料に集約している（他県のような多年度・数百頁のPDF分割は無い）。
+//
+// 一次ソース: 鹿児島県公式ページ「令和8年度鹿児島県公立高等学校入学者選抜方法案内等について」
+// (`pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r8/r8nyuusiannai.html`)からリンク
+// される本体PDF(`pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r8/documents/
+// 124253_20251205110312-1.pdf`・全6頁・2026-09-17 curl+pdftoppm(150dpi)でビジョン確認)。
+//
+// ★T-Y14が本来対象とする「学力検査:調査書の比重」「学力検査問題の種類」は、本資料のQ&A(頁5・
+// Q8)で「傾斜配点を実施している場合がある」と言及されるのみで、学校別の具体的な比重・配点は
+// 本資料に含まれない(各校の生徒募集要項に個別掲載と推測されるが今回は未確認)。そのため本DBでは
+// 代わりに「推薦選抜の実施有無と選抜方法概要」（T-Y14タスクファイルの対象データ項目4）として、
+// 学校・学科別の推薦入試定員枠・学区外一定枠・学科併願制度を収録する。ratioTypeフィールドは
+// 使用しない(比重データが無いため)。interviewRequiredは全レコードでtrue(頁5 Q1「学力検査を
+// 実施せず、中学校3年間の学習や活動状況、面接、作文等を総合して選抜する制度」という鹿児島県
+// 推薦入試の一般的な制度説明に基づく。個別校の実施有無を確認したものではない)。
+//
+// ★今回は7学区(鹿児島/南薩/北薩/姶良・伊佐/大隅/熊毛/大島)のうち「鹿児島学区」の18校38レコード
+// のみ収録。残り6学区は未収録（coverageNote参照）。
+
+import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
+
+export const KAGOSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
+  prefectureCode: 'kagoshima',
+  fiscalYear: '令和8年度（2026年度）',
+  status: 'structured',
+  coverageNote:
+    '全7学区(鹿児島/南薩/北薩/姶良・伊佐/大隅/熊毛/大島)のうち「鹿児島学区」18校38レコードのみ収録。残り6学区(南薩/北薩/姶良・伊佐/大隅/熊毛/大島)は未収録。また本資料は推薦入試・学区外枠・学科併願・くくり募集・帰国生徒等特別選抜のみを扱い、学力検査:調査書の比重(傾斜配点)は対象外',
+  source: {
+    url: 'https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r8/documents/124253_20251205110312-1.pdf',
+    docTitle: '令和8年度鹿児島県公立高等学校入学者選抜方法案内（令和7年12月5日修正版）',
+    lastChecked: '2026-09-17',
+  },
+  schools: [
+    { schoolName: '鶴丸', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員320人・推薦入試定員10%以内(学校推薦のみ)。学区外からの一定枠は募集定員の10%(32人)' },
+    { schoolName: '甲南', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員320人・推薦入試定員10%以内(学校推薦のみ)。学区外からの一定枠は募集定員の10%(32人)' },
+    { schoolName: '鹿児島中央', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員320人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学区外からの一定枠は募集定員の10%(32人)' },
+    { schoolName: '錦江湾', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員160人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学区外からの一定枠は募集定員の10%(16人)' },
+    { schoolName: '錦江湾', department: '理数', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦のみ)。普通科と学力検査・第二次選抜で相互に併願可能' },
+    { schoolName: '武岡台', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員240人・推薦入試定員10%以内(自己推薦のみ)。学区外からの一定枠は募集定員の10%(24人)。学力検査は情報科学科、第二次選抜は普通科(同一学科内継続)と併願可能な構造' },
+    { schoolName: '武岡台', department: '情報科学', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦のみ)。学力検査は普通科と併願可能' },
+    { schoolName: '開陽', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員120人・推薦入試定員15%以内(自己推薦・学校推薦とも実施)。学力検査は福祉科と併願可能' },
+    { schoolName: '開陽', department: '福祉', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員15%以内(自己推薦・学校推薦とも実施)。学力検査は普通科と併願可能' },
+    { schoolName: '明桜館', department: '文理科学', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員120人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。推薦入試・学力検査・第二次選抜いずれも商業科と併願可能' },
+    { schoolName: '明桜館', department: '商業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。推薦入試・学力検査・第二次選抜いずれも文理科学科と併願可能' },
+    { schoolName: '松陽', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員240人・推薦入試定員30%以内(注*1: 体育/書道/英語コース計20%・それ以外の一般10%。自己推薦は体育/書道/英語コースのみ実施)。学区外からの一定枠は募集定員の10%(24人)。第二次選抜は普通科内、学力検査は音楽科又は美術科と併願可能' },
+    { schoolName: '松陽', department: '音楽', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員65%以内(自己推薦・学校推薦とも実施)。学力検査は普通科と併願可能' },
+    { schoolName: '松陽', department: '美術', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員65%以内(自己推薦・学校推薦とも実施)。学力検査は普通科と併願可能' },
+    { schoolName: '鹿児島東', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学区外一定枠・学科併願・帰国生徒等特別選抜のいずれも実施なし(表中で唯一)' },
+    { schoolName: '鹿児島工業', department: '工業Ⅰ類', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員240人・推薦入試定員30%以内(自己推薦のみ)。推薦入試・学力検査は工業Ⅱ類と併願可能、第二次選抜は工業Ⅱ類4系分と併願可能' },
+    { schoolName: '鹿児島工業', department: '工業Ⅱ類', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員120人・推薦入試定員30%以内(自己推薦のみ)。推薦入試・学力検査は工業Ⅰ類と併願可能、第二次選抜は工業Ⅰ類3系分と併願可能' },
+    { schoolName: '鹿児島南', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員160人・推薦入試定員10%以内(学校推薦のみ)。学区外からの一定枠は募集定員の10%(16人)' },
+    { schoolName: '鹿児島南', department: '商業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員25%以内(学校推薦のみ)。第二次選抜は情報処理科と併願可能' },
+    { schoolName: '鹿児島南', department: '情報処理', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員20%以内(学校推薦のみ)。第二次選抜は商業科と併願可能' },
+    { schoolName: '鹿児島南', department: '体育', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員80%以内(自己推薦・学校推薦とも実施)' },
+    { schoolName: '吹上', department: '電気', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦のみ)。学力検査は電気/電子機械/情報処理の3学科間で第3志望まで併願可能' },
+    { schoolName: '吹上', department: '電子機械', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦のみ)。学力検査は電気/電子機械/情報処理の3学科間で第3志望まで併願可能' },
+    { schoolName: '吹上', department: '情報処理', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学力検査は電気/電子機械/情報処理の3学科間で第3志望まで併願可能' },
+    { schoolName: '伊集院', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員240人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学区外からの一定枠は募集定員の10%(24人)' },
+    { schoolName: '市来農芸', department: '農業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。推薦入試は農業/畜産/環境園芸の3学科間で第2志望まで、学力検査・第二次選抜も第2志望まで併願可能' },
+    { schoolName: '市来農芸', department: '畜産', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。3学科間で第2志望まで併願可能' },
+    { schoolName: '市来農芸', department: '環境園芸', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。3学科間で第2志望まで併願可能' },
+    { schoolName: '串木野', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員10%以内。自己推薦・学校推薦の実施有無は表中に○の記載なし(未実施の可能性)' },
+    { schoolName: '鹿児島玉龍', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員240人(注*2: うち鹿児島玉龍中学校からの入学者120人以内を含む)・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学区外からの一定枠は募集定員の10%(24人)' },
+    { schoolName: '鹿児島商業', department: 'ビジネスクリエイト', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員120人・推薦入試定員40%以内(自己推薦・学校推薦とも実施)。ビジネスクリエイト/情報イノベーション/アスリートスポーツの3学科間で推薦入試・学力検査・第二次選抜とも第3志望まで併願可能' },
+    { schoolName: '鹿児島商業', department: '情報イノベーション', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員120人・推薦入試定員40%以内(自己推薦・学校推薦とも実施)。3学科間で第3志望まで併願可能' },
+    { schoolName: '鹿児島商業', department: 'アスリートスポーツ', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員80%以内(自己推薦・学校推薦とも実施)。3学科間で第3志望まで併願可能' },
+    { schoolName: '鹿児島女子', department: 'ファイナンシャルビジネス', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員50%以内(自己推薦・学校推薦とも実施)。5学科間で推薦入試・学力検査・第二次選抜とも第3志望まで併願可能' },
+    { schoolName: '鹿児島女子', department: 'ビジネスデザイン', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員50%以内(自己推薦・学校推薦とも実施)。5学科間で第3志望まで併願可能' },
+    { schoolName: '鹿児島女子', department: 'スポーツビジネス', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員80%以内(自己推薦・学校推薦とも実施)。5学科間で第3志望まで併願可能' },
+    { schoolName: '鹿児島女子', department: 'ファッション・フードクリエイト', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員50%以内(自己推薦・学校推薦とも実施)。5学科間で第3志望まで併願可能' },
+    { schoolName: '鹿児島女子', department: 'ライフ・スポーツ', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員60%以内(自己推薦・学校推薦とも実施)。5学科間で第3志望まで併願可能' },
+  ],
+};

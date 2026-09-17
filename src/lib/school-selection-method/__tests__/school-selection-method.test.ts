@@ -569,6 +569,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('40人');
   });
 
+  it('kagoshima: 鹿児島中央(普通・推薦入試)は自己推薦・学校推薦とも実施し面接ありと記録されている', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kagoshima', '鹿児島中央', '推薦入試', '普通');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.note).toContain('自己推薦・学校推薦とも実施');
+  });
+
+  it('kagoshima: 鹿児島女子(5学科)は学科間で推薦入試・学力検査・第二次選抜とも第3志望まで併願可能', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kagoshima', '鹿児島女子', '推薦入試', 'ライフ・スポーツ');
+    expect(record?.note).toContain('第3志望まで');
+  });
+
+  it('kagoshima: schoolsは鹿児島学区18校38レコードを収録している(他6学区は未収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kagoshima');
+    expect(record?.schools?.length).toBe(38);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(18);
+    expect(record?.coverageNote).toContain('鹿児島学区');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
