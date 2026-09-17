@@ -251,12 +251,19 @@ osaka/aichi/ibaraki/yamanashi/gunmaに続き完了。
 発見。tsc実exit0・jest72件green確認済み（commit 6fc6a28・ローカルのみ）。残り313頁は未収録
 （今後の拡充対象）。
 
+**2026-09-17追記15（miyagi続き）: 白石工業高校の残り4学科(電気科/工業化学科/建築科/
+設備工業科・頁19/21/23/25)を追加し、白石工業の全5学科を完全収録した(9→21レコード)**。
+4学科とも共通選抜/特色選抜/第二次募集の比重・配点が機械科と完全に同一だが、募集定員は
+機械科80人に対し他4学科は40人(募集定員規模は評価比重に影響しないと確認)。tsc実exit0・
+jest73件green確認済み（commit 5da7719・ローカルのみ）。頁13〜25(3校21レコード)まで到達・
+残り291頁(約145校)は未収録。
+
 **次回セッションが選ぶべきこと**:
-1. miyagiの続き（頁19以降・偶数頁スキップに注意）、またはT-Y14の8県目（残るstructured確定県:
+1. miyagiの続き（頁27以降・偶数頁スキップに注意）、またはT-Y14の8県目（残るstructured確定県:
    tokyo/hokkaido/gifu/kagoshima）のデータ層実装に進む（aomori/okayama/kochi/tokushima/
    tochigi/mie/shiga/kagawa/ibaraki/shizuoka/wakayama/hiroshima/yamaguchiはT-Y15で使用済み。
    yamanashi/gunma/osaka/aichi/ibaraki/nagano/miyagiは実装済み）
 2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている・2026-09-17時点で34県実装済み・詳細はT-Y15タスクファイル参照）
+   指定されている・2026-09-17時点で35県実装済み・詳細はT-Y15タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
