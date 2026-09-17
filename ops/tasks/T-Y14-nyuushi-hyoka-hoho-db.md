@@ -371,3 +371,23 @@ ratioTypeに配点内訳(学力検査XX点:調査書XX点:面接XX点)、選抜�
    fukushima/gifu/shizuoka/hiroshima/yamaguchi/tokushima）
 5. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
    二重実装を避けること
+
+**2026-09-18追記23（aomori東青地区完全収録）: 東青地区分割版PDFの残り8頁(青森北スポーツ科学科/
+青森南普通科・グローバル探究科/青森中央総合学科/浪岡普通科/青森工業全学科/青森商業全学科/
+北斗普通科[定時制])を実装し、東青地区分割版(全12頁)を完全収録した**。12校(青森北・青森南は
+それぞれ2学科)36レコード。北斗のみ定時制課程(午前部・午後部・夜間部)で他11校は全日制。
+1校1頁の詳細記述形式は情報量が多くrecord数が伸びやすい(1頁で3レコード)ため、次に他地区へ
+進む際もこの単価を目安にできる。tsc実exit0・jest93件green確認済み（commit ed6b2f7・
+ローカルのみ・push頻度制限ルールに従い保留中）。
+
+**次回セッションが選ぶべきこと**:
+1. aomoriの続き（他5地区の分割版PDF[西北五/中弘南黒/上十三/下北むつ/三八]の1頁目から。
+   URLパターンは`R08motomeru_<地区名ローマ字>.pdf`。西北五=`seihokugo`、中弘南黒=
+   `chukonankoku_R0801`、上十三=`kamitosan`、下北むつ=`simokitamutu`、三八=`sanpachi`）
+2. またはhiroshimaへのリベンジ（300dpi等でより高解像度で全校一覧の点数マトリクス表(頁3〜)を
+   再確認し、Y-0を満たせる精度で読み取れるか試す）
+3. またはokayamaの続き（頁2〜7は完全未着手）
+4. またはkochi/miyagiの続き、またはT-Y14の12県目（残るstructured確定県: tokyo/hokkaido/
+   fukushima/gifu/shizuoka/hiroshima/yamaguchi/tokushima）
+5. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`を確認し
+   二重実装を避けること
