@@ -239,12 +239,24 @@ gunma/yamanashiと同型のratioTypeコロン区切り運用で収録できた(�
 index配線・ローカルのみ・push頻度制限指示によりpush保留）。nagano(6県目)はこれで
 osaka/aichi/ibaraki/yamanashi/gunmaに続き完了。
 
+**2026-09-17追記14（miyagi着手・7県目）: 先頭3校9レコードを実装完了した**（公式一括DL PDF
+`pref.miyagi.jp/documents/65121/r9_senbatsuhouhoutou.pdf`・令和9年度・全316頁の頁13/15/17）。
+宮城県は1校1頁で「選抜順序(共通選抜→特色選抜)」「共通選抜(学力検査:調査書比重)」
+「特色選抜(調査書/学力検査/面接の配点内訳)」「社会人特別選抜」「第二次募集(配点内訳)」の
+5ブロック構成という他県より情報量の多い方式。★選抜方法データ頁(奇数頁)と学校の
+「スクール・ミッション/ポリシー」頁(偶数頁・対象外)が交互配置されていると判明(次回続行時は
+偶数頁を機械的にスキップすること)。selectionCategoryを「共通選抜/特色選抜/第二次募集」の
+3区分に設計(社会人特別選抜は収録3校とも「無」で記録対象なし)。学科ごとに学力検査:調査書比重
+(7:3/4:6/6:4)が異なり、白石工業(機械科)特色選抜は面接・実技・作文いずれも実施しない例外を
+発見。tsc実exit0・jest72件green確認済み（commit 6fc6a28・ローカルのみ）。残り313頁は未収録
+（今後の拡充対象）。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y14の7県目（残るstructured確定県: tokyo/hokkaido/miyagi/
-   gifu/yamaguchi/kagoshima）のデータ層実装に進む（aomori/okayama/kochi/tokushima/
-   tochigi/mie/shiga/kagawa/ibaraki/shizuoka/wakayama/hiroshimaはT-Y15で使用済み。
-   yamanashi/gunma/osaka/aichi/ibaraki/naganoは実装済み）
+1. miyagiの続き（頁19以降・偶数頁スキップに注意）、またはT-Y14の8県目（残るstructured確定県:
+   tokyo/hokkaido/gifu/kagoshima）のデータ層実装に進む（aomori/okayama/kochi/tokushima/
+   tochigi/mie/shiga/kagawa/ibaraki/shizuoka/wakayama/hiroshima/yamaguchiはT-Y15で使用済み。
+   yamanashi/gunma/osaka/aichi/ibaraki/nagano/miyagiは実装済み）
 2. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
-   指定されている・2026-09-17時点で33県実装済み・詳細はT-Y15タスクファイル参照）
+   指定されている・2026-09-17時点で34県実装済み・詳細はT-Y15タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-selection-methods/index.ts`（T-Y14）
    または`src/data/school-districts/index.ts`（T-Y15）を確認し二重実装を避けること
