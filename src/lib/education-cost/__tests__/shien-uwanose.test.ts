@@ -191,6 +191,25 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(24000);
   });
 
+  it('saitamaは基準②の2〜3年生で国の就学支援金のみ(457,200円)=県独自上乗せが実質ゼロになる', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'saitama');
+    expect(record?.tiers).toHaveLength(5);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'saitama',
+        '基準②（目安年収約500万円〜609万円未満）・2〜3年生'
+      )
+    ).toBe(457200);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'saitama',
+        '生活保護受給・家計急変世帯、または基準①（目安年収約500万円未満）・1年生'
+      )
+    ).toBe(880200);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
