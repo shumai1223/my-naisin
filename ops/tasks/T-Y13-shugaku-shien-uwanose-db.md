@@ -165,15 +165,23 @@ hiroshima/tottori/yamaguchi/nara/gunma/tochigi/ibaraki/fukui/okayama/hokkaido/sa
 年収目安への独自変換はせず要綱の表記のまま転記(Y-0)。tsc実exit0・jest31件green確認済み
 （commit 87eb01c・ローカルのみ・push頻度制限ルールに従い保留中）。
 
+**2026-09-18追記(miyagi保留・toyama・24県目)**: miyagiはsurvey記載の「上乗せ補助」要綱PDF
+(866748_1.pdf)が404となっており、現行の交付要綱一覧ページにも同名資料が見当たらなかった
+（私立学校運営費補助金交付要綱に統合された可能性あり）。捏造回避のため保留しtoyamaへ切替。
+toyama実装完了: 公式リーフレット「3.支給額」図で算定基準額154,500-304,200円(年収目安
+590-910万円)の区間のみで上乗せ発生(それ以外は上乗せなし)と確認。★多子(3人以上)・ひとり親
+世帯は通常の3.5倍(277,200円 vs 79,200円)という大きな差を発見。tsc実exit0・jest32件green
+確認済み（commit 8ffce3a・ローカルのみ・push頻度制限ルールに従い保留中）。
+
 **次回セッションが選ぶべきこと**:
-1. fukuokaは次回、県庁サイト内検索や私学振興課への別角度のアプローチ(例: 私学関連の予算資料
-   PDFや議会答弁記録等)で一次資料を再探索するか、それでも見つからなければ`unknown`のまま
-   スキップして他県を優先する
-2. 未実装の残り15県(direct型9県: iwate/miyagi/yamagata/toyama/ishikawa/shiga/shimane/saga、
-   school-subsidy型4県: nagano/tokushima/kagawa/kochi、見込み1県: kagoshima、要再確認2県:
-   wakayama/ehime)から一次資料(WebFetch/curl+pdftoppm)で裏取りしながら実装を進める。
-   **着手時は必ず「令和8年度時点でも制度が継続しているか」（廃止・経過措置化されていないか）を
-   確認すること**(chiba型の落とし穴)
+1. fukuoka/miyagiは次回、県庁サイト内検索や私学振興課への別角度のアプローチ(例: 私学関連の
+   予算資料PDFや議会答弁記録等、miyagiは「私立学校運営費補助金交付要綱」内を確認)で一次資料を
+   再探索するか、それでも見つからなければ`unknown`のままスキップして他県を優先する
+2. 未実装の残り13県(direct型7県: iwate/yamagata/ishikawa/shiga/shimane/saga、school-subsidy型
+   4県: nagano/tokushima/kagawa/kochi、見込み1県: kagoshima、要再確認2県: wakayama/ehime)から
+   一次資料(WebFetch/curl+pdftoppm)で裏取りしながら実装を進める。**着手時は必ず「令和8年度
+   時点でも制度が継続しているか」（廃止・経過措置化されていないか）を確認すること**(chiba型の
+   落とし穴)
 3. school-subsidy型4県(nagano/tokushima/kagawa/kochi)はhokkaido/shizuoka/niigataの実装例
    (annualAmountJpy=県単上乗せ分のみ)に揃えること。niigataのように「目安年収でなく技術的な
    算定基準額を使う県」もあるため、その場合は独自変換せず原文のまま転記すること
