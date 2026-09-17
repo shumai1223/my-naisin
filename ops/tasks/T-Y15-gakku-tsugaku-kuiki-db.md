@@ -268,13 +268,26 @@ default_project/_page_/001/059/502/shiryou2_7gakkuminaoshijoukyou.pdf`）を再�
 T-Y15は41県実装完了(abolished型21県+districted型20県)。structured確定の残りはakita/
 niigata/fukui/yamanashi/miyazaki(baseline調査時点でいずれもuncertain=一次資料未発見)のみ。
 
+**2026-09-18追記: akita(42県目・abolished型)を実装完了した**。岩手県比較表に「H17 青森、秋田、
+茨城、神奈川、石川、奈良」と明記されているのを再確認(既に取得済みのPDFを再利用)し一次確認。
+二次資料(ksmdi.jpn.org「北海道・東北の学区制」)で廃止前3学区・学区外枠なし・理数科等専門学科
+も学区対象(他県と逆パターンの設計)という詳細を確認しその旨を正直に明記(Y-0)。★既存テストの
+「未登録県の例」がakitaを使っていたため、実装で矛盾が生じることを事前に検知しniigataに
+差し替え済み(次にniigataへ着手するセッションはこの点に注意)。
+
+T-Y15は42県実装完了(abolished型22県+districted型20県)。structured確定の残りはniigata/
+fukui/yamanashi/miyazaki(baseline調査時点でいずれもuncertain=一次資料未発見)のみ。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y15の42県目として、akita/niigata/fukui/yamanashi/miyazakiのいずれかを一次資料で
-   裏取りする。gunma/gifu/naraで確立した手順（①岩手県比較表で実施年度を確認→②県教育委員会
-   サイトの「入学者選抜実施要項」ページや「教育委員会会議録」を辿って一次資料を探す→③見つから
-   なければWikipedia等の二次資料に切り替え、その旨をnoteに明記）をそのまま踏襲するとよい
+1. T-Y15の43県目として、niigata/fukui/yamanashi/miyazakiのいずれかを一次資料で裏取りする。
+   gunma/gifu/nara/akitaで確立した手順（①岩手県比較表(既に取得済みのPDF)で実施年度を確認→
+   ②見つからなければ県教育委員会サイトの「入学者選抜実施要項」ページや「教育委員会会議録」を
+   辿って一次資料を探す→③それでも見つからなければWikipedia等の二次資料に切り替え、その旨を
+   noteに明記）をそのまま踏襲するとよい。★niigataは既存テストの「未登録県の例」として使われて
+   いた箇所をakita実装時に別の未使用県に差し替え済みなので、着手前に`school-district.test.ts`
+   を確認すること
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
-   yamanashi/gunma(63校)/nagano(20校)/miyagi(21レコード)の7県実装済み。詳細はT-Y14タスク
-   ファイル参照）
+   yamanashi/gunma(63校)/nagano(20校)/miyagi(21レコード)/kagoshima(155レコード)/kochi(64
+   レコード)の9県実装済み。詳細はT-Y14タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-districts/index.ts`を確認し二重実装を
    避けること
