@@ -169,13 +169,21 @@ R5(予定) 佐賀✅
 栃木/岐阜/鳥取/山梨(既にT-Y14で別データ扱い)は「H17/H19/H20/H26/H29」等で廃止年度の当たりを
 つけられるため、次回セッションの着手候補として優先度が高い。
 
+**2026-09-17追記: ishikawa(28県目・abolished型)を実装完了**。石川県公式サイト
+(`pref.ishikawa.lg.jp/kyoiku/gakkou/k-gakkou/gakkoushidou_02.html`)をWebFetchで直接確認し
+「平成17年度より通学区域の制限が廃止され、すべての学校・学科について、県内全域から入学する
+ことができます。」の文言を確認(一次資料で直接確認・岩手県比較資料のH17推定とも整合)。
+廃止前の3学区(第1学区=加賀地区、第2学区=金沢地区、第3学区=能登地区)は複数の二次資料に
+記述があるが一次資料での区割り明記は確認できず、正直に「二次資料のみ」と記録した。
+tsc実exit0・関連jest37件green確認済み(commit 5f44b73・ローカルのみ)。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y15の28県目（残るstructured確定県: iwate/yamagata/fukushima/
-   ishikawa/kyoto/shimane/yamaguchi/
+1. T-Y15の29県目（残るstructured確定県: iwate/yamagata/fukushima/
+   kyoto/shimane/yamaguchi/
    ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む（上記の岩手県表で
-   abolished型と当たりが付いている県を優先すると効率的。ishikawaはH17で
-   廃止の当たりが付いている）
+   abolished型と当たりが付いている県を優先すると効率的。yamagata/fukushima/kumamoto等は
+   H17/H20等で廃止の当たりが付いている）
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
-   yamanashi/gunma(12校)の5県実装済み。詳細はT-Y14タスクファイル参照）
+   yamanashi/gunma(63校)の5県実装済み。詳細はT-Y14タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-districts/index.ts`を確認し二重実装を
    避けること
