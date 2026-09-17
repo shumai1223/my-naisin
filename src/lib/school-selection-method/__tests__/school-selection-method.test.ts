@@ -661,6 +661,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(futsuu?.note).toContain('結合セル');
   });
 
+  it('aomori: 青森(普通科)は特色化選抜で学力検査の国語・数学・英語を1.5倍にする傾斜配点を行う', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '青森', '特色化選抜', '普通科');
+    expect(record?.note).toContain('1.5倍');
+    expect(record?.ratioType).toBe('学力検査650点:調査書180点:面接20点(合計850点)');
+  });
+
+  it('aomori: 青森北(普通科)は一般選抜で第2志望がスポーツ科学科の受検者に実技検査を実施する', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori', '青森北', '一般選抜', '普通科');
+    expect(record?.note).toContain('スポーツ科学科');
+  });
+
+  it('aomori: schoolsは東青地区分割版の頁1〜4(4校12レコード)を収録している(残り8頁・他5地区は未収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'aomori');
+    expect(record?.schools?.length).toBe(12);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(4);
+    expect(record?.coverageNote).toContain('東青地区');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
