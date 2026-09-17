@@ -746,12 +746,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
-  it('gifu: schoolsは頁1完全収録+頁2の学校番号19〜30(30校194レコード)を収録している(頁2残り・頁3〜4は未収録)', () => {
+  it('gifu: schoolsは頁1完全収録+頁2の学校番号19〜36(36校218レコード)を収録している(頁2残り・頁3〜4は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
-    expect(record?.schools?.length).toBe(194);
+    expect(record?.schools?.length).toBe(218);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(30);
+    expect(schoolNames.size).toBe(36);
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+  });
+
+  it('gifu: 関有知(普通)は独自検査で面接と自己表現の両方を実施する(生活デザインは独自検査なし)', () => {
+    const futsuu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '関有知', '第一次選抜(独自検査)', '普通');
+    const seikatsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu', '関有知', '第一次選抜(独自検査)', '生活デザイン');
+    expect(futsuu?.note).toContain('面接及び自己表現');
+    expect(seikatsu).toBeNull();
   });
 
   it('gifu: 大垣桜(4学科)は独自検査を含む選抜が実施されない(区分欄が全て空欄)', () => {
