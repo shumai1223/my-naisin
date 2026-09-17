@@ -580,12 +580,24 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('第3志望まで');
   });
 
-  it('kagoshima: schoolsは4学区(鹿児島/南薩/北薩/姶良・伊佐)47校105レコードを収録している(他3学区は未収録)', () => {
+  it('kagoshima: schoolsは全7学区67校155レコードを収録している(楠隼のみ推薦入試の実態不明で除外)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kagoshima');
-    expect(record?.schools?.length).toBe(105);
+    expect(record?.schools?.length).toBe(155);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(47);
-    expect(record?.coverageNote).toContain('姶良・伊佐学区');
+    expect(schoolNames.size).toBe(67);
+    expect(schoolNames.has('楠隼')).toBe(false);
+    expect(record?.coverageNote).toContain('大島');
+  });
+
+  it('kagoshima: 鹿屋農業(農業)は6学科間で学力検査・第二次選抜とも第2志望まで併願できる', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kagoshima', '鹿屋農業', '推薦入試', '農業');
+    expect(record?.note).toContain('6学科間');
+    expect(record?.note).toContain('第2志望まで');
+  });
+
+  it('kagoshima: 喜界(普通)は連携型中高一貫教育校入学者選抜のため通常の推薦入試定員%の記載がない', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kagoshima', '喜界', '推薦入試', '普通');
+    expect(record?.note).toContain('連携型中高一貫');
   });
 
   it('kagoshima: 薩南工業(機械)は4学科間で学力検査を第4志望まで併願できる', () => {

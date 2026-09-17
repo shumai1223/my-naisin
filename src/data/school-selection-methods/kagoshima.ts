@@ -19,9 +19,10 @@
 // 実施せず、中学校3年間の学習や活動状況、面接、作文等を総合して選抜する制度」という鹿児島県
 // 推薦入試の一般的な制度説明に基づく。個別校の実施有無を確認したものではない)。
 //
-// ★今回は7学区(鹿児島/南薩/北薩/姶良・伊佐/大隅/熊毛/大島)のうち「鹿児島学区」「南薩学区」
-// 「北薩学区」「姶良・伊佐学区」の47校105レコードのみ収録。残り3学区(大隅/熊毛/大島)は
-// 未収録（coverageNote参照）。
+// ★全7学区(鹿児島/南薩/北薩/姶良・伊佐/大隅/熊毛/大島)を完全収録(67校155レコード)。
+// ただし楠隼高校(普通科)は表内で推薦入試の定員%・自己推薦/学校推薦の別が空欄(中高一貫校の
+// 楠隼中学校からの入学者60人以内を含む特殊枠のため通常の推薦入試を実施していないと判断)で
+// 推薦入試の実態が確認できなかったため収録対象から除外した(Y-0: 確認できないものは収録しない)。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -30,7 +31,7 @@ export const KAGOSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全7学区(鹿児島/南薩/北薩/姶良・伊佐/大隅/熊毛/大島)のうち「鹿児島学区」18校38レコード+「南薩学区」10校20レコード+「北薩学区」9校22レコード+「姶良・伊佐学区」10校25レコード=47校105レコードのみ収録。残り3学区(大隅/熊毛/大島)は未収録。また本資料は推薦入試・学区外枠・学科併願・くくり募集・帰国生徒等特別選抜のみを扱い、学力検査:調査書の比重(傾斜配点)は対象外',
+    '全7学区(鹿児島/南薩/北薩/姶良・伊佐/大隅/熊毛/大島)を完全収録(67校155レコード)。楠隼高校(普通科)のみ推薦入試の実態が表内で確認できず除外。また本資料は推薦入試・学区外枠・学科併願・くくり募集・帰国生徒等特別選抜のみを扱い、学力検査:調査書の比重(傾斜配点)は対象外',
   source: {
     url: 'https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r8/documents/124253_20251205110312-1.pdf',
     docTitle: '令和8年度鹿児島県公立高等学校入学者選抜方法案内（令和7年12月5日修正版）',
@@ -142,5 +143,55 @@ export const KAGOSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
     { schoolName: '国分中央', department: '生活文化', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。3学科間で第2希望まで併願可能' },
     { schoolName: '国分中央', department: 'ビジネス情報', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員120人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。3学科間で第2希望まで併願可能' },
     { schoolName: '国分中央', department: 'スポーツ健康', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員60%以内(自己推薦のみ)。学力検査・第二次選抜とも園芸工学科/生活文化科又はビジネス情報科のいずれか1学科と併願可能(志望順位の指定なし)' },
+    { schoolName: '曽於', department: '文理', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。注*3: 文理/普通/機械電子/商業の4学科間で第2志望まで併願可能(畜産食農科との併願は不可)' },
+    { schoolName: '曽於', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学区外からの一定枠は募集定員の10%(4人)。注*3: 4学科間(文理/普通/機械電子/商業)で第2志望まで併願可能' },
+    { schoolName: '曽於', department: '畜産食農', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。注*3: 他学科との併願は不可' },
+    { schoolName: '曽於', department: '機械電子', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。注*3: 4学科間(文理/普通/機械電子/商業)で第2志望まで併願可能' },
+    { schoolName: '曽於', department: '商業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。注*3: 4学科間(文理/普通/機械電子/商業)で第2志望まで併願可能' },
+    { schoolName: '志布志', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員120人・推薦入試定員30%以内(注*4: 英語コース20%・それ以外の一般10%)(自己推薦・学校推薦とも実施)' },
+    { schoolName: '串良商業', department: '情報処理', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも総合ビジネス科と併願可能' },
+    { schoolName: '串良商業', department: '総合ビジネス', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも情報処理科と併願可能' },
+    { schoolName: '鹿屋', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員240人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学区外からの一定枠は募集定員の10%(24人)' },
+    { schoolName: '鹿屋農業', department: '農業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。農業/園芸/畜産/農業機械/農林環境/食と生活の6学科間で学力検査・第二次選抜とも第2志望まで併願可能' },
+    { schoolName: '鹿屋農業', department: '園芸', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。6学科間で第2志望まで併願可能' },
+    { schoolName: '鹿屋農業', department: '畜産', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。6学科間で第2志望まで併願可能' },
+    { schoolName: '鹿屋農業', department: '農業機械', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。6学科間で第2志望まで併願可能' },
+    { schoolName: '鹿屋農業', department: '農林環境', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。6学科間で第2志望まで併願可能' },
+    { schoolName: '鹿屋農業', department: '食と生活', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。6学科間で第2志望まで併願可能' },
+    { schoolName: '鹿屋工業', department: '機械', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。機械/電気/電子/建築/土木の5学科間で学力検査を第3志望まで併願可能(第二次選抜の併願は表内に記載なし)' },
+    { schoolName: '鹿屋工業', department: '電気', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。5学科間で学力検査を第3志望まで併願可能' },
+    { schoolName: '鹿屋工業', department: '電子', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。5学科間で学力検査を第3志望まで併願可能' },
+    { schoolName: '鹿屋工業', department: '建築', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。5学科間で学力検査を第3志望まで併願可能' },
+    { schoolName: '鹿屋工業', department: '土木', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。5学科間で学力検査を第3志望まで併願可能' },
+    { schoolName: '垂水', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも生活デザイン科と併願可能' },
+    { schoolName: '垂水', department: '生活デザイン', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員20%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも普通科と併願可能' },
+    { schoolName: '南大隅', department: '商業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)' },
+    { schoolName: '鹿屋女子', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員10%以内(自己推薦のみ)。学区外からの一定枠は募集定員の10%(4人)。情報ビジネス/生活科学の2学科と推薦入試・学力検査・第二次選抜とも第3志望まで併願可能(3学科間)' },
+    { schoolName: '鹿屋女子', department: '情報ビジネス', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦のみ)。3学科間で推薦入試・学力検査・第二次選抜とも第3志望まで併願可能' },
+    { schoolName: '鹿屋女子', department: '生活科学', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員30%以内(自己推薦のみ)。3学科間で推薦入試・学力検査・第二次選抜とも第3志望まで併願可能' },
+    { schoolName: '種子島', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。普通/生物生産/電気の3学科間で第2志望まで併願可能' },
+    { schoolName: '種子島', department: '生物生産', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。3学科間で第2志望まで併願可能' },
+    { schoolName: '種子島', department: '電気', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。3学科間で第2志望まで併願可能' },
+    { schoolName: '種子島中央', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。普通/ミライデザイン/情報処理の3学科間で第3志望まで併願可能' },
+    { schoolName: '種子島中央', department: 'ミライデザイン', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。3学科間で第3志望まで併願可能' },
+    { schoolName: '種子島中央', department: '情報処理', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員20%以内(自己推薦・学校推薦とも実施)。3学科間で第3志望まで併願可能' },
+    { schoolName: '屋久島', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも情報ビジネス科と併願可能' },
+    { schoolName: '屋久島', department: '情報ビジネス', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも普通科と併願可能' },
+    { schoolName: '大島', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員240人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)' },
+    { schoolName: '奄美', department: '機械電気', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学科併願は表内に記載なし' },
+    { schoolName: '奄美', department: '商業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学力検査は情報処理科と併願可能(第二次選抜の併願は表内に記載なし)' },
+    { schoolName: '奄美', department: '情報処理', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学力検査は商業科と併願可能' },
+    { schoolName: '奄美', department: '家政', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学科併願は表内に記載なし' },
+    { schoolName: '奄美', department: '衛生看護', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学科併願は表内に記載なし' },
+    { schoolName: '大島北', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも情報処理科と併願可能' },
+    { schoolName: '大島北', department: '情報処理', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも普通科と併願可能' },
+    { schoolName: '古仁屋', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)' },
+    { schoolName: '喜界', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・注*6: 連携型中高一貫教育校入学者選抜を実施するため通常の推薦入試定員%の記載なし。学力検査・第二次選抜とも商業科と併願可能' },
+    { schoolName: '喜界', department: '商業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・注*6: 連携型中高一貫教育校入学者選抜を実施するため通常の推薦入試定員%の記載なし。学力検査・第二次選抜とも普通科と併願可能' },
+    { schoolName: '徳之島', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも総合学科と併願可能' },
+    { schoolName: '徳之島', department: '総合学科', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。学力検査・第二次選抜とも普通科と併願可能' },
+    { schoolName: '沖永良部', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員10%以内(自己推薦・学校推薦とも実施)。推薦入試・学力検査・第二次選抜いずれも商業科と併願可能' },
+    { schoolName: '沖永良部', department: '商業', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員40人・推薦入試定員30%以内(自己推薦・学校推薦とも実施)。推薦入試・学力検査・第二次選抜いずれも普通科と併願可能' },
+    { schoolName: '与論', department: '普通', selectionCategory: '推薦入試', interviewRequired: true, note: '募集定員80人・推薦入試定員10%以内(注*7: 推薦入学者選抜及び連携型中高一貫教育校入学者選抜を実施する)(学校推薦のみ)' },
   ],
 };
