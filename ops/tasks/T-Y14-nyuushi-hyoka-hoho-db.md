@@ -294,10 +294,23 @@ jestで検出し訂正(過去のgunma/naganoと同型の教訓)。tsc実exit0・
 教訓を反映して一発でjest green達成。tsc実exit0・jest78件green確認済み（commit fb78c61・
 ローカルのみ）。残り3学区(大隅/熊毛/大島)は未収録。
 
+**2026-09-17追記19（kagoshima完了）: 大隅学区(曽於/志布志/串良商業/鹿屋/鹿屋農業/鹿屋工業/垂水/
+南大隅/鹿屋女子・楠隼は除外)27レコード+熊毛学区(種子島/種子島中央/屋久島)8レコード+大島学区
+(大島/奄美/大島北/古仁屋/喜界/徳之島/沖永良部/与論)16レコードを頁3から追加し、全7学区67校
+155レコードでkagoshimaを完全収録した**。楠隼高校(普通科)は表内で推薦入試の定員%・自己推薦/
+学校推薦の別が空欄(楠隼中学校からの入学者60人以内を含む中高一貫の特殊枠のため通常の推薦入試を
+実施していないと判断)で実態が確認できず収録対象から除外(Y-0: 確認できないものは収録しない)。
+喜界高校は注*6により連携型中高一貫教育校入学者選抜を実施するため通常の推薦入試%の記載が
+ないという特殊ケースを発見・noteに明記。鹿屋農業は6学科間で学力検査・第二次選抜とも第2志望
+まで併願可という広い例を確認。★2回連続(gunma/kagoshima第1弾)で踏んだ学校数見積もり誤りの
+教訓を反映し、今回はnode -eでコードから直接カウント(67校155レコード)してから記述・一発で
+jest green達成。tsc実exit0・jest80件green確認済み（commit b1ec917・ローカルのみ）。kagoshima
+は8県目としてosaka/aichi/ibaraki/yamanashi/gunma/nagano/miyagi/kagoshimaで完了・全県公式
+「令和8年度公立高等学校入学者選抜方法案内」(全6頁)を完全収録した唯一の県となった。
+
 **次回セッションが選ぶべきこと**:
-1. kagoshimaの続き（頁3の大隅学区・熊毛学区・大島学区。頁3は既にpdftoppmで画像取得済み）、
-   またはT-Y14の9県目（残るstructured確定県: tokyo/hokkaido/aomori/fukushima/gifu/
-   shizuoka/okayama/hiroshima/yamaguchi/tokushima/kochi）のデータ層実装に進む
+1. T-Y14の9県目（残るstructured確定県: tokyo/hokkaido/aomori/fukushima/gifu/shizuoka/
+   okayama/hiroshima/yamaguchi/tokushima/kochi）のデータ層実装に進む
 2. またはmiyagiの続き（頁27以降・偶数頁スキップに注意）
 3. またはT-Y15（学区DB）のデータ層実装へ切替（loop-question-noteの優先順位表で1と並行可と
    指定されている・2026-09-17時点で41県実装済み・詳細はT-Y15タスクファイル参照）
