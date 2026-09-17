@@ -177,12 +177,21 @@ R5(予定) 佐賀✅
 記述があるが一次資料での区割り明記は確認できず、正直に「二次資料のみ」と記録した。
 tsc実exit0・関連jest37件green確認済み(commit 5f44b73・ローカルのみ)。
 
+**2026-09-17追記: yamagata(29県目・districted型)を実装完了**。山形県教委会議資料
+(`pref.yamagata.jp/documents/4927/kaigishiryou1014-3.pdf`・2015年制定の規則改正資料)を
+pdftotext(-layout)で全文確認(この文書はテキスト層が正常でpdftoppmのビジョン確認は不要だった)。
+普通科は東/北/南/西の4学区制、理数科は東・北を統合した3区分、それ以外の学科・定時制・専攻科・
+中高一貫校は全て県下一円。学区外就学は固定%枠でなく「入学志願者比率の著しい不均衡」「通学の
+著しい不便」「その他やむを得ない事情」の3要件による教育長裁量の調整規定という他県に無い方式。
+tsc実exit0・関連jest38件green確認済み(commit 99b5c52・ローカルのみ)。
+
 **次回セッションが選ぶべきこと**:
-1. T-Y15の29県目（残るstructured確定県: iwate/yamagata/fukushima/
+1. T-Y15の30県目（残るstructured確定県: iwate/fukushima/
    kyoto/shimane/yamaguchi/
-   ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む（上記の岩手県表で
-   abolished型と当たりが付いている県を優先すると効率的。yamagata/fukushima/kumamoto等は
-   H17/H20等で廃止の当たりが付いている）
+   ehime/fukuoka/nagasaki/kumamoto）のデータ層実装に進む。fukushimaは公式PDF
+   「福島県立高等学校の通学区域に関する規則」(`pref.fukushima.lg.jp/uploaded/attachment/
+   653878.pdf`)が既に発見済み(普通科8学区・学区外進学20%上限・専門/総合/定通は県内全域)で
+   次に着手しやすい
 2. またはT-Y14（学校別評価方法DB）のデータ層実装へ切替（2026-09-17時点でosaka/aichi/ibaraki/
    yamanashi/gunma(63校)の5県実装済み。詳細はT-Y14タスクファイル参照）
 3. いずれを選ぶ場合も、着手前に既存の`src/data/school-districts/index.ts`を確認し二重実装を
