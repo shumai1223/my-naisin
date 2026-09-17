@@ -10,9 +10,15 @@ describe('T-Y15 学区（通学区域）DB', () => {
     expect(getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'akita')).toBeUndefined();
   });
 
-  it('prefecturesBySystemTypeはabolishedでaomori/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
+  it('prefecturesBySystemTypeはabolishedでaomori/gunma/hiroshima/ibaraki/ishikawa/kanagawa/kochi/miyagi/oita/osaka/saga/saitama/shiga/shimane/shizuoka/tochigi/tokyo/toyama/wakayama/yamaguchiを含む', () => {
     const abolished = prefecturesBySystemType(SCHOOL_DISTRICT_BY_PREFECTURE, 'abolished');
-    expect(abolished).toEqual(['aomori', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+    expect(abolished).toEqual(['aomori', 'gunma', 'hiroshima', 'ibaraki', 'ishikawa', 'kanagawa', 'kochi', 'miyagi', 'oita', 'osaka', 'saga', 'saitama', 'shiga', 'shimane', 'shizuoka', 'tochigi', 'tokyo', 'toyama', 'wakayama', 'yamaguchi']);
+  });
+
+  it('gunmaは平成19年度(2007年度)に全県一区化した(一次資料は令和3年度実施要項の資料1・二次資料の2021年説とは食い違う)', () => {
+    const record = getSchoolDistrict(SCHOOL_DISTRICT_BY_PREFECTURE, 'gunma');
+    expect(record?.systemType).toBe('abolished');
+    expect(record?.abolishedFiscalYear).toBe('平成19年度（2007年度）');
   });
 
   it('shimaneは学区制度が無く、松江市内3校・出雲高校のみ地域外入学制限(市外合格者10%/5%以内)を持つ', () => {
