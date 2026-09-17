@@ -552,11 +552,21 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toContain('4段階評価');
   });
 
-  it('miyagi: schoolsは3校9レコードを収録している(頁13/15/17の3校分のみ)', () => {
+  it('miyagi: schoolsは3校21レコードを収録している(白石工業は全5学科分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyagi');
-    expect(record?.schools?.length).toBe(9);
+    expect(record?.schools?.length).toBe(21);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
     expect(schoolNames.size).toBe(3);
+    const shiraishiKogyoDepartments = new Set(
+      record?.schools?.filter((s) => s.schoolName === '白石工業').map((s) => s.department)
+    );
+    expect(shiraishiKogyoDepartments.size).toBe(5);
+  });
+
+  it('miyagi: 白石工業(電気科・共通選抜)は機械科と同じ比重(6:4)だが募集定員は40人(機械科は80人)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyagi', '白石工業', '共通選抜', '電気科');
+    expect(record?.ratioType).toBe('学力検査6:調査書4');
+    expect(record?.note).toContain('40人');
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {

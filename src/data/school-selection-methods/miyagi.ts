@@ -9,8 +9,8 @@
 // curl+pdftoppm(150dpi)でビジョン確認。pdftotextはToUnicode CMap欠落で文字化けする既知パターン)。
 //
 // ★選抜方法データの頁と学校の「スクール・ミッション/ポリシー」頁が交互に配置されている
-// (奇数頁=選抜方法データ、偶数頁=ポリシー頁で本DBの対象外)。全316頁のうち先頭3校分
-// (頁13・15・17)のみ収録し、残りは今後の拡充対象(coverageNote参照)。
+// (奇数頁=選抜方法データ、偶数頁=ポリシー頁で本DBの対象外)。全316頁のうち頁13〜25の3校分
+// (白石・白石蔵王キャンパス・白石工業の全5学科)のみ収録し、残りは今後の拡充対象(coverageNote参照)。
 //
 // ratioTypeの運用:
 //  - 共通選抜: 学力検査:調査書の比重をそのまま転記(例'学力検査6:調査書4')
@@ -26,7 +26,7 @@ export const MIYAGI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    '全316頁(1校1頁・偶数頁は選抜方法データではなくスクール・ミッション/ポリシー頁で対象外)のうち、頁13(白石・看護科)・15(白石蔵王キャンパス・普通科)・17(白石工業・機械科)の3校のみ収録。社会人特別選抜は収録3校とも「無」',
+    '全316頁(1校1頁・偶数頁は選抜方法データではなくスクール・ミッション/ポリシー頁で対象外)のうち、頁13(白石・看護科)・15(白石蔵王キャンパス・普通科)・17〜25(白石工業・機械科/電気科/工業化学科/建築科/設備工業科の全5学科)の3校21レコードのみ収録。社会人特別選抜は収録3校とも「無」',
   source: {
     url: 'https://www.pref.miyagi.jp/documents/65121/r9_senbatsuhouhoutou.pdf',
     docTitle: '令和9年度宮城県公立高等学校入学者選抜 選抜方法等一覧',
@@ -95,7 +95,7 @@ export const MIYAGI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       selectionCategory: '特色選抜',
       interviewRequired: false,
       ratioType: '調査書390点:学力検査500点',
-      note: '募集人数32人(40%)・合計890点。面接・実技・作文はいずれも実施しない(工業科で唯一の無面接パターン)。審査対象は合計上位150%(48人)',
+      note: '募集人数32人(40%)・合計890点。面接・実技・作文はいずれも実施しない(白石工業高校の全5学科共通パターン。他2校は面接あり)。審査対象は合計上位150%(48人)',
     },
     {
       schoolName: '白石工業',
@@ -104,6 +104,102 @@ export const MIYAGI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       interviewRequired: true,
       ratioType: '調査書135点:学力検査300点:面接(4段階評価A〜D)',
       note: '合計435点。面接は個人面接10分程度(志望動機等)。評価が4段階(A〜D)である点が他校(3段階A〜C)と異なる',
+    },
+    {
+      schoolName: '白石工業',
+      department: '電気科',
+      selectionCategory: '共通選抜',
+      interviewRequired: false,
+      ratioType: '学力検査6:調査書4',
+      note: '募集定員40人・募集人数24人(60%)。機械科(募集定員80人)より定員が小さいが共通選抜/特色選抜の比重・配点は同一',
+    },
+    {
+      schoolName: '白石工業',
+      department: '電気科',
+      selectionCategory: '特色選抜',
+      interviewRequired: false,
+      ratioType: '調査書390点:学力検査500点',
+      note: '募集人数16人(40%)・合計890点。面接・実技・作文なし。審査対象は合計上位150%(24人)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '電気科',
+      selectionCategory: '第二次募集',
+      interviewRequired: true,
+      ratioType: '調査書135点:学力検査300点:面接(4段階評価A〜D)',
+      note: '合計435点。面接は個人面接10分程度(志望動機等)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '工業化学科',
+      selectionCategory: '共通選抜',
+      interviewRequired: false,
+      ratioType: '学力検査6:調査書4',
+      note: '募集定員40人・募集人数24人(60%)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '工業化学科',
+      selectionCategory: '特色選抜',
+      interviewRequired: false,
+      ratioType: '調査書390点:学力検査500点',
+      note: '募集人数16人(40%)・合計890点。面接・実技・作文なし。審査対象は合計上位150%(24人)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '工業化学科',
+      selectionCategory: '第二次募集',
+      interviewRequired: true,
+      ratioType: '調査書135点:学力検査300点:面接(4段階評価A〜D)',
+      note: '合計435点。面接は個人面接10分程度(志望動機等)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '建築科',
+      selectionCategory: '共通選抜',
+      interviewRequired: false,
+      ratioType: '学力検査6:調査書4',
+      note: '募集定員40人・募集人数24人(60%)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '建築科',
+      selectionCategory: '特色選抜',
+      interviewRequired: false,
+      ratioType: '調査書390点:学力検査500点',
+      note: '募集人数16人(40%)・合計890点。面接・実技・作文なし。審査対象は合計上位150%(24人)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '建築科',
+      selectionCategory: '第二次募集',
+      interviewRequired: true,
+      ratioType: '調査書135点:学力検査300点:面接(4段階評価A〜D)',
+      note: '合計435点。面接は個人面接10分程度(志望動機等)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '設備工業科',
+      selectionCategory: '共通選抜',
+      interviewRequired: false,
+      ratioType: '学力検査6:調査書4',
+      note: '募集定員40人・募集人数24人(60%)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '設備工業科',
+      selectionCategory: '特色選抜',
+      interviewRequired: false,
+      ratioType: '調査書390点:学力検査500点',
+      note: '募集人数16人(40%)・合計890点。面接・実技・作文なし。審査対象は合計上位150%(24人)',
+    },
+    {
+      schoolName: '白石工業',
+      department: '設備工業科',
+      selectionCategory: '第二次募集',
+      interviewRequired: true,
+      ratioType: '調査書135点:学力検査300点:面接(4段階評価A〜D)',
+      note: '合計435点。面接は個人面接10分程度(志望動機等)',
     },
   ],
 };
