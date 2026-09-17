@@ -1005,11 +1005,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(risu?.note).toContain('★国際理解分野');
   });
 
-  it('tokushima: schoolsは頁8-10(育成型選抜1-3頁目・20校64レコード)+頁13(一般選抜傾斜配点・7校8学科)の計71レコードを収録している(頁11-12の育成型選抜残りは未収録)', () => {
+  it('tokushima: 名西は普通・芸術(音楽・美術・書道)で育成型選抜の配点等を共有しつつ実績重視枠の文化部指定分野は芸術のみ3分野を持つ(頁11)', () => {
+    const futsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '名西', '育成型選抜(実績重視枠)', '普通');
+    const geijutsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '名西', '育成型選抜(実績重視枠)', '芸術(音楽・美術・書道)');
+    expect(futsu?.note).toContain('男子相撲');
+    expect(geijutsu?.note).toContain('音楽・美術・書道の3分野');
+  });
+
+  it('tokushima: 板野・川島・阿波西・穴吹は育成型選抜の実績重視枠が実施されない単一枠のみの学校である(頁11)', () => {
+    const itano = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '板野', '育成型選抜(実績重視枠)', '普通');
+    const kawashima = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '川島', '育成型選抜(実績重視枠)', '普通');
+    expect(itano).toBeNull();
+    expect(kawashima).toBeNull();
+  });
+
+  it('tokushima: schoolsは頁8-11(育成型選抜1-4頁目・28校80レコード)+頁13(一般選抜傾斜配点・7校8学科)の計87レコードを収録している(頁12の育成型選抜残りは未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima');
-    expect(record?.schools?.length).toBe(71);
+    expect(record?.schools?.length).toBe(87);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(20);
+    expect(schoolNames.size).toBe(28);
     expect(record?.coverageNote).toContain('育成型選抜');
   });
 
