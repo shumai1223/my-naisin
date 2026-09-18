@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { B1 } from './data-b1.mjs';
+import { B2 } from './data-b2.mjs';
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const QC = String.fromCharCode(39);
 const NL = String.fromCharCode(10);
@@ -48,12 +49,19 @@ for (const r of B1) {
   lines.push('      ratioType: ' + q(ratio) + ',', '      note: ' + q(note) + ',', '    },');
   out += lines.join(NL) + NL;
 }
-const names = new Set(B1.map((r) => r.school));
+
+// 別表2 特色化選抜の実施方法等
+for (const t of B2) {
+  const note = '【令和8年度 特色化選抜における実施方法等(別表2)・' + t.cat + '】実施方法: ' + t.method + '。面接: ' + t.itv + '。' + t.test + '。出願条件(別表3)・選考の割合は本レコードには未収録。';
+  const lines = ['    {', '      schoolName: ' + q(t.school) + ',', '      department: ' + q(t.sub || t.cat) + ',', '      selectionCategory: ' + q('特色化選抜(' + t.cat + ')') + ',', '      interviewRequired: true,', '      note: ' + q(note) + ',', '    },'];
+  out += lines.join(NL) + NL;
+}
+const names = new Set([...B1.map((r) => r.school), ...B2.map((t) => t.school.replace('(龍神分校)', '').replace('南部', '南部'))]);
 const zen = B1.filter((r) => r.course === '全日制').length;
 const tei = B1.filter((r) => r.course === '定時制').length;
-const ts = `// 和歌山県: 令和8年度和歌山県立高等学校入学者選抜選考基準(別表1)と面接・実技検査等(別表4)。
+const ts = `// 和歌山県: 令和8年度和歌山県立高等学校入学者選抜選考基準(別表1)・特色化選抜における実施方法等(別表2)・面接・実技検査等(別表4)。
 //
-// 一次ソース: 和歌山県教育委員会「令和8年度和歌山県立高等学校入学者選抜実施要項」別表1「入学者選抜選考基準」(全7頁)・別表4「面接・実技検査等」(全2頁)
+// 一次ソース: 和歌山県教育委員会「令和8年度和歌山県立高等学校入学者選抜実施要項」別表1「入学者選抜選考基準」(全7頁)・別表4「面接・実技検査等」(全2頁)・別表2「特色化選抜における実施方法等」(全9頁)
 // (県ページ \`https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html\`・
 // \`.../d00220765_d/fil/senkoukijun_beppyou1.pdf\`・\`.../mensetujitugi_beppyou4.pdf\`・2026-09-19 pdftoppm 100dpiで実画像を目視転記)。
 // 転記データと検算スクリプトは ops/baselines/wakayama-transcription/ に保存。
@@ -61,7 +69,8 @@ const ts = `// 和歌山県: 令和8年度和歌山県立高等学校入学者�
 // 和歌山県の一般選抜は学科ごとに 調査書・学力検査・(面接・実技検査)の割合(%)を公表している。調査書と学力検査は 30:70 / 40:60 / 50:50 が中心で、
 // 学力検査に傾斜配点(国語・英語を1.5倍)を置く学科(那賀国際科・星林の各学科)と、面接・実技検査を課す学科(和歌山北スポーツ健康科学科・和歌山東・有田中央総合学科・定時制の一部)がある。
 // 検算: 全レコードで 調査書+学力検査+面接・実技検査=100%。資料の◇印(県立中学校からの進学者のみ・県立高校入試では募集しない)の学科は収録していない。
-// 未収録: 特色化選抜(別表2・3)・スポーツ推薦(別表5〜7)・追募集(別表8)・通信制課程・「求める生徒像」の本文。
+// 特色化選抜(別表2)は区分(連携型中高一貫・農業・宇宙・地域・学際・芸術・スポーツ健康科学・スポーツ)ごとの実施方法(面接時間・作文/小論文の字数と時間・実技の内容)を21レコードで収録した。
+// 未収録: 特色化選抜の出願条件(別表3)・選考の割合・スポーツ推薦(別表5〜7)・追募集(別表8)・通信制課程・「求める生徒像」の本文。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -70,17 +79,17 @@ export const WAKAYAMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod =
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    ${q('一般選抜の学科別の割合(調査書・学力検査・面接実技)を全日制' + zen + 'レコード・定時制' + tei + 'レコードで完全収録(' + names.size + '校・' + B1.length + 'レコード)。特色化選抜・スポーツ推薦・追募集・通信制と求める生徒像の本文は未収録')},
+    ${q('一般選抜の学科別の割合(調査書・学力検査・面接実技)を全日制' + zen + 'レコード・定時制' + tei + 'レコードで完全収録し、特色化選抜の実施方法(別表2)' + B2.length + 'レコードを加えた(' + names.size + '校・' + (B1.length + B2.length) + 'レコード)。特色化選抜の出願条件・選考の割合・スポーツ推薦・追募集・通信制と求める生徒像の本文は未収録')},
   schools: [
 ${out.replace(/\n$/, '')}
   ],
   source: {
     url: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html',
-    docTitle: '令和8年度和歌山県立高等学校入学者選抜実施要項 別表1・別表4（和歌山県教育委員会）',
+    docTitle: '令和8年度和歌山県立高等学校入学者選抜実施要項 別表1・2・4（和歌山県教育委員会）',
     lastChecked: '${new Date().toISOString().slice(0, 10)}',
   },
   note: 'ratioTypeは一般選抜の 調査書:学力検査(:面接・実技検査) の割合(%)。学力検査の傾斜配点はnoteに記載(国語・英語1.5倍の学科あり)。定時制の昼夜で行が結合されている学科は昼間と夜間の両方に同じ割合を記録した。interviewRequiredは面接を課す学科(和歌山北スポーツ健康科学科・和歌山東・有田中央総合学科・定時制の一部)のみtrue。',
 };
 `;
 fs.writeFileSync(path.join(dir, '../../../src/data/school-selection-methods/wakayama.ts'), ts);
-console.log('schools', names.size, 'records', B1.length, '全日制', zen, '定時制', tei, '別表4連結', hit);
+console.log('schools', names.size, 'records', B1.length + B2.length, '全日制', zen, '定時制', tei, '別表4連結', hit);

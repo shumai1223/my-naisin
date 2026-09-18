@@ -1357,7 +1357,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
   it('wakayama: 一般選抜73レコード(35校・全日制60/定時制13)で、全ての割合の合計が100%に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'wakayama');
     expect(record?.status).toBe('structured');
-    const all = record?.schools ?? [];
+    const all = (record?.schools ?? []).filter((s) => s.selectionCategory === '一般選抜');
     expect(all).toHaveLength(73);
     expect(new Set(all.map((s) => s.schoolName)).size).toBe(35);
     expect(all.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(60);
@@ -1366,6 +1366,29 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
       const total = (s.ratioType ?? '').split(':').reduce((a, it) => a + Number(it.match(/([0-9]+)$/)?.[1] ?? 0), 0);
       expect(total).toBe(100);
     }
+  });
+
+  it('wakayama: 特色化選抜(別表2)21レコードを区分別に収録する(スポーツ9・芸術4・農業2・学際2・宇宙1・地域1・スポーツ健康科学1・連携型中高一貫1)', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'wakayama')?.schools ?? [];
+    const toku = all.filter((s) => s.selectionCategory.startsWith('特色化選抜('));
+    expect(toku).toHaveLength(21);
+    expect(all).toHaveLength(94);
+    const count = (cat: string) => toku.filter((s) => s.selectionCategory === `特色化選抜(${cat})`).length;
+    expect(count('スポーツ')).toBe(9);
+    expect(count('芸術')).toBe(4);
+    expect(count('農業')).toBe(2);
+    expect(count('学際')).toBe(2);
+    expect(count('宇宙')).toBe(1);
+    expect(count('地域')).toBe(1);
+    expect(count('スポーツ健康科学')).toBe(1);
+    expect(count('連携型中高一貫')).toBe(1);
+    const find = (school: string, dept: string) => toku.find((s) => s.schoolName === school && s.department === dept);
+    expect(find('橋本', '学際')?.note).toContain('小論文: 600字程度・70分');
+    expect(find('串本古座', '宇宙')?.note).toContain('小論文: 600字程度・60分');
+    expect(find('和歌山北', '陸上競技')?.note).toContain('作文: 800字程度・50分');
+    expect(find('和歌山東', '剣道')?.note).toContain('作文: 600字程度・50分');
+    expect(find('和歌山', '美術')?.note).toContain('鉛筆デッサン');
+    expect(find('和歌山', '音楽(器楽)')?.note).toContain('YAMAHA C6L');
   });
 
   it('wakayama: 那賀国際科は国語・英語1.5倍、和歌山北スポーツ健康科学科は30:30:40で選択実技15競技、和歌山北普通科は面接なし', () => {
