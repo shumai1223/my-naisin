@@ -1097,13 +1097,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(chienII?.ratioType).toBe('学力検査250:調査書85:面接15');
   });
 
-  it('iwate: 盛岡地区14校29学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が比率どおり1000点になる', () => {
+  it('iwate: 盛岡地区14校29学科と中部地区11校22学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(new Set(all.map((s) => s.schoolName)).size).toBe(14);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(25);
     const general = all.filter((s) => s.selectionCategory === '一般入学者選抜');
-    expect(general).toHaveLength(29);
+    expect(general).toHaveLength(51);
     for (const s of general) {
       const m = (s.ratioType ?? '').match(/^学力検査([0-9]+):調査書([0-9]+)/);
       expect(m).not.toBeNull();
@@ -1129,6 +1129,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const shiwa = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '紫波総合高等学校', '一般入学者選抜');
     expect(shiwa?.interviewRequired).toBe(true);
     expect(shiwa?.note).toContain('集団面接');
+  });
+
+  it('iwate: 二次募集・特色入学者選抜の配点内訳の合計が、調査書が圧縮されていない場合は資料の合計点と一致する(盛岡地区・中部地区)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate');
+    let checked = 0;
+    for (const s of record?.schools ?? []) {
+      if (s.selectionCategory !== '二次募集') continue;
+      const m = (s.note ?? '').match(/選抜方法:(.+?)、合計([0-9]+)点/);
+      if (!m) continue;
+      const parts = m[1].split('+').map((p) => Number(p.match(/([0-9]+)点/)?.[1] ?? 0));
+      if (!parts.length || m[1].includes('圧縮')) continue;
+      expect(parts.reduce((a, b) => a + b, 0)).toBe(Number(m[2]));
+      checked++;
+    }
+    expect(checked).toBeGreaterThan(5);
+  });
+
+  it('iwate: 北上翔南は学力検査400:調査書600(国語・数学1.5倍)、黒沢尻北は特色でプレゼンテーション・面接150点、大迫は独自検査の作文100点で合計1100点', () => {
+    const kita = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '北上翔南高等学校', '一般入学者選抜');
+    expect(kita?.ratioType).toBe('学力検査400:調査書600');
+    const kuro = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '黒沢尻北高等学校', '特色入学者選抜');
+    expect(kuro?.note).toContain('プレゼンテーション・面接150点');
+    const osako = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '大迫高等学校', '一般入学者選抜');
+    expect(osako?.note).toContain('合計1100点');
   });
 
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {

@@ -5,7 +5,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
-const REGIONS = [['./morioka.mjs', '盛岡地区']];
+const REGIONS = [['./morioka.mjs', '盛岡地区', 'r8_morioka.pdf'], ['./chubu.mjs', '中部地区', 'r8_chubu.pdf']];
+const ALL = ['盛岡地区', '中部地区', '県南地区', '沿岸南部地区', '宮古地区', '県北地区', '定時制'];
 const QC = String.fromCharCode(39);
 const q = (s) => {
   if (s.includes(QC) || s.includes(String.fromCharCode(92))) throw new Error('bad char: ' + s.slice(0, 30));
@@ -18,6 +19,7 @@ const push = (name, dept, cat, itv, ratio, note) => {
   out += `    {\n      schoolName: ${q(name)},\n      department: ${q(dept)},\n      selectionCategory: ${q(cat)},\n      interviewRequired: ${itv},\n${ratio ? `      ratioType: ${q(ratio)},\n` : ''}      note: ${q(note)},\n    },\n`;
   recs++;
 };
+const doneNames = REGIONS.map((r) => r[1]);
 for (const [file, region] of REGIONS) {
   const { I } = await import(file);
   for (const e of I) {
@@ -35,12 +37,12 @@ const ts = `// 岩手県: 令和8年度岩手県立高等学校入学者選抜�
 //
 // 一次ソース: 岩手県教育委員会「令和8年度岩手県立高等学校入学者選抜実施概要」(地区別PDF・学校ごとに1〜2頁)
 // (県ページ \`https://www.pref.iwate.jp/kyouikubunka/kyouiku/gakkou/senbatsu/1091420.html\`・
-// 盛岡地区: \`https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/091/420/r8_morioka.pdf\`・
+// 収録地区のPDF: ${REGIONS.map((r) => r[1] + ' ' + r[2]).join('、')}(いずれも https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/091/420/ 配下)・
 // 2026-09-19 pdftoppm 100dpiで目視転記)。転記データと生成スクリプトは ops/baselines/iwate-transcription/ に保存。
 //
 // 岩手県は「一般入学者選抜」(学力検査:調査書の比率[例:盛岡第一=7対3]・学校独自検査の有無)と「特色入学者選抜」(募集人員・調査書/志願理由書/面接/プレゼン/作文等の配点)と
 // 「二次募集」(調査書270点+面接+作文等)を学校・学科別に公表する。一般入学者選抜は全校で学力検査と調査書の合計が1000点(学校独自検査を課す学科は+100点で1100点)。
-// 収録済み地区: 盛岡地区14校(全日制)。未収録: 中部・県南・沿岸南部・宮古・県北・定時制の各地区PDF。
+// 収録済み地区: ${doneNames.join('・')}(全日制)。未収録: ${ALL.filter((r) => !doneNames.includes(r)).join('・')}の各地区PDF。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -49,7 +51,7 @@ export const IWATE_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    ${q(`盛岡地区(全日制)の実施概要を完全収録(${names.size}校・${recs}レコード)。中部・県南・沿岸南部・宮古・県北・定時制の各地区PDFは未収録`)},
+    ${q(`${doneNames.join('・')}(全日制)の実施概要を完全収録(${names.size}校・${recs}レコード)。${ALL.filter((r) => !doneNames.includes(r)).join('・')}の各地区PDFは未収録`)},
   schools: [
 ${out.replace(/\n$/, '')}
   ],
