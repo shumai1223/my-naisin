@@ -442,3 +442,28 @@ T-Y13進捗: 34県実装済み(前回33県+shimane)。
 kagoshima/okinawaの7県(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保留済み・gifuは
 優先度低)。他はT-Y14継続(gifu頁3-4/okayama頁3残り+頁4-7/hiroshima頁4-8/tokushima頁1-7)も
 引き続き選択肢。
+
+## 追記 2026-09-18(続き11): tokushima(35県目)完了・T-Y13で初のconfirmed-none
+
+「私立高校における授業料等軽減の補助について」リーフレットPDF(WebFetchでは「バイナリ解析
+不可」と自己申告・CJKフォント欠落の既知の罠)をcurl+pdftoppm(200dpi)で目視確認。図は
+「授業料軽減事業補助金」という表題の下に国の就学支援金(支給上限額457,200円/年)の帯グラフが
+「約590万円」から「所得制限なし」(令和8年度撤廃)まで単一の帯として途切れず続いており、
+**別枠で示された徳島県独自の上乗せ額は図中に見当たらなかった**(kagawa/sagaと同型の
+「授業料上乗せ無し」ケース)。同リーフレットの「奨学のための給付金」表(全日制152,000円等)は
+wakayama/ehime/aomoriと**4県連続で完全一致**し、国の全国共通基準額の可能性がさらに強まったため
+重複記録を避けて転記しなかった。
+
+**判断**: これまでの34県は全てconfirmed-yes(何らかの独自制度が見つかった)だったが、tokushima
+は授業料上乗せ・入学金補助のいずれも確認できず、**T-Y13で初めてstatus='confirmed-none'を
+使用した**(Y-0の「制度なし確認済み」区分を実践)。schemeType/tiersは付与せず、noteに調査経緯
+を記録。
+
+tsc実exit0・関連jest45件green(前回44件から+1)確認済み。
+
+T-Y13進捗: 35県調査済み(34県confirmed-yes+tokushima confirmed-none)。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はgifu[優先度低]/kochi/kumamoto/miyazaki/
+kagoshima/okinawaの6県(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保留済み)。
+他はT-Y14継続(gifu頁3-4/okayama頁3残り+頁4-7/hiroshima頁4-8/tokushima頁1-7[T-Y14の
+tokushimaは別ドメイン=学校・学科別選抜方法DB])も引き続き選択肢。
