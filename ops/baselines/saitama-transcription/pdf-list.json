@@ -1,0 +1,926 @@
+[
+ {
+  "name": "上尾",
+  "kind": "zen",
+  "file": "001_ageo.pdf",
+  "label": "普通・商業"
+ },
+ {
+  "name": "上尾",
+  "kind": "tei",
+  "file": "002_ageo.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "上尾鷹の台",
+  "kind": "zen",
+  "file": "003_ageotakanodai.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "上尾橘",
+  "kind": "zen",
+  "file": "004_ageotatibana.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "上尾南",
+  "kind": "zen",
+  "file": "005_ageominami.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "朝霞",
+  "kind": "zen",
+  "file": "006_asaka.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "朝霞",
+  "kind": "tei",
+  "file": "007_asaka.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "朝霞西",
+  "kind": "zen",
+  "file": "008_asakanishi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "いずみ",
+  "kind": "zen",
+  "file": "009_izumi.pdf",
+  "label": "生物系・環境系"
+ },
+ {
+  "name": "伊奈学園総合",
+  "kind": "zen",
+  "file": "010_inagakuen.pdf",
+  "label": "普通学系・スポーツ科学系・芸術系"
+ },
+ {
+  "name": "入間向陽",
+  "kind": "zen",
+  "file": "011_irumakouyou.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "岩槻",
+  "kind": "zen",
+  "file": "012_iwatuki_0619.pdf",
+  "label": "普通・国際教養"
+ },
+ {
+  "name": "岩槻商業",
+  "kind": "zen",
+  "file": "013_iwatukisyougyu.pdf",
+  "label": "商業・情報処理"
+ },
+ {
+  "name": "浦和",
+  "kind": "zen",
+  "file": "014_urawa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "浦和",
+  "kind": "tei",
+  "file": "015_urawa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "浦和北",
+  "kind": "zen",
+  "file": "016_urawakita.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "浦和商業",
+  "kind": "zen",
+  "file": "017_urawasyougyou.pdf",
+  "label": "商業・情報処理"
+ },
+ {
+  "name": "浦和第一女子",
+  "kind": "zen",
+  "file": "018_urawadaiitijyoshi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "浦和第一女子",
+  "kind": "tei",
+  "file": "019_urawadaiitijyoshi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "浦和西",
+  "kind": "zen",
+  "file": "020_urawanishi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "浦和東",
+  "kind": "zen",
+  "file": "021_urawahigashi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "大宮",
+  "kind": "zen",
+  "file": "022_oomiya.pdf",
+  "label": "普通・理数"
+ },
+ {
+  "name": "大宮科学技術",
+  "kind": "zen",
+  "file": "023_oomiyakagakugijyutu_0619.pdf",
+  "label": "機械工学・電気工学・建築デザイン工学・ロボット工学・情報サイエンス"
+ },
+ {
+  "name": "大宮科学技術",
+  "kind": "tei",
+  "file": "024_oomiyakagakugijyutu_0619.pdf",
+  "label": "工業技術"
+ },
+ {
+  "name": "大宮光陵",
+  "kind": "zen",
+  "file": "025_oomiyakouryou.pdf",
+  "label": "普通・外国語コース・美術・音楽・書道"
+ },
+ {
+  "name": "大宮商業",
+  "kind": "zen",
+  "file": "026_oomiyasyougyou.pdf",
+  "label": "商業"
+ },
+ {
+  "name": "大宮商業",
+  "kind": "tei",
+  "file": "027_oomiyasyougyou.pdf",
+  "label": "普通・商業"
+ },
+ {
+  "name": "大宮中央",
+  "kind": "tei",
+  "file": "028_oomiyatyuuou.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "大宮東",
+  "kind": "zen",
+  "file": "029_oomiyahigashi.pdf",
+  "label": "普通・体育"
+ },
+ {
+  "name": "大宮南",
+  "kind": "zen",
+  "file": "030_oomiyaminami.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "大宮武蔵野",
+  "kind": "zen",
+  "file": "031_oomiyamusashino.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "小鹿野",
+  "kind": "zen",
+  "file": "032_ogano.pdf",
+  "label": "総合"
+ },
+ {
+  "name": "小川",
+  "kind": "zen",
+  "file": "033_ogawa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "小川",
+  "kind": "tei",
+  "file": "034_ogawa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "桶川",
+  "kind": "zen",
+  "file": "035_okegawa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "桶川西",
+  "kind": "zen",
+  "file": "036_okegawanishi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "越生翔桜",
+  "kind": "zen",
+  "file": "037_ogosesyouou_0619.pdf",
+  "label": "普通・美術表現"
+ },
+ {
+  "name": "春日部",
+  "kind": "zen",
+  "file": "038_kasukabe.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "春日部",
+  "kind": "tei",
+  "file": "039_kasukabe.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "春日部工業",
+  "kind": "zen",
+  "file": "040_kasukabekougyou.pdf",
+  "label": "機械・建築・電気"
+ },
+ {
+  "name": "春日部女子",
+  "kind": "zen",
+  "file": "041_kasukabejyoshi.pdf",
+  "label": "普通・外国語"
+ },
+ {
+  "name": "春日部東",
+  "kind": "zen",
+  "file": "042_kasukabehigashi.pdf",
+  "label": "普通・人文"
+ },
+ {
+  "name": "川口",
+  "kind": "zen",
+  "file": "043_kawaguti.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "川口北",
+  "kind": "zen",
+  "file": "044_kawagutikita.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "川口工業",
+  "kind": "zen",
+  "file": "045_kawagutikougyou.pdf",
+  "label": "機械・電気・情報通信"
+ },
+ {
+  "name": "川口工業",
+  "kind": "tei",
+  "file": "046_kawagutikougyou.pdf",
+  "label": "工業技術"
+ },
+ {
+  "name": "川口青陵",
+  "kind": "zen",
+  "file": "047_kawagutiseiryoudocx.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "川口東",
+  "kind": "zen",
+  "file": "048_kawagutihigashi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "川越",
+  "kind": "zen",
+  "file": "049_kawagoe.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "川越工業",
+  "kind": "zen",
+  "file": "050_kawagoekougyou.pdf",
+  "label": "デザイン・建築・機械・電気・化学"
+ },
+ {
+  "name": "川越工業",
+  "kind": "tei",
+  "file": "051_kawagoekougyou.pdf",
+  "label": "普通・工業技術"
+ },
+ {
+  "name": "川越女子",
+  "kind": "zen",
+  "file": "052_kawagoejyoshi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "川越総合",
+  "kind": "zen",
+  "file": "053_kawagoesougou.pdf",
+  "label": "総合"
+ },
+ {
+  "name": "川越西",
+  "kind": "zen",
+  "file": "054_kawagoenishi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "川越初雁",
+  "kind": "zen",
+  "file": "055_kawagoehatukari.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "川越南",
+  "kind": "zen",
+  "file": "056_kawagoeminami.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "北本",
+  "kind": "zen",
+  "file": "057_kitamoto.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "久喜",
+  "kind": "zen",
+  "file": "058_kuki.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "久喜",
+  "kind": "tei",
+  "file": "059_kuki.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "久喜工業",
+  "kind": "zen",
+  "file": "060_kukikougyou.pdf",
+  "label": "電気・工業化学・機械・環境科学・情報技術"
+ },
+ {
+  "name": "久喜北陽",
+  "kind": "zen",
+  "file": "061_kukihokuyou.pdf",
+  "label": "総合"
+ },
+ {
+  "name": "熊谷",
+  "kind": "zen",
+  "file": "062_kumagaya.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "熊谷",
+  "kind": "tei",
+  "file": "063_kumagaya.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "熊谷工業",
+  "kind": "zen",
+  "file": "064_kumagayakougyou.pdf",
+  "label": "電気・建築・土木・機械・情報技術"
+ },
+ {
+  "name": "熊谷商業",
+  "kind": "zen",
+  "file": "065_kumagayasyougyou.pdf",
+  "label": "総合ビジネス"
+ },
+ {
+  "name": "熊谷女子",
+  "kind": "zen",
+  "file": "066_kumagayajyoshi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "熊谷西",
+  "kind": "zen",
+  "file": "067_kumagayanishi.pdf",
+  "label": "普通・理数"
+ },
+ {
+  "name": "熊谷農業",
+  "kind": "zen",
+  "file": "068_kumagayanougyou.pdf",
+  "label": "食品科学・生物生産工学・生活技術・生物生産技術"
+ },
+ {
+  "name": "栗橋北彩",
+  "kind": "zen",
+  "file": "069_kurihashihokusai.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "芸術総合",
+  "kind": "zen",
+  "file": "070_geijyutusougou.pdf",
+  "label": "美術・音楽・映像芸術・舞台芸術"
+ },
+ {
+  "name": "鴻巣",
+  "kind": "zen",
+  "file": "071_kounosu.pdf",
+  "label": "普通・商業"
+ },
+ {
+  "name": "鴻巣女子",
+  "kind": "zen",
+  "file": "072_kounosujyoshi.pdf",
+  "label": "普通・保育・家政科学"
+ },
+ {
+  "name": "越ケ谷",
+  "kind": "zen",
+  "file": "073_koshigaya.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "越ケ谷",
+  "kind": "tei",
+  "file": "074_koshigaya.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "越谷北",
+  "kind": "zen",
+  "file": "075_koshigayakita.pdf",
+  "label": "普通・理数"
+ },
+ {
+  "name": "越谷総合技術",
+  "kind": "zen",
+  "file": "076_koshigayasougougijyutu.pdf",
+  "label": "電子機械・情報技術・流通経済・情報処理・服飾デザイン・食物調理"
+ },
+ {
+  "name": "越谷西",
+  "kind": "zen",
+  "file": "077_koshigayanishi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "越谷東",
+  "kind": "zen",
+  "file": "078_koshigayahigashi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "越谷南",
+  "kind": "zen",
+  "file": "079_koshigayaminami.pdf",
+  "label": "普通・外国語"
+ },
+ {
+  "name": "児玉",
+  "kind": "zen",
+  "file": "080_kodama.pdf",
+  "label": "普通・生物資源・環境デザイン・機械・電子機械"
+ },
+ {
+  "name": "坂戸",
+  "kind": "zen",
+  "file": "081_sakado.pdf",
+  "label": "普通・外国語"
+ },
+ {
+  "name": "坂戸西",
+  "kind": "zen",
+  "file": "082_sakadonishi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "幸手桜",
+  "kind": "zen",
+  "file": "083_satutesakura.pdf",
+  "label": "総合"
+ },
+ {
+  "name": "狭山経済",
+  "kind": "zen",
+  "file": "084_sayamakeizai.pdf",
+  "label": "流通経済・会計・情報処理"
+ },
+ {
+  "name": "狭山工業",
+  "kind": "zen",
+  "file": "086_sayamakougyou.pdf",
+  "label": "機械・電気・電子機械"
+ },
+ {
+  "name": "狭山清陵",
+  "kind": "zen",
+  "file": "087_sayamaseiryou.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "狭山緑陽",
+  "kind": "tei",
+  "file": "088_sayamaryokuyou.pdf",
+  "label": "総合1部・総合2部"
+ },
+ {
+  "name": "志木",
+  "kind": "zen",
+  "file": "089_shiki.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "庄和",
+  "kind": "zen",
+  "file": "090_syouwa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "白岡",
+  "kind": "zen",
+  "file": "091_shiraoka.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "進修館",
+  "kind": "zen",
+  "file": "092_shinsyuukan.pdf",
+  "label": "総合・電気システム・情報メディア・ものづくり"
+ },
+ {
+  "name": "杉戸",
+  "kind": "zen",
+  "file": "093_sugito.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "杉戸農業",
+  "kind": "zen",
+  "file": "094_sugitonougyou.pdf",
+  "label": "生物生産技術・園芸・造園・食品流通・生活技術・生物生産工学"
+ },
+ {
+  "name": "誠和福祉",
+  "kind": "zen",
+  "file": "095_seiwafukushi.pdf",
+  "label": "総合・福祉"
+ },
+ {
+  "name": "草加",
+  "kind": "zen",
+  "file": "096_souka.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "草加西",
+  "kind": "zen",
+  "file": "097_soukanishi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "草加東",
+  "kind": "zen",
+  "file": "098_soukahigashi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "草加南",
+  "kind": "zen",
+  "file": "099_soukaminami.pdf",
+  "label": "普通・外国語"
+ },
+ {
+  "name": "秩父",
+  "kind": "zen",
+  "file": "100_titibu_0619.pdf",
+  "label": "普通・国際教養"
+ },
+ {
+  "name": "秩父農工科学",
+  "kind": "zen",
+  "file": "101_titibunoukoukagaku.pdf",
+  "label": "農業・食品化学・森林科学・電気システム・機械システム・ライフデザイン・フードデザイン"
+ },
+ {
+  "name": "秩父農工科学",
+  "kind": "tei",
+  "file": "102_titibunoukoukagaku.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "鶴ケ島清風",
+  "kind": "zen",
+  "file": "103_turugashimaseifuu.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "常盤",
+  "kind": "zen",
+  "file": "104_tokiwa.pdf",
+  "label": "看護"
+ },
+ {
+  "name": "所沢",
+  "kind": "zen",
+  "file": "105_tokorozawa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "所沢",
+  "kind": "tei",
+  "file": "106_tokorozawa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "所沢北",
+  "kind": "zen",
+  "file": "107_tokorozawakita.pdf",
+  "label": "普通・理数"
+ },
+ {
+  "name": "所沢商業",
+  "kind": "zen",
+  "file": "108_tokorozawasyougyo.pdf",
+  "label": "情報処理・国際流通・ビジネス会計"
+ },
+ {
+  "name": "所沢中央",
+  "kind": "zen",
+  "file": "109_tokorozawatyuuou.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "所沢西",
+  "kind": "zen",
+  "file": "110_tokorozawanishi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "戸田翔陽",
+  "kind": "tei",
+  "file": "111_todasyouyou.pdf",
+  "label": "総合1部・総合2部・総合3部"
+ },
+ {
+  "name": "豊岡",
+  "kind": "zen",
+  "file": "112_toyooka.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "滑川総合",
+  "kind": "zen",
+  "file": "113_namegwasougou.pdf",
+  "label": "総合"
+ },
+ {
+  "name": "南稜",
+  "kind": "zen",
+  "file": "114_nanryou.pdf",
+  "label": "普通・外国語"
+ },
+ {
+  "name": "新座",
+  "kind": "zen",
+  "file": "115_niiza.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "新座総合技術",
+  "kind": "zen",
+  "file": "116_niizasougougijyutu.pdf",
+  "label": "電子機械・情報技術・デザイン・総合ビジネス・服飾デザイン・食物調理"
+ },
+ {
+  "name": "新座柳瀬",
+  "kind": "zen",
+  "file": "117_niizayanase.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "蓮田松韻",
+  "kind": "zen",
+  "file": "118_hasudasyouinn.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "鳩ケ谷",
+  "kind": "zen",
+  "file": "119_hatogaya.pdf",
+  "label": "普通・園芸デザイン・情報処理"
+ },
+ {
+  "name": "羽生",
+  "kind": "tei",
+  "file": "120_hanyuu.pdf",
+  "label": "普通（昼間）・普通（夜間）"
+ },
+ {
+  "name": "羽生実業",
+  "kind": "zen",
+  "file": "121_hanyuujitugyou.pdf",
+  "label": "園芸・農業経済・商業・情報処理"
+ },
+ {
+  "name": "羽生第一",
+  "kind": "zen",
+  "file": "122_hanyuudaiti.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "飯能",
+  "kind": "zen",
+  "file": "123_hannou.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "飯能",
+  "kind": "tei",
+  "file": "124_hannou.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "日高",
+  "kind": "zen",
+  "file": "125_hidaka.pdf",
+  "label": "普通・情報コース"
+ },
+ {
+  "name": "深谷",
+  "kind": "zen",
+  "file": "126_fukaya.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "深谷商業",
+  "kind": "zen",
+  "file": "127_fukayasyougyou.pdf",
+  "label": "商業・会計・情報処理"
+ },
+ {
+  "name": "深谷第一",
+  "kind": "zen",
+  "file": "128_fukayadaiiti.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "吹上秋桜",
+  "kind": "tei",
+  "file": "129_fukiagesyuuou.pdf",
+  "label": "総合1部・総合2部"
+ },
+ {
+  "name": "富士見",
+  "kind": "zen",
+  "file": "130_fujimi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "ふじみ野",
+  "kind": "zen",
+  "file": "131_fujimino.pdf",
+  "label": "普通・スポーツサイエンス"
+ },
+ {
+  "name": "不動岡",
+  "kind": "zen",
+  "file": "132_fudouoka.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "本庄",
+  "kind": "zen",
+  "file": "133_honjyou.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "本庄",
+  "kind": "tei",
+  "file": "134_honjyou.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "松伏",
+  "kind": "zen",
+  "file": "135_matubushi.pdf",
+  "label": "普通・情報ビジネスコース・音楽"
+ },
+ {
+  "name": "松山",
+  "kind": "zen",
+  "file": "136_matuyama.pdf",
+  "label": "普通・理数"
+ },
+ {
+  "name": "松山女子",
+  "kind": "zen",
+  "file": "137_matuyamajyoshi.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "三郷",
+  "kind": "zen",
+  "file": "138_misato.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "三郷北",
+  "kind": "zen",
+  "file": "139_misatokita.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "三郷工業技術",
+  "kind": "zen",
+  "file": "140_misatokougyougijyutu.pdf",
+  "label": "機械・電子機械・電気・情報技術・情報電子"
+ },
+ {
+  "name": "宮代",
+  "kind": "zen",
+  "file": "141_miyashiro.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "妻沼",
+  "kind": "zen",
+  "file": "142_menuma.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "八潮フロンティア",
+  "kind": "zen",
+  "file": "143_yashiofurontlia_0619.pdf",
+  "label": "普通・ビジネス探究"
+ },
+ {
+  "name": "吉川美南",
+  "kind": "zen",
+  "file": "144_yoshikawaminami.pdf",
+  "label": "総合"
+ },
+ {
+  "name": "吉川美南",
+  "kind": "tei",
+  "file": "145_yoshikawaminami.pdf",
+  "label": "総合1部・総合2部"
+ },
+ {
+  "name": "与野",
+  "kind": "zen",
+  "file": "146_yono.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "寄居城北",
+  "kind": "zen",
+  "file": "147_yoriijyuhoku.pdf",
+  "label": "総合"
+ },
+ {
+  "name": "和光国際",
+  "kind": "zen",
+  "file": "148_wakoukokusai_0619.pdf",
+  "label": "普通・国際"
+ },
+ {
+  "name": "鷲宮",
+  "kind": "zen",
+  "file": "149_washinomiya.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "蕨",
+  "kind": "zen",
+  "file": "150_warabi.pdf",
+  "label": "普通・外国語"
+ },
+ {
+  "name": "川口市立",
+  "kind": "zen",
+  "file": "151_kawagutiitiritu.pdf",
+  "label": "普通・理数・スポーツ科学コース"
+ },
+ {
+  "name": "市立川越",
+  "kind": "zen",
+  "file": "152_itiritukawagoe.pdf",
+  "label": "普通・情報処理・国際経済"
+ },
+ {
+  "name": "市立浦和",
+  "kind": "zen",
+  "file": "153_itirituurawa.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "市立浦和南",
+  "kind": "zen",
+  "file": "154_itiriruurawaminami.pdf",
+  "label": "普通"
+ },
+ {
+  "name": "市立大宮北",
+  "kind": "zen",
+  "file": "155_itirituoomiyakita.pdf",
+  "label": "普通・理数"
+ }
+]

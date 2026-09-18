@@ -1219,3 +1219,19 @@ tsc実exit0・school-selection-method関連jest196件green・school名を含む�
 
 **T-Y14進捗**: okayama完了(全7頁)。次回の選択肢: tokyo頁2-7/shizuoka頁2以降/hokkaido残り11頁/hiroshima頁4-8
 (300dpi+Pillow技法)/tokushima頁11-12/fukushima頁11以降/gifu頁4(連携型・定時制・通信制のスコープ判断)/新規未着手県。
+
+**2026-09-19追記58（saitama新規着手・全日制131PDFを1校ずつ目視転記する長丁場）**: 県公式ページ
+`pref.saitama.lg.jp/f2208/r8senbatsu-kijun.html`は**1校(または学科群)につき1PDF**(全日制131本+定時制23本・
+市立高校含む・別に「あ〜い」等のかな行まとめPDFも存在)で、PDFはCJKフォントCMap欠落でtext抽出不可(pdftotextが
+空文字)→**pdftoppm 100dpi→目視転記**が必須。各PDFは1〜2頁(学科別で複数頁)・内容は「選抜の基本方針/選抜資料
+(学力検査500点・調査書の配点内訳[学習の記録の学年比・特別活動等の記録・その他の項目]・その他の資料[面接/実技])/
+一般募集の第1〜3次選抜の%と各段階の配点表/第2志望/その他」と定型で、DB向き。
+
+**再開手順(コンテキスト圧縮・再起動でも失われないようリポジトリ内に保存)**: `ops/baselines/saitama-transcription/`
+に ①`data.mjs`(転記済みタプル・`E(校名,学科,{pol,ch,oth,s1,s2,s3,d2,so,extra},pdf)`) ②`pdf-list.json`(全PDFのfile名・
+校名・全日制/定時制区別) ③`gen.mjs`(data.mjs→`src/data/school-selection-methods/saitama.ts`を生成)。手順は
+①PDF取得: `curl -sk https://www.pref.saitama.lg.jp/documents/268454/<file>` ②`pdftoppm -r 100 -png`でPNG化
+(2頁以上は横に並べて1枚にmontageすると1回のReadで読める) ③Readで目視→data.mjsへ追記→`node gen.mjs`→tsc/jest→commit。
+`pdf-list.json`のkind==='zen'が全日制131本。data.mjsに既に入っている`pdf`フィールドで転記済みを判別する。
+★転記で読み違えやすい点: 各段階の合計点は「学力500+調査書換算+その他」に一致する(テストが検算)。
+**第1〜3次の%と第2志望/その他欄が学校ごとに違う**ので毎校必ず全欄を見る。

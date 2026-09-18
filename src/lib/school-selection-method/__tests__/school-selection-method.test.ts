@@ -747,6 +747,36 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(day?.note).toContain('★');
   });
 
+  it('saitama: 選抜基準PDFから転記した学校は第1次〜の各段階の配点と面接有無をratioType/interviewRequiredに持つ', () => {
+    const ageo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '上尾', '一般募集', '普通科');
+    expect(ageo?.ratioType).toBe('第1次75%[学力500:調査書336=836]/第2次22%[学力500:調査書218=718]/第3次3%');
+    expect(ageo?.interviewRequired).toBe(false);
+    const tachibana = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '上尾橘', '一般募集', '普通科');
+    expect(tachibana?.interviewRequired).toBe(true);
+    expect(tachibana?.ratioType).toContain('面接100');
+  });
+
+  it('saitama: 伊奈学園総合のスポーツ科学系・芸術系は第2次選抜で実技検査300点を実施する', () => {
+    const sports = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '伊奈学園総合', '一般募集', 'スポーツ科学系・芸術系共通');
+    expect(sports?.ratioType).toContain('第2次29%[学力500:調査書334:実技検査300=1134]');
+    expect(sports?.interviewRequired).toBe(false);
+  });
+
+  it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
+    expect(record?.status).toBe('structured');
+    expect(record?.schools?.length).toBeGreaterThan(0);
+    for (const s of record?.schools ?? []) {
+      const stages = [...(s.ratioType ?? '').matchAll(/第[12]次[0-9]+%\[([^\]]+)\]/g)];
+      expect(stages.length).toBe(2);
+      for (const m of stages) {
+        const [body, total] = m[1].split('=');
+        const sum = body.split(':').reduce((a, p) => a + Number(p.replace(/[^0-9]/g, '')), 0);
+        expect(sum).toBe(Number(total));
+      }
+    }
+  });
+
   it('okayama: 津山(理数)は特別入学者選抜のみ収録され一般入学者選抜のレコードは無い(募集人員100%かつ一般選抜比率が「ー」のため)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
     const tsuyama = record?.schools?.filter((s) => s.schoolName === '津山');
