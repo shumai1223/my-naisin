@@ -25,6 +25,7 @@ import { TOCHIGI_SCHOOL_SELECTION_METHOD } from './tochigi';
 import { NIIGATA_SCHOOL_SELECTION_METHOD } from './niigata';
 import { YAMAGATA_SCHOOL_SELECTION_METHOD } from './yamagata';
 import { TOYAMA_SCHOOL_SELECTION_METHOD } from './toyama';
+import { NARA_SCHOOL_SELECTION_METHOD } from './nara';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -55,4 +56,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   niigata: NIIGATA_SCHOOL_SELECTION_METHOD,
   yamagata: YAMAGATA_SCHOOL_SELECTION_METHOD,
   toyama: TOYAMA_SCHOOL_SELECTION_METHOD,
+  nara: NARA_SCHOOL_SELECTION_METHOD,
 };

@@ -990,6 +990,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(nou?.note).toContain('集団面接');
   });
 
+  it('nara: 一次選抜(第1希望校)の80学科を収録し、検査成績の満点=学力+独自問題+作文+面接+実技になる', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nara');
+    expect(record?.status).toBe('structured');
+    expect(record?.schools?.length).toBe(80);
+    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(31);
+    for (const s of record?.schools ?? []) {
+      const m = (s.note ?? '').match(/検査成績の満点([0-9]+)点=([^。]+)。/);
+      expect(m).not.toBeNull();
+      if (!m) continue;
+      const sum = [...m[2].matchAll(/([0-9]+)点/g)].reduce((a, x) => a + Number(x[1]), 0);
+      expect(sum).toBe(Number(m[1]));
+    }
+  });
+
+  it('nara: 奈良は学力検査400点・パターン④(180点)、法隆寺国際 歴史文化科は社会2倍で調査書220点、奈良商工は3教科150+面接20=170・パターン②(234点)', () => {
+    const nara = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nara', '奈良', '一次選抜(第1希望校)', '普通科');
+    expect(nara?.ratioType).toBe('学力検査400:調査書180');
+    const hori = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nara', '法隆寺国際', '一次選抜(第1希望校)', '歴史文化科');
+    expect(hori?.note).toContain('社会(2倍)');
+    expect(hori?.ratioType).toBe('学力検査300:調査書220');
+    const shoko = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nara', '奈良商工', '一次選抜(第1希望校)', '機械工学科');
+    expect(shoko?.ratioType).toBe('検査成績170:調査書234');
+    expect(shoko?.interviewRequired).toBe(true);
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
