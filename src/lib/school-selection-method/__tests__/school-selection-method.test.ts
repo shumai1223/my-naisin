@@ -1445,14 +1445,29 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(all).toHaveLength(125);
-    expect(all.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(108);
-    expect(all.filter((s) => (s.note ?? '').includes('・定時制】'))).toHaveLength(17);
-    for (const s of all) {
-      expect(s.selectionCategory).toBe('後期選抜');
+    expect(all).toHaveLength(169);
+    const late = all.filter((s) => s.selectionCategory === '後期選抜');
+    expect(late).toHaveLength(125);
+    expect(late.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(108);
+    expect(late.filter((s) => (s.note ?? '').includes('・定時制】'))).toHaveLength(17);
+    for (const s of late) {
       expect(s.note).toContain('うち特に重視する選抜資料は');
       expect(s.note).not.toContain('うち特に重視する選抜資料は)');
     }
+  });
+
+  it('mie: スポーツ特別枠選抜(別表5)は15校44競技で、募集人数の合計が196人以内になる', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie')?.schools ?? [];
+    const sp = all.filter((s) => s.selectionCategory === 'スポーツ特別枠選抜');
+    expect(sp).toHaveLength(44);
+    expect(new Set(sp.map((s) => s.schoolName)).size).toBe(15);
+    const total = sp.reduce((a, s) => a + Number((s.note ?? '').match(/合計([0-9]+)人以内/)?.[1] ?? 0), 0);
+    expect(total).toBe(196);
+    const find = (school: string, dept: string) => sp.find((s) => s.schoolName === school && s.department === dept);
+    expect(find('津工業', 'セーリング競技(男子)')?.note).toContain('機械科2人以内、電気科1人以内、電子科1人以内、建設工学科1人以内(合計5人以内)');
+    expect(find('四日市商業', '空手道競技(女子)')?.note).toContain('商業科4人以内');
+    expect(find('稲生', 'なぎなた競技(女子)')?.note).toContain('普通科1人以内、体育科1人以内');
+    expect(find('尾鷲', '水泳競技(競泳)(男子)')?.note).toContain('システム工学科1人以内');
   });
 
   it('mie: 桑名北は面接◎、桑名工業は調査書◎、津は学力検査◎、北星(定時制)は学力検査を選抜資料としない', () => {

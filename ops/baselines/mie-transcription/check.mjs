@@ -9,3 +9,8 @@ for (const r of B4) {
 }
 const schools = new Set(B4.map((r) => r.school));
 console.log('rows', B4.length, 'schools', schools.size, '全日制', B4.filter((r) => r.course === '全日制').length, '定時制', B4.filter((r) => r.course === '定時制').length, 'bad', bad);
+
+// --- スポーツ特別枠(data-b5.mjs・別表5) ---
+import { B5 } from './data-b5.mjs';
+const b5Total = B5.reduce((a, e) => a + e.depts.reduce((b, d) => b + d[1], 0), 0);
+console.log('スポーツ特別枠 行', B5.length, '校', new Set(B5.map((e) => e.school)).size, '募集人数合計(人以内)', b5Total, '空欄', B5.filter((e) => !e.depts.length || e.depts.some((d) => !(d[1] > 0))).length);
