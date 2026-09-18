@@ -1354,6 +1354,37 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(higashi?.note).toContain('相撲(男子)・剣道(男子・女子)');
   });
 
+  it('wakayama: 一般選抜73レコード(35校・全日制60/定時制13)で、全ての割合の合計が100%に一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'wakayama');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(73);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(35);
+    expect(all.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(60);
+    expect(all.filter((s) => (s.note ?? '').includes('・定時制】'))).toHaveLength(13);
+    for (const s of all) {
+      const total = (s.ratioType ?? '').split(':').reduce((a, it) => a + Number(it.match(/([0-9]+)$/)?.[1] ?? 0), 0);
+      expect(total).toBe(100);
+    }
+  });
+
+  it('wakayama: 那賀国際科は国語・英語1.5倍、和歌山北スポーツ健康科学科は30:30:40で選択実技15競技、和歌山北普通科は面接なし', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'wakayama')?.schools ?? [];
+    const find = (school: string, dept: string) => list.find((s) => s.schoolName === school && s.department === dept);
+    expect(find('那賀', '国際科')?.note).toContain('国1.5・英1.5');
+    expect(find('星林', '普通科')?.note).toContain('英1.5');
+    const sports = find('和歌山北', 'スポーツ健康科学科');
+    expect(sports?.ratioType).toBe('調査書30:学力検査30:面接・実技検査40');
+    expect(sports?.interviewRequired).toBe(true);
+    expect(sports?.note).toContain('次の15競技');
+    expect(sports?.note).toContain('握力測定');
+    const kita = find('和歌山北', '普通科(北校舎)');
+    expect(kita?.ratioType).toBe('調査書50:学力検査50');
+    expect(kita?.interviewRequired).toBeUndefined();
+    expect(find('和歌山東', '普通科')?.ratioType).toBe('調査書40:学力検査40:面接・実技検査20');
+    expect(find('新宮', '普通科(昼間)(新翔校舎)(定時制)')?.ratioType).toBe('調査書40:学力検査40:面接・実技検査20');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
