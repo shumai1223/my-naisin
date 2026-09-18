@@ -1202,6 +1202,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(hokuo?.note).toContain('24名(定員の20%)');
   });
 
+  it('okinawa: 令和9年度の全59校164行を収録し、定員の合計が資料の合計行14,720名と一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okinawa');
+    expect(record?.status).toBe('structured');
+    expect(record?.fiscalYear).toContain('令和9年度');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(164);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(59);
+    const total = all.reduce((a, s) => a + Number((s.note ?? '').match(/定員([0-9]+)名/)?.[1] ?? 0), 0);
+    expect(total).toBe(14720);
+  });
+
+  it('okinawa: 比重は名護等が4.5:5.5・球陽/那覇国際/首里/開邦/向陽が4:6・多くは5:5、特別枠のチェック要否をnoteに持つ', () => {
+    const nago = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okinawa', '名護', '一般選抜', '普通');
+    expect(nago?.ratioType).toBe('調査書4.5:学力検査等5.5');
+    expect(nago?.note).toContain('チェックが必要');
+    const kyuyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okinawa', '球陽', '一般選抜', '文理探究');
+    expect(kyuyo?.ratioType).toBe('調査書4:学力検査等6');
+    const hentona = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okinawa', '辺土名', '一般選抜', '普通');
+    expect(hentona?.ratioType).toBe('調査書5:学力検査等5');
+    expect(hentona?.note).toContain('特別枠なし');
+    const kaiho = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okinawa', '開邦', '一般選抜', '芸術(音楽)');
+    expect(kaiho?.note).toContain('特色選抜の募集人員の割合50%');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');

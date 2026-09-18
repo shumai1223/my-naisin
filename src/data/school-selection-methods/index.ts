@@ -29,6 +29,7 @@ import { NARA_SCHOOL_SELECTION_METHOD } from './nara';
 import { SHIMANE_SCHOOL_SELECTION_METHOD } from './shimane';
 import { SAGA_SCHOOL_SELECTION_METHOD } from './saga';
 import { IWATE_SCHOOL_SELECTION_METHOD } from './iwate';
+import { OKINAWA_SCHOOL_SELECTION_METHOD } from './okinawa';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -63,4 +64,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   shimane: SHIMANE_SCHOOL_SELECTION_METHOD,
   saga: SAGA_SCHOOL_SELECTION_METHOD,
   iwate: IWATE_SCHOOL_SELECTION_METHOD,
+  okinawa: OKINAWA_SCHOOL_SELECTION_METHOD,
 };
