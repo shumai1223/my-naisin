@@ -316,3 +316,18 @@ tsc実exit0・関連jest38件green・フルスイート549suites/8047tests green
 次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/nagano/gifu/wakayama/shimane/
 tokushima/ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの12県(iwate/fukuoka/miyagi/
 ishikawa/shiga/akitaの6県は保留済み)。他は変更なし。
+
+## 追記 2026-09-18(続き6): nagano(29県目)完了(hiroshima3連続から多様性確保で切替)
+
+長野県公式ページ「私立高等学校授業料等軽減事業補助金」を実装。**他県と構造が根本的に異なる
+発見**: これまでの県は「在学中ずっと所得階層別に上乗せ」型だったが、長野県は①就学支援金の
+受給期間満了者(標準36月を使い切った者)または単位制課程で支給対象単位数が74単位を超えた者
+向けの授業料軽減(上限337,200円・所得制限なし・受給期間満了「後」の12月[通信制24月]限定)、
+②入学金軽減(24,500円・年収590万円未満のみ)という2区分。school-subsidy型(県は学校法人へ
+補助・家庭への直接支給ではない)。
+
+tsc実exit0・関連jest40件green。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/gifu/wakayama/shimane/tokushima/
+ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの11県(iwate/fukuoka/miyagi/ishikawa/
+shiga/akitaの6県は保留済み)。他は変更なし。
