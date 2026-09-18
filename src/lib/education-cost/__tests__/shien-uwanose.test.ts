@@ -338,6 +338,24 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(tsushin).toBe(15000);
   });
 
+  it('naganoは就学支援金の受給期間満了者向けに授業料軽減の上限337,200円を返す(在学中通常期間の上乗せとは異なる制度)', () => {
+    const amount = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'nagano',
+      '授業料軽減(就学支援金の受給期間満了者、または単位制課程で支給対象単位数が74単位を超えた者・12月[通信制課程は24月]以内)'
+    );
+    expect(amount).toBe(337200);
+  });
+
+  it('naganoは入学金軽減(年収目安590万円未満)で24,500円を返す', () => {
+    const amount = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'nagano',
+      '入学金軽減(保護者等の年収目安が約590万円未満)'
+    );
+    expect(amount).toBe(24500);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
