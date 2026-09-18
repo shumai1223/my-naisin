@@ -1322,6 +1322,38 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(fukushima?.note).toContain('中高連携学習のまとめ');
   });
 
+  it('oita: 推薦入学者選抜88レコード(39校・全日制と定時制)で、全ての比重の合計が100%に一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'oita');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(88);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(39);
+    for (const s of all) {
+      expect(s.selectionCategory).toBe('推薦入学者選抜');
+      const items = (s.ratioType ?? '').replace('(比重%)', '').split(':');
+      const total = items.reduce((a, it) => a + Number(it.match(/([0-9.]+)$/)?.[1] ?? 0), 0);
+      // 中津南耶馬溪校は16.7×3+50=100.1(資料の表記どおり)
+      expect(Math.abs(total - 100)).toBeLessThanOrEqual(0.2);
+    }
+  });
+
+  it('oita: 大分舞鶴理数科は適性検査60%、大分商業は情報処理科だけ活動指定に水球を持つ、鶴崎工業電気科は志望学科だけ面接40%', () => {
+    const maizuru = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'oita')?.schools?.find(
+      (s) => s.schoolName === '大分舞鶴' && s.department === '理数科'
+    );
+    expect(maizuru?.ratioType).toBe('調査書10:調査書・推薦書2:面接8:小論文20:適性検査60(比重%)');
+    const shogyo = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'oita')?.schools ?? [];
+    const noteOf = (dept: string) => shogyo.find((s) => s.schoolName === '大分商業' && s.department === dept)?.note ?? '';
+    expect(noteOf('情報処理科')).toContain('水球(男子・女子)');
+    expect(noteOf('商業科')).not.toContain('水球');
+    expect(noteOf('国際経済科')).not.toContain('水球');
+    const denki = shogyo.find((s) => s.schoolName === '鶴崎工業' && s.department === '電気科');
+    expect(denki?.ratioType).toBe('調査書10:調査書・推薦書60:面接15:小論文15(比重%)');
+    expect(denki?.note).toContain('志望学科は比重が異なり 調査書10・調査書・推薦書30・面接40・小論文20');
+    const higashi = shogyo.find((s) => s.schoolName === '中津東' && s.department === '機械科' && !(s.note ?? '').includes('定時制】'));
+    expect(higashi?.note).toContain('相撲(男子)・剣道(男子・女子)');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');

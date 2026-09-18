@@ -32,6 +32,7 @@ import { IWATE_SCHOOL_SELECTION_METHOD } from './iwate';
 import { OKINAWA_SCHOOL_SELECTION_METHOD } from './okinawa';
 import { TOTTORI_SCHOOL_SELECTION_METHOD } from './tottori';
 import { MIYAZAKI_SCHOOL_SELECTION_METHOD } from './miyazaki';
+import { OITA_SCHOOL_SELECTION_METHOD } from './oita';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -69,4 +70,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   okinawa: OKINAWA_SCHOOL_SELECTION_METHOD,
   tottori: TOTTORI_SCHOOL_SELECTION_METHOD,
   miyazaki: MIYAZAKI_SCHOOL_SELECTION_METHOD,
+  oita: OITA_SCHOOL_SELECTION_METHOD,
 };
