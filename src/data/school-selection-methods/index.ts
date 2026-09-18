@@ -36,6 +36,7 @@ import { OITA_SCHOOL_SELECTION_METHOD } from './oita';
 import { WAKAYAMA_SCHOOL_SELECTION_METHOD } from './wakayama';
 import { MIE_SCHOOL_SELECTION_METHOD } from './mie';
 import { NAGASAKI_SCHOOL_SELECTION_METHOD } from './nagasaki';
+import { FUKUOKA_SCHOOL_SELECTION_METHOD } from './fukuoka';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -77,4 +78,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   wakayama: WAKAYAMA_SCHOOL_SELECTION_METHOD,
   mie: MIE_SCHOOL_SELECTION_METHOD,
   nagasaki: NAGASAKI_SCHOOL_SELECTION_METHOD,
+  fukuoka: FUKUOKA_SCHOOL_SELECTION_METHOD,
 };

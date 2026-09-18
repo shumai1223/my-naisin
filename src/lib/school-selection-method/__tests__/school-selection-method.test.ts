@@ -1544,6 +1544,45 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(hasami?.note).toContain('静物卓上デッサン');
   });
 
+  it('fukuoka: 全日制の入学定員等一覧表を243レコード(90校)で収録し、推薦入学の募集人員合計4,529・特色化選抜の上限人数合計7,012になる', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukuoka');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(243);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(90);
+    const suisen = all.filter((s) => s.selectionCategory === '推薦入学');
+    const toku = all.filter((s) => s.selectionCategory === '特色化選抜');
+    expect(suisen).toHaveLength(129);
+    expect(toku).toHaveLength(113);
+    expect(all.filter((s) => s.selectionCategory === '推薦入学・特色化選抜なし')).toHaveLength(1);
+    const num = (s: string, re: RegExp) => Number(s.match(re)?.[1] ?? 0);
+    expect(suisen.reduce((a, s) => a + num(s.note ?? '', /募集人員([0-9]+)人程度/), 0)).toBe(4529);
+    expect(toku.reduce((a, s) => a + num(s.note ?? '', /内定者上限人数\(目安\)([0-9]+)人/), 0)).toBe(7012);
+    // 推薦入学+特色化選抜の人数が入学定員を超えるレコードは無い(同一学科の2レコードを合算して確認)
+    const byKey = new Map<string, { teiin: number; sum: number }>();
+    for (const s of [...suisen, ...toku]) {
+      const k = `${s.schoolName}|${s.department}|${(s.note ?? '').match(/一覧表・([^】]*)】/)?.[1]}`;
+      const cur = byKey.get(k) ?? { teiin: num(s.note ?? '', /入学定員([0-9]+)人/), sum: 0 };
+      cur.sum += num(s.note ?? '', /(?:募集人員|内定者上限人数\(目安\))([0-9]+)人/);
+      byKey.set(k, cur);
+    }
+    for (const v of byKey.values()) expect(v.sum).toBeLessThanOrEqual(v.teiin);
+  });
+
+  it('fukuoka: 福岡魁誠は推薦140人程度で面接(自己表現)・特色化なし、柏陵は特色化のみ288人、伝習館は面接又は面接・作文、小郡みらい創造コースは選抜の記載なし', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukuoka')?.schools ?? [];
+    const find = (school: string, dept: string, cat: string) => list.find((s) => s.schoolName === school && s.department === dept && s.selectionCategory === cat);
+    expect(find('福岡魁誠', '総合学科', '推薦入学')?.note).toContain('募集人員140人程度・実施方法=面接(自己表現)');
+    expect(find('福岡魁誠', '総合学科', '特色化選抜')).toBeUndefined();
+    expect(find('柏陵', '普通', '特色化選抜')?.note).toContain('内定者上限人数(目安)288人');
+    expect(find('柏陵', '普通', '推薦入学')).toBeUndefined();
+    expect(find('伝習館', '普通', '推薦入学')?.note).toContain('面接又は面接・作文');
+    expect(find('小郡', 'みらい創造コース', '推薦入学・特色化選抜なし')?.note).toContain('学びの多様化学校入学者選抜により入学者を決定');
+    // くくり・まとめ設定の学科は列挙した1行(入学定員は合計)
+    expect(find('小倉商業', '商業進学※・総合ビジネス※・観光ビジネス※・国際ビジネス※・ビジネス情報※・会計ビジネス※', '推薦入学')?.note).toContain('入学定員240人');
+    expect(find('門司学園', '普通', '推薦入学')?.note).toContain('推薦入学の新規実施校');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
