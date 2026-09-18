@@ -1226,6 +1226,36 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kaiho?.note).toContain('特色選抜の募集人員の割合50%');
   });
 
+  it('tottori: 全日制の募集生徒数3,728・特色募集人員945・うち県外98、定時制220・18が資料の小計行と一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    const num = (s: string, re: RegExp) => Number(s.match(re)?.[1] ?? 0);
+    const zen = all.filter((s) => (s.note ?? '').includes('・全日制】'));
+    const tei = all.filter((s) => (s.note ?? '').includes('・定時制】'));
+    const gen = (list: typeof all) => list.filter((s) => s.selectionCategory === '一般入学者選抜');
+    const toku = (list: typeof all) => list.filter((s) => s.selectionCategory.startsWith('特色入学者選抜'));
+    expect(gen(zen).reduce((a, s) => a + num(s.note ?? '', /募集生徒数([0-9]+)名/), 0)).toBe(3728);
+    expect(toku(zen).reduce((a, s) => a + num(s.note ?? '', /募集人員([0-9]+)人以内/), 0)).toBe(945);
+    expect(toku(zen).reduce((a, s) => a + num(s.note ?? '', /うち県外生徒([0-9]+)人程度/), 0)).toBe(98);
+    expect(gen(tei).reduce((a, s) => a + num(s.note ?? '', /募集生徒数([0-9]+)名/), 0)).toBe(220);
+    expect(toku(tei).reduce((a, s) => a + num(s.note ?? '', /募集人員([0-9]+)人以内/), 0)).toBe(18);
+  });
+
+  it('tottori: 鳥取西は130:250、鳥取商業は195:250(特色は個人面接+小論文60人)、日野は260:250、八頭は特色を2枠に分けて持つ', () => {
+    const nishi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '鳥取西', '一般入学者選抜');
+    expect(nishi?.ratioType).toBe('調査書の合計評定130:学力検査の合計得点250');
+    const shogyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '鳥取商業', '特色入学者選抜');
+    expect(shogyo?.note).toContain('募集人員60人以内');
+    expect(shogyo?.note).toContain('小論文');
+    const hino = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '日野', '一般入学者選抜');
+    expect(hino?.ratioType).toBe('調査書の合計評定260:学力検査の合計得点250');
+    const sports = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '八頭', '特色入学者選抜(スポーツ活動特色選抜)');
+    const activity = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '八頭', '特色入学者選抜(特別活動特色選抜)');
+    expect(sports?.note).toContain('募集人員40人以内');
+    expect(activity?.note).toContain('募集人員18人以内');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
