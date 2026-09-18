@@ -1097,13 +1097,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(chienII?.ratioType).toBe('学力検査250:調査書85:面接15');
   });
 
-  it('iwate: 盛岡地区14校29学科と中部地区11校22学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
+  it('iwate: 盛岡地区・中部地区・県南地区の38校75学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(new Set(all.map((s) => s.schoolName)).size).toBe(25);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(38);
     const general = all.filter((s) => s.selectionCategory === '一般入学者選抜');
-    expect(general).toHaveLength(51);
+    expect(general).toHaveLength(75);
     for (const s of general) {
       const m = (s.ratioType ?? '').match(/^学力検査([0-9]+):調査書([0-9]+)/);
       expect(m).not.toBeNull();
@@ -1153,6 +1153,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kuro?.note).toContain('プレゼンテーション・面接150点');
     const osako = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '大迫高等学校', '一般入学者選抜');
     expect(osako?.note).toContain('合計1100点');
+  });
+
+  it('iwate: 水沢は学力検査7:調査書3、水沢農業は6:4、一関工業は独自検査(個人面接)100点で1100点、水沢の特色は口頭試問で合計500点', () => {
+    const mizusawa = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '水沢高等学校', '一般入学者選抜');
+    expect(mizusawa?.ratioType).toBe('学力検査700:調査書300');
+    const toku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '水沢高等学校', '特色入学者選抜');
+    expect(toku?.note).toContain('合計500点');
+    const nogyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '水沢農業高等学校', '一般入学者選抜', '食品科学科');
+    expect(nogyo?.ratioType).toBe('学力検査600:調査書400');
+    const ikk = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '一関工業高等学校', '一般入学者選抜', '電気科');
+    expect(ikk?.interviewRequired).toBe(true);
+    expect(ikk?.note).toContain('合計1100点');
   });
 
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
