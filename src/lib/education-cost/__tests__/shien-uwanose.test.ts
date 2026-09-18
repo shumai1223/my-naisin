@@ -396,6 +396,19 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(ehimeAmount).toBe(wakayamaAmount);
   });
 
+  it('aomoriは就学支援費補助金(県独自の入学金補助・年収270万円未満新入生)で年額50,000円を返す', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'aomori');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(record?.schemeType).toBe('school-subsidy');
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'aomori',
+        '年収目安270万円未満（算出額0円・非課税相当世帯）・当該年度の新入生（入学金補助）'
+      )
+    ).toBe(50000);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
