@@ -510,3 +510,21 @@ okayama頁3残り+頁4-7/hiroshima頁4-8/tokushima頁1-7)も引き続き選択�
 3件連続(tokushima/kochi/kumamoto)しているため、次回は残り3県(miyazaki/kagoshima/okinawa)を
 一通り終えた後、T-Y13は「主要な鉱脈は掘り尽くした」可能性を評価してT-Y14等へ主軸を移す
 判断も検討してよい。
+
+## 追記 2026-09-19: miyazaki(38県目)完了・4件目のconfirmed-none
+
+「高等学校等就学支援金（私立高等学校等）について」ページをcurl+grepで確認。本文が「国の
+費用により...支給」と明記し、支給額(全日制38,100円/月=年額457,200円)も国基準額そのもので、
+宮崎県独自の追加上乗せは見当たらなかった。「私立高等学校専攻科に通う生徒への授業料支援」は
+専攻科(高校卒業後の課程)向けで対象外と正しく判別。
+
+tsc実exit0・関連jest48件green(前回47件から+1)確認済み。
+
+T-Y13進捗: 38県調査済み(34県confirmed-yes+4県confirmed-none[tokushima/kochi/kumamoto/
+miyazaki])。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はgifu[優先度低]/kagoshima/okinawaの3県
+(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保留済み)。confirmed-noneが4件連続
+(tokushima/kochi/kumamoto/miyazaki)のため、kagoshima/okinawaを終えたらT-Y13は一区切りと
+判断しT-Y14等へ主軸を移すことを推奨。他はT-Y14継続(gifu頁3-4/okayama頁5-7/hiroshima頁4-8/
+tokushima頁1-7)も引き続き選択肢。
