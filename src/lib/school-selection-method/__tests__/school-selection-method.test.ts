@@ -917,6 +917,45 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
+  it('yamagata: 概要表の合計行(全日制 A34校/B8校・個人面接29校・集団面接13校・作文23校・発表3校・県外受入れ前期12校/後期11校)と転記校数が一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata');
+    expect(record?.status).toBe('structured');
+    expect(record?.schools?.length).toBe(138);
+    const zenkiZen = (record?.schools ?? []).filter((s) => s.selectionCategory === '前期(特色)選抜' && !s.department?.includes('定時制'));
+    const kouki = (record?.schools ?? []).filter((s) => s.selectionCategory === '後期(一般)選抜' && !s.department?.includes('定時制'));
+    const schools = (list: typeof zenkiZen, f: (n: string) => boolean) => new Set(list.filter((s) => f(s.note ?? '')).map((s) => s.schoolName)).size;
+    expect(schools(zenkiZen, (n) => n.includes('検査日程:A日程'))).toBe(34);
+    expect(schools(zenkiZen, (n) => n.includes('検査日程:B日程'))).toBe(8);
+    expect(schools(zenkiZen, (n) => /検査方法:[^。]*個人面接/.test(n))).toBe(29);
+    expect(schools(zenkiZen, (n) => /検査方法:[^。]*集団面接/.test(n))).toBe(13);
+    expect(schools(zenkiZen, (n) => /検査方法:[^。]*作文/.test(n))).toBe(23);
+    expect(schools(zenkiZen, (n) => /検査方法:[^。]*発表/.test(n))).toBe(3);
+    expect(schools(zenkiZen, (n) => n.includes('県外志願者受入れ:あり'))).toBe(12);
+    expect(schools(kouki, (n) => n.includes('県外志願者受入れ:あり'))).toBe(11);
+    expect(schools(kouki, (n) => n.includes('適性検査:あり'))).toBe(2);
+    expect(schools(kouki, (n) => n.includes('傾斜配点:あり'))).toBe(2);
+  });
+
+  it('yamagata: 山形東(普通)は前期に口頭試問+個人面接+作文、後期は調査書3:学力検査7。新庄志誠館最上校は前期のみ県外受入れ', () => {
+    const zenki = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata', '山形東', '前期(特色)選抜', '普通');
+    expect(zenki?.note).toContain('口頭試問');
+    expect(zenki?.interviewRequired).toBe(true);
+    const kouki = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata', '山形東', '後期(一般)選抜', '普通');
+    expect(kouki?.ratioType).toBe('調査書3:学力検査7');
+    const mogamiZ = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata', '新庄志誠館最上校', '前期(特色)選抜', '普通');
+    const mogamiK = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata', '新庄志誠館最上校', '後期(一般)選抜', '普通');
+    expect(mogamiZ?.note).toContain('県外志願者受入れ:あり');
+    expect(mogamiK?.note).toContain('県外志願者受入れ:なし');
+  });
+
+  it('yamagata: 山形北音楽は適性検査あり・県外受入れ前期後期とも、山形市立商業の募集人員は学科別の注記を持つ', () => {
+    const music = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata', '山形北', '後期(一般)選抜', '音楽');
+    expect(music?.note).toContain('適性検査:あり');
+    expect(music?.note).toContain('県外志願者受入れ:あり');
+    const shoken = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata', '山形市立商業', '前期(特色)選抜', '商業');
+    expect(shoken?.note).toContain('総合ビジネス科25%程度');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
