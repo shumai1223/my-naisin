@@ -1179,6 +1179,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toContain('面接(段階評価)');
   });
 
+  it('shizuoka: schoolsは2校(下田/伊豆伊東)8レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取は設定なしのため対象外)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka');
+    expect(record?.schools?.length).toBe(8);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東']));
+  });
+
+  it('shizuoka: 下田(普通・学校裁量枠Ⅰ)は実技検査を実施するが下田(普通・学校裁量枠Ⅱ)は実施しない(選抜資料の列位置を200dpi画像で確認済み)', () => {
+    const stage1 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '下田', '学校裁量枠Ⅰ', '普通');
+    const stage2 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '下田', '学校裁量枠Ⅱ', '普通');
+    expect(stage1?.note).toContain('実技検査');
+    expect(stage2?.note).toContain('実技検査・作文・その他・事前調査票の実施なし');
+  });
+
+  it('shizuoka: 伊豆伊東(普通・学校裁量枠Ⅱ)はアート類型への適性を重視し実技検査のみで学力検査と面接も併用する', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '伊豆伊東', '学校裁量枠Ⅱ', '普通');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.note).toContain('アート類型への適性');
+    expect(record?.ratioType).toBe('選抜割合10%程度(希望者対象)');
+  });
+
+  it('shizuoka: 伊豆伊東はビジネスマネジメント科の学校裁量枠も普通科と別レコードで収録している', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '伊豆伊東', '学校裁量枠Ⅰ', 'ビジネスマネジメント');
+    expect(record?.ratioType).toBe('選抜割合25%程度(希望者対象)');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {

@@ -15,6 +15,7 @@ import { TOKUSHIMA_SCHOOL_SELECTION_METHOD } from './tokushima';
 import { HIROSHIMA_SCHOOL_SELECTION_METHOD } from './hiroshima';
 import { YAMAGUCHI_SCHOOL_SELECTION_METHOD } from './yamaguchi';
 import { FUKUSHIMA_SCHOOL_SELECTION_METHOD } from './fukushima';
+import { SHIZUOKA_SCHOOL_SELECTION_METHOD } from './shizuoka';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -35,4 +36,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   hiroshima: HIROSHIMA_SCHOOL_SELECTION_METHOD,
   yamaguchi: YAMAGUCHI_SCHOOL_SELECTION_METHOD,
   fukushima: FUKUSHIMA_SCHOOL_SELECTION_METHOD,
+  shizuoka: SHIZUOKA_SCHOOL_SELECTION_METHOD,
 };
