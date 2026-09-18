@@ -1249,11 +1249,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは3校(福島/橘/福島商業)15レコードを収録している(福島商業はくくり募集3学科分)', () => {
+  it('fukushima: schoolsは4校(福島/橘/福島商業/福島工業)30レコードを収録している(福島商業はくくり募集3学科分・福島工業は全日制5学科分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(15);
+    expect(record?.schools?.length).toBe(30);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業']));
   });
 
   it('fukushima: 福島商業(商業科・情報ビジネス科)の特色選抜はA型/B型/C型の3類型を持ちB型・C型のみ実技90点を課す', () => {
@@ -1266,6 +1266,23 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
   it('fukushima: 福島商業(商業科・会計ビジネス科)の一般選抜は募集定員40人で情報ビジネス科・経営ビジネス科の80人より少ない', () => {
     const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島商業', '一般選抜', '商業科・会計ビジネス科');
     expect(record?.note).toContain('募集定員40人');
+  });
+
+  it('fukushima: 福島工業(工業科・機械科)の特色選抜は調査書135点のみ点数化し特別活動等は精査のみで250点満点にならない(他校と異なる)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島工業', '特色選抜', '工業科・機械科');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.ratioType).toBe('学力検査250点:調査書135点:面接30点:実技検査100点(合計515点)');
+  });
+
+  it('fukushima: 福島工業(工業科・機械科)の一般選抜は募集定員80人で他4学科の40人より多い', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島工業', '一般選抜', '工業科・機械科');
+    expect(record?.interviewRequired).toBe(false);
+    expect(record?.note).toContain('募集定員80人');
+  });
+
+  it('fukushima: 福島工業(工業科・建築科)の後期選抜は小論文を段階評価のみで点数化しない(福島の普通科は120点に点数化する点で異なる)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島工業', '後期選抜', '工業科・建築科');
+    expect(record?.note).toContain('段階評価(点数化なし)');
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
