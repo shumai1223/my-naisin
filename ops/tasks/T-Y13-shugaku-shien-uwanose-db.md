@@ -528,3 +528,18 @@ miyazaki])。
 (tokushima/kochi/kumamoto/miyazaki)のため、kagoshima/okinawaを終えたらT-Y13は一区切りと
 判断しT-Y14等へ主軸を移すことを推奨。他はT-Y14継続(gifu頁3-4/okayama頁5-7/hiroshima頁4-8/
 tokushima頁1-7)も引き続き選択肢。
+
+## 追記 2026-09-19(続き2): kagoshima(39県目)完了・confirmed-none連続を止める5件目のconfirmed-yes級
+
+鹿児島県総務部学事法制課「私立高等学校に在学する生徒に対する修学支援」ページをcurlで確認。
+「鹿児島県私立高等学校授業料軽減費補助(令和8年度)」が県独自制度として存在し、補助額(上限額)が
+月額で明記: 生活保護8,000円/月・非課税4,950円/月・均等割のみ4,950円/月(年額は×12で
+96,000/59,400/59,400円)。別に「入学金軽減費補助」(上限5,650円・入学時のみ)もあるがtiers外の
+noteに記載。miyazaki等と違い、ページ名でなく本文の金額表で県独自と判別。
+
+tsc実exit0・関連jest49件green(前回48件から+1)確認済み。
+
+T-Y13進捗: 39県調査済み(35県confirmed-yes+4県confirmed-none)。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はgifu[優先度低]/okinawaの2県
+(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保留済み)。okinawa完了後はT-Y14等へ主軸を移す。

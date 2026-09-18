@@ -451,6 +451,22 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(record?.note).toContain('確認できなかった');
   });
 
+  it('kagoshimaは県独自の授業料軽減費補助(月額×12)を世帯の課税状況別に持つ', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'kagoshima');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(record?.schemeType).toBe('household');
+    expect(
+      findUwanoseAmountForTierLabel(SHIEN_UWANOSE_BY_PREFECTURE, 'kagoshima', '生活保護世帯')
+    ).toBe(96000);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'kagoshima',
+        '道府県民税・市町村民税が非課税の世帯'
+      )
+    ).toBe(59400);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
