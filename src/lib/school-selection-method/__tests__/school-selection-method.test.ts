@@ -843,6 +843,42 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
+  it('tochigi: 全日制58校108学科を特色選抜・一般選抜の各1レコード(計216)で収録している', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi');
+    expect(record?.status).toBe('structured');
+    expect(record?.schools?.length).toBe(216);
+    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(58);
+  });
+
+  it('tochigi: 宇都宮は一般選抜で学力検査9:調査書1、小山南スポーツは6:4(集団面接あり)、日光明峰は5:5', () => {
+    const utsunomiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '宇都宮', '一般選抜', '普通');
+    expect(utsunomiya?.ratioType).toBe('学力検査9:調査書の評定1');
+    expect(utsunomiya?.interviewRequired).toBe(false);
+    const sports = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '小山南', '一般選抜', 'スポーツ');
+    expect(sports?.ratioType).toBe('学力検査6:調査書の評定4');
+    expect(sports?.interviewRequired).toBe(true);
+    const nikko = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '日光明峰', '一般選抜', '普通');
+    expect(nikko?.ratioType).toBe('学力検査5:調査書の評定5');
+  });
+
+  it('tochigi: 宇都宮東は特色選抜100%・集団面接・学校作成問題(国数英)、栃木は学校作成問題(総合問題A・B)を持つ', () => {
+    const east = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '宇都宮東', '特色選抜', '普通');
+    expect(east?.note).toContain('100%');
+    expect(east?.note).toContain('学校作成問題(国・数・英)');
+    const tochigi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '栃木', '特色選抜', '普通');
+    expect(tochigi?.note).toContain('総合問題A・B');
+  });
+
+  it('tochigi: 全一般選抜レコードの比重は学力検査と調査書の合計が10になる', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi');
+    for (const s of record?.schools ?? []) {
+      if (s.selectionCategory !== '一般選抜') continue;
+      const m = (s.ratioType ?? '').match(/学力検査([0-9]):調査書の評定([0-9])/);
+      expect(m).not.toBeNull();
+      if (m) expect(Number(m[1]) + Number(m[2])).toBe(10);
+    }
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');

@@ -1271,3 +1271,13 @@ data.mjs→gen.mjs)。頁1-4=表形式(第1次比率+重点化+第2次比率+重
 別扱い(比率でなくnoteに数式を転記)。**fiscalYearは令和9年度(2027年度入学者選抜)**でaichiと同様。tsc実exit0・school系27スイート962件green。
 不変条件テスト: 特色検査を除く比(記録+学力/学力+主体的)の合計が10。**未収録**: 定時制・通信制・特別募集等・定通分割選抜・特色検査の概要(各別PDF)。
 **次回**: 同PDF系の他PDF、または未着手県(tochigi/iwate/yamagata/niigata/toyama/ishikawa/fukui/kyoto/nara/shimane/kagawa/saga/kumamoto/miyazaki/okinawa等)。
+
+**2026-09-19追記62（tochigi新規実装・全日制58校108学科・3頁の表を目視転記）**: 栃木県教委「令和8(2026)年度県立高等学校全日制課程の入学者選抜の方法等について」
+(`.../m04/r08/documents/20250520202321.pdf`・全3頁・A3画像PDF・text抽出不可)は、学校・学科別に「特色選抜(定員割合・面接[個人/集団]・作文/小論文の時間と字数・
+学校独自検査)」と「一般選抜(学力検査:調査書の評定の比重・面接の有無)」を一覧表で公表していた。130dpiで頁を上下2分割して目視転記
+(`ops/baselines/tochigi-transcription/`のdata.mjs→gen.mjs)。特色選抜・一般選抜を学科ごと各1レコード(計216)。不変条件テスト(比重の合計10)green。
+tsc実exit0・school系27スイート966件green。survey表(『学力検査:調査書比率が9:1〜5:5と学校ごとに異なる』)の予想どおり県標準比は無く学校別。
+
+**注意**: 一度、gen.mjsのnoteに「A日程等の別なく1回・学力検査は5教科」と根拠の無い一文を書いてしまい、コミット前に自分で発見して削除した
+(Y-0違反=表に無い事実)。生成スクリプトのnote定型文には資料で確認済みの事実だけを書くこと。**次回**: iwate/yamagata/niigata/toyama/ishikawa/fukui/kyoto/nara/
+shimane/kagawa/saga/kumamoto/miyazaki/okinawa等、survey表の見込み県を同様にまず一次ページで実物確認。
