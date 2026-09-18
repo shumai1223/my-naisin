@@ -1372,7 +1372,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'wakayama')?.schools ?? [];
     const toku = all.filter((s) => s.selectionCategory.startsWith('特色化選抜('));
     expect(toku).toHaveLength(21);
-    expect(all).toHaveLength(94);
+    expect(all).toHaveLength(123);
     const count = (cat: string) => toku.filter((s) => s.selectionCategory === `特色化選抜(${cat})`).length;
     expect(count('スポーツ')).toBe(9);
     expect(count('芸術')).toBe(4);
@@ -1415,6 +1415,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kita?.interviewRequired).toBeUndefined();
     expect(find('和歌山東', '普通科')?.ratioType).toBe('調査書40:学力検査40:面接・実技検査20');
     expect(find('新宮', '普通科(昼間)(新翔校舎)(定時制)')?.ratioType).toBe('調査書40:学力検査40:面接・実技検査20');
+  });
+
+  it('wakayama: スポーツ推薦(別表5〜7)は資料末尾の「計9校29競技スポーツ」と一致し、募集枠・出願条件・実技を競技単位に統合している', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'wakayama')?.schools ?? [];
+    const sp = all.filter((s) => s.selectionCategory === 'スポーツ推薦');
+    expect(sp).toHaveLength(29);
+    expect(new Set(sp.map((s) => s.schoolName)).size).toBe(9);
+    const find = (school: string, sport: string) => sp.find((s) => s.schoolName === school && s.department === sport);
+    for (const s of sp) {
+      expect(s.note).toContain('募集枠:');
+      expect(s.note).toContain('出願条件(別表6):');
+      expect(s.note).toContain('スポーツ実技検査等(別表7):');
+    }
+    expect(find('紀北農芸', 'ハンドボール')?.note).toContain('男子のみ3名程度');
+    expect(find('粉河', '卓球')?.note).toContain('女子のみ3名程度');
+    expect(find('和歌山北(普通科)', 'サッカー')?.note).toContain('女子のみ3名程度');
+    expect(find('和歌山北(普通科)', 'フェンシング')?.note).toContain('男女を問わず2名程度');
+    expect(find('和歌山工業', '陸上競技')?.note).toContain('専門種目のスパイク可');
+    expect(find('和歌山商業', '相撲')?.note).toContain('まわし');
+    // 面接を実施するのは別表7の備考に「面接を実施」とある学校のみ(和歌山商業・箕島は無し)
+    expect(find('和歌山商業', '卓球')?.interviewRequired).toBeUndefined();
+    expect(find('箕島', '柔道')?.interviewRequired).toBeUndefined();
+    expect(find('紀央館', 'ホッケー')?.interviewRequired).toBe(true);
+    expect(sp.filter((s) => s.interviewRequired)).toHaveLength(23); // 和歌山商業3競技+箕島3競技=6競技が面接なし
   });
 
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
