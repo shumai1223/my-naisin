@@ -1108,11 +1108,23 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('独自の提出書類');
   });
 
-  it('hiroshima: schoolsは頁3の最初の6校(広島国泰寺/広島市立基町/広島市立舟入/広島商業/広島市立広島商業/広島皆実・計11学科)33レコードを収録している(頁3残り+頁4-8は未収録)', () => {
+  it('hiroshima: schoolsは頁3(全日制課程[本校]一覧・16校27学科)を完全収録している(頁4-8は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima');
-    expect(record?.schools?.length).toBe(33);
+    expect(record?.schools?.length).toBe(90);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(6);
+    expect(schoolNames.size).toBe(14);
+  });
+
+  it('hiroshima: 広島工業(機械等5学科)は特色枠による選抜を実施せず定員枠100%が一般枠のみになる', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島工業', '特色枠による選抜', '機械');
+    expect(record?.note).toContain('特色枠による選抜を実施しない');
+  });
+
+  it('hiroshima: 広島観音(総合学科)と安古市(普通)は同型の調査書重視型傾斜配点(音楽・美術・保健体育・技術家庭2倍)を持つが比重の重み付けが異なる', () => {
+    const kannon = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島観音', '特色枠による選抜', '総合学科');
+    const ankoichi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '安古市', '特色枠による選抜', '普通');
+    expect(kannon?.ratioType).toBe('学力300:調査300:表現400(独自検査なし)');
+    expect(ankoichi?.ratioType).toBe('学力200:調査600:表現200(独自検査なし)');
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
