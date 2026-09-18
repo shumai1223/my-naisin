@@ -1153,13 +1153,6 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(bunri?.interviewRequired).toBe(true);
   });
 
-  it('fukushima: schoolsは2校(福島/橘・普通科)6レコードを収録している(前期選抜の特色選抜・一般選抜+後期選抜の3区分)', () => {
-    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(6);
-    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘']));
-  });
-
   it('fukushima: 福島(普通科)は特色選抜で音楽・美術・保健体育・技術家庭の4教科を2倍傾斜配点する', () => {
     const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島', '特色選抜', '普通科');
     expect(record?.interviewRequired).toBe(true);
@@ -1254,6 +1247,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '岩見沢東', '推薦入学者選抜', '文理探究');
     expect(record?.interviewRequired).toBe(true);
     expect(record?.ratioType).toBe('入学枠20%程度');
+  });
+
+  it('fukushima: schoolsは3校(福島/橘/福島商業)15レコードを収録している(福島商業はくくり募集3学科分)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
+    expect(record?.schools?.length).toBe(15);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業']));
+  });
+
+  it('fukushima: 福島商業(商業科・情報ビジネス科)の特色選抜はA型/B型/C型の3類型を持ちB型・C型のみ実技90点を課す', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島商業', '特色選抜', '商業科・情報ビジネス科');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.note).toContain('A型(学業');
+    expect(record?.ratioType).toContain('実技90点(B型・C型)');
+  });
+
+  it('fukushima: 福島商業(商業科・会計ビジネス科)の一般選抜は募集定員40人で情報ビジネス科・経営ビジネス科の80人より少ない', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島商業', '一般選抜', '商業科・会計ビジネス科');
+    expect(record?.note).toContain('募集定員40人');
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
