@@ -1153,6 +1153,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(bunri?.interviewRequired).toBe(true);
   });
 
+  it('fukushima: schoolsは2校(福島/橘・普通科)6レコードを収録している(前期選抜の特色選抜・一般選抜+後期選抜の3区分)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
+    expect(record?.schools?.length).toBe(6);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames).toEqual(new Set(['福島', '橘']));
+  });
+
+  it('fukushima: 福島(普通科)は特色選抜で音楽・美術・保健体育・技術家庭の4教科を2倍傾斜配点する', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島', '特色選抜', '普通科');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.ratioType).toContain('2倍傾斜配点');
+  });
+
+  it('fukushima: 橘(普通科)の一般選抜は学力検査の成績を3倍する比重で福島(同等)と異なる', () => {
+    const fukushimaShi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島', '一般選抜', '普通科');
+    const tachibana = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '橘', '一般選抜', '普通科');
+    expect(fukushimaShi?.ratioType).toBe('学力検査と調査書の成績の比重=同等');
+    expect(tachibana?.ratioType).toBe('学力検査の成績を3倍する');
+  });
+
+  it('fukushima: 橘(普通科)の後期選抜は面接を段階評価のみで点数化しない(福島は30点に点数化する点で異なる)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '橘', '後期選抜', '普通科');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.ratioType).toContain('面接(段階評価)');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
