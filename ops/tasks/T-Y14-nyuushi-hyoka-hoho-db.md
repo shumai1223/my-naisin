@@ -1262,3 +1262,12 @@ fukushima頁11以降/gifu頁4/未着手県)へ。saitamaの学校別選抜資料
 **教訓**: 県公式ページがHTML表なら、画像PDFの目視転記(埼玉は131PDFで約2時間)よりはるかに速く・誤りなく収録できる。着手前に`curl`でHTMLを取得して
 `<table>`があるか先に確認する(survey表の「structured(見込み)」県=kanagawa/tochigi/iwate/yamagata/niigata/toyama/ishikawa/fukui/kyoto/nara/shimane/kagawa/saga/kumamoto/
 miyazaki/okinawa の各URLを同じ手で当たる価値あり)。**次回**: 同手法でkanagawa/tochigi等の見込み県、またはchibaの傾斜配点(別資料)。
+
+**2026-09-19追記61（kanagawa新規実装・令和9年度共通選抜[全日制]全5頁・139校197レコード）**: survey表の「structured(見込み)」だったkanagawaの
+選考基準ページ(`senko_kijun.html`)は、共通選抜(全日制)の**画像PDF**(`01_kyoutsu_zennichi.pdf`・全5頁・text抽出不可)で全校の
+「学習の記録:学力検査:特色検査」比率(第1次選考)・「学力検査:主体的態度:特色検査」比率(第2次選考)・重点化(教科×2/×1.5等)・特色検査の種別
+(自己表現/面接/実技)・学力検査の教科構成を一覧表で公表していた。200dpi→ストリップ分割で目視転記(`ops/baselines/kanagawa-transcription/`の
+data.mjs→gen.mjs)。頁1-4=表形式(第1次比率+重点化+第2次比率+重点化)・頁5=横浜国際(国際科/IB)とクリエイティブスクール5校が数式(S=K+M+T等)形式で
+別扱い(比率でなくnoteに数式を転記)。**fiscalYearは令和9年度(2027年度入学者選抜)**でaichiと同様。tsc実exit0・school系27スイート962件green。
+不変条件テスト: 特色検査を除く比(記録+学力/学力+主体的)の合計が10。**未収録**: 定時制・通信制・特別募集等・定通分割選抜・特色検査の概要(各別PDF)。
+**次回**: 同PDF系の他PDF、または未着手県(tochigi/iwate/yamagata/niigata/toyama/ishikawa/fukui/kyoto/nara/shimane/kagawa/saga/kumamoto/miyazaki/okinawa等)。

@@ -805,6 +805,44 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kukuri?.note).toContain('くくり募集');
   });
 
+  it('kanagawa: 共通選抜(全日制)全5頁を収録し令和9年度として記録している(139校197レコード)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa');
+    expect(record?.status).toBe('structured');
+    expect(record?.fiscalYear).toContain('令和9年度');
+    expect(record?.schools?.length).toBe(197);
+    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(139);
+  });
+
+  it('kanagawa: 横浜翠嵐は第1次3:7:3・特色検査=自己表現、大船は英語と国数の高い1教科を×1.5に重点化する', () => {
+    const suiran = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', '横浜翠嵐', '共通選抜', '普通科');
+    expect(suiran?.ratioType).toBe('第1次選考[学習の記録:学力検査:特色検査=3:7:3]/第2次選考[学力検査:主体的に学習に取り組む態度:特色検査=8:2:2]');
+    expect(suiran?.note).toContain('自己表現');
+    const ofuna = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', '大船', '共通選抜', '普通科');
+    expect(ofuna?.note).toContain('[学]英(×1.5)');
+  });
+
+  it('kanagawa: 舞岡は特色検査=面接(interviewRequired)、クリエイティブスクールは学力検査なしで数式(S=K+M+T)をnoteに持つ', () => {
+    const maioka = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', '舞岡', '共通選抜', '普通科');
+    expect(maioka?.interviewRequired).toBe(true);
+    const kamariya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', '釜利谷', '共通選抜', '普通科');
+    expect(kamariya?.ratioType).toBeUndefined();
+    expect(kamariya?.note).toContain('S(100点満点)=K+M+T');
+    expect(kamariya?.note).toContain('学力検査は実施せず');
+  });
+
+  it('kanagawa: 非特色の学校は第1次・第2次とも学習の記録/学力検査(または学力検査/主体的態度)の比の合計が10になる', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa');
+    for (const s of record?.schools ?? []) {
+      if (!s.ratioType) continue;
+      const m = s.ratioType.match(/=([0-9]):([0-9]):([0-9-]+)\]\/第2次選考\[[^=]+=([0-9]):([0-9]):([0-9-]+)\]/);
+      expect(m).not.toBeNull();
+      if (m) {
+        expect(Number(m[1]) + Number(m[2])).toBe(10);
+        expect(Number(m[4]) + Number(m[5])).toBe(10);
+      }
+    }
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
