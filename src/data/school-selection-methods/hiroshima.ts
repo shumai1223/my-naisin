@@ -22,8 +22,12 @@
 //    換算後点数は資料に明記されない。Y-0に従い推測で数値を埋めない)。
 //  - 二次選抜: 調査書・自己表現・学校独自検査・比重(1,000点満点)の4列のみ(学力検査は実施なし)。
 //
-// ★今回は頁3の最初の3校(広島国泰寺/広島市立基町/広島市立舟入・計6学科)を実装し、この解析手法
-// (300dpi+2倍拡大クロップ)が正確に機能することを確認した。頁3残り(約22行)+頁4-8は次回。
+// ★今回は頁3の最初の6校(広島国泰寺/広島市立基町/広島市立舟入/広島商業/広島市立広島商業/
+// 広島皆実・計11学科)を実装し、この解析手法(300dpi+2倍拡大クロップ)が正確に機能することを
+// 確認した。頁3残り(約19行)+頁4-8は次回。
+//
+// ★訂正(広島皆実体育・二次選抜で発覚): 「独自の提出書類」欄は比重の点数とは無関係な
+// yes/noマーカー列であり、比重(調査書/自己表現/独自検査)の3列と混同しないこと。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -32,7 +36,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '全8頁のうち頁3(全日制課程[本校]一覧)の最初の3校(広島国泰寺/広島市立基町/広島市立舟入・計6学科)18レコードのみ収録。頁3残り(中区・東区・南区・西区・安佐南区の約22行)+頁4-8(分校/併設型/連携型/定時制/通信制/フレックス課程)は未収録',
+    '全8頁のうち頁3(全日制課程[本校]一覧)の最初の6校(広島国泰寺/広島市立基町/広島市立舟入/広島商業/広島市立広島商業/広島皆実・計11学科)33レコードのみ収録。頁3残り(南区・西区・安佐南区の約19行)+頁4-8(分校/併設型/連携型/定時制/通信制/フレックス課程)は未収録',
   schools: [
     {
       schoolName: '広島国泰寺',
@@ -147,7 +151,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '二次選抜',
       interviewRequired: false,
-      note: '自己表現30点。学校独自検査の実施なし(面接・作文・小論文等いずれも欄が空欄)。比重:調査書800点・自己表現200点の1,000点満点換算(独自検査が無いため調査書:自己表現=8:2の比率がそのまま適用され、他校で見られる独自検査ありの600:200:200パターンとは異なる)',
+      note: '自己表現30点。学校独自検査の実施なし(面接・作文・小論文等いずれも欄が空欄)。比重:調査書800点・自己表現200点の1,000点満点換算(独自検査なしの場合の調査書:自己表現配分は学校ごとに個別設定されており、後続の広島商業[700:300]とも異なる。固定比率ではなく学校長判断による点である点に注意)',
     },
     {
       schoolName: '広島市立舟入',
@@ -171,6 +175,121 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '二次選抜',
       interviewRequired: true,
       note: '自己表現30点。学校独自検査:面接を実施(50点)。比重:調査書700点・自己表現200点・独自検査(面接)100点の1,000点満点換算',
+    },
+    {
+      schoolName: '広島商業',
+      department: '情報ビジネス',
+      selectionCategory: '特色枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力400:調査400:表現200(独自検査なし)',
+      note: '定員枠50%(160人)。学力検査:標準=合計250点。調査書:9項目とも標準25点=合計225点。自己表現30点。学校独自検査の実施なし',
+    },
+    {
+      schoolName: '広島商業',
+      department: '情報ビジネス',
+      selectionCategory: '一般枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
+      note: '定員枠50%(160人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+    },
+    {
+      schoolName: '広島商業',
+      department: '情報ビジネス',
+      selectionCategory: '二次選抜',
+      interviewRequired: false,
+      note: '自己表現30点。学校独自検査の実施なし。比重:調査書700点・自己表現300点の1,000点満点換算(独自検査なしの配分は学校ごとに個別設定・舟入普通の800:200とも異なる)',
+    },
+    {
+      schoolName: '広島市立広島商業',
+      department: 'みらい商業',
+      selectionCategory: '特色枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力300:調査500:表現200(独自検査なし)',
+      note: '定員枠50%(120人)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし。比重は学力300:調査500:表現200(調査書を重視する配分・国泰寺等の400:400:200とは異なる独自の重み付け)',
+    },
+    {
+      schoolName: '広島市立広島商業',
+      department: 'みらい商業',
+      selectionCategory: '一般枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
+      note: '定員枠50%(120人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+    },
+    {
+      schoolName: '広島市立広島商業',
+      department: 'みらい商業',
+      selectionCategory: '二次選抜',
+      interviewRequired: false,
+      note: '自己表現30点。学校独自検査:作文を実施(100点)。比重:調査書400点・自己表現200点・独自検査(作文)400点の1,000点満点換算',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '普通',
+      selectionCategory: '特色枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力400:調査400:表現200(独自検査なし)',
+      note: '定員枠30%(72人)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '普通',
+      selectionCategory: '一般枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
+      note: '定員枠70%(168人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '普通',
+      selectionCategory: '二次選抜',
+      interviewRequired: false,
+      note: '自己表現30点。学校独自検査:小論文を実施(100点)。比重:調査書600点・自己表現200点・独自検査(小論文)200点の1,000点満点換算',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '衛生看護',
+      selectionCategory: '特色枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力400:調査400:表現200(独自検査なし)',
+      note: '定員枠30%(12人)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '衛生看護',
+      selectionCategory: '一般枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
+      note: '定員枠70%(28人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '衛生看護',
+      selectionCategory: '二次選抜',
+      interviewRequired: false,
+      note: '自己表現30点。学校独自検査:作文を実施(100点)。比重:調査書600点・自己表現200点・独自検査(作文)200点の1,000点満点換算(普通科と同一配点だが検査種別が小論文でなく作文)',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '体育',
+      selectionCategory: '特色枠による選抜',
+      interviewRequired: false,
+      ratioType: '学力200:調査200:表現200:独自600(1,200点満点)',
+      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重は独自検査ありのため1,200点満点(200+200+200+600)',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '体育',
+      selectionCategory: '一般枠による選抜',
+      interviewRequired: false,
+      ratioType: '独自200のみ判明(学力・調査・表現の換算後点数は資料に記載なし)',
+      note: '定員枠50%(20人)。学力検査:標準=合計250点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重欄は独自検査の200点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄',
+    },
+    {
+      schoolName: '広島皆実',
+      department: '体育',
+      selectionCategory: '二次選抜',
+      interviewRequired: true,
+      note: '自己表現30点。学校独自検査:面接(20点)と実技検査(100点)を組み合わせて実施(合計120点・特色枠/一般枠がいずれも単一検査のみなのに対し二次選抜のみ複数検査を併用する珍しいケース)。比重:調査書200点・自己表現200点・独自検査(面接+実技)600点の1,000点満点換算。「独自の提出書類」欄に●があり学校独自の提出書類が必要(点数とは無関係の別項目)',
     },
   ],
   source: {
