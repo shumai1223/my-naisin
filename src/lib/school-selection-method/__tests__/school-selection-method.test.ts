@@ -1485,6 +1485,65 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('熊野青藍(紀南校舎)', '総合学科')?.note).toContain('うち特に重視する選抜資料は学力検査の結果)');
   });
 
+  it('nagasaki: 421レコード(57校)で、比重を持つ全レコードの比重合計が10になる', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagasaki');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(421);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(57);
+    const withRatio = all.filter((s) => s.ratioType);
+    expect(withRatio.length).toBeGreaterThan(300);
+    for (const s of withRatio) {
+      expect(s.ratioType).toContain('(比重・合計10)');
+      const items = (s.ratioType ?? '').replace('(比重・合計10)', '').split(':');
+      const total = items.reduce((a, it) => a + Number(it.match(/([0-9.]+)$/)?.[1] ?? 0), 0);
+      expect(Math.round(total * 10) / 10).toBe(10);
+    }
+  });
+
+  it('nagasaki: 選抜区分ごとの件数(一般選抜・チャレンジ・定時制Ⅰ期/Ⅱ期・通信制・離島留学6・美術工芸1)が資料の構造と一致する', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagasaki')?.schools ?? [];
+    const count = (cat: string) => all.filter((s) => s.selectionCategory === cat).length;
+    expect(count('一般選抜')).toBe(117); // 離島留学特別選抜へ分けた4行を除く全学科・コース
+    expect(count('チャレンジ選抜')).toBe(59);
+    expect(count('Ⅰ期選抜(定時制)')).toBe(12);
+    expect(count('Ⅱ期選抜(定時制)')).toBe(12);
+    expect(count('通信制課程募集定員')).toBe(2);
+    expect(count('離島留学特別選抜')).toBe(6);
+    expect(count('美術・工芸科特別選抜')).toBe(1);
+    // 課程別の募集定員(頁33)と一致する合計は ops/baselines/nagasaki-transcription/check.mjs で検算済み
+    const tsushin = all.filter((s) => s.selectionCategory === '通信制課程募集定員');
+    expect(tsushin.reduce((a, s) => a + Number((s.note ?? '').match(/募集定員([0-9]+)人/)?.[1] ?? 0), 0)).toBe(600);
+  });
+
+  it('nagasaki: 長崎東は一般選抜3:6.5:0.5・数英150点(難度の高い問題)、長崎西の理系は数200・理150・英200、佐世保商業の国際コミュニケーションは英200', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagasaki')?.schools ?? [];
+    const find = (school: string, dept: string, cat: string) => list.find((s) => s.schoolName === school && s.department === dept && s.selectionCategory === cat);
+    const higashi = find('長崎東', '普通・国際(くくり募集)', '一般選抜');
+    expect(higashi?.ratioType).toBe('調査書等3:学力検査6.5:面接0.5(比重・合計10)');
+    expect(higashi?.note).toContain('国100・社100・数150・理100・英150(合計600点)');
+    expect(higashi?.note).toContain('数英は難度の高い問題(選択問題)を実施する教科');
+    expect(find('長崎西', '普通[理系]', '一般選抜')?.note).toContain('国150・社100・数200・理150・英200(合計800点)');
+    expect(find('佐世保商業', '国際コミュニケーション', '一般選抜')?.note).toContain('英200');
+    // 自己推薦②で面接に代えてプレゼンテーションを課す学校
+    const pre = find('長崎東', '普通・国際(くくり募集)', '特別選抜(自己推薦②)');
+    expect(pre?.ratioType).toBe('調査書等7:プレゼンテーション3(比重・合計10)');
+    expect(pre?.note).toContain('プレゼンテーションに質疑応答及び英語を含む');
+    expect(pre?.interviewRequired).toBeUndefined();
+  });
+
+  it('nagasaki: 特別選抜を実施しない定時制昼間部は一般選抜のみ、離島留学特別選抜の五島スポーツは調査書4:面接1:実技5', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagasaki')?.schools ?? [];
+    const naru = list.filter((s) => s.schoolName === '鳴滝' && s.department === '普通(昼間部)');
+    expect(naru.map((s) => s.selectionCategory)).toEqual(['一般選抜']);
+    expect(naru[0].ratioType).toBe('調査書等2:学力検査4:面接4(比重・合計10)');
+    const goto = list.find((s) => s.schoolName === '五島' && s.selectionCategory === '離島留学特別選抜');
+    expect(goto?.ratioType).toBe('調査書等4:面接1:実技5(比重・合計10)');
+    const hasami = list.find((s) => s.schoolName === '波佐見' && s.selectionCategory === '美術・工芸科特別選抜');
+    expect(hasami?.ratioType).toBe('調査書等4:実技6(比重・合計10)');
+    expect(hasami?.note).toContain('静物卓上デッサン');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
