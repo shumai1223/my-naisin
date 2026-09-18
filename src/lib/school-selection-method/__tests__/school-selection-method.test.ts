@@ -1097,6 +1097,40 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(chienII?.ratioType).toBe('学力検査250:調査書85:面接15');
   });
 
+  it('iwate: 盛岡地区14校29学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が比率どおり1000点になる', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(14);
+    const general = all.filter((s) => s.selectionCategory === '一般入学者選抜');
+    expect(general).toHaveLength(29);
+    for (const s of general) {
+      const m = (s.ratioType ?? '').match(/^学力検査([0-9]+):調査書([0-9]+)/);
+      expect(m).not.toBeNull();
+      if (m) expect(Number(m[1]) + Number(m[2])).toBe(1000);
+    }
+  });
+
+  it('iwate: 盛岡第一は学力検査7:調査書3(700:300)、盛岡第二は5:5、盛岡第四は6:4、南昌みらい芸術学系は学校独自検査100点で合計1100点', () => {
+    const one = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '盛岡第一高等学校', '一般入学者選抜');
+    expect(one?.ratioType).toBe('学力検査700:調査書300');
+    const two = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '盛岡第二高等学校', '一般入学者選抜');
+    expect(two?.ratioType).toBe('学力検査500:調査書500');
+    const four = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '盛岡第四高等学校', '一般入学者選抜');
+    expect(four?.ratioType).toBe('学力検査600:調査書400');
+    const art = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '南昌みらい高等学校', '一般入学者選抜', '普通科(芸術学系)');
+    expect(art?.note).toContain('合計1100点');
+  });
+
+  it('iwate: 葛巻は連携型入学者選抜(合計550点)をnoteに持つ、紫波総合は一般入学者選抜で集団面接(学校独自検査100点)を課す', () => {
+    const kuzu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '葛巻高等学校', '二次募集');
+    expect(kuzu?.note).toContain('連携型入学者選抜');
+    expect(kuzu?.note).toContain('合計550点');
+    const shiwa = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '紫波総合高等学校', '一般入学者選抜');
+    expect(shiwa?.interviewRequired).toBe(true);
+    expect(shiwa?.note).toContain('集団面接');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
