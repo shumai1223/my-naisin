@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
-const REGIONS = [['./morioka.mjs', '盛岡地区', 'r8_morioka.pdf'], ['./chubu.mjs', '中部地区', 'r8_chubu.pdf'], ['./kennan.mjs', '県南地区', 'r8_kennan.pdf'], ['./engannanbu.mjs', '沿岸南部地区', 'r8_engannanbu.pdf']];
+const REGIONS = [['./morioka.mjs', '盛岡地区', 'r8_morioka.pdf'], ['./chubu.mjs', '中部地区', 'r8_chubu.pdf'], ['./kennan.mjs', '県南地区', 'r8_kennan.pdf'], ['./engannanbu.mjs', '沿岸南部地区', 'r8_engannanbu.pdf'], ['./miyako.mjs', '宮古地区', 'r8_miyako.pdf']];
 const ALL = ['盛岡地区', '中部地区', '県南地区', '沿岸南部地区', '宮古地区', '県北地区', '定時制'];
 const QC = String.fromCharCode(39);
 const q = (s) => {

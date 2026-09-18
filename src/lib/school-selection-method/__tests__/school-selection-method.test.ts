@@ -1097,13 +1097,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(chienII?.ratioType).toBe('学力検査250:調査書85:面接15');
   });
 
-  it('iwate: 盛岡地区・中部地区・県南地区・沿岸南部地区の45校88学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
+  it('iwate: 盛岡・中部・県南・沿岸南部・宮古の5地区51校99学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(new Set(all.map((s) => s.schoolName)).size).toBe(45);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(51);
     const general = all.filter((s) => s.selectionCategory === '一般入学者選抜');
-    expect(general).toHaveLength(88);
+    expect(general).toHaveLength(99);
     for (const s of general) {
       const m = (s.ratioType ?? '').match(/^学力検査([0-9]+):調査書([0-9]+)/);
       expect(m).not.toBeNull();
@@ -1176,6 +1176,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(ofunato?.note).toContain('合計1050点');
     const kamaishi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '釜石高等学校', '特色入学者選抜');
     expect(kamaishi?.note).toContain('合計350点');
+  });
+
+  it('iwate: 山田は特色の調査書を660点満点から圧縮・プレゼンテーション120点、岩泉は独自検査の集団面接100点で1100点、宮古北の二次募集は面接200点', () => {
+    const yamada = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '山田高等学校', '特色入学者選抜');
+    expect(yamada?.note).toContain('合計660点を圧縮');
+    expect(yamada?.note).toContain('プレゼンテーション120点');
+    const iwaizumi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '岩泉高等学校', '一般入学者選抜');
+    expect(iwaizumi?.interviewRequired).toBe(true);
+    expect(iwaizumi?.note).toContain('集団面接');
+    expect(iwaizumi?.note).toContain('合計1100点');
+    const miyakoKita = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '宮古北高等学校', '二次募集');
+    expect(miyakoKita?.note).toContain('面接200点');
   });
 
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
