@@ -915,3 +915,29 @@ tsc実exit0・school-selection-method関連jest157件green。フルスイート�
 2. tokushima頁1-7(一般選抜の学校別選抜方法一覧本体)着手判断
 3. gifu頁4・okayama頁4-7・未着手県(tokyo/hokkaido/fukushima/shizuoka/yamaguchi)
 4. T-Y13へ戻る場合: wakayama等の未着手県から選択(gifuは一次資料未到達のため保留中)
+
+**2026-09-18追記46(yamaguchi新規実装・完全収録完了・push済7de6278)**: 「R8入学者選抜における
+各高等学校の選抜方法」PDF(山口県教育委員会)から全日制課程43校193レコードを新規実装した
+(schools配列69学科相当・特色選抜+第一次募集の2区分)。
+
+**発見**: ①「特色選抜」列の◎は凡例上「備考欄に具体的な内容・方法が示されている」の意味で、
+○と同様「実施」を意味する(◎と○の違いは実施有無ではなく備考の詳細度)。②「第一次募集」列は
+面接・小論文・実技検査・調査書等による選抜(%)の4区分を持つが、全日制課程では実際に使用
+されるのは常に面接列のみ(300dpi画像で全行を目視確認済み・西京体育コースも実技検査でなく
+面接列だった)。③傾斜配点(学校指定/生徒指定)は全日制課程で1件も使用されていなかった。
+④下関西「普通」は資料上データ自体が存在せず(文理探究のくくり募集のみ収録)、Y-0に従い
+推測で埋めずレコード自体を作らなかった。
+
+**テストの罠(自己訂正)**: 新規追加したテスト1件で`findSchoolSelectionRecord`の戻り値を
+`toBeUndefined()`で検証したが実装は「未収録時は`null`を返す」仕様(関数のJSDocに明記済み)
+だったため1件fail。修正は`toBeNull()`への変更のみ(データ側は正しかった)。**教訓**: 新規
+テスト作成時、ヘルパー関数の「見つからない時の返り値」(`undefined`か`null`か)を実装の
+JSDoc/型シグネチャで確認してから書く(型は`SchoolSelectionMethodRecord | null`と明記されて
+いるのに読み違えた)。
+
+tsc実exit0・school-selection-method関連jest161件green・フルスイート548/549 suites green
+(school-click-route.test.tsの同一IP429テストのみ既知の環境要因flake・自分の変更はこの
+ルート未接触)。commit 7de6278・push済。
+
+**次回セッションが選ぶべきこと(更新)**: 未着手県はtokyo/hokkaido/fukushima/shizuokaの4県に
+減少。上記1-2(hiroshima頁4-8/tokushima頁1-7)・gifu頁4・okayama頁4-7も引き続き選択肢。
