@@ -641,11 +641,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1+頁2+頁3+頁4+頁5を完全収録している(36校181レコード・頁6〜7は未収録)', () => {
+  it('okayama: schoolsは頁1〜頁6を完全収録している(45校227レコード・頁7は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(181);
+    expect(record?.schools?.length).toBe(227);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(36);
+    expect(schoolNames.size).toBe(45);
     expect(record?.coverageNote).toContain('岡山一宮');
     expect(record?.coverageNote).toContain('興陽');
     expect(record?.coverageNote).toContain('岡山南');
@@ -653,6 +653,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.coverageNote).toContain('倉敷鷲羽');
     expect(record?.coverageNote).toContain('津山東');
     expect(record?.coverageNote).toContain('井原');
+    expect(record?.coverageNote).toContain('真庭');
   });
 
   it('okayama: 津山工業は6学科が重視する実績(10人程度・ラグビー等)と一般入学者選抜の比率15%を共有する(頁5)', () => {
@@ -684,6 +685,41 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(green?.note).toContain('新体操');
     const human = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '井原', '特別入学者選抜', 'ヒューマンライフコース');
     expect(human?.note).toContain('机上で作業');
+  });
+
+  it('okayama: 備前緑陽は総合学科の4系列に同一内容(募集人員80%・一般選抜比率5%)を複製して収録している(頁6)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    const ryokuyo = record?.schools?.filter((s) => s.schoolName === '備前緑陽');
+    expect(ryokuyo).toHaveLength(8);
+    const kougyo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '備前緑陽', '一般入学者選抜', '工業技術系列');
+    expect(kougyo?.ratioType).toBe('調査書及び面接等5%');
+    expect(kougyo?.note).toContain('総合学科');
+  });
+
+  it('okayama: 総社南は普通・国際分野・美術工芸分野で一般入学者選抜(15%・☆海外帰国)を共有し、募集人員は人数(25人)で印字される(頁6)', () => {
+    const general = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '総社南', '一般入学者選抜', '美術工芸分野');
+    expect(general?.ratioType).toBe('調査書及び面接等15%');
+    expect(general?.note).toContain('☆');
+    const kokusai = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '総社南', '特別入学者選抜', '国際分野');
+    expect(kokusai?.note).toContain('25人');
+    expect(kokusai?.note).toContain('英語検定2級以上');
+  });
+
+  it('okayama: 備考欄の記号(※=複数校志願/◇=同一学科とみなす/◆=第1志望に第2志望を含める割合)の意味を頁1凡例に基づいてnoteに反映している(頁3〜6)', () => {
+    const maniwa = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '真庭', '一般入学者選抜', '看護');
+    expect(maniwa?.note).toContain('複数校志願');
+    const jonan = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '高梁城南', '一般入学者選抜', '電気');
+    expect(jonan?.note).toContain('◇');
+    const oku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '邑久', '一般入学者選抜', '普通');
+    expect(oku?.note).toContain('◆20%');
+    const kurashikiKango = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '倉敷中央', '特別入学者選抜', '看護');
+    expect(kurashikiKango?.note).not.toContain('意味は不明');
+  });
+
+  it('okayama: 勝山の蒜山校地は連携型中高一貫教育選抜(□)で募集人員30%・小論文を持つ(頁6)', () => {
+    const hiruzen = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '勝山', '特別入学者選抜', '普通(蒜山校地)');
+    expect(hiruzen?.note).toContain('募集人員30%');
+    expect(hiruzen?.note).toContain('連携型');
   });
 
   it('okayama: 津山(理数)は特別入学者選抜のみ収録され一般入学者選抜のレコードは無い(募集人員100%かつ一般選抜比率が「ー」のため)', () => {
