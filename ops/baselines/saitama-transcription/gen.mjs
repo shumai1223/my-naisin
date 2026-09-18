@@ -18,12 +18,13 @@ const stage = (n, s, oth, g = 500) => {
 };
 let out = '';
 for (const e of D) {
-  const rp = [stage(1, e.s1, e.oth), stage(2, e.s2, e.oth)];
+  const g = e.g || 500;
+  const rp = [stage(1, e.s1, e.oth, g), stage(2, e.s2, e.oth, g)];
   if (e.s3) rp.push('第3次' + e.s3);
   const ratioType = rp.join('/');
   let ch = '';
   if (e.ch) ch = `調査書:学習の記録${e.ch[0]}点(1〜3年の比${e.ch[1]})・特別活動等の記録${e.ch[2]}点・その他の項目${e.ch[3]}点=計${e.ch[4]}点。`;
-  const note = `【選抜基準PDF】基本方針:${e.pol}学力検査500点。${ch}その他の資料:${e.oth ? e.oth[0] + e.oth[1] + '点' : 'なし'}。第2志望:${e.d2}。その他:${e.so}。${e.extra ? e.extra : ''}`.replace(/。。/g, '。');
+  const note = `【選抜基準PDF】基本方針:${e.pol}学力検査${g}点。${ch}その他の資料:${e.oth ? e.oth[0] + e.oth[1] + '点' : 'なし'}。第2志望:${e.d2}。その他:${e.so}。${e.extra ? e.extra : ''}`.replace(/。。/g, '。');
   out += '    {\n';
   out += `      schoolName: ${q(e.name)},\n      department: ${q(e.dept)},\n      selectionCategory: '一般募集',\n      interviewRequired: ${e.oth && e.oth[0] === '面接' ? 'true' : 'false'},\n      ratioType: ${q(ratioType)},\n      note: ${q(note)},\n    },\n`;
 }
