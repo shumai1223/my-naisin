@@ -956,6 +956,40 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(shoken?.note).toContain('総合ビジネス科25%程度');
   });
 
+  it('toyama: 全日制34校82学科を一般選抜+推薦選抜の144レコードで収録し、資料の集計行(面接27校62学科・作文26校61学科・実技4校6学科・傾斜2校2学科)と一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'toyama');
+    expect(record?.status).toBe('structured');
+    expect(record?.schools?.length).toBe(144);
+    const all = record?.schools ?? [];
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(34);
+    const suisen = all.filter((s) => s.selectionCategory === '推薦選抜');
+    const ippan = all.filter((s) => s.selectionCategory === '一般選抜');
+    expect(ippan).toHaveLength(82);
+    const has = (list: typeof all, re: RegExp) => list.filter((s) => re.test(s.note ?? ''));
+    const sch = (list: typeof all) => new Set(list.map((s) => s.schoolName)).size;
+    const itv = suisen.filter((s) => s.interviewRequired);
+    expect([sch(itv), itv.length]).toEqual([27, 62]);
+    const essay = has(suisen, /作文:有/);
+    expect([sch(essay), essay.length]).toEqual([26, 61]);
+    const prac = has(suisen, /実技検査:(?!なし)/);
+    expect([sch(prac), prac.length]).toEqual([4, 6]);
+    const tilt = has(ippan, /傾斜配点:(?!なし)/);
+    expect([sch(tilt), tilt.length]).toEqual([2, 2]);
+    const gItv = ippan.filter((s) => s.interviewRequired);
+    expect([sch(gItv), gItv.length]).toEqual([1, 3]);
+  });
+
+  it('toyama: 呉羽の音楽コースは音楽2.0倍・実技検査あり・推薦は面接のみで作文なし、中央農業の3学科は一般選抜で集団面接', () => {
+    const kure = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'toyama', '呉羽', '一般選抜', '普通');
+    expect(kure?.note).toContain('音楽2.0倍');
+    const kureS = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'toyama', '呉羽', '推薦選抜', '普通');
+    expect(kureS?.interviewRequired).toBe(true);
+    expect(kureS?.note).toContain('作文:なし');
+    const nou = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'toyama', '中央農業', '一般選抜', 'バイオ技術');
+    expect(nou?.interviewRequired).toBe(true);
+    expect(nou?.note).toContain('集団面接');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
