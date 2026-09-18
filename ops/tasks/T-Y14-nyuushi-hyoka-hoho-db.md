@@ -1035,3 +1035,35 @@ tsc実exit0・school-selection-method関連jest173件green(今回はtsc・jest�
 tokushima頁1-7)・gifu頁4・okayama頁4-7も引き続き選択肢。**未pushのcommitが5件溜まっている。
 次回セッションでの区切りの良いタイミングでpushすることを強く推奨**(LOOP_CONTRACT.md冒頭の
 恒久ルール参照)。
+
+**2026-09-18追記50(hokkaido新規実装・岩見沢東/滝川の2校4学科8レコード・commit 1123305・
+push済562f66a〜1123305)**: 「令和８年度公立高等学校入学者選抜における学校裁量についての
+実施予定一覧表」PDF(全12頁)から岩見沢東(普通/文理探究)・滝川(普通/理数)の8レコード
+(推薦入学者選抜+一般入学者選抜の2区分)を実装した。**これでbaseline調査(2026-09-16実施)の
+structured確定19県(tokyo/osaka/hokkaido/aomori/miyagi/ibaraki/fukushima/gunma/yamanashi/
+nagano/gifu/shizuoka/aichi/okayama/hiroshima/yamaguchi/tokushima/kochi/kagoshima)すべてに
+最低1件の実装が付いた**(この機会にpushをまとめて実行・フルスイート549 suites/8089 tests
+全green・flakeなしを確認)。
+
+**この資料の特徴・意思決定(他県と異なる重要な判断)**: 北海道の資料は「面接以外に実施する
+項目」(英語聞き取りテスト/英語による問答/実技/作文/学習の記録/学習の合理的な時間/特別活動/
+スポーツ文化活動等/資格試験検定等/その他)や「個人調査書等重視の実技等」など10列以上の
+チェックマーク欄が密集する、これまで実装した中で最も密なマトリクス表だった。150dpi/200dpiの
+pdftoppm画像を複数回crop・確認したが、列とチェックマークの対応関係(特に推薦選抜内の個人調査書
+サブテーブルと、一般選抜の「複数尺度による選抜で重視する項目」内の別の個人調査書サブテーブルが
+紛らわしく2つ存在する構造)に完全な自信を持てなかった。**[[fable5-loop-protocol]]のY-0原則
+「未確認は転記しない」を優先し、確信の持てない列は今回あえて転記を見送った**——収録したのは
+①入学枠(%)②面接(個人)の有無③一般入学者選抜の複数尺度比率(評定:学力・学力:評定)④学力検査の
+傾斜配点、の4項目のみ。これは他県(shizuoka/tokyo等)で実践した「200dpi cropで確信が持てたら
+転記」パターンの逆——**確信が持てない場合は転記自体を見送るという初めての判断**であり、今後
+同種の超高密度な表に遭遇した際の判断基準として記録する。面接以外の詳細項目は今後300dpi以上の
+画像で列位置を再確認できた時点で拡充する。
+
+tsc実exit0・school-selection-method関連jest177件green・フルスイート549 suites/8089 tests
+全green(flakeなし)。commit 1123305・**6コミットまとめてpush済み(562f66a→1123305)**。
+
+**次回セッションが選ぶべきこと(更新)**: 新規県の未着手分は無くなった(19/19県着手済み)。
+以後は①各県の拡充(tokyo頁2-7/fukushima残り約90校/shizuoka頁2以降/hokkaido残り11頁の詳細
+チェックマーク列の再確認等)②hiroshima頁4-8③tokushima頁1-7④gifu頁4⑤okayama頁4-7、から選ぶ。
+baseline調査で「structured(見込み)」「uncertain」だった残り28県への新規着手も選択肢
+(ops/baselines/t-y14-selection-method-survey-2026-09.md参照・一次資料確認から要着手)。
