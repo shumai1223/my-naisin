@@ -641,16 +641,38 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1+頁2+頁3+頁4先頭2校を収録している(22校112レコード・頁4残り〜頁7は未収録)', () => {
+  it('okayama: schoolsは頁1+頁2+頁3+頁4を完全収録している(28校144レコード・頁5〜7は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(112);
+    expect(record?.schools?.length).toBe(144);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(22);
+    expect(schoolNames.size).toBe(28);
     expect(record?.coverageNote).toContain('岡山一宮');
     expect(record?.coverageNote).toContain('興陽');
     expect(record?.coverageNote).toContain('岡山南');
     expect(record?.coverageNote).toContain('倉敷中央');
     expect(record?.coverageNote).toContain('倉敷鷲羽');
+    expect(record?.coverageNote).toContain('津山東');
+  });
+
+  it('okayama: 津山(理数)は特別入学者選抜のみ収録され一般入学者選抜のレコードは無い(募集人員100%かつ一般選抜比率が「ー」のため)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    const tsuyama = record?.schools?.filter((s) => s.schoolName === '津山');
+    expect(tsuyama).toHaveLength(1);
+    expect(tsuyama?.[0].selectionCategory).toBe('特別入学者選抜');
+    expect(tsuyama?.[0].note).toContain('津山中学校');
+  });
+
+  it('okayama: 津山東は普通科が一般入学者選抜のみ・食物調理と看護は特別入学者選抜のみという逆パターンを持つ', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    const tsuyamahigashi = record?.schools?.filter((s) => s.schoolName === '津山東');
+    expect(tsuyamahigashi).toHaveLength(3);
+    const futsuu = tsuyamahigashi?.find((s) => s.department === '普通');
+    const shokumotsu = tsuyamahigashi?.find((s) => s.department === '食物調理');
+    const kango = tsuyamahigashi?.find((s) => s.department === '看護');
+    expect(futsuu?.selectionCategory).toBe('一般入学者選抜');
+    expect(shokumotsu?.selectionCategory).toBe('特別入学者選抜');
+    expect(kango?.selectionCategory).toBe('特別入学者選抜');
+    expect(kango?.note).toContain('※');
   });
 
   it('okayama: 玉島(理数)は一般入学者選抜で比率10%を返す(普通科はレコード無し)', () => {
