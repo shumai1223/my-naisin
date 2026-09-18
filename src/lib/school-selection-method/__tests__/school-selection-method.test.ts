@@ -1127,6 +1127,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(ankoichi?.ratioType).toBe('学力200:調査600:表現200(独自検査なし)');
   });
 
+  it('yamaguchi: schoolsは全日制課程(43校・69学科相当)の特色選抜+第一次募集を収録している(定時制課程は未収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamaguchi');
+    expect(record?.schools?.length).toBe(193);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(43);
+  });
+
+  it('yamaguchi: 岩国(普通)は特色選抜で面接(◎)のみを実施し学校独自検査・傾斜配点は無い', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamaguchi', '岩国', '特色選抜', '普通');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.note).toContain('学校独自検査の実施なし');
+  });
+
+  it('yamaguchi: 西京(体育コース)は第一次募集で実技検査列でなく面接列がマークされている(300dpi画像で列位置を確認済み)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamaguchi', '西京', '第一次募集', '体育コース');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.note).toContain('面接を実施');
+  });
+
+  it('yamaguchi: 下関西の「普通」は資料上データが無いためレコードが存在しない(文理探究のみ収録)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamaguchi', '下関西', '特色選抜', '普通');
+    expect(record).toBeNull();
+    const bunri = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamaguchi', '下関西', '特色選抜', '文理探究(人文社会科学・自然科学のくくり募集)');
+    expect(bunri?.interviewRequired).toBe(true);
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {

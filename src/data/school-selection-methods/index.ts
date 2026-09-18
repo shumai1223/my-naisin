@@ -13,6 +13,7 @@ import { AOMORI_SCHOOL_SELECTION_METHOD } from './aomori';
 import { GIFU_SCHOOL_SELECTION_METHOD } from './gifu';
 import { TOKUSHIMA_SCHOOL_SELECTION_METHOD } from './tokushima';
 import { HIROSHIMA_SCHOOL_SELECTION_METHOD } from './hiroshima';
+import { YAMAGUCHI_SCHOOL_SELECTION_METHOD } from './yamaguchi';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -31,4 +32,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   gifu: GIFU_SCHOOL_SELECTION_METHOD,
   tokushima: TOKUSHIMA_SCHOOL_SELECTION_METHOD,
   hiroshima: HIROSHIMA_SCHOOL_SELECTION_METHOD,
+  yamaguchi: YAMAGUCHI_SCHOOL_SELECTION_METHOD,
 };
