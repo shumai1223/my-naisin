@@ -437,6 +437,13 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(record?.note).toContain('確認できなかった');
   });
 
+  it('kumamotoは一次資料を確認のうえ授業料への県独自上乗せが無いと確認できた(confirmed-none)', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'kumamoto');
+    expect(record?.status).toBe('confirmed-none');
+    expect(record?.tiers).toBeUndefined();
+    expect(record?.note).toContain('確認できなかった');
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);

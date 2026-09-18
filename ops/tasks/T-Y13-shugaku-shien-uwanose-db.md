@@ -490,3 +490,23 @@ kagoshima/okinawaの5県(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保�
 他はT-Y14継続(gifu頁3-4/okayama頁3残り+頁4-7/hiroshima頁4-8/tokushima頁1-7)も引き続き
 選択肢。★WebSearchのAI要約に具体的な金額が出てきても、一次資料PDFで裏取りできなければ
 転記しない運用を今後も徹底すること(tokushima/kochi両方でこのパターンを検出済み)。
+
+## 追記 2026-09-18(続き13): kumamoto(37県目)完了・3件目のconfirmed-none
+
+「熊本県高等学校等就学支援金及び臨時支援金について」ページをcurl+grepで確認。ページ名に
+「熊本県」が冠されているが、内容は国の就学支援金・臨時支援金制度の説明のみ(基準額月額
+9,900円・年収590万円未満世帯は月額33,000円まで加算・いずれも国基準)で、県独自の追加上乗せは
+見当たらなかった。**教訓: 「<県名>高等学校等就学支援金」という命名パターンは全国の都道府県
+サイトで共通しており、ページ名だけで県独自制度と判断してはいけない**(内容を必ず精読する)。
+「家計急変」ページは高等教育(大学)向け制度へのリンクで高校生は対象外と正しく判別。
+
+tsc実exit0・関連jest47件green(前回46件から+1)確認済み。
+
+T-Y13進捗: 37県調査済み(34県confirmed-yes+3県confirmed-none[tokushima/kochi/kumamoto])。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はgifu[優先度低]/miyazaki/kagoshima/okinawa
+の4県(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保留済み)。他はT-Y14継続(gifu頁3-4/
+okayama頁3残り+頁4-7/hiroshima頁4-8/tokushima頁1-7)も引き続き選択肢。★confirmed-noneが
+3件連続(tokushima/kochi/kumamoto)しているため、次回は残り3県(miyazaki/kagoshima/okinawa)を
+一通り終えた後、T-Y13は「主要な鉱脈は掘り尽くした」可能性を評価してT-Y14等へ主軸を移す
+判断も検討してよい。
