@@ -22,6 +22,7 @@ import { SAITAMA_SCHOOL_SELECTION_METHOD } from './saitama';
 import { CHIBA_SCHOOL_SELECTION_METHOD } from './chiba';
 import { KANAGAWA_SCHOOL_SELECTION_METHOD } from './kanagawa';
 import { TOCHIGI_SCHOOL_SELECTION_METHOD } from './tochigi';
+import { NIIGATA_SCHOOL_SELECTION_METHOD } from './niigata';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -49,4 +50,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   chiba: CHIBA_SCHOOL_SELECTION_METHOD,
   kanagawa: KANAGAWA_SCHOOL_SELECTION_METHOD,
   tochigi: TOCHIGI_SCHOOL_SELECTION_METHOD,
+  niigata: NIIGATA_SCHOOL_SELECTION_METHOD,
 };

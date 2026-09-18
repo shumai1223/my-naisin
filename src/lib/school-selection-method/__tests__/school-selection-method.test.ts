@@ -879,6 +879,44 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
+  it('niigata: 令和9年度の全日制(県立+新潟市立)73校93学科を一般枠+学校設定枠の143レコードで収録している', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata');
+    expect(record?.status).toBe('structured');
+    expect(record?.fiscalYear).toContain('令和9年度');
+    expect(record?.schools?.length).toBe(143);
+    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(73);
+  });
+
+  it('niigata: 新潟中央 普通は学校設定枠(調査書300:学力700:その他200・8人以内)と一般枠(152人・3対7)を持つ', () => {
+    const waku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata', '新潟中央', '学校設定枠', '普通');
+    expect(waku?.ratioType).toBe('調査書300:学力検査700:その他200');
+    expect(waku?.note).toContain('募集人数8人以内');
+    const general = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata', '新潟中央', '一般枠', '普通');
+    expect(general?.ratioType).toBe('調査書3:学力検査7');
+    expect(general?.note).toContain('募集人数152');
+  });
+
+  it('niigata: 国際フロンティアは英語傾斜・集団面接(interviewRequired)・◇(資格加点)を持つ、新潟農業系のA/B枠は別レコード', () => {
+    const fr = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata', '国際フロンティア', '一般枠', 'グローバル探究');
+    expect(fr?.interviewRequired).toBe(true);
+    expect(fr?.note).toContain('傾斜配点する教科:英語');
+    const a = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata', '新発田農業', '学校設定枠A', '農業');
+    const b = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata', '新発田農業', '学校設定枠B', '農業');
+    expect(a?.note).toContain('募集人数16人以内');
+    expect(b?.note).toContain('募集人数8人以内');
+  });
+
+  it('niigata: 学校設定枠は調査書配点+学力検査配点=1000点、比重は調査書+学力検査=10', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata');
+    for (const s of record?.schools ?? []) {
+      const m = (s.ratioType ?? '').match(/^調査書([0-9]+):学力検査([0-9]+)/);
+      expect(m).not.toBeNull();
+      if (!m) continue;
+      const total = Number(m[1]) + Number(m[2]);
+      expect(total).toBe(s.selectionCategory === '一般枠' ? 10 : 1000);
+    }
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
