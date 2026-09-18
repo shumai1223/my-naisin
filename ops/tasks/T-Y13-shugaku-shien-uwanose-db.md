@@ -331,3 +331,35 @@ tsc実exit0・関連jest40件green。
 次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/gifu/wakayama/shimane/tokushima/
 ehime/kochi/kumamoto/miyazaki/kagoshima/okinawaの11県(iwate/fukuoka/miyagi/ishikawa/
 shiga/akitaの6県は保留済み)。他は変更なし。
+
+## 追記 2026-09-18(続き7): wakayama(30県目)完了・「本当になしかもしれない候補」の実態が判明
+
+前回の申し送り(追記1)で「wakayama/ehimeはconfirmed-none候補」と記録されていたが、実際に
+一次資料を確認したところ**授業料そのものへの県独自上乗せは`shigaku_futankeigen.html`で
+確認した限り見当たらなかった**(国の就学支援金制度の説明のみ)一方、**「奨学のための給付金」
+(授業料以外の教育費支援・就学支援金とは別制度と明記)の私立高校向け金額表は具体的に存在した**
+(非課税世帯152,000円/生活保護受給世帯52,600円/低所得世帯50,670円/中所得世帯38,000円・
+全日制定時制)。curl+grepで生HTMLのテーブルを直接確認し数値の誤記が無いことを確認済み。
+
+**判断**: sagaやkagawaと同型(「授業料上乗せは無いが、別カテゴリの具体的な給付が見つかった」)
+としてconfirmed-yes・household型で記録した。ただし**この金額表が国の基準額どのものか
+和歌山県独自の上乗せを含むかは一次資料に明記が無く**(WebSearchの二次情報では国基準額と
+一致するように見えたが、一次資料上の言明ではないため)、noteに「断定しない」旨を明記した。
+**教訓: 「confirmed-none候補」という前回の申し送りをそのまま信じず、実際に一次資料へ
+当たり直すことで新しい発見(奨学のための給付金という別カテゴリの給付)につながった。
+申し送りは「まだ確認していない」の意味であり「無いと確定した」ではないことを次回以降も
+区別すること。**
+
+tsc実exit0・関連jest41件green(既存33-40件から+8件は前回セッション分の累積カウント込み)。
+
+T-Y13進捗: `src/data/shien-uwanose/*.ts`(index.ts除く)のファイル数を実カウントし31県実装済み
+と確認(tokyo/osaka/mie/yamanashi/nagasaki/hyogo/kyoto/kanagawa/aichi/oita/hiroshima/
+tottori/yamaguchi/nara/gunma/tochigi/ibaraki/fukui/okayama/hokkaido/saitama/chiba/
+shizuoka/niigata/toyama/saga/yamagata/fukushima/kagawa/nagano/wakayama)。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はaomori/gifu/shimane/tokushima/ehime/
+kochi/kumamoto/miyazaki/kagoshima/okinawaの10県(iwate/fukuoka/miyagi/ishikawa/shiga/
+akitaの6県は保留済み)。ehimeも「confirmed-none候補」と前回記録されていたが、wakayamaの
+教訓どおり実際に一次資料へ当たり直すことを推奨(別カテゴリの給付が見つかる可能性がある)。
+他はT-Y14継続(gifu頁3-4/okayama頁3残り+頁4-7/aomori残り2地区/hiroshima頁4-8/
+tokushima頁1-7)も引き続き選択肢。

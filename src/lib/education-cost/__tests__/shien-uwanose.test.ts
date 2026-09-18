@@ -356,6 +356,27 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(amount).toBe(24500);
   });
 
+  it('wakayamaは奨学のための給付金(私立)で非課税世帯152,000円・生活保護受給世帯52,600円を返す(授業料そのものへの県独自上乗せは未確認)', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'wakayama');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(record?.schemeType).toBe('household');
+    expect(record?.tiers).toHaveLength(4);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'wakayama',
+        '非課税世帯（全日制・定時制・通常申請のみの場合）'
+      )
+    ).toBe(152000);
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'wakayama',
+        '生活保護受給世帯（全日制・定時制・通常申請のみの場合）'
+      )
+    ).toBe(52600);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
