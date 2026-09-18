@@ -543,3 +543,20 @@ T-Y13進捗: 39県調査済み(35県confirmed-yes+4県confirmed-none)。
 
 次回セッションが選ぶべきこと(更新): T-Y13未着手はgifu[優先度低]/okinawaの2県
 (iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保留済み)。okinawa完了後はT-Y14等へ主軸を移す。
+
+## 追記 2026-09-19(続き3): okinawa(40県目)完了・5件目のconfirmed-none
+
+沖縄県総務私学課「高等学校等就学支援金関係資料」ページ(更新日2024-09-19)と「就学支援・奨学金等に
+関する情報」一覧をcurl+grepで確認。県独自の私立高校向け事業は「私立学校通学費支援」(バス・
+モノレール通学費無料化・遠距離等通学費補助金)のみで、授業料そのものへの上乗せは見当たらず
+confirmed-none。通学費は授業料と別ドメインのためtiers対象外(noteに記載)。ページ更新日が古い
+ため、県が令和8年度新制度を発表した場合は要再確認。
+
+tsc実exit0・関連jest50件green(前回49件から+1)確認済み。
+
+T-Y13進捗: 40県調査済み(35県confirmed-yes+5県confirmed-none[tokushima/kochi/kumamoto/
+miyazaki/okinawa])。
+
+**T-Y13の一区切り**: 未着手はgifu[優先度低]のみ(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの
+6県は保留済み)。次回セッションはT-Y14(gifu頁3-4/okayama頁5-7/hiroshima頁4-8/tokushima頁1-7)
+へ主軸を移してよい。
