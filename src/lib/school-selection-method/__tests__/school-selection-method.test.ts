@@ -1097,13 +1097,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(chienII?.ratioType).toBe('学力検査250:調査書85:面接15');
   });
 
-  it('iwate: 盛岡地区・中部地区・県南地区の38校75学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
+  it('iwate: 盛岡地区・中部地区・県南地区・沿岸南部地区の45校88学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(new Set(all.map((s) => s.schoolName)).size).toBe(38);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(45);
     const general = all.filter((s) => s.selectionCategory === '一般入学者選抜');
-    expect(general).toHaveLength(75);
+    expect(general).toHaveLength(88);
     for (const s of general) {
       const m = (s.ratioType ?? '').match(/^学力検査([0-9]+):調査書([0-9]+)/);
       expect(m).not.toBeNull();
@@ -1165,6 +1165,17 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const ikk = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '一関工業高等学校', '一般入学者選抜', '電気科');
     expect(ikk?.interviewRequired).toBe(true);
     expect(ikk?.note).toContain('合計1100点');
+  });
+
+  it('iwate: 釜石商工は学力検査7:調査書3に独自検査(面接)100点で1100点、大船渡東は独自検査50点で1050点、釜石の特色は口頭試問で合計350点', () => {
+    const kamashoko = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '釜石商工高等学校', '一般入学者選抜', '機械科');
+    expect(kamashoko?.ratioType).toBe('学力検査700:調査書300:独自100');
+    expect(kamashoko?.note).toContain('合計1100点');
+    const ofunato = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '大船渡東高等学校', '一般入学者選抜', '食物文化科');
+    expect(ofunato?.ratioType).toBe('学力検査500:調査書500:独自50');
+    expect(ofunato?.note).toContain('合計1050点');
+    const kamaishi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '釜石高等学校', '特色入学者選抜');
+    expect(kamaishi?.note).toContain('合計350点');
   });
 
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
