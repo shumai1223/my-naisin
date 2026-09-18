@@ -409,6 +409,20 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(50000);
   });
 
+  it('shimaneは差額補填型(上限の定めなし)で基準点457,200円を返す(実際の補助額は授業料実費との差額)', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'shimane');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(record?.schemeType).toBe('school-subsidy');
+    expect(record?.tiers?.[0].note).toContain('補助額そのもの」ではなく');
+    expect(
+      findUwanoseAmountForTierLabel(
+        SHIEN_UWANOSE_BY_PREFECTURE,
+        'shimane',
+        '世帯年収目安270万円未満程度（生活保護受給、または算定基準額0円）（差額補填・上限の定めなし）'
+      )
+    ).toBe(457200);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
