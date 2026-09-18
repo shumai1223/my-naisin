@@ -1251,3 +1251,14 @@ interviewRequiredは面接の有無・noteに基本方針/調査書内訳/第2�
 **次回**: saitama定時制23PDFをスコープ判断のうえ収録するか、他県(tokyo頁2-7/shizuoka頁2以降/hokkaido残り11頁/hiroshima頁4-8/tokushima頁11-12/
 fukushima頁11以降/gifu頁4/未着手県)へ。saitamaの学校別選抜資料は他の県別(kanagawa/chiba/tochigi等survey表の見込み県)にも同型の
 「学校別PDF」形式がある可能性が高い→同じdata.mjs+gen.mjs方式(repo内保存)が使える。
+
+**2026-09-19追記60（chiba新規実装・全日制118校181学科・HTML表を機械解析）**: 千葉県公式ページ`.../r8/r8zennichi.html`(survey表に既載のURL)は
+**HTMLの表**(学校番号1〜121+市立高校)で「学校名/学科名/学校設定検査の内容/志願理由書」を学校・学科別に公表しており、埼玉と違い画像PDFでなく
+`curl`でHTMLを取得し表を機械解析できた(取得HTMLと生成スクリプトを`ops/baselines/chiba-transcription/`に保存・`node gen.mjs`で`chiba.ts`を再生成)。
+収録内容=学校設定検査(面接/自己表現/作文/小論文/適性検査/集団討論)と志願理由書の有無・くくり募集(＊)。interviewRequiredは学校設定検査欄に「面接」が
+ある学科。**未収録**: 学校別の学力検査と調査書の比率・傾斜配点(このページに無く別資料=survey表の「学校設定検査の内容等」PDF/「各高等学校の選抜基準」等・
+船橋理数・柏理数等の傾斜配点8校8学科)・定時制。coverageNoteに明記。tsc実exit0・school-selection-method関連jest204件・school系27スイート958件green。
+
+**教訓**: 県公式ページがHTML表なら、画像PDFの目視転記(埼玉は131PDFで約2時間)よりはるかに速く・誤りなく収録できる。着手前に`curl`でHTMLを取得して
+`<table>`があるか先に確認する(survey表の「structured(見込み)」県=kanagawa/tochigi/iwate/yamagata/niigata/toyama/ishikawa/fukui/kyoto/nara/shimane/kagawa/saga/kumamoto/
+miyazaki/okinawa の各URLを同じ手で当たる価値あり)。**次回**: 同手法でkanagawa/tochigi等の見込み県、またはchibaの傾斜配点(別資料)。

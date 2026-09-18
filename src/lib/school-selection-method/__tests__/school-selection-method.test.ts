@@ -780,6 +780,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(sports?.ratioType).toContain('第3次5%');
   });
 
+  it('chiba: 県立・市立全日制118校181学科の学校設定検査(面接・適性検査・自己表現等)を収録している', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'chiba');
+    expect(record?.status).toBe('structured');
+    expect(record?.schools?.length).toBe(181);
+    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(118);
+    expect(record?.coverageNote).toContain('未収録');
+  });
+
+  it('chiba: 千葉女子は普通科=面接・家政科=適性検査(学科ごとに検査が違う)で面接の有無がinterviewRequiredに反映される', () => {
+    const futsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'chiba', '千葉女子', '一般入学者選抜', '普通');
+    const kasei = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'chiba', '千葉女子', '一般入学者選抜', '家政');
+    expect(futsu?.interviewRequired).toBe(true);
+    expect(kasei?.interviewRequired).toBe(false);
+    expect(kasei?.note).toContain('適性検査');
+  });
+
+  it('chiba: 薬園台は園芸科のみ志願理由書が有・くくり募集(千葉商業等)はnoteに明記される', () => {
+    const engei = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'chiba', '薬園台', '一般入学者選抜', '園芸');
+    const futsu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'chiba', '薬園台', '一般入学者選抜', '普通');
+    expect(engei?.note).toContain('志願理由書:有');
+    expect(futsu?.note).toContain('志願理由書:無');
+    const kukuri = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'chiba', '千葉商業', '一般入学者選抜', '商業・情報処理');
+    expect(kukuri?.note).toContain('くくり募集');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
