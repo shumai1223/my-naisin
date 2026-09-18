@@ -1205,6 +1205,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('選抜割合25%程度(希望者対象)');
   });
 
+  it('tokyo: schoolsは4校(日比谷/三田/戸山/竹早)12レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo');
+    expect(record?.schools?.length).toBe(12);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames).toEqual(new Set(['日比谷', '三田', '戸山', '竹早']));
+  });
+
+  it('tokyo: 日比谷(普通科)の第一次募集は学力検査7:調査書3+ESAT-J20点で、第二次募集は6:4になる', () => {
+    const first = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '日比谷', '第一次募集', '普通科');
+    const second = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '日比谷', '第二次募集', '普通科');
+    expect(first?.ratioType).toBe('学力検査7:調査書3(700点:300点)+ESAT-J20点');
+    expect(second?.ratioType).toBe('学力検査6:調査書4(600点:400点)');
+  });
+
+  it('tokyo: 三田(普通科)の推薦に基づく選抜は個人面接250点が調査書100点を上回る(日比谷の調査書450点が最大の配点となるパターンと異なる)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '三田', '推薦に基づく選抜', '普通科');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.note).toContain('個人面接の配点が調査書を上回る');
+  });
+
+  it('tokyo: 竹早(普通科)の推薦に基づく選抜は個人面接を実施しない(日比谷/三田/戸山はいずれも個人面接を実施する点で異なる)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '竹早', '推薦に基づく選抜', '普通科');
+    expect(record?.interviewRequired).toBe(false);
+    expect(record?.note).toContain('個人面接・集団討論・実技検査・学校設定検査はいずれも実施なし');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
