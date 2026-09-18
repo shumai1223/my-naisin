@@ -641,15 +641,39 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1+頁2+頁3を完全収録している(20校106レコード・頁4〜7は未収録)', () => {
+  it('okayama: schoolsは頁1+頁2+頁3+頁4先頭2校を収録している(22校112レコード・頁4残り〜頁7は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(106);
+    expect(record?.schools?.length).toBe(112);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(20);
+    expect(schoolNames.size).toBe(22);
     expect(record?.coverageNote).toContain('岡山一宮');
     expect(record?.coverageNote).toContain('興陽');
     expect(record?.coverageNote).toContain('岡山南');
     expect(record?.coverageNote).toContain('倉敷中央');
+    expect(record?.coverageNote).toContain('倉敷鷲羽');
+  });
+
+  it('okayama: 玉島(理数)は一般入学者選抜で比率10%を返す(普通科はレコード無し)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    const tamashima = record?.schools?.filter((s) => s.schoolName === '玉島');
+    expect(tamashima).toHaveLength(2);
+    expect(tamashima?.every((s) => s.department === '理数')).toBe(true);
+    const general = tamashima?.find((s) => s.selectionCategory === '一般入学者選抜');
+    expect(general?.ratioType).toBe('調査書及び面接等10%');
+  });
+
+  it('okayama: 倉敷鷲羽は普通・ビジネスで重視する実績の内容が異なる(結合セルは募集人員のみ共通)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    const washu = record?.schools?.filter((s) => s.schoolName === '倉敷鷲羽');
+    expect(washu).toHaveLength(4);
+    const futsuu = washu?.find(
+      (s) => s.department === '普通' && s.selectionCategory === '特別入学者選抜'
+    );
+    const business = washu?.find(
+      (s) => s.department === 'ビジネス' && s.selectionCategory === '特別入学者選抜'
+    );
+    expect(futsuu?.note).toContain('英語検定準2級以上又は数学検定準2級以上合格');
+    expect(business?.note).toContain('野球(男子)、サッカー(男子)、ヨット又はレスリング');
   });
 
   it('okayama: 岡山御津は6コースが特別入学者選抜(募集人員80%)とその他の選抜等「■」(フレックス制選抜20%)を共有する(頁3)', () => {
