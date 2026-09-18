@@ -1441,6 +1441,35 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(sp.filter((s) => s.interviewRequired)).toHaveLength(23); // 和歌山商業3競技+箕島3競技=6競技が面接なし
   });
 
+  it('mie: 後期選抜125レコード(全日制108・定時制17)は全て特に重視する選抜資料(◎)を1つ以上持つ', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(125);
+    expect(all.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(108);
+    expect(all.filter((s) => (s.note ?? '').includes('・定時制】'))).toHaveLength(17);
+    for (const s of all) {
+      expect(s.selectionCategory).toBe('後期選抜');
+      expect(s.note).toContain('うち特に重視する選抜資料は');
+      expect(s.note).not.toContain('うち特に重視する選抜資料は)');
+    }
+  });
+
+  it('mie: 桑名北は面接◎、桑名工業は調査書◎、津は学力検査◎、北星(定時制)は学力検査を選抜資料としない', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie')?.schools ?? [];
+    const find = (school: string, dept: string) => list.find((s) => s.schoolName === school && s.department === dept);
+    expect(find('桑名北', '普通科')?.note).toContain('うち特に重視する選抜資料は面接の状況)');
+    expect(find('桑名北', '普通科')?.interviewRequired).toBe(true);
+    expect(find('桑名工業', '機械科・材料技術科')?.note).toContain('うち特に重視する選抜資料は調査書の内容)');
+    expect(find('津', '普通科')?.note).toContain('うち特に重視する選抜資料は学力検査の結果)');
+    expect(find('津', '普通科')?.interviewRequired).toBeUndefined();
+    const hokusei = find('北星', '普通科(夜間部)(定時制)');
+    expect(hokusei?.note).toContain('選抜資料: 面接の状況・調査書の内容・作文の結果');
+    expect(hokusei?.note).not.toContain('学力検査の結果');
+    expect(find('四日市工業', '機械交通工学科(定時制)')?.note).toContain('実技検査の結果');
+    expect(find('熊野青藍(紀南校舎)', '総合学科')?.note).toContain('うち特に重視する選抜資料は学力検査の結果)');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
