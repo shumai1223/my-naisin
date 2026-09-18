@@ -1097,13 +1097,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(chienII?.ratioType).toBe('学力検査250:調査書85:面接15');
   });
 
-  it('iwate: 盛岡・中部・県南・沿岸南部・宮古の5地区51校99学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
+  it('iwate: 盛岡・中部・県南・沿岸南部・宮古・県北の6地区59校111学科を一般入学者選抜・特色入学者選抜・二次募集で収録し、一般入学者選抜の学力検査+調査書が1000点になる', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(new Set(all.map((s) => s.schoolName)).size).toBe(51);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(59);
     const general = all.filter((s) => s.selectionCategory === '一般入学者選抜');
-    expect(general).toHaveLength(99);
+    expect(general).toHaveLength(111);
     for (const s of general) {
       const m = (s.ratioType ?? '').match(/^学力検査([0-9]+):調査書([0-9]+)/);
       expect(m).not.toBeNull();
@@ -1188,6 +1188,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(iwaizumi?.note).toContain('合計1100点');
     const miyakoKita = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '宮古北高等学校', '二次募集');
     expect(miyakoKita?.note).toContain('面接200点');
+  });
+
+  it('iwate: 軽米は連携型入学者選抜(合計530点)と独自検査30点で1030点、福岡は特色の調査書270点満点で合計400点、北桜は3学科とも特色定員の20%', () => {
+    const karumai = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '軽米高等学校', '一般入学者選抜');
+    expect(karumai?.note).toContain('合計1030点');
+    const karumaiNiji = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '軽米高等学校', '二次募集');
+    expect(karumaiNiji?.note).toContain('合計530点');
+    const fukuoka = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '福岡高等学校', '特色入学者選抜');
+    expect(fukuoka?.note).toContain('調査書270点');
+    expect(fukuoka?.note).toContain('合計400点');
+    const hokuo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate', '北桜高等学校', '特色入学者選抜', '総合学科');
+    expect(hokuo?.note).toContain('24名(定員の20%)');
   });
 
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
