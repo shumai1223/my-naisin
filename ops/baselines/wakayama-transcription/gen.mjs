@@ -5,6 +5,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { B1 } from './data-b1.mjs';
 import { B2 } from './data-b2.mjs';
+import { B3, B3_NOTE } from './data-b3.mjs';
+let b3hit = 0;
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const QC = String.fromCharCode(39);
 const NL = String.fromCharCode(10);
@@ -52,7 +54,10 @@ for (const r of B1) {
 
 // 別表2 特色化選抜の実施方法等
 for (const t of B2) {
-  const note = '【令和8年度 特色化選抜における実施方法等(別表2)・' + t.cat + '】実施方法: ' + t.method + '。面接: ' + t.itv + '。' + t.test + '。出願条件(別表3)・選考の割合は本レコードには未収録。';
+  const jouken = B3.get(t.cat + '|' + t.school + '|' + t.sub);
+  if (!jouken && t.cat !== '連携型中高一貫') throw new Error('別表3の出願条件が無い: ' + t.cat + t.school + t.sub);
+  if (jouken) b3hit++;
+  const note = '【令和8年度 特色化選抜における実施方法等(別表2)・' + t.cat + '】実施方法: ' + t.method + '。面接: ' + t.itv + '。' + t.test + '。' + (jouken ? '出願条件(別表3): ' + jouken + (t.cat === 'スポーツ' ? '。' + B3_NOTE : '') + '。' : '出願条件(別表3)に該当の記載なし。') + '選考の割合は本レコードには未収録。';
   const lines = ['    {', '      schoolName: ' + q(t.school) + ',', '      department: ' + q(t.sub || t.cat) + ',', '      selectionCategory: ' + q('特色化選抜(' + t.cat + ')') + ',', '      interviewRequired: true,', '      note: ' + q(note) + ',', '    },'];
   out += lines.join(NL) + NL;
 }
@@ -70,7 +75,8 @@ const ts = `// 和歌山県: 令和8年度和歌山県立高等学校入学者�
 // 学力検査に傾斜配点(国語・英語を1.5倍)を置く学科(那賀国際科・星林の各学科)と、面接・実技検査を課す学科(和歌山北スポーツ健康科学科・和歌山東・有田中央総合学科・定時制の一部)がある。
 // 検算: 全レコードで 調査書+学力検査+面接・実技検査=100%。資料の◇印(県立中学校からの進学者のみ・県立高校入試では募集しない)の学科は収録していない。
 // 特色化選抜(別表2)は区分(連携型中高一貫・農業・宇宙・地域・学際・芸術・スポーツ健康科学・スポーツ)ごとの実施方法(面接時間・作文/小論文の字数と時間・実技の内容)を21レコードで収録した。
-// 未収録: 特色化選抜の出願条件(別表3)・選考の割合・スポーツ推薦(別表5〜7)・追募集(別表8)・通信制課程・「求める生徒像」の本文。
+// 特色化選抜の出願条件(別表3・全4頁)は該当20レコードのnoteに要旨を付記した(スポーツはア〜ウの大会成績基準を数値で記録)。
+// 未収録: 特色化選抜の選考の割合・スポーツ推薦(別表5〜7)・追募集(別表8)・通信制課程・「求める生徒像」の本文。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -79,7 +85,7 @@ export const WAKAYAMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod =
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    ${q('一般選抜の学科別の割合(調査書・学力検査・面接実技)を全日制' + zen + 'レコード・定時制' + tei + 'レコードで完全収録し、特色化選抜の実施方法(別表2)' + B2.length + 'レコードを加えた(' + names.size + '校・' + (B1.length + B2.length) + 'レコード)。特色化選抜の出願条件・選考の割合・スポーツ推薦・追募集・通信制と求める生徒像の本文は未収録')},
+    ${q('一般選抜の学科別の割合(調査書・学力検査・面接実技)を全日制' + zen + 'レコード・定時制' + tei + 'レコードで完全収録し、特色化選抜の実施方法(別表2)' + B2.length + 'レコードを加えた(' + names.size + '校・' + (B1.length + B2.length) + 'レコード)。特色化選抜の選考の割合・スポーツ推薦・追募集・通信制と求める生徒像の本文は未収録')},
   schools: [
 ${out.replace(/\n$/, '')}
   ],
@@ -92,4 +98,4 @@ ${out.replace(/\n$/, '')}
 };
 `;
 fs.writeFileSync(path.join(dir, '../../../src/data/school-selection-methods/wakayama.ts'), ts);
-console.log('schools', names.size, 'records', B1.length + B2.length, '全日制', zen, '定時制', tei, '別表4連結', hit);
+console.log('schools', names.size, 'records', B1.length + B2.length, '全日制', zen, '定時制', tei, '別表4連結', hit, '別表3連結', b3hit);

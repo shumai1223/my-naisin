@@ -1389,6 +1389,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('和歌山東', '剣道')?.note).toContain('作文: 600字程度・50分');
     expect(find('和歌山', '美術')?.note).toContain('鉛筆デッサン');
     expect(find('和歌山', '音楽(器楽)')?.note).toContain('YAMAHA C6L');
+    // 別表3(出願条件): スポーツ9件は ア=都道府県大会1位/イ=地区大会8位以上/ウ=全国大会16位以上、スポーツ健康科学は4位以上/16位以上
+    const sport = toku.filter((s) => s.selectionCategory === '特色化選抜(スポーツ)');
+    for (const s of sport) {
+      expect(s.note).toContain('ア=都道府県大会1位、イ=地区大会(近畿大会等)8位以上、ウ=全国大会16位以上');
+      expect(s.note).toContain('選手登録(補欠を含む)');
+    }
+    expect(find('和歌山北', 'スポーツ健康科学')?.note ?? toku.find((s) => s.selectionCategory === '特色化選抜(スポーツ健康科学)')?.note).toContain('ア=都道府県大会4位以上、イ=地区大会(近畿大会等)16位以上');
+    expect(toku.filter((s) => (s.note ?? '').includes('出願条件(別表3):'))).toHaveLength(20);
+    expect(find('南部(龍神分校)', '連携型中高一貫')?.note).toContain('出願条件(別表3)に該当の記載なし');
   });
 
   it('wakayama: 那賀国際科は国語・英語1.5倍、和歌山北スポーツ健康科学科は30:30:40で選択実技15競技、和歌山北普通科は面接なし', () => {
