@@ -641,11 +641,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1〜頁6を完全収録している(45校227レコード・頁7は未収録)', () => {
+  it('okayama: schoolsは全7頁を完全収録している(51校259レコード)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(227);
+    expect(record?.schools?.length).toBe(259);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(45);
+    expect(schoolNames.size).toBe(51);
     expect(record?.coverageNote).toContain('岡山一宮');
     expect(record?.coverageNote).toContain('興陽');
     expect(record?.coverageNote).toContain('岡山南');
@@ -654,6 +654,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.coverageNote).toContain('津山東');
     expect(record?.coverageNote).toContain('井原');
     expect(record?.coverageNote).toContain('真庭');
+    expect(record?.coverageNote).toContain('鳥城');
   });
 
   it('okayama: 津山工業は6学科が重視する実績(10人程度・ラグビー等)と一般入学者選抜の比率15%を共有する(頁5)', () => {
@@ -720,6 +721,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const hiruzen = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '勝山', '特別入学者選抜', '普通(蒜山校地)');
     expect(hiruzen?.note).toContain('募集人員30%');
     expect(hiruzen?.note).toContain('連携型');
+  });
+
+  it('okayama: 勝間田は総合学科の5系列に同一内容(募集人員50%・剣道5人程度・一般選抜比率10%)を複製して収録している(頁7)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    expect(record?.schools?.filter((s) => s.schoolName === '勝間田')).toHaveLength(10);
+    const jidosha = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '勝間田', '特別入学者選抜', '自動車系列');
+    expect(jidosha?.note).toContain('剣道');
+    expect(jidosha?.note).toContain('討論、発表');
+  });
+
+  it('okayama: 和気閑谷は重視する実績の学科対応が確定できない旨と◆20%をnoteに明記している(頁7)', () => {
+    const special = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '和気閑谷', '特別入学者選抜', 'キャリア探求');
+    expect(special?.note).toContain('確定できない');
+    expect(special?.note).toContain('海外体験');
+    const general = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '和気閑谷', '一般入学者選抜', '普通');
+    expect(general?.note).toContain('◆20%');
+  });
+
+  it('okayama: 鳥城は定時制課程として昼間部(50%)・夜間部(30%)を別departmentで収録している(頁7)', () => {
+    const day = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '鳥城', '特別入学者選抜', '普通(昼間部)');
+    const night = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '鳥城', '特別入学者選抜', '普通(夜間部)');
+    expect(day?.note).toContain('募集人員50%');
+    expect(night?.note).toContain('募集人員30%');
+    expect(day?.note).toContain('★');
   });
 
   it('okayama: 津山(理数)は特別入学者選抜のみ収録され一般入学者選抜のレコードは無い(募集人員100%かつ一般選抜比率が「ー」のため)', () => {
