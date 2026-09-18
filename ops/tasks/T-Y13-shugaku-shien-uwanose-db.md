@@ -467,3 +467,26 @@ T-Y13進捗: 35県調査済み(34県confirmed-yes+tokushima confirmed-none)。
 kagoshima/okinawaの6県(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保留済み)。
 他はT-Y14継続(gifu頁3-4/okayama頁3残り+頁4-7/hiroshima頁4-8/tokushima頁1-7[T-Y14の
 tokushimaは別ドメイン=学校・学科別選抜方法DB])も引き続き選択肢。
+
+## 追記 2026-09-18(続き12): kochi(36県目)完了・2件目のconfirmed-none
+
+「私立高校生等に対する経済的負担への支援 (R8)」インフォグラフィックPDF(高知県私学・大学
+支援課)をcurl+pdftoppm(200dpi)で目視確認。図1「私立学校等就学支援金【所得要件なし】」は
+国の就学支援金の帯グラフのみで、別枠の高知県独自の授業料上乗せは見当たらなかった。図3
+「専攻科修学支援金」の月額41,100円等も、aomori.tsで既に確認済みの国の「専攻科修学支援金」の
+金額と完全一致し、これも国制度と判明。図2「奨学給付金」の金額(152,000円等)も
+wakayama/ehime/aomori/tokushimaと**5県連続で完全一致**。
+
+**WebSearchの二次情報にあった「年収350万円未満36,000円/590-700万円未満97,200円」という
+県独自上乗せの記述は、この一次資料(R8公式PDF)のどこにも見当たらなかった**(古い年度情報、
+または二次情報の誤りの可能性)。Y-0に従い転記せず、tokushimaに続き2件目のconfirmed-noneとした。
+
+tsc実exit0・関連jest46件green(前回45件から+1)確認済み。
+
+T-Y13進捗: 36県調査済み(34県confirmed-yes+2県confirmed-none[tokushima/kochi])。
+
+次回セッションが選ぶべきこと(更新): T-Y13未着手はgifu[優先度低]/kumamoto/miyazaki/
+kagoshima/okinawaの5県(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの6県は保留済み)。
+他はT-Y14継続(gifu頁3-4/okayama頁3残り+頁4-7/hiroshima頁4-8/tokushima頁1-7)も引き続き
+選択肢。★WebSearchのAI要約に具体的な金額が出てきても、一次資料PDFで裏取りできなければ
+転記しない運用を今後も徹底すること(tokushima/kochi両方でこのパターンを検出済み)。
