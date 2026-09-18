@@ -29,7 +29,7 @@ for (const e of D) {
   out += `      schoolName: ${q(e.name)},\n      department: ${q(e.dept)},\n      selectionCategory: '一般募集',\n      interviewRequired: ${e.oth && e.oth[0] === '面接' ? 'true' : 'false'},\n      ratioType: ${q(ratioType)},\n      note: ${q(note)},\n    },\n`;
 }
 const names = [...new Set(D.map((e) => e.name))];
-const cov = `令和8年度全日制の選抜基準PDF(1校または1学科群につき1PDF・全日制131PDF)のうち${names.length}校${D.length}レコードを収録(収録順: ${names.join('/')})。定時制・市立高校の一部は未着手`;
+const cov = names.length >= 131 ? `令和8年度全日制の選抜基準PDF131本(市立高校5校を含む)を全て収録(${names.length}校${D.length}レコード)。定時制課程のPDF23本は未着手` : `令和8年度全日制の選抜基準PDF(1校または1学科群につき1PDF・全日制131PDF)のうち${names.length}校${D.length}レコードを収録(収録順: ${names.join('/')})。定時制・市立高校の一部は未着手`;
 const header = `// 埼玉県: 令和8年度埼玉県公立高等学校入学者選抜における各高等学校の選抜基準(全日制)。
 //
 // 一次ソース: 埼玉県教育委員会「令和8年度埼玉県公立高等学校入学者選抜における各高等学校の選抜基準」

@@ -762,6 +762,24 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(sports?.interviewRequired).toBe(false);
   });
 
+  it('saitama: 全日制131校を収録し、傾斜配点校(大宮理数・所沢北理数等)は学力検査700点で第1次の合計点が一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
+    const names = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(names.size).toBe(131);
+    expect(record?.coverageNote).toContain('131');
+    const rikaOmiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '大宮', '一般募集', '理数科');
+    expect(rikaOmiya?.ratioType).toContain('学力700');
+    expect(rikaOmiya?.note).toContain('傾斜配点');
+    const kokusaiWako = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '和光国際', '一般募集', '国際科');
+    expect(kokusaiWako?.ratioType).toContain('学力600');
+  });
+
+  it('saitama: 川口市立スポーツ科学コースは面接あり・第3次選抜5%を持つ', () => {
+    const sports = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '川口市立', '一般募集', 'スポーツ科学コース');
+    expect(sports?.interviewRequired).toBe(true);
+    expect(sports?.ratioType).toContain('第3次5%');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
