@@ -641,17 +641,49 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは頁1+頁2+頁3+頁4を完全収録している(28校144レコード・頁5〜7は未収録)', () => {
+  it('okayama: schoolsは頁1+頁2+頁3+頁4+頁5を完全収録している(36校181レコード・頁6〜7は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(144);
+    expect(record?.schools?.length).toBe(181);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(28);
+    expect(schoolNames.size).toBe(36);
     expect(record?.coverageNote).toContain('岡山一宮');
     expect(record?.coverageNote).toContain('興陽');
     expect(record?.coverageNote).toContain('岡山南');
     expect(record?.coverageNote).toContain('倉敷中央');
     expect(record?.coverageNote).toContain('倉敷鷲羽');
     expect(record?.coverageNote).toContain('津山東');
+    expect(record?.coverageNote).toContain('井原');
+  });
+
+  it('okayama: 津山工業は6学科が重視する実績(10人程度・ラグビー等)と一般入学者選抜の比率15%を共有する(頁5)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    const tsuyamaKogyo = record?.schools?.filter((s) => s.schoolName === '津山工業');
+    expect(tsuyamaKogyo).toHaveLength(12);
+    const design = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '津山工業', '特別入学者選抜', 'デザイン');
+    expect(design?.note).toContain('デッサン');
+    expect(design?.note).toContain('ラグビー');
+    const general = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '津山工業', '一般入学者選抜', '機械');
+    expect(general?.ratioType).toBe('調査書及び面接等15%');
+  });
+
+  it('okayama: 玉野・笠岡の普通科は特別入学者選抜が全て「ー」のため一般入学者選抜のみ収録される(頁5)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    for (const name of ['玉野', '笠岡']) {
+      const rows = record?.schools?.filter((s) => s.schoolName === name);
+      expect(rows).toHaveLength(1);
+      expect(rows?.[0].selectionCategory).toBe('一般入学者選抜');
+    }
+  });
+
+  it('okayama: 井原は普通+地域生活(グリーンライフ/ヒューマンライフ)を収録し、重視する実績の学科対応は確定できない旨をnoteに明記している(頁5)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
+    const ihara = record?.schools?.filter((s) => s.schoolName === '井原');
+    expect(ihara).toHaveLength(6);
+    const green = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '井原', '特別入学者選抜', 'グリーンライフコース');
+    expect(green?.note).toContain('確定できない');
+    expect(green?.note).toContain('新体操');
+    const human = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '井原', '特別入学者選抜', 'ヒューマンライフコース');
+    expect(human?.note).toContain('机上で作業');
   });
 
   it('okayama: 津山(理数)は特別入学者選抜のみ収録され一般入学者選抜のレコードは無い(募集人員100%かつ一般選抜比率が「ー」のため)', () => {
