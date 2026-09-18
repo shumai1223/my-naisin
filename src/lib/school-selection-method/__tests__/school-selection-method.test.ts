@@ -1231,6 +1231,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('個人面接・集団討論・実技検査・学校設定検査はいずれも実施なし');
   });
 
+  it('hokkaido: schoolsは2校(岩見沢東/滝川)4学科8レコードを収録している(推薦入学者選抜+一般入学者選抜の2区分)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido');
+    expect(record?.schools?.length).toBe(8);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames).toEqual(new Set(['岩見沢東', '滝川']));
+  });
+
+  it('hokkaido: 滝川(理数)は一般入学者選抜で国・数・英を1.5倍にする傾斜配点を持つが滝川(普通)には傾斜配点が無い', () => {
+    const rigaku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '滝川', '一般入学者選抜', '理数');
+    const futsuu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '滝川', '一般入学者選抜', '普通');
+    expect(rigaku?.note).toContain('国語・数学・英語の3教科をそれぞれ1.5倍');
+    expect(futsuu?.note).toContain('傾斜配点の実施なし');
+  });
+
+  it('hokkaido: 岩見沢東(普通)の一般入学者選抜は調査書重視グループが評定10:学力0・学力重視グループが学力6:評定4', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '岩見沢東', '一般入学者選抜', '普通');
+    expect(record?.ratioType).toBe('評定:学力=10:0(調査書重視グループ)、学力:評定=6:4(学力重視グループ)');
+  });
+
+  it('hokkaido: 岩見沢東(文理探究)の推薦入学者選抜は入学枠20%程度で個人面接を実施する', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '岩見沢東', '推薦入学者選抜', '文理探究');
+    expect(record?.interviewRequired).toBe(true);
+    expect(record?.ratioType).toBe('入学枠20%程度');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
