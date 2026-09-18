@@ -1034,6 +1034,35 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(s2?.interviewRequired).toBe(false);
   });
 
+  it('shimane: 令和9年度別表2の全39校(定時制3校含む)を一般選抜と第2次募集で収録し、第2次募集の配点合計が一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shimane');
+    expect(record?.status).toBe('structured');
+    expect(record?.fiscalYear).toContain('令和9年度');
+    const all = record?.schools ?? [];
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(39);
+    expect(all.filter((s) => s.selectionCategory === '一般選抜')).toHaveLength(40);
+    const second = all.filter((s) => s.selectionCategory === '第2次募集');
+    expect(second).toHaveLength(40);
+    for (const s of second) {
+      const parts = (s.note ?? '').match(/選抜方法及び配点: ([^。]+)=合計([0-9]+)点/);
+      expect(parts).not.toBeNull();
+      if (!parts) continue;
+      const sum = [...parts[1].matchAll(/([0-9]+)(?:\+|$)/g)].reduce((a, m) => a + Number(m[1]), 0);
+      expect(sum).toBe(Number(parts[2]));
+    }
+  });
+
+  it('shimane: 出雲高校は一般選抜で調査報告書40:学力検査60、松江工業は60:40+面接10点評点化、大社体育科は70:30+実技10点で第2次募集合計150', () => {
+    const izumo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shimane', '出雲高等学校', '一般選抜');
+    expect(izumo?.ratioType).toBe('個人調査報告書40:学力検査60');
+    const matsuko = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shimane', '松江工業高等学校', '一般選抜');
+    expect(matsuko?.ratioType).toBe('個人調査報告書60:学力検査40');
+    expect(matsuko?.note).toContain('面接(評点化10点)');
+    const taisha = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shimane', '大社高等学校', '第2次募集', '体育科');
+    expect(taisha?.note).toContain('合計150点');
+    expect(taisha?.note).toContain('実技40');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
