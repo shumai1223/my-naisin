@@ -1092,3 +1092,16 @@ tsc実exit0・school-selection-method関連jest179件green。フルスイート�
 **次回セッションが選ぶべきこと(更新)**: fukushimaは頁8以降(福島工業以降・約88校)が拡充対象。
 上記の他の選択肢(tokyo頁2-7/shizuoka頁2以降/hokkaido残り11頁/hiroshima頁4-8/tokushima頁1-7/
 gifu頁4/okayama頁4-7/新規28県着手)も引き続き有効。
+
+**2026-09-18追記52（fukushima拡充・福島工業の全日制5学科15レコード追加・commit e646060）**:
+機械科/電気科/情報電子科/建築科/環境化学科の特色選抜+一般選抜+後期選抜を追加し、fukushimaは
+3校15レコード→**4校30レコード**に拡大。定時制課程は既存方針（他県と同じく対象外）を踏襲した。
+tsc実exit0・school-selection-method関連jest182件green確認済み。フルスイートは省略（データ追加
+のみで既存ロジックに影響なし・直前のfukushima商業commitで問題なし）。commit e646060・
+**push頻度制限ルールに従いpush保留中**（直近未push: 1123305/a76e59a/a809493/f046421/e646060
+の5件）。
+
+**次回セッションが選ぶべきこと(更新)**: fukushimaは頁11以降（福島工業の次の学校・約85校）が
+拡充対象。他の選択肢（tokyo頁2-7/shizuoka頁2以降/hokkaido残り11頁/hiroshima頁4-8/
+tokushima頁1-7/gifu頁3-4/okayama頁3残り+頁4-7/新規28県着手）も引き続き有効。未pushコミットが
+5件溜まっているため、区切りの良いタイミングでのpushを検討すること。
