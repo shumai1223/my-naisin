@@ -377,6 +377,25 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     ).toBe(52600);
   });
 
+  it('ehimeは奨学のための給付金(私立)で非課税世帯152,000円を返し、wakayamaと完全一致する(国基準額の可能性を補強)', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'ehime');
+    expect(record?.status).toBe('confirmed-yes');
+    expect(record?.schemeType).toBe('household');
+    expect(record?.tiers).toHaveLength(4);
+    const ehimeAmount = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'ehime',
+      '道府県民税所得割及び市町村民税所得割非課税世帯（通信制以外）'
+    );
+    const wakayamaAmount = findUwanoseAmountForTierLabel(
+      SHIEN_UWANOSE_BY_PREFECTURE,
+      'wakayama',
+      '非課税世帯（全日制・定時制・通常申請のみの場合）'
+    );
+    expect(ehimeAmount).toBe(152000);
+    expect(ehimeAmount).toBe(wakayamaAmount);
+  });
+
   it('登録済みレコードは全てfiscalYear・source.url・source.lastCheckedを持つ（Y-0: 1データ点1出典）', () => {
     for (const record of Object.values(SHIEN_UWANOSE_BY_PREFECTURE)) {
       expect(record?.fiscalYear.length).toBeGreaterThan(0);
