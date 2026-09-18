@@ -1256,6 +1256,40 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(activity?.note).toContain('募集人員18人以内');
   });
 
+  it('miyazaki: 全日制の定員合計7,320・定時制440で、全レコードの配点(学力検査+面接+適性検査等+調査書)が計に一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(114);
+    const num = (s: string, re: RegExp) => Number(s.match(re)?.[1] ?? 0);
+    const zen = all.filter((s) => (s.note ?? '').includes('・全日制】'));
+    const tei = all.filter((s) => (s.note ?? '').includes('・定時制】'));
+    expect(zen.reduce((a, s) => a + num(s.note ?? '', /定員([0-9]+)名/), 0)).toBe(7320);
+    expect(tei.reduce((a, s) => a + num(s.note ?? '', /定員([0-9]+)名/), 0)).toBe(440);
+    for (const s of all) {
+      const nums = (s.ratioType ?? '').match(/(学力検査|面接|適性検査等|調査書)([0-9]+)/g) ?? [];
+      const total = nums.reduce((a, m) => a + Number(m.replace(/[^0-9]/g, '')), 0);
+      expect(total).toBe(num(s.ratioType ?? '', /計([0-9]+)/));
+      expect(num(s.note ?? '', /合計([0-9]+)点/)).toBe(num(s.ratioType ?? '', /計([0-9]+)/));
+    }
+  });
+
+  it('miyazaki: 宮崎大宮は数学・英語150点で面接25/調査書75、小林体育コースは適性検査700点で計1300、宮崎東定時制は学力検査なし', () => {
+    const omiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki', '宮崎大宮', '一般入学者選抜');
+    expect(omiya?.ratioType).toBe('学力検査600:面接25:調査書75(計700)');
+    expect(omiya?.note).toContain('数学150・理科100・英語150');
+    const kobayashi = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki')?.schools?.find(
+      (s) => s.schoolName === '小林' && s.department === '普通(体育コース)'
+    );
+    expect(kobayashi?.ratioType).toBe('学力検査500:面接40:適性検査等700:調査書60(計1300)');
+    expect(kobayashi?.note).toContain('種目別技能検査');
+    const higashi = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki')?.schools?.find(
+      (s) => s.schoolName === '宮崎東' && s.department === '普通(昼間)(定時制)'
+    );
+    expect(higashi?.ratioType).toBe('面接50:適性検査等25:調査書25(計100)');
+    expect(higashi?.note).toContain('学力検査は実施しない');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
