@@ -1063,6 +1063,40 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(taisha?.note).toContain('実技40');
   });
 
+  it('saga: 付表4-4〜4-6の全日制32校69学科の選考I/IIと帰国等枠・重点評価枠・定時制を148レコードで収録し、選考IのB募集人員の合計が資料の合計行1369人と一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(148);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(32);
+    const k1 = all.filter((s) => s.selectionCategory === '一般選抜 選考I');
+    const k2 = all.filter((s) => s.selectionCategory === '一般選抜 選考II');
+    expect([k1.length, k2.length]).toEqual([69, 69]);
+    const totalB = k1.reduce((a, s) => a + Number((s.note ?? '').match(/選考I: 募集人員([0-9]+)人/)?.[1] ?? 0), 0);
+    expect(totalB).toBe(1369);
+  });
+
+  it('saga: 全レコードで②実技+③+④+⑤の合計が資料の値と一致する(選考I/II・定時制)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga');
+    for (const s of record?.schools ?? []) {
+      const note = s.note ?? '';
+      const m = note.match(/③学習の記録([0-9]+)点・④学習の記録以外([0-9]+)点、⑤面接([0-9]+)点、②+③+④+⑤=([0-9]+)点/);
+      if (!m) continue;
+      const prac = Number(note.match(/実技検査([0-9]+)点/)?.[1] ?? 0);
+      expect(prac + Number(m[1]) + Number(m[2]) + Number(m[3])).toBe(Number(m[4]));
+    }
+  });
+
+  it('saga: 佐賀西は国数英75点で学力検査325点、致遠館理数科は数学・理科75点で300点、選考IIは全校250点', () => {
+    const saga = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga', '佐賀西', '一般選抜 選考I', '普通科');
+    expect(saga?.ratioType).toBe('学力検査325:調査書115:面接10');
+    expect(saga?.note).toContain('傾斜配点あり');
+    const chien = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga', '致遠館', '一般選抜 選考I', '理数科');
+    expect(chien?.ratioType).toBe('学力検査300:調査書120:面接30');
+    const chienII = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga', '致遠館', '一般選抜 選考II', '理数科');
+    expect(chienII?.ratioType).toBe('学力検査250:調査書85:面接15');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
