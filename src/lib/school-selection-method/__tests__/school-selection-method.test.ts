@@ -1064,6 +1064,46 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('1,000点満点換算');
   });
 
+  it('hiroshima: 広島市立基町(創造表現)は特色枠が「その他の検査」・一般枠が「実技検査」と異なる独自検査を実施する', () => {
+    const tokushoku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立基町', '特色枠による選抜', '普通(創造表現)');
+    const ippan = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立基町', '一般枠による選抜', '普通(創造表現)');
+    expect(tokushoku?.note).toContain('「その他の検査」を実施(200点)');
+    expect(ippan?.note).toContain('実技検査を実施(200点');
+  });
+
+  it('hiroshima: 広島市立基町(創造表現)の一般枠は独自検査の200点のみ判明し学力・調査・表現の換算後点数は資料に記載が無い', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立基町', '一般枠による選抜', '普通(創造表現)');
+    expect(record?.ratioType).toContain('独自200のみ判明');
+    expect(record?.note).toContain('資料上空欄');
+  });
+
+  it('hiroshima: 広島市立舟入(普通)は特色枠・一般枠とも国語・数学・英語に2倍の傾斜配点が維持される', () => {
+    const tokushoku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立舟入', '特色枠による選抜', '普通');
+    const ippan = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立舟入', '一般枠による選抜', '普通');
+    expect(tokushoku?.note).toContain('合計400点');
+    expect(ippan?.note).toContain('合計400点');
+  });
+
+  it('hiroshima: 広島市立舟入(普通)の二次選抜は独自検査が無く調査書:自己表現=8:2の比率になる(他校の6:2:2型とは異なる)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立舟入', '二次選抜', '普通');
+    expect(record?.note).toContain('調査書800点・自己表現200点');
+    expect(record?.note).toContain('8:2の比率');
+  });
+
+  it('hiroshima: 広島市立舟入(国際コミュニケーション)は面接の配点が特色枠(50点)と一般枠(100点)で異なる', () => {
+    const tokushoku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立舟入', '特色枠による選抜', '普通(国際コミュニケーション)');
+    const ippan = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立舟入', '一般枠による選抜', '普通(国際コミュニケーション)');
+    expect(tokushoku?.note).toContain('面接を実施(50点)');
+    expect(ippan?.note).toContain('面接を実施(100点');
+  });
+
+  it('hiroshima: schoolsは頁3の最初の3校(広島国泰寺/広島市立基町/広島市立舟入・計6学科)18レコードを収録している(頁3残り+頁4-8は未収録)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima');
+    expect(record?.schools?.length).toBe(18);
+    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(schoolNames.size).toBe(3);
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
