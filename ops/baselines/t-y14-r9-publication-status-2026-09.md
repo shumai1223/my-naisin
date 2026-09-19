@@ -3,7 +3,7 @@
 T-Y14のDBのうちR8のまま残る県について、R9資料の公表有無を確認した記録。**URLが200でも公表済みとは限らない**(福岡は200だが『10月下旬に公表予定』)。
 確認方法: 各県のR8ソースがHTMLページの県はそのページを取得し『令和9年度』リンクを抽出。PDF直リンクの県は年度文字列の置換(r8→r9)を試したが多くは404(=命名規則が違うだけで未公表の証拠ではない)。
 
-## R9へ更新済み(13県)
+## R9へ更新済み(14県・2026-09-20時点。chiba/ehime/nagano/naraは同日更新)
 aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / nara(2026-09-20更新) / niigata / okinawa / shimane / shizuoka / yamanashi
 
 ## R9公表を確認したがDB未更新
