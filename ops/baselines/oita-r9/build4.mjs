@@ -27,14 +27,18 @@ for (const [no, , label] of list) {
   const school = ((p1text.join('\n').match(/大分県立(.+?)高等学校(?!入学)/) || [])[1] || '').replace(/^.*入学者選抜について/, '');
   const dl = p1.find((w) => w.t === '学科名' && w.y < 130);
   const dept = dl ? p1.filter((w) => Math.abs(w.y - dl.y) < 3 && w.x > dl.x + 20).sort((a, b) => a.x - b.x).map((w) => w.t).join('') : '';
-  const lab = (t) => p1.filter((w) => w.x > 80 && w.x < 140 && w.t === t).sort((a, b) => a.y - b.y);
-  const kLab = lab('調査書点に'), nLab = lab('募集人員');
+  // 頁1: ラベル(調査書点に/募集人員)をyでソートしたアンカー列にし、各アンカーの直後〜次のアンカーの手前までの x>=160 の文字を値とする
+  const anchors = p1.filter((w) => w.x > 60 && w.x < 145 && (w.t === '調査書点に' || /^募集人/.test(w.t))).sort((p, q) => p.y - q.y);
+  const endY = (p1.find((w) => /次のページに続く/.test(w.t))?.y) ?? 780;
   const val = (y0, y1) => rowsOf(p1.filter((w) => w.x >= 160 && w.y >= y0 && w.y < y1)).map((r) => r.w.map((w) => w.t).join('')).join(' ');
   const blocks = [];
-  for (let i = 0; i < nLab.length; i++) {
-    const ny = nLab[i].y, ky = kLab[i]?.y;
-    const nextK = kLab[i + 1]?.y ?? 9999;
-    blocks.push({ kijun: ky != null ? val(ky - 12, ny - 8) : '', nin: val(ny - 12, Math.min(nextK - 40, ny + 90, 780)) });
+  for (let i = 0; i < anchors.length; i++) {
+    if (anchors[i].t !== '調査書点に') continue;
+    const k = anchors[i];
+    const nA = anchors.slice(i + 1).find((x) => /^募集人/.test(x.t));
+    if (!nA) continue;
+    const nextK = anchors.slice(i + 1).find((x) => x.t === '調査書点に' && x.y > nA.y);
+    blocks.push({ kijun: val(k.y - 14, nA.y - 14), nin: val(nA.y - 14, Math.min(nextK ? nextK.y - 14 : 9999, endY)) });
   }
   // 頁2: 比重
   const hd = p2.find((w) => /^比重/.test(w.t) && w.y < 110);
@@ -48,6 +52,8 @@ for (const [no, , label] of list) {
     let m;
     const far = w.x >= hx + 50;
     if (far && !p2.some((q) => PREF.test(q.t) && q.x < w.x && q.x > hx - 60 && Math.abs(q.y - w.y) <= 12) && !PREFNUM.test(w.t)) continue;
+    // 本文中の『10分程度』『3年間』等の数字は比重でない
+    if (NUMRE.test(w.t) && p2.some((q) => q.y === w.y && q.x > w.x && q.x - w.x < 30 && /^(分|年間|人|点|時間)/.test(q.t))) continue;
     if (NUMRE.test(w.t)) cells.push({ y: w.y, x: w.x, v: +w.t, prefix: '' });
     else if ((m = w.t.match(PREFNUM))) cells.push({ y: w.y, x: w.x, v: +m[2], prefix: normP(m[1]) });
   }
@@ -61,6 +67,13 @@ for (const [no, , label] of list) {
       const pf2 = p2.filter((w) => PREF.test(w.t) && w.x < c.x && w.x > hx - 60 && w.y < c.y && c.y - w.y <= 40).sort((a, b) => b.y - a.y)[0];
       if (pf2 && cells.filter((k) => k !== c && Math.abs(k.y - c.y) < 30).length >= 0 && /指定|志望/.test(pf2.t)) c.prefix = normP(pf2.t);
     }
+  }
+  // 『【活動指定なし】』『および』『【志望学科】』が縦に並ぶ表記(情報科学の学科)は、後ろの数値を 【活動指定なし】および【志望学科】 の値として扱う
+  for (const c of cells) {
+    if (c.prefix !== '【志望学科】') continue;
+    const yo = p2.some((w) => w.t === 'および' && w.x > hx - 60 && w.x < hx + 60 && w.y >= c.y - 30 && w.y <= c.y + 5);
+    const na = p2.some((w) => w.t === '【活動指定なし】' && w.x > hx - 60 && w.y >= c.y - 45 && w.y < c.y);
+    if (yo && na) c.prefix = '【活動指定なし】および【志望学科】';
   }
   // 資料名(x70-140)のクラスタ
   const labToks = p2.filter((w) => w.x > 70 && w.x < 145 && w.y > hy + 10 && !/^[中学校長の推薦を必要とする自己型入者選抜な]$/.test(w.t)).sort((a, b) => a.y - b.y);
@@ -88,9 +101,13 @@ for (const [no, , label] of list) {
   }
   const okSum = sums.length > 0 && sums.every((v) => Math.abs(v - 100) < 0.3);
   if (!okSum || !hij.length) bad.push(`${n}:${sums.join('/')}`);
-  out.push({ no: n, label, school, dept, kijun: blocks[0]?.kijun ?? '', nin: blocks[0]?.nin ?? '', kijun2: blocks[1]?.kijun ?? '', nin2: blocks[1]?.nin ?? '', hijuu: hij[0] ?? [], hijuu2: hij[1] ?? [] });
+  // 値らしいブロックだけを採用(募集人員=『N人』を含む・基準=『以上』『基準なし』を含む)。要件本文が紛れた空ブロックは除外
+  const okN = blocks.filter((x) => /\d+\s*人/.test(x.nin));
+  const okK = blocks.filter((x) => /(以上|基準なし|基準無し|基準は設けない|】\s*なし)/.test(x.kijun));
+  out.push({ no: n, label, school, dept, kijun: okK[0]?.kijun ?? '', nin: okN[0]?.nin ?? '', kijun2: okK[1]?.kijun ?? '', nin2: okN[1]?.nin ?? '', hijuu: hij[0] ?? [], hijuu2: hij[1] ?? [] });
 }
 fs.writeFileSync(path.join(dir, 'rows-r9.json'), JSON.stringify(out, null, 1));
 console.log('R9', out.length, '/ 比重の合計が100(or 200)でない:', bad.join(', ') || 'なし');
 console.log('学校名空:', out.filter((r) => !r.school).map((r) => r.no).join(',') || 'なし', '/ 学科名空:', out.filter((r) => !r.dept).map((r) => r.no + '(' + r.label.split('_')[2] + ')').join(',') || 'なし', '/ 募集人員空:', out.filter((r) => !r.nin).map((r) => r.no).join(',') || 'なし', '/ 基準空:', out.filter((r) => !r.kijun).map((r) => r.no).join(',') || 'なし');
+
 
