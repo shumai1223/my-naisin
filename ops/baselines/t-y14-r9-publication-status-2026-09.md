@@ -4,7 +4,7 @@ T-Y14のDBのうちR8のまま残る県について、R9資料の公表有無を
 確認方法: 各県のR8ソースがHTMLページの県はそのページを取得し『令和9年度』リンクを抽出。PDF直リンクの県は年度文字列の置換(r8→r9)を試したが多くは404(=命名規則が違うだけで未公表の証拠ではない)。
 
 ## R9へ更新済み(18県・2026-09-20時点。chiba/ehime/nagano/naraは同日更新)
-aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026-09-20更新・全面再構築) / oita(2026-09-20更新・推薦のみ・欄空き0) / okayama(2026-09-20更新・差分パッチ) / miyazaki(2026-09-20更新) / mie(2026-09-20更新) / nara(2026-09-20更新) / niigata / okinawa / shimane / shizuoka / yamanashi
+aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026-09-20更新・全面再構築) / oita(2026-09-20更新・推薦のみ・欄空き0) / okayama(2026-09-20更新・差分パッチ) / hiroshima(2026-09-20更新・頁3のみ) / miyazaki(2026-09-20更新) / mie(2026-09-20更新) / nara(2026-09-20更新) / niigata / okinawa / shimane / shizuoka / yamanashi
 
 ## R9公表を確認したがDB未更新
 | 県 | R9資料 | 備考 |
@@ -20,7 +20,7 @@ aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026
 
 ## PDF直リンク県のハブ調査(2026-09-20・1回目=4県)
 - ~~okayama~~(**更新済み・追記106**): **公表済み**。`https://www.pref.okayama.jp/site/255/1044713.html`(令和9年度実施大要・2026-08-31更新)。学校別実施内容一覧(別表1・7頁・テキスト層あり)=`/uploaded/life/1054574_10218770_misc.pdf`、実施大要=`/uploaded/life/1054574_10218771_misc.pdf`。DBはR8(259レコード)のまま。R8(`1054600_10219031_misc.pdf`)とR9をpdftotext -rawで比較すると差分は各約60行(玉野普通の特別選抜15%→20%+検査追加・笠岡普通の特別選抜に検査追加・勝間田50%→80%・操山普通の一般選抜◎新設・工学系の実績欄の文言等)=**全面再構築でなく差分レコードのパッチで足りる見込み**。
-- **hiroshima**: **公表済み**。目次`https://www.pref.hiroshima.lg.jp/site/kyouiku/09senior-2nd-r9-nyuushi-r9-kou-r9-kou-mokuji-r9-kou-mokuji.html`(更新2026-09-18)から『入学者選抜の実施内容』ページ(`/site/kyouiku/09senior-2nd-r09-nyuushi-r09-kou-r09-kou-jisshinaiyou-r09-kou-jisshinaiyou-mokuji.html`)。DBはR8(90レコード・頁3のみ)のまま。**2026-09-20調査(追記107)**: R8の実施内容一覧表(`646901.pdf`・8頁縦)に相当するR9資料は`https://www.pref.hiroshima.lg.jp/uploaded/attachment/678267.pdf`(8頁・横向き・更新2026-08-17・同じ『実施内容一覧表』)。別に学校別の実施内容シート冊子(全日制広島市ほか=`678268.pdf`(2)-1・福山市ほか=`679531.pdf`(2)-2 等・二次選抜=(2)-4〜)も公表。R8との比較で**頁3のトークン差42種**(広島市立広島工業が『ものづくり探究科(機械・電気・建築)/情報デザイン探究科(情報工学・デザイン工学)/自動車探究科』に再編・二次選抜の欄構成が変わる)=**差分パッチでなく頁3の再抽出が必要**。
+- ~~hiroshima~~(**頁3を更新済み・追記108**): **公表済み**。目次`https://www.pref.hiroshima.lg.jp/site/kyouiku/09senior-2nd-r9-nyuushi-r9-kou-r9-kou-mokuji-r9-kou-mokuji.html`(更新2026-09-18)から『入学者選抜の実施内容』ページ(`/site/kyouiku/09senior-2nd-r09-nyuushi-r09-kou-r09-kou-jisshinaiyou-r09-kou-jisshinaiyou-mokuji.html`)。DBはR8(90レコード・頁3のみ)のまま。**2026-09-20調査(追記107)**: R8の実施内容一覧表(`646901.pdf`・8頁縦)に相当するR9資料は`https://www.pref.hiroshima.lg.jp/uploaded/attachment/678267.pdf`(8頁・横向き・更新2026-08-17・同じ『実施内容一覧表』)。別に学校別の実施内容シート冊子(全日制広島市ほか=`678268.pdf`(2)-1・福山市ほか=`679531.pdf`(2)-2 等・二次選抜=(2)-4〜)も公表。R8との比較で**頁3のトークン差42種**(広島市立広島工業が『ものづくり探究科(機械・電気・建築)/情報デザイン探究科(情報工学・デザイン工学)/自動車探究科』に再編・二次選抜の欄構成が変わる)=**差分パッチでなく頁3の再抽出が必要**。
 - **osaka**: 令和9年度は`https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r09_senbatsu.html`に『入学者選抜方針』等。R8の実施要項は令和7年10月16日公表だったため**R9の実施要項は10月中旬の見込み**=10月に再確認。
 - **hokkaido**: 時事通信の『令和9年度試験の実施要領』は**教員採用試験**の記事で無関係。道立高校の令和9年度選抜の手引は未確認(R8の手引は`https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/201495.html`)=10月以降に再確認。
 - 残り(未調査10県): aomori / fukushima / gunma / ibaraki / kagoshima / kochi / tochigi / toyama / yamagata / yamaguchi。

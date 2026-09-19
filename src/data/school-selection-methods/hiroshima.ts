@@ -1,3 +1,7 @@
+// ✅2026-09-20 令和9年度版(`https://www.pref.hiroshima.lg.jp/uploaded/attachment/678267.pdf`・更新2026-08-17・全8頁)へ更新した。
+// 頁3のR8/R9を座標(bbox)で学科帯ごとに突合し、差分(定員枠の人数が未定『-』になった・広島市立広島工業が探究科3つに再編・安西の二次選抜の独自検査が面接+作文200点に変更)のみ反映。
+// 記号(●/2倍)の個数と数値は他の学科で全て一致(ops/baselines/hiroshima-r9/banddiff.mjs)。以下は令和8年度版収録時の記録:
+//
 // 広島県: 「令和8年度広島県公立高等学校入学者選抜の実施内容」（広島県教育委員会公式ページ
 // `pref.hiroshima.lg.jp/site/kyouiku/08senior-2nd-r08-nyuushi-r08-kou-r08-kou-jisshinaiyou-
 // r08-kou-jisshinaiyou-mokuji.html`の「実施内容一覧表」PDF・全8頁）。
@@ -44,10 +48,10 @@ import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-met
 
 export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   prefectureCode: 'hiroshima',
-  fiscalYear: '令和8年度（2026年度）',
+  fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    '全8頁のうち頁3(全日制課程[本校]一覧・16校27学科)を完全収録(中区/東区: 広島国泰寺/広島市立基町/広島市立舟入/広島商業/広島市立広島商業/広島皆実、南区: 広島工業/広島市立広島工業、西区: 広島井口/広島観音、安佐南区: 安古市/安西/祇園北/広島市立沼田)。頁4-8(分校/併設型/連携型/定時制/通信制/フレックス課程)は未収録',
+    '【令和9年度版】全8頁のうち頁3(全日制課程[本校]一覧・14校27学科)を収録(中区/東区: 広島国泰寺/広島市立基町/広島市立舟入/広島商業/広島市立広島商業/広島皆実、南区: 広島工業/広島市立広島工業[探究科3つに再編]、西区: 広島井口/広島観音、安佐南区: 安古市/安西/祇園北/広島市立沼田)。頁4-8(分校/併設型/連携型/定時制/通信制/フレックス課程)は未収録',
   schools: [
     {
       schoolName: '広島国泰寺',
@@ -55,7 +59,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠30%(60人)。学力検査:国語50点・社会50点・数学100点(2倍傾斜)・理科50点・英語100点(2倍傾斜)=合計350点。調査書:国社数理音美保体技家外の9項目とも25点(傾斜なし)=合計225点。自己表現30点。学校独自検査の実施なし(面接・作文・小論文・実技検査・自校作成問題・その他いずれも欄が空欄)',
+      note: '定員枠30%(人数は令和9年度資料では未定「-」)。学力検査:国語50点・社会50点・数学100点(2倍傾斜)・理科50点・英語100点(2倍傾斜)=合計350点。調査書:国社数理音美保体技家外の9項目とも25点(傾斜なし)=合計225点。自己表現30点。学校独自検査の実施なし(面接・作文・小論文・実技検査・自校作成問題・その他いずれも欄が空欄)',
     },
     {
       schoolName: '広島国泰寺',
@@ -63,7 +67,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(120人)。学力検査:国社数理英とも標準(県教育委員会作成問題)で傾斜配点なし=合計250点。自己表現30点。学校独自検査の実施なし。比重欄は空欄(独自検査が無いため標準の6:2:2換算がそのまま適用され、換算後の点数は資料に個別記載されない)',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:国社数理英とも標準(県教育委員会作成問題)で傾斜配点なし=合計250点。自己表現30点。学校独自検査の実施なし。比重欄は空欄(独自検査が無いため標準の6:2:2換算がそのまま適用され、換算後の点数は資料に個別記載されない)',
     },
     {
       schoolName: '広島国泰寺',
@@ -78,7 +82,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠50%(40人)。学力検査:国語50点・社会50点・数学100点(2倍傾斜)・理科100点(2倍傾斜)・英語50点=合計350点(普通科とは2倍傾斜をかける教科が数理の組み合わせで異なる)。調査書:9項目とも25点=合計225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:国語50点・社会50点・数学100点(2倍傾斜)・理科100点(2倍傾斜)・英語50点=合計350点(普通科とは2倍傾斜をかける教科が数理の組み合わせで異なる)。調査書:9項目とも25点=合計225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島国泰寺',
@@ -86,7 +90,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(40人)。学力検査:標準(傾斜配点なし)=合計250点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準(傾斜配点なし)=合計250点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島国泰寺',
@@ -101,7 +105,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠30%(96人)。学力検査:標準(傾斜配点なし)=合計250点。調査書:音楽2倍・美術2倍・保健体育2倍・技術家庭2倍(各50点)、国社数理外は標準25点=合計325点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠30%(人数は令和9年度資料では未定「-」)。学力検査:標準(傾斜配点なし)=合計250点。調査書:音楽2倍・美術2倍・保健体育2倍・技術家庭2倍(各50点)、国社数理外は標準25点=合計325点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島市立基町',
@@ -109,7 +113,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠70%(224人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠70%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島市立基町',
@@ -124,7 +128,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力200:調査200:表現200:独自600(1,200点満点)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:音楽2倍・美術2倍・保健体育2倍・技術家庭2倍(各50点)、国社数理外は標準25点=合計325点。自己表現30点。学校独自検査:「その他の検査」を実施(200点)。比重は独自検査ありのため1,200点満点に換算(学力200/調査200/表現200/独自600)',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:音楽2倍・美術2倍・保健体育2倍・技術家庭2倍(各50点)、国社数理外は標準25点=合計325点。自己表現30点。学校独自検査:「その他の検査」を実施(200点)。比重は独自検査ありのため1,200点満点に換算(学力200/調査200/表現200/独自600)',
     },
     {
       schoolName: '広島市立基町',
@@ -132,7 +136,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '独自200のみ判明(学力・調査・表現の換算後点数は資料に記載なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。自己表現30点。学校独自検査:実技検査を実施(200点・特色枠の「その他の検査」とは異なる検査種別)。比重欄は独自検査の200点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄(Y-0に従い推測で埋めない)',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。自己表現30点。学校独自検査:実技検査を実施(200点・特色枠の「その他の検査」とは異なる検査種別)。比重欄は独自検査の200点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄(Y-0に従い推測で埋めない)',
     },
     {
       schoolName: '広島市立基町',
@@ -147,7 +151,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠30%(84人)。学力検査:国語100点(2倍傾斜)・社会50点・数学100点(2倍傾斜)・理科50点・英語100点(2倍傾斜)=合計400点(国語・数学・英語の3教科に2倍傾斜・国泰寺の数学英語2教科とは傾斜対象が異なる)。調査書:9項目とも標準25点=合計225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠30%(人数は令和9年度資料では未定「-」)。学力検査:国語100点(2倍傾斜)・社会50点・数学100点(2倍傾斜)・理科50点・英語100点(2倍傾斜)=合計400点(国語・数学・英語の3教科に2倍傾斜・国泰寺の数学英語2教科とは傾斜対象が異なる)。調査書:9項目とも標準25点=合計225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島市立舟入',
@@ -155,7 +159,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠70%(196人)。学力検査:特色枠と同じ国語・数学・英語2倍傾斜=合計400点(一般枠でも傾斜配点が維持される)。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠70%(人数は令和9年度資料では未定「-」)。学力検査:特色枠と同じ国語・数学・英語2倍傾斜=合計400点(一般枠でも傾斜配点が維持される)。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島市立舟入',
@@ -170,7 +174,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: true,
       ratioType: '学力400:調査400:表現200:独自200(1,200点満点)',
-      note: '定員枠30%(12人)。学力検査:普通科と同じ国語・数学・英語2倍傾斜=合計400点。調査書225点。自己表現30点。学校独自検査:面接を実施(50点)。比重は独自検査ありのため1,200点満点(400+400+200+200)',
+      note: '定員枠30%(人数は令和9年度資料では未定「-」)。学力検査:普通科と同じ国語・数学・英語2倍傾斜=合計400点。調査書225点。自己表現30点。学校独自検査:面接を実施(50点)。比重は独自検査ありのため1,200点満点(400+400+200+200)',
     },
     {
       schoolName: '広島市立舟入',
@@ -178,7 +182,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: true,
       ratioType: '独自100のみ判明(学力・調査・表現の換算後点数は資料に記載なし)',
-      note: '定員枠70%(28人)。学力検査:400点(国語・数学・英語2倍傾斜)。自己表現30点。学校独自検査:面接を実施(100点・特色枠の50点とは配点が異なる)。比重欄は独自検査の100点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄',
+      note: '定員枠70%(人数は令和9年度資料では未定「-」)。学力検査:400点(国語・数学・英語2倍傾斜)。自己表現30点。学校独自検査:面接を実施(100点・特色枠の50点とは配点が異なる)。比重欄は独自検査の100点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄',
     },
     {
       schoolName: '広島市立舟入',
@@ -193,7 +197,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠50%(160人)。学力検査:標準=合計250点。調査書:9項目とも標準25点=合計225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:9項目とも標準25点=合計225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島商業',
@@ -201,7 +205,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(160人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島商業',
@@ -216,7 +220,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力300:調査500:表現200(独自検査なし)',
-      note: '定員枠50%(120人)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし。比重は学力300:調査500:表現200(調査書を重視する配分・国泰寺等の400:400:200とは異なる独自の重み付け)',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし。比重は学力300:調査500:表現200(調査書を重視する配分・国泰寺等の400:400:200とは異なる独自の重み付け)',
     },
     {
       schoolName: '広島市立広島商業',
@@ -224,7 +228,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(120人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島市立広島商業',
@@ -239,7 +243,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠30%(72人)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠30%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島皆実',
@@ -247,7 +251,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠70%(168人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠70%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島皆実',
@@ -262,7 +266,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠30%(12人)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠30%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島皆実',
@@ -270,7 +274,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠70%(28人)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠70%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島皆実',
@@ -285,7 +289,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力200:調査200:表現200:独自600(1,200点満点)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重は独自検査ありのため1,200点満点(200+200+200+600)',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準=合計225点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重は独自検査ありのため1,200点満点(200+200+200+600)',
     },
     {
       schoolName: '広島皆実',
@@ -293,7 +297,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '独自200のみ判明(学力・調査・表現の換算後点数は資料に記載なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重欄は独自検査の200点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重欄は独自検査の200点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄',
     },
     {
       schoolName: '広島皆実',
@@ -315,7 +319,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠100%(80人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠100%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島工業',
@@ -337,7 +341,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠100%(80人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠100%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島工業',
@@ -359,7 +363,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠100%(80人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠100%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島工業',
@@ -381,7 +385,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠100%(40人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠100%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島工業',
@@ -403,7 +407,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠100%(40人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠100%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島工業',
@@ -414,141 +418,72 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
     },
     {
       schoolName: '広島市立広島工業',
-      department: '機械',
+      department: '情報工学・デザイン工学(情報デザイン探究科)',
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力300:調査500:表現200(独自検査なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし。比重は学力300:調査500:表現200(広島市立広島商業と同じ調査書重視の重み付け)',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし。比重は学力300:調査500:表現200(広島市立広島商業と同じ調査書重視の重み付け)。令和9年度資料の注記※1: 広島市立広島工業高等学校の情報工学科・デザイン工学科は「情報デザイン探究科」として募集を行う',
     },
     {
       schoolName: '広島市立広島工業',
-      department: '機械',
+      department: '情報工学・デザイン工学(情報デザイン探究科)',
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし。令和9年度資料の注記※1: 広島市立広島工業高等学校の情報工学科・デザイン工学科は「情報デザイン探究科」として募集を行う',
     },
     {
       schoolName: '広島市立広島工業',
-      department: '機械',
+      department: '情報工学・デザイン工学(情報デザイン探究科)',
       selectionCategory: '二次選抜',
       interviewRequired: false,
-      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●',
+      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●。令和9年度資料の注記※1: 広島市立広島工業高等学校の情報工学科・デザイン工学科は「情報デザイン探究科」として募集を行う',
     },
     {
       schoolName: '広島市立広島工業',
-      department: '自動車',
+      department: '自動車(自動車探究科)',
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力300:調査500:表現200(独自検査なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし。比重は学力300:調査500:表現200(広島市立広島商業と同じ調査書重視の重み付け)。令和9年度資料の注記※2: 広島市立広島工業高等学校の自動車科は「自動車探究科」として募集を行う',
     },
     {
       schoolName: '広島市立広島工業',
-      department: '自動車',
+      department: '自動車(自動車探究科)',
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし。令和9年度資料の注記※2: 広島市立広島工業高等学校の自動車科は「自動車探究科」として募集を行う',
     },
     {
       schoolName: '広島市立広島工業',
-      department: '自動車',
+      department: '自動車(自動車探究科)',
       selectionCategory: '二次選抜',
       interviewRequired: false,
-      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●',
+      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●。令和9年度資料の注記※2: 広島市立広島工業高等学校の自動車科は「自動車探究科」として募集を行う',
     },
     {
       schoolName: '広島市立広島工業',
-      department: '電気',
+      department: '機械・電気・建築(ものづくり探究科)',
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力300:調査500:表現200(独自検査なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし。比重は学力300:調査500:表現200(広島市立広島商業と同じ調査書重視の重み付け)。令和9年度資料の注記※3: 広島市立広島工業高等学校の機械科・電気科・建築科は「ものづくり探究科」として募集を行う',
     },
     {
       schoolName: '広島市立広島工業',
-      department: '電気',
+      department: '機械・電気・建築(ものづくり探究科)',
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし。令和9年度資料の注記※3: 広島市立広島工業高等学校の機械科・電気科・建築科は「ものづくり探究科」として募集を行う',
     },
     {
       schoolName: '広島市立広島工業',
-      department: '電気',
+      department: '機械・電気・建築(ものづくり探究科)',
       selectionCategory: '二次選抜',
       interviewRequired: false,
-      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '情報電子',
-      selectionCategory: '特色枠による選抜',
-      interviewRequired: false,
-      ratioType: '学力300:調査500:表現200(独自検査なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '情報電子',
-      selectionCategory: '一般枠による選抜',
-      interviewRequired: false,
-      ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '情報電子',
-      selectionCategory: '二次選抜',
-      interviewRequired: false,
-      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '建築',
-      selectionCategory: '特色枠による選抜',
-      interviewRequired: false,
-      ratioType: '学力300:調査500:表現200(独自検査なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '建築',
-      selectionCategory: '一般枠による選抜',
-      interviewRequired: false,
-      ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '建築',
-      selectionCategory: '二次選抜',
-      interviewRequired: false,
-      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '環境設備',
-      selectionCategory: '特色枠による選抜',
-      interviewRequired: false,
-      ratioType: '学力300:調査500:表現200(独自検査なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '環境設備',
-      selectionCategory: '一般枠による選抜',
-      interviewRequired: false,
-      ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
-    },
-    {
-      schoolName: '広島市立広島工業',
-      department: '環境設備',
-      selectionCategory: '二次選抜',
-      interviewRequired: false,
-      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●',
+      note: '自己表現30点。学校独自検査:面接を実施(30点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算。「その他」欄に●。令和9年度資料の注記※3: 広島市立広島工業高等学校の機械科・電気科・建築科は「ものづくり探究科」として募集を行う',
     },
     {
       schoolName: '広島井口',
@@ -556,7 +491,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠50%(160人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島井口',
@@ -564,7 +499,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(160人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島井口',
@@ -579,7 +514,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力300:調査300:表現400(独自検査なし)',
-      note: '定員枠30%(84人)。学力検査:標準=合計250点。調査書:音楽2倍・美術2倍・保健体育2倍・技術家庭2倍(各50点)、国社数理外は標準25点=合計325点(安古市と同型の調査書重視型傾斜配点)。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠30%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:音楽2倍・美術2倍・保健体育2倍・技術家庭2倍(各50点)、国社数理外は標準25点=合計325点(安古市と同型の調査書重視型傾斜配点)。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島観音',
@@ -587,7 +522,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠70%(196人)。学力検査:標準=合計250点。調査書:標準225点(一般枠は特色枠の傾斜配点を適用せず常に標準225点)。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠70%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点(一般枠は特色枠の傾斜配点を適用せず常に標準225点)。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島観音',
@@ -602,7 +537,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力200:調査600:表現200(独自検査なし)',
-      note: '定員枠50%(160人)。学力検査:標準=合計250点。調査書:音楽2倍・美術2倍・保健体育2倍・技術家庭2倍(各50点)、国社数理外は標準25点=合計325点(広島観音と同型の調査書重視型傾斜配点だが比重は200:600:200と異なる重み付け)。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:音楽2倍・美術2倍・保健体育2倍・技術家庭2倍(各50点)、国社数理外は標準25点=合計325点(広島観音と同型の調査書重視型傾斜配点だが比重は200:600:200と異なる重み付け)。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '安古市',
@@ -610,7 +545,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(160人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '安古市',
@@ -625,7 +560,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力200:調査600:表現200(独自検査なし)',
-      note: '定員枠50%(40人)。学力検査:標準=合計250点。調査書:標準225点(傾斜配点なし・安古市/広島観音とは異なり調査書は標準のまま比重のみ調査書重視)。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点(傾斜配点なし・安古市/広島観音とは異なり調査書は標準のまま比重のみ調査書重視)。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '安西',
@@ -633,14 +568,14 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(40人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '安西',
       department: '普通',
       selectionCategory: '二次選抜',
       interviewRequired: true,
-      note: '自己表現30点。学校独自検査:面接を実施(100点)。比重:調査書600点・自己表現200点・独自検査(面接)200点の1,000点満点換算',
+      note: '自己表現30点。学校独自検査:面接と作文を組み合わせて実施(合計200点・内訳の記載なし)。比重:調査書400点・自己表現200点・独自検査(面接+作文)400点の1,000点満点換算(令和8年度は面接のみ100点・比重600/200/200だった)',
     },
     {
       schoolName: '祇園北',
@@ -648,7 +583,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠50%(140人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '祇園北',
@@ -656,7 +591,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(140人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '祇園北',
@@ -671,7 +606,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力400:調査400:表現200(独自検査なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '祇園北',
@@ -679,7 +614,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(20人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '祇園北',
@@ -694,7 +629,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力300:調査500:表現200(独自検査なし)',
-      note: '定員枠50%(120人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島市立沼田',
@@ -702,7 +637,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '学力:調査書:自己表現=6:2:2(独自検査なし・換算後点数は資料に明記なし)',
-      note: '定員枠50%(120人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査の実施なし',
     },
     {
       schoolName: '広島市立沼田',
@@ -717,7 +652,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '特色枠による選抜',
       interviewRequired: false,
       ratioType: '学力200:調査200:表現200:独自600(1,200点満点)',
-      note: '定員枠50%(40人)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重は独自検査ありのため1,200点満点(200+200+200+600・広島皆実体育の特色枠と同一配点)',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。調査書:標準225点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重は独自検査ありのため1,200点満点(200+200+200+600・広島皆実体育の特色枠と同一配点)',
     },
     {
       schoolName: '広島市立沼田',
@@ -725,7 +660,7 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       selectionCategory: '一般枠による選抜',
       interviewRequired: false,
       ratioType: '独自200のみ判明(学力・調査・表現の換算後点数は資料に記載なし)',
-      note: '定員枠50%(40人)。学力検査:標準=合計250点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重欄は独自検査の200点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄',
+      note: '定員枠50%(人数は令和9年度資料では未定「-」)。学力検査:標準=合計250点。自己表現30点。学校独自検査:実技検査を実施(100点)。比重欄は独自検査の200点のみが記載され、学力・調査書・自己表現の換算後点数は資料上空欄',
     },
     {
       schoolName: '広島市立沼田',
@@ -736,9 +671,9 @@ export const HIROSHIMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
     },
   ],
   source: {
-    url: 'https://www.pref.hiroshima.lg.jp/uploaded/attachment/646901.pdf',
-    docTitle: '令和8年度広島県公立高等学校入学者選抜の実施内容(実施内容一覧表)',
-    lastChecked: '2026-09-18',
+    url: 'https://www.pref.hiroshima.lg.jp/uploaded/attachment/678267.pdf',
+    docTitle: '令和9年度広島県公立高等学校入学者選抜の実施内容(実施内容一覧表)',
+    lastChecked: '2026-09-20',
   },
-  note: '学力検査の「2倍」は該当教科の得点を2倍にする傾斜配点(50点→100点)。調査書の「2倍」も同様(25点→50点)。特色枠の比重は独自検査なしなら1,000点満点・ありなら1,100or1,200点満点に換算される。一般枠は独自検査が無い場合、標準の学力:調査書:自己表現=6:2:2比率がそのまま適用され資料上に換算後点数の明記は無い(推測で埋めない)。二次選抜は学力検査を実施せず調査書・自己表現・学校独自検査のみで1,000点満点',
+  note: '【令和9年度版】入学定員・定員枠の人数は資料上『-』(未定)のため定員枠は割合(%)のみ記載。広島市立広島工業は6学科から「情報デザイン探究科(情報工学・デザイン工学)/自動車探究科/ものづくり探究科(機械・電気・建築)」の3募集に再編。安西の二次選抜は独自検査が面接のみ(100点)から面接+作文(200点)に変更。学力検査の「2倍」は該当教科の得点を2倍にする傾斜配点(50点→100点)。調査書の「2倍」も同様(25点→50点)。特色枠の比重は独自検査なしなら1,000点満点・ありなら1,100or1,200点満点に換算される。一般枠は独自検査が無い場合、標準の学力:調査書:自己表現=6:2:2比率がそのまま適用され資料上に換算後点数の明記は無い(推測で埋めない)。二次選抜は学力検査を実施せず調査書・自己表現・学校独自検査のみで1,000点満点',
 };

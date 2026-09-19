@@ -2312,11 +2312,26 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('独自の提出書類');
   });
 
-  it('hiroshima: schoolsは頁3(全日制課程[本校]一覧・16校27学科)を完全収録している(頁4-8は未収録)', () => {
+  it('hiroshima: schoolsは令和9年度版の頁3(全日制課程[本校]一覧・14校27学科)を収録している(頁4-8は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima');
-    expect(record?.schools?.length).toBe(90);
+    expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+    expect(record?.schools?.length).toBe(81);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
     expect(schoolNames.size).toBe(14);
+  });
+
+  it('hiroshima: 広島市立広島工業は令和9年度に3つの探究科へ再編され(6学科→3募集)、安西の二次選抜は面接+作文の独自検査に変わった', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima');
+    const kogyo = record?.schools?.filter((s) => s.schoolName === '広島市立広島工業');
+    expect(kogyo).toHaveLength(9);
+    expect(new Set(kogyo?.map((s) => s.department)).size).toBe(3);
+    expect(kogyo?.every((s) => /探究科/.test(s.department ?? ''))).toBe(true);
+    const monozukuri = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '広島市立広島工業', '特色枠による選抜', '機械・電気・建築(ものづくり探究科)');
+    expect(monozukuri?.note).toContain('ものづくり探究科');
+    const anzai = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima', '安西', '二次選抜', '普通');
+    expect(anzai?.note).toContain('面接と作文');
+    expect(anzai?.note).toContain('調査書400点');
+    expect(record?.schools?.some((s) => /\d+人\)/.test(s.note ?? '') && /定員枠/.test(s.note ?? ''))).toBe(false);
   });
 
   it('hiroshima: 広島工業(機械等5学科)は特色枠による選抜を実施せず定員枠100%が一般枠のみになる', () => {
