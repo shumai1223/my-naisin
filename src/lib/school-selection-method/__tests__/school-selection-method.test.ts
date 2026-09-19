@@ -3378,6 +3378,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('段階評価(点数化なし)');
   });
 
+  it('fukui: 令和9年度の特色選抜実施校は23校32レコードで、出典は令和9年度版(r09nittei_d配下・令和8年度版ではない)・配点比率は資料に無いためratioTypeを持たない', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukui');
+    expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+    expect(record?.source.url).toContain('r09nittei_d/fil/r09tokusyoku.pdf');
+    expect(record?.schools).toHaveLength(32);
+    expect(new Set(record?.schools?.map((x) => x.schoolName)).size).toBe(23);
+    expect(record?.schools?.every((x) => x.selectionCategory === '特色選抜' && x.ratioType === undefined)).toBe(true);
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukui', '羽水', '特色選抜', '普通')?.note).toContain('生徒会・ボランティア活動等(男女)');
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukui', '若狭東', '特色選抜', '生活創造・地域創造・工業創造・ビジネス情報')?.note).toContain('ラグビーフットボール(男)');
+    // 鯖江は結合セルのため専攻ごとの対応を特定できない旨をnoteに明記している
+    expect(record?.schools?.some((x) => x.schoolName === '鯖江' && x.note?.includes('特定できない'))).toBe(true);
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
