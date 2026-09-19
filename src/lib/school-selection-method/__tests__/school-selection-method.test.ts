@@ -3121,11 +3121,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは36校(学校番号01〜33・あぶくま柏鵬・36・37・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川/田村/あぶくま柏鵬/会津/葵)246レコードを収録している', () => {
+  it('fukushima: schoolsは39校(学校番号01〜33・あぶくま柏鵬・36〜40・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川/田村/あぶくま柏鵬/会津/葵/会津学鳳/若松商業/会津工業)268レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(246);
+    expect(record?.schools?.length).toBe(268);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南', '須賀川創英館', '須賀川桐陽', '清陵情報', '岩瀬農業', '光南', '白河', '白河旭', '白河実業', '修明', '石川', '田村', 'あぶくま柏鵬', '会津', '葵']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南', '須賀川創英館', '須賀川桐陽', '清陵情報', '岩瀬農業', '光南', '白河', '白河旭', '白河実業', '修明', '石川', '田村', 'あぶくま柏鵬', '会津', '葵', '会津学鳳', '若松商業', '会津工業']));
   });
 
   it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
@@ -3142,10 +3142,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島明成', '一般選抜', '農業科・食品科学科')?.note).toContain('募集定員40人');
   });
 
-  it('fukushima: 外国人生徒等に係る特別枠選抜は福島北(基礎学力150点)・福島南国際文化科(200点)・あさか開成(100点)・光南(60点)の4校のみ・福島南国際文化科の特色検査は英語10点で満点660点', () => {
+  it('fukushima: 外国人生徒等に係る特別枠選抜は福島北(基礎学力150点)・福島南国際文化科(200点)・あさか開成(100点)・光南(60点)・会津学鳳(100点)の5校のみ・福島南国際文化科の特色検査は英語10点で満点660点', () => {
     const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? [];
     const foreign = recs.filter((x) => x.selectionCategory === '外国人生徒等に係る特別枠選抜');
-    expect(foreign.map((x) => x.schoolName).sort()).toEqual(['あさか開成', '光南', '福島北', '福島南']);
+    expect(foreign.map((x) => x.schoolName).sort()).toEqual(['あさか開成', '会津学鳳', '光南', '福島北', '福島南']);
+    expect(foreign.find((x) => x.schoolName === '会津学鳳')?.ratioType).toContain('基礎学力検査100点');
     expect(foreign.find((x) => x.schoolName === '光南')?.ratioType).toContain('基礎学力検査60点');
     expect(foreign.find((x) => x.schoolName === 'あさか開成')?.ratioType).toContain('基礎学力検査100点');
     expect(foreign.find((x) => x.schoolName === '福島北')?.ratioType).toContain('基礎学力検査150点');
