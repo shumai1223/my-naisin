@@ -2363,11 +2363,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toContain('面接(段階評価)');
   });
 
-  it('shizuoka: schoolsは令和9年度PDF頁1の2校(下田/伊豆伊東)8レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取は設定なしのため対象外)', () => {
+  it('shizuoka: schoolsは令和9年度PDF頁1-3の7校29レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取・土肥分校は設定なしのため対象外)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka');
-    expect(record?.schools?.length).toBe(8);
+    expect(record?.schools?.length).toBe(29);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東']));
+    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東', '熱海', '伊豆総合', '韮山', '伊豆中央', '田方農業']));
+  });
+
+  it('shizuoka: 頁2-3は体育的活動系(Ⅰ)が実技検査・事前調査票あり、農業後継者枠は作文+事前調査票、探究活動は作文または適応力検査、学習系は調査書・学力検査・面接のみ(画像で○列位置を確認済み)', () => {
+    const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka')?.schools ?? [];
+    const p23 = recs.filter((s) => ['熱海', '伊豆総合', '韮山', '伊豆中央', '田方農業'].includes(s.schoolName));
+    expect(p23).toHaveLength(21);
+    for (const s of p23) {
+      const n = s.note ?? '';
+      if (n.includes('審査項目は体育的活動') || n.includes('審査項目は文化的・体育的活動')) expect(n).toContain('実技検査・事前調査票');
+      else if (n.includes('農業後継者')) expect(n).toContain('作文・事前調査票');
+      else if (n.includes('適応力検査')) expect(n).toContain('その他(適応力検査)');
+      else if (n.includes('審査項目は探究活動') || n.includes('審査項目は地域貢献')) expect(n).toContain('面接・作文');
+      else expect(n).toContain('調査書・学力検査・面接のみ');
+    }
+    expect(p23.filter((s) => s.schoolName === '田方農業')).toHaveLength(8);
+    expect(p23.filter((s) => s.schoolName === '伊豆総合')).toHaveLength(6);
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '伊豆中央', '学校裁量枠Ⅱ', '普通')?.ratioType).toBe('選抜割合4%程度(希望者対象)');
+    // 令和9年度は韮山普通にも学校裁量枠(20%)がある(令和5年度版では設定なし)
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '韮山', '学校裁量枠Ⅰ', '普通')?.ratioType).toBe('選抜割合20%程度(希望者対象)');
   });
 
   it('shizuoka: 出典は令和9年度版PDF(1082226ページ配下のr9〜)であり令和5年度版(1031855配下)ではない(2026-09-19に取り違えを訂正)', () => {
