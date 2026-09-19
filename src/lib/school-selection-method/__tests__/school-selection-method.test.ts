@@ -754,9 +754,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('レスリング');
   });
 
-  it('okayama: schoolsは全7頁を完全収録している(51校259レコード)', () => {
+  it('okayama: schoolsは令和9年度版の全7頁を収録している(51校261レコード)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
-    expect(record?.schools?.length).toBe(259);
+    expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+    expect(record?.schools?.length).toBe(261);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
     expect(schoolNames.size).toBe(51);
     expect(record?.coverageNote).toContain('岡山一宮');
@@ -781,12 +782,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(general?.ratioType).toBe('調査書及び面接等15%');
   });
 
-  it('okayama: 玉野・笠岡の普通科は特別入学者選抜が全て「ー」のため一般入学者選抜のみ収録される(頁5)', () => {
+  it('okayama: 玉野・笠岡の普通科は令和9年度から特別入学者選抜(募集人員50%)が新設され特別・一般の2レコードを持つ(頁5)', () => {
+    const tamano = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '玉野', '特別入学者選抜', '普通');
+    expect(tamano?.note).toContain('募集人員50%');
+    expect(tamano?.note).toContain('10人程度');
+    expect(tamano?.note).toContain('英語検定準2級以上合格');
+    const kasaoka = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '笠岡', '特別入学者選抜', '普通');
+    expect(kasaoka?.note).toContain('募集人員50%');
+    expect(kasaoka?.note).toContain('8人程度');
+    expect(kasaoka?.note).toContain('数学検定準2級以上');
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
     for (const name of ['玉野', '笠岡']) {
       const rows = record?.schools?.filter((s) => s.schoolName === name);
-      expect(rows).toHaveLength(1);
-      expect(rows?.[0].selectionCategory).toBe('一般入学者選抜');
+      expect(rows).toHaveLength(2);
+      expect(rows?.map((r) => r.selectionCategory).sort()).toEqual(['一般入学者選抜', '特別入学者選抜']);
     }
   });
 
@@ -836,12 +845,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(hiruzen?.note).toContain('連携型');
   });
 
-  it('okayama: 勝間田は総合学科の5系列に同一内容(募集人員50%・剣道5人程度・一般選抜比率10%)を複製して収録している(頁7)', () => {
+  it('okayama: 勝間田は総合学科の5系列に同一内容(募集人員80%・剣道5人程度・一般選抜比率10%)を複製して収録している(頁7・令和9年度で特別の募集人員50→80%)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama');
     expect(record?.schools?.filter((s) => s.schoolName === '勝間田')).toHaveLength(10);
     const jidosha = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'okayama', '勝間田', '特別入学者選抜', '自動車系列');
     expect(jidosha?.note).toContain('剣道');
     expect(jidosha?.note).toContain('討論、発表');
+    expect(jidosha?.note).toContain('募集人員80%');
   });
 
   it('okayama: 和気閑谷は重視する実績の学科対応が確定できない旨と◆20%をnoteに明記している(頁7)', () => {
