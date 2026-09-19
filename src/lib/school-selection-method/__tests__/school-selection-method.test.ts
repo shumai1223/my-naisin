@@ -3121,11 +3121,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは42校(学校番号01〜33・あぶくま柏鵬・36〜43・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川/田村/あぶくま柏鵬/会津/葵/会津学鳳/若松商業/会津工業/喜多方/喜多方桐桜/猪苗代)286レコードを収録している', () => {
+  it('fukushima: schoolsは49校(学校番号01〜33・あぶくま柏鵬・36〜49・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川/田村/あぶくま柏鵬/会津/葵/会津学鳳/若松商業/会津工業/喜多方/喜多方桐桜/猪苗代/西会津/会津西陵/川口/会津農林/南会津/只見)314レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(286);
+    expect(record?.schools?.length).toBe(314);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南', '須賀川創英館', '須賀川桐陽', '清陵情報', '岩瀬農業', '光南', '白河', '白河旭', '白河実業', '修明', '石川', '田村', 'あぶくま柏鵬', '会津', '葵', '会津学鳳', '若松商業', '会津工業', '喜多方', '喜多方桐桜', '猪苗代']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南', '須賀川創英館', '須賀川桐陽', '清陵情報', '岩瀬農業', '光南', '白河', '白河旭', '白河実業', '修明', '石川', '田村', 'あぶくま柏鵬', '会津', '葵', '会津学鳳', '若松商業', '会津工業', '喜多方', '喜多方桐桜', '猪苗代', '西会津', '会津西陵', '川口', '会津農林', '南会津', '只見']));
   });
 
   it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
@@ -3263,6 +3263,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const k = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? []).filter((x) => x.schoolName === '喜多方桐桜');
     expect(k).toHaveLength(12);
     expect(k.filter((x) => x.selectionCategory === '一般選抜').every((x) => x.note?.includes('募集定員35人'))).toBe(true);
+  });
+
+  it('fukushima: 連携型選抜は修明と南会津の2校のみ(南会津は募集枠60%・面接は段階評価・満点500点)で川口の特色面接は430点(満点930点)', () => {
+    const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? [];
+    const renkei = recs.filter((x) => x.selectionCategory === '連携型選抜');
+    expect([...new Set(renkei.map((x) => x.schoolName))].sort()).toEqual(['修明', '南会津']);
+    const mi = renkei.find((x) => x.schoolName === '南会津');
+    expect(mi?.note).toContain('募集定員枠60%程度');
+    expect(mi?.note).toContain('選抜資料の満点は500点');
+    const kw = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '川口', '特色選抜', '普通科');
+    expect(kw?.ratioType).toContain('面接430点');
+    expect(250 + 250 + 430).toBe(930);
   });
 
   it('fukushima: 二本松実業は4学科(工業3科+家庭科生活文化科)×3区分の12レコードで生活文化科のみ特色選抜の募集定員枠が10%', () => {
