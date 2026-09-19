@@ -2363,20 +2363,21 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toContain('面接(段階評価)');
   });
 
-  it('shizuoka: schoolsは令和9年度PDF頁1-9(清水東まで)の29校94レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取・土肥分校・沼津東理数・清水東理数は設定なしのため対象外)', () => {
+  it('shizuoka: schoolsは令和9年度PDF頁1-11(駿河総合まで)の37校111レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取・土肥分校・沼津東理数・清水東理数は設定なしのため対象外)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka');
-    expect(record?.schools?.length).toBe(94);
+    expect(record?.schools?.length).toBe(111);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東', '熱海', '伊豆総合', '韮山', '伊豆中央', '田方農業', '三島南', '三島北', '御殿場', '御殿場南', '小山', '裾野', '沼津東', '沼津西', '沼津城北', '沼津工業', '沼津商業', '市立沼津', '吉原', '吉原工業', '富士', '富士東', '富士宮東', '富士宮北', '富士宮西', '富岳館', '富士市立', '清水東']));
+    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東', '熱海', '伊豆総合', '韮山', '伊豆中央', '田方農業', '三島南', '三島北', '御殿場', '御殿場南', '小山', '裾野', '沼津東', '沼津西', '沼津城北', '沼津工業', '沼津商業', '市立沼津', '吉原', '吉原工業', '富士', '富士東', '富士宮東', '富士宮北', '富士宮西', '富岳館', '富士市立', '清水東', '清水西', '清水南', '静岡市立清水桜が丘', '静岡', '静岡城北', '静岡東', '静岡西', '駿河総合']));
   });
 
   it('shizuoka: 全レコードの選抜資料の記述が○列の型(体育系=実技+事前調査票/農業後継者・地域貢献=作文/探究=適応力検査または作文/学習系=調査書・学力検査・面接のみ)のいずれかに一致する不変条件(転記誤読の検算)', () => {
     const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka')?.schools ?? [];
     for (const s of recs) {
       const n = s.note ?? '';
-      expect(s.ratioType).toMatch(/^選抜割合\d+%(程度|まで)?\((希望者|全員)対象\)$/);
+      expect(s.ratioType).toMatch(/^選抜割合(若干名|\d+%(程度|まで)?)\((希望者|全員)対象\)$/);
       const ok =
         n.includes('実技検査・事前調査票(作文') ||
+        n.includes('実技検査(作文・その他・事前調査票の実施なし)') ||
         n.includes('作文・事前調査票(実技検査') ||
         n.includes('その他(適応力検査)') ||
         n.includes('その他(口頭検査)') ||
@@ -2387,7 +2388,8 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
     // 体育的活動・文化的活動の枠は必ず実技検査と事前調査票を伴う(段階はⅠとは限らない: 吉原工業は学科適性がⅠ・部活動がⅡ)
     for (const s of recs.filter((x) => /審査項目は(文化的・)?体育的活動/.test(x.note ?? ''))) {
-      expect(s.note).toContain('実技検査・事前調査票');
+      // 実技検査は必須。事前調査票は大半の校で伴うが、清水南(体育的活動Ⅰ)など伴わない校もある
+      expect(s.note).toContain('実技検査');
     }
   });
 
