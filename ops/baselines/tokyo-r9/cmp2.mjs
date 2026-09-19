@@ -23,7 +23,7 @@ for (const f of files) {
       const extra = [];
       for (const w of lead) {
         if (/^\d+$/.test(w.t)) { if (pct == null) pct = w.t; else extra.push(w.t); }
-        else if (pct == null) name += w.t;
+        else if (pct == null && !/^(国|－|-|実施|各|自校|○|ー)/.test(w.t)) name += w.t;
       }
       const after = (r, lo, hi) => row.filter((w) => r && w.x > r.x && w.x < hi && /^\d+$/.test(w.t)).slice(0, 2).map((w) => w.t);
       r9.push({ file: f, page: pi + 1, y, name, pct, r1: first?.t ?? null, p1: first ? after(first, 0, second ? second.x : 900) : [], r2: second?.t ?? null, p2: second ? after(second, 0, 900) : [] });
@@ -37,13 +37,14 @@ let m;
 const r8 = new Map();
 while ((m = re.exec(ts))) {
   const [, school, dept, cat, ratio] = m;
-  const k = school + '|' + dept;
-  if (!r8.has(k)) r8.set(k, { school, dept, pct: null, first: null, second: null });
+  const isTei = /定時制|通信制/.test(cat);
+  const k = school + '|' + dept + '|' + isTei;
+  if (!r8.has(k)) r8.set(k, { school, dept, isTei, pct: null, first: null, second: null });
   const o = r8.get(k);
   if (cat === '推薦に基づく選抜') { const p = ratio.match(/推薦枠割合(\d+)%/); if (p) o.pct = p[1]; }
   const q = ratio.match(/学力検査(\d+):調査書(\d+)\((\d+)点:(\d+)点\)/);
-  if (cat === '第一次募集' && q) o.first = q.slice(1);
-  if (cat === '第二次募集' && q) o.second = q.slice(1);
+  if (/^第一次募集/.test(cat) && q) o.first = q.slice(1);
+  if (/^第二次募集/.test(cat) && q) o.second = q.slice(1);
 }
 const nk = (s) => s.replace(/[\s　]/g, '');
 const bySchool = new Map();
@@ -52,7 +53,7 @@ let same = 0, unmatched = 0;
 const diffs = [];
 for (const a of r9) {
   const an = nk(a.name); let cands = bySchool.get(an); if (!cands) { const ks = [...bySchool.keys()].filter((k) => an.startsWith(k)).sort((p, q) => q.length - p.length); if (ks.length) cands = bySchool.get(ks[0]); }
-  if (cands) cands = cands.filter((o) => o.first || o.second || o.pct != null); if (!cands || !cands.length) { unmatched++; diffs.push(`R9行がR8に無い(学校名不一致の可能性) ${a.file} p${a.page} 「${a.name}」`); continue; }
+  if (cands) cands = cands.filter((o) => (o.first || o.second || o.pct != null) && (process.env.TEI ? o.isTei : !o.isTei)); if (!cands || !cands.length) { unmatched++; diffs.push(`R9行がR8に無い(学校名不一致の可能性) ${a.file} p${a.page} 「${a.name}」`); continue; }
   const msgs = [];
   // 学科が複数あるR8学校は、比率・満点が一致する候補があればOKとする
   const okOne = cands.some((o) => {
@@ -72,5 +73,6 @@ for (const a of r9) {
 }
 console.log('一致', same, '差分/不明', diffs.length, '(うち学校名不一致', unmatched, ')');
 diffs.forEach((d) => console.log(' ', d));
+
 
 
