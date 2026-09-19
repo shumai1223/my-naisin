@@ -3378,13 +3378,22 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('段階評価(点数化なし)');
   });
 
-  it('fukui: 令和9年度の特色選抜実施校は23校32レコードで、出典は令和9年度版(r09nittei_d配下・令和8年度版ではない)・配点比率は資料に無いためratioTypeを持たない', () => {
+  it('fukui: 令和9年度の特色選抜実施校は23校32レコード・推薦入学者選抜は16校55レコードで、出典は令和9年度版(r09nittei_d配下・令和8年度版ではない)・配点比率は資料に無いためratioTypeを持たない', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukui');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
     expect(record?.source.url).toContain('r09nittei_d/fil/r09tokusyoku.pdf');
-    expect(record?.schools).toHaveLength(32);
-    expect(new Set(record?.schools?.map((x) => x.schoolName)).size).toBe(23);
-    expect(record?.schools?.every((x) => x.selectionCategory === '特色選抜' && x.ratioType === undefined)).toBe(true);
+    const tok = record?.schools?.filter((x) => x.selectionCategory === '特色選抜') ?? [];
+    const sui = record?.schools?.filter((x) => x.selectionCategory === '推薦入学者選抜') ?? [];
+    expect(tok).toHaveLength(32);
+    expect(new Set(tok.map((x) => x.schoolName)).size).toBe(23);
+    expect(sui).toHaveLength(55);
+    expect(new Set(sui.map((x) => x.schoolName)).size).toBe(16);
+    expect(record?.schools?.every((x) => x.ratioType === undefined)).toBe(true);
+    // 推薦の実施校は特色選抜の実施校の部分集合(16校はすべて特色選抜の23校に含まれる)
+    const tokSchools = new Set(tok.map((x) => x.schoolName));
+    expect(sui.every((x) => tokSchools.has(x.schoolName))).toBe(true);
+    // 坂井は食農科学2・機械自動車2・電気情報システム2・ビジネス生活デザイン2=8コース
+    expect(sui.filter((x) => x.schoolName === '坂井')).toHaveLength(8);
     expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukui', '羽水', '特色選抜', '普通')?.note).toContain('生徒会・ボランティア活動等(男女)');
     expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukui', '若狭東', '特色選抜', '生活創造・地域創造・工業創造・ビジネス情報')?.note).toContain('ラグビーフットボール(男)');
     // 鯖江は結合セルのため専攻ごとの対応を特定できない旨をnoteに明記している
