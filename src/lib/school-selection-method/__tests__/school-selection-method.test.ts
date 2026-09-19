@@ -527,13 +527,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kaikei?.ratioType).toBe('調査書60%:面接30%:学力検査10%');
   });
 
-  it('nagano: schoolsは第1通学区(北信地区)20校38レコード+第2通学区(東信地区)9校22レコードを収録している(第3〜6通学区は未収録)', () => {
+  it('nagano: schoolsは第1通学区(北信地区)20校38レコード+第2通学区(東信地区)9校22レコード+第3通学区(南信地区)19校37レコードを収録している(第4〜6通学区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano');
-    expect(record?.schools?.length).toBe(60);
+    expect(record?.schools?.length).toBe(97);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(29);
+    expect(schoolNames.size).toBe(48);
     expect(record?.coverageNote).toContain('第1通学区');
     expect(record?.coverageNote).toContain('第2通学区');
+    expect(record?.coverageNote).toContain('第3通学区');
+  });
+
+  it('nagano: 第3通学区の駒ヶ根工業は学力検査25%で他校より高く、岡谷工業は観点別①②、飯田OIDE長姫は6学科が共通の比重を持つ', () => {
+    const komagane = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '駒ヶ根工業', '前期選抜', '機械');
+    expect(komagane?.ratioType).toBe('調査書45%:面接30%:学力検査25%');
+    const okaya1 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '岡谷工業', '前期選抜①', '機械工学');
+    const okaya2 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '岡谷工業', '前期選抜②', '情報技術');
+    expect(okaya1?.ratioType).toBe('調査書70%:面接20%:学力検査10%');
+    expect(okaya2?.ratioType).toBe('調査書70%:面接20%:学力検査10%');
+    const oide = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano')?.schools ?? []).filter((s) => s.schoolName === '飯田OIDE長姫');
+    expect(oide).toHaveLength(6);
+    expect(new Set(oide.map((s) => s.ratioType))).toEqual(new Set(['調査書60%:面接25%:学力検査15%']));
+    const suwa = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '諏訪実業', '前期選抜', '服飾');
+    expect(suwa?.ratioType).toBe('調査書65%:面接20%:学力検査15%');
   });
 
   it('nagano: 全レコードのratioTypeに含まれる%の合計は100になる', () => {
