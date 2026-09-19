@@ -8,8 +8,9 @@ export function build16(rows) {
   let ins = '';
   for (const r of rows) {
     const noC = r.c == null;
-    const total = (r.c ?? 0) + r.m + r.j;
-    ins += `    {\n      schoolName: '${q(r.s)}',\n      department: '${q(r.k)}(${q(r.n)})',\n      selectionCategory: '文化・スポーツ等特別推薦',\n      interviewRequired: true,\n      ratioType: '${noC ? '' : '調査書' + r.c + '点+'}${r.mt}面接${r.m}点+実技検査${r.j}点',\n      note: '別表5-1「文化・スポーツ等特別推薦実施校の選抜方法等一覧」。種目: ${q(r.k)}・募集人数: ${q(r.n)}。満点は${noC ? '' : '調査書' + r.c + '点+'}${r.mt}面接${r.m}点+実技検査${r.j}点(合計${total}点・同一校の結合セルで種目共通の場合あり)。${noC ? '調査書の活用欄・調査書の満点欄は「—」(調査書点を選考に用いない)' : '調査書は評定を活用(観点別学習状況の評価は活用しない)'}。今後3年間の数値目標等: ${r.g.map(q).join('/')}${r.memo ? '。' + q(r.memo) : ''}。推薦の基準(要件の長文)は本DBでは未収録'\n    },\n`;
+    const total = (r.c ?? 0) + r.m + r.j + (r.sk ?? 0);
+    const skTxt = r.sk != null ? `+作文${r.sk}点` : '';
+    ins += `    {\n      schoolName: '${q(r.s)}',\n      department: '${q(r.k)}(${q(r.n)})',\n      selectionCategory: '文化・スポーツ等特別推薦',\n      interviewRequired: true,\n      ratioType: '${noC ? '' : '調査書' + r.c + '点+'}${r.mt}面接${r.m}点${skTxt}+実技検査${r.j}点',\n      note: '別表5-1「文化・スポーツ等特別推薦実施校の選抜方法等一覧」。種目: ${q(r.k)}・募集人数: ${q(r.n)}。満点は${noC ? '' : '調査書' + r.c + '点+'}${r.mt}面接${r.m}点${skTxt}+実技検査${r.j}点(合計${total}点・同一校の結合セルで種目共通の場合あり)。${noC ? '調査書の活用欄・調査書の満点欄は「—」(調査書点を選考に用いない)' : (r.kanten ? '調査書は観点別学習状況の評価を活用(評定は活用しない)' : '調査書は評定を活用(観点別学習状況の評価は活用しない)')}。今後3年間の数値目標等: ${r.g.map(q).join('/')}${r.memo ? '。' + q(r.memo) : ''}。推薦の基準(要件の長文)は本DBでは未収録'\n    },\n`;
   }
   return ins;
 }
