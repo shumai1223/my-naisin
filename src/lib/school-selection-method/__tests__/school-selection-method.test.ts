@@ -3121,11 +3121,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは18校(学校番号01〜18・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業)110レコードを収録している', () => {
+  it('fukushima: schoolsは22校(学校番号01〜22・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南)141レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(110);
+    expect(record?.schools?.length).toBe(141);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南']));
   });
 
   it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
@@ -3142,10 +3142,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島明成', '一般選抜', '農業科・食品科学科')?.note).toContain('募集定員40人');
   });
 
-  it('fukushima: 外国人生徒等に係る特別枠選抜は福島北(基礎学力150点)と福島南国際文化科(基礎学力200点)の2校のみ・福島南国際文化科の特色検査は英語10点で満点660点', () => {
+  it('fukushima: 外国人生徒等に係る特別枠選抜は福島北(基礎学力150点)・福島南国際文化科(200点)・あさか開成(100点)の3校のみ・福島南国際文化科の特色検査は英語10点で満点660点', () => {
     const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? [];
     const foreign = recs.filter((x) => x.selectionCategory === '外国人生徒等に係る特別枠選抜');
-    expect(foreign.map((x) => x.schoolName).sort()).toEqual(['福島北', '福島南']);
+    expect(foreign.map((x) => x.schoolName).sort()).toEqual(['あさか開成', '福島北', '福島南']);
+    expect(foreign.find((x) => x.schoolName === 'あさか開成')?.ratioType).toContain('基礎学力検査100点');
     expect(foreign.find((x) => x.schoolName === '福島北')?.ratioType).toContain('基礎学力検査150点');
     expect(foreign.find((x) => x.schoolName === '福島南')?.ratioType).toContain('基礎学力検査200点');
     const intl = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島南', '特色選抜', '国際文化科');
@@ -3184,6 +3185,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const a = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '安積黎明', '特色選抜', '普通科');
     expect(a?.note).toContain('選抜資料の満点はA型・B型とも620点');
     expect(250 + 250 + 20 + 100).toBe(620);
+  });
+
+  it('fukushima: 郡山北工は工業科6学科×3区分の18レコードで一般選抜の募集定員は機械科80人・他5学科40人・特色選抜は各科共通30%で実技300点', () => {
+    const recs = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? []).filter((x) => x.schoolName === '郡山北工');
+    expect(recs).toHaveLength(18);
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '郡山北工', '一般選抜', '工業科・機械科')?.note).toContain('募集定員80人');
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '郡山北工', '一般選抜', '工業科・建築科')?.note).toContain('募集定員40人');
+    expect(recs.filter((x) => x.selectionCategory === '特色選抜').every((x) => x.ratioType === '学力検査250点:調査書135点:面接65点:実技300点(特色検査)')).toBe(true);
   });
 
   it('fukushima: 二本松実業は4学科(工業3科+家庭科生活文化科)×3区分の12レコードで生活文化科のみ特色選抜の募集定員枠が10%', () => {
