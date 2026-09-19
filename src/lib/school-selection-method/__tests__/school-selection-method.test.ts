@@ -687,12 +687,34 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(bNittei?.note).toContain('10分間');
   });
 
-  it('kochi: schoolsは全日制32行(分校2件含む)64レコードを収録している(他課程は未収録)', () => {
+  it('kochi: schoolsは全日制32行(分校2件含む)64レコード+多部制単位制6レコード+定時制11レコードを収録している(実技検査・成人特別選抜は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi');
-    expect(record?.schools?.length).toBe(64);
+    expect(record?.schools?.length).toBe(81);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(30);
+    expect(schoolNames.size).toBe(32);
     expect(record?.coverageNote).toContain('定時制');
+    expect(record?.coverageNote).toContain('多部制単位制');
+  });
+
+  it('kochi: 定時制の課程は11校すべてB日程のみで、高知商業は7分・高知工業は10分・清水は6分の個人面接と記録されている', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi')?.schools ?? [];
+    const teiji = list.filter((s) => s.department.startsWith('定時制の課程'));
+    expect(teiji).toHaveLength(11);
+    expect(teiji.every((s) => s.selectionCategory === 'B日程')).toBe(true);
+    const byName = (n: string) => teiji.find((s) => s.schoolName === n)?.note ?? '';
+    expect(byName('高知商業')).toContain('7分間');
+    expect(byName('高知工業')).toContain('10分間');
+    expect(byName('清水')).toContain('6分間');
+  });
+
+  it('kochi: 多部制単位制の中芸は昼間部・夜間部とも10分・高知北は6分で、夜間部はB日程のみである', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi')?.schools ?? [];
+    const tabu = list.filter((s) => s.department.startsWith('多部制単位制'));
+    expect(tabu).toHaveLength(6);
+    const night = tabu.filter((s) => s.department.includes('夜間部'));
+    expect(night.every((s) => s.selectionCategory === 'B日程')).toBe(true);
+    expect(tabu.filter((s) => s.schoolName === '中芸').every((s) => s.note.includes('10分間'))).toBe(true);
+    expect(tabu.filter((s) => s.schoolName === '高知北').every((s) => s.note.includes('6分間'))).toBe(true);
   });
 
   it('okayama: 瀬戸(普通)は特別入学者選抜でホッケーを重視する実績として記録されている', () => {

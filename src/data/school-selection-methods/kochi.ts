@@ -8,9 +8,10 @@
 // する既知パターン）。頁1-2=面接内容一覧表（全日制/多部制単位制/定時制）、頁3-4=実技検査の
 // 概要一覧表（A/B日程）、頁5=傾斜配点実施校一覧表・成人特別選抜の概要一覧表。
 //
-// ★今回は頁1「全日制の課程」の面接内容一覧表(表の行数は32行=分校2件を含む・schoolNameとしては30校)64レコードのみ収録。
-// 多部制単位制(頁2上)・定時制(頁2下)・実技検査の概要(頁3-4)・成人特別選抜の概要(頁5下)は
-// 未収録(coverageNote参照)。selectionCategoryは「A日程」「B日程」の2区分。interviewRequired
+// ★頁1「全日制の課程」の面接内容一覧表(表の行数は32行=分校2件を含む・schoolNameとしては30校)64レコードと、
+// 頁2「多部制単位制」(中芸・高知北の昼間部/夜間部・6レコード)・「定時制の課程」(11校・B日程のみ・11レコード)を収録
+// (2026-09-19 頁2を実画像で転記。多部制・定時制のdepartmentは全日制と区別するため「多部制単位制 昼間部・…」「定時制の課程・…」と表記)。
+// 実技検査の概要(頁3-4)・成人特別選抜の概要(頁5下)は未収録(coverageNote参照)。selectionCategoryは「A日程」「B日程」の2区分。interviewRequired
 // は全レコードtrue(個人面接の実施が明記されているため)。傾斜配点実施校3校(高知丸の内=音楽科・
 // 高知小津=理数科・高知商業=社会マネジメント科)は頁5の「傾斜配点実施校一覧表」の内容を該当
 // レコードのnoteに転記した(ratioTypeフィールドは学校全体でなく特定学科のみに適用されるため
@@ -23,7 +24,7 @@ export const KOCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '頁1「全日制の課程」の面接内容一覧表(表の行数は32行=分校2件を含む・schoolNameとしては30校)64レコードのみ収録。多部制単位制(中芸・高知北の昼間部/夜間部)・定時制(11校)・実技検査の概要一覧表(岡豊・高知丸の内・高知国際・高知商業の一部学科)・成人特別選抜の概要一覧表(定時制/多部制12校)は未収録',
+    '頁1「全日制の課程」の面接内容一覧表(表の行数は32行=分校2件を含む・schoolNameとしては30校)64レコードと、多部制単位制(中芸・高知北の昼間部/夜間部・6レコード)・定時制(11校・B日程のみ11レコード)の面接内容(頁2)を収録。実技検査の概要一覧表(岡豊・高知丸の内・高知国際・高知商業の一部学科)・成人特別選抜の概要一覧表(定時制/多部制12校)は未収録',
   source: {
     url: 'https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/file_contents/r8_kensa_koumoku.pdf',
     docTitle: '令和8年度高知県公立高等学校入学者選抜における検査項目等一覧表',
@@ -94,5 +95,22 @@ export const KOCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '清水', department: '普通科(未来共創科)', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接6分間' },
     { schoolName: '高知商業', department: '総合マネジメント科・社会マネジメント科・情報マネジメント科・スポーツマネジメント科', selectionCategory: 'A日程', interviewRequired: true, note: '個人面接5分間(表中最短)。★傾斜配点実施(頁5一覧表): 社会マネジメント科は学力検査の英語が1.5倍' },
     { schoolName: '高知商業', department: '総合マネジメント科・社会マネジメント科・情報マネジメント科・スポーツマネジメント科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接5分間。★傾斜配点実施(頁5一覧表): 社会マネジメント科は学力検査の英語が1.5倍' },
+    { schoolName: '中芸', department: '多部制単位制 昼間部・普通科', selectionCategory: 'A日程', interviewRequired: true, note: '個人面接10分間' },
+    { schoolName: '中芸', department: '多部制単位制 昼間部・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接10分間' },
+    { schoolName: '中芸', department: '多部制単位制 夜間部・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接10分間。A日程は「−」(実施なし)' },
+    { schoolName: '高知北', department: '多部制単位制 昼間部・普通科', selectionCategory: 'A日程', interviewRequired: true, note: '個人面接6分間' },
+    { schoolName: '高知北', department: '多部制単位制 昼間部・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接6分間' },
+    { schoolName: '高知北', department: '多部制単位制 夜間部・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接6分間。A日程は「−」(実施なし)' },
+    { schoolName: '室戸', department: '定時制の課程・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接10分間。A日程は「−」(実施なし)' },
+    { schoolName: '山田', department: '定時制の課程・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接6分間。A日程は「−」(実施なし)' },
+    { schoolName: '高知東工業', department: '定時制の課程・機械科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接10分間。A日程は「−」(実施なし)' },
+    { schoolName: '高知工業', department: '定時制の課程・機械科・電気科・土木科・建築科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接10分間。A日程は「−」(実施なし)' },
+    { schoolName: '高岡', department: '定時制の課程・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接6分間。A日程は「−」(実施なし)' },
+    { schoolName: '須崎総合', department: '定時制の課程・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接10分間。A日程は「−」(実施なし)' },
+    { schoolName: '佐川', department: '定時制の課程・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接6分間。A日程は「−」(実施なし)' },
+    { schoolName: '大方', department: '定時制の課程・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接10分間。A日程は「−」(実施なし)' },
+    { schoolName: '宿毛', department: '定時制の課程・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接6分間。A日程は「−」(実施なし)' },
+    { schoolName: '清水', department: '定時制の課程・普通科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接6分間。A日程は「−」(実施なし)' },
+    { schoolName: '高知商業', department: '定時制の課程・商業科', selectionCategory: 'B日程', interviewRequired: true, note: '個人面接7分間。A日程は「−」(実施なし)' },
   ],
 };
