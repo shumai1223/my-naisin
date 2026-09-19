@@ -9,11 +9,14 @@
 // documents/r8-2-01.pdf`・全3頁・2026-09-17 curl+pdftoppm(150dpi)でビジョン確認。
 // ToUnicode CMap欠落でpdftotextが文字化けする既知パターン)。
 //
-// ★長野県公式ページには通学区(全6区)ごとに`r8-2-01.pdf`〜`r8-2-06.pdf`の計6ファイルが
-// 分割公開されている。本ファイルは1本目(r8-2-01.pdf＝第1通学区・北信地区)と2本目
+// ★長野県公式ページには`r8-2-01.pdf`〜`r8-2-06.pdf`の計6ファイルが分割公開されている
+// (01〜04=全日制の4通学区・05=定時制課程・06=定時制(多部制・単位制)。2026-09-19に05/06を
+// 実画像で確認し、以前の「通学区全6区」という記述は誤りだったため訂正した=第5・第6通学区は存在しない)。
+// 本ファイルは6本すべてを収録している。1本目(r8-2-01.pdf＝第1通学区・北信地区)と2本目
 // (r8-2-02.pdf＝第2通学区・東信地区・全2頁・2026-09-19 pdftoppm 110dpiで実画像を目視転記)と
 // 3本目(r8-2-03.pdf＝第3通学区・南信地区・全3頁・同日同方法)と4本目(r8-2-04.pdf＝
-// 第4通学区・中信地区・全2頁・同日同方法)を収録し、第5〜6通学区(r8-2-05〜06.pdf)は未収録(Y-0: 収録範囲の限定を正直に開示)。
+// 第4通学区・中信地区・全2頁・同日同方法)と、5本目(r8-2-05.pdf＝定時制課程・1頁・8校9レコード)と6本目(r8-2-06.pdf＝定時制(多部制・単位制)・
+// 1頁・3校8レコード)を収録。定時制は同名の全日制と区別するためselectionCategoryを「前期選抜(定時制)」とする。
 // 第3通学区の岡谷工業・上伊那農業は令和8年度から学科改編予定で資料は新しい学科名を示している。
 // 第2通学区の小諸義塾(94)は「令和8年度に開校する小諸義塾高等学校(仮称)」で学科名も仮称。
 // 上田染谷丘(国際教養)は面接と実技検査が「併せて40」の1セル(内訳は資料に無い)。
@@ -21,7 +24,7 @@
 // ratioTypeは「調査書X%:面接Y%:学力検査Z%」を基本形とし、作文(小論文)・実技検査が
 // 0でない学校のみ「:作文W%」「:実技検査V%」を追記する(gunma/yamanashiと同型の
 // コロン区切り運用)。全レコードで5項目の合計が100%になることを自己検算済み。
-// selectionCategoryは「前期選抜」固定(本PDFの対象が前期選抜のみのため)。同一学科内で
+// selectionCategoryは全日制が「前期選抜」・定時制が「前期選抜(定時制)」(本PDFの対象が前期選抜のみのため)。同一学科内で
 // 「観点別」①②の区分がある学校(長野商業・長野東)はselectionCategoryに①②を付記する。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
@@ -31,13 +34,13 @@ export const NAGANO_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '第1通学区(北信地区・20校38レコード・r8-2-01.pdf全3頁)と第2通学区(東信地区・9校22レコード・r8-2-02.pdf全2頁)と第3通学区(南信地区・19校37レコード・r8-2-03.pdf全3頁)と第4通学区(中信地区・13校24レコード・r8-2-04.pdf全2頁)を完全収録(計61校121レコード)。第5〜6通学区(r8-2-05〜06.pdf)は未収録。全日制「前期選抜」のみが対象で、後期選抜・定時制・通信制は本PDFの対象外',
+    '第1通学区(北信地区・20校38レコード・r8-2-01.pdf全3頁)と第2通学区(東信地区・9校22レコード・r8-2-02.pdf全2頁)と第3通学区(南信地区・19校37レコード・r8-2-03.pdf全3頁)と第4通学区(中信地区・13校24レコード・r8-2-04.pdf全2頁)と定時制課程(r8-2-05/06.pdf・11校17レコード・selectionCategory「前期選抜(定時制)」)を完全収録(計138レコード)。全日制4通学区+定時制で公表6ファイルすべてを収録済み。「前期選抜」のみが対象で、後期選抜・通信制は本PDFの対象外',
   source: {
     url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-01.pdf',
-    docTitle: '令和8年度長野県公立高等学校「前期選抜」における評価方法一覧(第1通学区・全日制課程。第2通学区は同ディレクトリのr8-2-02.pdf)',
+    docTitle: '令和8年度長野県公立高等学校「前期選抜」における評価方法一覧(全日制課程4通学区+定時制課程。本urlは第1通学区のr8-2-01.pdf・r8-2-02〜06.pdfは同ディレクトリ)',
     lastChecked: '2026-09-19',
   },
-  note: '通学区(全6区)ごとにr8-2-01.pdf〜r8-2-06.pdfの計6ファイルに分割公開されている資料の1本目(第1通学区・北信地区)と2本目(第2通学区・東信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-02.pdf)と3本目(第3通学区・南信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-03.pdf)と4本目(第4通学区・中信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-04.pdf)を収録。ratioTypeは調査書:面接:学力検査を基本形とし、作文・実技検査が0でない学校のみ追記(全レコードで5項目合計100%を自己検算済み)',
+  note: 'r8-2-01.pdf〜r8-2-06.pdfの計6ファイル(全日制4通学区+定時制2表)に分割公開されている資料の1本目(第1通学区・北信地区)と2本目(第2通学区・東信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-02.pdf)と3本目(第3通学区・南信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-03.pdf)と4本目(第4通学区・中信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-04.pdf)と5・6本目(定時制課程・r8-2-05.pdf/r8-2-06.pdf)を収録(6本すべて)。ratioTypeは調査書:面接:学力検査を基本形とし、作文・実技検査が0でない学校のみ追記(全レコードで5項目合計100%を自己検算済み)',
   schools: [
     { schoolName: '飯山', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書70%:面接20%:学力検査10%', note: '志望動機・意欲・目的意識・理解力・表現力・資質・態度を重視' },
     { schoolName: '飯山', department: '自然科学探究', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書60%:面接25%:学力検査15%', note: '国語・社会・数学・理科・英語を中心に評価。面接で自然科学・人文科学への興味・関心や探究的意欲も確認' },
@@ -163,5 +166,24 @@ export const NAGANO_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '大町岳陽', department: '学究', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書75%:面接15%:学力検査10%', note: '調査書は中学3年次の学習成績を重視し、国語・社会・数学・理科・英語の成績を重視。面接は学習意欲・自然科学分野や人文科学分野に対する意欲・関心・面接態度' },
     { schoolName: '白馬', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書70%:面接20%:学力検査10%', note: '調査書は各教科の学習成績・部活動・特別活動の状況等。面接は志望動機・高校生活への目的意識・学習意欲・将来への展望・態度・姿勢・表現の明確さ' },
     { schoolName: '白馬', department: '国際観光', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '調査書は各教科の学習成績・部活動・特別活動の状況等。面接は志望動機・高校生活への目的意識・学習意欲・将来への展望・態度・姿勢・理解力・表現力・コミュニケーション力' },
+    // ---- 定時制課程(r8-2-05.pdf) ----
+    { schoolName: '中野立志館', department: '普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書30%:面接50%:学力検査20%', note: '定時制課程。面接は志望動機・学習意欲・公共心・協調性・表現力・態度' },
+    { schoolName: '長野', department: '普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書30%:面接50%:学力検査20%', note: '定時制課程。調査書の内容を総合的に評価。面接は志望動機・学習意欲・将来の希望・態度・協調性' },
+    { schoolName: '長野商業', department: '普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書30%:面接50%:学力検査20%', note: '定時制課程。面接は志望の動機・学習の意欲・単位制の理解・態度・将来の希望' },
+    { schoolName: '長野工業', department: '基礎工学', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書30%:面接40%:学力検査10%:作文20%', note: '定時制課程(工業)。基礎工学・建築の2学科共通の比重。面接は志望動機・意欲・態度・表現力。作文(小論文)は理解力・表現力・字数' },
+    { schoolName: '長野工業', department: '建築', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書30%:面接40%:学力検査10%:作文20%', note: '定時制課程(工業)。基礎工学・建築の2学科共通の比重' },
+    { schoolName: '上田', department: '普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書30%:面接45%:学力検査25%', note: '定時制課程。調査書は学習に関する態度を重視し内容を総合的に評価。面接は志望動機・意欲・自己表現力・態度' },
+    { schoolName: '諏訪実業', department: '普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書25%:面接30%:学力検査20%:作文25%', note: '定時制課程。調査書の内容を総合的に評価。面接は志望動機・意欲・態度・表現力・就労状況・基本的生活習慣。作文(小論文)は論理性・積極性・具体性・内容の適正さ・表現力。備考「中学校の指導要録保存期間を過ぎている等の理由により調査書の発行が不可能な場合には、比重について別途考慮する」' },
+    { schoolName: '木曽青峰', department: '普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書40%:面接50%:学力検査10%', note: '定時制課程。調査書の内容を総合的に評価。面接は志望動機・意欲・態度' },
+    { schoolName: '池田工業', department: '普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書30%:面接50%:学力検査20%', note: '定時制課程。調査書は各教科の学習の記録・総合所見及び特記事項等を重視。面接は志望動機・意欲・態度' },
+    // ---- 定時制課程(多部制・単位制)(r8-2-06.pdf) ----
+    { schoolName: '東御清翔', department: '普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書40%:面接40%:学力検査20%', note: '定時制課程(多部制・単位制)。調査書の内容から総合的に判断。面接は志望動機・意欲・興味・関心・自己理解・態度・理解力・表現力・社会性' },
+    { schoolName: '箕輪進修', department: 'Ⅰ部・普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書35%:面接35%:学力検査30%', note: '定時制課程(多部制・単位制)。面接は志望動機・興味・関心・意欲・態度・表現力。備考「調査書内容、面接の結果、および学力検査の内容から総合的に判断する」' },
+    { schoolName: '箕輪進修', department: 'Ⅱ部・普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書35%:面接35%:学力検査30%', note: '定時制課程(多部制・単位制)。Ⅰ部・普通と同じ比重' },
+    { schoolName: '箕輪進修', department: 'Ⅲ部・普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書30%:面接45%:学力検査25%', note: '定時制課程(多部制・単位制)。Ⅰ・Ⅱ部より面接の比重が高い' },
+    { schoolName: '箕輪進修', department: 'Ⅰ部・工業', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書35%:面接35%:学力検査30%', note: '定時制課程(多部制・単位制)。Ⅰ部・普通と同じ比重' },
+    { schoolName: '松本筑摩', department: '午前・普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書40%:面接40%:学力検査20%', note: '定時制課程(多部制・単位制)。調査書の内容を総合的に評価。面接は志望動機・意欲・態度・適性' },
+    { schoolName: '松本筑摩', department: '午後・普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書40%:面接40%:学力検査20%', note: '定時制課程(多部制・単位制)。午前・普通と同じ比重' },
+    { schoolName: '松本筑摩', department: '夜間・普通', selectionCategory: '前期選抜(定時制)', interviewRequired: true, ratioType: '調査書40%:面接40%:学力検査20%', note: '定時制課程(多部制・単位制)。面接は志望動機・意欲・態度・理解力・協調性・公共心・仕事に対する考え方' },
   ],
 };

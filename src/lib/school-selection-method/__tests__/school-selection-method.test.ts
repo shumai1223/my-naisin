@@ -527,15 +527,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kaikei?.ratioType).toBe('調査書60%:面接30%:学力検査10%');
   });
 
-  it('nagano: schoolsは第1通学区(北信地区)20校38レコード+第2通学区(東信地区)9校22レコード+第3通学区(南信地区)19校37レコード+第4通学区(中信地区)13校24レコードを収録している(第5〜6通学区は未収録)', () => {
+  it('nagano: schoolsは第1通学区(北信地区)20校38レコード+第2通学区(東信地区)9校22レコード+第3通学区(南信地区)19校37レコード+第4通学区(中信地区)13校24レコード+定時制課程11校17レコードを収録している(公表6ファイルすべて・通学区は全日制の4つのみ)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano');
-    expect(record?.schools?.length).toBe(121);
+    expect(record?.schools?.length).toBe(138);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(61);
+    expect(schoolNames.size).toBe(66);
     expect(record?.coverageNote).toContain('第1通学区');
     expect(record?.coverageNote).toContain('第2通学区');
     expect(record?.coverageNote).toContain('第3通学区');
     expect(record?.coverageNote).toContain('第4通学区');
+    expect(record?.coverageNote).toContain('定時制');
+  });
+
+  it('nagano: 定時制課程17レコードは全日制と区別するためselectionCategoryが「前期選抜(定時制)」で、中野立志館は面接50%・長野工業と諏訪実業は作文を含む', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano')?.schools ?? [];
+    const teiji = list.filter((s) => s.selectionCategory === '前期選抜(定時制)');
+    expect(teiji).toHaveLength(17);
+    expect(new Set(teiji.map((s) => s.schoolName)).size).toBe(11);
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '中野立志館', '前期選抜(定時制)', '普通')?.ratioType).toBe('調査書30%:面接50%:学力検査20%');
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '長野工業', '前期選抜(定時制)', '基礎工学')?.ratioType).toBe('調査書30%:面接40%:学力検査10%:作文20%');
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '諏訪実業', '前期選抜(定時制)', '普通')?.ratioType).toBe('調査書25%:面接30%:学力検査20%:作文25%');
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '箕輪進修', '前期選抜(定時制)', 'Ⅲ部・普通')?.ratioType).toBe('調査書30%:面接45%:学力検査25%');
+    // 同名の全日制(長野・普通)とは別レコード
+    const nagano = list.filter((x) => x.schoolName === '長野' && x.department === '普通');
+    expect(new Set(nagano.map((x) => x.selectionCategory)).size).toBe(nagano.length);
   });
 
   it('nagano: 第4通学区の松本県ケ丘(自然探究・国際探究)は作文(小論文)30%を含み、木曽青峰の理数は調査書75%で同校の農業・工業(60%)と異なる', () => {
