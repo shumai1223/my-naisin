@@ -2363,43 +2363,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toContain('面接(段階評価)');
   });
 
-  it('shizuoka: schoolsは頁1-4の10校36レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取・土肥分校・韮山普通は設定なしのため対象外)', () => {
+  it('shizuoka: schoolsは令和9年度PDF頁1の2校(下田/伊豆伊東)8レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取は設定なしのため対象外)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka');
-    expect(record?.schools?.length).toBe(36);
+    expect(record?.schools?.length).toBe(8);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東', '伊豆総合', '韮山', '伊豆中央', '田方農業', '三島南', '三島北', '御殿場', '御殿場南']));
+    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東']));
   });
 
-  it('shizuoka: 頁3-4は体育的活動(Ⅰ)が実技検査・事前調査票あり、農業後継者枠(田方農業Ⅱ)は作文と面接、三島南Ⅱは適応力検査(200dpi画像で○列位置を確認済み)', () => {
-    const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka')?.schools ?? [];
-    const p34 = recs.filter((s) => ['田方農業', '三島南', '三島北', '御殿場', '御殿場南'].includes(s.schoolName));
-    expect(p34).toHaveLength(21);
-    for (const s of p34) {
-      if (s.note?.includes('審査項目は体育的活動')) expect(s.note).toContain('実技検査・事前調査票');
-      else if (s.note?.includes('農業後継者')) expect(s.note).toContain('作文');
-      else if (s.note?.includes('適応力検査')) expect(s.note).toContain('その他(適応力検査)');
-      else expect(s.note).toContain('調査書・学力検査・面接のみ');
-    }
-    expect(p34.filter((s) => s.schoolName === '田方農業')).toHaveLength(8);
-    expect(p34.filter((s) => s.schoolName === '御殿場')).toHaveLength(6);
-    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '田方農業', '学校裁量枠Ⅱ', '動物科学')?.ratioType).toBe('選抜割合5%程度(希望者対象)');
-  });
-
-  it('shizuoka: 頁2の体育的活動(学校裁量枠Ⅰ)は実技検査・事前調査票を実施し、学習系(Ⅱ)は調査書・学力検査・面接のみ(200dpi画像で○列位置を確認済み)', () => {
-    const recs = (record => record?.schools ?? [])(getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka'));
-    const page2 = recs.filter((s) => ['伊豆総合', '韮山', '伊豆中央'].includes(s.schoolName));
-    expect(page2).toHaveLength(7);
-    for (const s of page2) {
-      expect(s.interviewRequired).toBe(true);
-      expect(s.ratioType).toMatch(/^選抜割合\d+%(程度|まで)\(希望者対象\)$/);
-      if (s.note?.includes('体育的活動')) {
-        expect(s.note).toContain('実技検査・事前調査票');
-      } else {
-        expect(s.note).toContain('調査書・学力検査・面接のみ');
-      }
-    }
-    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '韮山', '学校裁量枠Ⅰ', '理数')?.ratioType).toBe('選抜割合50%まで(希望者対象)');
-    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '伊豆総合', '学校裁量枠Ⅱ', '工業')?.note).toContain('数学・理科・技術・家庭');
+  it('shizuoka: 出典は令和9年度版PDF(1082226ページ配下のr9〜)であり令和5年度版(1031855配下)ではない(2026-09-19に取り違えを訂正)', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka');
+    expect(record?.source?.url).toContain('/001/082/226/r9');
+    expect(record?.source?.url).not.toContain('/001/031/855/');
+    // 令和9年度の下田Ⅰは13%(令和5年度版の8%とは異なる)
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka', '下田', '学校裁量枠Ⅰ', '普通')?.ratioType).toBe('選抜割合13%程度(希望者対象)');
   });
 
   it('shizuoka: 下田(普通・学校裁量枠Ⅰ)は実技検査を実施するが下田(普通・学校裁量枠Ⅱ)は実施しない(選抜資料の列位置を200dpi画像で確認済み)', () => {
