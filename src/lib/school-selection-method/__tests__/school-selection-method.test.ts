@@ -1408,11 +1408,12 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(activity?.note).toContain('募集人員18人以内');
   });
 
-  it('miyazaki: 一般入学者選抜は全日制の定員合計7,320・定時制440で、全レコードの配点が計に一致する', () => {
+  it('miyazaki: 令和9年度の一般入学者選抜は全日制の定員合計7,320・定時制440で、全レコードの配点が計に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(all).toHaveLength(275);
+    expect(record?.fiscalYear).toContain('令和9年度');
+    expect(all).toHaveLength(276);
     const num = (s: string, re: RegExp) => Number(s.match(re)?.[1] ?? 0);
     const general = all.filter((s) => s.selectionCategory === '一般入学者選抜');
     expect(general).toHaveLength(114);
@@ -1430,22 +1431,22 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
-  it('miyazaki: 自己推薦方式114件は募集人員が定員×募集割合と一致し(全日制3,252・定時制146)、スポーツ推薦46件・連携型1件を収録する', () => {
+  it('miyazaki: 自己推薦方式114件は募集人員が定員×募集割合と一致し(全日制3,222・定時制146)、スポーツ推薦47件・連携型1件を収録する', () => {
     const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki')?.schools ?? [];
     const num = (s: string, re: RegExp) => Number(s.match(re)?.[1] ?? 0);
     const jiko = all.filter((s) => s.selectionCategory === '推薦入学者選抜(自己推薦方式)');
     expect(jiko).toHaveLength(114);
     const zen = jiko.filter((s) => (s.note ?? '').includes('・全日制】'));
     const tei = jiko.filter((s) => (s.note ?? '').includes('・定時制】'));
-    expect(zen.reduce((a, s) => a + num(s.note ?? '', /募集人員は定員の[0-9]+%\(([0-9]+)名\)/), 0)).toBe(3252);
+    expect(zen.reduce((a, s) => a + num(s.note ?? '', /募集人員は定員の[0-9]+%\(([0-9]+)名\)/), 0)).toBe(3222);
     expect(tei.reduce((a, s) => a + num(s.note ?? '', /募集人員は定員の[0-9]+%\(([0-9]+)名\)/), 0)).toBe(146);
-    expect(all.filter((s) => s.selectionCategory === '推薦入学者選抜(スポーツ推薦方式)')).toHaveLength(46);
+    expect(all.filter((s) => s.selectionCategory === '推薦入学者選抜(スポーツ推薦方式)')).toHaveLength(47);
     expect(all.filter((s) => s.selectionCategory === '連携型入学者選抜')).toHaveLength(1);
   });
 
-  it('miyazaki: 宮崎大宮は数学・英語150点で面接25/調査書75、小林体育コースは適性検査700点で計1300、宮崎東定時制は学力検査なし', () => {
+  it('miyazaki: 宮崎大宮は数学・英語150点で面接30/調査書70、小林体育コースは適性検査700点で計1300、宮崎東定時制は学力検査なし', () => {
     const omiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki', '宮崎大宮', '一般入学者選抜');
-    expect(omiya?.ratioType).toBe('学力検査600:面接25:調査書75(計700)');
+    expect(omiya?.ratioType).toBe('学力検査600:面接30:調査書70(計700)');
     expect(omiya?.note).toContain('数学150・理科100・英語150');
     const kobayashi = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki')?.schools?.find(
       (s) => s.schoolName === '小林' && s.department === '普通(体育コース)' && s.selectionCategory === '一般入学者選抜'
@@ -1459,15 +1460,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(higashi?.note).toContain('学力検査は実施しない');
   });
 
-  it('miyazaki: 宮崎大宮の自己推薦は学校独自検査(プレゼンテーション)40点で面接なし、宮崎西理数は附属中の進学予定者を除いた人数に25%(10名)', () => {
+  it('miyazaki: 宮崎大宮の自己推薦は学校独自検査(プレゼンテーション)50点で面接なし、宮崎西理数は附属中の進学予定者を除いた人数に20%(8名)', () => {
     const omiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki', '宮崎大宮', '推薦入学者選抜(自己推薦方式)');
-    expect(omiya?.ratioType).toBe('学力検査400:学校独自検査40:自己推薦書40:調査書120(計600)');
+    expect(omiya?.ratioType).toBe('学力検査400:学校独自検査50:自己推薦書50:調査書100(計600)');
     expect(omiya?.interviewRequired).toBeUndefined();
     expect(omiya?.note).toContain('プレゼンテーション');
     const nishi = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki')?.schools?.find(
       (s) => s.schoolName === '宮崎西' && s.department === '理数' && s.selectionCategory === '推薦入学者選抜(自己推薦方式)'
     );
-    expect(nishi?.note).toContain('(10名)');
+    expect(nishi?.note).toContain('(8名)');
     expect(nishi?.note).toContain('附属中学校(定員80名)');
     const fukushima = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'miyazaki', '福島', '連携型入学者選抜');
     expect(fukushima?.ratioType).toBe('学力検査120:面接60:学校独自検査20:調査書120(計320)');
