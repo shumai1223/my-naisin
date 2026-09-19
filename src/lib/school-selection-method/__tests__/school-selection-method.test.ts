@@ -687,9 +687,9 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(bNittei?.note).toContain('10分間');
   });
 
-  it('kochi: schoolsは全日制32行(分校2件含む)64レコード+多部制単位制6レコード+定時制11レコードを収録している+実技検査の概要12レコード(成人特別選抜は未収録)', () => {
+  it('kochi: schoolsは全日制32行(分校2件含む)64レコード+多部制単位制6レコード+定時制11レコードを収録している+実技検査の概要12レコード+成人特別選抜13レコード(資料全5頁)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi');
-    expect(record?.schools?.length).toBe(93);
+    expect(record?.schools?.length).toBe(106);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
     expect(schoolNames.size).toBe(32);
     expect(record?.coverageNote).toContain('定時制');
@@ -710,6 +710,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(dp?.note).toContain('10分程度');
   });
 
+  it('kochi: 成人特別選抜は13レコードで、高知工業のみ比率50%(他は20%)、須崎総合・佐川は作文600字、高知東工業・高岡・大方は作文なし', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi')?.schools ?? [];
+    const adult = list.filter((s) => s.selectionCategory === '成人特別選抜');
+    expect(adult).toHaveLength(13);
+    const noteOf = (n: string) => adult.find((s) => s.schoolName === n)?.note ?? '';
+    expect(noteOf('高知工業')).toContain('=50%');
+    expect(adult.filter((s) => s.note?.includes('=50%'))).toHaveLength(1);
+    expect(noteOf('須崎総合')).toContain('600字・50分');
+    expect(noteOf('佐川')).toContain('600字・40分');
+    for (const n of ['高知東工業', '高岡', '大方']) expect(noteOf(n)).toContain('作文の記載なし');
+    expect(noteOf('中芸')).toContain('個人面接10分間');
+  });
+
   it('kochi: 定時制の課程は11校すべてB日程のみで、高知商業は7分・高知工業は10分・清水は6分の個人面接と記録されている', () => {
     const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi')?.schools ?? [];
     const teiji = list.filter((s) => s.department.startsWith('定時制の課程'));
@@ -723,7 +736,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('kochi: 多部制単位制の中芸は昼間部・夜間部とも10分・高知北は6分で、夜間部はB日程のみである', () => {
     const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi')?.schools ?? [];
-    const tabu = list.filter((s) => s.department.startsWith('多部制単位制'));
+    const tabu = list.filter((s) => s.department.startsWith('多部制単位制') && s.selectionCategory !== '成人特別選抜');
     expect(tabu).toHaveLength(6);
     const night = tabu.filter((s) => s.department.includes('夜間部'));
     expect(night.every((s) => s.selectionCategory === 'B日程')).toBe(true);

@@ -15,7 +15,9 @@
 // 高知国際(探究/DPコース)・高知商業(スポーツマネジメント科)の6学科×A/Bの12レコードとして収録した
 // (departmentは「…・実技検査」で面接レコードと区別・interviewRequiredは設定しない・note=検査内容の要約。
 // 2026-09-19 実画像で転記。B日程の岡豊・体育コースは運動能力テストのみで運動競技種目テストの記載が無い)。
-// 成人特別選抜の概要(頁5下)は未収録(coverageNote参照)。selectionCategoryは「A日程」「B日程」の2区分。interviewRequired
+// 頁5下「成人特別選抜の概要一覧表」(定時制11校+多部制単位制夜間部2校のうち表に載る13校)は13レコード(selectionCategory「成人特別選抜」・
+// 比率・面接時間・作文の字数/時間をnoteに転記。「比率」欄の意味の注記は資料に無くそのまま転記。2026-09-19 実画像で転記)。
+// これで全5頁を完全収録した(残りの傾斜配点実施校一覧表=頁5上は既に収録済み)。selectionCategoryは「A日程」「B日程」の2区分。interviewRequired
 // は全レコードtrue(個人面接の実施が明記されているため)。傾斜配点実施校3校(高知丸の内=音楽科・
 // 高知小津=理数科・高知商業=社会マネジメント科)は頁5の「傾斜配点実施校一覧表」の内容を該当
 // レコードのnoteに転記した(ratioTypeフィールドは学校全体でなく特定学科のみに適用されるため
@@ -28,7 +30,7 @@ export const KOCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '頁1「全日制の課程」の面接内容一覧表(表の行数は32行=分校2件を含む・schoolNameとしては30校)64レコードと、多部制単位制(中芸・高知北の昼間部/夜間部・6レコード)・定時制(11校・B日程のみ11レコード)の面接内容(頁2)を収録。実技検査の概要一覧表(頁3-4・岡豊・高知丸の内・高知国際・高知商業の6学科×A/B日程=12レコード)も収録。未収録は成人特別選抜の概要一覧表(定時制/多部制12校)は未収録',
+    '頁1「全日制の課程」の面接内容一覧表(表の行数は32行=分校2件を含む・schoolNameとしては30校)64レコードと、多部制単位制(中芸・高知北の昼間部/夜間部・6レコード)・定時制(11校・B日程のみ11レコード)の面接内容(頁2)を収録。実技検査の概要一覧表(頁3-4・岡豊・高知丸の内・高知国際・高知商業の6学科×A/B日程=12レコード)も収録。成人特別選抜の概要一覧表(頁5下・定時制11校+多部制単位制夜間部2校=13レコード)も収録し、資料全5頁を完全収録(傾斜配点実施校一覧表=頁5上は3校のnoteに転記済み)',
   source: {
     url: 'https://www.pref.kochi.lg.jp/doc/r8_koukounyushi_main/file_contents/r8_kensa_koumoku.pdf',
     docTitle: '令和8年度高知県公立高等学校入学者選抜における検査項目等一覧表',
@@ -128,5 +130,18 @@ export const KOCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '高知国際', department: 'グローバル科(探究コース)・実技検査', selectionCategory: 'B日程', note: '英語による口頭試問: 学校作成の100語程度の英文を黙読後、その内容について英語で口頭試問を行う' },
     { schoolName: '高知国際', department: 'グローバル科(DPコース)・実技検査', selectionCategory: 'B日程', note: '次の2つの検査を行う。(1)日本語による口頭試問: 面接終了後に別途、DP(国際バカロレア機構が提供するディプロマ・プログラム)教育全般や本校のDP教育に関する口頭試問を日本語で10分程度実施。(2)英語による口頭試問: 学校作成の100語程度の英文を黙読後、その内容について英語で口頭試問を行う' },
     { schoolName: '高知商業', department: 'スポーツマネジメント科・実技検査', selectionCategory: 'B日程', note: '学校が指定する運動競技種目のうちから1種目を選択し、その競技に関する運動能力・技術テストを行う' },
+    { schoolName: '室戸', department: '定時制・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間・作文(400字・30分)' },
+    { schoolName: '中芸', department: '多部制単位制夜間部・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間・作文(400字・40分)' },
+    { schoolName: '山田', department: '定時制・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接6分間・作文(400字・30分)' },
+    { schoolName: '高知東工業', department: '定時制・機械科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間(作文の記載なし)' },
+    { schoolName: '高知工業', department: '定時制・機械科、電気科、土木科、建築科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=50%(意味の注記は資料に無い)。検査項目: 個人面接10分間・作文(400字・40分)' },
+    { schoolName: '高知北', department: '多部制単位制夜間部・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間・作文(400字・40分)' },
+    { schoolName: '高岡', department: '定時制・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間(作文の記載なし)' },
+    { schoolName: '須崎総合', department: '定時制・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間・作文(600字・50分)' },
+    { schoolName: '佐川', department: '定時制・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接7分間・作文(600字・40分)' },
+    { schoolName: '大方', department: '定時制・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間(作文の記載なし)' },
+    { schoolName: '宿毛', department: '定時制・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間・作文(400字・30分)' },
+    { schoolName: '清水', department: '定時制・普通科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接10分間・作文(400字・40分)' },
+    { schoolName: '高知商業', department: '定時制・商業科', selectionCategory: '成人特別選抜', interviewRequired: true, note: '資料の「比率」欄=20%(意味の注記は資料に無い)。検査項目: 個人面接7分間・作文(400字・30分)' },
   ],
 };
