@@ -2363,11 +2363,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toContain('面接(段階評価)');
   });
 
-  it('shizuoka: schoolsは令和9年度PDF頁1-7(富士理数まで)の22校72レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取・土肥分校・沼津東理数は設定なしのため対象外)', () => {
+  it('shizuoka: schoolsは令和9年度PDF頁1-9(清水東まで)の29校94レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取・土肥分校・沼津東理数・清水東理数は設定なしのため対象外)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka');
-    expect(record?.schools?.length).toBe(72);
+    expect(record?.schools?.length).toBe(94);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東', '熱海', '伊豆総合', '韮山', '伊豆中央', '田方農業', '三島南', '三島北', '御殿場', '御殿場南', '小山', '裾野', '沼津東', '沼津西', '沼津城北', '沼津工業', '沼津商業', '市立沼津', '吉原', '吉原工業', '富士']));
+    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東', '熱海', '伊豆総合', '韮山', '伊豆中央', '田方農業', '三島南', '三島北', '御殿場', '御殿場南', '小山', '裾野', '沼津東', '沼津西', '沼津城北', '沼津工業', '沼津商業', '市立沼津', '吉原', '吉原工業', '富士', '富士東', '富士宮東', '富士宮北', '富士宮西', '富岳館', '富士市立', '清水東']));
   });
 
   it('shizuoka: 全レコードの選抜資料の記述が○列の型(体育系=実技+事前調査票/農業後継者・地域貢献=作文/探究=適応力検査または作文/学習系=調査書・学力検査・面接のみ)のいずれかに一致する不変条件(転記誤読の検算)', () => {
