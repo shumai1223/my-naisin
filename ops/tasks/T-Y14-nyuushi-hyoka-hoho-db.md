@@ -1393,3 +1393,8 @@ WebSearch要約の「令和8年7月15日公表」は裏取りなしに信じて�
 (3)scratchpadの`shzlib.py`(rec/append/replace)で機械追記 (4)テストに**全レコード不変条件**(ratioType正規表現+選抜資料記述が○列の型のいずれか一致+体育系は実技検査必須)
 を新設し転記誤読を検算。1周回=2頁=15〜22レコードで安定。★印(第2志望の科まで併願可)はnoteに明記。「若干名」「22.5%」「100%全員」も正規表現で許容。
 **残(T-Y14全体)**: 他県のsource.url年度取り違えの点検(サンプル)・hiroshima頁4-8・gifu頁4・tokushima頁1-5/14-24・hokkaido残り・fukushima頁11以降・新規未着手県。
+
+**2026-09-20追記82(全39県のsource年度点検・shizuoka以外に取り違えなし)**: 追記80の再発防止として全39県のfiscalYear×source.urlを点検した。URLに
+年度(r8/r08/r9)を含む県は整合。URLから年度が読めない県は`curl -I`のLast-Modified+PDF本文の年度文言で検証: gifu/niigata=2026-06更新でR9・fukushima/gunma/hiroshima=2025-10〜11更新でR8。
+okayama/yamaguchiはLast-Modifiedが2026-09と直近だが**再アップ**でPDF本文は「令和８年度」(作成日2026-08-28/2025-06)=R8で整合(Last-Modifiedだけで判定しない)。
+aichiはcurlだとCookie要でHTMLが返り自動検証不可(前セッションの目視確認を信頼)。**残**: aichi/kanagawa/okinawa/shimane等ページ型出典の手動再確認は優先度低。
