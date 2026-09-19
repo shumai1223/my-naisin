@@ -3121,11 +3121,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは6校(福島/橘/福島商業/福島工業/福島明成/福島西)48レコードを収録している(福島明成は農業科4小学科×3区分・福島西は普通科+デザイン科学科の6区分)', () => {
+  it('fukushima: schoolsは10校(福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣)68レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(48);
+    expect(record?.schools?.length).toBe(68);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣']));
   });
 
   it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
@@ -3140,6 +3140,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     // 一般選抜の募集定員は生物生産科80人・他3科40人
     expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島明成', '一般選抜', '農業科・生物生産科')?.note).toContain('募集定員80人');
     expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島明成', '一般選抜', '農業科・食品科学科')?.note).toContain('募集定員40人');
+  });
+
+  it('fukushima: 外国人生徒等に係る特別枠選抜は福島北(基礎学力150点)と福島南国際文化科(基礎学力200点)の2校のみ・福島南国際文化科の特色検査は英語10点で満点660点', () => {
+    const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? [];
+    const foreign = recs.filter((x) => x.selectionCategory === '外国人生徒等に係る特別枠選抜');
+    expect(foreign.map((x) => x.schoolName).sort()).toEqual(['福島北', '福島南']);
+    expect(foreign.find((x) => x.schoolName === '福島北')?.ratioType).toContain('基礎学力検査150点');
+    expect(foreign.find((x) => x.schoolName === '福島南')?.ratioType).toContain('基礎学力検査200点');
+    const intl = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島南', '特色選抜', '国際文化科');
+    expect(intl?.ratioType).toContain('特色検査10点');
+    expect(intl?.note).toContain('選抜資料の満点は660点');
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島南', '特色選抜', '文理科')?.note).toContain('選抜資料の満点は600点');
+  });
+
+  it('fukushima: 特色選抜の点数の内訳が選抜資料の満点と一致する不変条件(学力検査+調査書+面接+特色検査=満点・転記誤読の検算)', () => {
+    const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? [];
+    for (const x of recs.filter((y) => y.selectionCategory === '特色選抜' && /選抜資料の満点は\d+点/.test(y.note ?? ''))) {
+      const total = Number(/選抜資料の満点は(\d+)点/.exec(x.note ?? '')?.[1]);
+      const nums = [...(x.ratioType ?? '').replace(/\([^)]*\)/g, '').matchAll(/(\d+)点/g)].map((m) => Number(m[1]));
+      // 福島商業のA型/B型併記は除外(満点が型により異なる)
+      if ((x.ratioType ?? '').includes('/')) continue;
+      // 特色面接が段階評価の校は面接の点数を持たないので、括弧外の数値の合計=満点
+      expect(nums.reduce((a, b) => a + b, 0)).toBe(total);
+    }
   });
 
   it('fukushima: 福島西の一般選抜は普通科が面接なし・デザイン科学科が個人面接あり、デザイン科学科の特色検査は鉛筆デッサン115点で調査書は135点のみ', () => {
