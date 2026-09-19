@@ -1,0 +1,1702 @@
+[
+ {
+  "page": 1,
+  "y": 77,
+  "school": "学校名",
+  "dept": "学科名(系・科)",
+  "gender": "男女",
+  "circles": []
+ },
+ {
+  "page": 1,
+  "y": 110,
+  "school": "宇都宮高校",
+  "dept": "普通",
+  "gender": "男",
+  "circles": [
+   "jiko",
+   "group"
+  ],
+  "keihai": "国数英",
+  "tokuGaku": 500,
+  "tokuCho": 100,
+  "tokuDoku": 100,
+  "ippanGaku": 500,
+  "ippanCho": 50,
+  "ratio": 10
+ },
+ {
+  "page": 1,
+  "y": 128,
+  "school": "宇都宮東高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 250,
+  "ippanGaku": 500,
+  "ippanCho": 50,
+  "ratio": 20
+ },
+ {
+  "page": 1,
+  "y": 146,
+  "school": "宇都宮南高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 400,
+  "ippanGaku": 500,
+  "ippanCho": 125,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 165,
+  "school": "宇都宮北高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 150,
+  "tokuDoku": 150,
+  "ippanGaku": 500,
+  "ippanCho": 50,
+  "ratio": 15
+ },
+ {
+  "page": 1,
+  "y": 183,
+  "school": "宇都宮女子高校",
+  "dept": "普通",
+  "gender": "女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 50,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 50,
+  "ratio": 10,
+  "keihai": "国数英"
+ },
+ {
+  "page": 1,
+  "y": 201,
+  "school": "宇都宮中央高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 150,
+  "tokuDoku": 150,
+  "ippanGaku": 500,
+  "ippanCho": 50,
+  "ratio": 15
+ },
+ {
+  "page": 1,
+  "y": 219,
+  "school": "宇都宮中央高校",
+  "dept": "総合家庭",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 150,
+  "tokuDoku": 150,
+  "ippanGaku": 500,
+  "ippanCho": 100,
+  "ratio": 25
+ },
+ {
+  "page": 1,
+  "y": 238,
+  "school": "宇都宮白楊高校",
+  "dept": "農業経営",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 256,
+  "school": "宇都宮白楊高校",
+  "dept": "生物工学",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 274,
+  "school": "宇都宮白楊高校",
+  "dept": "食品科学",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 292,
+  "school": "宇都宮白楊高校",
+  "dept": "農業工学",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 311,
+  "school": "宇都宮白楊高校",
+  "dept": "情報技術",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 329,
+  "school": "宇都宮白楊高校",
+  "dept": "流通経済",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 347,
+  "school": "宇都宮白楊高校",
+  "dept": "服飾デザイン",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 365,
+  "school": "宇都宮工業高校",
+  "dept": "機械システム",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 600,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 384,
+  "school": "宇都宮工業高校",
+  "dept": "電気情報システム",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 600,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 402,
+  "school": "宇都宮工業高校",
+  "dept": "建築デザイン",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 600,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 420,
+  "school": "宇都宮工業高校",
+  "dept": "環境建設システム",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 600,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 438,
+  "school": "宇都宮商業高校",
+  "dept": "商業",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 150,
+  "tokuDoku": 50,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 35
+ },
+ {
+  "page": 1,
+  "y": 456,
+  "school": "宇都宮商業高校",
+  "dept": "情報処理",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 150,
+  "tokuDoku": 50,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 35
+ },
+ {
+  "page": 1,
+  "y": 475,
+  "school": "鹿沼高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 135,
+  "tokuDoku": 65,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 25
+ },
+ {
+  "page": 1,
+  "y": 493,
+  "school": "鹿沼東高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 200,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 125,
+  "ratio": 50
+ },
+ {
+  "page": 1,
+  "y": 511,
+  "school": "鹿沼華陵高校",
+  "dept": "農林科学",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 300,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 400,
+  "ratio": 35
+ },
+ {
+  "page": 1,
+  "y": 529,
+  "school": "鹿沼華陵高校",
+  "dept": "機械・土木",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 300,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 400,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 548,
+  "school": "鹿沼華陵高校",
+  "dept": "情報科学",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 300,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 400,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 566,
+  "school": "鹿沼華陵高校",
+  "dept": "商業",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 300,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 400,
+  "ratio": 35
+ },
+ {
+  "page": 1,
+  "y": 584,
+  "school": "鹿沼華陵高校",
+  "dept": "ライフデザイン",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 300,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 400,
+  "ratio": 35
+ },
+ {
+  "page": 1,
+  "y": 602,
+  "school": "今市高校",
+  "dept": "総合学科",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 300,
+  "tokuDoku": 400,
+  "ippanGaku": 500,
+  "ippanCho": 200,
+  "ratio": 40
+ },
+ {
+  "page": 1,
+  "y": 621,
+  "school": "上三川高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 214,
+  "tokuDoku": 100,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 20
+ },
+ {
+  "page": 1,
+  "y": 639,
+  "school": "石橋高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 100,
+  "tokuDoku": 400,
+  "ippanGaku": 500,
+  "ippanCho": 100,
+  "ratio": 20
+ },
+ {
+  "page": 1,
+  "y": 657,
+  "school": "小山高校",
+  "dept": "普通・数理科学",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 125,
+  "tokuDoku": 375,
+  "ippanGaku": 500,
+  "ippanCho": 125,
+  "ratio": 15
+ },
+ {
+  "page": 1,
+  "y": 675,
+  "school": "小山南高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 1,
+  "y": 694,
+  "school": "小山南高校",
+  "dept": "スポーツ",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 50
+ },
+ {
+  "page": 1,
+  "y": 712,
+  "school": "小山西高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 1000,
+  "ippanGaku": 500,
+  "ippanCho": 125,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 77,
+  "school": "学校名",
+  "dept": "学科名(系・科)",
+  "gender": "男女",
+  "circles": []
+ },
+ {
+  "page": 2,
+  "y": 110,
+  "school": "小山北桜高校",
+  "dept": "食料環境",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 625,
+  "tokuDoku": 125,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 128,
+  "school": "小山北桜高校",
+  "dept": "建築システム",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 625,
+  "tokuDoku": 125,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 146,
+  "school": "小山北桜高校",
+  "dept": "総合ビジネス",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 625,
+  "tokuDoku": 125,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 165,
+  "school": "小山北桜高校",
+  "dept": "生活文化",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 625,
+  "tokuDoku": 125,
+  "ippanGaku": 500,
+  "ippanCho": 214,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 183,
+  "school": "小山城南高校",
+  "dept": "総合学科",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 300,
+  "tokuDoku": 100,
+  "ippanGaku": 500,
+  "ippanCho": 200,
+  "ratio": 20
+ },
+ {
+  "page": 2,
+  "y": 201,
+  "school": "栃木高校",
+  "dept": "普通",
+  "gender": "男",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 135,
+  "tokuDoku": 135,
+  "ippanGaku": 500,
+  "ippanCho": 50,
+  "ratio": 10,
+  "keihai": "国数英"
+ },
+ {
+  "page": 2,
+  "y": 219,
+  "school": "栃木女子高校",
+  "dept": "普通",
+  "gender": "女",
+  "circles": [
+   "kojin",
+   "jiko",
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 100,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 100,
+  "ratio": 20
+ },
+ {
+  "page": 2,
+  "y": 238,
+  "school": "栃木農業高校",
+  "dept": "農業科学",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 667,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 256,
+  "school": "栃木農業高校",
+  "dept": "食品科学",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 667,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 274,
+  "school": "栃木工業高校",
+  "dept": "機械",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 270,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 292,
+  "school": "栃木工業高校",
+  "dept": "電気",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 270,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 311,
+  "school": "栃木工業高校",
+  "dept": "電子情報",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 270,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 329,
+  "school": "栃木商業高校",
+  "dept": "商業",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 513,
+  "tokuDoku": 240,
+  "ippanGaku": 500,
+  "ippanCho": 162,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 347,
+  "school": "栃木商業高校",
+  "dept": "情報処理",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 513,
+  "tokuDoku": 240,
+  "ippanGaku": 500,
+  "ippanCho": 162,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 365,
+  "school": "栃木翔南高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 125,
+  "ratio": 25
+ },
+ {
+  "page": 2,
+  "y": 384,
+  "school": "壬生高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 200,
+  "tokuDoku": 400,
+  "ippanGaku": 500,
+  "ippanCho": 200,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 402,
+  "school": "佐野高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 125,
+  "tokuDoku": 375,
+  "ippanGaku": 500,
+  "ippanCho": 125,
+  "ratio": 30
+ },
+ {
+  "page": 2,
+  "y": 420,
+  "school": "佐野東高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "shudan",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 200,
+  "tokuDoku": 100,
+  "ippanGaku": 500,
+  "ippanCho": 100,
+  "ratio": 20
+ },
+ {
+  "page": 2,
+  "y": 438,
+  "school": "佐野松桜高校",
+  "dept": "情報制御",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 120,
+  "ippanGaku": 500,
+  "ippanCho": 270,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 456,
+  "school": "佐野松桜高校",
+  "dept": "商業",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 120,
+  "ippanGaku": 500,
+  "ippanCho": 270,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 475,
+  "school": "佐野松桜高校",
+  "dept": "家政",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 120,
+  "ippanGaku": 500,
+  "ippanCho": 270,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 493,
+  "school": "佐野松桜高校",
+  "dept": "介護福祉",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 120,
+  "ippanGaku": 500,
+  "ippanCho": 270,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 511,
+  "school": "足利高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 270,
+  "tokuDoku": 150,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 15
+ },
+ {
+  "page": 2,
+  "y": 529,
+  "school": "足利南高校",
+  "dept": "総合学科",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 300,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 300,
+  "ratio": 20
+ },
+ {
+  "page": 2,
+  "y": 548,
+  "school": "足利工業高校",
+  "dept": "機械",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 270,
+  "ippanGaku": 500,
+  "ippanCho": 340,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 566,
+  "school": "足利工業高校",
+  "dept": "電気システム",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 270,
+  "ippanGaku": 500,
+  "ippanCho": 340,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 584,
+  "school": "足利工業高校",
+  "dept": "産業デザイン",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 270,
+  "ippanGaku": 500,
+  "ippanCho": 340,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 602,
+  "school": "足利清風高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 621,
+  "school": "足利清風高校",
+  "dept": "商業",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 35
+ },
+ {
+  "page": 2,
+  "y": 639,
+  "school": "真岡高校",
+  "dept": "普通",
+  "gender": "男",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 1000,
+  "ippanGaku": 500,
+  "ippanCho": 50,
+  "ratio": 20
+ },
+ {
+  "page": 2,
+  "y": 657,
+  "school": "真岡女子高校",
+  "dept": "普通",
+  "gender": "女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 135,
+  "tokuDoku": 360,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 25
+ },
+ {
+  "page": 2,
+  "y": 675,
+  "school": "真岡北陵高校",
+  "dept": "生物生産",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 405,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 405,
+  "ratio": 50
+ },
+ {
+  "page": 2,
+  "y": 694,
+  "school": "真岡北陵高校",
+  "dept": "農業機械",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 405,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 405,
+  "ratio": 50
+ },
+ {
+  "page": 2,
+  "y": 712,
+  "school": "真岡北陵高校",
+  "dept": "食品科学",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 405,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 405,
+  "ratio": 50
+ },
+ {
+  "page": 2,
+  "y": 730,
+  "school": "真岡北陵高校",
+  "dept": "総合ビジネス",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 405,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 405,
+  "ratio": 50
+ },
+ {
+  "page": 2,
+  "y": 748,
+  "school": "真岡北陵高校",
+  "dept": "介護福祉",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 405,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 405,
+  "ratio": 50
+ },
+ {
+  "page": 3,
+  "y": 77,
+  "school": "学校名",
+  "dept": "学科名(系・科)",
+  "gender": "男女",
+  "circles": []
+ },
+ {
+  "page": 3,
+  "y": 110,
+  "school": "真岡工業高校",
+  "dept": "機械システム",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 120,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 50
+ },
+ {
+  "page": 3,
+  "y": 128,
+  "school": "真岡工業高校",
+  "dept": "建設",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 120,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 50
+ },
+ {
+  "page": 3,
+  "y": 146,
+  "school": "真岡工業高校",
+  "dept": "電子",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 120,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 50
+ },
+ {
+  "page": 3,
+  "y": 165,
+  "school": "益子芳星高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 250,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 183,
+  "school": "茂木高校",
+  "dept": "総合学科",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 135,
+  "tokuDoku": 365,
+  "ippanGaku": 500,
+  "ippanCho": 215,
+  "ratio": 35
+ },
+ {
+  "page": 3,
+  "y": 201,
+  "school": "烏山高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 540,
+  "tokuDoku": 600,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 35
+ },
+ {
+  "page": 3,
+  "y": 219,
+  "school": "馬頭高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 570,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 500,
+  "ratio": 20
+ },
+ {
+  "page": 3,
+  "y": 238,
+  "school": "馬頭高校",
+  "dept": "水産",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 570,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 500,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 256,
+  "school": "大田原高校",
+  "dept": "普通",
+  "gender": "男",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 135,
+  "tokuDoku": 165,
+  "ippanGaku": 500,
+  "ippanCho": 55,
+  "ratio": 20
+ },
+ {
+  "page": 3,
+  "y": 274,
+  "school": "大田原女子高校",
+  "dept": "普通",
+  "gender": "女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 135,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 292,
+  "school": "黒羽高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 1000,
+  "ippanGaku": 500,
+  "ippanCho": 500,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 311,
+  "school": "那須拓陽高校",
+  "dept": "農業経営",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 600,
+  "tokuDoku": 900,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 329,
+  "school": "那須拓陽高校",
+  "dept": "生物工学",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 600,
+  "tokuDoku": 900,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 347,
+  "school": "那須拓陽高校",
+  "dept": "食品化学",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 600,
+  "tokuDoku": 900,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 365,
+  "school": "那須拓陽高校",
+  "dept": "食物文化",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 600,
+  "tokuDoku": 900,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 384,
+  "school": "那須清峰高校",
+  "dept": "機械システム",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 402,
+  "school": "那須清峰高校",
+  "dept": "電気情報",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 420,
+  "school": "那須清峰高校",
+  "dept": "建設工学",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 438,
+  "school": "那須清峰高校",
+  "dept": "商業",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 333,
+  "tokuDoku": 500,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 456,
+  "school": "那須高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 675,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 500,
+  "ratio": 20
+ },
+ {
+  "page": 3,
+  "y": 475,
+  "school": "那須高校",
+  "dept": "リゾート観光",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 675,
+  "tokuDoku": 200,
+  "ippanGaku": 500,
+  "ippanCho": 500,
+  "ratio": 40
+ },
+ {
+  "page": 3,
+  "y": 493,
+  "school": "黒磯高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 200,
+  "tokuDoku": 600,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 20
+ },
+ {
+  "page": 3,
+  "y": 511,
+  "school": "黒磯南高校",
+  "dept": "総合学科",
+  "gender": "男女",
+  "circles": [
+   "kojin"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 350,
+  "tokuDoku": 300,
+  "ippanGaku": 500,
+  "ippanCho": 350,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 529,
+  "school": "矢板高校",
+  "dept": "農業経営",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 270,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 548,
+  "school": "矢板高校",
+  "dept": "工業システム",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 270,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 566,
+  "school": "矢板高校",
+  "dept": "栄養食物",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 270,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 584,
+  "school": "矢板高校",
+  "dept": "介護福祉",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 270,
+  "ippanGaku": 500,
+  "ippanCho": 333,
+  "ratio": 30
+ },
+ {
+  "page": 3,
+  "y": 602,
+  "school": "矢板東高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "kojin",
+   "jiko"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 135,
+  "tokuDoku": 360,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 40
+ },
+ {
+  "page": 3,
+  "y": 621,
+  "school": "高根沢高校",
+  "dept": "普通",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 250,
+  "ippanGaku": 500,
+  "ippanCho": 340,
+  "ratio": 40
+ },
+ {
+  "page": 3,
+  "y": 639,
+  "school": "高根沢高校",
+  "dept": "商業",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 500,
+  "tokuDoku": 250,
+  "ippanGaku": 500,
+  "ippanCho": 340,
+  "ratio": 40
+ },
+ {
+  "page": 3,
+  "y": 657,
+  "school": "さくら清修高校",
+  "dept": "総合学科",
+  "gender": "男女",
+  "circles": [
+   "presen"
+  ],
+  "tokuGaku": 500,
+  "tokuCho": 320,
+  "tokuDoku": 180,
+  "ippanGaku": 500,
+  "ippanCho": 135,
+  "ratio": 20
+ }
+]

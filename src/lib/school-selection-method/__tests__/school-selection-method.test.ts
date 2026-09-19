@@ -978,39 +978,51 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
-  it('tochigi: 全日制58校108学科を特色選抜・一般選抜の各1レコード(計216)で収録している', () => {
+  it('tochigi: 令和9年度版の全日制54校101学科を特色選抜・一般選抜の各1レコード(計202)で収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi');
     expect(record?.status).toBe('structured');
-    expect(record?.schools?.length).toBe(216);
-    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(58);
+    expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+    expect(record?.schools?.length).toBe(202);
+    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(54);
+    expect(record?.source.url).toContain('/m04/r09/');
   });
 
-  it('tochigi: 宇都宮は一般選抜で学力検査9:調査書1、小山南スポーツは6:4(集団面接あり)、日光明峰は5:5', () => {
-    const utsunomiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '宇都宮', '一般選抜', '普通');
-    expect(utsunomiya?.ratioType).toBe('学力検査9:調査書の評定1');
-    expect(utsunomiya?.interviewRequired).toBe(false);
-    const sports = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '小山南', '一般選抜', 'スポーツ');
-    expect(sports?.ratioType).toBe('学力検査6:調査書の評定4');
-    expect(sports?.interviewRequired).toBe(true);
-    const nikko = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '日光明峰', '一般選抜', '普通');
-    expect(nikko?.ratioType).toBe('学力検査5:調査書の評定5');
+  it('tochigi: 宇都宮(普通)は特色選抜の比重が学力500:調査書100:独自100・定員10%・グループ討論と自己表現シート、一般選抜は学力500:調査書50・傾斜配点国数英', () => {
+    const toku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '宇都宮', '特色選抜', '普通');
+    expect(toku?.ratioType).toBe('学力検査500:調査書100:学校独自検査100');
+    expect(toku?.note).toContain('特色選抜の定員の割合10%');
+    expect(toku?.note).toContain('グループ討論');
+    expect(toku?.note).toContain('自己表現シート(学校独自質問):あり');
+    expect(toku?.interviewRequired).toBe(false);
+    const ippan = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '宇都宮', '一般選抜', '普通');
+    expect(ippan?.ratioType).toBe('学力検査500:調査書50');
+    expect(ippan?.note).toContain('国数英');
+    expect(ippan?.interviewRequired).toBe(false);
   });
 
-  it('tochigi: 宇都宮東は特色選抜100%・集団面接・学校作成問題(国数英)、栃木は学校作成問題(総合問題A・B)を持つ', () => {
+  it('tochigi: 鹿沼華陵(農林科学)は特色選抜で個人面接・比重学力500:調査書300:独自200、宇都宮東はプレゼンテーション・小山西の独自検査点は最大の1000', () => {
+    const kanuma = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '鹿沼華陵', '特色選抜', '農林科学');
+    expect(kanuma?.interviewRequired).toBe(true);
+    expect(kanuma?.ratioType).toBe('学力検査500:調査書300:学校独自検査200');
+    expect(kanuma?.note).toContain('個人面接');
     const east = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '宇都宮東', '特色選抜', '普通');
-    expect(east?.note).toContain('100%');
-    expect(east?.note).toContain('学校作成問題(国・数・英)');
-    const tochigi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '栃木', '特色選抜', '普通');
-    expect(tochigi?.note).toContain('総合問題A・B');
+    expect(east?.note).toContain('特色選抜の定員の割合20%');
+    expect(east?.note).toContain('プレゼンテーション');
+    const koyamaNishi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', '小山西', '特色選抜', '普通');
+    expect(koyamaNishi?.ratioType).toBe('学力検査500:調査書500:学校独自検査1000');
   });
 
-  it('tochigi: 全一般選抜レコードの比重は学力検査と調査書の合計が10になる', () => {
+  it('tochigi: 全レコードは学力検査500点固定・特色選抜の定員の割合は上限50%以下・一般選抜は面接を含まない(令和9年度制度)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi');
     for (const s of record?.schools ?? []) {
-      if (s.selectionCategory !== '一般選抜') continue;
-      const m = (s.ratioType ?? '').match(/学力検査([0-9]):調査書の評定([0-9])/);
-      expect(m).not.toBeNull();
-      if (m) expect(Number(m[1]) + Number(m[2])).toBe(10);
+      expect(s.ratioType ?? '').toMatch(/^学力検査500:/);
+      if (s.selectionCategory === '特色選抜') {
+        const m = (s.note ?? '').match(/特色選抜の定員の割合(\d+)%/);
+        expect(m).not.toBeNull();
+        if (m) expect(Number(m[1])).toBeLessThanOrEqual(50);
+      } else {
+        expect(s.interviewRequired).toBe(false);
+      }
     }
   });
 
