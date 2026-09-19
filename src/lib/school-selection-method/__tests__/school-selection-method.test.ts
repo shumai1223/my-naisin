@@ -3121,11 +3121,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは10校(福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣)68レコードを収録している', () => {
+  it('fukushima: schoolsは13校(福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業)86レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(68);
+    expect(record?.schools?.length).toBe(86);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業']));
   });
 
   it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
@@ -3164,6 +3164,23 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
       // 特色面接が段階評価の校は面接の点数を持たないので、括弧外の数値の合計=満点
       expect(nums.reduce((a, b) => a + b, 0)).toBe(total);
     }
+  });
+
+  it('fukushima: 伊達の特色選抜はA型325点・B型250点+実技75点・C型325点のいずれも選抜資料の満点575点になる(型ごとの傾斜配点の検算)', () => {
+    const r = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '伊達', '特色選抜', '普通科');
+    expect(r?.note).toContain('選抜資料の満点は全型とも575点');
+    expect(250 + 325).toBe(575); // A型
+    expect(250 + 250 + 75).toBe(575); // B型(実技75点)
+    expect(250 + 325).toBe(575); // C型(生徒会130点)
+    expect(r?.ratioType).toBe('A型=学力検査250点:調査書325点/B型=学力検査250点:調査書250点:実技75点/C型=学力検査250点:調査書325点');
+  });
+
+  it('fukushima: 二本松実業は4学科(工業3科+家庭科生活文化科)×3区分の12レコードで生活文化科のみ特色選抜の募集定員枠が10%', () => {
+    const recs = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? []).filter((x) => x.schoolName === '二本松実業');
+    expect(recs).toHaveLength(12);
+    const tok = recs.filter((x) => x.selectionCategory === '特色選抜');
+    expect(tok.filter((x) => x.note?.includes('募集定員枠10%程度')).map((x) => x.department)).toEqual(['家庭科・生活文化科']);
+    expect(tok.filter((x) => x.note?.includes('募集定員枠25%程度'))).toHaveLength(3);
   });
 
   it('fukushima: 福島西の一般選抜は普通科が面接なし・デザイン科学科が個人面接あり、デザイン科学科の特色検査は鉛筆デッサン115点で調査書は135点のみ', () => {
