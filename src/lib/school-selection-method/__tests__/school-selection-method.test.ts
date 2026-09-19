@@ -3121,11 +3121,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは4校(福島/橘/福島商業/福島工業)30レコードを収録している(福島商業はくくり募集3学科分・福島工業は全日制5学科分)', () => {
+  it('fukushima: schoolsは6校(福島/橘/福島商業/福島工業/福島明成/福島西)48レコードを収録している(福島明成は農業科4小学科×3区分・福島西は普通科+デザイン科学科の6区分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(30);
+    expect(record?.schools?.length).toBe(48);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西']));
+  });
+
+  it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
+    const tokushoku = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? []).filter((x) => x.schoolName === '福島明成' && x.selectionCategory === '特色選抜');
+    expect(tokushoku).toHaveLength(4);
+    for (const t of tokushoku) {
+      expect(t.ratioType).toBe('学力検査250点:調査書250点(各教科の学習の記録135点+特別活動等・長所特技等115点):面接100点:作文100点(特色検査)');
+      expect(t.note).toContain('選抜資料の満点は700点');
+    }
+    const kouki = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島明成', '後期選抜', '農業科・環境土木科');
+    expect(kouki?.ratioType).toBe('調査書190点:面接50点:作文50点');
+    // 一般選抜の募集定員は生物生産科80人・他3科40人
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島明成', '一般選抜', '農業科・生物生産科')?.note).toContain('募集定員80人');
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島明成', '一般選抜', '農業科・食品科学科')?.note).toContain('募集定員40人');
+  });
+
+  it('fukushima: 福島西の一般選抜は普通科が面接なし・デザイン科学科が個人面接あり、デザイン科学科の特色検査は鉛筆デッサン115点で調査書は135点のみ', () => {
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島西', '一般選抜', '普通科')?.interviewRequired).toBe(false);
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島西', '一般選抜', 'デザイン科学科')?.interviewRequired).toBe(true);
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島西', '特色選抜', 'デザイン科学科')?.ratioType).toBe('学力検査250点:調査書135点:実技検査(鉛筆デッサン)115点');
   });
 
   it('fukushima: 福島商業(商業科・情報ビジネス科)の特色選抜はA型/B型/C型の3類型を持ちB型・C型のみ実技90点を課す', () => {
