@@ -39,7 +39,7 @@
 GA4はConsent Modeと離脱時のビーコン欠損で収益系イベントを取りこぼす（実測で
 D1 25件に対しGA4 0件の日がある）。**ここのゼロは異常の証拠にならない。**
 
-- `cta_view`: 20件以上
+- `cta_view`: 21件以上
 - `lead_submit`: 1件以上
 - `line_friend_click`: 1件以上
 - `affiliate_click`: 0件以上
