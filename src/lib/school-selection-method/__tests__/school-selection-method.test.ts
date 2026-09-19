@@ -2391,7 +2391,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: schoolsは全7頁の103校(頁1=日比谷/三田/戸山/竹早/向丘/上野/日本橋/本所/城東/東/深川/大崎/小山台・頁2=八潮/駒場/目黒/大森/田園調布/雪谷/桜町/千歳丘/松原/青山/広尾/鷺宮/武蔵丘・頁3=杉並/豊多摩/西/豊島/文京/竹台/板橋/大山/北園/高島/井草/石神井/田柄/練馬・頁4=光丘/青井/足立/足立新田/足立西/江北/淵江/葛飾野/南葛飾/江戸川/葛西南/小岩/小松川/篠崎/紅葉川/片倉・頁5=八王子北/八王子東/富士森/松が谷/立川/武蔵野北/多摩/府中/府中西/府中東/昭和/拝島/神代/調布北/調布南・頁6=小川/成瀬/野津田/町田/山崎/小金井北/小平/小平西/小平南/日野/日野台/南平/東村山西/国立/福生/狛江・頁7=東大和/東大和南/清瀬/久留米西/武蔵村山/永山/羽村/五日市/田無/保谷+島しょ6校[大島/新島/神津/三宅/八丈/小笠原])303レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo');
-    expect(record?.schools?.length).toBe(1088);
+    expect(record?.schools?.length).toBe(1104);
     // 普通科(頁1-7)の103校。n2_11のコース/エンカレッジ8件は別のdepartmentで区別される
     const futsu = (record?.schools ?? []).filter((s) => s.department === '普通科');
     expect(futsu).toHaveLength(303);
@@ -2821,7 +2821,8 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: n2_16頁1-3の文化・スポーツ等特別推薦は9校25レコード(頁1-3)+頁4-9の合計で、種目・募集人数・満点(調査書+面接+実技)・数値目標を持つ', () => {
     const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? []).filter((s) => s.selectionCategory === '文化・スポーツ等特別推薦');
-    expect(list).toHaveLength(269);
+    expect(list).toHaveLength(285);
+    expect(new Set(list.map((s) => s.schoolName)).size).toBe(91);
     for (const n of ['向丘', '上野', '本所', '城東', '東', '深川', '大崎', '八潮', '目黒', '大森', '雪谷', '桜町', '千歳丘', '広尾', '鷺宮', '武蔵丘', '杉並', '豊多摩', '豊島']) expect(list.some((s) => s.schoolName === n)).toBe(true);
     const by = (n: string) => list.filter((s) => s.schoolName === n);
     expect(by('城東')).toHaveLength(7);
@@ -3010,6 +3011,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('つばさ総合').find((s) => s.department.startsWith('美術'))?.note).toContain('65×50cm以内');
     expect(by('世田谷総合')).toHaveLength(2);
     expect(by('世田谷総合').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点')).toBe(true);
+    // 頁37-39(最終)
+    expect(by('杉並総合')).toHaveLength(3);
+    expect(by('杉並総合').every((s) => s.ratioType === '調査書225点+個人面接275点+実技検査500点')).toBe(true);
+    expect(by('王子総合')).toHaveLength(1);
+    expect(by('王子総合')[0].ratioType).toBe('調査書500点+個人面接150点+作文150点+実技検査200点');
+    expect(by('葛飾総合')).toHaveLength(2);
+    expect(by('葛飾総合').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点')).toBe(true);
+    expect(by('青梅総合')).toHaveLength(4);
+    expect(by('青梅総合').every((s) => s.ratioType === '調査書400点+個人面接200点+実技検査200点')).toBe(true);
+    expect(by('町田総合')).toHaveLength(2);
+    expect(by('町田総合').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点')).toBe(true);
+    expect(by('東久留米総合')).toHaveLength(1);
+    expect(by('東久留米総合')[0].ratioType).toBe('調査書900点+個人面接300点+実技検査600点');
+    expect(by('東久留米総合')[0].department).toBe('サッカー(男・10)');
+    expect(by('若葉総合')).toHaveLength(3);
+    expect(by('若葉総合').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点' && s.note?.includes('「自己PR」'))).toBe(true);
+    // 全レコードの満点が note の合計と一致する(調査書+面接+作文+実技)
+    for (const s of list) {
+      const nums = [...s.ratioType.matchAll(/([0-9]+)点/g)].map((m) => Number(m[1]));
+      const total = nums.reduce((a, b) => a + b, 0);
+      expect(s.note).toContain(`(合計${total}点`);
+    }
     expect(list.every((s) => s.note?.includes('推薦の基準(要件の長文)は本DBでは未収録'))).toBe(true);
   });
 
