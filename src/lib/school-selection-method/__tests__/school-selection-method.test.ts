@@ -3121,11 +3121,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは13校(福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業)86レコードを収録している', () => {
+  it('fukushima: schoolsは18校(学校番号01〜18・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業)110レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(86);
+    expect(record?.schools?.length).toBe(110);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業']));
   });
 
   it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
@@ -3173,6 +3173,17 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(250 + 250 + 75).toBe(575); // B型(実技75点)
     expect(250 + 325).toBe(575); // C型(生徒会130点)
     expect(r?.ratioType).toBe('A型=学力検査250点:調査書325点/B型=学力検査250点:調査書250点:実技75点/C型=学力検査250点:調査書325点');
+  });
+
+  it('fukushima: 郡山商業の特色選抜はA型375点・B型330点+実技45点でいずれも満点625点・安積黎明はA型(プレゼン)/B型(実技)とも特色検査100点で満点620点', () => {
+    const g = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '郡山商業', '特色選抜', '商業科・会計科');
+    expect(g?.ratioType).toBe('A型=学力検査250点:調査書375点/B型=学力検査250点:調査書330点:実技45点');
+    expect(g?.note).toContain('選抜資料の満点はA型・B型とも625点');
+    expect(250 + 375).toBe(625);
+    expect(250 + 330 + 45).toBe(625);
+    const a = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '安積黎明', '特色選抜', '普通科');
+    expect(a?.note).toContain('選抜資料の満点はA型・B型とも620点');
+    expect(250 + 250 + 20 + 100).toBe(620);
   });
 
   it('fukushima: 二本松実業は4学科(工業3科+家庭科生活文化科)×3区分の12レコードで生活文化科のみ特色選抜の募集定員枠が10%', () => {
