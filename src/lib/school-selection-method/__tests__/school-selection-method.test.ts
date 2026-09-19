@@ -2389,11 +2389,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('選抜割合25%程度(希望者対象)');
   });
 
-  it('tokyo: schoolsは4校(日比谷/三田/戸山/竹早)12レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
+  it('tokyo: schoolsは頁1の13校(日比谷/三田/戸山/竹早/向丘/上野/日本橋/本所/城東/東/深川/大崎/小山台)39レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo');
-    expect(record?.schools?.length).toBe(12);
+    expect(record?.schools?.length).toBe(39);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['日比谷', '三田', '戸山', '竹早']));
+    expect(schoolNames).toEqual(new Set(['日比谷', '三田', '戸山', '竹早', '向丘', '上野', '日本橋', '本所', '城東', '東', '深川', '大崎', '小山台']));
+    // 第一次募集は全13校が学力検査7:調査書3+ESAT-J20点、第二次募集は全13校が6:4
+    const first = (record?.schools ?? []).filter((s) => s.selectionCategory === '第一次募集');
+    const second = (record?.schools ?? []).filter((s) => s.selectionCategory === '第二次募集');
+    expect(first).toHaveLength(13);
+    expect(second).toHaveLength(13);
+    expect(first.every((s) => s.ratioType === '学力検査7:調査書3(700点:300点)+ESAT-J20点')).toBe(true);
+    expect(second.every((s) => s.ratioType === '学力検査6:調査書4(600点:400点)')).toBe(true);
+  });
+
+  it('tokyo: 推薦に基づく選抜は全13校が推薦枠割合20%で、面接・討論の点数と小論文/作文の点数がnoteの合計と一致する(日比谷・竹早は結合セルのため面接実施を断定しない)', () => {
+    const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? []).filter((s) => s.selectionCategory === '推薦に基づく選抜');
+    expect(list).toHaveLength(13);
+    expect(list.every((s) => s.ratioType === '推薦枠割合20%')).toBe(true);
+    const get = (n: string) => list.find((s) => s.schoolName === n);
+    expect(get('向丘')?.note).toContain('調査書500点+個人面接300点+作文200点(合計1000点)');
+    expect(get('上野')?.note).toContain('調査書500点+個人面接150点+小論文350点(合計1000点)');
+    expect(get('東')?.note).toContain('調査書360点+個人面接160点+小論文200点(合計720点)');
+    expect(get('小山台')?.note).toContain('調査書300点+個人面接200点+小論文400点(合計900点)');
+    // 文化・スポーツ等特別推薦の実施あり=向丘/上野/本所/城東/東/深川/大崎の7校、なし=残り6校
+    expect(list.filter((s) => s.note?.includes('特別推薦の実施あり')).map((s) => s.schoolName).sort()).toEqual(['上野', '向丘', '大崎', '本所', '東', '深川', '城東'].sort());
+    expect(list.filter((s) => s.note?.includes('特別推薦の実施なし'))).toHaveLength(6);
   });
 
   it('tokyo: 日比谷(普通科)の第一次募集は学力検査7:調査書3+ESAT-J20点で、第二次募集は6:4になる', () => {
@@ -2409,10 +2430,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('個人面接の配点が調査書を上回る');
   });
 
-  it('tokyo: 竹早(普通科)の推薦に基づく選抜は個人面接を実施しない(日比谷/三田/戸山はいずれも個人面接を実施する点で異なる)', () => {
-    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '竹早', '推薦に基づく選抜', '普通科');
-    expect(record?.interviewRequired).toBe(false);
-    expect(record?.note).toContain('個人面接・集団討論・実技検査・学校設定検査はいずれも実施なし');
+  it('tokyo: 日比谷・竹早の推薦は個人面接欄と集団討論欄にまたがる結合セルの点数を持ち(日比谷200/竹早250)、面接の実施有無は断定しない(2026-09-19に竹早の「面接なし」誤読を訂正)', () => {
+    const takehaya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '竹早', '推薦に基づく選抜', '普通科');
+    const hibiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '日比谷', '推薦に基づく選抜', '普通科');
+    expect(takehaya?.interviewRequired).toBeUndefined();
+    expect(hibiya?.interviewRequired).toBeUndefined();
+    expect(takehaya?.note).toContain('個人面接・集団討論の結合セル250点');
+    expect(hibiya?.note).toContain('個人面接・集団討論の結合セル200点');
+    expect(takehaya?.note).not.toContain('調査書500点+小論文250点のみ');
   });
 
   it('hokkaido: schoolsは2校(岩見沢東/滝川)4学科8レコードを収録している(推薦入学者選抜+一般入学者選抜の2区分)', () => {
