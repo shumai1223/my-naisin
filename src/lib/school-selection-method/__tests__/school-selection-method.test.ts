@@ -1214,7 +1214,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(new Set(all.map((s) => s.schoolName)).size).toBe(59);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(60);
     const general = all.filter((s) => s.selectionCategory === '一般入学者選抜');
     expect(general).toHaveLength(111);
     for (const s of general) {
@@ -1222,6 +1222,42 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
       expect(m).not.toBeNull();
       if (m) expect(Number(m[1]) + Number(m[2])).toBe(1000);
     }
+  });
+
+  it('iwate: 定時制9件(8校・杜陵は本校と奥州校の2件)は一般入学者選抜(定時制)で学力検査+調査書が1000点・学校独自検査を課す学校は1100点になり、二次募集の配点内訳が合計300点(成人枠は100〜200点)になる', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'iwate')?.schools ?? [];
+    const gen = all.filter((s) => s.selectionCategory === '一般入学者選抜(定時制)');
+    expect(gen).toHaveLength(9);
+    for (const s of gen) {
+      const m = (s.ratioType ?? '').match(/^学力検査([0-9]+):調査書([0-9]+)(?::独自([0-9]+))?$/);
+      expect(m).not.toBeNull();
+      if (m) {
+        expect(Number(m[1]) + Number(m[2])).toBe(1000);
+        const total = Number(m[1]) + Number(m[2]) + Number(m[3] ?? 0);
+        expect(s.note).toContain(`合計${total}点`);
+      }
+    }
+    // 釜石のみ学力検査:調査書=7:3、独自検査(個人面接100点)を課すのは杜陵2件・大船渡・釜石・宮古の5件
+    expect(gen.filter((s) => s.ratioType?.startsWith('学力検査700:'))).toHaveLength(1);
+    expect(gen.filter((s) => s.ratioType?.includes(':独自100'))).toHaveLength(5);
+    expect(gen.every((s) => s.note?.includes('特色入学者選抜は実施しない'))).toBe(true);
+    // 二次募集・後期日程の配点内訳(括弧内を除く最上位の点数の和)が合計と一致
+    const topSum = (parts: string) => {
+      let depth = 0; let cur = ''; const out: string[] = [];
+      for (const ch of parts) { if (ch === '(') depth++; if (ch === ')') depth--; if (ch === '+' && depth === 0) { out.push(cur); cur = ''; } else cur += ch; }
+      out.push(cur);
+      return out.map((p) => Number(p.match(/^[^0-9]*([0-9]+)点/)?.[1] ?? 0)).reduce((a, b) => a + b, 0);
+    };
+    const later = all.filter((s) => ['二次募集(定時制)', '後期日程(定時制)', '後期日程チャレンジ枠(定時制)', '成人枠(定時制)'].includes(s.selectionCategory));
+    expect(later).toHaveLength(9 + 2 + 2 + 7);
+    for (const s of later) {
+      const m = (s.note ?? '').match(/選抜方法:(.+?)、合計([0-9]+)点/);
+      expect(m).not.toBeNull();
+      if (m) expect(topSum(m[1])).toBe(Number(m[2]));
+    }
+    const chal = all.filter((s) => s.selectionCategory === '後期日程チャレンジ枠(定時制)');
+    expect(chal).toHaveLength(2);
+    expect(chal.every((s) => s.note?.includes('合計200点'))).toBe(true);
   });
 
   it('iwate: 盛岡第一は学力検査7:調査書3(700:300)、盛岡第二は5:5、盛岡第四は6:4、南昌みらい芸術学系は学校独自検査100点で合計1100点', () => {
