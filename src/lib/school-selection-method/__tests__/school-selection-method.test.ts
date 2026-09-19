@@ -527,12 +527,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kaikei?.ratioType).toBe('調査書60%:面接30%:学力検査10%');
   });
 
-  it('nagano: schoolsは第1通学区(北信地区)20校38レコードを収録している(第2〜6通学区は未収録)', () => {
+  it('nagano: schoolsは第1通学区(北信地区)20校38レコード+第2通学区(東信地区)9校22レコードを収録している(第3〜6通学区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano');
-    expect(record?.schools?.length).toBe(38);
+    expect(record?.schools?.length).toBe(60);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(20);
+    expect(schoolNames.size).toBe(29);
     expect(record?.coverageNote).toContain('第1通学区');
+    expect(record?.coverageNote).toContain('第2通学区');
+  });
+
+  it('nagano: 全レコードのratioTypeに含まれる%の合計は100になる', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano')?.schools ?? [];
+    for (const s of list) {
+      const total = [...(s.ratioType ?? '').matchAll(/([0-9]+)%/g)].reduce((a, m) => a + Number(m[1]), 0);
+      expect(total).toBe(100);
+    }
+  });
+
+  it('nagano: 第2通学区の小諸義塾(音楽)は観点別A/Bで実技検査の比重が50%と25%に分かれ、上田染谷丘(国際教養)は面接と実技検査を併せて40%で持つ', () => {
+    const a = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '小諸義塾', '前期選抜A', '音楽');
+    const b = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '小諸義塾', '前期選抜B', '音楽');
+    expect(a?.ratioType).toBe('調査書35%:面接10%:学力検査5%:実技検査50%');
+    expect(b?.ratioType).toBe('調査書50%:面接15%:学力検査10%:実技検査25%');
+    const someya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '上田染谷丘', '前期選抜', '国際教養');
+    expect(someya?.ratioType).toBe('調査書40%:面接・実技検査(併せて)40%:学力検査20%');
+    const noza = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '野沢北', '前期選抜', '理数');
+    expect(noza?.ratioType).toBe('調査書70%:面接20%:学力検査10%');
   });
 
   it('miyagi: 白石(看護科・共通選抜)は学力検査7:調査書3の比重を持つ', () => {
