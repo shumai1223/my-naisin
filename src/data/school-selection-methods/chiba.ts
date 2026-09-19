@@ -1,7 +1,7 @@
-// 千葉県: 令和8年度千葉県公立高等学校「一般入学者選抜」の検査の内容等（全日制の課程）。
+// 千葉県: 令和9年度千葉県公立高等学校「一般入学者選抜」の検査の内容等（全日制の課程）。
 //
-// 一次ソース: 千葉県教育委員会「令和8年度千葉県公立高等学校「一般入学者選抜」の検査の内容等（全日制の課程）」
-// (`https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8zennichi.html`・2026-09-19 curlでHTMLを取得)。
+// 一次ソース: 千葉県教育委員会「令和9年度千葉県公立高等学校「一般入学者選抜」の検査の内容等（全日制の課程）」
+// (`https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r9/r9zennichi.html`・2026-09-20 curlでHTMLを取得)。
 // 学校番号ごとの表(学校名・学科名・学校設定検査の内容・志願理由書の要否)を機械解析して転記した
 // (取得したHTMLと生成スクリプトは ops/baselines/chiba-transcription/ に保存)。
 // 千葉県は学力検査を5教科で実施し、学校設定検査(面接・自己表現・作文・小論文・適性検査・集団討論等)を
@@ -13,10 +13,10 @@ import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-met
 
 export const CHIBA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   prefectureCode: 'chiba',
-  fiscalYear: '令和8年度（2026年度）',
+  fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    '全日制課程の県立・市立118校181学科の「学校設定検査の内容」「志願理由書の要否」を全て収録。学校別の学力検査・調査書の比率や傾斜配点は本ページに無く未収録(別資料)。定時制課程は未収録',
+    '全日制課程の県立・市立118校178学科の「学校設定検査の内容」「志願理由書の要否」を全て収録。学校別の学力検査・調査書の比率や傾斜配点は本ページに無く未収録(別資料)。定時制課程は未収録',
   schools: [
     {
       schoolName: '千葉',
@@ -492,7 +492,7 @@ export const CHIBA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       department: '普通',
       selectionCategory: '一般入学者選抜',
       interviewRequired: false,
-      note: '【検査の内容等(全日制)】学校番号54。学校設定検査の内容:その他の検査、（思考力を問う問題）。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
+      note: '【検査の内容等(全日制)】学校番号54。学校設定検査の内容:学校独自問題、（国語・数学）。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
     },
     {
       schoolName: '柏',
@@ -638,8 +638,8 @@ export const CHIBA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       schoolName: '白井',
       department: '普通',
       selectionCategory: '一般入学者選抜',
-      interviewRequired: false,
-      note: '【検査の内容等(全日制)】学校番号71。学校設定検査の内容:自己表現。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
+      interviewRequired: true,
+      note: '【検査の内容等(全日制)】学校番号71。学校設定検査の内容:面接。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
     },
     {
       schoolName: '印旛明誠',
@@ -790,17 +790,10 @@ export const CHIBA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     },
     {
       schoolName: '佐原',
-      department: '普通',
+      department: '普通・理数',
       selectionCategory: '一般入学者選抜',
       interviewRequired: false,
-      note: '【検査の内容等(全日制)】学校番号85。学校設定検査の内容:作文。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
-    },
-    {
-      schoolName: '佐原',
-      department: '理数',
-      selectionCategory: '一般入学者選抜',
-      interviewRequired: false,
-      note: '【検査の内容等(全日制)】学校番号85。学校設定検査の内容:作文。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
+      note: '【検査の内容等(全日制)】学校番号85。学校設定検査の内容:作文。志願理由書:無。くくり募集を実施する学科(表の「＊」)。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
     },
     {
       schoolName: '佐原白楊',
@@ -874,21 +867,14 @@ export const CHIBA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     },
     {
       schoolName: '東総工業',
-      department: '電子機械',
+      department: '機械',
       selectionCategory: '一般入学者選抜',
       interviewRequired: false,
       note: '【検査の内容等(全日制)】学校番号92。学校設定検査の内容:自己表現。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
     },
     {
       schoolName: '東総工業',
-      department: '電気',
-      selectionCategory: '一般入学者選抜',
-      interviewRequired: false,
-      note: '【検査の内容等(全日制)】学校番号92。学校設定検査の内容:自己表現。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
-    },
-    {
-      schoolName: '東総工業',
-      department: '情報技術',
+      department: '電気情報',
       selectionCategory: '一般入学者選抜',
       interviewRequired: false,
       note: '【検査の内容等(全日制)】学校番号92。学校設定検査の内容:自己表現。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
@@ -1014,21 +1000,14 @@ export const CHIBA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     },
     {
       schoolName: '茂原樟陽',
-      department: '電子機械',
+      department: '機械テクノロジー',
       selectionCategory: '一般入学者選抜',
       interviewRequired: true,
       note: '【検査の内容等(全日制)】学校番号102。学校設定検査の内容:面接。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
     },
     {
       schoolName: '茂原樟陽',
-      department: '電気',
-      selectionCategory: '一般入学者選抜',
-      interviewRequired: true,
-      note: '【検査の内容等(全日制)】学校番号102。学校設定検査の内容:面接。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
-    },
-    {
-      schoolName: '茂原樟陽',
-      department: '環境化学',
+      department: '電気テクノロジー',
       selectionCategory: '一般入学者選抜',
       interviewRequired: true,
       note: '【検査の内容等(全日制)】学校番号102。学校設定検査の内容:面接。志願理由書:無。学力検査は5教科(国語・数学・英語・理科・社会)で実施。',
@@ -1287,9 +1266,9 @@ export const CHIBA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     },
   ],
   source: {
-    url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/r8zennichi.html',
-    docTitle: '令和8年度千葉県公立高等学校「一般入学者選抜」の検査の内容等（全日制の課程）（千葉県教育委員会）',
-    lastChecked: '2026-09-18',
+    url: 'https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r9/r9zennichi.html',
+    docTitle: '令和9年度千葉県公立高等学校「一般入学者選抜」の検査の内容等（全日制の課程）（千葉県教育委員会）',
+    lastChecked: '2026-09-19',
   },
   note: '「学校設定検査の内容」欄に「面接」の記載がある学科をinterviewRequired:trueとした(記載が無い学科は学校設定検査として面接を課さない)。「志願理由書」は「有」が出願時に提出を求める学科。学力検査は全校5教科で実施。',
 };

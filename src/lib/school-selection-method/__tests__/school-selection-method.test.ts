@@ -893,10 +893,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(sports?.ratioType).toContain('第3次5%');
   });
 
-  it('chiba: 県立・市立全日制118校181学科の学校設定検査(面接・適性検査・自己表現等)を収録している', () => {
+  it('chiba: 令和9年度の県立・市立全日制118校178学科(くくり募集は1行)の学校設定検査(面接・適性検査・自己表現等)を収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'chiba');
     expect(record?.status).toBe('structured');
-    expect(record?.schools?.length).toBe(181);
+    expect(record?.fiscalYear).toContain('令和9年度');
+    expect(record?.schools?.length).toBe(178);
     expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(118);
     expect(record?.coverageNote).toContain('未収録');
   });
