@@ -1593,14 +1593,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(sp.filter((s) => s.interviewRequired)).toHaveLength(23); // 和歌山商業3競技+箕島3競技=6競技が面接なし
   });
 
-  it('mie: 後期選抜125レコード(全日制108・定時制17)は全て特に重視する選抜資料(◎)を1つ以上持つ', () => {
+  it('mie: 令和9年度の後期選抜126レコード(全日制109・定時制17)は全て特に重視する選抜資料(◎)を1つ以上持つ', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(all).toHaveLength(169);
+    expect(record?.fiscalYear).toContain('令和9年度');
+    expect(all).toHaveLength(170);
     const late = all.filter((s) => s.selectionCategory === '後期選抜');
-    expect(late).toHaveLength(125);
-    expect(late.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(108);
+    expect(late).toHaveLength(126);
+    expect(late.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(109);
     expect(late.filter((s) => (s.note ?? '').includes('・定時制】'))).toHaveLength(17);
     for (const s of late) {
       expect(s.note).toContain('うち特に重視する選抜資料は');
@@ -1630,6 +1631,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('桑名工業', '機械科・材料技術科')?.note).toContain('うち特に重視する選抜資料は調査書の内容)');
     expect(find('津', '普通科')?.note).toContain('うち特に重視する選抜資料は学力検査の結果)');
     expect(find('津', '普通科')?.interviewRequired).toBeUndefined();
+    // 令和9年度: 久居 普通科は学力検査◎(令和8年度は調査書◎)、久居農林は4学科(農業科学・園芸科学・環境デザイン・生活デザイン)
+    expect(find('久居', '普通科')?.note).toContain('うち特に重視する選抜資料は学力検査の結果)');
+    expect(find('久居農林', '園芸科学科')?.note).toContain('うち特に重視する選抜資料は面接の状況)');
+    expect(find('久居農林', '生物生産科・生物資源科')).toBeUndefined();
     const hokusei = find('北星', '普通科(夜間部)(定時制)');
     expect(hokusei?.note).toContain('選抜資料: 面接の状況・調査書の内容・作文の結果');
     expect(hokusei?.note).not.toContain('学力検査の結果');
