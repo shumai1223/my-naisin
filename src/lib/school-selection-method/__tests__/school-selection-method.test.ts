@@ -687,13 +687,27 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(bNittei?.note).toContain('10分間');
   });
 
-  it('kochi: schoolsは全日制32行(分校2件含む)64レコード+多部制単位制6レコード+定時制11レコードを収録している(実技検査・成人特別選抜は未収録)', () => {
+  it('kochi: schoolsは全日制32行(分校2件含む)64レコード+多部制単位制6レコード+定時制11レコードを収録している+実技検査の概要12レコード(成人特別選抜は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi');
-    expect(record?.schools?.length).toBe(81);
+    expect(record?.schools?.length).toBe(93);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
     expect(schoolNames.size).toBe(32);
     expect(record?.coverageNote).toContain('定時制');
     expect(record?.coverageNote).toContain('多部制単位制');
+  });
+
+  it('kochi: 実技検査の概要は6学科×A/B日程の12レコードで、B日程の岡豊・体育コースは運動競技種目テストの記載が無くA日程にはある', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kochi')?.schools ?? [];
+    const jitsugi = list.filter((s) => s.department?.endsWith('・実技検査'));
+    expect(jitsugi).toHaveLength(12);
+    expect(jitsugi.filter((s) => s.selectionCategory === 'A日程')).toHaveLength(6);
+    const taiA = jitsugi.find((s) => s.schoolName === '岡豊' && s.department?.includes('体育') && s.selectionCategory === 'A日程');
+    const taiB = jitsugi.find((s) => s.schoolName === '岡豊' && s.department?.includes('体育') && s.selectionCategory === 'B日程');
+    expect(taiA?.note).toContain('運動競技種目テスト: 本校が指定する');
+    expect(taiB?.note).toContain('運動競技種目テストの記載はなし');
+    expect(jitsugi.every((s) => s.interviewRequired === undefined)).toBe(true);
+    const dp = jitsugi.find((s) => s.schoolName === '高知国際' && s.department?.includes('DP'));
+    expect(dp?.note).toContain('10分程度');
   });
 
   it('kochi: 定時制の課程は11校すべてB日程のみで、高知商業は7分・高知工業は10分・清水は6分の個人面接と記録されている', () => {
