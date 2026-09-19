@@ -560,3 +560,13 @@ miyazaki/okinawa])。
 **T-Y13の一区切り**: 未着手はgifu[優先度低]のみ(iwate/fukuoka/miyagi/ishikawa/shiga/akitaの
 6県は保留済み)。次回セッションはT-Y14(gifu頁3-4/okayama頁5-7/hiroshima頁4-8/tokushima頁1-7)
 へ主軸を移してよい。
+
+## 追記 2026-09-20: gifu(41県目)完了・6件目のconfirmed-none
+
+岐阜県私学振興課「岐阜県と国が行う私立高校生等への修学支援制度一覧(令和8年度)」PDF(`/uploaded/attachment/500731.pdf`・掲載元 page/2210.html)を curl+pdftotext -layout で本文確認。県の制度は(4)私立高等学校等授業料軽減補助金と(5)入学金軽減補助金の2本のみで、(4)は「(2)高校生等新修学支援金の上乗せ補助・新修学支援金を受給する生徒が対象」、(2)は国籍要件で就学支援金の対象外となる外国籍・外国人学校の生徒向け(県ページも同旨)。よって日本国籍等の生徒の授業料への県独自上乗せは confirmed-none。(5)入学金軽減補助金は学校補助型で授業料ではなく、表の桁配置が崩れ金額区分を断定できないため金額は転記せず note に記載。
+
+tsc実exit0・関連jest(shien-uwanose/education-cost)83件green(gifuのconfirmed-noneテスト+1)。
+
+**T-Y13進捗**: 41県調査済み(35県confirmed-yes+6県confirmed-none[tokushima/kochi/kumamoto/miyazaki/okinawa/gifu])。未着手なし。残りは保留6県(iwate/fukuoka/miyagi/ishikawa/shiga/akita)のみで、いずれも一次資料の再確認待ち。
+
+**次回セッションが選ぶべきこと**: T-Y13の未着手は0。保留6県は10月以降(新年度資料の公表後)にまとめて再確認。次の主食は T-Y11-winter Task B(学校別倍率の多年度化)か T-Y14(10月公表待ち以外)。

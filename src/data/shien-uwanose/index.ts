@@ -18,6 +18,7 @@ import { HIROSHIMA_SHIEN_UWANOSE } from './hiroshima';
 import { TOTTORI_SHIEN_UWANOSE } from './tottori';
 import { YAMAGUCHI_SHIEN_UWANOSE } from './yamaguchi';
 import { NARA_SHIEN_UWANOSE } from './nara';
+import { GIFU_SHIEN_UWANOSE } from './gifu';
 import { GUNMA_SHIEN_UWANOSE } from './gunma';
 import { TOCHIGI_SHIEN_UWANOSE } from './tochigi';
 import { IBARAKI_SHIEN_UWANOSE } from './ibaraki';
@@ -86,4 +87,5 @@ export const SHIEN_UWANOSE_BY_PREFECTURE: Partial<Record<string, PrefectureShien
   miyazaki: MIYAZAKI_SHIEN_UWANOSE,
   kagoshima: KAGOSHIMA_SHIEN_UWANOSE,
   okinawa: OKINAWA_SHIEN_UWANOSE,
+  gifu: GIFU_SHIEN_UWANOSE,
 };

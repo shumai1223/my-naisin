@@ -458,6 +458,15 @@ describe('T-Y13 都道府県独自上乗せ制度', () => {
     expect(record?.note).toContain('確認できなかった');
   });
 
+  it('gifuは一次資料を確認のうえ日本国籍等の生徒への授業料の県独自上乗せが無いと確認できた(confirmed-none・外国籍向けの授業料軽減補助金は別)', () => {
+    const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'gifu');
+    expect(record?.status).toBe('confirmed-none');
+    expect(record?.tiers).toBeUndefined();
+    expect(record?.note).toContain('確認できなかった');
+    expect(record?.note).toContain('外国籍');
+    expect(record?.source.url).toContain('pref.gifu.lg.jp');
+  });
+
   it('kagoshimaは県独自の授業料軽減費補助(月額×12)を世帯の課税状況別に持つ', () => {
     const record = getShienUwanose(SHIEN_UWANOSE_BY_PREFECTURE, 'kagoshima');
     expect(record?.status).toBe('confirmed-yes');
