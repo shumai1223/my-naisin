@@ -14,7 +14,7 @@ export function buildSenmon(group, rows) {
     if (r.kt != null) { parts.push(`集団討論${r.kt}点`); tot += r.kt; }
     if (r.rt) { parts.push(`${r.rt}${r.rp}点`); tot += r.rp; }
     if (r.jitsu != null) { parts.push(`実技検査${r.jitsu}点`); tot += r.jitsu; }
-    ins += rec(r.n, dept, '推薦に基づく選抜', r.men != null || r.kt != null, `推薦枠割合${r.w}%`, `文化・スポーツ等特別推薦の実施${r.cs}。調査書の観点別学習状況の評価は活用せず評定のみ活用。満点は${parts.join('+')}(合計${tot}点)${r.pr ? '。' + r.pr : ''}。${r.jitsu != null ? '' : '実技検査・'}学校設定検査の実施なし`);
+    ins += rec(r.n, dept, '推薦に基づく選抜', r.men != null || r.kt != null, `推薦枠割合${r.w}%`, `文化・スポーツ等特別推薦の実施${r.cs}。${r.kanten ? '調査書は観点別学習状況の評価を活用(評定は活用しない)' : '調査書の観点別学習状況の評価は活用せず評定のみ活用'}。満点は${parts.join('+')}(合計${tot}点)${r.pr ? '。' + r.pr : ''}。${r.jitsu != null ? '' : '実技検査・'}学校設定検査の実施なし`);
     const sc = r.sc ? '(国数英は自校作成問題)' : '';
     const k = r.keisha ? `。${r.keisha}` : '';
     ins += rec(r.n, dept, '第一次募集', r.m1 != null, (r.f1 || '学力検査7:調査書3(700点:300点)+ESAT-J20点') + (r.m1 != null ? `+個人面接${r.m1}点` : '') + (r.f1j ? `+実技検査${r.f1j}点` : ''), r.f1n || `学力検査は国数英社理の5教科${sc}${k}。学力検査を実施する教科の評定は1倍・実施しない教科(社理)の評定は2倍に換算。${r.f1j ? '実技検査' + r.f1j + '点を課す。' : ''}${r.m1 != null ? '満点は学力検査700点+調査書300点+個人面接' + r.m1 + '点。' + (r.m1n || '') + '小論文の実施なし' : '面接・小論文の実施なし'}`.replace('。。', '。'));
