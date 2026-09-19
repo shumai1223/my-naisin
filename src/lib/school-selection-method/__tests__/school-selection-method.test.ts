@@ -2363,11 +2363,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toContain('面接(段階評価)');
   });
 
-  it('shizuoka: schoolsは令和9年度PDF頁1-3の7校29レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取・土肥分校は設定なしのため対象外)', () => {
+  it('shizuoka: schoolsは令和9年度PDF頁1-5(沼津東まで)の14校49レコードの学校裁量枠を収録している(南伊豆分校・松崎・稲取・土肥分校・沼津東理数は設定なしのため対象外)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka');
-    expect(record?.schools?.length).toBe(29);
+    expect(record?.schools?.length).toBe(49);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東', '熱海', '伊豆総合', '韮山', '伊豆中央', '田方農業']));
+    expect(schoolNames).toEqual(new Set(['下田', '伊豆伊東', '熱海', '伊豆総合', '韮山', '伊豆中央', '田方農業', '三島南', '三島北', '御殿場', '御殿場南', '小山', '裾野', '沼津東']));
+  });
+
+  it('shizuoka: 全レコードの選抜資料の記述が○列の型(体育系=実技+事前調査票/農業後継者・地域貢献=作文/探究=適応力検査または作文/学習系=調査書・学力検査・面接のみ)のいずれかに一致する不変条件(転記誤読の検算)', () => {
+    const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'shizuoka')?.schools ?? [];
+    for (const s of recs) {
+      const n = s.note ?? '';
+      expect(s.ratioType).toMatch(/^選抜割合\d+%(程度|まで)\(希望者対象\)$/);
+      const ok =
+        n.includes('実技検査・事前調査票(作文') ||
+        n.includes('作文・事前調査票(実技検査') ||
+        n.includes('その他(適応力検査)') ||
+        n.includes('調査書・学力検査・面接のみ') ||
+        n.includes('調査書・学力検査・面接・作文(実技検査') ||
+        n.includes('調査書・学力検査・面接・実技検査(作文');
+      expect(ok).toBe(true);
+    }
+    // 体育的活動・文化的活動のⅠ枠は必ず実技検査と事前調査票を伴う
+    for (const s of recs.filter((x) => /審査項目は(文化的・)?体育的活動/.test(x.note ?? ''))) {
+      expect(s.note).toContain('実技検査・事前調査票');
+      expect(s.selectionCategory).toBe('学校裁量枠Ⅰ');
+    }
   });
 
   it('shizuoka: 頁2-3は体育的活動系(Ⅰ)が実技検査・事前調査票あり、農業後継者枠は作文+事前調査票、探究活動は作文または適応力検査、学習系は調査書・学力検査・面接のみ(画像で○列位置を確認済み)', () => {
