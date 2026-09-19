@@ -23,7 +23,21 @@ aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026
 - ~~hiroshima~~(**頁3を更新済み・追記108**): **公表済み**。目次`https://www.pref.hiroshima.lg.jp/site/kyouiku/09senior-2nd-r9-nyuushi-r9-kou-r9-kou-mokuji-r9-kou-mokuji.html`(更新2026-09-18)から『入学者選抜の実施内容』ページ(`/site/kyouiku/09senior-2nd-r09-nyuushi-r09-kou-r09-kou-jisshinaiyou-r09-kou-jisshinaiyou-mokuji.html`)。DBはR8(90レコード・頁3のみ)のまま。**2026-09-20調査(追記107)**: R8の実施内容一覧表(`646901.pdf`・8頁縦)に相当するR9資料は`https://www.pref.hiroshima.lg.jp/uploaded/attachment/678267.pdf`(8頁・横向き・更新2026-08-17・同じ『実施内容一覧表』)。別に学校別の実施内容シート冊子(全日制広島市ほか=`678268.pdf`(2)-1・福山市ほか=`679531.pdf`(2)-2 等・二次選抜=(2)-4〜)も公表。R8との比較で**頁3のトークン差42種**(広島市立広島工業が『ものづくり探究科(機械・電気・建築)/情報デザイン探究科(情報工学・デザイン工学)/自動車探究科』に再編・二次選抜の欄構成が変わる)=**差分パッチでなく頁3の再抽出が必要**。
 - **osaka**: 令和9年度は`https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r09_senbatsu.html`に『入学者選抜方針』等。R8の実施要項は令和7年10月16日公表だったため**R9の実施要項は10月中旬の見込み**=10月に再確認。
 - **hokkaido**: 時事通信の『令和9年度試験の実施要領』は**教員採用試験**の記事で無関係。道立高校の令和9年度選抜の手引は未確認(R8の手引は`https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/201495.html`)=10月以降に再確認。
-- 残り(未調査10県): aomori / fukushima / gunma / ibaraki / kagoshima / kochi / tochigi / toyama / yamagata / yamaguchi。
+- 残り(調査済み・詳細は下の2回目): aomori / fukushima / gunma / ibaraki / kagoshima / kochi / tochigi / toyama / yamagata / yamaguchi。
+
+## PDF直リンク県のハブ調査(2026-09-20・2回目=残り10県。WebSearchでURL特定→◎はページ取得で裏取り済み・○は検索結果のみ)
+- ◎**aomori**: **公表済み**。『令和9年度青森県立高等学校入学者選抜における求める生徒像・選抜方法等一覧』`https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/R09motomeru.html`(更新2026-07-09・全県版PDF約1.4MB+6地区版)。DBはR8(180レコード)。
+- ◎**fukushima**: **公表済み**。`https://www.pref.fukushima.lg.jp/site/edu/r9koukounyushi.html`に『各高等学校の選抜方法一覧』(2026-07-14)=`/uploaded/attachment/763363.pdf`・資料の見方=`760972.pdf`・基本方針(2026-09-11)=`762203.pdf`。DBはR8(444レコード)。
+- ○**yamagata**: 公表済みとみられる。`https://www.pref.yamagata.jp/700013/koko/r9nyuugakusyasennbatsu.html`(令和9年度入学者選抜情報)+前期(特色)選抜の各校概要(例: 東学区`2026r9nyuugakusyajouhoueast.html`)。DBはR8(138レコード)。要取得確認。
+- ○**yamaguchi**: 実施大綱が公表済み(`https://www.pref.yamaguchi.lg.jp/site/kyouiku/353652.html`・2026-07-07)。各校の選抜方法・特色選抜の要件・くくり募集の概要を含むとの記載。DBはR8(193レコード)。要取得確認。
+- ○**gunma**: 実施大綱`https://www.pref.gunma.jp/site/kyouiku/754234.html`(更新2026-05-01)と『各校の選抜方法等』(検索要約では2026-08-03公開・URL未特定)。DBはR8(160レコード)。ハブ`list66-367.html`から要特定。
+- ○**tochigi**: 『令和9(2027)年度栃木県立高等学校入学者選抜要項』`https://www.pref.tochigi.lg.jp/m04/r08/r9nyuugakusyasennbatsusyoukou.html`(2026-04-02決定)。**制度変更あり: 特色選抜の割合上限が現行30%程度→50%に引き上げ・学力検査と独自検査の実施**=R8のDB(216レコード)の特色選抜レコードに影響。実施細則の確定版は8月下旬公表予定(要確認)・各校特色選抜の一覧`tochigi-edu.ed.jp/.../7421`(入試情報)は学校側。**優先度高(制度変更のため)**。
+- ×**ibaraki**: R9は日程・リーフレット(`https://kyoiku.pref.ibaraki.jp/post-40694/`)のみ。実施要項はR8が`youkou2026`=R9の要項は未確認(10月頃の見込み)。
+- ×**kagoshima**: R9は日程(`.../r9nittei.html`)と入試情報ページ(`koukou02.html`)のみ。実施要綱は未確認(R8は`r7/r8youkou.html`=前年度中に公表された前例あり・要再確認)。
+- ×**kochi**: R9ページ`https://www.pref.kochi.lg.jp/doc/2026011400217/`は日程・定員・出題方針。選抜方法(取扱要項)は未確認。
+- ×**toyama**: R9は日程の発表資料(`https://www.kengaku.tym.ed.jp/archives/1917`)のみ。実施要領は未確認。
+
+
 
 ## 探索結果(2026-09-20・WebSearchでURL特定→ページ取得で裏取り。検索要約は根拠にしない)
 - **nagasaki**: 入試ハブ(`.../koko-nyushi/`)に令和9年度リンク無し。令和9年度『入学者選抜の基本方針』PDF(`/fs/1/5/3/2/2/_/R9______________.pdf`)のみ確認=**実施要領は未公表**。
