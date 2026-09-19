@@ -2391,7 +2391,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: schoolsは全7頁の103校(頁1=日比谷/三田/戸山/竹早/向丘/上野/日本橋/本所/城東/東/深川/大崎/小山台・頁2=八潮/駒場/目黒/大森/田園調布/雪谷/桜町/千歳丘/松原/青山/広尾/鷺宮/武蔵丘・頁3=杉並/豊多摩/西/豊島/文京/竹台/板橋/大山/北園/高島/井草/石神井/田柄/練馬・頁4=光丘/青井/足立/足立新田/足立西/江北/淵江/葛飾野/南葛飾/江戸川/葛西南/小岩/小松川/篠崎/紅葉川/片倉・頁5=八王子北/八王子東/富士森/松が谷/立川/武蔵野北/多摩/府中/府中西/府中東/昭和/拝島/神代/調布北/調布南・頁6=小川/成瀬/野津田/町田/山崎/小金井北/小平/小平西/小平南/日野/日野台/南平/東村山西/国立/福生/狛江・頁7=東大和/東大和南/清瀬/久留米西/武蔵村山/永山/羽村/五日市/田無/保谷+島しょ6校[大島/新島/神津/三宅/八丈/小笠原])303レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo');
-    expect(record?.schools?.length).toBe(844);
+    expect(record?.schools?.length).toBe(872);
     // 普通科(頁1-7)の103校。n2_11のコース/エンカレッジ8件は別のdepartmentで区別される
     const futsu = (record?.schools ?? []).filter((s) => s.department === '普通科');
     expect(futsu).toHaveLength(303);
@@ -2819,10 +2819,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(tsu.find((s) => s.schoolName === '一橋' && s.selectionCategory === '通信制課程 前期選抜')?.ratioType).toBe('学力検査600:調査書75(比率8:1)');
   });
 
-  it('tokyo: n2_16頁1-3の文化・スポーツ等特別推薦は9校25レコードで、種目・募集人数・満点(調査書+面接+実技)・数値目標を持つ', () => {
+  it('tokyo: n2_16頁1-3の文化・スポーツ等特別推薦は9校25レコード(頁1-3)+頁4-6の10校28レコードで、種目・募集人数・満点(調査書+面接+実技)・数値目標を持つ', () => {
     const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? []).filter((s) => s.selectionCategory === '文化・スポーツ等特別推薦');
-    expect(list).toHaveLength(25);
-    expect(new Set(list.map((s) => s.schoolName))).toEqual(new Set(['向丘', '上野', '本所', '城東', '東', '深川', '大崎', '八潮', '目黒']));
+    expect(list).toHaveLength(53);
+    for (const n of ['向丘', '上野', '本所', '城東', '東', '深川', '大崎', '八潮', '目黒', '大森', '雪谷', '桜町', '千歳丘', '広尾', '鷺宮', '武蔵丘', '杉並', '豊多摩', '豊島']) expect(list.some((s) => s.schoolName === n)).toBe(true);
     const by = (n: string) => list.filter((s) => s.schoolName === n);
     expect(by('城東')).toHaveLength(7);
     expect(by('目黒')).toHaveLength(3);
@@ -2835,6 +2835,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('上野')[0].ratioType).toBe('調査書500点+集団面接150点+実技検査350点');
     expect(by('城東').find((s) => s.department === '硬式野球(男・3)')?.note).toContain('全国選抜野球大会出場');
     expect(by('深川')[0].note).toContain('外国語コースは後掲');
+    // 頁4-6
+    expect(by('杉並')).toHaveLength(3);
+    expect(by('杉並').every((s) => s.ratioType === '調査書500点+集団面接200点+実技検査300点')).toBe(true);
+    expect(by('杉並').find((s) => s.department.startsWith('吹奏楽'))?.note).toContain('杉並は頁5から続く');
+    expect(by('豊多摩')).toHaveLength(5);
+    expect(by('豊多摩').every((s) => s.ratioType === '調査書500点+集団面接250点+実技検査250点')).toBe(true);
+    expect(by('豊島')).toHaveLength(4);
+    expect(by('豊島').every((s) => s.ratioType === '調査書500点+集団面接100点+実技検査400点')).toBe(true);
+    expect(by('鷺宮')).toHaveLength(5);
+    expect(by('鷺宮')[0].ratioType).toBe('調査書450点+個人面接100点+実技検査350点');
+    expect(by('桜町')[0].ratioType).toBe('調査書600点+個人面接200点+実技検査400点');
+    expect(by('千歳丘')[0].department).toBe('硬式野球(男・6)');
+    expect(by('広尾')).toHaveLength(3);
+    expect(by('大森').find((s) => s.department.startsWith('ダンス'))?.note).toContain('全国大会8位入賞以上');
     expect(list.every((s) => s.note?.includes('推薦の基準(要件の長文)は本DBでは未収録'))).toBe(true);
   });
 
