@@ -1583,6 +1583,38 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('門司学園', '普通', '推薦入学')?.note).toContain('推薦入学の新規実施校');
   });
 
+  it('ehime: 特色入学者選抜117レコード(40校・本選抜67+文化スポーツ重視50)で、全ての比重の合計が10になる', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ehime');
+    expect(record?.status).toBe('structured');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(117);
+    expect(new Set(all.map((s) => s.schoolName.replace(/\((本校|小田分校|中島分校|砥部分校)\)/, ''))).size).toBe(40);
+    expect(all.filter((s) => s.selectionCategory === '特色入学者選抜')).toHaveLength(67);
+    expect(all.filter((s) => s.selectionCategory.startsWith('特色入学者選抜('))).toHaveLength(50);
+    for (const s of all) {
+      expect(s.ratioType).toContain('(比重・合計10)');
+      const total = (s.ratioType ?? '')
+        .replace('(比重・合計10)', '')
+        .split(':')
+        .reduce((a, it) => a + Number(it.match(/([0-9]+)$/)?.[1] ?? 0), 0);
+      expect(total).toBe(10);
+    }
+  });
+
+  it('ehime: 川之江は調査書5:作文2:面接3、松山東は小論文と集団討論、新居浜東体育は実技テスト4・プレゼン2、伊予芸術は募集割合100%', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ehime')?.schools ?? [];
+    const find = (school: string, dept: string, cat = '特色入学者選抜') => list.find((s) => s.schoolName === school && s.department === dept && s.selectionCategory === cat);
+    expect(find('川之江', '普通')?.ratioType).toBe('調査書5:作文2:面接3(比重・合計10)');
+    expect(find('川之江', '普通', '特色入学者選抜(文化・スポーツ活動の取組・成果等を重視した選抜)')?.ratioType).toBe('調査書6:作文2:面接2(比重・合計10)');
+    expect(find('松山東', '普通')?.ratioType).toBe('調査書6:小論文2:集団討論2(比重・合計10)');
+    expect(find('新居浜東', '体育(健康スポーツ)')?.ratioType).toBe('調査書4:実技テスト4:プレゼンテーション2(比重・合計10)');
+    expect(find('伊予', '芸術')?.note).toContain('募集割合100%程度(募集人数40人程度)');
+    expect(find('しまなみ', '総合学科(伯方キャンパス16人・大三島キャンパス16人)')?.note).toContain('募集人数32人程度');
+    // 合算行(縦書きの学科名)の募集人数: 松山工業8学科×16=128、伊予農業6学科×16=96
+    expect(find('松山工業', '機械・電子機械・電気・情報電子・工業化学・建築・土木・繊維(各40人・各16人)')?.note).toContain('募集定員320人');
+    expect(find('伊予農業', '生物工学・園芸流通・食品化学・生活科学・環境開発・特用林産(各40人・各16人)')?.note).toContain('募集人数96人程度');
+  });
+
   it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
     expect(record?.status).toBe('structured');
