@@ -1486,36 +1486,33 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(fukushima?.note).toContain('中高連携学習のまとめ');
   });
 
-  it('oita: 推薦入学者選抜88レコード(39校・全日制と定時制)で、全ての比重の合計が100%に一致する', () => {
+  it('oita: 令和9年度の推薦入学者選抜88レコード(39校・全日制と定時制)を収録し、活動指定別に分かれない比重の合計は100%に一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'oita');
     expect(record?.status).toBe('structured');
+    expect(record?.fiscalYear).toContain('令和9年度');
     const all = record?.schools ?? [];
     expect(all).toHaveLength(88);
     expect(new Set(all.map((s) => s.schoolName)).size).toBe(39);
+    let plain = 0;
     for (const s of all) {
       expect(s.selectionCategory).toBe('推薦入学者選抜');
-      const items = (s.ratioType ?? '').replace('(比重%)', '').split(':');
-      const total = items.reduce((a, it) => a + Number(it.match(/([0-9.]+)$/)?.[1] ?? 0), 0);
-      // 中津南耶馬溪校は16.7×3+50=100.1(資料の表記どおり)
+      const body = (s.ratioType ?? '').replace('(比重%)', '');
+      // 活動指定別に比重が分かれる行(括弧内に併記)は合計の検算対象外
+      if (/[()]/.test(body)) continue;
+      plain++;
+      const total = body.split(':').reduce((a, it) => a + Number(it.match(/([0-9.]+)$/)?.[1] ?? 0), 0);
       expect(Math.abs(total - 100)).toBeLessThanOrEqual(0.2);
     }
+    expect(plain).toBeGreaterThanOrEqual(75);
   });
 
-  it('oita: 大分舞鶴理数科は適性検査60%、大分商業は情報処理科だけ活動指定に水球を持つ、鶴崎工業電気科は志望学科だけ面接40%', () => {
-    const maizuru = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'oita')?.schools?.find(
-      (s) => s.schoolName === '大分舞鶴' && s.department === '理数科'
-    );
-    expect(maizuru?.ratioType).toBe('調査書10:調査書・推薦書2:面接8:小論文20:適性検査60(比重%)');
-    const shogyo = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'oita')?.schools ?? [];
-    const noteOf = (dept: string) => shogyo.find((s) => s.schoolName === '大分商業' && s.department === dept)?.note ?? '';
-    expect(noteOf('情報処理科')).toContain('水球(男子・女子)');
-    expect(noteOf('商業科')).not.toContain('水球');
-    expect(noteOf('国際経済科')).not.toContain('水球');
-    const denki = shogyo.find((s) => s.schoolName === '鶴崎工業' && s.department === '電気科');
-    expect(denki?.ratioType).toBe('調査書10:調査書・推薦書60:面接15:小論文15(比重%)');
-    expect(denki?.note).toContain('志望学科は比重が異なり 調査書10・調査書・推薦書30・面接40・小論文20');
-    const higashi = shogyo.find((s) => s.schoolName === '中津東' && s.department === '機械科' && !(s.note ?? '').includes('定時制】'));
-    expect(higashi?.note).toContain('相撲(男子)・剣道(男子・女子)');
+  it('oita: 令和9年度の募集人員・比重(大分南=活動指定あり20人・活動指定なし5人、大分商業国際経済科=活動指定あり7人、別府鶴見丘=調査書20:推薦書・調査書40:小論文20:面接20)を原資料どおり保持する', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'oita')?.schools ?? [];
+    const find = (school: string, dept: string) => list.find((s) => s.schoolName === school && s.department === dept);
+    expect(find('大分南', '普通科')?.note).toContain('【活動指定あり】20人 【活動指定なし】5人');
+    expect(find('大分商業', '国際経済科')?.note).toContain('【活動指定あり】7人');
+    expect(find('別府鶴見丘', '普通科')?.ratioType).toBe('調査書20:推薦書・調査書40:小論文の結果20:面接の結果20(比重%)');
+    expect(find('中津南(耶馬溪校)', '環境・社会共生科')?.note).toContain('内地域活性化枠は6人');
   });
 
   it('wakayama: 一般選抜73レコード(35校・全日制60/定時制13)で、全ての割合の合計が100%に一致する', () => {

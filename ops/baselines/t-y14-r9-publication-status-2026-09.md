@@ -3,8 +3,8 @@
 T-Y14のDBのうちR8のまま残る県について、R9資料の公表有無を確認した記録。**URLが200でも公表済みとは限らない**(福岡は200だが『10月下旬に公表予定』)。
 確認方法: 各県のR8ソースがHTMLページの県はそのページを取得し『令和9年度』リンクを抽出。PDF直リンクの県は年度文字列の置換(r8→r9)を試したが多くは404(=命名規則が違うだけで未公表の証拠ではない)。
 
-## R9へ更新済み(17県・2026-09-20時点。chiba/ehime/nagano/naraは同日更新)
-aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026-09-20更新・全面再構築) / miyazaki(2026-09-20更新) / mie(2026-09-20更新) / nara(2026-09-20更新) / niigata / okinawa / shimane / shizuoka / yamanashi
+## R9へ更新済み(18県・2026-09-20時点。chiba/ehime/nagano/naraは同日更新)
+aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026-09-20更新・全面再構築) / oita(2026-09-20更新・推薦のみ) / miyazaki(2026-09-20更新) / mie(2026-09-20更新) / nara(2026-09-20更新) / niigata / okinawa / shimane / shizuoka / yamanashi
 
 ## R9公表を確認したがDB未更新
 | 県 | R9資料 | 備考 |
@@ -15,7 +15,7 @@ aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026
 | ~~mie~~(更新済み・追記91) | `/common/04/ci600017179.htm`→資料6(別表4)`001264584.pdf`・資料7(別表5)`001264585.pdf` | R8→R9の実差分6点 |
 | ~~miyazaki~~(更新済み・追記93) | 『令和9年度県立高等学校生徒募集(令和9年春入学生)について』`/kokokyoiku/kyoikukosodate/kyoiku/20260519170532.html` | 未取得(R8のURLは20250618の日付ページ) |
 
-| oita | **公表済み**: 推薦入学者選抜【第2期公表分】`https://www.pref.oita.jp/site/gakkokyoiku/r09suisen2.html`(2026-08-31更新・学校学科別PDF88本・`/uploaded/life/2352031_*_misc.pdf`・一覧はops/baselines/oita-r9/pdf-list.tsv)。第1期公表分`r09suisen1.html`は取得時404(掲載変更の可能性)。`r09suisen.html`(2026-05-22)は『推薦入試の内容を一部変更』の告知 | R8と同数の88本(2頁・pdftotextで読める)だが**推薦入試の内容が変更**されており(調査書点基準・募集人員に『内地域活性化枠』等)、縦書きラベルが混ざるため-layoutの単純抽出は失敗(比重合計が100にならない行が27)。bbox座標抽出で再構築する |
+| ~~oita~~(更新済み・追記99・推薦のみ) | **公表済み**: 推薦入学者選抜【第2期公表分】`https://www.pref.oita.jp/site/gakkokyoiku/r09suisen2.html`(2026-08-31更新・学校学科別PDF88本・`/uploaded/life/2352031_*_misc.pdf`・一覧はops/baselines/oita-r9/pdf-list.tsv)。第1期公表分`r09suisen1.html`は取得時404(掲載変更の可能性)。`r09suisen.html`(2026-05-22)は『推薦入試の内容を一部変更』の告知 | R8と同数の88本(2頁・pdftotextで読める)だが**推薦入試の内容が変更**されており(調査書点基準・募集人員に『内地域活性化枠』等)、縦書きラベルが混ざるため-layoutの単純抽出は失敗(比重合計が100にならない行が27)。bbox座標抽出で再構築する |
 | tokyo | **公表済み(直近)**: 令和9年度東京都立高等学校入学者選抜実施要綱・同細目(発表2026-09-17)`https://www.kyoiku.metro.tokyo.lg.jp/information/press/2026/09/2026091703`。R8は`20250925_n2_10`(2025-09-25) | 未取得。R8→R9差分の確認が必要 |
 
 ## 探索結果(2026-09-20・WebSearchでURL特定→ページ取得で裏取り。検索要約は根拠にしない)
