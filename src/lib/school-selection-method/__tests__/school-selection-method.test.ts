@@ -3121,11 +3121,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは32校(学校番号01〜32・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川)231レコードを収録している', () => {
+  it('fukushima: schoolsは36校(学校番号01〜33・あぶくま柏鵬・36・37・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川/田村/あぶくま柏鵬/会津/葵)246レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
-    expect(record?.schools?.length).toBe(231);
+    expect(record?.schools?.length).toBe(246);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南', '須賀川創英館', '須賀川桐陽', '清陵情報', '岩瀬農業', '光南', '白河', '白河旭', '白河実業', '修明', '石川']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南', '須賀川創英館', '須賀川桐陽', '清陵情報', '岩瀬農業', '光南', '白河', '白河旭', '白河実業', '修明', '石川', '田村', 'あぶくま柏鵬', '会津', '葵']));
   });
 
   it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
@@ -3238,6 +3238,17 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
     expect(250 + 360 + 90).toBe(700);
     expect(recs.find((x) => x.selectionCategory === '一般選抜')?.note).toContain('連携型選抜との併願者');
+  });
+
+  it('fukushima: 田村スポーツ科は特色検査=強化指定種目の実技250点で満点800点・一般選抜の面接は2回(意欲/運動能力)で合計200点', () => {
+    const t = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '田村', '特色選抜', 'スポーツ科');
+    expect(t?.note).toContain('選抜資料の満点は800点');
+    expect(250 + 190 + 110 + 250).toBe(800);
+    const g = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '田村', '一般選抜', 'スポーツ科');
+    expect(g?.note).toContain('個人面接を2回実施');
+    expect(g?.note).toContain('合計200点満点');
+    // 田村普通科は特色選抜A型・B型とも満点550点で募集定員枠40%
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '田村', '特色選抜', '普通科')?.note).toContain('募集定員枠40%程度');
   });
 
   it('fukushima: 二本松実業は4学科(工業3科+家庭科生活文化科)×3区分の12レコードで生活文化科のみ特色選抜の募集定員枠が10%', () => {
