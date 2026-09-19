@@ -2391,7 +2391,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: schoolsは全7頁の103校(頁1=日比谷/三田/戸山/竹早/向丘/上野/日本橋/本所/城東/東/深川/大崎/小山台・頁2=八潮/駒場/目黒/大森/田園調布/雪谷/桜町/千歳丘/松原/青山/広尾/鷺宮/武蔵丘・頁3=杉並/豊多摩/西/豊島/文京/竹台/板橋/大山/北園/高島/井草/石神井/田柄/練馬・頁4=光丘/青井/足立/足立新田/足立西/江北/淵江/葛飾野/南葛飾/江戸川/葛西南/小岩/小松川/篠崎/紅葉川/片倉・頁5=八王子北/八王子東/富士森/松が谷/立川/武蔵野北/多摩/府中/府中西/府中東/昭和/拝島/神代/調布北/調布南・頁6=小川/成瀬/野津田/町田/山崎/小金井北/小平/小平西/小平南/日野/日野台/南平/東村山西/国立/福生/狛江・頁7=東大和/東大和南/清瀬/久留米西/武蔵村山/永山/羽村/五日市/田無/保谷+島しょ6校[大島/新島/神津/三宅/八丈/小笠原])303レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo');
-    expect(record?.schools?.length).toBe(667);
+    expect(record?.schools?.length).toBe(693);
     // 普通科(頁1-7)の103校。n2_11のコース/エンカレッジ8件は別のdepartmentで区別される
     const futsu = (record?.schools ?? []).filter((s) => s.department === '普通科');
     expect(futsu).toHaveLength(303);
@@ -2583,7 +2583,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(get('中野工科', '第一次募集')?.ratioType).toBe('学力検査は実施しない+調査書300点+個人面接350点+実技検査350点');
     expect(get('練馬工科', '第二次募集')?.ratioType).toBe('学力検査は実施しない+調査書300点+個人面接350点+小論文/作文350点');
     expect(enc.every((s) => s.interviewRequired === true)).toBe(true);
-    const rk = list.filter((s) => s.schoolName === '六郷工科');
+    const rk = list.filter((s) => s.schoolName === '六郷工科' && s.department?.includes('専門教育を主とする学科'));
     expect(rk).toHaveLength(3);
     expect(rk.find((s) => s.selectionCategory === '推薦に基づく選抜')?.note).toContain('調査書500点+個人面接400点+作文100点(合計1000点)');
     expect(rk.find((s) => s.selectionCategory === '第二次募集')?.ratioType).toBe('学力検査6:調査書4(600点:400点)+個人面接300点');
@@ -2660,7 +2660,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: n2_12頁8の国際(国際科は英語2倍・IBコースは英語/数学の適否判定のみ)と併合科3校(推薦は実施しない)', () => {
     const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? [];
-    const kokusai = list.filter((s) => s.schoolName === '国際');
+    const kokusai = list.filter((s) => s.schoolName === '国際' && s.department?.includes('専門教育を主とする学科・国際関係に関する学科'));
     expect(kokusai).toHaveLength(5);
     const get = (cat: string) => kokusai.find((s) => s.selectionCategory === cat);
     expect(get('推薦に基づく選抜')?.note).toContain('調査書500点+個人面接200点+小論文300点(合計1000点)');
@@ -2742,6 +2742,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(t?.note).toContain('調査書500点+個人面接50点+小論文200点+学校設定検査(口頭試問)250点(合計1000点)');
     expect(k?.note).toContain('調査書500点+個人面接100点+小論文200点+学校設定検査(口頭試問)200点(合計1000点)');
     expect(list.every((s) => s.interviewRequired === true)).toBe(true);
+  });
+
+  it('tokyo: n2_13の海外帰国生徒等対象は帰国生徒9・引揚生徒3・在京外国人生徒等14=26レコードで、学力検査があるのは帰国生徒の4月入学のみ、国際の9月入学は面接200・作文400と大きい', () => {
+    const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? []).filter((s) => s.department?.includes('(海外帰国生徒等対象)'));
+    expect(list).toHaveLength(26);
+    const kikoku = list.filter((s) => s.selectionCategory.startsWith('帰国生徒対象選抜'));
+    const hikiage = list.filter((s) => s.selectionCategory === '引揚生徒対象選抜');
+    const zairyu = list.filter((s) => s.selectionCategory.startsWith('在京外国人生徒等対象選抜'));
+    expect(kikoku).toHaveLength(9);
+    expect(hikiage).toHaveLength(3);
+    expect(zairyu).toHaveLength(14);
+    expect(kikoku.filter((s) => s.selectionCategory.endsWith('(4月入学)')).every((s) => s.ratioType === '学力検査300+調査書100+個人面接100')).toBe(true);
+    expect(kikoku.filter((s) => s.selectionCategory.endsWith('(9月入学)') && s.schoolName !== '国際').every((s) => s.ratioType === '調査書100+個人面接100+作文100')).toBe(true);
+    expect(kikoku.find((s) => s.schoolName === '国際' && s.selectionCategory.endsWith('(9月入学)'))?.ratioType).toBe('調査書100+個人面接200+作文400');
+    expect(kikoku.filter((s) => s.schoolName === '国際' && s.selectionCategory.endsWith('(4月入学)'))).toHaveLength(2);
+    expect(hikiage.map((s) => s.schoolName).sort()).toEqual(['光丘', '富士森', '深川'].sort());
+    expect(hikiage.find((s) => s.schoolName === '深川')?.note).toContain('調査書90点+個人面接180点+作文90点(合計360点)');
+    expect(hikiage.find((s) => s.schoolName === '富士森')?.note).toContain('作文は40分');
+    expect(zairyu.find((s) => s.schoolName === '田柄')?.ratioType).toBe('調査書100+個人面接400+作文200');
+    expect(zairyu.find((s) => s.schoolName === '竹台')?.ratioType).toBe('調査書100+個人面接200+作文400');
+    expect(zairyu.filter((s) => s.selectionCategory.endsWith('(9月入学)')).map((s) => s.schoolName).sort()).toEqual(['南葛飾', '国際', '府中西', '田柄', '竹台', '飛鳥'].sort());
+    expect(zairyu.filter((s) => s.schoolName === '六郷工科' || s.schoolName === '杉並総合').every((s) => s.selectionCategory.endsWith('(4月入学)'))).toBe(true);
   });
 
   it('tokyo: 日比谷・竹早の推薦は個人面接欄と集団討論欄にまたがる結合セルの点数を持ち(日比谷200/竹早250)、面接の実施有無は断定しない(2026-09-19に竹早の「面接なし」誤読を訂正)', () => {
