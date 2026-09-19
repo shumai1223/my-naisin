@@ -1733,14 +1733,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('門司学園', '普通', '推薦入学')?.note).toContain('推薦入学の新規実施校');
   });
 
-  it('ehime: 特色入学者選抜117レコード(40校・本選抜67+文化スポーツ重視50)で、全ての比重の合計が10になる', () => {
+  it('ehime: 令和9年度の特色入学者選抜120レコード(41校・本選抜69+文化スポーツ重視51)で、全ての比重の合計が10になる', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ehime');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(all).toHaveLength(117);
-    expect(new Set(all.map((s) => s.schoolName.replace(/\((本校|小田分校|中島分校|砥部分校)\)/, ''))).size).toBe(40);
-    expect(all.filter((s) => s.selectionCategory === '特色入学者選抜')).toHaveLength(67);
-    expect(all.filter((s) => s.selectionCategory.startsWith('特色入学者選抜('))).toHaveLength(50);
+    expect(record?.fiscalYear).toContain('令和9年度');
+    expect(all).toHaveLength(120);
+    expect(new Set(all.map((s) => s.schoolName.replace(/\((本校|小田分校|中島分校|砥部分校)\)/, ''))).size).toBe(41);
+    expect(all.filter((s) => s.selectionCategory === '特色入学者選抜')).toHaveLength(69);
+    expect(all.filter((s) => s.selectionCategory.startsWith('特色入学者選抜('))).toHaveLength(51);
     for (const s of all) {
       expect(s.ratioType).toContain('(比重・合計10)');
       const total = (s.ratioType ?? '')
@@ -1760,8 +1761,8 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('新居浜東', '体育(健康スポーツ)')?.ratioType).toBe('調査書4:実技テスト4:プレゼンテーション2(比重・合計10)');
     expect(find('伊予', '芸術')?.note).toContain('募集割合100%程度(募集人数40人程度)');
     expect(find('しまなみ', '総合学科(伯方キャンパス16人・大三島キャンパス16人)')?.note).toContain('募集人数32人程度');
-    // 合算行(縦書きの学科名)の募集人数: 松山工業8学科×16=128、伊予農業6学科×16=96
-    expect(find('松山工業', '機械・電子機械・電気・情報電子・工業化学・建築・土木・繊維(各40人・各16人)')?.note).toContain('募集定員320人');
+    // 合算行(縦書きの学科名)の募集人数: 松山工業8学科×20=160(令和9年度は募集割合50%)、伊予農業6学科×16=96
+    expect(find('松山工業', '機械・電子機械・電気・情報電子・工業化学・建築・土木・繊維(各40人・各20人)')?.note).toContain('募集人数160人程度');
     expect(find('伊予農業', '生物工学・園芸流通・食品化学・生活科学・環境開発・特用林産(各40人・各16人)')?.note).toContain('募集人数96人程度');
   });
 
