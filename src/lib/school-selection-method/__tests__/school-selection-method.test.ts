@@ -2391,18 +2391,21 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: schoolsは全7頁の103校(頁1=日比谷/三田/戸山/竹早/向丘/上野/日本橋/本所/城東/東/深川/大崎/小山台・頁2=八潮/駒場/目黒/大森/田園調布/雪谷/桜町/千歳丘/松原/青山/広尾/鷺宮/武蔵丘・頁3=杉並/豊多摩/西/豊島/文京/竹台/板橋/大山/北園/高島/井草/石神井/田柄/練馬・頁4=光丘/青井/足立/足立新田/足立西/江北/淵江/葛飾野/南葛飾/江戸川/葛西南/小岩/小松川/篠崎/紅葉川/片倉・頁5=八王子北/八王子東/富士森/松が谷/立川/武蔵野北/多摩/府中/府中西/府中東/昭和/拝島/神代/調布北/調布南・頁6=小川/成瀬/野津田/町田/山崎/小金井北/小平/小平西/小平南/日野/日野台/南平/東村山西/国立/福生/狛江・頁7=東大和/東大和南/清瀬/久留米西/武蔵村山/永山/羽村/五日市/田無/保谷+島しょ6校[大島/新島/神津/三宅/八丈/小笠原])303レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo');
-    expect(record?.schools?.length).toBe(303);
-    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
+    expect(record?.schools?.length).toBe(327);
+    // 普通科(頁1-7)の103校。n2_11のコース/エンカレッジ8件は別のdepartmentで区別される
+    const futsu = (record?.schools ?? []).filter((s) => s.department === '普通科');
+    expect(futsu).toHaveLength(303);
+    const schoolNames = new Set(futsu.map((s) => s.schoolName));
     expect(schoolNames).toEqual(new Set(['日比谷', '三田', '戸山', '竹早', '向丘', '上野', '日本橋', '本所', '城東', '東', '深川', '大崎', '小山台', '八潮', '駒場', '目黒', '大森', '田園調布', '雪谷', '桜町', '千歳丘', '松原', '青山', '広尾', '鷺宮', '武蔵丘', '杉並', '豊多摩', '西', '豊島', '文京', '竹台', '板橋', '大山', '北園', '高島', '井草', '石神井', '田柄', '練馬', '光丘', '青井', '足立', '足立新田', '足立西', '江北', '淵江', '葛飾野', '南葛飾', '江戸川', '葛西南', '小岩', '小松川', '篠崎', '紅葉川', '片倉', '八王子北', '八王子東', '富士森', '松が谷', '立川', '武蔵野北', '多摩', '府中', '府中西', '府中東', '昭和', '拝島', '神代', '調布北', '調布南', '小川', '成瀬', '野津田', '町田', '山崎', '小金井北', '小平', '小平西', '小平南', '日野', '日野台', '南平', '東村山西', '国立', '福生', '狛江', '東大和', '東大和南', '清瀬', '久留米西', '武蔵村山', '永山', '羽村', '五日市', '田無', '保谷', '大島', '新島', '神津', '三宅', '八丈', '小笠原']));
     // 第一次募集は全13校が学力検査7:調査書3+ESAT-J20点、第二次募集は全13校が6:4
-    const first = (record?.schools ?? []).filter((s) => s.selectionCategory === '第一次募集');
-    const second = (record?.schools ?? []).filter((s) => s.selectionCategory === '第二次募集');
+    const first = futsu.filter((s) => s.selectionCategory === '第一次募集');
+    const second = futsu.filter((s) => s.selectionCategory === '第二次募集');
     expect(first).toHaveLength(103);
     expect(second).toHaveLength(103);
     // 島しょ6校は推薦に基づく選抜を実施しない(推薦レコードを持たず第一次募集のnoteに明記)
     for (const n of ['大島', '新島', '神津', '三宅', '八丈', '小笠原']) {
       expect(first.find((s) => s.schoolName === n)?.note).toContain('推薦に基づく選抜は「実施しない」');
-      expect((record?.schools ?? []).some((s) => s.schoolName === n && s.selectionCategory === '推薦に基づく選抜')).toBe(false);
+      expect(futsu.some((s) => s.schoolName === n && s.selectionCategory === '推薦に基づく選抜')).toBe(false);
     }
     expect(first.every((s) => s.ratioType === '学力検査7:調査書3(700点:300点)+ESAT-J20点')).toBe(true);
     expect(second.every((s) => s.ratioType?.startsWith('学力検査6:調査書4(600点:400点)'))).toBe(true);
@@ -2415,7 +2418,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
   });
 
   it('tokyo: 推薦に基づく選抜は島しょ6校を除く全97校が推薦枠割合20%で、面接・討論の点数と小論文/作文の点数がnoteの合計と一致する(日比谷・竹早は結合セルのため面接実施を断定しない)', () => {
-    const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? []).filter((s) => s.selectionCategory === '推薦に基づく選抜');
+    const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? []).filter((s) => s.selectionCategory === '推薦に基づく選抜' && s.department === '普通科');
     expect(list).toHaveLength(97);
     expect(list.every((s) => s.ratioType === '推薦枠割合20%')).toBe(true);
     const get = (n: string) => list.find((s) => s.schoolName === n);
@@ -2459,6 +2462,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '三田', '推薦に基づく選抜', '普通科');
     expect(record?.interviewRequired).toBe(true);
     expect(record?.note).toContain('個人面接の配点が調査書を上回る');
+  });
+
+  it('tokyo: n2_11頁1のコース4校は推薦枠割合30%で外国語(深川/松が谷/小平)は英語または国語・英語の2倍傾斜、片倉(造形美術)は実技検査1000点、エンカレッジ4校は学力検査を実施せず調査書・面接・作文/小論文で満点が決まる', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? [];
+    const course = list.filter((s) => s.department?.includes('(普通教育を主とする学科・コース)'));
+    const enc = list.filter((s) => s.department?.includes('(エンカレッジスクール)'));
+    expect(course).toHaveLength(12);
+    expect(enc).toHaveLength(12);
+    expect(new Set(course.map((s) => s.schoolName))).toEqual(new Set(['深川', '片倉', '松が谷', '小平']));
+    expect(new Set(enc.map((s) => s.schoolName))).toEqual(new Set(['蒲田', '足立東', '東村山', '秋留台']));
+    expect(course.filter((s) => s.selectionCategory === '推薦に基づく選抜').every((s) => s.ratioType === '推薦枠割合30%')).toBe(true);
+    expect(enc.filter((s) => s.selectionCategory === '推薦に基づく選抜').every((s) => s.ratioType === '推薦枠割合30%')).toBe(true);
+    const get = (arr: typeof list, n: string, cat: string) => arr.find((s) => s.schoolName === n && s.selectionCategory === cat);
+    expect(get(course, '片倉', '第一次募集')?.ratioType).toContain('実技検査1000点');
+    expect(get(course, '深川', '推薦に基づく選抜')?.note).toContain('調査書450点+個人面接270点+作文180点(合計900点)');
+    expect(get(course, '小平', '第二次募集')?.note).toContain('英語を1.6倍');
+    expect(get(course, '小平', '第二次募集')?.interviewRequired).toBe(true);
+    expect(get(enc, '足立東', '第一次募集')?.note).toContain('学力検査は実施しない');
+    expect(get(enc, '足立東', '第一次募集')?.note).toContain('(合計1200点)');
+    expect(get(enc, '秋留台', '推薦に基づく選抜')?.note).toContain('調査書300点+個人面接600点+小論文200点(合計1100点)');
+    expect(get(enc, '東村山', '第二次募集')?.note).toContain('実技検査200点');
+    expect(get(enc, '蒲田', '第二次募集')?.note).toContain('(合計1000点)');
   });
 
   it('tokyo: 日比谷・竹早の推薦は個人面接欄と集団討論欄にまたがる結合セルの点数を持ち(日比谷200/竹早250)、面接の実施有無は断定しない(2026-09-19に竹早の「面接なし」誤読を訂正)', () => {
