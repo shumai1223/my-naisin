@@ -18,6 +18,13 @@ aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026
 | ~~oita~~(更新済み・追記99・推薦のみ) | **公表済み**: 推薦入学者選抜【第2期公表分】`https://www.pref.oita.jp/site/gakkokyoiku/r09suisen2.html`(2026-08-31更新・学校学科別PDF88本・`/uploaded/life/2352031_*_misc.pdf`・一覧はops/baselines/oita-r9/pdf-list.tsv)。第1期公表分`r09suisen1.html`は取得時404(掲載変更の可能性)。`r09suisen.html`(2026-05-22)は『推薦入試の内容を一部変更』の告知 | R8と同数の88本(2頁・pdftotextで読める)だが**推薦入試の内容が変更**されており(調査書点基準・募集人員に『内地域活性化枠』等)、縦書きラベルが混ざるため-layoutの単純抽出は失敗(比重合計が100にならない行が27)。bbox座標抽出で再構築する |
 | tokyo | **公表済み(直近)**: 令和9年度東京都立高等学校入学者選抜実施要綱・同細目(発表2026-09-17)`https://www.kyoiku.metro.tokyo.lg.jp/information/press/2026/09/2026091703`。R8は`20250925_n2_10`(2025-09-25) | 未取得。R8→R9差分の確認が必要 |
 
+## PDF直リンク県のハブ調査(2026-09-20・1回目=4県)
+- **okayama**: **公表済み**。`https://www.pref.okayama.jp/site/255/1044713.html`(令和9年度実施大要・2026-08-31更新)。学校別実施内容一覧(別表1・7頁・テキスト層あり)=`/uploaded/life/1054574_10218770_misc.pdf`、実施大要=`/uploaded/life/1054574_10218771_misc.pdf`。DBはR8(259レコード)のまま。R8(`1054600_10219031_misc.pdf`)とR9をpdftotext -rawで比較すると差分は各約60行(玉野普通の特別選抜15%→20%+検査追加・笠岡普通の特別選抜に検査追加・勝間田50%→80%・操山普通の一般選抜◎新設・工学系の実績欄の文言等)=**全面再構築でなく差分レコードのパッチで足りる見込み**。
+- **hiroshima**: **公表済み**。目次`https://www.pref.hiroshima.lg.jp/site/kyouiku/09senior-2nd-r9-nyuushi-r9-kou-r9-kou-mokuji-r9-kou-mokuji.html`(更新2026-09-18)から『入学者選抜の実施内容』ページ(`/site/kyouiku/09senior-2nd-r09-nyuushi-r09-kou-r09-kou-jisshinaiyou-r09-kou-jisshinaiyou-mokuji.html`)。DBはR8(90レコード)のまま=未取得。
+- **osaka**: 令和9年度は`https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r09_senbatsu.html`に『入学者選抜方針』等。R8の実施要項は令和7年10月16日公表だったため**R9の実施要項は10月中旬の見込み**=10月に再確認。
+- **hokkaido**: 時事通信の『令和9年度試験の実施要領』は**教員採用試験**の記事で無関係。道立高校の令和9年度選抜の手引は未確認(R8の手引は`https://www.dokyoi.pref.hokkaido.lg.jp/hk/gks/201495.html`)=10月以降に再確認。
+- 残り(未調査10県): aomori / fukushima / gunma / ibaraki / kagoshima / kochi / tochigi / toyama / yamagata / yamaguchi。
+
 ## 探索結果(2026-09-20・WebSearchでURL特定→ページ取得で裏取り。検索要約は根拠にしない)
 - **nagasaki**: 入試ハブ(`.../koko-nyushi/`)に令和9年度リンク無し。令和9年度『入学者選抜の基本方針』PDF(`/fs/1/5/3/2/2/_/R9______________.pdf`)のみ確認=**実施要領は未公表**。
 - **saga**: 令和9年度は選抜実施日程のみ(`kiji003119218`)。新制度は令和10年度から(リーフレット掲載済み)=**R9の実施要項は未確認**。
