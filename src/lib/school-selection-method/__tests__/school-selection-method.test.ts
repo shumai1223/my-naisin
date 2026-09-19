@@ -527,14 +527,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kaikei?.ratioType).toBe('調査書60%:面接30%:学力検査10%');
   });
 
-  it('nagano: schoolsは第1通学区(北信地区)20校38レコード+第2通学区(東信地区)9校22レコード+第3通学区(南信地区)19校37レコードを収録している(第4〜6通学区は未収録)', () => {
+  it('nagano: schoolsは第1通学区(北信地区)20校38レコード+第2通学区(東信地区)9校22レコード+第3通学区(南信地区)19校37レコード+第4通学区(中信地区)13校24レコードを収録している(第5〜6通学区は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano');
-    expect(record?.schools?.length).toBe(97);
+    expect(record?.schools?.length).toBe(121);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(48);
+    expect(schoolNames.size).toBe(61);
     expect(record?.coverageNote).toContain('第1通学区');
     expect(record?.coverageNote).toContain('第2通学区');
     expect(record?.coverageNote).toContain('第3通学区');
+    expect(record?.coverageNote).toContain('第4通学区');
+  });
+
+  it('nagano: 第4通学区の松本県ケ丘(自然探究・国際探究)は作文(小論文)30%を含み、木曽青峰の理数は調査書75%で同校の農業・工業(60%)と異なる', () => {
+    const nat = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '松本県ケ丘', '前期選抜', '自然探究');
+    const intl = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '松本県ケ丘', '前期選抜', '国際探究');
+    expect(nat?.ratioType).toBe('調査書45%:面接15%:学力検査10%:作文30%');
+    expect(intl?.ratioType).toBe(nat?.ratioType);
+    const risu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '木曽青峰', '前期選抜', '理数');
+    const forest = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '木曽青峰', '前期選抜', '森林環境');
+    expect(risu?.ratioType).toBe('調査書75%:面接15%:学力検査10%');
+    expect(forest?.ratioType).toBe('調査書60%:面接25%:学力検査15%');
+    const hakuba = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagano', '白馬', '前期選抜', '国際観光');
+    expect(hakuba?.ratioType).toBe('調査書50%:面接30%:学力検査20%');
   });
 
   it('nagano: 第3通学区の駒ヶ根工業は学力検査25%で他校より高く、岡谷工業は観点別①②、飯田OIDE長姫は6学科が共通の比重を持つ', () => {

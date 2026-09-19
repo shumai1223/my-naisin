@@ -12,8 +12,8 @@
 // ★長野県公式ページには通学区(全6区)ごとに`r8-2-01.pdf`〜`r8-2-06.pdf`の計6ファイルが
 // 分割公開されている。本ファイルは1本目(r8-2-01.pdf＝第1通学区・北信地区)と2本目
 // (r8-2-02.pdf＝第2通学区・東信地区・全2頁・2026-09-19 pdftoppm 110dpiで実画像を目視転記)と
-// 3本目(r8-2-03.pdf＝第3通学区・南信地区・全3頁・同日同方法)を収録し、第4〜6通学区
-// (r8-2-04〜06.pdf)は未収録(Y-0: 収録範囲の限定を正直に開示)。
+// 3本目(r8-2-03.pdf＝第3通学区・南信地区・全3頁・同日同方法)と4本目(r8-2-04.pdf＝
+// 第4通学区・中信地区・全2頁・同日同方法)を収録し、第5〜6通学区(r8-2-05〜06.pdf)は未収録(Y-0: 収録範囲の限定を正直に開示)。
 // 第3通学区の岡谷工業・上伊那農業は令和8年度から学科改編予定で資料は新しい学科名を示している。
 // 第2通学区の小諸義塾(94)は「令和8年度に開校する小諸義塾高等学校(仮称)」で学科名も仮称。
 // 上田染谷丘(国際教養)は面接と実技検査が「併せて40」の1セル(内訳は資料に無い)。
@@ -31,13 +31,13 @@ export const NAGANO_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和8年度（2026年度）',
   status: 'structured',
   coverageNote:
-    '第1通学区(北信地区・20校38レコード・r8-2-01.pdf全3頁)と第2通学区(東信地区・9校22レコード・r8-2-02.pdf全2頁)と第3通学区(南信地区・19校37レコード・r8-2-03.pdf全3頁)を完全収録(計48校97レコード)。第4〜6通学区(r8-2-04〜06.pdf)は未収録。全日制「前期選抜」のみが対象で、後期選抜・定時制・通信制は本PDFの対象外',
+    '第1通学区(北信地区・20校38レコード・r8-2-01.pdf全3頁)と第2通学区(東信地区・9校22レコード・r8-2-02.pdf全2頁)と第3通学区(南信地区・19校37レコード・r8-2-03.pdf全3頁)と第4通学区(中信地区・13校24レコード・r8-2-04.pdf全2頁)を完全収録(計61校121レコード)。第5〜6通学区(r8-2-05〜06.pdf)は未収録。全日制「前期選抜」のみが対象で、後期選抜・定時制・通信制は本PDFの対象外',
   source: {
     url: 'https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-01.pdf',
     docTitle: '令和8年度長野県公立高等学校「前期選抜」における評価方法一覧(第1通学区・全日制課程。第2通学区は同ディレクトリのr8-2-02.pdf)',
     lastChecked: '2026-09-19',
   },
-  note: '通学区(全6区)ごとにr8-2-01.pdf〜r8-2-06.pdfの計6ファイルに分割公開されている資料の1本目(第1通学区・北信地区)と2本目(第2通学区・東信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-02.pdf)と3本目(第3通学区・南信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-03.pdf)を収録。ratioTypeは調査書:面接:学力検査を基本形とし、作文・実技検査が0でない学校のみ追記(全レコードで5項目合計100%を自己検算済み)',
+  note: '通学区(全6区)ごとにr8-2-01.pdf〜r8-2-06.pdfの計6ファイルに分割公開されている資料の1本目(第1通学区・北信地区)と2本目(第2通学区・東信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-02.pdf)と3本目(第3通学区・南信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-03.pdf)と4本目(第4通学区・中信地区・https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8-2-04.pdf)を収録。ratioTypeは調査書:面接:学力検査を基本形とし、作文・実技検査が0でない学校のみ追記(全レコードで5項目合計100%を自己検算済み)',
   schools: [
     { schoolName: '飯山', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書70%:面接20%:学力検査10%', note: '志望動機・意欲・目的意識・理解力・表現力・資質・態度を重視' },
     { schoolName: '飯山', department: '自然科学探究', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書60%:面接25%:学力検査15%', note: '国語・社会・数学・理科・英語を中心に評価。面接で自然科学・人文科学への興味・関心や探究的意欲も確認' },
@@ -138,5 +138,30 @@ export const NAGANO_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '下伊那農業', department: '生物活用', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '農業。3学科共通の比重' },
     { schoolName: '阿智', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '調査書は学習成績を重視し、部活動、特別活動等の活動実績。面接は志望動機・意欲・態度・表現力' },
     { schoolName: '阿南', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '調査書は学習成績、部活動・特別活動の実績、総合所見等。面接は志願理由書の内容を中心に志望動機・生徒会・部活動の実績・高校卒業後の進路希望等' },
+    // ---- 第4通学区(中信地区・r8-2-04.pdf) ----
+    { schoolName: '蘇南', department: '総合', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書65%:面接20%:学力検査15%', note: '調査書は各教科の学習の記録・特別活動等の記録・総合所見。面接は志望動機・意欲・探究・創造力・理解・表現力・態度' },
+    { schoolName: '木曽青峰', department: '森林環境', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書60%:面接25%:学力検査15%', note: '農業。調査書は中学校での学習成績(国語・数学・理科・技術・家庭の成績)を重視し、生徒会活動・部活動・その他の諸活動(ボランティア活動・資格取得等)の成果や実績も評価。面接は志望動機・意欲・態度・表現力・基本的生活習慣等' },
+    { schoolName: '木曽青峰', department: 'インテリア', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書60%:面接25%:学力検査15%', note: '工業。調査書は中学校での学習成績(国語・数学・美術・技術・家庭の成績)を重視し、生徒会活動・部活動・その他の諸活動の成果や実績も評価。面接は志望動機・意欲・態度・表現力・基本的生活習慣等' },
+    { schoolName: '木曽青峰', department: '理数', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書75%:面接15%:学力検査10%', note: '調査書は中学校での学習成績(国語・社会・数学・理科・英語の成績)を重視。面接は志望動機・意欲・態度・表現力' },
+    { schoolName: '塩尻志学館', department: '総合', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書65%:面接20%:学力検査15%', note: '調査書の内容を総合的に評価。面接は志望動機・意欲・発想力・表現力・態度' },
+    { schoolName: '田川', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書60%:面接25%:学力検査15%', note: '調査書は学習の記録(特に3年次の学習成績は良好であることが望ましい)・特別活動の記録・総合所見及び特記事項等を総合的に判断。面接は志望動機・意欲・表現力・態度' },
+    { schoolName: '梓川', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '調査書は学習状況と部活動・特別活動・校外活動の状況や内容。面接は志望動機・意欲・態度' },
+    { schoolName: '松本工業', department: '機械', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書60%:面接30%:学力検査10%', note: '工業。機械・電気・電子工業の3学科共通の比重。調査書は学習成績を重視し総合的に評価。面接は志望動機・興味関心・態度・意欲・自己理解・表現力' },
+    { schoolName: '松本工業', department: '電気', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書60%:面接30%:学力検査10%', note: '工業。機械・電気・電子工業の3学科共通の比重' },
+    { schoolName: '松本工業', department: '電子工業', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書60%:面接30%:学力検査10%', note: '工業。機械・電気・電子工業の3学科共通の比重' },
+    { schoolName: '松本県ケ丘', department: '自然探究', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書45%:面接15%:学力検査10%:作文30%', note: '自然探究・国際探究の2学科共通の比重。調査書は各教科の学習の記録(特に国語・社会・数学・理科・英語)を中心に総合所見等を総合的に評価。面接は志望動機・意欲・態度・自然科学・人文科学・社会科学などに対する興味・関心等。作文(小論文)は課題理解力・批判的思考力・創造的思考力・表現力等' },
+    { schoolName: '松本県ケ丘', department: '国際探究', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書45%:面接15%:学力検査10%:作文30%', note: '自然探究・国際探究の2学科共通の比重。作文(小論文)は課題理解力・批判的思考力・創造的思考力・表現力等' },
+    { schoolName: '明科', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '調査書は各教科の学習の記録・清掃への取り組み・生活のきまりの遵守を重視。個人面接は志望動機・意欲の強さ・基本的生活習慣を見る。備考「調査書、個人面接、および学力検査の結果を総合的に判断して選抜する」' },
+    { schoolName: '南安曇農業', department: 'グリーンサイエンス', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '農業。グリーンサイエンス・環境クリエイト・生物工学の3学科共通の比重。調査書は学習成績・部活動・特別活動等における特筆すべき点。面接は志願理由書に記載された内容をもとに、募集の観点に沿う人物であるか、基本的な生活習慣(あいさつ・時間を守る・ルールを守る)が身についているかを総合的に審査' },
+    { schoolName: '南安曇農業', department: '環境クリエイト', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '農業。3学科共通の比重' },
+    { schoolName: '南安曇農業', department: '生物工学', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '農業。3学科共通の比重' },
+    { schoolName: '穂高商業', department: '商業', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '商業。商業・情報マネジメントの2学科共通の比重。調査書は学習活動・特別活動等を総合的に評価。面接は志望動機・意欲・態度・理解力・表現力' },
+    { schoolName: '穂高商業', department: '情報マネジメント', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '商業。商業・情報マネジメントの2学科共通の比重' },
+    { schoolName: '池田工業', department: '機械・電気学', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '工業。機械・電気学と建築学の2学科共通の比重。調査書は各教科の学習の記録・特別活動の記録並びに総合所見等を総合的に評価。面接は志望動機・意欲・態度・表現力' },
+    { schoolName: '池田工業', department: '建築学', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '工業。機械・電気学と建築学の2学科共通の比重' },
+    { schoolName: '大町岳陽', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書75%:面接15%:学力検査10%', note: '調査書は中学校での生徒会活動・部活動において顕著な活躍を評価し、学習の記録・特別活動の記録・総合所見を中心に総合的に判断。面接は部活動・生徒会活動やボランティア活動に対する意欲・関心・面接態度・高校生活への意欲' },
+    { schoolName: '大町岳陽', department: '学究', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書75%:面接15%:学力検査10%', note: '調査書は中学3年次の学習成績を重視し、国語・社会・数学・理科・英語の成績を重視。面接は学習意欲・自然科学分野や人文科学分野に対する意欲・関心・面接態度' },
+    { schoolName: '白馬', department: '普通', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書70%:面接20%:学力検査10%', note: '調査書は各教科の学習成績・部活動・特別活動の状況等。面接は志望動機・高校生活への目的意識・学習意欲・将来への展望・態度・姿勢・表現の明確さ' },
+    { schoolName: '白馬', department: '国際観光', selectionCategory: '前期選抜', interviewRequired: true, ratioType: '調査書50%:面接30%:学力検査20%', note: '調査書は各教科の学習成績・部活動・特別活動の状況等。面接は志望動機・高校生活への目的意識・学習意欲・将来への展望・態度・姿勢・理解力・表現力・コミュニケーション力' },
   ],
 };
