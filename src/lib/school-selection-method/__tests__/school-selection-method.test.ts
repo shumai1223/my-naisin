@@ -2391,7 +2391,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: schoolsは全7頁の103校(頁1=日比谷/三田/戸山/竹早/向丘/上野/日本橋/本所/城東/東/深川/大崎/小山台・頁2=八潮/駒場/目黒/大森/田園調布/雪谷/桜町/千歳丘/松原/青山/広尾/鷺宮/武蔵丘・頁3=杉並/豊多摩/西/豊島/文京/竹台/板橋/大山/北園/高島/井草/石神井/田柄/練馬・頁4=光丘/青井/足立/足立新田/足立西/江北/淵江/葛飾野/南葛飾/江戸川/葛西南/小岩/小松川/篠崎/紅葉川/片倉・頁5=八王子北/八王子東/富士森/松が谷/立川/武蔵野北/多摩/府中/府中西/府中東/昭和/拝島/神代/調布北/調布南・頁6=小川/成瀬/野津田/町田/山崎/小金井北/小平/小平西/小平南/日野/日野台/南平/東村山西/国立/福生/狛江・頁7=東大和/東大和南/清瀬/久留米西/武蔵村山/永山/羽村/五日市/田無/保谷+島しょ6校[大島/新島/神津/三宅/八丈/小笠原])303レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo');
-    expect(record?.schools?.length).toBe(528);
+    expect(record?.schools?.length).toBe(552);
     // 普通科(頁1-7)の103校。n2_11のコース/エンカレッジ8件は別のdepartmentで区別される
     const futsu = (record?.schools ?? []).filter((s) => s.department === '普通科');
     expect(futsu).toHaveLength(303);
@@ -2587,6 +2587,30 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(rk).toHaveLength(3);
     expect(rk.find((s) => s.selectionCategory === '推薦に基づく選抜')?.note).toContain('調査書500点+個人面接400点+作文100点(合計1000点)');
     expect(rk.find((s) => s.selectionCategory === '第二次募集')?.ratioType).toBe('学力検査6:調査書4(600点:400点)+個人面接300点');
+  });
+
+  it('tokyo: n2_12頁5の商業7校は全校推薦枠割合40%で第一商業のみ満点が小さく(180+90+90=360点)第二次の面接がなく、大島海洋国際(水産)のみ第一次募集にも個人面接300点がある(2月22日実施)', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? [];
+    const biz = list.filter((s) => s.department?.includes('(専門教育を主とする学科・商業に関する学科)'));
+    expect(biz).toHaveLength(21);
+    expect(new Set(biz.map((s) => s.schoolName))).toEqual(new Set(['芝商業', '江東商業', '第三商業', '第一商業', '第四商業', '葛飾商業', '第五商業']));
+    const rec = biz.filter((s) => s.selectionCategory === '推薦に基づく選抜');
+    expect(rec.every((s) => s.ratioType === '推薦枠割合40%')).toBe(true);
+    const nt = (n: string) => rec.find((s) => s.schoolName === n)?.note ?? '';
+    expect(nt('第一商業')).toContain('調査書180点+個人面接90点+作文90点(合計360点)');
+    expect(nt('江東商業')).toContain('調査書600点+個人面接300点+作文300点(合計1200点)');
+    expect(nt('芝商業')).toContain('特別推薦の実施あり');
+    expect(nt('第四商業')).toContain('特別推薦の実施あり');
+    expect(rec.filter((s) => s.note?.includes('特別推薦の実施あり'))).toHaveLength(2);
+    const m2 = biz.filter((s) => s.selectionCategory === '第二次募集' && s.interviewRequired === true).map((s) => s.schoolName + s.ratioType.slice(-6)).sort();
+    expect(m2).toEqual(['芝商業面接200点', '江東商業面接300点', '第三商業面接200点', '第四商業面接200点', '葛飾商業面接250点', '第五商業面接300点'].sort());
+    const oshima = list.filter((s) => s.schoolName === '大島海洋国際');
+    expect(oshima).toHaveLength(3);
+    const first = oshima.find((s) => s.selectionCategory === '第一次募集');
+    expect(first?.interviewRequired).toBe(true);
+    expect(first?.ratioType).toBe('学力検査7:調査書3(700点:300点)+ESAT-J20点+個人面接300点');
+    expect(first?.note).toContain('2月22日(日)');
+    expect(oshima.find((s) => s.selectionCategory === '推薦に基づく選抜')?.note).toContain('調査書500点+個人面接300点+作文200点(合計1000点)');
   });
 
   it('tokyo: 日比谷・竹早の推薦は個人面接欄と集団討論欄にまたがる結合セルの点数を持ち(日比谷200/竹早250)、面接の実施有無は断定しない(2026-09-19に竹早の「面接なし」誤読を訂正)', () => {
