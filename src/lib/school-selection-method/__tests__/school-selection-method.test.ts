@@ -860,37 +860,48 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(day?.note).toContain('★');
   });
 
-  it('saitama: 選抜基準PDFから転記した学校は第1次〜の各段階の配点と面接有無をratioType/interviewRequiredに持つ', () => {
-    const ageo = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '上尾', '一般募集', '普通科');
-    expect(ageo?.ratioType).toBe('第1次75%[学力500:調査書336=836]/第2次22%[学力500:調査書218=718]/第3次3%');
-    expect(ageo?.interviewRequired).toBe(false);
-    const tachibana = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '上尾橘', '一般募集', '普通科');
-    expect(tachibana?.interviewRequired).toBe(true);
-    expect(tachibana?.ratioType).toContain('面接100');
-  });
-
-  it('saitama: 伊奈学園総合のスポーツ科学系・芸術系は第2次選抜で実技検査300点を実施する', () => {
-    const sports = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '伊奈学園総合', '一般募集', 'スポーツ科学系・芸術系共通');
-    expect(sports?.ratioType).toContain('第2次29%[学力500:調査書334:実技検査300=1134]');
-    expect(sports?.interviewRequired).toBe(false);
-  });
-
-  it('saitama: 全日制131校を収録し、傾斜配点校(大宮理数・所沢北理数等)は学力検査700点で第1次の合計点が一致する', () => {
+  it('saitama: 令和9年度の選抜実施内容(概要一覧)136校196レコードを収録し、全校で面接を実施する(共通選抜118・特色選抜78)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
-    const names = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(names.size).toBe(131);
-    expect(record?.coverageNote).toContain('131');
-    const rikaOmiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '大宮', '一般募集', '理数科');
-    expect(rikaOmiya?.ratioType).toContain('学力700');
-    expect(rikaOmiya?.note).toContain('傾斜配点');
-    const kokusaiWako = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '和光国際', '一般募集', '国際科');
-    expect(kokusaiWako?.ratioType).toContain('学力600');
+    expect(record?.status).toBe('structured');
+    expect(record?.fiscalYear).toContain('令和9年度');
+    const all = record?.schools ?? [];
+    expect(all).toHaveLength(196);
+    expect(new Set(all.map((s) => s.schoolName)).size).toBe(136);
+    expect(all.filter((s) => s.selectionCategory === '共通選抜')).toHaveLength(118);
+    expect(all.filter((s) => s.selectionCategory === '特色選抜')).toHaveLength(78);
+    expect(all.every((s) => s.interviewRequired === true)).toBe(true);
+    const key = (s: { schoolName: string; department?: string; selectionCategory: string }) => s.schoolName + '|' + s.department + '|' + s.selectionCategory;
+    expect(new Set(all.map(key)).size).toBe(196);
   });
 
-  it('saitama: 川口市立スポーツ科学コースは面接あり・第3次選抜5%を持つ', () => {
-    const sports = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', '川口市立', '一般募集', 'スポーツ科学コース');
-    expect(sports?.interviewRequired).toBe(true);
-    expect(sports?.ratioType).toContain('第3次5%');
+  it('saitama: 全レコードのratioTypeは学力+調査書+面接(+特色検査)=合計が全ての段階で一致する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
+    for (const s of record?.schools ?? []) {
+      const stages = [...(s.ratioType ?? '').matchAll(/\[([^\]]+)\]/g)];
+      expect(stages.length).toBeGreaterThanOrEqual(1);
+      expect(stages.length).toBeLessThanOrEqual(2);
+      for (const m of stages) {
+        const [body, total] = m[1].split('=');
+        const sum = body.split(':').reduce((a, part) => a + Number(part.replace(/[^0-9]/g, '')), 0);
+        expect(sum).toBe(Number(total));
+      }
+    }
+  });
+
+  it('saitama: 上尾鷹の台(共通選抜)は第1次70%・第2次30%、浦和(特色選抜)は数学・英語150点の傾斜配点で学力600、伊奈学園総合のスポーツ科学系は特色検査(実技)を課す', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama')?.schools ?? [];
+    const find = (school: string, dept: string, cat: string) => list.find((s) => s.schoolName === school && s.department === dept && s.selectionCategory === cat);
+    expect(find('上尾鷹の台', '普通科', '共通選抜')?.ratioType).toBe('第1次(70%)[学力500:調査書200:面接60=760]/第2次(30%)[学力500:調査書400:面接60=960]');
+    expect(find('上尾鷹の台', '普通科', '共通選抜')?.note).toContain('集団面接(自己評価資料に学校独自項目あり)');
+    const urawa = find('浦和', '普通科', '特色選抜');
+    expect(urawa?.ratioType).toContain('学力600');
+    expect(urawa?.note).toContain('傾斜配点');
+    const ina = find('伊奈学園総合', '普通科(スポーツ科学系)', '特色選抜');
+    expect(ina?.ratioType).toContain('特色検査200');
+    expect(ina?.note).toContain('実技(体育系)');
+    // 特色選抜と共通選抜の両方を実施する学科は2レコードに分けて収録する
+    expect(find('岩槻', '国際教養科', '特色選抜')?.ratioType).toBe('特色選抜(70%)[学力650:調査書400:面接30=1080]');
+    expect(find('岩槻', '国際教養科', '共通選抜')?.ratioType).toBe('共通選抜(30%)[学力500:調査書400:面接30=930]');
   });
 
   it('chiba: 令和9年度の県立・市立全日制118校178学科(くくり募集は1行)の学校設定検査(面接・適性検査・自己表現等)を収録している', () => {
@@ -1772,21 +1783,6 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     // 合算行(縦書きの学科名)の募集人数: 松山工業8学科×20=160(令和9年度は募集割合50%)、伊予農業6学科×16=96
     expect(find('松山工業', '機械・電子機械・電気・情報電子・工業化学・建築・土木・繊維(各40人・各20人)')?.note).toContain('募集人数160人程度');
     expect(find('伊予農業', '生物工学・園芸流通・食品化学・生活科学・環境開発・特用林産(各40人・各16人)')?.note).toContain('募集人数96人程度');
-  });
-
-  it('saitama: 全レコードのratioTypeは第1次・第2次の段階表記を持ち、合計点は学力+調査書+その他に一致する', () => {
-    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama');
-    expect(record?.status).toBe('structured');
-    expect(record?.schools?.length).toBeGreaterThan(0);
-    for (const s of record?.schools ?? []) {
-      const stages = [...(s.ratioType ?? '').matchAll(/第[12]次[0-9]+%\[([^\]]+)\]/g)];
-      expect(stages.length).toBe(2);
-      for (const m of stages) {
-        const [body, total] = m[1].split('=');
-        const sum = body.split(':').reduce((a, p) => a + Number(p.replace(/[^0-9]/g, '')), 0);
-        expect(sum).toBe(Number(total));
-      }
-    }
   });
 
   it('okayama: 津山(理数)は特別入学者選抜のみ収録され一般入学者選抜のレコードは無い(募集人員100%かつ一般選抜比率が「ー」のため)', () => {
