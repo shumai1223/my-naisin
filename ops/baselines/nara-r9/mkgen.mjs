@@ -1,0 +1,21 @@
+﻿import fs from 'fs';
+let s=fs.readFileSync('../nara-transcription/gen.mjs','utf8');
+const rep=(a,b)=>{ if(!s.includes(a)) throw new Error('未検出: '+a.slice(0,60)); s=s.split(a).join(b); };
+rep("`一次選抜学力検査(3教科)${e.gaku}+面接${e.itv}:調査書${e.chosho}`","`一次選抜学力検査(3教科)${e.gaku}:調査書${e.chosho}`");
+rep("面接${e.itv}点(面接の内容は資料の別表[22〜23頁]、未収録)。","令和9年度は各高校での二次選抜の検査(面接等)を実施しない(令和8年度は面接あり)。");
+rep("selectionCategory: '二次選抜',\n      interviewRequired: true,","selectionCategory: '二次選抜',\n      interviewRequired: false,");
+rep("令和8年度奈良県立高等学校入学者選抜概要","令和9年度奈良県立高等学校入学者選抜概要");
+rep("documents/18780/5_1_1ji_1kiboukou_itiran_0910.pdf","documents/24281/31_r9gaiyou_ichiji_ichiran_dai1.pdf");
+rep("n167/69538.html","n167/p122015.html");
+rep("2026-09-19 pdftoppm 100dpiで目視転記","令和9年度版は2026-09-20取得・pdftotext -bboxの座標で令和8年度版(目視転記)と突合し変更点のみ更新");
+rep("4_2_tyosasyo.pdf","24_r9gaiyou_chousasho.pdf");
+rep("ops/baselines/nara-transcription/","ops/baselines/nara-r9/(令和8年度版の目視転記は ops/baselines/nara-transcription/)");
+rep("fiscalYear: '令和8年度（2026年度）'","fiscalYear: '令和9年度（2027年度）'");
+rep("二次選抜の面接内容と第2(第3)志望の別表は未収録","第2(第3)志望の別表は未収録。合格人数枠は令和8年10月頃に発表される正式な募集人員で変更されることがある");
+rep("二次選抜は3教科の得点+面接で選考する","二次選抜は令和9年度は各高校での検査を実施せず一次選抜の3教科の得点と調査書で選考する");
+rep("5_2_1ji_2kiboukouitiran_0910.pdf/6_1_2ji_itiran_0910.pdf","32_r9gaiyou_ichiji_ichiran_dai2.pdf/33_r9gaiyou_niji_ichiran.pdf");
+rep("lastChecked: '${new Date().toISOString().slice(0, 10)}'","lastChecked: '2026-09-20'");
+rep("from './data.mjs'","from './data.mjs'");
+fs.writeFileSync('gen-r9.mjs',s);
+console.log('ok');
+

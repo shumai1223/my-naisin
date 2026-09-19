@@ -1107,6 +1107,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
   it('nara: 一次選抜(第1希望校80学科・第2希望校79学科)と二次選抜79学科を収録し、第1希望校の検査成績の満点=学力+独自問題+作文+面接+実技になる(第2希望・二次は第1希望の学科の部分集合)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nara');
     expect(record?.status).toBe('structured');
+    expect(record?.fiscalYear).toContain('令和9年度');
     expect(record?.schools?.length).toBe(238);
     expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(31);
     const first = (record?.schools ?? []).filter((s) => s.selectionCategory === '一次選抜(第1希望校)');
@@ -1137,12 +1138,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(shoko?.interviewRequired).toBe(true);
   });
 
-  it('nara: 二次選抜は面接あり・奈良北は一次選抜の3教科得点が270・奈良商工は面接20、第2希望校の奈良は3教科240点', () => {
+  it('nara: 令和9年度の二次選抜は各高校での検査(面接)なし・奈良北は一次選抜の3教科得点が300・奈良商工は150、第2希望校の奈良は3教科240点', () => {
     const r2 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nara', '奈良北', '二次選抜', '普通科');
-    expect(r2?.ratioType).toBe('一次選抜学力検査(3教科)270+面接50:調査書144');
-    expect(r2?.interviewRequired).toBe(true);
+    expect(r2?.ratioType).toBe('一次選抜学力検査(3教科)300:調査書144');
+    expect(r2?.interviewRequired).toBe(false);
     const shoko = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nara', '奈良商工', '二次選抜', '観光科');
-    expect(shoko?.ratioType).toBe('一次選抜学力検査(3教科)150+面接20:調査書234');
+    expect(shoko?.ratioType).toBe('一次選抜学力検査(3教科)150:調査書234');
+    expect(shoko?.note).toContain('令和9年度は各高校での二次選抜の検査(面接等)を実施しない');
     const s2 = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nara', '奈良', '一次選抜(第2希望校)', '普通科');
     expect(s2?.ratioType).toBe('学力検査(3教科)240:調査書180');
     expect(s2?.interviewRequired).toBe(false);
