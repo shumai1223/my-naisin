@@ -5,6 +5,28 @@ import fs from 'fs';
 export function build(rows) {
   let ins = '';
   for (const r of rows) {
+    if (r.noRec) {
+      // 推薦に基づく選抜を「実施しない」学校(表で推薦欄が結合して『実施しない』): 推薦レコードは作らず第一次募集のnoteに明記する
+      ins += `    {
+      schoolName: '${r.n}',
+      department: '普通科',
+      selectionCategory: '第一次募集',
+      interviewRequired: false,
+      ratioType: '学力検査7:調査書3(700点:300点)+ESAT-J20点',
+      note: '推薦に基づく選抜は「実施しない」(表で推薦欄が結合して記載)。学力検査は国数英社理の5教科。学力検査を実施する教科の評定は1倍・実施しない教科(社理)の評定は2倍に換算。面接・小論文・実技検査の実施なし',
+    },
+`;
+      ins += `    {
+      schoolName: '${r.n}',
+      department: '普通科',
+      selectionCategory: '第二次募集',
+      interviewRequired: false,
+      ratioType: '学力検査6:調査書4(600点:400点)',
+      note: '学力検査は国数英の3教科。学力検査を実施する教科の評定は1倍・実施しない教科の評定は2倍に換算。面接・小論文・実技検査の実施なし',
+    },
+`;
+      continue;
+    }
     const menDesc = r.merged != null ? `個人面接・集団討論の結合セル${r.merged}点` : `個人面接${r.men}点`;
     const tot = r.cho + (r.merged ?? r.men) + r.rp;
     const kekka = r.merged != null ? '(表では個人面接欄と集団討論欄にまたがる1つの結合セル。どちらを実施するか・併用かは表だけでは確定できないため、面接の実施有無は断定しない)' : '';
