@@ -2166,12 +2166,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record).toBeNull();
   });
 
-  it('tokushima: schoolsは育成型選抜実施概要一覧を全5頁(頁8-12・32校91レコード)完全収録し、頁13(一般選抜傾斜配点・7校8学科)と合わせて計98レコードを収録している', () => {
+  it('tokushima: schoolsは育成型選抜実施概要一覧を全5頁(頁8-12・32校91レコード)完全収録し、頁13(一般選抜傾斜配点・7校8学科)と頁6-7の選抜資料表(38校76レコード)を合わせて計174レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima');
-    expect(record?.schools?.length).toBe(98);
+    expect(record?.schools?.length).toBe(174);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(32);
+    expect(schoolNames.size).toBe(33);
     expect(record?.coverageNote).toContain('全5頁完全収録');
+  });
+
+  it('tokushima: 頁6-7の選抜資料表は全日制32校+定時制6校×(一般選抜・第2次募集選抜)の76レコードで、つるぎのみ一般選抜が集団面接・鳴門渦潮と名西は実技検査の注を持つ', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima')?.schools ?? [];
+    const ippan = list.filter((s) => s.selectionCategory === '一般選抜(選抜資料)');
+    const dai2 = list.filter((s) => s.selectionCategory === '第2次募集選抜(選抜資料)');
+    expect(ippan).toHaveLength(38);
+    expect(dai2).toHaveLength(38);
+    expect(ippan.filter((s) => s.department?.startsWith('全日制'))).toHaveLength(32);
+    expect(ippan.filter((s) => s.department?.startsWith('定時制'))).toHaveLength(6);
+    const shudan = ippan.filter((s) => s.note?.includes('学力検査・集団面接'));
+    expect(shudan.map((s) => s.schoolName)).toEqual(['つるぎ']);
+    const find = (cat: string, n: string, dept: string) => list.find((s) => s.selectionCategory === cat && s.schoolName === n && s.department?.startsWith(dept));
+    expect(find('一般選抜(選抜資料)', '鳴門渦潮', '全日制')?.note).toContain('体育科');
+    expect(find('第2次募集選抜(選抜資料)', '名西', '全日制')?.note).toContain('芸術科');
+    expect(find('第2次募集選抜(選抜資料)', '城南', '全日制')?.note).toContain('口頭試問(数学・英語)');
+    expect(find('第2次募集選抜(選抜資料)', '城東', '全日制')?.note).toContain('筆記検査(数学・英語)');
+    expect(find('第2次募集選抜(選抜資料)', '池田・三好', '全日制')?.note).toContain('筆記検査(国語・数学・英語)');
+    expect(find('第2次募集選抜(選抜資料)', '徳島中央', '定時制')?.note).toContain('筆記検査(国語・数学・英語)');
+    expect(dai2.filter((s) => s.note?.includes('記載なし(空欄)'))).toHaveLength(16);
   });
 
   it('hiroshima: 広島国泰寺(普通)は特色枠で数学・英語に2倍の傾斜配点があり学力検査合計350点になる', () => {
