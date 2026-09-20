@@ -2584,7 +2584,9 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
   it('tokyo: 推薦に基づく選抜は島しょ6校を除く全97校が推薦枠割合20%で、面接・討論の点数と小論文/作文の点数がnoteの合計と一致する(日比谷・竹早は結合セルのため面接実施を断定しない)', () => {
     const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? []).filter((s) => s.selectionCategory === '推薦に基づく選抜' && s.department === '普通科');
     expect(list).toHaveLength(97);
-    expect(list.every((s) => s.ratioType === '推薦枠割合20%')).toBe(true);
+    // 令和9年度版で足立新田/篠崎/片倉/府中西/府中東/小平西/日野/東大和/東大和南の9校が22%へ増加
+    const up = ['足立新田', '篠崎', '片倉', '府中西', '府中東', '小平西', '日野', '東大和', '東大和南'];
+    expect(list.every((s) => s.ratioType === (up.includes(s.schoolName) ? '推薦枠割合22%' : '推薦枠割合20%'))).toBe(true);
     const get = (n: string) => list.find((s) => s.schoolName === n);
     expect(get('向丘')?.note).toContain('調査書500点+個人面接300点+作文200点(合計1000点)');
     expect(get('上野')?.note).toContain('調査書500点+個人面接150点+小論文350点(合計1000点)');
@@ -2678,7 +2680,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const rec = list.filter((s) => s.selectionCategory === '推薦に基づく選抜');
     expect(rec).toHaveLength(14);
     const w = (n: string) => [...new Set(rec.filter((s) => s.schoolName === n).map((s) => s.ratioType))];
-    expect(w('園芸')).toEqual(['推薦枠割合30%']);
+    expect(w('園芸')).toEqual(['推薦枠割合35%']); // 令和9年度版で30→35%
     expect(w('農芸')).toEqual(['推薦枠割合35%']);
     expect(w('農産')).toEqual(['推薦枠割合40%']);
     expect(w('農業')).toEqual(['推薦枠割合40%']);

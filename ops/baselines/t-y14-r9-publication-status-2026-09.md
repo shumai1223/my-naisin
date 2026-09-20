@@ -16,7 +16,7 @@ aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026
 | ~~miyazaki~~(更新済み・追記93) | 『令和9年度県立高等学校生徒募集(令和9年春入学生)について』`/kokokyoiku/kyoikukosodate/kyoiku/20260519170532.html` | 未取得(R8のURLは20250618の日付ページ) |
 
 | ~~oita~~(更新済み・追記99・推薦のみ) | **公表済み**: 推薦入学者選抜【第2期公表分】`https://www.pref.oita.jp/site/gakkokyoiku/r09suisen2.html`(2026-08-31更新・学校学科別PDF88本・`/uploaded/life/2352031_*_misc.pdf`・一覧はops/baselines/oita-r9/pdf-list.tsv)。第1期公表分`r09suisen1.html`は取得時404(掲載変更の可能性)。`r09suisen.html`(2026-05-22)は『推薦入試の内容を一部変更』の告知 | R8と同数の88本(2頁・pdftotextで読める)だが**推薦入試の内容が変更**されており(調査書点基準・募集人員に『内地域活性化枠』等)、縦書きラベルが混ざるため-layoutの単純抽出は失敗(比重合計が100にならない行が27)。bbox座標抽出で再構築する |
-| tokyo | **公表済み(直近)**: 令和9年度東京都立高等学校入学者選抜実施要綱・同細目(発表2026-09-17)`https://www.kyoiku.metro.tokyo.lg.jp/information/press/2026/09/2026091703`。R8は`20250925_n2_10`(2025-09-25) | 未取得。R8→R9差分の確認が必要 |
+| tokyo(**部分更新済み・追記117**) | **公表済み(直近)**: 令和9年度東京都立高等学校入学者選抜実施要綱・同細目(発表2026-09-17)`https://www.kyoiku.metro.tokyo.lg.jp/information/press/2026/09/2026091703`。R8は`20250925_n2_10`(2025-09-25) | 未取得。R8→R9差分の確認が必要 |
 
 ## PDF直リンク県のハブ調査(2026-09-20・1回目=4県)
 - ~~okayama~~(**更新済み・追記106**): **公表済み**。`https://www.pref.okayama.jp/site/255/1044713.html`(令和9年度実施大要・2026-08-31更新)。学校別実施内容一覧(別表1・7頁・テキスト層あり)=`/uploaded/life/1054574_10218770_misc.pdf`、実施大要=`/uploaded/life/1054574_10218771_misc.pdf`。DBはR8(259レコード)のまま。R8(`1054600_10219031_misc.pdf`)とR9をpdftotext -rawで比較すると差分は各約60行(玉野普通の特別選抜15%→20%+検査追加・笠岡普通の特別選抜に検査追加・勝間田50%→80%・操山普通の一般選抜◎新設・工学系の実績欄の文言等)=**全面再構築でなく差分レコードのパッチで足りる見込み**。
@@ -53,3 +53,9 @@ aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026
 ## 未確認(ハブ調査が必要)
 PDF直リンクの県: aomori / fukushima / gunma / hiroshima / hokkaido / ibaraki / kagoshima / kochi / okayama / osaka / tochigi / toyama / yamagata / yamaguchi(r8→r9置換は aomori/kagoshima/kochi/osaka/tochigi/toyama/yamagata で404)。
 HTMLだがR9言及なし: nagasaki / oita / saga / saitama / tokushima / tokyo / tottori / wakayama(各R8ページに令和9年度へのリンクが無い=別ページで公表される可能性。県の入試トップから辿る)。
+
+## 3回目の再確認(2026-09-20 10:50頃・ibaraki/kagoshima/kochi/toyama)
+- **ibaraki**: R9の**実施要項**(`/wp-content/uploads/2026/07/koukou-youkou.pdf`・4頁)と**特色選抜実施概要一覧(予定)**(`/wp-content/uploads/2026/07/tokushoku2027-2.pdf`・63頁・2026-07-22)は公表済み。ただしDBの値の出所である**別表1『高等学校別入学者選抜実施方法』(学力検査重視:調査書重視の人数比率)は実施細則側**で、R9の実施細則は未公表(R8は令和7年10月改正)=特色選抜概要一覧には比率が無いためDB更新不可。10月に実施細則を再確認。
+- **kochi**: R9の`取扱要項`(`file_contents/r9_youkou.pdf`)・日程・出題方針は公表済み。DBの出所である『検査項目等一覧表』(面接内容等)に相当するR9資料は未掲載(R8は`r8_kensa_koumoku.pdf`)=未公表。
+- **toyama**: `09senbatsu.html`は存在するが掲載は日程(`r9nittei.pdf`)のみ。実施概要一覧(`r08gaiyou.pdf`相当)は未公表。
+- **kagoshima**: `r9nittei.html`のみ。実施要綱は未公表(R9の`r9youkou.html`は404)。
