@@ -30,7 +30,7 @@ aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026
 - ◎**fukushima**: **公表済み**。`https://www.pref.fukushima.lg.jp/site/edu/r9koukounyushi.html`に『各高等学校の選抜方法一覧』(2026-07-14)=`/uploaded/attachment/763363.pdf`・資料の見方=`760972.pdf`・基本方針(2026-09-11)=`762203.pdf`。DBはR9へ更新済み(2026-09-20・444レコード・追記112)。
 - ○**yamagata**: 公表済みとみられる。`https://www.pref.yamagata.jp/700013/koko/r9nyuugakusyasennbatsu.html`(令和9年度入学者選抜情報)+前期(特色)選抜の各校概要(例: 東学区`2026r9nyuugakusyajouhoueast.html`)。DBはR8(138レコード)。要取得確認。
 - ○**yamaguchi**: 実施大綱が公表済み(`https://www.pref.yamaguchi.lg.jp/site/kyouiku/353652.html`・2026-07-07)。各校の選抜方法・特色選抜の要件・くくり募集の概要を含むとの記載。DBはR9へ更新済み(2026-09-20・193レコード・追記113)。
-- ○**gunma**: 実施大綱`https://www.pref.gunma.jp/site/kyouiku/754234.html`(更新2026-05-01)と『各校の選抜方法等』(検索要約では2026-08-03公開・URL未特定)。DBはR8(160レコード)。ハブ`list66-367.html`から要特定。
+- ○**gunma**: 実施大綱`https://www.pref.gunma.jp/site/kyouiku/754234.html`(更新2026-05-01)と『各校の選抜方法等』(検索要約では2026-08-03公開・URL未特定)。DBはR9へ更新済み(2026-09-20・158レコード・追記115)。各校の選抜方法等=766806.html→708864.pdf。
 - ~~tochigi~~(**更新済み・追記110**): 『令和9(2027)年度栃木県立高等学校入学者選抜要項』`https://www.pref.tochigi.lg.jp/m04/r08/r9nyuugakusyasennbatsusyoukou.html`(2026-04-02決定)。**制度変更あり: 特色選抜の割合上限が現行30%程度→50%に引き上げ・学力検査と独自検査の実施**=R8のDB(216レコード)の特色選抜レコードに影響。実施細則の確定版は8月下旬公表予定(要確認)・各校特色選抜の一覧`tochigi-edu.ed.jp/.../7421`(入試情報)は学校側。**優先度高(制度変更のため)**。
 - ×**ibaraki**: R9は日程・リーフレット(`https://kyoiku.pref.ibaraki.jp/post-40694/`)のみ。実施要項はR8が`youkou2026`=R9の要項は未確認(10月頃の見込み)。
 - ×**kagoshima**: R9は日程(`.../r9nittei.html`)と入試情報ページ(`koukou02.html`)のみ。実施要綱は未確認(R8は`r7/r8youkou.html`=前年度中に公表された前例あり・要再確認)。

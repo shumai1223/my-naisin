@@ -405,7 +405,17 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('学力検査25%:面接等40%:調査書35%');
   });
 
-  it('gunma: 前橋工業(特色型選抜)は他校と逆順で第1次選抜となる例外校', () => {
+  it('gunma: 令和9年度版で前橋工業は総合型選抜が第1次・特色型選抜が第2次になり(令和8年度は逆順の例外校)、前橋商業・桐生工業・玉村は特色型選抜①②の2段階から特色型選抜の1段階になった', () => {
+    const at = (school: string, cat: string, dept: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma', school, cat, dept);
+    expect(at('前橋工業', '総合型選抜', '機械科・電子機械科・電気科・電子科・建築科・土木科')?.note).toContain('総合型選抜50%(第1次選抜)');
+    expect(at('前橋商業', '特色型選抜', '商業科')?.ratioType).toBe('学力検査25%:面接等5%:調査書70%');
+    expect(at('前橋商業', '特色型選抜①', '商業科')).toBeNull();
+    expect(at('玉村', '特色型選抜', '普通科')?.ratioType).toBe('学力検査25%:面接等50%:調査書25%');
+    expect(at('桐生市立商業', '特色型選抜②', '商業科・情報処理科')?.ratioType).toBe('学力検査20%:面接等10%:調査書70%');
+    expect(at('前橋', '特色型選抜①', '普通科')?.ratioType).toBe('学力検査73%:面接等5%:調査書22%');
+  });
+
+  it('gunma: 前橋工業(特色型選抜)の割合', () => {
     const record = findSchoolSelectionRecord(
       SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
       'gunma',
@@ -502,7 +512,8 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('gunma: 「I 全日制課程選抜」63校を完全収録している(全66レコード超・頁2〜68完結)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gunma');
-    expect(record?.schools?.length).toBe(160);
+    // 令和9年度版: 前橋商業・桐生工業・玉村が2段階化(-3)・桐生市立商業が3段階化(+1)で158
+    expect(record?.schools?.length).toBe(158);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
     expect(schoolNames.has('前橋市立前橋')).toBe(true);
     expect(schoolNames.has('高崎経済大学附属')).toBe(true);

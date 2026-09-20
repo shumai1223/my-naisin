@@ -1,3 +1,4 @@
+// ★2026-09-20に令和9年度版(766806.html→708864.pdf・全92頁)へ差し替え。R8→R9で割合・面接等点・調査書点・選抜比率・募集人員・段階数が変わった校のnoteに「(令和9年度版)」等を付記(差分は ops/baselines/gunma-r9/)。以下の一次ソース・頁数の記述は差し替え前の令和8年度版のもの。
 // 群馬県: 令和8年度群馬県公立高等学校入学者選抜における学校別「選抜の順・検査項目等」
 // （学力検査・面接等・調査書の得点配分と、それぞれが選抜順位に占める割合）。
 //
@@ -42,22 +43,22 @@
 // 群馬県外からの募集(計24人)を行う。
 //
 // フレックススクール選抜・定時制課程選抜・連携型選抜（頁69以降）は本ファイルの収録対象外。
-// ★前橋工業は「特色型選抜」が第1次・「総合型選抜」が第2次という他校と逆順の選抜順序を採る
-// 例外校。★桐生(理数科)は学力検査の教科別配点が回により異なる稀な例（特色型選抜①は数学300・
+// ★前橋工業は令和8年度版では「特色型選抜」が第1次・「総合型選抜」が第2次という他校と逆順の例外校だったが、
+// 令和9年度版では総合型選抜が第1次・特色型選抜が第2次に改められ他校と同じ順になった。★桐生(理数科)は学力検査の教科別配点が回により異なる稀な例（特色型選抜①は数学300・
 // 理科300・国語/英語/社会各100の900点満点、総合型選抜は他校と同じ各100〜150点の650点満点）。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
 export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   prefectureCode: 'gunma',
-  fiscalYear: '令和8年度（2026年度）',
+  fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
     '「I 全日制課程選抜」(頁2〜68)を63校全て完全収録(県立58校+市立4校+組合立1校)。頁69以降の「2 フレックススクール選抜」「3 定時制課程選抜」「4 連携型選抜」は本ファイルの対象外(未収録)。ratioTypeは学力検査:面接等:調査書(西邑楽のスポーツ科・芸術科、高崎経済大学附属の芸術コースは実技検査を含む4項目)の割合(%)をコロン区切りで転記',
   schools: [
     // 前橋（普通科【280】男280人）
     { schoolName: '前橋', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査81%:面接等6%:調査書14%', note: '募集人員280(男のみ)。総合型選抜80%。総合型選抜では学力検査の結果を重視して選抜。学力検査国数英各150点・社理各100点満点(計650)、面接等(集団面接)45点、調査書110点。第2志望の設定なし' },
-    { schoolName: '前橋', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査63%:面接等5%:調査書32%', note: '特色型選抜①15%。第1次選抜合格者以外を対象に、学力検査の結果と調査書の特別活動や部活動等の記録を重視して選抜。学力検査計650・面接等(集団面接)50点・調査書330点' },
+    { schoolName: '前橋', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査73%:面接等5%:調査書22%', note: '特色型選抜①15%。第1次選抜合格者以外を対象に、学力検査の結果と調査書の特別活動や部活動等の記録を重視して選抜。学力検査計650・面接等(集団面接)45点・調査書193点(令和9年度版)' },
     { schoolName: '前橋', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査59%:面接等5%:調査書35%', note: '特色型選抜②5%。第1・第2次選抜合格者以外を対象に、学力検査の結果と調査書の評定等を重視して選抜。学力検査計650・面接等(集団面接)60点・調査書390点' },
 
     // 前橋南（普通科【200】男女200人）
@@ -66,9 +67,9 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '前橋南', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査40%:面接等10%:調査書50%', note: '特色型選抜②15%。第1・第2次選抜合格者以外を対象に、調査書の評定等及び学力検査の結果を重視。学力検査国数英各150点・社理各100点(計650)・面接等(集団面接)160点・調査書810点' },
 
     // 前橋西（くくり募集(普通科、国際科)【160】男女160人）
-    { schoolName: '前橋西', department: 'くくり募集(普通科・国際科)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査71%:面接等7%:調査書21%', note: '募集人員160(男女・普通科と国際科のくくり募集)。総合型選抜50%。学力検査結果を重視。学力検査計500(各100点)・面接等(集団面接)50点・調査書150点' },
-    { schoolName: '前橋西', department: 'くくり募集(普通科・国際科)', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査30%:面接等9%:調査書61%', note: '特色型選抜①40%。第1次選抜合格者以外を対象に、調査書の評定等及び部活動等の記録を重視。学力検査計500・面接等(集団面接)150点・調査書1000点' },
-    { schoolName: '前橋西', department: 'くくり募集(普通科・国際科)', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査33%:面接等33%:調査書33%', note: '特色型選抜②10%。第1・第2次選抜合格者以外を対象に、調査書の評定等及び部活動等の記録、面接の結果を重視。学力検査計500・面接等(集団面接)500点・調査書500点' },
+    { schoolName: '前橋西', department: 'くくり募集(普通科・国際科)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査69%:面接等10%:調査書21%', note: '募集人員120(令和9年度版で160から変更)(男女・普通科と国際科のくくり募集)。総合型選抜50%。学力検査結果を重視。学力検査計500(各100点)・面接等(集団面接)70点・調査書150点(令和9年度版)' },
+    { schoolName: '前橋西', department: 'くくり募集(普通科・国際科)', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査29%:面接等12%:調査書58%', note: '特色型選抜①35%。第1次選抜合格者以外を対象に、調査書の評定等及び部活動等の記録を重視。学力検査計500・面接等(集団面接)210点・調査書1000点(令和9年度版)' },
+    { schoolName: '前橋西', department: 'くくり募集(普通科・国際科)', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査33%:面接等33%:調査書33%', note: '特色型選抜②15%。第1・第2次選抜合格者以外を対象に、調査書の評定等及び部活動等の記録、面接の結果を重視。学力検査計500・面接等(集団面接)500点・調査書500点(令和9年度版)' },
 
     // 前橋女子（普通科【280】女280人）
     { schoolName: '前橋女子', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査75%:面接等5%:調査書20%', note: '募集人員280(女のみ)。総合型選抜75%。学力検査結果を重視。学力検査計500(各100点)・面接等(集団面接)36点・調査書135点' },
@@ -86,18 +87,17 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
 
     // 前橋工業（機械科【40】/電子機械科【40】/電気科【40】/電子科【40】/建築科【40】/土木科【40】、男女240人）
     // ★選抜の順が「特色型選抜(第1次)→総合型選抜(第2次)」と他校と逆順の例外校
-    { schoolName: '前橋工業', department: '機械科・電子機械科・電気科・電子科・建築科・土木科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査46%:面接等27%:調査書27%', note: '募集人員240(男女・6学科共通の選抜方法)。特色型選抜45%(第1次選抜)。調査書の評定等、特別活動や部活動等の記録を重視。学力検査計500(各100点)・面接等(集団面接)300点・調査書300点。第2志望は全ての募集区分において相互に認める' },
-    { schoolName: '前橋工業', department: '機械科・電子機械科・電気科・電子科・建築科・土木科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査67%:面接等7%:調査書26%', note: '総合型選抜55%(第2次選抜)。第1次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(集団面接)50点・調査書200点' },
+    { schoolName: '前橋工業', department: '機械科・電子機械科・電気科・電子科・建築科・土木科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査46%:面接等27%:調査書27%', note: '募集人員240(男女・6学科共通の選抜方法)。特色型選抜50%(第2次選抜・令和8年度は第1次選抜だったが令和9年度は総合型選抜が第1次で他校と同じ順)。第1次選抜合格者以外を対象に、調査書の評定等、特別活動や部活動等の記録を重視。学力検査計500(各100点)・面接等(集団面接)300点・調査書300点。第2志望は全ての募集区分において相互に認める(令和9年度版)' },
+    { schoolName: '前橋工業', department: '機械科・電子機械科・電気科・電子科・建築科・土木科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査67%:面接等7%:調査書26%', note: '総合型選抜50%(第1次選抜)。学力検査の結果を重視。学力検査計500・面接等(集団面接)50点・調査書200点(令和9年度版)' },
 
     // 前橋商業（商業科【280】男女280人）
-    { schoolName: '前橋商業', department: '商業科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査25%:面接等5%:調査書70%', note: '募集人員280(男女)。特色型選抜①35%。調査書の部活動等や特別活動の記録及び学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)100点・調査書1400点' },
-    { schoolName: '前橋商業', department: '商業科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査45%:面接等5%:調査書50%', note: '特色型選抜②15%。第1次選抜合格者以外を対象に、調査書の評定等及び学力検査の結果を重視。学力検査計500・面接等(集団面接)60点・調査書550点' },
-    { schoolName: '前橋商業', department: '商業科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査75%:面接等5%:調査書20%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果及び調査書の評定等を重視。学力検査計500・面接等(集団面接)35点・調査書135点' },
+    { schoolName: '前橋商業', department: '商業科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査25%:面接等5%:調査書70%', note: '募集人員280(男女)。特色型選抜40%(第1次選抜・令和8年度は特色型選抜①②の2段階)。調査書の部活動等や特別活動の記録及び学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)100点・調査書1400点(令和9年度版)' },
+    { schoolName: '前橋商業', department: '商業科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査75%:面接等5%:調査書20%', note: '総合型選抜60%(第2次選抜)。第1次選抜合格者以外を対象に、学力検査の結果及び調査書の評定等を重視。学力検査計500・面接等(集団面接)35点・調査書135点(令和9年度版)' },
 
     // 高崎（普通科【280】男280人）
     { schoolName: '高崎', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査78%:面接等6%:調査書16%', note: '募集人員280(男のみ)。総合型選抜80%。学力検査結果を重視。学力検査国数英各150点・社理各100点満点(計650)・面接等(集団面接)50点・調査書135点' },
-    { schoolName: '高崎', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査41%:面接等6%:調査書52%', note: '特色型選抜①10%。第1次選抜合格者以外を対象に、学力検査の結果と調査書の評定及び部活動等の記録を重視。学力検査計650・面接等(集団面接)100点・調査書820点' },
-    { schoolName: '高崎', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査58%:面接等7%:調査書35%', note: '特色型選抜②10%。第1・第2次選抜合格者以外を対象に、学力検査の結果と調査書の評定及び特別活動等の記録を重視。学力検査計650・面接等(集団面接)75点・調査書390点' },
+    { schoolName: '高崎', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査58%:面接等7%:調査書35%', note: '特色型選抜①10%。第1次選抜合格者以外を対象に、学力検査の結果と調査書の評定及び特別活動等の記録を重視。学力検査計650・面接等(集団面接)75点・調査書390点(令和9年度版)' },
+    { schoolName: '高崎', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査41%:面接等6%:調査書52%', note: '特色型選抜②10%。第1・第2次選抜合格者以外を対象に、学力検査の結果と調査書の評定及び部活動等の記録を重視。学力検査計650・面接等(集団面接)100点・調査書820点(令和9年度版)' },
 
     // 高崎東（普通科【160】男女160人）
     { schoolName: '高崎東', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査66%:面接等10%:調査書24%', note: '募集人員160(男女)。総合型選抜70%。学力検査結果を重視。学力検査計500(各100点)・面接等(集団面接)75点・調査書180点' },
@@ -106,7 +106,7 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     // 高崎北（普通科【240】男女240人）
     { schoolName: '高崎北', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査74%:面接等6%:調査書20%', note: '募集人員240(男女)。総合型選抜70%。学力検査結果を重視。学力検査計500(各100点)・面接等(集団面接)40点・調査書135点' },
     { schoolName: '高崎北', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査45%:面接等7%:調査書48%', note: '特色型選抜①10%。第1次選抜合格者以外を対象に、調査書の評定等及び学力検査の結果を重視。学力検査計500・面接等(集団面接)80点・調査書540点' },
-    { schoolName: '高崎北', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査40%:面接等10%:調査書50%', note: '特色型選抜②20%。第1・第2次選抜合格者以外を対象に、調査書の特別活動や部活動等の記録、面接における意欲・態度等及び学力検査の結果を重視。学力検査計500・面接等(集団面接)120点・調査書630点' },
+    { schoolName: '高崎北', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査40%:面接等8%:調査書52%', note: '特色型選抜②20%。第1・第2次選抜合格者以外を対象に、調査書の特別活動や部活動等の記録、面接における意欲・態度等及び学力検査の結果を重視。学力検査計500・面接等(集団面接)100点・調査書650点(令和9年度版)' },
 
     // 榛名（普通科【72】男女72人・ぐんまチャレンジ・ハイスクール指定校）
     { schoolName: '榛名', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査50%:面接20%:調査書30%', note: '募集人員72(男女・「ぐんまチャレンジ・ハイスクール」の取組を理解し積極的に参加できる生徒を求める)。総合型選抜50%。学力検査と調査書の結果を重視。学力検査計500(各100点)・面接(個人面接)200点・調査書300点' },
@@ -130,12 +130,12 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '高崎商業', department: 'くくり募集(グローバルビジネス科・会計ビジネス科・情報ビジネス科・総合ビジネス科)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等13%:調査書25%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果及び調査書を重視。学力検査計500・面接等(個人面接)100点・調査書200点' },
 
     // 桐生（普通科【240】男女240人・理数科【80】男女80人）
-    { schoolName: '桐生', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査84%:面接等5%:調査書11%', note: '募集人員240(男女)。総合型選抜75%。学力検査の結果及び調査書の評定等を重視。学力検査国数英各150点・社理各100点満点(計650)・面接等(集団面接)40点・調査書81点' },
+    { schoolName: '桐生', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査84%:面接等5%:調査書11%', note: '募集人員240(男女)。総合型選抜75%。学力検査の結果及び調査書の評定等を重視。学力検査国数英各150点・社理各100点満点(計650)・面接等(集団面接)40点・調査書100点(令和9年度版)' },
     { schoolName: '桐生', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査45%:面接等5%:調査書50%', note: '特色型選抜①15%。第1次選抜合格者以外を対象に、調査書の評定等・特別活動や部活動等の記録及び学力検査の結果を重視。学力検査計650・面接等(集団面接)72点・調査書720点' },
     { schoolName: '桐生', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査30%:面接等10%:調査書60%', note: '特色型選抜②10%。第1・第2次選抜合格者以外を対象に、調査書の特別活動や部活動等の記録、評定等及び学力検査の結果を重視。学力検査国数英社理各100点(計500)・面接等(集団面接)166点・調査書1000点' },
     { schoolName: '桐生', department: '理数科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査55%:面接等5%:調査書39%', note: '募集人員80(男女)。特色型選抜①10%。学力検査の結果及び調査書の評定等・理科/数学/英語に関する活動実績を重視。学力検査は数学300・理科300・国語/英語/社会各100点の900点満点(他校と異なる理数科目重点配点)・面接等(集団面接)85点・調査書640点。第2志望は普通科への志望を認める' },
     { schoolName: '桐生', department: '理数科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査53%:面接等5%:調査書42%', note: '特色型選抜②40%。第1次選抜合格者以外を対象に、学力検査の結果及び調査書の評定等・理科/数学/英語に関する活動実績を重視。学力検査は数学200・理科200・国語/英語/社会各100点の800点満点・面接等(集団面接)80点・調査書640点' },
-    { schoolName: '桐生', department: '理数科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査84%:面接等5%:調査書11%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果及び調査書の評定等を重視。学力検査国数英各150点・社理各100点満点(計650・普通科の総合型選抜と同一配点)・面接等(集団面接)40点・調査書81点' },
+    { schoolName: '桐生', department: '理数科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査82%:面接等5%:調査書13%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果及び調査書の評定等を重視。学力検査国数英各150点・社理各100点満点(計650・普通科の総合型選抜と同一配点)・面接等(集団面接)40点・調査書100点(令和9年度版)' },
 
     // 桐生清桜（普通科(普通コース)【160】男女160人・普通科(アドバンスト探究コース)【80】男女80人）
     { schoolName: '桐生清桜', department: '普通科(普通コース)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査47%:面接等23%:調査書30%', note: '募集人員160(男女)。特色型選抜20%(2段階制)。調査書の部活動等の記録及び面接の結果を重視。学力検査計500(各100点)・面接等(集団面接)240点・調査書315点' },
@@ -145,13 +145,12 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '桐生清桜', department: '普通科(アドバンスト探究コース)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査67%:面接等5%:調査書28%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果及び調査書の評定等を重視。学力検査計500・面接等(集団面接)40点・調査書210点' },
 
     // 桐生工業（機械科【80】/建設科【40】/創造技術科電気コース【20】/創造技術科染織デザインコース【20】、男女160人）
-    { schoolName: '桐生工業', department: '機械科・建設科・創造技術科(電気コース・染織デザインコース)', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査20%:面接等30%:調査書50%', note: '募集人員160(男女・4区分共通の選抜方法)。特色型選抜①30%。面接の結果、調査書の評定等及び特別活動や部活動等の記録を重視。学力検査計500(各100点)・面接等(集団面接)750点・調査書1250点。第2志望は全ての学科・コースにおいて相互に認める' },
-    { schoolName: '桐生工業', department: '機械科・建設科・創造技術科(電気コース・染織デザインコース)', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査30%:面接等10%:調査書60%', note: '特色型選抜②20%。第1次選抜合格者以外を対象に、調査書の評定等及び特別活動や部活動等の記録を重視。学力検査計500・面接等(集団面接)167点・調査書1000点' },
-    { schoolName: '桐生工業', department: '機械科・建設科・創造技術科(電気コース・染織デザインコース)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査60%:面接等10%:調査書30%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(集団面接)83点・調査書250点' },
+    { schoolName: '桐生工業', department: '機械科・建設科・創造技術科(電気コース・染織デザインコース)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査20%:面接等30%:調査書50%', note: '募集人員120(男女・4区分共通の選抜方法・令和8年度は160)。特色型選抜50%(第1次選抜・令和8年度は特色型選抜①②の2段階)。面接の結果、調査書の評定等及び特別活動や部活動等の記録を重視。学力検査計500(各100点)・面接等(集団面接)750点・調査書1250点。第2志望は全ての募集区分において相互に認める(令和9年度版)' },
+    { schoolName: '桐生工業', department: '機械科・建設科・創造技術科(電気コース・染織デザインコース)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査60%:面接等10%:調査書30%', note: '総合型選抜50%(第2次選抜)。第1次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(集団面接)83点・調査書250点(令和9年度版)' },
 
     // 伊勢崎（くくり募集(普通科・グローバルコミュニケーション科)【280】男女280人）
-    { schoolName: '伊勢崎', department: 'くくり募集(普通科・グローバルコミュニケーション科)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査79%:面接等6%:調査書16%', note: '募集人員280(男女)。総合型選抜90%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)35点・調査書100点' },
-    { schoolName: '伊勢崎', department: 'くくり募集(普通科・グローバルコミュニケーション科)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査31%:面接等6%:調査書63%', note: '特色型選抜10%(2段階制)。第1次選抜合格者以外を対象に、調査書の評定等と部活動等の記録を重視。学力検査計500・面接等(集団面接)100点・調査書1000点' },
+    { schoolName: '伊勢崎', department: 'くくり募集(普通科・グローバルコミュニケーション科)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査79%:面接等6%:調査書16%', note: '募集人員280(男女)。総合型選抜80%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)35点・調査書100点(令和9年度版)' },
+    { schoolName: '伊勢崎', department: 'くくり募集(普通科・グローバルコミュニケーション科)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査31%:面接等6%:調査書63%', note: '特色型選抜20%(2段階制)。第1次選抜合格者以外を対象に、調査書の評定等と部活動等の記録を重視。学力検査計500・面接等(集団面接)100点・調査書1000点(令和9年度版)' },
 
     // 伊勢崎清明（普通科【200】男女200人）
     { schoolName: '伊勢崎清明', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査77%:面接等8%:調査書15%', note: '募集人員200(男女)。総合型選抜75%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)50点・調査書100点' },
@@ -183,23 +182,23 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
 
     // 太田女子（普通科【240】女240人）
     { schoolName: '太田女子', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査77%:面接等6%:調査書17%', note: '募集人員240(女のみ)。総合型選抜80%。学力検査の結果を重視。学力検査国数英各150点・社理各100点満点(計650)・面接等(集団面接)50点・調査書145点' },
-    { schoolName: '太田女子', department: '普通科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査51%:面接等6%:調査書43%', note: '特色型選抜20%(2段階制)。第1次選抜合格者以外を対象に、学力検査の結果及び調査書の評定に加え、部活動等の記録及び特別活動の記録を重視。学力検査計650・面接等(集団面接)75点・調査書550点' },
+    { schoolName: '太田女子', department: '普通科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査45%:面接等6%:調査書49%', note: '特色型選抜20%(2段階制)。第1次選抜合格者以外を対象に、学力検査の結果及び調査書の評定に加え、部活動等の記録及び特別活動の記録を重視。学力検査計650・面接等(集団面接)80点・調査書700点(令和9年度版)' },
 
     // 新田暁（総合学科【160】男女160人）
-    { schoolName: '新田暁', department: '総合学科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査60%:面接等10%:調査書30%', note: '募集人員160(男女)。総合型選抜60%。学力検査の結果を重視。学力検査計500(各100点)・面接等(個人面接)80点・調査書250点' },
-    { schoolName: '新田暁', department: '総合学科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査35%:面接等20%:調査書45%', note: '特色型選抜①35%。第1次選抜合格者以外を対象に、調査書及び面接を重視。学力検査計500・面接等(個人面接)280点・調査書650点' },
-    { schoolName: '新田暁', department: '総合学科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査30%:面接等40%:調査書30%', note: '特色型選抜②5%。第1・第2次選抜合格者以外を対象に、面接・調査書及び学力検査の結果を重視。学力検査計500・面接等(個人面接)660点・調査書500点' },
+    { schoolName: '新田暁', department: '総合学科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査64%:面接等15%:調査書21%', note: '募集人員160(男女)。総合型選抜60%。学力検査の結果を重視。学力検査計500(各100点)・面接等(個人面接)120点・調査書160点(令和9年度版)' },
+    { schoolName: '新田暁', department: '総合学科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査33%:面接等24%:調査書43%', note: '特色型選抜①35%。第1次選抜合格者以外を対象に、調査書及び面接を重視。学力検査計500・面接等(個人面接)360点・調査書640点(令和9年度版)' },
+    { schoolName: '新田暁', department: '総合学科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査32%:面接等38%:調査書30%', note: '特色型選抜②5%。第1・第2次選抜合格者以外を対象に、面接・調査書及び学力検査の結果を重視。学力検査計500・面接等(個人面接)600点・調査書480点(令和9年度版)' },
 
     // 太田工業（機械系くくり募集(機械科・電子機械科)【80】/電気情報科【40】、男女120人）
     { schoolName: '太田工業', department: '機械科・電子機械科(くくり募集)・電気情報科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査30%:面接等18%:調査書52%', note: '募集人員120(男女・3学科共通の選抜方法)。特色型選抜50%。調査書の記録及び面接の内容を重視。学力検査計500(各100点)・面接等(集団面接)300点・調査書860点。第2志望は全ての募集区分において相互に認める' },
     { schoolName: '太田工業', department: '機械科・電子機械科(くくり募集)・電気情報科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等10%:調査書27%', note: '総合型選抜50%。第1次選抜合格者以外を対象に、学力検査を重視。学力検査計500・面接等(集団面接)75点・調査書215点' },
 
     // 沼田（普通科(普通コース)【160】男女160人・普通科(文理探究コース)【40】男女40人）
-    { schoolName: '沼田', department: '普通科(普通コース)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査72%:面接等7%:調査書20%', note: '募集人員160(男女)。総合型選抜70%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)50点・調査書140点' },
+    { schoolName: '沼田', department: '普通科(普通コース)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査74%:面接等5%:調査書21%', note: '募集人員160(男女)。総合型選抜65%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)35点・調査書140点(令和9年度版)' },
     { schoolName: '沼田', department: '普通科(普通コース)', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査39%:面接等6%:調査書55%', note: '特色型選抜①25%。第1次選抜合格者以外を対象に、学力検査に加え調査書の評定及び特別活動の記録(部活動等の活動実績等)を重視。学力検査計500・面接等(集団面接)75点・調査書700点' },
-    { schoolName: '沼田', department: '普通科(普通コース)', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査50%:面接等5%:調査書45%', note: '特色型選抜②5%。第1・第2次選抜合格者以外を対象に、学力検査に加え調査書の評定等を重視。学力検査計500・面接等(集団面接)50点・調査書450点' },
-    { schoolName: '沼田', department: '普通科(文理探究コース)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査72%:面接等7%:調査書20%', note: '募集人員40(男女・文系理系を問わずより高度な学習内容に取り組む)。総合型選抜70%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)50点・調査書140点。普通科(普通コース)への第2志望を認める' },
-    { schoolName: '沼田', department: '普通科(文理探究コース)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査50%:面接等5%:調査書45%', note: '特色型選抜30%(2段階制)。第1次選抜合格者以外を対象に、学力検査に加え調査書の評定及び特別活動の記録を重視。学力検査計500・面接等(集団面接)50点・調査書450点' },
+    { schoolName: '沼田', department: '普通科(普通コース)', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査50%:面接等5%:調査書45%', note: '特色型選抜②10%。第1・第2次選抜合格者以外を対象に、学力検査に加え調査書の評定等を重視。学力検査計500・面接等(集団面接)50点・調査書450点(令和9年度版)' },
+    { schoolName: '沼田', department: '普通科(文理探究コース)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査74%:面接等5%:調査書21%', note: '募集人員40(男女・文系理系を問わずより高度な学習内容に取り組む)。総合型選抜75%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)35点・調査書140点。普通科(普通コース)への第2志望を認める(令和9年度版)' },
+    { schoolName: '沼田', department: '普通科(文理探究コース)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査50%:面接等5%:調査書45%', note: '特色型選抜25%(2段階制)。第1次選抜合格者以外を対象に、学力検査に加え調査書の評定及び特別活動の記録を重視。学力検査計500・面接等(集団面接)50点・調査書450点(令和9年度版)' },
 
     // 尾瀬（普通科【32】/自然環境科【32】、男女64人）
     { schoolName: '尾瀬', department: '普通科・自然環境科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査30%:面接等40%:調査書31%', note: '募集人員64(男女・2学科共通の選抜方法)。特色型選抜50%。面接の結果と調査書を重視。学力検査計500(各100点)・面接等(個人面接)660点・調査書510点。自然環境科の尾瀬ハートフルホーム・システム(ホームステイ)希望者は学科間の第2志望不可。それ以外は全学科相互に第2志望を認める' },
@@ -217,41 +216,41 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     // 館林女子（普通科【160】女160人）
     { schoolName: '館林女子', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査42%:面接等29%:調査書29%', note: '募集人員160(女のみ)。特色型選抜①10%。調査書の特別活動の記録及び面接を重視。学力検査計500(各100点)・面接等(個人面接)350点・調査書350点' },
     { schoolName: '館林女子', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査40%:面接等10%:調査書50%', note: '特色型選抜②40%。第1次選抜合格者以外を対象に、調査書の評定及び学力検査の結果を重視。学力検査計500・面接等(個人面接)125点・調査書625点' },
-    { schoolName: '館林女子', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査80%:面接等10%:調査書10%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(個人面接)60点・調査書60点' },
+    { schoolName: '館林女子', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査81%:面接等10%:調査書10%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(個人面接)60点・調査書60点(令和9年度版)' },
 
     // 渋川（普通科【160】男160人）
     { schoolName: '渋川', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査74%:面接等6%:調査書20%', note: '募集人員160(男のみ)。総合型選抜80%。学力検査の結果等を重視。学力検査計500(各100点)・面接等(集団面接)40点・調査書135点' },
     { schoolName: '渋川', department: '普通科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査50%:面接等8%:調査書42%', note: '特色型選抜20%(2段階制)。第1次選抜合格者以外を対象に、調査書の評定、部活動や特別活動の記録等を重視。学力検査計500・面接等(集団面接)80点・調査書420点' },
 
     // 渋川女子（普通科【200】女200人）
-    { schoolName: '渋川女子', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査68%:面接等12%:調査書20%', note: '募集人員200(女のみ)。総合型選抜60%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)90点・調査書145点' },
+    { schoolName: '渋川女子', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査68%:面接等12%:調査書20%', note: '募集人員160(令和9年度版で200から変更)(女のみ)。総合型選抜60%。学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)90点・調査書145点' },
     { schoolName: '渋川女子', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査47%:面接等8%:調査書44%', note: '特色型選抜①30%。第1次選抜合格者以外を対象に、特別活動や部活動等の記録を重視。学力検査計500・面接等(集団面接)90点・調査書470点' },
-    { schoolName: '渋川女子', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査43%:面接等19%:調査書38%', note: '特色型選抜②10%。第1・第2次選抜合格者以外を対象に、調査書の記録等を重視。学力検査国数英各200点・社理各100点満点(計800)・面接等(集団面接)360点・調査書700点' },
+    { schoolName: '渋川女子', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査46%:面接等21%:調査書33%', note: '特色型選抜②10%。第1・第2次選抜合格者以外を対象に、調査書の記録等を重視。学力検査国数英各200点・社理各100点満点(計800)・面接等(集団面接)360点・調査書580点(令和9年度版)' },
 
     // 渋川青翠（総合学科【120】男女120人）
     { schoolName: '渋川青翠', department: '総合学科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査60%:面接等10%:調査書30%', note: '募集人員120(男女)。総合型選抜60%。学力検査の結果を重視し、調査書と面接の結果を総合して選抜。学力検査計500(各100点)・面接等(個人面接)80点・調査書250点' },
-    { schoolName: '渋川青翠', department: '総合学科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査30%:面接等10%:調査書60%', note: '特色型選抜40%(2段階制)。第1次選抜合格者以外を対象に、調査書の評定と部活動の記録等を重視し、学力検査及び面接の結果を総合して選抜。学力検査計500・面接等(個人面接)160点・調査書1000点' },
+    { schoolName: '渋川青翠', department: '総合学科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査40%:面接等10%:調査書50%', note: '特色型選抜40%(2段階制)。第1次選抜合格者以外を対象に、調査書の評定と部活動の記録等を重視し、学力検査及び面接の結果を総合して選抜。学力検査計500・面接等(個人面接)125点・調査書625点(令和9年度版)' },
 
     // 渋川工業（機械科【40】/自動車科【40】/電気科【40】/情報システム科【40】、男女160人）
     { schoolName: '渋川工業', department: '機械科・自動車科・電気科・情報システム科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査42%:面接等15%:調査書42%', note: '募集人員160(男女・4学科共通の選抜方法)。特色型選抜50%。調査書の評定と特別活動の記録及び面接の結果を重視。学力検査計500(各100点)・面接等(個人面接)180点・調査書500点。第2志望は全ての学科において相互に認める' },
     { schoolName: '渋川工業', department: '機械科・自動車科・電気科・情報システム科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査77%:面接等8%:調査書15%', note: '総合型選抜50%。第1次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(個人面接)50点・調査書100点' },
 
     // 藤岡中央（くくり募集(普通科・理数科)【160】男女160人）
-    { schoolName: '藤岡中央', department: 'くくり募集(普通科・理数科)', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査29%:面接等12%:調査書59%', note: '募集人員160(男女)。特色型選抜①25%。調査書の評定等を重視。学力検査計500(各100点)・面接等(個人面接)200点・調査書1000点' },
+    { schoolName: '藤岡中央', department: 'くくり募集(普通科・理数科)', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査29%:面接等12%:調査書59%', note: '募集人員120(令和9年度版で160から変更)(男女)。特色型選抜①25%。調査書の評定等を重視。学力検査計500(各100点)・面接等(個人面接)200点・調査書1000点' },
     { schoolName: '藤岡中央', department: 'くくり募集(普通科・理数科)', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査20%:面接等30%:調査書50%', note: '特色型選抜②25%。第1次選抜合格者以外を対象に、調査書の特別活動や部活動等の記録及び面接の結果を重視。学力検査計500・面接等(個人面接)750点・調査書1250点' },
     { schoolName: '藤岡中央', department: 'くくり募集(普通科・理数科)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等6%:調査書31%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(個人面接)50点・調査書250点' },
 
     // 藤岡北（くくり募集(生物生産科・環境土木科・ヒューマン・サービス科)【120】男女120人）
-    { schoolName: '藤岡北', department: '生物生産科・環境土木科・ヒューマン・サービス科(くくり募集)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等25%:調査書13%', note: '募集人員120(男女・3学科共通の選抜方法)。総合型選抜90%。学力検査結果を中心に面接・調査書の内容を総合して選抜。学力検査計500(各100点)・面接等(個人面接)200点・調査書100点' },
-    { schoolName: '藤岡北', department: '生物生産科・環境土木科・ヒューマン・サービス科(くくり募集)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査50%:面接等40%:調査書10%', note: '特色型選抜10%(2段階制)。第1次選抜合格者以外を対象に、面接の結果を重視。学力検査計500・面接等(個人面接)400点・調査書100点' },
+    { schoolName: '藤岡北', department: '生物生産科・環境土木科・ヒューマン・サービス科(くくり募集)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査50%:面接等10%:調査書40%', note: '募集人員120(男女・3学科共通の選抜方法)。総合型選抜50%。学力検査結果を中心に面接・調査書の内容を総合して選抜。学力検査計500(各100点)・面接等(個人面接)100点・調査書400点(令和9年度版)' },
+    { schoolName: '藤岡北', department: '生物生産科・環境土木科・ヒューマン・サービス科(くくり募集)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査30%:面接等10%:調査書60%', note: '特色型選抜50%(2段階制)。第1次選抜合格者以外を対象に、面接の結果を重視。学力検査計500・面接等(個人面接)160点・調査書1000点(令和9年度版)' },
 
     // 藤岡工業（くくり募集(ものづくり創造科・電気・情報技術科)【80】男女80人）
-    { schoolName: '藤岡工業', department: 'ものづくり創造科・電気・情報技術科(くくり募集)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査20%:面接等20%:調査書60%', note: '募集人員80(男女)。特色型選抜40%。調査書と面接結果を重視。学力検査計500(各100点)・面接等(個人面接)500点・調査書1500点' },
-    { schoolName: '藤岡工業', department: 'ものづくり創造科・電気・情報技術科(くくり募集)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査50%:面接等10%:調査書40%', note: '総合型選抜60%。第1次選抜合格者以外を対象に、学力検査の結果と調査書を重視。学力検査計500・面接等(個人面接)100点・調査書400点' },
+    { schoolName: '藤岡工業', department: 'ものづくり創造科・電気・情報技術科(くくり募集)', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査15%:面接等15%:調査書71%', note: '募集人員80(男女)。特色型選抜50%。調査書と面接結果を重視。学力検査計500(各100点)・面接等(個人面接)500点・調査書2400点(令和9年度版)' },
+    { schoolName: '藤岡工業', department: 'ものづくり創造科・電気・情報技術科(くくり募集)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査50%:面接等5%:調査書45%', note: '総合型選抜50%。第1次選抜合格者以外を対象に、学力検査の結果と調査書を重視。学力検査計500・面接等(個人面接)50点・調査書450点(令和9年度版)' },
 
     // 富岡（普通科【200】男女200人）
-    { schoolName: '富岡', department: '普通科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査42%:面接等8%:調査書50%', note: '募集人員200(男女)。特色型選抜30%。調査書の評定等、部活動等の記録及び学力検査の結果を重視。学力検査計500(各100点)・面接等(個人面接)100点・調査書600点' },
-    { schoolName: '富岡', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査77%:面接等8%:調査書15%', note: '総合型選抜70%。第1次選抜合格者以外を対象に、調査書の評定等及び学力検査の結果を重視。学力検査計500・面接等(個人面接)50点・調査書100点' },
+    { schoolName: '富岡', department: '普通科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査42%:面接等8%:調査書50%', note: '募集人員160(令和9年度版で200から変更)(男女)。特色型選抜30%(第2次選抜)。第1次選抜合格者以外を対象に、学力検査の結果に加えて、調査書の評定及び部活動や特別活動の記録等を重視。学力検査計500(各100点)・面接等(個人面接)100点・調査書600点' },
+    { schoolName: '富岡', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査77%:面接等8%:調査書15%', note: '総合型選抜70%(第1次選抜)。学力検査の結果等を重視。学力検査計500・面接等(個人面接)50点・調査書100点' },
 
     // 富岡実業（くくり募集(生物生産科・地域産業科・電子機械科)【120】男女120人）
     { schoolName: '富岡実業', department: '生物生産科・地域産業科・電子機械科(くくり募集)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査50%:面接等20%:調査書30%', note: '募集人員120(男女・3学科共通の選抜方法)。総合型選抜70%。学力検査結果と調査書を重視。学力検査計500(各100点)・面接等(個人面接)200点・調査書300点' },
@@ -262,7 +261,7 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '松井田', department: '普通科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査30%:面接等40%:調査書30%', note: '特色型選抜50%(2段階制)。第1次選抜合格者以外を対象に、面接の結果を重視。学力検査計500・面接等(個人面接)660点・調査書500点' },
 
     // 安中総合学園（総合学科【200】男女200人）
-    { schoolName: '安中総合学園', department: '総合学科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査10%:面接等50%:調査書40%', note: '募集人員200(男女)。特色型選抜①25%。調査書における特別活動や部活動等の記録、面接における入学後に意欲的に部活動に取り組み部活動全体の活性化の原動力として活動する意欲等を重視。学力検査計500(各100点)・面接等(個人面接)2500点・調査書2000点。★gunma収録校中もっとも面接等の割合が高い(過半数)例' },
+    { schoolName: '安中総合学園', department: '総合学科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査10%:面接等50%:調査書40%', note: '募集人員160(令和9年度版で200から変更)(男女)。特色型選抜①25%。調査書における特別活動や部活動等の記録、面接における入学後に意欲的に部活動に取り組み部活動全体の活性化の原動力として活動する意欲等を重視。学力検査計500(各100点)・面接等(個人面接)2500点・調査書2000点。★gunma収録校中もっとも面接等の割合が高い(過半数)例' },
     { schoolName: '安中総合学園', department: '総合学科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査20%:面接等20%:調査書60%', note: '特色型選抜②25%。第1次選抜合格者以外を対象に、調査書の評定等を重視。学力検査計500・面接等(個人面接)500点・調査書1500点' },
     { schoolName: '安中総合学園', department: '総合学科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査60%:面接等20%:調査書20%', note: '総合型選抜50%。第1・第2次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(個人面接)165点・調査書165点' },
 
@@ -281,7 +280,7 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
 
     // 吾妻中央（普通科【72】/生物生産科【40】/環境工学科【40】/福祉科【40】、男女192人）
     { schoolName: '吾妻中央', department: '普通科・生物生産科・環境工学科・福祉科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等13%:調査書25%', note: '募集人員192(男女・4学科共通の選抜方法)。総合型選抜50%。調査書と学力検査の結果を重視。学力検査計500(各100点)・面接等(個人面接)100点・調査書200点。★4学科間で相互に第2志望を認める(普通科⇄生物生産科/環境工学科/福祉科、他学科同士も同様)' },
-    { schoolName: '吾妻中央', department: '普通科・生物生産科・環境工学科・福祉科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査47%:面接等28%:調査書25%', note: '特色型選抜①20%。第1次選抜合格者以外を対象に、学力検査の結果、調査書の特別活動及び部活動等における活動実績、面接における入学後の部活動の継続または加入の意志を重視。学力検査計500・面接等(個人面接)300点・調査書260点' },
+    { schoolName: '吾妻中央', department: '普通科・生物生産科・環境工学科・福祉科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査47%:面接等28%:調査書25%', note: '特色型選抜①20%。第1次選抜合格者以外を対象に、学力検査の結果、調査書の特別活動及び部活動等における活動実績、面接における入学後の部活動の継続または加入の意志を重視。学力検査計500・面接等(個人面接)300点・調査書265点(令和9年度版)' },
     { schoolName: '吾妻中央', department: '普通科・生物生産科・環境工学科・福祉科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査43%:面接等17%:調査書40%', note: '特色型選抜②30%。第1・第2次選抜合格者以外を対象に、調査書の評定等を重視。学力検査計500・面接等(個人面接)200点・調査書470点' },
 
     // 長野原（普通科【44】男女44人）
@@ -293,16 +292,15 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '嬬恋', department: '普通科(未来創造コース・探究アスリートコース)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査60%:面接等20%:調査書20%', note: '総合型選抜50%。第1次選抜合格者以外を対象に、学力検査の結果を重視。学力検査計500・面接等(個人面接)170点・調査書170点' },
 
     // 玉村（普通科【80】男女80人）
-    { schoolName: '玉村', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等13%:調査書25%', note: '募集人員80(男女)。総合型選抜50%。学力検査の結果を重視。学力検査計500(各100点)・面接等(個人面接)100点・調査書200点' },
-    { schoolName: '玉村', department: '普通科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査34%:面接等11%:調査書55%', note: '特色型選抜①40%。第1次選抜合格者以外を対象に、調査書における評定等、特別活動や部活動等の記録を重視。学力検査計500・面接等(個人面接)160点・調査書800点' },
-    { schoolName: '玉村', department: '普通科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査31%:面接等20%:調査書49%', note: '特色型選抜②10%。第1・第2次選抜合格者以外を対象に、調査書における評定等、特別活動や部活動等の記録、面接における部活動への取り組みの意志等を重視。学力検査計500・面接等(個人面接)320点・調査書800点' },
+    { schoolName: '玉村', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等13%:調査書25%', note: '募集人員80(男女)。総合型選抜50%(第1次選抜)。学力検査の結果を重視。学力検査計500(各100点)・面接等(個人面接)100点・調査書200点(令和9年度版)' },
+    { schoolName: '玉村', department: '普通科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査25%:面接等50%:調査書25%', note: '特色型選抜50%(第2次選抜・令和8年度は特色型選抜①②の2段階)。第1次選抜合格者以外を対象に、面接を重視。学力検査計500・面接等(個人面接)1000点・調査書500点(令和9年度版)' },
 
     // 板倉（普通科【72】男女72人）
     { schoolName: '板倉', department: '普通科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査30%:面接等20%:調査書50%', note: '募集人員72(男女)。特色型選抜50%。調査書の特別活動の記録及び学力検査の結果を重視。学力検査計500(各100点)・面接等(個人面接)320点・調査書820点' },
     { schoolName: '板倉', department: '普通科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査60%:面接等20%:調査書20%', note: '総合型選抜50%。第1次選抜合格者以外を対象に、学力検査の結果を重視。学力検査国数英各160点・社理各100点満点(計800)・面接等(個人面接)265点・調査書265点' },
 
     // 館林商工（工業科くくり募集(生産システム科・建築科)【80】/商業科くくり募集(総合ビジネス科・情報ビジネス科)【80】、男女160人）
-    { schoolName: '館林商工', department: '生産システム科・建築科・総合ビジネス科・情報ビジネス科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査48%:面接等9%:調査書43%', note: '募集人員160(男女・工業科くくり募集/商業科くくり募集4学科共通の選抜方法)。特色型選抜50%。調査書の部活動等の記録及び学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)90点・調査書445点。第2志望は全ての募集区分において相互に認める' },
+    { schoolName: '館林商工', department: '生産システム科・建築科・総合ビジネス科・情報ビジネス科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査49%:面接等9%:調査書42%', note: '募集人員160(男女・工業科くくり募集/商業科くくり募集4学科共通の選抜方法)。特色型選抜50%。調査書の部活動等の記録及び学力検査の結果を重視。学力検査計500(各100点)・面接等(集団面接)90点・調査書430点。第2志望は全ての募集区分において相互に認める(令和9年度版)' },
     { schoolName: '館林商工', department: '生産システム科・建築科・総合ビジネス科・情報ビジネス科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査74%:面接等7%:調査書20%', note: '総合型選抜50%。第1次選抜合格者以外を対象に、学力検査の結果と調査書を重視。学力検査計500・面接等(集団面接)45点・調査書135点' },
 
     // 西邑楽（普通科【120】男女120人）
@@ -332,8 +330,9 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '高崎経済大学附属', department: '普通科芸術コース(音楽系・美術系)', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査29%:面接等6%:調査書6%:実技検査59%', note: '総合型選抜70%。第1次選抜合格者以外を対象に、学力検査及び実技検査の結果を重視。学力検査計500・面接等(集団面接)100点・調査書100点・実技検査1000点' },
 
     // 桐生市立商業（桐生市立高校・くくり募集(商業科・情報処理科)【200】男女200人）
-    { schoolName: '桐生市立商業', department: '商業科・情報処理科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等13%:調査書25%', note: '桐生市立高校。募集人員200(男女・2学科共通の選抜方法)。総合型選抜70%。学力検査の結果と調査書を重視。学力検査計500(各100点)・面接等(集団面接)100点・調査書200点' },
-    { schoolName: '桐生市立商業', department: '商業科・情報処理科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査20%:面接等10%:調査書70%', note: '特色型選抜30%(2段階制)。第1次選抜合格者以外を対象に、面接の結果及び調査書の特別活動の記録を重視。学力検査計500・面接等(集団面接)250点・調査書1750点' },
+    { schoolName: '桐生市立商業', department: '商業科・情報処理科', selectionCategory: '特色型選抜①', interviewRequired: true, ratioType: '学力検査42%:面接等8%:調査書50%', note: '桐生市立高校。募集人員200(男女・2学科共通の選抜方法)。特色型選抜①25%(第1次選抜・令和8年度は特色型選抜と総合型選抜の2段階)。学力検査の結果と調査書を重視。学力検査計500(各100点)・面接等(集団面接)100点・調査書600点(令和9年度版)' },
+    { schoolName: '桐生市立商業', department: '商業科・情報処理科', selectionCategory: '特色型選抜②', interviewRequired: true, ratioType: '学力検査20%:面接等10%:調査書70%', note: '特色型選抜②25%(第2次選抜)。第1次選抜合格者以外を対象に、面接の結果及び調査書の特別活動の記録を重視。学力検査計500・面接等(集団面接)250点・調査書1750点(令和9年度版)' },
+    { schoolName: '桐生市立商業', department: '商業科・情報処理科', selectionCategory: '総合型選抜', interviewRequired: true, ratioType: '学力検査63%:面接等13%:調査書25%', note: '総合型選抜50%(第3次選抜)。第1・第2次選抜合格者以外を対象に、学力検査を重視。学力検査計500(各100点)・面接等(集団面接)100点・調査書200点(令和9年度版)' },
 
     // 太田市立太田（太田市立高校・商業科【153(確定)】男女153人。普通科102人は太田市立太田中学校からの内部進学者のみのため対象外）
     { schoolName: '太田市立太田', department: '商業科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査23%:面接等30%:調査書47%', note: '太田市立高校。募集人員153(男女・確定。普通科102人は全て太田市立太田中学校からの内部進学者のため本DB対象外。商業科への内部進学者がいる場合はその数を募集定員160人から減じる)。特色型選抜50%。調査書の部活動等の記録等を重視。学力検査計500(各100点)・面接等(個人面接)650点・調査書1020点' },
@@ -344,9 +343,9 @@ export const GUNMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     { schoolName: '利根商業', department: '普通科・総合ビジネス科・情報ビジネス科', selectionCategory: '特色型選抜', interviewRequired: true, ratioType: '学力検査51%:面接等18%:調査書31%', note: '特色型選抜30%(2段階制)。第1次選抜合格者以外を対象に、調査書における特別活動や部活動等の記録を重視。学力検査計500・面接等(個人面接)180点・調査書300点' },
   ],
   source: {
-    url: 'https://www.pref.gunma.jp/uploaded/attachment/679269.pdf',
-    docTitle: '令和8年度群馬県公立高等学校入学者選抜における各高等学校の「選抜方法等」について',
-    lastChecked: '2026-09-17',
+    url: 'https://www.pref.gunma.jp/uploaded/attachment/708864.pdf',
+    docTitle: '令和9年度群馬県公立高等学校入学者選抜における各高等学校の「選抜方法等」について(更新2026-08-03)',
+    lastChecked: '2026-09-20',
   },
   note: '学力検査の教科構成(国数英社理)は全校共通で学校別の問題タイプ区分は無い。学校ごとに異なるのは総合型選抜/特色型選抜①/②(2〜3段階)の学力検査:面接等:調査書(一部は実技検査を含む)の得点配分割合。ratioTypeはこの割合(%)をコロン区切りで転記。「I 全日制課程選抜」(頁2〜68)63校を完全収録済み。頁69以降のフレックススクール選抜・定時制課程選抜・連携型選抜は対象外',
 };

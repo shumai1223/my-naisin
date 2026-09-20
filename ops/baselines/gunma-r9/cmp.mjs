@@ -24,6 +24,9 @@ for (const [k, rs] of dbBy) {
     if (mm && (mm[1] !== x.mensetsu || mm[2] !== x.chosa)) d.push(`点 面接${mm[1]}/調査書${mm[2]} → ${x.mensetsu}/${x.chosa}`);
     const tt = /学力検査(?:計)?(\d+)/.exec(r.note);
     if (tt && tt[1] !== x.total) d.push(`学力検査計 ${tt[1]} → ${x.total}`);
+    const sh = /(?:総合型選抜|特色型選抜[①②]?)(\d+)%/.exec(r.note)?.[1];
+    if (sh && x.share && sh + '%' !== x.share) d.push(`比率 ${sh}% → ${x.share}`);
+    if (r.cat.replace(/[①②]/g, '') !== x.label.replace(/[①②]/g, '') || (r.cat.match(/[①②]/)?.[0] ?? '') !== (x.label.match(/[①②]/)?.[0] ?? '')) d.push(`段階名 ${r.cat} → ${x.label}`);
     if (d.length) { bad++; console.log(`${k} | ${r.dept.slice(0, 12)} | ${r.cat} (頁${x.p}): ${d.join(' ; ')}`); }
   });
 }

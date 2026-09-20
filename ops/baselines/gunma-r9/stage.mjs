@@ -15,7 +15,9 @@ for (let p = only ?? 1; p <= (only ?? n); p++) {
   lines.forEach((l, i) => {
     const m = /(総合型選抜|特色型選抜[①②]?)([\s\S]*)$/.exec(l);
     if (!m) return;
-    const nums = (m[2].match(/[\d,]+/g) ?? []).map((x) => x.replace(/,/g, ''));
+    let nums = (m[2].replace(/[\d,]+%/g, ' ').match(/[\d,]+/g) ?? []).map((x) => x.replace(/,/g, ''));
+    if (nums.length < 4 && i + 1 < lines.length && /\d/.test(lines[i + 1]) && !/検査項目|割\s*合|【/.test(lines[i + 1])) nums = (lines[i + 1].replace(/[\d,]+%/g, ' ').match(/[\d,]+/g) ?? []).map((x) => x.replace(/,/g, ''));
+    if (nums.length < 4 && i > 0 && (lines[i - 1].match(/[\d,]+/g) ?? []).length >= 4) nums = (lines[i - 1].replace(/[\d,]+%/g, ' ').match(/[\d,]+/g) ?? []).map((x) => x.replace(/,/g, ''));
     // 総合計, (各科目)x5, 面接等, 調査書
     const total = nums[0]; const rest = nums.slice(1);
     const mensetsu = rest[rest.length - 2]; const chosa = rest[rest.length - 1];
@@ -25,7 +27,16 @@ for (let p = only ?? 1; p <= (only ?? n); p++) {
       const r = /割\s*合\s+(\d+)%\s+(\d+)%\s+(\d+)%/.exec(lines[k]);
       if (r) { ratio = `${r[1]}%:${r[2]}%:${r[3]}%`; break; }
     }
-    stages.push({ label: m[1], total, subj: rest.slice(0, -2).join(','), mensetsu, chosa, ratio });
+    // 選抜比率: 割合行の3%を除いた単独の%(ブロック内。次の選抜行の手前まで)
+    let share = null;
+    for (let k = i + 1; k < Math.min(i + 8, lines.length); k++) {
+      if (/(総合型選抜|特色型選抜[①②]?)\s+\d/.test(lines[k])) break;
+      if (/【第/.test(lines[k])) break;
+      const rest2 = lines[k].replace(/割\s*合\s+\d+%\s+\d+%\s+\d+%/, '').replace(/割\s*合\s+\d+%\s+\d+%/, '');
+      const sm = /(\d+)%/.exec(rest2);
+      if (sm) { share = sm[1] + '%'; break; }
+    }
+    stages.push({ label: m[1], total, subj: rest.slice(0, -2).join(','), mensetsu, chosa, ratio, share });
   });
   pages.push({ p, school, cap, stages });
 }
