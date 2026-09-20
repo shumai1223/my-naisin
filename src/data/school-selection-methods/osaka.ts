@@ -1,10 +1,13 @@
-// 大阪府: 令和8年度大阪府公立高等学校等入学者選抜における学校別「学力検査問題の種類」
+// 大阪府: 令和9年度大阪府公立高等学校等入学者選抜における学校別「学力検査問題の種類」
 // 「学力検査の成績及び調査書の評定にかける倍率のタイプ」。
 //
-// 一次ソース: 大阪府教育委員会「令和8年度 大阪府公立高等学校等アドミッションポリシー
+// 一次ソース: 大阪府教育委員会「令和9年度 大阪府公立高等学校等アドミッションポリシー
 // （求める生徒像）並びに学力検査問題の種類並びに学力検査の成績及び調査書の評定にかける
-// 倍率のタイプ【課程等別、学科別】」PDF（`pref.osaka.lg.jp/documents/106331/...`・
-// 2026-09-17 curl+pdftoppmで目視確認）。
+// 倍率のタイプ【課程等別、学科別】」PDF（`pref.osaka.lg.jp/documents/129117/r09_admission_koukou.pdf`・
+// 府ページ掲載2026-07-08・PDF作成2026-07-03）。令和8年度版(2026-09-17目視転記)を土台に、
+// 2026-09-20にR8/R9を pdftotext -bbox 座標(学校名・問題3字・タイプ)で全66頁突合し、差分校を頁画像で確認して更新。
+// R8→R9差分: 長尾(数学B→A)・鳳(数学C→B)・福井(国語B→A)・松原(数学B→A)・東住吉総合(タイプII→III)、
+// 門真西・懐風館はR9の学校名索引・本表に掲載なし(R8のみ)のためレコード削除。
 //
 // 学力検査問題は国語・数学・英語それぞれA（基礎的問題）／B（標準的問題）から所管教育委員会が
 // 選択。倍率のタイプは表2（全日制課程）のI〜Vの5区分（IはI=1.4倍学検/0.6倍調査書〜V=0.6倍
@@ -35,10 +38,10 @@ import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-met
 
 export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   prefectureCode: 'osaka',
-  fiscalYear: '令和8年度（2026年度）',
+  fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    '全66頁を確認済み(1〜53頁=通常選抜・54〜65頁=知的障がい高等支援学校で本DB範囲外・66頁=奥付)。選抜区分「一般」の全カテゴリ(全日制144校相当・定時制14校)を収録。文理探究科・農業に関する学科・教育文理学科は部分収録',
+    '令和9年度版(全66頁)で令和8年度からの差分を突合済み(1〜53頁=通常選抜・54〜65頁=知的障がい高等支援学校で本DB範囲外・66頁=奥付)。選抜区分「一般」の全カテゴリ(全日制144校相当・定時制14校)を収録。文理探究科・農業に関する学科・教育文理学科は部分収録',
   schools: [
     {
       schoolName: '東淀川',
@@ -284,8 +287,9 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       schoolName: '長尾',
       department: '普通科',
       selectionCategory: '一般',
-      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'B' },
       ratioType: 'III',
+      note: '令和9年度版で数学がB→A問題に変更(R9資料の該当セルが網掛け)',
     },
     {
       schoolName: '牧野',
@@ -323,14 +327,6 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       selectionCategory: '一般',
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'III',
-    },
-    {
-      schoolName: '門真西',
-      department: '普通科',
-      selectionCategory: '一般',
-      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'B' },
-      ratioType: 'IV',
-      note: '倍率のタイプIVの初出（学検0.8倍/調査書1.2倍）',
     },
     {
       schoolName: '野崎',
@@ -428,14 +424,6 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       selectionCategory: '一般',
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
       ratioType: 'III',
-    },
-    {
-      schoolName: '懐風館',
-      department: '普通科',
-      selectionCategory: '一般',
-      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
-      ratioType: 'III',
-      note: '2つの専門コース(スポーツユースリーダー・チャイルドケアリーダー)を設置',
     },
     {
       schoolName: '長野',
@@ -597,9 +585,9 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       schoolName: '鳳',
       department: '普通科単位制',
       selectionCategory: '一般',
-      examSubjectTypes: { kokugo: 'C', suugaku: 'C', eigo: 'C' },
+      examSubjectTypes: { kokugo: 'C', suugaku: 'B', eigo: 'C' },
       ratioType: 'I',
-      note: '普通科単位制の学科としては最後の掲載校。これで(2)普通科単位制を完全収録',
+      note: '令和9年度版で数学がC→B問題に変更(網掛けセル)。普通科単位制の学科としては最後の掲載校。これで(2)普通科単位制を完全収録',
     },
     {
       schoolName: '春日丘',
@@ -890,9 +878,9 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       schoolName: '福井',
       department: '総合学科',
       selectionCategory: '一般',
-      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
+      examSubjectTypes: { kokugo: 'A', suugaku: 'A', eigo: 'A' },
       ratioType: 'IV',
-      note: '選抜区分「日本語指導」も別途設置(未収録)',
+      note: '令和9年度版で国語がB→A問題に変更(全AAA・タイプIV)。選抜区分「日本語指導」も別途設置(未収録)',
     },
     {
       schoolName: '枚方なぎさ',
@@ -937,9 +925,9 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       schoolName: '松原',
       department: '総合学科',
       selectionCategory: '一般',
-      examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'A' },
+      examSubjectTypes: { kokugo: 'B', suugaku: 'A', eigo: 'A' },
       ratioType: 'IV',
-      note: 'インクルーシブ教育を推進(自立支援生等)',
+      note: '令和9年度版で数学がB→A問題に変更(BAA・タイプIV)。インクルーシブ教育を推進(自立支援生等)',
     },
     {
       schoolName: '堺東',
@@ -976,8 +964,8 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       department: '総合学科(クリエイティブスクール)',
       selectionCategory: '一般',
       examSubjectTypes: { kokugo: 'B', suugaku: 'B', eigo: 'B' },
-      ratioType: 'II',
-      note: '工業・商業系を含む6系列を設置。多部制単位制I部・II部に相当するクリエイティブスクール',
+      ratioType: 'III',
+      note: '令和9年度版で倍率のタイプがII→IIIに変更。工業・商業系を含む6系列を設置。多部制単位制I部・II部に相当するクリエイティブスクール',
     },
     {
       schoolName: '大手前',
@@ -1120,9 +1108,9 @@ export const OSAKA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
     },
   ],
   source: {
-    url: 'https://www.pref.osaka.lg.jp/documents/106331/r08_admission_koukou.pdf',
+    url: 'https://www.pref.osaka.lg.jp/documents/129117/r09_admission_koukou.pdf',
     docTitle:
-      '令和8年度 大阪府公立高等学校等アドミッションポリシー（求める生徒像）並びに学力検査問題の種類並びに学力検査の成績及び調査書の評定にかける倍率のタイプ【課程等別、学科別】',
-    lastChecked: '2026-09-17',
+      '令和9年度 大阪府公立高等学校等アドミッションポリシー（求める生徒像）並びに学力検査問題の種類並びに学力検査の成績及び調査書の評定にかける倍率のタイプ【課程等別、学科別】',
+    lastChecked: '2026-09-20',
   },
 };

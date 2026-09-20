@@ -71,14 +71,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.examSubjectTypes).toEqual({ kokugo: 'B', suugaku: 'A', eigo: 'A' });
   });
 
-  it('osaka: 門真西(一般)は倍率タイプIVを持つ(初出)', () => {
+  it('osaka: 令和9年度版で松原(一般)は国語B・数学A・英語A(数学B→A)・タイプIV、門真西・懐風館は掲載なし', () => {
     const record = findSchoolSelectionRecord(
       SCHOOL_SELECTION_METHOD_BY_PREFECTURE,
       'osaka',
-      '門真西',
+      '松原',
       '一般'
     );
     expect(record?.ratioType).toBe('IV');
+    expect(record?.examSubjectTypes).toEqual({ kokugo: 'B', suugaku: 'A', eigo: 'A' });
+    for (const gone of ['門真西', '懐風館']) {
+      expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka', gone, '一般')).toBeNull();
+    }
   });
 
   it('osaka: 野崎(一般)は国数英すべてA問題を持つ(初出)', () => {
@@ -240,9 +244,9 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('III');
   });
 
-  it('osaka: schoolsは144校を収録している(定時制の課程14校を追加)', () => {
+  it('osaka: schoolsは142校を収録している(R9で門真西・懐風館が掲載なし=144から2減)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'osaka');
-    expect(record?.schools?.length).toBe(144);
+    expect(record?.schools?.length).toBe(142);
   });
 
   it('findSchoolSelectionRecordは未収録校にnullを返す', () => {
