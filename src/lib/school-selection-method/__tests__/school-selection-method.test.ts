@@ -2401,10 +2401,27 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(schoolNames.size).toBe(43);
   });
 
-  it('yamaguchi: 岩国(普通)は特色選抜で面接(◎)のみを実施し学校独自検査・傾斜配点は無い', () => {
+  it('yamaguchi: 令和9年度版で岩国(普通)は特色選抜の個人面接(○)に加え学校独自検査「自己表現」が入った(令和8年度は独自検査なし)', () => {
     const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamaguchi', '岩国', '特色選抜', '普通');
     expect(record?.interviewRequired).toBe(true);
-    expect(record?.note).toContain('学校独自検査の実施なし');
+    expect(record?.note).toContain('学校独自検査:自己表現');
+    expect(record?.note).toContain('令和9年度版');
+  });
+
+  it('yamaguchi: 令和9年度版の募集人員変更(柳井ビジネス情報50%・西京総合ビジネス50%・萩普通50%・大津緑洋普通25%)と検査名変更(南陽工業=口頭試問・防府衛生看護=基礎学力検査)を反映している', () => {
+    const note = (school: string, cat: string, dept: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamaguchi', school, cat, dept)?.note ?? '';
+    expect(note('柳井', '特色選抜', 'ビジネス情報')).toContain('募集人員50%');
+    expect(note('西京', '特色選抜', '総合ビジネス')).toContain('募集人員50%');
+    expect(note('萩', '特色選抜', '普通')).toContain('募集人員50%');
+    expect(note('大津緑洋', '特色選抜', '普通')).toContain('募集人員25%');
+    expect(note('南陽工業', '特色選抜', '電気')).toContain('学校独自検査:口頭試問');
+    expect(note('防府', '特色選抜', '衛生看護')).toContain('学校独自検査:基礎学力検査');
+  });
+
+  it('yamaguchi: 令和9年度版で岩国商業の第一次募集は面接を実施しない(令和8年度は実施)', () => {
+    const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamaguchi', '岩国商業', '第一次募集', '総合ビジネス');
+    expect(record?.interviewRequired).toBe(false);
+    expect(record?.note).toContain('面接・小論文・実技検査の実施なし');
   });
 
   it('yamaguchi: 西京(体育コース)は第一次募集で実技検査列でなく面接列がマークされている(300dpi画像で列位置を確認済み)', () => {

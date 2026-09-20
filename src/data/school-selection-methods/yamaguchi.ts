@@ -1,3 +1,4 @@
+// ★2026-09-20に令和9年度版(`pref.yamaguchi.lg.jp/site/kyouiku/353652.html`(2)『R9入学者選抜における各高等学校の選抜方法』・2頁・更新2026-07-07)へ差し替え。差分は ops/baselines/yamaguchi-r9/ に保存。R9は全行に「個人面接」列と「学校独自検査」列が別に立ち、R8で学校独自検査が空欄だった行にも検査名が入った(例: 岩国普通=自己表現)。R8→R9で募集人員・検査名・面接・調査書%が変わった行のnoteに「(令和9年度版)」を付記し、以下の一次ソース・表構造の記述は差し替え前の令和8年度版のもの。
 // 山口県: 「令和8年度入学者選抜における各高等学校の選抜方法」(山口県教育委員会公式ページ
 // `pref.yamaguchi.lg.jp/site/kyouiku/310448.html`「令和8年度山口県公立高等学校入学者選抜
 // 〈実施大綱〉について」の添付PDF「R8入学者選抜における各高等学校の選抜方法」)。
@@ -26,7 +27,7 @@ import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-met
 
 export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   prefectureCode: 'yamaguchi',
-  fiscalYear: '令和8年度（2026年度）',
+  fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
     '全日制課程(43校69学科)を完全収録。定時制課程(7校)は未収録。下関西の「普通」は資料上データが無い行のため未収録(文理探究へ一本化されたと見られる)',
@@ -36,7 +37,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は中学校におけるスポーツ・文化・生徒会活動等の実績や、入学後の継続的な意欲等を問う質問を含む',
+      note: '募集人員30%。面接(○)。学校独自検査:自己表現(令和9年度版)',
     },
     {
       schoolName: '岩国',
@@ -50,7 +51,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '文理探究(人文探究・理数探究のくくり募集)',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(○)。学校独自検査:総合問題。人文探究・理数探究の2コースをまとめた「くくり募集」',
+      note: '募集人員30%。面接(◎・備考欄に詳細あり)。学校独自検査:総合問題。人文探究・理数探究の2コースをまとめた「くくり募集」。備考: 個人面接は，探究活動への関心・意欲を問う質問を含む(令和9年度版)',
     },
     {
       schoolName: '岩国',
@@ -64,7 +65,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は入学後の学習及び諸活動等への意欲を問う質問を含む',
+      note: '募集人員30%。面接(○)。学校独自検査:自己表現(令和9年度版)',
     },
     {
       schoolName: '(岩国)坂上分校',
@@ -112,8 +113,8 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       schoolName: '岩国商業',
       department: '総合ビジネス',
       selectionCategory: '第一次募集',
-      interviewRequired: true,
-      note: '面接を実施。調査書等による選抜20%。小論文・実技検査の実施なし',
+      interviewRequired: false,
+      note: '調査書等による選抜20%。面接・小論文・実技検査の実施なし(令和9年度版)',
     },
     {
       schoolName: '岩国商業',
@@ -126,15 +127,15 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       schoolName: '岩国商業',
       department: '国際情報',
       selectionCategory: '第一次募集',
-      interviewRequired: true,
-      note: '面接を実施。調査書等による選抜20%。小論文・実技検査の実施なし',
+      interviewRequired: false,
+      note: '調査書等による選抜20%。面接・小論文・実技検査の実施なし(令和9年度版)',
     },
     {
       schoolName: '岩国工業',
       department: '機械',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(○)。学校独自検査:口頭試問',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '岩国工業',
@@ -148,7 +149,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '電気',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(○)。学校独自検査:口頭試問',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '岩国工業',
@@ -162,7 +163,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '都市工学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(○)。学校独自検査:口頭試問',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '岩国工業',
@@ -176,7 +177,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: 'システム化学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(○)。学校独自検査:口頭試問',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '岩国工業',
@@ -190,7 +191,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員20%。面接(○)。学校独自検査:基礎学力検査',
+      note: '募集人員30%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '柳井',
@@ -204,7 +205,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: 'ビジネス情報',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員35%。面接(○)。学校独自検査:小論文',
+      note: '募集人員50%。面接(○)。学校独自検査:小論文(令和9年度版)',
     },
     {
       schoolName: '柳井',
@@ -316,7 +317,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員20%。面接(○)。学校独自検査:小論文',
+      note: '募集人員30%。面接(○)。学校独自検査:小論文(令和9年度版)',
     },
     {
       schoolName: '下松',
@@ -540,7 +541,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '機械システム',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '南陽工業',
@@ -554,7 +555,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '電気',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '南陽工業',
@@ -568,7 +569,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '応用化学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '南陽工業',
@@ -596,7 +597,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '衛生看護',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(○)。学校独自検査:小論文',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '防府',
@@ -610,7 +611,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '総合',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員35%。面接(○)。学校独自検査:作文',
+      note: '募集人員40%。面接(○)。学校独自検査:作文(令和9年度版)',
     },
     {
       schoolName: '防府西',
@@ -694,7 +695,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員15%。面接(○)。学校独自検査:集団討論',
+      note: '募集人員20%。面接(○)。学校独自検査:集団討論(令和9年度版)',
     },
     {
       schoolName: '山口中央',
@@ -708,7 +709,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接はこれまでの経験や実績を踏まえ、自身の良い面や強みなどについての自己アピールを含む(学習、スポーツ・文化活動、生徒会活動、ボランティア活動など)',
+      note: '募集人員40%。面接(○)。学校独自検査:プレゼンテーション(令和9年度版)',
     },
     {
       schoolName: '西京',
@@ -736,7 +737,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '総合ビジネス',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員35%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は地域課題の解決などに向け、これまで自身が実践してきた取組の発表を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:プレゼンテーション(令和9年度版)',
     },
     {
       schoolName: '西京',
@@ -750,7 +751,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '情報処理',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員35%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は地域課題の解決などに向け、これまで自身が実践してきた取組の発表を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:プレゼンテーション(令和9年度版)',
     },
     {
       schoolName: '西京',
@@ -764,7 +765,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '生物生産',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員45%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員45%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '山口農業',
@@ -778,7 +779,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '食品工学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員45%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員45%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '山口農業',
@@ -792,7 +793,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '生活科学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員45%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員45%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '山口農業',
@@ -806,7 +807,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '環境科学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員45%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員45%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '山口農業',
@@ -820,7 +821,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '総合',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は基礎学力を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '(山口農業)西市分校',
@@ -862,7 +863,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員35%。面接(○)。学校独自検査:小論文',
+      note: '募集人員40%。面接(○)。学校独自検査:小論文(令和9年度版)',
     },
     {
       schoolName: '宇部中央',
@@ -876,7 +877,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '商業',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員35%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接はビジネスに関する学力及び興味・関心を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '宇部商業',
@@ -890,7 +891,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '総合情報',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員35%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接はビジネスに関する学力及び興味・関心を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '宇部商業',
@@ -960,7 +961,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(○)。学校独自検査:小論文',
+      note: '募集人員40%。面接(○)。学校独自検査:小論文(令和9年度版)',
     },
     {
       schoolName: '小野田',
@@ -1002,7 +1003,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '機械',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(○)。学校独自検査:実技検査',
+      note: '募集人員50%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '小野田工業',
@@ -1016,7 +1017,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '電子情報',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(○)。学校独自検査:実技検査',
+      note: '募集人員50%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '小野田工業',
@@ -1030,7 +1031,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '化学工業',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(○)。学校独自検査:実技検査',
+      note: '募集人員50%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '小野田工業',
@@ -1086,7 +1087,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(○)。学校独自検査:基礎学力検査',
+      note: '募集人員40%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '豊浦',
@@ -1100,7 +1101,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '総合',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(○)。学校独自検査:小論文',
+      note: '募集人員30%。面接(○)。学校独自検査:作文(令和9年度版)',
     },
     {
       schoolName: '長府',
@@ -1149,7 +1150,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '機械工学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '下関工科',
@@ -1163,7 +1164,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '電気工学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '下関工科',
@@ -1177,7 +1178,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '建設工学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '下関工科',
@@ -1191,7 +1192,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '応用化学工学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は学力を測る質問を含む',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '下関工科',
@@ -1205,7 +1206,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は思考力・表現力を問う質問を含む',
+      note: '募集人員25%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '大津緑洋',
@@ -1219,7 +1220,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '生物生産',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員40%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は農業や食品について学ぶ意欲を問う質問を含む',
+      note: '募集人員40%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '大津緑洋',
@@ -1233,7 +1234,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '生活科学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員40%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は農業や家庭について学ぶ意欲を問う質問を含む',
+      note: '募集人員40%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '大津緑洋',
@@ -1247,7 +1248,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '海洋技術',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員40%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は水産について学ぶ意欲を問う質問を含む',
+      note: '募集人員40%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '大津緑洋',
@@ -1261,7 +1262,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '海洋科学',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員50%。面接(◎・備考欄に詳細あり)。学校独自検査の実施なし。備考: 面接は水産について学ぶ意欲を問う質問を含む',
+      note: '募集人員40%。面接(○)。学校独自検査:口頭試問(令和9年度版)',
     },
     {
       schoolName: '大津緑洋',
@@ -1275,7 +1276,7 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
       department: '普通',
       selectionCategory: '特色選抜',
       interviewRequired: true,
-      note: '募集人員30%。面接(○)。学校独自検査:基礎学力検査',
+      note: '募集人員50%。面接(○)。学校独自検査:基礎学力検査(令和9年度版)',
     },
     {
       schoolName: '萩',
@@ -1384,9 +1385,9 @@ export const YAMAGUCHI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod 
     },
   ],
   source: {
-    url: 'https://www.pref.yamaguchi.lg.jp/uploaded/life/310448_591732_misc.pdf',
-    docTitle: 'R8入学者選抜における各高等学校の選抜方法',
-    lastChecked: '2026-09-18',
+    url: 'https://www.pref.yamaguchi.lg.jp/uploaded/life/353652_683069_misc.pdf',
+    docTitle: 'R9入学者選抜における各高等学校の選抜方法',
+    lastChecked: '2026-09-20',
   },
   note: '「特色選抜」列の◎は備考欄に具体的な内容・方法が示されていることを示す注記であり、○と同様「実施」を意味する(凡例より)。「第一次募集」列は面接・小論文・実技検査・調査書等による選抜(%)の4区分を持つが、全日制課程では実際に使用されるのは常に面接列のみ(300dpi画像で全行を目視確認済み)。傾斜配点(学校指定/生徒指定)は全日制課程で1件も使用されていない',
 };
