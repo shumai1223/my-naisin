@@ -26,7 +26,7 @@ aichi / chiba / ehime / fukui / gifu / kanagawa / miyagi / nagano / saitama(2026
 - 残り(調査済み・詳細は下の2回目): aomori / fukushima / gunma / ibaraki / kagoshima / kochi / tochigi / toyama / yamagata / yamaguchi。
 
 ## PDF直リンク県のハブ調査(2026-09-20・2回目=残り10県。WebSearchでURL特定→◎はページ取得で裏取り済み・○は検索結果のみ)
-- ◎**aomori**: **公表済み**。『令和9年度青森県立高等学校入学者選抜における求める生徒像・選抜方法等一覧』`https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/R09motomeru.html`(更新2026-07-09・全県版PDF約1.4MB+6地区版)。DBはR8(180レコード)。
+- ◎**aomori**: **公表済み**。『令和9年度青森県立高等学校入学者選抜における求める生徒像・選抜方法等一覧』`https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/R09motomeru.html`(更新2026-07-09・全県版PDF約1.4MB+6地区版)。DBはR9へ更新済み(2026-09-20・177レコード・追記111)。
 - ◎**fukushima**: **公表済み**。`https://www.pref.fukushima.lg.jp/site/edu/r9koukounyushi.html`に『各高等学校の選抜方法一覧』(2026-07-14)=`/uploaded/attachment/763363.pdf`・資料の見方=`760972.pdf`・基本方針(2026-09-11)=`762203.pdf`。DBはR8(444レコード)。
 - ○**yamagata**: 公表済みとみられる。`https://www.pref.yamagata.jp/700013/koko/r9nyuugakusyasennbatsu.html`(令和9年度入学者選抜情報)+前期(特色)選抜の各校概要(例: 東学区`2026r9nyuugakusyajouhoueast.html`)。DBはR8(138レコード)。要取得確認。
 - ○**yamaguchi**: 実施大綱が公表済み(`https://www.pref.yamaguchi.lg.jp/site/kyouiku/353652.html`・2026-07-07)。各校の選抜方法・特色選抜の要件・くくり募集の概要を含むとの記載。DBはR8(193レコード)。要取得確認。
