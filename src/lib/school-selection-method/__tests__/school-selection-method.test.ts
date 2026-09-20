@@ -3230,8 +3230,9 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(foreign.find((x) => x.schoolName === '福島北')?.ratioType).toContain('基礎学力検査150点');
     expect(foreign.find((x) => x.schoolName === '福島南')?.ratioType).toContain('基礎学力検査200点');
     const intl = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島南', '特色選抜', '国際文化科');
-    expect(intl?.ratioType).toContain('特色検査10点');
-    expect(intl?.note).toContain('選抜資料の満点は660点');
+    // 令和9年度版で英語の質問に英語で答える特色検査(10点)は廃止され満点は650点
+    expect(intl?.ratioType).not.toContain('特色検査');
+    expect(intl?.note).toContain('選抜資料の満点は650点');
     expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島南', '特色選抜', '文理科')?.note).toContain('選抜資料の満点は600点');
   });
 
