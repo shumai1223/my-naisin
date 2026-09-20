@@ -45,7 +45,16 @@ export function replaceRec(school, dept, cat, rec) {
   const i = src.indexOf(head);
   if (i < 0) throw new Error(`record not found: ${school}/${dept}/${cat}`);
   const j = src.indexOf('\n    },\n', i) + '\n    },\n'.length;
-  const body = rec
+  const one = (rec) => `    {
+      schoolName: ${q(rec.schoolName)},
+      department: ${q(rec.department)},
+      selectionCategory: ${q(rec.selectionCategory)},
+      interviewRequired: ${rec.interviewRequired ?? true},
+      ratioType: ${q(rec.ratioType)},
+      note: ${q(rec.note)},
+    },
+`;
+  const body = Array.isArray(rec) ? rec.map(one).join('') : rec
     ? `    {\n      schoolName: ${q(rec.schoolName)},\n      department: ${q(rec.department)},\n      selectionCategory: ${q(rec.selectionCategory)},\n      interviewRequired: ${rec.interviewRequired ?? true},\n      ratioType: ${q(rec.ratioType)},\n      note: ${q(rec.note)},\n    },\n`
     : '';
   src = src.slice(0, i) + body + src.slice(j);

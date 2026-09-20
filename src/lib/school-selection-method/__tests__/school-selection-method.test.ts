@@ -3197,11 +3197,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.ratioType).toBe('入学枠20%程度');
   });
 
-  it('fukushima: schoolsは66校(全日制の全校・学校番号01〜33・あぶくま柏鵬・36〜60・66〜71・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川/田村/あぶくま柏鵬/会津/葵/会津学鳳/若松商業/会津工業/喜多方/喜多方桐桜/猪苗代/西会津/会津西陵/川口/会津農林/南会津/只見/磐城/磐城桜が丘/平工業/いわき商業情報/いわき総合/いわき光洋/いわき湯本/小名浜海星/磐城農業/勿来/勿来工業/ふたば未来学園/相馬/相馬総合/原町/相馬農業/小高産業技術)444レコードを収録している', () => {
+  it('fukushima: schoolsは令和9年度版の65校(福島西・福島北に代わり福島学芸が新掲載。全日制の全校・学校番号01〜33・あぶくま柏鵬・36〜60・66〜71・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川/田村/あぶくま柏鵬/会津/葵/会津学鳳/若松商業/会津工業/喜多方/喜多方桐桜/猪苗代/西会津/会津西陵/川口/会津農林/南会津/只見/磐城/磐城桜が丘/平工業/いわき商業情報/いわき総合/いわき光洋/いわき湯本/小名浜海星/磐城農業/勿来/勿来工業/ふたば未来学園/相馬/相馬総合/原町/相馬農業/小高産業技術)444レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima');
     expect(record?.schools?.length).toBe(444);
     const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島西', '福島北', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南', '須賀川創英館', '須賀川桐陽', '清陵情報', '岩瀬農業', '光南', '白河', '白河旭', '白河実業', '修明', '石川', '田村', 'あぶくま柏鵬', '会津', '葵', '会津学鳳', '若松商業', '会津工業', '喜多方', '喜多方桐桜', '猪苗代', '西会津', '会津西陵', '川口', '会津農林', '南会津', '只見', '磐城', '磐城桜が丘', '平工業', 'いわき商業情報', 'いわき総合', 'いわき光洋', 'いわき湯本', '小名浜海星', '磐城農業', '勿来', '勿来工業', 'ふたば未来学園', '相馬', '相馬総合', '原町', '相馬農業', '小高産業技術']));
+    expect(schoolNames).toEqual(new Set(['福島', '橘', '福島商業', '福島工業', '福島明成', '福島学芸', '福島東', '福島南', '川俣', '伊達', '安達', '二本松実業', '本宮', '安積', '安積黎明', '郡山東', '郡山商業', '郡山北工', '郡山', 'あさか開成', '湖南', '須賀川創英館', '須賀川桐陽', '清陵情報', '岩瀬農業', '光南', '白河', '白河旭', '白河実業', '修明', '石川', '田村', 'あぶくま柏鵬', '会津', '葵', '会津学鳳', '若松商業', '会津工業', '喜多方', '喜多方桐桜', '猪苗代', '西会津', '会津西陵', '川口', '会津農林', '南会津', '只見', '磐城', '磐城桜が丘', '平工業', 'いわき商業情報', 'いわき総合', 'いわき光洋', 'いわき湯本', '小名浜海星', '磐城農業', '勿来', '勿来工業', 'ふたば未来学園', '相馬', '相馬総合', '原町', '相馬農業', '小高産業技術']));
   });
 
   it('fukushima: 福島明成の特色選抜は特色検査=作文100点+特色面接100点を点数化し選抜資料の満点700点・後期選抜は面接50点+作文50点', () => {
@@ -3221,13 +3221,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
   it('fukushima: 外国人生徒等に係る特別枠選抜は福島北(基礎学力150点)・福島南国際文化科(200点)・あさか開成(100点)・光南(60点)・会津学鳳(100点)・いわき総合(100点)・相馬総合(150点)の7校のみ・福島南国際文化科の特色検査は英語10点で満点660点', () => {
     const recs = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima')?.schools ?? [];
     const foreign = recs.filter((x) => x.selectionCategory === '外国人生徒等に係る特別枠選抜');
-    expect(foreign.map((x) => x.schoolName).sort()).toEqual(['あさか開成', 'いわき総合', '会津学鳳', '光南', '相馬総合', '福島北', '福島南']);
+    expect(foreign.map((x) => x.schoolName).sort()).toEqual(['あさか開成', 'いわき総合', '会津学鳳', '光南', '相馬総合', '福島南', '福島学芸']);
     expect(foreign.find((x) => x.schoolName === '相馬総合')?.ratioType).toContain('基礎学力検査150点');
     expect(foreign.find((x) => x.schoolName === 'いわき総合')?.ratioType).toContain('基礎学力検査100点');
     expect(foreign.find((x) => x.schoolName === '会津学鳳')?.ratioType).toContain('基礎学力検査100点');
     expect(foreign.find((x) => x.schoolName === '光南')?.ratioType).toContain('基礎学力検査60点');
     expect(foreign.find((x) => x.schoolName === 'あさか開成')?.ratioType).toContain('基礎学力検査100点');
-    expect(foreign.find((x) => x.schoolName === '福島北')?.ratioType).toContain('基礎学力検査150点');
+    expect(foreign.find((x) => x.schoolName === '福島学芸')?.ratioType).toContain('基礎学力検査150点');
     expect(foreign.find((x) => x.schoolName === '福島南')?.ratioType).toContain('基礎学力検査200点');
     const intl = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島南', '特色選抜', '国際文化科');
     // 令和9年度版で英語の質問に英語で答える特色検査(10点)は廃止され満点は650点
@@ -3420,10 +3420,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(tok.filter((x) => x.note?.includes('募集定員枠25%程度'))).toHaveLength(3);
   });
 
-  it('fukushima: 福島西の一般選抜は普通科が面接なし・デザイン科学科が個人面接あり、デザイン科学科の特色検査は鉛筆デッサン115点で調査書は135点のみ', () => {
-    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島西', '一般選抜', '普通科')?.interviewRequired).toBe(false);
-    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島西', '一般選抜', 'デザイン科学科')?.interviewRequired).toBe(true);
-    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島西', '特色選抜', 'デザイン科学科')?.ratioType).toBe('学力検査250点:調査書135点:実技検査(鉛筆デッサン)115点');
+  it('fukushima: 福島学芸(令和9年度版で新掲載・福島西の後継)の一般選抜は探究科・総合学科が面接なし・デザイン科学科が個人面接あり、デザイン科学科の特色検査は鉛筆デッサン115点で調査書は135点のみ', () => {
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島学芸', '一般選抜', '総合学科(仮称)')?.interviewRequired).toBe(false);
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島学芸', '一般選抜', 'デザイン科学科(仮称)')?.interviewRequired).toBe(true);
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'fukushima', '福島学芸', '特色選抜', 'デザイン科学科(仮称)')?.ratioType).toBe('学力検査250点:調査書135点:面接(段階評価):実技検査(鉛筆デッサン)115点');
   });
 
   it('fukushima: 福島商業(商業科・情報ビジネス科)の特色選抜はA型/B型/C型の3類型を持ちB型・C型のみ実技90点を課す', () => {
