@@ -1075,7 +1075,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
-  it('yamagata: 概要表の合計行(全日制 A34校/B8校・個人面接29校・集団面接13校・作文23校・発表3校・県外受入れ前期12校/後期11校)と転記校数が一致する', () => {
+  it('yamagata: 概要表の合計行(全日制 A34校/B8校・個人面接29校・集団面接13校・作文23校・発表3校・県外受入れ前期13校/後期12校[令和9年度版で置賜農業が加わった])と転記校数が一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata');
     expect(record?.status).toBe('structured');
     expect(record?.schools?.length).toBe(138);
@@ -1088,10 +1088,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(schools(zenkiZen, (n) => /検査方法:[^。]*集団面接/.test(n))).toBe(13);
     expect(schools(zenkiZen, (n) => /検査方法:[^。]*作文/.test(n))).toBe(23);
     expect(schools(zenkiZen, (n) => /検査方法:[^。]*発表/.test(n))).toBe(3);
-    expect(schools(zenkiZen, (n) => n.includes('県外志願者受入れ:あり'))).toBe(12);
-    expect(schools(kouki, (n) => n.includes('県外志願者受入れ:あり'))).toBe(11);
+    expect(schools(zenkiZen, (n) => n.includes('県外志願者受入れ:あり'))).toBe(13);
+    expect(schools(kouki, (n) => n.includes('県外志願者受入れ:あり'))).toBe(12);
     expect(schools(kouki, (n) => n.includes('適性検査:あり'))).toBe(2);
     expect(schools(kouki, (n) => n.includes('傾斜配点:あり'))).toBe(2);
+  });
+
+  it('yamagata: 令和9年度版で検査日程はA=令和9年1月19日/B=2月2日・加茂水産の前期募集は70%以内・置賜農業は県外志願者受入れが前期後期とも加わり、前期noteに検査ごとの配点割合を持つ', () => {
+    const at = (school: string, cat: string, dept: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'yamagata', school, cat, dept)?.note ?? '';
+    expect(at('山形東', '前期(特色)選抜', '普通')).toContain('A日程(令和9年1月19日)');
+    expect(at('山形南', '前期(特色)選抜', '普通')).toContain('B日程(令和9年2月2日)');
+    expect(at('加茂水産', '前期(特色)選抜', '水産')).toContain('募集人員(定員の比率):70%以内');
+    expect(at('置賜農業', '前期(特色)選抜', '農業')).toContain('県外志願者受入れ:あり');
+    expect(at('置賜農業', '後期(一般)選抜', '農業')).toContain('県外志願者受入れ:あり');
+    expect(at('山形東', '前期(特色)選抜', '普通')).toContain('個人面接【30％】');
   });
 
   it('yamagata: 山形東(普通)は前期に口頭試問+個人面接+作文、後期は調査書3:学力検査7。新庄志誠館最上校は前期のみ県外受入れ', () => {
