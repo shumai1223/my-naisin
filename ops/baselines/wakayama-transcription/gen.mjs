@@ -36,7 +36,7 @@ for (const r of B1) {
   if (r.itv) parts.push('面接・実技検査' + r.itv);
   const ratio = parts.join(':');
   const dept = r.course === '定時制' ? r.dept + '(定時制)' : r.dept;
-  let note = '【令和8年度 入学者選抜選考基準・' + r.course + '】一般選抜の割合(%): 調査書' + r.cho + '・学力検査' + r.gaku + (r.itv ? '・面接・実技検査' + r.itv + '(' + r.itvC + ')' : '');
+  let note = '【令和9年度 入学者選抜選考基準・' + r.course + '】一般選抜の割合(%): 調査書' + r.cho + '・学力検査' + r.gaku + (r.itv ? '・面接・実技検査' + r.itv + '(' + r.itvC + ')' : '');
   if (r.gakuK) note += '。学力検査の傾斜配点: ' + r.gakuK + '(数字は倍率・「国」は国語・「英」は外国語(英語))';
   if (r.choK) note += '。調査書の傾斜評価: ' + r.choK;
   const men = MEN.get(r.school + '|' + r.dept);
@@ -58,14 +58,14 @@ for (const t of B2) {
   const jouken = B3.get(t.cat + '|' + t.school + '|' + t.sub);
   if (!jouken && t.cat !== '連携型中高一貫') throw new Error('別表3の出願条件が無い: ' + t.cat + t.school + t.sub);
   if (jouken) b3hit++;
-  const note = '【令和8年度 特色化選抜における実施方法等(別表2)・' + t.cat + '】実施方法: ' + t.method + '。面接: ' + t.itv + '。' + t.test + '。' + (jouken ? '出願条件(別表3): ' + jouken + (t.cat === 'スポーツ' ? '。' + B3_NOTE : '') + '。' : '出願条件(別表3)に該当の記載なし。') + '選考の割合は本レコードには未収録。';
+  const note = '【令和9年度 特色化選抜における実施方法等(別表2)・' + t.cat + '】実施方法: ' + t.method + '。面接: ' + t.itv + '。' + t.test + '。' + (jouken ? '出願条件(別表3): ' + jouken + (t.cat === 'スポーツ' ? '。' + B3_NOTE : '') + '。' : '出願条件(別表3)に該当の記載なし。') + '選考の割合は本レコードには未収録。';
   const lines = ['    {', '      schoolName: ' + q(t.school) + ',', '      department: ' + q(t.sub || t.cat) + ',', '      selectionCategory: ' + q('特色化選抜(' + t.cat + ')') + ',', '      interviewRequired: true,', '      note: ' + q(note) + ',', '    },'];
   out += lines.join(NL) + NL;
 }
 // 別表5〜7 スポーツ推薦
 for (const p of SP) {
   const sexText = p.sex === '男女' ? '男女を問わず' : p.sex;
-  const note = '【令和8年度 スポーツ推薦(別表5〜7)・全日制】募集枠: ' + sexText + p.n + '名程度(複数の学科がある場合はすべての学科をあわせたもの。和歌山北高等学校普通科は北校舎及び西校舎をあわせたもの)。出願条件(別表6): ' + p.cond + '。スポーツ実技検査等(別表7): 共通実技=' + p.common + '、種目別実技=' + p.specific + (p.gear ? '、準備物=' + p.gear : '') + (p.itv ? '、備考=' + p.itv : '') + '。';
+  const note = '【令和9年度 スポーツ推薦(別表5〜7)・全日制】募集枠: ' + sexText + p.n + '名程度(複数の学科がある場合はすべての学科をあわせたもの。和歌山北高等学校普通科は北校舎及び西校舎をあわせたもの)。出願条件(別表6): ' + p.cond + '。スポーツ実技検査等(別表7): 共通実技=' + p.common + '、種目別実技=' + p.specific + (p.gear ? '、準備物=' + p.gear : '') + (p.itv ? '、備考=' + p.itv : '') + '。';
   const lines = ['    {', '      schoolName: ' + q(p.school) + ',', '      department: ' + q(p.sport) + ',', "      selectionCategory: 'スポーツ推薦',"];
   if (p.itv) lines.push('      interviewRequired: true,');
   lines.push('      note: ' + q(note) + ',', '    },');
@@ -74,11 +74,11 @@ for (const p of SP) {
 const names = new Set([...B1.map((r) => r.school), ...SP.map((p) => p.school.replace(/\((普通科|総合学科)\)/, '')),...B2.map((t) => t.school.replace('(龍神分校)', '').replace('南部', '南部'))]);
 const zen = B1.filter((r) => r.course === '全日制').length;
 const tei = B1.filter((r) => r.course === '定時制').length;
-const ts = `// 和歌山県: 令和8年度和歌山県立高等学校入学者選抜選考基準(別表1)・特色化選抜における実施方法等(別表2)・面接・実技検査等(別表4)。
+const ts = `// 和歌山県: 令和9年度和歌山県立高等学校入学者選抜選考基準(別表1)・特色化選抜における実施方法等(別表2)・面接・実技検査等(別表4)。
 //
-// 一次ソース: 和歌山県教育委員会「令和8年度和歌山県立高等学校入学者選抜実施要項」別表1「入学者選抜選考基準」(全7頁)・別表4「面接・実技検査等」(全2頁)・別表2「特色化選抜における実施方法等」(全9頁)
-// (県ページ \`https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html\`・
-// \`.../d00220765_d/fil/senkoukijun_beppyou1.pdf\`・\`.../mensetujitugi_beppyou4.pdf\`・2026-09-19 pdftoppm 100dpiで実画像を目視転記)。
+// 一次ソース: 和歌山県教育委員会「令和9年度和歌山県立高等学校入学者選抜実施要項」別表1「入学者選抜選考基準」(全7頁)・別表4「面接・実技検査等」(全2頁)・別表2「特色化選抜における実施方法等」(全9頁)
+// (県ページ \`https://www.pref.wakayama.lg.jp/prefg/500200/d00222649.html\`・
+// \`.../d00222649_d/fil/20_beppyo1.pdf\`〜\`26_beppyo7.pdf\`・令和8年度版を目視転記したデータに対し2026-09-21にR8/R9のPDFをPyMuPDF find_tablesで比較して差分のみ反映=ops/baselines/wakayama-r9/)。
 // 転記データと検算スクリプトは ops/baselines/wakayama-transcription/ に保存。
 //
 // 和歌山県の一般選抜は学科ごとに 調査書・学力検査・(面接・実技検査)の割合(%)を公表している。調査書と学力検査は 30:70 / 40:60 / 50:50 が中心で、
@@ -86,14 +86,14 @@ const ts = `// 和歌山県: 令和8年度和歌山県立高等学校入学者�
 // 検算: 全レコードで 調査書+学力検査+面接・実技検査=100%。資料の◇印(県立中学校からの進学者のみ・県立高校入試では募集しない)の学科は収録していない。
 // 特色化選抜(別表2)は区分(連携型中高一貫・農業・宇宙・地域・学際・芸術・スポーツ健康科学・スポーツ)ごとの実施方法(面接時間・作文/小論文の字数と時間・実技の内容)を21レコードで収録した。
 // 特色化選抜の出願条件(別表3・全4頁)は該当20レコードのnoteに要旨を付記した(スポーツはア〜ウの大会成績基準を数値で記録)。
-// スポーツ推薦(別表5〜7)は実施9校・29競技を、募集枠(別表5)・出願条件(別表6)・スポーツ実技検査等(別表7)を競技単位に統合した29レコードで収録した(別表5末尾の「計9校29競技スポーツ」と一致)。
+// スポーツ推薦(別表5〜7)は実施9校・27競技を、募集枠(別表5)・出願条件(別表6)・スポーツ実技検査等(別表7)を競技単位に統合した27レコードで収録した(別表5末尾の「計9校27競技スポーツ」と一致)。
 // 未収録: 特色化選抜の選考の割合・追募集(別表8)・通信制課程・「求める生徒像」の本文。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
 export const WAKAYAMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   prefectureCode: 'wakayama',
-  fiscalYear: '令和8年度（2026年度）',
+  fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
     ${q('一般選抜の学科別の割合(調査書・学力検査・面接実技)を全日制' + zen + 'レコード・定時制' + tei + 'レコードで完全収録し、特色化選抜の実施方法(別表2)' + B2.length + 'レコードとスポーツ推薦(別表5〜7)' + SP.length + 'レコードを加えた('+ names.size + '校・' + (B1.length + B2.length + SP.length) + 'レコード)。特色化選抜の選考の割合・追募集・通信制と求める生徒像の本文は未収録')},
@@ -101,8 +101,8 @@ export const WAKAYAMA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod =
 ${out.replace(/\n$/, '')}
   ],
   source: {
-    url: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00220765.html',
-    docTitle: '令和8年度和歌山県立高等学校入学者選抜実施要項 別表1〜7（和歌山県教育委員会）',
+    url: 'https://www.pref.wakayama.lg.jp/prefg/500200/d00222649.html',
+    docTitle: '令和9年度和歌山県立高等学校入学者選抜実施要項 別表1〜7（和歌山県教育委員会）',
     lastChecked: '${new Date().toISOString().slice(0, 10)}',
   },
   note: 'ratioTypeは一般選抜の 調査書:学力検査(:面接・実技検査) の割合(%)。学力検査の傾斜配点はnoteに記載(国語・英語1.5倍の学科あり)。定時制の昼夜で行が結合されている学科は昼間と夜間の両方に同じ割合を記録した。interviewRequiredは面接を課す学科(和歌山北スポーツ健康科学科・和歌山東・有田中央総合学科・定時制の一部)のみtrue。',

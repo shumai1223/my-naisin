@@ -11,5 +11,5 @@ console.log('rows', B1.length, 'schools', schools.size, '全日制', B1.filter((
 // --- スポーツ推薦(data-sp.mjs・別表5〜7) ---
 import { SP } from './data-sp.mjs';
 const spSchools = new Set(SP.map((p) => p.school));
-console.log('スポーツ推薦 競技数', SP.length, '(資料: 29競技)', '校数', spSchools.size, '(資料: 9校)', '空欄項目', SP.filter((p) => !p.cond || !p.common || !p.specific || !p.n).length);
-if (SP.length !== 29 || spSchools.size !== 9) { console.log('NG スポーツ推薦の件数が別表5の合計行と一致しない'); process.exitCode = 1; }
+console.log('スポーツ推薦 競技数', SP.length, '(資料: 27競技)', '校数', spSchools.size, '(資料: 9校)', '空欄項目', SP.filter((p) => !p.cond || !p.common || !p.specific || !p.n).length);
+if (SP.length !== 27 || spSchools.size !== 9) { console.log('NG スポーツ推薦の件数が別表5の合計行と一致しない'); process.exitCode = 1; }

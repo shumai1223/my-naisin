@@ -1576,13 +1576,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
-  it('wakayama: 特色化選抜(別表2)21レコードを区分別に収録する(スポーツ9・芸術4・農業2・学際2・宇宙1・地域1・スポーツ健康科学1・連携型中高一貫1)', () => {
+  it('wakayama: 特色化選抜(別表2)23レコードを区分別に収録する(スポーツ11[令和9年度に和歌山北ソフトテニス・和歌山商業相撲が追加]・芸術4・農業2・学際2・宇宙1・地域1・スポーツ健康科学1・連携型中高一貫1)', () => {
     const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'wakayama')?.schools ?? [];
     const toku = all.filter((s) => s.selectionCategory.startsWith('特色化選抜('));
-    expect(toku).toHaveLength(21);
+    expect(toku).toHaveLength(23);
     expect(all).toHaveLength(123);
     const count = (cat: string) => toku.filter((s) => s.selectionCategory === `特色化選抜(${cat})`).length;
-    expect(count('スポーツ')).toBe(9);
+    expect(count('スポーツ')).toBe(11);
+    expect(toku.some((s) => s.schoolName === '和歌山商業' && s.department === '相撲')).toBe(true);
+    expect(toku.some((s) => s.schoolName === '和歌山北' && s.department === 'ソフトテニス')).toBe(true);
     expect(count('芸術')).toBe(4);
     expect(count('農業')).toBe(2);
     expect(count('学際')).toBe(2);
@@ -1596,7 +1598,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('和歌山北', '陸上競技')?.note).toContain('作文: 800字程度・50分');
     expect(find('和歌山東', '剣道')?.note).toContain('作文: 600字程度・50分');
     expect(find('和歌山', '美術')?.note).toContain('鉛筆デッサン');
-    expect(find('和歌山', '音楽(器楽)')?.note).toContain('YAMAHA C6L');
+    expect(find('和歌山', '音楽(器楽)')?.note).toContain('YAMAHA CBL');
     // 別表3(出願条件): スポーツ9件は ア=都道府県大会1位/イ=地区大会8位以上/ウ=全国大会16位以上、スポーツ健康科学は4位以上/16位以上
     const sport = toku.filter((s) => s.selectionCategory === '特色化選抜(スポーツ)');
     for (const s of sport) {
@@ -1604,7 +1606,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
       expect(s.note).toContain('選手登録(補欠を含む)');
     }
     expect(find('和歌山北', 'スポーツ健康科学')?.note ?? toku.find((s) => s.selectionCategory === '特色化選抜(スポーツ健康科学)')?.note).toContain('ア=都道府県大会4位以上、イ=地区大会(近畿大会等)16位以上');
-    expect(toku.filter((s) => (s.note ?? '').includes('出願条件(別表3):'))).toHaveLength(20);
+    expect(toku.filter((s) => (s.note ?? '').includes('出願条件(別表3):'))).toHaveLength(22);
     expect(find('南部(龍神分校)', '連携型中高一貫')?.note).toContain('出願条件(別表3)に該当の記載なし');
   });
 
@@ -1625,10 +1627,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('新宮', '普通科(昼間)(新翔校舎)(定時制)')?.ratioType).toBe('調査書40:学力検査40:面接・実技検査20');
   });
 
-  it('wakayama: スポーツ推薦(別表5〜7)は資料末尾の「計9校29競技スポーツ」と一致し、募集枠・出願条件・実技を競技単位に統合している', () => {
+  it('wakayama: スポーツ推薦(別表5〜7)は令和9年度の資料末尾の「計9校27競技スポーツ」(ソフトテニス・相撲が特色化選抜へ移り2競技減)と一致し、募集枠・出願条件・実技を競技単位に統合している', () => {
     const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'wakayama')?.schools ?? [];
     const sp = all.filter((s) => s.selectionCategory === 'スポーツ推薦');
-    expect(sp).toHaveLength(29);
+    expect(sp).toHaveLength(27);
     expect(new Set(sp.map((s) => s.schoolName)).size).toBe(9);
     const find = (school: string, sport: string) => sp.find((s) => s.schoolName === school && s.department === sport);
     for (const s of sp) {
@@ -1641,12 +1643,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('和歌山北(普通科)', 'サッカー')?.note).toContain('女子のみ3名程度');
     expect(find('和歌山北(普通科)', 'フェンシング')?.note).toContain('男女を問わず2名程度');
     expect(find('和歌山工業', '陸上競技')?.note).toContain('専門種目のスパイク可');
-    expect(find('和歌山商業', '相撲')?.note).toContain('まわし');
+    expect(find('和歌山商業', '相撲')).toBeUndefined(); // 令和9年度は特色化選抜(スポーツ)へ移行
+    expect(find('和歌山北(普通科)', 'ソフトテニス')).toBeUndefined();
+    expect(find('紀北工業', 'レスリング')?.note).toContain('2名程度');
     // 面接を実施するのは別表7の備考に「面接を実施」とある学校のみ(和歌山商業・箕島は無し)
     expect(find('和歌山商業', '卓球')?.interviewRequired).toBeUndefined();
     expect(find('箕島', '柔道')?.interviewRequired).toBeUndefined();
     expect(find('紀央館', 'ホッケー')?.interviewRequired).toBe(true);
-    expect(sp.filter((s) => s.interviewRequired)).toHaveLength(23); // 和歌山商業3競技+箕島3競技=6競技が面接なし
+    expect(sp.filter((s) => s.interviewRequired)).toHaveLength(22); // 和歌山商業2競技+箕島3競技=5競技が面接なし
   });
 
   it('mie: 令和9年度の後期選抜126レコード(全日制109・定時制17)は全て特に重視する選抜資料(◎)を1つ以上持つ', () => {
