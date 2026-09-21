@@ -1623,6 +1623,29 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(toku(tei).reduce((a, s) => a + num(s.note ?? '', /募集人員([0-9]+)人以内/), 0)).toBe(18);
   });
 
+  it('tottori: 特色入学者選抜の43レコード(全日制41+定時制2)は全て出願要件・選抜方法・評定の目安の資料原文を持ち、学科別・競技別の要件が対応する', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori')?.schools ?? [];
+    const tk = list.filter((x) => x.selectionCategory.startsWith('特色入学者選抜'));
+    expect(tk).toHaveLength(43);
+    for (const s of tk) {
+      const note = s.note ?? '';
+      expect(note).toContain('出願要件・選抜方法・出願する際の評定の目安等(資料原文): ＜出願要件＞');
+      expect(note).toContain('＜選抜方法＞');
+    }
+    const f = (sc: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', sc, c, d);
+    expect(f('鳥取東', '特色入学者選抜', '普通・理数(くくり募集・単位制)')?.note).toContain('英検準２級以上');
+    // 鳥取湖陵の4学科は学科ごとの要件(1)と各科共通の要件(2)を持つ
+    expect(f('鳥取湖陵', '特色入学者選抜', '農業(食品システム)')?.note).toContain('農産物の生産や加工');
+    expect(f('鳥取湖陵', '特色入学者選抜', '情報(情報科学)')?.note).toContain('ＩＣＴ機器');
+    expect(f('鳥取湖陵', '特色入学者選抜', '情報(情報科学)')?.note).toContain('(各科共通)');
+    // 八頭・鳥取中央育英は2つの特色選抜でブロックの順序が入れ替わっていない
+    expect(f('八頭', '特色入学者選抜(スポーツ活動特色選抜)', '普通(単位制)')?.note).toContain('指定競技');
+    expect(f('八頭', '特色入学者選抜(特別活動特色選抜)', '普通(単位制)')?.note).toContain('文化的活動の県大会レベル以上');
+    expect(f('鳥取中央育英', '特色入学者選抜(スポーツ活動特色選抜)', '普通(単位制)')?.note).toContain('スポーツ探究類型');
+    expect(f('鳥取中央育英', '特色入学者選抜(特別活動特色選抜)', '普通(単位制)')?.note).toContain('特別活動（学級活動、生徒会活動、学校行事）の中心的存在');
+    expect(f('鳥取緑風', '特色入学者選抜', '総合(午前部・午後部)(単位制)(定時制)')?.note).toContain('働きながら高校卒業を目指そうとする者');
+  });
+
   it('tottori: 通信制課程は鳥取緑風・米子白鳳の2校(各約80名・面接と書類審査)を収録し、全体は91レコード', () => {
     const rec = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori');
     expect(rec?.schools).toHaveLength(91);
