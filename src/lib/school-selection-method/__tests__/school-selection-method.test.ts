@@ -1823,7 +1823,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(all).toHaveLength(426);
+    expect(all).toHaveLength(444);
     const late = all.filter((s) => s.selectionCategory === '後期選抜');
     expect(late).toHaveLength(126);
     expect(late.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(109);
@@ -1929,6 +1929,19 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(f('昴学園', '総合学科')?.note).toContain('後期選抜: 募集なし');
     expect(f('昴学園', '総合学科')?.interviewRequired).toBeUndefined();
     expect(f('みえ夢学園', '総合学科(午前の部)・総合学科(午後の部)')?.note).toContain('後期選抜: 募集人数は原則として5人以内');
+  });
+
+  it('mie: 後期選抜の調査書選抜人数(別表3)は110%が6学科・120%が12学科の18レコードで、120%は理数科・国際科学系・数理系に限られる', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie')?.schools ?? [];
+    const b3 = all.filter((s) => s.selectionCategory === '後期選抜の調査書選抜人数(別表3)');
+    expect(b3).toHaveLength(18);
+    expect(b3.filter((s) => (s.note ?? '').includes('募集定員の110%に設定')).length).toBe(6);
+    expect(b3.filter((s) => (s.note ?? '').includes('募集定員の120%に設定')).length).toBe(12);
+    const f = (sc: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie', sc, '後期選抜の調査書選抜人数(別表3)', d);
+    expect(f('桑名', '普通科')?.note).toContain('募集定員の110%に設定');
+    expect(f('桑名', '理数科')?.note).toContain('募集定員の120%に設定');
+    expect(f('四日市西', '普通科・数理情報コース')?.note).toContain('募集定員の120%に設定');
+    expect(f('伊勢', '普通科・国際科学コース')?.note).toContain('募集定員の120%に設定');
   });
 
   it('mie: スポーツ特別枠選抜(別表5)は15校44競技で、募集人数の合計が196人以内になる', () => {
