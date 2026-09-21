@@ -59,3 +59,7 @@ HTMLだがR9言及なし: nagasaki / oita / saga / saitama / tokushima / tokyo /
 - **kochi**: R9の`取扱要項`(`file_contents/r9_youkou.pdf`)・日程・出題方針は公表済み。DBの出所である『検査項目等一覧表』(面接内容等)に相当するR9資料は未掲載(R8は`r8_kensa_koumoku.pdf`)=未公表。
 - **toyama**: `09senbatsu.html`は存在するが掲載は日程(`r9nittei.pdf`)のみ。実施概要一覧(`r08gaiyou.pdf`相当)は未公表。
 - **kagoshima**: `r9nittei.html`のみ。実施要綱は未公表(R9の`r9youkou.html`は404)。
+
+## 2026-09-21 茨城 R9特色選抜(予定)の先行パース(DBには入れない)
+R9の特色選抜実施概要一覧(予定)`tokushoku2027-2.pdf`(63頁・2026-07-22)を**PyMuPDFの`page.find_tables()`**で表として抽出(`ops/baselines/ibaraki-r9/extract.py`→`tokushoku-r9-parsed.json`・79行=学校×学科×分野)。学力検査+調査書+面接+作文+実技=合計の検算が全79行で一致。**tokyo.ts等のDBには入れない理由**: ibaraki.tsは令和8年度の実施細則別表1(一般の80:20比率)で、fiscalYearが県単位で1つのためR9の特色だけを混ぜると年度が混在する(Y-0違反)。募集人員の割合も『10月下旬の実施細則で正式決定』。**10月に実施細則(R9)が公表されたら、一般の比率と併せてibaraki.tsをR9へ全面更新し、この`tokushoku-r9-parsed.json`から特色選抜レコード(校×学科×分野・配点)を追加する**。継ぎ目の処理(前ページからのつづきの重複除去・結合セルの配点継承)は`extract.py`と本ファイルの生成コードに記録。
+**技法**: 罫線のあるPDF表はpdftotext -bboxより`PyMuPDF find_tables()`が圧倒的に楽(結合セルは空文字で返る→直前の値を継承)。Pythonにfitzが入っている。
