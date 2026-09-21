@@ -955,11 +955,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kukuri?.note).toContain('くくり募集');
   });
 
-  it('kanagawa: 共通選抜(全日制)全5頁197レコードに定時制29・通信制2を加えた228レコードを令和9年度として収録している', () => {
+  it('kanagawa: 共通選抜(全日制)全5頁197レコードに定時制29・通信制2と定通分割選抜(定時制19・通信制2)を加えた249レコードを令和9年度として収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa');
     expect(record?.status).toBe('structured');
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(record?.schools?.length).toBe(228);
+    expect(record?.schools?.length).toBe(249);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '定通分割選抜(定時制)')).toHaveLength(19);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '定通分割選抜(通信制)')).toHaveLength(2);
     expect(record?.schools?.filter((s) => s.selectionCategory === '共通選抜')).toHaveLength(197);
     expect(record?.schools?.filter((s) => s.selectionCategory === '共通選抜(定時制)')).toHaveLength(29);
     expect(record?.schools?.filter((s) => s.selectionCategory === '共通選抜(通信制)')).toHaveLength(2);
@@ -995,10 +997,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(f('厚木清南', '共通選抜(通信制)', '普通科')?.note).toContain('S(80点満点)=H+W');
   });
 
+  it('kanagawa: 定通分割選抜(定時制)は比重が1段階のみ、神奈川総合産業は2:8、湘南は3:7:5、川崎市立川崎は共通選抜(定時制)のみに載る', () => {
+    const f = (sc: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', sc, c, d);
+    expect(f('神奈川総合産業', '定通分割選抜(定時制)', '普通科')?.ratioType).toBe('定通分割選抜[学習の記録:学力検査:特色検査=2:8:-]');
+    expect(f('湘南', '定通分割選抜(定時制)', '普通科')?.ratioType).toBe('定通分割選抜[学習の記録:学力検査:特色検査=3:7:5]');
+    expect(f('川崎市立川崎', '定通分割選抜(定時制)', '普通科昼間部')).toBeNull();
+    expect(f('川崎市立川崎', '共通選抜(定時制)', '普通科昼間部')).not.toBeNull();
+    expect(f('厚木清南', '定通分割選抜(通信制)', '普通科')?.note).toContain('共通選抜(通信制)と同一');
+  });
+
   it('kanagawa: 非特色の学校は第1次・第2次とも学習の記録/学力検査(または学力検査/主体的態度)の比の合計が10になる', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa');
     for (const s of record?.schools ?? []) {
       if (!s.ratioType) continue;
+      if (s.selectionCategory === '定通分割選抜(定時制)') {
+        const b = s.ratioType.match(/^定通分割選抜\[学習の記録:学力検査:特色検査=([0-9]):([0-9]):([0-9-]+)\]$/);
+        expect(b).not.toBeNull();
+        if (b) expect(Number(b[1]) + Number(b[2])).toBe(10);
+        continue;
+      }
       const m = s.ratioType.match(/=([0-9]):([0-9]):([0-9-]+)\]\/第2次選考\[[^=]+=([0-9]):([0-9]):([0-9-]+)\]/);
       expect(m).not.toBeNull();
       if (m) {

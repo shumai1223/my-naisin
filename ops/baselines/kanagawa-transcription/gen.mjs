@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { D, S } from './data.mjs';
-import { T, X, C } from './teiji.mjs';
+import { T, X, C, B } from './teiji.mjs';
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const QC = String.fromCharCode(39);
@@ -38,9 +38,32 @@ for (const [name, dept, tk, txt] of X) {
 for (const [name, dept, tk, txt] of C) {
   out += `    {\n      schoolName: ${q(name)},\n      department: ${q(dept)},\n      selectionCategory: '共通選抜(通信制)',\n      interviewRequired: false,\n      note: ${q(`【選考基準・共通選抜(通信制)・単位制による通信制 普通科】実施する検査:${tk}。${txt}`)},\n    },\n`;
 }
+for (const [name, dept, tk, r, sec] of B) {
+  const ratioType = `定通分割選抜[学習の記録:学力検査:特色検査=${r}]`;
+  const note = `【選考基準・定通分割選抜(定時制)・${sec}】学力検査:英国数。特色検査:${tk === '-' ? '実施しない' : tk}。比重は1段階のみ(第1次・第2次選考の区別なし)。重点化:なし。`;
+  out += `    {
+      schoolName: ${q(name)},
+      department: ${q(dept)},
+      selectionCategory: '定通分割選抜(定時制)',
+      interviewRequired: ${tk.includes('面接')},
+      ratioType: ${q(ratioType)},
+      note: ${q(note)},
+    },
+`;
+}
+for (const [name, dept, tk, txt] of C) {
+  out += `    {
+      schoolName: ${q(name)},
+      department: ${q(dept)},
+      selectionCategory: '定通分割選抜(通信制)',
+      interviewRequired: false,
+      note: ${q(`【選考基準・定通分割選抜(通信制)・単位制による通信制 普通科】共通選抜(通信制)と同一の内容。実施する検査:${tk}。${txt}`)},
+    },
+`;
+}
 const names = new Set([...D, ...S].map((e) => e.name));
-const total = D.length + S.length + T.length + X.length + C.length;
-const allNames = new Set([...D, ...S].map((e) => e.name).concat(T.map((e) => e[0]), X.map((e) => e[0]), C.map((e) => e[0])));
+const total = D.length + S.length + T.length + X.length + C.length + B.length + C.length;
+const allNames = new Set([...D, ...S].map((e) => e.name).concat(T.map((e) => e[0]), X.map((e) => e[0]), C.map((e) => e[0]), B.map((e) => e[0])));
 const ts = `// 神奈川県: 令和9年度神奈川県公立高等学校入学者選抜「選考基準」共通選抜(全日制)。
 //
 // 一次ソース: 神奈川県教育委員会「令和9年度神奈川県公立高等学校入学者選抜選考基準及び特色検査の概要」
@@ -55,7 +78,8 @@ const ts = `// 神奈川県: 令和9年度神奈川県公立高等学校入学�
 // 学力検査の教科構成はnoteに転記した。頁5の横浜国際(国際科/国際バカロレア)とクリエイティブスクール5校は
 // 比率でなく数式(S値)で選考されるためratioTypeを持たずnoteに数式を転記した。
 // 令和9年度の資料(2027年度入学者選抜)。定時制(02_kyoutsu_teiji.pdf・1頁・25学科の比率表+横浜明朋・相模向陽館の数式4行)と通信制(03_kyoutsu_tsuushin.pdf・横浜修悠館・厚木清南の作文)は2026-09-22にテキスト層の座標抽出と頁画像で突合して追加した(転記=ops/baselines/kanagawa-transcription/teiji.mjs)。
-// 未収録: 特別募集等・定通分割選抜・特色検査の概要(別PDF)。
+// 定通分割選抜(05_bunkatsu.pdf・定時制19行+通信制2行)も同日追加した。
+// 未収録: 特別募集等・特色検査の概要(別PDF)。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -64,7 +88,7 @@ export const KANAGAWA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod =
   fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    ${q(`共通選抜(全日制)PDF全5頁を完全収録(全日制${names.size}校${D.length + S.length}レコード)。共通選抜の定時制(${T.length + X.length}レコード=比率表${T.length}+横浜明朋・相模向陽館の数式${X.length})と通信制(${C.length}レコード)も収録(計${allNames.size}校${total}レコード)。特別募集等・定通分割選抜・特色検査の概要(各別PDF)は未収録`)},
+    ${q(`共通選抜(全日制)PDF全5頁を完全収録(全日制${names.size}校${D.length + S.length}レコード)。共通選抜の定時制(${T.length + X.length}レコード=比率表${T.length}+横浜明朋・相模向陽館の数式${X.length})と通信制(${C.length}レコード)、定通分割選抜(定時制${B.length}+通信制${C.length}レコード)も収録(計${allNames.size}校${total}レコード)。特別募集等・特色検査の概要(各別PDF)は未収録`)},
   schools: [
 ${out.replace(/\n$/, '')}
   ],
