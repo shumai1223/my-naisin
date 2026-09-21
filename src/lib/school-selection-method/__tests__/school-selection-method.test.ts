@@ -2385,12 +2385,26 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('独自の提出書類');
   });
 
-  it('hiroshima: schoolsは令和9年度版の頁3(全日制課程[本校]一覧・14校27学科)を収録している(頁4-8は未収録)', () => {
+  it('hiroshima: schoolsは令和9年度版の頁3(広島市中心部の全日制本校・14校27学科=81レコード)に加え、頁5-8の全日制本校(福山市ほか)・分校・併設型・定時制・フレキシブル課程を収録している(頁4=広島市北部/東部/南西部の全日制本校と連携型・通信制は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
-    expect(record?.schools?.length).toBe(81);
-    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(14);
+    expect(record?.schools?.length).toBe(326); // 頁3の81 + 頁5-8の245
+    // 頁3(14校)は department に区分を付けない本校のまま
+    expect(record?.schools?.filter((s) => s.schoolName === '広島国泰寺').length).toBe(6);
+  });
+
+  it('hiroshima: 頁5-8の追加分は学力検査・調査書の傾斜配点が資料の合計点と一致し(検算済み)、区分(分校/併設型/定時制/フレキシブル)は department の括弧で区別される', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima')?.schools ?? [];
+    const seisho = list.find((s) => s.schoolName === '福山誠之館' && s.department === '総合学科' && s.selectionCategory === '特色枠による選抜');
+    expect(seisho?.note).toContain('数学300点(6倍傾斜)');
+    expect(seisho?.note).toContain('合計700点');
+    expect(seisho?.ratioType).toBe('学力700:調査100:表現200:独自100');
+    expect(list.some((s) => s.schoolName === '福山誠之館' && s.department === '普通(定時制課程)')).toBe(true);
+    expect(list.filter((s) => s.department.includes('(併設型高等学校)')).map((s) => s.schoolName).sort()).toContain('福山市立福山');
+    expect(list.some((s) => s.schoolName === '広島市立広島みらい創生' && s.department.includes('(フレキシブル課程)'))).toBe(true);
+    // 福山葦陽(普通)は特色枠を実施せず定員枠100%が一般枠のみ
+    expect(list.some((s) => s.schoolName === '福山葦陽' && s.department === '普通' && s.selectionCategory === '特色枠による選抜')).toBe(false);
+    expect(list.find((s) => s.schoolName === '福山葦陽' && s.department === '普通' && s.selectionCategory === '一般枠による選抜')?.note).toContain('定員枠100%');
   });
 
   it('hiroshima: 広島市立広島工業は令和9年度に3つの探究科へ再編され(6学科→3募集)、安西の二次選抜は面接+作文の独自検査に変わった', () => {
