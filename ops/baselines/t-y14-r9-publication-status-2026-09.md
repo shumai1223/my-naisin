@@ -63,3 +63,16 @@ HTMLだがR9言及なし: nagasaki / oita / saga / saitama / tokushima / tokyo /
 ## 2026-09-21 茨城 R9特色選抜(予定)の先行パース(DBには入れない)
 R9の特色選抜実施概要一覧(予定)`tokushoku2027-2.pdf`(63頁・2026-07-22)を**PyMuPDFの`page.find_tables()`**で表として抽出(`ops/baselines/ibaraki-r9/extract.py`→`tokushoku-r9-parsed.json`・79行=学校×学科×分野)。学力検査+調査書+面接+作文+実技=合計の検算が全79行で一致。**tokyo.ts等のDBには入れない理由**: ibaraki.tsは令和8年度の実施細則別表1(一般の80:20比率)で、fiscalYearが県単位で1つのためR9の特色だけを混ぜると年度が混在する(Y-0違反)。募集人員の割合も『10月下旬の実施細則で正式決定』。**10月に実施細則(R9)が公表されたら、一般の比率と併せてibaraki.tsをR9へ全面更新し、この`tokushoku-r9-parsed.json`から特色選抜レコード(校×学科×分野・配点)を追加する**。継ぎ目の処理(前ページからのつづきの重複除去・結合セルの配点継承)は`extract.py`と本ファイルの生成コードに記録。
 **技法**: 罫線のあるPDF表はpdftotext -bboxより`PyMuPDF find_tables()`が圧倒的に楽(結合セルは空文字で返る→直前の値を継承)。Pythonにfitzが入っている。
+
+## 2026-09-21 再調査(WebSearch+ハブリンク抽出)で『未公表』の誤りが判明した県
+| 県 | 実態 | 対応 |
+|---|---|---|
+| hokkaido | **公表済み(2026-06-15)**: `https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/3/1/6/0/1/1/6/_/R9jisshiyotei.pdf` | **更新済み(追記127)** |
+| nagasaki | **公表済み(2026-06-19)**: `https://www.pref.nagasaki.lg.jp/press-contents/48655.html`→`/fs/2/4/2/5/7/_/__9____________________.pdf`(37頁) | **更新済み(追記128)** |
+| wakayama | **公表済み(2026-09-04)**: `https://www.pref.wakayama.lg.jp/prefg/500200/d00222649.html`(別表1〜8) | **更新済み(追記129)** |
+| saga | **公表済み**: 『令和9年度佐賀県立高等学校入学者選抜 評価基準の概要【全日制・定時制(学校別)】』`https://www.pref.saga.lg.jp/kyouiku/kiji003121003/3_121003_400514_up_ukx0dttb.pdf`(41頁・学校別に特別選抜[スポーツ/文化芸術推進指定校等]+一般選抜[選考I/II・学力検査・調査書(学習の記録/以外)・面接]の配点)。DB(saga.ts=R8の付表4-4〜4-6=一般選抜のみ148レコード)とは書式が別。 | **未着手**。`ops/baselines/saga-r9/parse.py`で一般選抜の選考I/IIを校単位に抽出する試作あり(単純な1学科校は取れる)が**複数学科の結合表(電気科・建築科等が1ブロック)は未対応**=学科グループの展開と、特別選抜(スポーツ推進指定校・文化芸術推進指定校)の新規収録が要る |
+| tottori | **特色入学者選抜概要・県外生徒募集は2026-06-04公表**(WebSearch)。DBの出所(`322543.htm`)との対応は未確認 | 未着手(次の候補) |
+| tokushima | `nyuushi.tokushima-ec.ed.jp/R8_nyuugakusyasennbatu`(URL名はR8だが検索要約は令和9年度と記載)=**要確認** | 未着手 |
+| kochi | R9の取扱要項・定員・**こうちフロンティア募集の実施校及び募集定員、検査内容等一覧表**(`r9_kochifrontier_ichiran.pdf`)は公表済み。DBの出所『検査項目等一覧表』相当は未掲載 | フロンティア募集一覧のみ新規収録候補 |
+| ibaraki | 特色選抜概要(予定)は先行パース済み(`ops/baselines/ibaraki-r9/tokushoku-r9-parsed.json`)。実施細則は10月 | 10月に一括 |
+| fukuoka / iwate / kagoshima / toyama | 検索でも未公表(fukuoka=10月下旬公表予定・iwate概要は令和8年度のみ・kagoshimaは日程のみ・toyamaは日程/発表資料のみ) | 10月以降に再確認 |
