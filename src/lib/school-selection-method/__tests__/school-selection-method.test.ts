@@ -2385,10 +2385,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('独自の提出書類');
   });
 
-  it('hiroshima: schoolsは令和9年度版の頁3(広島市中心部の全日制本校・14校27学科=81レコード)に加え、頁4-8の全日制本校(呉市・福山市ほか)・分校・併設型・定時制・フレキシブル課程を収録している(連携型・通信制は未収録)', () => {
+  it('hiroshima: schoolsは令和9年度版の頁3(広島市中心部の全日制本校・14校27学科=81レコード)に加え、頁4-8の全日制本校(呉市・福山市ほか)・分校・併設型・定時制・フレキシブル課程・連携型・通信制を収録している(全8頁を完全収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
-    expect(record?.schools?.length).toBe(412); // 頁3の81 + 頁4-8の331
+    expect(record?.schools?.length).toBe(419); // 頁3の81 + 頁4-8の331 + 連携型・通信制の7
     // 頁3(14校)は department に区分を付けない本校のまま
     expect(record?.schools?.filter((s) => s.schoolName === '広島国泰寺').length).toBe(6);
   });
@@ -2410,6 +2410,12 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kure?.note).toContain('学校独自検査:面接30点');
     const kabe = list.find((s) => s.schoolName === '可部' && s.department === '普通' && s.selectionCategory === '二次選抜');
     expect(kabe?.note).toContain('面接・作文(合計200点');
+    // 連携型(比重の合計900点)・通信制
+    const kake = list.find((s) => s.schoolName === '加計' && s.selectionCategory === '連携型中高一貫教育に関する選抜');
+    expect(kake?.ratioType).toBe('まとめ225:調査225:表現225:独自225');
+    expect(kake?.interviewRequired).toBe(true);
+    expect(list.filter((s) => s.selectionCategory === '連携型中高一貫教育に関する選抜')).toHaveLength(6);
+    expect(list.find((s) => s.schoolName === '福山東' && s.selectionCategory === '通信制課程の選抜')?.ratioType).toBe('志望理由書300:調査300:表現300');
     // 福山葦陽(普通)は特色枠を実施せず定員枠100%が一般枠のみ
     expect(list.some((s) => s.schoolName === '福山葦陽' && s.department === '普通' && s.selectionCategory === '特色枠による選抜')).toBe(false);
     expect(list.find((s) => s.schoolName === '福山葦陽' && s.department === '普通' && s.selectionCategory === '一般枠による選抜')?.note).toContain('定員枠100%');
