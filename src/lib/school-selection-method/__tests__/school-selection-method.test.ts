@@ -1247,7 +1247,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const k2 = all.filter((s) => s.selectionCategory === '一般選抜 選考II');
     expect([k1.length, k2.length]).toEqual([69, 69]);
     const totalB = k1.reduce((a, s) => a + Number((s.note ?? '').match(/選考I: 募集人員([0-9]+)人/)?.[1] ?? 0), 0);
-    expect(totalB).toBe(1369);
+    expect(totalB).toBe(1321); // 令和8年度は1369。令和9年度は鳥栖工業の選考I募集人員が72→24(割合30%→10%)に減った分(-48)
   });
 
   it('saga: 全レコードで②実技+③+④+⑤の合計が資料の値と一致する(選考I/II・定時制)', () => {
@@ -1259,6 +1259,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
       const prac = Number(note.match(/実技検査([0-9]+)点/)?.[1] ?? 0);
       expect(prac + Number(m[1]) + Number(m[2]) + Number(m[3])).toBe(Number(m[4]));
     }
+  });
+
+  it('saga: 令和9年度の変更(鳥栖工業の選考I=募集10%・鳥栖商業/佐賀東/伊万里実業の調査書配点・定時制の鳥栖工業/伊万里実業)を反映する', () => {
+    const rec = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga');
+    expect(rec?.fiscalYear).toBe('令和9年度（2027年度）');
+    const f = (s: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga', s, c, d);
+    expect(f('鳥栖工業', '一般選抜 選考I', '機械科')?.note).toContain('募集人員8人(募集定員に対する10%)');
+    expect(f('鳥栖商業', '一般選抜 選考I', '情報管理科')?.note).toContain('③学習の記録75点・④学習の記録以外115点');
+    expect(f('佐賀東', '一般選抜 選考I', '普通科・スポーツ科(くくり)')?.ratioType).toBe('学力検査250:調査書190:面接90');
+    expect(f('伊万里実業', '一般選抜 選考I', '商業科')?.ratioType).toBe('学力検査250:調査書150:面接80');
+    expect(f('鳥栖工業', '一般選抜 定時制', '普通科')?.ratioType).toBe('学力検査250:調査書185:面接240');
+    expect(f('伊万里実業', '一般選抜 定時制', '商業科')?.ratioType).toBe('学力検査250:調査書130:面接180');
   });
 
   it('saga: 佐賀西は国数英75点で学力検査325点、致遠館理数科は数学・理科75点で300点、選考IIは全校250点', () => {
