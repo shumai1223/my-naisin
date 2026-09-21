@@ -2385,10 +2385,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('独自の提出書類');
   });
 
-  it('hiroshima: schoolsは令和9年度版の頁3(広島市中心部の全日制本校・14校27学科=81レコード)に加え、頁5-8の全日制本校(福山市ほか)・分校・併設型・定時制・フレキシブル課程を収録している(頁4=広島市北部/東部/南西部の全日制本校と連携型・通信制は未収録)', () => {
+  it('hiroshima: schoolsは令和9年度版の頁3(広島市中心部の全日制本校・14校27学科=81レコード)に加え、頁4-8の全日制本校(呉市・福山市ほか)・分校・併設型・定時制・フレキシブル課程を収録している(連携型・通信制は未収録)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hiroshima');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
-    expect(record?.schools?.length).toBe(326); // 頁3の81 + 頁5-8の245
+    expect(record?.schools?.length).toBe(412); // 頁3の81 + 頁4-8の331
     // 頁3(14校)は department に区分を付けない本校のまま
     expect(record?.schools?.filter((s) => s.schoolName === '広島国泰寺').length).toBe(6);
   });
@@ -2402,6 +2402,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(list.some((s) => s.schoolName === '福山誠之館' && s.department === '普通(定時制課程)')).toBe(true);
     expect(list.filter((s) => s.department.includes('(併設型高等学校)')).map((s) => s.schoolName).sort()).toContain('福山市立福山');
     expect(list.some((s) => s.schoolName === '広島市立広島みらい創生' && s.department.includes('(フレキシブル課程)'))).toBe(true);
+    // 頁4(結合セル表示の表)は独自検査の種別を●のword座標で判別している
+    const misuzu = list.find((s) => s.schoolName === '広島市立美鈴が丘' && s.selectionCategory === '特色枠による選抜');
+    expect(misuzu?.note).toContain('最高得点の教科を4倍=合計400点');
+    const kure = list.find((s) => s.schoolName === '呉工業' && s.department === '機械・材料工学' && s.selectionCategory === '特色枠による選抜');
+    expect(kure?.interviewRequired).toBe(true);
+    expect(kure?.note).toContain('学校独自検査:面接30点');
+    const kabe = list.find((s) => s.schoolName === '可部' && s.department === '普通' && s.selectionCategory === '二次選抜');
+    expect(kabe?.note).toContain('面接・作文(合計200点');
     // 福山葦陽(普通)は特色枠を実施せず定員枠100%が一般枠のみ
     expect(list.some((s) => s.schoolName === '福山葦陽' && s.department === '普通' && s.selectionCategory === '特色枠による選抜')).toBe(false);
     expect(list.find((s) => s.schoolName === '福山葦陽' && s.department === '普通' && s.selectionCategory === '一般枠による選抜')?.note).toContain('定員枠100%');

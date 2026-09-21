@@ -55,7 +55,7 @@ def gen(e,suffix):
         assert all(x is not None for x in w[:3]),(school,dept,A[27:31])
         dk=A[30]!=''
         ratio=f'学力{w[0]}:調査{w[1]}:表現{w[2]}'+(f':独自{w[3]}' if dk else '(独自検査なし)')
-        note=f'定員枠{A[4]}%(人数は令和9年度資料では未定「-」)。'+marks(A,range(6,11),GN,50,B[6],'学力検査')+'。'+marks(A,range(11,20),CN,25,B[11],'調査書')+f'。自己表現{A[20]}点。'+dokuji(A,B,range(21,27))+ex
+        note=f'定員枠{A[4]}%(人数は令和9年度資料では未定「-」)。'+(('学力検査:国語・社会・数学・理科・英語(各50点)のうち最高得点の教科を4倍=合計'+str(num(B[6]))+'点(資料の注記『最高得点教科を4倍』)') if e.get('gaku_special') else marks(A,range(6,11),GN,50,B[6],'学力検査'))+'。'+marks(A,range(11,20),CN,25,B[11],'調査書')+f'。自己表現{A[20]}点。'+dokuji(A,B,range(21,27))+ex
         out+=rec(school,dept,'特色枠による選抜',bool(A[21]),ratio,note)
     if A[31]:
         w=[num(A[c]) for c in (46,47,48,49)]
