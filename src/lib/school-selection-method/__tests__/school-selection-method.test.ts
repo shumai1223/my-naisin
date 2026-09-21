@@ -2559,7 +2559,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: schoolsは全7頁の103校(頁1=日比谷/三田/戸山/竹早/向丘/上野/日本橋/本所/城東/東/深川/大崎/小山台・頁2=八潮/駒場/目黒/大森/田園調布/雪谷/桜町/千歳丘/松原/青山/広尾/鷺宮/武蔵丘・頁3=杉並/豊多摩/西/豊島/文京/竹台/板橋/大山/北園/高島/井草/石神井/田柄/練馬・頁4=光丘/青井/足立/足立新田/足立西/江北/淵江/葛飾野/南葛飾/江戸川/葛西南/小岩/小松川/篠崎/紅葉川/片倉・頁5=八王子北/八王子東/富士森/松が谷/立川/武蔵野北/多摩/府中/府中西/府中東/昭和/拝島/神代/調布北/調布南・頁6=小川/成瀬/野津田/町田/山崎/小金井北/小平/小平西/小平南/日野/日野台/南平/東村山西/国立/福生/狛江・頁7=東大和/東大和南/清瀬/久留米西/武蔵村山/永山/羽村/五日市/田無/保谷+島しょ6校[大島/新島/神津/三宅/八丈/小笠原])303レコードを収録している(推薦に基づく選抜+第一次募集+第二次募集の3区分)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo');
-    expect(record?.schools?.length).toBe(1104);
+    expect(record?.schools?.length).toBe(1107);
     // 普通科(頁1-7)の103校。n2_11のコース/エンカレッジ8件は別のdepartmentで区別される
     const futsu = (record?.schools ?? []).filter((s) => s.department === '普通科');
     expect(futsu).toHaveLength(303);
@@ -2991,8 +2991,8 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('tokyo: n2_16頁1-3の文化・スポーツ等特別推薦は9校25レコード(頁1-3)+頁4-9の合計で、種目・募集人数・満点(調査書+面接+実技)・数値目標を持つ', () => {
     const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? []).filter((s) => s.selectionCategory === '文化・スポーツ等特別推薦');
-    expect(list).toHaveLength(285);
-    expect(new Set(list.map((s) => s.schoolName)).size).toBe(91);
+    expect(list).toHaveLength(288);
+    expect(new Set(list.map((s) => s.schoolName)).size).toBe(90);
     for (const n of ['向丘', '上野', '本所', '城東', '東', '深川', '大崎', '八潮', '目黒', '大森', '雪谷', '桜町', '千歳丘', '広尾', '鷺宮', '武蔵丘', '杉並', '豊多摩', '豊島']) expect(list.some((s) => s.schoolName === n)).toBe(true);
     const by = (n: string) => list.filter((s) => s.schoolName === n);
     expect(by('城東')).toHaveLength(7);
@@ -3025,17 +3025,17 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('文京').find((s) => s.department.startsWith('硬式野球'))?.ratioType).toBe('調査書300点+集団面接100点+実技検査200点');
     expect(by('文京').filter((s) => !s.department.startsWith('硬式野球')).every((s) => s.ratioType === '調査書300点+個人面接100点+実技検査200点')).toBe(true);
     expect(by('板橋')).toHaveLength(3);
-    expect(by('板橋').every((s) => s.ratioType === '調査書750点+個人面接250点+実技検査600点')).toBe(true);
+    expect(by('板橋').every((s) => s.ratioType === '調査書450点+個人面接150点+実技検査300点')).toBe(true); // 令和9年度で750/250/600から変更
     expect(by('大山')).toHaveLength(1);
     expect(by('大山')[0].ratioType).toBe('調査書300点+個人面接300点+実技検査400点');
     expect(by('高島')).toHaveLength(7);
-    expect(by('高島').every((s) => s.ratioType === '調査書200点+集団面接300点+実技検査300点')).toBe(true);
+    expect(by('高島').every((s) => s.ratioType === '調査書400点+個人面接200点+実技検査200点')).toBe(true); // 令和9年度で200/集団300/300から変更
     expect(by('石神井')).toHaveLength(6);
     expect(by('石神井').every((s) => s.ratioType === '調査書450点+集団面接150点+実技検査300点')).toBe(true);
     // 頁10-12
     expect(by('練馬')).toHaveLength(4);
     expect(by('練馬').every((s) => s.ratioType === '調査書450点+集団面接150点+実技検査300点')).toBe(true);
-    expect(by('光丘')).toHaveLength(5);
+    expect(by('光丘')).toHaveLength(4); // 令和9年度で剣道が男女・4の1行に統合
     expect(by('光丘').every((s) => s.ratioType === '調査書300点+個人面接300点+実技検査400点')).toBe(true);
     expect(by('足立')).toHaveLength(3);
     expect(by('足立').filter((s) => s.ratioType.includes('集団面接200点'))).toHaveLength(2);
@@ -3046,7 +3046,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('足立新田').some((s) => s.note?.includes('頁11から続く'))).toBe(true);
     expect(by('足立西')).toHaveLength(3);
     expect(by('足立西')[0].ratioType).toBe('調査書450点+集団面接250点+実技検査250点');
-    expect(by('淵江')).toHaveLength(3);
+    expect(by('淵江')).toHaveLength(1); // 令和9年度でサッカーのみ
     expect(by('淵江')[0].ratioType).toBe('調査書500点+個人面接300点+実技検査200点');
     // 頁13-15
     expect(by('葛飾野')).toHaveLength(3);
@@ -3054,7 +3054,8 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('南葛飾')).toHaveLength(1);
     expect(by('南葛飾')[0].ratioType).toBe('調査書500点+個人面接200点+実技検査400点');
     expect(by('江戸川')).toHaveLength(5);
-    expect(by('江戸川').every((s) => s.ratioType === '調査書400点+個人面接100点+実技検査300点')).toBe(true);
+    expect(by('江戸川').filter((s) => s.ratioType === '調査書400点+個人面接100点+実技検査300点')).toHaveLength(4);
+    expect(by('江戸川').find((s) => s.department.startsWith('硬式野球'))?.ratioType).toBe('調査書400点+集団面接100点+実技検査300点'); // 令和9年度で野球のみ集団面接
     expect(by('葛西南')).toHaveLength(1);
     expect(by('葛西南')[0].ratioType).toBe('調査書200点+個人面接100点+実技検査400点');
     expect(by('小岩')).toHaveLength(5);
@@ -3066,10 +3067,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('篠崎').find((s) => s.department.startsWith('剣道'))?.note).toContain('墨東杯');
     // 頁16-18
     expect(by('片倉')).toHaveLength(4);
-    expect(by('片倉').find((s) => s.department.startsWith('卓球'))?.ratioType).toBe('調査書200点+個人面接500点+実技検査300点');
-    expect(by('片倉').find((s) => s.department.startsWith('吹奏楽'))?.ratioType).toBe('調査書450点+個人面接200点+実技検査400点');
-    expect(by('片倉').find((s) => s.department.startsWith('サッカー'))?.ratioType).toBe('調査書450点+集団面接400点+実技検査200点');
-    expect(by('八王子北')).toHaveLength(3);
+    expect(by('片倉').find((s) => s.department.startsWith('卓球'))?.ratioType).toBe('調査書400点+個人面接300点+実技検査300点');
+    expect(by('片倉').find((s) => s.department.startsWith('吹奏楽'))?.ratioType).toBe('調査書400点+個人面接300点+実技検査300点');
+    expect(by('片倉').find((s) => s.department.startsWith('サッカー'))?.ratioType).toBe('調査書400点+集団面接300点+実技検査300点');
+    expect(by('八王子北')).toHaveLength(4); // 令和9年度でバスケットボール(男女・2)が新設
     expect(by('八王子北').every((s) => s.ratioType === '調査書400点+個人面接150点+実技検査250点')).toBe(true);
     expect(by('富士森')).toHaveLength(4);
     expect(by('富士森').filter((s) => s.ratioType.includes('集団面接200点')).map((s) => s.department.split('(')[0]).sort()).toEqual(['吹奏楽', '硬式野球']);
@@ -3080,27 +3081,27 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('府中')[0].ratioType).toBe('調査書500点+個人面接100点+実技検査400点');
     // 頁19-21
     expect(by('府中西')).toHaveLength(4);
-    expect(by('府中西').every((s) => s.ratioType === '調査書400点+個人面接200点+実技検査200点')).toBe(true);
-    expect(by('府中東')).toHaveLength(5);
+    expect(by('府中西').filter((s) => s.ratioType === '調査書400点+個人面接200点+実技検査200点')).toHaveLength(3);
+    expect(by('府中西').find((s) => s.department.startsWith('ラグビー'))?.ratioType).toBe('調査書400点+集団面接200点+実技検査200点'); // 令和9年度でラグビーのみ集団面接
+    expect(by('府中東')).toHaveLength(6); // 令和9年度でボクシング(男女・4)が新設
     expect(by('府中東').every((s) => s.ratioType === '調査書450点+集団面接200点+実技検査200点')).toBe(true);
     expect(by('拝島')).toHaveLength(1);
     expect(by('拝島')[0].ratioType).toBe('調査書400点+個人面接200点+実技検査200点');
-    expect(by('小川')).toHaveLength(3);
+    expect(by('小川')).toHaveLength(1); // 令和9年度でバレーボール男女が掲載なし
     expect(by('小川').every((s) => s.ratioType === '調査書450点+個人面接250点+実技検査300点')).toBe(true);
-    expect(by('山崎')).toHaveLength(1);
-    expect(by('山崎')[0].ratioType).toBe('調査書600点+個人面接400点+実技検査200点');
+    expect(by('山崎')).toHaveLength(0); // 令和9年度で別表16に掲載なし
     expect(by('小平西')).toHaveLength(6);
     expect(by('小平西').filter((s) => s.ratioType.includes('集団面接180点')).map((s) => s.department.split('(')[0]).sort()).toEqual(['硬式野球', 'バスケットボール'].sort());
     expect(by('小平西').filter((s) => s.ratioType.includes('個人面接180点'))).toHaveLength(4);
     expect(by('小平西').every((s) => s.ratioType.startsWith('調査書450点+') && s.ratioType.endsWith('実技検査270点'))).toBe(true);
-    expect(by('小平南')).toHaveLength(3);
+    expect(by('小平南')).toHaveLength(4); // 令和9年度でバスケットボール女子が新設
     expect(by('小平南').every((s) => s.ratioType === '調査書450点+個人面接150点+実技検査300点')).toBe(true);
     // 頁22-24
     expect(by('日野')).toHaveLength(4);
     expect(by('日野').every((s) => s.ratioType === '調査書450点+集団面接200点+実技検査250点')).toBe(true);
-    expect(by('東村山西')).toHaveLength(2);
+    expect(by('東村山西')).toHaveLength(3); // 令和9年度でサッカー男・2が新設
     expect(by('東村山西').every((s) => s.ratioType === '調査書450点+集団面接200点+実技検査250点')).toBe(true);
-    expect(by('福生')).toHaveLength(6);
+    expect(by('福生')).toHaveLength(5); // 令和9年度でバレーボール女が掲載なし
     expect(by('福生').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点')).toBe(true);
     expect(by('福生').find((s) => s.department.startsWith('美術'))?.note).toContain('「自己PR」');
     expect(by('狛江')).toHaveLength(2);
@@ -3114,7 +3115,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('東大和南').every((s) => s.ratioType === '調査書500点+集団面接200点+実技検査200点')).toBe(true);
     expect(by('清瀬')).toHaveLength(3);
     expect(by('清瀬').every((s) => s.ratioType === '調査書500点+集団面接200点+実技検査300点')).toBe(true);
-    expect(by('久留米西')).toHaveLength(3);
+    expect(by('久留米西')).toHaveLength(2); // 令和9年度でバスケットボール女が掲載なし
     expect(by('久留米西').every((s) => s.ratioType === '調査書300点+個人面接300点+実技検査400点')).toBe(true);
     expect(by('武蔵村山')).toHaveLength(3);
     expect(by('武蔵村山').every((s) => s.ratioType === '調査書300点+個人面接200点+実技検査200点')).toBe(true);
@@ -3122,24 +3123,25 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('永山').every((s) => s.ratioType === '調査書200点+集団面接400点+実技検査400点')).toBe(true);
     expect(by('羽村')).toHaveLength(1);
     expect(by('羽村')[0].ratioType).toBe('調査書500点+個人面接250点+実技検査250点');
-    expect(by('田無')).toHaveLength(5);
+    expect(by('田無')).toHaveLength(6); // 令和9年度で美術(男女・2)が新設
     expect(by('田無').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点')).toBe(true);
     // 頁28-30
-    expect(by('保谷')).toHaveLength(6);
+    expect(by('保谷')).toHaveLength(7); // 令和9年度でハンドボール(男女・2)が新設
     expect(by('保谷').filter((s) => s.ratioType.includes('集団面接200点')).length).toBe(2);
     expect(by('保谷').every((s) => s.ratioType.startsWith('調査書500点+') && s.ratioType.endsWith('実技検査300点'))).toBe(true);
     expect(by('深川').filter((s) => s.department.includes('外国語コース'))).toHaveLength(2);
-    expect(by('東村山')).toHaveLength(1);
+    expect(by('東村山')).toHaveLength(2); // 令和9年度でバスケットボール男・2が新設
     expect(by('東村山')[0].ratioType).toBe('調査書600点+個人面接600点+実技検査200点');
     expect(by('東村山')[0].note).toContain('観点別学習状況の評価を活用(評定は活用しない)');
     expect(by('墨田川')).toHaveLength(4);
-    expect(by('墨田川').every((s) => s.ratioType === '調査書200点+個人面接50点+実技検査150点')).toBe(true);
+    expect(by('墨田川').filter((s) => s.ratioType === '調査書200点+個人面接50点+実技検査150点')).toHaveLength(3);
+    expect(by('墨田川').find((s) => s.department.startsWith('剣道'))?.ratioType).toBe('調査書200点+集団面接50点+実技検査150点'); // 令和9年度で剣道のみ集団面接
     expect(by('美原')).toHaveLength(2);
     expect(by('美原').every((s) => s.ratioType === '調査書300点+個人面接100点+実技検査300点')).toBe(true);
     expect(by('深沢')[0].ratioType).toBe('調査書400点+個人面接300点+実技検査300点');
-    expect(by('飛鳥')).toHaveLength(3);
+    expect(by('飛鳥')).toHaveLength(4); // 令和9年度でバスケットボール男・2が新設
     expect(by('飛鳥').find((s) => s.department.startsWith('英語'))?.ratioType).toBe('調査書300点+個人面接200点+作文200点+実技検査300点');
-    expect(by('飛鳥').filter((s) => s.ratioType === '調査書200点+個人面接200点+作文200点+実技検査400点')).toHaveLength(2);
+    expect(by('飛鳥').filter((s) => s.ratioType === '調査書200点+個人面接200点+作文200点+実技検査400点')).toHaveLength(3);
     expect(by('飛鳥').every((s) => s.note?.includes('(合計1000点'))).toBe(true);
     expect(by('板橋有徳')).toHaveLength(2);
     expect(by('板橋有徳').find((s) => s.department.startsWith('ラグビー'))?.ratioType).toBe('調査書300点+個人面接400点+実技検査300点');
@@ -3155,7 +3157,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('総合工科')).toHaveLength(1);
     expect(by('総合工科')[0].ratioType).toBe('調査書200点+個人面接400点+実技検査200点');
     expect(by('総合工科')[0].department).toBe('硬式野球(男・10)');
-    expect(by('杉並工科')).toHaveLength(3);
+    expect(by('杉並工科')).toHaveLength(2); // 令和9年度でものづくり(マイコンプログラミング)が掲載なし
     expect(by('杉並工科').every((s) => s.ratioType === '調査書100点+個人面接200点+実技検査200点')).toBe(true);
     expect(by('荒川工科')).toHaveLength(2);
     expect(by('荒川工科').every((s) => s.ratioType === '調査書500点+個人面接350点+実技検査150点')).toBe(true);
@@ -3172,7 +3174,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(by('第四商業')[0].ratioType).toBe('調査書300点+個人面接300点+実技検査400点');
     expect(by('八王子桑志')).toHaveLength(1);
     expect(by('八王子桑志')[0].ratioType).toBe('調査書450点+個人面接200点+実技検査250点');
-    expect(by('千早')).toHaveLength(2);
+    expect(by('千早')).toHaveLength(1); // 令和9年度でバレーボール女が掲載なし
     expect(by('千早').every((s) => s.ratioType === '調査書200点+個人面接100点+実技検査100点')).toBe(true);
     expect(by('晴海総合')).toHaveLength(4);
     expect(by('晴海総合').every((s) => s.ratioType === '調査書720点+個人面接240点+実技検査250点')).toBe(true);
@@ -3184,17 +3186,17 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     // 頁37-39(最終)
     expect(by('杉並総合')).toHaveLength(3);
     expect(by('杉並総合').every((s) => s.ratioType === '調査書225点+個人面接275点+実技検査500点')).toBe(true);
-    expect(by('王子総合')).toHaveLength(1);
-    expect(by('王子総合')[0].ratioType).toBe('調査書500点+個人面接150点+作文150点+実技検査200点');
-    expect(by('葛飾総合')).toHaveLength(2);
+    expect(by('王子総合')).toHaveLength(3); // 令和9年度で硬式野球・フェンシングが新設し、満点が3種目共通(美術の作文欄は消滅)
+    expect(by('王子総合').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点')).toBe(true);
+    expect(by('葛飾総合')).toHaveLength(1); // 令和9年度でバスケットボール女が掲載なし
     expect(by('葛飾総合').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点')).toBe(true);
     expect(by('青梅総合')).toHaveLength(4);
     expect(by('青梅総合').every((s) => s.ratioType === '調査書400点+個人面接200点+実技検査200点')).toBe(true);
-    expect(by('町田総合')).toHaveLength(2);
-    expect(by('町田総合').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点')).toBe(true);
+    expect(by('町田総合')).toHaveLength(5); // 令和9年度でバスケットボール男女・陸上競技が新設し、満点が500/個人100/400へ変更
+    expect(by('町田総合').every((s) => s.ratioType === '調査書500点+個人面接100点+実技検査400点')).toBe(true);
     expect(by('東久留米総合')).toHaveLength(1);
     expect(by('東久留米総合')[0].ratioType).toBe('調査書900点+個人面接300点+実技検査600点');
-    expect(by('東久留米総合')[0].department).toBe('サッカー(男・10)');
+    expect(by('東久留米総合')[0].department).toBe('サッカー(男・22)'); // 令和9年度で募集人数10→22
     expect(by('若葉総合')).toHaveLength(3);
     expect(by('若葉総合').every((s) => s.ratioType === '調査書500点+個人面接200点+実技検査300点' && s.note?.includes('「自己PR」'))).toBe(true);
     // 全レコードの満点が note の合計と一致する(調査書+面接+作文+実技)
