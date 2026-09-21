@@ -1,0 +1,4193 @@
+[
+{
+"page": 1,
+"y": [
+170,
+186
+],
+"school": "桑名",
+"dept": "普通科",
+"teiin": [
+"240"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+170,
+186
+]
+},
+{
+"page": 1,
+"y": [
+186,
+201
+],
+"school": "桑名",
+"dept": "理数科",
+"teiin": [
+"40"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+186,
+201
+]
+},
+{
+"page": 1,
+"y": [
+201,
+215
+],
+"school": "桑名",
+"dept": "衛生看護科",
+"teiin": [
+"40"
+],
+"bosyu": "100 %",
+"zen": {
+"mensetsu": "集団",
+"shoron": "○",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": null,
+"diag_koki": true,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+201,
+215
+]
+},
+{
+"page": 1,
+"y": [
+215,
+230
+],
+"school": "桑名西",
+"dept": "普通科",
+"teiin": [
+"240"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+215,
+230
+]
+},
+{
+"page": 1,
+"y": [
+230,
+260
+],
+"school": "桑名北",
+"dept": "普通科",
+"teiin": [
+"160"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "フレキシブル特別枠選抜は、募集枠20%で面接・作文を実施する。",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+230,
+260
+]
+},
+{
+"page": 1,
+"y": [
+260,
+276
+],
+"school": "桑名工業",
+"dept": "機械科",
+"teiin": [
+"40",
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+260,
+291
+]
+},
+{
+"page": 1,
+"y": [
+276,
+291
+],
+"school": "桑名工業",
+"dept": "材料技術科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+260,
+291
+]
+},
+{
+"page": 1,
+"y": [
+291,
+306
+],
+"school": "桑名工業",
+"dept": "電気科",
+"teiin": [
+"40",
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+291,
+320
+]
+},
+{
+"page": 1,
+"y": [
+306,
+320
+],
+"school": "桑名工業",
+"dept": "電子科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+291,
+320
+]
+},
+{
+"page": 1,
+"y": [
+320,
+403
+],
+"school": "いなべ総合学園",
+"dept": "総合学科",
+"teiin": [
+"280"
+],
+"bosyu": "II 50%",
+"zen": {
+"sakubun": "○",
+"jitsugi": "○",
+"g_kokugo": "○",
+"g_suugaku": "○",
+"g_eigo": "○ ○"
+},
+"free": "I集団III集団語と英語、又は数学と英語のいずれかを事前に選択する。※上記のI~IIIのいずれかを事前に選択する。IIを選択した者は、国",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+320,
+403
+]
+},
+{
+"page": 1,
+"y": [
+403,
+418
+],
+"school": "四日市",
+"dept": "普通科",
+"teiin": [
+"240"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+403,
+418
+]
+},
+{
+"page": 1,
+"y": [
+418,
+433
+],
+"school": "四日市",
+"dept": "普通科・国際科学コース",
+"teiin": [
+"80"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+418,
+433
+]
+},
+{
+"page": 1,
+"y": [
+433,
+448
+],
+"school": "四日市南",
+"dept": "普通科",
+"teiin": [
+"200"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+433,
+448
+]
+},
+{
+"page": 1,
+"y": [
+448,
+463
+],
+"school": "四日市南",
+"dept": "普通科・数理科学コース",
+"teiin": [
+"80"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "100",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+448,
+463
+]
+},
+{
+"page": 1,
+"y": [
+463,
+478
+],
+"school": "四日市西",
+"dept": "普通科",
+"teiin": [
+"120"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+463,
+478
+]
+},
+{
+"page": 1,
+"y": [
+478,
+499
+],
+"school": "四日市西",
+"dept": "普通科・比較文化・歴史コース",
+"teiin": [
+"40",
+"80"
+],
+"bosyu": "30 %",
+"zen": {
+"g_kokugo": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+478,
+513
+]
+},
+{
+"page": 1,
+"y": [
+499,
+513
+],
+"school": "四日市西",
+"dept": "普通科・数理情報コース",
+"teiin": [
+"40"
+],
+"bosyu": "30 %",
+"zen": {
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+478,
+513
+]
+},
+{
+"page": 2,
+"y": [
+106,
+122
+],
+"school": "朝明",
+"dept": "普通科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+106,
+122
+]
+},
+{
+"page": 2,
+"y": [
+122,
+136
+],
+"school": "朝明",
+"dept": "ふくし科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+122,
+136
+]
+},
+{
+"page": 2,
+"y": [
+136,
+152
+],
+"school": "四日市四郷",
+"dept": "普通科",
+"teiin": [
+"80"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "集団",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+136,
+152
+]
+},
+{
+"page": 2,
+"y": [
+152,
+166
+],
+"school": "四日市四郷",
+"dept": "普通科・スポーツ科学コース",
+"teiin": [
+"40"
+],
+"bosyu": "100 %",
+"zen": {
+"mensetsu": "集団",
+"jitsugi": "○"
+},
+"free": "",
+"koki": null,
+"diag_koki": true,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+152,
+166
+]
+},
+{
+"page": 2,
+"y": [
+166,
+182
+],
+"school": "四日市工業",
+"dept": "機械科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+166,
+182
+]
+},
+{
+"page": 2,
+"y": [
+182,
+197
+],
+"school": "四日市工業",
+"dept": "電子機械科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+182,
+197
+]
+},
+{
+"page": 2,
+"y": [
+197,
+212
+],
+"school": "四日市工業",
+"dept": "電気科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+197,
+212
+]
+},
+{
+"page": 2,
+"y": [
+212,
+227
+],
+"school": "四日市工業",
+"dept": "電子工学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+212,
+227
+]
+},
+{
+"page": 2,
+"y": [
+227,
+242
+],
+"school": "四日市工業",
+"dept": "建築科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+227,
+242
+]
+},
+{
+"page": 2,
+"y": [
+242,
+257
+],
+"school": "四日市工業",
+"dept": "物質工学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+242,
+257
+]
+},
+{
+"page": 2,
+"y": [
+257,
+271
+],
+"school": "四日市工業",
+"dept": "自動車科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+257,
+271
+]
+},
+{
+"page": 2,
+"y": [
+271,
+287
+],
+"school": "四日市中央工業",
+"dept": "機械科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+271,
+287
+]
+},
+{
+"page": 2,
+"y": [
+287,
+302
+],
+"school": "四日市中央工業",
+"dept": "電気科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+287,
+302
+]
+},
+{
+"page": 2,
+"y": [
+302,
+317
+],
+"school": "四日市中央工業",
+"dept": "化学工学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+302,
+317
+]
+},
+{
+"page": 2,
+"y": [
+317,
+332
+],
+"school": "四日市中央工業",
+"dept": "都市工学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+317,
+332
+]
+},
+{
+"page": 2,
+"y": [
+332,
+346
+],
+"school": "四日市中央工業",
+"dept": "設備システム科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+332,
+346
+]
+},
+{
+"page": 2,
+"y": [
+346,
+362
+],
+"school": "四日市商業",
+"dept": "商業科",
+"teiin": [
+"200"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+346,
+362
+]
+},
+{
+"page": 2,
+"y": [
+362,
+376
+],
+"school": "四日市商業",
+"dept": "情報マネジメント科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+362,
+376
+]
+},
+{
+"page": 2,
+"y": [
+376,
+392
+],
+"school": "四日市農芸",
+"dept": "農業科学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+376,
+422
+]
+},
+{
+"page": 2,
+"y": [
+392,
+407
+],
+"school": "四日市農芸",
+"dept": "食品科学科",
+"teiin": [
+"120",
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+376,
+422
+]
+},
+{
+"page": 2,
+"y": [
+407,
+422
+],
+"school": "四日市農芸",
+"dept": "環境造園科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+376,
+422
+]
+},
+{
+"page": 2,
+"y": [
+422,
+436
+],
+"school": "四日市農芸",
+"dept": "生活文化科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+422,
+436
+]
+},
+{
+"page": 2,
+"y": [
+436,
+451
+],
+"school": "菰野",
+"dept": "普通科",
+"teiin": [
+"160"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+436,
+451
+]
+},
+{
+"page": 2,
+"y": [
+451,
+467
+],
+"school": "川越",
+"dept": "探究科",
+"teiin": [
+"200"
+],
+"bosyu": "5 %",
+"zen": {
+"jiko": "個人"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+451,
+467
+]
+},
+{
+"page": 2,
+"y": [
+467,
+481
+],
+"school": "川越",
+"dept": "国際探究科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+467,
+481
+]
+},
+{
+"page": 3,
+"y": [
+106,
+122
+],
+"school": "神戸",
+"dept": "普通科",
+"teiin": [
+"200"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+106,
+122
+]
+},
+{
+"page": 3,
+"y": [
+122,
+136
+],
+"school": "神戸",
+"dept": "理数科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+122,
+136
+]
+},
+{
+"page": 3,
+"y": [
+136,
+152
+],
+"school": "飯野",
+"dept": "応用デザイン科",
+"teiin": [
+"80"
+],
+"bosyu": "100 %",
+"zen": {
+"mensetsu": "集団",
+"jitsugi": "○",
+"g_kokugo": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": null,
+"diag_koki": true,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+136,
+152
+]
+},
+{
+"page": 3,
+"y": [
+152,
+166
+],
+"school": "飯野",
+"dept": "英語コミュニケーション科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "100",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+152,
+166
+]
+},
+{
+"page": 3,
+"y": [
+166,
+182
+],
+"school": "白子",
+"dept": "普通科",
+"teiin": [
+"160"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+166,
+182
+]
+},
+{
+"page": 3,
+"y": [
+182,
+197
+],
+"school": "白子",
+"dept": "普通科・文化教養(吹奏楽)コース",
+"teiin": [
+"40"
+],
+"bosyu": "100 %",
+"zen": {
+"jiko": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": null,
+"diag_koki": true,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+182,
+197
+]
+},
+{
+"page": 3,
+"y": [
+197,
+211
+],
+"school": "白子",
+"dept": "生活創造科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+197,
+211
+]
+},
+{
+"page": 3,
+"y": [
+211,
+226
+],
+"school": "石薬師",
+"dept": "普通科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+211,
+226
+]
+},
+{
+"page": 3,
+"y": [
+226,
+242
+],
+"school": "稲生",
+"dept": "普通科",
+"teiin": [
+"120"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+226,
+242
+]
+},
+{
+"page": 3,
+"y": [
+242,
+256
+],
+"school": "稲生",
+"dept": "体育科",
+"teiin": [
+"40"
+],
+"bosyu": "100 %",
+"zen": {
+"mensetsu": "個人",
+"jitsugi": "○"
+},
+"free": "",
+"koki": null,
+"diag_koki": true,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+242,
+256
+]
+},
+{
+"page": 3,
+"y": [
+256,
+272
+],
+"school": "亀山",
+"dept": "普通科",
+"teiin": [
+"80"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+256,
+272
+]
+},
+{
+"page": 3,
+"y": [
+272,
+287
+],
+"school": "亀山",
+"dept": "システムメディア科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+272,
+287
+]
+},
+{
+"page": 3,
+"y": [
+287,
+301
+],
+"school": "亀山",
+"dept": "総合生活科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+287,
+301
+]
+},
+{
+"page": 3,
+"y": [
+301,
+316
+],
+"school": "津",
+"dept": "普通科",
+"teiin": [
+"320"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+301,
+316
+]
+},
+{
+"page": 3,
+"y": [
+316,
+332
+],
+"school": "津西",
+"dept": "普通科",
+"teiin": [
+"200"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+316,
+332
+]
+},
+{
+"page": 3,
+"y": [
+332,
+346
+],
+"school": "津西",
+"dept": "国際科学科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+332,
+346
+]
+},
+{
+"page": 3,
+"y": [
+346,
+362
+],
+"school": "津商業",
+"dept": "ビジネス科",
+"teiin": [
+"160"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+346,
+362
+]
+},
+{
+"page": 3,
+"y": [
+362,
+376
+],
+"school": "津商業",
+"dept": "情報システム科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+362,
+376
+]
+},
+{
+"page": 3,
+"y": [
+376,
+391
+],
+"school": "津東",
+"dept": "普通科",
+"teiin": [
+"240"
+],
+"bosyu": "30 %",
+"zen": {
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+376,
+391
+]
+},
+{
+"page": 3,
+"y": [
+391,
+407
+],
+"school": "津工業",
+"dept": "機械科",
+"teiin": [
+"120"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sogo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+391,
+407
+]
+},
+{
+"page": 3,
+"y": [
+407,
+422
+],
+"school": "津工業",
+"dept": "電気科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sogo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+407,
+422
+]
+},
+{
+"page": 3,
+"y": [
+422,
+437
+],
+"school": "津工業",
+"dept": "電子科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sogo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+422,
+437
+]
+},
+{
+"page": 3,
+"y": [
+437,
+451
+],
+"school": "津工業",
+"dept": "建設工学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sogo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+437,
+451
+]
+},
+{
+"page": 4,
+"y": [
+106,
+166
+],
+"school": "久居",
+"dept": "普通科",
+"teiin": [
+"160"
+],
+"bosyu": "30%",
+"zen": {
+"jitsugi": "○",
+"g_kokugo": "○"
+},
+"free": "I集団II集団※上記のI・IIのどちらかを事前に選択する。フレキシブル特別枠選抜は、募集枠20%で面接・学力検査を実施する。",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+106,
+166
+]
+},
+{
+"page": 4,
+"y": [
+166,
+182
+],
+"school": "久居農林",
+"dept": "農業科学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+166,
+182
+]
+},
+{
+"page": 4,
+"y": [
+182,
+197
+],
+"school": "久居農林",
+"dept": "園芸科学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+182,
+197
+]
+},
+{
+"page": 4,
+"y": [
+197,
+212
+],
+"school": "久居農林",
+"dept": "環境デザイン科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+197,
+212
+]
+},
+{
+"page": 4,
+"y": [
+212,
+226
+],
+"school": "久居農林",
+"dept": "生活デザイン科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+212,
+226
+]
+},
+{
+"page": 4,
+"y": [
+226,
+242
+],
+"school": "白山",
+"dept": "普通科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"jiko": "個人"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+226,
+242
+]
+},
+{
+"page": 4,
+"y": [
+242,
+256
+],
+"school": "白山",
+"dept": "情報コミュニケーション科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"jiko": "個人"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+242,
+256
+]
+},
+{
+"page": 4,
+"y": [
+256,
+272
+],
+"school": "上野",
+"dept": "学際探究科",
+"teiin": [
+"160"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+256,
+272
+]
+},
+{
+"page": 4,
+"y": [
+272,
+286
+],
+"school": "上野",
+"dept": "理数科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+272,
+286
+]
+},
+{
+"page": 4,
+"y": [
+286,
+316
+],
+"school": "あけぼの学園",
+"dept": "総合学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "特別選抜は、募集枠5%で面接・作文を実施する。",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+286,
+316
+]
+},
+{
+"page": 4,
+"y": [
+316,
+332
+],
+"school": "伊賀白鳳",
+"dept": "機械科",
+"teiin": [
+"35"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+316,
+362
+]
+},
+{
+"page": 4,
+"y": [
+332,
+347
+],
+"school": "伊賀白鳳",
+"dept": "電子機械科",
+"teiin": [
+"35",
+"105"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+316,
+362
+]
+},
+{
+"page": 4,
+"y": [
+347,
+362
+],
+"school": "伊賀白鳳",
+"dept": "建築デザイン科",
+"teiin": [
+"35"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+316,
+362
+]
+},
+{
+"page": 4,
+"y": [
+362,
+377
+],
+"school": "伊賀白鳳",
+"dept": "生物資源科",
+"teiin": [
+"35",
+"70"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+362,
+392
+]
+},
+{
+"page": 4,
+"y": [
+377,
+392
+],
+"school": "伊賀白鳳",
+"dept": "フードシステム科 ",
+"teiin": [
+"35"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+362,
+392
+]
+},
+{
+"page": 4,
+"y": [
+392,
+407
+],
+"school": "伊賀白鳳",
+"dept": "経営科",
+"teiin": [
+"30"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+392,
+407
+]
+},
+{
+"page": 4,
+"y": [
+407,
+421
+],
+"school": "伊賀白鳳",
+"dept": "ヒューマンサービス科",
+"teiin": [
+"35"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+407,
+421
+]
+},
+{
+"page": 4,
+"y": [
+421,
+436
+],
+"school": "名張",
+"dept": "総合学科",
+"teiin": [
+"200"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+421,
+436
+]
+},
+{
+"page": 4,
+"y": [
+436,
+452
+],
+"school": "名張青峰",
+"dept": "普通科",
+"teiin": [
+"160"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+436,
+452
+]
+},
+{
+"page": 4,
+"y": [
+452,
+466
+],
+"school": "名張青峰",
+"dept": "普通科・文理探究コース",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+452,
+466
+]
+},
+{
+"page": 5,
+"y": [
+105,
+121
+],
+"school": "松阪",
+"dept": "普通科",
+"teiin": [
+"200"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+105,
+121
+]
+},
+{
+"page": 5,
+"y": [
+121,
+136
+],
+"school": "松阪",
+"dept": "理数科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+121,
+136
+]
+},
+{
+"page": 5,
+"y": [
+136,
+151
+],
+"school": "松阪工業",
+"dept": "機械科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+136,
+151
+]
+},
+{
+"page": 5,
+"y": [
+151,
+166
+],
+"school": "松阪工業",
+"dept": "電気工学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+151,
+166
+]
+},
+{
+"page": 5,
+"y": [
+166,
+181
+],
+"school": "松阪工業",
+"dept": "工業化学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+166,
+181
+]
+},
+{
+"page": 5,
+"y": [
+181,
+196
+],
+"school": "松阪工業",
+"dept": "繊維デザイン科",
+"teiin": [
+"40"
+],
+"bosyu": "100 %",
+"zen": {
+"mensetsu": "個人",
+"jitsugi": "○"
+},
+"free": "",
+"koki": null,
+"diag_koki": true,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+181,
+196
+]
+},
+{
+"page": 5,
+"y": [
+196,
+211
+],
+"school": "松阪工業",
+"dept": "自動車科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+196,
+211
+]
+},
+{
+"page": 5,
+"y": [
+211,
+226
+],
+"school": "松阪商業",
+"dept": "総合ビジネス科",
+"teiin": [
+"120"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+211,
+226
+]
+},
+{
+"page": 5,
+"y": [
+226,
+241
+],
+"school": "松阪商業",
+"dept": "国際ビジネス科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+226,
+241
+]
+},
+{
+"page": 5,
+"y": [
+241,
+256
+],
+"school": "飯南",
+"dept": "総合学科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+241,
+256
+]
+},
+{
+"page": 5,
+"y": [
+256,
+271
+],
+"school": "相可",
+"dept": "普通科",
+"teiin": [
+"80"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+256,
+271
+]
+},
+{
+"page": 5,
+"y": [
+271,
+286
+],
+"school": "相可",
+"dept": "生産経済科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+271,
+286
+]
+},
+{
+"page": 5,
+"y": [
+286,
+301
+],
+"school": "相可",
+"dept": "環境創造科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+286,
+301
+]
+},
+{
+"page": 5,
+"y": [
+301,
+316
+],
+"school": "相可",
+"dept": "食物調理科",
+"teiin": [
+"40"
+],
+"bosyu": "100 %",
+"zen": {
+"mensetsu": "個人",
+"shoron": "○",
+"sonota": "○"
+},
+"free": "",
+"koki": null,
+"diag_koki": true,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+301,
+316
+]
+},
+{
+"page": 5,
+"y": [
+316,
+331
+],
+"school": "昴学園",
+"dept": "総合学科",
+"teiin": [
+"80"
+],
+"bosyu": "100 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": null,
+"diag_koki": true,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+316,
+331
+]
+},
+{
+"page": 5,
+"y": [
+331,
+346
+],
+"school": "明野",
+"dept": "生産科学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+331,
+346
+]
+},
+{
+"page": 5,
+"y": [
+346,
+361
+],
+"school": "明野",
+"dept": "食品科学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+346,
+361
+]
+},
+{
+"page": 5,
+"y": [
+361,
+376
+],
+"school": "明野",
+"dept": "生活教養科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+361,
+376
+]
+},
+{
+"page": 5,
+"y": [
+376,
+390
+],
+"school": "明野",
+"dept": "福祉科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "集団"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+376,
+390
+]
+},
+{
+"page": 6,
+"y": [
+105,
+121
+],
+"school": "宇治山田",
+"dept": "普通科",
+"teiin": [
+"160"
+],
+"bosyu": "30 %",
+"zen": {
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+105,
+121
+]
+},
+{
+"page": 6,
+"y": [
+121,
+136
+],
+"school": "伊勢",
+"dept": "普通科",
+"teiin": [
+"240"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+121,
+136
+]
+},
+{
+"page": 6,
+"y": [
+136,
+151
+],
+"school": "伊勢",
+"dept": "普通科・国際科学コース",
+"teiin": [
+"40"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+136,
+151
+]
+},
+{
+"page": 6,
+"y": [
+151,
+166
+],
+"school": "宇治山田商業",
+"dept": "商業科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+151,
+166
+]
+},
+{
+"page": 6,
+"y": [
+166,
+181
+],
+"school": "宇治山田商業",
+"dept": "情報処理科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+166,
+181
+]
+},
+{
+"page": 6,
+"y": [
+181,
+196
+],
+"school": "宇治山田商業",
+"dept": "国際科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "集団",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "100",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+181,
+196
+]
+},
+{
+"page": 6,
+"y": [
+196,
+211
+],
+"school": "伊勢工業",
+"dept": "機械科",
+"teiin": [
+"80"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+196,
+211
+]
+},
+{
+"page": 6,
+"y": [
+211,
+226
+],
+"school": "伊勢工業",
+"dept": "電気科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+211,
+226
+]
+},
+{
+"page": 6,
+"y": [
+226,
+241
+],
+"school": "伊勢工業",
+"dept": "建築科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+226,
+241
+]
+},
+{
+"page": 6,
+"y": [
+241,
+256
+],
+"school": "南伊勢（度会校舎）",
+"dept": "普通科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+241,
+256
+]
+},
+{
+"page": 6,
+"y": [
+256,
+271
+],
+"school": "鳥羽",
+"dept": "総合学科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+256,
+271
+]
+},
+{
+"page": 6,
+"y": [
+271,
+286
+],
+"school": "志摩",
+"dept": "普通科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+271,
+286
+]
+},
+{
+"page": 6,
+"y": [
+286,
+301
+],
+"school": "水産",
+"dept": "海洋・機関科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+286,
+301
+]
+},
+{
+"page": 6,
+"y": [
+301,
+316
+],
+"school": "水産",
+"dept": "水産資源科",
+"teiin": [
+"40"
+],
+"bosyu": "50 %",
+"zen": {
+"mensetsu": "個人",
+"sakubun": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "個人"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+301,
+316
+]
+},
+{
+"page": 6,
+"y": [
+316,
+346
+],
+"school": "尾鷲",
+"dept": "普通科",
+"teiin": [
+"70"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "フレキシブル特別枠選抜は、募集枠20%で面接・学力検査を実施する。",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+316,
+346
+]
+},
+{
+"page": 6,
+"y": [
+346,
+361
+],
+"school": "尾鷲",
+"dept": "普通科・プログレッシブコース",
+"teiin": [
+"30"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+346,
+361
+]
+},
+{
+"page": 6,
+"y": [
+361,
+376
+],
+"school": "尾鷲",
+"dept": "情報ビジネス科",
+"teiin": [
+"30"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+361,
+376
+]
+},
+{
+"page": 6,
+"y": [
+376,
+391
+],
+"school": "尾鷲",
+"dept": "システム工学科",
+"teiin": [
+"30"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "集団",
+"g_suugaku": "○",
+"g_eigo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+376,
+391
+]
+},
+{
+"page": 6,
+"y": [
+391,
+406
+],
+"school": "木本校舎熊野青藍",
+"dept": "普通科",
+"teiin": [
+"80"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+391,
+406
+]
+},
+{
+"page": 6,
+"y": [
+406,
+421
+],
+"school": "木本校舎熊野青藍",
+"dept": "普通科・アドバンストコース",
+"teiin": [
+"40"
+],
+"bosyu": "―",
+"zen": {},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": true,
+"inherited": false,
+"koki_span": [
+406,
+421
+]
+},
+{
+"page": 6,
+"y": [
+421,
+436
+],
+"school": "木本校舎熊野青藍",
+"dept": "総合学科",
+"teiin": [
+"40"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+421,
+436
+]
+},
+{
+"page": 6,
+"y": [
+436,
+450
+],
+"school": "木本校舎熊野青藍",
+"dept": "紀南校舎総合学科",
+"teiin": [
+"40"
+],
+"bosyu": "30 %",
+"zen": {
+"mensetsu": "個人",
+"g_kokugo": "○"
+},
+"free": "",
+"koki": {
+"k_kokugo": "50",
+"k_suugaku": "50",
+"k_shakai": "50",
+"k_eigo": "50",
+"k_rika": "50",
+"k_jitsugi": "―",
+"k_mensetsu": "―"
+},
+"diag_koki": false,
+"diag_zenki": false,
+"inherited": false,
+"koki_span": [
+436,
+450
+]
+}
+]

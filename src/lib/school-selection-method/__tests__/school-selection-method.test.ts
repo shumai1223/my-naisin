@@ -1707,7 +1707,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(all).toHaveLength(170);
+    expect(all).toHaveLength(316);
     const late = all.filter((s) => s.selectionCategory === '後期選抜');
     expect(late).toHaveLength(126);
     expect(late.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(109);
@@ -1716,6 +1716,37 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
       expect(s.note).toContain('うち特に重視する選抜資料は');
       expect(s.note).not.toContain('うち特に重視する選抜資料は)');
     }
+  });
+
+  it('mie: 別表1(学校別実施要項)は全日制126行・定時制18行・通信制2行の計146レコードで、前期選抜の募集枠と後期選抜の配点を持つ', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie')?.schools ?? [];
+    const b1 = all.filter((s) => s.selectionCategory === '前期・後期選抜の実施要項(別表1)');
+    expect(b1).toHaveLength(146);
+    expect(b1.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(126);
+    expect(b1.filter((s) => (s.note ?? '').includes('・定時制】'))).toHaveLength(18);
+    expect(b1.filter((s) => (s.note ?? '').includes('・通信制】'))).toHaveLength(2);
+    for (const s of b1) {
+      expect(s.note).toMatch(/前期選抜: (募集枠[0-9]+%|実施しない)/);
+      expect(s.note).toMatch(/後期選抜: (配点|実施しない)/);
+    }
+    // 全日制で後期選抜を実施する学科の学力検査は5教科(傾斜配点を除き各50)
+    const kokiZen = b1.filter((s) => (s.note ?? '').includes('・全日制】') && (s.note ?? '').includes('後期選抜: 配点'));
+    expect(kokiZen).toHaveLength(126 - 8); // 前期選抜のみ(斜線)の8学科を除く
+    expect(kokiZen.filter((s) => (s.note ?? '').includes('配点(国語50・数学50・社会50・英語50・理科50)'))).toHaveLength(118 - 3); // 傾斜: 四日市南の数理科学コース(数学100)・飯野の英語コミュニケーション科と宇治山田商業の国際科(英語100)
+  });
+
+  it('mie: 別表1の例(四日市南の数理科学コースは数学100・飯野の英語コミュニケーション科は英語100・桑名の衛生看護科は前期のみ・久居は前期I/II選択)', () => {
+    const f = (sc: string, d: string) =>
+      findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie', sc, '前期・後期選抜の実施要項(別表1)', d);
+    expect(f('四日市南', '普通科・数理科学コース')?.note).toContain('配点(国語50・数学100・社会50・英語50・理科50)');
+    expect(f('飯野', '英語コミュニケーション科')?.note).toContain('配点(国語50・数学50・社会50・英語100・理科50)');
+    expect(f('桑名', '衛生看護科')?.note).toContain('後期選抜: 実施しない');
+    expect(f('桑名', '衛生看護科')?.note).toContain('前期選抜: 募集枠100%');
+    expect(f('久居', '普通科')?.note).toContain('I: 面接(集団)・学力検査(国語) / II: 面接(集団)・実技検査');
+    expect(f('桑名工業', '機械科')?.note).toContain('機械科・材料技術科をくくり募集・合計80人');
+    expect(f('北星', '普通科(昼間部・定時制)')?.note).toContain('前期選抜: 募集枠50%、検査=自己表現(個人)');
+    expect(f('北星', '普通科(通信制)')?.note).toContain('入学定員240人');
+    expect(f('熊野青藍(木本校舎)', '総合学科')?.note).toContain('前期選抜: 募集枠30%');
   });
 
   it('mie: スポーツ特別枠選抜(別表5)は15校44競技で、募集人数の合計が196人以内になる', () => {
