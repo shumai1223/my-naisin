@@ -913,6 +913,31 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
+  it('saitama: 全196レコードが個票(確定版)の目指す学校像・アドミッション・ポリシー・面接の評価の観点/規準を持ち、特色検査を実施する学科は実施内容を持つ', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama')?.schools ?? [];
+    expect(list).toHaveLength(196);
+    for (const s of list) {
+      const note = s.note ?? '';
+      expect(note).toContain('【個票(確定版)】目指す学校像: ');
+      expect(note).toContain('入学者の受入れに関する方針(アドミッション・ポリシー): ');
+      expect(note).toContain('面接の評価の観点: ');
+      expect(note).toContain('面接の評価規準: ');
+      // 概要一覧の『特色検査: …』がある特色選抜は、個票にも特色検査の実施内容がある
+      if (/特色検査: /.test(note) && s.selectionCategory === '特色選抜') expect(note).toContain('特色検査の実施内容: ');
+    }
+    const f = (sc: string, d: string, c: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama', sc, c, d);
+    expect(f('上尾', '普通科', '特色選抜')?.note).toContain('文武不岐の理念を理解し、実践する力');
+    expect(f('上尾', '普通科', '特色選抜')?.note).toContain('これまでの活動の中で他者に誇れることを具体的に書いてください');
+    expect(f('上尾', '普通科(定時制)', '共通選抜')?.note).toContain('ルールを守り、卒業を目指して努力を続けることができる生徒');
+    expect(f('伊奈学園総合', '普通科(スポーツ科学系)', '特色選抜')?.note).toContain('特色検査の実施内容: 実施する実技(体育系)');
+    // 特色選抜と共通選抜の両方を実施する学科は、同じ個票の面接の記載が両方のレコードに入る
+    const a = f('岩槻', '国際教養科', '特色選抜')?.note ?? '';
+    const b = f('岩槻', '国際教養科', '共通選抜')?.note ?? '';
+    expect(a).toContain('面接の実施方法: 集団面接');
+    expect(b).toContain('面接の実施方法: 集団面接');
+    expect(b).not.toContain('特色検査の実施内容: ');
+  });
+
   it('saitama: 上尾鷹の台(共通選抜)は第1次70%・第2次30%、浦和(特色選抜)は数学・英語150点の傾斜配点で学力600、伊奈学園総合のスポーツ科学系は特色検査(実技)を課す', () => {
     const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saitama')?.schools ?? [];
     const find = (school: string, dept: string, cat: string) => list.find((s) => s.schoolName === school && s.department === dept && s.selectionCategory === cat);
