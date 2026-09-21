@@ -955,11 +955,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kukuri?.note).toContain('くくり募集');
   });
 
-  it('kanagawa: 共通選抜(全日制)全5頁197レコードに定時制29・通信制2と定通分割選抜(定時制19・通信制2)を加えた249レコードを令和9年度として収録している', () => {
+  it('kanagawa: 共通選抜(全日制)全5頁197レコードに定時制29・通信制2と定通分割選抜(定時制19・通信制2)と特別募集53を加えた302レコードを令和9年度として収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa');
     expect(record?.status).toBe('structured');
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(record?.schools?.length).toBe(249);
+    expect(record?.schools?.length).toBe(302);
+    expect(record?.schools?.filter((s) => s.selectionCategory.startsWith('特別募集(')).length).toBe(51);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '別科')).toHaveLength(2);
     expect(record?.schools?.filter((s) => s.selectionCategory === '定通分割選抜(定時制)')).toHaveLength(19);
     expect(record?.schools?.filter((s) => s.selectionCategory === '定通分割選抜(通信制)')).toHaveLength(2);
     expect(record?.schools?.filter((s) => s.selectionCategory === '共通選抜')).toHaveLength(197);
@@ -1004,6 +1006,37 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(f('川崎市立川崎', '定通分割選抜(定時制)', '普通科昼間部')).toBeNull();
     expect(f('川崎市立川崎', '共通選抜(定時制)', '普通科昼間部')).not.toBeNull();
     expect(f('厚木清南', '定通分割選抜(通信制)', '普通科')?.note).toContain('共通選抜(通信制)と同一');
+  });
+
+  it('kanagawa: 特別募集は連携2・海外帰国9・在県外国人等20・インクルーシブ18・中途退学者2で、選考式S=G+M(+W)の各成分の満点の和が総点に一致する', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa')?.schools ?? [];
+    const c = (k: string) => list.filter((s) => s.selectionCategory === `特別募集(${k})`).length;
+    expect([c('連携募集'), c('海外帰国生徒'), c('在県外国人等'), c('インクルーシブ教育実践推進校'), c('中途退学者')]).toEqual([2, 9, 20, 18, 2]);
+    let checked = 0;
+    for (const s of list.filter((x) => x.selectionCategory.startsWith('特別募集(') || x.selectionCategory === '別科')) {
+      const note = s.note ?? '';
+      const mx: Record<string, number> = {};
+      for (const m of note.matchAll(/\(([A-Z][0-9]?)=([0-9]+)点満点/g)) mx[m[1]] = Number(m[2]);
+      for (const m of note.matchAll(/S[0-9]?\(([0-9]+)点満点\)=([A-Z0-9+×]+)/g)) {
+        const sum = m[2].split('+').reduce((a, term) => {
+          const [v, k] = term.includes('×') ? term.split('×').sort((x, y) => (/^[0-9]+$/.test(x) ? 1 : -1)) : [term, '1'];
+          return a + Number(k) * (mx[v] ?? 0);
+        }, 0);
+        expect(sum).toBe(Number(m[1]));
+        checked++;
+      }
+    }
+    expect(checked).toBe(35);
+  });
+
+  it('kanagawa: 特別募集の例(光陵の連携募集はS=R+M+P=30点・横浜国際は第1回目S1=G1+M+W[50%まで]・磯子工業は機械科等4学科・インクルーシブ校はM=100点のみ)', () => {
+    const f = (sc: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', sc, c, d);
+    expect(f('光陵', '特別募集(連携募集)', '普通科')?.note).toContain('S(30点満点)=R+M+P');
+    expect(f('横浜国際', '特別募集(海外帰国生徒)', '単位制国際科(国際バカロレアコースを除く。)')?.note).toContain('募集人員の50%まで');
+    expect(f('磯子工業', '特別募集(在県外国人等)', '機械科・電気科・建設科・化学科')?.note).toContain('S(400点満点)=G+M');
+    expect(f('城郷', '特別募集(インクルーシブ教育実践推進校)', '普通科')?.note).toContain('M値の高い者から');
+    expect(f('城郷', '特別募集(インクルーシブ教育実践推進校)', '普通科')?.interviewRequired).toBe(true);
+    expect(f('横浜市立横浜商業', '別科', '美容科')?.note).toContain('S(1000点満点)=G+M');
   });
 
   it('kanagawa: 非特色の学校は第1次・第2次とも学習の記録/学力検査(または学力検査/主体的態度)の比の合計が10になる', () => {
