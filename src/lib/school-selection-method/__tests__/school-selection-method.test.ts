@@ -1823,7 +1823,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(all).toHaveLength(316);
+    expect(all).toHaveLength(385);
     const late = all.filter((s) => s.selectionCategory === '後期選抜');
     expect(late).toHaveLength(126);
     expect(late.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(109);
@@ -1863,6 +1863,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(f('北星', '普通科(昼間部・定時制)')?.note).toContain('前期選抜: 募集枠50%、検査=自己表現(個人)');
     expect(f('北星', '普通科(通信制)')?.note).toContain('入学定員240人');
     expect(f('熊野青藍(木本校舎)', '総合学科')?.note).toContain('前期選抜: 募集枠30%');
+  });
+
+  it('mie: 別表2(前期選抜の要件・検査・選抜方法)は全日制63学科群・定時制5・通信制1の69レコードで、選抜方法に調査書の点数化と選抜条件を持つ', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie')?.schools ?? [];
+    const b2 = all.filter((s) => s.selectionCategory === '前期選抜(別表2)');
+    expect(b2).toHaveLength(69);
+    expect(b2.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(63);
+    expect(b2.filter((s) => (s.note ?? '').includes('・定時制】'))).toHaveLength(5);
+    expect(b2.filter((s) => (s.note ?? '').includes('・通信制】'))).toHaveLength(1);
+    for (const s of b2) {
+      expect(s.note).toContain('選抜において重視する要件: ');
+      expect(s.note).toContain('1 選抜資料の取扱い: ');
+      expect(s.note).toContain('2 選抜方法: ');
+    }
+    const f = (sc: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie', sc, '前期選抜(別表2)', d);
+    expect(f('桑名', '衛生看護科')?.note).toContain('集団面接(1グループ15分程度)');
+    expect(f('桑名', '衛生看護科')?.note).toContain('小論文=45分・400字程度');
+    expect(f('桑名', '衛生看護科')?.note).toContain('第3学年の各教科の評定の合計 45点満点');
+    expect(f('桑名', '衛生看護科')?.interviewRequired).toBe(true);
+    expect(f('津東', '普通科')?.note).toContain('数学50点、英語50点をそれぞれ2倍する');
+    expect(f('津東', '普通科')?.interviewRequired).toBeUndefined();
+    expect(f('桑名工業', '機械科・材料技術科・電気科・電子科')?.note).toContain('調査書得点の順位が募集人数60%以内');
   });
 
   it('mie: スポーツ特別枠選抜(別表5)は15校44競技で、募集人数の合計が196人以内になる', () => {
