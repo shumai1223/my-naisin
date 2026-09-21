@@ -3254,29 +3254,44 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(takehaya?.note).not.toContain('調査書500点+小論文250点のみ');
   });
 
-  it('hokkaido: schoolsは2校(岩見沢東/滝川)4学科8レコードを収録している(推薦入学者選抜+一般入学者選抜の2区分)', () => {
+  it('hokkaido: schoolsは令和9年度版の全10頁(192校305学科)を完全収録している(推薦266+一般305=571レコード)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido');
-    expect(record?.schools?.length).toBe(8);
-    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames).toEqual(new Set(['岩見沢東', '滝川']));
+    expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+    expect(record?.schools?.length).toBe(571);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '推薦入学者選抜')).toHaveLength(266);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '一般入学者選抜')).toHaveLength(305);
+    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(192);
+    // 推薦入学者選抜は全学科で面接を実施する
+    expect(record?.schools?.filter((s) => s.selectionCategory === '推薦入学者選抜').every((s) => s.interviewRequired === true)).toBe(true);
   });
 
-  it('hokkaido: 滝川(理数)は一般入学者選抜で国・数・英を1.5倍にする傾斜配点を持つが滝川(普通)には傾斜配点が無い', () => {
-    const rigaku = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '滝川', '一般入学者選抜', '理数');
-    const futsuu = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '滝川', '一般入学者選抜', '普通');
-    expect(rigaku?.note).toContain('国語・数学・英語の3教科をそれぞれ1.5倍');
-    expect(futsuu?.note).toContain('傾斜配点の実施なし');
+  it('hokkaido: 学力検査の傾斜配点は11学科で実施され(札幌北=数・英2.0/札幌国際情報=英2.0/旭川西=数・理2.0+英1.5等)、他は実施なし', () => {
+    const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido')?.schools ?? []).filter((s) => s.selectionCategory === '一般入学者選抜');
+    expect(list.filter((s) => s.note?.includes('傾斜配点教科(倍率):'))).toHaveLength(11);
+    const find = (n: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', n, '一般入学者選抜', d);
+    expect(find('札幌北', '普通')?.note).toContain('傾斜配点教科(倍率):数・英(2.0)');
+    expect(find('札幌国際情報', '国際文化')?.note).toContain('傾斜配点教科(倍率):英(2.0)');
+    expect(find('旭川西', '理数')?.note).toContain('傾斜配点教科(倍率):数・理(2.0)、英(1.5)');
+    expect(find('滝川', '理数')?.note).toContain('傾斜配点教科(倍率):国・数・英(1.5)');
+    expect(find('滝川', '普通')?.note).toContain('傾斜配点の実施なし');
   });
 
-  it('hokkaido: 岩見沢東(普通)の一般入学者選抜は調査書重視グループが評定10:学力0・学力重視グループが学力6:評定4', () => {
+  it('hokkaido: 岩見沢東(普通)の一般入学者選抜は学力重視グループが学力10:評定0・調査書重視グループが評定6:学力4(令和8年度の旧記述は2グループの割当が逆だった)', () => {
     const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '岩見沢東', '一般入学者選抜', '普通');
-    expect(record?.ratioType).toBe('評定:学力=10:0(調査書重視グループ)、学力:評定=6:4(学力重視グループ)');
+    expect(record?.ratioType).toBe('学力:評定=10:0(学力検査の成績を重視するグループ)、評定:学力=6:4(個人調査書等を重視するグループ)');
   });
 
-  it('hokkaido: 岩見沢東(文理探究)の推薦入学者選抜は入学枠20%程度で個人面接を実施する', () => {
+  it('hokkaido: 岩見沢東(文理探究)の推薦入学者選抜は入学枠20%程度で個人面接を実施し、長沼(普通)は推薦を実施しない', () => {
     const record = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '岩見沢東', '推薦入学者選抜', '文理探究');
     expect(record?.interviewRequired).toBe(true);
     expect(record?.ratioType).toBe('入学枠20%程度');
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '長沼', '推薦入学者選抜', '普通')).toBeNull();
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido', '長沼', '一般入学者選抜', '普通')?.note).toContain('全員に個人面接');
+  });
+
+  it('hokkaido: 入学枠に*が付く6学科(鵡川/上川/湧別/鹿追/広尾/羅臼)は連携型入学者選抜による合格内定者数を減じた数に対する推薦の範囲と明記される', () => {
+    const list = (getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'hokkaido')?.schools ?? []).filter((s) => s.selectionCategory === '推薦入学者選抜' && s.note?.includes('連携型入学者選抜による合格内定者数を減じた数'));
+    expect(list.map((s) => s.schoolName).sort()).toEqual(['上川', '湧別', '羅臼', '広尾', '鹿追', '鵡川'].sort());
   });
 
   it('fukushima: schoolsは令和9年度版の65校(福島西・福島北に代わり福島学芸が新掲載。全日制の全校・学校番号01〜33・あぶくま柏鵬・36〜60・66〜71・福島/橘/福島商業/福島工業/福島明成/福島西/福島北/福島東/福島南/川俣/伊達/安達/二本松実業/本宮/安積/安積黎明/郡山東/郡山商業/郡山北工/郡山/あさか開成/湖南/須賀川創英館/須賀川桐陽/清陵情報/岩瀬農業/光南/白河/白河旭/白河実業/修明/石川/田村/あぶくま柏鵬/会津/葵/会津学鳳/若松商業/会津工業/喜多方/喜多方桐桜/猪苗代/西会津/会津西陵/川口/会津農林/南会津/只見/磐城/磐城桜が丘/平工業/いわき商業情報/いわき総合/いわき光洋/いわき湯本/小名浜海星/磐城農業/勿来/勿来工業/ふたば未来学園/相馬/相馬総合/原町/相馬農業/小高産業技術)444レコードを収録している', () => {
