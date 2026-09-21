@@ -1436,7 +1436,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kaiho?.note).toContain('特色選抜の募集人員の割合50%');
   });
 
-  it('tottori: 全日制の募集生徒数3,728・特色募集人員945・うち県外98、定時制220・18が資料の小計行と一致する', () => {
+  it('tottori: 令和9年度の全日制の募集生徒数3,614・特色募集人員969、定時制220・18が資料の小計行と一致する(県外生徒数は多くが『*』=上限を定めない)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
@@ -1445,9 +1445,9 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const tei = all.filter((s) => (s.note ?? '').includes('・定時制】'));
     const gen = (list: typeof all) => list.filter((s) => s.selectionCategory === '一般入学者選抜');
     const toku = (list: typeof all) => list.filter((s) => s.selectionCategory.startsWith('特色入学者選抜'));
-    expect(gen(zen).reduce((a, s) => a + num(s.note ?? '', /募集生徒数([0-9]+)名/), 0)).toBe(3728);
-    expect(toku(zen).reduce((a, s) => a + num(s.note ?? '', /募集人員([0-9]+)人以内/), 0)).toBe(945);
-    expect(toku(zen).reduce((a, s) => a + num(s.note ?? '', /うち県外生徒([0-9]+)人程度/), 0)).toBe(98);
+    expect(gen(zen).reduce((a, s) => a + num(s.note ?? '', /募集生徒数([0-9]+)名/), 0)).toBe(3614);
+    expect(toku(zen).reduce((a, s) => a + num(s.note ?? '', /募集人員([0-9]+)人以内/), 0)).toBe(969);
+    expect(toku(zen).filter((s) => (s.note ?? '').includes('うち県外生徒数の上限は定めない')).length).toBeGreaterThan(30);
     expect(gen(tei).reduce((a, s) => a + num(s.note ?? '', /募集生徒数([0-9]+)名/), 0)).toBe(220);
     expect(toku(tei).reduce((a, s) => a + num(s.note ?? '', /募集人員([0-9]+)人以内/), 0)).toBe(18);
   });
@@ -1462,8 +1462,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(hino?.ratioType).toBe('調査書の合計評定260:学力検査の合計得点250');
     const sports = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '八頭', '特色入学者選抜(スポーツ活動特色選抜)');
     const activity = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '八頭', '特色入学者選抜(特別活動特色選抜)');
-    expect(sports?.note).toContain('募集人員40人以内');
-    expect(activity?.note).toContain('募集人員18人以内');
+    expect(sports?.note).toContain('募集人員60人以内'); // 令和9年度で40→60
+    expect(activity?.note).toContain('募集人員20人以内'); // 令和9年度で18→20
+    // 令和9年度の主な変更: 鳥取東が特色入学者選抜(15人)を新設・鳥取湖陵の工業(電子機械)と境港総合技術の工業(電気電子)が掲載なし・日野は76→38(募集生徒数)
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '鳥取東', '特色入学者選抜')?.note).toContain('募集人員15人以内');
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori')?.schools ?? [];
+    expect(list.some((s) => s.schoolName === '鳥取湖陵' && s.department === '工業(電子機械)')).toBe(false);
+    expect(list.some((s) => s.schoolName === '境港総合技術' && s.department === '工業(電気電子)')).toBe(false);
+    expect(hino?.note).toContain('募集生徒数38名');
   });
 
   it('miyazaki: 令和9年度の一般入学者選抜は全日制の定員合計7,320・定時制440で、全レコードの配点が計に一致する', () => {
