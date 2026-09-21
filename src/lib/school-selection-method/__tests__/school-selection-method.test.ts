@@ -2115,6 +2115,32 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
+  it('ehime: 本選抜69レコードは全て入学時に求める生徒像と出願資格・検査概要・備考の原文を持ち、川之江は作文30分・面接7分程度', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ehime')?.schools ?? [];
+    const main = list.filter((x) => x.selectionCategory === '特色入学者選抜');
+    expect(main).toHaveLength(69);
+    for (const s of main) {
+      const note = s.note ?? '';
+      expect(note).toContain('入学時に求める生徒像: ');
+      expect(note).toContain('出願資格・検査概要・備考(資料原文): ');
+      // 検査項目等の比重に面接があるのに検査概要に面接の記載が無い、といった転記漏れの検出(宇和島東の2頁は見出しが無い書式のため除く)
+      if (!s.schoolName.startsWith('宇和島東')) {
+        expect(note).toContain('＜出願資格＞');
+        expect(note).toContain('＜検査概要＞');
+        expect(note).toContain('＜備考＞');
+      }
+      if (s.ratioType?.includes('面接')) expect(note).toContain('「面接」'); // 小松のみ『「面接」について』の書式
+      if (s.ratioType?.includes('作文')) expect(note).toContain('「作文」');
+      if (s.ratioType?.includes('小論文')) expect(note).toMatch(/小論文[^。]*の実施時間は/); // 今治西(国際・普通)のみ「小論文①」「小論文②」の2本立て
+    }
+    const kawa = main.find((x) => x.schoolName === '川之江');
+    expect(kawa?.note).toContain('「作文」の実施時間は30分です。');
+    expect(kawa?.note).toContain('「面接」の実施時間は７分程度です。');
+    expect(kawa?.note).toContain('第３学年の９教科の評定合計が35以上の者');
+    const uwa = main.find((x) => x.schoolName === '宇和島東(本校)' && x.department.includes('理数'));
+    expect(uwa?.note).toContain('「小論文」の実施時間は60分');
+  });
+
   it('ehime: 川之江は調査書5:作文2:面接3、松山東は小論文と集団討論、新居浜東体育は実技テスト4・プレゼン2、伊予芸術は募集割合100%', () => {
     const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ehime')?.schools ?? [];
     const find = (school: string, dept: string, cat = '特色入学者選抜') => list.find((s) => s.schoolName === school && s.department === dept && s.selectionCategory === cat);

@@ -21,11 +21,16 @@ const rec = (school, dept, cat, itv, ratio, note) => {
   out += lines.join(NL) + NL;
   recs++;
 };
+// 出願資格・検査概要・備考・入学時に求める生徒像(資料の原文): ext-text.py が頁の列(x=338〜645)と生徒像の列(x=95〜250)を行帯ごとに抽出→rows-text.json。data-r9.mjsの各e()の行末コメント『// pN』と頁ごとの件数で対応づける
+const TXT = JSON.parse(fs.readFileSync(path.join(dir, 'rows-text.json'), 'utf8'));
+const pageOfEntry = fs.readFileSync(path.join(dir, 'data-r9.mjs'), 'utf8').split(NL).filter((l) => l.startsWith('e(')).map((l) => Number(l.match(/\/\/ p(\d+)/)[1]));
+if (pageOfEntry.length !== EH.length || TXT.length !== EH.length) throw new Error('件数不一致 ' + pageOfEntry.length + ' ' + EH.length + ' ' + TXT.length);
+EH.forEach((r, i) => { if (TXT[i].page !== pageOfEntry[i]) throw new Error('頁不一致 ' + i + ' ' + r.school + ' ' + pageOfEntry[i] + ' ' + TXT[i].page); r.txt = TXT[i]; });
 const H = '【令和9年度 特色入学者選抜 各校の出願資格及び検査項目等】';
 for (const r of EH) {
   let note = H + '募集定員' + r.teiin + '人のうち特色入学者選抜の募集割合' + r.wari + '%程度(募集人数' + r.n + '人程度)。検査項目等の比重(合計10): ' + NAMES.filter(([k]) => r.w[k] > 0).map(([k, n]) => n + r.w[k]).join('・');
   if (r.memo) note += '。' + r.memo;
-  note += '。出願資格(評定・資格検定・活動実績の条件)と検査概要の本文は本DBには未収録。';
+  note += '。入学時に求める生徒像: ' + r.txt.seito.map((x) => x.replace(/^○/, '')).join(' / ') + '。出願資格・検査概要・備考(資料原文): ' + r.txt.main.join(' / ').replace(/＜(出願資格|検査概要|備考)＞ \/ /g, '＜$1＞').replace(/ \/ ＜/g, ' / ＜') + '。';
   rec(r.school, r.dept, '特色入学者選抜', r.w.men > 0 || r.w.shu > 0, ratioOf(r.w), note);
   for (const s of r.subs) {
     const n2 = H + '募集定員' + r.teiin + '人。特色入学者選抜のうち「' + s[0] + '」の募集人数は' + s[1] + '(同選抜で合格とならなかった場合は同選抜を希望していない志願者に含めて選抜する)。検査項目等の比重(合計10): ' + NAMES.filter(([k]) => s[2][k] > 0).map(([k, n]) => n + s[2][k]).join('・') + '。';
@@ -44,7 +49,8 @@ const ts = `// 愛媛県: 令和9年度愛媛県県立高等学校入学者選�
 // 多くの学校が「文化・スポーツ活動の取組・成果等を重視した選抜」を特色入学者選抜の内数として別の比重で実施し、その人数を上限として明示する。
 // 縦書きで列挙された学科(工業・農業・水産の一部)は資料どおり1行にまとめた(各学科の募集定員・募集人数が同じため。文化・スポーツ選抜の学科別人数の和で学科数を検算した)。
 // 検算(ops/.../check.mjs): 全行と全サブ選抜で比重の和=10、募集割合×募集定員≒募集人数(±1)、文スポ選抜の人数が募集人数を超えない、重複なし。
-// 未収録: 出願資格(評定平均・資格検定・活動実績の条件)・検査概要(作文/小論文/面接の時間と内容)・入学時に求める生徒像の本文。一般入学者選抜の学校別配点は別資料。
+// 出願資格(評定・資格検定・活動実績の条件)・検査概要(作文/小論文/面接の時間と内容)・備考・入学時に求める生徒像の本文は2026-09-22に収録した(各頁=1行[学校×学科]・頁内の複数行は生徒像の列の水平線で行帯に分割・ops/baselines/ehime-r9/ext-text.py)。
+// 未収録: 一般入学者選抜の学校別配点は別資料。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
