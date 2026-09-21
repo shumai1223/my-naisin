@@ -1237,12 +1237,13 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(taisha?.note).toContain('実技40');
   });
 
-  it('saga: 付表4-4〜4-6の全日制32校69学科の選考I/IIと帰国等枠・重点評価枠・定時制を148レコードで収録し、選考IのB募集人員の合計が資料の合計行1369人と一致する', () => {
+  it('saga: 付表4-4〜4-6の全日制32校69学科の選考I/IIと帰国等枠・重点評価枠・定時制の148レコードと特別選抜234レコードの計382レコードを収録し、選考IのB募集人員の合計が資料の合計行1369人と一致する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(all).toHaveLength(148);
+    expect(all).toHaveLength(382);
     expect(new Set(all.map((s) => s.schoolName)).size).toBe(32);
+    expect(all.filter((s) => !s.selectionCategory.startsWith('特別選抜'))).toHaveLength(148);
     const k1 = all.filter((s) => s.selectionCategory === '一般選抜 選考I');
     const k2 = all.filter((s) => s.selectionCategory === '一般選抜 選考II');
     expect([k1.length, k2.length]).toEqual([69, 69]);
@@ -1271,6 +1272,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(f('伊万里実業', '一般選抜 選考I', '商業科')?.ratioType).toBe('学力検査250:調査書150:面接80');
     expect(f('鳥栖工業', '一般選抜 定時制', '普通科')?.ratioType).toBe('学力検査250:調査書185:面接240');
     expect(f('伊万里実業', '一般選抜 定時制', '商業科')?.ratioType).toBe('学力検査250:調査書130:面接180');
+  });
+
+  it('saga: 特別選抜(スポーツ・文化芸術・特色ある教育課程の推進指定校)は29校83セクション234行で、各セクションの計(学力検査+実技・調査書+面接)が配点の合計と一致する', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga')?.schools ?? [];
+    const toku = all.filter((s) => s.selectionCategory.startsWith('特別選抜 '));
+    expect(toku).toHaveLength(234);
+    expect(new Set(toku.map((s) => s.schoolName)).size).toBe(29);
+    expect(toku.reduce((a, s) => a + Number((s.note ?? '').match(/募集人員([0-9]+)人/)?.[1] ?? 0), 0)).toBe(1614);
+    for (const s of toku) {
+      const note = s.note ?? '';
+      const m = (s.ratioType ?? '').match(/^学力検査([0-9]+):実技([0-9]+):調査書([0-9]+):面接([0-9]+)$/);
+      expect(m).not.toBeNull();
+      expect(note).toContain(`学力検査+実技=${Number(m?.[1]) + Number(m?.[2])}点、調査書+面接=${Number(m?.[3]) + Number(m?.[4])}点`);
+    }
+  });
+
+  it('saga: 特別選抜の例(鳥栖の体操競技(女)・佐賀商業の特色ある教育課程・白石の学校希望枠の面接)', () => {
+    const f = (sc: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'saga', sc, c, d);
+    expect(f('鳥栖', '特別選抜 スポーツ推進指定校(競技実績に基づく募集枠)', '学科指定なし(体操競技(女))')?.ratioType).toBe('学力検査150:実技250:調査書200:面接30');
+    expect(f('佐賀商業', '特別選抜 特色ある教育課程推進指定校', '商業科・グローバルビジネス科(一括してくくり募集)')?.note).toContain('募集人員40人');
+    expect(f('佐賀商業', '特別選抜 特色ある教育課程推進指定校', '情報処理科')?.note).toContain('募集人員10人');
+    expect(f('白石', '特別選抜 スポーツ推進指定校(学校希望に基づく募集枠)', '学科指定なし(野球・男)')?.ratioType).toBe('学力検査150:実技300:調査書240:面接60');
   });
 
   it('saga: 佐賀西は国数英75点で学力検査325点、致遠館理数科は数学・理科75点で300点、選考IIは全校250点', () => {
