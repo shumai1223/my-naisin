@@ -955,12 +955,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kukuri?.note).toContain('くくり募集');
   });
 
-  it('kanagawa: 共通選抜(全日制)全5頁を収録し令和9年度として記録している(139校197レコード)', () => {
+  it('kanagawa: 共通選抜(全日制)全5頁197レコードに定時制29・通信制2を加えた228レコードを令和9年度として収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa');
     expect(record?.status).toBe('structured');
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(record?.schools?.length).toBe(197);
-    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(139);
+    expect(record?.schools?.length).toBe(228);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '共通選抜')).toHaveLength(197);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '共通選抜(定時制)')).toHaveLength(29);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '共通選抜(通信制)')).toHaveLength(2);
+    expect(new Set(record?.schools?.filter((s) => s.selectionCategory === '共通選抜').map((s) => s.schoolName)).size).toBe(139);
   });
 
   it('kanagawa: 横浜翠嵐は第1次3:7:3・特色検査=自己表現、大船は英語と国数の高い1教科を×1.5に重点化する', () => {
@@ -978,6 +981,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kamariya?.ratioType).toBeUndefined();
     expect(kamariya?.note).toContain('S(100点満点)=K+M+T');
     expect(kamariya?.note).toContain('学力検査は実施せず');
+  });
+
+  it('kanagawa: 定時制は追浜・湘南・高浜等が特色検査=面接、湘南は第1次3:7:5、横浜明朋は数式S1=K×3+G×2+M、相模向陽館は3段階選考、通信制は作文', () => {
+    const f = (sc: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', sc, c, d);
+    expect(f('湘南', '共通選抜(定時制)', '普通科')?.ratioType).toBe('第1次選考[学習の記録:学力検査:特色検査=3:7:5]/第2次選考[学力検査:主体的に学習に取り組む態度:特色検査=5:5:5]');
+    expect(f('湘南', '共通選抜(定時制)', '普通科')?.interviewRequired).toBe(true);
+    expect(f('希望ケ丘', '共通選抜(定時制)', '普通科')?.interviewRequired).toBe(false);
+    expect(f('川崎市立川崎', '共通選抜(定時制)', '普通科昼間部')?.ratioType).toContain('第2次選考[学力検査:主体的に学習に取り組む態度:特色検査=8:2:-]');
+    expect(f('横浜明朋', '共通選抜(定時制)', '普通科午前部')?.note).toContain('S1(600点満点)=K×3+G×2+M');
+    expect(f('相模向陽館', '共通選抜(定時制)', '普通科午後部')?.note).toContain('S3(70点満点)=M+T');
+    expect(f('横浜修悠館', '共通選抜(通信制)', '普通科')?.note).toContain('W=24点満点');
+    expect(f('厚木清南', '共通選抜(通信制)', '普通科')?.note).toContain('S(80点満点)=H+W');
   });
 
   it('kanagawa: 非特色の学校は第1次・第2次とも学習の記録/学力検査(または学力検査/主体的態度)の比の合計が10になる', () => {
