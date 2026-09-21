@@ -1572,6 +1572,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(new Set(all.map((s) => s.schoolName)).size).toBe(59);
     const total = all.reduce((a, s) => a + Number((s.note ?? '').match(/定員([0-9]+)名/)?.[1] ?? 0), 0);
     expect(total).toBe(14720);
+    // 全県共通の制度(実施要項): 学力検査は5教科各60点・特色選抜の学力検査成績は記述式を除く各50点・特色選抜の募集割合は普通科20%以内/その他40%以内
+    expect(record?.coverageNote).toContain('各60点');
+    expect(record?.coverageNote).toContain('各教科50点');
+    expect(record?.coverageNote).toContain('普通科20%以内');
   });
 
   it('okinawa: 比重は名護等が4.5:5.5・球陽/那覇国際/首里/開邦/向陽が4:6・多くは5:5、特別枠のチェック要否をnoteに持つ', () => {
