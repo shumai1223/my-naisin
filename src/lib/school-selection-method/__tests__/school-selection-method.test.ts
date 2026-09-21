@@ -993,13 +993,27 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
-  it('tochigi: 令和9年度版の全日制54校101学科を特色選抜・一般選抜の各1レコード(計202)で収録している', () => {
+  it('tochigi: 令和9年度版の全日制54校101学科を特色選抜・一般選抜の各1レコード(計202)に、定時制7学科の一般選抜7+フレックス特別選抜2を加えた計211レコードで収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi');
     expect(record?.status).toBe('structured');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
-    expect(record?.schools?.length).toBe(202);
-    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(54);
+    expect(record?.schools?.length).toBe(211);
+    expect(record?.schools?.filter((s) => !s.selectionCategory.startsWith('定時制')).length).toBe(202);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '定時制 一般選抜')).toHaveLength(7);
+    expect(record?.schools?.filter((s) => s.selectionCategory === '定時制 フレックス特別選抜')).toHaveLength(2);
+    expect(new Set(record?.schools?.filter((s) => !s.selectionCategory.startsWith('定時制')).map((s) => s.schoolName)).size).toBe(54);
     expect(record?.source.url).toContain('/m04/r09/');
+  });
+
+  it('tochigi: 定時制は宇都宮清陵・学悠館にフレックス特別選抜(50%・個人面接+作文)があり、一般選抜は学力・調査書・面接の比重(学悠館のみ500:250:250)', () => {
+    const f = (sc: string, c: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi', sc, c, '普通(定時制)');
+    expect(f('宇都宮清陵', '定時制 フレックス特別選抜')?.ratioType).toBe('調査書200:面接200:作文100');
+    expect(f('学悠館', '定時制 フレックス特別選抜')?.ratioType).toBe('調査書0:面接300:作文200');
+    expect(f('学悠館', '定時制 フレックス特別選抜')?.note).toContain('調査書点なし');
+    expect(f('学悠館', '定時制 一般選抜')?.ratioType).toBe('学力検査500:調査書250:面接250');
+    expect(f('学悠館', '定時制 一般選抜')?.note).toContain('国社数理英');
+    expect(f('真岡', '定時制 一般選抜')?.ratioType).toBe('学力検査300:調査書300:面接300');
+    expect(f('鹿沼華陵', '定時制 フレックス特別選抜')).toBeNull();
   });
 
   it('tochigi: 宇都宮(普通)は特色選抜の比重が学力500:調査書100:独自100・定員10%・グループ討論と自己表現シート、一般選抜は学力500:調査書50・傾斜配点国数英', () => {
@@ -1027,9 +1041,9 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(koyamaNishi?.ratioType).toBe('学力検査500:調査書500:学校独自検査1000');
   });
 
-  it('tochigi: 全レコードは学力検査500点固定・特色選抜の定員の割合は上限50%以下・一般選抜は面接を含まない(令和9年度制度)', () => {
+  it('tochigi: 全日制の全レコードは学力検査500点固定・特色選抜の定員の割合は上限50%以下・一般選抜は面接を含まない(令和9年度制度・定時制を除く)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tochigi');
-    for (const s of record?.schools ?? []) {
+    for (const s of (record?.schools ?? []).filter((x) => !x.selectionCategory.startsWith('定時制'))) {
       expect(s.ratioType ?? '').toMatch(/^学力検査500:/);
       if (s.selectionCategory === '特色選抜') {
         const m = (s.note ?? '').match(/特色選抜の定員の割合(\d+)%/);
