@@ -32,7 +32,7 @@ for (const r of B4) {
 // 別表5 スポーツ特別枠選抜の募集競技・募集学科(競技×性別を1レコード)
 for (const s of B5) {
   const total = s.depts.reduce((a, d) => a + d[1], 0);
-  const note = '【令和9年度 スポーツ特別枠選抜の募集競技・募集学科(別表5)・全日制】募集競技: ' + s.sport + '(' + s.sex + ')。募集学科・募集人数: ' + s.depts.map((d) => d[0] + d[1] + '人以内').join('、') + '(合計' + total + '人以内)。応募資格・実技検査・選抜方法(別表6)は本レコードには未収録。';
+  const note = '【令和9年度 スポーツ特別枠選抜の募集競技・募集学科(別表5)・全日制】募集競技: ' + s.sport + '(' + s.sex + ')。募集学科・募集人数: ' + s.depts.map((d) => d[0] + d[1] + '人以内').join('、') + '(合計' + total + '人以内)。応募資格・実技検査・選抜方法は学校ごとのレコード(スポーツ特別枠選抜(別表6))に収録。';
   out += ['    {', '      schoolName: ' + q(s.school) + ',', '      department: ' + q(s.sport + '(' + s.sex + ')') + ',', "      selectionCategory: 'スポーツ特別枠選抜',", '      note: ' + q(note) + ',', '    },'].join(NL) + NL;
 }
 // 別表1(資料3・学校別実施要項): 前期選抜の募集枠%と検査+後期選抜の教科別配点+面接種別(全日制126行は罫線+座標の自動抽出+画像照合・定時制18行/通信制2行は高解像度画像の目視転記=b1all.py→b1-all.json)
@@ -77,7 +77,22 @@ for (const r of B2) {
   lines.push('      note: ' + q(note) + ',', '    },');
   out += lines.join(NL) + NL;
 }
-const names = new Set([...B4.map((r) => r.school.replace(/\((木本|紀南|度会)校舎\)/, '')), ...B5.map((s) => s.school), ...B1.map((r) => r.school.replace(/\((木本|紀南|度会)校舎\)/, '')), ...B2.map((r) => r.school)]);
+// 別表6(資料8・全18頁): スポーツ特別枠選抜の学校別「応募資格」「実技検査」「選抜方法」(実施15校・1校1レコード)。b6ext.py(fitzのテキスト層を学校見出しと節見出しで分割)→b6-recs.json
+const B6 = JSON.parse(fs.readFileSync(path.join(dir, 'b6-recs.json'), 'utf8'));
+const t = (x) => x.replace(/。$/, '');
+for (const r of B6) {
+  const note =
+    '【令和9年度 スポーツ特別枠選抜を実施する高等学校の「募集競技」「応募資格」「実技検査」「選抜方法」(別表6・資料8)】募集競技(募集学科 募集人数): ' + t(r.bosyu_txt) +
+    '。応募資格: ' + t(r.shikaku_txt) +
+    '。検査の実施概要: ' + t(r.kensa_txt) +
+    '。選抜方法: ' + t(r.senbatsu_txt) + '。';
+  const hasMen = /面\s*接/.test(r.senbatsu_txt);
+  const lines = ['    {', '      schoolName: ' + q(r.school) + ',', "      department: '全募集競技(スポーツ特別枠選抜)',", "      selectionCategory: 'スポーツ特別枠選抜(別表6)',"];
+  if (hasMen) lines.push('      interviewRequired: true,');
+  lines.push('      note: ' + q(note) + ',', '    },');
+  out += lines.join(NL) + NL;
+}
+const names = new Set([...B4.map((r) => r.school.replace(/\((木本|紀南|度会)校舎\)/, '')), ...B5.map((s) => s.school), ...B1.map((r) => r.school.replace(/\((木本|紀南|度会)校舎\)/, '')), ...B2.map((r) => r.school), ...B6.map((r) => r.school)]);
 const zen = B4.filter((r) => r.course === '全日制').length;
 const tei = B4.filter((r) => r.course === '定時制').length;
 const ts = `// 三重県: 令和9年度三重県立高等学校入学者選抜における各高等学校別後期選抜の選抜資料及び選抜方法の最終段階における「特に重視する選抜資料等」一覧(別表4)。
@@ -93,7 +108,8 @@ const ts = `// 三重県: 令和9年度三重県立高等学校入学者選抜�
 // スポーツ特別枠選抜(別表5・資料7)は実施15校の募集競技×性別44レコードを募集学科・募集人数(合計196人以内)とともに収録した。
 // 別表1(資料3・\`https://www.pref.mie.lg.jp/common/content/001264581.pdf\`・全8頁・学校別実施要項)は2026-09-21に収録した: 全日制126学科行(前期選抜の募集枠%・検査[面接/自己表現/作文/小論文/実技検査/学力検査/総合問題]と後期選抜の教科別配点・面接種別)・定時制18行(再募集・追加募集含む)・通信制2行(北星・松阪)。全日制は罫線と座標から抽出し全6頁を画像と照合した(ops/baselines/mie-r9/b1x.py・b1parse.py・b1all.py)。
 // 別表2(資料4・\`https://www.pref.mie.lg.jp/common/content/001264582.pdf\`・全69頁)は2026-09-22に収録した: 前期選抜を実施する全日制63学科群・定時制5・通信制1の計69レコード(学校×学科群)に、選抜において重視する要件・検査の実施概要(面接の形式と時間・作文/小論文の時間と字数・学力検査教科・実技検査の内容)・選抜方法(調査書の点数化・面接/作文の評価段階・第1段階以降の選抜条件)を転記した(ops/baselines/mie-r9/b2tab.py・b2final.py)。
-// 未収録: 学校の特色の本文・スポーツ特別枠の応募資格/実技検査/選抜方法(別表6・17頁)・海外帰国生徒等(別表7)。
+// 別表6(資料8・\`https://www.pref.mie.lg.jp/common/content/001264586.pdf\`・全18頁)は2026-09-22に収録した: スポーツ特別枠選抜を実施する15校(1校1レコード)の募集競技(募集学科・人数)・応募資格・検査の実施概要(実技検査の内容・津工業は個人面接15分)・選抜方法(調査書の点数化・面接/学力検査/実技検査の評価段階・第1段階以降の選抜条件)を転記した(ops/baselines/mie-r9/b6ext.py)。稲生のみ普通科と体育科で選抜方法が異なるため両方を1レコードに収めた。
+// 未収録: 学校の特色の本文・海外帰国生徒等(別表7)。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -102,7 +118,7 @@ export const MIE_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    ${q('後期選抜の選抜資料と最終段階で特に重視する選抜資料(別表4)を全日制' + zen + 'レコード・定時制' + tei + 'レコードで完全収録し、スポーツ特別枠選抜の募集競技・募集学科(別表5)' + B5.length + 'レコード、および学校別実施要項(別表1・全日制' + B1.filter((r) => r.course === '全日制').length + '行・定時制' + B1.filter((r) => r.course === '定時制').length + '行・通信制' + B1.filter((r) => r.course === '通信制').length + '行=前期選抜の募集枠と検査・後期選抜の教科別配点と面接種別)を加えた(' + names.size + '校・' + (B4.length + B5.length + B1.length + B2.length) + 'レコード)。前期選抜の学校別の要件・検査・選抜方法(別表2)' + B2.length + 'レコードも収録。学校の特色の本文・スポーツ特別枠の応募資格と実技・帰国等は未収録')},
+    ${q('後期選抜の選抜資料と最終段階で特に重視する選抜資料(別表4)を全日制' + zen + 'レコード・定時制' + tei + 'レコードで完全収録し、スポーツ特別枠選抜の募集競技・募集学科(別表5)' + B5.length + 'レコード、および学校別実施要項(別表1・全日制' + B1.filter((r) => r.course === '全日制').length + '行・定時制' + B1.filter((r) => r.course === '定時制').length + '行・通信制' + B1.filter((r) => r.course === '通信制').length + '行=前期選抜の募集枠と検査・後期選抜の教科別配点と面接種別)を加えた(' + names.size + '校・' + (B4.length + B5.length + B1.length + B2.length + B6.length) + 'レコード)。前期選抜の学校別の要件・検査・選抜方法(別表2)' + B2.length + 'レコードも収録。スポーツ特別枠選抜の学校別の応募資格・実技検査・選抜方法(別表6)' + B6.length + 'レコードも収録。学校の特色の本文・海外帰国生徒等は未収録')},
   schools: [
 ${out.replace(/\n$/, '')}
   ],
@@ -115,5 +131,5 @@ ${out.replace(/\n$/, '')}
 };
 `;
 fs.writeFileSync(path.join(dir, '../../../src/data/school-selection-methods/mie.ts'), ts);
-console.log('schools', names.size, 'records', B4.length + B5.length + B1.length + B2.length,'全日制', zen, '定時制', tei);
+console.log('schools', names.size, 'records', B4.length + B5.length + B1.length + B2.length + B6.length,'全日制', zen, '定時制', tei);
 

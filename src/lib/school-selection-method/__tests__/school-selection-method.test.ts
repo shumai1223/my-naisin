@@ -1823,7 +1823,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(all).toHaveLength(385);
+    expect(all).toHaveLength(400);
     const late = all.filter((s) => s.selectionCategory === '後期選抜');
     expect(late).toHaveLength(126);
     expect(late.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(109);
@@ -1885,6 +1885,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(f('津東', '普通科')?.note).toContain('数学50点、英語50点をそれぞれ2倍する');
     expect(f('津東', '普通科')?.interviewRequired).toBeUndefined();
     expect(f('桑名工業', '機械科・材料技術科・電気科・電子科')?.note).toContain('調査書得点の順位が募集人数60%以内');
+  });
+
+  it('mie: スポーツ特別枠選抜(別表6)は15校15レコードで、応募資格・実技検査・選抜方法を持ち、学校ごとの選抜方法の差を保持する', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie')?.schools ?? [];
+    const b6 = all.filter((s) => s.selectionCategory === 'スポーツ特別枠選抜(別表6)');
+    expect(b6).toHaveLength(15);
+    for (const s of b6) {
+      expect(s.note).toContain('応募資格: ');
+      expect(s.note).toContain('検査の実施概要: ');
+      expect(s.note).toContain('選抜方法: ');
+    }
+    // 別表5の学校名と別表6の学校名は同じ15校
+    const b5Schools = new Set(all.filter((s) => s.selectionCategory === 'スポーツ特別枠選抜').map((s) => s.schoolName));
+    expect(new Set(b6.map((s) => s.schoolName))).toEqual(b5Schools);
+    const f = (sc: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie', sc, 'スポーツ特別枠選抜(別表6)', '全募集競技(スポーツ特別枠選抜)');
+    expect(f('いなべ総合学園')?.note).toContain('(3) 実技検査 ９０点');
+    expect(f('津工業')?.note).toContain('個人面接（１５分程度）');
+    expect(f('津工業')?.note).toContain('(2) 総合問題 ３０点');
+    expect(f('四日市四郷')?.note).toContain('評定（第１～３学年の各教科の評定を換算） ９０点満点');
+    expect(f('名張')?.note).toContain('調査書得点と学力検査得点の順位がともにスポーツ特別枠選抜の各募集競技の募集人数の１００％以内');
+    expect(f('稲生')?.note).toContain('【体育科】');
+    expect(f('白子')?.interviewRequired).toBe(true);
   });
 
   it('mie: スポーツ特別枠選抜(別表5)は15校44競技で、募集人数の合計が196人以内になる', () => {
