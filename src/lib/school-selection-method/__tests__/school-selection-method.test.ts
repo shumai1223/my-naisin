@@ -1823,7 +1823,7 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(all).toHaveLength(400);
+    expect(all).toHaveLength(426);
     const late = all.filter((s) => s.selectionCategory === '後期選抜');
     expect(late).toHaveLength(126);
     expect(late.filter((s) => (s.note ?? '').includes('・全日制】'))).toHaveLength(109);
@@ -1907,6 +1907,28 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(f('名張')?.note).toContain('調査書得点と学力検査得点の順位がともにスポーツ特別枠選抜の各募集競技の募集人数の１００％以内');
     expect(f('稲生')?.note).toContain('【体育科】');
     expect(f('白子')?.interviewRequired).toBe(true);
+  });
+
+  it('mie: 海外帰国生徒・外国人生徒等の特別枠選抜(別表7)は21校26レコードで、斜線(募集なし)・実施校作成の学力検査・学力検査なしの学校を区別する', () => {
+    const all = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie')?.schools ?? [];
+    const b7 = all.filter((s) => s.selectionCategory === '海外帰国生徒・外国人生徒等の特別枠選抜(別表7)');
+    expect(b7).toHaveLength(26);
+    expect(new Set(b7.map((s) => s.schoolName.replace(/\(.+校舎\)/, ''))).size).toBe(21);
+    const f = (sc: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'mie', sc, '海外帰国生徒・外国人生徒等の特別枠選抜(別表7)', d);
+    expect(f('飯野', '英語コミュニケーション科')?.note).toContain('国語(実施校作成問題)・数学(実施校作成問題)・英語(県作成問題)');
+    expect(f('飯野', '英語コミュニケーション科')?.note).toContain('前期選抜: 募集人数は原則として7人以内');
+    expect(f('松阪商業', '国際ビジネス科')?.note).toContain('国語(実施校作成問題)');
+    expect(f('北星', '普通科(昼間部)・情報ビジネス科(昼間部)')?.note).toContain('学力検査=課さない');
+    expect(f('宇治山田商業', '国際科')?.note).toContain('学力検査=英語(県作成問題)(国語・数学は課さない)');
+    // 斜線: 川越 探究科・津西 普通科は前期なし、四日市四郷 スポーツ科学コース・稲生 体育科・昴学園は後期なし
+    expect(f('川越', '探究科')?.note).toContain('前期選抜: 募集なし');
+    expect(f('津西', '普通科')?.note).toContain('前期選抜: 募集なし');
+    expect(f('四日市四郷', '普通科・スポーツ科学コース')?.note).toContain('後期選抜: 募集なし');
+    expect(f('稲生', '体育科')?.note).toContain('後期選抜: 募集なし');
+    expect(f('昴学園', '総合学科')?.note).toContain('前期選抜: 募集人数は原則として6人以内');
+    expect(f('昴学園', '総合学科')?.note).toContain('後期選抜: 募集なし');
+    expect(f('昴学園', '総合学科')?.interviewRequired).toBeUndefined();
+    expect(f('みえ夢学園', '総合学科(午前の部)・総合学科(午後の部)')?.note).toContain('後期選抜: 募集人数は原則として5人以内');
   });
 
   it('mie: スポーツ特別枠選抜(別表5)は15校44競技で、募集人数の合計が196人以内になる', () => {
