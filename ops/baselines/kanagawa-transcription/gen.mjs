@@ -74,9 +74,22 @@ for (const r of TK) {
     },
 `;
 }
+// 特色検査の概要(06_tokushoku.pdf・7頁・テキスト層あり): ops/baselines/kanagawa-r9/ext06.py(罫線+座標の行帯・学校帯・内容帯)→fin06.py→tokushoku06-final.json。自己表現検査・実技検査・面接の評価の観点・検査の概要・提出書類。
+const TS = JSON.parse(fs.readFileSync(path.join(dir, '../kanagawa-r9/tokushoku06-final.json'), 'utf8'));
+for (const r of TS) {
+  const note = `【特色検査の概要・${r.head}・06_tokushoku.pdf 頁${r.page}】評価の観点: ${r.kanten.join('')}。検査の概要: ${r.gaiyo}。提出書類:${r.docs}。${r.note ? '注: ' + r.note : ''}`;
+  out += `    {
+      schoolName: ${q(r.school)},
+      department: ${q(r.dept)},
+      selectionCategory: ${q('特色検査の概要(' + r.head + ')')},
+      interviewRequired: ${r.head.startsWith('面接')},
+      note: ${q(note)},
+    },
+`;
+}
 const names = new Set([...D, ...S].map((e) => e.name));
-const total = D.length + S.length + T.length + X.length + C.length + B.length + C.length + TK.length;
-const allNames = new Set([...D, ...S].map((e) => e.name).concat(T.map((e) => e[0]), X.map((e) => e[0]), C.map((e) => e[0]), B.map((e) => e[0]), TK.map((e) => e.school)));
+const total = D.length + S.length + T.length + X.length + C.length + B.length + C.length + TK.length + TS.length;
+const allNames = new Set([...D, ...S].map((e) => e.name).concat(T.map((e) => e[0]), X.map((e) => e[0]), C.map((e) => e[0]), B.map((e) => e[0]), TK.map((e) => e.school), TS.map((e) => e.school)));
 const ts = `// 神奈川県: 令和9年度神奈川県公立高等学校入学者選抜「選考基準」共通選抜(全日制)。
 //
 // 一次ソース: 神奈川県教育委員会「令和9年度神奈川県公立高等学校入学者選抜選考基準及び特色検査の概要」
@@ -93,7 +106,8 @@ const ts = `// 神奈川県: 令和9年度神奈川県公立高等学校入学�
 // 令和9年度の資料(2027年度入学者選抜)。定時制(02_kyoutsu_teiji.pdf・1頁・25学科の比率表+横浜明朋・相模向陽館の数式4行)と通信制(03_kyoutsu_tsuushin.pdf・横浜修悠館・厚木清南の作文)は2026-09-22にテキスト層の座標抽出と頁画像で突合して追加した(転記=ops/baselines/kanagawa-transcription/teiji.mjs)。
 // 定通分割選抜(05_bunkatsu.pdf・定時制19行+通信制2行)も同日追加した。
 // 特別募集(04_tokubetsuboshuu.pdf・53レコード)も追加した。
-// 未収録: 特色検査の概要(別PDF)・特別募集の評価の観点の箇条書き。
+// 特色検査の概要(06_tokushoku.pdf・7頁・93レコード)も追加した。
+// 未収録: 特別募集の評価の観点の箇条書き。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
@@ -102,7 +116,7 @@ export const KANAGAWA_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod =
   fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    ${q(`共通選抜(全日制)PDF全5頁を完全収録(全日制${names.size}校${D.length + S.length}レコード)。共通選抜の定時制(${T.length + X.length}レコード=比率表${T.length}+横浜明朋・相模向陽館の数式${X.length})と通信制(${C.length}レコード)、定通分割選抜(定時制${B.length}+通信制${C.length}レコード)、特別募集(連携募集・海外帰国生徒・在県外国人等・インクルーシブ教育実践推進校・中途退学者・別科の${TK.length}レコード)も収録(計${allNames.size}校${total}レコード)。特色検査の概要(別PDF)と特別募集の評価の観点の箇条書きは未収録`)},
+    ${q(`共通選抜(全日制)PDF全5頁を完全収録(全日制${names.size}校${D.length + S.length}レコード)。共通選抜の定時制(${T.length + X.length}レコード=比率表${T.length}+横浜明朋・相模向陽館の数式${X.length})と通信制(${C.length}レコード)、定通分割選抜(定時制${B.length}+通信制${C.length}レコード)、特別募集(連携募集・海外帰国生徒・在県外国人等・インクルーシブ教育実践推進校・中途退学者・別科の${TK.length}レコード)、特色検査の概要(自己表現検査・実技検査・面接の評価の観点と検査の概要と提出書類の${TS.length}レコード)も収録(計${allNames.size}校${total}レコード)。特別募集の評価の観点の箇条書きは未収録`)},
   schools: [
 ${out.replace(/\n$/, '')}
   ],

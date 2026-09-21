@@ -955,11 +955,12 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(kukuri?.note).toContain('くくり募集');
   });
 
-  it('kanagawa: 共通選抜(全日制)全5頁197レコードに定時制29・通信制2と定通分割選抜(定時制19・通信制2)と特別募集53を加えた302レコードを令和9年度として収録している', () => {
+  it('kanagawa: 共通選抜(全日制)全5頁197レコードに定時制29・通信制2と定通分割選抜(定時制19・通信制2)と特別募集53・特色検査の概要93を加えた395レコードを令和9年度として収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa');
     expect(record?.status).toBe('structured');
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(record?.schools?.length).toBe(302);
+    expect(record?.schools?.length).toBe(395);
+    expect(record?.schools?.filter((s) => s.selectionCategory.startsWith('特色検査の概要('))).toHaveLength(93);
     expect(record?.schools?.filter((s) => s.selectionCategory.startsWith('特別募集(')).length).toBe(51);
     expect(record?.schools?.filter((s) => s.selectionCategory === '別科')).toHaveLength(2);
     expect(record?.schools?.filter((s) => s.selectionCategory === '定通分割選抜(定時制)')).toHaveLength(19);
@@ -1037,6 +1038,27 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(f('城郷', '特別募集(インクルーシブ教育実践推進校)', '普通科')?.note).toContain('M値の高い者から');
     expect(f('城郷', '特別募集(インクルーシブ教育実践推進校)', '普通科')?.interviewRequired).toBe(true);
     expect(f('横浜市立横浜商業', '別科', '美容科')?.note).toContain('S(1000点満点)=G+M');
+  });
+
+  it('kanagawa: 特色検査の概要は自己表現35+2・実技12・面接24+12+8の93レコードで、評価の観点・検査の概要・提出書類を持つ', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa')?.schools ?? [];
+    const c = (k: string) => list.filter((s) => s.selectionCategory === `特色検査の概要(${k})`).length;
+    expect([c('自己表現検査・全日制'), c('自己表現検査・定時制'), c('実技検査・全日制'), c('面接・全日制'), c('面接・定時制'), c('面接・定通分割選抜・定時制')]).toEqual([35, 2, 12, 24, 12, 8]);
+    for (const s of list.filter((x) => x.selectionCategory.startsWith('特色検査の概要('))) {
+      expect(s.note).toContain('評価の観点: ');
+      expect(s.note).toContain('検査の概要: ');
+      expect(s.note).toMatch(/提出書類:.+。/);
+    }
+    const f = (sc: string, d: string, k: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', sc, `特色検査の概要(${k})`, d);
+    expect(f('横浜翠嵐', '普通科', '自己表現検査・全日制')?.note).toContain('検査時間は60分');
+    expect(f('横浜翠嵐', '普通科', '自己表現検査・全日制')?.note).toContain('共通問題と共通選択問題');
+    expect(f('神奈川総合', '単位制舞台芸術科', '自己表現検査・全日制')?.note).toContain('7人でグループ討論');
+    expect(f('神奈川工業', 'デザイン科', '実技検査・全日制')?.note).toContain('検査時間は90分');
+    expect(f('商工', '総合ビジネス科', '面接・全日制')?.note).toContain('面接時間は15分程度');
+    expect(f('中央農業', '園芸科学科', '面接・全日制')?.note).toContain('中農シート');
+    expect(f('横浜明朋', '単位制普通科午前部', '面接・定時制')?.note).toContain('めいほうシート');
+    expect(f('釜利谷', '普通科', '面接・全日制')?.interviewRequired).toBe(true);
+    expect(f('釜利谷', '普通科', '自己表現検査・全日制')?.interviewRequired).toBe(false);
   });
 
   it('kanagawa: 非特色の学校は第1次・第2次とも学習の記録/学力検査(または学力検査/主体的態度)の比の合計が10になる', () => {
