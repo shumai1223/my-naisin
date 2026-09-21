@@ -1030,6 +1030,22 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(checked).toBe(35);
   });
 
+  it('kanagawa: 特別募集の全53レコードが評価の観点を持ち、実施する検査(面接・作文)ごとの観点見出しが揃う', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa')?.schools ?? [];
+    const tk = list.filter((x) => x.selectionCategory.startsWith('特別募集(') || x.selectionCategory === '別科');
+    expect(tk).toHaveLength(53);
+    for (const s of tk) {
+      const note = s.note ?? '';
+      expect(note).toContain('評価の観点: ');
+      const kensa = note.match(/実施する検査:(.*?)。選考方法/)?.[1] ?? '';
+      if (kensa.includes('面接')) expect(note).toContain('面接の評価の観点(');
+      if (kensa.includes('作文')) expect(note).toContain('作文の評価の観点(');
+    }
+    const f = (sc: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', sc, c, d);
+    expect(f('光陵', '特別募集(連携募集)', '普通科')?.note).toContain('プレゼンテーションの評価の観点(課題を設定する力 / 課題を解決する力 / 適切に表現する力)');
+    expect(f('横浜国際', '特別募集(海外帰国生徒)', '単位制国際科国際バカロレアコース')?.note).toContain('自己表現検査の評価の観点: 「特色検査の概要」参照');
+  });
+
   it('kanagawa: 特別募集の例(光陵の連携募集はS=R+M+P=30点・横浜国際は第1回目S1=G1+M+W[50%まで]・磯子工業は機械科等4学科・インクルーシブ校はM=100点のみ)', () => {
     const f = (sc: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kanagawa', sc, c, d);
     expect(f('光陵', '特別募集(連携募集)', '普通科')?.note).toContain('S(30点満点)=R+M+P');

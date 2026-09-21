@@ -61,10 +61,10 @@ for (const [name, dept, tk, txt] of C) {
     },
 `;
 }
-// 特別募集(04_tokubetsuboshuu.pdf・5頁・テキスト層あり): ops/baselines/kanagawa-r9/ext04b.py(罫線+座標の行帯抽出)→ext04c.py→fin04.py→tokubetsu04-final.json。評価の観点(面接・作文・課題レポート等の観点別の箇条書き)は転記していない。
+// 特別募集(04_tokubetsuboshuu.pdf・5頁・テキスト層あり): ops/baselines/kanagawa-r9/ext04b.py(罫線+座標の行帯抽出)→ext04c.py→fin04.py→tokubetsu04-final.json。評価の観点(面接・作文・課題レポート・プレゼンテーションの観点別の箇条書き)は2026-09-22にext04k.py(観点帯の行ごとのclip抽出)→fin04k.pyで追加した。
 const TK = JSON.parse(fs.readFileSync(path.join(dir, '../kanagawa-r9/tokubetsu04-final.json'), 'utf8'));
 for (const r of TK) {
-  const note = `【選考基準・${r.cat}・04_tokubetsuboshuu.pdf 頁${r.page}】実施する検査:${r.kensa}。選考方法: ${r.method} 提出書類:${r.docs}。`;
+  const note = `【選考基準・${r.cat}・04_tokubetsuboshuu.pdf 頁${r.page}】実施する検査:${r.kensa}。選考方法: ${r.method} 提出書類:${r.docs}。評価の観点: ${r.kanten}。`;
   out += `    {
       schoolName: ${q(r.school)},
       department: ${q(r.dept)},
@@ -107,7 +107,7 @@ const ts = `// 神奈川県: 令和9年度神奈川県公立高等学校入学�
 // 定通分割選抜(05_bunkatsu.pdf・定時制19行+通信制2行)も同日追加した。
 // 特別募集(04_tokubetsuboshuu.pdf・53レコード)も追加した。
 // 特色検査の概要(06_tokushoku.pdf・7頁・93レコード)も追加した。
-// 未収録: 特別募集の評価の観点の箇条書き。
+// 未収録: なし(神奈川県選考基準の別PDFは全て収録済み)。
 
 import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-method';
 
