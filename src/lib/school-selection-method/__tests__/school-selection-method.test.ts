@@ -1041,12 +1041,17 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     }
   });
 
-  it('niigata: 令和9年度の全日制(県立+新潟市立)73校93学科を一般枠+学校設定枠の143レコードで収録している', () => {
+  it('niigata: 令和9年度の全日制(県立+新潟市立)93学科の一般枠+学校設定枠143レコードに定時制11行(+市立明鏡の学校設定枠1)・通信制2行を加えた157レコードを収録している', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata');
     expect(record?.status).toBe('structured');
     expect(record?.fiscalYear).toContain('令和9年度');
-    expect(record?.schools?.length).toBe(143);
-    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(73);
+    expect(record?.schools?.length).toBe(157);
+    const cats = (c: string) => record?.schools?.filter((s) => s.selectionCategory === c).length;
+    expect(cats('定時制 一般枠')).toBe(11);
+    expect(cats('定時制 学校設定枠')).toBe(1);
+    expect(cats('通信制課程')).toBe(2);
+    expect((record?.schools?.length ?? 0) - 14).toBe(143);
+    expect(new Set(record?.schools?.map((s) => s.schoolName)).size).toBe(82);
   });
 
   it('niigata: 新潟中央 普通は学校設定枠(調査書300:学力700:その他200・8人以内)と一般枠(152人・3対7)を持つ', () => {
@@ -1070,13 +1075,23 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
 
   it('niigata: 学校設定枠は調査書配点+学力検査配点=1000点、比重は調査書+学力検査=10', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata');
-    for (const s of record?.schools ?? []) {
+    for (const s of (record?.schools ?? []).filter((x) => x.selectionCategory !== '定時制 一般枠' && x.selectionCategory !== '通信制課程')) {
       const m = (s.ratioType ?? '').match(/^調査書([0-9]+):学力検査([0-9]+)/);
       expect(m).not.toBeNull();
       if (!m) continue;
       const total = Number(m[1]) + Number(m[2]);
       expect(total).toBe(s.selectionCategory === '一般枠' ? 10 : 1000);
     }
+  });
+
+  it('niigata: 定時制は市立明鏡のみ学校設定枠(調査書0:学力1000:その他500・15人以内)を持ち、長岡明徳は午前部105・夜間部35、通信制は若干人', () => {
+    const f = (sc: string, c: string, d: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'niigata', sc, c, d);
+    expect(f('市立明鏡', '定時制 学校設定枠', '普通・午前部')?.ratioType).toBe('調査書0:学力検査1000:その他500');
+    expect(f('市立明鏡', '定時制 一般枠', '普通・午前部')?.note).toContain('一般枠: 募集人数90');
+    expect(f('長岡明徳', '定時制 一般枠', '普通・午前部')?.note).toContain('全体募集人数105');
+    expect(f('長岡明徳', '定時制 一般枠', '普通・夜間部')?.note).toContain('全体募集人数35');
+    expect(f('佐渡(相川分校)', '定時制 一般枠', '普通・午前部')?.note).toContain('個人面接');
+    expect(f('新潟翠江', '通信制課程', '普通(通信制)')?.note).toContain('若干人');
   });
 
   it('yamagata: 概要表の合計行(全日制 A34校/B8校・個人面接29校・集団面接13校・作文23校・発表3校・県外受入れ前期13校/後期12校[令和9年度版で置賜農業が加わった])と転記校数が一致する', () => {
