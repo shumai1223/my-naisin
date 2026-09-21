@@ -3627,6 +3627,23 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(list.every((s) => s.note?.includes('推薦の基準(要件の長文)は本DBでは未収録'))).toBe(true);
   });
 
+  it('tokyo: 別表4付表の観点別学習状況の評価の得点化(7校)は得点満点が各観点のAの得点の合計に一致する', () => {
+    const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo')?.schools ?? [];
+    const hits = list.filter((x) => (x.note ?? '').includes('別表4付表'));
+    expect(hits).toHaveLength(7);
+    expect(hits.every((x) => x.selectionCategory === '推薦に基づく選抜')).toBe(true);
+    // 得点満点 = 27区分のA得点の合計(9教科×Ⅰ/Ⅱ/Ⅲ)
+    const total = (m: RegExpMatchArray) => Number(m[1]);
+    const totals = hits.map((x) => [x.schoolName, total((x.note ?? '').match(/得点満点([0-9]+)点/) as RegExpMatchArray)]);
+    expect(Object.fromEntries(totals)).toEqual({ 蒲田: 243, 足立東: 400, 東村山: 270, 秋留台: 180, 中野工科: 282, 練馬工科: 228, 大田桜台: 325 });
+    // 足立東: 国語等4教科+外国語=Ⅰ13+Ⅱ13+Ⅲ18、音楽・美術・保体・技家=Ⅲ19 → 44×5 + 45×4 = 400
+    expect(44 * 5 + 45 * 4).toBe(400);
+    // 大田桜台: 国語55・社会45・外国語75・他6教科25 → 325
+    expect(55 + 45 + 75 + 25 * 6).toBe(325);
+    // 中野工科: 理科・技家=12×3=36が2教科、他7教科=9+9+12=30 → 282
+    expect(36 * 2 + 30 * 7).toBe(282);
+  });
+
   it('tokyo: 日比谷・竹早の推薦は個人面接欄と集団討論欄にまたがる結合セルの点数を持ち(日比谷200/竹早250)、面接の実施有無は断定しない(2026-09-19に竹早の「面接なし」誤読を訂正)', () => {
     const takehaya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '竹早', '推薦に基づく選抜', '普通科');
     const hibiya = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokyo', '日比谷', '推薦に基づく選抜', '普通科');
