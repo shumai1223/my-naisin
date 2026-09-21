@@ -2220,6 +2220,15 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('590点');
   });
 
+  it('tokushima: 令和9年度の育成型選抜の競技・分野の変更(城東は女子バドミントン除外・陸上が女子のみ/徳島商業は女子ソフトボール除外・英語が★/阿波西はバスケットボールが男子・女子)を反映する', () => {
+    const find = (school: string, dept: string) => findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', school, '育成型選抜(活動重視枠)', dept);
+    expect(getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima')?.fiscalYear).toBe('令和9年度（2027年度）');
+    expect(find('城東', '普通')?.note).toContain('男子硬式野球・男子バスケットボール・男子バレーボール・女子陸上競技');
+    expect(find('城東', '普通')?.note).not.toContain('バドミントン');
+    expect(find('徳島商業', 'ビジネス探究・ビジネス創造')?.note ?? '').not.toContain('女子ソフトボール');
+    expect(find('阿波西', '普通')?.note).toContain('男子・女子バスケットボール');
+  });
+
   it('tokushima: 城東(普通)は育成型選抜の活動重視枠と実績重視枠で調査書・学力検査の配点が異なる', () => {
     const katsudou = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '城東', '育成型選抜(活動重視枠)', '普通');
     const jisseki = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tokushima', '城東', '育成型選抜(実績重視枠)', '普通');
