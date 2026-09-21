@@ -2064,14 +2064,22 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.note).toContain('スピーチ');
   });
 
-  it('gifu: schoolsは頁1・頁2・頁3を完全収録している(63校381レコード・頁4は未収録)', () => {
+  it('gifu: schoolsは全4頁を収録している(頁1〜3=63校381レコード+頁4の特別選抜67レコード)', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'gifu');
-    expect(record?.schools?.length).toBe(381);
-    const schoolNames = new Set(record?.schools?.map((s) => s.schoolName));
-    expect(schoolNames.size).toBe(63);
+    expect(record?.schools?.length).toBe(448);
+    const list = record?.schools ?? [];
+    expect(list.filter((s) => s.selectionCategory === '連携型選抜(全日制)')).toHaveLength(5);
+    expect(list.filter((s) => s.selectionCategory === '定時制 第一次選抜')).toHaveLength(16);
+    expect(list.filter((s) => s.selectionCategory === '定時制 第二次選抜')).toHaveLength(16);
+    expect(list.filter((s) => s.selectionCategory === '通信制 前期・後期選抜')).toHaveLength(2);
+    expect(list.filter((s) => s.selectionCategory === '県外募集実施校に係る入学者の選抜')).toHaveLength(24);
+    expect(list.filter((s) => s.selectionCategory === '帰国生徒等に係る入学者の選抜').map((s) => s.department).sort()).toEqual(['美術', '音楽']);
+    // 県外募集: 羽島北のフェンシングは標準検査に加えて自己表現、岐阜商業の硬式野球(男子)は面接
+    const hashima = list.find((s) => s.selectionCategory === '県外募集実施校に係る入学者の選抜' && s.schoolName === '羽島北');
+    expect(hashima?.note).toContain('自己表現');
+    expect(list.find((s) => s.selectionCategory === '県外募集実施校に係る入学者の選抜' && s.schoolName === '岐阜商業')?.interviewRequired).toBe(true);
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
-    expect(record?.coverageNote).toContain('頁4');
-    expect(record?.coverageNote).toContain('未着手');
+    expect(record?.coverageNote).toContain('全4頁を完全収録');
   });
 
   it('gifu: 土岐紅陵(総合)は独自検査区分I(27%)と区分II(3%)の2枠を持つ(頁3)', () => {
