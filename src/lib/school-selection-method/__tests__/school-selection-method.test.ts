@@ -1698,11 +1698,11 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(find('熊野青藍(紀南校舎)', '総合学科')?.note).toContain('うち特に重視する選抜資料は学力検査の結果)');
   });
 
-  it('nagasaki: 421レコード(57校)で、比重を持つ全レコードの比重合計が10になる', () => {
+  it('nagasaki: 令和9年度版422レコード(57校)で、比重を持つ全レコードの比重合計が10になる', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagasaki');
     expect(record?.status).toBe('structured');
     const all = record?.schools ?? [];
-    expect(all).toHaveLength(421);
+    expect(all).toHaveLength(422); // 令和9年度で佐世保南の文理探究が特別選抜(自己推薦①)を実施するようになり+1
     expect(new Set(all.map((s) => s.schoolName)).size).toBe(57);
     const withRatio = all.filter((s) => s.ratioType);
     expect(withRatio.length).toBeGreaterThan(300);
@@ -1729,20 +1729,21 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(tsushin.reduce((a, s) => a + Number((s.note ?? '').match(/募集定員([0-9]+)人/)?.[1] ?? 0), 0)).toBe(600);
   });
 
-  it('nagasaki: 長崎東は一般選抜3:6.5:0.5・数英150点(難度の高い問題)、長崎西の理系は数200・理150・英200、佐世保商業の国際コミュニケーションは英200', () => {
+  it('nagasaki: 長崎東は令和9年度に一般選抜2:7.5:0.5・数英150点(難度の高い問題)、長崎西の理系は数200・理150・英200、佐世保商業の国際コミュニケーションは英200', () => {
     const list = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'nagasaki')?.schools ?? [];
     const find = (school: string, dept: string, cat: string) => list.find((s) => s.schoolName === school && s.department === dept && s.selectionCategory === cat);
     const higashi = find('長崎東', '普通・国際(くくり募集)', '一般選抜');
-    expect(higashi?.ratioType).toBe('調査書等3:学力検査6.5:面接0.5(比重・合計10)');
+    expect(higashi?.ratioType).toBe('調査書等2:学力検査7.5:面接0.5(比重・合計10)');
     expect(higashi?.note).toContain('国100・社100・数150・理100・英150(合計600点)');
     expect(higashi?.note).toContain('数英は難度の高い問題(選択問題)を実施する教科');
     expect(find('長崎西', '普通[理系]', '一般選抜')?.note).toContain('国150・社100・数200・理150・英200(合計800点)');
     expect(find('佐世保商業', '国際コミュニケーション', '一般選抜')?.note).toContain('英200');
-    // 自己推薦②で面接に代えてプレゼンテーションを課す学校
+    // 長崎東の自己推薦②は令和9年度に『調査書等7:プレゼンテーション3』から『調査書等1:面接9』へ変更された
     const pre = find('長崎東', '普通・国際(くくり募集)', '特別選抜(自己推薦②)');
-    expect(pre?.ratioType).toBe('調査書等7:プレゼンテーション3(比重・合計10)');
-    expect(pre?.note).toContain('プレゼンテーションに質疑応答及び英語を含む');
-    expect(pre?.interviewRequired).toBeUndefined();
+    expect(pre?.ratioType).toBe('調査書等1:面接9(比重・合計10)');
+    expect(pre?.interviewRequired).toBe(true);
+    // 自己推薦②で面接に代えてプレゼンテーションを課す学校(長崎鶴洋は令和9年度も調査書+プレゼンテーション)
+    expect(find('長崎鶴洋', '水産', '特別選抜(自己推薦②)')?.ratioType).toBe('調査書等6:プレゼンテーション4(比重・合計10)');
   });
 
   it('nagasaki: 特別選抜を実施しない定時制昼間部は一般選抜のみ、離島留学特別選抜の五島スポーツは調査書4:面接1:実技5', () => {

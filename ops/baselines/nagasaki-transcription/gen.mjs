@@ -22,7 +22,7 @@ const rec = (school, dept, cat, itv, ratio, note) => {
   out += lines.join(NL) + NL;
   recs++;
 };
-const H = '【令和8年度 学校・学科・コース別募集定員、実施内容等一覧';
+const H = '【令和9年度 学校・学科・コース別募集定員、実施内容等一覧';
 for (const r of NG) {
   if (r.skip) continue; // 離島留学特別選抜は頁34-36の別レコードで収録
   const course = r.course || '全日制課程';
@@ -90,10 +90,10 @@ for (const r of RITO) {
   rec(r.school, r.dept, r.kind, w.itv != null, parts.join(':') + '(比重・合計10)', H + '・' + r.kind + '(頁34-36)】募集定員' + r.n + '。検査の方法等: ' + r.method + '。');
 }
 const names = new Set([...NG.map((r) => r.school), ...TEI.map((t) => t.school.replace(/\((夜間部)\)/, '')), ...TSUSHIN.map((s) => s[0]), ...RITO.map((r) => r.school)]);
-const ts = `// 長崎県: 令和8年度長崎県公立高等学校入学者選抜「学校・学科・コース別募集定員、実施内容等一覧」(全日制・定時制・通信制・離島留学特別選抜・美術工芸科特別選抜)。
+const ts = `// 長崎県: 令和9年度長崎県公立高等学校入学者選抜「学校・学科・コース別募集定員、実施内容等一覧」(全日制・定時制・通信制・離島留学特別選抜・美術工芸科特別選抜)。
 //
-// 一次ソース: 長崎県教育委員会「令和8年度長崎県公立高等学校入学者選抜実施要領」付属資料「02 学校・学科・コース別募集定員、実施内容等一覧」
-// (県ページ \`https://www.pref.nagasaki.jp/doc/page-746842.html\`・\`https://www.pref.nagasaki.jp/uploads/2025/09/1757565090.pdf\`・全36頁・2026-09-19 pdftoppm 150dpiで実画像を目視転記)。
+// 一次ソース: 長崎県教育委員会「令和9年度公立高等学校入学者選抜に係る各高等学校の実施内容」(令和8年6月19日時点・2026-06-19公表)
+// (県ページ \`https://www.pref.nagasaki.lg.jp/press-contents/48655.html\`・\`https://www.pref.nagasaki.jp/fs/2/4/2/5/7/_/__9____________________.pdf\`・全37頁)。令和8年度版を150dpi画像で目視転記したデータ(data.mjs)に対し、2026-09-21に**R8/R9のPDFをPyMuPDF find_tablesで表抽出して行ごとに差分検出**(ops/baselines/nagasaki-r9/diff6.py)し、実差分40ブロックだけを反映した(該当行は画像で目視確認)。
 // 転記データと検算スクリプトは ops/baselines/nagasaki-transcription/ に保存。
 //
 // 長崎県は学科・コースごとに 特別選抜(自己推薦①②)・一般選抜・チャレンジ選抜の「各検査項目等の比重(合計10)」と、一般選抜の各教科の配点(国社数理英・数学/英語を150〜200点とする傾斜配点学科あり)を公表している。
@@ -106,7 +106,7 @@ import type { PrefectureSchoolSelectionMethod } from '@/lib/school-selection-met
 
 export const NAGASAKI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   prefectureCode: 'nagasaki',
-  fiscalYear: '令和8年度（2026年度）',
+  fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
     ${q('全日制・定時制・通信制の学校・学科・コース別の選抜方法(特別選抜・一般選抜・チャレンジ選抜の比重と一般選抜の教科別配点)と離島留学特別選抜・美術工芸科特別選抜を完全収録(' + names.size + '校・' + recs + 'レコード)。育成したい生徒像の本文と出願要件の本文は未収録')},
@@ -114,8 +114,8 @@ export const NAGASAKI_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod =
 ${out.replace(/\n$/, '')}
   ],
   source: {
-    url: 'https://www.pref.nagasaki.jp/doc/page-746842.html',
-    docTitle: '令和8年度長崎県公立高等学校入学者選抜 学校・学科・コース別募集定員、実施内容等一覧（長崎県教育委員会）',
+    url: 'https://www.pref.nagasaki.lg.jp/press-contents/48655.html',
+    docTitle: '令和９年度長崎県公立高等学校入学者選抜実施内容（令和8年6月19日時点・長崎県教育委員会）',
     lastChecked: '${new Date().toISOString().slice(0, 10)}',
   },
   note: 'ratioTypeは各検査項目等の比重(合計10)。特別選抜=調査書等:面接(自己推薦②で面接に代えてプレゼンテーションを課す学校あり)、一般選抜=調査書等:学力検査:面接、チャレンジ選抜=調査書等:面接。一般選抜の教科別配点と数学・英語の難度の高い問題の有無はnoteに記載。特別選抜の募集定員が学科をまたいで結合されている学校(大村・猶興館・松浦・対馬・小浜・口加・川棚・各農業・工業・商業高校等)は結合セルとしてグループ合算で検算した。',
