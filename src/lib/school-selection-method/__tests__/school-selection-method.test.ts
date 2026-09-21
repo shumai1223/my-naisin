@@ -1487,6 +1487,14 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(toku(tei).reduce((a, s) => a + num(s.note ?? '', /募集人員([0-9]+)人以内/), 0)).toBe(18);
   });
 
+  it('tottori: 通信制課程は鳥取緑風・米子白鳳の2校(各約80名・面接と書類審査)を収録し、全体は91レコード', () => {
+    const rec = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori');
+    expect(rec?.schools).toHaveLength(91);
+    const tsu = (rec?.schools ?? []).filter((s) => s.selectionCategory === '通信制課程の選抜');
+    expect(tsu.map((s) => s.schoolName)).toEqual(['鳥取緑風', '米子白鳳']);
+    for (const s of tsu) expect(s.note).toContain('募集生徒数約80名。選抜方法:面接・書類審査');
+  });
+
   it('tottori: 鳥取西は130:250、鳥取商業は195:250(特色は個人面接+小論文60人)、日野は260:250、八頭は特色を2枠に分けて持つ', () => {
     const nishi = findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'tottori', '鳥取西', '一般入学者選抜');
     expect(nishi?.ratioType).toBe('調査書の合計評定130:学力検査の合計得点250');
