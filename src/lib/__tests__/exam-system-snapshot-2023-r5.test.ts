@@ -150,4 +150,16 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(w2023.gradeMultipliers).toEqual(w2024.gradeMultipliers);
     expect(w2023.reverseCalc?.examMaxScore).toBe(w2026.reverseCalc?.examMaxScore);
   });
+
+  test('ibaraki: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const i2023 = snapshot.entries.find((e) => e.code === 'ibaraki')!;
+    const i2024 = snapshot2024.entries.find((e) => e.code === 'ibaraki')!;
+    const i2025 = snapshot2025.entries.find((e) => e.code === 'ibaraki')!;
+    const i2026 = snapshot2026.entries.find((e) => e.code === 'ibaraki')!;
+    expect(i2023.maxScore).toBe(135);
+    expect(i2023.maxScore).toBe(i2024.maxScore);
+    expect(i2023.maxScore).toBe(i2025.maxScore);
+    expect(i2023.maxScore).toBe(i2026.maxScore);
+    expect(i2023.gradeMultipliers).toEqual(i2024.gradeMultipliers);
+  });
 });

@@ -12,22 +12,25 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 7件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama）。
+- **entries 8件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki）。
 - ehime/kochi/yamanashiは2024-r6のURLパターン（`r06`→`r05`等の年度部分の置換）で
   直接発見でき、pdftotextはCJKテキスト抽出不可（他県と同型の既知の制約。yamanashiは
   通常の空白でなく文字コードがシフトされたグリフのmojibakeという別パターン）だったため
   PyMuPDFでページをPNGにレンダリングしてビジョン解析した。
-- **osaka/chiba/tochigi/wakayamaは単純なURL置換では404だったが、「県教委サイトの
-  年度別実施要項案内ページ」をWebSearchで見つけてから辿ると発見できた**。これが
-  今回確立した主要手法。ページID・フォルダ番号・ファイル名の枝番はいずれも年度で
-  不規則に変わる（wakayamaは年度ごとにページID自体が別・tochigiはR5だけフォルダ
-  番号が初回作成時のまま）ため、機械的な数字置換だけに頼らないこと。
-- 7県とも2024-r6・2025-r7・2026-r8と数値が完全一致（変更なし）。
-- **nagano/toyamaはWebSearchが提示したURLが実際には404だった**（WebSearch要約の
-  作話パターン・既知のリスクを再確認。`archive.org/wayback/available`APIでも
-  スナップショットなしと確認済み）。Wayback CDX APIは2026-09-22時点で断続的に
-  「Temporarily Offline」のため、この2県は裏取り不能で保留中。
-  osaka/chiba/tochigi/kanagawa等のWayback依存県も同じ理由で復旧待ち。
+- **osaka/chiba/tochigi/wakayama/ibarakiは単純なURL置換では404だったが、「県教委
+  サイトの年度別実施要項案内ページ」をWebSearchで見つけてから辿ると発見できた**。
+  これが今回確立した主要手法。ページID・フォルダ番号・ファイル名の枝番・
+  WordPressのpost slugはいずれも年度で不規則に変わる（wakayamaは年度ごとにページID
+  自体が別・tochigiはR5だけフォルダ番号が初回作成時のまま・ibarakiはslugが
+  `bylaws/`→`page-26505/`のように付け替わる）ため、機械的な数字置換だけに頼らないこと。
+- 8県とも2024-r6・2025-r7・2026-r8と数値が完全一致（変更なし）。
+- **nagano/toyama/iwate/shimane/aomoriは全て試行済みだが、WebSearchが提示した
+  URLがいずれも実際には404だった、または索引ページの現行版が古い年度のPDFへの
+  リンクを既に削除していた**（WebSearch要約の作話パターン・既知のリスクを複数回
+  再確認。nagano/toyamaは`archive.org/wayback/available`APIでもスナップショット
+  なしと確認済み）。Wayback CDX APIは2026-09-22時点で断続的に「Temporarily
+  Offline」または429レート制限のため、この5県は裏取り不能で保留中。osaka/chiba/
+  tochigi/kanagawa等のWayback依存県も同じ理由で復旧待ち。
 
 ## 収集方針（2024-r6から継承・Y-0を継承）
 
@@ -41,11 +44,12 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 次にやること
 
-大市場県のうちkanagawa/aichi/saitama/hyogo/fukuokaはR6時点でWayback依存だったため、
-Wayback復旧まで後回しにするのが効率的。未試行はshimane/aomori（`src/data/snapshots/
-2024-r6/exam-system.json`のsourceUrlでこの2県も`web.archive.org`を含まない＝現行サイト
-直接型なので、osaka/chiba/tochigi/wakayamaと同じ「県教委サイトの年度別実施要項案内
-ページをWebSearchで探す」型が効く見込みが高い）。iwateは未試行。nagano/toyamaは
-WebSearchが提示したURLがいずれも実在せず（archive.org/wayback/availableでも
-スナップショットなし）、現時点では裏取り可能な一次資料に到達できていない
-（Wayback CDXの復旧を待つか、県サイト内の別の索引ページから辿り直す必要がある）。
+未試行の県から、まず現行サイト直接型（`src/data/snapshots/2024-r6/exam-system.json`の
+sourceUrlで`web.archive.org`を含まない県）を優先し、osaka/chiba/tochigi/wakayama/ibaraki
+と同じ「県教委サイトの年度別実施要項案内ページをWebSearchで探す」型を試す。
+nagano/toyama/iwate/shimane/aomoriは今回このセッションで試行済みだが解決できなかった
+（詳細は上記「進捗状況」参照）ので、次回は同じ検索を繰り返すより先にWayback CDX APIの
+復旧（`archive.org/wayback/available`で確認可能）を待つか、県サイト内を直接クロールして
+索引ページを探す（トップページ→教育委員会→高校入試の階層を辿る）方式に切り替えると
+よい。大市場県のうちkanagawa/aichi/saitama/hyogo/fukuokaはR6時点でWayback依存だった
+ため、同じくWayback復旧待ち。
