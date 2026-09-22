@@ -25,7 +25,14 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
   aomori(Wayback上に1件だけ発見したがコンテンツが1MBで切り詰められ全78頁中の一部しか読めない)、
   niigata(R5専用ページ`r5kotogakkonyushi.html`はWebSearch上のタイトルには存在するが実サーバは404・
   Wayback CDXでは未確認)、fukui(`r5ittupan.html`は現存するが出願状況等の統計PDFのみで実施要項
-  本体は掲載されておらず、`r5youkou.html`のような別ページはCDXにも存在しない)。
+  本体は掲載されておらず、`r5youkou.html`のような別ページはCDXにも存在しない)、
+  saitama(`r5nyuushi-jouhou.html`は現存するが統計PDFのみ・R8の`r8nyuushi-jissiyoukou.html`に相当
+  する`r5nyuushi-jissiyoukou.html`は404)、miyagi(WebSearchが提示した`kyo-r5koukounyusihousin.html`
+  等は全て404)。**2026-09-22 20:10頃、Wayback CDX APIが断続的にTemporarily Offlineを繰り返し、
+  複数の大市場県(niigata/saitama/miyagi等)の再確認ができなかった**。これらの県はR6時点でも
+  Wayback依存だった県が多く、R5はさらに一段階古いため現行サイトからの直接発見が難しい構造的傾向が
+  ある。次回は①Waybackが安定してから同じ県を再挑戦するか、②まだ試していない県(aichi/fukuoka/
+  hyogo/hokkaido/kagawa/oita/ishikawa)を先に一巡することを推奨。
 - **shizuoka**はWebSearchでR5専用の発表資料ページ(project ID 001/031/855・R6は001/054/127・
   R7は001/063/460と年度ごとに全く異なるproject ID)を発見し各種様式等PDF(33頁)を取得。
   (別記1)調査書の記入方法2(3)アの条文がR6エントリの引用文と一言一句完全一致し45点満点
