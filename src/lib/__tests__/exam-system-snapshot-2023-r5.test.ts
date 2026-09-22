@@ -460,4 +460,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(oi2023.practicalMultiplier).toBe(4);
     expect(oi2023.gradeMultipliers).toEqual(oi2024.gradeMultipliers);
   });
+
+  test('miyazaki: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(caveatあり・消去法による間接確認)', () => {
+    const mz2023 = snapshot.entries.find((e) => e.code === 'miyazaki')!;
+    const mz2024 = snapshot2024.entries.find((e) => e.code === 'miyazaki')!;
+    const mz2025 = snapshot2025.entries.find((e) => e.code === 'miyazaki')!;
+    const mz2026 = snapshot2026.entries.find((e) => e.code === 'miyazaki')!;
+    expect(mz2023.maxScore).toBe(135);
+    expect(mz2023.maxScore).toBe(mz2024.maxScore);
+    expect(mz2023.maxScore).toBe(mz2025.maxScore);
+    expect(mz2023.maxScore).toBe(mz2026.maxScore);
+    expect(mz2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 1 });
+    expect(mz2023.gradeMultipliers).toEqual(mz2024.gradeMultipliers);
+  });
 });

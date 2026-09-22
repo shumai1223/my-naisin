@@ -12,9 +12,17 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 30件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 31件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita）。
+  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita・miyazaki）。
+- **✅2026-09-23追記: miyazakiを追加(31/47・caveatあり)**。`documents/70099/`配下をCDX全件
+  走査し複数の候補PDFを発見。1つ目(`70099_20220920140358-1.pdf`)は1頁目のビジョン確認で
+  「推薦入学要項」(別冊子)と判明し却下、2つ目(`70099_20220928102855-1.pdf`・6.98MB・80頁)
+  が正しい「入学者選抜実施要綱」本体だった。本文書はkanagawa型(PyMuPDFの`get_text()`で
+  抽出成功)。「10出願書類の作成要領」(2)調査書(様式2)の項がR6エントリの引用文と同型
+  (日付のみ年度分ズレ)で一致・R6と同じく学年別傾斜配点の記載が一切無いため消去法による
+  135点満点で確定(R6と同型のcaveat)。**教訓: ディレクトリ全件走査で複数の候補PDFが見つかる
+  場合、ファイル名だけで決め打ちせず1頁目のビジョン確認で正しい冊子か判別すること**。
 - **✅2026-09-23追記: oitaを追加(30/47・caveatあり)**。R5専用ページ(`site/kyoiku/
   koukounyuushir05.html`。現行404・Waybackで発見)から`uploaded/attachment/2164202.pdf`
   (8.4MB・82頁)を特定。**本PDFはkanagawaと異なりPyMuPDFの`get_text()`でもグリフ変換自体が
