@@ -532,4 +532,18 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(kg2023.gradeMultipliers).toEqual(kg2024.gradeMultipliers);
     expect(kg2023.reverseCalc).toEqual(kg2024.reverseCalc);
   });
+
+  test('fukui: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const fk2023 = snapshot.entries.find((e) => e.code === 'fukui')!;
+    const fk2024 = snapshot2024.entries.find((e) => e.code === 'fukui')!;
+    const fk2025 = snapshot2025.entries.find((e) => e.code === 'fukui')!;
+    const fk2026 = snapshot2026.entries.find((e) => e.code === 'fukui')!;
+    expect(fk2023.maxScore).toBe(45);
+    expect(fk2023.maxScore).toBe(fk2024.maxScore);
+    expect(fk2023.maxScore).toBe(fk2025.maxScore);
+    expect(fk2023.maxScore).toBe(fk2026.maxScore);
+    expect(fk2023.gradeMultipliers).toEqual({ '1': 0, '2': 0, '3': 1 });
+    expect(fk2023.gradeMultipliers).toEqual(fk2024.gradeMultipliers);
+    expect(fk2023.reverseCalc).toBeNull();
+  });
 });

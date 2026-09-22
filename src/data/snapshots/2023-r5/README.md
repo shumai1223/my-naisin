@@ -12,10 +12,25 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 35件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 36件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
   kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita・miyazaki・
-  toyama・tokushima・niigata・kagoshima）。
+  toyama・tokushima・niigata・kagoshima・fukui）。
+- **✅2026-09-23追記: fukuiを追加(36/47)**。過去セッションが「一次ソースが見つからない」と保留に
+  していたが、原因はR6のファイル名パターン(`R6yoko.pdf`・大文字始まり)を単純に年度だけ機械置換した
+  こと（`R5yoko.pdf`は実在せず404）。WebSearchでR5専用ページ(`doc/koukou/nyugaku/r5youkou.html`。
+  現行404・Waybackで発見)を直接発見しリンク一覧を取得したところ、正しいファイル名は小文字始まりの
+  `r5youkou.pdf`（R6とは命名規則自体が異なる）と判明。実施要項本体(757KB・10頁・切り詰めなし)を
+  取得し「8選抜の方法」(1)イがR6エントリの引用文と一言一句完全一致(第3学年のみ・9教科×5段階=
+  45点満点・変更なし)。教訓: ファイル名の「未発見」判定はファイル名パターンの推測ミスであることが
+  あり、機械置換で404だったからといって一次ソース自体が存在しないとは限らない(必ずR5専用ページ
+  自体をWebSearch/Waybackで探し、実際のリンク一覧からファイル名を確認すること)。
+- なお同日、miyagiを再試行。要項本体(`documents/39415/`配下・78頁を複数ファイルに分割)は
+  Waybackから問題なく取得できたが、R6エントリが引用する「調査書点(195点満点)」の換算式自体は
+  要項本文になく、別文書「入試制度保護者説明会配布資料」(`r5nyuushi.pdf`・3.2MB)のみに掲載されて
+  いると判明。このファイルはavailability APIで全タイムスタンプを走査しても捕捉が1件のみで、
+  その1件がWayback上で1,048,576バイトに切り詰められている(shimane型の「別ダイジェストを試す」
+  解決策が使えない=そもそも複数ダイジェストが存在しない)ことを確認し、物理的取得不能と再確定した。
 - **✅2026-09-23追記: kagoshimaを追加(35/47)**。WebSearchでR5専用ページ(`ba05/kyoiku-bunka/
   school/koukou/nyushi/r4/r5nyuushiyoukou.html`。現行404・Waybackで発見)から実施要綱本体
   (`documents/101746_20221026085652-1.pdf`・1.7MB・109頁・単一タイムスタンプで切り詰めなし確認済み)

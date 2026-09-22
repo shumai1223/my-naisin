@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 35,
+    "collectedCount": 36,
     "unavailable": [],
-    "pdfHashStatus": "partial_35_of_35",
-    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigata/kagoshima)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigata/kagoshimaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_36_of_36",
+    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigata/kagoshima/fukui)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigata/kagoshima/fukuiはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -1268,6 +1268,34 @@
       "lastVerified": "2026-09-23",
       "pdfHash": "7e9f657f3fb747bf62208c1266bcb1b0528b40611f6a4dce7a7163ecd43371a1",
       "diffFromCurrentYear": "変更なし(2026-09-23にWebSearchでR5専用ページ(ba05/kyoiku-bunka/school/koukou/nyushi/r4/r5nyuushiyoukou.html。R6以降と異なり公表年の元号フォルダ(r4=令和4年公表)配下に格納される命名規則と判明。現行404・Waybackで発見)から実施要綱本体(documents/101746_20221026085652-1.pdf・R6のdocuments/109244_...とは別ID・1.7MB・109頁)を特定。単一タイムスタンプのみ(切り詰めなし・1,735,743バイト)。「選抜の内容」ア「調査書の『学習の記録』は、第3学年の記録を次のとおり点数に換算して選抜に用いる。学力検査を行う5教科：それぞれ10点満点 学力検査を行わない必修の4教科(音楽、美術、保健体育及び技術・家庭)：それぞれ100点満点」およびイ(ｴ)d「各教科それぞれ90点満点：合計450点満点」がR6エントリの引用文と一言一句完全一致。令和6・7・8年度分のgradeMultipliers{1:0,2:0,3:1}・coreMultiplier=2・practicalMultiplier=20・maxScore=450と完全一致(変更なし)。教訓: 鹿児島県のWaybackフォルダ命名は対象年度(r5)でなく公表年の元号年度(r4)を使う(佐賀/宮崎等の「R5専用ページのURL自体が404」型と異なり、フォルダ名の年度がそもそも対象年度と1つずれる新パターン)。"
+    },
+    {
+      "code": "fukui",
+      "name": "福井県",
+      "region": "中部",
+      "fiscalYear": "2023",
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://web.archive.org/web/20221017120906/https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r5youkou_d/fil/r5youkou.pdf",
+      "sourceUrl2": "https://web.archive.org/web/20221017120817/https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r5youkou.html",
+      "sourceTitle": "福井県教育委員会「令和5年度福井県立高等学校入学者選抜実施要項」8選抜の方法(1)イ",
+      "lastVerified": "2026-09-23",
+      "pdfHash": "57f941ef7aba9d236ba68502154bfc3bff1c7b6356e2419375df70ef24e9bcc5",
+      "diffFromCurrentYear": "変更なし(2026-09-23に前セッションが試した機械的なR6ファイル名置換(R6yoko.pdf→R5yoko.pdfは大文字始まり・404)ではなく、WebSearchでR5専用ページ(doc/koukou/nyugaku/r5youkou.html。現行404だがWaybackで発見)を直接発見しリンク一覧を取得したところ、正しいファイル名は小文字始まりの`r5youkou.pdf`(R6の`R6yoko.pdf`とは命名規則自体が異なる)と判明。実施要項本体(757KB・10頁・切り詰めなし)を取得。「8選抜の方法」(1)イ「選抜に当たっては、調査書中の『学習の記録』の『評定』の第3学年の各教科の評定と学力検査(追検査を含む。)の成績を総合的に審査する」がR6エントリの引用文と一言一句完全一致(第3学年のみ・9教科×5段階=45点満点)。令和6・7・8年度分と完全一致(変更なし)。教訓: 前年度のファイル名パターンを単純に大文字小文字も含めて機械置換で決め打ちせず、実際のR5専用ページのリンク一覧を確認すること(前セッションの「一次ソースが見つからない」保留判定は、ファイル名の推測方法が誤っていただけで実際には存在した)。"
     }
   ]
 }
