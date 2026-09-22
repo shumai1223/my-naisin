@@ -12,7 +12,13 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 11件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma）。
+- **entries 12件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma・kyoto）。
+- **kyoto**はWebSearchでR5選抜情報ページ(`?p=536`)を発見し、R6と同じファイル名パターン
+  (`senbatuyoukou.pdf`)の選抜要項本体を直接取得(88頁)。7中期選抜イ選抜方法等(ｱ)a・bの条文が
+  R6エントリの引用文と一言一句完全一致し、195点満点(5教科×5×3学年=75点+4教科×5×3学年×2倍
+  =120点)を確定(変更なし)。教訓: 日本語ファイル名のPDFリンクはHTMLから抽出した生のUTF-8文字列を
+  そのままcurlに渡すと404になることがあり、`encodeURI`相当のパーセントエンコードが必要
+  (今回は英数字ファイル名の本命ドキュメントが別に見つかったため回避)。
 - **gunma**はWebSearchでR5要項ページを発見し、本文PDF内の参照箇所から『調査書の作成について』が
   R5では「別記１」(R6は「別記３」)であることを特定して該当PDFを取得。R6エントリの引用文と一言一句
   完全一致(135点満点・9教科×5段階×3学年・学年間傾斜なし・変更なし)。教訓: gunmaは資料構成自体は

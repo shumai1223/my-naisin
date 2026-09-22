@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 11,
+    "collectedCount": 12,
     "unavailable": [],
-    "pdfHashStatus": "partial_11_of_11",
-    "pdfHashNote": "着手11件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma)は全て直接URLで取得し即時ハッシュ化。"
+    "pdfHashStatus": "partial_12_of_12",
+    "pdfHashNote": "着手12件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto)は全て直接URLで取得し即時ハッシュ化。"
   },
   "entries": [
     {
@@ -297,6 +297,28 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "5fdae2d0608e70a14120195be793e425dc973febaf8841bfff56f86aa3825ced",
       "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5要項ページ(kyouiku/101162)を発見。本文PDF(101483.pdf)内で『調査書の作成について』への参照が『別記１』であることを確認(R6は同内容が『別記３』に格上げされているという年度で番号が変わる既知パターン)し、別記1本体(101490.pdf)を直接取得。(2)「第１学年及び第２学年の観点別学習状況及び評定は、指導要録に記載されたものを転記する」(4)「第３学年の評定は…全ての生徒について５段階による評定を記入するものとし、上位より『５』『４』『３』『２』『１』とする」を確認、R6エントリの引用文(別記3・イ/エとして引用されている条文)と一言一句完全一致(3学年とも等しく5段階評定・学年間傾斜なし・9教科×5段階×3学年=135点・変更なし)。教訓: gunmaは資料構成自体は毎年同じでも『別記』の通し番号が年度で前後することがあり、本文中の参照箇所(何ページから、という記述)を辿って現物を確認する必要がある)"
+    },
+    {
+      "code": "kyoto",
+      "name": "京都府",
+      "region": "近畿",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 2,
+      "maxScore": 195,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2022/12/senbatuyoukou.pdf",
+      "sourceUrl2": "https://www.kyoto-be.ne.jp/koukyou/cms/?p=536",
+      "sourceTitle": "京都府教育委員会「令和5年度京都府公立高等学校入学者選抜要項」7 中期選抜(全日制・定時制共通)イ選抜方法等(ｱ)a・b",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "8f406684f2ee015bb71925671430aa4444d934e527b37105f72b0aa39a027b57",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5選抜情報ページ(?p=536)を発見、本体PDF(senbatuyoukou.pdf・R6と同じファイル名パターンだが2022/12アップロードのため別ファイル)を直接取得(88頁)。pdftotextで正常抽出(mojibakeなし)。p.26相当7中期選抜(全日制・定時制共通)イ選抜方法等(ｱ)a「報告書の第１学年、第２学年及び第３学年における必修教科の評定を合計する。その際、『音楽』、『美術』、『保健体育』及び『技術・家庭』の評定は、２倍する」b「学力検査の配点は、各教科40点とし、それぞれの得点の合計値を求める」を確認、R6エントリの引用文と一言一句完全一致(5教科×5×3学年=75点+4教科×5×3学年×2倍=120点、合計195点満点・変更なし)。教訓: URLに日本語ファイル名を含むリンクはHTMLから抽出した生のUTF-8文字列のままcurlに渡すと404になることがあり、encodeURI相当のパーセントエンコードが必要(今回はsenbatuyoukou.pdfという英数字ファイル名を使う本命ドキュメントが別に見つかったため回避したが、次に日本語ファイル名PDFしか無い県に当たった場合は要エンコード)"
     }
   ]
 }
