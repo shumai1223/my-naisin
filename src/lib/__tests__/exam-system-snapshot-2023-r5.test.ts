@@ -346,4 +346,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(hy2023.coreMultiplier).toBe(4);
     expect(hy2023.practicalMultiplier).toBe(7.5);
   });
+
+  test('fukuoka: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const fo2023 = snapshot.entries.find((e) => e.code === 'fukuoka')!;
+    const fo2024 = snapshot2024.entries.find((e) => e.code === 'fukuoka')!;
+    const fo2025 = snapshot2025.entries.find((e) => e.code === 'fukuoka')!;
+    const fo2026 = snapshot2026.entries.find((e) => e.code === 'fukuoka')!;
+    expect(fo2023.maxScore).toBe(45);
+    expect(fo2023.maxScore).toBe(fo2024.maxScore);
+    expect(fo2023.maxScore).toBe(fo2025.maxScore);
+    expect(fo2023.maxScore).toBe(fo2026.maxScore);
+    expect(fo2023.targetGrades).toEqual([3]);
+    expect(fo2023.gradeMultipliers).toEqual(fo2024.gradeMultipliers);
+  });
 });

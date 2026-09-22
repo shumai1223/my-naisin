@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 22,
+    "collectedCount": 23,
     "unavailable": [],
-    "pdfHashStatus": "partial_22_of_22",
-    "pdfHashNote": "着手22件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo)は全て取得し即時ハッシュ化(gifu/ishikawaはWayback経由)。ishikawa/kagawaはcaveatあり(換算式の一次ソース頁が読めず構造一致から推定)。"
+    "pdfHashStatus": "partial_23_of_23",
+    "pdfHashNote": "着手23件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuokaはWayback経由)。ishikawa/kagawaはcaveatあり(換算式の一次ソース頁が読めず構造一致から推定)。"
   },
   "entries": [
     {
@@ -583,6 +583,39 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "ab24b613679672c27d0a11455a922168ffcb1bc1db2bcb079f2d106e7428d73f",
       "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchで発見した現行の別ドメイン(www.hyogo-c.ed.jp・R6のwww2.hyogo-c.ed.jp/hpe/uploads/配下とは異なりrobots.txtのDisallow対象外)から直接200で取得(84頁)。今回はpdftotextでCJKテキスト抽出に成功(R6と異なりビジョン解析不要)。第4212項「判定資料(A)・・・調査書の各教科の学習の記録の第3学年の、『国語』、『社会』、『数学』、『理科』、『外国語』の5教科の評定の和を4倍した値と、『音楽』、『美術』、『保健体育』、『技術・家庭』の4教科の評定の和を7.5倍した値との総和(総配点250点)による資料」を確認、R6エントリの引用文と一言一句完全一致(第3学年のみ・5教科×4倍+4教科×7.5倍=250点満点・変更なし)。令和6・7・8年度分と完全一致"
+    },
+    {
+      "code": "fukuoka",
+      "name": "福岡県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2023",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 345,
+        "examMaxScore": 300,
+        "defaultRatio": { "naishin": 13, "exam": 87 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "http://web.archive.org/web/20221020023140/https://www.pref.fukuoka.lg.jp/uploaded/life/651225_61430049_misc.pdf",
+      "sourceUrl2": "http://web.archive.org/web/20221019080504/https://www.pref.fukuoka.lg.jp/contents/05youkou.html",
+      "sourceTitle": "福岡県教育委員会「令和5年度福岡県立高等学校入学者選抜要項」(八)選抜の方法1",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "55c2a1611c7146bf3651dfe3eec8ebbec676eb6485758c0889e21af822207c90",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWayback CDXでR5専用の索引ページ(contents/05youkou.html)を発見。ページ本体は2023-03-27時点のスナップショットが200で取得できたが、そこにリンクされたPDF本体(654652_61464338_misc.pdf)自体はCDXに一件もヒットせず未アーカイブと判明(2024-r6のtokyo/gifuと同型の「HTMLは保存されたがリンク先PDFは保存されていない」パターン)。より古い2022-10-19時点のスナップショットを確認したところ同じ『令和5年度福岡県立高等学校入学者選抜要項』へのリンクが別のattachment ID(651225_61430049_misc.pdf)を指しており、そちらはWaybackに保存されていた(3.5MB・78頁・切り捨てなし)。(八)選抜の方法1「調査書の『各教科の学習の記録』の第3学年における各教科の評定の数値の合計によって序列を定めるとともに、学力検査の総点によって序列を定める」を確認、R6エントリの引用文と一言一句完全一致(第3学年のみ・9教科×5段階=45点満点・変更なし)。令和6・7・8年度分と完全一致。教訓: 同一ページでもWaybackのスナップショット時点によってリンク先のattachment IDが異なることがあり(福岡県のCMSがファイル更新のたびに新IDを発行する方式)、1つのタイムスタンプでPDFが見つからなくても別のタイムスタンプのHTMLスナップショットを試す価値がある"
     }
   ]
 }

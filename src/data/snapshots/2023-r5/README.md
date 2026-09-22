@@ -12,9 +12,15 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 22件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 23件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo）。
+  kagawa・hyogo・fukuoka）。
+- **fukuoka**はWayback CDXでR5索引ページ(contents/05youkou.html)を発見したが、そこにリンクされた
+  PDF本体自体はCDXに未アーカイブだった。より古いタイムスタンプのHTMLスナップショットを試したところ
+  同じ文書への別attachment ID(福岡県のCMSはファイル更新のたびに新IDを発行)が見つかり、そちらは
+  Waybackに保存されていた(78頁・切り捨てなし)。(八)選抜の方法1の条文がR6引用文と一言一句完全一致し
+  45点満点を確定(変更なし)。教訓: 同一ページでもスナップショット時点でリンク先PDFのIDが異なることが
+  あり、1つのタイムスタンプで失敗しても別のタイムスタンプを試す価値がある。
 - **hyogo**はWebSearchでR6が使っていた`www2.hyogo-c.ed.jp/hpe/uploads/`(robots.txt Disallow対象)
   とは別ドメイン`www.hyogo-c.ed.jp/~koko-bo/`配下にR5専用PDFを発見し直接200で取得(84頁)。今回は
   pdftotextでCJKテキスト抽出に成功(R6はビジョン解析が必要だった)。第4212項判定資料(A)の算定式が
