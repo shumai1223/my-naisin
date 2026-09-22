@@ -332,4 +332,18 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(kg2023.coreMultiplier).toBe(2);
     expect(kg2023.practicalMultiplier).toBe(4);
   });
+
+  test('hyogo: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const hy2023 = snapshot.entries.find((e) => e.code === 'hyogo')!;
+    const hy2024 = snapshot2024.entries.find((e) => e.code === 'hyogo')!;
+    const hy2025 = snapshot2025.entries.find((e) => e.code === 'hyogo')!;
+    const hy2026 = snapshot2026.entries.find((e) => e.code === 'hyogo')!;
+    expect(hy2023.maxScore).toBe(250);
+    expect(hy2023.maxScore).toBe(hy2024.maxScore);
+    expect(hy2023.maxScore).toBe(hy2025.maxScore);
+    expect(hy2023.maxScore).toBe(hy2026.maxScore);
+    expect(hy2023.targetGrades).toEqual([3]);
+    expect(hy2023.coreMultiplier).toBe(4);
+    expect(hy2023.practicalMultiplier).toBe(7.5);
+  });
 });

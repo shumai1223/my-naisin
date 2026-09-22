@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 21,
+    "collectedCount": 22,
     "unavailable": [],
-    "pdfHashStatus": "partial_21_of_21",
-    "pdfHashNote": "着手21件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa)は全て取得し即時ハッシュ化(gifu/ishikawaはWayback経由)。ishikawa/kagawaはcaveatあり(換算式の一次ソース頁が読めず構造一致から推定)。"
+    "pdfHashStatus": "partial_22_of_22",
+    "pdfHashNote": "着手22件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo)は全て取得し即時ハッシュ化(gifu/ishikawaはWayback経由)。ishikawa/kagawaはcaveatあり(換算式の一次ソース頁が読めず構造一致から推定)。"
   },
   "entries": [
     {
@@ -561,6 +561,28 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "e4173543a3b16784c3d5ef8052243b8ba0dada4408b5e3056c661b1ea6c31063",
       "diffFromCurrentYear": "【caveatあり・変更なし(構造一致で推定)】2026-09-22にWebSearchで発見した「令和5年度香川県公立高等学校入学者選抜要綱」(dai2gou.pdf・5頁・現行URLで直接200取得)を確認。6選抜方法(1)「調査書の学習の記録と学力検査の成績は、同等に扱う。」を確認、R6エントリの引用文と一言一句完全一致(gradeMultipliers全学年1で等倍・変更なし)。ただしR6と同じく、maxScore=390/actualMaxScore=220/coreMultiplier=2/practicalMultiplier=4という具体的な換算式は『実施細目』という別文書(R6でAdobe-Japan1フォント欠落によりテキスト抽出・ビジョン解析とも不能だった)に記載されており、R5版の実施細目のURLは今回発見できなかった(WebSearchでも要綱本体のみヒット)。R6・R7・R8の3年連続で390/220/2/4が完全一致していることから制度不変と判断し引き継いだ(R6と同型のcaveat)"
+    },
+    {
+      "code": "hyogo",
+      "name": "兵庫県",
+      "region": "近畿",
+      "fiscalYear": "2023",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 4,
+      "practicalMultiplier": 7.5,
+      "maxScore": 250,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.hyogo-c.ed.jp/~koko-bo/02nyuushi/r5senbatu/r5senbatsuyoukou-youshiki/R5_senbatsuyoukou.pdf",
+      "sourceUrl2": null,
+      "sourceTitle": "兵庫県教育委員会「令和5年度兵庫県公立高等学校入学者選抜要綱」第4212項 判定資料(A)の算定式(別表1評定換算表参照)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "ab24b613679672c27d0a11455a922168ffcb1bc1db2bcb079f2d106e7428d73f",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchで発見した現行の別ドメイン(www.hyogo-c.ed.jp・R6のwww2.hyogo-c.ed.jp/hpe/uploads/配下とは異なりrobots.txtのDisallow対象外)から直接200で取得(84頁)。今回はpdftotextでCJKテキスト抽出に成功(R6と異なりビジョン解析不要)。第4212項「判定資料(A)・・・調査書の各教科の学習の記録の第3学年の、『国語』、『社会』、『数学』、『理科』、『外国語』の5教科の評定の和を4倍した値と、『音楽』、『美術』、『保健体育』、『技術・家庭』の4教科の評定の和を7.5倍した値との総和(総配点250点)による資料」を確認、R6エントリの引用文と一言一句完全一致(第3学年のみ・5教科×4倍+4教科×7.5倍=250点満点・変更なし)。令和6・7・8年度分と完全一致"
     }
   ]
 }

@@ -12,9 +12,13 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 21件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 22件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa）。
+  kagawa・hyogo）。
+- **hyogo**はWebSearchでR6が使っていた`www2.hyogo-c.ed.jp/hpe/uploads/`(robots.txt Disallow対象)
+  とは別ドメイン`www.hyogo-c.ed.jp/~koko-bo/`配下にR5専用PDFを発見し直接200で取得(84頁)。今回は
+  pdftotextでCJKテキスト抽出に成功(R6はビジョン解析が必要だった)。第4212項判定資料(A)の算定式が
+  R6エントリの引用文と一言一句完全一致し250点満点を確定(変更なし・caveatなし)。
 - **kagawa**はWebSearchで「令和5年度香川県公立高等学校入学者選抜要綱」(dai2gou.pdf・5頁)を現行URLで
   直接取得。6選抜方法(1)「調査書の学習の記録と学力検査の成績は、同等に扱う」はR6引用文と一言一句
   完全一致で確認できたが、具体的な換算式(390/220/coreMultiplier2/practicalMultiplier4)を記載する
