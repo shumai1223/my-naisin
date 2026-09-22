@@ -12,16 +12,22 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 3件**（ehime・kochi・yamanashi）。全て2024-r6のURLパターン（`r06`→`r05`等の
-  年度部分の置換）で直接発見でき、pdftotextはCJKテキスト抽出不可（他県と同型の既知の制約。
-  yamanashiは通常の空白でなく文字コードがシフトされたグリフのmojibakeという別パターン）
-  だったためPyMuPDFでページをPNGにレンダリングしてビジョン解析した。
-- 3県とも2024-r6・2025-r7・2026-r8と数値が完全一致（変更なし）。yamanashiはR6と同じ
-  PDFページ位置（18枚目/印刷頁13）に同じ章番号（第9選抜方法）があり、章構成そのものも
-  年度間で変わっていないことが分かった。
-- **Wayback Machine（Internet Archive）は2026-09-22時点で「Temporarily Offline」を再確認**
-  （複数のCDX APIクエリが全てこのエラーページを返した）。osaka/chiba/tochigi/kanagaw等の
-  Wayback依存県はこの復旧待ち。現行サイトに直接残っている県を優先して着手すること。
+- **entries 7件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama）。
+- ehime/kochi/yamanashiは2024-r6のURLパターン（`r06`→`r05`等の年度部分の置換）で
+  直接発見でき、pdftotextはCJKテキスト抽出不可（他県と同型の既知の制約。yamanashiは
+  通常の空白でなく文字コードがシフトされたグリフのmojibakeという別パターン）だったため
+  PyMuPDFでページをPNGにレンダリングしてビジョン解析した。
+- **osaka/chiba/tochigi/wakayamaは単純なURL置換では404だったが、「県教委サイトの
+  年度別実施要項案内ページ」をWebSearchで見つけてから辿ると発見できた**。これが
+  今回確立した主要手法。ページID・フォルダ番号・ファイル名の枝番はいずれも年度で
+  不規則に変わる（wakayamaは年度ごとにページID自体が別・tochigiはR5だけフォルダ
+  番号が初回作成時のまま）ため、機械的な数字置換だけに頼らないこと。
+- 7県とも2024-r6・2025-r7・2026-r8と数値が完全一致（変更なし）。
+- **nagano/toyamaはWebSearchが提示したURLが実際には404だった**（WebSearch要約の
+  作話パターン・既知のリスクを再確認。`archive.org/wayback/available`APIでも
+  スナップショットなしと確認済み）。Wayback CDX APIは2026-09-22時点で断続的に
+  「Temporarily Offline」のため、この2県は裏取り不能で保留中。
+  osaka/chiba/tochigi/kanagawa等のWayback依存県も同じ理由で復旧待ち。
 
 ## 収集方針（2024-r6から継承・Y-0を継承）
 
@@ -36,11 +42,10 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 ## 次にやること
 
 大市場県のうちkanagawa/aichi/saitama/hyogo/fukuokaはR6時点でWayback依存だったため、
-Wayback復旧まで後回しにするのが効率的。**osakaはWebSearchで発見できた**（教委サイトの
-年度別「実施要項」目次ページ`pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r05_jisshiyoko.html`
-のような、県サイトの案内ページを経由すればファイル名の枝番違いを気にせず本体PDFへ
-辿れる。単純な`r6`→`r5`のURL文字列置換だけに頼らないこと）。同じ手が効きそうな県
-（chiba/tochigi/toyama/iwate/nagano/wakayama/shimane/aomori・単純置換では404だった）
-から次に着手する。2024-r6で**現行サイトに直接PDFが残っていた県**（`src/data/snapshots/
-2024-r6/exam-system.json`のsourceUrlで`web.archive.org`を含まない県を機械的に絞り込める）
-を優先すること。
+Wayback復旧まで後回しにするのが効率的。未試行はshimane/aomori（`src/data/snapshots/
+2024-r6/exam-system.json`のsourceUrlでこの2県も`web.archive.org`を含まない＝現行サイト
+直接型なので、osaka/chiba/tochigi/wakayamaと同じ「県教委サイトの年度別実施要項案内
+ページをWebSearchで探す」型が効く見込みが高い）。iwateは未試行。nagano/toyamaは
+WebSearchが提示したURLがいずれも実在せず（archive.org/wayback/availableでも
+スナップショットなし）、現時点では裏取り可能な一次資料に到達できていない
+（Wayback CDXの復旧を待つか、県サイト内の別の索引ページから辿り直す必要がある）。

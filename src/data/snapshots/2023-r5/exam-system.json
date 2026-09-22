@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 6,
+    "collectedCount": 7,
     "unavailable": [],
-    "pdfHashStatus": "partial_6_of_6",
-    "pdfHashNote": "着手6件(ehime/kochi/yamanashi/osaka/chiba/tochigi)は全て直接URLで取得し即時ハッシュ化。"
+    "pdfHashStatus": "partial_7_of_7",
+    "pdfHashNote": "着手7件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama)は全て直接URLで取得し即時ハッシュ化。"
   },
   "entries": [
     {
@@ -176,6 +176,39 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "0035fd8baf46dac87a8d0fac6927aa577dd33a1b2131316bbe2482d024eea9d1",
       "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5の案内ページ(r05nyushinittei2.html)を発見し、フォルダは`m04/r03/`のまま(R6以降の年度別フォルダ命名規則とは異なる)資料一覧から「02_r05bekki_chousashosakuseinoyouryou.pdf」(別記 調査書作成の要領・3頁)を直接取得。pdftotextで正常抽出。「⑴第1、第2学年の評定は、生徒指導要録の記載どおりに5段階法で記入する」「⑵第3学年の評定は…年間を見通して5段階法で記入する」を確認、R6/R7/R8エントリと一言一句完全一致(学年間の傾斜配点なし・9教科×5段階×3学年=135点)。教訓: 栃木県はR6以降と異なりR5時点では『m04/r0X/』のフォルダ番号が公開年でなく初回作成時の番号(r03)のまま残っていることがあるため、単純な年度番号置換はここでも機能しなかった)"
+    },
+    {
+      "code": "wakayama",
+      "name": "和歌山県",
+      "region": "近畿",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 180,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 680,
+        "examMaxScore": 500,
+        "defaultRatio": { "naishin": 26, "exam": 74 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500200/d00211217_d/fil/R05_1_zennichi_teiji.pdf",
+      "sourceUrl2": "https://www.pref.wakayama.lg.jp/prefg/500200/d00211217.html",
+      "sourceTitle": "和歌山県教育委員会「令和5年度和歌山県立高等学校入学者選抜(全日制課程・定時制課程)実施要項」第2一般選抜 10(2)ア(ｱ)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "033057ce4e3e4f64212ac7f0a9e40bad7cbf9a6525f4fd4ca306724ace96394f",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5専用ページ(d00211217.html・R6のd00214177とは別ページID)を発見し、R6と同じファイル命名規則(R05_1_zennichi_teiji.pdf)で本体PDF(24頁)を直接取得。pdftotextで正常抽出、p.7「(2)判定資料の評価 ア調査書(ア)評定 次の方法で算出し、計180点満点とする…a第1・第2学年の評定: 第1・第2学年の9教科の5段階評定の合計を算出する(90点満点) b第3学年の評定: 第3学年の9教科の5段階評定の合計を2倍して算出する(90点満点)」を確認、R6/R7/R8エントリと一言一句完全一致。学力検査は各教科100点×5教科=500点満点も確認(reverseCalc.examMaxScore=500と一致)。教訓: 和歌山県は年度ごとにページID自体が変わる(R5=d00211217/R6=d00214177/R7=d00218143/R8=d00220765)ため、URLの数字部分の単純推測ではなくWebSearchで当該年度のページを毎回探す必要がある)"
     }
   ]
 }

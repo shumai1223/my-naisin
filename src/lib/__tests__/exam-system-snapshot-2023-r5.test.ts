@@ -137,4 +137,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(t2023.maxScore).toBe(t2026.maxScore);
     expect(t2023.gradeMultipliers).toEqual(t2024.gradeMultipliers);
   });
+
+  test('wakayama: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const w2023 = snapshot.entries.find((e) => e.code === 'wakayama')!;
+    const w2024 = snapshot2024.entries.find((e) => e.code === 'wakayama')!;
+    const w2025 = snapshot2025.entries.find((e) => e.code === 'wakayama')!;
+    const w2026 = snapshot2026.entries.find((e) => e.code === 'wakayama')!;
+    expect(w2023.maxScore).toBe(180);
+    expect(w2023.maxScore).toBe(w2024.maxScore);
+    expect(w2023.maxScore).toBe(w2025.maxScore);
+    expect(w2023.maxScore).toBe(w2026.maxScore);
+    expect(w2023.gradeMultipliers).toEqual(w2024.gradeMultipliers);
+    expect(w2023.reverseCalc?.examMaxScore).toBe(w2026.reverseCalc?.examMaxScore);
+  });
 });
