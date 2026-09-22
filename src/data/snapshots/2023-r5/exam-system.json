@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 27,
+    "collectedCount": 28,
     "unavailable": [],
-    "pdfHashStatus": "partial_27_of_27",
-    "pdfHashNote": "着手27件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimaneはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_28_of_28",
+    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitamaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -17,8 +17,16 @@
       "name": "愛媛県",
       "region": "四国",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 135,
@@ -29,7 +37,10 @@
       "reverseCalc": {
         "totalMaxScore": 385,
         "examMaxScore": 250,
-        "defaultRatio": { "naishin": 35, "exam": 65 },
+        "defaultRatio": {
+          "naishin": 35,
+          "exam": 65
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -50,8 +61,16 @@
       "name": "高知県",
       "region": "四国",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 2,
       "maxScore": 195,
@@ -62,7 +81,10 @@
       "reverseCalc": {
         "totalMaxScore": 445,
         "examMaxScore": 250,
-        "defaultRatio": { "naishin": 44, "exam": 56 },
+        "defaultRatio": {
+          "naishin": 44,
+          "exam": 56
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -83,8 +105,16 @@
       "name": "山梨県",
       "region": "中部",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 2,
       "practicalMultiplier": 3,
       "maxScore": 330,
@@ -105,8 +135,16 @@
       "name": "大阪府",
       "region": "近畿",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 2, "2": 2, "3": 6 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 2,
+        "2": 2,
+        "3": 6
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 450,
@@ -117,7 +155,10 @@
       "reverseCalc": {
         "totalMaxScore": 900,
         "examMaxScore": 450,
-        "defaultRatio": { "naishin": 50, "exam": 50 },
+        "defaultRatio": {
+          "naishin": 50,
+          "exam": 50
+        },
         "calcType": "osaka",
         "naishinMultiplier": 1,
         "kValue": null,
@@ -138,8 +179,16 @@
       "name": "千葉県",
       "region": "関東",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 135,
@@ -160,8 +209,16 @@
       "name": "栃木県",
       "region": "関東",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 135,
@@ -182,8 +239,16 @@
       "name": "和歌山県",
       "region": "近畿",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 180,
@@ -194,7 +259,10 @@
       "reverseCalc": {
         "totalMaxScore": 680,
         "examMaxScore": 500,
-        "defaultRatio": { "naishin": 26, "exam": 74 },
+        "defaultRatio": {
+          "naishin": 26,
+          "exam": 74
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -215,8 +283,16 @@
       "name": "茨城県",
       "region": "関東",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 135,
@@ -237,8 +313,14 @@
       "name": "三重県",
       "region": "近畿",
       "fiscalYear": "2023",
-      "targetGrades": [3],
-      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 45,
@@ -259,8 +341,15 @@
       "name": "奈良県",
       "region": "近畿",
       "fiscalYear": "2023",
-      "targetGrades": [2, 3],
-      "gradeMultipliers": { "1": 0, "2": 1, "3": 2 },
+      "targetGrades": [
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 1,
+        "3": 2
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 135,
@@ -281,8 +370,16 @@
       "name": "群馬県",
       "region": "関東",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 135,
@@ -303,8 +400,16 @@
       "name": "京都府",
       "region": "近畿",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 2,
       "maxScore": 195,
@@ -325,8 +430,16 @@
       "name": "福島県",
       "region": "北海道・東北",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 2,
       "maxScore": 195,
@@ -347,8 +460,16 @@
       "name": "岡山県",
       "region": "中国",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 2,
       "maxScore": 195,
@@ -359,7 +480,10 @@
       "reverseCalc": {
         "totalMaxScore": 545,
         "examMaxScore": 350,
-        "defaultRatio": { "naishin": 36, "exam": 64 },
+        "defaultRatio": {
+          "naishin": 36,
+          "exam": 64
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -380,8 +504,16 @@
       "name": "広島県",
       "region": "中国",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 3 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 3
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 225,
@@ -392,7 +524,10 @@
       "reverseCalc": {
         "totalMaxScore": 475,
         "examMaxScore": 250,
-        "defaultRatio": { "naishin": 47, "exam": 53 },
+        "defaultRatio": {
+          "naishin": 47,
+          "exam": 53
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -413,8 +548,16 @@
       "name": "熊本県",
       "region": "九州・沖縄",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 180,
@@ -425,7 +568,10 @@
       "reverseCalc": {
         "totalMaxScore": 430,
         "examMaxScore": 250,
-        "defaultRatio": { "naishin": 42, "exam": 58 },
+        "defaultRatio": {
+          "naishin": 42,
+          "exam": 58
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -446,8 +592,14 @@
       "name": "山形県",
       "region": "北海道・東北",
       "fiscalYear": "2023",
-      "targetGrades": [3],
-      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 45,
@@ -468,8 +620,14 @@
       "name": "静岡県",
       "region": "中部",
       "fiscalYear": "2023",
-      "targetGrades": [3],
-      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 45,
@@ -490,8 +648,16 @@
       "name": "岐阜県",
       "region": "中部",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 180,
@@ -512,8 +678,16 @@
       "name": "石川県",
       "region": "中部",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 180,
@@ -534,8 +708,16 @@
       "name": "香川県",
       "region": "四国",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 2,
       "practicalMultiplier": 4,
       "maxScore": 390,
@@ -546,7 +728,10 @@
       "reverseCalc": {
         "totalMaxScore": 1000,
         "examMaxScore": 500,
-        "defaultRatio": { "naishin": 40, "exam": 60 },
+        "defaultRatio": {
+          "naishin": 40,
+          "exam": 60
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -567,8 +752,14 @@
       "name": "兵庫県",
       "region": "近畿",
       "fiscalYear": "2023",
-      "targetGrades": [3],
-      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
       "coreMultiplier": 4,
       "practicalMultiplier": 7.5,
       "maxScore": 250,
@@ -589,8 +780,14 @@
       "name": "福岡県",
       "region": "九州・沖縄",
       "fiscalYear": "2023",
-      "targetGrades": [3],
-      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 45,
@@ -601,7 +798,10 @@
       "reverseCalc": {
         "totalMaxScore": 345,
         "examMaxScore": 300,
-        "defaultRatio": { "naishin": 13, "exam": 87 },
+        "defaultRatio": {
+          "naishin": 13,
+          "exam": 87
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -622,8 +822,16 @@
       "name": "山口県",
       "region": "中国",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 135,
@@ -634,7 +842,10 @@
       "reverseCalc": {
         "totalMaxScore": 385,
         "examMaxScore": 250,
-        "defaultRatio": { "naishin": 35, "exam": 65 },
+        "defaultRatio": {
+          "naishin": 35,
+          "exam": 65
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -655,8 +866,16 @@
       "name": "滋賀県",
       "region": "近畿",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 135,
@@ -677,8 +896,14 @@
       "name": "長野県",
       "region": "中部",
       "fiscalYear": "2023",
-      "targetGrades": [3],
-      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 45,
@@ -699,8 +924,16 @@
       "name": "島根県",
       "region": "中国",
       "fiscalYear": "2023",
-      "targetGrades": [1, 2, 3],
-      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
       "coreMultiplier": 1,
       "practicalMultiplier": 1,
       "maxScore": 180,
@@ -711,7 +944,10 @@
       "reverseCalc": {
         "totalMaxScore": 1000,
         "examMaxScore": 500,
-        "defaultRatio": { "naishin": 40, "exam": 60 },
+        "defaultRatio": {
+          "naishin": 40,
+          "exam": 60
+        },
         "calcType": "standard",
         "naishinMultiplier": null,
         "kValue": null,
@@ -726,6 +962,50 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "5cb733d3dc89bcee56101f2d364bb19c3416033b6138a611f6ef17d2edd408d1",
       "diffFromCurrentYear": "変更なし(2026-09-22にWayback CDXでR5の文書ディレクトリ(senbatsu/senbatsu_info/index.data/)を検索し正しいファイル名(R5jissiyoukou.pdf・R6の「jisshiyoukou」に対しRomaji表記が「jissiyoukou」と一部異なる)を発見。同名で1MB切り詰め版(truncated)と6.5MB完全版の2種のダイジェストがWaybackにアーカイブされており、先に1MB版を取得したところpdfinfoがtrailer dictionary読み取りエラーを出したため、6.5MB版(94頁・R6と同一頁数)を取得し直した。p.29(印字ページ番号「-29-」・R6と同一)の(ｵ)1)の算出方法表で「学習の記録 素点×51/180(小数点以下切り上げ) 素点180 評点51」「特別活動の記録 素点をそのまま 素点9 評点9」「学力検査 素点×0.16(小数点以下切り上げ) 素点250 評点40」を確認、R6エントリの引用文と一言一句完全一致。個人調査報告書と学力検査の比率80:20/70:30/60:40/50:50/40:60の5パターン(乗数8/6・7/6・5/6・4/6、学力検査係数0.08/0.12/0.16/0.2/0.24)も全て一致。180点=9教科×5段階×(第1学年1倍+第2学年1倍+第3学年2倍)は令和6・7・8年度分と完全一致(変更なし)。教訓: Wayback上で同一URLに複数ダイジェストがある場合、ファイルサイズがぴったり1,048,576バイト(1MB)のものは通信/保存時の切り詰めを疑い、別のタイムスタンプ/ダイジェストを試すこと"
+    },
+    {
+      "code": "saitama",
+      "name": "埼玉県",
+      "region": "関東",
+      "fiscalYear": "2023",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 180,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 900,
+        "examMaxScore": 500,
+        "defaultRatio": {
+          "naishin": 40,
+          "exam": 60
+        },
+        "calcType": "saitama",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://web.archive.org/web/20221007223249/https://www.pref.saitama.lg.jp/documents/218315/52senbatsuyoryo.pdf",
+      "sourceUrl2": "https://web.archive.org/web/20220701085241/https://www.pref.saitama.lg.jp/f2208/r5nyuushi-jissiyoukou.html",
+      "sourceTitle": "埼玉県教育委員会「令和5年度埼玉県公立高等学校入学者選抜実施要項」2 一般募集入学者選抜要領 1(2)ア 学習の記録の得点",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "8cf7719d038ceba681e0c714d6d0919fa6157a1e2ff0d02b9e27f136ca6e3a7d",
+      "diffFromCurrentYear": "変更なし(2026-09-22にf2208/r5nyuushi-jissiyoukou.html(現行サイトは404・Wayback 2022-07-01クロールで発見)から資料一覧を取得し、documents/218315/52senbatsuyoryo.pdf(R6の documents/238245/52senbatsuyoryo_r6.pdf とは全く別のdocument ID・同一ファイル名)を特定。3つの独立タイムスタンプ(20220701/20221007/20240924)で同一ダイジェストが確認できたため切り詰めの心配がない完全版と判断し取得(4頁・p.102-105相当)。p.102「1(2)ア 学習の記録の得点」で「『学習の評定の各学年別合計』に、各高等学校が定める各学年の比率をそれぞれ乗じて加えた数(点)とする。またその最高点は、各学年の比率の数値の合計に45を乗じて得た数(点)とする。」を確認、R6エントリの引用文と一言一句完全一致。埼玉県は各学年比率・学力検査換算定数とも学校ごとに範囲内で自由設定できる制度のため、reverseCalc(900/500/40:60)はR6エントリと同様サイト独自の代表値(比率1:1:2の代表値で180点)。令和6・7・8年度分のgradeMultipliers{1:1,2:1,3:2}/maxScore=180と完全一致・変更なし)"
     }
   ]
 }

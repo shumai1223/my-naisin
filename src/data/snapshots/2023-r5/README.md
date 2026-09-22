@@ -12,9 +12,29 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 27件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 28件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane）。
+  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama）。
+- **✅2026-09-22追記: saitama(28/47)を追加。大市場県で初めてWaybackから完全版を回収できた
+  ケース**。現行サイトの`f2208/r5nyuushi-jissiyoukou.html`は404だが、Wayback(2022-07-01クロール)
+  で発見しリンク一覧から`documents/218315/52senbatsuyoryo.pdf`(R6は`documents/238245/
+  52senbatsuyoryo_r6.pdf`と全く別のdocument ID)を特定。3つの独立タイムスタンプ(20220701/
+  20221007/20240924)で同一ダイジェストと確認できたため切り詰めの心配がない完全版と判断
+  (最初のタイムスタンプでの直接フェッチは1回失敗したが、2番目のタイムスタンプで再試行し成功)。
+  p.102「1(2)ア 学習の記録の得点」の条文がR6引用文と一言一句完全一致(180点満点・
+  gradeMultipliers{1:1,2:1,3:2}・変更なし)。**教訓: 大市場県は単純なURL置換だけでなく
+  `f2208/r{年度}nyuushi-jissiyoukou.html`という固定パターンのページをWaybackで直接検索すると
+  document ID自体を辿れる（osaka/chiba型の「県教委サイトの年度別案内ページ」と同型の手法が
+  埼玉のfixed-pathページでも機能した）**。
+- **IA CDX APIは2026-09-22 22:26頃から断続的に「Temporarily Offline」(503)と復旧を繰り返す
+  不安定な状態が続いている。**単発リクエストは3〜5回のリトライで成功することが多いが、
+  1回のcurlタイムアウト(20〜25秒)だけでは「まだ落ちている」と誤判定しやすい。aomoriは
+  この日のうちに再検証したが、既知の1,048,576バイト切り詰め問題（`nyuugakusyasenbatsu
+  youkou2023.pdf`は唯一のcapture・別ダイジェストが存在しない）は解消せず、PyMuPDFで
+  78頁と認識されても該当頁(19頁付近)は全て白紙レンダリングのため引き続き保留。
+  同じディレクトリで見つけた`R5senbatsuyoukou.pdf`(3.8MB)は中身が「青森県立**中学校**
+  入学者選抜要項」で誤り(高校ではない)と判明・`tyousasho2023.xls`(調査書xls・10KB)が
+  次に試す価値のある候補として残る。
 - **nagano**は当初「保留」に分類していたが、Wayback CDXでR5の文書ディレクトリを検索したところ
   正しいファイル名`r5yoko_1.pdf`(アンダースコア付き)を発見(以前の機械置換`r6yoko1.pdf`→`r5yoko1.pdf`
   はアンダースコアなしで404だった単純なタイプミス相当の差異)。イ(ｱ)の条文がR6引用文と一言一句
