@@ -49,7 +49,11 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
   本体は掲載されておらず、`r5youkou.html`のような別ページはCDXにも存在しない)、
   saitama(`r5nyuushi-jouhou.html`は現存するが統計PDFのみ・R8の`r8nyuushi-jissiyoukou.html`に相当
   する`r5nyuushi-jissiyoukou.html`は404)、miyagi(WebSearchが提示した`kyo-r5koukounyusihousin.html`
-  等は全て404)。**2026-09-22 20:10頃、Wayback CDX APIが断続的にTemporarily Offlineを繰り返し、
+  等は全て404)、aichi(Incapsulaリダイレクトループでcurl直接取得不可・Wayback CDXも429/Temporarily
+  Offlineで裏取り不能。★令和5年度から校内順位決定方式の入試改革が実施されたという第三者情報を
+  発見したため、R6の値をそのまま引き継ぐことは避け未収集のまま保留とした)、oita(R5専用ページ
+  `koukounyuushir05.html`はWebSearchのタイトルには存在するが実サーバは404・Wayback CDXも
+  Temporarily Offline/504で確認不能)。**2026-09-22 20:10頃、Wayback CDX APIが断続的にTemporarily Offlineを繰り返し、
   複数の大市場県(niigata/saitama/miyagi等)の再確認ができなかった**。これらの県はR6時点でも
   Wayback依存だった県が多く、R5はさらに一段階古いため現行サイトからの直接発見が難しい構造的傾向が
   ある。次回は①Waybackが安定してから同じ県を再挑戦するか、②まだ試していない県(aichi/fukuoka/
