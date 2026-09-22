@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 8,
+    "collectedCount": 9,
     "unavailable": [],
-    "pdfHashStatus": "partial_8_of_8",
-    "pdfHashNote": "着手8件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki)は全て直接URLで取得し即時ハッシュ化。"
+    "pdfHashStatus": "partial_9_of_9",
+    "pdfHashNote": "着手9件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie)は全て直接URLで取得し即時ハッシュ化。"
   },
   "entries": [
     {
@@ -231,6 +231,28 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "4b078812f1911bf35ec89d23f26cc82c3bc684190a14492c8ea3193fcac1d3dc",
       "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5の案内ページ(bylaws/・ページタイトルで令和5年度と確認)を発見し、85頁の実施細則一括PDF(01all.pdf)を直接取得。pdftotextで正常抽出。p.4「(7)合否判定方法」イ共通選抜(ｲ)「共通選抜の対象となる受検者全員について、調査書の評定合計(3年間)の高い順に並べる」を確認、R6/R7/R8エントリと一言一句完全一致(学年間の傾斜配点なし=等倍合計・9教科×5段階×3学年=135点)。R6は条項番号が(8)だったが本文の内容・文言は完全一致(条項番号が年度で前後する既知のパターン・yamanashi等と同型)。★`/bylaws/`というスラッグはR5固有で、R7は別スラッグ(`page-26505/`)に付け替わっていることをWebSearchで確認済み(茨城県教育委員会のWordPressは年度ごとに新しいpost/pageを作る方式で、固定URLではない)ため、次に別年度へ着手する際は毎回WebSearchでその年度のページを探す必要がある)"
+    },
+    {
+      "code": "mie",
+      "name": "三重県",
+      "region": "近畿",
+      "fiscalYear": "2023",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.mie.lg.jp/common/content/001010971.pdf",
+      "sourceUrl2": "https://www.pref.mie.lg.jp/KOKOKYO/HP/m0204200029_00060.htm",
+      "sourceTitle": "三重県教育委員会「令和5年度三重県立高等学校入学者選抜実施方針」第3後期選抜 3選抜(1)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "40952adfdb182ce1cc0a27889516c717f31ad439ad6266b98f1310771e9128c1",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchで「令和５年度三重県立高等学校入学者選抜実施方針」PDF(001010971.pdf)を直接発見・取得。pdftotextで正常抽出。第3後期選抜3選抜(1)「調査書の第３学年における『各教科の学習の記録』及び『特別活動の記録』等により、およそ募集定員に当たる数の者を選ぶ。ただし、高等学校によっては、調査書の『各教科の学習の記録』等により選ぶ人数を、募集定員のおよそ110％又は120％にあらかじめ設定することができる」を確認、R6(sourceTitle脚注引用)・R7(実施要項第3後期選抜3選抜方法(1)に9教科×5段階=45点の明記あり)エントリの引用文と一言一句完全一致(第3学年のみ対象・9教科×5段階=45点満点・変更なし)。三重県は実施方針(年度当初公表・選抜手続きの大枠)と実施要項(後日公表・別表等の詳細)の2種類の資料があり、R5は実施方針のみで45点の直接記載はないが、対象学年・計算式がR6/R7と一言一句一致することから45点満点で確定できる)"
     }
   ]
 }

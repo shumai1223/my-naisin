@@ -162,4 +162,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(i2023.maxScore).toBe(i2026.maxScore);
     expect(i2023.gradeMultipliers).toEqual(i2024.gradeMultipliers);
   });
+
+  test('mie: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const m2023 = snapshot.entries.find((e) => e.code === 'mie')!;
+    const m2024 = snapshot2024.entries.find((e) => e.code === 'mie')!;
+    const m2025 = snapshot2025.entries.find((e) => e.code === 'mie')!;
+    const m2026 = snapshot2026.entries.find((e) => e.code === 'mie')!;
+    expect(m2023.maxScore).toBe(45);
+    expect(m2023.maxScore).toBe(m2024.maxScore);
+    expect(m2023.maxScore).toBe(m2025.maxScore);
+    expect(m2023.maxScore).toBe(m2026.maxScore);
+    expect(m2023.targetGrades).toEqual([3]);
+    expect(m2023.gradeMultipliers).toEqual(m2024.gradeMultipliers);
+  });
 });

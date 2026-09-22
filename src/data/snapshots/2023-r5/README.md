@@ -12,7 +12,13 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 8件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki）。
+- **entries 9件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie）。
+- **mie**はWebSearchで「令和５年度三重県立高等学校入学者選抜実施方針」PDF(`001010971.pdf`)を
+  直接発見・取得(単純URL置換は不要だった)。三重県は年度当初に「実施方針」(選抜手続きの大枠)、
+  後日「実施要項」(別表等の詳細)の2段階で資料を公表する構造で、R5は実施方針のみ収集し
+  R6/R7エントリの引用文(第3後期選抜3選抜(1)の条文)と一言一句完全一致することで
+  45点満点(9教科×5段階・第3学年のみ対象)を確定した(R7エントリが同条文の直後に
+  「9教科×5段階=45点」と明記しているため、R5でも条文一致=数値一致と確定できる)。
 - ehime/kochi/yamanashiは2024-r6のURLパターン（`r06`→`r05`等の年度部分の置換）で
   直接発見でき、pdftotextはCJKテキスト抽出不可（他県と同型の既知の制約。yamanashiは
   通常の空白でなく文字コードがシフトされたグリフのmojibakeという別パターン）だったため
