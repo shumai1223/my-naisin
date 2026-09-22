@@ -4006,6 +4006,34 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(zennichi.filter((x) => x.schoolName === '石川県立工業高等学校')).toHaveLength(7);
   });
 
+  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区13校31レコードを収録し、一覧表と個別学校ページの2つの独立情報源が一致した学校のみに限定する', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kyoto');
+    expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
+    const schools = record?.schools ?? [];
+    expect(schools).toHaveLength(31);
+    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(13);
+    expect(schools.every((x) => x.ratioType === undefined)).toBe(true);
+    // 清明高校は単位制による定時制(昼間二部)課程のため対象外
+    expect(schools.some((x) => x.schoolName.includes('清明'))).toBe(false);
+    // 山城は普通科(単位制・A1/A2の2型)+文理総合科(単位制・A型)の2学科3レコード
+    const yamashiro = schools.filter((x) => x.schoolName === '京都府立山城高等学校');
+    expect(yamashiro).toHaveLength(3);
+    expect(new Set(yamashiro.map((x) => x.department)).size).toBe(2);
+    // 嵯峨野は「京都こすもす科」1学科のみ(自然科学系統80人+文理科学系統240人)で
+    // 個別ページの実測(判定Ⅰ〜Ⅲの多段階選抜)と一致する
+    const sagano = schools.filter((x) => x.schoolName === '京都府立嵯峨野高等学校');
+    expect(sagano).toHaveLength(2);
+    expect(sagano.every((x) => x.department?.includes('京都こすもす科'))).toBe(true);
+    expect(sagano.some((x) => x.note?.includes('80'))).toBe(true);
+    expect(sagano.some((x) => x.note?.includes('240'))).toBe(true);
+    // 桂は普通科(A/Bの2型)+植物クリエイト科+園芸ビジネス科の3学科4レコード
+    const katsura = schools.filter((x) => x.schoolName === '京都府立桂高等学校');
+    expect(katsura).toHaveLength(4);
+    expect(new Set(katsura.map((x) => x.department)).size).toBe(3);
+    // 洛西は普通科1学科A方式のみの単純な1レコード校
+    expect(schools.filter((x) => x.schoolName === '京都府立洛西高等学校')).toHaveLength(1);
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {

@@ -40,6 +40,7 @@ import { FUKUOKA_SCHOOL_SELECTION_METHOD } from './fukuoka';
 import { EHIME_SCHOOL_SELECTION_METHOD } from './ehime';
 import { FUKUI_SCHOOL_SELECTION_METHOD } from './fukui';
 import { ISHIKAWA_SCHOOL_SELECTION_METHOD } from './ishikawa';
+import { KYOTO_SCHOOL_SELECTION_METHOD } from './kyoto';
 
 export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   Record<string, PrefectureSchoolSelectionMethod>
@@ -85,4 +86,5 @@ export const SCHOOL_SELECTION_METHOD_BY_PREFECTURE: Partial<
   ehime: EHIME_SCHOOL_SELECTION_METHOD,
   fukui: FUKUI_SCHOOL_SELECTION_METHOD,
   ishikawa: ISHIKAWA_SCHOOL_SELECTION_METHOD,
+  kyoto: KYOTO_SCHOOL_SELECTION_METHOD,
 };
