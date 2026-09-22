@@ -64,11 +64,16 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
   `koukounyuushir05.html`はWebSearchのタイトルには存在するが実サーバは404・Wayback CDXも
   Temporarily Offline/504で確認不能)、miyazaki(R5専用ページ`20220616064917.html`をWaybackで発見し
   実施要綱PDFリンク`70099_20220912152623-1.pdf`まで特定できたが、そのPDF自体はCDX検索が繰り返し
-  Temporarily Offlineで裏取りできず、直接アクセスも404)。**2026-09-22 20:10頃、Wayback CDX APIが断続的にTemporarily Offlineを繰り返し、
-  複数の大市場県(niigata/saitama/miyagi等)の再確認ができなかった**。これらの県はR6時点でも
+  Temporarily Offlineで裏取りできず、直接アクセスも404)、kanagawa(R5専用ページ`r9234791.html`を
+  WebSearchで発見したが実サーバは404・Wayback CDXも504/Temporarily Offlineで繰り返し確認不能)。
+  **2026-09-22 20:10頃、Wayback CDX APIが断続的にTemporarily Offlineを繰り返し、
+  複数の大市場県(niigata/saitama/miyagi/kanagawa等)の再確認ができなかった**。これらの県はR6時点でも
   Wayback依存だった県が多く、R5はさらに一段階古いため現行サイトからの直接発見が難しい構造的傾向が
-  ある。次回は①Waybackが安定してから同じ県を再挑戦するか、②まだ試していない県(aichi/fukuoka/
-  hyogo/hokkaido/kagawa/oita/ishikawa)を先に一巡することを推奨。
+  ある。**2026-09-22 21:35時点でT-Y11 Task Cは25/47・残りの未着手4県はhokkaido(R6自体がpdfHash
+  null=archive.org側の恒久的配信バグで取得不能と確定済み)・tokyo(過去セッションでR6実施要綱本体
+  PDF自体が一度もアーカイブされておらず取得不能と確定済み)・saga(R6自体がpdfHash null=一次資料
+  未発見のまま)・kanagawa(今回404・Wayback不調)で、いずれも新規に試しても解決見込みが低い**。
+  次回はWaybackが安定してからtoyama/iwate/nagano/shimane等の保留県を再挑戦するのが最も見込みがある。
 - **shizuoka**はWebSearchでR5専用の発表資料ページ(project ID 001/031/855・R6は001/054/127・
   R7は001/063/460と年度ごとに全く異なるproject ID)を発見し各種様式等PDF(33頁)を取得。
   (別記1)調査書の記入方法2(3)アの条文がR6エントリの引用文と一言一句完全一致し45点満点
