@@ -12,8 +12,13 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 19件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
-  gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu）。
+- **entries 20件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+  gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa）。
+- **ishikawa**はファイル名(r6youkou.pdf→r5youkou.pdf)の機械置換でWayback CDXから完全版(67頁)を
+  取得。R6と同型の「Adobe-Japan1フォント欠落」でpdftotextが一部頁で完全に文字抽出不能な罠があり、
+  肝心の6(2)倍率記述頁はpdftoppmでも白紙(ビジョン解析不能)。7(2)条文・様式2-2/様式3の構造一致は
+  直接確認できたが、6(2)の具体的な倍率記述自体は今回未確認で、R6・R8の一致(R7は未収集)と学校数不変から
+  180点満点を構造推定として引き継いだ(**caveatあり**・shiga/yamaguchi/tokyoと同型の間接確認)。
 - **gifu**は現行サイトの直接URLが404だったが、第三者サイト(dogaku.jp)が同じattachment IDを
   一次ソースとして引用していたのを手がかりにWayback CDX APIで検索し3件のスナップショットを発見・
   完全版(53頁・切り捨てなし)を取得。R6引用文と一言一句完全一致で180点満点を確定(変更なし)。

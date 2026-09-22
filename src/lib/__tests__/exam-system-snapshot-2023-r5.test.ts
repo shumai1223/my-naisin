@@ -305,4 +305,16 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(gf2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 2 });
     expect(gf2023.gradeMultipliers).toEqual(gf2024.gradeMultipliers);
   });
+
+  test('ishikawa: 2024-r6・2026-r8と2023-r5で制度の核となる数値が一致する(2025-r7は未収集のため比較対象外・caveatあり・構造一致で推定)', () => {
+    const ik2023 = snapshot.entries.find((e) => e.code === 'ishikawa')!;
+    const ik2024 = snapshot2024.entries.find((e) => e.code === 'ishikawa')!;
+    const ik2026 = snapshot2026.entries.find((e) => e.code === 'ishikawa')!;
+    expect(snapshot2025.entries.find((e) => e.code === 'ishikawa')).toBeUndefined();
+    expect(ik2023.maxScore).toBe(180);
+    expect(ik2023.maxScore).toBe(ik2024.maxScore);
+    expect(ik2023.maxScore).toBe(ik2026.maxScore);
+    expect(ik2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 2 });
+    expect(ik2023.gradeMultipliers).toEqual(ik2024.gradeMultipliers);
+  });
 });
