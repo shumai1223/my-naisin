@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 24,
+    "collectedCount": 25,
     "unavailable": [],
-    "pdfHashStatus": "partial_24_of_24",
-    "pdfHashNote": "着手24件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuokaはWayback経由)。ishikawa/kagawa/yamaguchiはcaveatあり(換算式の一次ソース頁が読めない、または本文に明示数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_25_of_25",
+    "pdfHashNote": "着手25件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuokaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -649,6 +649,28 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "a8815b4f8aa2e1b3222f841a212e4467e9ef0d3384b0feb6e7c6f056f9719ed8",
       "diffFromCurrentYear": "【caveatあり・変更なし】2026-09-22にWebSearchで「令和5年度山口県公立高等学校入学者選抜実施大綱」(8頁)を現行URLで直接取得。イ選抜の方法(ｱ)「高等学校長は、選抜に当たっては、調査書を重視する。その際、調査書の『学習の記録』と学力検査の成績は同等に取り扱うとともに、調査書の『学習の記録』以外の記載事項及び面接、小論文、実技検査の結果等も十分考慮する」を確認、R6エントリの引用文と一言一句完全一致。ただしR6と同じく本文書には調査書「学習の記録」の学年別配点(9教科×5段階×3学年均等配点で135点満点)を直接示す数値記載は無く、R6と同型のcaveat(第三者裏取り+prefectures.tsとの整合)を維持。令和6・7・8年度分と完全一致(変更なし)"
+    },
+    {
+      "code": "shiga",
+      "name": "滋賀県",
+      "region": "近畿",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.shiga.lg.jp/documents/16948/5530706_1.pdf",
+      "sourceUrl2": "https://www.pref.shiga.lg.jp/documents/16948/5530708_1.pdf",
+      "sourceTitle": "滋賀県教育委員会「令和5年度滋賀県立高等学校入学者選抜要項について(概要および変更点)」＋「令和5年度滋賀県立高等学校入学者選抜要項」9選抜の方法(caveatあり)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "8cd88ce6207ccb5ec125a9c2de8b99338ab4edc04ddfbef3912090bc6da922b7",
+      "diffFromCurrentYear": "【caveatあり・変更なし(間接確認)】2026-09-22にWebSearchで発見した歴代アーカイブページ(senbatsu/325134.html・R05セクション)から2文書を直接取得(共に現行URLで200)。『概要および変更点』文書は毎年発行される網羅的な変更点リストであり、令和5年度の変更点として明記されているのは(1)信楽高校の全国募集枠検査方法(2)石山高校特色選抜の募集枠・検査内容(3)大津商業・長浜北星のスポーツ推薦定員(4)八日市南高校の面接廃止、の4校限定の変更のみで、一般選抜全体の個人調査報告書(調査書)の評価方法・配点比率に関する変更は一切記載されていない(R6と同型の確認方法)。選抜要項本体(1MB)9選抜の方法も確認したが、各教科等の配点自体は『各県立高等学校ごとに定める実施要項によるものとする(別表1の「高等学校別入学者選抜一覧表」を参照すること)』と学校別に委任される構造で本文には現れない(R6と一言一句同一の委任文言)。maxScore=135(9教科×5段階×3学年・学年間傾斜なし)は令和6・7・8年度分からの構造不変前提の引き継ぎであり、様式現物での独立再検証ではない点はR6エントリと同じ限界として明記する"
     }
   ]
 }

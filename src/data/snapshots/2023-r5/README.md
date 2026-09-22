@@ -12,9 +12,14 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 24件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 25件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo・fukuoka・yamaguchi）。
+  kagawa・hyogo・fukuoka・yamaguchi・shiga）。
+- **shiga**はWebSearchで歴代アーカイブページ(senbatsu/325134.html)のR05セクションを発見し
+  『概要および変更点』『選抜要項』の2文書を現行URLで直接取得。変更点文書は4校限定の変更のみで
+  一般選抜の調査書配点に関する変更なし、要項本体も配点は「各高等学校ごとに定める実施要項による」
+  と別表1へ委任する構造でR6と一言一句同一。R6と同型のcaveat(構造不変前提の引き継ぎ)で135点満点を
+  収録(変更なし)。
 - **yamaguchi**はWebSearchで「令和5年度山口県公立高等学校入学者選抜実施大綱」(8頁)を現行URLで
   直接取得。イ選抜の方法(ｱ)の条文がR6引用文と一言一句完全一致(調査書と学力検査を同等に扱う方針)。
   ただしR6自体も本文中に学習の記録の学年別配点(135点満点)を示す数値記載が無く、R6と同型のcaveatを
