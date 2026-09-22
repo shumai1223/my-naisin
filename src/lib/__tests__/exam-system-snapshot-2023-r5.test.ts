@@ -429,4 +429,19 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(st2023.reverseCalc?.calcType).toBe('saitama');
     expect(st2023.reverseCalc?.defaultRatio).toEqual(st2024.reverseCalc?.defaultRatio);
   });
+
+  test('kanagawa: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」・2件目の大市場県Wayback完全復旧)', () => {
+    const kn2023 = snapshot.entries.find((e) => e.code === 'kanagawa')!;
+    const kn2024 = snapshot2024.entries.find((e) => e.code === 'kanagawa')!;
+    const kn2025 = snapshot2025.entries.find((e) => e.code === 'kanagawa')!;
+    const kn2026 = snapshot2026.entries.find((e) => e.code === 'kanagawa')!;
+    expect(kn2023.maxScore).toBe(135);
+    expect(kn2023.maxScore).toBe(kn2024.maxScore);
+    expect(kn2023.maxScore).toBe(kn2025.maxScore);
+    expect(kn2023.maxScore).toBe(kn2026.maxScore);
+    expect(kn2023.targetGrades).toEqual([2, 3]);
+    expect(kn2023.gradeMultipliers).toEqual({ '1': 0, '2': 1, '3': 2 });
+    expect(kn2023.gradeMultipliers).toEqual(kn2024.gradeMultipliers);
+    expect(kn2023.reverseCalc).toBeNull();
+  });
 });

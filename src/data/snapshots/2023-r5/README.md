@@ -12,9 +12,18 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 28件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 29件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama）。
+  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa）。
+- **✅2026-09-22追記: kanagawaを追加(29/47)。2件目の大市場県Wayback完全復旧**。WebSearchで
+  R5専用ページ(`docs/dc4/prs/r9234791.html`)を発見・そこからリンクされる固定パスページ
+  (`docs/dc4/nyusen/nyusen/jishiyoryo.html`・R6以降と同一URLで年度ごとに内容だけが更新される
+  方式=saitamaのf2208型と同型)をWayback(2022-07-01クロール)で取得し、`documents/63604/
+  r5youryou.pdf`(2.7MB・100頁)を特定。pdftotextはCJK抽出不可だが**PyMuPDFの`get_text()`は
+  抽出に成功**（端末表示はmojibodeでも抽出自体は正常でgrep一致に使えた・新しい技法として記録）。
+  p.13「(2)選考の方法」(ｱ)数値の扱い①「A=(第2学年の9教科の評定の合計)+(第3学年の9教科の評定
+  の合計)×2」・(ｲ)第1次選考「S1=a×f+b×g+c×h」がR6引用文と一言一句完全一致
+  (targetGrades[2,3]・gradeMultipliers{1:0,2:1,3:2}・maxScore=135・変更なし)。
 - **✅2026-09-22追記: saitama(28/47)を追加。大市場県で初めてWaybackから完全版を回収できた
   ケース**。現行サイトの`f2208/r5nyuushi-jissiyoukou.html`は404だが、Wayback(2022-07-01クロール)
   で発見しリンク一覧から`documents/218315/52senbatsuyoryo.pdf`(R6は`documents/238245/
