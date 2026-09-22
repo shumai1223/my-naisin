@@ -3974,6 +3974,38 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(record?.schools?.some((x) => x.schoolName === '鯖江' && x.note?.includes('特定できない'))).toBe(true);
   });
 
+  it('ishikawa: 令和8年度募集要綱の別表を全日制40校65学科(募集定員合計7,280人)・定時制6校10レコード(合計480人)で収録し、傾斜配点の一覧が資料に無いためratioTypeを持たない', () => {
+    const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ishikawa');
+    expect(record?.fiscalYear).toBe('令和8年度（2026年度）');
+    const zennichi = record?.schools?.filter((x) => x.selectionCategory === '一般入学(全日制)') ?? [];
+    const teiji = record?.schools?.filter((x) => x.selectionCategory === '一般入学(定時制)') ?? [];
+    expect(zennichi).toHaveLength(65);
+    expect(new Set(zennichi.map((x) => x.schoolName)).size).toBe(40);
+    expect(teiji).toHaveLength(10);
+    expect(new Set(teiji.map((x) => x.schoolName)).size).toBe(6);
+    expect(record?.schools?.every((x) => x.ratioType === undefined)).toBe(true);
+    // 学科別募集定員の数値をnoteから合算すると資料の「計」行の値と一致する(検算)
+    const sumQuota = (recs: typeof zennichi) =>
+      recs.reduce((sum, x) => {
+        const m = x.note?.match(/募集定員(\d+)人/);
+        return sum + (m ? Number(m[1]) : 0);
+      }, 0);
+    expect(sumQuota(zennichi)).toBe(7280);
+    expect(sumQuota(teiji)).toBe(480);
+    // 大聖寺実業は機械システム科(面接あり)と情報ビジネス科(面接あり)の2学科
+    expect(findSchoolSelectionRecord(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'ishikawa', '石川県立大聖寺実業高等学校', '一般入学(全日制)', '機械システム科')?.interviewRequired).toBe(true);
+    // 鶴来高等学校は普通科1学科のみでコース内数(うちスポーツ科学コース40)を持ち面接・適性検査とも実施
+    const tsurugi = zennichi.filter((x) => x.schoolName === '石川県立鶴来高等学校');
+    expect(tsurugi).toHaveLength(1);
+    expect(tsurugi.every((x) => x.interviewRequired === true)).toBe(true);
+    expect(tsurugi.some((x) => x.note?.includes('スポーツ科学コース40'))).toBe(true);
+    // 輪島高等学校は全日制(普通科・うちビジネスコース内数)と定時制(夜間部)の両方に登場する
+    expect(zennichi.some((x) => x.schoolName === '石川県立輪島高等学校')).toBe(true);
+    expect(teiji.some((x) => x.schoolName === '石川県立輪島高等学校')).toBe(true);
+    // 工業高等学校(金沢)は7学科(機械システム・電気・電子情報・材料化学・工芸・テキスタイル工学・デザイン)
+    expect(zennichi.filter((x) => x.schoolName === '石川県立工業高等学校')).toHaveLength(7);
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
