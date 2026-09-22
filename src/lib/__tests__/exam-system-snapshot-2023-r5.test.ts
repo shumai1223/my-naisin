@@ -444,4 +444,20 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(kn2023.gradeMultipliers).toEqual(kn2024.gradeMultipliers);
     expect(kn2023.reverseCalc).toBeNull();
   });
+
+  test('oita: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(caveatあり・学校裁量制の代表値)', () => {
+    const oi2023 = snapshot.entries.find((e) => e.code === 'oita')!;
+    const oi2024 = snapshot2024.entries.find((e) => e.code === 'oita')!;
+    const oi2025 = snapshot2025.entries.find((e) => e.code === 'oita')!;
+    const oi2026 = snapshot2026.entries.find((e) => e.code === 'oita')!;
+    expect(oi2023.maxScore).toBe(520);
+    expect(oi2023.maxScore).toBe(oi2024.maxScore);
+    expect(oi2023.maxScore).toBe(oi2025.maxScore);
+    expect(oi2023.maxScore).toBe(oi2026.maxScore);
+    expect(oi2023.simplifiedCalc).toBe(true);
+    expect(oi2023.actualMaxScore).toBe(260);
+    expect(oi2023.coreMultiplier).toBe(2);
+    expect(oi2023.practicalMultiplier).toBe(4);
+    expect(oi2023.gradeMultipliers).toEqual(oi2024.gradeMultipliers);
+  });
 });

@@ -12,9 +12,17 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 29件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 30件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa）。
+  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita）。
+- **✅2026-09-23追記: oitaを追加(30/47・caveatあり)**。R5専用ページ(`site/kyoiku/
+  koukounyuushir05.html`。現行404・Waybackで発見)から`uploaded/attachment/2164202.pdf`
+  (8.4MB・82頁)を特定。**本PDFはkanagawaと異なりPyMuPDFの`get_text()`でもグリフ変換自体が
+  破損しテキスト復元不能**だったため、印字ページ番号とPDF索引のオフセットを1点特定してから
+  ビジョン解析(p.15「7選抜の方法」)。①②はR6引用文と一致(学校裁量制)したが、**③のみR5に
+  R6引用文に無い「専門学科において」という限定句が含まれる差異を検出**(5教科を課す高校の
+  傾斜配点の対象範囲を明確化した可能性・学校裁量の代表値である520点の構造自体への影響は
+  無いと判断しcaveat付きで変更なし扱い)。
 - **✅2026-09-22追記: kanagawaを追加(29/47)。2件目の大市場県Wayback完全復旧**。WebSearchで
   R5専用ページ(`docs/dc4/prs/r9234791.html`)を発見・そこからリンクされる固定パスページ
   (`docs/dc4/nyusen/nyusen/jishiyoryo.html`・R6以降と同一URLで年度ごとに内容だけが更新される

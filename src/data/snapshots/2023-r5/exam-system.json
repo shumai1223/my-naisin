@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 29,
+    "collectedCount": 30,
     "unavailable": [],
-    "pdfHashStatus": "partial_29_of_29",
-    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_30_of_30",
+    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oitaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -1035,6 +1035,50 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "fc0b841fb6cc50ad80658bb726a17b7c258d8aa59c3afbd8cefb63dc0f8a4d30",
       "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5専用ページ(docs/dc4/prs/r9234791.html)を発見・そこからリンクされる固定パスページ(docs/dc4/nyusen/nyusen/jishiyoryo.html。R6以降と同一URLで年度ごとに内容が更新される方式=saitamaのf2208型と同型)をWayback(2022-07-01クロール)で取得しdocuments/63604/r5youryou.pdf(2.7MB・100頁)を特定。pdftotextはCJK抽出不可だがPyMuPDFのget_text()はテキスト抽出に成功(ただし端末表示はmojibake、抽出自体は正常でgrep一致に使えた)。p.13(印字-13-)「(2)選考の方法」(ｱ)数値の扱い①「A=(第2学年の9教科の評定の合計)+(第3学年の9教科の評定の合計)×2」・(ｲ)第1次選考「S1=a×f+b×g+c×h」を確認、R6エントリの引用文と一言一句完全一致。targetGrades[2,3]・gradeMultipliers{1:0,2:1,3:2}・maxScore=135は令和6・7・8年度分と完全一致(変更なし)。教訓: 大市場県のjishiyoryo.html型ページ(URLは固定・中身が年度で更新される)はWaybackで過去年度クロールを直接開けば当時のリンクが辿れる(saitamaのf2208/r{年}nyuushi-jissiyoukou.html型と同じ発見パターンが神奈川でも機能)"
+    },
+    {
+      "code": "oita",
+      "name": "大分県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2023",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 2
+      },
+      "coreMultiplier": 2,
+      "practicalMultiplier": 4,
+      "maxScore": 520,
+      "simplifiedCalc": true,
+      "actualMaxScore": 260,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 1000,
+        "examMaxScore": 500,
+        "defaultRatio": {
+          "naishin": 40,
+          "exam": 60
+        },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://web.archive.org/web/20221101134719/https://www.pref.oita.jp/uploaded/attachment/2164202.pdf",
+      "sourceUrl2": "https://web.archive.org/web/20221206175325/https://www.pref.oita.jp/site/kyoiku/koukounyuushir05.html",
+      "sourceTitle": "大分県教育委員会「令和5年度大分県立高等学校入学者選抜実施要項」第7第一次入学者選抜 7選抜の方法①②③",
+      "lastVerified": "2026-09-23",
+      "pdfHash": "99e4c2a9c3d3aa147d71f713c4ae25d16306d25d333059907642373e3949d2fb",
+      "diffFromCurrentYear": "変更なし・ただし1語のみ表記差異あり(2026-09-23にWebSearchでR5専用ページ(site/kyoiku/koukounyuushir05.html。現行サイトは404・Waybackで発見)から資料一覧を取得しuploaded/attachment/2164202.pdf(8.4MB・82頁「令和5年度大分県立高等学校入学者選抜実施要項」)を特定。pdftotext/PyMuPDF get_text()とも本PDFはCJKテキストが復元不能な形で文字化け(kanagawaと異なり本文書はグリフ変換自体が破損)するため、印字ページ番号をPDF索引とのオフセット(index18=printed-12-)から特定してp.15をビジョン解析。「7選抜の方法」①「調査書の教科学習成績及び学力検査を実施しない教科の換算点の合計点(以下『調査書の合計点』という。)並びに学力検査成績の総合計点と調査書のその他の記載事項及び面接、適性検査を実施した場合はその結果を資料として総合的に判定する。」②「調査書の合計点と学力検査成績の比率は学校ごとに定める。」を確認、R6エントリの引用文と一致(学校ごとに比率を独自に定める学校裁量制)。③のみR5は「5教科を課す高等学校では、専門学科において学力検査配点の比重を変える傾斜配点を採用することができる。」とあり、R6引用文に無い「専門学科において」という限定句が含まれる差異を検出(実質的な制度変更というより対象範囲の明確化の可能性・学校裁量の代表値である520点/coreMultiplier2/practicalMultiplier4の構造自体への影響は無いと判断し変更なし扱いで収録・caveatとして記録)。"
     }
   ]
 }
