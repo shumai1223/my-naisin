@@ -35,11 +35,12 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 次にやること
 
-大市場県（tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka）は軒並みR6時点で
-Wayback依存だったため、Wayback復旧まで後回しにするのが効率的。次に着手すべきは
-2024-r6で**現行サイトに直接PDFが残っていた県**（iwate/nagano/wakayama/shimane/toyama/
-aomori等・`git log`でなく`src/data/snapshots/2024-r6/exam-system.json`のsourceUrlで
-`web.archive.org`を含まない県を機械的に絞り込める）から、`r6`→`r5`のような単純な
-年度部分置換をまず試し、404ならWebSearchでR5版のURL（document IDが年度で変わることが
-多い）を探す。今回試して404だった県（tochigi/toyama/iwate/nagano/wakayama/shimane/
-aomori）は単純置換では見つからなかったので、次回はWebSearchでの再挑戦から。
+大市場県のうちkanagawa/aichi/saitama/hyogo/fukuokaはR6時点でWayback依存だったため、
+Wayback復旧まで後回しにするのが効率的。**osakaはWebSearchで発見できた**（教委サイトの
+年度別「実施要項」目次ページ`pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r05_jisshiyoko.html`
+のような、県サイトの案内ページを経由すればファイル名の枝番違いを気にせず本体PDFへ
+辿れる。単純な`r6`→`r5`のURL文字列置換だけに頼らないこと）。同じ手が効きそうな県
+（chiba/tochigi/toyama/iwate/nagano/wakayama/shimane/aomori・単純置換では404だった）
+から次に着手する。2024-r6で**現行サイトに直接PDFが残っていた県**（`src/data/snapshots/
+2024-r6/exam-system.json`のsourceUrlで`web.archive.org`を含まない県を機械的に絞り込める）
+を優先すること。

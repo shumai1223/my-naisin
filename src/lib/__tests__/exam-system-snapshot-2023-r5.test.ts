@@ -97,4 +97,18 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(y2023.practicalMultiplier).toBe(y2024.practicalMultiplier);
     expect(y2023.gradeMultipliers).toEqual(y2024.gradeMultipliers);
   });
+
+  test('osaka: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const o2023 = snapshot.entries.find((e) => e.code === 'osaka')!;
+    const o2024 = snapshot2024.entries.find((e) => e.code === 'osaka')!;
+    const o2025 = snapshot2025.entries.find((e) => e.code === 'osaka')!;
+    const o2026 = snapshot2026.entries.find((e) => e.code === 'osaka')!;
+    expect(o2023.maxScore).toBe(450);
+    expect(o2023.maxScore).toBe(o2024.maxScore);
+    expect(o2023.maxScore).toBe(o2025.maxScore);
+    expect(o2023.maxScore).toBe(o2026.maxScore);
+    expect(o2023.gradeMultipliers).toEqual(o2024.gradeMultipliers);
+    expect(o2023.reverseCalc?.totalMaxScore).toBe(o2026.reverseCalc?.totalMaxScore);
+    expect(o2023.reverseCalc?.osakaTypeCount).toBe(o2026.reverseCalc?.osakaTypeCount);
+  });
 });

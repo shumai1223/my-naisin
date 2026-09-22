@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 3,
+    "collectedCount": 4,
     "unavailable": [],
-    "pdfHashStatus": "partial_3_of_3",
-    "pdfHashNote": "着手3件(ehime/kochi/yamanashi)は全て直接URLで取得し即時ハッシュ化。"
+    "pdfHashStatus": "partial_4_of_4",
+    "pdfHashNote": "着手4件(ehime/kochi/yamanashi/osaka)は全て直接URLで取得し即時ハッシュ化。"
   },
   "entries": [
     {
@@ -99,6 +99,39 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "0e779bffeb1b61f96558e855886dfb8c144180bd78349b6cd7f9fa8cec0854dd",
       "diffFromCurrentYear": "変更なし(2026-09-22にR6のURLパターンのr6をr5に置換したURLで直接発見・現行サイトに掲載されたまま現存。pdftotextは文字コードが独自シフトされたグリフで抽出不可(mojibake)のためPyMuPDFでビジョン解析・R6と同じPDFページ位置(18枚目/印刷頁13)に第9選抜方法が存在することを事前に確認できた。「第9選抜方法」2(1)ア「各学年の学力検査実施教科の評定の計を求め、これに2を乗じて実施教科の調整評定小計とする」イ「…不実施教科の評定の計を求め、これに3を乗じて不実施教科の調整評定小計とする」ウ「両者の和を…評定合計とする」を確認、R6/R7/R8エントリと一言一句完全一致(5×5×2×3+4×5×3×3=330点)。章番号(第9)もR6と同一で変更なし。末尾の入学許可予定者発表日『令和5年3月10日』でfiscalYear=2023を裏付け)"
+    },
+    {
+      "code": "osaka",
+      "name": "大阪府",
+      "region": "近畿",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 2, "2": 2, "3": 6 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 450,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 900,
+        "examMaxScore": 450,
+        "defaultRatio": { "naishin": 50, "exam": 50 },
+        "calcType": "osaka",
+        "naishinMultiplier": 1,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": 5,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.osaka.lg.jp/documents/9169/22_r5_ippan.pdf",
+      "sourceUrl2": "https://www.pref.osaka.lg.jp/o180040/kotogakko/gakuji-g3/r05_jisshiyoko.html",
+      "sourceTitle": "大阪府教育委員会「令和5年度大阪府公立高等学校入学者選抜実施要項」3 入学者の選抜",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "e153a57d51e325281e1a9dc6d43060bf507d5004c62755785263ee62778ea52b",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5実施要項の目次ページ(r05_jisshiyoko.html)を発見し、R6と同名のファイル命名規則(22_r5_ippan.pdf・R6は21_r6_ippan.pdfで枝番のみ相違)で本体PDF(16頁)を直接取得。pdftotextで正常にテキスト抽出できた(他県で頻発するmojibakeなし)。「3 入学者の選抜」ア「学力検査の各教科の成績を合計する。(450点満点)」イ「調査書中の各教科の評定を合計する。その際、第3学年の評定を6倍、第1、2学年の評定を2倍する。(450点満点)」ウ「…次のⅠからⅤの5つのタイプで示された倍率…」を確認、令和6・7・8年度分のgradeMultipliers{1:2,2:2,3:6}/maxScore=450/osakaTypeCount=5と完全一致・変更なし)"
     }
   ]
 }
