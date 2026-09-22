@@ -502,4 +502,18 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(tk2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 1 });
     expect(tk2023.gradeMultipliers).toEqual(tk2024.gradeMultipliers);
   });
+
+  test('niigata: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const ni2023 = snapshot.entries.find((e) => e.code === 'niigata')!;
+    const ni2024 = snapshot2024.entries.find((e) => e.code === 'niigata')!;
+    const ni2025 = snapshot2025.entries.find((e) => e.code === 'niigata')!;
+    const ni2026 = snapshot2026.entries.find((e) => e.code === 'niigata')!;
+    expect(ni2023.maxScore).toBe(135);
+    expect(ni2023.maxScore).toBe(ni2024.maxScore);
+    expect(ni2023.maxScore).toBe(ni2025.maxScore);
+    expect(ni2023.maxScore).toBe(ni2026.maxScore);
+    expect(ni2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 1 });
+    expect(ni2023.gradeMultipliers).toEqual(ni2024.gradeMultipliers);
+    expect(ni2023.reverseCalc).toBeNull();
+  });
 });

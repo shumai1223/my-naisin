@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 33,
+    "collectedCount": 34,
     "unavailable": [],
-    "pdfHashStatus": "partial_33_of_33",
-    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushimaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_34_of_34",
+    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigata)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigataはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -1196,6 +1196,36 @@
       "lastVerified": "2026-09-23",
       "pdfHash": "c14fb839505a3cc0a43dd524605c31700dbc5de1cbb2fa854fe5d5c3c95e6309",
       "diffFromCurrentYear": "変更なし(2026-09-23にWebSearchで専用入試情報サイト(nyuushi.tokushima-ec.ed.jp)のR5専用ページ階層(high_school/R5_nyuugakusyasennbatu/R5sennbatuyoukou/R5sennbatuyoukou。現行404・Waybackで発見)を辿り、NetCommons型ID指定ダウンロードURL(wysiwyg/file/download/1/1518)を特定。通常の/web/timestamp/URLで直接フェッチすると archive側が500エラーのHTMLを返す罠があったが、id_サフィックス(/web/timestamp id_/URL)で生コンテンツを取得することで回避(2.5MB・98頁の正しいPDFを確認)。印刷頁35「別記2 相関表の作成」「調査書の評定値合計の算出方法(高等学校)」1「音楽、美術、保健体育及び技術・家庭の4教科については、第1学年から第3学年までの評定値合計を2倍する」2「国語、社会、数学、理科及び外国語については、第1学年から第3学年までの評定値合計とする」3「調査書の評定値合計は、上記1及び2を合計して195点満点とする」を確認、R6エントリの引用文と一言一句完全一致。令和6・7・8年度分のgradeMultipliers{1:1,2:1,3:1}/maxScore=195/practicalMultiplier=2と完全一致(変更なし)。教訓: NetCommons型CMSのID指定ダウンロードURLはWaybackの通常プレイバックで500エラーになることがあり、id_サフィックスでの生フェッチを試すこと。"
+    },
+    {
+      "code": "niigata",
+      "name": "新潟県",
+      "region": "中部",
+      "fiscalYear": "2023",
+      "targetGrades": [
+        1,
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://web.archive.org/web/20221110105439/https://www.pref.niigata.lg.jp/uploaded/attachment/339458.pdf",
+      "sourceUrl2": "https://web.archive.org/web/20240116133858/https://www.pref.niigata.lg.jp/sec/kotogakko/r5kotogakkonyushi.html",
+      "sourceTitle": "新潟県教育委員会「令和5年度新潟県公立高等学校入学者選抜要項」様式1 調査書",
+      "lastVerified": "2026-09-23",
+      "pdfHash": "7a1f1d6d7ccb32b75719e958650e52e8a7030da09bbe7e9dbf773db88481e211",
+      "diffFromCurrentYear": "変更なし(2026-09-23にWebSearchでR5専用ページ(sec/kotogakko/r5kotogakkonyushi.html。現行404・Waybackで発見)から資料一覧を取得し「入学者選抜要項」本体(uploaded/attachment/339458.pdf・R6のattachment/381674.pdfとは別ID・4MB・88頁)を特定。2つの独立タイムスタンプで同一ダイジェストを確認(切り詰めなし)。様式1「調査書」(印刷頁32)を確認、9教科(国語・社会・数学・理科・音楽・美術・保健体育・技術家庭・外国語)それぞれに「1年」「2年」「3年」の評定欄が並列で設けられており、学年間の傾斜配点(倍率)を示す記載は様式上に存在しない(等倍)。R6エントリと同一の様式構成で完全一致。9教科×5段階×3学年=135点。令和6・7・8年度分と完全一致(変更なし)。教訓: 印刷ページ番号とPDF索引のオフセットは文書内で一定でないことがある(様式の並び順が章立てと連動しないため、期待した位置に無ければ前後数頁を確認すること)。"
     }
   ]
 }

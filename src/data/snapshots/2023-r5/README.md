@@ -12,10 +12,17 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 33件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 34件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
   kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita・miyazaki・
-  toyama・tokushima）。
+  toyama・tokushima・niigata）。
+- **✅2026-09-23追記: niigataを追加(34/47)**。WebSearchでR5専用ページ(`sec/kotogakko/
+  r5kotogakkonyushi.html`。現行404・Waybackで発見)から資料一覧を取得し「入学者選抜要項」本体
+  (`uploaded/attachment/339458.pdf`・R6の`attachment/381674.pdf`とは別ID・4MB・88頁)を特定・
+  2タイムスタンプで同一ダイジェスト確認(切り詰めなし)。様式1「調査書」(印刷頁32)の9教科×
+  1〜3年評定欄がR6と同一構成(学年間傾斜なし)。135点満点・変更なし。**教訓: 印刷ページ番号と
+  PDF索引のオフセットは文書内で一定でないことがある(様式の並び順は章立てと連動しないため、
+  期待した位置に見当たらなければ前後数頁を確認すること)**。
 - **✅2026-09-23追記: tokushimaを追加(33/47)**。過去に「R5専用の議案書PDFが見つからず保留」
   としていたが、専用入試情報サイト(`nyuushi.tokushima-ec.ed.jp`)のR5専用ページ階層を
   WebSearchで発見し辿った結果、NetCommons型のID指定ダウンロードURL
