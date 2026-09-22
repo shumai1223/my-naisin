@@ -12,8 +12,12 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 17件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
-  gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata）。
+- **entries 18件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+  gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka）。
+- **shizuoka**はWebSearchでR5専用の発表資料ページ(project ID 001/031/855・R6は001/054/127・
+  R7は001/063/460と年度ごとに全く異なるproject ID)を発見し各種様式等PDF(33頁)を取得。
+  (別記1)調査書の記入方法2(3)アの条文がR6エントリの引用文と一言一句完全一致し45点満点
+  (第3学年のみ)を確定(変更なし)。
 - **yamagata**はWebSearchでR5専用ページ(220117r5nyuugakusyasennbatujouhou.html)を発見し様式第2号A
   「調査書」xlsx(23KB)を取得。R6と同じ手法(xlsx内部のsharedStrings.xmlをunzip抽出)で「第３学年の
   評定の合計」という項目名がR6エントリと一言一句完全一致で存在することを確認し45点満点(第3学年

@@ -279,4 +279,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(yg2023.targetGrades).toEqual([3]);
     expect(yg2023.gradeMultipliers).toEqual(yg2024.gradeMultipliers);
   });
+
+  test('shizuoka: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const sz2023 = snapshot.entries.find((e) => e.code === 'shizuoka')!;
+    const sz2024 = snapshot2024.entries.find((e) => e.code === 'shizuoka')!;
+    const sz2025 = snapshot2025.entries.find((e) => e.code === 'shizuoka')!;
+    const sz2026 = snapshot2026.entries.find((e) => e.code === 'shizuoka')!;
+    expect(sz2023.maxScore).toBe(45);
+    expect(sz2023.maxScore).toBe(sz2024.maxScore);
+    expect(sz2023.maxScore).toBe(sz2025.maxScore);
+    expect(sz2023.maxScore).toBe(sz2026.maxScore);
+    expect(sz2023.targetGrades).toEqual([3]);
+    expect(sz2023.gradeMultipliers).toEqual(sz2024.gradeMultipliers);
+  });
 });
