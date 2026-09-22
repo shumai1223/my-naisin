@@ -434,10 +434,13 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       ことがある（tochigi/ehime/kochiで実証・ただし関連URL(sourceUrl2等)は本体と同じ規則で
       推測しても外れることがあるため毎回個別に実在確認する）。
       **2023-r5は未着手** → **✅2026-09-22着手**: `src/data/snapshots/2023-r5/`を新設し
-      ehime・kochiの2県を収録(2/47)。両県とも2024-r6のURLパターンの年度部分置換(`r06`→`r05`等)
-      で直接発見でき、pdftotextはCJKテキスト抽出不可(他県と同型の既知の制約)のためPyMuPDFで
-      該当頁をビジョン解析。2024-r6/2025-r7/2026-r8と数値完全一致(変更なし)。osaka/chiba/
-      tochigiは同じ単純置換では404だったため次回はWebSearchで正しいURLを探す必要がある
+      ehime・kochi・yamanashiの3県を収録(3/47)。全て2024-r6のURLパターンの年度部分置換
+      (`r06`→`r05`等)で直接発見でき、pdftotextはCJKテキスト抽出不可(他県と同型の既知の制約。
+      yamanashiは文字コードシフト型のmojibake)のためPyMuPDFで該当頁をビジョン解析。
+      2024-r6/2025-r7/2026-r8と数値完全一致(変更なし)。osaka/chiba/tochigi/toyama/iwate/
+      nagano/wakayama/shimane/aomoriは同じ単純置換では404(次回はWebSearchで正しいURLを探す)。
+      大市場県(tokyo/kanagawa/aichi/saitama/hyogo/fukuoka等)はR6時点でWayback依存だったが、
+      2026-09-22時点でInternet Archiveが再び「Temporarily Offline」のため後回し
       (`src/data/snapshots/2023-r5/README.md`に詳細記録)。
 - [ ] **取得不能は正直に記録する**（N1-2で45/47・2県取得不能だった実績と同じ扱い） →
       現時点でmeta.unavailableは0件（保留中のtokyoはまだunavailable確定にしていない・

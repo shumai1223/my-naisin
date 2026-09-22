@@ -83,4 +83,18 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(k2023.practicalMultiplier).toBe(k2024.practicalMultiplier);
     expect(k2023.gradeMultipliers).toEqual(k2024.gradeMultipliers);
   });
+
+  test('yamanashi: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const y2023 = snapshot.entries.find((e) => e.code === 'yamanashi')!;
+    const y2024 = snapshot2024.entries.find((e) => e.code === 'yamanashi')!;
+    const y2025 = snapshot2025.entries.find((e) => e.code === 'yamanashi')!;
+    const y2026 = snapshot2026.entries.find((e) => e.code === 'yamanashi')!;
+    expect(y2023.maxScore).toBe(330);
+    expect(y2023.maxScore).toBe(y2024.maxScore);
+    expect(y2023.maxScore).toBe(y2025.maxScore);
+    expect(y2023.maxScore).toBe(y2026.maxScore);
+    expect(y2023.coreMultiplier).toBe(y2024.coreMultiplier);
+    expect(y2023.practicalMultiplier).toBe(y2024.practicalMultiplier);
+    expect(y2023.gradeMultipliers).toEqual(y2024.gradeMultipliers);
+  });
 });

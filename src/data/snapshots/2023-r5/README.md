@@ -12,10 +12,16 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 2件**（ehime・kochi）。ともに2024-r6のURLパターン（`r06`→`r05`等の年度部分の
-  置換）で直接発見でき、pdftotextはCJKテキスト抽出不可（他県と同型の既知の制約）だったため
-  PyMuPDFでページをPNGにレンダリングしてビジョン解析した。
-- 両県とも2024-r6・2025-r7・2026-r8と数値が完全一致（変更なし）。
+- **entries 3件**（ehime・kochi・yamanashi）。全て2024-r6のURLパターン（`r06`→`r05`等の
+  年度部分の置換）で直接発見でき、pdftotextはCJKテキスト抽出不可（他県と同型の既知の制約。
+  yamanashiは通常の空白でなく文字コードがシフトされたグリフのmojibakeという別パターン）
+  だったためPyMuPDFでページをPNGにレンダリングしてビジョン解析した。
+- 3県とも2024-r6・2025-r7・2026-r8と数値が完全一致（変更なし）。yamanashiはR6と同じ
+  PDFページ位置（18枚目/印刷頁13）に同じ章番号（第9選抜方法）があり、章構成そのものも
+  年度間で変わっていないことが分かった。
+- **Wayback Machine（Internet Archive）は2026-09-22時点で「Temporarily Offline」を再確認**
+  （複数のCDX APIクエリが全てこのエラーページを返した）。osaka/chiba/tochigi/kanagaw等の
+  Wayback依存県はこの復旧待ち。現行サイトに直接残っている県を優先して着手すること。
 
 ## 収集方針（2024-r6から継承・Y-0を継承）
 
@@ -29,7 +35,11 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 次にやること
 
-大市場県（tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka）と、2024-r6収集時に
-「年度番号がURLパスに直接入っている」と確認済みの県（tochigi/ehime/kochi等）から優先的に
-着手する。osaka/chiba/tochigiは今回`r6`→`r5`の単純な文字列置換では404だったため、
-WebSearchで正しいR5版のURL（document IDが年度で変わるパターン）を探す必要がある。
+大市場県（tokyo/kanagawa/aichi/osaka/saitama/chiba/hyogo/fukuoka）は軒並みR6時点で
+Wayback依存だったため、Wayback復旧まで後回しにするのが効率的。次に着手すべきは
+2024-r6で**現行サイトに直接PDFが残っていた県**（iwate/nagano/wakayama/shimane/toyama/
+aomori等・`git log`でなく`src/data/snapshots/2024-r6/exam-system.json`のsourceUrlで
+`web.archive.org`を含まない県を機械的に絞り込める）から、`r6`→`r5`のような単純な
+年度部分置換をまず試し、404ならWebSearchでR5版のURL（document IDが年度で変わることが
+多い）を探す。今回試して404だった県（tochigi/toyama/iwate/nagano/wakayama/shimane/
+aomori）は単純置換では見つからなかったので、次回はWebSearchでの再挑戦から。
