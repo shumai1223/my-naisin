@@ -435,8 +435,8 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       推測しても外れることがあるため毎回個別に実在確認する）。
       **2023-r5は未着手** → **✅2026-09-22着手**: `src/data/snapshots/2023-r5/`を新設し
       ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma・
-      kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuokaの18県を収録(18/47)。
-      mieは単純URL置換でなくWebSearchで「令和５年度三重県
+      kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifuの19県を収録
+      (19/47)。mieは単純URL置換でなくWebSearchで「令和５年度三重県
       立高等学校入学者選抜実施方針」PDFを直接発見(45点満点・9教科×5段階・第3学年のみ対象、R6/R7
       の引用文と一言一句一致)。naraもWebSearchでR5専用ページ(document ID年度ごとに変わる)を
       発見し135点満点(15点×9教科・第2/3学年のみ)をR6引用文と一致で確定(R7→R8間で制度変更済みの
@@ -452,6 +452,10 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       yamagataはR5専用ページのxlsx(様式第2号A)をunzip抽出しsharedStrings.xmlの項目名一致で
       45点満点を確定。okinawaはR5ページ404・Wayback不調で保留。shizuokaはproject IDが年度ごとに
       変わるURL構造をWebSearchで辿りR5専用発表資料ページを発見・45点満点をR6引用文と一致で確定。
+      gifuは第三者サイト引用の直リンクが404だったがWayback CDX(availability APIは空だったがCDXには
+      3件実在)で完全版PDFを回収・180点満点をR6引用文と一致で確定。toyama/iwate/nagano/shimaneは
+      再試行したがCDXにも未アーカイブと確認、tottori/tokushima/akitaはR5専用PDFのURL特定に至らず
+      保留、aomoriはWaybackに1件のみ発見したが1MBで内容切り詰めのため未確定。
       ehime/kochi/yamanashiは2024-r6のURLパターンの年度部分置換(`r06`→`r05`等)で直接発見
       (yamanashiは文字コードシフト型のmojibakeでpdftotext不可・PyMuPDFビジョン解析)。
       osaka/chiba/tochigi/wakayama/ibarakiは単純置換では404だったがWebSearchでR5専用の

@@ -292,4 +292,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(sz2023.targetGrades).toEqual([3]);
     expect(sz2023.gradeMultipliers).toEqual(sz2024.gradeMultipliers);
   });
+
+  test('gifu: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const gf2023 = snapshot.entries.find((e) => e.code === 'gifu')!;
+    const gf2024 = snapshot2024.entries.find((e) => e.code === 'gifu')!;
+    const gf2025 = snapshot2025.entries.find((e) => e.code === 'gifu')!;
+    const gf2026 = snapshot2026.entries.find((e) => e.code === 'gifu')!;
+    expect(gf2023.maxScore).toBe(180);
+    expect(gf2023.maxScore).toBe(gf2024.maxScore);
+    expect(gf2023.maxScore).toBe(gf2025.maxScore);
+    expect(gf2023.maxScore).toBe(gf2026.maxScore);
+    expect(gf2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 2 });
+    expect(gf2023.gradeMultipliers).toEqual(gf2024.gradeMultipliers);
+  });
 });
