@@ -12,9 +12,18 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 31件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 32件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita・miyazaki）。
+  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita・miyazaki・
+  toyama）。
+- **✅2026-09-23追記: toyamaを追加(32/47)**。旧セッションでは「CDXにも未アーカイブ」と
+  結論していたが、WebSearchでR5専用ページ(`pref.toyama.jp/3003/20220712.html`。現行404・
+  Waybackで発見)から`documents/27438/r5_youryou.pdf`(R6のdocument ID `37292`とは別・
+  5.8MB・58頁)を特定・2つの独立タイムスタンプで同一ダイジェスト確認(切り詰めなし)。
+  印刷頁2「7選抜の方法(3)」ア〜ウの条文がR6引用文と一言一句完全一致
+  (135点満点+特別活動等15点=150点満点・変更なし)。**教訓: 「CDXに未アーカイブ」という
+  過去の結論も、県教委サイトのR5専用告知ページ自体をWebSearchで新たに発見できれば覆る
+  ことがある(toyama/kanagawa/saitamaに共通する教訓)**。
 - **✅2026-09-23追記: miyazakiを追加(31/47・caveatあり)**。`documents/70099/`配下をCDX全件
   走査し複数の候補PDFを発見。1つ目(`70099_20220920140358-1.pdf`)は1頁目のビジョン確認で
   「推薦入学要項」(別冊子)と判明し却下、2つ目(`70099_20220928102855-1.pdf`・6.98MB・80頁)

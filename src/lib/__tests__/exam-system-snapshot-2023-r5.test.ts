@@ -473,4 +473,19 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(mz2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 1 });
     expect(mz2023.gradeMultipliers).toEqual(mz2024.gradeMultipliers);
   });
+
+  test('toyama: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const ty2023 = snapshot.entries.find((e) => e.code === 'toyama')!;
+    const ty2024 = snapshot2024.entries.find((e) => e.code === 'toyama')!;
+    const ty2025 = snapshot2025.entries.find((e) => e.code === 'toyama')!;
+    const ty2026 = snapshot2026.entries.find((e) => e.code === 'toyama')!;
+    expect(ty2023.maxScore).toBe(135);
+    expect(ty2023.maxScore).toBe(ty2024.maxScore);
+    expect(ty2023.maxScore).toBe(ty2025.maxScore);
+    expect(ty2023.maxScore).toBe(ty2026.maxScore);
+    expect(ty2023.targetGrades).toEqual([2, 3]);
+    expect(ty2023.gradeMultipliers).toEqual({ '1': 0, '2': 1, '3': 2 });
+    expect(ty2023.gradeMultipliers).toEqual(ty2024.gradeMultipliers);
+    expect(ty2023.reverseCalc).toBeNull();
+  });
 });

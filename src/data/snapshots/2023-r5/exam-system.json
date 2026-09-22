@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 31,
+    "collectedCount": 32,
     "unavailable": [],
-    "pdfHashStatus": "partial_31_of_31",
-    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita/miyazaki)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oita/miyazakiはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_32_of_32",
+    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyamaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -1123,6 +1123,35 @@
       "lastVerified": "2026-09-23",
       "pdfHash": "eebc604a90b1ccbe330b43d2c102700e01d04698b635417ac3882ad5973377d1",
       "diffFromCurrentYear": "変更なし(caveatあり)(2026-09-23にdocuments/70099/配下をCDX全件走査し『令和5年度宮崎県立高等学校入学者選抜実施要綱』本体(70099_20220928102855-1.pdf・6.98MB・80頁。同ディレクトリに存在した70099_20220920140358-1.pdfは中身が推薦入学要項のみで別物と判明)を特定・Wayback経由で取得。本文書はPyMuPDFのget_text()でテキスト抽出に成功(kanagawa型)。印字ページ番号のオフセット(index31=印字-28-)を特定し『10出願書類の作成要領』(2)調査書(様式2)の項(印字-29-)を確認、イ『学習の記録Ⅰ』ア第1・第2学年の観点別学習状況及び評定は『生徒指導要録』に記載されたものを記入する、イ第3学年は令和4年12月末日までの成績によって行う、という記述がR6エントリの引用文と同型(日付のみ年度分ズレ)で一致。R6と同じく学年別の傾斜配点や実技科目への倍率など素点の重み付けを示す記載は一切無い(必修教科は各学年とも一律5段階評定)——R6と同型のcaveat(135という数値は一次ソースの明示的配点表ではなく『傾斜なし』の消去法に基づく)を維持。令和6・7・8年度分のgradeMultipliers{1:1,2:1,3:1}/maxScore=135と矛盾しない(変更なし)。教訓: documents/直下ディレクトリのCDX全件走査で候補PDFが複数見つかった場合、ファイル名だけでなく1頁目のビジョン確認で『推薦入学要項』等の別冊子でないか判別すること"
+    },
+    {
+      "code": "toyama",
+      "name": "富山県",
+      "region": "中部",
+      "fiscalYear": "2023",
+      "targetGrades": [
+        2,
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 1,
+        "3": 2
+      },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://web.archive.org/web/20230419143129/https://www.pref.toyama.jp/documents/27438/r5_youryou.pdf",
+      "sourceUrl2": "https://web.archive.org/web/20230419141559/https://www.pref.toyama.jp/3003/20220712.html",
+      "sourceTitle": "富山県教育委員会「令和5年度富山県立高等学校入学者選抜実施要領」7選抜の方法(3)",
+      "lastVerified": "2026-09-23",
+      "pdfHash": "066a21740be9c4c1fc20fb42b85d19343bcdb48ddc26dd11d6fc390b992a6ebe",
+      "diffFromCurrentYear": "変更なし(2026-09-23にWebSearchでR5専用ページ(pref.toyama.jp/3003/20220712.html。現行404・Waybackで発見)から資料一覧を取得しdocuments/27438/r5_youryou.pdf(R6のdocument ID 37292とは別・5.8MB・58頁)を特定。2つの独立タイムスタンプ(20230419/20251115)で同一ダイジェストを確認(切り詰めなし)。印刷頁2(PDF頁5)「7選抜の方法(3)…ア学習の記録における2年次の各教科の評定による評定点(45点満点) イ学習の記録における3年次の各教科の評定それぞれに2を乗じたものによる評定点(90点満点) ウ特別活動等、学習の記録以外の記載事項を換算したものによる評定点(15点満点)」を確認、R6エントリの引用文と一言一句完全一致(中2:45点+中3×2:90点=135点+特別活動等15点=150点満点)。令和6・7・8年度分と完全一致(変更なし)。"
     }
   ]
 }
