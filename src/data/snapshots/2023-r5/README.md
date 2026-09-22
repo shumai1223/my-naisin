@@ -12,7 +12,15 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 12件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma・kyoto）。
+- **entries 13件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma・kyoto・fukushima）。
+- **fukushima**はR5専用ページ(`site/edu/r5koukounyushi.html`・R6は`r6koukounyushi.html`と年度で
+  固定パターン)をWebSearchで発見し、「令和5年度福島県立高等学校入学者選抜実施要綱」本体(98頁)を
+  直接取得。一般選抜「調査書」①の条文がR6エントリの引用文と一言一句完全一致し195点満点を確定
+  (変更なし)。教訓: 同一文書内に前期選抜(特色選抜等・135点満点)と一般選抜(後期選抜・195点満点)
+  の2種類の異なる調査書配点が別々の章に併記されており、『調査書』という見出しが複数回登場するため
+  正しい選抜区分(一般選抜=後期選抜)の章を特定する必要がある(tokushimaも同型の構造の可能性があり
+  今回はR5専用の議案書を発見できず見送った)。
+- **保留**: tokushima(R5専用の議案書PDFが見つからず、報告事項PDFには配点記載なし)。
 - **kyoto**はWebSearchでR5選抜情報ページ(`?p=536`)を発見し、R6と同じファイル名パターン
   (`senbatuyoukou.pdf`)の選抜要項本体を直接取得(88頁)。7中期選抜イ選抜方法等(ｱ)a・bの条文が
   R6エントリの引用文と一言一句完全一致し、195点満点(5教科×5×3学年=75点+4教科×5×3学年×2倍
