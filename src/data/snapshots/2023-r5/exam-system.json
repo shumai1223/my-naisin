@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 25,
+    "collectedCount": 26,
     "unavailable": [],
-    "pdfHashStatus": "partial_25_of_25",
-    "pdfHashNote": "着手25件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuokaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_26_of_26",
+    "pdfHashNote": "着手26件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/naganoはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -671,6 +671,28 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "8cd88ce6207ccb5ec125a9c2de8b99338ab4edc04ddfbef3912090bc6da922b7",
       "diffFromCurrentYear": "【caveatあり・変更なし(間接確認)】2026-09-22にWebSearchで発見した歴代アーカイブページ(senbatsu/325134.html・R05セクション)から2文書を直接取得(共に現行URLで200)。『概要および変更点』文書は毎年発行される網羅的な変更点リストであり、令和5年度の変更点として明記されているのは(1)信楽高校の全国募集枠検査方法(2)石山高校特色選抜の募集枠・検査内容(3)大津商業・長浜北星のスポーツ推薦定員(4)八日市南高校の面接廃止、の4校限定の変更のみで、一般選抜全体の個人調査報告書(調査書)の評価方法・配点比率に関する変更は一切記載されていない(R6と同型の確認方法)。選抜要項本体(1MB)9選抜の方法も確認したが、各教科等の配点自体は『各県立高等学校ごとに定める実施要項によるものとする(別表1の「高等学校別入学者選抜一覧表」を参照すること)』と学校別に委任される構造で本文には現れない(R6と一言一句同一の委任文言)。maxScore=135(9教科×5段階×3学年・学年間傾斜なし)は令和6・7・8年度分からの構造不変前提の引き継ぎであり、様式現物での独立再検証ではない点はR6エントリと同じ限界として明記する"
+    },
+    {
+      "code": "nagano",
+      "name": "長野県",
+      "region": "中部",
+      "fiscalYear": "2023",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "http://web.archive.org/web/20230205171039/https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r5/documents/r5yoko_1.pdf",
+      "sourceUrl2": "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r5/r5nyushi.html",
+      "sourceTitle": "長野県教育委員会「令和5年度長野県立高等学校入学者選抜要綱」第3後期選抜イ(ｱ)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "5998853171566836903df722750563874b4a898bf12545f0a6877f8008e77ebc",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWayback CDXでR5の文書ディレクトリ(kyoiku/koko/saiyo-nyuushi/shiken/ko/r5/documents/)を検索し正しいファイル名(r5yoko_1.pdf・アンダースコア付き。以前の試行はr5yoko1.pdfとアンダースコアなしで機械的に置換し404だった)を発見・取得(9頁)。イ(ｱ)「学科ごとに、受検者全員について、調査書に記載されている中学校第３学年の必修教科の評定合計値(最高45点)を縦軸、学力検査成就率合計値(最高500点)を横軸とする相関図を作成する」を確認、R6エントリの引用文と一言一句完全一致(第3学年のみ・9教科×5段階=45点満点・変更なし)。令和6・7・8年度分と完全一致。教訓: ファイル名の単純な年度トークン置換(r6→r5)は、アンダースコア等の細部が年度によって異なる場合に失敗する。置換が404の場合はWayback CDXでディレクトリ全体を検索し実在のファイル名一覧から探すとよい(toyama/nagano両方でこの手法が有効と判明。toyamaは同ディレクトリに本当に何も無く未アーカイブと確定したが、naganoは単純なタイプミス相当の差異だった)"
     }
   ]
 }

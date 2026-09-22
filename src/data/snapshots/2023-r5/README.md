@@ -12,9 +12,14 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 25件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 26件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo・fukuoka・yamaguchi・shiga）。
+  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano）。
+- **nagano**は当初「保留」に分類していたが、Wayback CDXでR5の文書ディレクトリを検索したところ
+  正しいファイル名`r5yoko_1.pdf`(アンダースコア付き)を発見(以前の機械置換`r6yoko1.pdf`→`r5yoko1.pdf`
+  はアンダースコアなしで404だった単純なタイプミス相当の差異)。イ(ｱ)の条文がR6引用文と一言一句
+  完全一致し45点満点を確定(変更なし)。教訓: ファイル名の単純な年度置換が404の場合、Wayback CDXで
+  ディレクトリ全体を検索すると実在のファイル名一覧から正解が見つかることがある。
 - **shiga**はWebSearchで歴代アーカイブページ(senbatsu/325134.html)のR05セクションを発見し
   『概要および変更点』『選抜要項』の2文書を現行URLで直接取得。変更点文書は4校限定の変更のみで
   一般選抜の調査書配点に関する変更なし、要項本体も配点は「各高等学校ごとに定める実施要項による」
@@ -50,7 +55,8 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
   **重要な教訓**: `archive.org/wayback/available`のavailability APIは空(`{}`)を返しても
   `/cdx/search/cdx`には実際にスナップショットが存在することがある(availability APIは最新1件のみの
   簡易版)。availabilityで空だった場合もCDXで再確認すること(gifu/aomoriの両方でこの罠を確認)。
-- **保留**: toyama/iwate/nagano/shimane(Wayback CDXにも本当に未アーカイブ)、
+- **保留**: toyama(Wayback CDXで文書ディレクトリを検索しても本当に未アーカイブと確認・
+  naganoと違いタイプミス相当の差異ではなく真に存在しない)、iwate/shimane(同様に未確認のまま)、
   tottori/tokushima/akita(R5専用の一次ソースPDFが未発見のまま時間切れ)、
   aomori(Wayback上に1件だけ発見したがコンテンツが1MBで切り詰められ全78頁中の一部しか読めない)、
   niigata(R5専用ページ`r5kotogakkonyushi.html`はWebSearch上のタイトルには存在するが実サーバは404・
@@ -73,7 +79,8 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
   null=archive.org側の恒久的配信バグで取得不能と確定済み)・tokyo(過去セッションでR6実施要綱本体
   PDF自体が一度もアーカイブされておらず取得不能と確定済み)・saga(R6自体がpdfHash null=一次資料
   未発見のまま)・kanagawa(今回404・Wayback不調)で、いずれも新規に試しても解決見込みが低い**。
-  次回はWaybackが安定してからtoyama/iwate/nagano/shimane等の保留県を再挑戦するのが最も見込みがある。
+  次回はWaybackが安定してからiwate/shimane等の保留県をディレクトリ全体検索で再挑戦するのが
+  最も見込みがある(nagano方式が成功例)。
 - **shizuoka**はWebSearchでR5専用の発表資料ページ(project ID 001/031/855・R6は001/054/127・
   R7は001/063/460と年度ごとに全く異なるproject ID)を発見し各種様式等PDF(33頁)を取得。
   (別記1)調査書の記入方法2(3)アの条文がR6エントリの引用文と一言一句完全一致し45点満点

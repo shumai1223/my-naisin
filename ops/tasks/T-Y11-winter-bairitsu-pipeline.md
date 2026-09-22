@@ -436,7 +436,7 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       **2023-r5は未着手** → **✅2026-09-22着手**: `src/data/snapshots/2023-r5/`を新設し
       ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma・
       kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-      kagawa・hyogo・fukuoka・yamaguchi・shigaの25県を収録(25/47)。mieは単純URL置換でなくWebSearchで「令和５年度三重県
+      kagawa・hyogo・fukuoka・yamaguchi・shiga・naganoの26県を収録(26/47)。mieは単純URL置換でなくWebSearchで「令和５年度三重県
       立高等学校入学者選抜実施方針」PDFを直接発見(45点満点・9教科×5段階・第3学年のみ対象、R6/R7
       の引用文と一言一句一致)。naraもWebSearchでR5専用ページ(document ID年度ごとに変わる)を
       発見し135点満点(15点×9教科・第2/3学年のみ)をR6引用文と一致で確定(R7→R8間で制度変更済みの
@@ -466,7 +466,8 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       指すことを利用しPDFを回収・45点満点をR6引用文と一致で確定。yamaguchiはWebSearchで実施大綱を
       現行URLで直接取得・条文一致で135点満点(caveatあり=R6自体も明示数値記載なし)を確定。shigaは
       歴代アーカイブページのR05セクションから2文書を発見・変更点なし+別表1委任構造の一致から
-      caveatあり135点満点を確定。
+      caveatあり135点満点を確定。naganoは当初保留だったがWayback CDXでディレクトリ全体検索し
+      正しいファイル名(アンダースコア付き)を発見・45点満点をR6引用文と一致で確定(caveatなし)。
       ehime/kochi/yamanashiは2024-r6のURLパターンの年度部分置換(`r06`→`r05`等)で直接発見
       (yamanashiは文字コードシフト型のmojibakeでpdftotext不可・PyMuPDFビジョン解析)。
       osaka/chiba/tochigi/wakayama/ibarakiは単純置換では404だったがWebSearchでR5専用の
