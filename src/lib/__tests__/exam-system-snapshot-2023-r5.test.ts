@@ -317,4 +317,19 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(ik2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 2 });
     expect(ik2023.gradeMultipliers).toEqual(ik2024.gradeMultipliers);
   });
+
+  test('kagawa: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(caveatあり・構造一致で推定)', () => {
+    const kg2023 = snapshot.entries.find((e) => e.code === 'kagawa')!;
+    const kg2024 = snapshot2024.entries.find((e) => e.code === 'kagawa')!;
+    const kg2025 = snapshot2025.entries.find((e) => e.code === 'kagawa')!;
+    const kg2026 = snapshot2026.entries.find((e) => e.code === 'kagawa')!;
+    expect(kg2023.maxScore).toBe(390);
+    expect(kg2023.maxScore).toBe(kg2024.maxScore);
+    expect(kg2023.maxScore).toBe(kg2025.maxScore);
+    expect(kg2023.maxScore).toBe(kg2026.maxScore);
+    expect(kg2023.simplifiedCalc).toBe(true);
+    expect(kg2023.actualMaxScore).toBe(220);
+    expect(kg2023.coreMultiplier).toBe(2);
+    expect(kg2023.practicalMultiplier).toBe(4);
+  });
 });

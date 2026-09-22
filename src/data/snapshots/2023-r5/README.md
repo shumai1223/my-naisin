@@ -12,8 +12,14 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 20件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
-  gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa）。
+- **entries 21件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+  gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
+  kagawa）。
+- **kagawa**はWebSearchで「令和5年度香川県公立高等学校入学者選抜要綱」(dai2gou.pdf・5頁)を現行URLで
+  直接取得。6選抜方法(1)「調査書の学習の記録と学力検査の成績は、同等に扱う」はR6引用文と一言一句
+  完全一致で確認できたが、具体的な換算式(390/220/coreMultiplier2/practicalMultiplier4)を記載する
+  『実施細目』という別文書はR6自体もAdobe-Japan1フォント欠落で読めておらず、R5版のURLも今回発見
+  できなかった。R6・R7・R8の3年連続一致から構造推定で収録(**caveatあり**・R6と同型の間接確認)。
 - **ishikawa**はファイル名(r6youkou.pdf→r5youkou.pdf)の機械置換でWayback CDXから完全版(67頁)を
   取得。R6と同型の「Adobe-Japan1フォント欠落」でpdftotextが一部頁で完全に文字抽出不能な罠があり、
   肝心の6(2)倍率記述頁はpdftoppmでも白紙(ビジョン解析不能)。7(2)条文・様式2-2/様式3の構造一致は

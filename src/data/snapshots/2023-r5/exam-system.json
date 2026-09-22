@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 20,
+    "collectedCount": 21,
     "unavailable": [],
-    "pdfHashStatus": "partial_20_of_20",
-    "pdfHashNote": "着手20件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa)は全て取得し即時ハッシュ化(gifu/ishikawaはWayback経由)。ishikawaのみcaveatあり(6(2)の倍率記述頁がpdftoppmで白紙のため独立再検証できず構造一致から推定)。"
+    "pdfHashStatus": "partial_21_of_21",
+    "pdfHashNote": "着手21件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa)は全て取得し即時ハッシュ化(gifu/ishikawaはWayback経由)。ishikawa/kagawaはcaveatあり(換算式の一次ソース頁が読めず構造一致から推定)。"
   },
   "entries": [
     {
@@ -528,6 +528,39 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "25ab7d67f5de790f83acdbf2d0101db495ddabb5da13554b228110899635d020",
       "diffFromCurrentYear": "【caveatあり・変更なし(構造一致で推定)】2026-09-22にファイル名(r5youkou.pdf)をr6youkou.pdfから機械的に置換してWayback CDXで発見・取得(67頁・6.9MB・切り捨てなし)。pdftotextはAdobe-Japan1フォント欠落で一部頁が完全に文字抽出不能(R6と同型の既知の罠)。テキスト抽出できた範囲で7(2)「調査書中の学習の記録の評定は、第１学年、第２学年及び第３学年のいずれも５段階評定によって記載するものとする」をR6エントリの7(2)引用文と一言一句完全一致で確認、様式2-2(成績一覧表Ⅱ表)が第3学年のみ9教科の評定欄を持つ構造もR6と同一であることを確認。しかし6(2)の『第1・2学年の合計値+第3学年の合計値を2倍した値の和』という具体的な倍率記述そのものは、該当頁がpdftoppmでも完全白紙(Adobe-Japan1言語パック欠落)でビジョン解析も不能なため、今回は独立再検証できなかった。R6・R8で(R7は未収集)180点満点・gradeMultipliers{1:1,2:1,3:2}が完全一致していること、および学校数(40校65学科9コース)が令和4→5年度で不変と教委資料に明記されていることから制度不変と判断し180点満点を引き継いだ(次回、白紙頁の代替入手手段(別ファイル・別頁)があれば直接裏取りを推奨)"
+    },
+    {
+      "code": "kagawa",
+      "name": "香川県",
+      "region": "四国",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 2,
+      "practicalMultiplier": 4,
+      "maxScore": 390,
+      "simplifiedCalc": true,
+      "actualMaxScore": 220,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 1000,
+        "examMaxScore": 500,
+        "defaultRatio": { "naishin": 40, "exam": 60 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.kagawa.lg.jp/documents/32961/dai2gou.pdf",
+      "sourceUrl2": "https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html",
+      "sourceTitle": "香川県教育委員会「令和5年度香川県公立高等学校入学者選抜要綱」6選抜方法(1)(caveatあり)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "e4173543a3b16784c3d5ef8052243b8ba0dada4408b5e3056c661b1ea6c31063",
+      "diffFromCurrentYear": "【caveatあり・変更なし(構造一致で推定)】2026-09-22にWebSearchで発見した「令和5年度香川県公立高等学校入学者選抜要綱」(dai2gou.pdf・5頁・現行URLで直接200取得)を確認。6選抜方法(1)「調査書の学習の記録と学力検査の成績は、同等に扱う。」を確認、R6エントリの引用文と一言一句完全一致(gradeMultipliers全学年1で等倍・変更なし)。ただしR6と同じく、maxScore=390/actualMaxScore=220/coreMultiplier=2/practicalMultiplier=4という具体的な換算式は『実施細目』という別文書(R6でAdobe-Japan1フォント欠落によりテキスト抽出・ビジョン解析とも不能だった)に記載されており、R5版の実施細目のURLは今回発見できなかった(WebSearchでも要綱本体のみヒット)。R6・R7・R8の3年連続で390/220/2/4が完全一致していることから制度不変と判断し引き継いだ(R6と同型のcaveat)"
     }
   ]
 }

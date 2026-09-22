@@ -435,8 +435,8 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       推測しても外れることがあるため毎回個別に実在確認する）。
       **2023-r5は未着手** → **✅2026-09-22着手**: `src/data/snapshots/2023-r5/`を新設し
       ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma・
-      kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawaの20県を
-      収録(20/47)。mieは単純URL置換でなくWebSearchで「令和５年度三重県
+      kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
+      kagawaの21県を収録(21/47)。mieは単純URL置換でなくWebSearchで「令和５年度三重県
       立高等学校入学者選抜実施方針」PDFを直接発見(45点満点・9教科×5段階・第3学年のみ対象、R6/R7
       の引用文と一言一句一致)。naraもWebSearchでR5専用ページ(document ID年度ごとに変わる)を
       発見し135点満点(15点×9教科・第2/3学年のみ)をR6引用文と一致で確定(R7→R8間で制度変更済みの
@@ -459,6 +459,8 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       もR5専用実施要項ページが全て404で保留(Wayback CDXも断続的にオフライン)。ishikawaはファイル名
       置換でWayback CDXから完全版を回収できたが肝心の倍率記述頁がAdobe-Japan1フォント欠落で白紙
       (ビジョン解析不能)のため、R6・R8の一致(R7は未収集)から構造推定でcaveatあり180点満点として収録。
+      kagawaは要綱本体をWebSearchで発見し基本方針の条文一致を確認したが、換算式を持つ『実施細目』は
+      R6自体も読めておらずR5版URLも未発見のため、R6/R7/R8の一致から構造推定でcaveatあり390点満点。
       ehime/kochi/yamanashiは2024-r6のURLパターンの年度部分置換(`r06`→`r05`等)で直接発見
       (yamanashiは文字コードシフト型のmojibakeでpdftotext不可・PyMuPDFビジョン解析)。
       osaka/chiba/tochigi/wakayama/ibarakiは単純置換では404だったがWebSearchでR5専用の
