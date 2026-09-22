@@ -434,16 +434,18 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       ことがある（tochigi/ehime/kochiで実証・ただし関連URL(sourceUrl2等)は本体と同じ規則で
       推測しても外れることがあるため毎回個別に実在確認する）。
       **2023-r5は未着手** → **✅2026-09-22着手**: `src/data/snapshots/2023-r5/`を新設し
-      ehime・kochi・yamanashi・osakaの4県を収録(4/47)。ehime/kochi/yamanashiは2024-r6の
-      URLパターンの年度部分置換(`r06`→`r05`等)で直接発見(yamanashiは文字コードシフト型の
-      mojibakeでpdftotext不可・PyMuPDFビジョン解析)。osakaは単純置換(`21_r6_ippan.pdf`→
-      `21_r5_ippan.pdf`)では404だったがWebSearchでR5専用の目次ページ(`r05_jisshiyoko.html`)
-      を発見し枝番違いのファイル名(`22_r5_ippan.pdf`)を特定・pdftotextで正常抽出できた。
-      2024-r6/2025-r7/2026-r8と数値完全一致(変更なし・4県共通)。chiba/tochigi/toyama/iwate/
-      nagano/wakayama/shimane/aomoriは単純置換で404のまま(次回はosakaと同様に県のR5専用
-      目次ページをWebSearchで探す)。大市場県(tokyo/kanagawa/aichi/saitama/hyogo/fukuoka等)は
-      R6時点でWayback依存だったが、2026-09-22時点でInternet Archiveが再び「Temporarily
-      Offline」のため後回し(`src/data/snapshots/2023-r5/README.md`に詳細記録)。
+      ehime・kochi・yamanashi・osaka・chibaの5県を収録(5/47)。ehime/kochi/yamanashiは
+      2024-r6のURLパターンの年度部分置換(`r06`→`r05`等)で直接発見(yamanashiは文字コード
+      シフト型のmojibakeでpdftotext不可・PyMuPDFビジョン解析)。osaka/chibaは単純置換
+      では404だったがWebSearchでR5専用の目次ページ(`r05_jisshiyoko.html`/
+      `040815jissiyoukou.html`)を発見し枝番違いのファイル名(`22_r5_ippan.pdf`/
+      `03r5ippan.pdf`)を特定・pdftotextで正常抽出できた(この「県教委サイトの年度別実施要項
+      目次ページ経由」の型がosaka/chiba共通で機能したため、今後の主要手法として確立)。
+      2024-r6/2025-r7/2026-r8と数値完全一致(変更なし・5県共通)。tochigi/toyama/iwate/
+      nagano/wakayama/shimane/aomoriは単純置換で404のまま(次回は同じ型をWebSearchで試す)。
+      大市場県(tokyo/kanagawa/aichi/saitama/hyogo/fukuoka等)はR6時点でWayback依存だったが、
+      2026-09-22時点でInternet Archiveが再び「Temporarily Offline」のため後回し
+      (`src/data/snapshots/2023-r5/README.md`に詳細記録)。
 - [ ] **取得不能は正直に記録する**（N1-2で45/47・2県取得不能だった実績と同じ扱い） →
       現時点でmeta.unavailableは0件（保留中のtokyoはまだunavailable確定にしていない・
       Wayback復旧後に再試行の余地があるため）
