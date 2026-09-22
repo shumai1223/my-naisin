@@ -240,4 +240,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(o2023.reverseCalc?.totalMaxScore).toBe(o2026.reverseCalc?.totalMaxScore);
     expect(o2023.gradeMultipliers).toEqual(o2024.gradeMultipliers);
   });
+
+  test('hiroshima: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const h2023 = snapshot.entries.find((e) => e.code === 'hiroshima')!;
+    const h2024 = snapshot2024.entries.find((e) => e.code === 'hiroshima')!;
+    const h2025 = snapshot2025.entries.find((e) => e.code === 'hiroshima')!;
+    const h2026 = snapshot2026.entries.find((e) => e.code === 'hiroshima')!;
+    expect(h2023.maxScore).toBe(225);
+    expect(h2023.maxScore).toBe(h2024.maxScore);
+    expect(h2023.maxScore).toBe(h2025.maxScore);
+    expect(h2023.maxScore).toBe(h2026.maxScore);
+    expect(h2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 3 });
+    expect(h2023.gradeMultipliers).toEqual(h2024.gradeMultipliers);
+  });
 });

@@ -12,8 +12,12 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 14件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
-  gunma・kyoto・fukushima・okayama）。
+- **entries 15件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+  gunma・kyoto・fukushima・okayama・hiroshima）。
+- **hiroshima**はR6のURLスラグ`r06`トークンをそのまま`r05`へ機械置換して200を確認できた
+  (接頭辞`06senior-2nd-`部分はそのまま残す必要があった・全体置換だと404)。実施要項本体(174頁)の
+  様式第2号5学習の記録欄(1)がR6エントリの引用文と一言一句完全一致し225点満点(9教科×(5+5+15))
+  を確定(変更なし)。
 - **okayama**はWebSearchで報道発表ページを発見し「令和5年度岡山県立高等学校入学者選抜実施要項」
   (78頁)を直接取得。[一般入学者選抜]1選抜の方針ウの条文に加え、別表「相関表の作成について」の
   200点満点の数式そのもの((ｱ)20点+(ｲ)90点+(ｳ)90点)も直接確認でき、条文一致のみの他県より
