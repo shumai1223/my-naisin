@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 23,
+    "collectedCount": 24,
     "unavailable": [],
-    "pdfHashStatus": "partial_23_of_23",
-    "pdfHashNote": "着手23件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuokaはWayback経由)。ishikawa/kagawaはcaveatあり(換算式の一次ソース頁が読めず構造一致から推定)。"
+    "pdfHashStatus": "partial_24_of_24",
+    "pdfHashNote": "着手24件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuokaはWayback経由)。ishikawa/kagawa/yamaguchiはcaveatあり(換算式の一次ソース頁が読めない、または本文に明示数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -616,6 +616,39 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "55c2a1611c7146bf3651dfe3eec8ebbec676eb6485758c0889e21af822207c90",
       "diffFromCurrentYear": "変更なし(2026-09-22にWayback CDXでR5専用の索引ページ(contents/05youkou.html)を発見。ページ本体は2023-03-27時点のスナップショットが200で取得できたが、そこにリンクされたPDF本体(654652_61464338_misc.pdf)自体はCDXに一件もヒットせず未アーカイブと判明(2024-r6のtokyo/gifuと同型の「HTMLは保存されたがリンク先PDFは保存されていない」パターン)。より古い2022-10-19時点のスナップショットを確認したところ同じ『令和5年度福岡県立高等学校入学者選抜要項』へのリンクが別のattachment ID(651225_61430049_misc.pdf)を指しており、そちらはWaybackに保存されていた(3.5MB・78頁・切り捨てなし)。(八)選抜の方法1「調査書の『各教科の学習の記録』の第3学年における各教科の評定の数値の合計によって序列を定めるとともに、学力検査の総点によって序列を定める」を確認、R6エントリの引用文と一言一句完全一致(第3学年のみ・9教科×5段階=45点満点・変更なし)。令和6・7・8年度分と完全一致。教訓: 同一ページでもWaybackのスナップショット時点によってリンク先のattachment IDが異なることがあり(福岡県のCMSがファイル更新のたびに新IDを発行する方式)、1つのタイムスタンプでPDFが見つからなくても別のタイムスタンプのHTMLスナップショットを試す価値がある"
+    },
+    {
+      "code": "yamaguchi",
+      "name": "山口県",
+      "region": "中国",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 385,
+        "examMaxScore": 250,
+        "defaultRatio": { "naishin": 35, "exam": 65 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.yamaguchi.lg.jp/uploaded/life/163558_295997_misc.pdf",
+      "sourceUrl2": "https://www.pref.yamaguchi.lg.jp/soshiki/180/102717.html",
+      "sourceTitle": "山口県教育委員会「令和5年度山口県公立高等学校入学者選抜実施大綱」2(5)選抜イ(ｱ)(caveatあり)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "a8815b4f8aa2e1b3222f841a212e4467e9ef0d3384b0feb6e7c6f056f9719ed8",
+      "diffFromCurrentYear": "【caveatあり・変更なし】2026-09-22にWebSearchで「令和5年度山口県公立高等学校入学者選抜実施大綱」(8頁)を現行URLで直接取得。イ選抜の方法(ｱ)「高等学校長は、選抜に当たっては、調査書を重視する。その際、調査書の『学習の記録』と学力検査の成績は同等に取り扱うとともに、調査書の『学習の記録』以外の記載事項及び面接、小論文、実技検査の結果等も十分考慮する」を確認、R6エントリの引用文と一言一句完全一致。ただしR6と同じく本文書には調査書「学習の記録」の学年別配点(9教科×5段階×3学年均等配点で135点満点)を直接示す数値記載は無く、R6と同型のcaveat(第三者裏取り+prefectures.tsとの整合)を維持。令和6・7・8年度分と完全一致(変更なし)"
     }
   ]
 }

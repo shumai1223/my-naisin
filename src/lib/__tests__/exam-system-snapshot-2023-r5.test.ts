@@ -359,4 +359,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(fo2023.targetGrades).toEqual([3]);
     expect(fo2023.gradeMultipliers).toEqual(fo2024.gradeMultipliers);
   });
+
+  test('yamaguchi: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(caveatあり・条文一致)', () => {
+    const yg2023 = snapshot.entries.find((e) => e.code === 'yamaguchi')!;
+    const yg2024 = snapshot2024.entries.find((e) => e.code === 'yamaguchi')!;
+    const yg2025 = snapshot2025.entries.find((e) => e.code === 'yamaguchi')!;
+    const yg2026 = snapshot2026.entries.find((e) => e.code === 'yamaguchi')!;
+    expect(yg2023.maxScore).toBe(135);
+    expect(yg2023.maxScore).toBe(yg2024.maxScore);
+    expect(yg2023.maxScore).toBe(yg2025.maxScore);
+    expect(yg2023.maxScore).toBe(yg2026.maxScore);
+    expect(yg2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 1 });
+    expect(yg2023.gradeMultipliers).toEqual(yg2024.gradeMultipliers);
+  });
 });
