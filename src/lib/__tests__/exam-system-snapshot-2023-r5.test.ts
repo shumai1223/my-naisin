@@ -253,4 +253,17 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(h2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 3 });
     expect(h2023.gradeMultipliers).toEqual(h2024.gradeMultipliers);
   });
+
+  test('kumamoto: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const km2023 = snapshot.entries.find((e) => e.code === 'kumamoto')!;
+    const km2024 = snapshot2024.entries.find((e) => e.code === 'kumamoto')!;
+    const km2025 = snapshot2025.entries.find((e) => e.code === 'kumamoto')!;
+    const km2026 = snapshot2026.entries.find((e) => e.code === 'kumamoto')!;
+    expect(km2023.maxScore).toBe(180);
+    expect(km2023.maxScore).toBe(km2024.maxScore);
+    expect(km2023.maxScore).toBe(km2025.maxScore);
+    expect(km2023.maxScore).toBe(km2026.maxScore);
+    expect(km2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 2 });
+    expect(km2023.gradeMultipliers).toEqual(km2024.gradeMultipliers);
+  });
 });

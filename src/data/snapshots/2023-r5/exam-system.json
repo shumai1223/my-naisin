@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 15,
+    "collectedCount": 16,
     "unavailable": [],
-    "pdfHashStatus": "partial_15_of_15",
-    "pdfHashNote": "着手15件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima)は全て直接URLで取得し即時ハッシュ化。"
+    "pdfHashStatus": "partial_16_of_16",
+    "pdfHashNote": "着手16件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto)は全て直接URLで取得し即時ハッシュ化。"
   },
   "entries": [
     {
@@ -406,7 +406,40 @@
       "sourceTitle": "広島県教育委員会・広島市教育委員会等「令和5年度広島県公立高等学校入学者選抜実施要項」様式第2号の作成方法等 5学習の記録欄(1)",
       "lastVerified": "2026-09-22",
       "pdfHash": "b1932a7855a57d3c6ba9651df58ed3d751ff9ab4abdff302657b2bf7c124c644",
-      "diffFromCurrentYear": "変更なし(2026-09-22にR6のURLスラグ(`r06`→`r05`)を機械的に置換して発見した令和5年度実施要項本体(174頁・現行サイトに掲載されたまま現存)を直接取得。pdftotextで正常抽出。「様式第2号の作成方法等」5学習の記録欄(1)「第１学年及び第２学年については、指導要録の学習の記録の必修教科の評定をそのまま用い、５段階評定で記入する。第３学年については、５段階評定による評点を３倍して記入する」を確認、R6エントリの引用文と一言一句完全一致(9教科×(5+5+15)=225点満点)。令和6・7・8年度分と完全一致・変更なし。教訓: hiroshimaのURLは接頭辞`06senior-2nd-`部分は変えず本体の`r06`トークンのみ`r05`に置換すると200になった(接頭辞ごと置換すると404)"
+      "diffFromCurrentYear": "変更なし(2026-09-22にR6のURLスラグ(r06→r05)を機械的に置換して発見した令和5年度実施要項本体(174頁・現行サイトに掲載されたまま現存)を直接取得。pdftotextで正常抽出。「様式第2号の作成方法等」5学習の記録欄(1)「第１学年及び第２学年については、指導要録の学習の記録の必修教科の評定をそのまま用い、５段階評定で記入する。第３学年については、５段階評定による評点を３倍して記入する」を確認、R6エントリの引用文と一言一句完全一致(9教科×(5+5+15)=225点満点)。令和6・7・8年度分と完全一致・変更なし。教訓: hiroshimaのURLは接頭辞06senior-2nd-部分は変えず本体のr06トークンのみr05に置換すると200になった(接頭辞ごと置換すると404)"
+    },
+    {
+      "code": "kumamoto",
+      "name": "熊本県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 180,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 430,
+        "examMaxScore": 250,
+        "defaultRatio": { "naishin": 42, "exam": 58 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.kumamoto.jp/uploaded/life/148117_321143_misc.pdf",
+      "sourceUrl2": "https://www.pref.kumamoto.jp/site/kyouiku/148117.html",
+      "sourceTitle": "熊本県教育委員会「令和5年度(2023年度)熊本県立高等学校入学者選抜要項」III後期(一般)選抜 9選抜(本検査)(1)カ選抜の手順(ｲ)b・c",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "ad97aca57a38423c61bd7d103e625e2b4c6a2e851e470249474fc43a43769417",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5要項ページ(148117)を発見・本体PDF(3.83MB・97頁)を直接取得。b「学力検査を行わない4教科(音楽、美術、保健体育、技術・家庭)については、教科ごとに、第1学年及び第2学年の評定に、第3学年の評定を2倍したものを加えて合計する」c「aで補正した5教科の合計点に、bの4教科の合計点を加えて総計点を算出する」を確認、R6エントリの引用文と一言一句完全一致(9教科×(5+5+10)=180点満点・変更なし)。令和6・7・8年度分と完全一致。同じ県ページ一覧に『要項の改訂について』(157444)という別ページも存在したが、既に選抜方法本体を条文一致で確認できたため改訂内容までは未確認(通常こうした改訂は日程・様式の軽微修正であることが多いが、次回セッションで余裕があれば裏取りを推奨)"
     }
   ]
 }
