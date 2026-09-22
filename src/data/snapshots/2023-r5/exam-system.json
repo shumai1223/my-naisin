@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 10,
+    "collectedCount": 11,
     "unavailable": [],
-    "pdfHashStatus": "partial_10_of_10",
-    "pdfHashNote": "着手10件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara)は全て直接URLで取得し即時ハッシュ化。"
+    "pdfHashStatus": "partial_11_of_11",
+    "pdfHashNote": "着手11件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma)は全て直接URLで取得し即時ハッシュ化。"
   },
   "entries": [
     {
@@ -275,6 +275,28 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "a92a5ae039a8443b303f2dd30c5fddcd0990bdd1bc601a6f49d0373d86b3266d",
       "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5専用ページ(pref.nara.jpが.lg.jpへ301リダイレクト・documents/6012配下、R6はdocuments/6003・R7はdocuments/5976と毎年document IDが変わる)を発見し、『調査書及び学習成績一覧表等作成要領』本体(r5_25_28tyousasyo3.pdf)を直接取得。pdftotextで正常抽出。1(5)ア「学習成績は、国語、社会、数学、理科、音楽、美術、保健体育、技術・家庭及び英語の各教科とも、第２学年と第３学年の成績を１：２の割合で算出してください」、イ「各教科別に、次の(ア)及び(イ)を合計した学習成績を15点満点で記入してください。(ア)生徒指導要録に記載された第２学年の５段階評定値 (イ)第３学年の…観点別学習状況の評価を総括した５段階評定値を２倍した数値」を確認、R6エントリの引用文と一言一句完全一致(第1学年は不使用・9教科×15点=135点満点)。本文4「１の(5)のア及びイに基づき135点満点（15点×９教科）で算出してください」でも135点満点を直接確認(二重に裏取り)。⚠️T-N1-N4で検出されたnaraの制度変更はR7→R8間で発生したもの・R5→R6→R7は変更なしで一貫)"
+    },
+    {
+      "code": "gunma",
+      "name": "群馬県",
+      "region": "関東",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.gunma.jp/uploaded/attachment/101490.pdf",
+      "sourceUrl2": "https://www.pref.gunma.jp/site/kyouiku/101162.html",
+      "sourceTitle": "群馬県教育委員会「令和5年度群馬県公立高等学校入学者選抜実施要項」別記1「調査書の作成について」(2)・(4)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "5fdae2d0608e70a14120195be793e425dc973febaf8841bfff56f86aa3825ced",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5要項ページ(kyouiku/101162)を発見。本文PDF(101483.pdf)内で『調査書の作成について』への参照が『別記１』であることを確認(R6は同内容が『別記３』に格上げされているという年度で番号が変わる既知パターン)し、別記1本体(101490.pdf)を直接取得。(2)「第１学年及び第２学年の観点別学習状況及び評定は、指導要録に記載されたものを転記する」(4)「第３学年の評定は…全ての生徒について５段階による評定を記入するものとし、上位より『５』『４』『３』『２』『１』とする」を確認、R6エントリの引用文(別記3・イ/エとして引用されている条文)と一言一句完全一致(3学年とも等しく5段階評定・学年間傾斜なし・9教科×5段階×3学年=135点・変更なし)。教訓: gunmaは資料構成自体は毎年同じでも『別記』の通し番号が年度で前後することがあり、本文中の参照箇所(何ページから、という記述)を辿って現物を確認する必要がある)"
     }
   ]
 }

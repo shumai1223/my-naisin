@@ -12,7 +12,11 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 10件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara）。
+- **entries 11件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma）。
+- **gunma**はWebSearchでR5要項ページを発見し、本文PDF内の参照箇所から『調査書の作成について』が
+  R5では「別記１」(R6は「別記３」)であることを特定して該当PDFを取得。R6エントリの引用文と一言一句
+  完全一致(135点満点・9教科×5段階×3学年・学年間傾斜なし・変更なし)。教訓: gunmaは資料構成自体は
+  毎年同じでも「別記」の通し番号が年度で前後する(本文の参照箇所を辿って現物確認が必要)。
 - **mie**はWebSearchで「令和５年度三重県立高等学校入学者選抜実施方針」PDF(`001010971.pdf`)を
   直接発見・取得(単純URL置換は不要だった)。三重県は年度当初に「実施方針」(選抜手続きの大枠)、
   後日「実施要項」(別表等の詳細)の2段階で資料を公表する構造で、R5は実施方針のみ収集し

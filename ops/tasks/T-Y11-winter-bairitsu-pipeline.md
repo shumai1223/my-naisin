@@ -434,12 +434,13 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       ことがある（tochigi/ehime/kochiで実証・ただし関連URL(sourceUrl2等)は本体と同じ規則で
       推測しても外れることがあるため毎回個別に実在確認する）。
       **2023-r5は未着手** → **✅2026-09-22着手**: `src/data/snapshots/2023-r5/`を新設し
-      ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・naraの10県を
-      収録(10/47)。mieは単純URL置換でなくWebSearchで「令和５年度三重県立高等学校入学者選抜
-      実施方針」PDFを直接発見(45点満点・9教科×5段階・第3学年のみ対象、R6/R7の引用文と
+      ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunmaの
+      11県を収録(11/47)。mieは単純URL置換でなくWebSearchで「令和５年度三重県立高等学校入学者
+      選抜実施方針」PDFを直接発見(45点満点・9教科×5段階・第3学年のみ対象、R6/R7の引用文と
       一言一句一致)。naraもWebSearchでR5専用ページ(document ID年度ごとに変わる)を発見し
       135点満点(15点×9教科・第2/3学年のみ)をR6引用文と一致で確定(R7→R8間で制度変更済みの
-      ためR8とは比較しない)。
+      ためR8とは比較しない)。gunmaは『別記』の通し番号が年度で前後する(R5=別記1・R6=別記3)
+      ことを本文の参照箇所から特定し135点満点をR6引用文と一致で確定。
       ehime/kochi/yamanashiは2024-r6のURLパターンの年度部分置換(`r06`→`r05`等)で直接発見
       (yamanashiは文字コードシフト型のmojibakeでpdftotext不可・PyMuPDFビジョン解析)。
       osaka/chiba/tochigi/wakayama/ibarakiは単純置換では404だったがWebSearchでR5専用の

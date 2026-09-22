@@ -187,4 +187,16 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(n2023.gradeMultipliers).toEqual(n2024.gradeMultipliers);
     expect(n2023.gradeMultipliers).toEqual(n2025.gradeMultipliers);
   });
+
+  test('gunma: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const g2023 = snapshot.entries.find((e) => e.code === 'gunma')!;
+    const g2024 = snapshot2024.entries.find((e) => e.code === 'gunma')!;
+    const g2025 = snapshot2025.entries.find((e) => e.code === 'gunma')!;
+    const g2026 = snapshot2026.entries.find((e) => e.code === 'gunma')!;
+    expect(g2023.maxScore).toBe(135);
+    expect(g2023.maxScore).toBe(g2024.maxScore);
+    expect(g2023.maxScore).toBe(g2025.maxScore);
+    expect(g2023.maxScore).toBe(g2026.maxScore);
+    expect(g2023.gradeMultipliers).toEqual(g2024.gradeMultipliers);
+  });
 });
