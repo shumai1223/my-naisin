@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 16,
+    "collectedCount": 17,
     "unavailable": [],
-    "pdfHashStatus": "partial_16_of_16",
-    "pdfHashNote": "着手16件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto)は全て直接URLで取得し即時ハッシュ化。"
+    "pdfHashStatus": "partial_17_of_17",
+    "pdfHashNote": "着手17件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata)は全て直接URLで取得し即時ハッシュ化。"
   },
   "entries": [
     {
@@ -440,6 +440,28 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "ad97aca57a38423c61bd7d103e625e2b4c6a2e851e470249474fc43a43769417",
       "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5要項ページ(148117)を発見・本体PDF(3.83MB・97頁)を直接取得。b「学力検査を行わない4教科(音楽、美術、保健体育、技術・家庭)については、教科ごとに、第1学年及び第2学年の評定に、第3学年の評定を2倍したものを加えて合計する」c「aで補正した5教科の合計点に、bの4教科の合計点を加えて総計点を算出する」を確認、R6エントリの引用文と一言一句完全一致(9教科×(5+5+10)=180点満点・変更なし)。令和6・7・8年度分と完全一致。同じ県ページ一覧に『要項の改訂について』(157444)という別ページも存在したが、既に選抜方法本体を条文一致で確認できたため改訂内容までは未確認(通常こうした改訂は日程・様式の軽微修正であることが多いが、次回セッションで余裕があれば裏取りを推奨)"
+    },
+    {
+      "code": "yamagata",
+      "name": "山形県",
+      "region": "北海道・東北",
+      "fiscalYear": "2023",
+      "targetGrades": [3],
+      "gradeMultipliers": { "1": 0, "2": 0, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 45,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.yamagata.jp/documents/25535/14-1tyousasyo2a.xlsx",
+      "sourceUrl2": "https://www.pref.yamagata.jp/700013/220117r5nyuugakusyasennbatujouhou.html",
+      "sourceTitle": "山形県教育局高校教育課「令和5年度山形県公立高等学校入学者選抜 様式第2号A 調査書」",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "1dddaa4fbea3f858d23ee142a38e9173cd10352b917e1f9a881152496e23d101",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5専用ページ(220117r5nyuugakusyasennbatujouhou.html)を発見し様式第2号A「調査書」xlsx(23KB)を直接取得。R6と同じ手法(xlsx内部のxl/sharedStrings.xmlをunzip抽出)で確認したところ「第３学年の評定の合計」という項目名がR6エントリと一言一句完全一致で存在し、第3学年のみを合計する方式(9教科×5段階=45点満点)を確認。令和6・7・8年度分と完全一致・変更なし"
     }
   ]
 }

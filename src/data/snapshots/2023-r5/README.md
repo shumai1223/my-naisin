@@ -12,8 +12,13 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 16件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
-  gunma・kyoto・fukushima・okayama・hiroshima・kumamoto）。
+- **entries 17件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+  gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata）。
+- **yamagata**はWebSearchでR5専用ページ(220117r5nyuugakusyasennbatujouhou.html)を発見し様式第2号A
+  「調査書」xlsx(23KB)を取得。R6と同じ手法(xlsx内部のsharedStrings.xmlをunzip抽出)で「第３学年の
+  評定の合計」という項目名がR6エントリと一言一句完全一致で存在することを確認し45点満点(第3学年
+  のみ・9教科×5段階)を確定(変更なし)。
+- **保留**: okinawa(R5専用ページが404・Wayback CDXも本セッション中は再度Temporarily Offline)。
 - **kumamoto**はWebSearchでR5要項ページ(148117)を発見し本体PDF(97頁)を直接取得。III後期(一般)選抜
   9選抜(本検査)(1)カ選抜の手順(ｲ)b・cの条文がR6エントリの引用文と一言一句完全一致し180点満点
   (9教科×(5+5+10))を確定(変更なし)。同ページ一覧に『要項の改訂について』という別ページも

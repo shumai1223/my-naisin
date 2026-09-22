@@ -435,8 +435,8 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       推測しても外れることがあるため毎回個別に実在確認する）。
       **2023-r5は未着手** → **✅2026-09-22着手**: `src/data/snapshots/2023-r5/`を新設し
       ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・gunma・
-      kyoto・fukushima・okayama・hiroshima・kumamotoの16県を収録(16/47)。mieは単純URL置換でなく
-      WebSearchで「令和５年度三重県
+      kyoto・fukushima・okayama・hiroshima・kumamoto・yamagataの17県を収録(17/47)。mieは単純URL
+      置換でなくWebSearchで「令和５年度三重県
       立高等学校入学者選抜実施方針」PDFを直接発見(45点満点・9教科×5段階・第3学年のみ対象、R6/R7
       の引用文と一言一句一致)。naraもWebSearchでR5専用ページ(document ID年度ごとに変わる)を
       発見し135点満点(15点×9教科・第2/3学年のみ)をR6引用文と一致で確定(R7→R8間で制度変更済みの
@@ -449,6 +449,8 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       条文一致に加え相関表の200点満点数式そのものも直接確認でき二重裏取りできた(195点満点確定)。
       hiroshimaはR6のURLスラグ内r06トークンのみ置換(接頭辞は残す)で200を確認・225点満点を
       R6引用文と一致で確定。kumamotoはWebSearchでR5要項ページを発見し180点満点をR6引用文と一致で確定。
+      yamagataはR5専用ページのxlsx(様式第2号A)をunzip抽出しsharedStrings.xmlの項目名一致で
+      45点満点を確定。okinawaはR5ページ404・Wayback不調で保留。
       ehime/kochi/yamanashiは2024-r6のURLパターンの年度部分置換(`r06`→`r05`等)で直接発見
       (yamanashiは文字コードシフト型のmojibakeでpdftotext不可・PyMuPDFビジョン解析)。
       osaka/chiba/tochigi/wakayama/ibarakiは単純置換では404だったがWebSearchでR5専用の
