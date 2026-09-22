@@ -488,4 +488,18 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(ty2023.gradeMultipliers).toEqual(ty2024.gradeMultipliers);
     expect(ty2023.reverseCalc).toBeNull();
   });
+
+  test('tokushima: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const tk2023 = snapshot.entries.find((e) => e.code === 'tokushima')!;
+    const tk2024 = snapshot2024.entries.find((e) => e.code === 'tokushima')!;
+    const tk2025 = snapshot2025.entries.find((e) => e.code === 'tokushima')!;
+    const tk2026 = snapshot2026.entries.find((e) => e.code === 'tokushima')!;
+    expect(tk2023.maxScore).toBe(195);
+    expect(tk2023.maxScore).toBe(tk2024.maxScore);
+    expect(tk2023.maxScore).toBe(tk2025.maxScore);
+    expect(tk2023.maxScore).toBe(tk2026.maxScore);
+    expect(tk2023.practicalMultiplier).toBe(2);
+    expect(tk2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 1 });
+    expect(tk2023.gradeMultipliers).toEqual(tk2024.gradeMultipliers);
+  });
 });

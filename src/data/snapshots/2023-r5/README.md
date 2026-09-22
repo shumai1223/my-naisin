@@ -12,10 +12,19 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 32件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 33件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
   kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita・miyazaki・
-  toyama）。
+  toyama・tokushima）。
+- **✅2026-09-23追記: tokushimaを追加(33/47)**。過去に「R5専用の議案書PDFが見つからず保留」
+  としていたが、専用入試情報サイト(`nyuushi.tokushima-ec.ed.jp`)のR5専用ページ階層を
+  WebSearchで発見し辿った結果、NetCommons型のID指定ダウンロードURL
+  (`wysiwyg/file/download/1/1518`)に到達。**通常の`/web/{timestamp}/{URL}`形式でフェッチ
+  すると archive側が500エラーのHTMLを返す罠があったが、`id_`サフィックス
+  (`/web/{timestamp}id_/{URL}`)で生コンテンツを取得することで回避**(2.5MB・98頁の
+  正しいPDFを確認)。印刷頁35「別記2 相関表の作成」の条文がR6引用文と一言一句完全一致
+  (195点満点・変更なし)。**教訓: NetCommons型CMSのID指定ダウンロードURLはWaybackの
+  通常プレイバックで500エラーになることがあり、`id_`サフィックスでの生フェッチを試すこと**。
 - **✅2026-09-23追記: toyamaを追加(32/47)**。旧セッションでは「CDXにも未アーカイブ」と
   結論していたが、WebSearchでR5専用ページ(`pref.toyama.jp/3003/20220712.html`。現行404・
   Waybackで発見)から`documents/27438/r5_youryou.pdf`(R6のdocument ID `37292`とは別・
