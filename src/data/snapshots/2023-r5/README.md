@@ -12,9 +12,9 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 26件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 27件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
-  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano）。
+  kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane）。
 - **nagano**は当初「保留」に分類していたが、Wayback CDXでR5の文書ディレクトリを検索したところ
   正しいファイル名`r5yoko_1.pdf`(アンダースコア付き)を発見(以前の機械置換`r6yoko1.pdf`→`r5yoko1.pdf`
   はアンダースコアなしで404だった単純なタイプミス相当の差異)。イ(ｱ)の条文がR6引用文と一言一句
@@ -55,8 +55,18 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
   **重要な教訓**: `archive.org/wayback/available`のavailability APIは空(`{}`)を返しても
   `/cdx/search/cdx`には実際にスナップショットが存在することがある(availability APIは最新1件のみの
   簡易版)。availabilityで空だった場合もCDXで再確認すること(gifu/aomoriの両方でこの罠を確認)。
+- **shimane**はnaganoと同じ「Wayback CDXでR5の文書ディレクトリ全体を検索」方式で解決。
+  単純な年度置換`R6jisshiyoukou.pdf`→`R5jisshiyoukou.pdf`は404だったが、実在ファイル名は
+  ローマ字表記が一部異なる`R5jissiyoukou.pdf`(shiではなくsi)だった。取得時、同一URLに
+  1MB切り詰め版と6.5MB完全版の2種のダイジェストがWaybackに存在し、先に取った1MB版は
+  pdfinfoがtrailer dictionaryエラーを出す壊れたファイルだったため6.5MB版(94頁・R6と同頁数)を
+  取り直した。p.29(印字ページ番号「-29-」・R6と同一)の算出方法表「学習の記録 素点×51/180
+  評点51」「特別活動の記録 素点そのまま 評点9」「学力検査 素点×0.16 評点40」がR6引用文と
+  一言一句完全一致、80:20〜40:60の5パターン換算式も全一致し180点満点を確定(変更なし・caveatなし)。
+  教訓: Wayback上で同一URLに複数ダイジェストがある場合、ファイルサイズがぴったり1,048,576バイト
+  (1MB)のものは切り詰めを疑い、別のタイムスタンプ/ダイジェストを試すこと。
 - **保留**: toyama(Wayback CDXで文書ディレクトリを検索しても本当に未アーカイブと確認・
-  naganoと違いタイプミス相当の差異ではなく真に存在しない)、iwate/shimane(同様に未確認のまま)、
+  naganoと違いタイプミス相当の差異ではなく真に存在しない)、
   tottori/tokushima/akita(R5専用の一次ソースPDFが未発見のまま時間切れ)、
   aomori(Wayback上に1件だけ発見したがコンテンツが1MBで切り詰められ全78頁中の一部しか読めない)、
   niigata(R5専用ページ`r5kotogakkonyushi.html`はWebSearch上のタイトルには存在するが実サーバは404・

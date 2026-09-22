@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 26,
+    "collectedCount": 27,
     "unavailable": [],
-    "pdfHashStatus": "partial_26_of_26",
-    "pdfHashNote": "着手26件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/naganoはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_27_of_27",
+    "pdfHashNote": "着手27件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimaneはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -693,6 +693,39 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "5998853171566836903df722750563874b4a898bf12545f0a6877f8008e77ebc",
       "diffFromCurrentYear": "変更なし(2026-09-22にWayback CDXでR5の文書ディレクトリ(kyoiku/koko/saiyo-nyuushi/shiken/ko/r5/documents/)を検索し正しいファイル名(r5yoko_1.pdf・アンダースコア付き。以前の試行はr5yoko1.pdfとアンダースコアなしで機械的に置換し404だった)を発見・取得(9頁)。イ(ｱ)「学科ごとに、受検者全員について、調査書に記載されている中学校第３学年の必修教科の評定合計値(最高45点)を縦軸、学力検査成就率合計値(最高500点)を横軸とする相関図を作成する」を確認、R6エントリの引用文と一言一句完全一致(第3学年のみ・9教科×5段階=45点満点・変更なし)。令和6・7・8年度分と完全一致。教訓: ファイル名の単純な年度トークン置換(r6→r5)は、アンダースコア等の細部が年度によって異なる場合に失敗する。置換が404の場合はWayback CDXでディレクトリ全体を検索し実在のファイル名一覧から探すとよい(toyama/nagano両方でこの手法が有効と判明。toyamaは同ディレクトリに本当に何も無く未アーカイブと確定したが、naganoは単純なタイプミス相当の差異だった)"
+    },
+    {
+      "code": "shimane",
+      "name": "島根県",
+      "region": "中国",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 2 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 180,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 1000,
+        "examMaxScore": 500,
+        "defaultRatio": { "naishin": 40, "exam": 60 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://web.archive.org/web/20221110104319/https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/R5jissiyoukou.pdf",
+      "sourceUrl2": "https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/",
+      "sourceTitle": "島根県教育委員会「令和5年度島根県公立高等学校入学者選抜実施要綱」(2)選抜の具体的方法ア(ｵ)1)の算出方法表",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "5cb733d3dc89bcee56101f2d364bb19c3416033b6138a611f6ef17d2edd408d1",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWayback CDXでR5の文書ディレクトリ(senbatsu/senbatsu_info/index.data/)を検索し正しいファイル名(R5jissiyoukou.pdf・R6の「jisshiyoukou」に対しRomaji表記が「jissiyoukou」と一部異なる)を発見。同名で1MB切り詰め版(truncated)と6.5MB完全版の2種のダイジェストがWaybackにアーカイブされており、先に1MB版を取得したところpdfinfoがtrailer dictionary読み取りエラーを出したため、6.5MB版(94頁・R6と同一頁数)を取得し直した。p.29(印字ページ番号「-29-」・R6と同一)の(ｵ)1)の算出方法表で「学習の記録 素点×51/180(小数点以下切り上げ) 素点180 評点51」「特別活動の記録 素点をそのまま 素点9 評点9」「学力検査 素点×0.16(小数点以下切り上げ) 素点250 評点40」を確認、R6エントリの引用文と一言一句完全一致。個人調査報告書と学力検査の比率80:20/70:30/60:40/50:50/40:60の5パターン(乗数8/6・7/6・5/6・4/6、学力検査係数0.08/0.12/0.16/0.2/0.24)も全て一致。180点=9教科×5段階×(第1学年1倍+第2学年1倍+第3学年2倍)は令和6・7・8年度分と完全一致(変更なし)。教訓: Wayback上で同一URLに複数ダイジェストがある場合、ファイルサイズがぴったり1,048,576バイト(1MB)のものは通信/保存時の切り詰めを疑い、別のタイムスタンプ/ダイジェストを試すこと"
     }
   ]
 }

@@ -483,6 +483,16 @@ R6（令和6年度）: 45/47県 収録済み（未収録は oita・saga のみ�
       なため保留。大市場県(tokyo/kanagawa/aichi/saitama/hyogo/fukuoka等)はR6時点で
       Wayback依存だったが、同じ理由で後回し(`src/data/snapshots/2023-r5/README.md`に
       詳細記録)。
+      **✅2026-09-22追記: shimaneを追加(27/47)**。Wayback CDXが復旧したため保留県を
+      ディレクトリ全体検索で再挑戦(nagano方式)。単純な年度置換`R6jisshiyoukou.pdf`→
+      `R5jisshiyoukou.pdf`は404だったが、実在ファイル名はローマ字表記が一部異なる
+      `R5jissiyoukou.pdf`(shiではなくsi)だった。同一URLに1MB切り詰め版と6.5MB完全版の
+      2ダイジェストがあり、先に取得した1MB版はpdfinfoがtrailer dictionaryエラーを出す
+      壊れたファイルだったため6.5MB版(94頁・R6と同頁数)を取り直した。p.29(印字ページ番号
+      「-29-」・R6と同一)の算出方法表(学習の記録51/180・特別活動9/9・学力検査40/250、
+      80:20〜40:60の5パターン換算式も全一致)がR6引用文と一言一句完全一致し180点満点を
+      確定(変更なし・caveatなし)。教訓: Wayback上で同一URLに複数ダイジェストがある場合、
+      ファイルサイズがぴったり1,048,576バイト(1MB)のものは切り詰めを疑うこと。
 - [ ] **取得不能は正直に記録する**（N1-2で45/47・2県取得不能だった実績と同じ扱い） →
       現時点でmeta.unavailableは0件（保留中のtokyoはまだunavailable確定にしていない・
       Wayback復旧後に再試行の余地があるため）

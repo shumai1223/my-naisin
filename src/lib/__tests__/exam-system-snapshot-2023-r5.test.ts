@@ -398,4 +398,19 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(na2023.targetGrades).toEqual([3]);
     expect(na2023.gradeMultipliers).toEqual(na2024.gradeMultipliers);
   });
+
+  test('shimane: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const sm2023 = snapshot.entries.find((e) => e.code === 'shimane')!;
+    const sm2024 = snapshot2024.entries.find((e) => e.code === 'shimane')!;
+    const sm2025 = snapshot2025.entries.find((e) => e.code === 'shimane')!;
+    const sm2026 = snapshot2026.entries.find((e) => e.code === 'shimane')!;
+    expect(sm2023.maxScore).toBe(180);
+    expect(sm2023.maxScore).toBe(sm2024.maxScore);
+    expect(sm2023.maxScore).toBe(sm2025.maxScore);
+    expect(sm2023.maxScore).toBe(sm2026.maxScore);
+    expect(sm2023.targetGrades).toEqual([1, 2, 3]);
+    expect(sm2023.gradeMultipliers).toEqual({ '1': 1, '2': 1, '3': 2 });
+    expect(sm2023.gradeMultipliers).toEqual(sm2024.gradeMultipliers);
+    expect(sm2023.reverseCalc?.defaultRatio).toEqual(sm2024.reverseCalc?.defaultRatio);
+  });
 });
