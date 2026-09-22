@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "fiscalYearLabel": "令和5年度(2023年度)",
+    "status": "collecting",
+    "startedAt": "2026-09-22",
+    "completedAt": null,
+    "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
+    "totalPrefectures": 47,
+    "collectedCount": 2,
+    "unavailable": [],
+    "pdfHashStatus": "partial_2_of_2",
+    "pdfHashNote": "着手2件(ehime/kochi)は両方直接URLで取得し即時ハッシュ化。"
+  },
+  "entries": [
+    {
+      "code": "ehime",
+      "name": "愛媛県",
+      "region": "四国",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 385,
+        "examMaxScore": 250,
+        "defaultRatio": { "naishin": 35, "exam": 65 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://ehime-c.esnet.ed.jp/koukou/nyuusi/r05nyuusi/hanni/r05koukou_nyuugakusyasennbatu_zissiyoukou.pdf",
+      "sourceUrl2": "https://ehime-c.esnet.ed.jp/koukou/nyuusi/r05nyuusi",
+      "sourceTitle": "愛媛県教育委員会「令和5年度愛媛県県立高等学校入学者選抜実施要項」6入学者の選抜方法(2)ア(イ)",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "72f4ee4118aae6f2ba414d34c0116455b17b2188b052d8e08fa1fe81957b4de7",
+      "diffFromCurrentYear": "変更なし(2026-09-22にR6のURLパターンのr06をr05に置換したURLで直接発見・現行サイトに掲載されたまま現存・pdftotextはCJKテキスト抽出不可のためPyMuPDFでp.5をビジョン解析)。「調査書点(調査書の各教科の学習の記録の第1学年から第3学年までにおいて履修した必修教科の評定の合計をいう)は、135点満点とする」と明記(実技4教科への傾斜配点や学年間の重み付けの記載は無く、9教科×5段階×3学年の均等合計)。令和6・7・8年度分のgradeMultipliers{1:1,2:1,3:1}/maxScore=135と完全一致・変更なし)"
+    },
+    {
+      "code": "kochi",
+      "name": "高知県",
+      "region": "四国",
+      "fiscalYear": "2023",
+      "targetGrades": [1, 2, 3],
+      "gradeMultipliers": { "1": 1, "2": 1, "3": 1 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 2,
+      "maxScore": 195,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": true,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 445,
+        "examMaxScore": 250,
+        "defaultRatio": { "naishin": 44, "exam": 56 },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://www.pref.kochi.lg.jp/doc/r5_koukounyushi_main/file_contents/R5_koukouyouryo.pdf",
+      "sourceUrl2": "https://www.pref.kochi.lg.jp/doc/r5_koukounyushi_main/",
+      "sourceTitle": "高知県教育委員会「令和5年度高知県公立高等学校入学志願者取扱要領」IV志願者の選抜 1A日程(2)イ「調査書における『各教科の学習の記録』の配点」",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "a5dc02cc8bbf5574ed2ed025c00bf12e7e2a9f1e77998fbc1815f678d48248da",
+      "diffFromCurrentYear": "変更なし(2026-09-22にR6のURLパターンのr6をr5に置換したURLで直接発見・現行サイトに掲載されたまま現存・pdftotextはCJKテキスト抽出不可のためPyMuPDFでp.4をビジョン解析)。「調査書における『各教科の学習の記録』の配点: 国語20 社会20 数学20 理科20 音楽40 美術40 保健体育40 技術・家庭40 外国語20」と明記(B日程全日制も同一配点)。5教科×20+実技4教科×40=260点でpracticalMultiplier=2を維持。令和6・7・8年度分のgradeMultipliers{1:1,2:1,3:1}/maxScore=195(モデル代表値)/practicalMultiplier=2と完全一致・変更なし)"
+    }
+  ]
+}
