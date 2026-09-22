@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 34,
+    "collectedCount": 35,
     "unavailable": [],
-    "pdfHashStatus": "partial_34_of_34",
-    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigata)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigataはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
+    "pdfHashStatus": "partial_35_of_35",
+    "pdfHashNote": "着手28件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara/gunma/kyoto/fukushima/okayama/hiroshima/kumamoto/yamagata/shizuoka/gifu/ishikawa/kagawa/hyogo/fukuoka/yamaguchi/shiga/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigata/kagoshima)は全て取得し即時ハッシュ化(gifu/ishikawa/fukuoka/nagano/shimane/saitama/kanagawa/oita/miyazaki/toyama/tokushima/niigata/kagoshimaはWayback経由)。ishikawa/kagawa/yamaguchi/shigaはcaveatあり(換算式の一次ソース頁が読めない、または本文で学校別委任のため数値記載が無く構造一致から推定)。"
   },
   "entries": [
     {
@@ -1226,6 +1226,48 @@
       "lastVerified": "2026-09-23",
       "pdfHash": "7a1f1d6d7ccb32b75719e958650e52e8a7030da09bbe7e9dbf773db88481e211",
       "diffFromCurrentYear": "変更なし(2026-09-23にWebSearchでR5専用ページ(sec/kotogakko/r5kotogakkonyushi.html。現行404・Waybackで発見)から資料一覧を取得し「入学者選抜要項」本体(uploaded/attachment/339458.pdf・R6のattachment/381674.pdfとは別ID・4MB・88頁)を特定。2つの独立タイムスタンプで同一ダイジェストを確認(切り詰めなし)。様式1「調査書」(印刷頁32)を確認、9教科(国語・社会・数学・理科・音楽・美術・保健体育・技術家庭・外国語)それぞれに「1年」「2年」「3年」の評定欄が並列で設けられており、学年間の傾斜配点(倍率)を示す記載は様式上に存在しない(等倍)。R6エントリと同一の様式構成で完全一致。9教科×5段階×3学年=135点。令和6・7・8年度分と完全一致(変更なし)。教訓: 印刷ページ番号とPDF索引のオフセットは文書内で一定でないことがある(様式の並び順が章立てと連動しないため、期待した位置に無ければ前後数頁を確認すること)。"
+    },
+    {
+      "code": "kagoshima",
+      "name": "鹿児島県",
+      "region": "九州・沖縄",
+      "fiscalYear": "2023",
+      "targetGrades": [
+        3
+      ],
+      "gradeMultipliers": {
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "coreMultiplier": 2,
+      "practicalMultiplier": 20,
+      "maxScore": 450,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": {
+        "totalMaxScore": 900,
+        "examMaxScore": 450,
+        "defaultRatio": {
+          "naishin": 50,
+          "exam": 50
+        },
+        "calcType": "standard",
+        "naishinMultiplier": null,
+        "kValue": null,
+        "sValueCoefficients": null,
+        "osakaTypeCount": null,
+        "hasTokyoSettings": false,
+        "hasKanagawaSettings": false
+      },
+      "sourceUrl": "https://web.archive.org/web/20240507070214/https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r4/documents/101746_20221026085652-1.pdf",
+      "sourceUrl2": "https://web.archive.org/web/20221117202534/https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r4/r5nyuushiyoukou.html",
+      "sourceTitle": "鹿児島県教育委員会「令和5年度鹿児島県公立高等学校入学者選抜実施要綱」選抜の内容ア・イ(ｴ)d",
+      "lastVerified": "2026-09-23",
+      "pdfHash": "7e9f657f3fb747bf62208c1266bcb1b0528b40611f6a4dce7a7163ecd43371a1",
+      "diffFromCurrentYear": "変更なし(2026-09-23にWebSearchでR5専用ページ(ba05/kyoiku-bunka/school/koukou/nyushi/r4/r5nyuushiyoukou.html。R6以降と異なり公表年の元号フォルダ(r4=令和4年公表)配下に格納される命名規則と判明。現行404・Waybackで発見)から実施要綱本体(documents/101746_20221026085652-1.pdf・R6のdocuments/109244_...とは別ID・1.7MB・109頁)を特定。単一タイムスタンプのみ(切り詰めなし・1,735,743バイト)。「選抜の内容」ア「調査書の『学習の記録』は、第3学年の記録を次のとおり点数に換算して選抜に用いる。学力検査を行う5教科：それぞれ10点満点 学力検査を行わない必修の4教科(音楽、美術、保健体育及び技術・家庭)：それぞれ100点満点」およびイ(ｴ)d「各教科それぞれ90点満点：合計450点満点」がR6エントリの引用文と一言一句完全一致。令和6・7・8年度分のgradeMultipliers{1:0,2:0,3:1}・coreMultiplier=2・practicalMultiplier=20・maxScore=450と完全一致(変更なし)。教訓: 鹿児島県のWaybackフォルダ命名は対象年度(r5)でなく公表年の元号年度(r4)を使う(佐賀/宮崎等の「R5専用ページのURL自体が404」型と異なり、フォルダ名の年度がそもそも対象年度と1つずれる新パターン)。"
     }
   ]
 }

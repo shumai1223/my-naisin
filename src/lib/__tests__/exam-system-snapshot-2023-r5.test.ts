@@ -516,4 +516,20 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(ni2023.gradeMultipliers).toEqual(ni2024.gradeMultipliers);
     expect(ni2023.reverseCalc).toBeNull();
   });
+
+  test('kagoshima: 2024-r6・2025-r7・2026-r8と2023-r5で制度の核となる数値が一致する(実測で確認済みの「変更なし」)', () => {
+    const kg2023 = snapshot.entries.find((e) => e.code === 'kagoshima')!;
+    const kg2024 = snapshot2024.entries.find((e) => e.code === 'kagoshima')!;
+    const kg2025 = snapshot2025.entries.find((e) => e.code === 'kagoshima')!;
+    const kg2026 = snapshot2026.entries.find((e) => e.code === 'kagoshima')!;
+    expect(kg2023.maxScore).toBe(450);
+    expect(kg2023.maxScore).toBe(kg2024.maxScore);
+    expect(kg2023.maxScore).toBe(kg2025.maxScore);
+    expect(kg2023.maxScore).toBe(kg2026.maxScore);
+    expect(kg2023.coreMultiplier).toBe(2);
+    expect(kg2023.practicalMultiplier).toBe(20);
+    expect(kg2023.gradeMultipliers).toEqual({ '1': 0, '2': 0, '3': 1 });
+    expect(kg2023.gradeMultipliers).toEqual(kg2024.gradeMultipliers);
+    expect(kg2023.reverseCalc).toEqual(kg2024.reverseCalc);
+  });
 });

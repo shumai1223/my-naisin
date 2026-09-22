@@ -12,10 +12,22 @@ Task Cの本文に「2023-r5は未着手」と明記されたまま長期間残�
 
 ## 進捗状況（2026-09-22）
 
-- **entries 34件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
+- **entries 35件**（ehime・kochi・yamanashi・osaka・chiba・tochigi・wakayama・ibaraki・mie・nara・
   gunma・kyoto・fukushima・okayama・hiroshima・kumamoto・yamagata・shizuoka・gifu・ishikawa・
   kagawa・hyogo・fukuoka・yamaguchi・shiga・nagano・shimane・saitama・kanagawa・oita・miyazaki・
-  toyama・tokushima・niigata）。
+  toyama・tokushima・niigata・kagoshima）。
+- **✅2026-09-23追記: kagoshimaを追加(35/47)**。WebSearchでR5専用ページ(`ba05/kyoiku-bunka/
+  school/koukou/nyushi/r4/r5nyuushiyoukou.html`。現行404・Waybackで発見)から実施要綱本体
+  (`documents/101746_20221026085652-1.pdf`・1.7MB・109頁・単一タイムスタンプで切り詰めなし確認済み)
+  を特定。**新パターン発見: 鹿児島県教委サイトはURLフォルダ名を対象年度でなく公表年の元号年度で
+  切る**（R5年度の要項は`r4`フォルダ配下・R6年度の要項は`r6`フォルダ配下と、他県で確立していた
+  「対象年度=フォルダ名」の前提が成り立たない）。「選抜の内容」ア(調査書換算：5教科10点満点×5+
+  4教科100点満点×4)およびイ(ｴ)d(学力検査：各教科90点満点×5教科=450点満点)がR6エントリの
+  引用文と一言一句完全一致(gradeMultipliers{1:0,2:0,3:1}・coreMultiplier=2・practicalMultiplier=20・
+  maxScore=450・変更なし)。なお同日、akita(R5専用ページ自体がWaybackに一度も
+  クロールされておらず物理的取得不能と確定・掲載告知ページ`pages/archive/68058`も未アーカイブ)と
+  tottori(`295710.htm`の最古スナップショットが2024-07で、R5当時の実施要項掲載時点の版が存在しない)
+  を再試行したが両県とも解決に至らず保留継続とした。
 - **✅2026-09-23追記: niigataを追加(34/47)**。WebSearchでR5専用ページ(`sec/kotogakko/
   r5kotogakkonyushi.html`。現行404・Waybackで発見)から資料一覧を取得し「入学者選抜要項」本体
   (`uploaded/attachment/339458.pdf`・R6の`attachment/381674.pdf`とは別ID・4MB・88頁)を特定・
