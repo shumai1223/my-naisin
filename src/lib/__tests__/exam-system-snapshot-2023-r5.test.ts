@@ -175,4 +175,16 @@ describe('2023-r5 exam-system snapshot（T-Y11 Task C 収集中スナップシ�
     expect(m2023.targetGrades).toEqual([3]);
     expect(m2023.gradeMultipliers).toEqual(m2024.gradeMultipliers);
   });
+
+  test('nara: 2024-r6・2025-r7と2023-r5で制度の核となる数値が一致する(R7→R8間で変更があったため2026-r8とは比較しない)', () => {
+    const n2023 = snapshot.entries.find((e) => e.code === 'nara')!;
+    const n2024 = snapshot2024.entries.find((e) => e.code === 'nara')!;
+    const n2025 = snapshot2025.entries.find((e) => e.code === 'nara')!;
+    expect(n2023.maxScore).toBe(135);
+    expect(n2023.maxScore).toBe(n2024.maxScore);
+    expect(n2023.maxScore).toBe(n2025.maxScore);
+    expect(n2023.targetGrades).toEqual([2, 3]);
+    expect(n2023.gradeMultipliers).toEqual(n2024.gradeMultipliers);
+    expect(n2023.gradeMultipliers).toEqual(n2025.gradeMultipliers);
+  });
 });

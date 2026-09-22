@@ -6,10 +6,10 @@
     "completedAt": null,
     "collectionMethod": "T-Y11 Task C(ops/tasks/T-Y11-winter-bairitsu-pipeline.md)。2024-r6/2025-r7/2026-r8と同じ形式・同じ収集方針。各県教育委員会の一次ソース(現存ページ、無ければWayback Machine CDX API)を1県ずつ確認して収集する。取得できなかった県はentriesに含めず、meta.unavailableへ理由付きで記録する。推測で埋めない。2023-r5はタスクファイル本文で「未着手」と明記されていたため、2026-09-22に新規着手した(前々々年度=令和8年度からさらに3年遡るスナップショット)。",
     "totalPrefectures": 47,
-    "collectedCount": 9,
+    "collectedCount": 10,
     "unavailable": [],
-    "pdfHashStatus": "partial_9_of_9",
-    "pdfHashNote": "着手9件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie)は全て直接URLで取得し即時ハッシュ化。"
+    "pdfHashStatus": "partial_10_of_10",
+    "pdfHashNote": "着手10件(ehime/kochi/yamanashi/osaka/chiba/tochigi/wakayama/ibaraki/mie/nara)は全て直接URLで取得し即時ハッシュ化。"
   },
   "entries": [
     {
@@ -253,6 +253,28 @@
       "lastVerified": "2026-09-22",
       "pdfHash": "40952adfdb182ce1cc0a27889516c717f31ad439ad6266b98f1310771e9128c1",
       "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchで「令和５年度三重県立高等学校入学者選抜実施方針」PDF(001010971.pdf)を直接発見・取得。pdftotextで正常抽出。第3後期選抜3選抜(1)「調査書の第３学年における『各教科の学習の記録』及び『特別活動の記録』等により、およそ募集定員に当たる数の者を選ぶ。ただし、高等学校によっては、調査書の『各教科の学習の記録』等により選ぶ人数を、募集定員のおよそ110％又は120％にあらかじめ設定することができる」を確認、R6(sourceTitle脚注引用)・R7(実施要項第3後期選抜3選抜方法(1)に9教科×5段階=45点の明記あり)エントリの引用文と一言一句完全一致(第3学年のみ対象・9教科×5段階=45点満点・変更なし)。三重県は実施方針(年度当初公表・選抜手続きの大枠)と実施要項(後日公表・別表等の詳細)の2種類の資料があり、R5は実施方針のみで45点の直接記載はないが、対象学年・計算式がR6/R7と一言一句一致することから45点満点で確定できる)"
+    },
+    {
+      "code": "nara",
+      "name": "奈良県",
+      "region": "近畿",
+      "fiscalYear": "2023",
+      "targetGrades": [2, 3],
+      "gradeMultipliers": { "1": 0, "2": 1, "3": 2 },
+      "coreMultiplier": 1,
+      "practicalMultiplier": 1,
+      "maxScore": 135,
+      "simplifiedCalc": false,
+      "actualMaxScore": null,
+      "supports10PointScale": false,
+      "variantCount": 0,
+      "reverseCalc": null,
+      "sourceUrl": "https://www.pref.nara.lg.jp/documents/6012/r5_25_28tyousasyo3.pdf",
+      "sourceUrl2": "https://www.pref.nara.lg.jp/n167/61629.html",
+      "sourceTitle": "奈良県教育委員会「調査書及び学習成績一覧表等作成要領」(令和5年度奈良県立高等学校入学者選抜実施要項) 1調査書(5)ア・イ",
+      "lastVerified": "2026-09-22",
+      "pdfHash": "a92a5ae039a8443b303f2dd30c5fddcd0990bdd1bc601a6f49d0373d86b3266d",
+      "diffFromCurrentYear": "変更なし(2026-09-22にWebSearchでR5専用ページ(pref.nara.jpが.lg.jpへ301リダイレクト・documents/6012配下、R6はdocuments/6003・R7はdocuments/5976と毎年document IDが変わる)を発見し、『調査書及び学習成績一覧表等作成要領』本体(r5_25_28tyousasyo3.pdf)を直接取得。pdftotextで正常抽出。1(5)ア「学習成績は、国語、社会、数学、理科、音楽、美術、保健体育、技術・家庭及び英語の各教科とも、第２学年と第３学年の成績を１：２の割合で算出してください」、イ「各教科別に、次の(ア)及び(イ)を合計した学習成績を15点満点で記入してください。(ア)生徒指導要録に記載された第２学年の５段階評定値 (イ)第３学年の…観点別学習状況の評価を総括した５段階評定値を２倍した数値」を確認、R6エントリの引用文と一言一句完全一致(第1学年は不使用・9教科×15点=135点満点)。本文4「１の(5)のア及びイに基づき135点満点（15点×９教科）で算出してください」でも135点満点を直接確認(二重に裏取り)。⚠️T-N1-N4で検出されたnaraの制度変更はR7→R8間で発生したもの・R5→R6→R7は変更なしで一貫)"
     }
   ]
 }
