@@ -5,14 +5,21 @@
 // セルのため、単純な中点分割では隣接校の行を取り違えるリスクがあった(詳細は
 // `ops/baselines/t-y14-selection-method-survey-2026-09.md`のkyoto行)。
 //
-// 本ファイルは「京都市・乙訓」学区の13校について、①一覧表(find_tables()でセルbbox検出
-// →page.get_text(clip=bbox)で再抽出)と②個別学校ページ(頁21〜51・1選抜型=1頁・各頁に
+// 本ファイルは京都市・乙訓学区26校を2段階で収録する。
+// ①最初の13校(山城〜東稜)は、一覧表(頁14-18・find_tables()でセルbbox検出→
+// page.get_text(clip=bbox)で再抽出)と個別学校ページ(頁21〜51・1選抜型=1頁・各頁に
 // 学校名が明記される曖昧性のない情報源)を独立に突合し、両者が完全一致することを確認した
-// 学校のみを収録する(嵯峨野の「京都こすもす科」は個別ページで自然科学系統80人+文理科学
-// 系統240人の内訳と選抜方法が直接確認できた)。他学区(城陽・京都市中心部の残り等)は
-// 後半PDF・未突合分を含み今回は未収録。
+// 学校（嵯峨野の「京都こすもす科」は個別ページで自然科学系統80人+文理科学系統240人の
+// 内訳と選抜方法が直接確認できた）。
+// ②残りの13校(洛水〜開建・頁52-77)は一覧表側の照合を経ず、個別学校ページのみを直接
+// 転記した（一覧表そのものにこの範囲の学校名を含むページで一部フォント文字化けがあり、
+// 個別ページの方が曖昧性が無く安全なため）。京都すばる(商業学科群・情報科学科が同一
+// 選抜型で並記)・京都工学院(プロジェクト工学科がものづくり/まちづくりの2分野系統を
+// 1つの選抜型でまとめて募集)のように1ページが複数の学科・系統を含む場合はnoteに内訳を
+// 記載する。京都奏和(頁78)は単位制による定時制(昼間四部制)課程のため対象外。
+// 他学区(城陽・京都市中心部の残り等)は後半PDF分を含み今回は未収録。
 //
-// selectionCategoryは資料の「選抜方式・型」表記(A1/A2/B/C等)をそのまま使用。noteの
+// selectionCategoryは資料の「選抜方式、型」表記(A/A1/A2/B/C/D等)をそのまま使用。noteの
 // 「独自枠募集人員」は当該型で独自枠から選抜される人数(学科全体の募集定員とは別の数値)。
 // 配点の詳細な算出式(判定Ⅰ〜Ⅲ等の複雑な多段階選抜を持つ学校がある)までは転記せず、
 // 学校・学科・選抜型・人数構造の転記にとどめる(ratioTypeは設定しない)。
@@ -24,10 +31,10 @@ export const KYOTO_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
   fiscalYear: '令和9年度（2027年度）',
   status: 'structured',
   coverageNote:
-    '「京都市・乙訓」学区の13校(全31レコード=学校×学科×選抜型)のみ収録。一覧表(頁14-18)と個別学校ページ(頁21-51)の両方で行の帰属を突合できた学校に限定(結合セルの帰属が一意に確定できない他学区は今回見送り)。清明高校は単位制による定時制(昼間二部)課程のため本表の対象外(定時制は別掲)',
+    '「京都市・乙訓」学区の26校(全58レコード=学校×学科×選抜型)を収録。山城〜東稜の13校は一覧表(頁14-18)と個別学校ページ(頁21-51)の両方で行の帰属を突合できた学校、洛水〜開建の13校は個別学校ページ(頁52-77)のみを直接転記(一覧表側の該当ページに文字化けがあったため)。結合セルの帰属が一意に確定できない他学区・後半PDF分は今回見送り。清明高校(単位制による定時制・昼間二部)と京都奏和(単位制による定時制・昼間四部制)は本表の対象外(定時制は別掲)',
   source: {
     url: 'https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2026/09/前期選抜独自枠等募集要項（1前半）.pdf',
-    docTitle: '京都府教育委員会「令和9年度京都府公立高等学校入学者選抜 前期選抜独自枠等募集要項」頁14-18・頁21-51',
+    docTitle: '京都府教育委員会「令和9年度京都府公立高等学校入学者選抜 前期選抜独自枠等募集要項」頁14-18・頁21-77',
     lastChecked: '2026-09-23',
   },
   note:
@@ -218,6 +225,168 @@ export const KYOTO_SCHOOL_SELECTION_METHOD: PrefectureSchoolSelectionMethod = {
       department: '普通科',
       selectionCategory: '前期選抜独自枠 B方式',
       note: '学科募集定員200人。独自枠募集人員27人',
+    },
+    {
+      schoolName: '京都府立洛水高等学校',
+      department: '普通科',
+      selectionCategory: '前期選抜独自枠 A方式',
+      note: '独自枠募集人員56人',
+    },
+    {
+      schoolName: '京都府立洛水高等学校',
+      department: '普通科',
+      selectionCategory: '前期選抜独自枠 B方式',
+      note: '独自枠募集人員24人',
+    },
+    {
+      schoolName: '京都府立京都すばる高等学校',
+      department: '商業学科群（起業創造科・企画科）',
+      selectionCategory: '前期選抜独自枠 A方式',
+      note: '独自枠募集人員70人',
+    },
+    {
+      schoolName: '京都府立京都すばる高等学校',
+      department: '商業学科群（起業創造科・企画科）',
+      selectionCategory: '前期選抜独自枠 B方式',
+      note: '独自枠募集人員30人',
+    },
+    {
+      schoolName: '京都府立京都すばる高等学校',
+      department: '情報科学科',
+      selectionCategory: '前期選抜独自枠 A方式',
+      note: '独自枠募集人員40人',
+    },
+    {
+      schoolName: '京都府立向陽高等学校',
+      department: '普通科',
+      selectionCategory: '前期選抜独自枠 A方式',
+      note: '独自枠募集人員100人',
+    },
+    {
+      schoolName: '京都府立乙訓高等学校',
+      department: '普通科',
+      selectionCategory: '前期選抜独自枠 A方式1型',
+      note: '独自枠募集人員60人',
+    },
+    {
+      schoolName: '京都府立乙訓高等学校',
+      department: '普通科',
+      selectionCategory: '前期選抜独自枠 A方式2型',
+      note: '独自枠募集人員40人',
+    },
+    {
+      schoolName: '京都府立乙訓高等学校',
+      department: 'スポーツ健康科学科',
+      selectionCategory: '前期選抜独自枠 C方式',
+      note: '独自枠募集人員40人',
+    },
+    {
+      schoolName: '京都府立西乙訓高等学校',
+      department: '普通科',
+      selectionCategory: '前期選抜独自枠 A方式',
+      note: '独自枠募集人員80人',
+    },
+    {
+      schoolName: '京都市立西京高等学校',
+      department: 'エンタープライジング科',
+      selectionCategory: '前期選抜独自枠 A方式1型',
+      note: '独自枠募集人員144人',
+    },
+    {
+      schoolName: '京都市立西京高等学校',
+      department: 'エンタープライジング科',
+      selectionCategory: '前期選抜独自枠 A方式2型',
+      note: '独自枠募集人員16人',
+    },
+    {
+      schoolName: '京都市立美術工芸高等学校',
+      department: '美術工芸科',
+      selectionCategory: '前期選抜独自枠 C方式',
+      note: '独自枠募集人員90人',
+    },
+    {
+      schoolName: '京都市立京都堀川音楽高等学校',
+      department: '音楽科（作曲専攻・声楽専攻・器楽専攻・楽理専攻）',
+      selectionCategory: '前期選抜独自枠 C方式',
+      note: '独自枠募集人員40人',
+    },
+    {
+      schoolName: '京都市立京都工学院高等学校',
+      department: 'プロジェクト工学科（ものづくり分野系統・まちづくり分野系統）',
+      selectionCategory: '前期選抜独自枠 A方式1型',
+      note: 'ものづくり分野系統97人・まちづくり分野系統65人(出願時に希望系統を選択)',
+    },
+    {
+      schoolName: '京都市立京都工学院高等学校',
+      department: 'プロジェクト工学科（ものづくり分野系統・まちづくり分野系統）',
+      selectionCategory: '前期選抜独自枠 A方式2型',
+      note: 'ものづくり分野系統11人・まちづくり分野系統7人(出願時に希望系統を選択)',
+    },
+    {
+      schoolName: '京都市立京都工学院高等学校',
+      department: 'フロンティア理数科',
+      selectionCategory: '前期選抜独自枠 A方式',
+      note: '独自枠募集人員60人',
+    },
+    {
+      schoolName: '京都市立堀川高等学校',
+      department: '探究学科群（人間探究科・自然探究科）',
+      selectionCategory: '前期選抜独自枠 A方式',
+      note: '独自枠募集人員230人',
+    },
+    {
+      schoolName: '京都市立堀川高等学校',
+      department: '探究学科群（人間探究科・自然探究科）',
+      selectionCategory: '前期選抜独自枠 D方式',
+      note: '独自枠募集人員10人',
+    },
+    {
+      schoolName: '京都市立日吉ケ丘高等学校',
+      department: '普通科（単位制）',
+      selectionCategory: '前期選抜独自枠 A方式1型',
+      note: '独自枠募集人員80人',
+    },
+    {
+      schoolName: '京都市立日吉ケ丘高等学校',
+      department: '普通科（単位制）',
+      selectionCategory: '前期選抜独自枠 A方式2型',
+      note: '独自枠募集人員20人',
+    },
+    {
+      schoolName: '京都市立日吉ケ丘高等学校',
+      department: '普通科（単位制）',
+      selectionCategory: '前期選抜独自枠 A方式3型',
+      note: '独自枠募集人員20人',
+    },
+    {
+      schoolName: '京都市立紫野高等学校',
+      department: '普通科',
+      selectionCategory: '前期選抜独自枠 A方式1型',
+      note: '独自枠募集人員85人',
+    },
+    {
+      schoolName: '京都市立紫野高等学校',
+      department: '普通科',
+      selectionCategory: '前期選抜独自枠 A方式2型',
+      note: '独自枠募集人員15人',
+    },
+    {
+      schoolName: '京都市立紫野高等学校',
+      department: 'アカデミア科',
+      selectionCategory: '前期選抜独自枠 A方式',
+      note: '独自枠募集人員80人',
+    },
+    {
+      schoolName: '京都市立開建高等学校',
+      department: 'ルミノベーション科',
+      selectionCategory: '前期選抜独自枠 A方式1型',
+      note: '独自枠募集人員105人',
+    },
+    {
+      schoolName: '京都市立開建高等学校',
+      department: 'ルミノベーション科',
+      selectionCategory: '前期選抜独自枠 A方式2型',
+      note: '独自枠募集人員15人',
     },
   ],
 };
