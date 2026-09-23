@@ -33,7 +33,10 @@ export const NAGANO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制課程', '定時制課程（多部制・単位制）'],
     pendingDepartments: [],
-    note: '7頁目の【県立定時制課程】【県立定時制課程（多部制・単位制）】両表の全22レコードを完全収録。',
+    note: '7頁目の【県立定時制課程】【県立定時制課程（多部制・単位制）】両表の全22レコードを完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 松本筑摩（本表の多部制・単位制収録校と同一校）・' +
+      '長野西（定時制データには無い別校）に通信制課程が存在するが、独立した志願者数の公表資料は' +
+      '発見できず未収録。',
   },
   records: [
     // ===== 県立定時制課程 =====

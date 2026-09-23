@@ -35,7 +35,10 @@ export const MIYAZAKI_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制課程（一般入学）'],
     pendingDepartments: [],
-    note: '「2　定時制課程」セクションの全10レコード（6校）を完全収録。',
+    note: '「2　定時制課程」セクションの全10レコード（6校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 宮崎東（本表の定時制収録校と同一校）・延岡青朋も' +
+      '通信制課程を併設するが、県教委の入試情報ページ・学校独自サイトいずれにも通信制課程の' +
+      '志願者数/出願状況の公表は見当たらず未収録。',
   },
   records: [
     { schoolName: '延岡青朋', department: '普通', quota: 37, finalApplicants: 18, finalRate: 0.49 },

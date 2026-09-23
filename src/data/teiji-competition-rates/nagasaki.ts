@@ -39,7 +39,10 @@ export const NAGASAKI_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制/夜間部（Ⅰ期選抜のみ・本選抜全体ではない点に留意）'],
     pendingDepartments: [],
-    note: '8頁目「Ⅰ期選抜志願状況（定時制/夜間部）」の全12レコードを完全収録。数値はⅠ期選抜のみで本選抜全体の集計ではない点に注意。',
+    note: '8頁目「Ⅰ期選抜志願状況（定時制/夜間部）」の全12レコードを完全収録。数値はⅠ期選抜のみで本選抜全体の集計ではない点に注意。' +
+      '2026-09-23にT-P1通信制拡張の調査: 鳴滝定夜・佐世保中央定夜（いずれも本表の定時制収録校と' +
+      '同一校）は通信制課程も併設するが、県教委の志願状況/実施状況ページ群のいずれにも通信制の' +
+      '公表は見当たらず未収録。',
   },
   records: [
     { schoolName: '鳴滝定夜', department: '普通', quota: 28, finalApplicants: 5, finalRate: 0.2 },
