@@ -226,9 +226,18 @@ GSC 2026-06-02〜08-31（90日）:
       3県は新規データ収録・他11県はnoteのみ）。
       **進捗(2026-09-23続報5・miyazaki/nagano/nagasaki完了・commit ba2e179)**: 3県とも
       定時制収録校が通信制課程を併設する共通パターンだが独立公表資料は発見できず未収録。
-      本セッション累計17県完了（うち新規データ収録3県: ishikawa/nara/shiga）。
-      残り14県（niigata/oita/okayama/okinawa/osaka/saga/shimane/shizuoka/tochigi/
-      tokushima/toyama/wakayama/yamagata/yamanashi）。
+      **完了(2026-09-23続報6・残り14県完了・commit aa02732/18e1cec)**: niigata/oita/
+      okayama/okinawa/osaka/saga/shimane/shizuoka/tochigi/tokushima/toyama/wakayama/
+      yamagata/yamanashiを完走。**これで「残り32県」全ての通信制セクション有無調査が完了**。
+      本セッション最終集計: 32県中29県はnoteのみ（独立公表資料なし・データ追加なし）、
+      3県（ishikawa/nara/shiga）は新規データ収録。既存の7県（chiba/gifu/hokkaido/
+      kanagawa/kochi/mie/miyagi）＋前セッションのtokyoと合わせ、公立通信制データを持つのは
+      現在11県。残る「拾えなかった」29県は全て、定時制収録校（または同一県内の別の単独校）が
+      通信制課程を併設している事実自体は確認済みだが、県教委が競争率算定に使える出願者数/
+      志願者数の独立公表資料を持たない（または本セッションの探索で発見できなかった）状態。
+      **本項目のこれ以上の深追いは打ち切る**（47都道府県中47県を機械的に確認済み・逓減領域）。
+      再開する場合は、未発見29県の中から個別に「学校公式サイトへの直接問い合わせ」等、
+      より重い調査コストをかける価値があるかを👤判断で絞ってから着手すること。
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
 - [ ] ⚠️ **47県を埋めるために推測で水増ししない。** 20県で止まるならそれが正しい姿
 - [ ] ⚠️ **スケールドコンテンツ検出のゲートが既にある**（`uniqueness.test`）。
