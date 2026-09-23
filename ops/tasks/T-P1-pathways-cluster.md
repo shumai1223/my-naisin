@@ -213,11 +213,19 @@ GSC 2026-06-02〜08-31（90日）:
       **進捗(2026-09-23続報3・kagawa/kagoshima/kumamoto完了・commit be1c30a)**: 3県とも
       既存PDFの全頁数を実測し通信制の余地なしを確認。3県とも定時制収録校と同一の学校
       （高松/丸亀・開陽・湧心館）が通信制課程を併設する共通パターンだが、独立した出願状況の
-      公表資料は発見できず未収録（note追記のみ）。本セッション累計: aomori/ehime/fukuoka/
-      fukushima/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kumamotoの11県完了
-      （うちishikawaのみ新規データ収録・他10県はnoteのみ）。残り21県（kyoto/miyazaki/
-      nagano/nagasaki/nara/niigata/oita/okayama/okinawa/osaka/saga/shiga/shimane/
-      shizuoka/tochigi/tokushima/toyama/wakayama/yamagata/yamanashi）。
+      公表資料は発見できず未収録（note追記のみ）。
+      **進捗(2026-09-23続報4・kyoto/nara/shiga完了・commit af6dbc0)**: naraで山辺高校
+      （定時制収録校とは別の独立校）・shigaで大津清陵（通信制。定時制収録校と同一校の第3課程）
+      をそれぞれ独立公表資料から発見し新規収録。kyotoは本PDF全4頁に余地なく、府教委の選抜状況
+      ページにも通信制区分が無いため未収録。**教訓④（頻出パターン）**: nara・shigaで連続して
+      発見した通信制の独立公表資料は、県教委の入試情報ハブページのURL・ファイル名に
+      「tuusin」「通信」を含むことが多い。ハブページの全リンクを一覧化してから「通信」で
+      grepする探索順序が、個別にWebSearchで都度探すより効率的と判明。
+      本セッション累計: aomori/ehime/fukuoka/fukushima/gunma/hiroshima/ishikawa/iwate/
+      kagawa/kagoshima/kumamoto/kyoto/nara/shigaの14県完了（うちishikawa/nara/shigaの
+      3県は新規データ収録・他11県はnoteのみ）。残り17県（miyazaki/nagano/nagasaki/
+      niigata/oita/okayama/okinawa/osaka/saga/shimane/shizuoka/tochigi/tokushima/
+      toyama/wakayama/yamagata/yamanashi）。
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
 - [ ] ⚠️ **47県を埋めるために推測で水増ししない。** 20県で止まるならそれが正しい姿
 - [ ] ⚠️ **スケールドコンテンツ検出のゲートが既にある**（`uniqueness.test`）。
