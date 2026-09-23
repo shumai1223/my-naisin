@@ -4160,11 +4160,34 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     );
   });
 
-  it('shiga: [別表１]令和9年度高等学校別入学者選抜一覧表(頁1・全日制の課程)の27校34学科79レコードを収録', () => {
+  it('shiga: [別表１]令和9年度高等学校別入学者選抜一覧表(全2頁)の52校(頁1=27校＋頁2全日制17校＋定時制/通信制8校)138レコードを収録', () => {
     const record = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga;
     const schools = record?.schools ?? [];
-    expect(schools).toHaveLength(79);
-    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(27);
+    expect(schools).toHaveLength(138);
+    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(52);
+  });
+
+  it('shiga: 大津清陵は昼間/通信/夜間の3課程が別学校名(schoolNameに課程を含む)で収録され、通信は学力検査なしで個人調査報告書900:その他100', () => {
+    const otsuseiryo = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga?.schools?.filter((x) =>
+      x.schoolName.startsWith('大津清陵'),
+    );
+    expect(otsuseiryo).toHaveLength(3);
+    expect(new Set(otsuseiryo?.map((x) => x.schoolName))).toEqual(
+      new Set(['大津清陵・昼間', '大津清陵・通信', '大津清陵・夜間']),
+    );
+    const tsushin = otsuseiryo?.find((x) => x.schoolName === '大津清陵・通信');
+    expect(tsushin?.ratioType).toBe('個人調査報告書900:その他100');
+  });
+
+  it('shiga: 能登川は全日制(4レコード)と定時制の昼間/夜間(3レコード)が別学校名で収録される', () => {
+    const zenjitsuseiNotogawa = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga?.schools?.filter(
+      (x) => x.schoolName === '能登川',
+    );
+    expect(zenjitsuseiNotogawa).toHaveLength(4);
+    const teijiNotogawa = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga?.schools?.filter((x) =>
+      ['能登川・昼間', '能登川・夜間'].includes(x.schoolName),
+    );
+    expect(teijiNotogawa).toHaveLength(3);
   });
 
   it('shiga: 膳所(普通科)は自己推薦のみ(中学校長推薦なし)で一般型選抜は学力検査800:個人調査報告書200', () => {
