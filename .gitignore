@@ -141,3 +141,14 @@ ops/raw/bairitsu-pdf-archive/
 ops/deliverables/obunsha-poc-v0/r8-full.json
 ops/deliverables/obunsha-poc-v0/r8-full.csv
 ops/deliverables/obunsha-poc-v0/r7-r8-diff.json
+
+# ── loop の一次資料ワークエリア（2026-09-23 追加）─────────────────
+# 各県教委からダウンロードしたPDFと、ビジョン解析用に切り出したPNG。
+# 出典URLは src/data/ 側に記録済みで、必要ならいつでも再取得できる。
+# 2026-09-23時点で385ファイル・167.6MB が未追跡のまま溜まっており、
+# `git add -A` 一発でリポジトリに入る状態だったため明示的に除外する。
+# ⚠️ 既に追跡済みの29ファイル（小さい一次資料）はこの行の影響を受けず、追跡され続ける。
+ops/baselines/**/*.pdf
+ops/baselines/**/*.png
+ops/baselines/**/*.jpg
+ops/baselines/**/__pycache__/
