@@ -4006,16 +4006,18 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(zennichi.filter((x) => x.schoolName === '石川県立工業高等学校')).toHaveLength(7);
   });
 
-  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区26校58レコード＋城陽学区8校18レコード＋相楽学区3校13レコードを収録し、一覧表と個別学校ページを突合または個別学校ページ直読みのいずれかで検証済みの学校のみに限定する', () => {
+  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区26校58レコード＋城陽学区8校18レコード＋相楽学区3校13レコード＋北桑田2レコードを収録し、一覧表と個別学校ページを突合または個別学校ページ直読みのいずれかで検証済みの学校のみに限定する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kyoto');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
     const schools = record?.schools ?? [];
-    expect(schools).toHaveLength(89);
-    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(37);
+    expect(schools).toHaveLength(91);
+    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(38);
     expect(schools.every((x) => x.ratioType === undefined)).toBe(true);
     // 清明高校(単位制・定時制昼間二部)と京都奏和(単位制・定時制昼間四部制)は対象外
     expect(schools.some((x) => x.schoolName.includes('清明'))).toBe(false);
     expect(schools.some((x) => x.schoolName.includes('京都奏和'))).toBe(false);
+    // 北桑田美山分校(定時制・昼間課程)も同様に対象外
+    expect(schools.some((x) => x.schoolName.includes('美山'))).toBe(false);
     // 山城は普通科(単位制・A1/A2の2型)+文理総合科(単位制・A型)の2学科3レコード
     const yamashiro = schools.filter((x) => x.schoolName === '京都府立山城高等学校');
     expect(yamashiro).toHaveLength(3);
@@ -4073,6 +4075,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const nanyo = schools.filter((x) => x.schoolName === '京都府立南陽高等学校');
     expect(nanyo).toHaveLength(2);
     expect(new Set(nanyo.map((x) => x.department))).toEqual(new Set(['普通科', 'サイエンスリサーチ科']));
+    // 北桑田(本校)は普通科(京都市・乙訓枠を含む30人)+京都フォレスト科15人の2レコード
+    const kitakuwada = schools.filter((x) => x.schoolName === '京都府立北桑田高等学校');
+    expect(kitakuwada).toHaveLength(2);
+    expect(new Set(kitakuwada.map((x) => x.department))).toEqual(new Set(['普通科', '京都フォレスト科']));
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
