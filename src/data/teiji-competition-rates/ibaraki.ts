@@ -33,7 +33,7 @@ export const IBARAKI_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制'],
     pendingDepartments: [],
-    note: '3頁目「【定時制】」の全21レコード（12校）を完全収録。',
+    note: '3頁目「【定時制】」の全21レコード（12校）を完全収録。同一PDF内に「【連携型入学者選抜】」セクションはあるが「【通信制】」セクションは存在しないことを2026-09-23に確認済み（T-P1通信制拡張の調査で再取得・全5頁を通読）。',
   },
   records: [
     { schoolName: '高萩', department: '普通（午前）', quota: 80, finalApplicants: 33, finalRate: 0.41 },
