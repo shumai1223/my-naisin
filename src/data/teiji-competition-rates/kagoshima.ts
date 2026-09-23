@@ -34,7 +34,11 @@ export const KAGOSHIMA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = 
     status: 'complete',
     includedDepartments: ['定時制'],
     pendingDepartments: [],
-    note: '7頁目「（定時制）」の全3レコード（2校・鹿児島学区+大島学区）を完全収録。',
+    note: '7頁目「（定時制）」の全3レコード（2校・鹿児島学区+大島学区）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 本PDFは全7頁で通信制セクションの余地なし（頁数実測）。' +
+      '開陽高校（本表の定時制収録校と同一校）は通信制課程も設置し独立サイト' +
+      '（kaiyo-tsushin.edu.pref.kagoshima.jp）まで持つが、出願状況/志願者数の公表資料は' +
+      '県教委サイト・学校独自サイトいずれにも発見できず未収録。',
   },
   records: [
     { schoolName: '開陽', department: '普通', quota: 16, finalApplicants: 24, finalRate: 1.5 },

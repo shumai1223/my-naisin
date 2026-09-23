@@ -35,7 +35,11 @@ export const KUMAMOTO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制課程'],
     pendingDepartments: [],
-    note: '5頁目「＜定時制課程＞」の全12レコード（学校単独の内訳合計行2件を除く）を完全収録。',
+    note: '5頁目「＜定時制課程＞」の全12レコード（学校単独の内訳合計行2件を除く）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 本PDFは全5頁で通信制セクションの余地なし（頁数実測）。' +
+      '湧心館高校（本表の定時制収録校と同一校・協力校4校を持つ広域通信制）は熊本県唯一の公立' +
+      '通信制だが、県教委の「前期（特色）選抜等出願者数」「募集定員」等の公表ページ群のいずれ' +
+      'にも通信制の出願状況は見当たらず未収録。',
   },
   records: [
     { schoolName: '湧心館', department: '普通', quota: 40, finalApplicants: 23, finalRate: 0.58 },

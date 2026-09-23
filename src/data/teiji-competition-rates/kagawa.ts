@@ -35,7 +35,10 @@ export const KAGAWA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制課程'],
     pendingDepartments: [],
-    note: '2頁目「（11-3）定時制課程小学科別」の全12レコード（9校）を完全収録。',
+    note: '2頁目「（11-3）定時制課程小学科別」の全12レコード（9校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 本PDFは全2頁で通信制セクションの余地なし（頁数実測）。' +
+      '香川県立高松・丸亀（いずれも本表の定時制収録校と同一校）に通信制課程が存在することを' +
+      '確認したが、独立した出願状況/志願者数の公表資料を発見できず未収録。',
   },
   records: [
     { schoolName: '小豆島中央', department: '普通', quota: 40, finalApplicants: 2, finalRate: 0.05 },
