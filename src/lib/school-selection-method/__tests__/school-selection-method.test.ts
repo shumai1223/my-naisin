@@ -4006,12 +4006,12 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(zennichi.filter((x) => x.schoolName === '石川県立工業高等学校')).toHaveLength(7);
   });
 
-  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区26校58レコードを収録し、一覧表と個別学校ページを突合または個別学校ページ直読みのいずれかで検証済みの学校のみに限定する', () => {
+  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区26校58レコード＋城陽学区8校18レコードを収録し、一覧表と個別学校ページを突合または個別学校ページ直読みのいずれかで検証済みの学校のみに限定する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kyoto');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
     const schools = record?.schools ?? [];
-    expect(schools).toHaveLength(58);
-    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(26);
+    expect(schools).toHaveLength(76);
+    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(34);
     expect(schools.every((x) => x.ratioType === undefined)).toBe(true);
     // 清明高校(単位制・定時制昼間二部)と京都奏和(単位制・定時制昼間四部制)は対象外
     expect(schools.some((x) => x.schoolName.includes('清明'))).toBe(false);
@@ -4047,6 +4047,20 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const horikawa = schools.filter((x) => x.schoolName === '京都市立堀川高等学校');
     expect(horikawa).toHaveLength(2);
     expect(horikawa.every((x) => x.department === '探究学科群（人間探究科・自然探究科）')).toBe(true);
+    // 城陽学区(後半PDF・頁1-17)は個別学校ページのみで構成される8校18レコード
+    const higashiuji = schools.filter((x) => x.schoolName === '京都府立東宇治高等学校');
+    expect(higashiuji).toHaveLength(2);
+    const joyo = schools.filter((x) => x.schoolName === '京都府立城陽高等学校');
+    expect(joyo).toHaveLength(2);
+    // 京都八幡は北キャンパス(普通科総合選択制)と南キャンパス(介護福祉科・人間科学科)を
+    // 資料の構成どおり別学校として収録
+    const yawataKita = schools.filter((x) => x.schoolName === '京都府立京都八幡高等学校（北キャンパス）');
+    expect(yawataKita).toHaveLength(2);
+    const yawataMinami = schools.filter((x) => x.schoolName === '京都府立京都八幡高等学校（南キャンパス）');
+    expect(yawataMinami).toHaveLength(2);
+    expect(new Set(yawataMinami.map((x) => x.department))).toEqual(new Set(['介護福祉科', '人間科学科']));
+    const kuseyama = schools.filter((x) => x.schoolName === '京都府立久御山高等学校');
+    expect(kuseyama).toHaveLength(3);
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
