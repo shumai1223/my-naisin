@@ -187,6 +187,37 @@ GSC 2026-06-02〜08-31（90日）:
       okayama/okinawa/osaka/saga/shiga/shimane/shizuoka/tochigi/tokushima/toyama/wakayama/
       yamagata/yamanashi。次回はこの中から数県ずつ、まず既存PDF内を確認→無ければ独立資料を
       WebSearchで探す、の2段階で進める。
+      **進捗(2026-09-23続報2・8県完了)**: aomori/ehime/fukuoka/fukushima/gunma/hiroshima/
+      iwate（commit f5528ec/1c5e7d2/242acf9）は通信制セクションなし・独立公表も未発見と確認
+      （note追記のみ）。**ishikawaは当たり**: 定時制とは別の独立公表資料「(通信制)の合格状況」
+      （4月8日公表・`kisya/r8kyoui/documents/20260408.pdf`）を発見し、金沢泉丘（通信制）2学科
+      2レコードを新規収録（出願者数B・出願倍率B/Aを採用、他県と同じ規律）。
+      **教訓①**: 定時制の一次ソースPDFが小規模（数頁）でも、通信制は選抜スケジュール自体が
+      別（定時制3月出願→4月合格発表等）で独立公表される場合があるため、同一PDF内に無くても
+      即座に「なし」と結論せず、県教委の記者発表（kisya）一覧ページを年度・月別に辿ると見つかる
+      ことがある（tokyoで確立したパターンの再現）。**教訓②**: WebFetch/WebSearchが提示した
+      具体的なURL（今回は「kisya/r8kyoui/documents/20260408.pdf」）は実在しないことがある
+      既知の罠の逆パターンとして、**今回はcurlで200を返し実在を確認できた**——過信も過小評価も
+      せず必ずcurlで実在確認してから使うことに変わりはない。**教訓③（重要・回帰の発見）**:
+      前回セッションのtokyo通信制追加（commit 94ce5d6）が`teiji-competition-rates/tokyo.ts`の
+      レコード数を16→19に増やした際、関連する`school-teiji-lookup.test.ts`と
+      `stage-ledger/__tests__/tokyo.test.ts`の固定期待値（レコード数）を更新し忘れており、
+      フルjestスイートでのみ検出される回帰が2件残っていた（当時のセッションは狭い範囲
+      `jest272`のみ実行していたため見逃した）。今回のセッションでフルスイート実行時に発覚し
+      修正（commit 242acf9）。**教訓: 既存データファイルにレコードを追加する際は、そのファイルを
+      参照する全テストへの影響を確認するため、対象ファイル名で`grep -rl`してから編集後に
+      フルjestスイートを実行する習慣を徹底する**（narrow testだけでは検出できない）。
+      次回は残り24県（kagawa/kagoshima/kumamoto/kyoto/miyazaki/nagano/nagasaki/nara/niigata/
+      oita/okayama/okinawa/osaka/saga/shiga/shimane/shizuoka/tochigi/tokushima/toyama/
+      wakayama/yamagata/yamanashi）を継続する。
+      **進捗(2026-09-23続報3・kagawa/kagoshima/kumamoto完了・commit be1c30a)**: 3県とも
+      既存PDFの全頁数を実測し通信制の余地なしを確認。3県とも定時制収録校と同一の学校
+      （高松/丸亀・開陽・湧心館）が通信制課程を併設する共通パターンだが、独立した出願状況の
+      公表資料は発見できず未収録（note追記のみ）。本セッション累計: aomori/ehime/fukuoka/
+      fukushima/gunma/hiroshima/ishikawa/iwate/kagawa/kagoshima/kumamotoの11県完了
+      （うちishikawaのみ新規データ収録・他10県はnoteのみ）。残り21県（kyoto/miyazaki/
+      nagano/nagasaki/nara/niigata/oita/okayama/okinawa/osaka/saga/shiga/shimane/
+      shizuoka/tochigi/tokushima/toyama/wakayama/yamagata/yamanashi）。
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
 - [ ] ⚠️ **47県を埋めるために推測で水増ししない。** 20県で止まるならそれが正しい姿
 - [ ] ⚠️ **スケールドコンテンツ検出のゲートが既にある**（`uniqueness.test`）。
