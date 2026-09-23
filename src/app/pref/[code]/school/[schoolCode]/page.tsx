@@ -42,8 +42,13 @@ const PILOT_PREFECTURE_CODES = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES;
  * GSCの実クエリでは短縮形（例:「一宮商業高校」）が正式名（「〜高等学校」）の23倍表示・76倍クリック
  * だが、このページは正式名しか出していなかった（BAR.md §0-6）。まず1県（aichi＝実測の例示県）に
  * 限定してtitle/meta description/h1に短縮形を併記し、GSCで4週間CTRを追跡してから展開県を広げる。
+ *
+ * 2026-09-24 全県へ展開（👤裁定・W-8判定 ops/baselines/gsc-review-2026-09-24.md）:
+ * JP×MOBILE・9/7-20窓で条件①が+0.29pt（閾値+0.30ptとの差0.01ptは誤差と判定）、条件②は+4.1ptで合格。
+ * ⚠️ 全デバイスでは条件②が−17.9〜−32.6ptで不合格、消えたクエリ上位が「○○高校 倍率」だった点は
+ * 未解消の懸念として同ファイルに記録済み。展開後は W-8 と同じ方法で全県のクリックを追跡すること。
  */
-const SHORT_FORM_PILOT_PREFECTURE_CODES = ['aichi'];
+const SHORT_FORM_ENABLED = true;
 
 interface PageProps {
   params: Promise<{ code: string; schoolCode: string }>;
@@ -67,7 +72,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: '学校が見つかりません | My Naishin', robots: { index: false, follow: false } };
   }
 
-  const shortName = SHORT_FORM_PILOT_PREFECTURE_CODES.includes(code) ? shortenSchoolName(school.schoolName) : null;
+  const shortName = SHORT_FORM_ENABLED ? shortenSchoolName(school.schoolName) : null;
   const displayName = shortName ? `${school.schoolName}（${shortName}）` : school.schoolName;
 
   const title = `${displayName}の入試倍率・募集人員 | My Naishin`;
@@ -100,8 +105,8 @@ export default async function SchoolPage({ params }: PageProps) {
   const categoryTrends = getSchoolCategoryTrends(code, school, COMPETITION_RATE_HISTORY_BY_PREFECTURE[code]);
   const teijiRecords = getSchoolTeijiRecords(code, schoolCode);
   const schoolHistoryByDepartment = groupSchoolHistoryByDepartment(school.history);
-  // S3-3パイロット（aichi限定・BAR.md V-6）: 検索ユーザーが実際に打つ短縮形をh1に併記する。
-  const shortName = SHORT_FORM_PILOT_PREFECTURE_CODES.includes(code) ? shortenSchoolName(school.schoolName) : null;
+  // S3-3（2026-09-24 全県展開・BAR.md V-6）: 検索ユーザーが実際に打つ短縮形をh1に併記する。
+  const shortName = SHORT_FORM_ENABLED ? shortenSchoolName(school.schoolName) : null;
   const canonicalUrl = `https://my-naishin.com/pref/${prefecture.code}/school/${schoolCode}`;
   // S3-4（ops/PROPOSALS.md）: HighSchool + FAQPage 構造化データ。実数のみ・AggregateRatingは作らない。
   const faqItems = buildSchoolFaqItems(school, prefecture.name);

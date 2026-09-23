@@ -31,4 +31,14 @@ describe('shortenSchoolName', () => {
     expect(shortenSchoolName('愛知県立旭丘高校')).toBeNull();
     expect(shortenSchoolName('')).toBeNull();
   });
+
+  // 2026-09-24 全県展開前の検算で発見: 校名部分が設置者名だけの学校は「高校」だけが残る。
+  it('returns null when only 高校 would remain (e.g. 北九州市立高等学校)', () => {
+    expect(shortenSchoolName('北九州市立高等学校')).toBeNull();
+  });
+
+  it('keeps names whose own part contains 立 (e.g. 知立)', () => {
+    expect(shortenSchoolName('愛知県立知立高等学校')).toBe('知立高校');
+    expect(shortenSchoolName('愛知県立知立東高等学校')).toBe('知立東高校');
+  });
 });

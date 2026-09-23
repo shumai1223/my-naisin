@@ -30,6 +30,8 @@ export function shortenSchoolName(fullName: string): string | null {
   const base = withoutPrefix.includes('高等学校') ? withoutPrefix : fullName;
   const short = base.replace('高等学校', '高校');
 
-  if (short === fullName || short.length === 0) return null;
+  // 「北九州市立高等学校」のように校名部分が設置者名だけの学校は、接頭辞を外すと「高校」しか
+  // 残らない（2026-09-24 全県展開前に3,422校で検算して発見）。校名として成立しないので出さない。
+  if (short === fullName || short.length <= '高校'.length) return null;
   return short;
 }
