@@ -49,7 +49,7 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・197レコー�
     expect(matched).toBe(182);
   });
 
-  it('定時制課程（単位制）7レコード＋チャレンジスクール等8レコード＝計15レコードのquota・applicantsConfirmedは既存の倍率パイプライン（teiji-competition-rates/tokyo.ts）と全件完全一致する（既存パイプライン全16レコード中15レコードを反映・残り1件の在京外国人生徒等対象は恒久的にスコープ外）', () => {
+  it('定時制課程（単位制）7レコード＋チャレンジスクール等8レコード＝計15レコードのquota・applicantsConfirmedは既存の倍率パイプライン（teiji-competition-rates/tokyo.ts）と全件完全一致する（既存パイプライン全19レコード中15レコードを反映・残り4件は在京外国人生徒等対象1件＋2026-09-23追加の通信制3件＝いずれも段階台帳のスコープ外）', () => {
     const teijiFile = TEIJI_COMPETITION_RATE_BY_PREFECTURE.tokyo;
     if (!teijiFile) throw new Error('teiji-competition-rates/tokyo.ts が見つかりません');
     const teijiRecords = records.filter(
@@ -75,7 +75,9 @@ describe('東京都 段階台帳（T-Y11F §5順序#7・7県目・197レコー�
       expect(counterpart.finalApplicants).toBe(stageRecord.applicantsConfirmed);
     }
     expect(matched).toBe(15);
-    expect(teijiFile.records).toHaveLength(16); // 既存パイプライン全16件中15件を反映（残り1件は在京外国人）
+    // 既存パイプライン全19件中15件を反映（残り4件＝在京外国人1件＋2026-09-23追加の通信制3件は段階台帳スコープ外）
+    expect(teijiFile.records).toHaveLength(19);
+    expect(teijiFile.records.filter((r) => r.department.includes('通信制'))).toHaveLength(3);
   });
 
   it('finalPassersはapplicantsConfirmedを超えない（東京都でもこのパターンの逆転は0件）', () => {

@@ -13,12 +13,15 @@ describe('getSchoolTeijiRecords（学校ページから定時制・通信制デ�
   });
 
   it('複数学科を持つ実在校（東京都立新宿山吹高等学校の相当校）は複数レコードを返す', () => {
-    // 新宿山吹は普通科1〜4部/情報科2・4部の2レコードを持つ（tokyo.ts参照）
+    // 新宿山吹は定時制（普通科1〜4部/情報科2・4部）2レコード＋通信制（普通科）1レコードの
+    // 計3レコードを持つ（2026-09-23のT-P1通信制拡張でtokyo.tsに通信制レコードを追加済み）
     const master = SCHOOL_MASTER_BY_PREFECTURE.tokyo!;
     const shinjukuYamabuki = master.schools.find((s) => s.name.includes('新宿山吹'));
     expect(shinjukuYamabuki).toBeDefined();
     const records = getSchoolTeijiRecords('tokyo', shinjukuYamabuki!.code);
-    expect(records.length).toBe(2);
+    expect(records.length).toBe(3);
+    expect(records.filter((r) => r.trackType === '定時制')).toHaveLength(2);
+    expect(records.filter((r) => r.trackType === '通信制')).toHaveLength(1);
   });
 
   it('全日制のみで定時制課程を持たない実在校（東京都立日比谷高等学校）は空配列を返す', () => {

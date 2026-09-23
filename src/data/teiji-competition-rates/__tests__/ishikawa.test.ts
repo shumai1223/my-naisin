@@ -9,13 +9,13 @@ import { ISHIKAWA_TEIJI_COMPETITION_RATES } from '../ishikawa';
 describe('石川県 定時制課程 倍率パイプライン（T-Y11F §5順序#4）', () => {
   const { records, officialSubtotals } = ISHIKAWA_TEIJI_COMPETITION_RATES;
 
-  it('取り込み件数は10レコード（6校・小松北と金沢中央は夜間部/午前部/午後部の3レコード）', () => {
-    expect(records).toHaveLength(10);
+  it('取り込み件数は12レコード（定時制6校10レコード＋通信制1校2レコード）', () => {
+    expect(records).toHaveLength(12);
   });
 
-  it('学校数は6校', () => {
+  it('学校数は7校（定時制6校＋通信制の金沢泉丘）', () => {
     const schoolNames = new Set(records.map((r) => r.schoolName));
-    expect(schoolNames.size).toBe(6);
+    expect(schoolNames.size).toBe(7);
   });
 
   it('小松北3レコードの合計が公式「小松北　小計」と一致する', () => {
@@ -46,13 +46,21 @@ describe('石川県 定時制課程 倍率パイプライン（T-Y11F §5順序#
     expect(result.matches).toBe(true);
   });
 
-  it('全10レコードの合計が公式「総計」と一致する', () => {
+  it('定時制10レコードの合計が公式「総計」と一致する（通信制2レコードは別選抜のため除外）', () => {
     const subtotal = officialSubtotals.find((s) => s.label === '総計');
     if (!subtotal) throw new Error('officialSubtotals に "総計" が見つかりません');
-    const result = checkAgainstSubtotal(records, subtotal, () => true);
+    const teijiRecords = records.filter((r) => !r.department.includes('通信制'));
+    const result = checkAgainstSubtotal(teijiRecords, subtotal, () => true);
     expect(result.matches).toBe(true);
-    expect(sumRecords(records).quota).toBe(480);
-    expect(sumRecords(records).finalApplicants).toBe(236);
+    expect(sumRecords(teijiRecords).quota).toBe(480);
+    expect(sumRecords(teijiRecords).finalApplicants).toBe(236);
+  });
+
+  it('通信制2レコード（金沢泉丘）の合計が公式「金沢泉丘（通信制）計」と一致する', () => {
+    const subtotal = officialSubtotals.find((s) => s.label === '金沢泉丘（通信制）計');
+    if (!subtotal) throw new Error('officialSubtotals に "金沢泉丘（通信制）計" が見つかりません');
+    const result = checkAgainstSubtotal(records, subtotal, (r) => r.department.includes('通信制'));
+    expect(result.matches).toBe(true);
   });
 
   it('quota/finalApplicants/finalRateはいずれも0以上（不変条件）', () => {

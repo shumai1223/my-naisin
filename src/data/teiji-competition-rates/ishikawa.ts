@@ -32,12 +32,23 @@ export const ISHIKAWA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
+    {
+      url: 'https://www.pref.ishikawa.lg.jp/kisya/r8kyoui/documents/20260408.pdf',
+      docTitle: '石川県教育委員会 令和8年度石川県公立高等学校（通信制）の合格状況（4月8日）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-23',
+    },
   ],
   coverage: {
     status: 'complete',
-    includedDepartments: ['定時制（夜間制・昼間制）'],
+    includedDepartments: ['定時制（夜間制・昼間制）', '通信制（金沢泉丘）'],
     pendingDepartments: [],
-    note: '定時制専用PDFの全10レコード（6校）を完全収録。',
+    note: '定時制専用PDFの全10レコード（6校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査で追加: 石川県公立の通信制課程は金沢泉丘高等学校1校のみ' +
+      '（2学科）で、定時制とは別選抜（出願3月・合格発表4月8日）のため独立した公表資料' +
+      '「（通信制）の合格状況」に掲載。定時制と異なり「出願状況」単独のPDFは見当たらず、' +
+      '合格状況PDF内の募集定員(A)・出願者数(B)・出願倍率(B/A)列を採用（他レコードと同じ規律で' +
+      'finalApplicants=出願者数B・finalRate=出願倍率B/A、受検倍率D/Aではない）。',
   },
   records: [
     { schoolName: '加賀聖城', department: '普通（夜間部）', quota: 40, finalApplicants: 15, finalRate: 0.38 },
@@ -50,6 +61,8 @@ export const ISHIKAWA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '羽松', department: '普通（午前部）', quota: 40, finalApplicants: 13, finalRate: 0.33 },
     { schoolName: '七尾城北', department: '普通（夜間部）', quota: 40, finalApplicants: 16, finalRate: 0.4 },
     { schoolName: '輪島', department: '普通（夜間部）', quota: 40, finalApplicants: 1, finalRate: 0.03 },
+    { schoolName: '金沢泉丘', department: '普通（通信制）', quota: 200, finalApplicants: 58, finalRate: 0.29 },
+    { schoolName: '金沢泉丘', department: '衛生看護（通信制）', quota: 40, finalApplicants: 0, finalRate: 0 },
   ],
   officialSubtotals: [
     { label: '小松北　小計', schoolCount: 1, quota: 120, finalApplicants: 57, finalRate: 0.48 },
@@ -57,5 +70,6 @@ export const ISHIKAWA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { label: '夜間制', quota: 200, finalApplicants: 46, finalRate: 0.23 },
     { label: '昼間制', quota: 280, finalApplicants: 190, finalRate: 0.68 },
     { label: '総計', schoolCount: 6, quota: 480, finalApplicants: 236, finalRate: 0.49 },
+    { label: '金沢泉丘（通信制）計', schoolCount: 1, quota: 240, finalApplicants: 58, finalRate: 0.24 },
   ],
 };

@@ -36,7 +36,12 @@ export const IWATE_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制（一次募集）'],
     pendingDepartments: [],
-    note: '定時制セクションの全12レコード（9校）を完全収録。',
+    note: '定時制セクションの全12レコード（9校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 本PDFは全4頁（1〜3頁目=全日制・4頁目=定時制）のみで' +
+      '構成され通信制セクションは存在しない（ページ数を実測確認）。杜陵高等学校は定時制と別に' +
+      '通信制課程も設置しているが、県教委の志願者数一覧ハブページ（1094015.html）に掲載される' +
+      '7種類のPDF（一次募集・二次募集・最終合格・いわて留学等）のいずれにも「通信制」の見出しは' +
+      'なく、独立した公表資料も発見できなかったため未収録。',
   },
   records: [
     { schoolName: '杜陵', department: '普通（1・2部）', quota: 80, finalApplicants: 29, finalRate: 0.36 },
