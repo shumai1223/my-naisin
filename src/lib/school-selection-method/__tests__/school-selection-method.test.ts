@@ -4160,6 +4160,62 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     );
   });
 
+  it('shiga: [別表１]令和9年度高等学校別入学者選抜一覧表(頁1・全日制の課程)の27校34学科79レコードを収録', () => {
+    const record = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga;
+    const schools = record?.schools ?? [];
+    expect(schools).toHaveLength(79);
+    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(27);
+  });
+
+  it('shiga: 膳所(普通科)は自己推薦のみ(中学校長推薦なし)で一般型選抜は学力検査800:個人調査報告書200', () => {
+    const zeze = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga?.schools?.filter(
+      (x) => x.schoolName === '膳所' && x.department === '普通科',
+    );
+    expect(zeze).toHaveLength(2);
+    expect(zeze?.map((x) => x.selectionCategory).sort()).toEqual(
+      ['一般型選抜', '学校独自型選抜(自己推薦)'].sort(),
+    );
+    const ippan = zeze?.find((x) => x.selectionCategory === '一般型選抜');
+    expect(ippan?.ratioType).toBe('学力検査800:個人調査報告書200');
+  });
+
+  it('shiga: 虎姫(普通科)は中学校長推薦が探究枠と国際バカロレア枠の2区分に分かれる', () => {
+    const torahime = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga?.schools?.filter(
+      (x) => x.schoolName === '虎姫',
+    );
+    expect(torahime).toHaveLength(3);
+    expect(
+      torahime?.some((x) => x.selectionCategory === '学校独自型選抜(中学校長推薦・探究枠)'),
+    ).toBe(true);
+    expect(
+      torahime?.some((x) => x.selectionCategory === '学校独自型選抜(中学校長推薦・国際バカロレア枠)'),
+    ).toBe(true);
+  });
+
+  it('shiga: 伊香(森の探究科)は全国募集枠(学力検査なし)と通常枠の2つの中学校長推薦区分を持つ', () => {
+    const ikaMoriNoTankyu = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga?.schools?.filter(
+      (x) => x.schoolName === '伊香' && x.department === '森の探究科',
+    );
+    expect(ikaMoriNoTankyu).toHaveLength(3);
+    const zenkoku = ikaMoriNoTankyu?.find(
+      (x) => x.selectionCategory === '学校独自型選抜(中学校長推薦・全国募集枠)',
+    );
+    expect(zenkoku?.ratioType).toBe('個人調査報告書800:面接100:作文100');
+  });
+
+  it('shiga: 石山(音楽学科)と栗東(美術学科)は一般型選抜を実施しない(学校独自型選抜100%で二次募集に実技枠を残す)', () => {
+    const ishiyamaOngaku = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga?.schools?.filter(
+      (x) => x.schoolName === '石山' && x.department === '音楽学科',
+    );
+    expect(ishiyamaOngaku).toHaveLength(1);
+    expect(ishiyamaOngaku?.[0].selectionCategory).toBe('学校独自型選抜(自己推薦)');
+    const rittoBijutsu = SCHOOL_SELECTION_METHOD_BY_PREFECTURE.shiga?.schools?.filter(
+      (x) => x.schoolName === '栗東' && x.department === '美術学科',
+    );
+    expect(rittoBijutsu).toHaveLength(1);
+    expect(rittoBijutsu?.[0].selectionCategory).toBe('学校独自型選抜(自己推薦)');
+  });
+
   it('structuredレコードのschoolsは1件以上を持つ', () => {
     for (const record of Object.values(SCHOOL_SELECTION_METHOD_BY_PREFECTURE)) {
       if (record?.status === 'structured') {
