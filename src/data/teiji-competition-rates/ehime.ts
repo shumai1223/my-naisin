@@ -34,7 +34,10 @@ export const EHIME_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制'],
     pendingDepartments: [],
-    note: '定時制専用PDFの全11レコード（10校）を完全収録。',
+    note: '定時制専用PDFの全11レコード（10校）を完全収録。2026-09-23にT-P1通信制拡張の調査で' +
+      '県立学校入学者選抜等関連情報ページ（r08nyuusi）を確認したところ、掲載リンクは' +
+      '「全日制」「定時制」の入学志願者数・合格者数のみで「通信制」に関するリンクは' +
+      '存在しないことを確認済み。',
   },
   records: [
     { schoolName: '川之江', department: '普通', quota: 40, finalApplicants: 10, finalRate: 0.25 },

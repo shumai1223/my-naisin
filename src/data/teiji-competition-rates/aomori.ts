@@ -39,7 +39,11 @@ export const AOMORI_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制の課程'],
     pendingDepartments: [],
-    note: '定時制の課程専用PDFの全11レコード（6校）を完全収録。',
+    note: '定時制の課程専用PDFの全11レコード（6校）を完全収録。2026-09-23にT-P1通信制拡張の調査で' +
+      '出願状況等の一覧ページ（shutsugansyasuu2026_koukou.html）を確認したところ、掲載PDFは' +
+      '「全日制」「定時制」の2種類のみで「通信制」のPDFは存在しないことを確認済み。' +
+      '青森県立北斗・八戸中央・尾上総合の3校は定時制と通信制を併置しているが、通信制課程は' +
+      '競争選抜（倍率公表）の対象外とみられ、同一の出願状況報告フレームには含まれていない。',
   },
   records: [
     { schoolName: '北斗', department: '普通（午前部）', quota: 40, finalApplicants: 37, finalRate: 0.93 },
