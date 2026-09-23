@@ -39,7 +39,7 @@ export const SAITAMA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制 普通科', '定時制 専門学科（工業に関する学科）', '定時制 専門学科（商業に関する学科）', '定時制 総合学科'],
     pendingDepartments: [],
-    note: '9頁目「定時制」全区分（普通科18・工業科3・商業科1・総合学科9=計31レコード）を完全収録。',
+    note: '9頁目「定時制」全区分（普通科18・工業科3・商業科1・総合学科9=計31レコード）を完全収録。9頁目は「全日制・定時制の総計」で終わり「通信制」セクションは存在しないことを2026-09-23に確認済み（T-P1通信制拡張の調査で再取得）。',
   },
   records: [
     { schoolName: '上尾（定）', department: '普通科', quota: 40, finalApplicants: 17, finalRate: 0.43 },
