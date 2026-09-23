@@ -39,7 +39,11 @@ export const OSAKA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制の課程（普通科7校・専門学科2校・総合学科9校）'],
     pendingDepartments: [],
-    note: '【定時制】シートの全18レコード（18校）を完全収録。「普通科計」「専門学科計」「総合学科計」の3区分小計と完全一致。',
+    note: '【定時制】シートの全18レコード（18校）を完全収録。「普通科計」「専門学科計」「総合学科計」の3区分小計と完全一致。' +
+      '2026-09-23にT-P1通信制拡張の調査: 同一xlsxブックは【全日制】【定時制】の2シートのみで' +
+      '通信制シートは存在しない（unzip+workbook.xmlで実測確認）。大阪府唯一の公立通信制（桃谷・' +
+      '本表の定時制収録校と同一校）は「定時制及び通信制の課程の志願者について」という案内文書は' +
+      '存在するが具体的な志願者数の独立公表資料は発見できず未収録。',
   },
   records: [
     { schoolName: '大手前', department: '普通', quota: 40, finalApplicants: 15, finalRate: 0.38 },

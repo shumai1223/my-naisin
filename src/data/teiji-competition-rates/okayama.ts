@@ -36,7 +36,10 @@ export const OKAYAMA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制（県立）', '定時制（市立）'],
     pendingDepartments: [],
-    note: '6頁目の（県立定時制）（市立定時制）両表の全12レコードを完全収録。',
+    note: '6頁目の（県立定時制）（市立定時制）両表の全12レコードを完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 岡山県唯一の公立通信制（岡山操山・本表の定時制収録校' +
+      'とは別の独立校）が存在するが、県教委の「県立高等学校の募集定員」「学校案内」等のページ' +
+      'にも志願者数の独立公表資料を発見できず未収録。',
   },
   records: [
     // ===== 県立定時制 =====

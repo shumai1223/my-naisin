@@ -40,7 +40,10 @@ export const SAGA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制課程（6校7レコード）'],
     pendingDepartments: [],
-    note: '2頁目「（2）定時制課程」の全7レコード（6校）を完全収録。「合計」280/72/0.26・「鳥栖工業計」80/19/0.24と完全一致。',
+    note: '2頁目「（2）定時制課程」の全7レコード（6校）を完全収録。「合計」280/72/0.26・「鳥栖工業計」80/19/0.24と完全一致。' +
+      '2026-09-23にT-P1通信制拡張の調査: 佐賀県唯一の公立通信制（佐賀北・定時制収録校とは別の' +
+      '独立校）が存在するが、県教委の一般選抜/特別選抜志願状況ページ群のいずれにも通信制の' +
+      '公表は見当たらず未収録。',
   },
   records: [
     { schoolName: '鳥栖工業', department: '普通科', quota: 40, finalApplicants: 5, finalRate: 0.13 },

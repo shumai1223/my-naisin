@@ -39,7 +39,9 @@ export const OKINAWA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     pendingDepartments: [],
     note:
       '全4頁を走査し「課程」列が「定時」の全8レコード（6校）を完全収録。県全体の定時制限定の' +
-      '印字済み合計が存在しないため、officialSubtotalsは空（自己集計quota400/applicants162は参考値）。',
+      '印字済み合計が存在しないため、officialSubtotalsは空（自己集計quota400/applicants162は参考値）。' +
+      '2026-09-23にT-P1通信制拡張の調査: 泊（本表の定時制収録校と同一校）・宜野湾（別校）に' +
+      '通信制課程が存在するが、独立した志願者数の公表資料は発見できず未収録。',
   },
   records: [
     { schoolName: 'コザ', department: '商業', quota: 40, finalApplicants: 17, finalRate: 0.43 },

@@ -31,7 +31,11 @@ export const NIIGATA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制の課程'],
     pendingDepartments: [],
-    note: '6頁目末尾「定時制の課程」の全12レコードを完全収録。',
+    note: '6頁目末尾「定時制の課程」の全12レコードを完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 新潟翠江・高田南城（いずれも本表の定時制収録校と' +
+      '同一校）は通信制課程も併設し出願期間は2/16〜4/2と定時制より遅いことを確認したが、' +
+      '県教委サイト（kyouikucho.nein.ed.jp）がbot拒否（HTTP 403）で直接確認できず、' +
+      'WebSearch経由でも独立公表資料を発見できず未収録。',
   },
   records: [
     { schoolName: '新潟翠江', department: '普通・午前', quota: 35, finalApplicants: 18, finalRate: 0.51 },

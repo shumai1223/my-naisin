@@ -36,7 +36,10 @@ export const OITA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制課程（4校9レコード）'],
     pendingDepartments: [],
-    note: '4頁目「［定時制］」の全9レコード（4校）を完全収録。「県立高校定時制課程合計」募集人員344・最終志願者数65と完全一致。',
+    note: '4頁目「［定時制］」の全9レコード（4校）を完全収録。「県立高校定時制課程合計」募集人員344・最終志願者数65と完全一致。' +
+      '2026-09-23にT-P1通信制拡張の調査: 大分県唯一の公立通信制（爽風館・本表の定時制収録校と' +
+      '同一校）は「秋季募集」（春季入学者を除いた欠員分の秋入学枠）の公表ページはあるが、' +
+      '主selection（春季）の志願者数/出願状況の公表資料は発見できず未収録。',
   },
   records: [
     { schoolName: '中津東', department: '機械', quota: 40, finalApplicants: 3, finalRate: 0.08 },
