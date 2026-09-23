@@ -223,9 +223,12 @@ GSC 2026-06-02〜08-31（90日）:
       grepする探索順序が、個別にWebSearchで都度探すより効率的と判明。
       本セッション累計: aomori/ehime/fukuoka/fukushima/gunma/hiroshima/ishikawa/iwate/
       kagawa/kagoshima/kumamoto/kyoto/nara/shigaの14県完了（うちishikawa/nara/shigaの
-      3県は新規データ収録・他11県はnoteのみ）。残り17県（miyazaki/nagano/nagasaki/
-      niigata/oita/okayama/okinawa/osaka/saga/shimane/shizuoka/tochigi/tokushima/
-      toyama/wakayama/yamagata/yamanashi）。
+      3県は新規データ収録・他11県はnoteのみ）。
+      **進捗(2026-09-23続報5・miyazaki/nagano/nagasaki完了・commit ba2e179)**: 3県とも
+      定時制収録校が通信制課程を併設する共通パターンだが独立公表資料は発見できず未収録。
+      本セッション累計17県完了（うち新規データ収録3県: ishikawa/nara/shiga）。
+      残り14県（niigata/oita/okayama/okinawa/osaka/saga/shimane/shizuoka/tochigi/
+      tokushima/toyama/wakayama/yamagata/yamanashi）。
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
 - [ ] ⚠️ **47県を埋めるために推測で水増ししない。** 20県で止まるならそれが正しい姿
 - [ ] ⚠️ **スケールドコンテンツ検出のゲートが既にある**（`uniqueness.test`）。
