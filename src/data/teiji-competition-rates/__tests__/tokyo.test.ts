@@ -13,8 +13,8 @@ describe('東京都 定時制課程・チャレンジスクール・在京外国
     return s;
   };
 
-  it('取り込み件数は16レコード（定時制単位制7 + チャレンジスクール等8 + 在京外国人1）', () => {
-    expect(records).toHaveLength(16);
+  it('取り込み件数は19レコード（定時制単位制7 + チャレンジスクール等8 + 在京外国人1 + 通信制3）', () => {
+    expect(records).toHaveLength(19);
   });
 
   it('定時制課程（単位制の学校）7レコードの合計が公式「定時制課程単位制計」と一致する', () => {
@@ -45,7 +45,21 @@ describe('東京都 定時制課程・チャレンジスクール・在京外国
     expect(result.matches).toBe(true);
   });
 
-  it('全16レコードの合計quota/applicantsが3セクションの公式計の合算と一致する（総検算）', () => {
+  it('通信制課程（前期選抜）3レコードの合計が公式「通信制課程（前期選抜）計」と一致する', () => {
+    const result = checkAgainstSubtotal(records, findSubtotal('通信制課程（前期選抜）計'), (r) => r.department === '普通科（通信制）');
+    expect(result.matches).toBe(true);
+    expect(sumRecords(records.filter((r) => r.department === '普通科（通信制）')).schoolCount).toBe(3);
+  });
+
+  it('通信制課程3レコードはいずれもsourceIndex=1（別PDF由来）を持つ', () => {
+    const tsushinRecords = records.filter((r) => r.department === '普通科（通信制）');
+    expect(tsushinRecords).toHaveLength(3);
+    for (const r of tsushinRecords) {
+      expect(r.sourceIndex).toBe(1);
+    }
+  });
+
+  it('全19レコードの合計quota/applicantsが4セクションの公式計の合算と一致する（総検算）', () => {
     const totals = sumRecords(records);
     const expectedQuota = officialSubtotals.reduce((acc, s) => acc + s.quota, 0);
     const expectedApplicants = officialSubtotals.reduce((acc, s) => acc + s.finalApplicants, 0);

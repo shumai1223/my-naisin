@@ -23,6 +23,15 @@ import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
  *
  * ToUnicode欠落は無く`pdftoppm 200dpi`のビジョン解析1回の読み取りで全16レコードを判読できた
  * （既存の全日制tokyoデータと異なりこの2頁は文字・罫線とも明瞭）。
+ *
+ * 【2026-09-23追記・T-P1通信制拡張】上記の「03-3-v2」（最終応募状況）本体8頁には「通信制」の語が
+ * 1件も出現せず、東京都の公立通信制課程（一橋・新宿山吹・砂川の3校、いずれも普通科）は
+ * 定時制とは別建ての「前期選抜」として独立公表されている（`20260222_tsuushin_result`・全1頁）。
+ * ⚠️このPDFは他の都道府県・他の東京都データと異なり「最終応募人員／最終応募倍率」ではなく
+ * 「受検人員（実際に受検した人数）／受検倍率」を印字している（列見出しで確認）。
+ * `finalApplicants`/`finalRate`フィールドには公表された唯一の倍率である「受検人員／受検倍率」を
+ * そのまま転記した（quota×finalRate≒finalApplicantsで内部整合・印字済み「計」行125／221／1.77と
+ * 完全一致）。※募集人員は通信制課程（後期選抜）の人員を除いた前期選抜分のみ。
  */
 
 export const TOKYO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
@@ -35,6 +44,12 @@ export const TOKYO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-05',
     },
+    {
+      url: 'https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/20260222_tsuushin_result',
+      docTitle: '東京都教育委員会 令和8年度東京都立高等学校入学者選抜受検状況（通信制課程における選抜（前期選抜））',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-23',
+    },
   ],
   coverage: {
     status: 'complete',
@@ -43,9 +58,10 @@ export const TOKYO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       '定時制課程単位制総合学科（チャレンジスクール）',
       '定時制課程単位制普通科（チャレンジ枠）',
       '在京外国人生徒等対象入学者選抜（国際高校）',
+      '通信制課程（前期選抜）',
     ],
     pendingDepartments: [],
-    note: '7〜8頁目に掲載された定時制・チャレンジスクール・在京外国人枠の全16レコードを完全収録。',
+    note: '7〜8頁目に掲載された定時制・チャレンジスクール・在京外国人枠の全16レコードに加え、通信制課程3校（前期選抜のみ・後期選抜は非公表のため対象外）を2026-09-23に追加収録。',
   },
   records: [
     // ===== 23[定時制課程（単位制の学校）] =====
@@ -69,10 +85,16 @@ export const TOKYO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
 
     // ===== 25[在京外国人生徒等対象入学者選抜（国際高校）] =====
     { schoolName: '国際', area: '目黒', department: '国際', quota: 25, finalApplicants: 80, finalRate: 3.2 },
+
+    // ===== 通信制課程（前期選抜）・2026-09-23追加 =====
+    { schoolName: '一橋', area: '千代田', department: '普通科（通信制）', quota: 50, finalApplicants: 66, finalRate: 1.32, sourceIndex: 1 },
+    { schoolName: '新宿山吹', area: '新宿', department: '普通科（通信制）', quota: 25, finalApplicants: 71, finalRate: 2.84, sourceIndex: 1 },
+    { schoolName: '砂川', area: '立川', department: '普通科（通信制）', quota: 50, finalApplicants: 84, finalRate: 1.68, sourceIndex: 1 },
   ],
   officialSubtotals: [
     { label: '定時制課程単位制計', quota: 1120, finalApplicants: 987, finalRate: 0.88 },
     { label: 'チャレンジスクール及びチャレンジ枠 計', quota: 1565, finalApplicants: 1973, finalRate: 1.26 },
     { label: '在京外国人生徒等対象入学者選抜（国際高校）計', quota: 25, finalApplicants: 80, finalRate: 3.2 },
+    { label: '通信制課程（前期選抜）計', quota: 125, finalApplicants: 221, finalRate: 1.77 },
   ],
 };

@@ -31,7 +31,7 @@ export const TOTTORI_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制課程'],
     pendingDepartments: [],
-    note: '8頁目「（定時制課程）」の全5レコードを完全収録。',
+    note: '8頁目「（定時制課程）」の全5レコードを完全収録。同一PDF全8頁を通読し「通信制」の語が1件も出現しないことを2026-09-23に確認済み（T-P1通信制拡張の調査で再取得）。「２ 定時制課程」の次の大区分は存在せず本書は定時制課程で完結している。',
   },
   records: [
     { schoolName: '鳥取緑風', department: '総合（午前・午後）', quota: 56, finalApplicants: 44, finalRate: 0.79 },

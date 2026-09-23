@@ -17,12 +17,14 @@ describe('T-P1 P1-4 getPrefectureAlternativeTracks（定時制・通信制の選
     expect(ALTERNATIVE_TRACK_PREFECTURE_CODES.length).toBeGreaterThanOrEqual(21);
   });
 
-  it('tokyo（通信制レコードを含まない県）はtsushinCount=0・全レコードが定時制に分類される', () => {
+  it('tokyo（2026-09-23に通信制3校を追加収録）はtsushinCount=3・teijiCount=16で分類される', () => {
     const result = getPrefectureAlternativeTracks('tokyo');
     expect(result).not.toBeNull();
-    expect(result!.tsushinCount).toBe(0);
-    expect(result!.teijiCount).toBe(result!.schools.length);
-    expect(result!.schools.every((s) => s.trackType === '定時制')).toBe(true);
+    expect(result!.tsushinCount).toBe(3);
+    expect(result!.teijiCount).toBe(16);
+    expect(result!.teijiCount + result!.tsushinCount).toBe(result!.schools.length);
+    const tsushinSchools = result!.schools.filter((s) => s.trackType === '通信制');
+    expect(tsushinSchools.every((s) => s.department.includes('通信制'))).toBe(true);
   });
 
   it('gifu（通信制レコードを含む県）はtrackTypeが department の「通信制」表記で正しく分類される', () => {
