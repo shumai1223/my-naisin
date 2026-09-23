@@ -4006,12 +4006,12 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(zennichi.filter((x) => x.schoolName === '石川県立工業高等学校')).toHaveLength(7);
   });
 
-  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区26校58レコード＋城陽学区8校18レコード＋相楽学区3校13レコード＋北桑田2レコード＋亀岡4レコード＋南丹3レコード＋園部1レコード＋農芸1レコードを収録し、一覧表と個別学校ページを突合または個別学校ページ直読みのいずれかで検証済みの学校のみに限定する', () => {
+  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区26校58レコード＋城陽学区8校18レコード＋相楽学区3校13レコード＋北桑田2レコード＋亀岡4レコード＋南丹3レコード＋園部1レコード＋農芸1レコード＋須知3レコードを収録し、一覧表と個別学校ページを突合または個別学校ページ直読みのいずれかで検証済みの学校のみに限定する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kyoto');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
     const schools = record?.schools ?? [];
-    expect(schools).toHaveLength(100);
-    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(42);
+    expect(schools).toHaveLength(103);
+    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(43);
     expect(schools.every((x) => x.ratioType === undefined)).toBe(true);
     // 清明高校(単位制・定時制昼間二部)と京都奏和(単位制・定時制昼間四部制)は対象外
     expect(schools.some((x) => x.schoolName.includes('清明'))).toBe(false);
@@ -4091,6 +4091,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     // 園部・農芸はいずれも単一学科A方式のみの1レコード校
     expect(schools.filter((x) => x.schoolName === '京都府立園部高等学校')).toHaveLength(1);
     expect(schools.filter((x) => x.schoolName === '京都府立農芸高等学校')).toHaveLength(1);
+    // 須知は普通科(A/Bの2型)+食品科学科(A型)の2学科3レコード
+    const suchi = schools.filter((x) => x.schoolName === '京都府立須知高等学校');
+    expect(suchi).toHaveLength(3);
+    expect(new Set(suchi.map((x) => x.department))).toEqual(new Set(['普通科', '食品科学科']));
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
