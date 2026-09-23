@@ -173,6 +173,20 @@ GSC 2026-06-02〜08-31（90日）:
       無ければcoverage.noteに「通信制セクションなしを確認済み」と明記して再調査を防ぐ。
       1県あたりの作業量はkyoto T-Y14の1学区分程度（PDF再取得→該当頁特定→転記→検算→
       テスト追加）。35県全部は1セッションで終わらない規模なので数県ずつ進める。
+      **進捗(2026-09-23続報)**: ibaraki（commit fa6b784）・saitama（commit 30bb9e6）・
+      tottori（commit 94ce5d6）の3県は同一PDF内に通信制セクションが存在しないことを確認済み
+      （note追記のみ・データ追加なし）。**tokyoは当たり**: 既存の定時制ソース（03-3-v2・全8頁）
+      自体には通信制が無いが、東京都教委は通信制課程を定時制とは別建ての独立資料
+      （「通信制課程における選抜（前期選抜）」`20260222_tsuushin_result`）として公表しており、
+      一橋・新宿山吹・砂川の3校3レコードを新規収録できた（commit 94ce5d6）。**教訓**:
+      「同一PDF内」に固執せず、該当県のPDFに通信制が無かった場合もWebSearchで
+      「（県名） 通信制課程 入学者選抜 応募状況」等を試すこと。定時制と通信制が完全に別選抜
+      フロー（前期/後期選抜等）を持つ都道府県では、通信制だけの独立公表資料がある可能性が高い。
+      **残り32県**（確認未着手）: aomori/ehime/fukuoka/fukushima/gunma/hiroshima/ishikawa/
+      iwate/kagawa/kagoshima/kumamoto/kyoto/miyazaki/nagano/nagasaki/nara/niigata/oita/
+      okayama/okinawa/osaka/saga/shiga/shimane/shizuoka/tochigi/tokushima/toyama/wakayama/
+      yamagata/yamanashi。次回はこの中から数県ずつ、まず既存PDF内を確認→無ければ独立資料を
+      WebSearchで探す、の2段階で進める。
 - [ ] ⚠️ **1データ点1出典。取れない県は「取れない」と書く**（Y-0）
 - [ ] ⚠️ **47県を埋めるために推測で水増ししない。** 20県で止まるならそれが正しい姿
 - [ ] ⚠️ **スケールドコンテンツ検出のゲートが既にある**（`uniqueness.test`）。
