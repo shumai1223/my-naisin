@@ -4020,6 +4020,9 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(schools.some((x) => x.schoolName.includes('京都奏和'))).toBe(false);
     // 北桑田美山分校(定時制・昼間課程)も同様に対象外
     expect(schools.some((x) => x.schoolName.includes('美山'))).toBe(false);
+    // 清新(単位制による定時制・昼間課程)も同様に対象外。これで後半PDF全82頁
+    // (前期選抜独自枠募集要項セクション)の全校確認が完了する
+    expect(schools.some((x) => x.schoolName.includes('清新'))).toBe(false);
     // 山城は普通科(単位制・A1/A2の2型)+文理総合科(単位制・A型)の2学科3レコード
     const yamashiro = schools.filter((x) => x.schoolName === '京都府立山城高等学校');
     expect(yamashiro).toHaveLength(3);
