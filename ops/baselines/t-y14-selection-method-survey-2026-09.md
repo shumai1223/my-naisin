@@ -8,13 +8,22 @@
 着手前に必ず`ls src/data/school-selection-methods/`と`index.ts`の実ファイル・登録状況を数えて裏取り
 すること（本台帳の記述だけを信じない・[[feedback-verify-data-via-files-not-lib-comments]]と同型の罠）。
 
-**2026-09-23時点の実ファイル数**: `src/data/school-selection-methods/*.ts`は42県分が存在し
-`index.ts`にも42県分が登録されている（内訳は2026-09-23にkyoto実装完了で内訳最新化）。未実装は
-akita/shiga/hyogo/kagawa/kumamoto/の5県のみで、いずれも「学校別一覧が存在しない」と過去セッション
+**2026-09-23時点の実ファイル数**: `src/data/school-selection-methods/*.ts`は43県分が存在し
+`index.ts`にも43県分が登録されている（2026-09-23にkyoto実装完了＋shiga新規実装で内訳最新化）。
+**⚠️2026-09-23再訂正: shigaの「individual（学校別一覧が存在しない）」判定は誤りだった。**
+教委ハブページ（`pref.shiga.lg.jp/edu/ma09/16947.html`）の全リンクを機械的に列挙し「別表」で
+grepしたところ、独立公表資料「[別表１] R9高等学校別入学者選抜一覧表」（全2頁）が実在すると判明し、
+頁1（27校34学科79レコード）を実装した（`src/data/school-selection-methods/shiga.ts`）。
+未実装は akita/hyogo/kagawa/kumamoto の4県のみで、いずれも「学校別一覧が存在しない」と過去セッション
 （2026-09-19時点）で個別に確認済み（対象外＝個別ページ巡回コストが高すぎるため見送り、
 `PrefectureSchoolSelectionMethod`型コメント「47都道府県・県内全校が揃わなくてよい」の設計方針どおり）。
-**T-Y14は実質完了状態**。次にこのタスクへ戻る場合は、まず上記5県のいずれかで新しい一次資料
-（県単位一覧PDF）が新規公表されていないかを再確認することから始める。
+**ただしshigaの前例を踏まえると、この4県も「ハブページ本文を軽く見ただけで別表の存在を見落とした」
+可能性があるため、次回はハブページの全リンクをgrepし直してから再度「本当に無い」と確定させること**
+（[[feedback-verify-data-via-files-not-lib-comments]]と同型の罠。台帳の記述を鵜呑みにしない）。
+**T-Y14は実質完了に近いが、shiga頁2（残り全日制校）・定時制/通信制の課程はまだ未実装**。
+次にこのタスクへ戻る場合は、①shiga頁2・定時制/通信制の拡充、②akita/hyogo/kagawa/kumamotoの
+ハブページ全リンク再grep、③5県のいずれかで新しい一次資料が新規公表されていないかの再確認、
+のいずれかから始める。
 
 - 目的: `ops/tasks/T-Y14-nyuushi-hyoka-hoho-db.md` §「作業の順序」ステップ2（47都道府県で
   構造化一覧の有無を探索し台帳化）の実行記録。
