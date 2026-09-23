@@ -39,7 +39,11 @@ export const FUKUSHIMA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = 
     status: 'complete',
     includedDepartments: ['定時制（後期選抜）'],
     pendingDepartments: [],
-    note: '「2 定時制」セクションの全8レコード（6校）を完全収録。',
+    note: '「2 定時制」セクションの全8レコード（6校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査で再確認: 本PDFは全2頁（1頁目=全日制「1 全日制」・' +
+      '2頁目=定時制「2 定時制」）のみで構成され、「3 通信制」等の追加セクションは存在しない' +
+      '（過去セッションが既に全2頁をビジョン解析で判読済み・画像PDFのためpdftotextでの' +
+      '再確認は不可）。',
   },
   records: [
     { schoolName: '福島工業（定時）', department: '工業科', quota: 37, finalApplicants: 1, finalRate: 0.03 },

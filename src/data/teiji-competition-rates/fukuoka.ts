@@ -43,7 +43,13 @@ export const FUKUOKA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'partial',
     includedDepartments: ['定時制（単位制課程を除く）'],
     pendingDepartments: ['定時制単位制課程（2期入学試験含む・複雑なレイアウトのため今回は未収録）'],
-    note: '「単位制課程を除く」定時制16校16レコードを完全収録。単位制課程は別PDFの存在のみ確認し未収録（正直にpendingDepartments記録）。',
+    note: '「単位制課程を除く」定時制16校16レコードを完全収録。単位制課程は別PDFの存在のみ確認し未収録（正直にpendingDepartments記録）。' +
+      '2026-09-23にT-P1通信制拡張の調査でハブページ（nyushi8.html）を再確認したが掲載4PDF' +
+      '（県立一般・市組合立一般・県立定時制・定時制単位制課程2期）に通信制は含まれない。' +
+      '福岡県唯一の公立通信制課程（博多青松高等学校）を個別に調査したが、県教委が公表するのは' +
+      '「補充募集」（定員割れ後の追加募集）のみで、他県のような入学定員/志願者数/倍率の' +
+      '志願状況PDFは県サイト・学校公式サイトのいずれにも見当たらず、選抜方式自体が競争倍率を' +
+      '前提としない形（作文・面接等による選考）とみられる。捏造を避けるためデータ追加を見送り。',
   },
   records: [
     { schoolName: '京都', department: '普通科', quota: 40, finalApplicants: 21, finalRate: 0.53 },
