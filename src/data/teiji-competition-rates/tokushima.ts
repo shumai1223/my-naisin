@@ -30,7 +30,10 @@ export const TOKUSHIMA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = 
     status: 'complete',
     includedDepartments: ['定時制課程'],
     pendingDepartments: [],
-    note: '【定時制課程】ブロックの全9レコードを完全収録。',
+    note: '【定時制課程】ブロックの全9レコードを完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 徳島中央（本表の定時制収録校と同一校・徳島県唯一の' +
+      '公立通信制）が存在するが、県教委の出願状況公表ページ群（育成型・連携型/一般選抜/第2次' +
+      '募集）のいずれにも通信制区分がなく未収録。',
   },
   records: [
     { schoolName: '徳島科学技術', department: '機械類', quota: 20, finalApplicants: 6, finalRate: 0.3 },

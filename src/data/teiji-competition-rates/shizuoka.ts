@@ -32,7 +32,10 @@ export const SHIZUOKA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制', '単位制による定時制'],
     pendingDepartments: [],
-    note: '11頁目【定時制】と12頁目【単位制による定時制】の全19レコードを完全収録。',
+    note: '11頁目【定時制】と12頁目【単位制による定時制】の全19レコードを完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 静岡県唯一の公立通信制（静岡中央・本表の単位制による' +
+      '定時制収録校と同一校）が存在するが、志願状況ハブページに掲載される資料は「学校紹介' +
+      '（定時制・通信制）」という定員案内PDFのみで志願者数の独立公表は発見できず未収録。',
   },
   records: [
     // ===== 定時制 =====

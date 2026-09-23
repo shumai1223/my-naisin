@@ -40,7 +40,10 @@ export const WAKAYAMA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制（県立）', '定時制（市立）'],
     pendingDepartments: [],
-    note: '2頁目冒頭【定時制】の県立13レコード（7校）＋「（参考）市立高等学校」の2レコード（1校）を完全収録。',
+    note: '2頁目冒頭【定時制】の県立13レコード（7校）＋「（参考）市立高等学校」の2レコード（1校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: きのくに青雲・伊都中央・南紀（いずれも本表の定時制' +
+      '収録校と同一校）に通信制課程が存在するが、県教委が公表するのは「通信制課程実施要項」' +
+      '（募集要項の手続き文書）のみで、他選抜のような出願状況/志願者数のPDFは発見できず未収録。',
   },
   records: [
     { schoolName: '伊都中央', department: '普通科（昼）', quota: 70, finalApplicants: 29, finalRate: 0.41 },

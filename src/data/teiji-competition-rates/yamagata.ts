@@ -35,7 +35,10 @@ export const YAMAGATA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制の課程'],
     pendingDepartments: [],
-    note: '5頁目「【定時制の課程】」の全7レコード（5校）を完全収録。',
+    note: '5頁目「【定時制の課程】」の全7レコード（5校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 霞城学園・庄内総合（いずれも本表の定時制収録校と' +
+      '同一校）に通信制課程が存在するが、県教委の入学者選抜情報ページ（前期/後期選抜志願状況）' +
+      'のいずれにも通信制区分がなく未収録。',
   },
   records: [
     { schoolName: '霞城学園', department: '普通科（Ⅰ部・午前）', quota: 32, finalApplicants: 37, finalRate: 1.16 },

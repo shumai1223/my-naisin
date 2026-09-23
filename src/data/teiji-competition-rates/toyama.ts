@@ -36,7 +36,9 @@ export const TOYAMA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制の課程（単位制前期第1次選抜）'],
     pendingDepartments: [],
-    note: '3頁目「定時制の課程（単位制前期第1次選抜）」の全19レコード（5校12学科）を完全収録。',
+    note: '3頁目「定時制の課程（単位制前期第1次選抜）」の全19レコード（5校12学科）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 富山県唯一の公立通信制（雄峰・本表の定時制収録校と' +
+      '同一校）が存在するが、志願状況の独立公表資料は発見できず未収録。',
   },
   records: [
     { schoolName: '新川みどり野', department: '普通科・昼間単位制Ⅰ部', quota: 40, finalApplicants: 10, finalRate: 0.25 },

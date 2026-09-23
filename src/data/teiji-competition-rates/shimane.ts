@@ -33,7 +33,9 @@ export const SHIMANE_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制'],
     pendingDepartments: [],
-    note: '【定時制】表の全8レコードを完全収録。',
+    note: '【定時制】表の全8レコードを完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 宍道・浜田（いずれも本表の定時制収録校と同一校）に' +
+      '通信制課程が存在するが、独立した出願者数の公表資料は発見できず未収録。',
   },
   records: [
     { schoolName: '松江工業（定時）', department: '機械', quota: 40, finalApplicants: 5, finalRate: 0.13 },

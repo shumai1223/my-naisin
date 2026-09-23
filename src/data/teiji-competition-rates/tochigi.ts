@@ -37,7 +37,10 @@ export const TOCHIGI_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['定時制課程（一般選抜）'],
     pendingDepartments: [],
-    note: '定時制課程専用PDFの全12レコード（8校）を完全収録。',
+    note: '定時制課程専用PDFの全12レコード（8校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 学悠館（本表の定時制収録校と同一校）・宇都宮（定時制' +
+      'データには無い別の独立校）に通信制課程が存在するが、県教委の入試お知らせページが列挙する' +
+      '出願状況PDF群（全日制/定時制/フレックス特別選抜）のいずれにも通信制区分がなく未収録。',
   },
   records: [
     { schoolName: '宇都宮工業', department: '普通（午後部）', quota: 40, finalApplicants: 15, finalRate: 0.38 },

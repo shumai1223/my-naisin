@@ -37,7 +37,10 @@ export const YAMANASHI_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = 
     status: 'complete',
     includedDepartments: ['定時制課程'],
     pendingDepartments: [],
-    note: '4頁目「［定時制課程］7校 13学科・部」の全13レコードを完全収録。',
+    note: '4頁目「［定時制課程］7校 13学科・部」の全13レコードを完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 山梨県唯一の公立通信制（中央・本表の定時制収録校と' +
+      '同一校）が存在するが、志願者数の独立公表資料は発見できず未収録。これで残り32県すべての' +
+      '通信制セクション有無調査が完了（新規データ収録3県: ishikawa/nara/shiga）。',
   },
   records: [
     { schoolName: '韮崎', department: '普通（昼間制）', quota: 40, finalApplicants: 9, finalRate: 0.23 },
