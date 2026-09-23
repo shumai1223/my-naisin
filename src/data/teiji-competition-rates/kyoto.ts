@@ -36,7 +36,11 @@ export const KYOTO_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     status: 'complete',
     includedDepartments: ['昼間定時制・学年制', '昼間定時制・単位制', '夜間定時制・学年制', '夜間定時制・単位制'],
     pendingDepartments: [],
-    note: '4頁目「（定時制）」の全9レコードを完全収録。',
+    note: '4頁目「（定時制）」の全9レコードを完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査: 本PDFは全4頁で通信制セクションの余地なし（頁数実測）。' +
+      '京都府立朱雀（本表の夜間定時制・単位制収録校と同一校）・西舞鶴に通信制課程が存在するが、' +
+      '府教委の「令和8年度選抜状況」ページが列挙する前期/中期/後期/特別（清明・清新・京都奏和）' +
+      '選抜のいずれにも通信制の区分がなく、独立公表資料も発見できず未収録。',
   },
   records: [
     { schoolName: '北桑田（美山分校）', department: '農業・家政 [昼間定時制・学年制]', quota: 34, finalApplicants: 0, finalRate: 0 },

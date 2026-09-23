@@ -10,29 +10,38 @@ import { SHIGA_TEIJI_COMPETITION_RATES } from '../shiga';
 describe('滋賀県 定時制課程 倍率パイプライン（T-Y11F §5順序#4）', () => {
   const { records, officialSubtotals } = SHIGA_TEIJI_COMPETITION_RATES;
 
-  it('取り込み件数は7レコード（7校・一般型選抜のみ）', () => {
-    expect(records).toHaveLength(7);
+  it('取り込み件数は8レコード（定時制7校・一般型選抜のみ＋通信制1校）', () => {
+    expect(records).toHaveLength(8);
   });
 
-  it('学校数は7校', () => {
+  it('学校数は8校（定時制7校＋通信制の大津清陵）', () => {
     const schoolNames = new Set(records.map((r) => r.schoolName));
-    expect(schoolNames.size).toBe(7);
+    expect(schoolNames.size).toBe(8);
   });
 
-  it('全レコードの合計が自己集計値と一致する', () => {
+  it('定時制レコードの合計が自己集計値と一致する（通信制1レコードは別選抜のため除外）', () => {
     const subtotal = officialSubtotals.find((s) => s.label === '一般型選抜のみ自己集計（定時制）');
     if (!subtotal) throw new Error('officialSubtotals に "一般型選抜のみ自己集計（定時制）" が見つかりません');
-    const result = checkAgainstSubtotal(records, subtotal, () => true);
+    const teijiRecords = records.filter((r) => !r.department.includes('通信制'));
+    const result = checkAgainstSubtotal(teijiRecords, subtotal, () => true);
     expect(result.matches).toBe(true);
-    expect(sumRecords(records).quota).toBe(268);
-    expect(sumRecords(records).finalApplicants).toBe(159);
+    expect(sumRecords(teijiRecords).quota).toBe(268);
+    expect(sumRecords(teijiRecords).finalApplicants).toBe(159);
   });
 
   it('公式「計②」280/163から自己集計268/159を差し引いた残差が学校独自型選抜分(12/4)と一致する', () => {
     const officialTotal = { quota: 280, finalApplicants: 163 };
-    const selfTotal = sumRecords(records);
+    const teijiRecords = records.filter((r) => !r.department.includes('通信制'));
+    const selfTotal = sumRecords(teijiRecords);
     expect(officialTotal.quota - selfTotal.quota).toBe(12);
     expect(officialTotal.finalApplicants - selfTotal.finalApplicants).toBe(4);
+  });
+
+  it('通信制1レコード（大津清陵）は募集定員320・出願者数168', () => {
+    const tsushin = records.find((r) => r.department.includes('通信制'));
+    if (!tsushin) throw new Error('通信制レコードが見つかりません');
+    expect(tsushin.quota).toBe(320);
+    expect(tsushin.finalApplicants).toBe(168);
   });
 
   it('quota/finalApplicants/finalRateはいずれも0以上（不変条件）', () => {

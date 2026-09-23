@@ -37,12 +37,21 @@ export const SHIGA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
+    {
+      url: 'https://www.pref.shiga.lg.jp/documents/16947/5595836.pdf',
+      docTitle: '滋賀県教育委員会 令和8年度滋賀県立高等学校入学者選抜（通信制の課程）に関する出願者数について（3月10日）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-23',
+    },
   ],
   coverage: {
     status: 'complete',
-    includedDepartments: ['定時制（一般型選抜のみ）'],
+    includedDepartments: ['定時制（一般型選抜のみ）', '通信制（大津清陵）'],
     pendingDepartments: ['定時制（学校独自型選抜・能登川昼間部の中学校長推薦のみ該当）'],
-    note: '3頁目【定時制】の一般型選抜7レコード（7校）を完全収録。学校独自型選抜1レコード（能登川昼間部）は全日制と同じ方針でスコープ外。',
+    note: '3頁目【定時制】の一般型選抜7レコード（7校）を完全収録。学校独自型選抜1レコード（能登川昼間部）は全日制と同じ方針でスコープ外。' +
+      '2026-09-23にT-P1通信制拡張の調査で追加: 滋賀県唯一の公立通信制（大津清陵）は定時制とは' +
+      '別建ての独立公表資料「（通信制の課程）に関する出願者数について」に掲載。同資料には倍率の' +
+      '印字が無いため、他県と同じ規律で自前算出（finalRate=finalApplicants/quota）。',
   },
   records: [
     { schoolName: '大津清陵（昼間部）', department: '普通', quota: 40, finalApplicants: 38, finalRate: 0.95 },
@@ -52,6 +61,7 @@ export const SHIGA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '長浜北星定時制', department: '総合', quota: 40, finalApplicants: 20, finalRate: 0.5 },
     { schoolName: '能登川（昼間部）', department: '普通（一般型）', quota: 28, finalApplicants: 28, finalRate: 1.0 },
     { schoolName: '能登川（夜間部）', department: '普通', quota: 40, finalApplicants: 20, finalRate: 0.5 },
+    { schoolName: '大津清陵（通信制）', department: '普通（通信制）', quota: 320, finalApplicants: 168, finalRate: 0.53 },
   ],
   officialSubtotals: [{ label: '一般型選抜のみ自己集計（定時制）', schoolCount: 7, quota: 268, finalApplicants: 159 }],
 };

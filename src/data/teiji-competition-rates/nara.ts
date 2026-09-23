@@ -35,12 +35,22 @@ export const NARA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
       fiscalYear: '令和8年度（2026年度）',
       fetchedAt: '2026-09-09',
     },
+    {
+      url: 'https://www.pref.nara.lg.jp/documents/5981/r8_tuusingoukaku_tuusinnnijibosyuu.pdf',
+      docTitle: '奈良県教育委員会 令和8年度奈良県立高等学校入学者通信制課程選抜合格者数（2月13日）',
+      fiscalYear: '令和8年度（2026年度）',
+      fetchedAt: '2026-09-23',
+    },
   ],
   coverage: {
     status: 'complete',
-    includedDepartments: ['定時制課程（一次選抜・第一出願期間）'],
+    includedDepartments: ['定時制課程（一次選抜・第一出願期間）', '通信制課程（山辺）'],
     pendingDepartments: [],
-    note: '「2　一次選抜・成人特別選抜［定時制課程］」セクションの全5レコード（4校）を完全収録。',
+    note: '「2　一次選抜・成人特別選抜［定時制課程］」セクションの全5レコード（4校）を完全収録。' +
+      '2026-09-23にT-P1通信制拡張の調査で追加: 奈良県唯一の公立通信制（山辺高校・定時制収録校' +
+      'とは別校）は独立公表資料「通信制課程選抜合格者数」に募集人員・出願者数・受検者数・' +
+      '合格者数の4列で掲載。他県と同じ規律でfinalApplicants=出願者数、finalRate=出願者数/' +
+      '募集人員（受検倍率でなく出願倍率）を採用。',
   },
   records: [
     { schoolName: '奈良商工', department: '工業・商業', quota: 40, finalApplicants: 13, finalRate: 0.33 },
@@ -48,6 +58,7 @@ export const NARA_TEIJI_COMPETITION_RATES: PrefectureCompetitionRateFile = {
     { schoolName: '大和中央', department: '普通（Ⅱ部）', quota: 75, finalApplicants: 43, finalRate: 0.57 },
     { schoolName: '畝傍', department: '普通', quota: 40, finalApplicants: 12, finalRate: 0.3 },
     { schoolName: '西吉野農業', department: '農業', quota: 16, finalApplicants: 5, finalRate: 0.31 },
+    { schoolName: '山辺', department: '普通（通信制）', quota: 150, finalApplicants: 37, finalRate: 0.25 },
   ],
   officialSubtotals: [
     { label: '県立計', schoolCount: 3, quota: 230, finalApplicants: 106, finalRate: 0.46 },
