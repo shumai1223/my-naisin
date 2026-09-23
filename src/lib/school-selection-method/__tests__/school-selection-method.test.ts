@@ -4006,12 +4006,12 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     expect(zennichi.filter((x) => x.schoolName === '石川県立工業高等学校')).toHaveLength(7);
   });
 
-  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区26校58レコード＋城陽学区8校18レコード＋相楽学区3校13レコード＋北桑田2レコード＋亀岡4レコード＋南丹3レコード＋園部1レコード＋農芸1レコード＋須知3レコード＋綾部本校2レコード＋綾部東分校2レコード＋福知山本校2レコード＋工業3レコード＋大江1レコード＋東舞鶴1レコード＋西舞鶴3レコード＋海洋1レコード＋宮津天橋宮津学舎2レコード＋宮津天橋加悦谷学舎2レコードを収録し、一覧表と個別学校ページを突合または個別学校ページ直読みのいずれかで検証済みの学校のみに限定する', () => {
+  it('kyoto: 令和9年度「前期選抜独自枠等募集要項」の京都市・乙訓学区26校58レコード＋城陽学区8校18レコード＋相楽学区3校13レコード＋北桑田2レコード＋亀岡4レコード＋南丹3レコード＋園部1レコード＋農芸1レコード＋須知3レコード＋綾部本校2レコード＋綾部東分校2レコード＋福知山本校2レコード＋工業3レコード＋大江1レコード＋東舞鶴1レコード＋西舞鶴3レコード＋海洋1レコード＋宮津天橋宮津学舎2レコード＋宮津天橋加悦谷学舎2レコード＋峰山3レコードを収録し、一覧表と個別学校ページを突合または個別学校ページ直読みのいずれかで検証済みの学校のみに限定する', () => {
     const record = getSchoolSelectionMethod(SCHOOL_SELECTION_METHOD_BY_PREFECTURE, 'kyoto');
     expect(record?.fiscalYear).toBe('令和9年度（2027年度）');
     const schools = record?.schools ?? [];
-    expect(schools).toHaveLength(122);
-    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(53);
+    expect(schools).toHaveLength(125);
+    expect(new Set(schools.map((x) => x.schoolName)).size).toBe(54);
     // 福知山三和分校(定時制・昼間課程)も清明・京都奏和・北桑田美山分校と同様に対象外
     expect(schools.some((x) => x.schoolName.includes('三和'))).toBe(false);
     expect(schools.every((x) => x.ratioType === undefined)).toBe(true);
@@ -4133,6 +4133,10 @@ describe('T-Y14 学校・学科別入学者選抜の評価方法', () => {
     const kayatani = schools.filter((x) => x.schoolName === '京都府立宮津天橋高等学校（加悦谷学舎）');
     expect(kayatani).toHaveLength(2);
     expect(kayatani.every((x) => x.department === '普通科（単位制）')).toBe(true);
+    // 峰山は普通科(A1/A2の2型)+機械創造科(A方式)の2学科3レコード
+    const mineyama = schools.filter((x) => x.schoolName === '京都府立峰山高等学校');
+    expect(mineyama).toHaveLength(3);
+    expect(new Set(mineyama.map((x) => x.department))).toEqual(new Set(['普通科', '機械創造科']));
   });
 
   it('structuredレコードのschoolsは1件以上を持つ', () => {
