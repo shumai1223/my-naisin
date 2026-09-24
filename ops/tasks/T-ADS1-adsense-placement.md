@@ -77,9 +77,13 @@
 
 ## 4. 実装（loop）
 
-- [ ] `src/lib/ad-units.ts`: 4キーのユニットIDを1か所に（初期値はプレースホルダ `'0000000000'`＝描画されない）
-- [ ] `src/app/layout.tsx`: `adsbygoogle.js`（`?client=ca-pub-7817682248719138`）を `next/script` の `strategy="afterInteractive"` で読み込む。
-      **`NEXT_PUBLIC_ADSENSE_ENABLED === '1'` のときだけ**（`AdSlot` と同じガード）。7月に外した理由のコメントは経緯として残し、再開の理由を追記
+- [ ] `src/lib/ad-units.ts`: 4キーのユニットIDを1か所に（**§2の本物のID**を入れる）
+- [x] `src/app/layout.tsx` の `adsbygoogle.js` 読み込み → **対話セッションが実施済み（c123f10・自動広告用に常時読み込み）。触らない**
+- [ ] ⚠️ **点火スイッチの効き方を先に確かめる。** `AdSlot` は `'use client'` なので `process.env.NEXT_PUBLIC_ADSENSE_ENABLED` は
+      **ビルド時に埋め込まれる**。このリポジトリの他の旗（`NEXT_PUBLIC_ADVISOR_ENABLED` 等）は `wrangler.jsonc` の `vars`（実行時）で点火しており、
+      それらはサーバーコンポーネントで読んでいるから効いている。**`vars` に入れても client の `AdSlot` には届かない可能性が高い。**
+      → サーバー側（ページ/レイアウト）で旗を読み、`AdSlot` に `enabled` を props で渡す形に直すか、Workers Builds のビルド変数で渡す必要があるかを確認し、
+      **👤がやる操作を1つに絞って**質問ノートに書く（「wrangler.jsonc の vars に1行足して push」で済む形が望ましい。envの変更自体は👤）
 - [ ] `AdSlot` に小さな「スポンサーリンク」ラベルと上下余白を足す（ラベルは枠ごとに1つ。テキストは本文色でなく控えめな色）
 - [ ] §3 の表どおりに配置。**各面で ParentLeadCTA・StickyConvertBar・計算ボタン・入力欄との位置関係をテストで固定**
       （広告がCTAより前に来ない／入力欄の隣にない）
@@ -88,14 +92,14 @@
 - [ ] CLS: 全枠で `minHeight` 予約（既定250。`PAGE_BOTTOM` の Multiplex は実寸に合わせる）
 - [ ] env は**触らない**（`NEXT_PUBLIC_ADSENSE_ENABLED` の点火は👤・C7）
 - [ ] `tsc` 実exit0（パイプ禁止）／jest フルスイート green（`--maxWorkers=2` 可）
-- [ ] ⚠️ **push しない。** 質問ノートの「👤の『pushして』を待つ」が有効
+- [ ] push は1日1回ルールどおり（保留は2026-09-24に解除済み）
 
 ## 5. 点火の手順（👤向け・質問ノートに番号つきで書くこと）
 
-1. AdSense管理画面で §2 の4ユニットを作る → 表示される `data-ad-slot` の数字4つを loop（またはセッション）に渡す → `src/lib/ad-units.ts` に入る
-2. AdSense管理画面の「自動広告」: **アンカー ON（位置: 上）／Vignette ON／ページ内広告 OFF**
-3. Google Payments の**本人確認**を済ませる（済ませないと支払いが止まる）
-4. Cloudflare の本番環境変数 `NEXT_PUBLIC_ADSENSE_ENABLED=1` を設定
+1. ~~4ユニット作成~~ ✅ 2026-09-24 済み（§2）
+2. ~~自動広告の設定~~ ✅ 2026-09-24 済み（アンカー・全画面広告〈頻度5分〉ON／ページ内〈バナー・Multiplex〉OFF）
+3. ~~本人確認の提出~~ ✅ 2026-09-24 提出済み（住所確認PINは収益$10到達で届く）
+4. 手動ユニットの点火（§4で確かめた1つの操作）
 5. push（＝デプロイ）
 
 ## 6. 2週間後の見直し（`ops/baselines/ads-placement-review-2026-10.md` に書く手順を残す）
