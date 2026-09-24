@@ -20,6 +20,7 @@ import { SchoolParentLeadForm } from '@/components/SchoolParentLeadForm';
 import { isSchoolLeadFormReleased } from '@/lib/school-lead-release';
 import { SchoolPageNaishinNote } from '@/components/SchoolPageNaishinNote';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { AdUnit } from '@/components/AdSlot';
 
 /**
  * 個別学校ページ（Λ-2・分割公開の波ごとにインデックス解禁）。
@@ -195,6 +196,10 @@ export default async function SchoolPage({ params }: PageProps) {
             />
           )}
 
+          {/* T-ADS1 AdSense 1枠目: 倍率データ・保護者CTA・リードフォームより下（CTAを押し下げない・データが先）。
+              NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。枠は3つ以内（IN_CONTENT×2＋PAGE_BOTTOM）。 */}
+          <AdUnit unit="IN_CONTENT" />
+
           {school.departmentRates.length > 1 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="mb-4 text-lg font-bold text-slate-800">学科別の内訳</h2>
@@ -305,6 +310,9 @@ export default async function SchoolPage({ params }: PageProps) {
               </div>
             </section>
           )}
+
+          {/* T-ADS1 AdSense 2枠目: 多年度推移の後。推移が無い学校では出さない（1枠目と近接して1画面あけられないため） */}
+          {schoolHistoryByDepartment.length > 0 && <AdUnit unit="IN_CONTENT" />}
 
           {categoryTrends.length > 0 && (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -431,6 +439,8 @@ export default async function SchoolPage({ params }: PageProps) {
 現在は募集人員・応募者数・倍率と、この学校固有の多年度推移・学科区分の県内推移を掲載しています（いずれも教育委員会公表の一次データに基づく）。近隣校リンクは学区によって表示件数が少ない場合があります。偏差値・合格最低点は掲載していません。学校選びの最終判断は必ず各校の公式サイト・教育委員会の最新情報でご確認ください。
             </p>
           </section>
+          {/* T-ADS1 AdSense 3枠目: ページ最下部（フッターの前）の関連コンテンツ型ユニット */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </div>

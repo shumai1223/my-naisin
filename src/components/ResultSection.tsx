@@ -18,6 +18,7 @@ import { RankCard } from '@/components/Result/RankCard';
 import { CalculationBasis } from '@/components/Result/CalculationBasis';
 import { PointValueCard } from '@/components/Result/PointValueCard';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { AdUnit } from '@/components/AdSlot';
 import { getPrefectureByCode, type PrefectureConfig } from '@/lib/prefectures';
 import { track, EVENTS } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -660,6 +661,10 @@ export function ResultSection({
               <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </div>
           </button>
+
+          {/* T-ADS1 AdSense RESULT_BELOW: 結果タブの最後＝保護者CTA(GapToTarget/ParentCostBridge)・学校ページ導線・
+              学習サポートより必ず下（収益の主導線を押し下げない）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="RESULT_BELOW" />
         </div>
       ) : (
         <div

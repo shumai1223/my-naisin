@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { HyoteiHeikinGyakusanResultFlow } from '@/components/HyoteiHeikin/HyoteiHeikinGyakusanResultFlow';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { AdUnit } from '@/components/AdSlot';
 
 const FAQS = [
   {
@@ -144,6 +145,9 @@ export default function HyoteiHeikinGyakusanPage() {
               ))}
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>

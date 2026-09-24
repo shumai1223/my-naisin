@@ -52,6 +52,7 @@ import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ThreeStepGuide } from '@/components/ThreeStepGuide';
+import { AdUnit } from '@/components/AdSlot';
 
 const SECTION_LOADER = (
   <div
@@ -691,6 +692,11 @@ export default function HomeClient() {
 
               <div className="mx-auto max-w-4xl px-4 pb-8">
                 <ChangeLogSection limit={5} />
+              </div>
+
+              {/* T-ADS1 AdSense PAGE_BOTTOM: トップの最下部。結果直後の RESULT_BELOW は ResultSection 側。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+              <div className="mx-auto max-w-4xl px-4 pb-8">
+                <AdUnit unit="PAGE_BOTTOM" />
               </div>
             </div>
           </div>

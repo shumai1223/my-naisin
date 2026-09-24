@@ -18,6 +18,7 @@ const KANAGAWA_SOURCE_URL =
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
+import { AdUnit } from '@/components/AdSlot';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const KANAGAWA_S_VALUE_FAQS = [
@@ -435,6 +436,9 @@ export default function KanagawaSValuePage() {
               </Link>
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。保護者リードCTAより後ろ。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>

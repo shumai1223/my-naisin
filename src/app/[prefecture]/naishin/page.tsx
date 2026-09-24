@@ -35,6 +35,7 @@ import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
 import { AnswerBox } from '@/components/AnswerBox';
 import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { SponsorSlot } from '@/components/SponsorSlot';
+import { AdUnit } from '@/components/AdSlot';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
@@ -486,6 +487,10 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
             {/* 掲載枠スポンサー（D-3・県×面の直販枠。未契約の間は描画0） */}
             <SponsorSlot placement="naishin" prefectureCode={prefectureCode} />
 
+            {/* T-ADS1 AdSense IN_CONTENT: 計算結果・保護者CTA・県専用ツール導線・AI個別指導枠より下＝解説の前。
+                NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+            <AdUnit unit="IN_CONTENT" />
+
             {/* 都道府県別詳細解説（SSRでGooglebotに情報を与える） */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
               <h2 className="mb-6 flex items-center gap-2 text-xl font-bold text-slate-800">
@@ -727,6 +732,9 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
               prefectureCode={prefectureCode}
               prefectureName={prefecture.name}
             />
+
+            {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。保護者リードCTAより後ろ。 */}
+            <AdUnit unit="PAGE_BOTTOM" />
           </div>
         </div>
       </div>

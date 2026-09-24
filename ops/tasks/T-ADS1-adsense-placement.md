@@ -77,21 +77,21 @@
 
 ## 4. 実装（loop）
 
-- [ ] `src/lib/ad-units.ts`: 4キーのユニットIDを1か所に（**§2の本物のID**を入れる）
+- [x] `src/lib/ad-units.ts`: 4キーのユニットIDを1か所に（**§2の本物のID**を入れる）
 - [x] `src/app/layout.tsx` の `adsbygoogle.js` 読み込み → **対話セッションが実施済み（c123f10・自動広告用に常時読み込み）。触らない**
-- [ ] ⚠️ **点火スイッチの効き方を先に確かめる。** `AdSlot` は `'use client'` なので `process.env.NEXT_PUBLIC_ADSENSE_ENABLED` は
+- [x] ⚠️ **点火スイッチの効き方を先に確かめる。** `AdSlot` は `'use client'` なので `process.env.NEXT_PUBLIC_ADSENSE_ENABLED` は
       **ビルド時に埋め込まれる**。このリポジトリの他の旗（`NEXT_PUBLIC_ADVISOR_ENABLED` 等）は `wrangler.jsonc` の `vars`（実行時）で点火しており、
       それらはサーバーコンポーネントで読んでいるから効いている。**`vars` に入れても client の `AdSlot` には届かない可能性が高い。**
       → サーバー側（ページ/レイアウト）で旗を読み、`AdSlot` に `enabled` を props で渡す形に直すか、Workers Builds のビルド変数で渡す必要があるかを確認し、
       **👤がやる操作を1つに絞って**質問ノートに書く（「wrangler.jsonc の vars に1行足して push」で済む形が望ましい。envの変更自体は👤）
-- [ ] `AdSlot` に小さな「スポンサーリンク」ラベルと上下余白を足す（ラベルは枠ごとに1つ。テキストは本文色でなく控えめな色）
-- [ ] §3 の表どおりに配置。**各面で ParentLeadCTA・StickyConvertBar・計算ボタン・入力欄との位置関係をテストで固定**
+- [x] `AdSlot` に小さな「スポンサーリンク」ラベルと上下余白を足す（ラベルは枠ごとに1つ。テキストは本文色でなく控えめな色）
+- [x] §3 の表どおりに配置。**各面で ParentLeadCTA・StickyConvertBar・計算ボタン・入力欄との位置関係をテストで固定**
       （広告がCTAより前に来ない／入力欄の隣にない）
-- [ ] §3「置かない場所」を**不変条件テスト**に: 除外ルートのソースに `<AdSlot` が無いこと
-- [ ] 1ページあたりの手動枠が3以下であることをテストで固定
-- [ ] CLS: 全枠で `minHeight` 予約（既定250。`PAGE_BOTTOM` の Multiplex は実寸に合わせる）
-- [ ] env は**触らない**（`NEXT_PUBLIC_ADSENSE_ENABLED` の点火は👤・C7）
-- [ ] `tsc` 実exit0（パイプ禁止）／jest フルスイート green（`--maxWorkers=2` 可）
+- [x] §3「置かない場所」を**不変条件テスト**に: 除外ルートのソースに `<AdSlot` が無いこと
+- [x] 1ページあたりの手動枠が3以下であることをテストで固定
+- [x] CLS: 全枠で `minHeight` 予約（既定250。`PAGE_BOTTOM` の Multiplex は実寸に合わせる）
+- [x] env は**触らない**（`NEXT_PUBLIC_ADSENSE_ENABLED` の点火は👤・C7）
+- [x] `tsc` 実exit0（パイプ禁止）／jest フルスイート green（`--maxWorkers=2` 可）
 - [ ] push は1日1回ルールどおり（保留は2026-09-24に解除済み）
 
 ## 5. 点火の手順（👤向け・質問ノートに番号つきで書くこと）
@@ -108,3 +108,20 @@
 - **SEOが落ちていないか**: `scripts/w9-weighted-rank.mjs` の前週比と、Search Console の Core Web Vitals（CLS）を確認。
   上位20クエリの加重順位が +0.5位以上悪化、または CLS が「不良」になったら、`IN_CONTENT` から外して様子を見る
 - 保護者CTAのクリック（D1の `/go` ログ）が広告開始前の2週間より明らかに減っていたら、`RESULT_BELOW` を1段下げる
+
+---
+
+## 実施記録（2026-09-24 22:xx・loop）
+
+- 実装済み: `ad-units.ts`（旧 `ad-slots.ts` は削除）／`AdSlot`（`layout` prop・スポンサーリンクラベル・`AdUnit`）／
+  ブログ（`blog-ad-insert.ts` で本文の見出し位置に IN_ARTICLE を最大2枠自動挿入＋PAGE_BOTTOM。旧 `<!-- AD_PLACEHOLDER -->` 方式は廃止＝どの記事にもマーカーは無かった）／
+  学校ページ（IN_CONTENT×2＋PAGE_BOTTOM）／結果連動フロー13本（RESULT_BELOW・結果が出た後だけ）／
+  /hensachi・/hyotei-heikin・県の計算機9面・トップ・換算早見4面。
+- ⚠️ **仕様表からの意図的なずれ**（保護者CTAを押し下げない＝§0の原則を優先した）:
+  学校ページの1枠目は「今季の入試倍率の後」ではなく **保護者CTA・リードフォームの後**／県計算機3面（Osaka/Tokyo/[prefecture]）のIN_CONTENTはCTAの後／
+  換算・早見面のRESULT_BELOWは計算機の入力欄に隣接させず、解説セクションの後（hayamihyouは対応表の後・CTAの後）。
+- 点火の効き方の結論: client の `AdSlot` は `process.env.NEXT_PUBLIC_ADSENSE_ENABLED` を**ビルド時に埋め込む**。`wrangler.jsonc` の `vars`（実行時）には**効かない**
+  （OpenNext はビルド時に wrangler vars を読まず、`.env*` ファイルだけを読む＝`extract-project-env-vars.js`）。学校ページ・ブログはSSGなので実行時に読む道も無い。
+  → 点火の操作は質問ノート参照（Workers Builds のビルド変数 or `.env.production`）。
+- 検証: tsc実exit0・jestフル553suites/8392tests green（`ad-placement.test.ts` 39本を新設）。push保留（本日分は対話セッションが使用済み）。
+- 2週間後の見直し手順: `ops/baselines/ads-placement-review-2026-10.md`

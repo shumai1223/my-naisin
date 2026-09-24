@@ -10,6 +10,7 @@ import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
+import { AdUnit } from '@/components/AdSlot';
 import { StatsOptIn } from '@/components/StatsOptIn';
 import { UnlockGate } from '@/components/UnlockGate';
 import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
@@ -124,6 +125,10 @@ export function HensachiResultFlow() {
 
       {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
       <ShindanEntryLink className="mt-6" />
+
+      {/* T-ADS1 AdSense RESULT_BELOW: 結果が出た後だけ・保護者リード/保存CTA/橋の全てより下（入力欄・計算ボタンから離す）。
+          NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+      {has && <AdUnit unit="RESULT_BELOW" />}
     </>
   );
 }

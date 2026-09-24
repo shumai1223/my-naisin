@@ -10,6 +10,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HyoteiResultFlow } from '@/components/HyoteiHeikin/HyoteiResultFlow';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
+import { AdUnit } from '@/components/AdSlot';
 
 const HYOTEI_FAQS = [
   {
@@ -289,6 +290,9 @@ export default function HyoteiHeikinPage() {
               />
             </div>
           </section>
+
+          {/* T-ADS1 AdSense IN_CONTENT: 結果連動CTA・EV最上位CTAの後、解説の最初の見出しの前。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="IN_CONTENT" />
 
           {/* 評定平均の計算方法（具体例） */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -1290,6 +1294,9 @@ export default function HyoteiHeikinPage() {
               </Link>
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
 
           <ToolClusterNav current="hyotei-heikin" className="mt-8" />
         </div>

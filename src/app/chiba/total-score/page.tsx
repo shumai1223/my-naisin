@@ -10,6 +10,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ChibaTotalScoreResultFlow } from '@/components/Chiba/ChibaTotalScoreResultFlow';
 import { getPrefectureByCode } from '@/lib/prefectures';
+import { AdUnit } from '@/components/AdSlot';
 
 // ZZ-10c: 出典リンクはprefectures.ts(X-14再検証で更新される単一ソース)から動的取得し、
 // ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
@@ -294,6 +295,9 @@ export default function ChibaTotalScorePage() {
               </Link>
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。保護者リードCTAより後ろ。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>

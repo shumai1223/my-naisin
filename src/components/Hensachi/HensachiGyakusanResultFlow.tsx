@@ -10,6 +10,7 @@ import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { StatsOptIn } from '@/components/StatsOptIn';
 import { UnlockGate } from '@/components/UnlockGate';
 import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
+import { AdUnit } from '@/components/AdSlot';
 
 /**
  * /hensachi/gyakusan の結果連動フロー（C-15）。
@@ -73,6 +74,8 @@ export function HensachiGyakusanResultFlow() {
           </UnlockGate>
         </div>
       )}
+      {/* T-ADS1 AdSense RESULT_BELOW: 結果が出た後だけ・保護者リード/保存CTA/橋の全てより下。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+      {has && <AdUnit unit="RESULT_BELOW" />}
     </>
   );
 }

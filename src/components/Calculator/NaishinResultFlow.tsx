@@ -10,6 +10,7 @@ import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 import { StatsOptIn } from '@/components/StatsOptIn';
 import { UnlockGate } from '@/components/UnlockGate';
 import { NationalPercentileReveal } from '@/components/NationalPercentileReveal';
+import { AdUnit } from '@/components/AdSlot';
 
 interface NaishinResultFlowProps {
   prefectureCode: string;
@@ -101,6 +102,10 @@ export function NaishinResultFlow({ prefectureCode, prefectureName, maxScore }: 
           </UnlockGate>
         </div>
       )}
+
+      {/* T-ADS1 AdSense RESULT_BELOW: 結果が出た後だけ・保護者リード/保存CTA/橋の全てより下（入力欄・計算ボタンから離す）。
+          NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+      {result && <AdUnit unit="RESULT_BELOW" />}
     </>
   );
 }

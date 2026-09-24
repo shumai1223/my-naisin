@@ -17,8 +17,8 @@ import { ReadingProgressBar } from '@/components/Blog/ReadingProgressBar';
 import { BackToTopButton } from '@/components/Blog/BackToTopButton';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { AdSlot } from '@/components/AdSlot';
-import { AD_SLOTS } from '@/lib/ad-slots';
+import { AdUnit } from '@/components/AdSlot';
+import { splitHtmlForInArticleAds } from '@/lib/blog-ad-insert';
 import { FutoukouLeadCTA } from '@/components/FutoukouLeadCTA';
 
 interface PageProps {
@@ -247,11 +247,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             </p>
           </div>
 
-          {/* 本文。`<!-- AD_PLACEHOLDER -->` を境に分割し、記事内（H2間）に AdSense床を挿入。
-              マーカーが無い記事は単一セグメント＝従来と完全に同じ描画。AdSlot は承認まで null（安全）。 */}
-          {post.content
-            .replace(/__PREFECTURE_LINK_LIST__/g, '')
-            .split('<!-- AD_PLACEHOLDER -->')
+          {/* 本文。導入文の後・本文の中ほどの <h2 の前に記事内広告(IN_ARTICLE・最大2枠)を挿入（位置は blog-ad-insert.ts）。
+              広告は本文を書き換えず、セグメントを連結すると元の本文に戻る。AdUnit は NEXT_PUBLIC_ADSENSE_ENABLED=1 まで null。 */}
+          {splitHtmlForInArticleAds(post.content.replace(/__PREFECTURE_LINK_LIST__/g, ''))
             .flatMap((segment, i, arr) => {
               const nodes = [
                 <div
@@ -263,9 +261,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               ];
               if (i < arr.length - 1) {
                 nodes.push(
-                  <div key={`ad-${i}`} className="my-8">
-                    <AdSlot slot={AD_SLOTS.blogInArticle} format="fluid" minHeight={280} />
-                  </div>
+                  <AdUnit key={`ad-${i}`} unit="IN_ARTICLE" />
                 );
               }
               return nodes;
@@ -347,11 +343,6 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {/* 記事末尾の関連サービスCTA（blog placement＝EV¥84/clickのそら塾へ統一。旧サプリ¥5.4/clickは撤去） */}
         <ParentLeadCTA className="mt-10" placement="blog" />
-
-        {/* AdSense床（承認＝NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画されない。読了直後の高エンゲージ位置） */}
-        <div className="mt-8">
-          <AdSlot slot={AD_SLOTS.blogArticleEnd} />
-        </div>
 
         {/* Tags + Share */}
         <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -436,6 +427,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             hasCalculationMethod={post.tags.includes('計算方法') || post.tags.includes('内申点')}
           />
         </div>
+
+        {/* 記事の最下部（前後ナビの前）: 関連コンテンツ型ユニット。ParentLeadCTAより後ろ */}
+        <AdUnit unit="PAGE_BOTTOM" />
 
         {/* Prev / Next Navigation */}
         <nav className="mt-12 grid gap-4 md:grid-cols-2">

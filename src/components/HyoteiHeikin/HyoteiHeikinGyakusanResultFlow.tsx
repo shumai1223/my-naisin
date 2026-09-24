@@ -7,6 +7,7 @@ import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ParentCostBridge } from '@/components/ParentCostBridge';
+import { AdUnit } from '@/components/AdSlot';
 
 /**
  * /hyotei-heikin/gyakusan の結果連動フロー（TIER K-4）。
@@ -46,6 +47,8 @@ export function HyoteiHeikinGyakusanResultFlow() {
 
       {/* 結果直後の同スケール導線（生徒→保護者）：学費/塾代の情報導線 */}
       <ParentCostBridge className="mt-6" />
+      {/* T-ADS1 AdSense RESULT_BELOW: 結果が出た後だけ・保護者リード/保存CTA/橋の全てより下。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+      {has && <AdUnit unit="RESULT_BELOW" />}
     </>
   );
 }

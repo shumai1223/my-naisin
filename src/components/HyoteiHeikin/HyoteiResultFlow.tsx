@@ -12,6 +12,7 @@ import { ParentWindowBridge } from '@/components/ParentWindowBridge';
 import { ShindanEntryLink } from '@/components/ShindanEntryLink';
 import { useExperiment } from '@/components/ab/useExperiment';
 import type { AffiliateId } from '@/lib/affiliates';
+import { AdUnit } from '@/components/AdSlot';
 
 /**
  * /hyotei-heikin（CTR13.5%・高intent）の結果連動 換金フロー。
@@ -89,6 +90,8 @@ export function HyoteiResultFlow() {
 
       {/* 塾診断ファネルへの入口（結果に合う塾を無料診断） */}
       <ShindanEntryLink className="mt-6" />
+      {/* T-ADS1 AdSense RESULT_BELOW: 結果が出た後だけ・保護者リード/保存CTA/橋の全てより下。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+      {has && <AdUnit unit="RESULT_BELOW" />}
     </>
   );
 }

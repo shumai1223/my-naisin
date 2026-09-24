@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { FullScoreHensachiCalculator } from '@/components/Hensachi/FullScoreHensachiCalculator';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { AdUnit } from '@/components/AdSlot';
 
 const FAQS = [
   {
@@ -97,6 +98,10 @@ export default function MantenkanPage() {
             </p>
           </section>
 
+          {/* T-ADS1 AdSense RESULT_BELOW: 換算・早見面。計算機の入力欄・ボタンに隣接させないよう、答えの解説セクションの後に置く。
+              NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="RESULT_BELOW" />
+
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
@@ -126,6 +131,9 @@ export default function MantenkanPage() {
           <div className="mt-8">
             <HensachiClusterNav current="mantenkan" />
           </div>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>

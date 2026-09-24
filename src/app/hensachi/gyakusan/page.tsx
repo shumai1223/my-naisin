@@ -8,6 +8,7 @@ import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { HensachiGyakusanResultFlow } from '@/components/Hensachi/HensachiGyakusanResultFlow';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { AdUnit } from '@/components/AdSlot';
 
 const FAQS = [
   {
@@ -130,6 +131,9 @@ export default function HensachiGyakusanPage() {
           <div className="mt-8">
             <HensachiClusterNav current="gyakusan" />
           </div>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>

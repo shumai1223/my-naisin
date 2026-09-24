@@ -17,6 +17,7 @@ const TOKYO_SOURCE_URL =
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
+import { AdUnit } from '@/components/AdSlot';
 
 export const metadata: Metadata = {
   title: '都立高校 総合得点 計算サイト【1020点満点】学力検査・調査書点・ESAT-J | My Naishin',
@@ -457,6 +458,9 @@ export default function TokyoTotalScorePage() {
             note="【森塾】の無料体験授業（PR）"
           />
 
+          {/* T-ADS1 AdSense IN_CONTENT: 保護者リードCTAの後ろ（CTAを押し下げない）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="IN_CONTENT" />
+
           {/* よくある質問 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
@@ -528,6 +532,9 @@ export default function TokyoTotalScorePage() {
               </Link>
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。保護者リードCTAより後ろ。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>

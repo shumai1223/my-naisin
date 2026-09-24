@@ -16,6 +16,7 @@ const OSAKA_SOURCE_URL =
   getPrefectureByCode('osaka')?.sourceUrl ?? 'https://www.pref.osaka.lg.jp/kotogakko/gakuji-g3/';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
+import { AdUnit } from '@/components/AdSlot';
 
 // 可視の「よくある質問」セクションと完全一致させた FAQ（FAQ リッチリザルト用）
 const OSAKA_TOTAL_SCORE_FAQS = [
@@ -300,6 +301,9 @@ export default function OsakaTotalScorePage() {
             note="個別指導キャンパスの無料体験（PR）"
           />
 
+          {/* T-ADS1 AdSense IN_CONTENT: 保護者リードCTAの後ろ（CTAを押し下げない）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="IN_CONTENT" />
+
           {/* よくある質問 */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
@@ -357,6 +361,9 @@ export default function OsakaTotalScorePage() {
               </Link>
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。保護者リードCTAより後ろ。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>

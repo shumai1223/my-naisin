@@ -8,6 +8,7 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
+import { AdUnit } from '@/components/AdSlot';
 import { PREFECTURES } from '@/lib/prefectures';
 import { HensachiResultFlow } from '@/components/Hensachi/HensachiResultFlow';
 import { AnswerBox } from '@/components/AnswerBox';
@@ -336,6 +337,9 @@ export default function HensachiPage() {
               />
             </div>
           </section>
+
+          {/* T-ADS1 AdSense IN_CONTENT: 解説の最初の見出し（計算式）の前・EV最上位CTAの後。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="IN_CONTENT" />
 
           {/* Formula */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -1188,6 +1192,9 @@ export default function HensachiPage() {
               </Link>
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前） */}
+          <AdUnit unit="PAGE_BOTTOM" />
 
           <ToolClusterNav current="hensachi" className="mt-8" />
         </div>

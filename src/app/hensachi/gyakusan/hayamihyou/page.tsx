@@ -14,6 +14,7 @@ import {
   GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE,
   GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV,
 } from '@/lib/hensachi';
+import { AdUnit } from '@/components/AdSlot';
 
 const FAQ_HENSACHI_VALUES = [40, 45, 50, 55, 60, 65, 70];
 const FAQ_SCORE_VALUES = [130, 160, 190, 220, 250, 280, 340, 370];
@@ -160,6 +161,9 @@ export default function HensachiGyakusanHayamihyouPage() {
             <ParentLeadCTA placement="hensachi" />
           </div>
 
+          {/* T-ADS1 AdSense RESULT_BELOW: 答え（対応表）の後・保護者CTAより下。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="RESULT_BELOW" />
+
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
@@ -171,6 +175,9 @@ export default function HensachiGyakusanHayamihyouPage() {
               ))}
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>

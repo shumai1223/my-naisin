@@ -16,6 +16,7 @@ import { TotalScoreReverseCalculator } from '@/components/TotalScore/TotalScoreR
 import { TotalScoreExplainerView } from '@/components/TotalScore/TotalScoreExplainerView';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { HensachiPromo } from '@/components/HensachiPromo';
+import { AdUnit } from '@/components/AdSlot';
 
 /** 早見表：既定の比率オプションで、得点率の組合せ→総合得点を engine で算出する。 */
 function buildQuickTable(system: TotalScoreSystem) {
@@ -366,6 +367,9 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
             note={offer.note}
           />
 
+          {/* T-ADS1 AdSense IN_CONTENT: 保護者リードCTAの後ろ（CTAを押し下げない）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="IN_CONTENT" />
+
           {/* 出典 */}
           <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
@@ -431,6 +435,9 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
               </Link>
             </div>
           </section>
+
+          {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。保護者リードCTAより後ろ。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
+          <AdUnit unit="PAGE_BOTTOM" />
         </div>
       </div>
     </>
