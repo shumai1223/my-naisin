@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import type { ReactNode } from 'react';
+import Script from 'next/script';
 
 import './globals.css';
 
@@ -114,9 +115,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ExitIntentLineModal />
           <StickyConvertBar />
         </div>
-        {/* AdSense撤退（2026-07）：adsbygoogle.js の常時ロードを撤去。
-            AdSlot は NEXT_PUBLIC_ADSENSE_ENABLED=1 のときだけ描画＝広告ユニットは元々ゼロで、
-            このスクリプトはページを重くするだけだった。収益は保護者リード送客（アフィリ）に一本化。 */}
+        {/* AdSense撤退（2026-07）：adsbygoogle.js の常時ロードを撤去していた。
+            2026-09-24 再開（👤指示）: AdSenseが承認された（pub-7817682248719138・public/ads.txt一致）。
+            支払いの住所確認PINは収益$10到達で届くため、自動広告（アンカー・Vignette）を先に動かす目的で読み込む。
+            どの形式を出すかはAdSense管理画面の「自動広告」設定で決まる（👤: アンカーON・位置は上／VignetteON／ページ内広告OFF）。
+            本文中の手動ユニットは AdSlot（NEXT_PUBLIC_ADSENSE_ENABLED=1 かつ実ユニットID）で別途点火＝ops/tasks/T-ADS1。
+            afterInteractive: 本文の描画後に読み込み、LCPを邪魔しない。 */}
+        <Script
+          id="adsbygoogle-js"
+          async
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817682248719138"
+        />
       </body>
     </html>
   );
