@@ -11,8 +11,6 @@ interface AffiliateAdProps {
   hideLabel?: boolean;
   /** textタイプのアンカー要素に直接付与するclass。指定するとデフォルトのスタイルを置き換える（ボタン化したいときに使う） */
   linkClassName?: string;
-  /** @deprecated AdSense撤退で無効化（常に表示）。後方互換のため受けるだけ。 */
-  auditHide?: boolean;
   /** textタイプのアンカー表示文言を上書き（href/トラッキングは維持）。塾の素のアンカー文「【森塾】」等を、CTAボタンとして自然な行動文にしたいときに使う。 */
   ctaText?: string;
   /** 視認時に cta_view を送る（CTR=affiliate_click÷cta_view を取得）。ParentLeadCTA経由は二重計測になるので付けない＝主要バナー面で opt-in。 */
@@ -32,9 +30,7 @@ interface AffiliateAdProps {
   variant?: string;
 }
 
-export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, auditHide = false, ctaText, trackView = false, viewPlacement, viewPref, pref, placement, variant }: AffiliateAdProps) {
-  // AdSense撤退（2026-07）で審査モードは廃止。auditHide は後方互換で受けるが、もう隠さない。
-  void auditHide;
+export function AffiliateAd({ id, className = '', centered = true, hideLabel = false, linkClassName, ctaText, trackView = false, viewPlacement, viewPref, pref, placement, variant }: AffiliateAdProps) {
   const ad = AFFILIATES[id];
   // 先回し枠（未確定案件）はリンク未確定なので描画しない＝デッドリンク/空ピクセルを出さない。
   if ((ad.status ?? 'live') === 'pending') return null;
@@ -43,7 +39,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
   // 302先は AFFILIATES の固定 href だけ＝オープンリダイレクトにならない。
   const href = goHref(ad.id, { pref: pref ?? viewPref, placement: placement ?? viewPlacement });
 
-  // 視認計測（opt-in）。描画される（pending/auditHideを通過した）ときだけ仕込むので空インプは出ない。
+  // 視認計測（opt-in）。描画される（pendingを通過した）ときだけ仕込むので空インプは出ない。
   const viewTracker = trackView ? (
     <CtaViewTracker placement={viewPlacement ?? 'affiliate'} pref={viewPref} program={id} variant={variant} />
   ) : null;

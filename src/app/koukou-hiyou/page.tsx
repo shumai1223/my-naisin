@@ -114,10 +114,9 @@ export default function KoukouHiyouPage() {
           </ul>
         </div>
 
-        {/* 保護者リード導線（収益／審査中は休眠） */}
+        {/* 保護者リード導線（収益） */}
         <div className="mt-8">
           <ParentLeadCTA
-            auditHide
             placement="parent-lp"
             heading="高校の学費、今のうちに備えていますか？"
             body="高校3年間の費用は公立でも約179万円。早めの準備で選択肢が広がります。ご家庭に合った学習・進学プランを、まずは無料の資料で確認できます。"

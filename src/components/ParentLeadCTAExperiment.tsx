@@ -12,7 +12,6 @@ interface ParentLeadCTAExperimentProps {
   placement?: LeadPlacement;
   prefectureCode?: string;
   className?: string;
-  auditHide?: boolean;
 }
 
 /** レジストリに無い実験IDでも壊さないためのフォールバック（旧 control/urgent コピーA/B）。 */
@@ -37,7 +36,6 @@ export function ParentLeadCTAExperiment({
   placement,
   prefectureCode,
   className,
-  auditHide,
 }: ParentLeadCTAExperimentProps) {
   const def = getExperiment(experimentId);
   const arms = def?.arms?.length ? def.arms : FALLBACK_ARMS;
@@ -67,7 +65,6 @@ export function ParentLeadCTAExperiment({
       note={preset?.note}
       ctaText={ctaText}
       className={className}
-      auditHide={auditHide}
       variant={variantId}
     />
   );

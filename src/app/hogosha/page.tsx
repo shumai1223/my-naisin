@@ -236,7 +236,6 @@ export default function HogoshaPage() {
             copyExperimentId="hogosha-cta-text-2026"
             placement="parent-lp"
             className="mb-10"
-            auditHide
           />
 
           {/* 保護者ができる3つのこと */}
@@ -351,7 +350,6 @@ export default function HogoshaPage() {
             slot="article-end"
             copyExperimentId="hogosha-cta-text-2026"
             placement="parent-lp"
-            auditHide
           />
 
           <p className="mt-8 flex items-center justify-center gap-1.5 text-center text-xs text-slate-400">

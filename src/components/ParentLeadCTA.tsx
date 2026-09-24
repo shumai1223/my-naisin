@@ -10,8 +10,6 @@ interface ParentLeadCTAProps {
   /** 本文（未指定なら出し分けエンジンの解決値） */
   body?: string;
   className?: string;
-  /** @deprecated AdSense撤退で無効化（常に表示）。後方互換のため受けるだけ。 */
-  auditHide?: boolean;
   /** 送客先プログラム。明示時は最優先。未指定なら県×面エンジンが解決（既定=Z会資料請求） */
   affiliateId?: AffiliateId;
   /** ボタン下の補足表記（PR/無料など）。affiliateIdを差し替えたら送客先名に合わせる */
@@ -37,11 +35,7 @@ interface ParentLeadCTAProps {
  * 「契約の意思決定者＝保護者」に向けて、無料資料請求（高単価リード）へ誘導する。
  * 実リンク・トラッキング・rel/PR表記は AffiliateAd に集約してコンプラを担保。
  */
-export function ParentLeadCTA({ heading, body, className = '', auditHide = false, affiliateId, note, ctaText, prefectureCode, placement, variant, secondaryAffiliateId, secondaryVariant }: ParentLeadCTAProps) {
-  // AdSense撤退（2026-07）で審査モードは廃止。auditHide は後方互換で受けるが、もう隠さない
-  // （＝これまで NEXT_PUBLIC_ADSENSE_AUDIT=1 で休眠していた保護者リードCTAを全面点灯＝換金導線の解凍）。
-  void auditHide;
-
+export function ParentLeadCTA({ heading, body, className = '', affiliateId, note, ctaText, prefectureCode, placement, variant, secondaryAffiliateId, secondaryVariant }: ParentLeadCTAProps) {
   // 県×面の出し分けエンジンで既定を解決。明示propは常に最優先（後方互換）。
   const offer = selectLeadOffer({ prefectureCode, placement });
   const resolvedHeading = heading ?? offer.heading;

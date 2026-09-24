@@ -681,7 +681,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                     自宅でマンツーマンの個別指導を受けたいなら、ネット松陰塾の自立学習スタイルが選択肢になります。
                   </p>
                   <div className="flex justify-start">
-                    <AffiliateAd placement="naishin" id="shoin-banner" centered={false} auditHide />
+                    <AffiliateAd placement="naishin" id="shoin-banner" centered={false} />
                   </div>
                 </div>
                 <div className="rounded-xl border border-sky-100 bg-sky-50/40 p-4">
@@ -689,7 +689,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                   <p className="mb-3 text-xs text-sky-700 leading-relaxed">
                     先生1人に生徒2人まで。{prefecture.name}全域から受講できるオンライン個別指導塾です。
                   </p>
-                  <AffiliateAd placement="naishin" id="sora-juku-banner" auditHide />
+                  <AffiliateAd placement="naishin" id="sora-juku-banner" />
                 </div>
                 {/* 校舎所在地の実態に合わせる：関東=森塾／関西=個別指導キャンパス（旧コードは大阪にも関東限定の森塾を誤表示していた） */}
                 {['tokyo', 'kanagawa', 'saitama', 'chiba', 'ibaraki', 'tochigi', 'gunma'].includes(prefectureCode) && (

@@ -42,7 +42,6 @@ interface ParentLeadCTAPositionSlotProps {
   placement?: LeadPlacement;
   prefectureCode?: string;
   className?: string;
-  auditHide?: boolean;
 }
 
 export function ParentLeadCTAPositionSlot({
@@ -51,7 +50,6 @@ export function ParentLeadCTAPositionSlot({
   placement,
   prefectureCode,
   className,
-  auditHide,
 }: ParentLeadCTAPositionSlotProps) {
   const variant = React.useContext(PositionVariantContext);
   const shouldRenderHere = variant === 'above-fold' ? slot === 'above-fold' : slot === 'article-end';
@@ -63,7 +61,6 @@ export function ParentLeadCTAPositionSlot({
       placement={placement}
       prefectureCode={prefectureCode}
       className={className}
-      auditHide={auditHide}
     />
   );
 }

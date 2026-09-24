@@ -67,7 +67,7 @@ type Status = 'idle' | 'submitting' | 'success' | 'fallback' | 'error';
  *  2) メールでの受け取り登録 …… 会員化の入口。文脈（都道府県・内申・目標・ギャップ）付きで送られ、
  *     高インテントのセグメント名簿になる。配信は /api/lead → Webhook、未設定時は mailto で取りこぼし防止。
  *
- * これは“広告”ではなく“資産形成”なので AdSense審査の密度リスクには当たらない（auditHideしない）。
+ * これは“広告”ではなく“資産形成”なので AdSense審査の密度リスクには当たらない（審査用の非表示の対象にもしない）。
  */
 export function SaveResultCTA({
   source,

@@ -268,7 +268,6 @@ function ReversePageContent() {
                 experimentId="result-offer-2026"
                 placement="result"
                 prefectureCode={prefCtx.prefectureCode || undefined}
-                auditHide
                 className="mt-8"
               />
 
