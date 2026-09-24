@@ -9,7 +9,9 @@
  * 人間が目視でページを特定してきた運用を踏襲する。自動化すると誤ったページを検算に通し
  * fail-closedの意味が薄れるリスクの方が大きいと判断）。
  *
- * 使い方: npx tsx scripts/bairitsu-ingest/harvest-prefecture.ts <県コード> <PDFパス> <ページ番号,...>
+ * 使い方: npx tsx scripts/bairitsu-ingest/harvest-prefecture.ts <県コード> <PDFパス> <ページ番号,...> [--emit <出力JSON>]
+ *   --emit: 検算OKのとき、抽出した行をJSON({prefectureCode, rows})で書き出す（T-TD1: 年度末パックの本納品
+ *           scripts/td1-build-delivery.ts --parsed <JSON> の入力。検算NGなら書き出さない）
  *
  * 前段（PDF取得）は`scripts/bairitsu-ingest/archive-changed-pdfs.mjs`が既に担っており、
  * このスクリプトはその保存先（`ops/raw/bairitsu-pdf-archive/<pref>/<sha256>.pdf`）を
@@ -17,6 +19,7 @@
  * 配線（spawn→JSON.parse→純関数呼び出し→exit code）のみを検証済み（詳細はworklog参照）。
  */
 import { execFileSync } from 'node:child_process';
+import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { harvestPrefecture } from '@/lib/bairitsu-ingest/harvest-prefecture';
@@ -83,6 +86,11 @@ function main(): number {
     return 1;
   }
   console.log(`✅ ${prefectureCode}: ${result.parsed.length}件抽出・検算OK`);
+  const emitIdx = process.argv.indexOf('--emit');
+  if (emitIdx >= 0 && process.argv[emitIdx + 1]) {
+    writeFileSync(process.argv[emitIdx + 1], JSON.stringify({ prefectureCode, rows: result.parsed }, null, 2), 'utf8');
+    console.log(`   → ${process.argv[emitIdx + 1]} に書き出しました`);
+  }
   return 0;
 }
 

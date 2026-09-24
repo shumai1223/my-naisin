@@ -36,7 +36,7 @@ export interface NendomatsuPricing {
   confirmedYenTaxIncluded: number | null;
 }
 
-const PRICING: NendomatsuPricing = pricing as NendomatsuPricing;
+const PRICING: NendomatsuPricing = pricing as unknown as NendomatsuPricing;
 
 export function formatYen(n: number): string {
   return `¥${n.toLocaleString('en-US')}`;

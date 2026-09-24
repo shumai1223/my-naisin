@@ -21,6 +21,7 @@ import {
   confirmedPriceLabel,
 } from '../src/lib/nendomatsu-pack';
 import { finalityOf, r9Baseline } from '../src/lib/nendomatsu-pack-schedule';
+import { mdToHtml } from '../src/lib/nendomatsu-pack-md';
 
 const OUT = 'ops/deliverables/nendomatsu-pack-sample';
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -155,9 +156,15 @@ ${extra}
   );
 }
 
+const DOC_CSS_EXTRA = '<style>blockquote{border-left:3px solid #999;margin:2mm 0;padding:0 3mm;color:#333}ul{margin:1mm 0;padding-left:5mm}li{margin:0.4mm 0}code{font-family:Consolas,monospace;font-size:8pt}</style>';
+for (const [name, title] of [['SPEC', 'データ仕様書'], ['TERMS', '利用条件（案）']] as const) {
+  const md = fs.readFileSync(path.join(OUT, name + '.md'), 'utf8');
+  fs.writeFileSync(path.join(OUT, name + '.html'), html(title, mdToHtml(md)).replace('</head>', DOC_CSS_EXTRA + '</head>'), 'utf8');
+}
+
 fs.mkdirSync(path.join(OUT, 'templates'), { recursive: true });
 fs.writeFileSync(path.join(OUT, 'ONE-PAGER.html'), onePager, 'utf8');
 fs.writeFileSync(path.join(OUT, 'templates', 'mitsumori.html'), docTemplate('見積書'), 'utf8');
 fs.writeFileSync(path.join(OUT, 'templates', 'seikyusho.html'), docTemplate('請求書'), 'utf8');
 fs.writeFileSync(path.join(OUT, 'templates', 'nohinsho.html'), docTemplate('納品書'), 'utf8');
-console.log(`生成: ONE-PAGER.html / templates/{mitsumori,seikyusho,nohinsho}.html（価格: ${displayPriceLabel()}・納品対象 ${deliverables.length}県）`);
+console.log(`生成: ONE-PAGER.html / SPEC.html / TERMS.html / templates/{mitsumori,seikyusho,nohinsho}.html（価格: ${displayPriceLabel()}・納品対象 ${deliverables.length}県）`);

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>データ仕様書</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+body { font-family: "Yu Gothic", "YuGothic", "Meiryo", sans-serif; font-size: 9pt; line-height: 1.38; color: #111; margin: 0; }
+h1 { font-family: "Yu Mincho", "YuMincho", serif; font-size: 15pt; margin: 0 0 2mm; }
+h2 { font-family: "Yu Mincho", "YuMincho", serif; font-size: 10pt; margin: 2.4mm 0 0.8mm; border-bottom: 1px solid #333; padding-bottom: 0.5mm; }
+p { margin: 0.8mm 0; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #666; padding: 0.5mm 1.6mm; text-align: left; vertical-align: top; font-size: 8.2pt; }
+table.sched { table-layout: fixed; }
+table.sched td:first-child { white-space: nowrap; }
+th { background: #eee; }
+.draft { border: 2px solid #b00; color: #b00; font-weight: bold; padding: 1.2mm 2mm; margin-bottom: 2mm; }
+.small { font-size: 8pt; color: #333; }
+.box { border: 1px solid #333; min-height: 8mm; padding: 1mm 2mm; }
+.right { text-align: right; }
+</style><style>blockquote{border-left:3px solid #999;margin:2mm 0;padding:0 3mm;color:#333}ul{margin:1mm 0;padding-left:5mm}li{margin:0.4mm 0}code{font-family:Consolas,monospace;font-size:8pt}</style></head><body>
+<h1>令和9年度 公立高校 倍率速報データ 年度末パック — データ仕様書</h1>
+<ul><li>提供: My Naishin 運営（契約名義人: 國井）</li><li>この仕様書と同じフォルダの <code>sample-r8-*.csv</code> / <code>.json</code> は、<b>令和8年度の確定値で作った実物</b>です（令和9年度の納品物と同じ形式）。</li></ul>
+<h2>1. これは何か</h2>
+<p>各都道府県の教育委員会が公表する「公立高校入学者選抜の出願状況（学校×学科ごとの募集人員・出願者数・倍率）」を、</p>
+<p><b>公表資料の記載のまま転記して</b>、Excelで開けるCSVと、システム取り込み用のJSONにしたものです。</p>
+<p><b>独自の推計・予測・偏差値・合否判定は一切含みません。</b></p>
+<ul><li>毎年2月に47県のPDFを追って転記していた作業の代わりになります。</li><li>納品は各県の<b>公表後</b>です。<b>どの県が、公表からどれくらいで届くか</b>は「納品予定表」（ONE-PAGER）に県別に書いています。</li></ul>
+<p>  届かない県・許諾が確認できていない県は、最初から見積もりに入れません。</p>
+<h2>2. 収録範囲</h2>
+<ul><li>対象: 各県の公立高校（全日制）の一般入学者選抜の出願状況。定時制・通信制・特別選抜・再募集等は<b>県ごとに収録範囲が異なる</b>ため、</li></ul>
+<p>  納品時に県別の収録範囲（含む/含まない）を同梱の <code>scope.txt</code> に明記します。</p>
+<ul><li>1行 = 1校 × 1学科（県の資料が「くくり募集」「合算」で出している学科は、県の資料の区切りのまま1行）。</li><li>令和8年度のサンプルは、千葉（大規模・188行）・長野（中規模・129行）・秋田（小規模・78行）です。</li></ul>
+<h2>3. 列の定義（CSV=日本語ヘッダ／JSON=英語キー）</h2>
+<table><tr><th>CSV列</th><th>JSONキー</th><th>型</th><th>意味</th></tr><tr><td>県</td><td><code>prefecture</code></td><td>文字列</td><td>都道府県名</td></tr><tr><td>学校コード</td><td><code>schoolCode</code></td><td>文字列/空</td><td>文部科学省「学校コード一覧」の学校コード。<b>学校名が一意に突合できた学校のみ</b>。突合できない学校は空欄（学校名は県の資料の表記のまま）</td></tr><tr><td>学校名</td><td><code>schoolName</code></td><td>文字列</td><td>学校コードが突合できた場合は正式名称、できなかった場合は県の資料の表記</td></tr><tr><td>学科</td><td><code>department</code></td><td>文字列</td><td>県の資料の学科名・コース名の表記のまま</td></tr><tr><td>募集人員</td><td><code>quota</code></td><td>整数</td><td>県の資料の募集人員（募集定員）。県ごとに「定員」の定義が異なる（内部進学・帰国生徒枠の扱い等）ため、<b>県の資料の値をそのまま</b></td></tr><tr><td>出願者数</td><td><code>applicants</code></td><td>整数</td><td>県の資料の出願（志願）者数</td></tr><tr><td>倍率</td><td><code>rate</code></td><td>数値</td><td><b>県が公表した倍率をそのまま転記</b>。こちらで計算し直していません。県が倍率を公表していない場合は空欄（<code>null</code>）</td></tr><tr><td>区分</td><td><code>stage</code></td><td><code>確定</code> / <code>速報</code> / 空</td><td><code>速報</code>=志願（志望）変更<b>前</b>の出願状況／<code>確定</code>=志願（志望）変更<b>後</b>の最終の出願状況。県の資料名から判別できない場合は空欄</td></tr><tr><td>公表日</td><td><code>publishedDate</code></td><td><code>YYYY-MM-DD</code> / 空</td><td>県が資料に記載した公表日。<b>確認できた県のみ</b>。確認できない場合は空欄</td></tr><tr><td>出典URL</td><td><code>sourceUrl</code></td><td>URL</td><td>その行の数値が載っている県教育委員会の公表資料。<b>全行に付きます（1行=1出典）</b></td></tr><tr><td>確認日</td><td><code>checkedDate</code></td><td><code>YYYY-MM-DD</code></td><td>こちらが公表資料と突き合わせた日</td></tr><tr><td>前年度倍率</td><td><code>previousRate</code></td><td>数値/空</td><td>同じ学校・同じ学科の前年度（令和7年度）の県公表倍率。<b>学校名と学科名が一致した場合のみ</b>。一致しない・前年度が無い場合は空欄</td></tr><tr><td>前年度差</td><td><code>rateDelta</code></td><td>数値/空</td><td><code>倍率 − 前年度倍率</code>（小数第2位）。<b>この列だけは公表値どうしの単純な差としてこちらで算出</b>しています。ほかの列は全て県の公表値の転記です</td></tr></table>
+<h2>4. 空欄（null）の意味</h2>
+<ul><li>空欄は「県が公表していない」または「こちらで確認できていない」を意味します。<b>0ではありません。</b></li></ul>
+<p>  こちらで推測して埋めることはしません。</p>
+<ul><li>倍率が空欄の行でも、出願者数と募集人員から倍率を計算して埋めることはしません（県の公表値ではなくなるため）。</li></ul>
+<h2>5. 速報と確定の違い</h2>
+<ul><li><b>速報（志願変更前）</b>: 出願期間の締切後に県が最初に出す出願状況。この後、志願変更（志望変更）で数字が動きます。</li><li><b>確定（志願変更後）</b>: 志願変更の締切後に県が出す最終の出願状況。合格発表前の最終の倍率です（<b>受検者数・合格者数ではありません</b>）。</li><li>本パックの中心は「確定（志願変更後）」です。志願変更前の速報を納品できるかは県によって異なり、<b>納品予定表の「対象資料」の列</b>に県別に書いています。</li></ul>
+<p>  志願変更の有無・回数・呼称は県ごとに異なります（例: 1回の県・2回の県・「志望変更」と呼ぶ県）。</p>
+<ul><li>県が複数回の公表をする場合、<b>公表のたびに別の行</b>（区分・公表日で区別）で納品します。</li></ul>
+<h2>6. 丸め・表記</h2>
+<ul><li>倍率の小数桁数・丸めは<b>県の公表どおり</b>です。こちらで丸め直しません（例: 県が 1.03 と公表していれば 1.03）。</li><li>学科名・学校名は、学校コードが突合できた学校は正式名称、それ以外は県の資料の表記です（略称・旧字体を含みます）。</li></ul>
+<h2>7. 訂正が出たとき</h2>
+<ul><li>県が公表資料を<b>訂正</b>した場合（訂正版の公表）は、訂正版を反映して<b>再納品</b>します。訂正履歴（訂正日・変更前後の値）を同梱します。</li><li><b>当方の転記誤り</b>が見つかった場合は、無償で訂正・再納品します。</li><li>公表資料そのものの誤りは、県の訂正に従います（県が訂正を出すまで、公表どおりの値を納品します）。</li></ul>
+<h2>8. ファイル形式</h2>
+<ul><li><b>CSV</b>: UTF-8（<b>BOM付き</b>）・改行 CRLF・カンマ区切り。Excelでそのまま開いて文字化けしません。値にカンマや改行を含む場合は二重引用符で囲みます。</li><li><b>JSON</b>: UTF-8（BOMなし）。1ファイル=1県。<code>records</code> 配列に1行1オブジェクト。</li><li>ファイル名: <code>&lt;年度&gt;-&lt;県コード&gt;-&lt;区分&gt;-&lt;公表日&gt;.csv</code>（令和9年度の納品時）。サンプルは <code>sample-r8-&lt;県コード&gt;.csv</code>。</li></ul>
+<h2>9. 利用条件</h2>
+<p><code>TERMS.md</code>（利用条件案）を参照してください。</p>
+</body></html>
