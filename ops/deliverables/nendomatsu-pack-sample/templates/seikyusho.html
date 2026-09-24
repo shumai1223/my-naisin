@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>請求書（ひな形）</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+body { font-family: "Yu Gothic", "YuGothic", "Meiryo", sans-serif; font-size: 9pt; line-height: 1.38; color: #111; margin: 0; }
+h1 { font-family: "Yu Mincho", "YuMincho", serif; font-size: 15pt; margin: 0 0 2mm; }
+h2 { font-family: "Yu Mincho", "YuMincho", serif; font-size: 10pt; margin: 2.4mm 0 0.8mm; border-bottom: 1px solid #333; padding-bottom: 0.5mm; }
+p { margin: 0.8mm 0; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #666; padding: 0.5mm 1.6mm; text-align: left; vertical-align: top; font-size: 8.2pt; }
+table.sched { table-layout: fixed; }
+table.sched td:first-child { white-space: nowrap; }
+th { background: #eee; }
+.draft { border: 2px solid #b00; color: #b00; font-weight: bold; padding: 1.2mm 2mm; margin-bottom: 2mm; }
+.small { font-size: 8pt; color: #333; }
+.box { border: 1px solid #333; min-height: 8mm; padding: 1mm 2mm; }
+.right { text-align: right; }
+</style></head><body>
+<div class="draft">価格未確定・送付不可（価格の確定後に `npm run td1:build-kit` で再生成してから使うこと）</div>
+<h1>請求書</h1>
+<table>
+<tr><th style="width:24%">宛名</th><td class="box">（貴社名・部署名）　　　　　　　御中</td></tr>
+<tr><th>発行日</th><td class="box">（　　年　　月　　日）</td></tr>
+<tr><th>書類番号</th><td class="box">（👤が採番）</td></tr>
+<tr><th>件名</th><td>令和9年度 公立高校 倍率速報データ 年度末パック</td></tr>
+</table>
+<h2>明細</h2>
+<table>
+<tr><th>品名</th><th style="width:12%">数量</th><th style="width:36%">金額（税込）</th></tr>
+<tr><td>令和9年度 公立高校 倍率速報データ 年度末パック（令和9年度 県立高校 出願状況 CSV/JSON・納品予定表の県）</td><td>1式</td><td class="right"><b>価格は確定待ち（仮置き ¥240,000〜¥300,000・税込）</b></td></tr>
+</table>
+<p class="small">当方は適格請求書発行事業者ではありません。表示金額はすべて税込です。</p>
+<table style="margin-top:3mm">
+<tr><th>支払期限</th><td>2027年3月31日</td></tr>
+<tr><th>お振込先</th><td class="box">（👤が記入: 金融機関名・支店名・口座種別・口座番号・口座名義）</td></tr>
+</table>
+<h2>発行者</h2>
+<table>
+<tr><th style="width:24%">発行者</th><td>My Naishin 運営（契約名義人: 國井）</td></tr>
+<tr><th>住所</th><td class="box">（👤が記入）</td></tr>
+<tr><th>電話</th><td class="box">（👤が記入）</td></tr>
+<tr><th>連絡先メール</th><td>naishin.dev@gmail.com</td></tr>
+</table>
+
+</body></html>
