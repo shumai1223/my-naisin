@@ -16,7 +16,7 @@ th { background: #eee; }
 .box { border: 1px solid #333; min-height: 8mm; padding: 1mm 2mm; }
 .right { text-align: right; }
 </style></head><body>
-<div class="draft">価格未確定・送付不可（価格の確定後に `npm run td1:build-kit` で再生成してから使うこと）</div>
+
 <h1>見積書</h1>
 <table>
 <tr><th style="width:24%">宛名</th><td class="box">（貴社名・部署名）　　　　　　　御中</td></tr>
@@ -27,7 +27,9 @@ th { background: #eee; }
 <h2>明細</h2>
 <table>
 <tr><th>品名</th><th style="width:12%">数量</th><th style="width:36%">金額（税込）</th></tr>
-<tr><td>令和9年度 公立高校 倍率速報データ 年度末パック（令和9年度 県立高校 出願状況 CSV/JSON・納品予定表の県）</td><td>1式</td><td class="right"><b>価格は確定待ち（仮置き ¥240,000〜¥300,000・税込）</b></td></tr>
+<tr><td>令和9年度 公立高校 倍率速報データ 年度末パック 1県目（県名: <span class="box">　　　　</span>）</td><td>1</td><td class="right">¥55,000</td></tr>
+<tr><td>同 2県目以降（県名: <span class="box">　　　　　　　　</span>）</td><td class="box">　</td><td class="right">¥33,000 × 数量 ＝ <span class="box">　　　　</span></td></tr>
+<tr><th colspan="2" class="right">合計（税込）</th><td class="right box">　　　　</td></tr>
 </table>
 <p class="small">当方は適格請求書発行事業者ではありません。表示金額はすべて税込です。</p>
 <table style="margin-top:3mm">

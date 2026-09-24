@@ -4,9 +4,9 @@
 
 | 連番 | 組織 | 区分 | 窓口 | 窓口の宛先 | スレッドID | 状態 |
 |---|---|---|---|---|---|---|
-| 01 | [株式会社下野新聞社](01-shimotsuke-shimbun.md) | 地方紙 | メール | kyoiku@shimotsuke.co.jp | - | 待機 |
-| 02 | [株式会社北國新聞社](02-hokkoku-shimbun.md) | 地方紙 | メール | koho@hokkoku.co.jp | - | 待機 |
-| 03 | [岐阜新聞社](03-gifu-shimbun.md) | 地方紙 | メール | shuppan@gifu-np.co.jp | - | 待機 |
+| 01 | [株式会社下野新聞社](01-shimotsuke-shimbun.md) | 地方紙 | メール | kyoiku@shimotsuke.co.jp | - | 設置済み draftId r-1598937997881288757（2026-09-24・添付は👤が手で付ける） |
+| 02 | [株式会社北國新聞社](02-hokkoku-shimbun.md) | 地方紙 | メール | koho@hokkoku.co.jp | - | 設置済み draftId r9200230578449305840（2026-09-24・添付は👤が手で付ける） |
+| 03 | [岐阜新聞社](03-gifu-shimbun.md) | 地方紙 | メール | shuppan@gifu-np.co.jp | - | 設置済み draftId r-2210852826878167862（2026-09-24・添付は👤が手で付ける） |
 | 04 | [株式会社ベネッセコーポレーション](04-benesse.md) | 進学情報(商談済み) | メール(返信) | スレッドを引き継ぐ | 19f66046b0df26d4 | 待機 |
 | 05 | [株式会社千葉日報社](05-chiba-nippo.md) | 地方紙 | フォーム | https://www.chibanippo.co.jp/inquiry | - | 待機 |
 | 06 | [株式会社読売アルスA（よみうり進学メディア）](06-yomiuri-arsa.md) | 進学情報誌 | フォーム | https://yomiarsa.co.jp/contact/ | - | 待機 |
@@ -17,3 +17,8 @@
 | 11 | [株式会社琉球新報社](11-ryukyu-shimpo.md) | 地方紙(既接触) | フォーム | https://ryukyushimpo.jp/news/contact_page.html | - | 待機 |
 
 合計 11 社（メール 4／フォーム 7）。
+
+
+**2026-09-24 対話セッション**: 価格確定（1県¥55,000・2県目以降¥33,000・税込）→ 置換 → メール窓口の新規3社（01〜03）に Gmail下書きを設置。
+**04 ベネッセは商談スレッドへの返信のため、👤が中身を確認するまで設置しない。**
+⚠️ Gmail MCPは添付に対応していない。送る前に ONE-PAGER.pdf・SPEC.pdf・TERMS.pdf・sample-r8-*.csv(3本) を👤が手で添付すること。

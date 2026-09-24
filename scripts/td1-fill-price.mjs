@@ -37,7 +37,13 @@ if (!confirmed) {
   process.exit(0);
 }
 
-const label = `¥${pricing.confirmedYenTaxIncluded.toLocaleString('en-US')}（税込）`;
+// ⚠️ src/lib/nendomatsu-pack.ts の confirmedPriceLabel() と同じ文字列を作る（テストで一致を固定）。
+const yen = (n) => `¥${n.toLocaleString('en-US')}`;
+const add = pricing.additionalPrefectureYenTaxIncluded;
+const first = `${yen(pricing.confirmedYenTaxIncluded)}（税込）`;
+const label = Number.isInteger(add) && add > 0
+  ? `1県 ${first}／同時にご注文の2県目以降は1県あたり ${yen(add)}（税込）`
+  : first;
 const SKIP = new Set(['README.md', 'INDEX.md']);
 const files = fs.readdirSync(draftsDir).filter((f) => f.endsWith('.md') && !SKIP.has(f)).sort();
 

@@ -82,7 +82,7 @@ function offerBlock(e: Entry, withAttachments: boolean): string {
     `・対象県: ${allNames}（県教育委員会から出典明記での掲載許諾を得ている県のうち、当方の体制で反映できる県。これ以外の県は許諾が確認でき次第ご案内します）`,
     `・貴社が令和8年度に掲載されていた県（${relNames(e)}）は、対象県に含まれています`,
     `・納品の目安: ${timing(e)}（営業日ベースの目安です。県の公表日・公表方法が変わった場合は速やかにご連絡します）`,
-    `・価格: {{PRICE}}（1式・買い切り・請求書払い・${NENDOMATSU_PACK.paymentDeadline}まで）。${NENDOMATSU_PACK.invoiceNotice}`,
+    `・価格: {{PRICE}}（買い切り・請求書払い・${NENDOMATSU_PACK.paymentDeadline}まで）。${NENDOMATSU_PACK.invoiceNotice}`,
   ];
   if (withAttachments) lines.push(`・添付: 決裁用の1枚資料／令和8年度の確定値で作ったサンプル（千葉・長野・秋田）／仕様書／利用条件（案）`);
   else lines.push(`・資料: 決裁用の1枚資料・令和8年度の確定値で作ったサンプル・仕様書・利用条件（案）は、ご返信いただければ添付してお送りします`);

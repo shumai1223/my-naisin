@@ -34,6 +34,8 @@ export interface NendomatsuPricing {
   status: PriceStatus;
   provisionalRangeYenTaxIncluded: [number, number];
   confirmedYenTaxIncluded: number | null;
+  /** 同時注文の2県目以降・1県あたりの価格（税込）。未設定なら1式の単一価格として扱う。 */
+  additionalPrefectureYenTaxIncluded?: number | null;
 }
 
 const PRICING: NendomatsuPricing = pricing as unknown as NendomatsuPricing;
@@ -49,7 +51,21 @@ export function isPriceConfirmed(p: NendomatsuPricing = PRICING): boolean {
 
 /** 確定価格の表示文字列(税込)。未確定なら null（メール下書きへは絶対に差し込まない）。 */
 export function confirmedPriceLabel(p: NendomatsuPricing = PRICING): string | null {
-  return isPriceConfirmed(p) ? `${formatYen(p.confirmedYenTaxIncluded as number)}（税込）` : null;
+  if (!isPriceConfirmed(p)) return null;
+  const first = `${formatYen(p.confirmedYenTaxIncluded as number)}（税込）`;
+  const add = p.additionalPrefectureYenTaxIncluded;
+  if (typeof add === 'number' && Number.isInteger(add) && add > 0) {
+    return `1県 ${first}／同時にご注文の2県目以降は1県あたり ${formatYen(add)}（税込）`;
+  }
+  return first;
+}
+
+/** n県を同時に注文したときの合計（税込）。価格未確定なら null。 */
+export function totalPriceForPrefectures(n: number, p: NendomatsuPricing = PRICING): number | null {
+  if (!isPriceConfirmed(p) || !Number.isInteger(n) || n < 1) return null;
+  const add = p.additionalPrefectureYenTaxIncluded;
+  const per = typeof add === 'number' && Number.isInteger(add) && add > 0 ? add : (p.confirmedYenTaxIncluded as number);
+  return (p.confirmedYenTaxIncluded as number) + per * (n - 1);
 }
 
 /** 内部資料・非公開ページ用の表示。未確定のときは「確定待ち」を明示して仮の幅を出す。 */

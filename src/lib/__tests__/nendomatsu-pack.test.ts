@@ -14,17 +14,33 @@ import {
   getDeliverablePrefectures,
   getPricing,
   isPriceConfirmed,
+  totalPriceForPrefectures,
   type NendomatsuPricing,
 } from '../nendomatsu-pack';
 
 const pending: NendomatsuPricing = { status: 'pending', provisionalRangeYenTaxIncluded: [240000, 300000], confirmedYenTaxIncluded: null };
 const confirmed: NendomatsuPricing = { status: 'confirmed', provisionalRangeYenTaxIncluded: [240000, 300000], confirmedYenTaxIncluded: 250000 };
+const tiered: NendomatsuPricing = { ...confirmed, confirmedYenTaxIncluded: 55000, additionalPrefectureYenTaxIncluded: 33000 };
 
 describe('価格の単一の出所(T-TD1)', () => {
-  it('リポジトリの価格定数は現時点で未確定(👤の確定待ち・C7ゲート)', () => {
-    expect(getPricing().status).toBe('pending');
-    expect(getPricing().confirmedYenTaxIncluded).toBeNull();
-    expect(isPriceConfirmed()).toBe(false);
+  it('リポジトリの価格定数は👤確定済み(2026-09-24): 1県¥55,000・2県目以降¥33,000(税込)', () => {
+    expect(getPricing().status).toBe('confirmed');
+    expect(getPricing().confirmedYenTaxIncluded).toBe(55000);
+    expect(getPricing().additionalPrefectureYenTaxIncluded).toBe(33000);
+    expect(isPriceConfirmed()).toBe(true);
+  });
+
+  it('1県目と2県目以降の価格を1つのラベルで出す', () => {
+    expect(confirmedPriceLabel(tiered)).toBe('1県 ¥55,000（税込）／同時にご注文の2県目以降は1県あたり ¥33,000（税込）');
+  });
+
+  it('n県の合計: 1県55,000／2県88,000／9県319,000・未確定や不正なnはnull', () => {
+    expect(totalPriceForPrefectures(1, tiered)).toBe(55000);
+    expect(totalPriceForPrefectures(2, tiered)).toBe(88000);
+    expect(totalPriceForPrefectures(9, tiered)).toBe(319000);
+    expect(totalPriceForPrefectures(0, tiered)).toBeNull();
+    expect(totalPriceForPrefectures(2, pending)).toBeNull();
+    expect(totalPriceForPrefectures(2, confirmed)).toBe(500000); // 追加単価が無ければ同額×n
   });
 
   it('未確定なら確定価格ラベルはnull・表示には「確定待ち」が明示される', () => {
@@ -106,6 +122,12 @@ describe('scripts/td1-fill-price.mjs（実CLIを一時ディレクトリで実�
     expect(fs.readFileSync(path.join(dd, '01-a.md'), 'utf8')).toBe('価格 ¥250,000（税込）');
     expect(fs.readFileSync(path.join(dd, '02-b.md'), 'utf8')).toBe('¥250,000（税込） と ¥250,000（税込）');
     expect(fs.readFileSync(path.join(dd, 'README.md'), 'utf8')).toBe('{{PRICE}}はここに書く'); // 手順書は対象外
+  });
+
+  it('段階価格: スクリプトのラベルはライブラリの confirmedPriceLabel() と完全一致する', () => {
+    const { dd, pj } = setup(tiered, { '01-a.md': '価格: {{PRICE}}' });
+    expect(run(dd, pj).code).toBe(0);
+    expect(fs.readFileSync(path.join(dd, '01-a.md'), 'utf8')).toBe(`価格: ${confirmedPriceLabel(tiered)}`);
   });
 
   it('置換漏れ({{PRICE}}以外の差し込み口)が1つでもあれば、1ファイルも書き換えず止まる(exit 1)', () => {

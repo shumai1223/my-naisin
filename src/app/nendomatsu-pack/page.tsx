@@ -100,7 +100,7 @@ export default function NendomatsuPackPage() {
           <dl className="text-sm text-slate-700">
             <div className="flex gap-3 border-b border-slate-100 py-2">
               <dt className="w-24 shrink-0 font-medium text-slate-900">価格</dt>
-              <dd data-testid="price-label">{displayPriceLabel()}（1式・買い切り）</dd>
+              <dd data-testid="price-label">{displayPriceLabel()}（買い切り）</dd>
             </div>
             <div className="flex gap-3 border-b border-slate-100 py-2">
               <dt className="w-24 shrink-0 font-medium text-slate-900">お支払い</dt>

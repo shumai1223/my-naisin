@@ -19,6 +19,8 @@ import {
   getDeliverablePrefectures,
   isPriceConfirmed,
   confirmedPriceLabel,
+  getPricing,
+  formatYen,
 } from '../src/lib/nendomatsu-pack';
 import { finalityOf, r9Baseline } from '../src/lib/nendomatsu-pack-schedule';
 import { mdToHtml } from '../src/lib/nendomatsu-pack-md';
@@ -96,7 +98,7 @@ ${rows}
 
 <h2>4. 価格・お支払い</h2>
 <table>
-<tr><th style="width:26%">価格</th><td>${priceCell}（1式・買い切り・表示は税込）</td></tr>
+<tr><th style="width:26%">価格</th><td>${priceCell}（買い切り・表示は税込）</td></tr>
 <tr><th>お支払い</th><td>請求書払い・支払期限 ${esc(NENDOMATSU_PACK.paymentDeadline)}</td></tr>
 <tr><th>インボイス</th><td>${esc(NENDOMATSU_PACK.invoiceNotice)}</td></tr>
 </table>
@@ -117,6 +119,13 @@ ${rows}
 // ---- 見積書・請求書・納品書 ----
 function docTemplate(kind: '見積書' | '請求書' | '納品書'): string {
   const priceLine = isPriceConfirmed() ? esc(confirmedPriceLabel()!) : `<b>${esc(displayPriceLabel())}</b>`;
+  // 2026-09-24 👤確定: 1県目と2県目以降で単価が違うため、明細は県ごとの2行＋合計（県名・数量は👤が記入）。
+  const pr = getPricing();
+  const detailRows = isPriceConfirmed() && pr.additionalPrefectureYenTaxIncluded
+    ? `<tr><td>${esc(NENDOMATSU_PACK.productName)} 1県目（県名: <span class="box">　　　　</span>）</td><td>1</td><td class="right">${esc(formatYen(pr.confirmedYenTaxIncluded as number))}</td></tr>
+<tr><td>同 2県目以降（県名: <span class="box">　　　　　　　　</span>）</td><td class="box">　</td><td class="right">${esc(formatYen(pr.additionalPrefectureYenTaxIncluded))} × 数量 ＝ <span class="box">　　　　</span></td></tr>
+<tr><th colspan="2" class="right">合計（税込）</th><td class="right box">　　　　</td></tr>`
+    : `<tr><td>${esc(NENDOMATSU_PACK.productName)}（令和9年度 県立高校 出願状況 CSV/JSON・納品予定表の県）</td><td>1式</td><td class="right">${priceLine}</td></tr>`;
   const dateLabel = kind === '納品書' ? '納品日' : '発行日';
   const extra =
     kind === '請求書'
@@ -139,7 +148,7 @@ function docTemplate(kind: '見積書' | '請求書' | '納品書'): string {
 <h2>明細</h2>
 <table>
 <tr><th>品名</th><th style="width:12%">数量</th><th style="width:36%">金額（税込）</th></tr>
-<tr><td>${esc(NENDOMATSU_PACK.productName)}（令和9年度 県立高校 出願状況 CSV/JSON・納品予定表の県）</td><td>1式</td><td class="right">${priceLine}</td></tr>
+${detailRows}
 </table>
 <p class="small">${esc(NENDOMATSU_PACK.invoiceNotice)}</p>
 <table style="margin-top:3mm">
