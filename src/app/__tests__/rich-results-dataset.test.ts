@@ -40,6 +40,7 @@ const DATASET_EXEMPT_ROUTES: Record<string, string> = {
   '/partner-demo': 'AA-2：noindex・旗付きUI（プレースホルダ表示の内部確認用デモでデータセットの提供ではない）',
   '/mitsumori': '2026-08-13：noindex・見積書自動発行の内部ツール（入力フォームでデータセットの提供ではない）',
   '/interim-bulletin-preview': 'Y-11：noindex・旗付きUI（サンプルデータの表示イメージ確認用でDatasetSchema対象のデータセット配布ではない）',
+  '/nendomatsu-pack': 'T-TD1：noindex・旗付きUI（商品説明ページでDatasetSchema対象のデータセット配布ではない）',
   '/ask': '決定論Q&Aツール（単発応答でありデータセットの提供ではない）',
   '/blog': '記事一覧ページ（データセットの提供なし）',
   '/blog/tag/[tag]': 'タグ別記事一覧ページ（データセットの提供なし）',

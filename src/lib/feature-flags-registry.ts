@@ -12,6 +12,7 @@ import { isAdvisorEnabled } from '@/lib/advisor/flag';
 import { isJukuSaasEnabled } from '@/lib/juku-saas/flag';
 import { isPartnerDemoEnabled } from '@/lib/partner-demo/flag';
 import { isInterimBulletinPreviewEnabled } from '@/lib/interim-bulletin/flag';
+import { isNendomatsuPackEnabled } from '@/lib/nendomatsu-pack-flag';
 import { isAdSlotEnabled } from '@/components/AdSlot';
 
 export interface FeatureFlagEntry {
@@ -31,6 +32,11 @@ export const FEATURE_FLAGS: FeatureFlagEntry[] = [
     name: 'interim-bulletin-preview（Y-11）',
     envVar: 'NEXT_PUBLIC_INTERIM_BULLETIN_ENABLED',
     check: isInterimBulletinPreviewEnabled,
+  },
+  {
+    name: 'nendomatsu-pack（T-TD1）',
+    envVar: 'NEXT_PUBLIC_NENDOMATSU_PACK_ENABLED',
+    check: isNendomatsuPackEnabled,
   },
   {
     name: 'adsense',

@@ -43,6 +43,7 @@ const HOWTO_EXEMPT_ROUTES: Record<string, string> = {
   '/embed/demo': 'T-C7：noindex・埋め込みデモページ（統合イメージの提示で手順の解説ではない）',
   '/mitsumori': '2026-08-13：noindex・見積書自動発行の内部ツール（社名入力フォーム＋PDF印刷で手順コンテンツではない）',
   '/interim-bulletin-preview': 'Y-11：noindex・旗付きUI（サンプルデータのテーブル表示で手順コンテンツではない）',
+  '/nendomatsu-pack': 'T-TD1：noindex・旗付きUI（商品説明ページで手順コンテンツではない）',
   '/blog': '記事一覧ページ（一覧のみで手順コンテンツなし）',
   '/blog/tag/[tag]': 'タグ別記事一覧ページ（一覧のみで手順コンテンツなし）',
   '/blog/[slug]': '個別記事（記事ごとに内容が異なり一律の手順定義は不可。BlogPostingSchemaで対応）',
