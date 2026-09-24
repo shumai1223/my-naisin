@@ -1,27 +1,34 @@
-# 留守番サマリ（👤 不在 2026-09-09〜09-23）
+# 10月以降の状態（引き継ぎサマリ）
 
-**loop はイテレーションの終わりにこのファイルを上書きすること（1日1回以上）。15行以内に収める。**
-**「順調です」とだけ書かない。👤が知りたいのは残り時間と払底日。数字で書く。**
+**2026-10-01から、loopは常駐しない（Claude Max → Pro）。作業は👤がProセッションを開いた時だけ進む。**
+旧「留守番サマリ（9/9〜9/23の不在期間用）」はこの内容に置き換えた。最終更新 2026-09-24。
 
 ---
 
-最終更新              2026-09-18 20:03
-いまやっていること     9/15に👤指示でT-Y14(学校・学科別選抜方法DB)とT-Y15(学区DB)を新規投入。
-                      T-Y15は47/47県で完全達成(以後は保守のみ)。T-Y14はstructured確定19県
-                      全てに着手済み・現在は各県の拡充フェーズ(gifu/okayama/hiroshima/
-                      tokushima/fukushima/aomori等)。並行でT-Y13(就学支援金上乗せDB)も
-                      31県まで進行中。
-今日やったこと(9/18分) T-Y15を47/47県で完全達成。T-Y14はfukushima/tokyo/hokkaido/shizuoka/
-                      hiroshima/yamaguchi/tokushima等を新規実装+gifu/okayama等を拡充
-                      (累計レコード数は各県数十〜数百件規模)。T-Y13はshizuoka/niigata/
-                      toyama/yamagata/fukushima/kagawa/nagano/wakayamaを追加し31県に到達。
-                      全てtsc実exit0・jestフルスイートgreenを都度確認・6コミットをまとめて
-                      push済(89705d2まで)。
-次にやること           T-Y14残り県拡充(gifu頁3-4/okayama頁3残り+頁4-7/aomori残り2地区/
-                      hiroshima頁4-8/tokushima頁1-7)、またはT-Y13未着手10県
-                      (aomori/gifu/shimane/tokushima/ehime/kochi/kumamoto/miyazaki/
-                      kagoshima/okinawa)を継続。材料は当面枯渇しない見込み。
-払底の見込み           当面なし(T-Y14/T-Y13とも数週間分の一次資料調査作業が残っている)。
-詰まっていること        T-S13A A-3(有償ティア設定)のみ価格判断待ちで凍結中(9/16質問ノート記載)。
-👤の判断が要るもの      T-S13A A-3の価格設定方法(a:proに含める/b:scaleへ個別価格)のみ。
-                      他は無し(Cloudflare請求対策としてpushは2-3日に1回のバッチ運用に変更済み)
+## 建設フェーズは終わった（新しい大規模クラスタは作らない）
+
+- 完結: T-P1（通信制拡張）・T-Y14（学校別選抜方法DB）・T-TD1（年度末パック売り込み一式）・T-SAGA1（佐賀の県共通配点の取り下げ）・T-AD1（auditHide残骸の掃除）。
+- 中途半端に残したタスクは無い。再開が要るものは下の「毎週」「日付が決まっているもの」に書いた。
+
+## 毎週やること（Proセッションを開いた週に1回）
+
+- `node --use-system-ca scripts/w9-weighted-rank.mjs`（GSCクリック上位20クエリの加重順位）。前週比+0.5位以上の悪化は質問ノート（`memory/loop-question-note.md`）末尾へ「いつ・どのクエリが・何位から何位へ」だけ書く。
+- W-8展開後の追跡（〜10月下旬）: 23県コホートのクリック増減と「高校 倍率」系クエリの表示数を、`ops/baselines/w8-aichi-judgment-2026-09-24.mjs` の窓だけ変えて再実行。手順と根拠は `ops/baselines/gsc-review-2026-09-24.md`。悪化していたら短縮形併記（`shortenSchoolName()`）を戻す判断を👤に上げる。
+- Gmail: `in:inbox newer_than:7d -category:promotions` で件名まで読む（B2B返信・AdSense・旺文社）。
+
+## 日付が決まっているもの
+
+- **2月: 年度末パック（令和9年度 倍率速報）の納品。** `ops/runbooks/nendomatsu-pack-february.md` に手順を全部書いた。納品対象は9県（秋田・茨城・栃木・千葉・石川・長野・岐阜・香川・沖縄）。1県目で所要時間を測って書き戻す。
+- 11/15〜12/25: 保護者窓（保護者向け導線の活きた窓）。1〜2月: 冬の収穫期。
+
+## 👤の判断・作業待ち
+
+- AdSense: **承認済み（09-24）。収益の受け取りには本人確認（身分証）が必要**。
+- T-TD1: ベネッセ（04）の確認・フォーム7社の送信・Gmail下書き3社は設置済み（`ops/deliverables/nendomatsu-pack-sample/`）。
+- push: 1日1回まで（`ops/LOOP_CONTRACT.md` 冒頭）。未pushのローカルcommitが30件超あるのは正常。開いた日に1回で出し切ってよい。
+- `ops/baselines/` 配下のuntracked（約27件・約14MB・主に `yamagata-r9/sch` と `tokyo-r9/x`）は過去のR9転記作業の使い捨て残骸で、内容は各県のcommit済みデータに反映済み。**削除/gitignoreは👤が決める**（loopは消さない）。
+
+## 触ってはいけないもの
+
+- `auditHide` に類する「審査用に何かを隠す」仕組みは作らない（2026-07-04に保護者リードCTAを全非表示にした前科）。
+- 環境変数（機能フラグ）の変更はloop単独禁止。価格・送信・下書き設置は👤の指示があるまで動かさない。
