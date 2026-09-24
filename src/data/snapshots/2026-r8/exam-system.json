@@ -1434,21 +1434,7 @@
       "actualMaxScore": null,
       "supports10PointScale": false,
       "variantCount": 0,
-      "reverseCalc": {
-        "totalMaxScore": 385,
-        "examMaxScore": 250,
-        "defaultRatio": {
-          "naishin": 35,
-          "exam": 65
-        },
-        "calcType": "standard",
-        "naishinMultiplier": null,
-        "kValue": null,
-        "sValueCoefficients": null,
-        "osakaTypeCount": null,
-        "hasTokyoSettings": false,
-        "hasKanagawaSettings": false
-      },
+      "reverseCalc": null,
       "sourceUrl": "https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html",
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/exam/41/naishin/",
       "sourceTitle": "佐賀県 県立高等学校入学者選抜実施要項",

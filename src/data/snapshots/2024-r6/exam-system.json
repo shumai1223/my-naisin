@@ -1630,27 +1630,13 @@
       "actualMaxScore": null,
       "supports10PointScale": false,
       "variantCount": 0,
-      "reverseCalc": {
-        "totalMaxScore": 385,
-        "examMaxScore": 250,
-        "defaultRatio": {
-          "naishin": 35,
-          "exam": 65
-        },
-        "calcType": "standard",
-        "naishinMultiplier": null,
-        "kValue": null,
-        "sValueCoefficients": null,
-        "osakaTypeCount": null,
-        "hasTokyoSettings": false,
-        "hasKanagawaSettings": false
-      },
+      "reverseCalc": null,
       "sourceUrl": "https://www.pref.saga.lg.jp/kyouiku/kiji00398379/index.html",
       "sourceUrl2": "https://www.edu-netz.com/admission-information2024/saga-info-r6",
       "sourceTitle": "佐賀県教育委員会「令和6年度佐賀県立高等学校入学者選抜実施要項についてお知らせします」(現行URLは404・archive.org CDXにも本ページ・配下PDFとも一切のクロール実績なしで未アーカイブと確定)",
       "lastVerified": "2026-09-15",
       "pdfHash": null,
-      "diffFromCurrentYear": "【caveatあり・一次ソース未取得・pdfHashなし】2026-09-15にkiji00398379(令和6年度実施要項のお知らせページ)を発見したが現行ライブは404。archive.org availability API・CDX APIとも本ページのクロール実績が0件で、Wayback経由でも本体PDFへ到達不能と確定した(令和7年度エントリで報告済みのarchive.org不安定とは別に、そもそも一度もクロールされていない可能性が高い)。一次資料が物理的に入手不能なためpdfHashはnull(未収集)のまま記録する。代わりに独立した第三者塾サイト2件(edu-netz.com「admission-information2024/saga-info-r6」・WebSearch要約経由の別サイト)が揃って「中1・中2・中3各45点(9教科5段階評定)・合計135点満点・学年間傾斜なし・学力検査250点満点」と一致して説明しており、これは令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・examMaxScore=250と完全に一致する(変更なしと判断)。ただし一次資料未確認のため確度は令和7年度エントリ(pdfHashあり)より一段低い。次回重要な用途に使う場合は改めて一次ソースの再探索(教委への直接照会等)を検討すること"
+      "diffFromCurrentYear": "【caveatあり・一次ソース未取得・pdfHashなし】2026-09-15にkiji00398379(令和6年度実施要項のお知らせページ)を発見したが現行ライブは404。archive.org availability API・CDX APIとも本ページのクロール実績が0件で、Wayback経由でも本体PDFへ到達不能と確定した(令和7年度エントリで報告済みのarchive.org不安定とは別に、そもそも一度もクロールされていない可能性が高い)。一次資料が物理的に入手不能なためpdfHashはnull(未収集)のまま記録する。代わりに独立した第三者塾サイト2件(edu-netz.com「admission-information2024/saga-info-r6」・WebSearch要約経由の別サイト)が揃って「中1・中2・中3各45点(9教科5段階評定)・合計135点満点・学年間傾斜なし・学力検査250点満点」と一致して説明しており、これは令和7・8年度分のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・examMaxScore=250と完全に一致する(変更なしと判断)。ただし一次資料未確認のため確度は令和7年度エントリ(pdfHashあり)より一段低い。次回重要な用途に使う場合は改めて一次ソースの再探索(教委への直接照会等)を検討すること【2026-09-24訂正(T-SAGA1・当方データの訂正であり制度変更ではない)】本エントリのreverseCalc(総合385点・学力250・内申35%)は取り下げた。令和5年度実施要項(付表4-1〜4-5)で調査書の点数配分が学校ごとに異なる(例: 鳥栖180・三養基135・神埼70・佐賀東90・佐賀西75)と確認され、県共通の配点は存在しないため。根拠は第三者の塾サイトのみで一次資料の裏付けが無かった。評定合計135点(9教科×5段階×3学年)は残す。"
     }
   ]
 }

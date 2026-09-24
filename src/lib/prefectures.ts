@@ -992,21 +992,20 @@ export const PREFECTURES: PrefectureConfig[] = [
     coreMultiplier: 1,
     practicalMultiplier: 1,
     maxScore: 135,
-    description: '中1〜中3の9教科×5段階（135点満点）',
+    description: '中1〜中3の9教科×5段階（評定の合計135点）。入試での調査書の配点は学校ごとに異なる（実施要項の付表で学校別に公表）',
+    // ⚠️2026-09-24(T-SAGA1・👤裁定)取り下げ: 従来の総合385点・内申35%の逆算(reverseCalc)は
+    // 一次資料の裏付けが無く、第三者の塾サイト2件(うち1件はsourceUrl2のベネッセ)が根拠だった。
+    // 令和5年度実施要項(付表4-1〜4-5)で調査書の点数が学校ごとに違うこと(鳥栖180・三養基135・神埼70・
+    // 佐賀東90・佐賀西75等)を確認したため、県共通の配点は存在しないとしてreverseCalcを持たせない
+    // (滋賀と同じ型)。評定合計135点(9教科×5段階×3学年・学年均等)は算数として正しいので残す。
+    // sourceUrl2(ベネッセ)は評定合計135点の相互検証(二次)としてのみ保持する。逆算(385点・35%)の根拠ではない。
+    // lastVerified/sourceTitleはsource-history.tsの起点エントリと連動するため据え置き、
+    // 2026-09-24の訂正はsource-history.tsのMANUAL_HISTORYに記録した。
     sourceUrl: 'https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html',
     sourceUrl2: 'https://czemi.benesse.ne.jp/open/nyushi/exam/41/naishin/',
     sourceTitle: '佐賀県 県立高等学校入学者選抜実施要項',
     lastVerified: '2026-07-16',
-    fiscalYear: '2026',
-    // ⚠️2026-08-21修正: 他県と同じ汎用値(500点満点)のままだったが、佐賀県の学力検査は
-    // 実際には5教科×50点＝250点満点（500点満点ではない、一般選抜の標準）。
-    // 内申135+学力250=385点満点・内申比率は約35%（Web検索で確認）。
-    reverseCalc: {
-      totalMaxScore: 385,
-      examMaxScore: 250,
-      defaultRatio: { naishin: 35, exam: 65 },
-      calcType: 'standard'
-    }
+    fiscalYear: '2026'
   },
   {
     code: 'nagasaki',

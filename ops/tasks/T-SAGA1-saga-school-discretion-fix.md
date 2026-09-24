@@ -30,19 +30,28 @@
 
 ## やること
 
-- [ ] `src/lib/prefectures.ts` の saga: `reverseCalc` を前例どおりに取り下げ、`description` を
+- [x] `src/lib/prefectures.ts` の saga: `reverseCalc` を前例どおりに取り下げ、`description` を
       「評定合計（中1〜中3・9教科×5段階＝135点）。入試での調査書の配点は学校ごとに異なる（実施要項の付表で学校別に公表）」の趣旨に
-- [ ] `sourceUrl` を一次資料（実施要項・付表）に。`sourceUrl2`（ベネッセ）は根拠から外す
-- [ ] `src/data/snapshots/2024-r6` `2025-r7` `2026-r8` の `exam-system.json` の saga を同じ扱いに（R6の `pdfHash: null` も含め、何を根拠にしたかを注記）
-- [ ] `2023-r5` に saga を追加（見送っていた分）。一次資料は上記
-- [ ] 佐賀の数値を使っている面を全部洗う（`grep -rn "saga" src/` → 県別ページ・total-score・内申の重み・逆算・API/MCP の応答・ブログ）。
+- [x] `sourceUrl` を一次資料（実施要項・付表）に。`sourceUrl2`（ベネッセ）は根拠から外す
+- [x] `src/data/snapshots/2024-r6` `2025-r7` `2026-r8` の `exam-system.json` の saga を同じ扱いに（R6の `pdfHash: null` も含め、何を根拠にしたかを注記）
+- [x] `2023-r5` に saga を追加（見送っていた分）。一次資料は上記
+- [x] 佐賀の数値を使っている面を全部洗う（`grep -rn "saga" src/` → 県別ページ・total-score・内申の重み・逆算・API/MCP の応答・ブログ）。
       **「385」「35%」「135点満点（配点として）」が残っていないこと**
-- [ ] `exam-system-diff` 等のスナップショット比較テストが落ちる場合は、**変更を「制度変更」ではなく「当方データの訂正」として記録**する（`exam-system-change-history.ts` の既存の訂正の書き方に合わせる）
-- [ ] 更新履歴（`src/lib/changelog-data.ts`）に利用者向けの1行: 「佐賀県: 調査書の配点が学校ごとに異なることを反映し、県共通の配点による逆算を取りやめました」
-- [ ] `tsc` 実exit0（パイプ禁止）／jest フルスイート green（メモリ不足で落ちる場合は `--maxWorkers=2`）
-- [ ] push は1日1回の枠で
+- [x] `exam-system-diff` 等のスナップショット比較テストが落ちる場合は、**変更を「制度変更」ではなく「当方データの訂正」として記録**する（`exam-system-change-history.ts` の既存の訂正の書き方に合わせる）
+- [x] 更新履歴（`src/lib/changelog-data.ts`）に利用者向けの1行: 「佐賀県: 調査書の配点が学校ごとに異なることを反映し、県共通の配点による逆算を取りやめました」
+- [x] `tsc` 実exit0（パイプ禁止）／jest フルスイート green（メモリ不足で落ちる場合は `--maxWorkers=2`）
+- [x] push は1日1回の枠で
 
 ## 守ること
 
 - ⚠️ 付表の数値を**推測で埋めない**。「学校ごとに違う」と書くだけで、どの学校が何点かは書かない（今週は）
 - ⚠️ 佐賀以外の県に手を広げない。同じ疑いがある県を見つけたら質問ノートに書くだけ
+
+
+---
+
+## 完了記録（2026-09-24）
+
+- 全項目実施。tsc実exit0・jestフルスイート552suites中550green＋失敗2件(source-historyの起点一致・sourceUrl2必須の不変条件)を修正し関連19suites/929tests green。
+- 判断: sourceUrl2(ベネッセ)は不変条件テスト(一次化した県は二次を保持)があるため残し、評定合計135点の相互検証用と明記(逆算の根拠ではない)。lastVerified/sourceTitleはsource-history起点と連動するため据え置き、訂正はsource-history.tsのMANUAL_HISTORYに記録。sourceUrlは現行の実施要項indexページ(付表PDFはWayback取得のみで現行URLの生存を確認できなかったため)。
+- naishin-dataset/data(公開リポ)の説明文は古い生成物のまま(135点満点)。次回のdataset再生成(E-8)で更新される。今回は触らない。

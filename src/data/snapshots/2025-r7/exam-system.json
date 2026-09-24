@@ -1387,27 +1387,13 @@
       "actualMaxScore": null,
       "supports10PointScale": false,
       "variantCount": 0,
-      "reverseCalc": {
-        "totalMaxScore": 385,
-        "examMaxScore": 250,
-        "defaultRatio": {
-          "naishin": 35,
-          "exam": 65
-        },
-        "calcType": "standard",
-        "naishinMultiplier": null,
-        "kValue": null,
-        "sValueCoefficients": null,
-        "osakaTypeCount": null,
-        "hasTokyoSettings": false,
-        "hasKanagawaSettings": false
-      },
+      "reverseCalc": null,
       "sourceUrl": "https://www.pref.saga.lg.jp/kyouiku/kiji003109678/3_109678_330206_up_ar81mpcp.pdf",
       "sourceUrl2": "https://czemi.benesse.ne.jp/open/nyushi/article/41/feature/0041.html",
       "sourceTitle": "佐賀県教育委員会「令和7年度佐賀県立高等学校入学者選抜における評価基準の概要」(記事ページkiji003109678は既に削除済み・第三者サイト複数の要約で裏取り)",
       "lastVerified": "2026-08-31",
       "pdfHash": "13a63b99ba9c03fc8486792c4baccce16e97914ad6b86f5b392fd1372c852888",
-      "diffFromCurrentYear": "【caveatあり・直接一次ソース未取得】2026-08-31に令和7年度専用記事ページ(kiji003109678「令和7年度佐賀県立高等学校入学者選抜における評価基準の概要についてお知らせします」)およびそのPDF本体URLの両方にcurl直叩きでアクセスしたが、いずれも記事削除後の404相当エラーページが返った(令和8年度版に更新されR7版は公開終了と推測)。Internet Archiveも本日複数回試行したが429(レート制限)/一時オフラインで参照不能だった。このため一次ソースでの直接検証はできなかったが、Benesse(czemi)を含む複数の独立した第三者塾サイトが揃って『佐賀県の内申点は1〜3年生それぞれで9教科5段階評定45点ずつ、合計135点満点(学年間傾斜なし)』と一致して説明しており、これは令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・practicalMultiplier=1と完全に一致する。学力検査250点満点も同様に一致。新制度変更の報道等は確認されなかったため変更なしと判断したが、次回このデータを重要な用途に使う場合は一次ソース(kiji番号は年度更新のたびに変わるため要再検索)での再確認が望ましい",
+      "diffFromCurrentYear": "【caveatあり・直接一次ソース未取得】2026-08-31に令和7年度専用記事ページ(kiji003109678「令和7年度佐賀県立高等学校入学者選抜における評価基準の概要についてお知らせします」)およびそのPDF本体URLの両方にcurl直叩きでアクセスしたが、いずれも記事削除後の404相当エラーページが返った(令和8年度版に更新されR7版は公開終了と推測)。Internet Archiveも本日複数回試行したが429(レート制限)/一時オフラインで参照不能だった。このため一次ソースでの直接検証はできなかったが、Benesse(czemi)を含む複数の独立した第三者塾サイトが揃って『佐賀県の内申点は1〜3年生それぞれで9教科5段階評定45点ずつ、合計135点満点(学年間傾斜なし)』と一致して説明しており、これは令和8年度分(prefectures.ts)のgradeMultipliers{1:1,2:1,3:1}・maxScore=135・practicalMultiplier=1と完全に一致する。学力検査250点満点も同様に一致。新制度変更の報道等は確認されなかったため変更なしと判断したが、次回このデータを重要な用途に使う場合は一次ソース(kiji番号は年度更新のたびに変わるため要再検索)での再確認が望ましい【2026-09-24訂正(T-SAGA1・当方データの訂正であり制度変更ではない)】本エントリのreverseCalc(総合385点・学力250・内申35%)は取り下げた。令和5年度実施要項(付表4-1〜4-5)で調査書の点数配分が学校ごとに異なる(例: 鳥栖180・三養基135・神埼70・佐賀東90・佐賀西75)と確認され、県共通の配点は存在しないため。根拠は第三者の塾サイトのみで一次資料の裏付けが無かった。評定合計135点(9教科×5段階×3学年)は残す。",
       "pdfHashNote": "現行URLは2026-09-07時点で404。archive.org Waybackスナップショット経由で本文取得しハッシュ算出（http://web.archive.org/web/20250916063640/https://www.pref.saga.lg.jp/kyouiku/kiji003109678/3_109678_330206_up_ar81mpcp.pdf）。sourceUrl自体は元の一次URLのまま変更しない（当時は生きていた記録として保持）。"
     },
     {

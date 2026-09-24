@@ -1173,6 +1173,12 @@ const MANUAL_HISTORY: Record<string, SourceSnapshot[]> = {
       sourceTitle: '塾オンラインドットコム「【佐賀県】高校入試の内申点計算方法！自動で計算の仕方＆内申点を上げる方法」＋WebSearch要約の2独立ソース',
       note: 'freshness-queue.ts(ZZ-9b)のgetStaleTop()で最古(daysSinceVerified=1)として選定・再検証。前回未使用の第三者ソース(jyuku-online.com)+WebSearch要約で確認・既存記載(全学年等倍・9教科×5段階×3年=135点満点)に変更なし(両ソースとも完全一致)。',
     },
+    {
+      date: '2026-09-24',
+      sourceUrl: 'https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html',
+      sourceTitle: '佐賀県教育委員会「令和5年度佐賀県立高等学校入学者選抜実施要項（第Ⅰ部入学者募集要項、付表）」付表4-1〜4-5',
+      note: 'T-SAGA1(👤裁定)による訂正: 付表で調査書(③学習の記録)の点数が学校・学科ごとに異なることを一次資料で確認し、県共通の配点(総合385点・内申35%)による逆算を取り下げた。評定合計135点(9教科×5段階×3学年)は維持。従来の第三者ソースは一次資料の裏付けが無かった。',
+    },
   ],
   mie: [
     {

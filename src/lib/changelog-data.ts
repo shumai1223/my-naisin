@@ -14,6 +14,17 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-09-24',
+    prefectureCode: 'saga',
+    type: 'fix',
+    category: 'calculation',
+    title: '佐賀県: 調査書の配点が学校ごとに異なることを反映し、県共通の配点による逆算を取りやめました',
+    description:
+      '佐賀県の入試では、調査書の点数の配分が学校・学科ごとに異なり、県共通の配点はありません（実施要項の付表で学校別に公表）。これまで「総合385点・内申35%」という県共通の配点を前提に逆算計算を提供していましたが、一次資料の裏付けがなかったため取りやめました。9教科×5段階×3学年の評定の合計（135点）の表示は変わりません。',
+    sourceUrl: 'https://www.pref.saga.lg.jp/kyouiku/kiji003115881/index.html',
+    sourceName: '佐賀県教育委員会 県立高等学校入学者選抜実施要項',
+  },
+  {
     date: '2026-08-17',
     type: 'fix',
     category: 'content',
