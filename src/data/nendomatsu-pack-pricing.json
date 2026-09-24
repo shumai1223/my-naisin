@@ -1,0 +1,7 @@
+{
+  "_readme": "T-TD1: 令和9年度 倍率速報 年度末パックの価格を決める【唯一の場所】。ONE-PAGER・見積書/請求書ひな形・商品ページ(/nendomatsu-pack)・メール下書き({{PRICE}})はすべてここから差し込まれる。価格を確定するときは、👤が status を \"confirmed\" にして confirmedYenTaxIncluded に税込の整数(円)を入れる。それ以外は何も直さなくてよい(直したあと `npm run td1:build-kit` → `node scripts/td1-fill-price.mjs`)。",
+  "status": "pending",
+  "provisionalRangeYenTaxIncluded": [240000, 300000],
+  "confirmedYenTaxIncluded": null,
+  "_provisionalNote": "provisionalRangeは Fable 案(ops/prompts/fable-revenue-challenge-2026-09-03-ANSWER.md §4・提案1)の仮置き。C7ゲートにより👤の確定待ち。statusがpendingの間、メール下書きにはこの金額を一切出さない。"
+}

@@ -1,0 +1,59 @@
+{
+  "generatedBy": "scripts/td1-build-sample.ts",
+  "prefectures": [
+    {
+      "prefectureCode": "chiba",
+      "prefecture": "千葉県",
+      "scale": "大規模",
+      "recordCount": 188,
+      "schoolNamesDistinct": 124,
+      "schoolCodeMatched": 124,
+      "schoolCodeNoMatch": 0,
+      "schoolCodeAmbiguous": 0,
+      "withPreviousYear": 188,
+      "stages": [
+        "確定"
+      ],
+      "publishedDate": "2026-02-13",
+      "sourceUrls": [
+        "https://www.pref.chiba.lg.jp/kyouiku/shidou/nyuushi/koukou/r8/documents/r8kakuteiippan.pdf"
+      ]
+    },
+    {
+      "prefectureCode": "nagano",
+      "prefecture": "長野県",
+      "scale": "中規模",
+      "recordCount": 129,
+      "schoolNamesDistinct": 77,
+      "schoolCodeMatched": 75,
+      "schoolCodeNoMatch": 2,
+      "schoolCodeAmbiguous": 0,
+      "withPreviousYear": 120,
+      "stages": [
+        "確定"
+      ],
+      "publishedDate": "2026-03-05",
+      "sourceUrls": [
+        "https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/20260305web-teisei.pdf"
+      ]
+    },
+    {
+      "prefectureCode": "akita",
+      "prefecture": "秋田県",
+      "scale": "小規模",
+      "recordCount": 78,
+      "schoolNamesDistinct": 44,
+      "schoolCodeMatched": 44,
+      "schoolCodeNoMatch": 0,
+      "schoolCodeAmbiguous": 0,
+      "withPreviousYear": 76,
+      "stages": [
+        "確定"
+      ],
+      "publishedDate": "2026-02-12",
+      "sourceUrls": [
+        "https://www.pref.akita.lg.jp/uploads/public/archive_0000093860_00/20260212_%EF%BC%91%E6%AC%A1%E5%8B%9F%E9%9B%86%E3%80%80%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%88%E5%BF%97%E9%A1%98%E5%85%88%E5%A4%89%E6%9B%B4%E5%BE%8C%EF%BC%89%EF%BC%88%E5%85%AC%E2%80%95%EF%BC%92%EF%BC%89.pdf"
+      ]
+    }
+  ]
+}
