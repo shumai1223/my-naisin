@@ -39,6 +39,21 @@
 
 **ユニットを分けるのは、どの位置がいくら稼いだかを管理画面で分けて見るため。**（位置ごとの成績で、2週間後に配置を見直す）
 
+### ✅ 2026-09-24 👤がユニットを作成済み（このIDをそのまま `src/lib/ad-units.ts` に入れる）
+
+| キー | ユニットID（data-ad-slot） | 管理画面の種類 | `<ins>` に必要な属性（管理画面が出したコードどおり） |
+|---|---|---|---|
+| `RESULT_BELOW` | `1489568761` | ディスプレイ（レスポンシブ） | `data-ad-format="auto"` `data-full-width-responsive="true"` |
+| `IN_CONTENT` | `4472981442` | ディスプレイ（レスポンシブ） | `data-ad-format="auto"` `data-full-width-responsive="true"` |
+| `IN_ARTICLE` | `5642592886` | 記事内広告 | `data-ad-layout="in-article"` `data-ad-format="fluid"` ＋ `style="text-align:center"` |
+| `PAGE_BOTTOM` | `3128110186` | Multiplex | `data-ad-format="autorelaxed"` |
+
+- ⚠️ **いまの `AdSlot` は `data-ad-layout` を出せない。** `layout?: string` を足し、`IN_ARTICLE` だけ `in-article`＋`fluid` にする。
+  記事内とMultiplexは `data-full-width-responsive` を付けない（管理画面のコードに無い）
+- ⚠️ 管理画面のコードに付いている `<script async src=".../adsbygoogle.js">` は**ページごとに貼らない**（`layout.tsx` で1回読み込み済み・c123f10）
+- インフィード広告は作らない（👤確認済み。一覧画面向けで、このサイトの主要な面に合わない）
+- ユニットIDは本物になったが、手動ユニットの描画は **`NEXT_PUBLIC_ADSENSE_ENABLED=1`（👤がCloudflareで設定）** まで出ない。これは既存の二重ガードどおり
+
 ## 3. 手動ユニットを置く場所（面ごと）
 
 **モバイルで1ページ最大3枠。枠と枠の間は最低1画面分あける。**
