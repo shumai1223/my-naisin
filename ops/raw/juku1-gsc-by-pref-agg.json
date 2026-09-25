@@ -1,0 +1,386 @@
+{
+ "rows": 3423,
+ "national": {
+  "clicks": 4721,
+  "impressions": 246692,
+  "pages": 399
+ },
+ "prefs": [
+  {
+   "pref": "tokyo",
+   "calc": 604,
+   "school": 121,
+   "total": 725,
+   "imp": 17052,
+   "pos": 9.9
+  },
+  {
+   "pref": "kanagawa",
+   "calc": 488,
+   "school": 110,
+   "total": 598,
+   "imp": 16524,
+   "pos": 9.8
+  },
+  {
+   "pref": "osaka",
+   "calc": 88,
+   "school": 178,
+   "total": 266,
+   "imp": 17823,
+   "pos": 9.3
+  },
+  {
+   "pref": "hokkaido",
+   "calc": 61,
+   "school": 200,
+   "total": 261,
+   "imp": 9943,
+   "pos": 8
+  },
+  {
+   "pref": "chiba",
+   "calc": 30,
+   "school": 109,
+   "total": 139,
+   "imp": 12603,
+   "pos": 10
+  },
+  {
+   "pref": "fukuoka",
+   "calc": 28,
+   "school": 96,
+   "total": 124,
+   "imp": 7855,
+   "pos": 8.4
+  },
+  {
+   "pref": "hiroshima",
+   "calc": 16,
+   "school": 96,
+   "total": 112,
+   "imp": 6123,
+   "pos": 9.6
+  },
+  {
+   "pref": "shiga",
+   "calc": 14,
+   "school": 85,
+   "total": 99,
+   "imp": 3246,
+   "pos": 8.4
+  },
+  {
+   "pref": "hyogo",
+   "calc": 44,
+   "school": 54,
+   "total": 98,
+   "imp": 6469,
+   "pos": 8.7
+  },
+  {
+   "pref": "kyoto",
+   "calc": 31,
+   "school": 54,
+   "total": 85,
+   "imp": 3865,
+   "pos": 8.1
+  },
+  {
+   "pref": "aichi",
+   "calc": 5,
+   "school": 79,
+   "total": 84,
+   "imp": 6219,
+   "pos": 8.7
+  },
+  {
+   "pref": "ishikawa",
+   "calc": 11,
+   "school": 62,
+   "total": 73,
+   "imp": 2385,
+   "pos": 8.1
+  },
+  {
+   "pref": "nagasaki",
+   "calc": 11,
+   "school": 59,
+   "total": 70,
+   "imp": 2430,
+   "pos": 8.5
+  },
+  {
+   "pref": "gifu",
+   "calc": 20,
+   "school": 49,
+   "total": 69,
+   "imp": 2798,
+   "pos": 8.7
+  },
+  {
+   "pref": "nara",
+   "calc": 14,
+   "school": 54,
+   "total": 68,
+   "imp": 3482,
+   "pos": 8.1
+  },
+  {
+   "pref": "ibaraki",
+   "calc": 20,
+   "school": 40,
+   "total": 60,
+   "imp": 4453,
+   "pos": 9.8
+  },
+  {
+   "pref": "saitama",
+   "calc": 11,
+   "school": 48,
+   "total": 59,
+   "imp": 3490,
+   "pos": 11.1
+  },
+  {
+   "pref": "tochigi",
+   "calc": 2,
+   "school": 55,
+   "total": 57,
+   "imp": 2727,
+   "pos": 9.8
+  },
+  {
+   "pref": "niigata",
+   "calc": 14,
+   "school": 42,
+   "total": 56,
+   "imp": 3138,
+   "pos": 8.9
+  },
+  {
+   "pref": "yamaguchi",
+   "calc": 14,
+   "school": 39,
+   "total": 53,
+   "imp": 2042,
+   "pos": 9
+  },
+  {
+   "pref": "mie",
+   "calc": 21,
+   "school": 29,
+   "total": 50,
+   "imp": 3185,
+   "pos": 7.5
+  },
+  {
+   "pref": "miyagi",
+   "calc": 15,
+   "school": 35,
+   "total": 50,
+   "imp": 2717,
+   "pos": 7.7
+  },
+  {
+   "pref": "nagano",
+   "calc": 5,
+   "school": 45,
+   "total": 50,
+   "imp": 1940,
+   "pos": 10.1
+  },
+  {
+   "pref": "gunma",
+   "calc": 7,
+   "school": 41,
+   "total": 48,
+   "imp": 3456,
+   "pos": 12.5
+  },
+  {
+   "pref": "kumamoto",
+   "calc": 11,
+   "school": 35,
+   "total": 46,
+   "imp": 2684,
+   "pos": 7.2
+  },
+  {
+   "pref": "shizuoka",
+   "calc": 6,
+   "school": 36,
+   "total": 42,
+   "imp": 2751,
+   "pos": 9.5
+  },
+  {
+   "pref": "kochi",
+   "calc": 2,
+   "school": 39,
+   "total": 41,
+   "imp": 816,
+   "pos": 8.5
+  },
+  {
+   "pref": "okinawa",
+   "calc": 10,
+   "school": 27,
+   "total": 37,
+   "imp": 3542,
+   "pos": 8.5
+  },
+  {
+   "pref": "toyama",
+   "calc": 11,
+   "school": 22,
+   "total": 33,
+   "imp": 1266,
+   "pos": 8.4
+  },
+  {
+   "pref": "fukushima",
+   "calc": 12,
+   "school": 18,
+   "total": 30,
+   "imp": 1247,
+   "pos": 10.3
+  },
+  {
+   "pref": "oita",
+   "calc": 15,
+   "school": 15,
+   "total": 30,
+   "imp": 1171,
+   "pos": 8.7
+  },
+  {
+   "pref": "yamagata",
+   "calc": 11,
+   "school": 17,
+   "total": 28,
+   "imp": 1334,
+   "pos": 10.1
+  },
+  {
+   "pref": "okayama",
+   "calc": 12,
+   "school": 15,
+   "total": 27,
+   "imp": 1727,
+   "pos": 10.8
+  },
+  {
+   "pref": "yamanashi",
+   "calc": 13,
+   "school": 13,
+   "total": 26,
+   "imp": 702,
+   "pos": 7.5
+  },
+  {
+   "pref": "ehime",
+   "calc": 6,
+   "school": 20,
+   "total": 26,
+   "imp": 1195,
+   "pos": 8.1
+  },
+  {
+   "pref": "kagoshima",
+   "calc": 7,
+   "school": 19,
+   "total": 26,
+   "imp": 1582,
+   "pos": 9.3
+  },
+  {
+   "pref": "shimane",
+   "calc": 0,
+   "school": 25,
+   "total": 25,
+   "imp": 610,
+   "pos": 7.2
+  },
+  {
+   "pref": "wakayama",
+   "calc": 3,
+   "school": 20,
+   "total": 23,
+   "imp": 694,
+   "pos": 10.9
+  },
+  {
+   "pref": "miyazaki",
+   "calc": 3,
+   "school": 19,
+   "total": 22,
+   "imp": 935,
+   "pos": 7.8
+  },
+  {
+   "pref": "fukui",
+   "calc": 10,
+   "school": 10,
+   "total": 20,
+   "imp": 911,
+   "pos": 9.6
+  },
+  {
+   "pref": "kagawa",
+   "calc": 4,
+   "school": 15,
+   "total": 19,
+   "imp": 1503,
+   "pos": 8.9
+  },
+  {
+   "pref": "tottori",
+   "calc": 4,
+   "school": 11,
+   "total": 15,
+   "imp": 435,
+   "pos": 8.2
+  },
+  {
+   "pref": "saga",
+   "calc": 5,
+   "school": 7,
+   "total": 12,
+   "imp": 1392,
+   "pos": 9.6
+  },
+  {
+   "pref": "akita",
+   "calc": 2,
+   "school": 7,
+   "total": 9,
+   "imp": 984,
+   "pos": 9.5
+  },
+  {
+   "pref": "iwate",
+   "calc": 2,
+   "school": 6,
+   "total": 8,
+   "imp": 1137,
+   "pos": 11.5
+  },
+  {
+   "pref": "aomori",
+   "calc": 5,
+   "school": 0,
+   "total": 5,
+   "imp": 218,
+   "pos": 9.7
+  },
+  {
+   "pref": "tokushima",
+   "calc": 0,
+   "school": 3,
+   "total": 3,
+   "imp": 279,
+   "pos": 9
+  }
+ ]
+}
