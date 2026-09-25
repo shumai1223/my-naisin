@@ -39,21 +39,17 @@ describe('学校ページのCTA順序（G7）', () => {
   });
 
   /**
-   * T-M1-2（C10-1・2026-09-05投入）: 学校ページの広告は「倍率データより後・1枠のみ」
-   * （Y-0＝データが主役の原則。インデックス評価中のためテンプレページ化を避ける）。
+   * T-M1-2（C10-1・2026-09-05投入）で学校ページにアフィリ1枠（個別指導キャンパス）を置いていたが、
+   * 2026-09-25 👤裁定で「生徒向けページの有料塾アフィリは外し、一等地はAdSenseへ」に変更した
+   * （3か月で実クリック47件・確定0件）。学校ページの訪問者は生徒が中心なので0枠にする。
+   * 広告の位置と数は ad-placement.test.ts の「学校ページ: 広告は倍率データ・保護者CTA・リードフォームより下」で固定。
    */
-  it('AffiliateAdは倍率データより後に、1枠だけレンダーされる', () => {
+  it('学校ページにはアフィリエイト広告を置かない（AdSenseのみ）', () => {
     const filePath = join(process.cwd(), 'src/app/pref/[code]/school/[schoolCode]/page.tsx');
     const content = readFileSync(filePath, 'utf8');
 
-    const rateHeadingIndex = content.indexOf('今季の入試倍率');
-    const adIndex = content.indexOf('<AffiliateAd');
-
-    expect(rateHeadingIndex).toBeGreaterThan(-1);
-    expect(adIndex).toBeGreaterThan(-1);
-    expect(rateHeadingIndex).toBeLessThan(adIndex);
-
-    const adOccurrences = (content.match(/<AffiliateAd/g) || []).length;
-    expect(adOccurrences).toBe(1);
+    expect(content.indexOf('今季の入試倍率')).toBeGreaterThan(-1);
+    expect((content.match(/<AffiliateAd/g) || []).length).toBe(0);
+    expect((content.match(/<AdUnit\b/g) || []).length).toBe(3);
   });
 });

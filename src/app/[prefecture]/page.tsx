@@ -25,7 +25,6 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { PrefecturePillarLinks } from '@/components/PrefecturePillarLinks';
 import { TrustInfo } from '@/components/TrustInfo';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 interface PrefecturePageProps {
@@ -311,16 +310,6 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
               {/* 内部リンクピラー */}
               <PrefecturePillarLinks prefectureCode={code} prefectureName={pref.name} />
 
-              {/* オンライン学習サービス紹介 */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm text-center">
-                <div className="text-xs font-bold text-slate-700 mb-2">
-                  自宅で学べる個別指導
-                </div>
-                <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
-                  内申点を上げる<br />毎日の学習習慣づくりに
-                </div>
-                <AffiliateAd placement="prefecture-top" id="shoin-banner" />
-              </div>
             </div>
           </div>
         </div>

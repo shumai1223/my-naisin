@@ -29,7 +29,6 @@ import { BlogRelatedArticles } from '@/components/BlogRelatedArticles';
 import { NaishinResultFlow } from '@/components/Calculator/NaishinResultFlow';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 import { TrustInfo } from '@/components/TrustInfo';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ParentLeadCTAExperiment } from '@/components/ParentLeadCTAExperiment';
 import { AnswerBox } from '@/components/AnswerBox';
@@ -467,23 +466,6 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
             {/* ⛔ E-0（2026-08-11）: 高校別ボーダーライン一覧の掲載を停止した（Y-0違反）。
                 詳細と復活条件: ops/tasks/T-E0-borderline-y0-violation.md */}
 
-            {/* 志望校検討モードのユーザーへ：AI個別指導（旧サプリ¥5.4/clickは低EVで撤去） */}
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="grid items-center gap-4 md:grid-cols-[1fr_auto]">
-                <div>
-                  <div className="text-sm font-bold text-slate-800">
-                    志望校レベルに合わせた学習を始める
-                  </div>
-                  <div className="mt-1 text-xs text-slate-500 leading-relaxed">
-                    {prefecture.name}の高校別ボーダーラインを見て志望校が見えてきたら、いまの学力との差を埋める準備を。AIが弱点を自動分析する個別指導の無料体験で、今の学力に必要な対策を確認できます。
-                  </div>
-                </div>
-                <div className="flex justify-center md:justify-end">
-                  <AffiliateAd id="atama-banner" trackView viewPlacement="prefecture" viewPref={prefectureCode} />
-                </div>
-              </div>
-            </section>
-
             {/* 掲載枠スポンサー（D-3・県×面の直販枠。未契約の間は描画0） */}
             <SponsorSlot placement="naishin" prefectureCode={prefectureCode} />
 
@@ -666,57 +648,6 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                   : []),
               ]}
             />
-
-            {/* 学習方法の提案：通信教育・個別指導の選択肢 */}
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="mb-4 text-base font-bold text-slate-800">学習方法を選ぶ</h3>
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-xl border border-blue-100 bg-blue-50/40 p-4">
-                  <div className="mb-2 text-sm font-bold text-blue-900">難関校を狙うなら</div>
-                  <p className="mb-3 text-xs text-blue-700 leading-relaxed">
-                    トップ校を志望する場合、内申点だけでなく当日点の実力も鍵。現役東大・難関大生による学習コーチングで、難関校対策を伴走してもらう選択肢もあります。
-                  </p>
-                  <div className="text-sm">
-                    <AffiliateAd placement="naishin" id="moshimo-studycoach" hideLabel />（PR）
-                  </div>
-                </div>
-                <div className="rounded-xl border border-emerald-100 bg-emerald-50/40 p-4">
-                  <div className="mb-2 text-sm font-bold text-emerald-900">個別指導で内申を底上げ</div>
-                  <p className="mb-3 text-xs text-emerald-700 leading-relaxed">
-                    自宅でマンツーマンの個別指導を受けたいなら、ネット松陰塾の自立学習スタイルが選択肢になります。
-                  </p>
-                  <div className="flex justify-start">
-                    <AffiliateAd placement="naishin" id="shoin-banner" centered={false} />
-                  </div>
-                </div>
-                <div className="rounded-xl border border-sky-100 bg-sky-50/40 p-4">
-                  <div className="mb-2 text-sm font-bold text-sky-900">送迎不要のオンライン個別指導</div>
-                  <p className="mb-3 text-xs text-sky-700 leading-relaxed">
-                    先生1人に生徒2人まで。{prefecture.name}全域から受講できるオンライン個別指導塾です。
-                  </p>
-                  <AffiliateAd placement="naishin" id="sora-juku-banner" />
-                </div>
-                {/* 校舎所在地の実態に合わせる：関東=森塾／関西=個別指導キャンパス（旧コードは大阪にも関東限定の森塾を誤表示していた） */}
-                {['tokyo', 'kanagawa', 'saitama', 'chiba', 'ibaraki', 'tochigi', 'gunma'].includes(prefectureCode) && (
-                  <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-4">
-                    <div className="mb-2 text-sm font-bold text-orange-900">教室で学ぶ個別指導</div>
-                    <p className="mb-3 text-xs text-orange-700 leading-relaxed">
-                      {prefecture.name}内に教室がある<AffiliateAd placement="naishin" id="morijuku-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
-                    </p>
-                    <AffiliateAd placement="naishin" id="morijuku-banner" />
-                  </div>
-                )}
-                {['osaka', 'hyogo', 'kyoto', 'nara', 'shiga', 'wakayama'].includes(prefectureCode) && (
-                  <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-4">
-                    <div className="mb-2 text-sm font-bold text-orange-900">教室で学ぶ個別指導</div>
-                    <p className="mb-3 text-xs text-orange-700 leading-relaxed">
-                      {prefecture.name}内に教室がある<AffiliateAd placement="naishin" id="campus-text" hideLabel />（PR）。先生1人に生徒2人までの個別指導で定期テスト対策。
-                    </p>
-                    <AffiliateAd placement="naishin" id="campus-banner" />
-                  </div>
-                )}
-              </div>
-            </section>
 
             {/* 保護者リード（換金の本命）：県別ページは堀の主力なのに cta_view=0 だった面。
                 ページ末尾＝全文を読んだ高エンゲージ保護者に、県×面エンジンが解決した無料リード（関東=森塾/関西=キャンパス/他=Z会資料請求）を提示。

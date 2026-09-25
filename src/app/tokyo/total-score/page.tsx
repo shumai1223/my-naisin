@@ -14,7 +14,6 @@ import { getPrefectureByCode } from '@/lib/prefectures';
 // ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
 const TOKYO_SOURCE_URL =
   getPrefectureByCode('tokyo')?.sourceUrl ?? 'https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 import { AdUnit } from '@/components/AdSlot';
@@ -341,17 +340,6 @@ export default function TokyoTotalScorePage() {
             <p className="mt-3 text-xs text-slate-500">
               ※ 合格目安は過去の入試データに基づく推定値です。年度・倍率により変動します。各校の正確な情報は東京都教育委員会の公式発表をご確認ください。
             </p>
-          </section>
-
-          {/* 2タッチ目：AI個別指導（下のParentLeadCTAとは別プログラムで多様性確保。旧Z会/サプリ¥1.5-5.4/clickの代替） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="text-sm font-bold text-slate-700 mb-1">
-              AIが弱点を自動分析する個別指導
-            </div>
-            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              <AffiliateAd placement="total-score" id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
-            </div>
-            <AffiliateAd placement="total-score" id="atama-banner" />
           </section>
 
           {/* 合格基準点シミュレーション（SEO: 都立高校 合格基準点 シュミレーション / 都立 点数 計算） */}

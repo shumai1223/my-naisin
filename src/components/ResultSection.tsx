@@ -17,7 +17,6 @@ import { ParentCostBridge } from '@/components/ParentCostBridge';
 import { RankCard } from '@/components/Result/RankCard';
 import { CalculationBasis } from '@/components/Result/CalculationBasis';
 import { PointValueCard } from '@/components/Result/PointValueCard';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { AdUnit } from '@/components/AdSlot';
 import { getPrefectureByCode, type PrefectureConfig } from '@/lib/prefectures';
 import { track, EVENTS } from '@/lib/track';
@@ -318,165 +317,13 @@ export function ResultSection({
             <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-blue-500" />
           </Link>
 
-          {/* 子ども向け第2選択肢（クリックアフィリ）：内申点レベル別の動的訴求。
-              観客=生徒に向けた教材導線。橋①（保護者・成果報酬）の下に置く。 */}
-          <Card className="overflow-hidden">
-            <div className="border-b border-slate-100/80 bg-gradient-to-r from-amber-50/80 via-orange-50/60 to-rose-50/80 px-6 py-5">
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-amber-500" />
-                <div className="text-base font-bold text-slate-800">
-                  あなたの内申点レベルに合った学習サポート
-                </div>
-              </div>
-              <div className="mt-1 text-xs text-slate-500">
-                計算結果（満点比 {result.percent.toFixed(0)}%）から、今のあなたに最適な学習方法を提案します
-              </div>
-            </div>
-            <div className="p-6">
-              {result.percent >= 80 ? (
-                // 高内申層（80%+）：難関対策・上位志望校
-                <div className="space-y-3">
-                  <div className="rounded-xl border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-indigo-50 p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-purple-600 px-2 py-0.5 text-[10px] font-black text-white">
-                        難関校志望者へ
-                      </span>
-                      <div className="text-sm font-bold text-purple-900">
-                        オンライン個別指導の無料体験
-                      </div>
-                    </div>
-                    <p className="text-xs text-purple-800 leading-relaxed mb-3">
-                      内申点が高い層は、当日点の取り切りで合否が決まります。まずは無料体験で今の実力を診断し、応用問題対策や記述力を伸ばす学習プランを一緒に組み立てられます。
-                    </p>
-                    <div className="text-xs">
-                      <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
-                    </div>
-                  </div>
-                </div>
-              ) : result.percent >= 60 ? (
-                // 中位層（60〜80%）：通信教育で安定上昇
-                <div className="space-y-3">
-                  <div className="rounded-xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-black text-white">
-                        中堅上位を狙うなら
-                      </span>
-                      <div className="text-sm font-bold text-blue-900">
-                        オンライン個別指導の無料体験
-                      </div>
-                    </div>
-                    <p className="text-xs text-blue-800 leading-relaxed mb-3">
-                      あと一押しで上位校が見える層。定期テスト対策と入試対策を一緒に見てもらえる無料体験で、今の弱点と伸ばし方を具体的に確認できます。
-                    </p>
-                    <div className="text-xs">
-                      <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
-                    </div>
-                  </div>
-                </div>
-              ) : result.percent >= 40 ? (
-                // 中堅層（40〜60%）：基礎固め
-                <div className="space-y-3">
-                  <div className="rounded-xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-black text-white">
-                        基礎固めで底上げ
-                      </span>
-                      <div className="text-sm font-bold text-emerald-900">
-                        オンライン個別指導の無料体験
-                      </div>
-                    </div>
-                    <p className="text-xs text-emerald-800 leading-relaxed mb-3">
-                      苦手教科の理解不足が原因で評定が伸び悩んでいる層。無料体験で「分からない」の原因を洗い出し、個別指導で学習習慣を作るのが最短ルート。
-                    </p>
-                    <div className="text-xs">
-                      <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                // 下位層（〜40%）：個別指導で学習習慣
-                <div className="space-y-3">
-                  <div className="rounded-xl border-2 border-rose-200 bg-gradient-to-br from-rose-50 to-orange-50 p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-rose-600 px-2 py-0.5 text-[10px] font-black text-white">
-                        まず学習習慣から
-                      </span>
-                      <div className="text-sm font-bold text-rose-900">
-                        オンライン個別指導の無料体験
-                      </div>
-                    </div>
-                    <p className="text-xs text-rose-800 leading-relaxed mb-3">
-                      学習習慣が確立していない層は、まず「毎日机に向かう」を作ることが最優先。無料体験でつまずきポイントを洗い出しながら、個別指導で基礎から理解する2段構えが効果的。
-                    </p>
-                    <div className="text-xs">
-                      <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
-                    </div>
-                  </div>
-                </div>
-              )}
-              <div className="mt-3 text-center text-[10px] text-slate-400">
-                ※ 上記は内申点レベルから推定した一般的なおすすめです。実際の学習プランは志望校や個人の特性に合わせて選んでください。
-              </div>
-            </div>
-          </Card>
-
-          {/* 計算結果直後の最高エンゲージ位置：塾体験CTA（モバイルは大きめタップ領域） */}
-          <Card className="overflow-hidden">
-            <div className="px-5 py-5 text-center md:px-6">
-              <div className="mb-2 text-sm font-bold text-slate-700">
-                結果が出た今が、対策の“始めどき”です
-              </div>
-              <div className="mb-4 text-xs text-slate-500">
-                内申点・偏差値の差は、動き出すのが遅いほど取り戻すのが大変になります
-              </div>
-              {/* Desktop: 728x90バナー */}
-              <div className="hidden md:block">
-                <AffiliateAd placement="result" id="sora-juku-banner" />
-              </div>
-              {/* Mobile: ボタン化したCTA（タップしやすい44px以上） */}
-              <div className="md:hidden">
-                <div className="rounded-xl bg-blue-50 border border-blue-100 p-4 text-left">
-                  <div className="mb-2 text-sm font-bold text-blue-900">
-                    オンライン個別指導の無料体験
-                  </div>
-                  <div className="mb-3 text-xs text-blue-700 leading-relaxed">
-                    間に合ううちに、まずは無料体験で「今の学力で何が足りないか」を見える化。全国オンライン対応・費用はかかりません。
-                  </div>
-                  <AffiliateAd placement="result"
-                    id="sora-juku-text"
-                    hideLabel
-                    linkClassName="block w-full rounded-xl bg-blue-600 px-5 py-3.5 text-center text-base font-bold text-white shadow-md shadow-blue-500/30 active:bg-blue-700"
-                  />
-                  <div className="mt-2 text-center text-[10px] text-slate-400">[PR]</div>
-                </div>
-              </div>
-              <div className="mt-3 hidden text-xs md:block">
-                <AffiliateAd placement="result" id="sora-juku-text" className="mx-1" hideLabel />（PR）から始められます
-              </div>
-            </div>
-          </Card>
+          {/* T-ADS1 AdSense RESULT_BELOW（2026-09-25 位置を引き上げ）: 保護者CTA(GapToTarget/ParentCostBridge)と
+              学校ページ導線の直後＝計算結果のすぐ下。ここには生徒向けの有料塾アフィリ（そら塾）のカードが3枚あったが、
+              3か月で確定0件だったため外し、最も見られる位置をAdSenseに渡した。保護者CTAより上には置かない。 */}
+          <AdUnit unit="RESULT_BELOW" />
 
           <RankCard result={result} />
           <PointValueCard scores={scores} prefectureCode={prefectureCode} />
-
-          {/* スコア解釈後の中間CTA：塾体験 */}
-          <Card className="overflow-hidden">
-            <div className="px-5 py-5 md:px-6">
-              <div className="grid items-center gap-4 md:grid-cols-[1fr_auto]">
-                <div>
-                  <div className="text-sm font-bold text-slate-800">
-                    今の学力、無料体験でチェックしませんか
-                  </div>
-                  <div className="mt-1 text-xs text-slate-500 leading-relaxed">
-                    志望校との距離とやるべきことを具体的に確認できます。全国オンライン対応・費用はかかりません。
-                  </div>
-                </div>
-                <div className="flex justify-center md:justify-end">
-                  <AffiliateAd placement="result" id="sora-juku-banner" />
-                </div>
-              </div>
-            </div>
-          </Card>
 
           <CalculationBasis prefectureCode={prefectureCode} variantCode={variantCode} total={result.total} max={result.max} />
 
@@ -662,9 +509,6 @@ export function ResultSection({
             </div>
           </button>
 
-          {/* T-ADS1 AdSense RESULT_BELOW: 結果タブの最後＝保護者CTA(GapToTarget/ParentCostBridge)・学校ページ導線・
-              学習サポートより必ず下（収益の主導線を押し下げない）。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
-          <AdUnit unit="RESULT_BELOW" />
         </div>
       ) : (
         <div
@@ -679,20 +523,6 @@ export function ResultSection({
             currentPrefecture={prefectureCode}
           />
 
-          {/* 詳細分析を開く高インテント層へ：塾体験CTA */}
-          <Card className="overflow-hidden">
-            <div className="px-5 py-5 md:px-6">
-              <div className="text-sm font-bold text-slate-800 mb-2">
-                難関校を狙うなら、当日点の実力も伸ばす
-              </div>
-              <div className="text-xs text-slate-500 leading-relaxed mb-3">
-                内申点を最大化したら、次は当日点の対策です。無料体験で今の実力を確認し、伸ばし方を一緒に組み立てられます。
-              </div>
-              <div className="text-sm">
-                <AffiliateAd placement="result" id="sora-juku-text" hideLabel />（PR）── 全国オンライン対応・費用はかかりません
-              </div>
-            </div>
-          </Card>
 
           <Card className="overflow-hidden">
             <div className="border-b border-slate-100/80 bg-gradient-to-r from-emerald-50/80 via-teal-50/60 to-green-50/80 px-6 py-5">
@@ -767,17 +597,6 @@ export function ResultSection({
           <SubjectBreakdown scores={scores} prefectureCode={prefectureCode} />
           <GoalSection currentScore={result.total} maxScore={result.max} />
 
-          <Card className="overflow-hidden">
-            <div className="px-6 py-6 text-center">
-              <div className="mb-2 text-sm font-bold text-slate-700">
-                今の実力を無料でチェック
-              </div>
-              <div className="mb-4 text-xs text-slate-500">
-                オンライン個別指導の無料体験で、志望校との距離を具体的に確認できます
-              </div>
-              <AffiliateAd placement="result" id="sora-juku-banner" />
-            </div>
-          </Card>
         </div>
       )}
     </section>

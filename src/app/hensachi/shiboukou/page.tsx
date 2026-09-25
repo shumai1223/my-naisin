@@ -6,7 +6,6 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
@@ -239,15 +238,6 @@ export default function HensachiShiboukouPage() {
             <div className="mt-3 text-center">
               <Link href="/prefectures" className="text-sm font-bold text-purple-600 hover:underline">47都道府県すべての入試制度を見る →</Link>
             </div>
-          </section>
-
-          {/* アフィリエイト（旧Z会/サプリ¥1.5-5.4/clickは撤去し、全国オンライン個別¥84/clickへ） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="mb-1 text-sm font-bold text-slate-700">志望校との差を、効率よく埋める</div>
-            <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              苦手教科だけをピンポイントで底上げする<AffiliateAd placement="hensachi-shiboukou" id="sora-juku-text" hideLabel />（PR）。無料体験あり。
-            </div>
-            <AffiliateAd placement="hensachi-shiboukou" id="sora-juku-banner" />
           </section>
 
           {/* FAQ */}

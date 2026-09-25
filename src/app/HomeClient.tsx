@@ -46,7 +46,6 @@ import Loader from '@/components/ui/Loader';
 import { HistoryPanel } from '@/components/HistoryPanel';
 import { BlogSection } from '@/components/BlogSection';
 import { NaishinGuideSection } from '@/components/NaishinGuideSection';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -402,19 +401,6 @@ export default function HomeClient() {
                       <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </button>
-                </div>
-              )}
-
-              {/* ファーストビューのZ会CTA：select画面のみ。EPC50+の最優先素材を上部に露出 */}
-              {navigationMode === 'select' && (
-                <div className="px-4 pb-3 md:px-6">
-                  <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-xl border border-blue-100 bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 px-4 py-2.5 text-center text-xs text-slate-600 md:text-sm">
-                    <span>内申点アップに学習サポートという選択肢。</span>
-                    <AffiliateAd placement="home" id="atama-text" hideLabel />
-                    <span className="text-slate-400">/</span>
-                    <AffiliateAd placement="home" id="zkai-text-request" hideLabel />
-                    <span className="text-[10px] text-slate-400">[PR]</span>
-                  </div>
                 </div>
               )}
 

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { BookOpen, ChevronRight, Home, Search } from 'lucide-react';
 import * as React from 'react';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HUB_ALL } from '@/lib/total-score/hub';
 import { GLOSSARY_TERMS } from '@/lib/glossary-terms';
 
@@ -187,22 +186,6 @@ export default function GlossaryClient() {
                 ))}
               </tbody>
             </table>
-          </div>
-        </section>
-
-        {/* アフィリエイト広告 */}
-        <section className="mt-10 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-          <div className="text-sm font-bold text-slate-700 mb-1">
-            用語を理解したら、実践へ
-          </div>
-          <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-            内申点アップに直結する学習なら<AffiliateAd placement="glossary" id="campus-text" hideLabel />（PR）。無料体験でまずは相性を確認。
-          </div>
-          <div className="hidden md:block">
-            <AffiliateAd placement="glossary" id="campus-banner" />
-          </div>
-          <div className="md:hidden">
-            <AffiliateAd placement="glossary" id="sapuri-banner-300" />
           </div>
         </section>
 

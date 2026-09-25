@@ -7,7 +7,6 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { AdUnit } from '@/components/AdSlot';
 import { PREFECTURES } from '@/lib/prefectures';
 import { HensachiResultFlow } from '@/components/Hensachi/HensachiResultFlow';
@@ -316,27 +315,6 @@ export default function HensachiPage() {
           <div className="mt-6">
             <HensachiClusterNav current="hub" />
           </div>
-
-          {/* 計算結果直後の最高エンゲージ位置：EV最上位のAI個別指導無料体験へ集中（旧Z会は低EVで撤去） */}
-          <section className="mt-6 rounded-2xl border-2 border-purple-300 bg-gradient-to-br from-purple-50 to-indigo-50 px-6 py-6 shadow-md text-center">
-            <div className="text-base font-bold text-slate-800 mb-1">
-              この偏差値を上げる、最短ルート
-            </div>
-            <div className="text-xs text-slate-600 mb-4 leading-relaxed">
-              <AffiliateAd placement="hensachi" id="atama-text" hideLabel />（PR）— AIが弱点を自動分析する個別指導の無料体験
-            </div>
-            <div className="hidden md:block">
-              <AffiliateAd placement="hensachi" id="atama-banner" />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd placement="hensachi"
-                id="atama-text"
-                hideLabel
-                ctaText="無料体験を申し込む（PR）"
-                linkClassName="block w-full rounded-xl bg-purple-600 px-6 py-3.5 font-bold text-white shadow-lg transition-all hover:bg-purple-700 active:scale-95"
-              />
-            </div>
-          </section>
 
           {/* T-ADS1 AdSense IN_CONTENT: 解説の最初の見出し（計算式）の前・EV最上位CTAの後。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
           <AdUnit unit="IN_CONTENT" />
@@ -661,28 +639,6 @@ export default function HensachiPage() {
                 </p>
               </div>
             </div>
-          </section>
-
-          {/* 中間広告：そら塾（全国オンライン個別・EV¥84/click。旧サプリ¥5.4/clickは低EVで撤去し高EV枠へ振替） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-sm text-center">
-            <div className="text-sm font-bold text-slate-700 mb-1">
-              全国どこでも受けられるオンライン個別指導
-            </div>
-            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              苦手教科だけをピンポイントで底上げする<AffiliateAd placement="hensachi" id="sora-juku-text" hideLabel />（PR）。無料体験あり。
-            </div>
-            <AffiliateAd placement="hensachi" id="sora-juku-banner" />
-          </section>
-
-          {/* 中間広告：atama+ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-sm text-center">
-            <div className="text-sm font-bold text-slate-700 mb-1">
-              AIが苦手を自動分析・個別カリキュラムで偏差値アップ
-            </div>
-            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              マンツーマンAI×担任サポート制の<AffiliateAd placement="hensachi" id="atama-text" hideLabel />（PR）。無料体験あり。
-            </div>
-            <AffiliateAd placement="hensachi" id="atama-banner" />
           </section>
 
           {/* 偏差値と内申点の関係 */}

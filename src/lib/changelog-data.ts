@@ -14,6 +14,14 @@ export interface ChangeLogEntry {
 
 export const CHANGELOG: ChangeLogEntry[] = [
   {
+    date: '2026-09-25',
+    type: 'remove',
+    category: 'ui',
+    title: '計算結果の下などにあった教材・塾の紹介を減らし、ページを見やすくしました',
+    description:
+      '計算ツール・偏差値・評定平均・学校ページなどに表示していた教材や塾の紹介（PR）を整理し、計算結果のすぐ下に続けて並んでいた紹介カードを取り除きました。保護者の方向けの無料資料請求・無料相談のご案内は、保護者向けのページと「保護者の方へ」の枠にのみ残しています。計算方法やデータには変更はありません。',
+  },
+  {
     date: '2026-09-24',
     prefectureCode: 'saga',
     type: 'fix',

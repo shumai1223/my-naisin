@@ -15,7 +15,6 @@ import { BlogStickyTOC } from '@/components/Blog/BlogStickyTOC';
 import { BlogShareButtons } from '@/components/Blog/BlogShareButtons';
 import { ReadingProgressBar } from '@/components/Blog/ReadingProgressBar';
 import { BackToTopButton } from '@/components/Blog/BackToTopButton';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { AdUnit } from '@/components/AdSlot';
 import { splitHtmlForInArticleAds } from '@/lib/blog-ad-insert';
@@ -237,15 +236,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           <meta itemProp="datePublished" content={post.date} />
           <meta itemProp="author" content="しゅうまい" />
           <meta itemProp="keywords" content={post.tags.join(', ')} />
-
-          {/* 記事冒頭の2タッチ目：AI個別指導（末尾のParentLeadCTA(blog=そら塾)とは別プログラムで多様性確保。旧サプリ/Z会¥1.5-5.4/clickの代替） */}
-          <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50/60 px-4 py-3">
-            <p className="text-xs leading-relaxed text-slate-700">
-              <span className="text-slate-500">関連サービス：</span>
-              <AffiliateAd placement="blog-article" id="atama-text" className="mx-1" hideLabel />
-              （PR）AIが弱点を自動分析する個別指導の無料体験。
-            </p>
-          </div>
 
           {/* 本文。導入文の後・本文の中ほどの <h2 の前に記事内広告(IN_ARTICLE・最大2枠)を挿入（位置は blog-ad-insert.ts）。
               広告は本文を書き換えず、セグメントを連結すると元の本文に戻る。AdUnit は NEXT_PUBLIC_ADSENSE_ENABLED=1 まで null。 */}

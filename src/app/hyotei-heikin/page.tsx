@@ -6,7 +6,6 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { HyoteiResultFlow } from '@/components/HyoteiHeikin/HyoteiResultFlow';
 import { ToolClusterNav } from '@/components/ToolClusterNav';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
@@ -270,27 +269,6 @@ export default function HyoteiHeikinPage() {
             <HyoteiResultFlow />
           </div>
 
-          {/* 計算結果直後の最高エンゲージ位置：EV最上位のAI個別指導無料体験へ集中（旧Z会は低EVで撤去） */}
-          <section className="mt-6 rounded-2xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 shadow-md text-center">
-            <div className="text-base font-bold text-slate-800 mb-1">
-              この評定平均を上げるなら
-            </div>
-            <div className="text-xs text-slate-600 mb-4 leading-relaxed">
-              内申点アップに直結する学習なら<AffiliateAd placement="hyotei-heikin" id="atama-text" hideLabel />（PR）。AIが弱点を自動分析する個別指導の無料体験。
-            </div>
-            <div className="hidden md:block">
-              <AffiliateAd placement="hyotei-heikin" id="atama-banner" />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd placement="hyotei-heikin"
-                id="atama-text"
-                hideLabel
-                ctaText="無料体験を申し込む（PR）"
-                linkClassName="block w-full rounded-xl bg-emerald-600 px-6 py-3.5 font-bold text-white shadow-lg transition-all hover:bg-emerald-700 active:scale-95"
-              />
-            </div>
-          </section>
-
           {/* T-ADS1 AdSense IN_CONTENT: 結果連動CTA・EV最上位CTAの後、解説の最初の見出しの前。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
           <AdUnit unit="IN_CONTENT" />
 
@@ -519,28 +497,6 @@ export default function HyoteiHeikinPage() {
                   <strong>選択肢：</strong>入りやすい私立高校、通信制高校、定時制高校、サポート校など。<Link href="/blog/futoukou-naishinten-high-school" className="font-bold underline">不登校でも行ける高校</Link>の特集記事もご参考に。状況によっては高卒認定試験という選択肢もあります。
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* 中間広告：自宅で個別指導 + オンライン個別指導（低EVのスタサプ¥5.4/clickは撤去） */}
-          <section className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-center shadow-sm">
-              <div className="text-xs font-bold text-slate-700 mb-1">
-                自宅で個別指導
-              </div>
-              <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
-                内申点アップに直結する学習習慣
-              </div>
-              <AffiliateAd placement="hyotei-heikin" id="shoin-banner" />
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-white px-5 py-5 text-center shadow-sm">
-              <div className="text-xs font-bold text-slate-700 mb-1">
-                送迎不要のオンライン個別指導
-              </div>
-              <div className="text-[11px] text-slate-500 mb-3 leading-relaxed">
-                先生1人に生徒2人まで・全国対応
-              </div>
-              <AffiliateAd placement="hyotei-heikin" id="sora-juku-banner" />
             </div>
           </section>
 
@@ -878,16 +834,6 @@ export default function HyoteiHeikinPage() {
               <ChevronRight className="h-4 w-4" />
             </a>
             <p className="mt-2 text-xs text-slate-500">姉妹サイト My Shingaku（大学受験・進学費用）へ移動します</p>
-          </section>
-
-          {/* 大学受験向け広告 */}
-          <section className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50/30 px-6 py-5 text-center shadow-sm">
-            <div className="text-sm font-bold text-emerald-900 mb-1">
-              大学受験も評定平均が鍵｜高1から始める通信教育
-            </div>
-            <div className="text-xs text-emerald-700 mb-4 leading-relaxed">
-              総合型選抜・指定校推薦を狙うなら<AffiliateAd placement="hyotei-heikin" id="zkai-daigaku" hideLabel />（PR）や<AffiliateAd id="shinken-koukou" hideLabel placement="hyotei-koukou" />（PR）で高1から大学受験の基礎を固める
-            </div>
           </section>
 
           {/* 評定平均と入試 */}

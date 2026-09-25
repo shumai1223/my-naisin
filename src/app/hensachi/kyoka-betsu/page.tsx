@@ -6,7 +6,6 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SaveResultCTA } from '@/components/SaveResultCTA';
 import { HensachiCalculator } from '@/components/Hensachi/HensachiCalculator';
@@ -209,15 +208,6 @@ export default function HensachiKyokaBetsuPage() {
           <div className="mt-8">
             <HensachiClusterNav current="kyoka-betsu" />
           </div>
-
-          {/* アフィリエイト（旧Z会/サプリ¥1.5-5.4/clickは撤去し、全国オンライン個別¥84/clickへ） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="mb-1 text-sm font-bold text-slate-700">苦手教科を、効率よく底上げ</div>
-            <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              苦手教科だけをピンポイントで底上げする<AffiliateAd placement="hensachi-kyoka-betsu" id="sora-juku-text" hideLabel />（PR）。無料体験あり。
-            </div>
-            <AffiliateAd placement="hensachi-kyoka-betsu" id="sora-juku-banner" />
-          </section>
 
           {/* FAQ */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

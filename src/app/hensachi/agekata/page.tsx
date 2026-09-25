@@ -5,7 +5,6 @@ import { Home, ChevronRight, TrendingUp, Calculator, Eye, Rocket, User, ShieldCh
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { HensachiClusterNav } from '@/components/Hensachi/HensachiClusterNav';
 import { buildPercentileTable } from '@/lib/hensachi';
@@ -220,15 +219,6 @@ export default function HensachiAgekataPage() {
               note="【atama＋ オンライン塾】の資料請求・無料体験（PR）"
             />
           </div>
-
-          {/* アフィリエイト（旧Z会/サプリ¥1.5-5.4/clickは撤去し、全国オンライン個別¥84/clickへ） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="mb-1 text-sm font-bold text-slate-700">偏差値を上げる学習教材</div>
-            <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              苦手教科だけをピンポイントで底上げする<AffiliateAd placement="hensachi-agekata" id="sora-juku-text" hideLabel />（PR）。無料体験あり。
-            </div>
-            <AffiliateAd placement="hensachi-agekata" id="sora-juku-banner" />
-          </section>
 
           {/* クラスタナビ */}
           <div className="mt-8">

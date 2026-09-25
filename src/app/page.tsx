@@ -4,7 +4,6 @@ import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures'
 import { getAllPosts } from '@/lib/blog-data';
 import { HOME_FAQS } from '@/lib/home-faq-content';
 import HomeClient from './HomeClient';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { PrefectureNaishinTable } from '@/components/PrefectureNaishinTable';
@@ -145,13 +144,6 @@ export default function Page() {
             ))}
           </div>
 
-          {/* PR ストリップ：コラム読了後のフック */}
-          <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50/60 px-5 py-4 text-center">
-            <div className="text-xs text-slate-700">
-              <AffiliateAd placement="home" id="morijuku-text" hideLabel trackView viewPlacement="home" />（PR）で内申＋偏差値を伸ばす。あるいは
-              <AffiliateAd placement="home" id="zkai-text-request" hideLabel trackView viewPlacement="home" />（PR）の通信教育で詳細を確認。
-            </div>
-          </div>
         </div>
       </section>
 
@@ -304,23 +296,6 @@ export default function Page() {
                     </div>
                   </div>
                 ))}
-              </div>
-
-              {/* 47都道府県リンク直下：志望校選びの次の一手 */}
-              <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="grid items-center gap-4 md:grid-cols-[1fr_auto]">
-                  <div>
-                    <div className="text-sm font-bold text-slate-800">
-                      地域の制度を把握したら、学力対策を進める
-                    </div>
-                    <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                      スタディサプリ中学講座なら全教科のプロ講師の映像授業を月額料金で受けられます。
-                    </p>
-                  </div>
-                  <div className="flex justify-center md:justify-end">
-                    <AffiliateAd placement="home" id="sapuri-banner-300" trackView viewPlacement="home" />
-                  </div>
-                </div>
               </div>
 
               {/* 新ツールの発見動線：質問で即回答／成績の継続トラッキング */}
@@ -538,19 +513,6 @@ export default function Page() {
               >
                 47都道府県すべて見る
               </Link>
-            </div>
-
-            {/* サイドバーPR：個別指導の選択肢 */}
-            <div className="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-6">
-              <h3 className="font-bold text-emerald-900 mb-3 text-sm">
-                自宅で個別指導を受けるなら
-              </h3>
-              <p className="text-xs text-emerald-800 leading-relaxed mb-4">
-                ネット松陰塾は自宅でマンツーマンの個別指導を受けられる自立学習スタイル。内申点の底上げに。
-              </p>
-              <div className="flex justify-start">
-                <AffiliateAd placement="home" id="shoin-banner" centered={false} trackView viewPlacement="home" />
-              </div>
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

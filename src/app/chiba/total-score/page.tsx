@@ -6,7 +6,6 @@ import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { ChibaTotalScoreResultFlow } from '@/components/Chiba/ChibaTotalScoreResultFlow';
 import { getPrefectureByCode } from '@/lib/prefectures';
@@ -226,17 +225,6 @@ export default function ChibaTotalScorePage() {
                 同じ評定・同じ当日点でも、志望校のK値で総合得点の構成が大きく変わります。当日点が強い人はK=0.5の進学校、内申が強い人はK=1.5〜2の高校が相対的に有利になりやすいです。
               </p>
             </div>
-          </section>
-
-          {/* 2タッチ目：AI個別指導（下のParentLeadCTAとは別プログラムで多様性確保。旧Z会/サプリ¥1.5-5.4/clickの代替） */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="text-sm font-bold text-slate-700 mb-1">
-              AIが弱点を自動分析する個別指導
-            </div>
-            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              <AffiliateAd placement="total-score" id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
-            </div>
-            <AffiliateAd placement="total-score" id="atama-banner" />
           </section>
 
           {/* 保護者向けリード（旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}

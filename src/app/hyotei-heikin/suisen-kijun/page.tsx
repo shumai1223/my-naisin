@@ -5,7 +5,6 @@ import { Home, ChevronRight, Award, Calculator, TrendingUp, User, ShieldCheck, C
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 
 // 推薦・併願優遇の評定平均「出願基準」の一般的な目安バンド（特定校のボーダーではない）
@@ -264,15 +263,6 @@ export default function HyoteiSuisenKijunPage() {
               note="【atama＋ オンライン塾】の資料請求・無料体験（PR）"
             />
           </div>
-
-          {/* アフィリエイト（旧Z会/サプリ¥1.5-5.4/clickは撤去し、全国オンライン個別¥84/clickへ。上のatama+と別プログラムで多様性維持） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="mb-1 text-sm font-bold text-slate-700">評定を支える、定期テスト対策</div>
-            <div className="mb-4 text-xs leading-relaxed text-slate-500">
-              評定の土台＝定期テスト。<AffiliateAd placement="hyotei-heikin-suisen-kijun" id="sora-juku-text" hideLabel />（PR）で苦手教科を安定させる
-            </div>
-            <AffiliateAd placement="hyotei-heikin-suisen-kijun" id="sora-juku-banner" />
-          </section>
 
           {/* 関連ツール */}
           <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">

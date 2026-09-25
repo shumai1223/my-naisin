@@ -15,7 +15,6 @@ import { getPrefectureByCode } from '@/lib/prefectures';
 // (発見: 旧ハードコードはdc4/nyusen/という現在は存在しない別パスを指していた)
 const KANAGAWA_SOURCE_URL =
   getPrefectureByCode('kanagawa')?.sourceUrl ?? 'https://www.pref.kanagawa.jp/docs/hr4/senbatsu2024.html';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 import { AdUnit } from '@/components/AdSlot';
@@ -348,17 +347,6 @@ export default function KanagawaSValuePage() {
             <p className="mt-3 text-xs text-slate-500">
               ※ 合格目安は過去の入試データに基づく推定値です。年度・倍率により変動します。最新情報は神奈川県教育委員会の公式発表をご確認ください。
             </p>
-          </section>
-
-          {/* 2タッチ目：AI個別指導（下のParentLeadCTAとは別プログラムで多様性確保。旧Z会/サプリ¥1.5-5.4/clickの代替） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white px-6 py-6 text-center shadow-sm">
-            <div className="text-sm font-bold text-slate-700 mb-1">
-              AIが弱点を自動分析する個別指導
-            </div>
-            <div className="text-xs text-slate-500 mb-4 leading-relaxed">
-              <AffiliateAd placement="total-score" id="atama-text" hideLabel />（PR）の無料体験で、今の学力に必要な対策を確認できます。
-            </div>
-            <AffiliateAd placement="total-score" id="atama-banner" />
           </section>
 
           {/* 保護者向けリード（換金の本命：資料請求送客。旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}

@@ -5,7 +5,6 @@ import { Home, ChevronRight, GraduationCap, CalendarClock, Scale, HelpCircle, Sp
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AnswerBox } from '@/components/AnswerBox';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
@@ -151,9 +150,6 @@ export default function SougouGataSenbatsuPage() {
                 大学の総合型・学校推薦型選抜と費用を調べる（My Shingaku）
                 <ChevronRight className="h-4 w-4" />
               </a>
-              <span className="inline-flex items-center justify-center text-xs text-slate-500">
-                高1から評定対策を始めるなら <AffiliateAd id="zkai-daigaku" className="mx-1" hideLabel placement="hiyou" />（PR）
-              </span>
             </div>
           </section>
 

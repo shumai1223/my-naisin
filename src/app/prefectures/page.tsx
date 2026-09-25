@@ -15,7 +15,6 @@ import {
 
 import { PREFECTURES, REGIONS } from '@/lib/prefectures';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
-import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 
 export const metadata = {
   title: '内申点 計算サイト 47都道府県一覧｜都道府県別の高校入試・実技倍率を確認【2026年度・無料】 | My Naishin',
@@ -178,25 +177,6 @@ export default function PrefecturesPage() {
                 </section>
               );
             })}
-          </div>
-
-          {/* 広告セクション */}
-          <div className="mt-16 rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm text-center">
-            <div className="text-base font-bold text-slate-800 mb-1">
-              47都道府県すべてに対応する通信教育
-            </div>
-            <div className="text-xs text-slate-500 mb-5 leading-relaxed max-w-xl mx-auto">
-              地域差のないオンライン学習サービスで、内申点アップと志望校合格を両立。<AffiliateAd placement="prefectures" id="atama-text" hideLabel />（PR）は全国の多くの中学生に選ばれています。
-            </div>
-            <div className="hidden md:block">
-              <AffiliateAd placement="prefectures" id="atama-banner" />
-            </div>
-            <div className="md:hidden">
-              <AffiliateAd placement="prefectures" id="sapuri-banner-300" />
-            </div>
-            <div className="mt-4 text-xs">
-              <AffiliateAd placement="prefectures" id="zkai-text-request" className="mx-1" hideLabel />（PR）で詳細を確認
-            </div>
           </div>
 
           {/* Bottom Info */}
