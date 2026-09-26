@@ -6,6 +6,7 @@
 |---|---|---:|---|
 | 第1便 | `ops/cowork/COWORK-TASK-juku1-forms-batch1.md` | 25(全国6・神奈川10・東京9) | 👤が起動待ち(TARGETS.csv=`Cowork第1便に指示済(未送信)`) |
 | 第2便 | `ops/cowork/COWORK-TASK-juku1-forms-batch2.md` | 25(神奈川13・東京12) | 👤が起動待ち(第1便のあと) |
+| 第3便 | `ops/cowork/COWORK-TASK-juku1-forms-batch3.md` | 24(神奈川11・東京13) | 👤が起動待ち(第2便のあと) |
 
 - 生成: `node scripts/juku1-build-drafts.mjs --kind form --limit 25`(文面) → `node scripts/juku1-build-cowork.mjs <便番号> <id,...>`(指示書)
 - 文面の語句は `ops/deliverables/juku1/drafts/phrases.json` に人が書いたものだけを使う
