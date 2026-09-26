@@ -100,11 +100,11 @@
 
 ## 5. 完了の定義（成果物が実在することを ls で確かめる）
 
-- [ ] `ops/baselines/juku1-inventory-2026-09.md`（県別の在庫・ランク）
-- [ ] `ops/deliverables/juku1/LEGAL.md`（法定表示・送らない相手の基準・住所の扱いの質問）
-- [ ] `ops/deliverables/juku1/TARGETS.csv`（全国30＋A各80＋B各30＋C各5を目標）
-- [ ] `ops/deliverables/juku1/drafts/`（ひな形2本＋差し込み結果）
-- [ ] `ops/deliverables/juku1/ONE-PAGER.pdf`
-- [ ] 第1便25件の Gmail 下書き or Cowork 指示（9/27 中）
-- [ ] `ops/cowork/COWORK-TASK-juku1-forms.md`
-- [ ] `ops/deliverables/juku1/KILL-LOG.md`（空でよい・判定日だけ書く）
+- [x] `ops/baselines/juku1-inventory-2026-09.md`（県別の在庫・ランク）
+- [x] `ops/deliverables/juku1/LEGAL.md`（法定表示・送らない相手の基準・住所の扱いの質問）
+- [x] `ops/deliverables/juku1/TARGETS.csv`（実数400・全国7/A132/B147/C114＝全国枠とAが目標未達。STATUS.md参照）
+- [x] `ops/deliverables/juku1/drafts/`（ひな形2本＋差し込み結果）
+- [x] `ops/deliverables/juku1/ONE-PAGER.pdf`
+- [x] 第1便25件の Gmail 下書き or Cowork 指示（9/27 中）
+- [x] `ops/cowork/COWORK-TASK-juku1-forms.md`
+- [x] `ops/deliverables/juku1/KILL-LOG.md`（空でよい・判定日だけ書く）
