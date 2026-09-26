@@ -3,6 +3,7 @@ import { Heart, FileText, Shield, Mail, AlertTriangle, Sparkles, BookOpen, User,
 
 import { APP_NAME } from '@/lib/constants';
 import { FISCAL_YEAR_PROVISIONAL_NOTE } from '@/lib/fiscal-year';
+import { SUPPORT_URL } from '@/lib/support-link';
 
 export function Footer() {
   return (
@@ -316,6 +317,21 @@ export function Footer() {
             <Link href="/terms" className="text-[11px] text-slate-400 hover:text-blue-500">利用規約</Link>
             <div className="h-3 w-px bg-slate-200" />
             <Link href="/privacy" className="text-[11px] text-slate-400 hover:text-blue-500">プライバシーポリシー</Link>
+            {SUPPORT_URL && (
+              <>
+                <div className="h-3 w-px bg-slate-200" />
+                {/* 応援リンク（T-REV2 R5）: 小さく1つだけ・見返りは約束しない。URL未設定の間は描画しない */}
+                <a
+                  href={SUPPORT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-[10px] text-slate-400 hover:text-blue-500"
+                  title="いただいた応援は運営費にあてます（見返りはありません）"
+                >
+                  このサイトを応援する
+                </a>
+              </>
+            )}
             <div className="h-3 w-px bg-slate-200" />
             <div className="flex items-center gap-1 text-[11px] text-slate-400">
               Made with <Heart className="h-3 w-3 text-rose-400" /> for students
