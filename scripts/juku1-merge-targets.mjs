@@ -16,6 +16,8 @@ function parseCsv(t) {
   if (cur || row.length) { row.push(cur); rows.push(row); }
   return rows.filter((r) => r.some((x) => x.trim() !== ''));
 }
+// 統合は初回だけ。以降は TARGETS.csv が正本(状態の更新・下書きIDを直接書く)。上書きするには --force
+if (fs.existsSync(`${D}/TARGETS.csv`) && !process.argv.includes('--force')) { console.error('TARGETS.csv が既にある。正本を上書きしないため中止(--force で強制)'); process.exit(1); }
 const esc = (v) => (/[",\n]/.test(v) ? `"${v.replaceAll('"', '""')}"` : v);
 const all = []; const problems = [];
 for (const f of fs.readdirSync(`${D}/targets-parts`).filter((x) => x.endsWith('.csv')).sort()) {
@@ -33,23 +35,24 @@ const norm = (s) => String(s ?? '').replace(/\s|株式会社|有限会社|一般
 const ledgerOrgs = (Array.isArray(ledgerRaw) ? ledgerRaw : ledgerRaw.entries ?? []).map((e) => ({ org: e.org, status: e.status, key: norm(e.org) })).filter((e) => e.key.length >= 3);
 const seenCompany = new Map(); const seenDest = new Map();
 const PERSONAL = /@(gmail|yahoo|icloud|hotmail|outlook)\./i;
+const demote = (t, st, why) => { t['状態'] = st; t['一言メモ'] += ` [検査: ${why}]`; };
 for (const t of all) {
   const live = t['状態'] === '未着手';
   if (live && t['窓口種別'] === 'mail' && !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(t['宛先'])) problems.push(`${t.id}: メール形式が不正 ${t['宛先']}`);
   if (live && t['窓口種別'] === 'form' && !/^https?:\/\//.test(t['宛先'])) problems.push(`${t.id}: フォームURLが不正 ${t['宛先']}`);
   if (live && t['営業お断り表記の有無'] !== '無') problems.push(`${t.id}: お断り表記が「無」と確認されていないのに未着手`);
-  if (live && PERSONAL.test(t['宛先'])) problems.push(`${t.id}: フリーメール宛先(個人アドレスの可能性) ${t['宛先']}`);
+  if (live && PERSONAL.test(t['宛先'])) { demote(t, '要確認', 'フリーメール宛先(個人アドレスの可能性・👤判断)'); problems.push(`${t.id}: フリーメール宛先 → 要確認へ ${t['宛先']}`); }
   if (live && !t['一言メモ']) problems.push(`${t.id}: 一言メモが空`);
   if (/思学舎|イー・エス・ティ|ベネッセ|旺文社/.test(t['塾名'] + t['運営会社']) && live) problems.push(`${t.id}: 除外対象の運営会社`);
   if (live) {
     const nm = norm(t['塾名'] + t['運営会社']);
     const own = norm(t['運営会社'] || t['塾名']);
-    for (const e of ledgerOrgs) if (nm.includes(e.key) || (own.length >= 3 && e.key.includes(own))) problems.push(`${t.id}: B2B台帳(outreach-ledger)に連絡履歴あり → ${e.org} (${e.status}) 👤確認`);
+    for (const e of ledgerOrgs) if (nm.includes(e.key) || (own.length >= 5 && e.key.includes(own))) { demote(t, '要確認', `B2B台帳に連絡履歴あり(${e.org} ${e.status})・二重に連絡しないよう👤判断`); problems.push(`${t.id}: B2B台帳に連絡履歴 → 要確認へ ${e.org}`); break; }
   }
   const ck = (t['運営会社'] || t['塾名']).replace(/\s|株式会社|有限会社|\(株\)|（株）/g, '');
   if (live) {
-    if (seenCompany.has(ck)) problems.push(`${t.id}: 運営会社重複(${seenCompany.get(ck)}と) ${ck}`); else seenCompany.set(ck, t.id);
-    if (seenDest.has(t['宛先'])) problems.push(`${t.id}: 宛先重複(${seenDest.get(t['宛先'])}と) ${t['宛先']}`); else seenDest.set(t['宛先'], t.id);
+    if (seenCompany.has(ck)) { demote(t, '除外', `運営会社重複(${seenCompany.get(ck)})`); problems.push(`${t.id}: 運営会社重複 → 除外 (${seenCompany.get(ck)}と) ${ck}`); } else seenCompany.set(ck, t.id);
+    if (seenDest.has(t['宛先']) && t['状態'] === '未着手') { demote(t, '除外', `宛先重複(${seenDest.get(t['宛先'])})`); problems.push(`${t.id}: 宛先重複 → 除外 (${seenDest.get(t['宛先'])}と)`); } else seenDest.set(t['宛先'], t.id);
   }
 }
 fs.writeFileSync(`${D}/TARGETS.csv`, '\uFEFF' + [HEAD.join(',')].concat(all.map((t) => HEAD.map((k) => esc(t[k])).join(','))).join('\r\n') + '\r\n', 'utf8');

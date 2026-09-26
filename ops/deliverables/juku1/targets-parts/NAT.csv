@@ -1,0 +1,34 @@
+id,県,塾名,運営会社,窓口種別,宛先,確認したページURL,営業お断り表記の有無,中学生コースの有無,教室数,一言メモ,状態
+NAT-001,national,そら塾,株式会社スプリックス,form,https://sprix.inc/contact/,https://sprix.inc/contact/,無,有,,"中学生向けコース紹介ページ(sorajuku.jp/course/middle.html)に中学1年〜3年のコースがある。同社フォームは対象サービスに「そら塾」を選べる(森塾・河合塾マナビス等も同社)",未着手
+NAT-002,national,東進オンライン学校・東進中学NET,株式会社ナガセ,form,https://www.toshin.com/toi/,https://www.toshin.com/toi/,無,有,,"東進公式サイトに中学生向けの「東進中学NET」「東進ハイスクール中学部」と全国統一中学生テストの案内がある",未着手
+NAT-003,national,学研の家庭教師・学研教室ほか(学研),株式会社学研ホールディングス,form,https://www.gakken.co.jp/ja/contact/contact3.html,https://www.gakken.co.jp/ja/contact/contact3.html,無,有,,"中学生向けページに「学研の家庭教師【中学生コース】は学力検査対策だけでなく内申点対策にも特化」と記載。フォームは「メディアの方、ビジネス利用をご希望のお客様」窓口。城南進学研究社(NAT-010)は学研グループ",未着手
+NAT-004,national,個別指導Axis(Axisのオンライン家庭教師),株式会社ワオ・コーポレーション,form,https://www.wao-corp.com/contact/business/,https://www.wao-corp.com/contact/business/,無,有,,"Axisのオンライン家庭教師ページに「内申点を上げる対策」までの対応と記載。フォームは「事業・サービスに関するお問い合わせ」(会社名欄あり)",未着手
+NAT-005,national,マナリンク,株式会社NoSchool,form,https://manalink.jp/contact,https://manalink.jp/contact,無,有,,"中学生向け講座に「高校受験 過去問演習講座」など高校受験対策の講座が掲載されている。フォームは氏名・メール・内容のみの一般問い合わせ",未着手
+NAT-006,national,スマイルゼミ(中学生コース),株式会社ジャストシステム,form,https://www.justsystems.com/jp/contact/,https://www.justsystems.com/jp/contact/,無,有,,"中学3年生向けページ(smile-zemi.jp/chugaku/grade/3rd-year/)で受験と内申点に触れている。問い合わせページに「その他のお問い合わせ」区分がある",未着手
+NAT-007,national,すらら,株式会社すららネット,form,https://surala.co.jp/contact/,https://surala.co.jp/contact/,無,有,,"すららトップに「中学/高校受験をサポートします」と記載",未着手
+NAT-008,national,明光義塾(オンライン明光義塾),株式会社明光ネットワークジャパン,form,https://cloud.swcms.net/meikonetPublic/ja/inquiry1.html,https://cloud.swcms.net/meikonetPublic/ja/inquiry1.html,無,有,,"明光義塾サイトに「中学生の定期テスト対策」「中学生の個別指導」のページがある。フォームは会社名・部署欄あり(全国チェーンの本部窓口)",未着手
+NAT-009,national,スクールIE,やる気スイッチグループ,form,https://www.yarukiswitch.jp/inquiry/advertisement/,https://www.yarukiswitch.jp/inquiry/advertisement/,無,有,,"「広告宣伝、プロモーション、Webマーケティングに関するご提案」用の専用フォーム(広告に関するお問い合わせ)がある。スクールIE公式に「定期テスト/内申対策」「高校受験対策」の記載(グループ全体で国内外2,400以上の教室)",未着手
+NAT-010,national,デキタス・城南コベッツ,株式会社城南進学研究社,form,https://najb.f.msgs.jp/webapp/form/23673_najb_6/index.do,https://najb.f.msgs.jp/webapp/form/23673_najb_6/index.do,無,有,,"問い合わせフォームの内容選択に「広告・宣伝・PR/取材（生徒募集）について」がある。デキタスは「小学生・中学生向けオンライン学習教材」。学研グループ(NAT-003と同グループ)",未着手
+NAT-011,national,アガルート学習コーチング,株式会社アガルート,form,https://www.agaroot.jp/coaching/inquiry/,https://www.agaroot.jp/coaching/inquiry/,無,有,,"サイトに「中学生・高校受験コース」がある。フォームは氏名・メール・電話・内容のみの一般問い合わせ",未着手
+NAT-012,national,天神(家庭学習教材),株式会社タオ,form,https://www.tenjin.cc/contents/inquiries/,https://www.tenjin.cc/contents/inquiries/,無,有,,"家庭学習教材「天神」に中学生版の商品ページがある(会社概要ページにも問い合わせフォームあり)",未着手
+NAT-013,national,勉トレ,,form,https://bentore.net/contact/,https://bentore.net/contact/,無,有,,"問い合わせフォームに「生徒・保護者お問い合わせ」と別に「法人・広告主お問い合わせ」の区分がある(特商法表記の販売業者名は「勉トレ」のみ)",未着手
+NAT-014,national,Create Education Online(参考書ルート予備校),,mail,info@create-education-online.com,https://www.create-education-online.com/,無,有,,"トップページに「中学生のコース」があり「内申点アップ」の記載。事業用メールアドレスとしてページ本文に掲載(WebFetchで2回一致確認)。沖縄拠点のオンライン塾",未着手
+NAT-015,national,EIKOH LiNK STUDY(栄光ゼミナール),株式会社栄光,form,https://4bd1bb6f.form.kintoneapp.com/public/1a37f590c6a3f2e2f16d3497f99f4f0df35606314aa1ebad43a7e5cd3275b93c,https://www.eikoh.co.jp/corporate/,,有,,"会社案内ページに「その他のお問い合わせフォーム」があるが、フォームはJavaScript描画で本文を読めず営業お断りの有無を確認できていない。LINK STUDYに「【中1~3】リンスタ高校受験対策」あり",要確認
+NAT-016,national,公文式(KUMON),公文教育研究会,form,https://www.kumon.ne.jp/tetsuzuki/otoiawase/index.html,https://www.kumon.ne.jp/tetsuzuki/otoiawase/index.html,,有,,"問い合わせページは学習者・入会向けの区分が中心で、企業・広告向け窓口を確認できていない",要確認
+NAT-017,national,河合塾(河合塾One),学校法人河合塾,form,https://www.kawaijuku.jp/inquiry.html,https://www.kawaijuku.jp/inquiry.html,有,有,,"お問い合わせページに「営業を目的としたお問い合わせはご遠慮ください。」と記載",除外
+NAT-018,national,ITTO個別指導学院,株式会社ITTO,form,https://www.itto.jp/company/form/itto/,https://www.itto.jp/company/form/itto/,有,有,,"お問い合わせフォームの注意事項に「営業目的でのご利用はお断りします。」と記載",除外
+NAT-019,national,家庭教師のトライ・トライのオンライン個別指導塾,株式会社トライグループ,form,https://www.trygroup.co.jp/request/,https://www.trygroup.co.jp/request/,無,有,,"トライのオンライン個別指導塾に「中学生の高校受験・定期テスト・内申点対策」ページがあるが、公開窓口は資料請求フォームのみで法人窓口を確認できない",除外
+NAT-020,national,Z会の通信教育,,form,https://www.zkai.co.jp/jr/inquiry/,https://www.zkai.co.jp/jr/inquiry/,,有,,"公開されている問い合わせ先は受講者向けサポートセンター等のみで法人・広告向け窓口を確認できない(法人向けは企業研修ページのみ)",除外
+NAT-021,national,スタディサプリ,株式会社リクルート,form,https://studysapuri.jp/info/help/,https://studysapuri.jp/info/help/,,有,,"公開窓口は利用者向けヘルプ、コーポレートの問い合わせは報道関係者向けのみで営業窓口を確認できない",除外
+NAT-022,national,オンライン家庭教師WAM,株式会社エイチ・エム・グループ,form,https://wam.onl/contact/,https://wam.onl/contact/,無,有,,"公立高校入試対策・中高一貫校内申対策の記載があるが、公開窓口は保護者向けの資料請求・入塾相談フォーム(お子さんの学年が必須)のみ",除外
+NAT-023,national,家庭教師のラスト,オルレアンの乙女株式会社,form,https://last-teacher.co.jp/contact/,https://last-teacher.co.jp/contact/,無,有,,"定期テスト対策・高校受験対策の記載があるが、公開窓口は体験・資料請求フォーム(学年必須)のみ",除外
+NAT-024,national,東大先生,株式会社AGILE STUDY,form,https://todai-sensei.jp/contact,https://todai-sensei.jp/contact,無,,,"公開窓口は無料学習相談・資料請求フォーム(生徒氏名・学年が必須)のみ。中学生向けの記述は未確認",除外
+NAT-025,national,SKY家庭教師,株式会社カノカコーポレーション,form,https://sky-kk.com/contact-us/,https://sky-kk.com/contact-us/,無,有,,"「私立・公立高校受験等対応します」と記載。公開窓口は無料体験・資料請求と兼用のフォームのみ",除外
+NAT-026,national,プロ家庭教師 アズネット(AZ-net),有限会社アズネット,form,https://aznet-pro.com/contact/,https://aznet-pro.com/contact/,無,有,,"「中学・高校・大受受験コース」の記載があるが、公開窓口は無料相談・資料請求フォーム(学年選択)のみ",除外
+NAT-027,national,キミノスクール,株式会社クルイト,form,https://kimino-school.com/contact/,https://kimino-school.com/contact/,無,有,,"中3の生徒の声を掲載。公開窓口は体験・資料請求フォームのみで、掲載メールは個人情報の取扱い窓口(privacy@)のため対象外",除外
+NAT-028,national,オンライン家庭教師ネッティー,株式会社ワン・ツー・ワン,form,https://www.katekyoinfo.com/contact/,https://www.katekyoinfo.com/contact/,無,有,,"「高校受験専門コース」がある。公開窓口は本人・保護者の氏名と学年が必須の入会向けフォームのみ",除外
+NAT-029,national,DIC学園(プロ家庭教師),株式会社ディック学園,form,https://www.pro-dic.jp/contact.html,https://www.pro-dic.jp/contact.html,無,有,,"「定期テスト・内申点アップ対策」の記載があるが、公開窓口は無料体験・相談フォームのみ",除外
+NAT-030,national,オンライン東大家庭教師友の会,,form,https://online.tomonokai.net/inquiry/,https://online.tomonokai.net/inquiry/,無,有,,"中学生の家庭教師コースの記載があるが、公開窓口は無料体験・資料請求フォームのみ",除外
+NAT-031,national,オンライン家庭教師ピース,株式会社デジタルand,form,https://katekyo-peacenet.com/inquiry.html,https://katekyo-peacenet.com/,無,有,,"トップページにサービス終了に伴う今後のスケジュールの案内が掲載されている",除外
+NAT-032,national,スタディコーチ,株式会社Builds,form,https://studycoach.co.jp/contact/,https://studycoach.co.jp/contact/,無,,,"公開窓口は無料体験・資料請求フォームのみ。中学生向けの記述は未確認",除外
+NAT-033,national,atama+(進学個別atama+塾),atama plus株式会社,form,https://offers.atama.plus/contact/,https://offers.atama.plus/contact/,,有,,"公開窓口は「学習塾様向け」の導入相談フォームなど用途別で、広告向け窓口を確認できない",除外

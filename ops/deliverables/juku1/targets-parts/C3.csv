@@ -1,0 +1,67 @@
+id,県,塾名,運営会社,窓口種別,宛先,確認したページURL,営業お断り表記の有無,中学生コースの有無,教室数,一言メモ,状態
+C3-001,gunma,前橋ゼミ,株式会社H.Y.T.,form,https://maezemi.com/contact/,https://maezemi.com/contact/,無,有,8,中学生向けの「個別Lab＋」コースがあり、新前橋駅前校と高崎駅西口校は中学生・高校生のみの教室と記載(前橋市),未着手
+C3-002,gunma,武蔵進学教室,,mail,musashi-shingaku@outlook.jp,https://www.musashishingaku.com/,無,有,1,中3クラスを月・木の20:00～22:30に開講と授業料表に記載(伊勢崎市),未着手
+C3-003,gunma,星野進学ゼミ,,form,https://www.hoshinoshingakuzemi.jp/pages/4/,https://www.hoshinoshingakuzemi.jp/,無,有,2,中3向け「トップ高校上位合格講座」(5教科・全12回の特訓)がある(太田市),未着手
+C3-004,gunma,次世代型超個別塾Genesis,株式会社グリフエデュケーション,form,https://genesis-juku.com/contact/,https://genesis-juku.com/,無,有,2,中学生コースは学校の内容から高校受験まで対応し、県内トップレベルの進学校合格者も出したと記載(沼田校・高崎校),未着手
+C3-005,gunma,うすい学園,株式会社うすい,form,https://ac.usuigakuen.co.jp/inquiry,https://usuigakuen.co.jp/about/,無,有,20,中学部に定期テスト対策・入試対策・入試情報のページがある(高崎・前橋・伊勢崎・太田など20校以上),未着手
+C3-006,gunma,適塾,,form,http://www.tekijuku.info/10-contact.php,http://www.tekijuku.info/10-contact.php,有,,,お問い合わせフォームに「営業目的のご利用はご遠慮ください」の記載あり,除外
+C3-007,gunma,慎塾,,form,https://maebashi-shinjuku.jp/contact/,https://maebashi-shinjuku.jp/contact/,有,,,お問い合わせフォームに「企業様からの営業メールはご遠慮ください」の記載あり(前橋市),除外
+C3-008,kumamoto,はち塾,,mail,info@hachijuku.com,https://hachijuku.com/,無,有,1,トップページに「八代市の個別指導 学習塾。高校生 中学生向け。」と記載(八代市),未着手
+C3-009,kumamoto,明成塾,,form,https://meisei-juku.net/inquiry/,https://meisei-juku.net/,無,有,1,サイトに「熊高 済々黌 第一 第二 高専合格指導の明成塾です」と記載(熊本市西区),未着手
+C3-010,kumamoto,少人数指導塾テラス サクラマチ校,株式会社Terrace,mail,info@terrace-kmc.com,https://www.terrace-kmc.com/company,無,有,1,中学生コースのページに「定期テストから入試まで幅広く対応」と記載(熊本市),未着手
+C3-011,kumamoto,さくらゼミナール,,form,https://sakura-seminar.com/contact/,https://sakura-seminar.com/,無,有,2,中3を含む定期テストの順位・点数アップの生徒事例を掲載(むさし校・ましき校),未着手
+C3-012,kumamoto,DOゼミナール,有限会社エイペックス,form,https://do-semi.jp/s-contact/,https://do-semi.jp/,無,有,9,トップページに中学生向けの通常講座・テスト対策会・無料の定期テスト対策の案内がある(福岡6・熊本3校舎、本社は玉名市),未着手
+C3-013,kumamoto,熊本ゼミナール,熊本ゼミナール株式会社,form,,https://www.kumazemi.jp/company/,無,有,,「公立高校受験コース」がある。ただし会社概要ページの資料請求・お問い合わせはLINE経由のリンクのみで、メールアドレスや通常フォームを確認できていない,要確認
+C3-014,shizuoka,ユリイカ進学教室,,form,https://www.schooleureka.jp/contact/,https://www.schooleureka.jp/,無,有,1,「二週間ほど前から定期テスト対策授業」を行うと記載(静岡市葵区),未着手
+C3-015,shizuoka,With学習塾,WITH HARMONICS,form,https://www.withgakushujuku.com/contact,https://www.withgakushujuku.com/,無,有,5,「学調や高校受験の対策は、この夏休みの過ごし方がカギになります」と案内(島田・掛川・焼津・静岡の5教室),未着手
+C3-016,shizuoka,STUDY BASE,,form,https://study-base.jp/contact/,https://study-base.jp/contact/,無,有,,問い合わせ項目に「目標としている進学先の合格点数や内申点の目安を知りたい」がある(富士市),未着手
+C3-017,shizuoka,沼津進学塾,,form,https://numashin-jyuku.com/contact/,https://numashin-jyuku.com/,無,有,2,「内申点対策から始め、高校入試や高校入学後に対応できる基礎学力の定着を図る」と記載(沼津市・清水町),未着手
+C3-018,shizuoka,弘友私塾,kouyushi-juku Co.Ltd,form,https://www.kou-yu.jp/contact/,https://www.kou-yu.jp/,無,有,,公立中学の定期テスト・学力調査テストが難化していると説明し、問い合わせ欄の学年に中1～中3がある(静岡市),未着手
+C3-019,shizuoka,まながく,株式会社スタディーネットワーク,form,https://managaku-juku.com/form02/,https://managaku-juku.com/,,,6,浜松市の個別指導塾。トップページから案内される form02 のフォームは文字化けして用途(問い合わせか資料請求か)を確認できていない,要確認
+C3-020,shizuoka,修学館,,form,https://shuugakukan.com/contact/,https://shuugakukan.com/contact/,有,,,お問い合わせフォームに「営業・提案・勧誘等の目的での利用は固く禁止」の記載あり(静岡市),除外
+C3-021,shizuoka,向上館,,form,https://www.kojokan.jp/%e7%84%a1%e6%96%99%e4%bd%93%e9%a8%93%e3%83%bb%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,https://www.kojokan.jp/,有,,,問い合わせフォームに「営業・勧誘」を禁じる旨の記載あり(三島市ほか),除外
+C3-022,shizuoka,虹の風学修館,,form,https://www.gakuki.co.jp/nijinokaze/inquiry/,https://www.gakuki.co.jp/nijinokaze/inquiry/,有,,,問い合わせフォームに「営業メールやご提案に関するメールはお断り」の記載あり(浜松市),除外
+C3-023,shizuoka,桐光学院,,form,https://tokogakuin.com/contact/,https://tokogakuin.com/contact/,有,,,お問い合わせに「営業や勧誘等一切の営業活動の書き込みをご遠慮願います」の記載あり(浜松市),除外
+C3-024,shizuoka,みしま時習館,,,,https://m-jishukan.com/contact,無,,1,問い合わせは電話と公式LINEのみで、メールアドレスもフォームも公開されていない(三島市),除外
+C3-025,shizuoka,育英学園,,,,http://ikuei-gakuen.com/,,,,WebFetchで証明書エラー(共用証明書と不一致)のため確認できず(三島市),確認不可（証明書エラー）
+C3-026,kochi,歩塾,,mail,ayumijukuhonbu@kochi.email.ne.jp,https://www.ayumijuku.com/inquiry.html,無,有,4,「資料のご請求、または、ご質問・お問い合わせ」用ページに掲載され、鴨部教室に小学部・公立中学部がある(高知市),未着手
+C3-027,kochi,土佐アカデミー,,form,https://tosaacademy.com/contact,https://tosaacademy.com/contact,無,有,9,サイトに「瀬戸教室冬季講座」のページがある(高知県内9教室),未着手
+C3-028,kochi,佑啓塾,,form,https://peraichi.com/landing_pages/view/yukei-top/,https://peraichi.com/landing_pages/view/yukei-top/,無,有,,中学3年の授業を火・木・土の19:15～22:15に実施と記載(高知市。問い合わせフォームは同ページ内),未着手
+C3-029,kochi,稲吉塾,,form,https://inajuku.jp/contact/,https://inajuku.jp/contact/,無,有,,中学生は英語と数学の授業が毎回あり、学校授業の先取りをすると記載(南国市),未着手
+C3-030,kochi,ギフコ学習塾,,mail,gifco55@yahoo.co.jp,https://gifco.nobu-naga.net/contact.html,無,有,,お問い合わせページに「質問がありましたら、gifco55@yahoo.co.jpまで」とあり、中学生コースがある(香南市。2回取得して一致),未着手
+C3-031,kochi,土佐塾,,form,https://www.tosajuku.com/mail/,https://www.tosajuku.com/mail/,無,有,,「お問い合わせ」ページはあるが、フォームの中身を取得できず用途を確認できていない(公立高校の合格実績を掲載),要確認
+C3-032,kochi,律志舎グループ,,,,https://www.kawasaki-juku.com/,無,,,トップページに電話番号のみで、メールアドレスもフォームもない(高知市),除外
+C3-033,kochi,佐々木理数塾,株式会社佐々木理数塾,,,https://kochi-sasaki.jp/,無,無,1,申し込みはLINE公式アカウントのみで、難関大学受験の理数専門塾(高知市),除外
+C3-034,kochi,ことは塾,,,,https://kotohajuku.jimdofree.com/,無,有,1,メールアドレスもお問い合わせフォームも見当たらない(南国市),除外
+C3-035,okinawa,学習塾ベンガル,,form,https://bengal.okinawa/contact/,https://bengal.okinawa/,無,有,2,「内申点アップから入試対策まで行う中学生コース」と記載(うるま市),未着手
+C3-036,okinawa,明進セミナー,,mail,contact@meishin-seminar.com,https://www.meishin-seminar.com/,無,有,2,「テスト当日の早朝特訓やってます」と記載(沖縄市・西原町・北谷町・中城村向け),未着手
+C3-037,okinawa,琉大進学塾,R PROJECT,form,https://ryudaijuku.net/contact/,https://ryudaijuku.net/,無,有,3,那覇国際高校・国立沖縄高専・首里高校・浦添高校で県内1位の合格者数と記載(那覇・浦添・宜野湾),未着手
+C3-038,okinawa,沖縄進学塾,,form,https://juku.okinawa/%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B/,https://juku.okinawa/,無,有,,「高校入試を目標においた基礎学力・応用力をつけるための授業」と記載し、高校入試コースがある(那覇市の小禄・金城・鏡原中学校区専門),未着手
+C3-039,okinawa,ハル進学スクール,,form,https://www.hal-shingakuschool.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,https://www.hal-shingakuschool.com/,無,有,,サイトのタイトルに「中学高校受験のエキスパート」とあり、問い合わせフォームの学年欄に中1～中3がある(メールアドレスはメール保護表示のためフォーム扱い),未着手
+C3-040,okinawa,屋宜塾,,,,https://yagi-juku.com/,無,有,2,「学習塾 中学部」の募集クラスがあるが、メールアドレスもフォームも見当たらない(那覇本校・中部普天間校),除外
+C3-041,toyama,アルファ進学スクール,,mail,soumu@alpha-es.co.jp,https://www.alpha-es.co.jp/information/,無,有,,中学部で「高校入試・大学入試で実力を発揮するための確かな『得点力』を鍛える」と記載(本部事務所の連絡先メール),未着手
+C3-042,toyama,道徳塾,ひこばえの杜,form,https://www.doutokujuku.jp/pages/3/,https://www.doutokujuku.jp/,無,有,,中学生向けの集団個別指導で「自分の課題を見つけ、自分で工夫して学ぶ習慣」を身に着けると記載(高岡市福岡町),未着手
+C3-043,toyama,学び舎プラット,,form,https://www.manabiya-plat.jp/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,https://www.manabiya-plat.jp/,無,有,2,問い合わせフォームで入塾・体験を受け付け、学年欄に中1～中3がある(魚津市・滑川市),未着手
+C3-044,toyama,エミール教育センター,,form,https://itoemiel.com/?page_id=456,https://itoemiel.com/,無,有,2,中学生は英語・数学・理科・社会を指導し、高岡高校・砺波高校・高岡南高校などへの進学実績を掲載(南砺市の福野・井波教室),未着手
+C3-045,toyama,成和学舎,,form,https://lovetonami.com/seiwagakusha/contact_me/,https://lovetonami.com/seiwagakusha/home/,無,有,3,高校受験の対応先として高岡高校・砺波高校・高岡南高校・富山高専・石川高専などを記載(南砺市),未着手
+C3-046,toyama,富山育英センター,,form,https://www.toyama-ikuei.com/apply/,https://www.toyama-ikuei.com/,,有,18,「富山県高校入試育英模試」と中学部の入試対策がある。育英模試申込フォームの規約に「営業活動など迷惑活動」を禁じる文言があり、適用範囲を要確認,要確認
+C3-047,toyama,平成義塾,,,,http://www.heisei-school.jp/,,,,WebFetchで接続失敗(Socket is closed)のため確認できず(富山市),確認不可（証明書エラー）
+C3-048,toyama,城西セミナー,,,,http://www.jousai.com/,,,,WebFetchで接続失敗(Socket is closed)のため確認できず(高岡市),確認不可（証明書エラー）
+C3-049,toyama,張田塾,,,,https://haritajuku.jimdofree.com/,無,有,1,公開アドレスはメール保護表示で読めず、フォームもない。県立高校普通科を目指す中学生向けの一斉・個別授業を掲載(射水市),除外
+C3-050,toyama,明塾,,,,https://meijuku.amebaownd.com/,無,有,1,メールが「先頭のmを1つ削除して送信」という難読化表記でそのまま宛先にできず、フォームもない。中学3年に休日の入試対策を掲載(魚津市),除外
+C3-051,toyama,教育センター学習塾,,,,https://www.kyoiku-center.co.jp/,無,有,3,メールアドレスもフォームも公開されていない(富山市の3校),除外
+C3-052,fukushima,ツカハラ塾,,form,https://www.tukahara-school.com/contact/,https://www.tukahara-school.com/contact/,無,有,,「中学生は高校入試を見越した完全5教科指導」と記載(郡山市),未着手
+C3-053,fukushima,村田進学塾,,form,https://murata-singaku.jp/contact,https://murata-singaku.jp/contact,無,有,7,問い合わせフォームで高校入試説明会・講習会・定期テスト対策の問い合わせを受け付け、「高校別受験対策」を掲載(いわき市),未着手
+C3-054,fukushima,伊藤学習塾,,form,https://ito-gakushujuku.com/contact.php,https://ito-gakushujuku.com/,無,有,2,過去3年間の合格実績に会津高校など地元高校を掲載(会津若松市),未着手
+C3-055,fukushima,名城塾,,form,https://meijojuku.com/top/contact/,https://meijojuku.com/top/,無,有,1,トップページに「中学生開講講座」とテスト対策講座の日程を掲載(福島市),未着手
+C3-056,fukushima,大舘塾,,form,https://odatejuku.jp/contact/,https://odatejuku.jp/,無,有,,定期テスト対策に対応できると案内し、福島高校の合格者数を実績として掲載(福島市),未着手
+C3-057,fukushima,東日本学院,,form,https://www.higashinihongakuin.com/experience,https://www.higashinihongakuin.com/,無,有,14,中1～中3対象の定期テスト対策講座を掲載。ただし窓口は資料請求(/catalog)と相談・体験予約(/experience)のみで、通常の問い合わせ先を確認できていない,要確認
+C3-058,fukushima,ベスト学院進学塾,BEST GAKUIN Corporation,form,https://www.bestgakuin.co.jp/contact/,https://www.bestgakuin.co.jp/,無,有,45,「福島県立高等学校を目指すなら、やっぱりベスト学院」と記載。ただしフォームは資料請求・入塾・個別相談会の申込用で、一般の問い合わせ用か要確認,要確認
+C3-059,fukushima,進学研究室,,,,http://shingaku-kenkyushitsu.com/,,,,WebFetchで証明書エラー(共用証明書と不一致)のため確認できず(福島市),確認不可（証明書エラー）
+C3-060,oita,個別指導専門塾 自啓館,,form,https://www.jikeikan.com/contact/,https://www.jikeikan.com/,無,有,5,中学入学後の最初のテストが70番以下だった生徒に英数から指導し、中3から国語を加えた事例を掲載(大分市),未着手
+C3-061,oita,中村塾,,form,https://onkjyuku.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b,https://onkjyuku.com/,無,有,,「【2026年夏期講習受付中】大分市の中学生向け夏期講習」という記事がある(大分市),未着手
+C3-062,oita,夢進学塾kanaL,,form,https://form.run/@kanal/,https://yume-kanal-oita.com/,無,有,1,中1～中3の通常指導があり、大分県高校入試情報のブログと内申点計算ツールを提供(大分市),未着手
+C3-063,oita,進学予備校ウインロード,,form,https://winroadrikeijyuku.com/?page_id=3598,https://winroadrikeijyuku.com/,無,有,2,「中学生コース詳細」「中学生コース受講料」のページがあり、上野丘・舞鶴・鶴見丘受験をうたう(別府校・大分明野校),未着手
+C3-064,oita,東セミ,株式会社熱き情熱コーポレーション,form,https://atsuki.co.jp/contact/,https://tosemi.jp/middle,無,有,22,中学部に「定期テストでよい点を取り高校合格を目指す公立コース」があり、定期試験対策で内申点アップにつなげると記載(大分・宮崎・福岡),未着手
+C3-065,oita,個別指導の慶林館,DIC学園グループ,form,https://www.e-kobetu.jp/form_efo/,https://www.e-kobetu.jp/chugaku/index.html,無,有,,中学生向けページに「徹底した入試分析に基づく指導」とある。ただし窓口は「メールでのお申込み」フォームで、一般の問い合わせ用か要確認(大分県内9校),要確認
+C3-066,oita,進学教室スタップ(St-up),,form,https://st-up-oita.webnode.jp/ask/,https://st-up-oita.webnode.jp/ask/,有,,,問い合わせページに「「営業的」の問い合わせはご遠慮ください！（返信しません）」の記載あり(大分市),除外

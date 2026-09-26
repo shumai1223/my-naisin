@@ -1,0 +1,87 @@
+id,県,塾名,運営会社,窓口種別,宛先,確認したページURL,営業お断り表記の有無,中学生コースの有無,教室数,一言メモ,状態
+BONE-001,osaka,ローラン教育学院,,form,https://www.loran-net.com/mailform/,https://www.loran-net.com/mailform/,無,有,,公立中学校に通う生徒向けの基本コースで学校別の定期テスト対策があると記載(大東市),未着手
+BONE-002,osaka,イーエス個別ゼミナール,,form,https://es-seminar.com/%e3%81%8a%e5%95%8f%e5%90%88%e3%81%9b/,https://es-seminar.com/%e3%81%8a%e5%95%8f%e5%90%88%e3%81%9b/,無,有,,地域に特化したカリキュラムで内申点アップに直結する指導を行うと記載(松原市・堺市),未着手
+BONE-003,osaka,みらい個別,,form,https://mirai-kobetsu.com/contact,https://mirai-kobetsu.com/contact,無,有,,中学生向けに中学校別「無料」5科テスト対策コースがある(茨木市・高槻市),未着手
+BONE-004,osaka,対面式個別指導ステップアップ,株式会社スリーピース,form,https://stepup-kobetsu.com/contact.php,https://stepup-kobetsu.com/contact.php,無,有,,中3生対象の五ツ木模試対策(お申込み受付)のお知らせがある(大阪市),未着手
+BONE-005,osaka,TKT個別指導塾,,form,https://tkt-juku.com/contact/,https://tkt-juku.com/contact/,無,有,,中学生コースに定期テスト対策・高校入試対策と記載(堺市堺区),未着手
+BONE-006,osaka,堺予備校,,form,https://yobiko1587.com/contact/,https://yobiko1587.com/contact/,無,有,,1学年1クラスの少人数制で公立・私立高校受験に向けた授業を行うと記載(堺市西区),未着手
+BONE-007,osaka,関進ゼミ,,form,https://www.kanshin-semi.com/contact/,https://www.kanshin-semi.com/contact/,無,有,,泉ヶ丘教室に中学部(高校受験コース)がある(堺市),未着手
+BONE-008,osaka,英知ゼミ,,form,https://eichi-zemi.com/contact,https://eichi-zemi.com/contact,無,有,,中3レギュラーコースの募集状況を掲載(東大阪市),未着手
+BONE-009,osaka,かいりつゼミ,,form,https://tokkunkobetu.jimdofree.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,https://tokkunkobetu.jimdofree.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,無,有,,2026年冬期講習(12/22〜1/7)と中3対象の入試講習(11/3〜)の期間を掲載(堺市堺区),未着手
+BONE-010,osaka,円現塾,,form,https://engenjuku.com/inquiry/,https://engenjuku.com/inquiry/,無,有,,大阪公立高校の偏差値と合格ラインの最新版を公開中と掲載(都島区・天王寺区),未着手
+BONE-011,osaka,友学園,,form,https://tomogaku.co.jp/page-63/page-143,https://tomogaku.co.jp/page-63/page-143,無,有,,大阪府公立高校入試C問題のリスニング・ライティング比率の変化に触れた記事がある(守口市),未着手
+BONE-012,osaka,阪神個別学習院,,form,https://www.hanshinkobetsu.com/contact/,https://www.hanshinkobetsu.com/contact/,無,有,,冬期講習会(2期申込)受付中のお知らせ(2025/12/09)がある(大阪市),未着手
+BONE-013,osaka,プロ進学塾,,form,https://www.pro-juku.net/contact,https://www.pro-juku.net/contact,無,有,,中学校での定期テストの成績アップ・実力養成にこだわると記載(堺市),未着手
+BONE-014,osaka,愛知ゼミナール個別指導塾,,form,https://aitizemi.com/contact/,https://aitizemi.com/contact/,無,有,,大阪府公立高校入試の内申点・偏差値・合格最低点の一覧ページがある(豊中市),未着手
+BONE-015,osaka,個別指導塾ウイズ,千里丘観光開発株式会社,mail,juku-with@senrioka.co.jp,https://juku-with.com/contact,無,有,,2026年春の公立高校全員合格の実績と定期テスト・評定対策を掲載(吹田市),未着手
+BONE-016,osaka,フォーインワンゼミナール,,form,https://4in1.jp/contact/,https://4in1.jp/contact/,無,有,,地域の学校に完全対応の一斉クラスで定期テスト対策や日曜補習は無料と記載(門真市),未着手
+BONE-017,osaka,個別学習塾Wing,,form,https://www.winggr.com/%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B-%E5%AE%9F%E7%B8%BE%E7%B4%B9%E4%BB%8B/,https://www.winggr.com/%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B-%E5%AE%9F%E7%B8%BE%E7%B4%B9%E4%BB%8B/,無,有,3,5科計400点以上を目指す中学生コースがある(茨木市)。注意:フォームに「営業電話はご遠慮ください。営業はお問い合わせフォームからお願いします」との記載(フォーム経由は可と読める),未着手
+BONE-018,osaka,英伸スクール,,form,https://eishin-school.com/contact,https://eishin-school.com/contact,無,有,1,中学3年生は志望校に合格するための対策を行うと記載(羽曳野市),未着手
+BONE-019,osaka,英数セミナー,,form,https://eisusemi.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,https://eisusemi.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,無,有,,生徒1名の中学生クラスは完全個別1対1の対面指導と記載(摂津市),未着手
+BONE-020,osaka,啓明塾,,form,https://keimei-juku.com/contact,https://keimei-juku.com/contact,無,有,,2026年公立高校入試結果と冬期講習募集のお知らせを掲載(羽曳野市),未着手
+BONE-021,osaka,個別指導シグマ,,form,https://k-sigma.net/wp/contact/form_01/,https://k-sigma.net/wp/contact/form_01/,無,有,20,2026年『大阪府公立高校』学校別の個別進学相談会の開催告知がある(吹田市ほか北摂・大阪市),未着手
+BONE-022,osaka,創大学院,,form,https://soudaigakuin.com/contact,https://soudaigakuin.com/contact,無,有,6,「内申点に直結する定期テスト対策」と記載(大東市・交野市・寝屋川市・四條畷市・門真市),未着手
+BONE-023,osaka,スクールMIO,,form,https://s-mio.jp/contact/,https://s-mio.jp/contact/,無,有,3,「大阪府公立高校のC問題入試対策、B問題入試対策を万全に行います」と記載(堺市・泉佐野市ほか),未着手
+BONE-024,osaka,田中塾,,form,https://tanakajuku.com/contact,https://tanakajuku.com/contact,無,有,,令和10年度の高校入試から公立高校の変更点があるとの案内を掲載(松原市),未着手
+BONE-025,osaka,学習塾ドリーム・チーム,株式会社ドリーム・チーム,form,https://dr-t-eam.jp/inquiry,https://dr-t-eam.jp/inquiry,無,有,,「1中学校専門塾」として中学部を置くと記載(大阪市),未着手
+BONE-026,osaka,みのり学院,,form,http://www.minorigakuin.com/contact/mail.cgi?id=inquiry,http://www.minorigakuin.com/contact/mail.cgi?id=inquiry,無,有,,募集要項に中学生の項目がある(富田林市),未着手
+BONE-027,osaka,大阪栄光学園,株式会社大阪栄光学園,form,https://eikogakuen.co.jp/access/,https://eikogakuen.co.jp/access/,無,有,,中学生の高校受験対策講座や定期テスト前の攻略リストの記事を掲載(阪南市),未着手
+BONE-028,osaka,GrowrY(グローリー),,form,https://growry.net/access/,https://growry.net/access/,無,有,2,中学生講座のページがある(摂津市・吹田市),未着手
+BONE-029,osaka,つかさ塾,"TSUKASA Co., Ltd.",form,https://www.tsukasa-jyuku.com/contact,https://www.tsukasa-jyuku.com/contact,無,有,3,中学1〜3年生向けコースが複数掲載されている(守口市・門真市・寝屋川市),未着手
+BONE-030,osaka,アーク進学会,ARC EDU株式会社,form,https://www.arc-edu.com/contact_form/,https://www.arc-edu.com/contact_form/,無,有,8,中学生向けに複数コースを設定(都島・鶴見・寝屋川・阿倍野ほか),未着手
+BONE-031,osaka,大東志塾,一般社団法人 大東志塾,form,https://daito-shijuku.com/contact/,https://daito-shijuku.com/contact/,有,有,,お問い合わせページに「営業でのお問い合わせはご遠慮ください。」と記載のため除外,除外
+BONE-032,osaka,京大学館,,form,https://kyodai-gakkan.com/contact/,https://kyodai-gakkan.com/contact/,有,,,サイトに「営業電話はお断りしてます」との記載のため除外(高槻市),除外
+BONE-033,osaka,未来アカデミー,,,,https://miraimirai.jp/,無,有,,公開メール・問い合わせフォームが確認できず(LINE・電話のみ。メールは個人情報窓口のみ)のため除外(堺市堺区),除外
+BONE-034,osaka,フォーエムグループ,,,,https://www.minerva-gakuin.net/contact/,無,有,6,お問い合わせフォームを停止中で電話案内のみのため除外,除外
+BONE-035,osaka,立志館ゼミナール,,,,https://kou-juken.risshikan.jp/,,有,,一般の問い合わせフォームが未確認(Web申込・資料請求・各校問い合わせのみ確認),要確認
+BONE-036,osaka,アシスト学習塾,,,,https://assist-edu.com/reference,,有,,体験・資料請求フォームとLINEのみで一般の問い合わせ窓口が未確認(吹田市),要確認
+BONE-037,osaka,進学塾Rex,,form,https://sgj-rex.jp/consultation/,https://sgj-rex.jp/consultation/,,有,,窓口が個別相談申込フォームのみで用途限定の可能性があるため要確認(大阪市),要確認
+BONE-038,osaka,進栄セミナー,,,,https://shinei-seminar.jp/inquiries,,有,2,お問い合わせページは体験申込・資料請求ボタンへの遷移のみで問い合わせフォームURLが未確認(守口市),要確認
+BONE-039,osaka,平成寺子屋,,form,https://ssl.form-mailer.jp/fms/300e9d60476984,https://ssl.form-mailer.jp/fms/300e9d60476984,,有,,窓口が「応募フォーム」で用途が不明。メールは(at)表記で宛先にせず(東淀川区・東住吉区・東大阪市),要確認
+BONE-040,osaka,(塾名未確認 koshin-semi.jp),,,,http://koshin-semi.jp/,,,,WebFetchで証明書エラー(共用証明書)のため取得できず,確認不可（証明書エラー）
+BONE-041,osaka,(塾名未確認 sanma-education.com),,,,http://sanma-education.com/,,,,WebFetchで証明書エラー(共用証明書)のため取得できず,確認不可（証明書エラー）
+BONE-042,hokkaido,札幌新生塾,株式会社札幌新生塾,form,http://www.shinseijuku.jp/pages/62/,http://www.shinseijuku.jp/pages/62/,無,有,,一斉授業と個別指導のW受講で内申アップや合格力を養成すると記載(札幌市),未着手
+BONE-043,hokkaido,札幌進学ゼミナール,,mail,sapporoshingaku@gmail.com,http://sapporo-shingaku-seminar.com/otoiawase.html,無,有,,内申ランクIで入塾し卒業時にDランクになった生徒の事例を掲載(札幌市・石狩市)。アドレスはgmailだが塾名のもの,未着手
+BONE-044,hokkaido,神谷塾,,form,http://www.kamiya-z.com/contact,http://www.kamiya-z.com/contact,無,有,,北海道学力コンクール事務局や道内公立高校入試資料へのリンク集を掲載(札幌市西区),未着手
+BONE-045,hokkaido,啓誠ゼミナール,,form,http://keiseizemi.com/form.html,http://keiseizemi.com/form.html,無,有,,小3から高3まで少人数指導・個別指導と記載(札幌市西区),未着手
+BONE-046,hokkaido,進学教室FiveSchools,合同会社716,form,https://fiveschools.com/contact,https://fiveschools.com/contact,無,有,,中学生向けに内申点対策・入試対策と、道コン受験＆反省会・過去問テストゼミがある(札幌市),未着手
+BONE-047,hokkaido,秀英館,,form,https://so-shueikan.com/contact/,https://so-shueikan.com/contact/,無,有,,平常授業で内申点アップに注力し、講習会で公立高校入試問題や裁量問題を演習と記載(札幌市北区),未着手
+BONE-048,hokkaido,青雲学舎,有限会社青雲学舎,mail,info@seiun-gakusha.com,http://seiun-gakusha.com/gaiyo.html,無,有,,道コンの学年順位・全道順位の成績実績を掲載(札幌市豊平区),未着手
+BONE-049,hokkaido,パシフィック・セミナー(くじら塾),,form,http://www.kangeki.tv/inquiry/,http://www.kangeki.tv/inquiry/,無,有,,冬期講習の受講生募集を開始しましたとのお知らせ(2025年11月26日)を掲載(札幌市),未着手
+BONE-050,hokkaido,学友館,,form,http://www.gakuyuukan.com/contact/index.html?normal,http://www.gakuyuukan.com/contact/index.html?normal,無,有,,講習・講座のお申し込みと学習相談のフォームがある。小・中・高・大学受験生対象(札幌市),未着手
+BONE-051,hokkaido,高屋塾,,form,https://takayajuku.com/contact/,https://takayajuku.com/contact/,無,有,,直近のテストの高得点が内申点、ひいては入試に影響するとブログに記載(札幌市豊平区),未着手
+BONE-052,hokkaido,SOHOアカデミー,,form,https://soho-i.net/form.html,https://soho-i.net/form.html,無,有,,中学生(高校受験)コース&料金のページがあり、道コンの受験生受付も掲載(札幌市東区),未着手
+BONE-053,hokkaido,進学PLUS,,form,https://singakuplus.com/contact/,https://singakuplus.com/contact/,無,有,,「北海道における高校進学の最短の近道は内申点アップ」と記載(札幌市),未着手
+BONE-054,hokkaido,札幌進学プラザグループ,,form,https://www.sapporo-plaza.jp/contact/,https://www.sapporo-plaza.jp/contact/,無,有,,冬期講習ページに中3の道コン開催日と入塾資格の内申ランクの記載がある(札幌市ほか),未着手
+BONE-055,hokkaido,クラーク学秀会,,mail,clark@clarknet.jp,http://clarknet.jp/juku/,無,有,,2025年度冬期講習受付中のお知らせと、中3生の春・秋の保護者面談の記載がある(札幌市),未着手
+BONE-056,hokkaido,プライム教育センター,,form,http://www.prime-info.jp/index.php?id=3,http://www.prime-info.jp/index.php?id=3,無,有,,2024年度冬期講習会の募集開始のお知らせと中学生コース案内がある(札幌市清田区),未着手
+BONE-057,hokkaido,学習塾STEP UP(個別指導プラスワン),,form,https://step-up-sapporo.com/contact.html,https://step-up-sapporo.com/contact.html,無,有,,2025年11月6日付で冬期講習会受付中のお知らせがある(札幌市手稲区),未着手
+BONE-058,hokkaido,共律塾,,form,http://ashitabakai.net/contact/,http://ashitabakai.net/contact/,無,有,,26年度入試の合格実績(確定)を掲載(札幌市中央区),未着手
+BONE-059,hokkaido,まなびげいと,,form,https://manabi-gate.com/mail/,https://manabi-gate.com/mail/,無,有,,2026年第2回道コンの結果記事を掲載(札幌市東区),未着手
+BONE-060,hokkaido,志学会,,form,https://shigakukai-web.jp/form/index.php,https://shigakukai-web.jp/form/index.php,無,有,,中学生コースに「公立高校入試情報【旭川】」ページがある(旭川市・北見市),未着手
+BONE-061,hokkaido,藤田塾,,form,http://fujita-juku.com/?page_id=16,http://fujita-juku.com/?page_id=16,無,有,,後期通知表の平均内申点297・塾生の59%がAランクと掲載(旭川市),未着手
+BONE-062,hokkaido,優希塾(Flexible Assist),,mail,mail@yukijuku.com,http://yukijuku.com/%e3%81%8a%e5%95%8f%e5%90%88%e3%81%9b/,無,有,,お問合せページにメールアドレスを掲載。旭川市の個別指導学習塾,未着手
+BONE-063,hokkaido,英数学館,,form,https://www.eisu-gakkan.co.jp/contact,https://www.eisu-gakkan.co.jp/contact,無,有,,「冬期講習会 生徒募集!」(2026年2月28日付)のお知らせを掲載,未着手
+BONE-064,hokkaido,スタディープロジェクト,,mail,web@studyproject-info.com,http://www.studyproject-info.com/contact.html,無,有,,最新入試情報ページに内申点計算方法から高校入試情報を掲載(小樽市),未着手
+BONE-065,hokkaido,SEED GROUP,,form,http://www.seedgroup.jp/contact,http://www.seedgroup.jp/contact,無,有,,冬期講習会(小学生・中学生)のご案内ページがある(小樽市),未着手
+BONE-066,hokkaido,OPAS(オーパス),,form,https://www.eduplanopas.com/contact,https://www.eduplanopas.com/contact,無,有,,中学生部で「学力テスト総合ABC対策模試」受付中と掲載(小樽市),未着手
+BONE-067,hokkaido,岩見沢指導会,,form,https://sidoukai.com/contact/,https://sidoukai.com/contact/,無,有,,「中学専門の学習塾」と記載(岩見沢市),未着手
+BONE-068,hokkaido,明成セミナー,,form,https://meisei-seminar.com/inquiry.html,https://meisei-seminar.com/inquiry.html,無,有,,個別指導の冬期講習会受付中(2025.11)と掲載(登別市),未着手
+BONE-069,hokkaido,あすなろ会,,form,http://www.asunaro-kai.com/contact/,http://www.asunaro-kai.com/contact/,無,有,,小学生・中学生・高校生・大学入試・公務員試験の各対策ページがある(釧路市),未着手
+BONE-070,hokkaido,進学塾Root,,form,http://root-juku.com/contact,http://root-juku.com/contact,無,有,,中3「5教科コース」(週3〜4回)の料金表を掲載(北広島市),未着手
+BONE-071,hokkaido,個別指導塾きたがく,,form,https://www.kitagaku.com/page-302/,https://www.kitagaku.com/page-302/,無,有,,石狩市花川・札幌市の小学生〜高校生対象の個別指導塾と記載,未着手
+BONE-072,hokkaido,現役予備校TANJI,,form,https://yobiko-tanji.co.jp/contact/,https://yobiko-tanji.co.jp/contact/,有,有,,お問い合わせページに「営業を目的としたお電話はお断りしております」と記載のため除外(札幌市豊平区),除外
+BONE-073,hokkaido,個別指導北大コーチ,,form,https://www.hokudaicoach.com/contact/,https://www.hokudaicoach.com/contact/,有,有,,フォームに「営業の連絡はご遠慮ください」と記載のため除外(札幌市北区),除外
+BONE-074,hokkaido,ビルドアップ,,form,https://buildup-tutoringschool.com/contact,https://buildup-tutoringschool.com/contact,有,有,,「宣伝広告等の業者様からのお問い合わせはお断りいたします」と記載のため除外(江別市),除外
+BONE-075,hokkaido,クリアゼミ,,form,http://clear-semi.com/contact,http://clear-semi.com/contact,有,有,,フォームに「営業・広告・求人などのご案内は受け付けておりません」と記載のため除外(札幌市西区),除外
+BONE-076,hokkaido,個別指導塾レベルアップ,,form,https://www.levelup-sapporo.com/contact,https://www.levelup-sapporo.com/contact,有,有,,フォームに「営業目的の業者の方はこのフォームを使用しないでください」と記載のため除外(札幌市北区),除外
+BONE-077,hokkaido,札幌エリート塾,,form,https://sapporoelite.com/contact/,https://sapporoelite.com/contact/,有,有,,お問い合わせページに営業電話をかける業者への苦言(営業お断り趣旨)の記載があるため除外,除外
+BONE-078,hokkaido,みかんせい,株式会社みかんせい,form,https://www.mikanseijin.com/contact/,https://www.mikanseijin.com/contact/,有,有,,フォームに「営業メール、イタズラメールは固くお断り」と記載のため除外(帯広市),除外
+BONE-079,hokkaido,修成学院,,,,https://www.shuseigakuin.com/contact,,有,,お問い合わせは電話のみでメール・フォームが確認できず除外(函館市),除外
+BONE-080,hokkaido,未来塾(miraijuku),,,,http://www.miraijyuku2015.jp/about/,,有,,メールアドレスがメール保護で読めず、問い合わせフォームも確認できないため除外(函館市),除外
+BONE-081,hokkaido,みやけんセミナー,,,,http://www.miyaken-semi.info/contact/index.html,,有,,問い合わせページにフォーム・メールが確認できず除外(稚内市・千歳市),除外
+BONE-082,hokkaido,学習センターGAKUTO,,,,https://gakusyusenta-gakuto.com/company,,有,,教室概要ページに公開メール・フォームが確認できず除外(苫小牧市),除外
+BONE-083,hokkaido,学問のススメ,,form,https://gakumon-no-susume.com/contact/,https://gakumon-no-susume.com/contact/,無,有,,中学1〜3年の募集停止と掲載のため除外(帯広市),除外
+BONE-084,hokkaido,練成会グループ,株式会社練成会,,,https://www.renseikai.com/contact/,,有,,資料請求・お問い合わせページにフォームが確認できず要確認(道内各地に教室),要確認
+BONE-085,hokkaido,和喜塾,,,,https://wakijuku.com/,,有,,トップに「メールでのお問い合わせ」リンクはあるがフォームの中身が未確認(帯広市),要確認
+BONE-086,hokkaido,トップゼミ青葉塾,,,,https://www.aobajuku-tomakomai.com/about/,,有,,メールがメール保護で読めず宛先にできないため要確認(苫小牧市),要確認

@@ -1,0 +1,54 @@
+id,県,塾名,運営会社,窓口種別,宛先,確認したページURL,営業お断り表記の有無,中学生コースの有無,教室数,一言メモ,状態
+C2-001,ibaraki,つくば進学塾,,mail,jyuku@tsuku-sin.jp,https://www.tsuku-sin.jp/,無,有,,茨城県立高校の学校説明会日程のお知らせをサイトに掲載している,未着手
+C2-002,ibaraki,桜ゼミナール,,mail,sakurazemi59@yahoo.co.jp,https://sakuraseminar.sakura.ne.jp/,無,有,,水戸市の塾で、冬期講習の受付開始を告知し高校受験指導にも対応と記載,未着手
+C2-003,ibaraki,受験予備校常勝,常勝教育グループ吉村学院,mail,info@josyo.jp,https://josyo.jp/%E5%8F%97%E9%A8%93%E4%BA%88%E5%82%99%E6%A0%A1%E5%B8%B8%E5%8B%9D%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,無,有,1,ひたちなか市の塾で、中学部に「水戸一高に合格できる理由」のページと冬期講習の案内がある,未着手
+C2-004,ibaraki,特伸塾,,form,https://tokushinjuku.com/contact/,https://tokushinjuku.com/contact/,無,有,,土浦市の塾で、高校受験生だけのコースでクラス授業と個別指導による高校入試対策を行うと記載,未着手
+C2-005,ibaraki,学習塾 喇叭水仙,,form,https://rappasuisen.jp/contact,https://rappasuisen.jp/contact,無,有,4,神栖・鹿嶋・波崎の塾で、中3は業者テストを5～7回実施と記載,未着手
+C2-006,ibaraki,専修グループ,,form,https://sensyu-grp.com/contact/,https://sensyu-grp.com/contact/,有,,,お問い合わせページに「営業関連のお問い合わせはご遠慮ください」の記載あり,除外
+C2-007,saitama,WiLL（ウィル）,有限会社ウィル,mail,higashitokorozawa@will-school.co.jp,https://www.will-school.co.jp/higashitokorozawa/,無,有,3,所沢市の塾で、東所沢教室のページに「県立高校受験専門」と掲げている,未着手
+C2-008,saitama,個別指導学友,,mail,snsystem@cyber.ocn.ne.jp,https://gakuyu.net/,無,有,,春日部市の塾で、受験制度改革（面談・内申書の簡素化）について解説する記載がある,未着手
+C2-009,saitama,OKaBe大宮進学塾,,form,https://www.okabe-omiya-juku.jp/contact,https://www.okabe-omiya-juku.jp/contact,無,有,,さいたま市の塾で、中学生向けに「圧倒的な先取り」と「徹底的な反復」で難関高校合格を目指すと記載,未着手
+C2-010,saitama,進学塾unit,,form,https://www.juku-unit.com/contact/,https://www.juku-unit.com/contact/,無,有,,川越市の塾で、2学期定期テスト勉強会の案内があり北辰テストに触れた生徒の声を掲載,未着手
+C2-011,saitama,金子学習塾,,form,https://forms.gle/X3xYQ83LVocKTPGU6,https://kanekogakushujuku.net/,無,有,,熊谷市の塾で、夏期講習・冬期講習は中3生のみ実施と記載（フォームは体験入塾・ご相談用）,未着手
+C2-012,saitama,StudyHouse（スタディハウス）,,,,http://www.studyhouse.co.jp/class/,,,,WebFetchで証明書エラー（ホスト名不一致）のため未確認,確認不可（証明書エラー）
+C2-013,saitama,Be-1（びーわん）,,,,http://be-1kobetu.com/,,,,WebFetchで証明書エラー（ホスト名不一致）のため未確認,確認不可（証明書エラー）
+C2-014,saitama,関根塾,,,,https://www.sek.co.jp/,,,,WebFetchが3回とも接続失敗（Socket is closed）のため未確認,確認不可（証明書エラー）
+C2-015,tochigi,Make Impact,株式会社MakeImpact,mail,info@makeimpact.jp,https://makeimpact.jp/contact/,無,有,2,宇都宮市の塾で、「高校入試、定期テスト対策、実力テスト、下野模試に強い学習塾」と説明している,未着手
+C2-016,tochigi,スタディー・フィールド（小山城南教室）,スタディー・フィールド グループ,mail,kanuma@people-corp.jp,https://www.study-f.com/kanuma/oyama-jonan/,無,有,3,鹿沼・小山・さくら地区の塾で、「栃木県立高校特色選抜 合格状況」の掲載と冬期キャンペーンの告知がある,未着手
+C2-017,tochigi,わたらせ塾,,mail,info@watarasejyuku.com,https://watarasejyuku.com/about/,無,有,,足利市の塾で、「高校受験から大学受験まで6年間」の指導を掲げている,未着手
+C2-018,tochigi,植野進学ゼミ,,form,https://ueno-zemi.net/contact.html,https://ueno-zemi.net/contact.html,無,有,,小山市の塾で、中学生向けに定期テスト対策補習と質問タイムを設けている,未着手
+C2-019,tochigi,嚶鳴進学塾,,form,https://f-oumeishingakujuku.com/contact/,https://f-oumeishingakujuku.com/contact/,無,有,,宇都宮市の塾で、県立高校合格率を毎年90％以上と掲載し冬期講習の案内がある,未着手
+C2-020,tochigi,本松学習塾,合同会社ホンマツ,form,https://www.honmatsu-juku.com/contact,https://www.honmatsu-juku.com/contact,有,有,,お問い合わせフォームに「営業目的でのフォームのご利用はご遠慮ください」の記載あり,除外
+C2-021,niigata,修学館,,form,https://shugakukan.info/contact,https://shugakukan.info/contact,無,有,,長岡市の塾で、中学生コースについて「定期テスト対策・受験対策まで直接指導」と記載,未着手
+C2-022,niigata,立心ゼミナール,,form,https://www.rizemi.jp/contact/,https://www.rizemi.jp/contact/,無,有,,三条市・燕市の塾で、「三高・巻高・三条東高を狙える」と掲げている,未着手
+C2-023,niigata,小池塾,,form,https://koike-jk.com/contact-us,https://koike-jk.com/contact-us,無,有,4,新発田市の塾で、新潟高校・新潟南高校・新発田高校・新発田南高校などへの合格を掲載,未着手
+C2-024,niigata,進学塾レグルス,,form,https://niigata-regulus.com/contact/,https://niigata-regulus.com/contact/,無,有,,新潟市西区の塾で、中学生コースがあり新潟高校・南高校・江南高校への合格実績を掲載,未着手
+C2-025,niigata,虎塾,,form,https://toraschool.com/contact,https://toraschool.com/contact,無,有,2,新潟市の塾（関屋校・潟東校）で、「高校受験・定期テストで結果を出す！」と掲げている,未着手
+C2-026,niigata,真友ゼミ,,form,https://shinyusya.net/inquiry/,https://shinyusya.net/inquiry/,有,有,,お問合せフォームに「法人営業によるお問合せフォームのご利用はご遠慮ください」の記載あり,除外
+C2-027,niigata,飛翔塾,,mail,info@hishojuku.jp,https://www.hishojuku.jp/contact.html,有,有,,問合せページに「営業目的の問い合わせは固くお断りします」の記載あり,除外
+C2-028,niigata,井手塾,株式会社井手塾,form,https://idejuku.com/materials/,https://idejuku.com/materials/,無,有,4,公開されている窓口が無料体験・資料請求専用フォームのみのため除外（上越市・公立中コースあり）,除外
+C2-029,yamaguchi,ベストエデュケーション,株式会社ベストエデュケーション,mail,best_educat@yahoo.co.jp,https://b-edu.jp/cms/pageask0.html,無,有,6,山陽小野田・宇部・山口・下関に校舎があり、2025-2026冬期講習の受付中と告知,未着手
+C2-030,yamaguchi,おのだ進学塾,,mail,mail@onoda-shingakujuku.jp,https://onoda-shingakujuku.jp/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,無,有,,山陽小野田市の塾で、公立高校入試対策の土曜講座がある（問い合わせフォームは廃止・メール受付）,未着手
+C2-031,yamaguchi,思学会,,form,https://www.shigakukai-shimonoseki-juku.com/contact,https://www.shigakukai-shimonoseki-juku.com/contact,無,有,,下関市の塾で、「夏期、冬期講習は塾生以外には行いません」と記載,未着手
+C2-032,yamaguchi,徳進塾,CAIシステム株式会社,form,https://tokushin-juku.com/contact,https://tokushin-juku.com/contact,無,有,3,周南市（徳山・下松・光）の塾で、「中３入試対策講座」がある,未着手
+C2-033,yamaguchi,TOP-U予備校（宇部進グループ）,株式会社向学社,form,https://www.top-u.jp/contact/,https://www.top-u.jp/contact/,無,有,,山口市・宇部市に校舎があり、冬の学習会で公立高校の過去問などを履修すると記載,未着手
+C2-034,yamaguchi,志英塾,,form,https://www.shieijuku.com/contact,https://www.shieijuku.com/contact,有,有,1,サイトに「営業のお電話は固くお断りいたします」の記載あり（防府市）,除外
+C2-035,mie,安藤塾,株式会社安藤塾,form,https://www.andojuku.jp/contact-form,https://www.andojuku.jp/contact-form,無,有,,伊勢・津・松阪・鈴鹿・亀山の塾で、中学生コースと冬期講習のページがある,未着手
+C2-036,mie,四日市学習塾TheJuku,,form,https://thejuku.jp/contact-form/,https://thejuku.jp/contact-form/,無,有,,四日市市の塾で、「県立・私立のトップ高合格を目指し」と中学生向けに記載,未着手
+C2-037,mie,学真会,,form,https://gakushinkai.com/contact/,https://gakushinkai.com/contact/,無,有,,桑名市・四日市市の塾で、定期テスト対策に強い塾と掲げている,未着手
+C2-038,mie,進学塾ISM,,form,https://ism-ise.jp/contact-form/,https://ism-ise.jp/contact-form/,無,有,,伊勢市の塾で、「2026年中学3年生限定12日間完成入試弱点克服講座」を案内している,未着手
+C2-039,mie,進学塾GT,進学塾GT,form,https://gtjuku.com/info,https://gtjuku.com/info,無,有,,名張市の塾で、中学生向けに「入試200点獲得講座」がある,未着手
+C2-040,miyagi,あるふあゼミナール,有限会社総合教育センター,mail,info@alpha-semi.net,https://www.alpha-semi.net/p10/,無,有,2,大崎市（古川駅前校・穂波校）の塾で、中学生コースがある,未着手
+C2-041,miyagi,学習塾アトムズ,,form,https://kg-atoms.jp/contact,https://kg-atoms.jp/contact,無,有,1,石巻市の塾で、「【中学生】受験対策コース」のページがある,未着手
+C2-042,miyagi,仙台藤原塾,株式会社仙台藤原塾,form,https://fujiwara-shingakujuku.com/question/,https://fujiwara-shingakujuku.com/question/,無,有,1,仙台市の塾で、北仙台教室の2025年度冬期講習のお知らせを掲載している,未着手
+C2-043,miyagi,レッツ進学塾,,form,https://www.letsshingakujuku.jp/%E3%81%8A%E5%95%8F%E5%90%88%E3%82%8F%E3%81%9B/,https://www.letsshingakujuku.jp/%E3%81%8A%E5%95%8F%E5%90%88%E3%82%8F%E3%81%9B/,無,有,2,仙台市太白区の塾で、夏休み・冬休み・春休みに講習会を開催と記載,未着手
+C2-044,miyagi,カラフル学舎,,form,https://colorfulgakusha32.com/contact,https://colorfulgakusha32.com/contact,無,有,4,大崎市の塾で、「冬季講習は全員参加していただきます」と記載,未着手
+C2-045,miyagi,ひのき進学グループ,株式会社スクールプルミエ,form,https://www.hinoki-sendai.com/contact1/,https://www.hinoki-sendai.com/contact1/,有,有,19,フォームに「（企業様のお問い合わせはご遠慮ください。）」の記載あり,除外
+C2-046,miyagi,Aスクール東北,,form,https://a-schooltouhoku.com/,https://a-schooltouhoku.com/,有,有,,サイトに「セールス・勧誘はお断りしております」の記載あり（岩沼市・名取市）,除外
+C2-047,nagano,理文塾,,mail,info@ribun.net,https://www.ribun.net/,無,有,,松本市の塾で、中学生向けに学校のテスト日程に合わせプリントを作り直して提供と記載,未着手
+C2-048,nagano,塾アマノ,Amano inc.,mail,info@jukuamano.jp,https://jukuamano.jp/contact.html,無,有,3,佐久市の塾で、中学生向けに「高校入試で必要な5教科。すべて生授業。」と記載,未着手
+C2-049,nagano,進学塾ヨダゼミ,,form,http://yodazemi.com/company/contact/,http://yodazemi.com/company/contact/,無,有,5,上田・小諸・佐久・軽井沢に校舎があり、中間・期末考査の公開対策授業を案内している,未着手
+C2-050,nagano,信州アカデミー,,form,https://shinshu-academy.net/contact.html,https://shinshu-academy.net/contact.html,無,有,1,茅野市の塾で、中学生向けコースに高校受験の記載がある,未着手
+C2-051,nagano,長野双葉塾,,form,https://futaba-ngn.com/contact/,https://futaba-ngn.com/contact/,無,有,1,長野市の塾で、ページタイトルに高校受験を掲げコースを案内している,未着手
+C2-052,nagano,総合教育カルチャー,,,,http://s-j-culture.com/,,,,WebFetchで証明書エラー（ホスト名不一致）のため未確認,確認不可（証明書エラー）
+C2-053,nagano,いずみ塾,株式会社アイキューブ,form,https://izumijuku.co.jp/contact,https://izumijuku.co.jp/contact,,有,,問い合わせページに「営業等のご案内は別ページからお願いします」と営業窓口を別に案内しており、扱い要判断,要確認

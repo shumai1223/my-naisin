@@ -1,0 +1,66 @@
+id,県,塾名,運営会社,窓口種別,宛先,確認したページURL,営業お断り表記の有無,中学生コースの有無,教室数,一言メモ,状態
+KNGA-001,kanagawa,横浜WIP,株式会社ネクサス,mail,info@y-wip.jp,https://y-wip.jp/company/,無,有,,トップのタイトルに「内申点も受験も万全に」とあり、中学生向け個別指導・少人数制授業のコースがある,未着手
+KNGA-002,kanagawa,桐林学園予備校,桐林学園予備校,form,https://torin-gakuen.com/contact.html,https://torin-gakuen.com/contact.html,無,有,,会社概要ページに特色検査対策・公立高校入試学力検査に向けた授業の記載がある(川崎区),未着手
+KNGA-003,kanagawa,BREST/FULLMARKS(ブレストグループ),株式会社ブレストインキュベーション,form,https://juku.brest.co.jp/mailform/,https://juku.brest.co.jp/mailform/,無,有,,中学生(中1〜3)クラスの案内ページがあり、フォームの問い合わせ内容に季節講習の日程が含まれる(都筑区・港北区など),未着手
+KNGA-004,kanagawa,青葉学院,創栄青葉有限会社,form,https://www.aobagakuin.com/contact/,https://www.aobagakuin.com/contact/,無,有,,JR中山駅前の学習塾で、フォームのご希望コースに「中学生」の選択肢がある,未着手
+KNGA-005,kanagawa,横浜チュータリングスクール,株式会社キッズ・ドリーム,form,https://www.y-ts.jp/contact,https://www.y-ts.jp/contact,無,有,2,夏期・冬期・春期講習は任意選択で必要最低限に、と案内している(鶴見区の尻手駅前校・鶴見諏訪坂校),未着手
+KNGA-006,kanagawa,神奈川ゼミナール,,form,http://kana-zemi.com/contact/,http://kana-zemi.com/contact/,無,有,4,「内申点では毎年10UPの生徒がでる」と記載(反町・三ツ沢・西谷・小机の教室),未着手
+KNGA-007,kanagawa,アスク青山アカデミー,,form,https://www.ask-aoyama.com/mail_from.html,https://www.ask-aoyama.com/mail_from.html,無,有,,冬期講習の案内があり、地元中学の中間・期末テスト対策を掲げる(川崎区・鶴見区),未着手
+KNGA-008,kanagawa,進学教室セラビ,,form,https://juku-cestlavie.jimdofree.com/お問い合わせ/,https://juku-cestlavie.jimdofree.com/お問い合わせ/,無,有,,「特色検査のある公立高校を受検希望の方は別途コースあり」と記載(鶴見区生麦)。メールはメール保護で読めないためフォーム,未着手
+KNGA-009,kanagawa,港北学館,,form,http://kohokugakkan.com/お問い合わせメールフォーム/,http://kohokugakkan.com/お問い合わせメールフォーム/,無,有,2,中学部の指導方針ページがあり内申に関する記述が多い個人塾(篠原校・樽町校),未着手
+KNGA-010,kanagawa,陵光ゼミナール,株式会社クラヤ・エデュケーション,form,https://kuraya-edu.co.jp/contact/,https://kuraya-edu.co.jp/contact/,無,有,,「劇的に伸びる内申点」の見出しがある(旭区・鶴ヶ峰駅近く)。フォームの学年選択に中学1〜3年がある,未着手
+KNGA-011,kanagawa,緑進学院,,form,https://www.ryokushin.com/captmail/captmail.cgi,https://www.ryokushin.com/captmail/captmail.cgi,無,有,,「合格に必要な内申点・入試得点」を扱う説明の記載と、2025年冬期講習の案内ページがある,未着手
+KNGA-012,kanagawa,神奈川個別ゼミナール,,form,https://kanakobe.com/contact,https://kanakobe.com/contact,無,有,2,冬期講習の実施日と、県立高校入試期間(2/1〜15)は日曜・祝日も開放する旨を記載(鶴見区)。サイトに載る個人名のメールは記録せずフォームを採用,未着手
+KNGA-013,kanagawa,CG中萬学院・啓明館・さなる個別@will(株式会社中萬学院),株式会社中萬学院,form,https://www.chuman.co.jp/form/contact/,https://www.chuman.co.jp/form/contact/,無,有,,会社の問い合わせフォームに「受験相談」「コース・授業について」の項目がある。プライバシー欄の個人情報窓口メールは営業先に使わずフォームを採用,未着手
+KNGA-014,kanagawa,湘南ゼミナール,,form,https://www.shozemi.com/contact/,https://www.shozemi.com/contact/,無,有,,問い合わせ内容に「その他」があり、サイトに神奈川県公立高校入試・内申点を解説する記事がある(神奈川県内に多数の教室),未着手
+KNGA-015,kanagawa,DUO受験パーソナルトレーニング,,form,https://duo-juken-personal.com/お問い合わせ/お問い合わせ-2/,https://duo-juken-personal.com/お問い合わせ/お問い合わせ-2/,無,有,,中学生コースがあり、公立中学生限定の内申点対策専門コース(2025年4月開設)を掲載(保土ケ谷区和田町),未着手
+KNGA-016,kanagawa,山手進学会,,mail,yamashin1994@gmail.com,https://yama-shin1994.sakura.ne.jp/wp/,無,有,,高校受験部門(中1〜中3)で「定期テストと内申点の向上」「神奈川県公立高校入試を見据えたカリキュラム」と記載。メールは塾名由来の事業用Gmail,未着手
+KNGA-017,kanagawa,中山学院,,mail,hax69870@tree.odn.ne.jp,https://www.nakayamagakuin.com/,無,有,,外部生でも志望校決定や中間・期末テストの勉強法の相談を随時受け付けると記載,未着手
+KNGA-018,kanagawa,ひのき進学教室,株式会社ひのき会,form,https://www.hinoki-net.com/contact/consultation.php,https://www.hinoki-net.com/contact/consultation.php,無,有,6,中学生向けに内申点アップ・定期テスト対策と中3の志望校別合格プログラムを掲載(溝の口・登戸ほか、東京の教室を含む6教室),未着手
+KNGA-019,kanagawa,清心塾,,form,https://www.seishinjuku-sugao.jp/contact,https://www.seishinjuku-sugao.jp/contact,無,有,,「中学生への最初のアプローチは予習・復習のコツを教えることから」と記載(宮前区),未着手
+KNGA-020,kanagawa,満点道場,,form,https://www.mantendojo.com/toiawa/index.html,https://www.mantendojo.com/toiawa/index.html,無,有,,「200人以上の中学生の内申点を上げ続けてきた」と記載(宮前区・宮崎エリアの中学生向け),未着手
+KNGA-021,kanagawa,井田個別指導塾,,mail,idakobetsu@yahoo.co.jp,https://idakobetsu.wixsite.com/home/otoiawase,無,有,,中学生の週1回・週2回の料金表を掲載(川崎市中原区・高津区),未着手
+KNGA-022,kanagawa,錬成会学習塾,,mail,renseikaishinmaruko@gmail.com,https://goisagisan.wixsite.com/classroom-00/,無,有,,「中学生の授業では5教科の質問を受けている」と記載(中原区)。メールは塾名由来の事業用Gmail,未着手
+KNGA-023,kanagawa,完全個別指導塾PRIDE,,form,https://pride0901.com/contact/,https://pride0901.com/contact/,無,有,4,「テストの成績だけでなく内申点を上げ」と記載。フォームの種別に高校受験がある(新百合ヶ丘・登戸ほか),未着手
+KNGA-024,kanagawa,学習塾 円塾,,form,https://enjyuku.net/contact/,https://enjyuku.net/contact/,無,有,,コース案内に中学生の授業時間帯(18:30〜)が載っている(高津区)。フォームは講座・体験・入塾相談の問い合わせ,未着手
+KNGA-025,kanagawa,新学館,,mail,info@shingaku-kan.com,https://shingaku-kan.com/,無,有,,「樽町中専門の学習塾」と掲げる(港北区)。メールはトップと問い合わせフォームページで確認,未着手
+KNGA-026,kanagawa,個別指導塾TOPIA(慶友学院TOPIA),,form,https://hiyoshi-topia.com/contact/,https://hiyoshi-topia.com/contact/,無,有,,「確実に内申点をアップしたい」方向けと記載(港北区・日吉)。フォームページのGmailは1回のみの確認のためフォームを採用,未着手
+KNGA-027,kanagawa,A.C.T.進学教室,,form,https://act-sk.com/contact/,https://act-sk.com/contact/,無,有,,中学受験・高校受験・中高一貫校生の強化・補習まで対応と記載(保土ケ谷区),未着手
+KNGA-028,kanagawa,創栄学園,創栄学園,form,https://soeigakuen.com/contact/,https://soeigakuen.com/contact/,無,有,,講師1人が生徒6人を指導する少人数制と記載(泉区。福島県にも拠点あり),未着手
+KNGA-029,kanagawa,ニッケンアカデミー,ニッケンアカデミー,form,http://nikken.jpn.org/inquiry.htm,http://nikken.jpn.org/inquiry.htm,無,有,1,「講座内容・中学部」のページがある(保土ケ谷区の1教室),未着手
+KNGA-030,kanagawa,山手ゼミナール,山手ゼミナール,mail,info@yamazemi.com,https://www.yamazemi.com/untitled-c14pn,無,有,,中学部は「1クラス最大8人までの少人数制授業」と記載。メールはトップ・問い合わせ・別ページで一致,未着手
+KNGA-031,kanagawa,学習塾 スクールiris,,form,https://school-iris-edu.com/info/enquiry/,https://school-iris-edu.com/info/enquiry/,無,有,,神奈川県の入学者選抜(第3学年の主体的に学習に取り組む態度の評価活用)を解説する記載がある。メールは届きにくいとしてLINEを推奨する注記あり,未着手
+KNGA-032,kanagawa,コスモジュク,"Cosmo Original Co., Ltd.",form,https://cosmojuku.com/contact/,https://cosmojuku.com/contact/,無,有,2,中学生の少人数(8人まで)クラスと、合格に必要な読解力・思考力・表現力のカリキュラムを掲載(日限丸山台・別所弘明寺の2校),未着手
+KNGA-033,kanagawa,共立ゼミナール,共立ゼミナール,form,https://kyosemi.jimdofree.com/お問い合わせ/,https://kyosemi.jimdofree.com/お問い合わせ/,無,有,,「定期テスト前には対策授業として補習授業を行います」と記載,未着手
+KNGA-034,kanagawa,山内英数塾,,form,https://yem.main.jp/contact,https://yem.main.jp/contact,無,有,,中学1〜3年生の少人数制個別指導クラスの案内がある(都筑区)。問い合わせページには電話とフォームのみ,未着手
+KNGA-035,kanagawa,個別指導exsia(イクシア),,form,https://www.pc-exsia.com/contact-us,https://www.pc-exsia.com/contact-us,無,有,2,「中学生のためには定期テスト対策から国公私立高校の入試対策、過去問題演習まで」と記載(永田・笹下の2校),未着手
+KNGA-036,kanagawa,Mr.N塾,,form,https://mrnjuku.com/contact/,https://mrnjuku.com/contact/,無,有,,「定期テスト前にはワークをくり返し解いてもらう」と記載。フォームは教室見学・入塾面談の予約中心,未着手
+KNGA-037,kanagawa,個別指導塾ティーシャル横浜,,form,https://tcial.jp/contact/,https://tcial.jp/contact/,無,有,,中学生コースに「公立高校受験・私立高校受験対策」があり、「営業・協業をご希望の方は専用フォームへ」と案内している(専用フォームURLは未確認),未着手
+KNGA-038,kanagawa,ひざくら学習塾,,form,https://hzkr78.com/askpage/,https://hzkr78.com/askpage/,無,有,,中学生向け模試に「新教育神奈川Wもぎ」を挙げている。フォームは体験申込を含む問い合わせ,未着手
+KNGA-039,kanagawa,岩井学豊塾,岩井学豊塾,form,https://www.iwai-gakuho.com/問い合わせ/,https://www.iwai-gakuho.com/問い合わせ/,無,有,,「中学2年生で解ける入試問題を随時扱う」と記載し、高校受験コースのページがある,未着手
+KNGA-040,kanagawa,アダス(ADAS)進学会,株式会社創育社,form,https://forms.gle/PEEm7e5721VjkNfCA,https://docs.google.com/forms/d/e/1FAIpQLSeEIyUopGLh_n6VI2qIFL_Zq6ou6cDsC4q5SYDBi8Xloeug2A/viewform?usp=send_form,無,有,5,「中学生コースは基礎から入試レベルまで」と記載(横浜・藤沢・横須賀・東京の5校)。問い合わせはGoogleフォーム,未着手
+KNGA-041,kanagawa,横浜進学教室(横進),,form,https://docs.google.com/forms/d/e/1FAIpQLSd7sVLsfJVt8pMVnM7_q3JhM5RV-2c9ZDgfadZgyoLagL6jWw/viewform?usp=header,https://jusadream.com/,無,有,,トップに「2026年高校入試で受験したすべての高校で合格率100%(公立・私立)」と掲載。問い合わせはGoogleフォーム(神奈川区),未着手
+KNGA-042,kanagawa,天塾,,mail,shani@e-mail.jp,https://ten-juku.com/law/,無,,,特定商取引法表記にメールアドレスがあり、川崎市の公立高校の内申点を解説する記事があるが、中学生コースの有無をサイトで確認できていない(高津区),要確認
+KNGA-043,kanagawa,歩実塾,,form,https://ayumi-19.com/問い合わせフォーム/,https://ayumi-19.com/問い合わせフォーム/,無,有,,問い合わせページは「お電話でのお問い合わせはご遠慮ください」とLINEでの相談を案内しており、フォームの実在を再確認したい(幸区),要確認
+KNGA-044,kanagawa,Σシグマ進学教室,,mail,sigmainfo@sigmania.jp,https://sigmania.jp/,,,,トップにmailtoリンクがあるが中学生向けの記載を確認できず、小学生の中学受験が中心に見える。運営会社の記載なし(高津区),要確認
+KNGA-045,kanagawa,創英ゼミナール,株式会社創英コーポレーション,form,https://www.souei.net/full_year_form/,https://www.souei.net/full_year_form/,,有,,フォームの問い合わせ内容が「体験授業・資料請求・夏期講習の問合」に限られ、営業に使えるか要確認,要確認
+KNGA-046,kanagawa,西谷梅の木の進学塾ユニティ,,form,https://unity-edu.jp/otoiawase/,https://unity-edu.jp/otoiawase/,,有,,問い合わせページに「営業電話がとても多く電話番号は非公開」と記載があり、営業連絡への姿勢とLINE誘導の扱いを要確認(保土ケ谷区),要確認
+KNGA-047,kanagawa,みやうち塾,,,,https://miyauchijuku.com,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-048,kanagawa,泰明ゼミナール,,,,http://www.taimei-zemi.sakura.ne.jp/,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-049,kanagawa,倫学舎,,,,http://ringakusya.g1.xrea.com/new1.html,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-050,kanagawa,個別指導そら塾,,,,http://www.solajyuku.com/system.html,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-051,kanagawa,ラポール個別指導塾(戸塚区),,,,http://lapole-marine.com/juku/tokuchou.html,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-052,kanagawa,桜光塾,,,,http://sakurahikari.com/elementary.html,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-053,kanagawa,優伸スクール,,,,http://www.yushinschool.jp,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-054,kanagawa,進学塾フォルテ,,form,https://forte-idogaya.com/,https://forte-idogaya.com/,有,有,1,サイトに「業者の方の営業電話は一切お断りしております」と記載(南区井土ケ谷),除外
+KNGA-055,kanagawa,天王町ゼミ,,,,https://ezemikun.jp/tenzemi/,有,有,1,連絡先に「営業・勧誘お断り」と記載(個人事業者・保土ケ谷区),除外
+KNGA-056,kanagawa,川和ゼミナール,,form,https://kawazemi.main.jp/contact/,https://kawazemi.main.jp/contact/,有,有,,問い合わせフォームに「このフォームを利用した売り込みの一切を固く禁止いたします」と記載,除外
+KNGA-057,kanagawa,個個港学舎,株式会社貴アンド博,form,https://coco-kougakusha.com/inquiry/,https://coco-kougakusha.com/inquiry/,有,有,,問い合わせフォームに「営業のご連絡はご遠慮下さい」と記載,除外
+KNGA-058,kanagawa,ブリッジ学院,,,,https://bridge19.amebaownd.com/,,有,,一般生の募集を中止していて新規募集の広告枠の対象にならない(卒業生枠のみ),除外
+KNGA-059,kanagawa,ウインド進学教室,,,,https://wind-school.jp/about/,,有,,サイトにメールアドレス・問い合わせフォームが見当たらず、電話番号のみ,除外
+KNGA-060,kanagawa,ゼスト進学セミナー,,,,http://www.zest-ss.com/contact.html,,有,,問い合わせページが電話番号のみでメール・フォームなし(戸塚区),除外
+KNGA-061,kanagawa,学習塾Learning,,,,https://spindle-tree.com/,,有,,メール・フォームの記載がなく電話番号のみ(宮前区),除外
+KNGA-062,kanagawa,タノクラアカデミー,,,,https://www.tanokura-academy.com/cosuguide,,有,,問い合わせがLINEのみでメール・フォームなし(宮前区),除外
+KNGA-063,kanagawa,個別学習塾 未来塾,,,,https://miraijuku.storeinfo.jp/,,有,,問い合わせページが電話番号のみでメール・フォームなし(中原区),除外
+KNGA-064,kanagawa,泰星学院,,,,https://www.taiseigogo.com/profile.html,,有,3,会社概要ページにメール・フォームの記載がなく窓口を確認できない(川崎市の3か所),除外
+KNGA-065,kanagawa,自立学習支援型塾 Funny School,,,,https://www.funny-school.com/contact-8,無,有,,問い合わせページが無料体験の申込専用で営業の連絡先として使えない(幸区),除外

@@ -1,0 +1,598 @@
+﻿id,県,塾名,運営会社,窓口種別,宛先,確認したページURL,営業お断り表記の有無,中学生コースの有無,教室数,一言メモ,状態
+BONE-001,osaka,ローラン教育学院,,form,https://www.loran-net.com/mailform/,https://www.loran-net.com/mailform/,無,有,,公立中学校に通う生徒向けの基本コースで学校別の定期テスト対策があると記載(大東市),未着手
+BONE-002,osaka,イーエス個別ゼミナール,,form,https://es-seminar.com/%e3%81%8a%e5%95%8f%e5%90%88%e3%81%9b/,https://es-seminar.com/%e3%81%8a%e5%95%8f%e5%90%88%e3%81%9b/,無,有,,地域に特化したカリキュラムで内申点アップに直結する指導を行うと記載(松原市・堺市),未着手
+BONE-003,osaka,みらい個別,,form,https://mirai-kobetsu.com/contact,https://mirai-kobetsu.com/contact,無,有,,中学生向けに中学校別「無料」5科テスト対策コースがある(茨木市・高槻市),未着手
+BONE-004,osaka,対面式個別指導ステップアップ,株式会社スリーピース,form,https://stepup-kobetsu.com/contact.php,https://stepup-kobetsu.com/contact.php,無,有,,中3生対象の五ツ木模試対策(お申込み受付)のお知らせがある(大阪市),未着手
+BONE-005,osaka,TKT個別指導塾,,form,https://tkt-juku.com/contact/,https://tkt-juku.com/contact/,無,有,,中学生コースに定期テスト対策・高校入試対策と記載(堺市堺区),未着手
+BONE-006,osaka,堺予備校,,form,https://yobiko1587.com/contact/,https://yobiko1587.com/contact/,無,有,,1学年1クラスの少人数制で公立・私立高校受験に向けた授業を行うと記載(堺市西区),未着手
+BONE-007,osaka,関進ゼミ,,form,https://www.kanshin-semi.com/contact/,https://www.kanshin-semi.com/contact/,無,有,,泉ヶ丘教室に中学部(高校受験コース)がある(堺市),未着手
+BONE-008,osaka,英知ゼミ,,form,https://eichi-zemi.com/contact,https://eichi-zemi.com/contact,無,有,,中3レギュラーコースの募集状況を掲載(東大阪市),未着手
+BONE-009,osaka,かいりつゼミ,,form,https://tokkunkobetu.jimdofree.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,https://tokkunkobetu.jimdofree.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,無,有,,2026年冬期講習(12/22〜1/7)と中3対象の入試講習(11/3〜)の期間を掲載(堺市堺区),未着手
+BONE-010,osaka,円現塾,,form,https://engenjuku.com/inquiry/,https://engenjuku.com/inquiry/,無,有,,大阪公立高校の偏差値と合格ラインの最新版を公開中と掲載(都島区・天王寺区),未着手
+BONE-011,osaka,友学園,,form,https://tomogaku.co.jp/page-63/page-143,https://tomogaku.co.jp/page-63/page-143,無,有,,大阪府公立高校入試C問題のリスニング・ライティング比率の変化に触れた記事がある(守口市),未着手
+BONE-012,osaka,阪神個別学習院,,form,https://www.hanshinkobetsu.com/contact/,https://www.hanshinkobetsu.com/contact/,無,有,,冬期講習会(2期申込)受付中のお知らせ(2025/12/09)がある(大阪市),未着手
+BONE-013,osaka,プロ進学塾,,form,https://www.pro-juku.net/contact,https://www.pro-juku.net/contact,無,有,,中学校での定期テストの成績アップ・実力養成にこだわると記載(堺市),未着手
+BONE-014,osaka,愛知ゼミナール個別指導塾,,form,https://aitizemi.com/contact/,https://aitizemi.com/contact/,無,有,,大阪府公立高校入試の内申点・偏差値・合格最低点の一覧ページがある(豊中市),未着手
+BONE-015,osaka,個別指導塾ウイズ,千里丘観光開発株式会社,mail,juku-with@senrioka.co.jp,https://juku-with.com/contact,無,有,,2026年春の公立高校全員合格の実績と定期テスト・評定対策を掲載(吹田市),未着手
+BONE-016,osaka,フォーインワンゼミナール,,form,https://4in1.jp/contact/,https://4in1.jp/contact/,無,有,,地域の学校に完全対応の一斉クラスで定期テスト対策や日曜補習は無料と記載(門真市),未着手
+BONE-017,osaka,個別学習塾Wing,,form,https://www.winggr.com/%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B-%E5%AE%9F%E7%B8%BE%E7%B4%B9%E4%BB%8B/,https://www.winggr.com/%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B-%E5%AE%9F%E7%B8%BE%E7%B4%B9%E4%BB%8B/,無,有,3,5科計400点以上を目指す中学生コースがある(茨木市)。注意:フォームに「営業電話はご遠慮ください。営業はお問い合わせフォームからお願いします」との記載(フォーム経由は可と読める),未着手
+BONE-018,osaka,英伸スクール,,form,https://eishin-school.com/contact,https://eishin-school.com/contact,無,有,1,中学3年生は志望校に合格するための対策を行うと記載(羽曳野市),未着手
+BONE-019,osaka,英数セミナー,,form,https://eisusemi.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,https://eisusemi.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,無,有,,生徒1名の中学生クラスは完全個別1対1の対面指導と記載(摂津市),未着手
+BONE-020,osaka,啓明塾,,form,https://keimei-juku.com/contact,https://keimei-juku.com/contact,無,有,,2026年公立高校入試結果と冬期講習募集のお知らせを掲載(羽曳野市),未着手
+BONE-021,osaka,個別指導シグマ,,form,https://k-sigma.net/wp/contact/form_01/,https://k-sigma.net/wp/contact/form_01/,無,有,20,2026年『大阪府公立高校』学校別の個別進学相談会の開催告知がある(吹田市ほか北摂・大阪市),未着手
+BONE-022,osaka,創大学院,,form,https://soudaigakuin.com/contact,https://soudaigakuin.com/contact,無,有,6,「内申点に直結する定期テスト対策」と記載(大東市・交野市・寝屋川市・四條畷市・門真市),未着手
+BONE-023,osaka,スクールMIO,,form,https://s-mio.jp/contact/,https://s-mio.jp/contact/,無,有,3,「大阪府公立高校のC問題入試対策、B問題入試対策を万全に行います」と記載(堺市・泉佐野市ほか),未着手
+BONE-024,osaka,田中塾,,form,https://tanakajuku.com/contact,https://tanakajuku.com/contact,無,有,,令和10年度の高校入試から公立高校の変更点があるとの案内を掲載(松原市),未着手
+BONE-025,osaka,学習塾ドリーム・チーム,株式会社ドリーム・チーム,form,https://dr-t-eam.jp/inquiry,https://dr-t-eam.jp/inquiry,無,有,,「1中学校専門塾」として中学部を置くと記載(大阪市),未着手
+BONE-026,osaka,みのり学院,,form,http://www.minorigakuin.com/contact/mail.cgi?id=inquiry,http://www.minorigakuin.com/contact/mail.cgi?id=inquiry,無,有,,募集要項に中学生の項目がある(富田林市),未着手
+BONE-027,osaka,大阪栄光学園,株式会社大阪栄光学園,form,https://eikogakuen.co.jp/access/,https://eikogakuen.co.jp/access/,無,有,,中学生の高校受験対策講座や定期テスト前の攻略リストの記事を掲載(阪南市),未着手
+BONE-028,osaka,GrowrY(グローリー),,form,https://growry.net/access/,https://growry.net/access/,無,有,2,中学生講座のページがある(摂津市・吹田市),未着手
+BONE-029,osaka,つかさ塾,"TSUKASA Co., Ltd.",form,https://www.tsukasa-jyuku.com/contact,https://www.tsukasa-jyuku.com/contact,無,有,3,中学1〜3年生向けコースが複数掲載されている(守口市・門真市・寝屋川市),未着手
+BONE-030,osaka,アーク進学会,ARC EDU株式会社,form,https://www.arc-edu.com/contact_form/,https://www.arc-edu.com/contact_form/,無,有,8,中学生向けに複数コースを設定(都島・鶴見・寝屋川・阿倍野ほか),未着手
+BONE-031,osaka,大東志塾,一般社団法人 大東志塾,form,https://daito-shijuku.com/contact/,https://daito-shijuku.com/contact/,有,有,,お問い合わせページに「営業でのお問い合わせはご遠慮ください。」と記載のため除外,除外
+BONE-032,osaka,京大学館,,form,https://kyodai-gakkan.com/contact/,https://kyodai-gakkan.com/contact/,有,,,サイトに「営業電話はお断りしてます」との記載のため除外(高槻市),除外
+BONE-033,osaka,未来アカデミー,,,,https://miraimirai.jp/,無,有,,公開メール・問い合わせフォームが確認できず(LINE・電話のみ。メールは個人情報窓口のみ)のため除外(堺市堺区),除外
+BONE-034,osaka,フォーエムグループ,,,,https://www.minerva-gakuin.net/contact/,無,有,6,お問い合わせフォームを停止中で電話案内のみのため除外,除外
+BONE-035,osaka,立志館ゼミナール,,,,https://kou-juken.risshikan.jp/,,有,,一般の問い合わせフォームが未確認(Web申込・資料請求・各校問い合わせのみ確認),要確認
+BONE-036,osaka,アシスト学習塾,,,,https://assist-edu.com/reference,,有,,体験・資料請求フォームとLINEのみで一般の問い合わせ窓口が未確認(吹田市),要確認
+BONE-037,osaka,進学塾Rex,,form,https://sgj-rex.jp/consultation/,https://sgj-rex.jp/consultation/,,有,,窓口が個別相談申込フォームのみで用途限定の可能性があるため要確認(大阪市),要確認
+BONE-038,osaka,進栄セミナー,,,,https://shinei-seminar.jp/inquiries,,有,2,お問い合わせページは体験申込・資料請求ボタンへの遷移のみで問い合わせフォームURLが未確認(守口市),要確認
+BONE-039,osaka,平成寺子屋,,form,https://ssl.form-mailer.jp/fms/300e9d60476984,https://ssl.form-mailer.jp/fms/300e9d60476984,,有,,窓口が「応募フォーム」で用途が不明。メールは(at)表記で宛先にせず(東淀川区・東住吉区・東大阪市),要確認
+BONE-040,osaka,(塾名未確認 koshin-semi.jp),,,,http://koshin-semi.jp/,,,,WebFetchで証明書エラー(共用証明書)のため取得できず,確認不可（証明書エラー）
+BONE-041,osaka,(塾名未確認 sanma-education.com),,,,http://sanma-education.com/,,,,WebFetchで証明書エラー(共用証明書)のため取得できず,確認不可（証明書エラー）
+BONE-042,hokkaido,札幌新生塾,株式会社札幌新生塾,form,http://www.shinseijuku.jp/pages/62/,http://www.shinseijuku.jp/pages/62/,無,有,,一斉授業と個別指導のW受講で内申アップや合格力を養成すると記載(札幌市),未着手
+BONE-043,hokkaido,札幌進学ゼミナール,,mail,sapporoshingaku@gmail.com,http://sapporo-shingaku-seminar.com/otoiawase.html,無,有,,内申ランクIで入塾し卒業時にDランクになった生徒の事例を掲載(札幌市・石狩市)。アドレスはgmailだが塾名のもの [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+BONE-044,hokkaido,神谷塾,,form,http://www.kamiya-z.com/contact,http://www.kamiya-z.com/contact,無,有,,北海道学力コンクール事務局や道内公立高校入試資料へのリンク集を掲載(札幌市西区),未着手
+BONE-045,hokkaido,啓誠ゼミナール,,form,http://keiseizemi.com/form.html,http://keiseizemi.com/form.html,無,有,,小3から高3まで少人数指導・個別指導と記載(札幌市西区),未着手
+BONE-046,hokkaido,進学教室FiveSchools,合同会社716,form,https://fiveschools.com/contact,https://fiveschools.com/contact,無,有,,中学生向けに内申点対策・入試対策と、道コン受験＆反省会・過去問テストゼミがある(札幌市),未着手
+BONE-047,hokkaido,秀英館,,form,https://so-shueikan.com/contact/,https://so-shueikan.com/contact/,無,有,,平常授業で内申点アップに注力し、講習会で公立高校入試問題や裁量問題を演習と記載(札幌市北区),未着手
+BONE-048,hokkaido,青雲学舎,有限会社青雲学舎,mail,info@seiun-gakusha.com,http://seiun-gakusha.com/gaiyo.html,無,有,,道コンの学年順位・全道順位の成績実績を掲載(札幌市豊平区),未着手
+BONE-049,hokkaido,パシフィック・セミナー(くじら塾),,form,http://www.kangeki.tv/inquiry/,http://www.kangeki.tv/inquiry/,無,有,,冬期講習の受講生募集を開始しましたとのお知らせ(2025年11月26日)を掲載(札幌市),未着手
+BONE-050,hokkaido,学友館,,form,http://www.gakuyuukan.com/contact/index.html?normal,http://www.gakuyuukan.com/contact/index.html?normal,無,有,,講習・講座のお申し込みと学習相談のフォームがある。小・中・高・大学受験生対象(札幌市),未着手
+BONE-051,hokkaido,高屋塾,,form,https://takayajuku.com/contact/,https://takayajuku.com/contact/,無,有,,直近のテストの高得点が内申点、ひいては入試に影響するとブログに記載(札幌市豊平区),未着手
+BONE-052,hokkaido,SOHOアカデミー,,form,https://soho-i.net/form.html,https://soho-i.net/form.html,無,有,,中学生(高校受験)コース&料金のページがあり、道コンの受験生受付も掲載(札幌市東区),未着手
+BONE-053,hokkaido,進学PLUS,,form,https://singakuplus.com/contact/,https://singakuplus.com/contact/,無,有,,「北海道における高校進学の最短の近道は内申点アップ」と記載(札幌市),未着手
+BONE-054,hokkaido,札幌進学プラザグループ,,form,https://www.sapporo-plaza.jp/contact/,https://www.sapporo-plaza.jp/contact/,無,有,,冬期講習ページに中3の道コン開催日と入塾資格の内申ランクの記載がある(札幌市ほか),未着手
+BONE-055,hokkaido,クラーク学秀会,,mail,clark@clarknet.jp,http://clarknet.jp/juku/,無,有,,2025年度冬期講習受付中のお知らせと、中3生の春・秋の保護者面談の記載がある(札幌市),未着手
+BONE-056,hokkaido,プライム教育センター,,form,http://www.prime-info.jp/index.php?id=3,http://www.prime-info.jp/index.php?id=3,無,有,,2024年度冬期講習会の募集開始のお知らせと中学生コース案内がある(札幌市清田区),未着手
+BONE-057,hokkaido,学習塾STEP UP(個別指導プラスワン),,form,https://step-up-sapporo.com/contact.html,https://step-up-sapporo.com/contact.html,無,有,,2025年11月6日付で冬期講習会受付中のお知らせがある(札幌市手稲区),未着手
+BONE-058,hokkaido,共律塾,,form,http://ashitabakai.net/contact/,http://ashitabakai.net/contact/,無,有,,26年度入試の合格実績(確定)を掲載(札幌市中央区),未着手
+BONE-059,hokkaido,まなびげいと,,form,https://manabi-gate.com/mail/,https://manabi-gate.com/mail/,無,有,,2026年第2回道コンの結果記事を掲載(札幌市東区),未着手
+BONE-060,hokkaido,志学会,,form,https://shigakukai-web.jp/form/index.php,https://shigakukai-web.jp/form/index.php,無,有,,中学生コースに「公立高校入試情報【旭川】」ページがある(旭川市・北見市),未着手
+BONE-061,hokkaido,藤田塾,,form,http://fujita-juku.com/?page_id=16,http://fujita-juku.com/?page_id=16,無,有,,後期通知表の平均内申点297・塾生の59%がAランクと掲載(旭川市),未着手
+BONE-062,hokkaido,優希塾(Flexible Assist),,mail,mail@yukijuku.com,http://yukijuku.com/%e3%81%8a%e5%95%8f%e5%90%88%e3%81%9b/,無,有,,お問合せページにメールアドレスを掲載。旭川市の個別指導学習塾,未着手
+BONE-063,hokkaido,英数学館,,form,https://www.eisu-gakkan.co.jp/contact,https://www.eisu-gakkan.co.jp/contact,無,有,,「冬期講習会 生徒募集!」(2026年2月28日付)のお知らせを掲載,未着手
+BONE-064,hokkaido,スタディープロジェクト,,mail,web@studyproject-info.com,http://www.studyproject-info.com/contact.html,無,有,,最新入試情報ページに内申点計算方法から高校入試情報を掲載(小樽市),未着手
+BONE-065,hokkaido,SEED GROUP,,form,http://www.seedgroup.jp/contact,http://www.seedgroup.jp/contact,無,有,,冬期講習会(小学生・中学生)のご案内ページがある(小樽市),未着手
+BONE-066,hokkaido,OPAS(オーパス),,form,https://www.eduplanopas.com/contact,https://www.eduplanopas.com/contact,無,有,,中学生部で「学力テスト総合ABC対策模試」受付中と掲載(小樽市),未着手
+BONE-067,hokkaido,岩見沢指導会,,form,https://sidoukai.com/contact/,https://sidoukai.com/contact/,無,有,,「中学専門の学習塾」と記載(岩見沢市),未着手
+BONE-068,hokkaido,明成セミナー,,form,https://meisei-seminar.com/inquiry.html,https://meisei-seminar.com/inquiry.html,無,有,,個別指導の冬期講習会受付中(2025.11)と掲載(登別市),未着手
+BONE-069,hokkaido,あすなろ会,,form,http://www.asunaro-kai.com/contact/,http://www.asunaro-kai.com/contact/,無,有,,小学生・中学生・高校生・大学入試・公務員試験の各対策ページがある(釧路市),未着手
+BONE-070,hokkaido,進学塾Root,,form,http://root-juku.com/contact,http://root-juku.com/contact,無,有,,中3「5教科コース」(週3〜4回)の料金表を掲載(北広島市),未着手
+BONE-071,hokkaido,個別指導塾きたがく,,form,https://www.kitagaku.com/page-302/,https://www.kitagaku.com/page-302/,無,有,,石狩市花川・札幌市の小学生〜高校生対象の個別指導塾と記載,未着手
+BONE-072,hokkaido,現役予備校TANJI,,form,https://yobiko-tanji.co.jp/contact/,https://yobiko-tanji.co.jp/contact/,有,有,,お問い合わせページに「営業を目的としたお電話はお断りしております」と記載のため除外(札幌市豊平区),除外
+BONE-073,hokkaido,個別指導北大コーチ,,form,https://www.hokudaicoach.com/contact/,https://www.hokudaicoach.com/contact/,有,有,,フォームに「営業の連絡はご遠慮ください」と記載のため除外(札幌市北区),除外
+BONE-074,hokkaido,ビルドアップ,,form,https://buildup-tutoringschool.com/contact,https://buildup-tutoringschool.com/contact,有,有,,「宣伝広告等の業者様からのお問い合わせはお断りいたします」と記載のため除外(江別市),除外
+BONE-075,hokkaido,クリアゼミ,,form,http://clear-semi.com/contact,http://clear-semi.com/contact,有,有,,フォームに「営業・広告・求人などのご案内は受け付けておりません」と記載のため除外(札幌市西区),除外
+BONE-076,hokkaido,個別指導塾レベルアップ,,form,https://www.levelup-sapporo.com/contact,https://www.levelup-sapporo.com/contact,有,有,,フォームに「営業目的の業者の方はこのフォームを使用しないでください」と記載のため除外(札幌市北区),除外
+BONE-077,hokkaido,札幌エリート塾,,form,https://sapporoelite.com/contact/,https://sapporoelite.com/contact/,有,有,,お問い合わせページに営業電話をかける業者への苦言(営業お断り趣旨)の記載があるため除外,除外
+BONE-078,hokkaido,みかんせい,株式会社みかんせい,form,https://www.mikanseijin.com/contact/,https://www.mikanseijin.com/contact/,有,有,,フォームに「営業メール、イタズラメールは固くお断り」と記載のため除外(帯広市),除外
+BONE-079,hokkaido,修成学院,,,,https://www.shuseigakuin.com/contact,,有,,お問い合わせは電話のみでメール・フォームが確認できず除外(函館市),除外
+BONE-080,hokkaido,未来塾(miraijuku),,,,http://www.miraijyuku2015.jp/about/,,有,,メールアドレスがメール保護で読めず、問い合わせフォームも確認できないため除外(函館市),除外
+BONE-081,hokkaido,みやけんセミナー,,,,http://www.miyaken-semi.info/contact/index.html,,有,,問い合わせページにフォーム・メールが確認できず除外(稚内市・千歳市),除外
+BONE-082,hokkaido,学習センターGAKUTO,,,,https://gakusyusenta-gakuto.com/company,,有,,教室概要ページに公開メール・フォームが確認できず除外(苫小牧市),除外
+BONE-083,hokkaido,学問のススメ,,form,https://gakumon-no-susume.com/contact/,https://gakumon-no-susume.com/contact/,無,有,,中学1〜3年の募集停止と掲載のため除外(帯広市),除外
+BONE-084,hokkaido,練成会グループ,株式会社練成会,,,https://www.renseikai.com/contact/,,有,,資料請求・お問い合わせページにフォームが確認できず要確認(道内各地に教室),要確認
+BONE-085,hokkaido,和喜塾,,,,https://wakijuku.com/,,有,,トップに「メールでのお問い合わせ」リンクはあるがフォームの中身が未確認(帯広市),要確認
+BONE-086,hokkaido,トップゼミ青葉塾,,,,https://www.aobajuku-tomakomai.com/about/,,有,,メールがメール保護で読めず宛先にできないため要確認(苫小牧市),要確認
+BTWO-001,chiba,さくら進学塾,,form,https://www.sakurashingaku.com/jyuku/mail/,https://www.sakurashingaku.com/jyuku/mail/,無,有,,千葉・船橋など公立上位校の受験専門と掲げる(個人塾),未着手
+BTWO-002,chiba,Vision進学塾,,form,https://vision-jyuku.com/vision_inquiry/,https://vision-jyuku.com/vision_inquiry/,無,有,,本八幡の進学塾で問い合わせフォームに校舎選択欄がある,未着手
+BTWO-003,chiba,Brain進学塾,,form,https://www.brain-shingaku.com/access.html,https://www.brain-shingaku.com/access.html,無,有,1,千葉市若葉区で中学・高校受験に強い塾と掲げる,未着手
+BTWO-004,chiba,学習塾 本塾,株式会社コプレ,form,https://honjyuku.com/contact/,https://honjyuku.com/contact/,無,有,,千葉県立入試の内申点オール3で受験できる高校を解説するページがある,未着手
+BTWO-005,chiba,教育プラザ,,form,https://www.kyoupla.com/requestform,https://www.kyoupla.com/requestform,無,有,2,蘇我と都賀の2教室で問い合わせ項目に「高校受験について」がある,未着手
+BTWO-006,chiba,学習塾 Dream,,form,https://juku-dream.com/contact/,https://juku-dream.com/contact/,無,有,1,松戸市八ケ崎の塾で定期テスト対策と受験対策を取り入れると記載,未着手
+BTWO-007,chiba,東葛MAXゼミナール,,form,https://www.toukatu-max.com/contact/index.html,https://www.toukatu-max.com/contact/index.html,無,有,1,南流山教室(本部)で中学生コースがある,未着手
+BTWO-008,chiba,創学舎,株式会社アガトス,form,https://sougakusya.com/contact/,https://sougakusya.com/contact/,無,有,8,柏・我孫子・流山エリアに8教室で中学部のページがある,未着手
+BTWO-009,chiba,筑波塾,,form,https://tsukubajuku.com/contact-input/,https://tsukubajuku.com/contact-input/,無,有,1,柏教室で「5教科授業 県立高校受験」を掲げる,未着手
+BTWO-010,chiba,修学舎,有限会社修学舎,form,https://k-shugakusha.com/contact/,https://k-shugakusha.com/contact/,無,有,1,中学3年生を対象に学力・目標別のクラス編成授業を行うと記載,未着手
+BTWO-011,chiba,総合学習塾SCHOLAR,,form,https://scholar-sch.com/contact,https://scholar-sch.com/contact,無,有,1,中学集団授業は千葉県公立高校受験での合格を目指すものと記載,未着手
+BTWO-012,chiba,中島塾,,form,https://nakajima-juku.jp/contact/,https://nakajima-juku.jp/contact/,無,有,1,成田市で定期テスト対策と高校受験対策に注力すると記載,未着手
+BTWO-013,chiba,進学塾With,,form,https://shingakujuku-with.com/contact/,https://shingakujuku-with.com/contact/,無,有,2,中学生は週3日5科目の授業(おゆみ野教室・ちはら台校),未着手
+BTWO-014,chiba,光英塾 佐倉駅前教室,光英株式会社,form,https://koeijuku.com/contact/,https://koeijuku.com/contact/,無,有,1,中学生コースで高校受験に向けた志望校合格指導を掲げる,未着手
+BTWO-015,chiba,学力工房 木更津教室,,form,https://kisarazu-juku.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b,https://kisarazu-juku.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b,無,有,1,「千葉県の公立高校受験は中1の1学期から始まっている」と中学生向けに発信,未着手
+BTWO-016,chiba,進学塾好学舎,,form,https://merix-edu.com/?page_id=83,https://merix-edu.com/?page_id=83,無,,1,茂原市の進学塾で「連続3年間不合格者なし」を掲げコース案内ページがある,未着手
+BTWO-017,chiba,栄翔塾,,form,https://eishojyuku.com/contact/,https://eishojyuku.com/contact/,無,有,1,東金市の塾で高校入試が不安な生徒向けの案内と冬期講習ページがある,未着手
+BTWO-018,chiba,エソー個伸塾,,form,https://esoh-group.com/contact/,https://esoh-group.com/contact/,無,有,5,2026年版の千葉県公立高校入試の仕組み解説ページがある,未着手
+BTWO-019,chiba,南行徳の学習塾 ANRI F.H.,,form,https://anri-fh.com/form/,https://anri-fh.com/form/,無,有,1,市川市南行徳の塾で中学生コースがある,未着手
+BTWO-020,chiba,21世紀寺子屋 暁塾,,form,https://akatsukijyuku.com/inquiry/,https://akatsukijyuku.com/inquiry/,無,有,1,浦安駅近くの塾で中学生コースがある,未着手
+BTWO-021,chiba,寺子屋はじめ,,form,https://terakoya-hajime.com/contact/,https://terakoya-hajime.com/contact/,無,有,1,野田市の塾で中学生コースの案内ページがある,未着手
+BTWO-022,chiba,学習塾かめゼミ,,form,https://kamezemi.com/contact,https://kamezemi.com/contact,無,有,1,野田市梅郷駅近くの塾で高校受験(英・数・理)に対応と明記,未着手
+BTWO-023,chiba,個別指導Up塾,,form,https://kobetsu-upjyuku.com/contact,https://kobetsu-upjyuku.com/contact,無,有,2,高校入試向けに個別指導と集団授業を組み合わせた指導を掲げる(鎌ヶ谷・柏逆井),未着手
+BTWO-024,chiba,飯田塾,,form,https://www.iidajukunarita.com/お問合せフォーム/,https://www.iidajukunarita.com/お問合せフォーム/,無,有,1,成田市の塾で中3の夏期講習・日曜講座(入試直前まで)を案内,未着手
+BTWO-025,chiba,若竹綜合学園,,form,https://wakatake-gakuen.com/contact/,https://wakatake-gakuen.com/contact/,無,有,1,市原市の中学校に特化したテスト対策を案内,未着手
+BTWO-026,chiba,伸学アカデミー,,form,https://shin-aca.com/contact/,https://shin-aca.com/contact/,無,有,1,四街道市の塾で中3生の定期テストの点数アップ実績を掲載,未着手
+BTWO-027,chiba,学習塾Upright,,form,https://r.goope.jp/upright-sakura/contact,https://r.goope.jp/upright-sakura/contact,無,有,1,佐倉の3中学校専門で偏差値60以上の難関公立高校向け5教科対策を掲げる,未着手
+BTWO-028,chiba,成績UPラボ,,form,https://seiseki-up-labo.com/contact/,https://seiseki-up-labo.com/contact/,無,有,1,幕張本郷の塾で千葉県公立高校入試の内申点とボーダーの解説記事がある,未着手
+BTWO-029,chiba,NPS成田予備校,,form,https://www.npsnaritayobiko.com/お問合せ/,https://www.npsnaritayobiko.com/お問合せ/,無,有,9,「公立高校合格率90%」を掲げ9校舎を展開,未着手
+BTWO-030,chiba,NEVER TOO LATE,,form,https://www.nevertoolate.jp/contact/,https://www.nevertoolate.jp/contact/,無,有,3,千葉ニュータウンで中学生対象・高校受験合格実績のページがある(3教室),未着手
+BTWO-031,chiba,個別進学塾アライン 大網校,,form,https://allein-juku.com/contact/,https://allein-juku.com/contact/,無,有,1,中1・中2が年3回の「千葉県統一テスト」を受験できると記載(大網白里市),未着手
+BTWO-032,chiba,完全個別指導学習塾ユーカル,ライフスタディー Corporation,form,https://you-cal.co.jp/inquiry/,https://you-cal.co.jp/inquiry/,無,有,2,「千葉県の高校受験制度について」のお知らせ記事がある(習志野台・北習志野),未着手
+BTWO-033,chiba,飯倉進学塾,,form,http://iigura-juku.com/contact.html,http://iigura-juku.com/contact.html,無,有,1,中学生の定期試験対策・受験対策を掲げる(大網白里市),未着手
+BTWO-034,chiba,千葉進研,,form,https://www.chibashinken.com/document_request/,https://www.chibashinken.com/document_request/,無,有,12,中3総合コースがあり12教室を展開・公開フォームは資料請求と体験申込のみ,要確認
+BTWO-035,chiba,日米文化学院,,form,https://nichibei-school.net/nichibei-res/,https://nichibei-school.net/nichibei-res/,有,有,,問い合わせページに「業者の方の営業は固くお断りします」の記載あり,除外
+BTWO-036,chiba,イーグル学院,,form,https://eggnoda.com/otoiawase,https://eggnoda.com/otoiawase,有,有,3,問い合わせフォームに「企業の方が営業のために使用するのはご遠慮ください」の記載あり,除外
+BTWO-037,chiba,正学館(北柏校・流山おおたかの森校),for next株式会社,,,https://sg-kitakashiwa.com/contact/,無,有,2,問い合わせページに入力フォームがなく電話番号のみ,除外
+BTWO-038,chiba,金杉進学スクール,,,,https://kanasugi-shingaku.com/,無,有,1,公開連絡先がLINEのみ,除外
+BTWO-039,chiba,村田塾,,,,https://muratajuku.com/,無,有,1,公開連絡先がLINEのみ,除外
+BTWO-040,chiba,小高進学塾,,form,https://www.odakashingaku.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b%e3%81%94%e5%85%a5%e5%a1%be%e3%81%be%e3%81%a7%e3%81%ae%e6%b5%81%e3%82%8c/,https://www.odakashingaku.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b%e3%81%94%e5%85%a5%e5%a1%be%e3%81%be%e3%81%a7%e3%81%ae%e6%b5%81%e3%82%8c/,有,有,1,フォームに「営業活動はご遠慮願います」の記載あり,除外
+BTWO-041,chiba,個別指導GAKU,,,,https://www.kobetugaku.jp/お問合わせ/,無,有,1,問い合わせは電話のみでフォーム・メール記載なし,除外
+BTWO-042,chiba,ランゲージ・ラボラトリー,,,,https://tateyama.me/contact/,無,有,1,公開メールアドレスが塾長個人名入りでフォームなし,除外
+BTWO-043,fukuoka,福岡進学塾 原通り校・有田校,,form,https://fukuokashingakujuku.com/inquiry/,https://fukuokashingakujuku.com/inquiry/,無,有,2,中学1年・2年・3年の学年別コースのページがある,未着手
+BTWO-044,fukuoka,常勝進学塾 福岡春日本校,,form,https://www.joushou-shingakujuku.com/contact.html,https://www.joushou-shingakujuku.com/contact.html,無,有,1,小学4年生〜中学3年生を対象とする進学塾と明記されている,未着手
+BTWO-045,fukuoka,学習塾イノセント,株式会社コリレーション・ワン,form,https://edu-innocent.com/top/contact,https://edu-innocent.com/top/contact,無,有,20,中学生向けに高校受験に向けた個別授業・予習学習を行うと記載がある(福岡・熊本・佐賀に20教室),未着手
+BTWO-046,fukuoka,次世代ゼミ ファインズ,有限会社１．２．３,form,https://www.fines-k.com/form/index.html,https://www.fines-k.com/form/index.html,無,有,6,公立TOP校合格を目指す中学生の受験特訓コースがある,未着手
+BTWO-047,fukuoka,有機学習塾,,mail,yuuki-juku@juno.ocn.ne.jp,https://www.yuuki-gakushuu.org/form.html,無,有,2,中学生向け冬期講習の案内(2025年11月・公開終了)を新着情報に掲載,未着手
+BTWO-048,fukuoka,毘沙門塾,株式会社ニシムラ,mail,bishamon@bronze.ocn.ne.jp,https://bishamonjuku.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,無,有,,中学生コースは県立高校合格を目標に定期考査の成績向上を目指すと記載,未着手
+BTWO-049,fukuoka,シーズ鎌倉学園,(株)シーズ,form,https://www.seeds-kg.com/pages/5/,https://www.seeds-kg.com/pages/5/,無,有,10,中学部は公立高校第1志望合格を目標にすると記載(10教室),未着手
+BTWO-050,fukuoka,開心塾,,form,https://kaishin-juku.jp/contact/,https://kaishin-juku.jp/contact/,無,有,3,高校入試対策として中1からの総復習を掲げている,未着手
+BTWO-051,fukuoka,アテネ塾(旧 筑紫松陰塾),,form,https://www.athensjyuku.jp/contact/,https://www.athensjyuku.jp/contact/,無,有,1,中学生・小学生・高校生対象で定期テスト・受験対策・進路指導まで対応と記載,未着手
+BTWO-052,fukuoka,ちくしの進学教室,,form,https://www.chikushin-smile.jp/mail.html,https://www.chikushin-smile.jp/mail.html,無,有,4,高校受験(第1志望合格率)を前面に出した中学生コースのページがある,未着手
+BTWO-053,fukuoka,学習塾スマイルボート,,form,https://www.smileboat.jp/contents/category/contact/,https://www.smileboat.jp/contents/category/contact/,無,有,2,飯塚校・直方校の2校で高校受験を終えた生徒の声を掲載,未着手
+BTWO-054,fukuoka,南ゼミナール,,form,https://minami-zemi.jp/contact/,https://minami-zemi.jp/contact/,無,有,1,トップに「冬期講習 生徒追加募集」の案内があり中学1〜3年生コースがある [検査: B2B台帳に連絡履歴あり(株式会社スプリックス(東証上場・森塾/湘南ゼミナール等の塾チェーン運営・IR窓口) awaiting)・二重に連絡しないよう👤判断],要確認
+BTWO-055,fukuoka,進海ゼミナール,合同会社オレンジハーフ,form,https://www.shin-kaizemi.com/blank-4,https://www.shin-kaizemi.com/blank-4,無,有,1,中1〜中3の授業時間割・料金を掲載(産医大通り教室),未着手
+BTWO-056,fukuoka,総合進学教室 時習館,,mail,contact@jishukan-kasugabaru.jp,https://www.jishukan-kasugabaru.jp/,無,有,1,「企業様からのお問い合わせはメールにて」と記載・サイト上はcontact[at]表記・中3は11月以降日曜も授業,未着手
+BTWO-057,fukuoka,学思館,,form,https://www.gakushikan.co.jp/company/contact/,https://www.gakushikan.co.jp/company/contact/,無,有,9,中学生向けに「受験本科 高校受験、合格へ！」のコースがある,未着手
+BTWO-058,fukuoka,俺のお墨付き,,mail,o.sumi.tsuki1@gmail.com,https://oresumi.com/mail/,無,有,4,中学生向け「冬期特訓案内」(2025)がメニューにある [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+BTWO-059,fukuoka,高校受験専門 学習塾 First Step,,form,https://fs-2003.com/contact,https://fs-2003.com/contact,無,有,1,高校受験専門を掲げ福岡市東区香椎で小・中学生を指導,未着手
+BTWO-060,fukuoka,望羊学舎 大橋教室,,form,https://boyogakusha.com/inquiry/,https://boyogakusha.com/inquiry/,無,有,1,対象学年に中学1年生〜3年生を明記,未着手
+BTWO-061,fukuoka,糸島美咲塾,,mail,itoshima.misakijuku@gmail.com,https://www.misaki-juku.com/access,無,有,1,中学生・高校生の5教科受験指導と冬期講習(計6日間)の日程を掲載 [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+BTWO-062,fukuoka,糸島学習塾YES 前原駅前校,,form,https://yesjyuku.com/contact/,https://yesjyuku.com/contact/,無,有,1,中学生向けの通い放題コースの案内がある,未着手
+BTWO-063,fukuoka,石松塾,株式会社石松塾,form,https://isimatu.co.jp/contact/,https://isimatu.co.jp/contact/,無,有,2,中学校ごとの定期考査対策と高校受験指導を掲げる,未着手
+BTWO-064,fukuoka,あんきゅう塾,,form,https://an9-juku.com/contuctus/,https://an9-juku.com/contuctus/,無,有,1,中学3年生・2年生の募集締切(キャンセル待ち)を掲載,未着手
+BTWO-065,fukuoka,個別指導塾 中川塾,,form,https://juku-nakagawa.com/contact/,https://juku-nakagawa.com/contact/,無,有,1,中間・期末考査や実力テストを目標にした取り組みを案内,未着手
+BTWO-066,fukuoka,堤進学塾,,form,https://learningstation.wixsite.com/tsutsumijuku/contact,https://learningstation.wixsite.com/tsutsumijuku/contact,無,有,1,久留米の複数の中学校名を挙げて中学生の受験・学習指導を案内,未着手
+BTWO-067,fukuoka,小倉学習塾,,mail,kokuragakushujuku@gmail.com,https://www.kokuragakushujuku.com/,無,有,,北九州の小〜中学生対象の学習塾と記載 [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+BTWO-068,fukuoka,中野塾,,mail,nakano.juku.kurume@gmail.com,https://www.nakanojuku.com/,無,有,1,中学生の受験対策に特化したコースがある [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+BTWO-069,fukuoka,Dr.TAKAゼミ(六本松),,form,https://dr-taka.com/contact/,https://dr-taka.com/contact/,無,有,1,中学生コースに「高校受験・定期テスト対策」などが並ぶ,未着手
+BTWO-070,fukuoka,Enjoy Study 神松寺校,,form,https://enjoystudy.jp/contact-us/,https://enjoystudy.jp/contact-us/,無,有,1,中学生向けに部活と勉強を両立する自習環境を案内し高校入試結果のページがある,未着手
+BTWO-071,fukuoka,村の学習室 那珂川,,form,https://muranojukunakagawa.com/contact/,https://muranojukunakagawa.com/contact/,無,有,2,中学生に県立高校受験コースがあり大学進学を見据えた指導を案内,未着手
+BTWO-072,fukuoka,個別塾 SKY(スカイ),,form,https://sky-umi.net/inquiry.html,https://sky-umi.net/inquiry.html,無,有,,宇美町の塾で中学生向けコースのページへのリンクがある,未着手
+BTWO-073,fukuoka,Life進学ゼミ,,,,https://lifeshingakuzemi.com/,,,,,要確認
+BTWO-074,fukuoka,筑紫修学館,株式会社TSATOZ,,,https://www.ganbari.com/junior-high/,,有,7,中学生コースで内申点を重視する旨の記載あり・問い合わせ窓口が資料請求ページに転送され一般の問い合わせ窓口を確認できず,要確認
+BTWO-075,fukuoka,ユリイカ(EUREKA)うきは,,,,https://eureka-ukiha.com/contact/,,有,2,お問い合わせページのフォーム有無を確認できなかった,要確認
+BTWO-076,fukuoka,進学塾 正學舎,,form,https://seigakusya-fukuoka.com/contact,https://seigakusya-fukuoka.com/contact,有,有,1,問い合わせフォームに「営業メールはお断りしております」の記載あり,除外
+BTWO-077,fukuoka,金沢塾,,,,https://kanazawajuku.main.jp/,無,有,,公開連絡先が個人名入りの携帯キャリアのメールのみでフォームなし,除外
+BTWO-078,fukuoka,龍王塾,,,,https://www.ryuojuku.com/entry.php?eid=345369,無,有,,メール欄・入力フォームとも公開されておらず電話のみ,除外
+BTWO-079,fukuoka,Learnal大牟田個別進学塾,,,,https://www.learnal.website/,無,有,1,公開連絡先がLINEのみ,除外
+BTWO-080,fukuoka,高科塾,,,,https://kokajuku.amebaownd.com/,無,有,,メール・フォームが見当たらない,除外
+BTWO-081,fukuoka,学習塾Study Roots,,form,https://study-roots.com/inquiry,https://study-roots.com/inquiry,有,有,1,問い合わせページに「営業及び勧誘目的でのご利用は固くお断り」の記載あり,除外
+BTWO-082,fukuoka,個別指導の古賀塾,株式会社ａｍｉｃｉ,,,https://koga-juku.com/contact/,無,有,2,メール記載なし・問い合わせは外部サービスへのボタンと電話のみ,除外
+BTWO-083,fukuoka,福岡進学塾 那珂川本校・春日校,,form,https://www.fukuokashingakujuku.jp/form.html,https://www.fukuokashingakujuku.jp/form.html,有,有,2,フォームに「企業からの営業メールはご遠慮ください」の記載あり,除外
+BTWO-084,fukuoka,ラ・セーヌ進学塾,,,,http://juku-laseine.com/,,,,取得時に証明書エラー(共用証明書),確認不可（証明書エラー）
+BTWO-085,fukuoka,麻生ゼミナール,,,,http://aso-semi.com/,,,,取得時に証明書エラー(共用証明書),確認不可（証明書エラー）
+BTWO-086,hiroshima,進学空間Move,株式会社ザイン,form,https://shingakukuukanmove.jp/contact,https://shingakukuukanmove.jp/contact,無,有,1,広島公立上位校進学専門を掲げ来春の広島県高校入試の定員変更を解説する記事がある,未着手
+BTWO-087,hiroshima,Egg進学教室,有限会社志塾,form,https://eggweb.co.jp/inq.html,https://eggweb.co.jp/inq.html,無,有,,中学生対象コース(中1P/中2P/中3HS等)と冬期講習・入試情報のページがある,未着手
+BTWO-088,hiroshima,広島ゼミナール,,form,https://hiroshima-seminar.com/%e3%81%8a%e5%95%8f%e5%90%88%e3%82%8f%e3%81%9b/,https://hiroshima-seminar.com/%e3%81%8a%e5%95%8f%e5%90%88%e3%82%8f%e3%81%9b/,無,有,2,中1〜中3の週あたり授業日数を掲載し2025年冬期講習の案内がある,未着手
+BTWO-089,hiroshima,個別指導塾 博桜会,,form,https://hakuokai-hiroshima.com/contact/,https://hakuokai-hiroshima.com/contact/,無,有,1,「公立高校受験に強い個別指導塾」を掲げる,未着手
+BTWO-090,hiroshima,慶進塾,,form,https://keishin-juku.com/contact/,https://keishin-juku.com/contact/,無,有,,内申点の底上げを掲げた学校別過去問対策と冬期講習会の案内がある,未着手
+BTWO-091,hiroshima,あさひ塾 西原教室,有限会社ライズ,form,https://www.asahijuku.jp/contact/,https://www.asahijuku.jp/contact/,無,有,,年間予定に冬期講習会と2月の公立高校入試対策ゼミがある,未着手
+BTWO-092,hiroshima,完全個別指導塾 オールウェイズ,,form,https://www.allways-hiroshima.net/contact/,https://www.allways-hiroshima.net/contact/,無,有,1,広島県公立高校入試の内申点計算フォームを公開している,未着手
+BTWO-093,hiroshima,成道館,,mail,info@seidoukan.net,https://seidoukan.net/,無,有,1,中3は12月から休日特訓で高校入試に備えると記載,未着手
+BTWO-094,hiroshima,川上塾,,mail,info@kawakamijuku.com,https://kawakamijuku.com/,無,有,1,中3の高校入試に向けた準備について書いた記事がある(安佐南区),未着手
+BTWO-095,hiroshima,住田アカデミー,,form,https://sumida-academy.com/contact,https://sumida-academy.com/contact,無,有,1,中学生の月謝を掲載し冬期練成会の案内ページがある(府中町),未着手
+BTWO-096,hiroshima,学習ひろば,,form,https://gakushu-hiroba.com/pages/%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B,https://gakushu-hiroba.com/pages/%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B,無,有,1,中学1〜3年生を対象に上位国公立高校進学を目指すと記載(府中町),未着手
+BTWO-097,hiroshima,さかもと学習塾,株式会社さかもと,form,https://t-sakamoto.com/contacts/,https://t-sakamoto.com/contacts/,無,有,1,中高生は試験一週間前から定期試験対策を行うと記載,未着手
+BTWO-098,hiroshima,若竹塾,Wakatakejuku Inc.,form,https://wakatakejuku.com/entry/,https://wakatakejuku.com/entry/,無,有,4,「中3誠之館対策SEコース」があり福山・尾道に4校舎,未着手
+BTWO-099,hiroshima,無学泰山塾,,form,https://taiheisha.net/contact,https://taiheisha.net/contact,無,有,7,福山を中心に7教室で中学生コースのメニューがある,未着手
+BTWO-100,hiroshima,英数学院,,mail,eisugakuinfuchu@gmail.com,https://eisu-gakuin.jp/,無,有,1,小中高生対象で補習から難関校の受験対策まで対応と記載(府中町) [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+BTWO-101,hiroshima,橋本obata学習塾,,form,https://hashimoto-obata.com/contact/,https://hashimoto-obata.com/contact/,無,有,1,10月後期から中3日曜授業を始め受験体制に入ると案内(東広島市西条),未着手
+BTWO-102,hiroshima,個別指導 彩星館,,form,https://kobetsu-saiseikan.com/contact/,https://kobetsu-saiseikan.com/contact/,無,有,5,中学生向け冬期講習の案内がある(東広島市・5校舎),未着手
+BTWO-103,hiroshima,ソラ学習塾,,form,https://www.soragaku.com/contact-8,https://www.soragaku.com/contact-8,無,有,1,中学部があり「新しい公立高校入試について」の案内ページがある(廿日市市),未着手
+BTWO-104,hiroshima,学習塾NICK,,mail,rising1001110@gmail.com,https://29-jyuku.com/exam,無,有,1,廿日市の中学生専門塾で広島県の内申点と当日点の関係を解説するページがある [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+BTWO-105,hiroshima,瀬野みどり塾,,mail,info@senomidorijuku.ec-net.jp,http://senomidorijuku.ec-net.jp/,無,有,1,公立高校入試と内申点について触れた案内文がある(安芸区),未着手
+BTWO-106,hiroshima,光優塾,,form,https://hiyu-juku.com/contact/,https://hiyu-juku.com/contact/,無,有,,令和7年度冬期講習生の募集案内があり公立高校の受験対策校を明記(福山市),未着手
+BTWO-107,hiroshima,嘉門学習塾,,form,http://comeon-juku.jp/inquiry,http://comeon-juku.jp/inquiry,無,有,,FAQに春期・夏期・冬期講習を実施と記載(福山市),未着手
+BTWO-108,hiroshima,塾まなび,,form,https://juku-manabi.com/inquiry/,https://juku-manabi.com/inquiry/,無,有,2,明王台校・水呑校で夏季・冬期講習のページがある(福山市),未着手
+BTWO-109,hiroshima,パワーゼミ,,form,https://power-semi.net/toiawase,https://power-semi.net/toiawase,無,有,,中学生コースに「公立高校の合否は学力と内申点で決まる」と記載(福山市),未着手
+BTWO-110,hiroshima,コムタス進学セミナー,,form,https://www.comtas.jp/contact/,https://www.comtas.jp/contact/,無,有,3,呉駅前・広・焼山で中学・高校・大学受験の指導を掲げる,未着手
+BTWO-111,hiroshima,秀優舎,,form,https://shuyusha.jp/contact/,https://shuyusha.jp/contact/,無,有,1,集団個別と完全個別の2システムで学校の定期テストと高校・大学入試に対応(安佐北区),未着手
+BTWO-112,hiroshima,ひろしまスタディ,楠教育株式会社,form,https://hiroshima-study.jp/contact/,https://hiroshima-study.jp/contact/,無,有,,広島市エリアに特化した学習サポート塾(オンライン)で定期面談や進路相談を案内,未着手
+BTWO-113,hiroshima,ビビッド修永学習塾,,form,https://vivid-vision.jp/contact/,https://vivid-vision.jp/contact/,無,有,,誠之館高校など高倍率校を目指す中学生コースのページがある(福山市),未着手
+BTWO-114,hiroshima,いろは学習教室,,form,https://iroha-school.com/contact/,https://iroha-school.com/contact/,無,有,1,中学3年生の授業枠と「冬期講習申込受付中」の案内がある(東広島市),未着手
+BTWO-115,hiroshima,個別指導塾メイクアップ,,form,https://www.hiroshima-makeup.com/contact.html,https://www.hiroshima-makeup.com/contact.html,無,有,1,近隣中学校ごとの定期テスト対策コースがある(佐伯区),未着手
+BTWO-116,hiroshima,ノーベル学習館,,form,https://www.nobel-g.co.jp/linkpage/mailform-contact.html,https://www.nobel-g.co.jp/linkpage/mailform-contact.html,無,有,11,「公立高校入試では内申点が非常に重要」と記載し竹原・三原・東広島に展開,未着手
+BTWO-117,hiroshima,大学受験進学塾 広大研,,mail,info@hirodaiken.jp,https://hirodaiken.jp/,無,有,6,高校受験向け「広大研ミドル」コースがあり広島・西条・五日市に6教室,未着手
+BTWO-118,hiroshima,TEN(古江・美鈴が丘),有限会社TEN,form,https://ten-e-group.com/contact/,https://ten-e-group.com/contact/,有,有,,問い合わせページに「営業に関する連絡はご遠慮ください」の記載あり,除外
+BTWO-119,hiroshima,公立高校受験専門 かがわ塾,,form,https://kagawa-juku.jp/,https://kagawa-juku.jp/,有,有,,問い合わせフォームに「企業様からの営業案内などは全てお断り」の記載あり,除外
+BTWO-120,hiroshima,あかつき塾,株式会社あかつき,,,https://www.keizu.ne.jp/refe/,無,有,3,問い合わせは教室別のリンク形式でフォーム・メール記載が見当たらない,除外
+BTWO-121,hiroshima,新一ゼミ,,,,https://shinichizemi.jp/,無,有,,公開連絡先が電話とLINEのみ,除外
+BTWO-122,hiroshima,進学塾ライトアップ,,,,https://lightup-onomichi.com/,,,,取得時に証明書エラー(共用証明書),確認不可（証明書エラー）
+C1-001,shiga,おうみ進学プラザ,株式会社Way Bridge,mail,omi@omi-plaza.com,https://omi-plaza.com/company/,無,有,,「おうみ進学プラザについて」ページに滋賀県立高校入試では記述式の問題が多く出題されると記載があり、中学生の集団学習コースがある,未着手
+C1-002,shiga,昴塾,CKCネットワーク株式会社,form,https://www.ckc.co.jp/contact/,https://subaru-jyuku.jp/course/,無,有,10,昴塾のコース案内に「３年生は入試対策も行っています」とある(運営会社の問い合わせフォームを宛先とした),未着手
+C1-003,shiga,服部塾・よしき塾,,form,https://hattorijuku.com/contact,https://hattorijuku.com/information/1046/,無,有,4,中学3年生向け「高校受験に向けた入試特訓」開始のお知らせ(2026/09/14)がある,未着手
+C1-004,shiga,個別指導アップ・る,,form,https://up-dekiru555.com/contact/,https://up-dekiru555.com/junior_high/,無,有,4,中学部ページに「地元中学校の進路内容にあわせ内申書対策に対応した地域密着型指導」とある(本部は彦根市),未着手
+C1-005,shiga,アットスクール,株式会社アットスクール,form,https://www.at-school.jp/inquiry/,https://www.at-school.jp/,無,有,11,滋賀・大阪・兵庫・京都・愛知に11教室があり、サイトに中学・高校入試の合格実績と入試情報のページがある,未着手
+C1-006,kyoto,近藤塾,,mail,info@kondojuku-uji.com,https://www.kondojuku-kyoto-osaka.com/juku,無,有,34,「中3 高校入試特訓(個別指導)」が8月下旬から2月まである(塾概要ページにMAIL欄として掲載のアドレス),未着手
+C1-007,kyoto,立誠学院,立誠学院グループ,form,https://www.rissei-gakuin.com/inquiry/inquiry.html,https://www.rissei-gakuin.com/ssr/,無,有,6,「小６から始められる受験コース」があり週3日通塾と記載(山科・醍醐・伏見など6校舎),未着手
+C1-008,kyoto,教学舎,,form,https://kyougakusya.net/contact,https://kyougakusya.net/,無,有,,中学生コースは英語・数学がメイン科目で、内申点を上げる学習にも触れている(福知山市・舞鶴市・綾部市),未着手
+C1-009,kyoto,京都 修学塾,,form,https://www.shugakujuku-kyoto.com/form.php,https://www.shugakujuku-kyoto.com/,無,有,,トップに「冬期講習のお申込・パンフレット」の案内が掲載されている,未着手
+C1-010,kyoto,學進会,,form,https://gakushinkai.co.jp/?page_id=528,https://gakushinkai.co.jp/,無,有,,福知山の塾で、個別指導の対象に中学生が含まれ、一斉授業で高校受験に対応するとある,未着手
+C1-011,hyogo,岡村ゼミナール,岡村ゼミナール株式会社,form,https://oksemi.co.jp/ap,https://oksemi.co.jp/,無,有,30,中学生の「高校受験コース」は難関公立高校への進学を目指すコースと記載(姫路・赤穂・たつの等30教室),未着手
+C1-012,hyogo,進学個別指導塾Willbe,,form,https://ako-juku.com/contact/,https://ako-juku.com/,無,有,,兵庫県公立高校入試の内申点計算ツールと合格目安(第4学区対応)を公開している(赤穂市),未着手
+C1-013,hyogo,学習空間オズ,,mail,learningspace.oz@gmail.com,https://www.learning-space-oz.com/contact,無,有,,三田市の塾で、サイトに中学部のページがある(内容は画像のため講座詳細は未確認)。gmailだが事業名のアドレス [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+C1-014,hyogo,まんてん個別指導塾,,form,https://mantenlab.com/flow,https://mantenlab.com/j_high_school,無,有,20,中学生向けに各校の定期試験前2週間から10時間以上の試験対策を行うと記載(兵庫県内20教室以上),未着手
+C1-015,hyogo,北摂英数学院,,form,http://hukuin.sakura.ne.jp/contact.html,http://hukuin.sakura.ne.jp/,無,有,,大手塾からの転塾生が北摂三田高校などに合格した実績を掲載している(メールは詐欺対策で閉鎖済み・フォームのみ),未着手
+C1-016,aichi,星煌学院,株式会社星煌学院,form,https://www.sj-seico.co.jp/contact.html,https://www.sj-seico.co.jp/company.html,無,有,9,事業内容に「小中学生の学習指導及び公立高校受験を中心とする進学指導」と記載(名古屋市の大高・有松など),未着手
+C1-017,aichi,トップ教育センター,株式会社トップ教育センター,form,https://www.top-kyouiku.co.jp/inquiry/,https://www.top-kyouiku.co.jp/company/,無,有,17,集団指導のEISUゼミナールは小学校から公立高校に沿った学習・進学指導をベースにすると記載(半田市・知多エリア),未着手
+C1-018,aichi,名学館,株式会社名学館ホールディングス,form,http://www.meigakukan.co.jp/inquiry/,http://www.meigakukan.co.jp/,無,有,,トップに「定期テスト対策／内申アップ対策／中高大受験対策」を掲げている(名古屋市),未着手
+C1-019,aichi,野田塾,,form,https://www.nodajuku.co.jp/form/enquete_form.php?en=1,https://www.nodajuku.co.jp/,無,有,,サイトに愛知の公立高校入試問題・解答のページがある,未着手
+C1-020,aichi,明海学院,,form,https://meikaigakuin.com/contact/,https://meikaigakuin.com/course/junior-high-school/,無,有,,中3生は4月中旬から毎週土曜に「高校入試対策講座」を開講と記載(愛知・岐阜の個別指導塾),未着手
+C1-021,ishikawa,東大セミナー,株式会社ティエラ石川,form,https://www.tohsemi.com/contact3/,https://www.tohsemi.com/,無,有,10,サイトのコース案内に「選抜入試対策講座」がある(金沢市・野々市市・白山市の10校舎),未着手
+C1-022,ishikawa,学習塾GAIN,,form,https://gain-ishikawa.com/contact/,https://gain-ishikawa.com/,無,有,2,中高生クラス授業がある(白山市の松任駅前校・高尾南校の2校),未着手
+C1-023,ishikawa,進学個別指導塾ノエクリ,株式会社WILLBANK,form,https://noecre.jp/contact,https://noecre.jp/,無,有,,サイトが「難関大学受験・国公立高校受験に強い進学塾」と名乗り、金沢市・白山市・小松市で展開している,未着手
+C1-024,ishikawa,学習塾 数塾,,form,https://www.suzyuku.com/inqfm/general/,https://www.suzyuku.com/mattou/middle-school/,無,有,3,中学3年生は1・2年生の復習と並行して入試対策も行うと記載(白山・野々市・金沢の3校),未着手
+C1-025,ishikawa,泉進ゼミナール,,mail,info@senshin-seminar.com,https://www.senshin-seminar.com/access.html,無,有,,事業内容に中学生向け個別指導専門塾の運営と高校受験対策教材の制作が挙がる(金沢市),未着手
+C1-026,nagasaki,智翔館,株式会社智翔館,form,https://chishokan.co.jp/wp/contact/,https://chishokan.co.jp/,無,有,,中3向け「長崎県一斉模試」と「秋の受験対策講座」の案内が掲載されている(佐世保市),未着手
+C1-027,nagasaki,モリ・ジュク,株式会社モリジュク,mail,morijuku_haiki@yahoo.co.jp,https://mori-juku.co.jp/,無,有,,トップに「志望校ごとの受験対策サポート」と記載し中学部のページがある(佐世保市早岐・広田) [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+C1-028,nagasaki,長崎ゼミナール,有限会社長崎ゼミナール,form,https://n-semi.com/contact/,https://n-semi.com/each-grade/,無,有,,各学年コースの中学生の項で学習目標に「公立高校合格」を掲げている(長崎市),未着手
+C1-029,nagasaki,吉野塾,,form,https://www.yoshinojuku.jp/form.html,https://www.yoshinojuku.jp/,無,有,,2026年の入試で諫早高・長崎西・長崎東・長崎北の公立高校合格を掲載している(諫早市),未着手
+C1-030,nagasaki,進学サポートαstep,,form,https://www.alpha-step.com/contact/,https://www.alpha-step.com/,無,有,,サイトに「志望校合格率100％」と合格実績を掲載している(諫早市),未着手
+C1-031,gifu,賢学塾,,form,https://ssl.form-mailer.jp/fms/1cad3d57104004,https://kengakujuku.com/,無,有,,「中３高校入試対策」コースがあり、岐阜県公立高校入試のデータを解説する「高校入試情報サイト」を運営している(大垣市),未着手
+C1-032,gifu,開智塾,,form,https://kaichijuku.jp/contact/,https://kaichijuku.jp/,無,有,,中学部に月1回の「超級英語・超級数学」があると記載(各務原・関・美濃・美濃加茂・富加),未着手
+C1-033,gifu,螢雪ゼミナール,,form,https://keisetsu.net/info/contact1.php,https://keisetsu.net/,無,有,,中学部は「部活も勉強も両方頑張る」生徒向けの受験に強い独自システムと記載(愛知・岐阜・西濃),未着手
+C1-034,gifu,春塾,,form,https://ogaki-harujuku.jp/contact/,https://ogaki-harujuku.jp/,無,有,,小中高生対象で、高校受験まで5教科に対応する個別・集団指導と無料送迎バスを掲載している(大垣市),未着手
+C1-035,gifu,天晴塾,,form,https://tensei-juku.jimdofree.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B-1/,https://tensei-juku.jimdofree.com/,無,有,,学年別の募集状況を掲載し「中３ 募集終了」と記載している(多治見市),未着手
+C1-036,nara,市田塾,株式会社市田,form,https://ichidajuku.co.jp/contact/,https://www.ichidajuku.co.jp/junior-high-school,無,有,12,高校受験コースで「定期テストで着実に結果を出し、内申点アップにつなげます」と記載し、12月に冬期講習開始とある,未着手
+C1-037,nara,進学塾“関西”,,mail,kansai@kansai-edu.com,https://kansai-edu.com/inquiry/,無,有,5,天理・生駒・真美ヶ丘・精華台・城山台に校舎があり、中学部(中1〜中3)のコースがある(1974年創塾),未着手
+C1-038,nara,個別指導るーと,,form,https://root-nara.jp/contact,https://root-nara.jp/,無,有,,「冬期集中の募集を開始しました」(2025.11.28)の案内があり、高校受験(中学3年生)の指導ページがある(天理市),未着手
+C1-039,nara,泉原学習塾 小林学習塾,,form,https://izumihara.com/inquiry/,https://izumihara.com/junior-2/,無,有,,中学生は「内申、実力アップを目指す」とし、定期テスト2週間前から毎日2時間の授業(無料)と記載(大和郡山市),未着手
+C1-040,nara,進学塾AOI,,form,https://aoijuku.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,https://aoijuku.com/,無,有,,サイトに「2024年度高校入試実績」のページがあり、中学の5教科を担当講師制で指導している(大和郡山市),未着手
+C1-041,kyoto,森学習塾,,form,https://mori-gj.com/contact-us/,https://mori-gj.com/,無,有,,中3向け「公立高校入試対策講座」が10月末からあるが、問い合わせフォームは体験授業・個別相談会の申込専用のため,除外
+C1-042,hyogo,木村塾,株式会社ヒューマレッジ,form,,https://www.kimurajuku.co.jp/kimurajuku/chugakusei/hyogo.html,,有,19,兵庫の中学部は19教室だが、問い合わせページが東進(ナガセ)ドメインの資料請求フォームへ転送され、ナガセグループのため,除外
+C1-043,hyogo,ロイヤルアカデミー神吉校,,,,https://royal-academy-members.info/?page_id=306,無,有,,連絡はLINEと電話のみで、メールもフォームも確認できないため,除外
+C1-044,gifu,旭ゼミナール,有限会社旭ゼミナール,form,https://www.asahi-zemi.com/form.html,https://www.asahi-zemi.com/form.html,無,有,3,フォームは入塾お申し込み専用で「メールでの返信はいたしません」と記載され、問い合わせは電話のみのため,除外
+C1-045,gifu,HOMES個別指導学院,株式会社HOMESエデュケーション,form,https://www.homes-edu.com/contact/,https://www.homes-edu.com/contact/,無,有,,フォームは資料請求・個別説明会・体験授業の申込専用のため,除外
+C1-046,nagasaki,志田塾,,form,,https://www.shidajuku.com/,,,,長崎市の進学塾だがWebFetchでHTTP 403となり内容を確認できなかった(証明書エラーではない),要確認
+C2-001,ibaraki,つくば進学塾,,mail,jyuku@tsuku-sin.jp,https://www.tsuku-sin.jp/,無,有,,茨城県立高校の学校説明会日程のお知らせをサイトに掲載している,未着手
+C2-002,ibaraki,桜ゼミナール,,mail,sakurazemi59@yahoo.co.jp,https://sakuraseminar.sakura.ne.jp/,無,有,,水戸市の塾で、冬期講習の受付開始を告知し高校受験指導にも対応と記載 [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+C2-003,ibaraki,受験予備校常勝,常勝教育グループ吉村学院,mail,info@josyo.jp,https://josyo.jp/%E5%8F%97%E9%A8%93%E4%BA%88%E5%82%99%E6%A0%A1%E5%B8%B8%E5%8B%9D%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,無,有,1,ひたちなか市の塾で、中学部に「水戸一高に合格できる理由」のページと冬期講習の案内がある,未着手
+C2-004,ibaraki,特伸塾,,form,https://tokushinjuku.com/contact/,https://tokushinjuku.com/contact/,無,有,,土浦市の塾で、高校受験生だけのコースでクラス授業と個別指導による高校入試対策を行うと記載,未着手
+C2-005,ibaraki,学習塾 喇叭水仙,,form,https://rappasuisen.jp/contact,https://rappasuisen.jp/contact,無,有,4,神栖・鹿嶋・波崎の塾で、中3は業者テストを5～7回実施と記載,未着手
+C2-006,ibaraki,専修グループ,,form,https://sensyu-grp.com/contact/,https://sensyu-grp.com/contact/,有,,,お問い合わせページに「営業関連のお問い合わせはご遠慮ください」の記載あり,除外
+C2-007,saitama,WiLL（ウィル）,有限会社ウィル,mail,higashitokorozawa@will-school.co.jp,https://www.will-school.co.jp/higashitokorozawa/,無,有,3,所沢市の塾で、東所沢教室のページに「県立高校受験専門」と掲げている,未着手
+C2-008,saitama,個別指導学友,,mail,snsystem@cyber.ocn.ne.jp,https://gakuyu.net/,無,有,,春日部市の塾で、受験制度改革（面談・内申書の簡素化）について解説する記載がある,未着手
+C2-009,saitama,OKaBe大宮進学塾,,form,https://www.okabe-omiya-juku.jp/contact,https://www.okabe-omiya-juku.jp/contact,無,有,,さいたま市の塾で、中学生向けに「圧倒的な先取り」と「徹底的な反復」で難関高校合格を目指すと記載,未着手
+C2-010,saitama,進学塾unit,,form,https://www.juku-unit.com/contact/,https://www.juku-unit.com/contact/,無,有,,川越市の塾で、2学期定期テスト勉強会の案内があり北辰テストに触れた生徒の声を掲載,未着手
+C2-011,saitama,金子学習塾,,form,https://forms.gle/X3xYQ83LVocKTPGU6,https://kanekogakushujuku.net/,無,有,,熊谷市の塾で、夏期講習・冬期講習は中3生のみ実施と記載（フォームは体験入塾・ご相談用）,未着手
+C2-012,saitama,StudyHouse（スタディハウス）,,,,http://www.studyhouse.co.jp/class/,,,,WebFetchで証明書エラー（ホスト名不一致）のため未確認,確認不可（証明書エラー）
+C2-013,saitama,Be-1（びーわん）,,,,http://be-1kobetu.com/,,,,WebFetchで証明書エラー（ホスト名不一致）のため未確認,確認不可（証明書エラー）
+C2-014,saitama,関根塾,,,,https://www.sek.co.jp/,,,,WebFetchが3回とも接続失敗（Socket is closed）のため未確認,確認不可（証明書エラー）
+C2-015,tochigi,Make Impact,株式会社MakeImpact,mail,info@makeimpact.jp,https://makeimpact.jp/contact/,無,有,2,宇都宮市の塾で、「高校入試、定期テスト対策、実力テスト、下野模試に強い学習塾」と説明している,未着手
+C2-016,tochigi,スタディー・フィールド（小山城南教室）,スタディー・フィールド グループ,mail,kanuma@people-corp.jp,https://www.study-f.com/kanuma/oyama-jonan/,無,有,3,鹿沼・小山・さくら地区の塾で、「栃木県立高校特色選抜 合格状況」の掲載と冬期キャンペーンの告知がある,未着手
+C2-017,tochigi,わたらせ塾,,mail,info@watarasejyuku.com,https://watarasejyuku.com/about/,無,有,,足利市の塾で、「高校受験から大学受験まで6年間」の指導を掲げている,未着手
+C2-018,tochigi,植野進学ゼミ,,form,https://ueno-zemi.net/contact.html,https://ueno-zemi.net/contact.html,無,有,,小山市の塾で、中学生向けに定期テスト対策補習と質問タイムを設けている,未着手
+C2-019,tochigi,嚶鳴進学塾,,form,https://f-oumeishingakujuku.com/contact/,https://f-oumeishingakujuku.com/contact/,無,有,,宇都宮市の塾で、県立高校合格率を毎年90％以上と掲載し冬期講習の案内がある,未着手
+C2-020,tochigi,本松学習塾,合同会社ホンマツ,form,https://www.honmatsu-juku.com/contact,https://www.honmatsu-juku.com/contact,有,有,,お問い合わせフォームに「営業目的でのフォームのご利用はご遠慮ください」の記載あり,除外
+C2-021,niigata,修学館,,form,https://shugakukan.info/contact,https://shugakukan.info/contact,無,有,,長岡市の塾で、中学生コースについて「定期テスト対策・受験対策まで直接指導」と記載,未着手
+C2-022,niigata,立心ゼミナール,,form,https://www.rizemi.jp/contact/,https://www.rizemi.jp/contact/,無,有,,三条市・燕市の塾で、「三高・巻高・三条東高を狙える」と掲げている,未着手
+C2-023,niigata,小池塾,,form,https://koike-jk.com/contact-us,https://koike-jk.com/contact-us,無,有,4,新発田市の塾で、新潟高校・新潟南高校・新発田高校・新発田南高校などへの合格を掲載,未着手
+C2-024,niigata,進学塾レグルス,,form,https://niigata-regulus.com/contact/,https://niigata-regulus.com/contact/,無,有,,新潟市西区の塾で、中学生コースがあり新潟高校・南高校・江南高校への合格実績を掲載,未着手
+C2-025,niigata,虎塾,,form,https://toraschool.com/contact,https://toraschool.com/contact,無,有,2,新潟市の塾（関屋校・潟東校）で、「高校受験・定期テストで結果を出す！」と掲げている,未着手
+C2-026,niigata,真友ゼミ,,form,https://shinyusya.net/inquiry/,https://shinyusya.net/inquiry/,有,有,,お問合せフォームに「法人営業によるお問合せフォームのご利用はご遠慮ください」の記載あり,除外
+C2-027,niigata,飛翔塾,,mail,info@hishojuku.jp,https://www.hishojuku.jp/contact.html,有,有,,問合せページに「営業目的の問い合わせは固くお断りします」の記載あり,除外
+C2-028,niigata,井手塾,株式会社井手塾,form,https://idejuku.com/materials/,https://idejuku.com/materials/,無,有,4,公開されている窓口が無料体験・資料請求専用フォームのみのため除外（上越市・公立中コースあり）,除外
+C2-029,yamaguchi,ベストエデュケーション,株式会社ベストエデュケーション,mail,best_educat@yahoo.co.jp,https://b-edu.jp/cms/pageask0.html,無,有,6,山陽小野田・宇部・山口・下関に校舎があり、2025-2026冬期講習の受付中と告知 [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+C2-030,yamaguchi,おのだ進学塾,,mail,mail@onoda-shingakujuku.jp,https://onoda-shingakujuku.jp/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,無,有,,山陽小野田市の塾で、公立高校入試対策の土曜講座がある（問い合わせフォームは廃止・メール受付）,未着手
+C2-031,yamaguchi,思学会,,form,https://www.shigakukai-shimonoseki-juku.com/contact,https://www.shigakukai-shimonoseki-juku.com/contact,無,有,,下関市の塾で、「夏期、冬期講習は塾生以外には行いません」と記載,未着手
+C2-032,yamaguchi,徳進塾,CAIシステム株式会社,form,https://tokushin-juku.com/contact,https://tokushin-juku.com/contact,無,有,3,周南市（徳山・下松・光）の塾で、「中３入試対策講座」がある,未着手
+C2-033,yamaguchi,TOP-U予備校（宇部進グループ）,株式会社向学社,form,https://www.top-u.jp/contact/,https://www.top-u.jp/contact/,無,有,,山口市・宇部市に校舎があり、冬の学習会で公立高校の過去問などを履修すると記載,未着手
+C2-034,yamaguchi,志英塾,,form,https://www.shieijuku.com/contact,https://www.shieijuku.com/contact,有,有,1,サイトに「営業のお電話は固くお断りいたします」の記載あり（防府市）,除外
+C2-035,mie,安藤塾,株式会社安藤塾,form,https://www.andojuku.jp/contact-form,https://www.andojuku.jp/contact-form,無,有,,伊勢・津・松阪・鈴鹿・亀山の塾で、中学生コースと冬期講習のページがある,未着手
+C2-036,mie,四日市学習塾TheJuku,,form,https://thejuku.jp/contact-form/,https://thejuku.jp/contact-form/,無,有,,四日市市の塾で、「県立・私立のトップ高合格を目指し」と中学生向けに記載,未着手
+C2-037,mie,学真会,,form,https://gakushinkai.com/contact/,https://gakushinkai.com/contact/,無,有,,桑名市・四日市市の塾で、定期テスト対策に強い塾と掲げている,未着手
+C2-038,mie,進学塾ISM,,form,https://ism-ise.jp/contact-form/,https://ism-ise.jp/contact-form/,無,有,,伊勢市の塾で、「2026年中学3年生限定12日間完成入試弱点克服講座」を案内している,未着手
+C2-039,mie,進学塾GT,進学塾GT,form,https://gtjuku.com/info,https://gtjuku.com/info,無,有,,名張市の塾で、中学生向けに「入試200点獲得講座」がある,未着手
+C2-040,miyagi,あるふあゼミナール,有限会社総合教育センター,mail,info@alpha-semi.net,https://www.alpha-semi.net/p10/,無,有,2,大崎市（古川駅前校・穂波校）の塾で、中学生コースがある,未着手
+C2-041,miyagi,学習塾アトムズ,,form,https://kg-atoms.jp/contact,https://kg-atoms.jp/contact,無,有,1,石巻市の塾で、「【中学生】受験対策コース」のページがある,未着手
+C2-042,miyagi,仙台藤原塾,株式会社仙台藤原塾,form,https://fujiwara-shingakujuku.com/question/,https://fujiwara-shingakujuku.com/question/,無,有,1,仙台市の塾で、北仙台教室の2025年度冬期講習のお知らせを掲載している,未着手
+C2-043,miyagi,レッツ進学塾,,form,https://www.letsshingakujuku.jp/%E3%81%8A%E5%95%8F%E5%90%88%E3%82%8F%E3%81%9B/,https://www.letsshingakujuku.jp/%E3%81%8A%E5%95%8F%E5%90%88%E3%82%8F%E3%81%9B/,無,有,2,仙台市太白区の塾で、夏休み・冬休み・春休みに講習会を開催と記載,未着手
+C2-044,miyagi,カラフル学舎,,form,https://colorfulgakusha32.com/contact,https://colorfulgakusha32.com/contact,無,有,4,大崎市の塾で、「冬季講習は全員参加していただきます」と記載,未着手
+C2-045,miyagi,ひのき進学グループ,株式会社スクールプルミエ,form,https://www.hinoki-sendai.com/contact1/,https://www.hinoki-sendai.com/contact1/,有,有,19,フォームに「（企業様のお問い合わせはご遠慮ください。）」の記載あり,除外
+C2-046,miyagi,Aスクール東北,,form,https://a-schooltouhoku.com/,https://a-schooltouhoku.com/,有,有,,サイトに「セールス・勧誘はお断りしております」の記載あり（岩沼市・名取市）,除外
+C2-047,nagano,理文塾,,mail,info@ribun.net,https://www.ribun.net/,無,有,,松本市の塾で、中学生向けに学校のテスト日程に合わせプリントを作り直して提供と記載,未着手
+C2-048,nagano,塾アマノ,Amano inc.,mail,info@jukuamano.jp,https://jukuamano.jp/contact.html,無,有,3,佐久市の塾で、中学生向けに「高校入試で必要な5教科。すべて生授業。」と記載,未着手
+C2-049,nagano,進学塾ヨダゼミ,,form,http://yodazemi.com/company/contact/,http://yodazemi.com/company/contact/,無,有,5,上田・小諸・佐久・軽井沢に校舎があり、中間・期末考査の公開対策授業を案内している,未着手
+C2-050,nagano,信州アカデミー,,form,https://shinshu-academy.net/contact.html,https://shinshu-academy.net/contact.html,無,有,1,茅野市の塾で、中学生向けコースに高校受験の記載がある,未着手
+C2-051,nagano,長野双葉塾,,form,https://futaba-ngn.com/contact/,https://futaba-ngn.com/contact/,無,有,1,長野市の塾で、ページタイトルに高校受験を掲げコースを案内している,未着手
+C2-052,nagano,総合教育カルチャー,,,,http://s-j-culture.com/,,,,WebFetchで証明書エラー（ホスト名不一致）のため未確認,確認不可（証明書エラー）
+C2-053,nagano,いずみ塾,株式会社アイキューブ,form,https://izumijuku.co.jp/contact,https://izumijuku.co.jp/contact,,有,,問い合わせページに「営業等のご案内は別ページからお願いします」と営業窓口を別に案内しており、扱い要判断,要確認
+C3-001,gunma,前橋ゼミ,株式会社H.Y.T.,form,https://maezemi.com/contact/,https://maezemi.com/contact/,無,有,8,中学生向けの「個別Lab＋」コースがあり、新前橋駅前校と高崎駅西口校は中学生・高校生のみの教室と記載(前橋市),未着手
+C3-002,gunma,武蔵進学教室,,mail,musashi-shingaku@outlook.jp,https://www.musashishingaku.com/,無,有,1,中3クラスを月・木の20:00～22:30に開講と授業料表に記載(伊勢崎市) [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+C3-003,gunma,星野進学ゼミ,,form,https://www.hoshinoshingakuzemi.jp/pages/4/,https://www.hoshinoshingakuzemi.jp/,無,有,2,中3向け「トップ高校上位合格講座」(5教科・全12回の特訓)がある(太田市),未着手
+C3-004,gunma,次世代型超個別塾Genesis,株式会社グリフエデュケーション,form,https://genesis-juku.com/contact/,https://genesis-juku.com/,無,有,2,中学生コースは学校の内容から高校受験まで対応し、県内トップレベルの進学校合格者も出したと記載(沼田校・高崎校),未着手
+C3-005,gunma,うすい学園,株式会社うすい,form,https://ac.usuigakuen.co.jp/inquiry,https://usuigakuen.co.jp/about/,無,有,20,中学部に定期テスト対策・入試対策・入試情報のページがある(高崎・前橋・伊勢崎・太田など20校以上),未着手
+C3-006,gunma,適塾,,form,http://www.tekijuku.info/10-contact.php,http://www.tekijuku.info/10-contact.php,有,,,お問い合わせフォームに「営業目的のご利用はご遠慮ください」の記載あり,除外
+C3-007,gunma,慎塾,,form,https://maebashi-shinjuku.jp/contact/,https://maebashi-shinjuku.jp/contact/,有,,,お問い合わせフォームに「企業様からの営業メールはご遠慮ください」の記載あり(前橋市),除外
+C3-008,kumamoto,はち塾,,mail,info@hachijuku.com,https://hachijuku.com/,無,有,1,トップページに「八代市の個別指導 学習塾。高校生 中学生向け。」と記載(八代市),未着手
+C3-009,kumamoto,明成塾,,form,https://meisei-juku.net/inquiry/,https://meisei-juku.net/,無,有,1,サイトに「熊高 済々黌 第一 第二 高専合格指導の明成塾です」と記載(熊本市西区),未着手
+C3-010,kumamoto,少人数指導塾テラス サクラマチ校,株式会社Terrace,mail,info@terrace-kmc.com,https://www.terrace-kmc.com/company,無,有,1,中学生コースのページに「定期テストから入試まで幅広く対応」と記載(熊本市),未着手
+C3-011,kumamoto,さくらゼミナール,,form,https://sakura-seminar.com/contact/,https://sakura-seminar.com/,無,有,2,中3を含む定期テストの順位・点数アップの生徒事例を掲載(むさし校・ましき校),未着手
+C3-012,kumamoto,DOゼミナール,有限会社エイペックス,form,https://do-semi.jp/s-contact/,https://do-semi.jp/,無,有,9,トップページに中学生向けの通常講座・テスト対策会・無料の定期テスト対策の案内がある(福岡6・熊本3校舎、本社は玉名市),未着手
+C3-013,kumamoto,熊本ゼミナール,熊本ゼミナール株式会社,form,,https://www.kumazemi.jp/company/,無,有,,「公立高校受験コース」がある。ただし会社概要ページの資料請求・お問い合わせはLINE経由のリンクのみで、メールアドレスや通常フォームを確認できていない,要確認
+C3-014,shizuoka,ユリイカ進学教室,,form,https://www.schooleureka.jp/contact/,https://www.schooleureka.jp/,無,有,1,「二週間ほど前から定期テスト対策授業」を行うと記載(静岡市葵区),未着手
+C3-015,shizuoka,With学習塾,WITH HARMONICS,form,https://www.withgakushujuku.com/contact,https://www.withgakushujuku.com/,無,有,5,「学調や高校受験の対策は、この夏休みの過ごし方がカギになります」と案内(島田・掛川・焼津・静岡の5教室),未着手
+C3-016,shizuoka,STUDY BASE,,form,https://study-base.jp/contact/,https://study-base.jp/contact/,無,有,,問い合わせ項目に「目標としている進学先の合格点数や内申点の目安を知りたい」がある(富士市),未着手
+C3-017,shizuoka,沼津進学塾,,form,https://numashin-jyuku.com/contact/,https://numashin-jyuku.com/,無,有,2,「内申点対策から始め、高校入試や高校入学後に対応できる基礎学力の定着を図る」と記載(沼津市・清水町),未着手
+C3-018,shizuoka,弘友私塾,kouyushi-juku Co.Ltd,form,https://www.kou-yu.jp/contact/,https://www.kou-yu.jp/,無,有,,公立中学の定期テスト・学力調査テストが難化していると説明し、問い合わせ欄の学年に中1～中3がある(静岡市),未着手
+C3-019,shizuoka,まながく,株式会社スタディーネットワーク,form,https://managaku-juku.com/form02/,https://managaku-juku.com/,,,6,浜松市の個別指導塾。トップページから案内される form02 のフォームは文字化けして用途(問い合わせか資料請求か)を確認できていない,要確認
+C3-020,shizuoka,修学館,,form,https://shuugakukan.com/contact/,https://shuugakukan.com/contact/,有,,,お問い合わせフォームに「営業・提案・勧誘等の目的での利用は固く禁止」の記載あり(静岡市),除外
+C3-021,shizuoka,向上館,,form,https://www.kojokan.jp/%e7%84%a1%e6%96%99%e4%bd%93%e9%a8%93%e3%83%bb%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/,https://www.kojokan.jp/,有,,,問い合わせフォームに「営業・勧誘」を禁じる旨の記載あり(三島市ほか),除外
+C3-022,shizuoka,虹の風学修館,,form,https://www.gakuki.co.jp/nijinokaze/inquiry/,https://www.gakuki.co.jp/nijinokaze/inquiry/,有,,,問い合わせフォームに「営業メールやご提案に関するメールはお断り」の記載あり(浜松市),除外
+C3-023,shizuoka,桐光学院,,form,https://tokogakuin.com/contact/,https://tokogakuin.com/contact/,有,,,お問い合わせに「営業や勧誘等一切の営業活動の書き込みをご遠慮願います」の記載あり(浜松市),除外
+C3-024,shizuoka,みしま時習館,,,,https://m-jishukan.com/contact,無,,1,問い合わせは電話と公式LINEのみで、メールアドレスもフォームも公開されていない(三島市),除外
+C3-025,shizuoka,育英学園,,,,http://ikuei-gakuen.com/,,,,WebFetchで証明書エラー(共用証明書と不一致)のため確認できず(三島市),確認不可（証明書エラー）
+C3-026,kochi,歩塾,,mail,ayumijukuhonbu@kochi.email.ne.jp,https://www.ayumijuku.com/inquiry.html,無,有,4,「資料のご請求、または、ご質問・お問い合わせ」用ページに掲載され、鴨部教室に小学部・公立中学部がある(高知市),未着手
+C3-027,kochi,土佐アカデミー,,form,https://tosaacademy.com/contact,https://tosaacademy.com/contact,無,有,9,サイトに「瀬戸教室冬季講座」のページがある(高知県内9教室),未着手
+C3-028,kochi,佑啓塾,,form,https://peraichi.com/landing_pages/view/yukei-top/,https://peraichi.com/landing_pages/view/yukei-top/,無,有,,中学3年の授業を火・木・土の19:15～22:15に実施と記載(高知市。問い合わせフォームは同ページ内),未着手
+C3-029,kochi,稲吉塾,,form,https://inajuku.jp/contact/,https://inajuku.jp/contact/,無,有,,中学生は英語と数学の授業が毎回あり、学校授業の先取りをすると記載(南国市),未着手
+C3-030,kochi,ギフコ学習塾,,mail,gifco55@yahoo.co.jp,https://gifco.nobu-naga.net/contact.html,無,有,,お問い合わせページに「質問がありましたら、gifco55@yahoo.co.jpまで」とあり、中学生コースがある(香南市。2回取得して一致) [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+C3-031,kochi,土佐塾,,form,https://www.tosajuku.com/mail/,https://www.tosajuku.com/mail/,無,有,,「お問い合わせ」ページはあるが、フォームの中身を取得できず用途を確認できていない(公立高校の合格実績を掲載),要確認
+C3-032,kochi,律志舎グループ,,,,https://www.kawasaki-juku.com/,無,,,トップページに電話番号のみで、メールアドレスもフォームもない(高知市),除外
+C3-033,kochi,佐々木理数塾,株式会社佐々木理数塾,,,https://kochi-sasaki.jp/,無,無,1,申し込みはLINE公式アカウントのみで、難関大学受験の理数専門塾(高知市),除外
+C3-034,kochi,ことは塾,,,,https://kotohajuku.jimdofree.com/,無,有,1,メールアドレスもお問い合わせフォームも見当たらない(南国市),除外
+C3-035,okinawa,学習塾ベンガル,,form,https://bengal.okinawa/contact/,https://bengal.okinawa/,無,有,2,「内申点アップから入試対策まで行う中学生コース」と記載(うるま市),未着手
+C3-036,okinawa,明進セミナー,,mail,contact@meishin-seminar.com,https://www.meishin-seminar.com/,無,有,2,「テスト当日の早朝特訓やってます」と記載(沖縄市・西原町・北谷町・中城村向け),未着手
+C3-037,okinawa,琉大進学塾,R PROJECT,form,https://ryudaijuku.net/contact/,https://ryudaijuku.net/,無,有,3,那覇国際高校・国立沖縄高専・首里高校・浦添高校で県内1位の合格者数と記載(那覇・浦添・宜野湾),未着手
+C3-038,okinawa,沖縄進学塾,,form,https://juku.okinawa/%E3%81%8A%E5%95%8F%E5%90%88%E3%81%9B/,https://juku.okinawa/,無,有,,「高校入試を目標においた基礎学力・応用力をつけるための授業」と記載し、高校入試コースがある(那覇市の小禄・金城・鏡原中学校区専門),未着手
+C3-039,okinawa,ハル進学スクール,,form,https://www.hal-shingakuschool.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,https://www.hal-shingakuschool.com/,無,有,,サイトのタイトルに「中学高校受験のエキスパート」とあり、問い合わせフォームの学年欄に中1～中3がある(メールアドレスはメール保護表示のためフォーム扱い),未着手
+C3-040,okinawa,屋宜塾,,,,https://yagi-juku.com/,無,有,2,「学習塾 中学部」の募集クラスがあるが、メールアドレスもフォームも見当たらない(那覇本校・中部普天間校),除外
+C3-041,toyama,アルファ進学スクール,,mail,soumu@alpha-es.co.jp,https://www.alpha-es.co.jp/information/,無,有,,中学部で「高校入試・大学入試で実力を発揮するための確かな『得点力』を鍛える」と記載(本部事務所の連絡先メール),未着手
+C3-042,toyama,道徳塾,ひこばえの杜,form,https://www.doutokujuku.jp/pages/3/,https://www.doutokujuku.jp/,無,有,,中学生向けの集団個別指導で「自分の課題を見つけ、自分で工夫して学ぶ習慣」を身に着けると記載(高岡市福岡町),未着手
+C3-043,toyama,学び舎プラット,,form,https://www.manabiya-plat.jp/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,https://www.manabiya-plat.jp/,無,有,2,問い合わせフォームで入塾・体験を受け付け、学年欄に中1～中3がある(魚津市・滑川市),未着手
+C3-044,toyama,エミール教育センター,,form,https://itoemiel.com/?page_id=456,https://itoemiel.com/,無,有,2,中学生は英語・数学・理科・社会を指導し、高岡高校・砺波高校・高岡南高校などへの進学実績を掲載(南砺市の福野・井波教室),未着手
+C3-045,toyama,成和学舎,,form,https://lovetonami.com/seiwagakusha/contact_me/,https://lovetonami.com/seiwagakusha/home/,無,有,3,高校受験の対応先として高岡高校・砺波高校・高岡南高校・富山高専・石川高専などを記載(南砺市),未着手
+C3-046,toyama,富山育英センター,,form,https://www.toyama-ikuei.com/apply/,https://www.toyama-ikuei.com/,,有,18,「富山県高校入試育英模試」と中学部の入試対策がある。育英模試申込フォームの規約に「営業活動など迷惑活動」を禁じる文言があり、適用範囲を要確認,要確認
+C3-047,toyama,平成義塾,,,,http://www.heisei-school.jp/,,,,WebFetchで接続失敗(Socket is closed)のため確認できず(富山市),確認不可（証明書エラー）
+C3-048,toyama,城西セミナー,,,,http://www.jousai.com/,,,,WebFetchで接続失敗(Socket is closed)のため確認できず(高岡市),確認不可（証明書エラー）
+C3-049,toyama,張田塾,,,,https://haritajuku.jimdofree.com/,無,有,1,公開アドレスはメール保護表示で読めず、フォームもない。県立高校普通科を目指す中学生向けの一斉・個別授業を掲載(射水市),除外
+C3-050,toyama,明塾,,,,https://meijuku.amebaownd.com/,無,有,1,メールが「先頭のmを1つ削除して送信」という難読化表記でそのまま宛先にできず、フォームもない。中学3年に休日の入試対策を掲載(魚津市),除外
+C3-051,toyama,教育センター学習塾,,,,https://www.kyoiku-center.co.jp/,無,有,3,メールアドレスもフォームも公開されていない(富山市の3校),除外
+C3-052,fukushima,ツカハラ塾,,form,https://www.tukahara-school.com/contact/,https://www.tukahara-school.com/contact/,無,有,,「中学生は高校入試を見越した完全5教科指導」と記載(郡山市),未着手
+C3-053,fukushima,村田進学塾,,form,https://murata-singaku.jp/contact,https://murata-singaku.jp/contact,無,有,7,問い合わせフォームで高校入試説明会・講習会・定期テスト対策の問い合わせを受け付け、「高校別受験対策」を掲載(いわき市),未着手
+C3-054,fukushima,伊藤学習塾,,form,https://ito-gakushujuku.com/contact.php,https://ito-gakushujuku.com/,無,有,2,過去3年間の合格実績に会津高校など地元高校を掲載(会津若松市),未着手
+C3-055,fukushima,名城塾,,form,https://meijojuku.com/top/contact/,https://meijojuku.com/top/,無,有,1,トップページに「中学生開講講座」とテスト対策講座の日程を掲載(福島市),未着手
+C3-056,fukushima,大舘塾,,form,https://odatejuku.jp/contact/,https://odatejuku.jp/,無,有,,定期テスト対策に対応できると案内し、福島高校の合格者数を実績として掲載(福島市),未着手
+C3-057,fukushima,東日本学院,,form,https://www.higashinihongakuin.com/experience,https://www.higashinihongakuin.com/,無,有,14,中1～中3対象の定期テスト対策講座を掲載。ただし窓口は資料請求(/catalog)と相談・体験予約(/experience)のみで、通常の問い合わせ先を確認できていない,要確認
+C3-058,fukushima,ベスト学院進学塾,BEST GAKUIN Corporation,form,https://www.bestgakuin.co.jp/contact/,https://www.bestgakuin.co.jp/,無,有,45,「福島県立高等学校を目指すなら、やっぱりベスト学院」と記載。ただしフォームは資料請求・入塾・個別相談会の申込用で、一般の問い合わせ用か要確認,要確認
+C3-059,fukushima,進学研究室,,,,http://shingaku-kenkyushitsu.com/,,,,WebFetchで証明書エラー(共用証明書と不一致)のため確認できず(福島市),確認不可（証明書エラー）
+C3-060,oita,個別指導専門塾 自啓館,,form,https://www.jikeikan.com/contact/,https://www.jikeikan.com/,無,有,5,中学入学後の最初のテストが70番以下だった生徒に英数から指導し、中3から国語を加えた事例を掲載(大分市),未着手
+C3-061,oita,中村塾,,form,https://onkjyuku.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b,https://onkjyuku.com/,無,有,,「【2026年夏期講習受付中】大分市の中学生向け夏期講習」という記事がある(大分市),未着手
+C3-062,oita,夢進学塾kanaL,,form,https://form.run/@kanal/,https://yume-kanal-oita.com/,無,有,1,中1～中3の通常指導があり、大分県高校入試情報のブログと内申点計算ツールを提供(大分市),未着手
+C3-063,oita,進学予備校ウインロード,,form,https://winroadrikeijyuku.com/?page_id=3598,https://winroadrikeijyuku.com/,無,有,2,「中学生コース詳細」「中学生コース受講料」のページがあり、上野丘・舞鶴・鶴見丘受験をうたう(別府校・大分明野校),未着手
+C3-064,oita,東セミ,株式会社熱き情熱コーポレーション,form,https://atsuki.co.jp/contact/,https://tosemi.jp/middle,無,有,22,中学部に「定期テストでよい点を取り高校合格を目指す公立コース」があり、定期試験対策で内申点アップにつなげると記載(大分・宮崎・福岡),未着手
+C3-065,oita,個別指導の慶林館,DIC学園グループ,form,https://www.e-kobetu.jp/form_efo/,https://www.e-kobetu.jp/chugaku/index.html,無,有,,中学生向けページに「徹底した入試分析に基づく指導」とある。ただし窓口は「メールでのお申込み」フォームで、一般の問い合わせ用か要確認(大分県内9校),要確認
+C3-066,oita,進学教室スタップ(St-up),,form,https://st-up-oita.webnode.jp/ask/,https://st-up-oita.webnode.jp/ask/,有,,,問い合わせページに「「営業的」の問い合わせはご遠慮ください！（返信しません）」の記載あり(大分市),除外
+KNGA-001,kanagawa,横浜WIP,株式会社ネクサス,mail,info@y-wip.jp,https://y-wip.jp/company/,無,有,,トップのタイトルに「内申点も受験も万全に」とあり、中学生向け個別指導・少人数制授業のコースがある,未着手
+KNGA-002,kanagawa,桐林学園予備校,桐林学園予備校,form,https://torin-gakuen.com/contact.html,https://torin-gakuen.com/contact.html,無,有,,会社概要ページに特色検査対策・公立高校入試学力検査に向けた授業の記載がある(川崎区),Cowork第1便に指示済(未送信)
+KNGA-003,kanagawa,BREST/FULLMARKS(ブレストグループ),株式会社ブレストインキュベーション,form,https://juku.brest.co.jp/mailform/,https://juku.brest.co.jp/mailform/,無,有,,中学生(中1〜3)クラスの案内ページがあり、フォームの問い合わせ内容に季節講習の日程が含まれる(都筑区・港北区など),Cowork第1便に指示済(未送信)
+KNGA-004,kanagawa,青葉学院,創栄青葉有限会社,form,https://www.aobagakuin.com/contact/,https://www.aobagakuin.com/contact/,無,有,,JR中山駅前の学習塾で、フォームのご希望コースに「中学生」の選択肢がある,Cowork第1便に指示済(未送信)
+KNGA-005,kanagawa,横浜チュータリングスクール,株式会社キッズ・ドリーム,form,https://www.y-ts.jp/contact,https://www.y-ts.jp/contact,無,有,2,夏期・冬期・春期講習は任意選択で必要最低限に、と案内している(鶴見区の尻手駅前校・鶴見諏訪坂校),Cowork第1便に指示済(未送信)
+KNGA-006,kanagawa,神奈川ゼミナール,,form,http://kana-zemi.com/contact/,http://kana-zemi.com/contact/,無,有,4,「内申点では毎年10UPの生徒がでる」と記載(反町・三ツ沢・西谷・小机の教室),Cowork第1便に指示済(未送信)
+KNGA-007,kanagawa,アスク青山アカデミー,,form,https://www.ask-aoyama.com/mail_from.html,https://www.ask-aoyama.com/mail_from.html,無,有,,冬期講習の案内があり、地元中学の中間・期末テスト対策を掲げる(川崎区・鶴見区),Cowork第1便に指示済(未送信)
+KNGA-008,kanagawa,進学教室セラビ,,form,https://juku-cestlavie.jimdofree.com/お問い合わせ/,https://juku-cestlavie.jimdofree.com/お問い合わせ/,無,有,,「特色検査のある公立高校を受検希望の方は別途コースあり」と記載(鶴見区生麦)。メールはメール保護で読めないためフォーム,Cowork第1便に指示済(未送信)
+KNGA-009,kanagawa,港北学館,,form,http://kohokugakkan.com/お問い合わせメールフォーム/,http://kohokugakkan.com/お問い合わせメールフォーム/,無,有,2,中学部の指導方針ページがあり内申に関する記述が多い個人塾(篠原校・樽町校),Cowork第1便に指示済(未送信)
+KNGA-010,kanagawa,陵光ゼミナール,株式会社クラヤ・エデュケーション,form,https://kuraya-edu.co.jp/contact/,https://kuraya-edu.co.jp/contact/,無,有,,「劇的に伸びる内申点」の見出しがある(旭区・鶴ヶ峰駅近く)。フォームの学年選択に中学1〜3年がある,Cowork第1便に指示済(未送信)
+KNGA-011,kanagawa,緑進学院,,form,https://www.ryokushin.com/captmail/captmail.cgi,https://www.ryokushin.com/captmail/captmail.cgi,無,有,,「合格に必要な内申点・入試得点」を扱う説明の記載と、2025年冬期講習の案内ページがある,Cowork第1便に指示済(未送信)
+KNGA-012,kanagawa,神奈川個別ゼミナール,,form,https://kanakobe.com/contact,https://kanakobe.com/contact,無,有,2,冬期講習の実施日と、県立高校入試期間(2/1〜15)は日曜・祝日も開放する旨を記載(鶴見区)。サイトに載る個人名のメールは記録せずフォームを採用,未着手
+KNGA-013,kanagawa,CG中萬学院・啓明館・さなる個別@will(株式会社中萬学院),株式会社中萬学院,form,https://www.chuman.co.jp/form/contact/,https://www.chuman.co.jp/form/contact/,無,有,,会社の問い合わせフォームに「受験相談」「コース・授業について」の項目がある。プライバシー欄の個人情報窓口メールは営業先に使わずフォームを採用,未着手
+KNGA-014,kanagawa,湘南ゼミナール,,form,https://www.shozemi.com/contact/,https://www.shozemi.com/contact/,無,有,,問い合わせ内容に「その他」があり、サイトに神奈川県公立高校入試・内申点を解説する記事がある(神奈川県内に多数の教室) [検査: B2B台帳に連絡履歴あり(株式会社スプリックス(東証上場・森塾/湘南ゼミナール等の塾チェーン運営・IR窓口) awaiting)・二重に連絡しないよう👤判断],要確認
+KNGA-015,kanagawa,DUO受験パーソナルトレーニング,,form,https://duo-juken-personal.com/お問い合わせ/お問い合わせ-2/,https://duo-juken-personal.com/お問い合わせ/お問い合わせ-2/,無,有,,中学生コースがあり、公立中学生限定の内申点対策専門コース(2025年4月開設)を掲載(保土ケ谷区和田町),未着手
+KNGA-016,kanagawa,山手進学会,,mail,yamashin1994@gmail.com,https://yama-shin1994.sakura.ne.jp/wp/,無,有,,高校受験部門(中1〜中3)で「定期テストと内申点の向上」「神奈川県公立高校入試を見据えたカリキュラム」と記載。メールは塾名由来の事業用Gmail [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+KNGA-017,kanagawa,中山学院,,mail,hax69870@tree.odn.ne.jp,https://www.nakayamagakuin.com/,無,有,,外部生でも志望校決定や中間・期末テストの勉強法の相談を随時受け付けると記載,未着手
+KNGA-018,kanagawa,ひのき進学教室,株式会社ひのき会,form,https://www.hinoki-net.com/contact/consultation.php,https://www.hinoki-net.com/contact/consultation.php,無,有,6,中学生向けに内申点アップ・定期テスト対策と中3の志望校別合格プログラムを掲載(溝の口・登戸ほか、東京の教室を含む6教室),未着手
+KNGA-019,kanagawa,清心塾,,form,https://www.seishinjuku-sugao.jp/contact,https://www.seishinjuku-sugao.jp/contact,無,有,,「中学生への最初のアプローチは予習・復習のコツを教えることから」と記載(宮前区),未着手
+KNGA-020,kanagawa,満点道場,,form,https://www.mantendojo.com/toiawa/index.html,https://www.mantendojo.com/toiawa/index.html,無,有,,「200人以上の中学生の内申点を上げ続けてきた」と記載(宮前区・宮崎エリアの中学生向け),未着手
+KNGA-021,kanagawa,井田個別指導塾,,mail,idakobetsu@yahoo.co.jp,https://idakobetsu.wixsite.com/home/otoiawase,無,有,,中学生の週1回・週2回の料金表を掲載(川崎市中原区・高津区) [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+KNGA-022,kanagawa,錬成会学習塾,,mail,renseikaishinmaruko@gmail.com,https://goisagisan.wixsite.com/classroom-00/,無,有,,「中学生の授業では5教科の質問を受けている」と記載(中原区)。メールは塾名由来の事業用Gmail [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+KNGA-023,kanagawa,完全個別指導塾PRIDE,,form,https://pride0901.com/contact/,https://pride0901.com/contact/,無,有,4,「テストの成績だけでなく内申点を上げ」と記載。フォームの種別に高校受験がある(新百合ヶ丘・登戸ほか),未着手
+KNGA-024,kanagawa,学習塾 円塾,,form,https://enjyuku.net/contact/,https://enjyuku.net/contact/,無,有,,コース案内に中学生の授業時間帯(18:30〜)が載っている(高津区)。フォームは講座・体験・入塾相談の問い合わせ,未着手
+KNGA-025,kanagawa,新学館,,mail,info@shingaku-kan.com,https://shingaku-kan.com/,無,有,,「樽町中専門の学習塾」と掲げる(港北区)。メールはトップと問い合わせフォームページで確認,未着手
+KNGA-026,kanagawa,個別指導塾TOPIA(慶友学院TOPIA),,form,https://hiyoshi-topia.com/contact/,https://hiyoshi-topia.com/contact/,無,有,,「確実に内申点をアップしたい」方向けと記載(港北区・日吉)。フォームページのGmailは1回のみの確認のためフォームを採用,未着手
+KNGA-027,kanagawa,A.C.T.進学教室,,form,https://act-sk.com/contact/,https://act-sk.com/contact/,無,有,,中学受験・高校受験・中高一貫校生の強化・補習まで対応と記載(保土ケ谷区),未着手
+KNGA-028,kanagawa,創栄学園,創栄学園,form,https://soeigakuen.com/contact/,https://soeigakuen.com/contact/,無,有,,講師1人が生徒6人を指導する少人数制と記載(泉区。福島県にも拠点あり),未着手
+KNGA-029,kanagawa,ニッケンアカデミー,ニッケンアカデミー,form,http://nikken.jpn.org/inquiry.htm,http://nikken.jpn.org/inquiry.htm,無,有,1,「講座内容・中学部」のページがある(保土ケ谷区の1教室),未着手
+KNGA-030,kanagawa,山手ゼミナール,山手ゼミナール,mail,info@yamazemi.com,https://www.yamazemi.com/untitled-c14pn,無,有,,中学部は「1クラス最大8人までの少人数制授業」と記載。メールはトップ・問い合わせ・別ページで一致,未着手
+KNGA-031,kanagawa,学習塾 スクールiris,,form,https://school-iris-edu.com/info/enquiry/,https://school-iris-edu.com/info/enquiry/,無,有,,神奈川県の入学者選抜(第3学年の主体的に学習に取り組む態度の評価活用)を解説する記載がある。メールは届きにくいとしてLINEを推奨する注記あり,未着手
+KNGA-032,kanagawa,コスモジュク,"Cosmo Original Co., Ltd.",form,https://cosmojuku.com/contact/,https://cosmojuku.com/contact/,無,有,2,中学生の少人数(8人まで)クラスと、合格に必要な読解力・思考力・表現力のカリキュラムを掲載(日限丸山台・別所弘明寺の2校),未着手
+KNGA-033,kanagawa,共立ゼミナール,共立ゼミナール,form,https://kyosemi.jimdofree.com/お問い合わせ/,https://kyosemi.jimdofree.com/お問い合わせ/,無,有,,「定期テスト前には対策授業として補習授業を行います」と記載,未着手
+KNGA-034,kanagawa,山内英数塾,,form,https://yem.main.jp/contact,https://yem.main.jp/contact,無,有,,中学1〜3年生の少人数制個別指導クラスの案内がある(都筑区)。問い合わせページには電話とフォームのみ,未着手
+KNGA-035,kanagawa,個別指導exsia(イクシア),,form,https://www.pc-exsia.com/contact-us,https://www.pc-exsia.com/contact-us,無,有,2,「中学生のためには定期テスト対策から国公私立高校の入試対策、過去問題演習まで」と記載(永田・笹下の2校),未着手
+KNGA-036,kanagawa,Mr.N塾,,form,https://mrnjuku.com/contact/,https://mrnjuku.com/contact/,無,有,,「定期テスト前にはワークをくり返し解いてもらう」と記載。フォームは教室見学・入塾面談の予約中心,未着手
+KNGA-037,kanagawa,個別指導塾ティーシャル横浜,,form,https://tcial.jp/contact/,https://tcial.jp/contact/,無,有,,中学生コースに「公立高校受験・私立高校受験対策」があり、「営業・協業をご希望の方は専用フォームへ」と案内している(専用フォームURLは未確認),未着手
+KNGA-038,kanagawa,ひざくら学習塾,,form,https://hzkr78.com/askpage/,https://hzkr78.com/askpage/,無,有,,中学生向け模試に「新教育神奈川Wもぎ」を挙げている。フォームは体験申込を含む問い合わせ,未着手
+KNGA-039,kanagawa,岩井学豊塾,岩井学豊塾,form,https://www.iwai-gakuho.com/問い合わせ/,https://www.iwai-gakuho.com/問い合わせ/,無,有,,「中学2年生で解ける入試問題を随時扱う」と記載し、高校受験コースのページがある,未着手
+KNGA-040,kanagawa,アダス(ADAS)進学会,株式会社創育社,form,https://forms.gle/PEEm7e5721VjkNfCA,https://docs.google.com/forms/d/e/1FAIpQLSeEIyUopGLh_n6VI2qIFL_Zq6ou6cDsC4q5SYDBi8Xloeug2A/viewform?usp=send_form,無,有,5,「中学生コースは基礎から入試レベルまで」と記載(横浜・藤沢・横須賀・東京の5校)。問い合わせはGoogleフォーム,未着手
+KNGA-041,kanagawa,横浜進学教室(横進),,form,https://docs.google.com/forms/d/e/1FAIpQLSd7sVLsfJVt8pMVnM7_q3JhM5RV-2c9ZDgfadZgyoLagL6jWw/viewform?usp=header,https://jusadream.com/,無,有,,トップに「2026年高校入試で受験したすべての高校で合格率100%(公立・私立)」と掲載。問い合わせはGoogleフォーム(神奈川区),未着手
+KNGA-042,kanagawa,天塾,,mail,shani@e-mail.jp,https://ten-juku.com/law/,無,,,特定商取引法表記にメールアドレスがあり、川崎市の公立高校の内申点を解説する記事があるが、中学生コースの有無をサイトで確認できていない(高津区),要確認
+KNGA-043,kanagawa,歩実塾,,form,https://ayumi-19.com/問い合わせフォーム/,https://ayumi-19.com/問い合わせフォーム/,無,有,,問い合わせページは「お電話でのお問い合わせはご遠慮ください」とLINEでの相談を案内しており、フォームの実在を再確認したい(幸区),要確認
+KNGA-044,kanagawa,Σシグマ進学教室,,mail,sigmainfo@sigmania.jp,https://sigmania.jp/,,,,トップにmailtoリンクがあるが中学生向けの記載を確認できず、小学生の中学受験が中心に見える。運営会社の記載なし(高津区),要確認
+KNGA-045,kanagawa,創英ゼミナール,株式会社創英コーポレーション,form,https://www.souei.net/full_year_form/,https://www.souei.net/full_year_form/,,有,,フォームの問い合わせ内容が「体験授業・資料請求・夏期講習の問合」に限られ、営業に使えるか要確認,要確認
+KNGA-046,kanagawa,西谷梅の木の進学塾ユニティ,,form,https://unity-edu.jp/otoiawase/,https://unity-edu.jp/otoiawase/,,有,,問い合わせページに「営業電話がとても多く電話番号は非公開」と記載があり、営業連絡への姿勢とLINE誘導の扱いを要確認(保土ケ谷区),要確認
+KNGA-047,kanagawa,みやうち塾,,,,https://miyauchijuku.com,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-048,kanagawa,泰明ゼミナール,,,,http://www.taimei-zemi.sakura.ne.jp/,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-049,kanagawa,倫学舎,,,,http://ringakusya.g1.xrea.com/new1.html,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-050,kanagawa,個別指導そら塾,,,,http://www.solajyuku.com/system.html,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-051,kanagawa,ラポール個別指導塾(戸塚区),,,,http://lapole-marine.com/juku/tokuchou.html,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-052,kanagawa,桜光塾,,,,http://sakurahikari.com/elementary.html,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-053,kanagawa,優伸スクール,,,,http://www.yushinschool.jp,,,,WebFetchで証明書エラーとなり内容を確認できていない,確認不可（証明書エラー）
+KNGA-054,kanagawa,進学塾フォルテ,,form,https://forte-idogaya.com/,https://forte-idogaya.com/,有,有,1,サイトに「業者の方の営業電話は一切お断りしております」と記載(南区井土ケ谷),除外
+KNGA-055,kanagawa,天王町ゼミ,,,,https://ezemikun.jp/tenzemi/,有,有,1,連絡先に「営業・勧誘お断り」と記載(個人事業者・保土ケ谷区),除外
+KNGA-056,kanagawa,川和ゼミナール,,form,https://kawazemi.main.jp/contact/,https://kawazemi.main.jp/contact/,有,有,,問い合わせフォームに「このフォームを利用した売り込みの一切を固く禁止いたします」と記載,除外
+KNGA-057,kanagawa,個個港学舎,株式会社貴アンド博,form,https://coco-kougakusha.com/inquiry/,https://coco-kougakusha.com/inquiry/,有,有,,問い合わせフォームに「営業のご連絡はご遠慮下さい」と記載,除外
+KNGA-058,kanagawa,ブリッジ学院,,,,https://bridge19.amebaownd.com/,,有,,一般生の募集を中止していて新規募集の広告枠の対象にならない(卒業生枠のみ),除外
+KNGA-059,kanagawa,ウインド進学教室,,,,https://wind-school.jp/about/,,有,,サイトにメールアドレス・問い合わせフォームが見当たらず、電話番号のみ,除外
+KNGA-060,kanagawa,ゼスト進学セミナー,,,,http://www.zest-ss.com/contact.html,,有,,問い合わせページが電話番号のみでメール・フォームなし(戸塚区),除外
+KNGA-061,kanagawa,学習塾Learning,,,,https://spindle-tree.com/,,有,,メール・フォームの記載がなく電話番号のみ(宮前区),除外
+KNGA-062,kanagawa,タノクラアカデミー,,,,https://www.tanokura-academy.com/cosuguide,,有,,問い合わせがLINEのみでメール・フォームなし(宮前区),除外
+KNGA-063,kanagawa,個別学習塾 未来塾,,,,https://miraijuku.storeinfo.jp/,,有,,問い合わせページが電話番号のみでメール・フォームなし(中原区),除外
+KNGA-064,kanagawa,泰星学院,,,,https://www.taiseigogo.com/profile.html,,有,3,会社概要ページにメール・フォームの記載がなく窓口を確認できない(川崎市の3か所),除外
+KNGA-065,kanagawa,自立学習支援型塾 Funny School,,,,https://www.funny-school.com/contact-8,無,有,,問い合わせページが無料体験の申込専用で営業の連絡先として使えない(幸区),除外
+KNGB-001,kanagawa,ちがさき少人数教室,,form,https://www.sps-shonan.com/contact/,https://www.sps-shonan.com/contact/,無,有,,定期試験前に内申点アップを狙った対策授業と長時間の補講を行うとトップページに記載(SPS湘南グループを前身と表記),未着手
+KNGB-002,kanagawa,個別進学塾トークス 平塚校,株式会社wacwac,mail,info@talkss.jp,https://talkss.jp/law/,無,有,,ブログに「神奈川県公立高校入試のしくみ」の解説記事がある(同社が個別指導エクセルシア茅ヶ崎校も運営しており同一運営会社のため1行のみ),未着手
+KNGB-003,kanagawa,学習塾 育海会,株式会社フラップステージ,mail,info@ikumikai.com,https://ikumikai.com/,無,有,,サイト見出しが「平塚中等・公立高校受験 学習塾」で集団授業と個別指導を掲げる,未着手
+KNGB-004,kanagawa,ブライト学院学習塾,,form,https://bright-gakuin.co.jp/form,https://bright-gakuin.co.jp/form,無,有,,特色検査や神奈川県公立高校入試に散見される難問をクリアする新コースの募集案内がある,未着手
+KNGB-005,kanagawa,学心塾・学心Plus,,form,https://www.gakushin-juku.net/toiawase,https://www.gakushin-juku.net/toiawase,無,有,,指導対象に中学生全学年を明記(平塚・大磯・秦野に教室と表記)。無料体験後の強引な勧誘はしない旨の記載のみで営業お断り表記は無し,未着手
+KNGB-006,kanagawa,SCI木の芽教室,,form,http://www.kinome.co.jp/?page_id=25,http://www.kinome.co.jp/?page_id=25,無,有,,1976年開校の綾瀬市の学習塾で中学生向けの時間割・指導料ページがある,未着手
+KNGB-007,kanagawa,リード個別学習教室,,form,https://www.lead-kobetsu.com/inquiry/,https://www.lead-kobetsu.com/inquiry/,無,有,,塾長日記に「公立高校入試、全員第一志望合格」(2025年2月28日)と記載,未着手
+KNGB-008,kanagawa,個別対応学習塾Will Do,株式会社SES,form,https://www.willdogo.com/contact.html,https://www.willdogo.com/contact.html,無,有,,サイトタイトルに「神奈川方式対応」とあり大和市・綾瀬市の中学生を対象とする,未着手
+KNGB-009,kanagawa,アテナ理英ゼミナール,,mail,info@athenazemi.com,https://athenazemi.com/,無,有,,コース説明に「通学校の授業準拠で内申点の充実を」と記載,未着手
+KNGB-010,kanagawa,進学塾cocoro,,form,https://cocorocoro.com/contact/index.html,https://cocorocoro.com/contact/index.html,無,有,,中央林間の進学塾で冬期講習会の案内ページ(2023年度分)がある,未着手
+KNGB-011,kanagawa,個別指導のDoors,,form,https://doors-kobetsu.com/contact/,https://doors-kobetsu.com/contact/,無,有,,中学生コースで定期テスト対策から高校受験対策まで行うと記載,未着手
+KNGB-012,kanagawa,さくら個別指導塾,,form,https://sakura-kobetsu.com/inquiry.html,https://sakura-kobetsu.com/winter2025/,無,有,,冬期講習2025-2026の案内ページ(2025年10月15日投稿)があり神奈川県公立高校入試に触れている(相模原市・座間市),未着手
+KNGB-013,kanagawa,ホタル塾,,form,https://hotaru19.com/contact/,https://hotaru19.com/contact/,無,有,,中学部は中1〜中3対象で定期テスト対策・内申対策・神奈川県公立高校入試対策を掲げる,未着手
+KNGB-014,kanagawa,個別指導ルック,,mail,info@look-kobetsu.com,https://look-kobetsu.com/privacy,無,有,,5科目対応の無料定期テスト対策会の案内がある(相模原市中央区),未着手
+KNGB-015,kanagawa,個学指導のエイティ,,form,https://www.eighty-kogakushidu.com/contact,https://www.eighty-kogakushidu.com/contact,無,有,,相模原中央校・南林間校に中学生コースがあり中学校別の定期テスト対策ページがある,未着手
+KNGB-016,kanagawa,登臨ゼミナール,,form,https://torin-seminar.com/form,https://torin-seminar.com/form,無,有,,中学部のページで公立高校の選抜資料の中心は内申点と入試得点と説明している(相模原市中央区),未着手
+KNGB-017,kanagawa,きぬがさ塾,,mail,info@kinujuku.jp,https://www.kinujuku.jp/,無,有,,冬期講習会のご案内ページがあり「開校以来22年連続全員合格」と掲げる(相模大野・中央林間),未着手
+KNGB-018,kanagawa,学習塾慧友,,form,https://ku-juku.com/toiawase/,https://ku-juku.com/toiawase/,無,有,,中学生コースは定期テスト対策・内申対策・高校受験対策を中心と記載(相模大野)。しつこい勧誘は無い旨の記載のみで営業お断り表記は無し,未着手
+KNGB-019,kanagawa,ほまれ塾,,mail,kamimizo@homarejuku.com,https://homarejuku.com/contact,無,有,,合格実績に大和高校・海老名高校・弥栄高校(普通科)などの公立高校を掲載,未着手
+KNGB-020,kanagawa,受験サポート塾ジークSIEG,,form,https://ts-sieg.com/contact-us/,https://ts-sieg.com/contact-us/,無,有,,東林間・中央林間の塾で相談サポート・自習室・定期テスト対策・確認テストを提供と記載,未着手
+KNGB-021,kanagawa,ACEゼミナール,,form,https://atsugijuku.com/contact/,https://atsugijuku.com/contact/,無,有,,「内申点を上げるための具体的なノート指導」を訴求(厚木・大和・海老名・秦野・相模原の高校を目指す塾),未着手
+KNGB-022,kanagawa,若泉進学会,,mail,jukuchou@jakusen.com,https://jakusen.com/contact.html,無,有,,中学生向けに「教科書コース」「マンツーマンコース」などがあり本厚木駅徒歩圏の少人数進学塾と記載,未着手
+KNGB-023,kanagawa,まなびジョーズ学院,,form,https://manabijouzu.com/contact/,https://manabijouzu.com/contact/,無,有,,厚木市の塾で高校受験・中学受験・高認受験などに対応と記載,未着手
+KNGB-024,kanagawa,個別指導エルフ学院,株式会社エルフ,form,https://elf-gakuin.co.jp/toiawase.htm,https://elf-gakuin.co.jp/toiawase.htm,無,有,,中学生の定期テスト対策プランと中学生の「受け放題」コースの案内がある,未着手
+KNGB-025,kanagawa,学指会,,mail,hadano@gakushikai.net,https://gakushikai.net/join/jikanwari/,無,有,,ブログに「内申点から考える、神奈川の高校受験と志望校選び」の連載(2026年9月)がある。秦野で45年と記載,未着手
+KNGB-026,kanagawa,グリーンライフゼミナール鶴巻校,,form,https://greenlifeseminar.com/contact/,https://greenlifeseminar.com/contact/,無,有,,お知らせに「令和9年度公立高校入試実施要項ならびに募集案内について」(2026年7月3日)を掲載,未着手
+KNGB-027,kanagawa,早稲田アルパス,株式会社シャイムズ,form,https://wasedatokai.jp/contact/,https://wasedatokai.jp/contact/,無,有,,東海大学前駅の個別指導塾で中学・高校・大学受験と学校テスト対策を掲げる(無料体験授業の申込ページあり),未着手
+KNGB-028,kanagawa,松島塾,,form,http://matsushimajuku.com/contact/,http://matsushimajuku.com/contact/,無,有,,「地元小・中学校完全対応 少人数クラス 定期テスト対策 高校入試」を掲げる小田原の学習塾,未着手
+KNGB-029,kanagawa,慧真館,,form,https://keishinkan.jp/contact,https://keishinkan.jp/contact,無,有,,「小田原市の中学生・小学生の少人数精鋭指導の進学塾・公立上位校受験専門」と記載,未着手
+KNGB-030,kanagawa,柏木塾,,form,https://kashiwagi-juku.jp/contact/,https://kashiwagi-juku.jp/contact/,無,有,,トップに「内申書対策や入試対策をしたい」層向けの案内がある(小田原市栢山),未着手
+KNGB-031,kanagawa,エコール学院,有限会社エコール学院,form,https://www.ecole-gakuin.com/contact/,https://www.ecole-gakuin.com/contact/,無,有,,中学生は各学年定員12名の少人数指導と記載。ブログに令和7年度神奈川県公立高校学力検査数学の講評がある,未着手
+KNGB-032,kanagawa,個別指導のササキ塾,,form,https://sasaki-juku.net/?page_id=208,https://sasaki-juku.net/?page_id=208,無,有,,入試対策ゼミガイダンス2026の記事(2026年9月22日)があり中3入試対策ゼミを実施,未着手
+KNGB-033,kanagawa,HOME個別指導塾,,form,https://home-kobetsu.com/?page_id=293,https://home-kobetsu.com/?page_id=293,無,有,,ブログに「神奈川県完全受験マニュアル【神奈川県公立高校入試情報のまとめ】」がある(藤沢市村岡),未着手
+KNGB-034,kanagawa,すばる進学セミナー,,mail,info@subaru-ss.jp,https://subaru-ss.jp/,無,有,,トップに「徹底した少人数と鎌倉地域密着型の進学塾」と記載。中学部の説明会案内ページがある,未着手
+KNGB-035,kanagawa,學志館,株式会社學志館,form,https://gakushikan.jp/contact/,https://gakushikan.jp/contact/,無,有,,お知らせに逗子市中学校の「定期テスト廃止」についての記事(2026年5月7日)がある,未着手
+KNGB-036,kanagawa,逗子アナザースクール,,form,https://www.zushianotherschool.com/contact/,https://www.zushianotherschool.com/contact/,無,有,,トップに「内申点＆観点別アップ・単元＆定期テスト対策」に対応と記載,未着手
+KNGB-037,kanagawa,賢育学舎,,form,https://kenikugakusha.com/contactus,https://kenikugakusha.com/contactus,無,有,,トップに「神奈川公立高校 合格速報 受験者16名 全員合格」と掲載(横須賀市根岸町),未着手
+KNGB-038,kanagawa,進学塾クロフネ,株式会社クロスカ,mail,kurihama@kurofune-school.com,https://kurofune-school.com/tokushoho/,無,有,,中学生コースで内申対策・神奈川県公立高校入試対策を行うと記載(追浜・大津・横須賀総合高校専門),未着手
+KNGB-039,kanagawa,横浜個人指導会,,form,https://shidokai-yokosuka.com/contact/,https://shidokai-yokosuka.com/contact/,無,有,,春期・夏期・冬期講習など特別講習を開講と記載(横須賀市浦賀)。名称に横浜とあるが所在は横須賀,未着手
+KNGB-040,kanagawa,横須賀能率スクール,,form,http://www.yokosuka4119.com/contact/index.html,http://www.yokosuka4119.com/contact/index.html,無,有,,冬期講習のご案内ページがあり学校別・個人別の定期テスト対策を行うと記載,未着手
+KNGB-041,kanagawa,啓悠舎,,form,https://www.keiyusha.jp/contact.html,https://www.keiyusha.jp/contact.html,無,有,,タイトルに「浦賀中学鴨居中学対応塾」とあり中学生指導方針のページがある,未着手
+KNGB-042,kanagawa,伸学館ゼミナール,株式会社伸学館,form,http://shingakukan.jp/otoiawase/,http://shingakukan.jp/otoiawase/,無,有,,問い合わせページに「小1から中3までの完全地域密着」と記載(横須賀市),未着手
+KNGB-043,kanagawa,進学塾CLEAR,,form,https://clear.school/new/お問い合わせフォーム/,https://clear.school/new/お問い合わせフォーム/,有,有,,フォームに「営業・勧誘を目的としたお問い合わせは固くお断りいたします」と記載のため除外(小田原・国府津),除外
+KNGB-044,kanagawa,神奈研MANABIYA 鶴が台校,,form,https://kanaken-manabiya.com/contact/,https://kanaken-manabiya.com/contact/,有,有,,問い合わせページに「営業目的の業者の方は利用をご遠慮ください」と記載のため除外(茅ヶ崎市),除外
+KNGB-045,kanagawa,フロンティア学院,,form,https://frontiergakuin.jp/question/,https://frontiergakuin.jp/question/,有,有,,資料請求フォームに「営業のご連絡はご遠慮願います」と記載のため除外(厚木市),除外
+KNGB-046,kanagawa,パスカル進学ゼミ,,form,https://pascal-zemi.net/contact/,https://pascal-zemi.net/contact/,有,有,,問い合わせページに「営業目的でのご利用はご遠慮」と記載のため除外(厚木市),除外
+KNGB-047,kanagawa,KOSHIN学院,,form,https://www.koshin-gakuin.jp/contact/,https://www.koshin-gakuin.jp/contact/,有,有,,問い合わせページに「営業等の売り込みにつきましては、一切お断り」と記載のため除外(平塚市),除外
+KNGB-048,kanagawa,平塚中等受検・高校受験の堀口塾,,form,https://www.horiguchijuku.com/contact/,https://www.horiguchijuku.com/contact/,有,有,,ページに「営業の書き込みは固くお断り」と記載のため除外(平塚市),除外
+KNGB-049,kanagawa,毎日個別塾5-Days,5JAPAN株式会社,form,https://5-days.jp/mailform/,https://5-days.jp/company/,無,有,,会社沿革に広島・福岡など多数地域での校舎展開が記載され全国規模のチェーンのため県枠の対象外として除外,除外
+KNGB-050,kanagawa,個別指導学習塾 まんてんスクール,,form,https://www.manten-school.com/contact/,https://www.manten-school.com/,無,,,サイトタイトルが「小学生の基礎学力を伸ばす学習塾」で中学生向けコースを確認できず除外,除外
+KNGB-051,kanagawa,個別指導塾 学習空間,株式会社スタディーネットワーク,form,https://gakushu-kukan.com/contact/,https://gakushu-kukan.com/contact/,無,有,,神奈川県公立高校入試の現状や高校データを把握と記載。ただし問い合わせ窓口が資料請求フォームのみで用途限定の可能性があり要確認,要確認
+KNGB-052,kanagawa,けいおう学院,けいおう株式会社,form,https://keiou.jp/2023/shiryou,https://keiou.jp/company,無,有,,公立高校専門の個別指導塾で神奈川に多数の教室を持つ。公開窓口が資料請求・体験フォームで一般の問い合わせ窓口が未確認のため要確認,要確認
+KNGB-053,kanagawa,東日本進学会,,,,https://www.higapon.net/,,有,,秦野・厚木などに教室があり冬期講習・定期テスト対策の案内ページがある。問い合わせ窓口(メール/フォーム)を特定できず要確認,要確認
+NAT-001,national,そら塾,株式会社スプリックス,form,https://sprix.inc/contact/,https://sprix.inc/contact/,無,有,,中学生向けコース紹介ページ(sorajuku.jp/course/middle.html)に中学1年〜3年のコースがある。同社フォームは対象サービスに「そら塾」を選べる(森塾・河合塾マナビス等も同社) [検査: B2B台帳に連絡履歴あり(株式会社スプリックス(東証上場・森塾/湘南ゼミナール等の塾チェーン運営・IR窓口) awaiting)・二重に連絡しないよう👤判断],要確認
+NAT-002,national,東進オンライン学校・東進中学NET,株式会社ナガセ,form,https://www.toshin.com/toi/,https://www.toshin.com/toi/,無,有,,東進公式サイトに中学生向けの「東進中学NET」「東進ハイスクール中学部」と全国統一中学生テストの案内がある,Cowork第1便に指示済(未送信)
+NAT-003,national,学研の家庭教師・学研教室ほか(学研),株式会社学研ホールディングス,form,https://www.gakken.co.jp/ja/contact/contact3.html,https://www.gakken.co.jp/ja/contact/contact3.html,無,有,,中学生向けページに「学研の家庭教師【中学生コース】は学力検査対策だけでなく内申点対策にも特化」と記載。フォームは「メディアの方、ビジネス利用をご希望のお客様」窓口。城南進学研究社(NAT-010)は学研グループ,Cowork第1便に指示済(未送信)
+NAT-004,national,個別指導Axis(Axisのオンライン家庭教師),株式会社ワオ・コーポレーション,form,https://www.wao-corp.com/contact/business/,https://www.wao-corp.com/contact/business/,無,有,,Axisのオンライン家庭教師ページに「内申点を上げる対策」までの対応と記載。フォームは「事業・サービスに関するお問い合わせ」(会社名欄あり) [検査: B2B台帳に連絡履歴あり(株式会社ワオ・コーポレーション awaiting)・二重に連絡しないよう👤判断],要確認
+NAT-005,national,マナリンク,株式会社NoSchool,form,https://manalink.jp/contact,https://manalink.jp/contact,無,有,,中学生向け講座に「高校受験 過去問演習講座」など高校受験対策の講座が掲載されている。フォームは氏名・メール・内容のみの一般問い合わせ [検査: B2B台帳に連絡履歴あり(株式会社NoSchool awaiting)・二重に連絡しないよう👤判断],要確認
+NAT-006,national,スマイルゼミ(中学生コース),株式会社ジャストシステム,form,https://www.justsystems.com/jp/contact/,https://www.justsystems.com/jp/contact/,無,有,,中学3年生向けページ(smile-zemi.jp/chugaku/grade/3rd-year/)で受験と内申点に触れている。問い合わせページに「その他のお問い合わせ」区分がある [検査: B2B台帳に連絡履歴あり(ジャストシステム（スマイルゼミ） awaiting)・二重に連絡しないよう👤判断],要確認
+NAT-007,national,すらら,株式会社すららネット,form,https://surala.co.jp/contact/,https://surala.co.jp/contact/,無,有,,すららトップに「中学/高校受験をサポートします」と記載,Cowork第1便に指示済(未送信)
+NAT-008,national,明光義塾(オンライン明光義塾),株式会社明光ネットワークジャパン,form,https://cloud.swcms.net/meikonetPublic/ja/inquiry1.html,https://cloud.swcms.net/meikonetPublic/ja/inquiry1.html,無,有,,明光義塾サイトに「中学生の定期テスト対策」「中学生の個別指導」のページがある。フォームは会社名・部署欄あり(全国チェーンの本部窓口) [検査: B2B台帳に連絡履歴あり(株式会社明光ネットワークジャパン awaiting)・二重に連絡しないよう👤判断],要確認
+NAT-009,national,スクールIE,やる気スイッチグループ,form,https://www.yarukiswitch.jp/inquiry/advertisement/,https://www.yarukiswitch.jp/inquiry/advertisement/,無,有,,"「広告宣伝、プロモーション、Webマーケティングに関するご提案」用の専用フォーム(広告に関するお問い合わせ)がある。スクールIE公式に「定期テスト/内申対策」「高校受験対策」の記載(グループ全体で国内外2,400以上の教室) [検査: B2B台帳に連絡履歴あり(やる気スイッチグループHD awaiting)・二重に連絡しないよう👤判断]",要確認
+NAT-010,national,デキタス・城南コベッツ,株式会社城南進学研究社,form,https://najb.f.msgs.jp/webapp/form/23673_najb_6/index.do,https://najb.f.msgs.jp/webapp/form/23673_najb_6/index.do,無,有,,問い合わせフォームの内容選択に「広告・宣伝・PR/取材（生徒募集）について」がある。デキタスは「小学生・中学生向けオンライン学習教材」。学研グループ(NAT-003と同グループ) [検査: B2B台帳に連絡履歴あり(株式会社城南進学研究社(城南コベッツ・教育関係者向けソリューションサイト) awaiting)・二重に連絡しないよう👤判断],要確認
+NAT-011,national,アガルート学習コーチング,株式会社アガルート,form,https://www.agaroot.jp/coaching/inquiry/,https://www.agaroot.jp/coaching/inquiry/,無,有,,サイトに「中学生・高校受験コース」がある。フォームは氏名・メール・電話・内容のみの一般問い合わせ,Cowork第1便に指示済(未送信)
+NAT-012,national,天神(家庭学習教材),株式会社タオ,form,https://www.tenjin.cc/contents/inquiries/,https://www.tenjin.cc/contents/inquiries/,無,有,,家庭学習教材「天神」に中学生版の商品ページがある(会社概要ページにも問い合わせフォームあり),Cowork第1便に指示済(未送信)
+NAT-013,national,勉トレ,,form,https://bentore.net/contact/,https://bentore.net/contact/,無,有,,問い合わせフォームに「生徒・保護者お問い合わせ」と別に「法人・広告主お問い合わせ」の区分がある(特商法表記の販売業者名は「勉トレ」のみ),Cowork第1便に指示済(未送信)
+NAT-014,national,Create Education Online(参考書ルート予備校),,mail,info@create-education-online.com,https://www.create-education-online.com/,無,有,,トップページに「中学生のコース」があり「内申点アップ」の記載。事業用メールアドレスとしてページ本文に掲載(WebFetchで2回一致確認)。沖縄拠点のオンライン塾,未着手
+NAT-015,national,EIKOH LiNK STUDY(栄光ゼミナール),株式会社栄光,form,https://4bd1bb6f.form.kintoneapp.com/public/1a37f590c6a3f2e2f16d3497f99f4f0df35606314aa1ebad43a7e5cd3275b93c,https://www.eikoh.co.jp/corporate/,,有,,会社案内ページに「その他のお問い合わせフォーム」があるが、フォームはJavaScript描画で本文を読めず営業お断りの有無を確認できていない。LINK STUDYに「【中1~3】リンスタ高校受験対策」あり,要確認
+NAT-016,national,公文式(KUMON),公文教育研究会,form,https://www.kumon.ne.jp/tetsuzuki/otoiawase/index.html,https://www.kumon.ne.jp/tetsuzuki/otoiawase/index.html,,有,,問い合わせページは学習者・入会向けの区分が中心で、企業・広告向け窓口を確認できていない,要確認
+NAT-017,national,河合塾(河合塾One),学校法人河合塾,form,https://www.kawaijuku.jp/inquiry.html,https://www.kawaijuku.jp/inquiry.html,有,有,,お問い合わせページに「営業を目的としたお問い合わせはご遠慮ください。」と記載,除外
+NAT-018,national,ITTO個別指導学院,株式会社ITTO,form,https://www.itto.jp/company/form/itto/,https://www.itto.jp/company/form/itto/,有,有,,お問い合わせフォームの注意事項に「営業目的でのご利用はお断りします。」と記載,除外
+NAT-019,national,家庭教師のトライ・トライのオンライン個別指導塾,株式会社トライグループ,form,https://www.trygroup.co.jp/request/,https://www.trygroup.co.jp/request/,無,有,,トライのオンライン個別指導塾に「中学生の高校受験・定期テスト・内申点対策」ページがあるが、公開窓口は資料請求フォームのみで法人窓口を確認できない,除外
+NAT-020,national,Z会の通信教育,,form,https://www.zkai.co.jp/jr/inquiry/,https://www.zkai.co.jp/jr/inquiry/,,有,,公開されている問い合わせ先は受講者向けサポートセンター等のみで法人・広告向け窓口を確認できない(法人向けは企業研修ページのみ),除外
+NAT-021,national,スタディサプリ,株式会社リクルート,form,https://studysapuri.jp/info/help/,https://studysapuri.jp/info/help/,,有,,公開窓口は利用者向けヘルプ、コーポレートの問い合わせは報道関係者向けのみで営業窓口を確認できない,除外
+NAT-022,national,オンライン家庭教師WAM,株式会社エイチ・エム・グループ,form,https://wam.onl/contact/,https://wam.onl/contact/,無,有,,公立高校入試対策・中高一貫校内申対策の記載があるが、公開窓口は保護者向けの資料請求・入塾相談フォーム(お子さんの学年が必須)のみ,除外
+NAT-023,national,家庭教師のラスト,オルレアンの乙女株式会社,form,https://last-teacher.co.jp/contact/,https://last-teacher.co.jp/contact/,無,有,,定期テスト対策・高校受験対策の記載があるが、公開窓口は体験・資料請求フォーム(学年必須)のみ,除外
+NAT-024,national,東大先生,株式会社AGILE STUDY,form,https://todai-sensei.jp/contact,https://todai-sensei.jp/contact,無,,,公開窓口は無料学習相談・資料請求フォーム(生徒氏名・学年が必須)のみ。中学生向けの記述は未確認,除外
+NAT-025,national,SKY家庭教師,株式会社カノカコーポレーション,form,https://sky-kk.com/contact-us/,https://sky-kk.com/contact-us/,無,有,,「私立・公立高校受験等対応します」と記載。公開窓口は無料体験・資料請求と兼用のフォームのみ,除外
+NAT-026,national,プロ家庭教師 アズネット(AZ-net),有限会社アズネット,form,https://aznet-pro.com/contact/,https://aznet-pro.com/contact/,無,有,,「中学・高校・大受受験コース」の記載があるが、公開窓口は無料相談・資料請求フォーム(学年選択)のみ,除外
+NAT-027,national,キミノスクール,株式会社クルイト,form,https://kimino-school.com/contact/,https://kimino-school.com/contact/,無,有,,中3の生徒の声を掲載。公開窓口は体験・資料請求フォームのみで、掲載メールは個人情報の取扱い窓口(privacy@)のため対象外,除外
+NAT-028,national,オンライン家庭教師ネッティー,株式会社ワン・ツー・ワン,form,https://www.katekyoinfo.com/contact/,https://www.katekyoinfo.com/contact/,無,有,,「高校受験専門コース」がある。公開窓口は本人・保護者の氏名と学年が必須の入会向けフォームのみ,除外
+NAT-029,national,DIC学園(プロ家庭教師),株式会社ディック学園,form,https://www.pro-dic.jp/contact.html,https://www.pro-dic.jp/contact.html,無,有,,「定期テスト・内申点アップ対策」の記載があるが、公開窓口は無料体験・相談フォームのみ,除外
+NAT-030,national,オンライン東大家庭教師友の会,,form,https://online.tomonokai.net/inquiry/,https://online.tomonokai.net/inquiry/,無,有,,中学生の家庭教師コースの記載があるが、公開窓口は無料体験・資料請求フォームのみ,除外
+NAT-031,national,オンライン家庭教師ピース,株式会社デジタルand,form,https://katekyo-peacenet.com/inquiry.html,https://katekyo-peacenet.com/,無,有,,トップページにサービス終了に伴う今後のスケジュールの案内が掲載されている,除外
+NAT-032,national,スタディコーチ,株式会社Builds,form,https://studycoach.co.jp/contact/,https://studycoach.co.jp/contact/,無,,,公開窓口は無料体験・資料請求フォームのみ。中学生向けの記述は未確認,除外
+NAT-033,national,atama+(進学個別atama+塾),atama plus株式会社,form,https://offers.atama.plus/contact/,https://offers.atama.plus/contact/,,有,,公開窓口は「学習塾様向け」の導入相談フォームなど用途別で、広告向け窓口を確認できない,除外
+TKYA-001,tokyo,大島栄伸塾,,form,https://ojima-eishinjuku.com/inquiry/,https://ojima-eishinjuku.com/inquiry/,無,有,,都立高校志望校別の受験対策ページがある(江東区・大島駅前の個別指導塾),Cowork第1便に指示済(未送信)
+TKYA-002,tokyo,個別指導Plus1 南篠崎教室,,form,https://plus1shinozaki.com/inquire/,https://plus1shinozaki.com/inquire/,無,有,,都立高校受験・私立高校受験のコース案内ページがある,Cowork第1便に指示済(未送信)
+TKYA-003,tokyo,英智義塾,,form,https://eichigijuku.com/contact/,https://eichigijuku.com/contact/,無,有,,中学クラスで葛飾区立中学の定期テスト対策を実施し、テスト前の無料勉強会を案内している,Cowork第1便に指示済(未送信)
+TKYA-004,tokyo,桐山学習指導会,,form,https://touyama-juku.com/inquiry/index.html,https://touyama-juku.com/inquiry/index.html,無,有,2,小学部・中学部の冬期講習案内(2025年度分)を掲載、板橋本町校と小豆沢校の2校,Cowork第1便に指示済(未送信)
+TKYA-005,tokyo,学習塾ライト(東向島),,form,https://lighthigamuko.biz/お問合せページ/,https://lighthigamuko.biz/お問合せページ/,無,有,,中学生の授業で内申点に応じた単願・併願の受験情報を掲載している,Cowork第1便に指示済(未送信)
+TKYA-006,tokyo,学習塾top,,mail,gakushujuku.top@gmail.com,https://www.gakushujuku-top.com/お問い合わせ,無,有,2,都立一般入試の合格校名(小松川高・江戸川高など)と夏期・冬期・春期講習の実施を掲載 [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+TKYA-007,tokyo,伸孝学園,,form,https://shinkougakuen.com/contact/,https://shinkougakuen.com/contact/,無,有,,新中1〜中3向けに都立人気校受験・補習のコースを募集している(練馬),Cowork第1便に指示済(未送信)
+TKYA-008,tokyo,ミトヤ塾,,form,https://mitoya-juku.jp/contact/,https://mitoya-juku.jp/contact/,無,有,,30年以上都立高校受験を指導と記載、梅島・五反野エリアの塾,Cowork第1便に指示済(未送信)
+TKYA-009,tokyo,学習塾エデュプレ,,mail,info@education-place.com,https://education-place.com/about/会社概要/,無,有,,亀有・足立の塾で、都立高校の合格実績(城東・上野など)を年度別に掲載,未着手
+TKYA-010,tokyo,東都ゼミナール,,form,https://www.tohto-semi.com/contact/,https://www.tohto-semi.com/contact/,無,有,,中学・高校・大学受験に対応し、冬期講習会など季節講習の案内がある(一之江),Cowork第1便に指示済(未送信)
+TKYA-011,tokyo,個別指導SUNS,,form,https://suns.education/contact/,https://suns.education/contact/,無,有,3,大山校・西巣鴨校・葛西校の3校舎で中学1〜3年生のコースがある,Cowork第1便に指示済(未送信)
+TKYA-012,tokyo,学習スタジオ フォワード,,form,https://www.forward403.com/お問い合わせ/,https://www.forward403.com/お問い合わせ/,無,有,4,創立21年で都立入試対策を研究と記載、赤羽・浮間・志村・西台の4教室,未着手
+TKYA-013,tokyo,石橋塾,,mail,info@ishibashijuku.com,https://sites.google.com/site/ishijuku314159265/home,無,有,1,夏期・冬期講習を受講した生徒の都立高校等の合格実績を掲載(門前仲町、本校のみ),未着手
+TKYA-014,tokyo,明利学舎 西葛西本校,,form,https://cai-nishikasai.com/contact/,https://cai-nishikasai.com/contact/,無,有,,動画「高校受験総括 明利学舎が語る2026高校受験(都立と私立の最新トレンド)」を公開,未着手
+TKYA-015,tokyo,ハイブリッド指導学習塾 リアライズ,,form,https://funaborijuku.com/contact/,https://funaborijuku.com/contact/,無,有,,小学生・中学生(高校受験)・高校生の3コース構成(船堀),未着手
+TKYA-016,tokyo,ラーニング・ワン 小岩校,,form,https://learning-1.com/contact/,https://learning-1.com/contact/,無,有,,ブログで都立東高校など都立高校の学校訪問動画を公開している(東京私塾協同組合理事塾と記載),未着手
+TKYA-017,tokyo,押上英数教室,,form,https://oek-oshiage.com/contact/,https://oek-oshiage.com/contact/,無,有,,5〜6名のグループ学習で定期テスト高得点と都立高校合格を目指すと記載。広告営業の問い合わせは電話不可・フォームからと明記(押上),未着手
+TKYA-018,tokyo,西日暮里 個別指導塾 KINOMIの里,,form,https://docs.google.com/forms/d/e/1FAIpQLSeftHo-DU7JwFT_jdBPndH1NaUOXYbgeSfZxwjXU9Mjr6CD2A/viewform?usp=sf_link,https://kinomi-social.com/coaching_school_toiawase.html,無,有,,都立高校・私立高校の一般入試コースがあり、冬期講習は塾生限定と記載(荒川区),未着手
+TKYA-019,tokyo,個別指導Wit,,form,https://docs.google.com/forms/d/e/1FAIpQLSdxuZA2meistaC-VBzmiDNkkf--FKdeBKpN5cM-ypfgskOm0w/viewform,https://kyoiku-wit.com/company,無,有,,内申対策と定期テスト対策を案内(両国・深川など)。ただしフォームが学習相談・体験予約用か未確認,要確認
+TKYA-020,tokyo,自由塾,,form,https://www.jiyujyuku.com/contact_iriya,https://www.jiyujyuku.com/contact,無,有,3,台東区入谷と荒川区日暮里・町屋の3教室、都立高推薦入試の実績を掲載。フォームは教室別で区分が体験・資料請求中心のため用途要確認,要確認
+TKYA-021,tokyo,ESO(少人数・個別指導塾),,mail,info@e-studyonline.org,https://e-studyonline.org/,有,有,,トップに「営業電話はお断りします」、別ページに「ご遠慮願います」と記載のため除外,除外
+TKYA-022,tokyo,葛西の学び舎 斉学舎,,form,https://seigakusha.net/mail/,https://seigakusha.net/mail/,無,有,,フォームが「資料のご請求・体験や面談のお申し込み」専用のため除外,除外
+TKYA-023,tokyo,nito個別学院,,,,https://www.nitokobetsu.com/,,有,2,押上・両国の2教室。サイトに電話番号のみでメール・フォームを確認できないため除外,除外
+TKYA-024,tokyo,進学教室T・M・T,,,,https://www.tmt-net.com/,,,,サイト上でメール・フォームの問い合わせ窓口を確認できないため除外,除外
+TKYA-025,tokyo,国大セミナー,,mail,jyuku@kokudai.com,https://www.kokudai.com/contact/,無,有,,埼玉本社で関東に多数教室の大手チェーン、当アドレスは無料体験・説明会申込用のため除外,除外
+TKYB-001,tokyo,本多セミナー,,mail,honda@honda-seminar.com,https://www.honda-seminar.com/info_mail.html,無,有,,中学生・高校生の部で、クラス指導は中1〜3を通じて都立受験を意識した授業を行い内申点のアップを図ると記載,未着手
+TKYB-002,tokyo,西荻塾,,form,https://nishiogi-juku.jp/contacts/,https://nishiogi-juku.jp/contacts/,無,有,,都立高合格率90%超をうたい、内申点・倍率を素材に合否ラインを推計して指導すると記載,未着手
+TKYB-003,tokyo,ひのき進学教室,株式会社ひのき会,form,https://www.hinoki-net.com/contact/consultation.php,https://www.hinoki-net.com/contact/consultation.php,無,有,6,中学生コースに内申点アップ・定期テスト対策があり、中3は第一志望校に絞った合格プランを組むと記載 [検査: 運営会社重複(KNGA-018)],除外
+TKYB-004,tokyo,みらい創研ゼミナール,,form,https://miraisoken.jp/contact/inquiry/,https://miraisoken.jp/contact/inquiry/,無,有,,中学1年生〜中学3年生のコースがある限定個別指導塾,未着手
+TKYB-005,tokyo,進塾,,form,https://susumujyuku.net/,https://susumujyuku.net/,無,有,,高校受験では「3年1学期」の内申点が最も大切と記載し、冬期講習は前期5日間・後期の日程を掲載,未着手
+TKYB-006,tokyo,品川海風塾,,form,http://www.kaifujyuku.jp/contact/,http://www.kaifujyuku.jp/contact/,無,有,,中学生は推薦入試合格を目指し、内申点(通知表)を上げるため全員5教科必修と記載,未着手
+TKYB-007,tokyo,木谷塾,,form,https://kiyajuku.com/contact/,https://kiyajuku.com/contact/,無,有,,新着情報で、都立高校入試の内申点と学力点の割合が変わる見込みを解説している,未着手
+TKYB-008,tokyo,いずみ学習教室,,form,https://izumi-gakusyu.net/contact/,https://izumi-gakusyu.net/contact/,無,有,,中学2・3年Dクラスは難関私立高校・都立独自入試合格授業と記載し、内申対策にも力を入れるとある,未着手
+TKYB-009,tokyo,アモス塾,,form,https://amosjuku.com/contact/,https://amosjuku.com/contact/,無,有,,中学生向けに高校受験を見据えた内申・定期テスト対策を掲載,未着手
+TKYB-010,tokyo,いぶき学院,,form,https://ibukigakuin.co.jp/otoiawase.html,https://ibukigakuin.co.jp/otoiawase.html,無,有,,高校受験決起会(中3春)を実施し、都立高校推薦入試に関する記事を掲載,未着手
+TKYB-011,tokyo,太陽学院,,mail,info@beck-tns.jp,https://beck-tns.jp/,無,有,,中学生の受験指導に都立高校入試突破クラスがあり、内申点を向上させる指導を行うと記載,未着手
+TKYB-012,tokyo,進学院Ties,,form,https://ties-sg.com/contact,https://ties-sg.com/contact,無,有,,近隣中学校の定期テスト対策・内申対策、都立入試対策に特に力を入れると記載,未着手
+TKYB-013,tokyo,個別指導あすなろ,,form,http://asunaro-school.com/?page_id=276,http://asunaro-school.com/?page_id=276,無,有,,内申点アップ・偏差値アップにこだわると記載し、冬期講習の受付中を掲載,未着手
+TKYB-014,tokyo,みなと学院,,form,https://minatokujuku.com/inquire/,https://minatokujuku.com/inquire/,無,有,,コースに高校受験特訓コースがあり、都立高校推薦合格は内申点が大切と記載,未着手
+TKYB-015,tokyo,個別指導エール,,mail,info@yell.sunnyday.jp,http://yell-takanawa.com/access.html,無,有,2,中学生は全9教科指導で高校受験の作文・面接指導があり、季節講習はなしと記載,未着手
+TKYB-016,tokyo,竹の会,,form,https://takenokai.net/contact/,https://takenokai.net/contact/,無,有,,渋谷で創立40年、都立中・都立高の受験対策をうたう,未着手
+TKYB-017,tokyo,フレンズアップ,合同会社フレンズアップ,form,https://friendsup.jp/contact,https://friendsup.jp/contact,無,有,,都立受験の基礎知識として試験方法と内申点を解説するブログ連載がある,未着手
+TKYB-018,tokyo,TANOSAN個別指導教室,,mail,info@tanosan.net,https://tanosan.net/about/introduction/,無,有,,中学生コースに内申・受験対策コースと都立自校作成校コースがある,未着手
+TKYB-019,tokyo,武蔵野進学セミナー,,form,https://www.musashino-s.com/contactform/,https://www.musashino-s.com/contactform/,無,有,,都立高校入試に実績があり、定期テスト対策授業で内申点対策も手厚いと記載,未着手
+TKYB-020,tokyo,個別指導きみの塾,,form,https://kiminojyuku.com/,https://kiminojyuku.com/,無,有,,指導目的に定期テスト対策・内申点対策・都立高校/私立高校受験対策と記載,未着手
+TKYB-021,tokyo,進学教室ONE,株式会社進学教室ONE,form,https://shingaku1one.com/contact/,https://shingaku1one.com/contact/,無,有,,都立を第一志望とするなら本番以前に内申点を取る必要があると記載,未着手
+TKYB-022,tokyo,第一ゼミナール,株式会社ディーワン,form,https://d1zemi.com/contact/,https://d1zemi.com/contact/,無,有,2,中学生向けに内申点対策から志望校選びまで対応し、都立・私立の出題傾向も提供すると記載,未着手
+TKYB-023,tokyo,武蔵野個別指導塾,,mail,musashinokobetu.daily@gmail.com,https://www.musasinokobetu.com/company_profile/,無,有,,中学生コースに内申点UPから定期試験・高校受験対策があると記載 [検査: フリーメール宛先(個人アドレスの可能性・👤判断)],要確認
+TKYB-024,tokyo,フィールドアトラクションズ,,form,https://field-attractions.net/contact,https://field-attractions.net/contact,無,有,,2026年高校入試の合格として都立立川高校3名・戸山高校1名・国分寺高校4名を掲載し、中学生コースがある,未着手
+TKYB-025,tokyo,学習塾Canpass,合同会社キャンパス,form,https://canpass-class.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b-2/,https://canpass-class.com/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b-2/,無,有,,中学生の個別指導の案内があり、都立国分寺高等学校校長との教育対談を掲載,未着手
+TKYB-026,tokyo,小平進学教室ハイスコア,,form,http://kodairashingakukyoushitsu-highscore.com/?page_id=9,http://kodairashingakukyoushitsu-highscore.com/?page_id=9,無,有,,高校入試の第一志望校合格率96%以上をうたい、内申・定期テスト対策を掲載,未着手
+TKYB-027,tokyo,代々木進学ゼミナール,,form,http://yoshin-zemi.com/otoiawase/,http://yoshin-zemi.com/otoiawase/,無,有,,中学部(中1〜3)で内申対策・偏差値対策を行うと記載し、冬期講習の案内ページがある,未着手
+TKYB-028,tokyo,Jサポート,株式会社Jサポート,form,https://jsupport-ed.co.jp/contact/,https://jsupport-ed.co.jp/contact/,無,有,,新着記事に都立高校入試のESAT-Jスピーキングテストと私立高校の内申加点(漢検)を掲載,未着手
+TKYB-029,tokyo,コマ塾,,form,https://komajyuku.com/contact/,https://komajyuku.com/contact/,無,有,,中学生コースは内申点や都立入試を重点対策と記載し、新中学3年は満席と掲載,未着手
+TKYB-030,tokyo,私塾自学舎,,form,https://jigakusha.com/contact/,https://jigakusha.com/contact/,無,有,,「自学舎が都立受験に強い理由」の一つに内申点の底上げを挙げ、冬期講習の案内を掲載,未着手
+TKYB-031,tokyo,METRO個別指導塾,,mail,info@kyoiku1.com,https://kyoiku1.com/tokushou.html,無,有,,小学生の補習から中学受験・高校受験・大学受験まで対応と記載,未着手
+TKYB-032,tokyo,町田英数学院,,mail,eisugakuin@eisu.sakura.ne.jp,https://www.eisu.jp/info/,無,有,,中間・期末の成績は内申点に直結し、都立の推薦・一般入試に直結すると記載,未着手
+TKYB-033,tokyo,s-Live東京つつじヶ丘校,株式会社スパンキー,form,https://kobetsu-tsutsuji.com/inq,https://kobetsu-tsutsuji.com/inq,無,有,,高校受験コースに都立推薦サポートと私立受験サポートがある,未着手
+TKYB-034,tokyo,学而会,,form,https://www.gakujikai.com/contact/,https://www.gakujikai.com/contact/,無,有,,中学部があり、2026年度の都立自校作成校合格率93%と冬期講習募集を掲載,未着手
+TKYB-035,tokyo,個別指導多摩スクール,,form,https://www.tama-school.com/contact/,https://www.tama-school.com/contact/,無,有,,令和8年の都立高校入試結果一覧と冬期講習のお知らせを掲載,未着手
+TKYB-036,tokyo,こだま塾,,form,http://kodamajuku.com/contact/,http://kodamajuku.com/contact/,無,有,,今年度中3生の内申変化例を掲載し、冬期講習受講生の受付を案内,未着手
+TKYB-037,tokyo,東京英才学院 八王子教育センター,,mail,hachi@tokyo-eisai.org,https://www.tokyo-eisai.org/map/,無,有,,中学生個別指導塾の項目に高校受験・定期テスト対策・内申アップがある,未着手
+TKYB-038,tokyo,町田市秀塾,,form,https://shujuku.jimdofree.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,https://shujuku.jimdofree.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/,無,有,,中1・中2の冬期講習の時間割・受講料ページがあり、都立高校入試の実績をうたう,未着手
+TKYB-039,tokyo,学志舎 三鷹校,,form,,https://mitaka.gakushisha.jp/%e3%82%a2%e3%82%af%e3%82%bb%e3%82%b9-2/,有,有,,アクセスページに「営業電話は全てお断りしております」と記載。営業お断りのため除外,除外
+TKYB-040,tokyo,セルモ 町田,,form,,https://www.selmo-machida.com/contact/,有,有,,問い合わせフォームに「営業業者からの問い合わせフォーム送信は固くお断りします」と記載。除外,除外
+TKYB-041,tokyo,生徒派,,,,https://www.seitoha.net/,有,有,,トップに「営業の電話お断り」と記載。営業お断り表記があるため除外,除外
+TKYB-042,tokyo,世田谷学習塾,,form,,https://setagaya-gakushujuku.com/,有,有,,お問い合わせ欄に「営業電話はご遠慮ください」と記載。除外,除外
+TKYB-043,tokyo,三田学院,,,,http://mita-gakuin.com/,有,,,定休日欄に「電話相談・電話セールスお断り」と記載。除外,除外
+TKYB-044,tokyo,プラドアカデミー,,form,,https://www.weg.jp/contact/,有,有,,問い合わせフォームに「企業やフリーランスの皆様は本フォームからのご連絡はご遠慮ください」と記載。除外,除外
+TKYB-045,tokyo,国大セミナー,,form,,https://www.kokudai.com/,無,有,102,サイトに1都1府5県で全102校舎と記載。大手チェーンのため県枠の対象外として除外,除外
+TKYB-046,tokyo,ベスト自修館 清瀬校,株式会社ベスト自修館,,,https://www.bestjishukan.com/inquiry/,無,有,,お問い合わせページがLINE友だち追加のみで、メールアドレスもフォームも無いため除外,除外
+TKYB-047,tokyo,矢島塾,,,,https://www.yajimajuku.co.jp/,,有,,公開メールアドレスは講師採用の応募用のみで、問い合わせ窓口を確認できず要確認,要確認
+TKYB-048,tokyo,斗満学院TOMAN,,form,,http://www.toman.jp/,,有,,問い合わせフォームのURLがcurlで403となり中身を確認できず要確認(トップに都立高校受験学習塾と記載),要確認
