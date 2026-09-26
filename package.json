@@ -59,6 +59,8 @@
     "gsc": "node --use-system-ca scripts/gsc.mjs",
     "gmail:auth": "node --use-system-ca scripts/gmail-auth.mjs",
     "gmail:mcp": "node --use-system-ca scripts/gmail-mcp.mjs",
+    "adsense:auth": "node --use-system-ca scripts/adsense-auth.mjs",
+    "adsense:mcp": "node --use-system-ca scripts/adsense-mcp.mjs",
     "trends": "node --use-system-ca scripts/trends.mjs",
     "trends:mcp": "node --use-system-ca scripts/trends-mcp.mjs",
     "test:trends": "node --test scripts/__tests__/trends-client.test.mjs",
@@ -85,6 +87,7 @@
     "tailwind-merge": "^2.6.1"
   },
   "devDependencies": {
+    "@googleapis/adsense": "^19.0.1",
     "@googleapis/analyticsadmin": "^17.0.0",
     "@googleapis/analyticsdata": "^5.0.1",
     "@googleapis/gmail": "^17.0.0",

@@ -108,6 +108,7 @@ data/affiliate-actuals.json
 
 # Gmail OAuth 連携の機密（refresh_token。client_secretは.ga4/を共用）。
 .gmail/
+.adsense/
 
 # 週次レポート/プレビューの生成物（コミットしない）
 newsletter-preview-*.html

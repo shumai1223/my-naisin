@@ -27,6 +27,13 @@
         "--use-system-ca",
         "scripts/trends-mcp.mjs"
       ]
+    },
+    "adsense": {
+      "command": "node",
+      "args": [
+        "--use-system-ca",
+        "scripts/adsense-mcp.mjs"
+      ]
     }
   }
 }
