@@ -53,9 +53,9 @@
 
 ## 完了の定義（ls で確かめる）
 
-- [ ] `ops/deliverables/rev2/R1-PLATFORMS.md`・`R1-LISTING.md`・`R1-samples/`（3本）・`ops/runbooks/pdf-data-service.md`
-- [ ] `ops/deliverables/rev2/R2-PROGRAMS.md`・my-shingaku の紹介枠（URL未設定で非表示・テストあり）
-- [ ] `ops/runbooks/ads-review-2026-10-03.md`
-- [ ] juku1 の1枚資料・返信用文面に LINE 提供表示の1行
-- [ ] `ops/deliverables/rev2/R5-STRIPE.md`・フッターの応援リンク（URL未設定で非表示・テストあり）
-- [ ] 👤に回す操作の一覧を `loop-question-note` の末尾に1ブロックで
+- [x] `ops/deliverables/rev2/R1-PLATFORMS.md`・`R1-LISTING.md`・`R1-samples/`（3本）・`ops/runbooks/pdf-data-service.md`
+- [x] `ops/deliverables/rev2/R2-PROGRAMS.md`・my-shingaku の紹介枠（URL未設定で非表示・テストあり）
+- [x] `ops/runbooks/ads-review-2026-10-03.md`
+- [x] juku1 の1枚資料・返信用文面に LINE 提供表示の1行
+- [x] `ops/deliverables/rev2/R5-STRIPE.md`・フッターの応援リンク（URL未設定で非表示・テストあり）
+- [x] 👤に回す操作の一覧を `loop-question-note` の末尾に1ブロックで
