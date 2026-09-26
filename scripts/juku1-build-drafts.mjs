@@ -28,6 +28,8 @@ const targets = rows.slice(1).filter((r) => r.length >= head.length).map((r) => 
 const inv = JSON.parse(fs.readFileSync('ops/raw/juku1-gsc-by-pref-agg.json', 'utf8'));
 const clicks = Object.fromEntries(inv.prefs.map((p) => [p.pref, p.total]));
 const NAMES = { tokyo: '東京都', kanagawa: '神奈川県', osaka: '大阪府', hokkaido: '北海道', chiba: '千葉県', fukuoka: '福岡県', hiroshima: '広島県', shiga: '滋賀県', hyogo: '兵庫県', kyoto: '京都府', aichi: '愛知県', ishikawa: '石川県', nagasaki: '長崎県', gifu: '岐阜県', nara: '奈良県', ibaraki: '茨城県', saitama: '埼玉県', tochigi: '栃木県', niigata: '新潟県', yamaguchi: '山口県', mie: '三重県', miyagi: '宮城県', nagano: '長野県', gunma: '群馬県', kumamoto: '熊本県', shizuoka: '静岡県', kochi: '高知県', okinawa: '沖縄県', toyama: '富山県', fukushima: '福島県', oita: '大分県' };
+// 県別枠の価格は在庫ランク別(👤確定 2026-09-26): A(月300クリック以上)30,000 / B(100〜299)20,000 / C(30〜99)10,000
+const priceOf = (c) => (c >= 300 ? '30,000' : c >= 100 ? '20,000' : '10,000');
 const footer = fs.readFileSync(`${D}/drafts/LEGAL-FOOTER.txt`, 'utf8').trim();
 const tplPref = fs.readFileSync(`${D}/drafts/TEMPLATE-pref.md`, 'utf8').replace(/^<!--.*-->\n/, '');
 const tplNat = fs.readFileSync(`${D}/drafts/TEMPLATE-national.md`, 'utf8').replace(/^<!--.*-->\n/, '');
@@ -37,7 +39,7 @@ for (const t of picked) {
   const tpl = t['県'] === 'national' ? tplNat : tplPref;
   const body = tpl
     .replaceAll('{塾名}', t['塾名']).replaceAll('{県名}', NAMES[t['県']] ?? t['県'])
-    .replaceAll('{一言メモ}', t['一言メモ']).replaceAll('{クリック数}', String(clicks[t['県']] ?? ''))
+    .replaceAll('{一言メモ}', t['一言メモ']).replaceAll('{価格}', priceOf(clicks[t['県']])).replaceAll('{クリック数}', String(clicks[t['県']] ?? ''))
     .replaceAll('{法定表示}', footer);
   fs.writeFileSync(`${D}/drafts/generated/${t['id']}.txt`, body, 'utf8');
 }

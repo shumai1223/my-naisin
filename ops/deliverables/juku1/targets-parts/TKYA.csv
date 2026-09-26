@@ -1,0 +1,26 @@
+id,県,塾名,運営会社,窓口種別,宛先,確認したページURL,営業お断り表記の有無,中学生コースの有無,教室数,一言メモ,状態
+TKYA-001,tokyo,大島栄伸塾,,form,https://ojima-eishinjuku.com/inquiry/,https://ojima-eishinjuku.com/inquiry/,無,有,,都立高校志望校別の受験対策ページがある(江東区・大島駅前の個別指導塾),未着手
+TKYA-002,tokyo,個別指導Plus1 南篠崎教室,,form,https://plus1shinozaki.com/inquire/,https://plus1shinozaki.com/inquire/,無,有,,都立高校受験・私立高校受験のコース案内ページがある,未着手
+TKYA-003,tokyo,英智義塾,,form,https://eichigijuku.com/contact/,https://eichigijuku.com/contact/,無,有,,中学クラスで葛飾区立中学の定期テスト対策を実施し、テスト前の無料勉強会を案内している,未着手
+TKYA-004,tokyo,桐山学習指導会,,form,https://touyama-juku.com/inquiry/index.html,https://touyama-juku.com/inquiry/index.html,無,有,2,小学部・中学部の冬期講習案内(2025年度分)を掲載、板橋本町校と小豆沢校の2校,未着手
+TKYA-005,tokyo,学習塾ライト(東向島),,form,https://lighthigamuko.biz/お問合せページ/,https://lighthigamuko.biz/お問合せページ/,無,有,,中学生の授業で内申点に応じた単願・併願の受験情報を掲載している,未着手
+TKYA-006,tokyo,学習塾top,,mail,gakushujuku.top@gmail.com,https://www.gakushujuku-top.com/お問い合わせ,無,有,2,都立一般入試の合格校名(小松川高・江戸川高など)と夏期・冬期・春期講習の実施を掲載,未着手
+TKYA-007,tokyo,伸孝学園,,form,https://shinkougakuen.com/contact/,https://shinkougakuen.com/contact/,無,有,,新中1〜中3向けに都立人気校受験・補習のコースを募集している(練馬),未着手
+TKYA-008,tokyo,ミトヤ塾,,form,https://mitoya-juku.jp/contact/,https://mitoya-juku.jp/contact/,無,有,,30年以上都立高校受験を指導と記載、梅島・五反野エリアの塾,未着手
+TKYA-009,tokyo,学習塾エデュプレ,,mail,info@education-place.com,https://education-place.com/about/会社概要/,無,有,,亀有・足立の塾で、都立高校の合格実績(城東・上野など)を年度別に掲載,未着手
+TKYA-010,tokyo,東都ゼミナール,,form,https://www.tohto-semi.com/contact/,https://www.tohto-semi.com/contact/,無,有,,中学・高校・大学受験に対応し、冬期講習会など季節講習の案内がある(一之江),未着手
+TKYA-011,tokyo,個別指導SUNS,,form,https://suns.education/contact/,https://suns.education/contact/,無,有,3,大山校・西巣鴨校・葛西校の3校舎で中学1〜3年生のコースがある,未着手
+TKYA-012,tokyo,学習スタジオ フォワード,,form,https://www.forward403.com/お問い合わせ/,https://www.forward403.com/お問い合わせ/,無,有,4,創立21年で都立入試対策を研究と記載、赤羽・浮間・志村・西台の4教室,未着手
+TKYA-013,tokyo,石橋塾,,mail,info@ishibashijuku.com,https://sites.google.com/site/ishijuku314159265/home,無,有,1,夏期・冬期講習を受講した生徒の都立高校等の合格実績を掲載(門前仲町、本校のみ),未着手
+TKYA-014,tokyo,明利学舎 西葛西本校,,form,https://cai-nishikasai.com/contact/,https://cai-nishikasai.com/contact/,無,有,,動画「高校受験総括 明利学舎が語る2026高校受験(都立と私立の最新トレンド)」を公開,未着手
+TKYA-015,tokyo,ハイブリッド指導学習塾 リアライズ,,form,https://funaborijuku.com/contact/,https://funaborijuku.com/contact/,無,有,,小学生・中学生(高校受験)・高校生の3コース構成(船堀),未着手
+TKYA-016,tokyo,ラーニング・ワン 小岩校,,form,https://learning-1.com/contact/,https://learning-1.com/contact/,無,有,,ブログで都立東高校など都立高校の学校訪問動画を公開している(東京私塾協同組合理事塾と記載),未着手
+TKYA-017,tokyo,押上英数教室,,form,https://oek-oshiage.com/contact/,https://oek-oshiage.com/contact/,無,有,,5〜6名のグループ学習で定期テスト高得点と都立高校合格を目指すと記載。広告営業の問い合わせは電話不可・フォームからと明記(押上),未着手
+TKYA-018,tokyo,西日暮里 個別指導塾 KINOMIの里,,form,https://docs.google.com/forms/d/e/1FAIpQLSeftHo-DU7JwFT_jdBPndH1NaUOXYbgeSfZxwjXU9Mjr6CD2A/viewform?usp=sf_link,https://kinomi-social.com/coaching_school_toiawase.html,無,有,,都立高校・私立高校の一般入試コースがあり、冬期講習は塾生限定と記載(荒川区),未着手
+TKYA-019,tokyo,個別指導Wit,,form,https://docs.google.com/forms/d/e/1FAIpQLSdxuZA2meistaC-VBzmiDNkkf--FKdeBKpN5cM-ypfgskOm0w/viewform,https://kyoiku-wit.com/company,無,有,,内申対策と定期テスト対策を案内(両国・深川など)。ただしフォームが学習相談・体験予約用か未確認,要確認
+TKYA-020,tokyo,自由塾,,form,https://www.jiyujyuku.com/contact_iriya,https://www.jiyujyuku.com/contact,無,有,3,台東区入谷と荒川区日暮里・町屋の3教室、都立高推薦入試の実績を掲載。フォームは教室別で区分が体験・資料請求中心のため用途要確認,要確認
+TKYA-021,tokyo,ESO(少人数・個別指導塾),,mail,info@e-studyonline.org,https://e-studyonline.org/,有,有,,トップに「営業電話はお断りします」、別ページに「ご遠慮願います」と記載のため除外,除外
+TKYA-022,tokyo,葛西の学び舎 斉学舎,,form,https://seigakusha.net/mail/,https://seigakusha.net/mail/,無,有,,フォームが「資料のご請求・体験や面談のお申し込み」専用のため除外,除外
+TKYA-023,tokyo,nito個別学院,,,,https://www.nitokobetsu.com/,,有,2,押上・両国の2教室。サイトに電話番号のみでメール・フォームを確認できないため除外,除外
+TKYA-024,tokyo,進学教室T・M・T,,,,https://www.tmt-net.com/,,,,サイト上でメール・フォームの問い合わせ窓口を確認できないため除外,除外
+TKYA-025,tokyo,国大セミナー,,mail,jyuku@kokudai.com,https://www.kokudai.com/contact/,無,有,,埼玉本社で関東に多数教室の大手チェーン、当アドレスは無料体験・説明会申込用のため除外,除外

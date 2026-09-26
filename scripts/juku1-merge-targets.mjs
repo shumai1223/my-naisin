@@ -27,6 +27,10 @@ for (const f of fs.readdirSync(`${D}/targets-parts`).filter((x) => x.endsWith('.
     all.push(Object.fromEntries(HEAD.map((k, i) => [k, r[i].trim()])));
   }
 }
+// 既に別件(B2B打診)で連絡した組織かどうか。二重に営業しないため台帳と突き合わせる(自動除外はせず👤確認)
+const ledgerRaw = JSON.parse(fs.readFileSync('data/outreach-ledger.json', 'utf8'));
+const norm = (s) => String(s ?? '').replace(/\s|株式会社|有限会社|一般社団法人|公益財団法人|グループ|ホールディングス/g, '');
+const ledgerOrgs = (Array.isArray(ledgerRaw) ? ledgerRaw : ledgerRaw.entries ?? []).map((e) => ({ org: e.org, status: e.status, key: norm(e.org) })).filter((e) => e.key.length >= 3);
 const seenCompany = new Map(); const seenDest = new Map();
 const PERSONAL = /@(gmail|yahoo|icloud|hotmail|outlook)\./i;
 for (const t of all) {
@@ -37,6 +41,11 @@ for (const t of all) {
   if (live && PERSONAL.test(t['宛先'])) problems.push(`${t.id}: フリーメール宛先(個人アドレスの可能性) ${t['宛先']}`);
   if (live && !t['一言メモ']) problems.push(`${t.id}: 一言メモが空`);
   if (/思学舎|イー・エス・ティ|ベネッセ|旺文社/.test(t['塾名'] + t['運営会社']) && live) problems.push(`${t.id}: 除外対象の運営会社`);
+  if (live) {
+    const nm = norm(t['塾名'] + t['運営会社']);
+    const own = norm(t['運営会社'] || t['塾名']);
+    for (const e of ledgerOrgs) if (nm.includes(e.key) || (own.length >= 3 && e.key.includes(own))) problems.push(`${t.id}: B2B台帳(outreach-ledger)に連絡履歴あり → ${e.org} (${e.status}) 👤確認`);
+  }
   const ck = (t['運営会社'] || t['塾名']).replace(/\s|株式会社|有限会社|\(株\)|（株）/g, '');
   if (live) {
     if (seenCompany.has(ck)) problems.push(`${t.id}: 運営会社重複(${seenCompany.get(ck)}と) ${ck}`); else seenCompany.set(ck, t.id);
