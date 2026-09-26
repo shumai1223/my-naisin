@@ -1181,7 +1181,7 @@ print(naishin["total"])  # -> 52`;
         <div className="rounded-xl bg-slate-50 p-4 text-center text-xs text-slate-500">
           運営：
           <Link href="/about/editor-profile" className="mx-1 underline">
-            現役中学生エンジニア・しゅうまい
+            現役中学生エンジニア・ないしんパンダ
           </Link>
           ／ お問い合わせは
           <Link href="/contact" className="mx-1 underline">

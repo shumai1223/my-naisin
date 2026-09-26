@@ -23,11 +23,11 @@ import { CURRENT_FISCAL_YEAR, REIWA_YEAR_LABEL } from '@/lib/fiscal-year';
 
 export const metadata: Metadata = {
   title: '編集長・開発者プロフィール | My Naishin',
-  description: 'My Naishin（マイ内申）の開発者・しゅうまいのプロフィール。2026年度受験を控える現役中学生エンジニアが、47都道府県の教育委員会資料を自ら解析し、正確な内申点計算ツールを開発・運営しています。',
+  description: 'My Naishin（マイ内申）の開発者・ないしんパンダのプロフィール。2026年度受験を控える現役中学生エンジニアが、47都道府県の教育委員会資料を自ら解析し、正確な内申点計算ツールを開発・運営しています。',
 };
 
 export default function EditorProfilePage() {
-  // 運営者「しゅうまい」の Person を ProfilePage として機械可読化。
+  // 運営者「ないしんパンダ」の Person を ProfilePage として機械可読化。
   // @id は SiteSchema(founder) / BlogPostingSchema(author) と共有し、Googleに同一人物として統合させる。
   // これがサイト最大の差別化点「現役中学生エンジニアが執筆・開発」のE-E-A-T構造化の中核。
   const profileSchema = {
@@ -36,7 +36,7 @@ export default function EditorProfilePage() {
     mainEntity: {
       '@type': 'Person',
       '@id': 'https://my-naishin.com/#person-shumai',
-      name: 'しゅうまい',
+      name: 'ないしんパンダ',
       url: 'https://my-naishin.com/about/editor-profile',
       jobTitle: 'My Naishin 開発責任者 / 現役中学生エンジニア（2026年度受験生）',
       description:
@@ -103,7 +103,7 @@ export default function EditorProfilePage() {
               </div>
 
               <div className="flex-1 text-center md:text-left">
-                <h1 className="text-3xl font-black text-slate-900">しゅうまい</h1>
+                <h1 className="text-3xl font-black text-slate-900">ないしんパンダ</h1>
                 <p className="mt-2 text-xl font-bold text-blue-600">My Naishin 開発責任者 / 現役中学生エンジニア (2026年度受験生)</p>
                 
                 <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-3">

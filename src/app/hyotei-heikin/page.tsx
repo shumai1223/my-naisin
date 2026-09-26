@@ -215,7 +215,7 @@ export default function HyoteiHeikinPage() {
               </div>
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-2 mb-1">
-                  <div className="text-sm font-bold text-slate-800">監修・運営：しゅうまい</div>
+                  <div className="text-sm font-bold text-slate-800">監修・運営：ないしんパンダ</div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-200">
                     <ShieldCheck className="h-3 w-3" />
                     2026年度受験生
@@ -954,7 +954,7 @@ export default function HyoteiHeikinPage() {
               【実体験】中3で評定平均を3.2→4.1まで上げた具体策
             </h2>
             <div className="bg-white rounded-xl p-5 border border-emerald-100 mb-4">
-              <p className="text-xs text-emerald-700 font-bold mb-2">運営者しゅうまいから</p>
+              <p className="text-xs text-emerald-700 font-bold mb-2">運営者ないしんパンダから</p>
               <p className="text-sm text-slate-700 leading-relaxed">
                 自分が中2の終わりまで評定平均3.2でした。「このままじゃ志望校に届かない」と気づき、中3の1学期で4.1まで上げました。やったことを正直に書きます。
               </p>

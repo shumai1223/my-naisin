@@ -110,7 +110,7 @@ export default function HensachiKyokaBetsuPage() {
               </div>
               <div className="flex-1">
                 <div className="mb-1 flex flex-wrap items-center gap-2">
-                  <div className="text-sm font-bold text-slate-800">監修・運営：しゅうまい</div>
+                  <div className="text-sm font-bold text-slate-800">監修・運営：ないしんパンダ</div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-200">
                     <ShieldCheck className="h-3 w-3" />
                     2026年度受験生

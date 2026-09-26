@@ -97,7 +97,7 @@ export default function GentenArchivePage() {
         description="各都道府県教育委員会の一次ソースをいつ確認したかを記録する継続更新型アーカイブ"
         datePublished="2026-07-23"
         dateModified={latestDate ?? '2026-07-23'}
-        author="しゅうまい"
+        author="ないしんパンダ"
       />
       <DatasetSchema
         name="47都道府県 入試一次ソース確認履歴データセット"

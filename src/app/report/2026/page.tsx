@@ -104,7 +104,7 @@ export default async function Report2026Page() {
         description="47都道府県の内申点算出方式を公式データで横断比較した年次白書"
         datePublished="2026-07-23"
         dateModified="2026-07-23"
-        author="しゅうまい"
+        author="ないしんパンダ"
       />
       <DatasetSchema
         name="内申点白書2026 都道府県別データ"

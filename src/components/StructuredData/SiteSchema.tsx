@@ -27,7 +27,7 @@ export function SiteSchema() {
     founder: {
       '@type': 'Person',
       '@id': 'https://my-naishin.com/#person-shumai',
-      name: 'しゅうまい',
+      name: 'ないしんパンダ',
       url: 'https://my-naishin.com/about/editor-profile',
     },
     knowsAbout: [

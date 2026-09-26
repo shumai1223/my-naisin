@@ -8,7 +8,7 @@ export const post: BlogPost = {
   lastUpdated: '2026-05-25',
   category: '進路・受験',
   readTime: '8分',
-  author: 'しゅうまい',
+  author: 'ないしんパンダ',
   tags: ['偏差値', '高校受験', '志望校選び', '内申点'],
   sources: [
     { name: '東京都教育委員会 令和8年度入学者選抜', url: 'https://www.kyoiku.metro.tokyo.lg.jp/' },

@@ -85,7 +85,7 @@ export default function ReliabilityPage() {
         description="47都道府県の内申点データの最終検証日・一次ソース確認履歴・API稼働状況のサマリー"
         datePublished="2026-07-24"
         dateModified={latestVerifiedDate ?? '2026-07-24'}
-        author="しゅうまい"
+        author="ないしんパンダ"
       />
       <DatasetSchema
         name={DATASET_META.name}

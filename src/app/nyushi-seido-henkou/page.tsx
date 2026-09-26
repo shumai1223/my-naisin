@@ -151,7 +151,7 @@ export default function NyushiSeidoHenkouPage() {
         description="各都道府県教育委員会が公式発表した公立高校入試の制度変更予告と、過去に実際に反映された制度変更の履歴を都道府県別にまとめた継続更新ページ"
         datePublished="2026-07-23"
         dateModified="2026-08-01"
-        author="しゅうまい"
+        author="ないしんパンダ"
       />
       <FAQPageSchema faqItems={FAQS} />
 

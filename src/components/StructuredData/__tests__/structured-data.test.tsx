@@ -193,7 +193,7 @@ describe('ArticleSchema', () => {
       description: '説明',
       datePublished: '2026-01-01',
       dateModified: '2026-06-01',
-      author: 'しゅうまい',
+      author: 'ないしんパンダ',
     };
     const without = extractJsonLd(ArticleSchema(base)) as Record<string, unknown>;
     expectSchemaNode(without, 'Article');
@@ -207,7 +207,7 @@ describe('ArticleSchema', () => {
     const author = without.author as Record<string, unknown>;
     expect(author['@type']).toBe('Person');
     expect(author['@id']).toBe('https://my-naishin.com/#person-shumai');
-    expect(author.name).toBe('しゅうまい');
+    expect(author.name).toBe('ないしんパンダ');
     expect(author.sameAs).toEqual(['https://github.com/shumai1223']);
 
     const withImg = extractJsonLd(
@@ -225,7 +225,7 @@ describe('BlogPostingSchema', () => {
         description: '説明',
         url: 'https://my-naishin.com/blog/x',
         datePublished: '2026-01-01',
-        author: 'しゅうまい',
+        author: 'ないしんパンダ',
         tags: ['内申点', '高校受験'],
       }),
     ) as Record<string, unknown>;

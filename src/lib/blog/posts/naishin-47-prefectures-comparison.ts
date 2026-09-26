@@ -9,7 +9,7 @@ export const post: BlogPost = {
   lastUpdated: '2026-06-06',
   category: '基礎知識',
   readTime: '12分',
-  author: 'しゅうまい',
+  author: 'ないしんパンダ',
   tags: ['内申点', '都道府県比較', '高校受験', '独自データ', '実技4教科', '2026年度入試'],
   sources: [
     {

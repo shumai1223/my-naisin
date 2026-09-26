@@ -31,7 +31,7 @@ export function BlogPostingSchema({
     url,
     datePublished,
     dateModified: dateModified ?? datePublished,
-    // 著者は Person（現役中学生エンジニアしゅうまい）で機械可読化。E-E-A-T最大の差別化点。
+    // 著者は Person（現役中学生エンジニアないしんパンダ）で機械可読化。E-E-A-T最大の差別化点。
     // @id を editor-profile / SiteSchema の founder と共有し、Googleに同一エンティティとして統合させる。
     author: {
       '@type': 'Person',

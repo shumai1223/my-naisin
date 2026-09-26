@@ -22,7 +22,7 @@ export function ArticleSchema({
     description: description,
     datePublished: datePublished,
     dateModified: dateModified,
-    // 著者は Person（現役中学生エンジニアしゅうまい）で機械可読化。BlogPostingSchemaと同じ
+    // 著者は Person（現役中学生エンジニアないしんパンダ）で機械可読化。BlogPostingSchemaと同じ
     // @id を共有しGoogle/AIに同一エンティティとして統合させる（E-E-A-T最大の差別化点）。
     // 従来はOrganizationとして出力しており、被リンク獲得の要である/naishin-kakusa・/naishin-map・
     // /report/2026等の主力ページがブログ記事より弱いauthorship signalしか持てていなかった

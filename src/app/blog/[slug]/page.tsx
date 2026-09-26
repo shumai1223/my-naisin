@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         url={`https://my-naishin.com/blog/${post.slug}`}
         datePublished={post.date}
         dateModified={post.lastUpdated}
-        author="しゅうまい"
+        author="ないしんパンダ"
         tags={post.tags}
       />
       <BreadcrumbSchema
@@ -234,7 +234,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <meta itemProp="headline" content={post.title} />
           <meta itemProp="description" content={post.description} />
           <meta itemProp="datePublished" content={post.date} />
-          <meta itemProp="author" content="しゅうまい" />
+          <meta itemProp="author" content="ないしんパンダ" />
           <meta itemProp="keywords" content={post.tags.join(', ')} />
 
           {/* 本文。導入文の後・本文の中ほどの <h2 の前に記事内広告(IN_ARTICLE・最大2枠)を挿入（位置は blog-ad-insert.ts）。
