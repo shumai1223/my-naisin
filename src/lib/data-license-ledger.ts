@@ -500,12 +500,16 @@ export const DATA_LICENSE_LEDGER: Record<string, DataLicenseLedgerEntry> = {
   kyoto: {
     prefecture: 'kyoto',
     sourceHost: '.lg.jp（実質公的）',
-    ...UNKNOWN(
-      '未確認。2026-08-28調査: 高校教育課の部署直通メールは公式サイト上に見当たらず、電話番号のみ' +
-        '掲載（loopは電話不可）。京都府教育委員会の全体窓口「ご意見箱」(goikenbako@kyoto-be.ne.jp)' +
-        'へ、高校教育課への取次ぎを依頼する初回問い合わせメールの下書きを設置（draftId ' +
-        'r5483203572825509665・送信は👤）'
-    ),
+    redistribution: 'ok',
+    evidence:
+      '2026-09-28 13:31 JST 受領（threadId 1a0e6483f25005a9・goikenbako@kyoto-be.ne.jp・2026-08-28の' +
+        '初回問い合わせへの返信）: 「京都府教育委員会ホームページに掲載している公立高等学校入学者選抜に関する' +
+        '資料につきましては、御自身で運営されるウェブサイトへ掲載いただいて差し支えありません。」条件＝' +
+        '①内容を正確に掲示 ②利用者が最新情報を確認できるよう府教委HPの該当ページへのリンクを紹介する' +
+        '（src/data/competition-rates/kyoto.ts の sourceUrl は kyoto-be.ne.jp の資料を指しており充足）。' +
+        '⚠️許諾は「自身のウェブサイトへの掲載」まで。9/25に追加で尋ねた「他事業者への有償提供」には未回答' +
+        '＝年度末パック（T-TD1）の販売対象には含めない。府教委側から当サイトへのリンク可否の言及なし（false扱い）',
+    verifiedAt: '2026-09-28',
   },
   yamagata: {
     prefecture: 'yamagata',

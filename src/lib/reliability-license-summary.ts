@@ -21,6 +21,7 @@ const PUBLIC_LICENSE_SUMMARY: Record<string, { text: string; backlink: boolean }
   tochigi: { text: '応募状況データの出典明記のうえでの掲載を許諾。', backlink: false },
   nagano: { text: '応募状況データの出典明記のうえでの掲載を許諾。当課公式サイトへの参照掲載は不可。', backlink: false },
   oita: { text: '応募状況データの出典明記のうえでの転記・掲載を許諾。県が監修・推奨するものではない。', backlink: false },
+  kyoto: { text: '入学者選抜に関する公表資料の掲載を許諾。内容を正確に掲示し、最新情報を確認できるよう府教育委員会の該当ページへのリンクを紹介すること。', backlink: false },
 };
 
 export interface LicensedPrefectureSummary {

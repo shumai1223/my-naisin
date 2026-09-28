@@ -99,7 +99,7 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
     expect(DATA_LICENSE_LEDGER.wakayama.verifiedAt).toBe('2026-09-04');
   });
 
-  test('redistributableOkPrefectures()は現時点でakita/chiba/gifu/ibaraki/ishikawa/kagawa/mie/nagano/oita/okinawa/tochigiの11県を返す（kill_criteria: 10県に到達＝A-1達成・A-2着手可）', () => {
+  test('redistributableOkPrefectures()は現時点でakita/chiba/gifu/ibaraki/ishikawa/kagawa/kyoto/mie/nagano/oita/okinawa/tochigiの12県を返す（kill_criteria: 10県に到達＝A-1達成・A-2着手可）', () => {
     // ⚠️このテストはA-1進捗を記録するリグレッションガード。次のセッションが県を
     // 追加調査してokが増えたら、この配列を実態に合わせて更新すること（減ることは無いはず）。
     expect(redistributableOkPrefectures().sort()).toEqual([
@@ -109,6 +109,7 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
       'ibaraki',
       'ishikawa',
       'kagawa',
+      'kyoto',
       'mie',
       'nagano',
       'oita',
