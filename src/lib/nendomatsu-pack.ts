@@ -99,9 +99,31 @@ export function getCoverage(): CoverageRow[] {
   });
 }
 
-/** 納品対象＝A+B かつ 再配布許諾ok（fail-closed: unknown/ngは含めない）。 */
+/**
+ * 👤が「売る」と決めた県（2026-09-24 裁定「9県で売る」）。
+ *
+ * 台帳の `redistribution: 'ok'` は「自分のサイトへの掲載」の許諾であって、新聞社など他事業者への
+ * 有償提供の許諾ではない（有償提供の可否は 2026-09-25 に19県へ確認中）。2026-09-28 に京都が 'ok'
+ * になった際、この一覧が無かったため販売対象が自動で11県（+京都・大分）に増えてテストで見つかった。
+ * **ここに県を足すのは👤の判断が出てから**（できれば県教委から有償提供の了承を得てから）。
+ */
+export const PACK_SALES_APPROVED: ReadonlySet<string> = new Set([
+  'akita',
+  'ibaraki',
+  'tochigi',
+  'chiba',
+  'ishikawa',
+  'nagano',
+  'gifu',
+  'kagawa',
+  'okinawa',
+]);
+
+/** 納品対象＝A+B かつ 再配布許諾ok かつ 👤が販売を決めた県（fail-closed: どれか1つでも欠けたら含めない）。 */
 export function getDeliverablePrefectures(): CoverageRow[] {
-  return getCoverage().filter((r) => r.deliveryClass !== 'C' && r.license === 'ok');
+  return getCoverage().filter(
+    (r) => r.deliveryClass !== 'C' && r.license === 'ok' && PACK_SALES_APPROVED.has(r.code),
+  );
 }
 
 /** メール下書き等の {{PRICE}} を置換する。価格未確定なら例外（呼び出し側で何もせず終了させる）。 */
