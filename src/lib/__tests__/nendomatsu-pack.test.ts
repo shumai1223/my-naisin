@@ -74,10 +74,13 @@ describe('納品対象県は実データから導出される', () => {
     expect(c.every((r) => ['A', 'B', 'C'].includes(r.deliveryClass))).toBe(true);
   });
 
-  it('納品対象は「C以外かつ許諾ok」だけ(fail-closed・TD-0台帳の9県)', () => {
+  it('納品対象は「C以外かつ許諾okかつ👤が販売を決めた県」だけ(fail-closed・9県＋2026-09-30に福岡を追加して10県)', () => {
     const d = getDeliverablePrefectures();
     expect(d.every((r) => r.deliveryClass !== 'C' && r.license === 'ok')).toBe(true);
-    expect(d.map((r) => r.code).sort()).toEqual(['akita', 'chiba', 'gifu', 'ibaraki', 'ishikawa', 'kagawa', 'nagano', 'okinawa', 'tochigi']);
+    expect(d.map((r) => r.code).sort()).toEqual(['akita', 'chiba', 'fukuoka', 'gifu', 'ibaraki', 'ishikawa', 'kagawa', 'nagano', 'okinawa', 'tochigi']);
+    // 許諾okでも👤が決めていない県（京都・大分）は自動で入らない
+    expect(d.map((r) => r.code)).not.toContain('kyoto');
+    expect(d.map((r) => r.code)).not.toContain('oita');
   });
 
   it('インボイス非登録の一文と税込表示の注記が定数にある(隠すと経理で止まる)', () => {

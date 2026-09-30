@@ -37,10 +37,10 @@ describe('/nendomatsu-pack（T-TD1 TD-8・build-not-launch）', () => {
     expect(SITEMAP_EXCLUDED_ROUTES as readonly string[]).toContain('/nendomatsu-pack');
   });
 
-  it('フラグonでは9県の納品予定表と、👤確定済みの段階価格(1県¥55,000・2県目以降¥33,000)が出る', () => {
+  it('フラグonでは10県の納品予定表と、👤確定済みの段階価格(1県¥55,000・2県目以降¥33,000)が出る', () => {
     process.env.NEXT_PUBLIC_NENDOMATSU_PACK_ENABLED = '1';
     const html = renderToStaticMarkup(React.createElement(() => NendomatsuPackPage()));
-    expect((html.match(/data-testid="delivery-row"/g) ?? []).length).toBe(9);
+    expect((html.match(/data-testid="delivery-row"/g) ?? []).length).toBe(10);
     expect(html).not.toContain('確定待ち');
     expect(html).toContain('1県 ¥55,000（税込）');
     expect(html).toContain('1県あたり ¥33,000（税込）');
