@@ -14,12 +14,27 @@ import { buildFullExportRecords, toCsv, type ObunshaPocRecord } from './obunsha-
 import { getPrefectureByCode } from './prefectures';
 import { SITE_URL } from './naishin-dataset';
 
-/** COMPETITION_RATE_BY_PREFECTUREを`redistribution: 'ok'`の県だけに絞り込む。 */
+/**
+ * 許諾は ok だが、出典の確認が済むまで配布APIには載せない県（fail-closed）。
+ *
+ * fukuoka（2026-09-29 に掲載・有償提供とも許諾）: 台帳には「令和8年度分の48校99件は英進館記事を
+ * 学科別内訳の主典拠」とある一方、`commercialSourceOnly` の説明では「裏取り・補助のみ」とされ、
+ * 記述が食い違う。商用サイト由来の値を配布しないよう、どのレコードが県の公式資料だけで確定するかを
+ * 確かめるまで配布対象から外す（当サイトへの掲載には影響しない）。
+ */
+export const API_EXCLUDED_PENDING_SOURCE_REVIEW: ReadonlySet<string> = new Set(['fukuoka']);
+
+/** COMPETITION_RATE_BY_PREFECTUREを`redistribution: 'ok'`の県だけに絞り込む（出典確認待ちの県は除く）。 */
 function redistributableByPrefecture(
   byPrefecture: Partial<Record<string, PrefectureCompetitionRateFile>> = COMPETITION_RATE_BY_PREFECTURE
 ): Partial<Record<string, PrefectureCompetitionRateFile>> {
-  const ok = new Set(redistributableOkPrefectures());
+  const ok = new Set(apiDistributablePrefectures());
   return Object.fromEntries(Object.entries(byPrefecture).filter(([code]) => ok.has(code)));
+}
+
+/** 配布APIに載せる県＝許諾ok かつ 出典確認待ちでない県。 */
+export function apiDistributablePrefectures(): string[] {
+  return redistributableOkPrefectures().filter((c) => !API_EXCLUDED_PENDING_SOURCE_REVIEW.has(c));
 }
 
 /** 再配布許諾済み県のみのフラットレコード配列（1行=1校1学科1年度）。 */
@@ -56,7 +71,7 @@ export function buildCompetitionRatesIndex(
     recordsByPref.set(r.prefectureCode, list);
   }
 
-  const prefectures: CompetitionRatesIndexEntry[] = redistributableOkPrefectures()
+  const prefectures: CompetitionRatesIndexEntry[] = apiDistributablePrefectures()
     .slice()
     .sort()
     .map((code) => {
@@ -107,7 +122,7 @@ export function competitionRatesForPrefecture(
   code: string,
   byPrefecture: Partial<Record<string, PrefectureCompetitionRateFile>> = COMPETITION_RATE_BY_PREFECTURE
 ): CompetitionRatesPrefectureDetail | null {
-  const ok = new Set(redistributableOkPrefectures());
+  const ok = new Set(apiDistributablePrefectures());
   if (!ok.has(code)) return null;
   const file = byPrefecture[code];
   if (!file) return null;

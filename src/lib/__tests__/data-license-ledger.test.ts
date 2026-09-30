@@ -39,8 +39,9 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
     expect(DATA_LICENSE_LEDGER.gifu.evidence).toContain('出典等の表記については、ご提示いただいた');
   });
 
-  test('fukuoka: 令和6年度分は商用第三者(育伸社)ソースであることが理由に明記されており"unknown"のまま', () => {
-    expect(DATA_LICENSE_LEDGER.fukuoka.redistribution).toBe('unknown');
+  test('fukuoka: 2026-09-29の回答で"ok"。令和6年度分が商用第三者(育伸社)ソースである旨は明記し続ける（配布ではcommercialSourceOnlyで除外）', () => {
+    expect(DATA_LICENSE_LEDGER.fukuoka.redistribution).toBe('ok');
+    expect(DATA_LICENSE_LEDGER.fukuoka.evidence).toContain('差し支えはございません');
     expect(DATA_LICENSE_LEDGER.fukuoka.evidence).toContain('育伸社');
     expect(DATA_LICENSE_LEDGER.fukuoka.evidence).toContain('令和6年度分191件');
   });
@@ -99,12 +100,13 @@ describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => 
     expect(DATA_LICENSE_LEDGER.wakayama.verifiedAt).toBe('2026-09-04');
   });
 
-  test('redistributableOkPrefectures()は現時点でakita/chiba/gifu/ibaraki/ishikawa/kagawa/kyoto/mie/nagano/oita/okinawa/tochigiの12県を返す（kill_criteria: 10県に到達＝A-1達成・A-2着手可）', () => {
+  test('redistributableOkPrefectures()は現時点でakita/chiba/fukuoka/gifu/ibaraki/ishikawa/kagawa/kyoto/mie/nagano/oita/okinawa/tochigiの13県を返す（kill_criteria: 10県に到達＝A-1達成・A-2着手可）', () => {
     // ⚠️このテストはA-1進捗を記録するリグレッションガード。次のセッションが県を
     // 追加調査してokが増えたら、この配列を実態に合わせて更新すること（減ることは無いはず）。
     expect(redistributableOkPrefectures().sort()).toEqual([
       'akita',
       'chiba',
+      'fukuoka',
       'gifu',
       'ibaraki',
       'ishikawa',

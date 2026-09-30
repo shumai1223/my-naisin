@@ -1,6 +1,6 @@
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
-import { redistributableOkPrefectures } from '../data-license-ledger';
 import {
+  apiDistributablePrefectures,
   buildCompetitionRatesCsv,
   buildCompetitionRatesIndex,
   competitionRatesForPrefecture,
@@ -12,8 +12,8 @@ import {
  * の/api/schoolsとの取り違えを機械的に検知する回帰テスト）。
  */
 describe('T-S13A A-2 公開配布API', () => {
-  it('redistributableExportRecordsは redistributableOkPrefectures() の県のみを含む', () => {
-    const ok = new Set(redistributableOkPrefectures());
+  it('redistributableExportRecordsは apiDistributablePrefectures() の県のみを含む', () => {
+    const ok = new Set(apiDistributablePrefectures());
     expect(ok.size).toBeGreaterThanOrEqual(10);
     const records = redistributableExportRecords();
     expect(records.length).toBeGreaterThan(0);
@@ -23,7 +23,7 @@ describe('T-S13A A-2 公開配布API', () => {
   });
 
   it('redistributableExportRecordsは ok県以外(例: 東京)のレコードを1件も含まない', () => {
-    const ok = new Set(redistributableOkPrefectures());
+    const ok = new Set(apiDistributablePrefectures());
     expect(ok.has('tokyo')).toBe(false);
     const records = redistributableExportRecords();
     expect(records.some((r) => r.prefectureCode === 'tokyo')).toBe(false);
@@ -40,7 +40,7 @@ describe('T-S13A A-2 公開配布API', () => {
   });
 
   it('buildCompetitionRatesIndexは ok県の数だけ prefectures を返し、totalRecordsが一致する', () => {
-    const ok = redistributableOkPrefectures();
+    const ok = apiDistributablePrefectures();
     const index = buildCompetitionRatesIndex();
     expect(index.prefectures).toHaveLength(ok.length);
     const sumRecordCount = index.prefectures.reduce((s, p) => s + p.recordCount, 0);
@@ -49,7 +49,7 @@ describe('T-S13A A-2 公開配布API', () => {
   });
 
   it('buildCompetitionRatesIndexの各エントリはprefectureCodeがok県集合に含まれる', () => {
-    const ok = new Set(redistributableOkPrefectures());
+    const ok = new Set(apiDistributablePrefectures());
     const index = buildCompetitionRatesIndex();
     for (const p of index.prefectures) {
       expect(ok.has(p.prefectureCode)).toBe(true);
@@ -59,7 +59,7 @@ describe('T-S13A A-2 公開配布API', () => {
   });
 
   it('competitionRatesForPrefectureはok県ならレコードを返す', () => {
-    const [firstOk] = redistributableOkPrefectures();
+    const [firstOk] = apiDistributablePrefectures();
     const detail = competitionRatesForPrefecture(firstOk);
     expect(detail).not.toBeNull();
     expect(detail?.prefectureCode).toBe(firstOk);
