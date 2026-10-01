@@ -19,17 +19,23 @@ export interface AdUnitSpec {
   kind: AdUnitKind;
   /** CLS対策の予約高さ(px) */
   minHeight: number;
+  /**
+   * true なら描画しない（置き場所のコードは残し、ここを外せば戻る）。
+   * 2026-10-01 👤裁定: 1週間（9/25〜10/1）の実測で、画面に映った割合が mn-result-below 11%・mn-page-bottom 15%、
+   * 収益は週¥14・週¥7。見られない広告はサイト全体の視認率と単価を下げるので止め、自動広告（ページ内）に任せる。
+   */
+  retired?: boolean;
 }
 
 export const AD_UNITS = {
   /** 計算機の結果＋保護者CTAの直後・答え（表・換算結果）の直後。ディスプレイ（レスポンシブ） `mn-result-below` */
-  RESULT_BELOW: { slot: '1489568761', kind: 'display', minHeight: 250 },
+  RESULT_BELOW: { slot: '1489568761', kind: 'display', minHeight: 250, retired: true },
   /** 解説・表・推移の途中。ディスプレイ（レスポンシブ） `mn-in-content` */
   IN_CONTENT: { slot: '4472981442', kind: 'display', minHeight: 250 },
   /** ブログ本文の途中。記事内広告（fluid） `mn-in-article` */
   IN_ARTICLE: { slot: '5642592886', kind: 'in-article', minHeight: 280 },
   /** 各ページの最下部（フッターの前）。Multiplex（autorelaxed） `mn-page-bottom` */
-  PAGE_BOTTOM: { slot: '3128110186', kind: 'multiplex', minHeight: 300 },
+  PAGE_BOTTOM: { slot: '3128110186', kind: 'multiplex', minHeight: 300, retired: true },
 } as const satisfies Record<string, AdUnitSpec>;
 
 export type AdUnitKey = keyof typeof AD_UNITS;

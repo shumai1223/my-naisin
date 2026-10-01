@@ -130,9 +130,14 @@ describe('AdUnit の描画（点火スイッチ）', () => {
     process.env.NEXT_PUBLIC_ADSENSE_ENABLED = '1';
     const html = (unit: keyof typeof AD_UNITS) => renderToStaticMarkup(React.createElement(AdUnit, { unit }));
 
-    const rb = html('RESULT_BELOW');
+    // 2026-10-01 👤裁定: RESULT_BELOW と PAGE_BOTTOM は retired（見られていないため停止）＝点火後も何も描画しない
+    expect(html('RESULT_BELOW')).toBe('');
+    expect(html('PAGE_BOTTOM')).toBe('');
+
+    // ディスプレイ型の属性は、稼働中の IN_CONTENT で確かめる
+    const rb = html('IN_CONTENT');
     expect(rb).toContain('スポンサーリンク');
-    expect(rb).toContain('data-ad-slot="1489568761"');
+    expect(rb).toContain('data-ad-slot="4472981442"');
     expect(rb).toContain('data-ad-format="auto"');
     expect(rb).toContain('data-full-width-responsive="true"');
     expect(rb).toContain('min-height:250px');
@@ -145,11 +150,7 @@ describe('AdUnit の描画（点火スイッチ）', () => {
     expect(ia).toContain('text-align:center');
     expect(ia).not.toContain('data-full-width-responsive');
 
-    const pb = html('PAGE_BOTTOM');
-    expect(pb).toContain('data-ad-slot="3128110186"');
-    expect(pb).toContain('data-ad-format="autorelaxed"');
-    expect(pb).not.toContain('data-full-width-responsive');
-    expect(pb).toContain('print:hidden');
+    expect(ia).toContain('print:hidden');
   });
 });
 

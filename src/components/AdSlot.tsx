@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { AD_UNITS, adUnitAttributes, type AdUnitKey } from '@/lib/ad-units';
+import { AD_UNITS, adUnitAttributes, type AdUnitKey, type AdUnitSpec } from '@/lib/ad-units';
 
 /**
  * AdSense 広告枠（手動配置ユニット）。
@@ -100,7 +100,9 @@ export function AdSlot({
  * ユニット名（RESULT_BELOW 等）で置く。ID・種類（記事内/Multiplex）・予約高さは ad-units.ts が決める。
  */
 export function AdUnit({ unit }: { unit: AdUnitKey }) {
-  const spec = AD_UNITS[unit];
+  const spec: AdUnitSpec = AD_UNITS[unit];
+  // 止めたユニット（ad-units.ts の retired）は何も描画しない＝予約高さも取らない（CLSなし）
+  if (spec.retired) return null;
   const attrs = adUnitAttributes(spec.kind);
   return (
     <AdSlot
