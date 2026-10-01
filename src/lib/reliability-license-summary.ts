@@ -13,7 +13,7 @@ const PUBLIC_LICENSE_SUMMARY: Record<string, { text: string; backlink: boolean }
   gifu: { text: '応募状況データの出典明記のうえでの掲載を許諾。当課ウェブサイトへのリンク掲載は不可。', backlink: false },
   mie: { text: '応募状況データの出典明記のうえでの掲載を許諾。個人運営サイトへのリンク掲載は不可。', backlink: false },
   okinawa: { text: '応募状況データの転載、および県教育委員会ウェブサイトへのリンク設定の両方を許諾。', backlink: true },
-  ibaraki: { text: '応募状況データの出典明記のうえでの掲載を許諾。', backlink: false },
+  ibaraki: { text: '応募状況データの出典明記のうえでの掲載を許諾。整理したデータの事業者への提供も、当方が作成したものと分かるようにし元の公表資料を案内する条件で許諾。', backlink: false },
   akita: { text: '応募状況データの出典明記のうえでの掲載を許諾。当課公式サイトへの参照掲載は不可。', backlink: false },
   ishikawa: { text: '応募状況データの出典明記のうえでの掲載を許諾（当課ウェブサイトへのリンク掲載は不可）。整理したデータの事業者への提供も、県が公認・推奨しない旨と当方の責任を明示する条件で許諾。', backlink: false },
   kagawa: { text: '応募状況データの出典明記のうえでの掲載を許諾。当課公式サイトへの参照掲載は不可。', backlink: false },
