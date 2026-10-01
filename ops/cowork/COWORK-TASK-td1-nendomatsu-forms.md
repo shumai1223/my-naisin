@@ -1,8 +1,8 @@
-# Cowork指示書: T-TD1 年度末パックの売り込み（問い合わせフォーム 7件）※送信は👤
+# Cowork指示書: T-TD1 年度末パックの売り込み（問い合わせフォーム 8件）※送信は👤
 
 ## このファイルについて（2026-09-24作成）
 
-令和9年度 公立高校 倍率データ「年度末パック」の売り込みのうち、**メールアドレスが無くフォームのみが窓口**の 7 社に、
+令和9年度 公立高校 倍率データ「年度末パック」の売り込みのうち、**メールアドレスが無くフォームのみが窓口**の 8 社に、
 フォームへ本文を入力する作業です。**本文はこのファイルに書いていません**（二重管理をしないため）。
 各社のファイル `ops/deliverables/nendomatsu-pack-sample/drafts/<連番>-<slug>.md` の「## 件名」「## 本文」をそのまま貼ってください。
 
@@ -17,7 +17,7 @@
 - **最終の送信ボタンは絶対に押さないでください。** 確認画面が出るところまで進めたら止めてください。送信は👤が内容を確認して行います。
 - 会員登録・ログインが必要なページには入らない。
 - 電話番号・住所など共通入力値にない項目が必須の場合は、推測で埋めず**未入力のまま止めて報告**する。
-- 1回の作業は最大 7 社まで（1晩10〜15社までのガードレール）。
+- 1回の作業は最大 8 社まで（1晩10〜15社までのガードレール）。
 
 ## 共通の入力値
 
@@ -29,7 +29,7 @@
 | URL・ホームページ欄 | https://my-naishin.com |
 | 電話番号・郵便番号・住所 | （未定義。必須なら送信直前で止めて報告。推測で埋めない） |
 
-## 対象（7社）
+## 対象（8社）
 
 | 連番 | 組織 | 入口URL | 下書きファイル |
 |---|---|---|---|
@@ -40,6 +40,7 @@
 | 09 | 株式会社秋田魁新報社 | https://www.sakigake.jp/secure/rcpt/q-shuppan/ | `ops/deliverables/nendomatsu-pack-sample/drafts/09-akita-sakigake.md` |
 | 10 | 株式会社信濃毎日新聞社 | https://ad.shinmai.co.jp/contact/ | `ops/deliverables/nendomatsu-pack-sample/drafts/10-shinano-mainichi.md` |
 | 11 | 株式会社琉球新報社 | https://ryukyushimpo.jp/news/contact_page.html | `ops/deliverables/nendomatsu-pack-sample/drafts/11-ryukyu-shimpo.md` |
+| 12 | 株式会社西日本新聞社 | https://solution.nishinippon.co.jp/contact/ | `ops/deliverables/nendomatsu-pack-sample/drafts/12-nishinippon-shimbun.md` |
 
 ## 報告してほしいこと
 

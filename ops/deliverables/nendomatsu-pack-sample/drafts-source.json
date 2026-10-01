@@ -146,6 +146,20 @@
       "evidenceUrl": "https://ryukyushimpo.jp/news/entry-5009793.html",
       "orgLine": "貴社は令和8年度入試で、2026年2月3日付「【各校の倍率一覧】県立高校入試、初回志願状況を発表」に始まり、志願変更後の最終発表（2月17日）まで追記されていました。",
       "prior": { "status": "フォーム送信済み(awaiting)", "lastContact": "2026-08-27", "followups": 0, "threadId": null, "note": "2026-08-27にフォームでサイト紹介の連絡を送信済み(ledger OL-0826・返信なし)", "mention": "8月27日にフォームから別件（サイトのご紹介）でご連絡した者です。ご多忙のところ恐れ入りますが、今回は新しいご案内です。" }
+    },
+    {
+      "slug": "nishinippon-shimbun",
+      "org": "株式会社西日本新聞社",
+      "dept": "ご担当者",
+      "kind": "shimbun",
+      "channel": "form",
+      "contact": "https://solution.nishinippon.co.jp/contact/",
+      "contactEvidence": "https://c.nishinippon.co.jp/inquiry/ の生HTMLをcurlで取得し、「その他有料サービスのお問い合わせ」の案内先がこのフォームであることを確認、フォーム本体(Contact Form 7・必須=お名前/会社名/部署/住所/メール/電話/内容・サービス種別チェック)もcurlで確認済み(2026-10-01)。メールアドレスの記載なし。⚠️広告・ソリューションの窓口のため、入試情報・出版のご担当部署へお回しいただく形の本文にしてある。出版は営業管理部(出版) TEL 092-711-5523 が別にある（電話専用・loopは使わない）",
+      "prefectures": ["fukuoka"],
+      "evidenceUrl": "https://www.nishinippon.co.jp/item/1461841/",
+      "orgLine": "貴社は令和8年度入試で、2026年2月21日付「【志願状況一覧】福岡県の公立高校、全日制の実質倍率1.11倍 60校97学科など定員割れ」、2月25日付「【独自算出の一覧表】福岡県公立高校一般入試の「実質倍率」は？」の記事で、県教育委員会の一覧表にない「実質倍率」を独自に算出して学校別の一覧表にされていました。",
+      "prior": null,
+      "routingNote": "本フォームは広告・ソリューションの窓口と存じますが、入試情報・出版のご担当部署へお回しいただければ幸いです。"
     }
   ]
 }

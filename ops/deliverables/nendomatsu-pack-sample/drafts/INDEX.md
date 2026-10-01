@@ -15,8 +15,9 @@
 | 09 | [株式会社秋田魁新報社](09-akita-sakigake.md) | 地方紙 | フォーム | https://www.sakigake.jp/secure/rcpt/q-shuppan/ | - | 待機 |
 | 10 | [株式会社信濃毎日新聞社](10-shinano-mainichi.md) | 地方紙 | フォーム | https://ad.shinmai.co.jp/contact/ | - | 待機 |
 | 11 | [株式会社琉球新報社](11-ryukyu-shimpo.md) | 地方紙(既接触) | フォーム | https://ryukyushimpo.jp/news/contact_page.html | - | 待機 |
+| 12 | [株式会社西日本新聞社](12-nishinippon-shimbun.md) | 地方紙 | フォーム | https://solution.nishinippon.co.jp/contact/ | - | 待機（福岡は有償提供OK＝送れば返事次第で契約まで進めてよい。2026-10-01 loopが追加・広告/ソリューション窓口のため本文に「担当部署へお回しください」入り） |
 
-合計 11 社（メール 4／フォーム 7）。
+合計 12 社（メール 4／フォーム 8）。
 
 
 **2026-09-24 対話セッション**: 価格確定（1県¥55,000・2県目以降¥33,000・税込）→ 置換 → メール窓口の新規3社（01〜03）に Gmail下書きを設置。
