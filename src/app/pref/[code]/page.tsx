@@ -75,7 +75,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                   {prefecture.name}の内申点計算方法
                 </h1>
                 <p className="mt-1 text-sm text-slate-500">
-                  {prefecture.region} | 令和{prefecture.fiscalYear || '7'}年度入試対応
+                  {prefecture.region} | {prefecture.fiscalYear || '2026'}年度入試対応
                 </p>
               </div>
             </div>
