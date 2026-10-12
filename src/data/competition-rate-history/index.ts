@@ -2,6 +2,7 @@
  * Λ-4 多年度アーカイブ: 都道府県別チャンクを集約するindex。
  * Y-2のsrc/data/competition-rates/index.tsと同じ設計（県ごとの静的importでedge runtime対応）。
  */
+import { omitPublicationRefused } from '@/lib/publication-refused-prefectures';
 import type { PrefectureRateHistoryFile } from '@/lib/competition-rate-history';
 import { TOKYO_COMPETITION_RATE_HISTORY } from './tokyo';
 import { KANAGAWA_COMPETITION_RATE_HISTORY } from './kanagawa';
@@ -51,7 +52,7 @@ import { SHIZUOKA_COMPETITION_RATE_HISTORY } from './shizuoka';
 import { TOCHIGI_COMPETITION_RATE_HISTORY } from './tochigi';
 import { HOKKAIDO_COMPETITION_RATE_HISTORY } from './hokkaido';
 
-export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, PrefectureRateHistoryFile>> = {
+export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, PrefectureRateHistoryFile>> = omitPublicationRefused<PrefectureRateHistoryFile>({
   hokkaido: HOKKAIDO_COMPETITION_RATE_HISTORY,
   tokyo: TOKYO_COMPETITION_RATE_HISTORY,
   kanagawa: KANAGAWA_COMPETITION_RATE_HISTORY,
@@ -99,7 +100,7 @@ export const COMPETITION_RATE_HISTORY_BY_PREFECTURE: Partial<Record<string, Pref
   osaka: OSAKA_COMPETITION_RATE_HISTORY,
   shizuoka: SHIZUOKA_COMPETITION_RATE_HISTORY,
   tochigi: TOCHIGI_COMPETITION_RATE_HISTORY,
-};
+});
 
 export const COMPETITION_RATE_HISTORY_FILES: PrefectureRateHistoryFile[] = Object.values(
   COMPETITION_RATE_HISTORY_BY_PREFECTURE

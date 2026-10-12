@@ -2,6 +2,7 @@
  * Y-2 倍率パイプラインα: 都道府県別チャンクを集約するindex。
  * Y-1のsrc/data/schools/index.tsと同じ設計（県ごとの静的importでedge runtime対応）。
  */
+import { omitPublicationRefused } from '@/lib/publication-refused-prefectures';
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 import { HOKKAIDO_COMPETITION_RATES } from './hokkaido';
 import { TOKYO_COMPETITION_RATES } from './tokyo';
@@ -51,7 +52,7 @@ import { SHIMANE_COMPETITION_RATES } from './shimane';
 import { SHIGA_COMPETITION_RATES } from './shiga';
 import { FUKUSHIMA_COMPETITION_RATES } from './fukushima';
 
-export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = {
+export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = omitPublicationRefused<PrefectureCompetitionRateFile>({
   tokyo: TOKYO_COMPETITION_RATES,
   kanagawa: KANAGAWA_COMPETITION_RATES,
   osaka: OSAKA_COMPETITION_RATES,
@@ -99,7 +100,7 @@ export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCo
   shiga: SHIGA_COMPETITION_RATES,
   fukushima: FUKUSHIMA_COMPETITION_RATES,
   hokkaido: HOKKAIDO_COMPETITION_RATES,
-};
+});
 
 export const COMPETITION_RATE_FILES: PrefectureCompetitionRateFile[] = Object.values(
   COMPETITION_RATE_BY_PREFECTURE

@@ -30,10 +30,10 @@ describe('/developers 掲載件数の実データ整合性', () => {
     const { prefectureCount, totalRecords, totalLicensable, uniqueSchoolCount } = actualCounts();
 
     // 現状の正典値（本テストが落ちたら、原因がデータ更新かページ記載の誤りかを切り分けてから直す）。
-    expect(prefectureCount).toBe(47);
-    expect(totalRecords).toBe(24_736);
-    expect(totalLicensable).toBe(24_545);
-    expect(uniqueSchoolCount).toBe(3_283);
+    expect(prefectureCount).toBe(46); // 和歌山は県が掲載を断ったため除外(2026-10-12)
+    expect(totalRecords).toBe(24_444);
+    expect(totalLicensable).toBe(24_253);
+    expect(uniqueSchoolCount).toBe(3_250);
 
     const pageSrc = fs.readFileSync(path.join(__dirname, '../page.tsx'), 'utf8');
     expect(pageSrc).toContain(`${totalRecords.toLocaleString('en-US')}件`);

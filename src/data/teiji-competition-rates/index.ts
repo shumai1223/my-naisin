@@ -3,6 +3,7 @@
  * `src/data/competition-rates/index.ts`と同じ設計（県ごとの静的importでedge runtime対応）。
  * S1-3で実機確認済みのA分類県から順次追加する（`ops/S1-3-teiji-availability-ledger.md`参照）。
  */
+import { omitPublicationRefused } from '@/lib/publication-refused-prefectures';
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
 import { TOKYO_TEIJI_COMPETITION_RATES } from './tokyo';
 import { MIYAGI_TEIJI_COMPETITION_RATES } from './miyagi';
@@ -47,7 +48,7 @@ import { OITA_TEIJI_COMPETITION_RATES } from './oita';
 import { OSAKA_TEIJI_COMPETITION_RATES } from './osaka';
 import { SAGA_TEIJI_COMPETITION_RATES } from './saga';
 
-export const TEIJI_COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = {
+export const TEIJI_COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = omitPublicationRefused<PrefectureCompetitionRateFile>({
   tokyo: TOKYO_TEIJI_COMPETITION_RATES,
   miyagi: MIYAGI_TEIJI_COMPETITION_RATES,
   tokushima: TOKUSHIMA_TEIJI_COMPETITION_RATES,
@@ -90,7 +91,7 @@ export const TEIJI_COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, Prefec
   oita: OITA_TEIJI_COMPETITION_RATES,
   osaka: OSAKA_TEIJI_COMPETITION_RATES,
   saga: SAGA_TEIJI_COMPETITION_RATES,
-};
+});
 
 export const TEIJI_COMPETITION_RATE_FILES: PrefectureCompetitionRateFile[] = Object.values(
   TEIJI_COMPETITION_RATE_BY_PREFECTURE

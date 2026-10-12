@@ -13,7 +13,7 @@ describe('buildCompetitionRatePublicationBaseline', () => {
     const expected = Object.keys(COMPETITION_RATE_BY_PREFECTURE).sort();
     const actual = baseline.map((e) => e.prefecture).sort();
     expect(actual).toEqual(expected);
-    expect(actual.length).toBe(47);
+    expect(actual.length).toBe(46); // 47県のうち和歌山は県が掲載を断ったため公開用マップから除外(2026-10-12)
   });
 
   it('resolves a real fiscal year label (not "不明") for every prefecture', () => {
@@ -97,7 +97,7 @@ describe('buildCompetitionRatePublicationBaseline', () => {
     const unresolved = baseline.filter((e) => e.publishedAt === null).map((e) => e.prefecture).sort();
     // 一次資料のヘッダコメントに発表日の記述が無く、推測せず未解決のまま残した3県（推測しない=Y-0憲法③）。
     expect(unresolved).toEqual(['ehime', 'fukuoka', 'hokkaido']);
-    expect(resolved.length).toBe(44);
+    expect(resolved.length).toBe(43); // 和歌山を除外(2026-10-12)・旧44
   });
 });
 

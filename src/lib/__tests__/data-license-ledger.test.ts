@@ -1,9 +1,11 @@
 import { DATA_LICENSE_LEDGER, redistributableOkPrefectures } from '../data-license-ledger';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import { PUBLICATION_REFUSED_PREFECTURES } from '../publication-refused-prefectures';
 
 describe('DATA_LICENSE_LEDGER（T-S13A A-1・47県利用条件台帳）', () => {
   test('COMPETITION_RATE_BY_PREFECTUREにある全県が台帳に存在する（漏れなし）', () => {
-    const dataCodes = Object.keys(COMPETITION_RATE_BY_PREFECTURE).sort();
+    // 県が掲載を断った県は公開用マップから外れるが、台帳には理由つきで残す。
+    const dataCodes = [...Object.keys(COMPETITION_RATE_BY_PREFECTURE), ...PUBLICATION_REFUSED_PREFECTURES].sort();
     const ledgerCodes = Object.keys(DATA_LICENSE_LEDGER).sort();
     expect(ledgerCodes).toEqual(dataCodes);
   });

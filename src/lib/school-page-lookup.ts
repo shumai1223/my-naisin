@@ -62,7 +62,7 @@ export const INDEXED_SCHOOL_PAGE_PREFECTURE_CODES = [
   'nara',
   'kagawa',
   'tokushima',
-  'wakayama',
+  // wakayama: 2026-09-04に県から掲載を断られたため非公開（2026-10-12 👤決定・publication-refused-prefectures.ts）
   'miyazaki',
   'toyama',
   'oita',

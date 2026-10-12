@@ -11,6 +11,7 @@ import {
   type OfficialSubtotal,
 } from '../competition-rate';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import { WAKAYAMA_COMPETITION_RATES } from '@/data/competition-rates/wakayama';
 
 const RECORDS: CompetitionRateRecord[] = [
   { schoolName: '日比谷', area: '千代田', department: '普通科', quota: 253, finalApplicants: 520, finalRate: 2.06 },
@@ -227,7 +228,6 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
       { code: 'tokyo', count: 189 },
       { code: 'tottori', count: 43 },
       { code: 'toyama', count: 75 },
-      { code: 'wakayama', count: 57 },
       { code: 'yamagata', count: 90 },
       { code: 'yamaguchi', count: 98 },
       { code: 'yamanashi', count: 48 },
@@ -625,7 +625,7 @@ describe('resolveSourceLocator / countRecordsWithSourceLocator（T-Y11F §5順�
   });
 
   describe('wakayama R8（#8・16県目・assembleCompetitionRateRows利用の全5県が完了）', () => {
-    const file = COMPETITION_RATE_BY_PREFECTURE['wakayama']!;
+    const file = WAKAYAMA_COMPETITION_RATES; // 公開用マップからは除外(県が掲載を断った)ため生データを直接参照
     const r8 = file.records.filter((r) => !r.fiscalYear);
 
     it('R8の57件全件がresolveSourceLocatorで解決できる', () => {

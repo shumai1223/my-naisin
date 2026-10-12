@@ -3,6 +3,7 @@
  * `src/data/competition-rates/index.ts`と同じ設計（県ごとの静的importでedge runtime対応）。
  * パイロット県（chiba・saitama）から順次追加する。
  */
+import { omitPublicationRefused } from '@/lib/publication-refused-prefectures';
 import type { PrefectureStageLedgerFile } from '@/lib/stage-ledger';
 import { CHIBA_STAGE_LEDGER } from './chiba';
 import { SAITAMA_STAGE_LEDGER } from './saitama';
@@ -33,7 +34,7 @@ import { KYOTO_STAGE_LEDGER } from './kyoto';
 import { AKITA_STAGE_LEDGER } from './akita';
 import { HOKKAIDO_STAGE_LEDGER } from './hokkaido';
 
-export const STAGE_LEDGER_BY_PREFECTURE: Partial<Record<string, PrefectureStageLedgerFile>> = {
+export const STAGE_LEDGER_BY_PREFECTURE: Partial<Record<string, PrefectureStageLedgerFile>> = omitPublicationRefused<PrefectureStageLedgerFile>({
   chiba: CHIBA_STAGE_LEDGER,
   saitama: SAITAMA_STAGE_LEDGER,
   tochigi: TOCHIGI_STAGE_LEDGER,
@@ -62,7 +63,7 @@ export const STAGE_LEDGER_BY_PREFECTURE: Partial<Record<string, PrefectureStageL
   kyoto: KYOTO_STAGE_LEDGER,
   akita: AKITA_STAGE_LEDGER,
   hokkaido: HOKKAIDO_STAGE_LEDGER,
-};
+});
 
 export const STAGE_LEDGER_FILES: PrefectureStageLedgerFile[] = Object.values(
   STAGE_LEDGER_BY_PREFECTURE
