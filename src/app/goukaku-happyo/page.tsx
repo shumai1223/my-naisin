@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ClipboardList, HelpCircle, AlertTriangle, ChevronRightSquare, CheckCircle2 } from 'lucide-react';
+import { Home, ChevronRight, ClipboardList, HelpCircle, AlertTriangle, ChevronRightSquare, CheckCircle2 } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -74,10 +74,10 @@ export default function GoukakuHappyoPage() {
         totalTime="P14D"
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -92,7 +92,7 @@ export default function GoukakuHappyoPage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
+          <section className="mb-8 rounded-lg border-2 border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
               <p className="text-sm leading-relaxed text-amber-900">
@@ -101,19 +101,19 @@ export default function GoukakuHappyoPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-blue-500 pl-3 text-lg font-bold text-slate-800">
-              <ClipboardList className="h-5 w-5 text-blue-500" />
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
+              <ClipboardList className="h-5 w-5 text-brand-500" />
               合格後の一般的な流れ
             </h2>
             <div className="space-y-4">
               {PASSED_STEPS.map((s, i) => (
                 <div key={s.title} className="flex gap-4">
                   <div className="flex flex-col items-center">
-                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
+                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
                       {i + 1}
                     </div>
-                    {i < PASSED_STEPS.length - 1 && <div className="mt-1 h-full w-px flex-1 bg-emerald-100" />}
+                    {i < PASSED_STEPS.length - 1 && <div className="mt-1 h-full w-px flex-1 bg-brand-100" />}
                   </div>
                   <div className="pb-2">
                     <div className="text-sm font-bold text-slate-800">{s.title}</div>
@@ -124,7 +124,7 @@ export default function GoukakuHappyoPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 border-l-4 border-slate-400 pl-3 text-lg font-bold text-slate-800">
               <CheckCircle2 className="h-5 w-5 text-slate-500" />
               思うような結果でなかったときは
@@ -139,13 +139,13 @@ export default function GoukakuHappyoPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
                 <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
                   <h3 className="mb-1 flex items-start gap-1.5 text-sm font-bold text-slate-800">
-                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
                     Q. {f.question}
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
@@ -159,26 +159,26 @@ export default function GoukakuHappyoPage() {
             <ParentLeadCTA placement="hiyou" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/jikosaiten" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/jikosaiten" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 自己採点のやり方
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/juken-toujitsu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/juken-toujitsu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 受験当日の持ち物・タイムライン
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/heigan-yuugu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/heigan-yuugu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 併願優遇の仕組み
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/koukou-hiyou" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/koukou-hiyou" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 高校費用シミュレーター
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/naishin-kakusa" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/naishin-kakusa" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 都道府県別 内申点格差レポート
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>

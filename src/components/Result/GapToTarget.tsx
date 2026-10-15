@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Target, Send, ChevronRight, TrendingUp, PartyPopper, Wallet, Info } from 'lucide-react';
+import { Target, Send, ChevronRight, TrendingUp, PartyPopper, Wallet, Info } from '@/components/icons';
 
 import { Card } from '@/components/ui/Card';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
@@ -90,9 +90,9 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
 
   return (
     <Card className="overflow-hidden" variant="elevated">
-      <div className="border-b border-slate-100/80 bg-gradient-to-r from-indigo-50/80 via-blue-50/60 to-sky-50/80 px-6 py-5">
+      <div className="border-b border-slate-100/80 bg-brand-50/80 px-6 py-5">
         <div className="flex items-center gap-2">
-          <Target className="h-5 w-5 text-indigo-600" />
+          <Target className="h-5 w-5 text-brand-600" />
           <div className="text-base font-bold text-slate-800">志望校・目標までの距離</div>
         </div>
         <div className="mt-1 text-xs text-slate-500">
@@ -124,10 +124,10 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
               value={targetLabel === 'あなたの目標' && target != null ? target : ''}
               onChange={(e) => setManual(Number(e.target.value))}
               placeholder={`例：${Math.min(result.max, Math.round(result.max * 0.85))}`}
-              className="mt-1 h-11 w-full rounded-2xl border border-slate-200 bg-white px-4 text-sm text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+              className="mt-1 h-11 w-full rounded-lg border border-slate-200 bg-white px-4 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
             />
           </div>
-          <div className="text-[11px] text-slate-400 sm:pb-3">志望校の目標内申がわかる方はこちら</div>
+          <div className="text-xs text-slate-400 sm:pb-3">志望校の目標内申がわかる方はこちら</div>
         </div>
 
         {/* ギャップ提示 ＋ 状態別の取引 */}
@@ -135,25 +135,25 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
           <div className="space-y-4 pt-1">
             {/* ギャップの数字（発火力のある一行・語尾でヘッジ） */}
             <div
-              className={`rounded-2xl border-2 p-4 text-center ${
+              className={`rounded-lg border-2 p-4 text-center ${
                 state === 'far'
-                  ? 'border-rose-200 bg-rose-50/70'
+                  ? 'border-red-200 bg-red-50/70'
                   : state === 'close'
                     ? 'border-amber-200 bg-amber-50/70'
-                    : 'border-emerald-200 bg-emerald-50/70'
+                    : 'border-brand-200 bg-brand-50/70'
               }`}
             >
               {state === 'met' ? (
-                <div className="flex items-center justify-center gap-2 text-emerald-800">
+                <div className="flex items-center justify-center gap-2 text-brand-800">
                   <PartyPopper className="h-5 w-5" />
-                  <span className="text-base font-black">
+                  <span className="text-base font-bold">
                     {targetLabel}（{target}）を {Math.abs(gap)}点 上回っています
                   </span>
                 </div>
               ) : (
-                <div className={state === 'far' ? 'text-rose-800' : 'text-amber-800'}>
+                <div className={state === 'far' ? 'text-red-800' : 'text-amber-800'}>
                   <div className="text-xs font-bold opacity-80">{targetLabel}（{target}）まで</div>
-                  <div className="text-2xl font-black tracking-tight">
+                  <div className="text-2xl font-bold tracking-tight">
                     目安まであと <span className="text-3xl">{gap}</span> 点
                   </div>
                 </div>
@@ -192,8 +192,8 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
             )}
 
             {state === 'met' && (
-              <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/60 to-white p-5">
-                <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200">
+              <div className="rounded-lg border border-brand-200 bg-brand-50 p-5">
+                <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
                   <Wallet className="h-3.5 w-3.5" />
                   合格圏が見えたら、次の備え
                 </div>
@@ -204,7 +204,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
                 <Link
                   href="/koukou-hiyou"
                   onClick={() => track('met_bridge_click', { pref: prefectureCode, to: 'koukou-hiyou' })}
-                  className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
+                  className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
                 >
                   高校の費用をシミュレーションする
                   <ChevronRight className="h-4 w-4" />
@@ -216,30 +216,30 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
             <button
               type="button"
               onClick={shareToParent}
-              className="group flex w-full items-center justify-between rounded-2xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 text-left transition-all hover:border-blue-400 hover:shadow-md"
+              className="group flex w-full items-center justify-between rounded-lg border-2 border-brand-200 bg-brand-50 px-5 py-4 text-left transition-all hover:border-brand-400"
             >
               <div>
-                <div className="flex items-center gap-2 text-sm font-bold text-blue-900">
+                <div className="flex items-center gap-2 text-sm font-bold text-brand-900">
                   <Send className="h-4 w-4" />
                   この結果を保護者に送る
                 </div>
-                <div className="mt-0.5 text-xs text-blue-700">
+                <div className="mt-0.5 text-xs text-brand-700">
                   「あと{state === 'met' ? '0' : gap}点」を画像にして共有。進路の相談がはじめやすくなります。
                 </div>
               </div>
-              <div className="flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-sm font-bold text-white shadow-sm transition-all group-hover:bg-blue-700">
+              <div className="flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-2 text-sm font-bold text-white transition-all group-hover:bg-brand-700">
                 共有
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </div>
             </button>
 
             {/* ヘッジ（信頼の堀を守る語尾） */}
-            <div className="flex items-start gap-2 rounded-xl bg-slate-50 px-4 py-3 text-[11px] leading-relaxed text-slate-500">
+            <div className="flex items-start gap-2 rounded-lg bg-slate-50 px-4 py-3 text-xs leading-relaxed text-slate-500">
               <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400" />
               <span>
                 {HEDGE_NOTE}
                 {prefectureName ? `（${prefectureName}の` : '（'}
-                <Link href={`/${prefectureCode}/naishin`} className="font-semibold text-slate-600 underline">
+                <Link href={`/${prefectureCode}/naishin`} className="font-bold text-slate-600 underline">
                   計算根拠・出典ページ
                 </Link>
                 でご確認ください）
@@ -249,7 +249,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
         )}
 
         {!state && (
-          <div className="flex items-center gap-2 rounded-xl bg-indigo-50/60 px-4 py-3 text-xs text-indigo-700">
+          <div className="flex items-center gap-2 rounded-lg bg-brand-50/60 px-4 py-3 text-xs text-brand-700">
             <TrendingUp className="h-4 w-4 shrink-0" />
             目標を選ぶ／入れると、合格目安まで「あと何点」かが表示されます。
           </div>

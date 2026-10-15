@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Check, Plus, Trash2, Edit3, Save, Star, Flame } from 'lucide-react';
+import { Target, Check, Plus, Trash2, Edit3, Save, Star, Flame } from '@/components/icons';
 
 const GOALS_KEY = 'my-naishin:personal-goals';
 
@@ -120,13 +120,13 @@ export function PersonalGoalCard() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
-      className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 p-5 text-white">
+      <div className="bg-slate-500 p-5 text-white">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
               <Target className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -136,7 +136,7 @@ export function PersonalGoalCard() {
           </div>
           {totalCount > 0 && (
             <div className="text-right">
-              <div className="text-2xl font-black">{completionRate}%</div>
+              <div className="text-2xl font-bold">{completionRate}%</div>
               <div className="text-xs text-white/80">{completedCount}/{totalCount} 達成</div>
             </div>
           )}
@@ -152,7 +152,7 @@ export function PersonalGoalCard() {
                 initial={{ width: 0 }}
                 animate={{ width: `${completionRate}%` }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="h-full bg-gradient-to-r from-pink-400 to-rose-400 rounded-full"
+                className="h-full bg-slate-400 rounded-full"
               />
             </div>
           </div>
@@ -165,9 +165,9 @@ export function PersonalGoalCard() {
               key={goal.id}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              className={`flex items-center gap-3 rounded-xl p-3 border transition-all ${
+              className={`flex items-center gap-3 rounded-lg p-3 border transition-all ${
                 goal.completed
-                  ? 'bg-emerald-50 border-emerald-200'
+                  ? 'bg-brand-50 border-brand-200'
                   : 'bg-slate-50 border-slate-200'
               }`}
             >
@@ -175,8 +175,8 @@ export function PersonalGoalCard() {
                 onClick={() => toggleGoal(goal.id)}
                 className={`grid h-6 w-6 shrink-0 place-items-center rounded-full border-2 transition-all ${
                   goal.completed
-                    ? 'bg-emerald-500 border-emerald-500 text-white'
-                    : 'border-slate-300 hover:border-emerald-400'
+                    ? 'bg-brand-500 border-brand-500 text-white'
+                    : 'border-slate-300 hover:border-brand-400'
                 }`}
               >
                 {goal.completed && <Check className="h-3.5 w-3.5" />}
@@ -188,12 +188,12 @@ export function PersonalGoalCard() {
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
                     aria-label="目標を編集"
-                    className="flex-1 text-sm bg-white border border-slate-300 rounded-lg px-2 py-1 outline-none focus:border-rose-400"
+                    className="flex-1 text-sm bg-white border border-slate-300 rounded-lg px-2 py-1 outline-none focus:border-red-400"
                     autoFocus
                   />
                   <button
                     onClick={() => saveEdit(goal.id)}
-                    className="p-1 text-emerald-500 hover:bg-emerald-50 rounded"
+                    className="p-1 text-brand-500 hover:bg-brand-50 rounded"
                   >
                     <Save className="h-4 w-4" />
                   </button>
@@ -212,7 +212,7 @@ export function PersonalGoalCard() {
                     </button>
                     <button
                       onClick={() => deleteGoal(goal.id)}
-                      className="p-1 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded"
+                      className="p-1 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                     </button>
@@ -232,18 +232,18 @@ export function PersonalGoalCard() {
               onKeyDown={(e) => e.key === 'Enter' && addGoal(newGoal)}
               aria-label="新しい目標を入力"
               placeholder="目標を入力..."
-              className="flex-1 text-sm border border-slate-300 rounded-xl px-3 py-2 outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-100"
+              className="flex-1 text-sm border border-slate-300 rounded-lg px-3 py-2 outline-none focus:border-red-400 focus:ring-2 focus:ring-red-100"
               autoFocus
             />
             <button
               onClick={() => addGoal(newGoal)}
-              className="px-4 py-2 bg-rose-500 text-white text-sm font-bold rounded-xl hover:bg-rose-600 transition-colors"
+              className="px-4 py-2 bg-red-500 text-white text-sm font-bold rounded-lg hover:bg-red-600 transition-colors"
             >
               追加
             </button>
             <button
               onClick={() => setIsAdding(false)}
-              className="px-3 py-2 text-slate-500 text-sm rounded-xl hover:bg-slate-100"
+              className="px-3 py-2 text-slate-500 text-sm rounded-lg hover:bg-slate-100"
             >
               キャンセル
             </button>
@@ -251,10 +251,10 @@ export function PersonalGoalCard() {
         ) : (
           <button
             onClick={() => setIsAdding(true)}
-            className="w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-slate-200 rounded-xl text-slate-500 hover:border-rose-300 hover:text-rose-500 transition-colors"
+            className="w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-slate-200 rounded-lg text-slate-500 hover:border-red-300 hover:text-red-500 transition-colors"
           >
             <Plus className="h-4 w-4" />
-            <span className="text-sm font-medium">新しい目標を追加</span>
+            <span className="text-sm">新しい目標を追加</span>
           </button>
         )}
 
@@ -281,10 +281,10 @@ export function PersonalGoalCard() {
 
         {/* Motivation */}
         {completedCount > 0 && (
-          <div className="mt-4 rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 p-3 border border-rose-200">
+          <div className="mt-4 rounded-lg bg-slate-50 p-3 border border-red-200">
             <div className="flex items-center gap-2 justify-center">
-              <Flame className="h-4 w-4 text-rose-500" />
-              <p className="text-xs text-rose-700 text-center font-medium">
+              <Flame className="h-4 w-4 text-red-500" />
+              <p className="text-xs text-red-700 text-center">
                 {completedCount}個の目標達成おめでとう！この調子で頑張ろう！
               </p>
             </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Bell, ExternalLink } from 'lucide-react';
+import { Home, ChevronRight, Bell, ExternalLink } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -155,10 +155,10 @@ export default function NyushiSeidoHenkouPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -167,7 +167,7 @@ export default function NyushiSeidoHenkouPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-amber-500 text-white">
               <Bell className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -179,7 +179,7 @@ export default function NyushiSeidoHenkouPage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-6">
+          <section className="mb-8 rounded-lg border-2 border-amber-200 bg-amber-50 p-6">
             <p className="text-sm leading-relaxed text-amber-900">
               現時点で本サイトが把握している変更予告は{UPCOMING_CHANGES.length}件です。教育委員会の新しい
               発表を確認でき次第、追記していきます。掲載していない都道府県に変更がないとは限りません。
@@ -188,9 +188,9 @@ export default function NyushiSeidoHenkouPage() {
 
           <section className="mb-8 space-y-4">
             {UPCOMING_CHANGES.map((c) => (
-              <div key={c.prefCode} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div key={c.prefCode} className="rounded-lg border border-slate-200 bg-white p-6">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-700">
+                  <span className="rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
                     {c.prefName}
                   </span>
                   <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
@@ -204,7 +204,7 @@ export default function NyushiSeidoHenkouPage() {
                     href={c.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-indigo-600 hover:underline"
+                    className="flex items-center gap-1 text-brand-600 hover:underline"
                   >
                     出典: {c.sourceTitle} <ExternalLink className="h-3 w-3" />
                   </a>
@@ -212,7 +212,7 @@ export default function NyushiSeidoHenkouPage() {
                 </div>
                 <Link
                   href={`/${c.prefCode}/naishin`}
-                  className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline"
+                  className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-brand-600 hover:underline"
                 >
                   {c.prefName}の現行制度を確認する <ChevronRight className="h-3 w-3" />
                 </Link>
@@ -227,9 +227,9 @@ export default function NyushiSeidoHenkouPage() {
             </p>
             <div className="space-y-4">
               {PAST_SYSTEM_CHANGES.map((c, i) => (
-                <div key={`${c.prefCode}-${i}`} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div key={`${c.prefCode}-${i}`} className="rounded-lg border border-slate-200 bg-white p-6">
                   <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">
+                    <span className="rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
                       {c.prefName}
                     </span>
                     <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
@@ -243,7 +243,7 @@ export default function NyushiSeidoHenkouPage() {
                       href={c.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-indigo-600 hover:underline"
+                      className="flex items-center gap-1 text-brand-600 hover:underline"
                     >
                       出典: {c.sourceTitle} <ExternalLink className="h-3 w-3" />
                     </a>
@@ -251,7 +251,7 @@ export default function NyushiSeidoHenkouPage() {
                   </div>
                   <Link
                     href={`/${c.prefCode}/naishin`}
-                    className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline"
+                    className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-brand-600 hover:underline"
                   >
                     {c.prefName}の現行制度を確認する <ChevronRight className="h-3 w-3" />
                   </Link>
@@ -260,7 +260,7 @@ export default function NyushiSeidoHenkouPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
@@ -277,26 +277,26 @@ export default function NyushiSeidoHenkouPage() {
             <ParentLeadCTA placement="prefecture" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center">
             <p className="mb-3 text-sm text-slate-600">
               都道府県別の内申点計算方法や制度の違いをもっと詳しく知りたい方はこちら
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               <Link
                 href="/naishin-kakusa"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
               >
                 内申点格差レポート
               </Link>
               <Link
                 href="/report/2026"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
               >
                 内申点白書2026
               </Link>
               <Link
                 href="/"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
               >
                 内申点を計算する
               </Link>

@@ -58,35 +58,35 @@ export function TrendChart({ points, granularity }: { points: TrendPoint[]; gran
         <line x1={pl} y1={pt + ih} x2={W - pr} y2={pt + ih} className="stroke-slate-200" strokeWidth={1} />
 
         {/* 面・線 */}
-        <polygon points={area} className="fill-emerald-100/70" />
-        <polyline points={line} className="fill-none stroke-emerald-500" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+        <polygon points={area} className="fill-brand-100/70" />
+        <polyline points={line} className="fill-none stroke-brand-500" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
 
         {/* 点（多すぎる時は省略） */}
-        {n <= 70 && points.map((p, i) => <circle key={i} cx={x(i)} cy={y(p.value)} r={2.2} className="fill-emerald-600" />)}
+        {n <= 70 && points.map((p, i) => <circle key={i} cx={x(i)} cy={y(p.value)} r={2.2} className="fill-brand-600" />)}
 
         {/* ホバーのガイド線＋強調点 */}
         {hp && (
           <>
             <line x1={hx} y1={pt} x2={hx} y2={pt + ih} className="stroke-slate-300" strokeDasharray="3 3" strokeWidth={1} />
-            <circle cx={hx} cy={y(hp.value)} r={4.5} className="fill-emerald-600 stroke-white" strokeWidth={2} />
+            <circle cx={hx} cy={y(hp.value)} r={4.5} className="fill-brand-600 stroke-white" strokeWidth={2} />
           </>
         )}
 
         {/* 軸ラベル */}
-        <text x={4} y={pt + 4} className="fill-slate-400 text-[9px]">{max}</text>
-        <text x={4} y={pt + ih} className="fill-slate-400 text-[9px]">0</text>
-        <text x={pl} y={H - 5} className="fill-slate-400 text-[9px]">{fmt(points[0].label)}</text>
-        <text x={W - pr} y={H - 5} textAnchor="end" className="fill-slate-400 text-[9px]">{fmt(points[n - 1].label)}</text>
+        <text x={4} y={pt + 4} className="fill-slate-400 text-xs">{max}</text>
+        <text x={4} y={pt + ih} className="fill-slate-400 text-xs">0</text>
+        <text x={pl} y={H - 5} className="fill-slate-400 text-xs">{fmt(points[0].label)}</text>
+        <text x={W - pr} y={H - 5} textAnchor="end" className="fill-slate-400 text-xs">{fmt(points[n - 1].label)}</text>
       </svg>
 
       {/* ツールチップ（マウス追従・該当の日/時間と件数） */}
       {hp && (
         <div
-          className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-lg bg-slate-900 px-2.5 py-1 text-xs font-bold text-white shadow-lg"
+          className="pointer-events-none absolute top-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-lg bg-slate-900 px-2.5 py-1 text-xs font-bold text-white"
           style={{ left: `${(hx / W) * 100}%` }}
         >
           {fmt(hp.label)}
-          <span className="ml-1.5 text-emerald-300">{hp.value}クリック</span>
+          <span className="ml-1.5 text-brand-300">{hp.value}クリック</span>
         </div>
       )}
     </div>

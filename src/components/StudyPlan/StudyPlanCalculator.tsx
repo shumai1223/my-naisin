@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { CalendarClock, Loader2, Target, TrendingUp, ChevronRight, AlertTriangle } from 'lucide-react';
+import { CalendarClock, Loader2, Target, TrendingUp, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { PREFECTURES, getPrefectureByCode, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
 import { funnel, track } from '@/lib/track';
@@ -85,12 +85,12 @@ export function StudyPlanCalculator() {
   }
 
   const inputCls =
-    'h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200';
+    'h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200';
 
   return (
-    <div className="rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-violet-50 to-white p-6 shadow-lg">
+    <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
       <div className="mb-5 flex items-center gap-3">
-        <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg">
+        <div className="grid h-12 w-12 place-items-center rounded-lg bg-brand-500 text-white">
           <CalendarClock className="h-6 w-6" />
         </div>
         <div>
@@ -99,7 +99,7 @@ export function StudyPlanCalculator() {
         </div>
       </div>
 
-      <form onSubmit={onSubmit} className="rounded-xl bg-white/70 p-4 shadow-sm">
+      <form onSubmit={onSubmit} className="rounded-lg bg-white/70 p-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
             <span className="mb-1 block text-xs font-bold text-slate-500">都道府県</span>
@@ -140,7 +140,7 @@ export function StudyPlanCalculator() {
 
         <p className="mt-3 text-xs text-slate-500">
           現在の内申点が分からない場合は{' '}
-          <Link href={`/${code}/naishin`} className="font-semibold text-indigo-600 underline">
+          <Link href={`/${code}/naishin`} className="font-bold text-brand-600 underline">
             {pref?.name ?? ''}の内申点計算
           </Link>
           {' '}で先に算出できます。
@@ -150,32 +150,32 @@ export function StudyPlanCalculator() {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-7 py-3 text-base font-bold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-7 py-3 text-base font-bold text-white transition-all hover:scale-105 disabled:cursor-not-allowed disabled:opacity-70"
           >
             {status === 'loading' ? <Loader2 className="h-5 w-5 animate-spin" /> : <Target className="h-5 w-5" />}
             計画を作成する
           </button>
         </div>
-        {error && <p className="mt-3 text-center text-sm font-semibold text-rose-600">{error}</p>}
+        {error && <p className="mt-3 text-center text-sm font-bold text-red-600">{error}</p>}
       </form>
 
       {result && result.studyPlan && (
-        <div className="mt-6 rounded-xl bg-white p-6 shadow-sm" role="status" aria-live="polite">
+        <div className="mt-6 rounded-lg bg-white p-6" role="status" aria-live="polite">
           {!result.achievable && (
-            <div className="mb-4 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
+            <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
               目標が満点を超えています。満点（{result.maxScore}点）以内で目標を設定してください。
             </div>
           )}
           <div className="grid gap-4 sm:grid-cols-3">
-            <Stat label="目標までの差" value={`${result.studyPlan.gap}点`} accent="text-rose-600" />
-            <Stat label="週あたり必要な改善" value={`約${result.studyPlan.perWeekNaishinGain}点/週`} accent="text-indigo-600" />
-            <Stat label="必要な評定平均" value={`${result.requiredAverageGrade}`} accent="text-emerald-600" />
+            <Stat label="目標までの差" value={`${result.studyPlan.gap}点`} accent="text-red-600" />
+            <Stat label="週あたり必要な改善" value={`約${result.studyPlan.perWeekNaishinGain}点/週`} accent="text-brand-600" />
+            <Stat label="必要な評定平均" value={`${result.requiredAverageGrade}`} accent="text-brand-600" />
           </div>
 
           {result.raisePriority && (
-            <div className="mt-4 flex items-start gap-2 rounded-xl border border-indigo-100 bg-indigo-50/60 p-4 text-sm text-slate-700">
-              <TrendingUp className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
+            <div className="mt-4 flex items-start gap-2 rounded-lg border border-brand-100 bg-brand-50/60 p-4 text-sm text-slate-700">
+              <TrendingUp className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
               {result.raisePriority}
             </div>
           )}
@@ -188,7 +188,7 @@ export function StudyPlanCalculator() {
                 <li key={m.week} className="flex items-center gap-3">
                   <span className="w-16 shrink-0 text-xs font-bold text-slate-500">第{m.week}週</span>
                   <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100">
-                    <div className="h-full rounded-full bg-gradient-to-r from-indigo-400 to-violet-500" style={{ width: `${ratio}%` }} />
+                    <div className="h-full rounded-full bg-brand-400" style={{ width: `${ratio}%` }} />
                   </div>
                   <span className="w-16 shrink-0 text-right text-xs font-bold text-slate-700">{m.targetNaishin}点</span>
                 </li>
@@ -200,7 +200,7 @@ export function StudyPlanCalculator() {
 
           <Link
             href={`/reverse?pref=${code}`}
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-indigo-600 hover:text-indigo-700"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-brand-600 hover:text-brand-700"
           >
             志望校から必要な当日点も逆算する
             <ChevronRight className="h-4 w-4" />
@@ -213,9 +213,9 @@ export function StudyPlanCalculator() {
 
 function Stat({ label, value, accent }: { label: string; value: string; accent: string }) {
   return (
-    <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 text-center">
+    <div className="rounded-lg border border-slate-100 bg-slate-50 p-4 text-center">
       <div className="text-xs font-bold text-slate-500">{label}</div>
-      <div className={`mt-1 text-2xl font-black ${accent}`}>{value}</div>
+      <div className={`mt-1 text-2xl font-bold ${accent}`}>{value}</div>
     </div>
   );
 }

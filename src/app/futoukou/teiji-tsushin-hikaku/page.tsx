@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ChevronRightSquare, BarChart3, Info } from 'lucide-react';
+import { Home, ChevronRight, ChevronRightSquare, BarChart3, Info } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -55,15 +55,15 @@ export default function TeijiTsushinHikakuPage() {
         keywords={['定時制', '通信制', '倍率', '都道府県別', '公立高校入試']}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-teal-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/futoukou" className="hover:text-teal-600">
+            <Link href="/futoukou" className="hover:text-brand-600">
               不登校と内申点
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -71,7 +71,7 @@ export default function TeijiTsushinHikakuPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-600 to-emerald-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <BarChart3 className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -84,7 +84,7 @@ export default function TeijiTsushinHikakuPage() {
             </p>
           </header>
 
-          <div className="mb-8 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mb-8 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
             <p className="text-xs leading-relaxed text-amber-800">
               このページは現在<strong>{summary.prefectureCount}都道府県分</strong>のデータが収集できた時点の集計です。
@@ -93,42 +93,42 @@ export default function TeijiTsushinHikakuPage() {
             </p>
           </div>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">現在収集できている範囲</h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <div className="rounded-xl bg-slate-50 p-4 text-center">
-                <div className="text-2xl font-bold text-teal-700">{summary.prefectureCount}</div>
+              <div className="rounded-lg bg-slate-50 p-4 text-center">
+                <div className="text-2xl font-bold text-brand-700">{summary.prefectureCount}</div>
                 <div className="mt-1 text-xs text-slate-500">都道府県</div>
               </div>
-              <div className="rounded-xl bg-slate-50 p-4 text-center">
-                <div className="text-2xl font-bold text-teal-700">{summary.totalSchoolCount}</div>
+              <div className="rounded-lg bg-slate-50 p-4 text-center">
+                <div className="text-2xl font-bold text-brand-700">{summary.totalSchoolCount}</div>
                 <div className="mt-1 text-xs text-slate-500">学校数（延べ）</div>
               </div>
-              <div className="rounded-xl bg-slate-50 p-4 text-center">
-                <div className="text-2xl font-bold text-teal-700">{summary.totalTeijiCount}</div>
+              <div className="rounded-lg bg-slate-50 p-4 text-center">
+                <div className="text-2xl font-bold text-brand-700">{summary.totalTeijiCount}</div>
                 <div className="mt-1 text-xs text-slate-500">定時制レコード</div>
               </div>
-              <div className="rounded-xl bg-slate-50 p-4 text-center">
-                <div className="text-2xl font-bold text-teal-700">{summary.totalTsushinCount}</div>
+              <div className="rounded-lg bg-slate-50 p-4 text-center">
+                <div className="text-2xl font-bold text-brand-700">{summary.totalTsushinCount}</div>
                 <div className="mt-1 text-xs text-slate-500">通信制レコード</div>
               </div>
             </div>
-            <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+            <p className="mt-3 text-xs leading-relaxed text-slate-400">
               件数・平均倍率は本サイトが公表データから集計した値です（公表資料そのものの数値ではありません）。
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">都道府県別の内訳</h2>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[480px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-slate-200 text-xs text-slate-500">
-                    <th className="py-2 pr-3 font-medium">都道府県</th>
-                    <th className="py-2 pr-3 text-right font-medium">学校数</th>
-                    <th className="py-2 pr-3 text-right font-medium">定時制</th>
-                    <th className="py-2 pr-3 text-right font-medium">通信制</th>
-                    <th className="py-2 text-right font-medium">平均倍率</th>
+                    <th className="py-2 pr-3">都道府県</th>
+                    <th className="py-2 pr-3 text-right">学校数</th>
+                    <th className="py-2 pr-3 text-right">定時制</th>
+                    <th className="py-2 pr-3 text-right">通信制</th>
+                    <th className="py-2 text-right">平均倍率</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,7 +140,7 @@ export default function TeijiTsushinHikakuPage() {
                         <td className="py-2 pr-3">
                           <Link
                             href={`/${r.prefectureCode}/teiji-tsushin`}
-                            className="font-bold text-teal-700 underline underline-offset-2"
+                            className="font-bold text-brand-700 underline underline-offset-2"
                           >
                             {pref.name}
                           </Link>
@@ -157,9 +157,9 @@ export default function TeijiTsushinHikakuPage() {
             </div>
           </section>
 
-          <div className="mb-8 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+          <div className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
             定時制・通信制・サポート校・フリースクールの違いや選び方は
-            <Link href="/futoukou/tsugaku" className="mx-1 font-bold text-teal-700 underline">
+            <Link href="/futoukou/tsugaku" className="mx-1 font-bold text-brand-700 underline">
               通信制高校・フリースクールという選択肢
             </Link>
             で解説しています。
@@ -167,7 +167,7 @@ export default function TeijiTsushinHikakuPage() {
 
           <Link
             href="/futoukou"
-            className="inline-flex items-center gap-1 text-sm font-bold text-teal-700 hover:underline"
+            className="inline-flex items-center gap-1 text-sm font-bold text-brand-700 hover:underline"
           >
             <ChevronRightSquare className="h-4 w-4 rotate-180" />
             「不登校と内申点」の解説に戻る

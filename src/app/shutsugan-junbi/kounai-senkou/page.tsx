@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Users, ChevronRightSquare, HelpCircle, ClipboardCheck } from 'lucide-react';
+import { Home, ChevronRight, Users, ChevronRightSquare, HelpCircle, ClipboardCheck } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -70,21 +70,21 @@ export default function KounaiSenkouPage() {
         steps={STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-violet-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/shutsugan-junbi" className="hover:text-violet-600">出願準備チェックリスト</Link>
+            <Link href="/shutsugan-junbi" className="hover:text-slate-600">出願準備チェックリスト</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">校内選考とは</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <Users className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">校内選考とは？</h1>
@@ -98,8 +98,8 @@ export default function KounaiSenkouPage() {
             <h2 className="mb-4 text-lg font-bold text-slate-800">校内選考の一般的な流れ</h2>
             <div className="space-y-3">
               {STEPS.map((s, i) => (
-                <div key={s.name} className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-violet-50 text-violet-600">
+                <div key={s.name} className="flex gap-3 rounded-lg border border-slate-200 bg-white p-5">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-slate-50 text-slate-600">
                     <ClipboardCheck className="h-5 w-5" />
                   </span>
                   <div>
@@ -119,7 +119,7 @@ export default function KounaiSenkouPage() {
             <ParentLeadCTA placement="suisen" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ページ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
@@ -128,7 +128,7 @@ export default function KounaiSenkouPage() {
                 { href: '/suisen-nyuushi', title: '推薦入試の仕組み' },
                 { href: '/hyotei-heikin/suisen-kijun', title: '推薦に必要な評定平均 早見表' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 text-sm text-slate-700 transition-shadow">
                   {c.title}
                   <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
                 </Link>
@@ -136,11 +136,11 @@ export default function KounaiSenkouPage() {
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-violet-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-slate-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

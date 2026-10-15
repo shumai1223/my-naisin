@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import nextDynamic from 'next/dynamic';
-import { Home, ChevronRight, Target, HelpCircle, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Home, ChevronRight, Target, HelpCircle, AlertTriangle, CheckCircle } from '@/components/icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
@@ -79,11 +79,11 @@ function ReversePageContent() {
       <FAQPageSchema faqItems={REVERSE_FAQS} />
       <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
             <div className="px-4 pb-10 md:px-6 pt-8">
               {/* Breadcrumb */}
               <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-                <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+                <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
                   <Home className="h-4 w-4" />
                   ホーム
                 </Link>
@@ -94,7 +94,7 @@ function ReversePageContent() {
               {/* SSR説明セクション */}
               <section className="mb-8 space-y-6">
                 <div className="flex items-center gap-3">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg">
+                  <div className="grid h-12 w-12 place-items-center rounded-lg bg-brand-500">
                     <Target className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -115,24 +115,24 @@ function ReversePageContent() {
                 </AnswerBox>
 
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-                    <h3 className="flex items-center gap-2 text-sm font-bold text-blue-800">
+                  <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                    <h3 className="flex items-center gap-2 text-sm font-bold text-brand-800">
                       <CheckCircle className="h-4 w-4" />
                       何を入力するの？
                     </h3>
-                    <ul className="mt-2 space-y-1 text-xs text-blue-700">
+                    <ul className="mt-2 space-y-1 text-xs text-brand-700">
                       <li>• 都道府県を選択</li>
                       <li>• 現在の内申点を入力</li>
                       <li>• 志望校の内申:学力の配点比率を設定</li>
                       <li>• 当日点の満点を設定（例：500点）</li>
                     </ul>
                   </div>
-                  <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-                    <h3 className="flex items-center gap-2 text-sm font-bold text-emerald-800">
+                  <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                    <h3 className="flex items-center gap-2 text-sm font-bold text-brand-800">
                       <HelpCircle className="h-4 w-4" />
                       何がわかるの？
                     </h3>
-                    <ul className="mt-2 space-y-1 text-xs text-emerald-700">
+                    <ul className="mt-2 space-y-1 text-xs text-brand-700">
                       <li>• 合格に必要な当日点の目安</li>
                       <li>• 必要得点率（何%取ればよいか）</li>
                       <li>• 内申点のカバー率</li>
@@ -141,7 +141,7 @@ function ReversePageContent() {
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
                   <div className="flex items-start gap-2">
                     <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-500" />
                     <div>
@@ -157,22 +157,22 @@ function ReversePageContent() {
               </section>
 
               {/* ツールの使い方説明 */}
-              <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
                 <h2 className="mb-4 text-lg font-bold text-slate-800">🛠️ 逆算ツールの使い方</h2>
                 <div className="space-y-4">
-                  <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
-                    <h3 className="mb-3 text-sm font-bold text-blue-800">ステップ1：都道府県を選択</h3>
-                    <p className="text-sm text-blue-700">あなたの受験する都道府県を選択します。東京都・神奈川県・大阪府など主要な都道府県に対応しています。</p>
+                  <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-brand-800">ステップ1：都道府県を選択</h3>
+                    <p className="text-sm text-brand-700">あなたの受験する都道府県を選択します。東京都・神奈川県・大阪府など主要な都道府県に対応しています。</p>
                   </div>
                   
-                  <div className="rounded-lg border border-green-200 bg-green-50 p-4">
-                    <h3 className="mb-3 text-sm font-bold text-green-800">ステップ2：現在の内申点を入力</h3>
-                    <p className="text-sm text-green-700">現在の内申点を入力します。東京都の場合は「換算内申（65点満点）」、神奈川県の場合は「評定合計（135点満点）」を入力してください。</p>
+                  <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-brand-800">ステップ2：現在の内申点を入力</h3>
+                    <p className="text-sm text-brand-700">現在の内申点を入力します。東京都の場合は「換算内申（65点満点）」、神奈川県の場合は「評定合計（135点満点）」を入力してください。</p>
                   </div>
                   
-                  <div className="rounded-lg border border-purple-200 bg-purple-50 p-4">
-                    <h3 className="mb-3 text-sm font-bold text-purple-800">ステップ3：配点比率を設定</h3>
-                    <p className="text-sm text-purple-700">志望校の内申点と学力検査の配点比率を設定します。よくある比率のプリセットボタンもあるので、参考にしてください。</p>
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-slate-800">ステップ3：配点比率を設定</h3>
+                    <p className="text-sm text-slate-700">志望校の内申点と学力検査の配点比率を設定します。よくある比率のプリセットボタンもあるので、参考にしてください。</p>
                   </div>
                   
                   <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
@@ -183,15 +183,15 @@ function ReversePageContent() {
               </section>
 
               {/* サンプル計算結果（SSR表示） */}
-              <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
                 <h2 className="mb-4 text-lg font-bold text-slate-800">計算例：東京都立高校を目指す場合</h2>
                 
                 {/* 満点の枠組み */}
-                <div className="mb-4 rounded-lg border border-blue-200 bg-blue-50 p-4">
-                  <h3 className="mb-2 text-sm font-bold text-blue-800">満点の枠組み</h3>
-                  <div className="text-sm text-blue-700">
+                <div className="mb-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
+                  <h3 className="mb-2 text-sm font-bold text-brand-800">満点の枠組み</h3>
+                  <div className="text-sm text-brand-700">
                     学力検査(700点) + 調査書点(300点) + ESAT-J(20点) = 1020点満点
-                    <div className="text-xs text-blue-600 mt-1">※ESAT-J対象外の学校・コースもあります</div>
+                    <div className="text-xs text-brand-600 mt-1">※ESAT-J対象外の学校・コースもあります</div>
                   </div>
                 </div>
                 
@@ -203,47 +203,47 @@ function ReversePageContent() {
                       <tbody>
                         <tr className="border-b border-slate-200/70 last:border-0">
                           <th scope="row" className="py-1 text-left font-normal">換算内申</th>
-                          <td className="py-1 text-right font-medium">50 / 65</td>
+                          <td className="py-1 text-right">50 / 65</td>
                         </tr>
                         <tr className="border-b border-slate-200/70 last:border-0">
                           <th scope="row" className="py-1 text-left font-normal">目標総合点</th>
-                          <td className="py-1 text-right font-medium">931 / 1020</td>
+                          <td className="py-1 text-right">931 / 1020</td>
                         </tr>
                         <tr>
                           <th scope="row" className="py-1 text-left font-normal">ESAT-J見込み</th>
-                          <td className="py-1 text-right font-medium">20 / 20</td>
+                          <td className="py-1 text-right">20 / 20</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
 
-                  <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
-                    <h3 className="mb-3 text-sm font-bold text-emerald-700">計算</h3>
-                    <table className="w-full text-sm text-emerald-600">
+                  <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                    <h3 className="mb-3 text-sm font-bold text-brand-700">計算</h3>
+                    <table className="w-full text-sm text-brand-600">
                       <tbody>
-                        <tr className="border-b border-emerald-200/60 last:border-0">
+                        <tr className="border-b border-brand-200/60 last:border-0">
                           <th scope="row" className="py-1 text-left font-normal">調査書点（推定）</th>
-                          <td className="py-1 text-right font-bold text-emerald-800">round(50 ÷ 65 × 300) = 231点</td>
+                          <td className="py-1 text-right font-bold text-brand-800">round(50 ÷ 65 × 300) = 231点</td>
                         </tr>
-                        <tr className="border-b border-emerald-200/60 last:border-0">
+                        <tr className="border-b border-brand-200/60 last:border-0">
                           <th scope="row" className="py-1 text-left font-normal">必要学力検査点</th>
-                          <td className="py-1 text-right font-bold text-emerald-800">931 - 231 - 20 = 680点 / 700点</td>
+                          <td className="py-1 text-right font-bold text-brand-800">931 - 231 - 20 = 680点 / 700点</td>
                         </tr>
-                        <tr className="border-b border-emerald-200/60 last:border-0">
+                        <tr className="border-b border-brand-200/60 last:border-0">
                           <th scope="row" className="py-1 text-left font-normal">必要得点率</th>
-                          <td className="py-1 text-right font-bold text-emerald-800">約97%</td>
+                          <td className="py-1 text-right font-bold text-brand-800">約97%</td>
                         </tr>
                         <tr>
                           <th scope="row" className="py-1 text-left font-normal">5教科平均</th>
-                          <td className="py-1 text-right font-bold text-emerald-800">約136点 / 140点</td>
+                          <td className="py-1 text-right font-bold text-brand-800">約136点 / 140点</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
 
-                  <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
-                    <h3 className="mb-2 text-sm font-bold text-blue-700">解説</h3>
-                    <p className="text-xs text-blue-600">
+                  <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                    <h3 className="mb-2 text-sm font-bold text-brand-700">解説</h3>
+                    <p className="text-xs text-brand-600">
                       この計算例では、換算内申50点（65点満点中）が調査書点231点に変換され、
                       目標総合点931点から調査書点231点とESAT-J 20点を引いた680点が当日の学力検査で必要な点数となります。
                       これにより「何点取れば合格できるか」が具体的にわかります。
@@ -312,7 +312,7 @@ function ReversePageContent() {
                   同じクリックを奪う低EVの重複だったため撤去。プライム面を高EVオファーに集中させる。 */}
 
               {/* 当日点逆算の考え方（本文・検索意図の網羅で順位を底上げ） */}
-              <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
                 <h2 className="mb-3 text-lg font-bold text-slate-800">当日点の逆算とは？合格点から必要点数を出す考え方</h2>
                 <p className="text-sm leading-relaxed text-slate-600">
                   高校入試の合否は、多くの都道府県で<strong>「内申点（調査書点）＋ 当日の学力検査点」の合計</strong>で決まります。
@@ -320,27 +320,27 @@ function ReversePageContent() {
                   内申点がすでに高ければ必要な当日点は下がり、内申点が低ければその分を当日点で取り返す必要がある、というシンプルな関係です。
                 </p>
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                  <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
-                    <div className="text-xs font-bold text-blue-900">① 合格基準点</div>
-                    <p className="mt-1 text-xs leading-relaxed text-blue-800">模試判定・進路資料・合格者平均から目安を把握。</p>
+                  <div className="rounded-lg border border-brand-100 bg-brand-50 p-4">
+                    <div className="text-xs font-bold text-brand-900">① 合格基準点</div>
+                    <p className="mt-1 text-xs leading-relaxed text-brand-800">模試判定・進路資料・合格者平均から目安を把握。</p>
                   </div>
-                  <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
-                    <div className="text-xs font-bold text-emerald-900">② 点数化した内申点</div>
-                    <p className="mt-1 text-xs leading-relaxed text-emerald-800">都道府県の方式で内申を点数に換算（満点・比率は地域差大）。</p>
+                  <div className="rounded-lg border border-brand-100 bg-brand-50 p-4">
+                    <div className="text-xs font-bold text-brand-900">② 点数化した内申点</div>
+                    <p className="mt-1 text-xs leading-relaxed text-brand-800">都道府県の方式で内申を点数に換算（満点・比率は地域差大）。</p>
                   </div>
-                  <div className="rounded-xl border border-purple-100 bg-purple-50 p-4">
-                    <div className="text-xs font-bold text-purple-900">③ 必要な当日点</div>
-                    <p className="mt-1 text-xs leading-relaxed text-purple-800">①−②＝当日に取るべき点数。配点比率で重みが変わる。</p>
+                  <div className="rounded-lg border border-slate-100 bg-slate-50 p-4">
+                    <div className="text-xs font-bold text-slate-900">③ 必要な当日点</div>
+                    <p className="mt-1 text-xs leading-relaxed text-slate-800">①−②＝当日に取るべき点数。配点比率で重みが変わる。</p>
                   </div>
                 </div>
                 <p className="mt-4 text-xs leading-relaxed text-slate-500">
-                  まだ自分の内申点を把握していない場合は<Link href="/" className="font-bold text-blue-600 hover:underline">内申点 計算サイト（47都道府県）</Link>で先に算出を。
-                  志望校レベルの当たりをつけるなら<Link href="/hensachi/shiboukou" className="font-bold text-blue-600 hover:underline">偏差値→志望校レンジ逆引き</Link>が便利です。
+                  まだ自分の内申点を把握していない場合は<Link href="/" className="font-bold text-brand-600 hover:underline">内申点 計算サイト（47都道府県）</Link>で先に算出を。
+                  志望校レベルの当たりをつけるなら<Link href="/hensachi/shiboukou" className="font-bold text-brand-600 hover:underline">偏差値→志望校レンジ逆引き</Link>が便利です。
                 </p>
               </section>
 
               {/* FAQ */}
-              <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
                 <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
                 <div className="space-y-4">
                   {REVERSE_FAQS.map((f) => (
@@ -353,56 +353,56 @@ function ReversePageContent() {
               </section>
 
               {/* 関連リンク */}
-              <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+              <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
                 <h2 className="mb-4 text-lg font-bold text-slate-800">関連コンテンツ</h2>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <Link
                     href="/"
-                    className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">内申点を計算する</span>
+                    <span className="text-sm text-slate-700">内申点を計算する</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
                     href="/hensachi"
-                    className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">偏差値を計算する</span>
+                    <span className="text-sm text-slate-700">偏差値を計算する</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
                     href="/hyotei-heikin"
-                    className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">評定平均を自動計算する</span>
+                    <span className="text-sm text-slate-700">評定平均を自動計算する</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
                     href="/prefectures"
-                    className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">都道府県別の計算方法を見る</span>
+                    <span className="text-sm text-slate-700">都道府県別の計算方法を見る</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
                     href="/tokyo/total-score"
-                    className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">都立1020点 総合得点を計算する</span>
+                    <span className="text-sm text-slate-700">都立1020点 総合得点を計算する</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
                     href="/kanagawa/s-value"
-                    className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">神奈川S値を計算する</span>
+                    <span className="text-sm text-slate-700">神奈川S値を計算する</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                   <Link
                     href="/tarinai-taisaku"
-                    className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                    className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
                   >
-                    <span className="text-sm font-medium text-slate-700">内申点・当日点が足りない冬の緊急対策</span>
+                    <span className="text-sm text-slate-700">内申点・当日点が足りない冬の緊急対策</span>
                     <ChevronRight className="h-4 w-4 text-slate-400" />
                   </Link>
                 </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ChevronRightSquare, Map as MapIcon } from 'lucide-react';
+import { Home, ChevronRight, ChevronRightSquare, Map as MapIcon } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -83,15 +83,15 @@ export default function NaishinMapPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/naishin-kakusa" className="hover:text-indigo-600">
+            <Link href="/naishin-kakusa" className="hover:text-brand-600">
               内申点格差レポート
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -99,7 +99,7 @@ export default function NaishinMapPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <MapIcon className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -111,26 +111,26 @@ export default function NaishinMapPage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">都道府県別マップ</h2>
             <NaishinMapGrid />
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">この地図の読み方</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               上の指標切替ボタンで「実技傾斜」「中3偏重度」「満点」の3つを切り替えられます。
               いずれも47都道府県すべての実測値を5段階の濃淡で色分けしており、色が濃いほど値が大きいことを表します。
               地図は実際の都道府県境の形をもとにしていますが、離島・境界線の細部までは再現していない簡略化データです。
               指標ごとの詳しい分析（実技傾斜がなぜ鹿児島県で突出しているか等）は
-              <Link href="/naishin-kakusa" className="font-bold text-indigo-700 hover:underline">
+              <Link href="/naishin-kakusa" className="font-bold text-brand-700 hover:underline">
                 内申点格差レポート
               </Link>
               で解説しています。
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">自分の県の内申点を計算する</h2>
             <p className="mb-4 text-xs text-slate-500">
               47都道府県すべてで、実際の成績を入れて内申点を計算できます。
@@ -140,7 +140,7 @@ export default function NaishinMapPage() {
                 <Link
                   key={pref.code}
                   href={`/${pref.code}/naishin`}
-                  className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-indigo-800 shadow-sm transition-colors hover:bg-indigo-50 hover:text-indigo-900"
+                  className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm text-brand-800 transition-colors hover:bg-brand-50 hover:text-brand-900"
                 >
                   <span className="truncate">{pref.name}</span>
                   <ChevronRightSquare className="h-3 w-3 shrink-0 opacity-60" />
@@ -149,33 +149,33 @@ export default function NaishinMapPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
               <Link
                 href="/naishin-kakusa"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
               >
                 内申点格差レポートを読む
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
               <Link
                 href="/total-score"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
               >
                 都道府県別の総合得点の仕組みを見る
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
               <Link
                 href="/developers"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
               >
                 このデータをAPIで使う
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
               <Link
                 href="/press"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
               >
                 取材・掲載についてのご案内
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
@@ -188,7 +188,7 @@ export default function NaishinMapPage() {
             <ParentLeadCTA placement="prefecture" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (

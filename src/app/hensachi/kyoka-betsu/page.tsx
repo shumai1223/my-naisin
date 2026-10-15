@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, BookOpen, Calculator, User, ShieldCheck, Calendar, FileCheck, Layers } from 'lucide-react';
+import { Home, ChevronRight, BookOpen, Calculator, User, ShieldCheck, Calendar, FileCheck, Layers } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -76,23 +76,23 @@ export default function HensachiKyokaBetsuPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="hover:text-slate-600">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">教科別の偏差値</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <BookOpen className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">教科別の偏差値を計算する</h1>
@@ -103,15 +103,15 @@ export default function HensachiKyokaBetsuPage() {
           </header>
 
           {/* E-E-A-T カード */}
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
             <div className="flex items-start gap-4">
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-md">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-slate-500 text-white">
                 <User className="h-6 w-6" />
               </div>
               <div className="flex-1">
                 <div className="mb-1 flex flex-wrap items-center gap-2">
                   <div className="text-sm font-bold text-slate-800">監修・運営：ないしんパンダ</div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-200">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2 py-0.5 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
                     <ShieldCheck className="h-3 w-3" />
                     2026年度受験生
                   </span>
@@ -119,7 +119,7 @@ export default function HensachiKyokaBetsuPage() {
                 <p className="text-xs leading-relaxed text-slate-600">
                   偏差値は数式で確定する指標です。当ツールは標準的な偏差値の定義（平均50・標準偏差10）に厳密に従って算出します。
                 </p>
-                <div className="mt-2 flex flex-wrap gap-3 text-[10px] text-slate-500">
+                <div className="mt-2 flex flex-wrap gap-3 text-xs text-slate-500">
                   <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />最終更新：2026年6月12日</span>
                   <span className="flex items-center gap-1"><FileCheck className="h-3 w-3" />計算式：偏差値＝50＋10×(点数−平均)÷標準偏差</span>
                 </div>
@@ -148,9 +148,9 @@ export default function HensachiKyokaBetsuPage() {
           </div>
 
           {/* 教科別・点を取るコツ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
-              <Layers className="h-5 w-5 text-purple-500" />
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-slate-500 pl-3 text-lg font-bold text-slate-800">
+              <Layers className="h-5 w-5 text-slate-500" />
               教科別・偏差値を上げるワンポイント
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
@@ -161,15 +161,15 @@ export default function HensachiKyokaBetsuPage() {
                 <Link
                   key={s.key}
                   href={`/hensachi/kyoka-betsu/${s.key}`}
-                  className="group rounded-xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-purple-200 hover:bg-purple-50/50"
+                  className="group rounded-lg border border-slate-100 bg-slate-50 p-4 transition-all hover:border-slate-200 hover:bg-slate-50/50"
                 >
                   <div className="mb-1 flex items-center gap-2">
-                    <span className="grid h-7 w-7 place-items-center rounded-lg bg-purple-100 text-xs font-black text-purple-700">{s.label.charAt(0)}</span>
+                    <span className="grid h-7 w-7 place-items-center rounded-lg bg-slate-100 text-xs font-bold text-slate-700">{s.label.charAt(0)}</span>
                     <span className="text-sm font-bold text-slate-800">{s.label}</span>
-                    {s.in3 && <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] font-bold text-indigo-700">3教科</span>}
+                    {s.in3 && <span className="rounded-full bg-brand-100 px-2 py-0.5 text-xs font-bold text-brand-700">3教科</span>}
                   </div>
                   <p className="text-xs leading-relaxed text-slate-600">{s.tip}</p>
-                  <span className="mt-2 flex items-center gap-1 text-[11px] font-bold text-purple-600 group-hover:underline">
+                  <span className="mt-2 flex items-center gap-1 text-xs font-bold text-slate-600 group-hover:underline">
                     {s.label}の上げ方を詳しく見る
                     <ChevronRight className="h-3 w-3" />
                   </span>
@@ -179,28 +179,28 @@ export default function HensachiKyokaBetsuPage() {
           </section>
 
           {/* 5教科 vs 3教科 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-purple-500" />
+              <Calculator className="h-5 w-5 text-slate-500" />
               5教科の偏差値と3教科の偏差値、どっちを見る？
             </h2>
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-                <h3 className="mb-1 text-sm font-bold text-blue-900">5教科（国数英理社）</h3>
-                <p className="text-xs leading-relaxed text-blue-800">
+              <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                <h3 className="mb-1 text-sm font-bold text-brand-900">5教科（国数英理社）</h3>
+                <p className="text-xs leading-relaxed text-brand-800">
                   <strong>公立高校受験</strong>は5教科の学力検査が基本。公立志望なら5教科の偏差値を主軸に見ます。理科・社会は短期間でも伸びやすく、合計偏差値を底上げしやすい教科です。
                 </p>
               </div>
-              <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-4">
-                <h3 className="mb-1 text-sm font-bold text-indigo-900">3教科（英数国）</h3>
-                <p className="text-xs leading-relaxed text-indigo-800">
+              <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                <h3 className="mb-1 text-sm font-bold text-brand-900">3教科（英数国）</h3>
+                <p className="text-xs leading-relaxed text-brand-800">
                   <strong>私立高校の一般入試</strong>は英語・数学・国語の3教科が主流。私立を併願するなら3教科の偏差値も把握しておくと、併願校選びの目安になります。
                 </p>
               </div>
             </div>
             <p className="mt-4 text-xs leading-relaxed text-slate-500">
-              偏差値だけで合否は決まりません。<Link href="/" className="font-bold text-purple-600 hover:underline">内申点 計算サイト</Link>で内申点も確認し、
-              <Link href="/hensachi/shiboukou" className="font-bold text-purple-600 hover:underline">偏差値→志望校レンジ逆引き</Link>で届く高校レベルもチェックしましょう。
+              偏差値だけで合否は決まりません。<Link href="/" className="font-bold text-slate-600 hover:underline">内申点 計算サイト</Link>で内申点も確認し、
+              <Link href="/hensachi/shiboukou" className="font-bold text-slate-600 hover:underline">偏差値→志望校レンジ逆引き</Link>で届く高校レベルもチェックしましょう。
             </p>
           </section>
 
@@ -210,7 +210,7 @@ export default function HensachiKyokaBetsuPage() {
           </div>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (

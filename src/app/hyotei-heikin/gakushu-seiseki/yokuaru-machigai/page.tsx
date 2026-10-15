@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, AlertTriangle, ChevronRightSquare, ShieldCheck, XCircle, CheckCircle2 } from 'lucide-react';
+import { Home, ChevronRight, AlertTriangle, ChevronRightSquare, ShieldCheck, XCircle, CheckCircle2 } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -117,43 +117,43 @@ export default function YokuaruMachigaiPage() {
         steps={HOWTO_STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-emerald-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-emerald-600">評定平均計算</Link>
+            <Link href="/hyotei-heikin" className="hover:text-brand-600">評定平均計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-emerald-600">学習成績の状況</Link>
+            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-brand-600">学習成績の状況</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">よくある3つの誤り</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <AlertTriangle className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               学習成績の状況｜よくある3つの誤り
             </h1>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              同じ評定データでも、計算方法を間違えると<strong className="text-emerald-700">違う数値</strong>になります。
+              同じ評定データでも、計算方法を間違えると<strong className="text-brand-700">違う数値</strong>になります。
               実際に数字を動かして、正しい方法との差を検証します。
             </p>
           </header>
 
-          <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
             <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <p className="text-xs leading-relaxed text-slate-600">
                 以下の3つの検証で使う具体例は、文部科学省の通知に定められた<strong>計算ルール</strong>（単位数不使用・全評定の単純平均・3か年間対象）
                 を正確に反映した、当サイトが作成したわかりやすい例です。通知自身が示す公式計算例（理科3.66→3.7・全体120÷31=3.87→3.9）は
-                <Link href="/hyotei-heikin/gakushu-seiseki" className="font-bold text-emerald-700 underline">学習成績の状況 計算ツール</Link>
+                <Link href="/hyotei-heikin/gakushu-seiseki" className="font-bold text-brand-700 underline">学習成績の状況 計算ツール</Link>
                 のページで確認できます。
               </p>
             </div>
@@ -161,20 +161,20 @@ export default function YokuaruMachigaiPage() {
 
           <div className="space-y-6">
             {ERROR_CASES.map((c) => (
-              <section key={c.title} className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm">
+              <section key={c.title} className="rounded-lg border-2 border-slate-200 bg-white p-6">
                 <h2 className="mb-1 text-lg font-bold text-slate-800">{c.title}</h2>
-                <div className="mb-3 text-xs font-bold text-emerald-700">{c.reasonTitle}</div>
+                <div className="mb-3 text-xs font-bold text-brand-700">{c.reasonTitle}</div>
                 <p className="mb-4 text-sm leading-relaxed text-slate-600">{c.reason}</p>
                 <div className="mb-3 rounded-lg bg-slate-50 px-3 py-2 text-xs font-mono text-slate-600">{c.data}</div>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-xl border-2 border-emerald-300 bg-emerald-50 p-4">
-                    <div className="mb-1 flex items-center gap-1.5 text-xs font-bold text-emerald-800">
+                  <div className="rounded-lg border-2 border-brand-300 bg-brand-50 p-4">
+                    <div className="mb-1 flex items-center gap-1.5 text-xs font-bold text-brand-800">
                       <CheckCircle2 className="h-4 w-4" />
                       {c.correctLabel}
                     </div>
-                    <div className="font-mono text-sm font-bold text-emerald-900">{c.correctValue}</div>
+                    <div className="font-mono text-sm font-bold text-brand-900">{c.correctValue}</div>
                   </div>
-                  <div className="rounded-xl border-2 border-red-200 bg-red-50 p-4">
+                  <div className="rounded-lg border-2 border-red-200 bg-red-50 p-4">
                     <div className="mb-1 flex items-center gap-1.5 text-xs font-bold text-red-700">
                       <XCircle className="h-4 w-4" />
                       {c.wrongLabel}
@@ -187,8 +187,8 @@ export default function YokuaruMachigaiPage() {
           </div>
 
           {/* 原文の定義をそのまま確認する */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               定義を原文で確認する
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -196,11 +196,11 @@ export default function YokuaruMachigaiPage() {
               「（国語4+3）＋（地歴5+4+4+4）＋・・・」のように途中を省略した略式表記になっており、
               定義そのものの一文を読み飛ばしてしまいやすいことです。定義の条文自体は次のとおりです。
             </p>
-            <blockquote className="mb-3 border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="mb-3 border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「各教科の学習成績の状況は、指導要録に基づき、各教科ごとに各科目の評定の合計数を各教科の評定数で
               除した数値（小数点以下第2位を四捨五入）を記入すること。」
             </blockquote>
-            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「全体の学習成績の状況は、指導要録に基づき、すべての教科・科目の評定の合計数をすべての評定数で
               除した数値（小数点以下第2位を四捨五入）を記入すること。」
             </blockquote>
@@ -211,7 +211,7 @@ export default function YokuaruMachigaiPage() {
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -224,8 +224,8 @@ export default function YokuaruMachigaiPage() {
           </section>
 
           {/* T-N5第3ラウンド: 留学・IBという「計算に含める/含めない」の境界ケース */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               留学・国際バカロレアは含める？含めない？
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -234,7 +234,7 @@ export default function YokuaruMachigaiPage() {
               境界を定めたものです。
             </p>
             <h3 className="mb-2 text-sm font-bold text-slate-800">留学中に修得した単位は算入しない</h3>
-            <blockquote className="mb-3 border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="mb-3 border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「「各教科の学習成績の状況」及び「全体の学習成績の状況」の欄については、次のように記入すること。
               なお、留学に係る修得単位については、算入する必要がない。」
             </blockquote>
@@ -243,7 +243,7 @@ export default function YokuaruMachigaiPage() {
               定められています（留学の記録自体は別欄に記載されます）。
             </p>
             <h3 className="mb-2 text-sm font-bold text-slate-800">国際バカロレア（IB）の科目は含める</h3>
-            <blockquote className="mb-3 border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="mb-3 border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「国際バカロレア・ディプロマ・プログラムの科目に係る調査書の扱いについては、国際バカロレア・
               ディプロマ・プログラムの科目等の履修及び単位の修得をもって高等学校学習指導要領の科目の履修
               及び単位の修得とみなしている場合又は代替している場合についても、それらに係る学校設定科目等
@@ -260,23 +260,23 @@ export default function YokuaruMachigaiPage() {
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               あわせて確認したいツール
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700">
                 学習成績の状況 計算ツール
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
-              <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+              <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700">
                 調査書シミュレーター
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>

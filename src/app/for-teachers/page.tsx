@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, GraduationCap, Users, Code2, Database, ChevronRightSquare, HelpCircle, Printer } from 'lucide-react';
+import { Home, ChevronRight, GraduationCap, Users, Code2, Database, ChevronRightSquare, HelpCircle, Printer } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -79,10 +79,10 @@ export default function ForTeachersPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -91,7 +91,7 @@ export default function ForTeachersPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <GraduationCap className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">学校の先生・進路指導のご担当者様へ</h1>
@@ -105,13 +105,13 @@ export default function ForTeachersPage() {
             {USE_CASES.map((u) => {
               const Icon = u.icon;
               return (
-                <div key={u.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div key={u.title} className="rounded-lg border border-slate-200 bg-white p-6">
                   <h2 className="mb-2 flex items-center gap-2 text-base font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600"><Icon className="h-5 w-5" /></span>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600"><Icon className="h-5 w-5" /></span>
                     {u.title}
                   </h2>
                   <p className="mb-3 text-sm leading-relaxed text-slate-600">{u.desc}</p>
-                  <Link href={u.href} className="inline-flex items-center gap-1 text-sm font-bold text-blue-600 hover:underline">
+                  <Link href={u.href} className="inline-flex items-center gap-1 text-sm font-bold text-brand-600 hover:underline">
                     {u.cta}
                     <ChevronRight className="h-4 w-4" />
                   </Link>
@@ -120,31 +120,31 @@ export default function ForTeachersPage() {
             })}
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/quality" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/quality" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 情報の信頼性への取り組み
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/about/editor-profile" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/about/editor-profile" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 運営者プロフィール
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/prefectures" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/prefectures" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 47都道府県の入試制度ページ
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/partner" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/partner" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 塾・教育事業者様向けパートナー案内
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-blue-600" />
+              <HelpCircle className="h-5 w-5 text-brand-600" />
               よくある質問
             </h2>
             <div className="space-y-4">

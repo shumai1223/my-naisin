@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Home, ChevronRight, MessageCircleQuestion, AlertTriangle } from 'lucide-react';
+import { Home, ChevronRight, MessageCircleQuestion, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { AdvisorClient } from '@/components/Advisor/AdvisorClient';
@@ -35,10 +35,10 @@ export default function AdvisorPage() {
         ]}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -47,7 +47,7 @@ export default function AdvisorPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <MessageCircleQuestion className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">アドバイザー（β）</h1>
@@ -56,7 +56,7 @@ export default function AdvisorPage() {
             </p>
           </header>
 
-          <section className="mb-6 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
+          <section className="mb-6 rounded-lg border-2 border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
               <p className="text-sm leading-relaxed text-amber-900">

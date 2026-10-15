@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Minus, Plus } from 'lucide-react';
+import { Minus, Plus } from '@/components/icons';
 
 import type { Subject } from '@/lib/types';
 import { clamp, cn, getSubjectWeight } from '@/lib/utils';
@@ -32,7 +32,7 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
     // data-no-rage: ステッパー/スライダー/クイック選択の連打はすべて正当な操作なので、カード全体を rage_click から除外（偽陽性の根絶）。
     <div
       className={cn(
-        'rounded-xl border bg-white p-4 shadow-sm transition-shadow hover:shadow-md',
+        'rounded-lg border bg-white p-4 transition-shadow',
         isUnconfirmed ? 'border-dashed border-amber-300' : 'border-slate-200'
       )}
       data-no-rage
@@ -41,19 +41,19 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="truncate text-sm font-semibold text-slate-700">{subject.label}</div>
+            <div className="truncate text-sm font-bold text-slate-700">{subject.label}</div>
             {weight > 1 && (
-              <span className="shrink-0 whitespace-nowrap rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600">
+              <span className="shrink-0 whitespace-nowrap rounded bg-brand-100 px-1.5 py-0.5 text-xs font-bold text-brand-600">
                 ×{weight}
               </span>
             )}
             {isUnconfirmed && (
-              <span className="shrink-0 whitespace-nowrap rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700">
+              <span className="shrink-0 whitespace-nowrap rounded bg-amber-100 px-1.5 py-0.5 text-xs font-bold text-amber-700">
                 未確認
               </span>
             )}
           </div>
-          <div className="mt-0.5 text-[11px] text-slate-500">
+          <div className="mt-0.5 text-xs text-slate-500">
             {isPractical ? '実技教科' : '5教科'} • 評定 {value}
             {weight > 1 ? `（換算 ${value * weight}点）` : ''}
           </div>
@@ -90,7 +90,7 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
               if (isNaN(num) || num < 1) setValue(1);
               else if (num > maxGrade) setValue(maxGrade);
             }}
-            className="h-10 w-14 rounded-lg bg-blue-500 text-center text-xl font-bold text-white shadow-sm outline-none focus:ring-2 focus:ring-blue-300 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            className="h-10 w-14 rounded-lg bg-brand-500 text-center text-xl font-bold text-white outline-none focus:ring-2 focus:ring-brand-300 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
             aria-label={`${subject.label}の内申点を入力`}
           />
           
@@ -136,9 +136,9 @@ export function SubjectSlider({ subject, prefectureCode, value, onChange, maxGra
               aria-label={`${subject.label}の評定を${i}にする`}
               aria-pressed={i === value}
               className={cn(
-                'h-10 rounded-lg text-sm font-semibold transition-all',
+                'h-10 rounded-lg text-sm font-bold transition-all',
                 i === value
-                  ? 'bg-blue-500 text-white shadow-sm'
+                  ? 'bg-brand-500 text-white'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95'
               )}
             >

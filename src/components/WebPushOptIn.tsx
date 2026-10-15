@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Bell, BellRing, Check, X } from 'lucide-react';
+import { Bell, BellRing, Check, X } from '@/components/icons';
 
 import { track } from '@/lib/track';
 import { VAPID_PUBLIC_KEY } from '@/lib/push-config';
@@ -99,9 +99,9 @@ export function WebPushOptIn({
   if (!supported) return null;
 
   return (
-    <section className={`rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-white p-5 shadow-sm ${className}`}>
+    <section className={`rounded-lg border border-brand-200 bg-brand-50 p-5 ${className}`}>
       <div className="flex items-start gap-3">
-        <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-indigo-100 text-indigo-600">
+        <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-100 text-brand-600">
           {state === 'subscribed' ? <BellRing className="h-5 w-5" /> : <Bell className="h-5 w-5" />}
         </span>
         <div className="flex-1">
@@ -109,7 +109,7 @@ export function WebPushOptIn({
           <p className="mt-1 text-xs leading-relaxed text-slate-600">{body}</p>
 
           {state === 'subscribed' ? (
-            <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700">
+            <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-brand-50 px-3 py-2 text-xs font-bold text-brand-700">
               <Check className="h-4 w-4" />通知をオンにしました。出願・通知表の時期にお知らせします。
             </p>
           ) : state === 'denied' ? (
@@ -121,14 +121,14 @@ export function WebPushOptIn({
               type="button"
               onClick={subscribe}
               disabled={state === 'working'}
-              className="mt-3 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+              className="mt-3 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Bell className="h-4 w-4" />
               {state === 'working' ? '設定中…' : '通知を受け取る（無料）'}
             </button>
           )}
           {state === 'error' && (
-            <p className="mt-2 text-xs text-rose-600">設定に失敗しました。時間をおいて再度お試しください。</p>
+            <p className="mt-2 text-xs text-red-600">設定に失敗しました。時間をおいて再度お試しください。</p>
           )}
         </div>
       </div>

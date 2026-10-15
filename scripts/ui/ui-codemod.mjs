@@ -129,17 +129,39 @@ function transformTokens(toks) {
     }
   }
 
-  // 4) 同じ接頭辞つきで「bg-gradient由来のbg-*」が既存bg-*と重なった場合、後ろを優先（Tailwindの後勝ちではないため先に出たものを消す）
+  // 4) 色相の置き換えを最終形にも適用（グラデーション由来の bg-* も対象）
   const outToks = [];
   for (const t of T) {
     if (t.remove) continue;
-    outToks.push(t.replace ?? t.raw);
+    let tok = t.replace ?? t.raw;
+    const [pre, util] = splitPrefix(tok);
+    const m = util.match(COLOR_UTIL_RX);
+    if (m) { tok = `--`; bump('hue:' + m[2] + '->' + HUE_MAP[m[2]]); }
+    outToks.push(tok);
   }
   return outToks;
 }
 
-function transformSegment(text) {
+function transformSegment(text, ctx) {
   if (!looksLikeClasses(text)) return text;
+  // 単独の from-/via-/to- だけの文字列（グラデーションの色だけを別の場所に置いている型）→ 単色の bg-*
+  {
+    const toks0 = text.trim().split(/\s+/).filter(Boolean);
+    const parts0 = toks0.map(splitPrefix);
+    if (toks0.length && parts0.every(([, u]) => /^(from|via|to)-/.test(u)) && parts0.every(([pre]) => pre === parts0[0][0])) {
+      const cols = parts0.map(([, u]) => u).filter((u) => !/^(from|via|to)-\d+%$/.test(u));
+      const pick = cols.find((u) => u.startsWith('from-')) || cols.find((u) => u.startsWith('via-')) || cols.find((u) => u.startsWith('to-'));
+      if (pick) {
+        ctx.standaloneStops++;
+        bump('standaloneStops');
+        const lead = text.match(/^\s*/)[0]; const trail = text.match(/\s*$/)[0];
+        const col = pick.slice(pick.indexOf('-') + 1);
+        const m0 = `bg-${col}`.match(COLOR_UTIL_RX);
+        const fixed = m0 ? `bg-${HUE_MAP[m0[2]]}-${m0[3]}${m0[4] || ''}` : `bg-${col}`;
+        return lead + parts0[0][0] + fixed + trail;
+      }
+    }
+  }
   const lines = text.split('\n');
   let changed = false;
   const out = lines.map((line) => {
@@ -157,6 +179,21 @@ function transformSegment(text) {
   return changed ? out.join('\n') : text;
 }
 
+function removeLoneGradientTokens(f, text) {
+  const sf2 = parse(f, text);
+  const edits = [];
+  for (const s of stringSegments(sf2, text).filter((x) => x.kind !== 'jsxtext')) {
+    if (!/bg-gradient-to-/.test(s.text) || JA_RX.test(s.text)) continue;
+    if (/(^|\s)(?:[a-z0-9-]+:)*(from|via|to)-/.test(s.text)) continue;
+    const next = s.text.replace(/(^|\s)(?:[a-z0-9-]+:)*bg-gradient-to-[a-z]+(?=\s|$)/g, '$1').replace(/[ \t]{2,}/g, ' ');
+    if (next !== s.text) { edits.push({ start: s.start, end: s.end, text: next }); bump('loneGradientRemoved'); }
+  }
+  edits.sort((a, b) => b.start - a.start);
+  let out = text;
+  for (const e of edits) out = out.slice(0, e.start) + e.text + out.slice(e.end);
+  return out;
+}
+
 let files;
 if (fileArgs.length) files = fileArgs.map((f) => path.resolve(ROOT, f));
 else files = walk(path.join(ROOT, 'src')).filter((f) => inUiScope(rel(f)));
@@ -169,6 +206,7 @@ for (const f of files) {
   const sf = parse(f, text);
   const segs = stringSegments(sf, text).filter((s) => s.kind !== 'jsxtext');
   const edits = [];
+  const ctx = { standaloneStops: 0 };
   for (const s of segs) {
     // lucide-react の import 先を差し替え
     if (!NO_ICONS && s.kind === 'str' && s.text === 'lucide-react' && (ts.isImportDeclaration(s.node.parent) || ts.isExportDeclaration(s.node.parent))) {
@@ -176,13 +214,15 @@ for (const f of files) {
       iconSwaps++;
       continue;
     }
-    const next = transformSegment(s.text);
+    const next = transformSegment(s.text, ctx);
     if (next !== s.text) edits.push({ start: s.start, end: s.end, text: next });
   }
   if (!edits.length) continue;
   edits.sort((a, b) => b.start - a.start);
   let out = text;
   for (const e of edits) out = out.slice(0, e.start) + e.text + out.slice(e.end);
+  // 色の指定だけ別の場所に置いていた型: 単色に直したので、残った bg-gradient-to-* だけの指定を外す
+  if (ctx.standaloneStops > 0) out = removeLoneGradientTokens(f, out);
   changedFiles++;
   if (/bg-gradient-to-/.test(out)) leftoverGradient.push(rel(f));
   if (!DRY) fs.writeFileSync(f, out, 'utf8');

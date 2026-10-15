@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -90,29 +90,29 @@ export default function HokkaidoRankPage() {
       />
       <FAQPageSchema faqItems={HOKKAIDO_RANK_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hokkaido" className="hover:text-blue-600">北海道</Link>
+            <Link href="/hokkaido" className="hover:text-brand-600">北海道</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">内申ランク判定</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Calculator className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               北海道 内申ランク（A〜M）判定ツール
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">
+            <div className="mt-2 inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
               A〜M 13ランク・2026年度入試対応
             </div>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -122,9 +122,9 @@ export default function HokkaidoRankPage() {
           </header>
 
           {/* ランクの仕組み */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-emerald-500" />
+              <BookOpen className="h-5 w-5 text-brand-500" />
               北海道の内申ランクA〜Mとは？
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
@@ -143,14 +143,14 @@ export default function HokkaidoRankPage() {
                 <tbody className="text-slate-700">
                   <tr><td className="border border-slate-200 px-3 py-2 font-bold text-red-700">Aランク</td><td className="border border-slate-200 px-3 py-2 text-right">296〜315</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌南・札幌北</td></tr>
                   <tr><td className="border border-slate-200 px-3 py-2 font-bold text-red-600">Bランク</td><td className="border border-slate-200 px-3 py-2 text-right">276〜295</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌西・札幌東・札幌旭丘</td></tr>
-                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-orange-700">Cランク</td><td className="border border-slate-200 px-3 py-2 text-right">256〜275</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌月寒・札幌国際情報</td></tr>
-                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-orange-600">Dランク</td><td className="border border-slate-200 px-3 py-2 text-right">236〜255</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌北陵・札幌新川</td></tr>
+                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-amber-700">Cランク</td><td className="border border-slate-200 px-3 py-2 text-right">256〜275</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌月寒・札幌国際情報</td></tr>
+                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-amber-600">Dランク</td><td className="border border-slate-200 px-3 py-2 text-right">236〜255</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌北陵・札幌新川</td></tr>
                   <tr><td className="border border-slate-200 px-3 py-2 font-bold text-amber-700">Eランク</td><td className="border border-slate-200 px-3 py-2 text-right">216〜235</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌啓成・市立札幌藻岩</td></tr>
                   <tr><td className="border border-slate-200 px-3 py-2 font-bold text-amber-600">Fランク</td><td className="border border-slate-200 px-3 py-2 text-right">196〜215</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌平岸・札幌東陵</td></tr>
-                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-emerald-700">Gランク</td><td className="border border-slate-200 px-3 py-2 text-right">176〜195</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌厚別・札幌真栄</td></tr>
-                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-emerald-600">Hランク</td><td className="border border-slate-200 px-3 py-2 text-right">156〜175</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌東豊・市立札幌啓北商業</td></tr>
-                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-blue-700">Iランク</td><td className="border border-slate-200 px-3 py-2 text-right">136〜155</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌白石・札幌東商業</td></tr>
-                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-blue-600">Jランク</td><td className="border border-slate-200 px-3 py-2 text-right">116〜135</td><td className="border border-slate-200 px-3 py-2 text-xs">下位中堅校</td></tr>
+                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-brand-700">Gランク</td><td className="border border-slate-200 px-3 py-2 text-right">176〜195</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌厚別・札幌真栄</td></tr>
+                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-brand-600">Hランク</td><td className="border border-slate-200 px-3 py-2 text-right">156〜175</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌東豊・市立札幌啓北商業</td></tr>
+                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-brand-700">Iランク</td><td className="border border-slate-200 px-3 py-2 text-right">136〜155</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌白石・札幌東商業</td></tr>
+                  <tr><td className="border border-slate-200 px-3 py-2 font-bold text-brand-600">Jランク</td><td className="border border-slate-200 px-3 py-2 text-right">116〜135</td><td className="border border-slate-200 px-3 py-2 text-xs">下位中堅校</td></tr>
                   <tr><td className="border border-slate-200 px-3 py-2 font-bold text-slate-700">Kランク</td><td className="border border-slate-200 px-3 py-2 text-right">96〜115</td><td className="border border-slate-200 px-3 py-2 text-xs">札幌琴似工業など</td></tr>
                   <tr><td className="border border-slate-200 px-3 py-2 font-bold text-slate-600">Lランク</td><td className="border border-slate-200 px-3 py-2 text-right">76〜95</td><td className="border border-slate-200 px-3 py-2 text-xs">基礎下位</td></tr>
                   <tr><td className="border border-slate-200 px-3 py-2 font-bold text-slate-500">Mランク</td><td className="border border-slate-200 px-3 py-2 text-right">0〜75</td><td className="border border-slate-200 px-3 py-2 text-xs">要努力</td></tr>
@@ -163,26 +163,26 @@ export default function HokkaidoRankPage() {
           <HokkaidoRankResultFlow />
 
           {/* 内申点の計算式 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-emerald-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               北海道の内申点・総合点の計算式
             </h2>
             <div className="space-y-4 text-sm">
               <div>
                 <h3 className="font-bold text-slate-800 mb-2">内申点（315点満点）の計算式</h3>
-                <div className="rounded-xl bg-slate-900 p-4 text-slate-100">
+                <div className="rounded-lg bg-slate-900 p-4 text-slate-100">
                   <div className="font-mono text-xs md:text-sm">
                     内申点 ＝ 中1の評定合計×2 ＋ 中2の評定合計×2 ＋ 中3の評定合計×3
                   </div>
                 </div>
                 <p className="mt-2 text-xs text-slate-500">
-                  ※ 9教科×5段階評価 × 学年倍率（2:2:3）で最大315点。中3の比重が大きい。詳細は<Link href="/hokkaido/naishin" className="text-blue-600 underline">北海道の内申点計算</Link>もご利用ください。
+                  ※ 9教科×5段階評価 × 学年倍率（2:2:3）で最大315点。中3の比重が大きい。詳細は<Link href="/hokkaido/naishin" className="text-brand-600 underline">北海道の内申点計算</Link>もご利用ください。
                 </p>
               </div>
               <div>
                 <h3 className="font-bold text-slate-800 mb-2">総合点（615点満点）</h3>
-                <div className="rounded-xl bg-slate-900 p-4 text-slate-100">
+                <div className="rounded-lg bg-slate-900 p-4 text-slate-100">
                   <div className="font-mono text-xs md:text-sm">
                     総合点 ＝ 内申点（315点） ＋ 学力検査点（300点）
                   </div>
@@ -206,7 +206,7 @@ export default function HokkaidoRankPage() {
           />
 
           {/* よくある質問 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               <div>
@@ -237,7 +237,7 @@ export default function HokkaidoRankPage() {
           </section>
 
           {/* 注意 */}
-          <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
@@ -247,23 +247,23 @@ export default function HokkaidoRankPage() {
           </div>
 
           {/* 関連リンク */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/hokkaido/naishin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">北海道の内申点を計算する</span>
+              <Link href="/hokkaido/naishin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">北海道の内申点を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hokkaido" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">北海道の入試制度ガイド</span>
+              <Link href="/hokkaido" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">北海道の入試制度ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/reverse?pref=hokkaido" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">志望校から逆算する</span>
+              <Link href="/reverse?pref=hokkaido" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">志望校から逆算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">評定平均を計算する</span>
+              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">評定平均を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
             </div>

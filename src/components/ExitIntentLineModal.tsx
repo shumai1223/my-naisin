@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { MessageCircle, X, BellRing } from 'lucide-react';
+import { MessageCircle, X, BellRing } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
@@ -132,10 +132,10 @@ export function ExitIntentLineModal() {
       onClick={close}
     >
       <div
-        className="w-full max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl"
+        className="w-full max-w-md overflow-hidden rounded-lg border border-slate-200 bg-white"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 px-5 py-5">
+        <div className="relative bg-brand-50 px-5 py-5">
           <button
             type="button"
             onClick={close}
@@ -144,7 +144,7 @@ export function ExitIntentLineModal() {
           >
             <X className="h-4 w-4" />
           </button>
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200">
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
             <BellRing className="h-3.5 w-3.5" />
             お見逃しなく
           </div>
@@ -161,16 +161,16 @@ export function ExitIntentLineModal() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={onLineClick}
-            className="flex items-center justify-center gap-2 rounded-xl bg-[#06C755] px-5 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
+            className="flex items-center justify-center gap-2 rounded-lg bg-[#06C755] px-5 py-3.5 text-sm font-bold text-white transition-all active:scale-[0.99]"
           >
             <MessageCircle className="h-5 w-5" />
             LINEで友だち追加（無料）
           </a>
-          <p className="text-center text-[11px] leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
+          <p className="text-center text-xs leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
           <button
             type="button"
             onClick={close}
-            className="text-center text-xs font-medium text-slate-400 hover:text-slate-600"
+            className="text-center text-xs text-slate-400 hover:text-slate-600"
           >
             あとで
           </button>

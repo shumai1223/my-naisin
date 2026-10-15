@@ -84,7 +84,7 @@ export function JukuReferralActions({
             type="button"
             onClick={() => updateStatus('contacted')}
             disabled={pending}
-            className="rounded-md bg-blue-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+            className="rounded-md bg-brand-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
           >
             連絡済みにする
           </button>
@@ -93,7 +93,7 @@ export function JukuReferralActions({
           type="button"
           onClick={() => setShowCommissionForm((v) => !v)}
           disabled={pending}
-          className="rounded-md bg-emerald-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+          className="rounded-md bg-brand-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
         >
           成約報告
         </button>
@@ -101,7 +101,7 @@ export function JukuReferralActions({
           type="button"
           onClick={() => updateStatus('declined')}
           disabled={pending}
-          className="rounded-md bg-rose-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+          className="rounded-md bg-red-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
         >
           辞退
         </button>
@@ -128,13 +128,13 @@ export function JukuReferralActions({
             type="button"
             onClick={submitCommission}
             disabled={pending}
-            className="rounded-md bg-emerald-700 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+            className="rounded-md bg-brand-700 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
           >
             {pending ? '処理中…' : '登録'}
           </button>
         </div>
       )}
-      {error && <p className="text-xs text-rose-600">{error}</p>}
+      {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
 }

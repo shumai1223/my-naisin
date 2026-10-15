@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { Calculator, RotateCcw } from '@/components/icons';
 import { AICHI_METHODS, computeAichiTotalScore } from '@/lib/total-score/aichi';
 
 export interface AichiHyokaResult {
@@ -45,10 +45,10 @@ export function AichiHyokaCalculator({ onResult }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border-2 border-rose-200 bg-white shadow-lg">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose-100 bg-gradient-to-r from-rose-50 to-red-50 px-6 py-4">
+    <div className="overflow-hidden rounded-lg border-2 border-red-200 bg-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-red-100 bg-red-50 px-6 py-4">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Calculator className="h-5 w-5 text-rose-600" />
+          <Calculator className="h-5 w-5 text-red-600" />
           愛知県の総合得点（評価方法Ⅰ〜Ⅴ）を計算
         </h2>
         <button
@@ -75,10 +75,10 @@ export function AichiHyokaCalculator({ onResult }: Props) {
             value={naishinSumInput}
             onChange={(e) => setNaishinSumInput(e.target.value)}
             placeholder="例：36"
-            className="h-12 w-full rounded-xl border border-slate-200 px-4 text-base outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-red-500 focus:ring-2 focus:ring-red-200"
           />
           {naishinSumInput !== '' && (
-            <div className="mt-2 text-xs text-rose-700">→ 評定得点：{hyoteitokuten}点 / 90点</div>
+            <div className="mt-2 text-xs text-red-700">→ 評定得点：{hyoteitokuten}点 / 90点</div>
           )}
         </div>
 
@@ -95,7 +95,7 @@ export function AichiHyokaCalculator({ onResult }: Props) {
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
             placeholder="例：95"
-            className="h-12 w-full rounded-xl border border-slate-200 px-4 text-base outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-red-500 focus:ring-2 focus:ring-red-200"
           />
         </div>
 
@@ -108,7 +108,7 @@ export function AichiHyokaCalculator({ onResult }: Props) {
                 type="button"
                 onClick={() => setMethodIndex(i)}
                 className={`rounded-lg px-2 py-2 text-center text-xs font-bold transition-all ${
-                  i === methodIndex ? 'bg-rose-600 text-white shadow-md' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  i === methodIndex ? 'bg-red-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
                 {m.type}
@@ -120,13 +120,13 @@ export function AichiHyokaCalculator({ onResult }: Props) {
       </div>
 
       {hasInput && (
-        <div className="border-t-2 border-rose-100 bg-gradient-to-br from-rose-50 to-red-50 px-6 py-6 text-center">
+        <div className="border-t-2 border-red-100 bg-red-50 px-6 py-6 text-center">
           <div className="mb-1 text-xs font-bold text-slate-600">あなたの総合得点（評価方法{method.type}）</div>
-          <div className="text-5xl font-black text-rose-700">
+          <div className="text-5xl font-bold text-red-700">
             {total}
             <span className="text-xl font-bold text-slate-400">/{method.max}</span>
           </div>
-          <div className="mx-auto mt-4 max-w-sm rounded-xl border border-rose-100 bg-white p-3 text-left">
+          <div className="mx-auto mt-4 max-w-sm rounded-lg border border-red-100 bg-white p-3 text-left">
             <div className="mb-2 text-xs font-bold text-slate-700">計算内訳</div>
             <ul className="space-y-1 text-xs text-slate-600">
               <li>評定得点：{hyoteitokuten} × {method.naishinMul} ＝ {Math.round(hyoteitokuten * method.naishinMul * 10) / 10}点</li>

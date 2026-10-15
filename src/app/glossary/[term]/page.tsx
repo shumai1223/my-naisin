@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Home, ChevronRight, BookOpen, HelpCircle, AlertTriangle, MapPin, Lightbulb } from 'lucide-react';
+import { Home, ChevronRight, BookOpen, HelpCircle, AlertTriangle, MapPin, Lightbulb } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -55,28 +55,28 @@ export default async function GlossaryTermPage({ params }: PageProps) {
       />
       <FAQPageSchema faqItems={faqs} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/glossary" className="hover:text-blue-600">用語辞典</Link>
+            <Link href="/glossary" className="hover:text-brand-600">用語辞典</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">{label}</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-amber-500 text-white">
               <BookOpen className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">{label}とは</h1>
             <p className="mx-auto mt-2 text-sm text-slate-400">読み方：{t.reading}</p>
           </header>
 
-          <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-6 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
               <BookOpen className="h-5 w-5 text-amber-500" />
               意味・定義
@@ -84,25 +84,25 @@ export default async function GlossaryTermPage({ params }: PageProps) {
             <p className="text-sm leading-relaxed text-slate-600">{t.description}</p>
           </section>
 
-          <section className="mb-6 rounded-2xl border border-blue-200 bg-blue-50 p-6">
+          <section className="mb-6 rounded-lg border border-brand-200 bg-brand-50 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Lightbulb className="h-5 w-5 text-blue-600" />
+              <Lightbulb className="h-5 w-5 text-brand-600" />
               具体例
             </h2>
-            <p className="text-sm leading-relaxed text-blue-800">{t.example}</p>
+            <p className="text-sm leading-relaxed text-brand-800">{t.example}</p>
           </section>
 
           {t.relatedPrefectures && (
-            <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="mb-6 rounded-lg border border-slate-200 bg-white p-6">
               <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <MapPin className="h-5 w-5 text-emerald-500" />
+                <MapPin className="h-5 w-5 text-brand-500" />
                 都道府県による違い
               </h2>
               <p className="text-sm leading-relaxed text-slate-600">{t.relatedPrefectures}</p>
             </section>
           )}
 
-          <section className="mb-6 rounded-2xl border-2 border-amber-200 bg-amber-50 p-6">
+          <section className="mb-6 rounded-lg border-2 border-amber-200 bg-amber-50 p-6">
             <div className="flex items-start gap-2">
               <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
               <div>
@@ -113,14 +113,14 @@ export default async function GlossaryTermPage({ params }: PageProps) {
           </section>
 
           {t.links && t.links.length > 0 && (
-            <section className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <section className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
               <h2 className="mb-3 text-sm font-bold text-slate-700">{label}を使って計算する</h2>
               <div className="flex flex-wrap gap-2">
                 {t.links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="flex items-center gap-1 rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 transition-colors hover:bg-indigo-50"
+                    className="flex items-center gap-1 rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 transition-colors hover:bg-brand-50"
                   >
                     {link.label}
                     <ChevronRight className="h-3.5 w-3.5" />
@@ -130,7 +130,7 @@ export default async function GlossaryTermPage({ params }: PageProps) {
             </section>
           )}
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
               <HelpCircle className="h-5 w-5 text-amber-500" />
               よくある質問
@@ -150,7 +150,7 @@ export default async function GlossaryTermPage({ params }: PageProps) {
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">他の用語も見る</h2>
             <div className="flex flex-wrap gap-2">
               {otherTerms.map((o) => (

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, BookOpen, ChevronRightSquare, ShieldCheck } from 'lucide-react';
+import { Home, ChevronRight, BookOpen, ChevronRightSquare, ShieldCheck } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -72,37 +72,37 @@ export default function KyokaBetsuPage() {
         steps={HOWTO_STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-emerald-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-emerald-600">評定平均計算</Link>
+            <Link href="/hyotei-heikin" className="hover:text-brand-600">評定平均計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-emerald-600">学習成績の状況</Link>
+            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-brand-600">学習成績の状況</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">教科別</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <BookOpen className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               教科別 学習成績の状況
             </h1>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              「英語の学習成績の状況4.0以上」のような<strong className="text-emerald-700">教科限定の出願基準</strong>に対応するため、
+              「英語の学習成績の状況4.0以上」のような<strong className="text-brand-700">教科限定の出願基準</strong>に対応するため、
               教科ごとの学習成績の状況だけを計算できます。
             </p>
           </header>
 
-          <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-100 text-amber-700">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-amber-100 text-amber-700">
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <p className="text-xs leading-relaxed text-amber-900">
@@ -116,19 +116,19 @@ export default function KyokaBetsuPage() {
             <KyokaBetsuCalculator />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               文部科学省の公式計算例で検算する
             </h2>
-            <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-relaxed text-emerald-900">
+            <div className="rounded-lg border border-brand-200 bg-brand-50 p-4 text-sm leading-relaxed text-brand-900">
               <h3 className="font-bold mb-2">理科（物理基礎3・化学基礎3・生物基礎5）</h3>
               <div className="font-mono">(3+3+5) ÷ 3 = 3.66… → <strong className="text-base">3.7</strong></div>
             </div>
           </section>
 
           {/* 教科の区分と「共」「専」表記 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               「教科」はどう区分されているか
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -136,7 +136,7 @@ export default function KyokaBetsuPage() {
               家庭・情報の10教科は、文部科学省の調査書様式の計算例に実際に登場する区分をそのまま使っています。
               専門学科（農業・工業・商業など）の科目は、これらとは別に教科ごとの学習成績の状況を算出します。
             </p>
-            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「各教科の学習成績の状況の欄に記載する教科名について、各学科に共通する各教科・主として専門学科
               において開設される各教科で同一の名称がある場合には、それぞれ「共」・「専」を教科名に併記すること。」
             </blockquote>
@@ -147,7 +147,7 @@ export default function KyokaBetsuPage() {
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -159,16 +159,16 @@ export default function KyokaBetsuPage() {
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               あわせて確認したいツール
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700">
                 全体の学習成績の状況を計算
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
-              <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+              <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700">
                 調査書シミュレーター
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>

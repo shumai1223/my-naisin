@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { usePathname } from 'next/navigation';
-import { MessageCircle, X } from 'lucide-react';
+import { MessageCircle, X } from '@/components/icons';
 
 import { track } from '@/lib/track';
 import { lineAddUrl } from '@/lib/line';
@@ -95,12 +95,12 @@ export function StickyConvertBar() {
       // 2026-08-01 Cowork実地UXテストで指摘された「下部固定LINEバナーが狭い画面を常時占有し
       // 圧迫感が強い」の是正: モバイル時はpadding/ボタン高さを縮小し、常時占有する面積を削減
       // （sm:以上＝タブレット・PCでは従来どおりの見た目を維持）。
-      className={`fixed inset-x-0 bottom-0 z-40 border-t border-emerald-200 bg-white/95 px-3 py-1.5 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] backdrop-blur transition-all duration-300 supports-[backdrop-filter]:bg-white/80 sm:py-2.5 ${
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-brand-200 bg-white px-3 py-1.5 transition-all duration-300 supports-[backdrop-filter]:bg-white sm:py-2.5 ${
         show ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
       }`}
     >
       <div className="mx-auto flex max-w-3xl items-center gap-2">
-        <p className="hidden flex-1 text-xs font-medium leading-tight text-slate-600 sm:block">
+        <p className="hidden flex-1 text-xs leading-tight text-slate-600 sm:block">
           <span className="font-bold text-slate-800">志望校に届くか不安？</span>
           <br />
           内申アップのコツと受験情報をLINEで受け取れます。
@@ -111,7 +111,7 @@ export function StickyConvertBar() {
           rel="noopener noreferrer"
           onClick={onLine}
           tabIndex={show ? 0 : -1}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#06C755] px-4 py-2 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99] sm:flex-none sm:px-6 sm:py-3"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#06C755] px-4 py-2 text-sm font-bold text-white transition-all active:scale-[0.99] sm:flex-none sm:px-6 sm:py-3"
         >
           <MessageCircle className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
           {/* 「無料相談」は1:1返信体制が無く履行できない約束のため、配信ベースの文言に統一(2026-07-15) */}

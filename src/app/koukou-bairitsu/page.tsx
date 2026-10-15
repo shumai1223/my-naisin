@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Percent, ChevronRightSquare } from 'lucide-react';
+import { Home, ChevronRight, Percent, ChevronRightSquare } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -58,10 +58,10 @@ export default function KoukouBairitsuPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -70,7 +70,7 @@ export default function KoukouBairitsuPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <Percent className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校入試 倍率計算サイト</h1>
@@ -81,7 +81,7 @@ export default function KoukouBairitsuPage() {
 
           <BairitsuCalculator />
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">志願倍率と実質倍率の違い</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               「倍率」という言葉には2種類あります。出願直後に発表される<strong>志願倍率</strong>（志願者数÷募集人員）と、
@@ -90,7 +90,7 @@ export default function KoukouBairitsuPage() {
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">都道府県別の入試制度・内申点を確認する</h2>
             <p className="mb-4 text-xs text-slate-500">
               県ごとの内申点の仕組みを確認できます。学校別の倍率は、各県教育委員会の公表値を転記して県別の入試ページに掲載しています（掲載範囲は県によって異なります）。最新の倍率は都道府県教育委員会の公式発表でもご確認ください。
@@ -100,7 +100,7 @@ export default function KoukouBairitsuPage() {
                 <Link
                   key={pref.code}
                   href={`/${pref.code}/naishin`}
-                  className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-indigo-800 shadow-sm transition-colors hover:bg-indigo-50 hover:text-indigo-900"
+                  className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm text-brand-800 transition-colors hover:bg-brand-50 hover:text-brand-900"
                 >
                   <span className="truncate">{pref.name}</span>
                   <ChevronRightSquare className="h-3 w-3 shrink-0 opacity-60" />
@@ -109,22 +109,22 @@ export default function KoukouBairitsuPage() {
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 偏差値を計算する
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/total-score" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/total-score" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 都道府県別の総合得点の仕組みを見る
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/koukou-bairitsu/yomikata" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/koukou-bairitsu/yomikata" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 出願倍率の読み方を見る
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/naishin-kakusa" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/naishin-kakusa" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 都道府県別 内申点格差レポートを見る
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
@@ -136,7 +136,7 @@ export default function KoukouBairitsuPage() {
             <ParentLeadCTA placement="prefecture" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (

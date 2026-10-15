@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Wallet, ArrowRight, RotateCcw, GraduationCap, School, BookOpen } from 'lucide-react';
+import { Wallet, ArrowRight, RotateCcw, GraduationCap, School, BookOpen } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { simulateEducationCost, formatYen, toManYen } from '@/lib/education-cost/engine';
@@ -59,7 +59,7 @@ export function EducationCostCalculator() {
   };
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-7">
       {/* 学年 */}
       <span className="block text-sm font-bold text-slate-800">お子さまの現在の学年</span>
       <div className="mt-2 grid grid-cols-3 gap-2">
@@ -67,8 +67,8 @@ export function EducationCostCalculator() {
           <button
             key={g}
             onClick={() => { markStart(); setGrade(g); }}
-            className={`rounded-xl border px-2 py-2.5 text-sm font-bold transition-all ${
-              grade === g ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-200'
+            className={`rounded-lg border px-2 py-2.5 text-sm font-bold transition-all ${
+              grade === g ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
             }`}
           >
             {GRADE_LABEL[g]}
@@ -83,8 +83,8 @@ export function EducationCostCalculator() {
           <button
             key={c}
             onClick={() => { markStart(); setHighCourse(c); }}
-            className={`rounded-xl border px-3 py-2.5 text-sm font-bold transition-all ${
-              highCourse === c ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-200'
+            className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition-all ${
+              highCourse === c ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
             }`}
           >
             {c === 'public' ? '公立高校' : '私立高校'}
@@ -99,8 +99,8 @@ export function EducationCostCalculator() {
           <button
             key={o.id}
             onClick={() => { markStart(); setJukuType(o.id); }}
-            className={`rounded-xl border px-2 py-2.5 text-sm font-bold transition-all ${
-              jukuType === o.id ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-200'
+            className={`rounded-lg border px-2 py-2.5 text-sm font-bold transition-all ${
+              jukuType === o.id ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
             }`}
           >
             {o.label}
@@ -115,8 +115,8 @@ export function EducationCostCalculator() {
           <button
             key={c}
             onClick={() => { markStart(); setJuniorCourse(c); }}
-            className={`rounded-full border px-3 py-1 font-semibold transition-all ${
-              juniorCourse === c ? 'border-indigo-400 bg-indigo-50 text-indigo-700' : 'border-slate-200 bg-white text-slate-500 hover:border-indigo-200'
+            className={`rounded-full border px-3 py-1 font-bold transition-all ${
+              juniorCourse === c ? 'border-brand-400 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-500 hover:border-brand-200'
             }`}
           >
             {c === 'public' ? '公立中学' : '私立中学'}
@@ -129,24 +129,24 @@ export function EducationCostCalculator() {
       </p>
 
       <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-        <button onClick={onCalc} className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-base font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 active:scale-95">
+        <button onClick={onCalc} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 text-base font-bold text-white transition-all hover:bg-brand-700 active:scale-95">
           高校卒業までの教育費を計算する
           <ArrowRight className="h-5 w-5" />
         </button>
-        <button onClick={reset} className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-slate-600 hover:bg-slate-50">
+        <button onClick={reset} className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 bg-white px-4 py-3.5 text-sm text-slate-600 hover:bg-slate-50">
           <RotateCcw className="h-4 w-4" />リセット
         </button>
       </div>
 
       {show && (
         <div id="edu-result" className="mt-8 scroll-mt-20" role="status" aria-live="polite">
-          <div className="rounded-2xl border-2 border-indigo-300 bg-gradient-to-br from-indigo-50 to-violet-50 p-5 text-center">
-            <div className="flex items-center justify-center gap-1.5 text-sm font-bold text-indigo-800">
+          <div className="rounded-lg border-2 border-brand-300 bg-brand-50 p-5 text-center">
+            <div className="flex items-center justify-center gap-1.5 text-sm font-bold text-brand-800">
               <Wallet className="h-4 w-4" />
               {GRADE_LABEL[grade]}から高校卒業までの教育費の目安
             </div>
-            <div className="mt-1 text-4xl font-black tracking-tight text-indigo-700 md:text-5xl">{formatYen(result.total)}</div>
-            <div className="mt-1 text-xs text-indigo-700">（{toManYen(result.total)}／{highCourse === 'public' ? '公立' : '私立'}高校コース）</div>
+            <div className="mt-1 text-4xl font-bold tracking-tight text-brand-700 md:text-5xl">{formatYen(result.total)}</div>
+            <div className="mt-1 text-xs text-brand-700">（{toManYen(result.total)}／{highCourse === 'public' ? '公立' : '私立'}高校コース）</div>
           </div>
 
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
@@ -167,12 +167,12 @@ export function EducationCostCalculator() {
 
 function Breakdown({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4">
-      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500">
-        <span className="text-indigo-500">{icon}</span>
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
+      <div className="flex items-center gap-1.5 text-xs text-slate-500">
+        <span className="text-brand-500">{icon}</span>
         {label}
       </div>
-      <div className="mt-1 text-xl font-black tracking-tight text-slate-900">{value}</div>
+      <div className="mt-1 text-xl font-bold tracking-tight text-slate-900">{value}</div>
     </div>
   );
 }

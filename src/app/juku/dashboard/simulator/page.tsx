@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from '@/components/icons';
 
 import { isJukuSaasEnabled } from '@/lib/juku-saas/flag';
 import { verifyInviteToken } from '@/lib/juku-saas-db';
@@ -51,12 +51,12 @@ export default async function JukuNaishinSimulatorPage({
       <div className="mx-auto max-w-4xl px-4 py-8">
         <Link
           href={`/juku/dashboard?token=${encodeURIComponent(token)}`}
-          className="mb-4 flex items-center gap-1 text-xs text-slate-500 hover:text-blue-600"
+          className="mb-4 flex items-center gap-1 text-xs text-slate-500 hover:text-brand-600"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           ダッシュボードへ戻る
         </Link>
-        <h1 className="text-xl font-black text-slate-900">{account.name} 内申点シミュレーター</h1>
+        <h1 className="text-xl font-bold text-slate-900">{account.name} 内申点シミュレーター</h1>
         <p className="mt-1 text-xs text-slate-500">
           9教科の評定を入力し、志望県を切り替えて内申点を比較できます（この画面の計算は保存されません）。
         </p>

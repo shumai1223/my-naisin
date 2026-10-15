@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw, Plus, Trash2 } from 'lucide-react';
+import { Calculator, RotateCcw, Plus, Trash2 } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { calcKyokaStatus, type Kamoku } from '@/lib/gakushu-seiseki';
@@ -74,11 +74,11 @@ export function KyokaBetsuCalculator() {
   }, [result, kyoka]);
 
   return (
-    <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
+      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-emerald-600" />
+            <Calculator className="h-5 w-5 text-brand-600" />
             教科を選んで科目・評定を入力
           </h2>
           <button
@@ -110,7 +110,7 @@ export function KyokaBetsuCalculator() {
       <div className="px-4 py-4 sm:px-6">
         <div className="space-y-2">
           {rows.map((row) => (
-            <div key={row.id} className="grid grid-cols-1 gap-2 rounded-xl border border-slate-100 bg-slate-50 p-3 sm:grid-cols-[1fr_auto_auto] sm:items-center">
+            <div key={row.id} className="grid grid-cols-1 gap-2 rounded-lg border border-slate-100 bg-slate-50 p-3 sm:grid-cols-[1fr_auto_auto] sm:items-center">
               <input
                 type="text"
                 value={row.kamoku}
@@ -127,8 +127,8 @@ export function KyokaBetsuCalculator() {
                     onClick={() => updateRow(row.id, { hyotei: r })}
                     className={`h-9 w-9 rounded-lg text-sm font-bold transition-all ${
                       row.hyotei === r
-                        ? 'bg-emerald-600 text-white shadow-md scale-110'
-                        : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-emerald-50'
+                        ? 'bg-brand-600 text-white scale-110'
+                        : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-brand-50'
                     }`}
                     aria-label={`評定${r}`}
                   >
@@ -150,7 +150,7 @@ export function KyokaBetsuCalculator() {
         <button
           type="button"
           onClick={addRow}
-          className="mt-3 inline-flex items-center gap-1 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-100"
+          className="mt-3 inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-2 text-xs font-bold text-brand-700 ring-1 ring-brand-200 hover:bg-brand-100"
         >
           <Plus className="h-3.5 w-3.5" />
           科目を追加
@@ -158,9 +158,9 @@ export function KyokaBetsuCalculator() {
       </div>
 
       {result !== null && result !== undefined && (
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200 text-center" role="status" aria-live="polite">
+        <div className="bg-brand-50 px-6 py-6 border-t-2 border-brand-200 text-center" role="status" aria-live="polite">
           <div className="text-xs font-bold text-slate-600 mb-1">{kyoka}の学習成績の状況</div>
-          <div className="text-5xl font-black text-emerald-700">{result.toFixed(1)}</div>
+          <div className="text-5xl font-bold text-brand-700">{result.toFixed(1)}</div>
           <div className="text-xs text-slate-500 mt-1">/ 5.0</div>
         </div>
       )}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Rocket, Loader2, AlertCircle } from 'lucide-react';
+import { Rocket, Loader2, AlertCircle } from '@/components/icons';
 
 /**
  * Pro / Enterprise へのアップグレード導線（堀B／Stripeループの入口）。
@@ -55,7 +55,7 @@ export function UpgradeButton({
           className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300"
         />
         <span>
-          <a href="/terms" target="_blank" rel="noreferrer" className="font-semibold text-indigo-600 underline">
+          <a href="/terms" target="_blank" rel="noreferrer" className="font-bold text-brand-600 underline">
             利用規約
           </a>
           に同意します
@@ -65,7 +65,7 @@ export function UpgradeButton({
         type="button"
         onClick={go}
         disabled={loading || !agreed}
-        className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-amber-200 transition-all hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white transition-all disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Rocket className="h-4 w-4" />}
         {label}
@@ -74,7 +74,7 @@ export function UpgradeButton({
         <p className="mt-2 flex items-start gap-2 rounded-lg bg-slate-50 p-3 text-xs leading-relaxed text-slate-600">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
           {info}{' '}
-          <a href="/contact" className="font-semibold text-indigo-600 underline">
+          <a href="/contact" className="font-bold text-brand-600 underline">
             お問い合わせ
           </a>
         </p>

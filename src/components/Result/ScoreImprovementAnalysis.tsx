@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { TrendingUp, TrendingDown, Minus, Lightbulb, Target, Zap, Star } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, Lightbulb, Target, Zap, Star } from '@/components/icons';
 
 import { readHistory } from '@/lib/persistence';
 import { getSubjectWeight } from '@/lib/utils';
@@ -113,7 +113,7 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
   }
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
+    <div className="rounded-lg border border-slate-200 bg-white">
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex w-full items-center justify-between p-4 text-left"
@@ -130,16 +130,16 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
           {diff && diff.length > 0 && (
             <div className="mb-4">
               <div className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-700">
-                <TrendingUp className="h-4 w-4 text-emerald-500" />
+                <TrendingUp className="h-4 w-4 text-brand-500" />
                 前回からの変化
               </div>
               <div className="flex flex-wrap gap-2">
                 {diff.map((change) => (
                   <div
                     key={change.subject}
-                    className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium ${
+                    className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs ${
                       change.diff > 0
-                        ? 'bg-emerald-50 text-emerald-700'
+                        ? 'bg-brand-50 text-brand-700'
                         : 'bg-red-50 text-red-700'
                     }`}
                   >
@@ -159,7 +159,7 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
           )}
 
           <div className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-700">
-            <Target className="h-4 w-4 text-blue-500" />
+            <Target className="h-4 w-4 text-brand-500" />
             おすすめ改善ポイント（上位3教科）
           </div>
 
@@ -171,7 +171,7 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
                   suggestion.priority === 'high'
                     ? 'border-amber-200 bg-amber-50'
                     : suggestion.priority === 'medium'
-                    ? 'border-blue-200 bg-blue-50'
+                    ? 'border-brand-200 bg-brand-50'
                     : 'border-slate-200 bg-slate-50'
                 }`}
               >
@@ -180,7 +180,7 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
                     {index === 0 && <Star className="h-4 w-4 text-amber-500" />}
                     <span className="font-bold text-slate-700">{suggestion.label}</span>
                     {suggestion.weight > 1 && (
-                      <span className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600">
+                      <span className="rounded bg-brand-100 px-1.5 py-0.5 text-xs font-bold text-brand-600">
                         ×{suggestion.weight}
                       </span>
                     )}
@@ -188,8 +188,8 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
                   <div className="flex items-center gap-1 text-sm">
                     <span className="text-slate-500">{suggestion.currentScore}</span>
                     <Zap className="h-3 w-3 text-amber-500" />
-                    <span className="font-bold text-emerald-600">{suggestion.suggestedScore}</span>
-                    <span className="ml-1 rounded bg-emerald-100 px-1.5 py-0.5 text-xs font-bold text-emerald-700">
+                    <span className="font-bold text-brand-600">{suggestion.suggestedScore}</span>
+                    <span className="ml-1 rounded bg-brand-100 px-1.5 py-0.5 text-xs font-bold text-brand-700">
                       +{suggestion.pointGain}点
                     </span>
                   </div>
@@ -199,12 +199,12 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
             ))}
           </div>
 
-          <div className="mt-4 rounded-lg bg-gradient-to-r from-indigo-50 to-violet-50 p-3">
-            <div className="flex items-center gap-2 text-sm font-bold text-indigo-700">
+          <div className="mt-4 rounded-lg bg-brand-50 p-3">
+            <div className="flex items-center gap-2 text-sm font-bold text-brand-700">
               <Zap className="h-4 w-4" />
               最短ルートの提案
             </div>
-            <p className="mt-1 text-xs text-indigo-600">
+            <p className="mt-1 text-xs text-brand-600">
               {topSuggestions.length > 0 ? (
                 <>
                   <strong>{topSuggestions[0].label}</strong>を1点上げると、
@@ -218,44 +218,44 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
           </div>
 
           {/* 広告前提UX：次に見るべき記事 */}
-          <div className="mt-4 rounded-lg border border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-4">
-            <div className="flex items-center gap-2 text-sm font-bold text-emerald-700 mb-3">
+          <div className="mt-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
+            <div className="flex items-center gap-2 text-sm font-bold text-brand-700 mb-3">
               <Star className="h-4 w-4" />
               次に見るべき攻略記事
             </div>
             <div className="space-y-2">
               <Link 
                 href="/blog/naishin-guide" 
-                className="block p-2 rounded-lg bg-white/70 hover:bg-white transition-colors border border-emerald-100"
+                className="block p-2 rounded-lg bg-white/70 hover:bg-white transition-colors border border-brand-100"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium text-emerald-800">内申点の基礎から完全理解</div>
-                    <div className="text-xs text-emerald-600">9教科の評価方法と上げ方のコツ</div>
+                    <div className="text-sm text-brand-800">内申点の基礎から完全理解</div>
+                    <div className="text-xs text-brand-600">9教科の評価方法と上げ方のコツ</div>
                   </div>
-                  <div className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">必読</div>
+                  <div className="text-xs bg-brand-100 text-brand-700 px-2 py-1 rounded">必読</div>
                 </div>
               </Link>
               <Link 
                 href="/blog/tokyo-kansan-naishin-guide" 
-                className="block p-2 rounded-lg bg-white/70 hover:bg-white transition-colors border border-emerald-100"
+                className="block p-2 rounded-lg bg-white/70 hover:bg-white transition-colors border border-brand-100"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium text-emerald-800">実技教科攻略ガイド</div>
-                    <div className="text-xs text-emerald-600">倍率の高い実技で効率よく点数を上げる</div>
+                    <div className="text-sm text-brand-800">実技教科攻略ガイド</div>
+                    <div className="text-xs text-brand-600">倍率の高い実技で効率よく点数を上げる</div>
                   </div>
-                  <div className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">実技特化</div>
+                  <div className="text-xs bg-brand-100 text-brand-700 px-2 py-1 rounded">実技特化</div>
                 </div>
               </Link>
               <Link 
                 href="/blog/naishinten-calculation-by-prefecture" 
-                className="block p-2 rounded-lg bg-white/70 hover:bg-white transition-colors border border-emerald-100"
+                className="block p-2 rounded-lg bg-white/70 hover:bg-white transition-colors border border-brand-100"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium text-emerald-800">提出物・観点別評価対策</div>
-                    <div className="text-xs text-emerald-600">テスト以外で内申点を上げる方法</div>
+                    <div className="text-sm text-brand-800">提出物・観点別評価対策</div>
+                    <div className="text-xs text-brand-600">テスト以外で内申点を上げる方法</div>
                   </div>
                   <div className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">日常対策</div>
                 </div>

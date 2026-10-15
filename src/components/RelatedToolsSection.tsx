@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from '@/components/icons';
 
 export interface RelatedLink {
   href: string;
@@ -22,7 +22,7 @@ interface RelatedToolsSectionProps {
 export function RelatedToolsSection({ heading = '次の一手・関連ツール', links, className = '' }: RelatedToolsSectionProps) {
   if (links.length === 0) return null;
   return (
-    <section className={`rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6 ${className}`}>
+    <section className={`rounded-lg border border-slate-200 bg-white p-5 md:p-6 ${className}`}>
       <h2 className="mb-4 text-base font-bold text-slate-800">{heading}</h2>
       <ul className="grid gap-2 sm:grid-cols-2">
         {links.map((l) => (
@@ -30,9 +30,9 @@ export function RelatedToolsSection({ heading = '次の一手・関連ツール'
             <Link
               href={l.href}
               {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="group flex items-start gap-2 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 transition-all hover:border-indigo-200 hover:bg-indigo-50/40"
+              className="group flex items-start gap-2 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 transition-all hover:border-brand-200 hover:bg-brand-50/40"
             >
-              <ArrowRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-indigo-400 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-400 transition-transform group-hover:translate-x-0.5" />
               <span>
                 <span className="block text-sm font-bold text-slate-800">{l.title}</span>
                 {l.desc && <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{l.desc}</span>}

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Handshake, Users, Target, BarChart3, MapPin, Code2, Mail, CheckCircle2, Printer } from 'lucide-react';
+import { Home, ChevronRight, Handshake, Users, Target, BarChart3, MapPin, Code2, Mail, CheckCircle2, Printer } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
@@ -59,7 +59,7 @@ export default function PartnerPage() {
         ]}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <div className="min-h-screen bg-slate-900 text-white">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-400">
             <Link href="/" className="flex items-center gap-1 hover:text-white"><Home className="h-4 w-4" />ホーム</Link>
@@ -68,7 +68,7 @@ export default function PartnerPage() {
           </nav>
 
           <header className="mb-10 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-400 text-white">
               <Handshake className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold md:text-4xl">受験意欲の高い中学生・保護者を、貴塾へ。</h1>
@@ -86,7 +86,7 @@ export default function PartnerPage() {
               { k: '送客の成果地点', v: '無料体験・資料請求' },
               { k: '計測', v: '一次データ（実数）' },
             ].map((s) => (
-              <div key={s.k} className="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+              <div key={s.k} className="rounded-lg border border-white/10 bg-white/5 p-4 text-center">
                 <div className="text-xs text-slate-400">{s.k}</div>
                 <div className="mt-1 text-sm font-bold text-white">{s.v}</div>
               </div>
@@ -98,9 +98,9 @@ export default function PartnerPage() {
             {VALUE.map((v) => {
               const Icon = v.icon;
               return (
-                <div key={v.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
+                <div key={v.title} className="rounded-lg border border-white/10 bg-white/5 p-6">
                   <div className="mb-2 flex items-center gap-2 font-bold text-white">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-500/20 text-emerald-300"><Icon className="h-5 w-5" /></span>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-500/20 text-brand-300"><Icon className="h-5 w-5" /></span>
                     {v.title}
                   </div>
                   <p className="text-sm leading-relaxed text-slate-300">{v.body}</p>
@@ -110,35 +110,35 @@ export default function PartnerPage() {
           </section>
 
           {/* 提携の形 */}
-          <section className="mb-10 rounded-2xl border border-white/10 bg-white/5 p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-white"><Users className="h-5 w-5 text-emerald-300" />提携の形</h2>
+          <section className="mb-10 rounded-lg border border-white/10 bg-white/5 p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-white"><Users className="h-5 w-5 text-brand-300" />提携の形</h2>
             <ul className="space-y-2.5 text-sm leading-relaxed text-slate-300">
-              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">CPA提携</strong>：無料体験・資料請求などの成果1件ごとの成果報酬。ASP経由でも、直接でも可。</span></li>
-              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">直接送客契約</strong>：商圏（都道府県）を指定した独占的な送客。実績に応じてCPA・条件を設計。</span></li>
-              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">ウィジェット提供</strong>：内申点・評定平均の計算ツールを貴塾サイトへ無料で埋め込み（SEO・回遊強化）。</span></li>
-              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /><span><strong className="text-white">掲載枠スポンサー（県×面）</strong>：都道府県・ページ種別を指定した月額固定の掲載枠。成果報酬ではなく定額でのご出稿をご希望の場合はこちらをご相談ください（「広告」表記込み・商圏の独占可）。</span></li>
+              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" /><span><strong className="text-white">CPA提携</strong>：無料体験・資料請求などの成果1件ごとの成果報酬。ASP経由でも、直接でも可。</span></li>
+              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" /><span><strong className="text-white">直接送客契約</strong>：商圏（都道府県）を指定した独占的な送客。実績に応じてCPA・条件を設計。</span></li>
+              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" /><span><strong className="text-white">ウィジェット提供</strong>：内申点・評定平均の計算ツールを貴塾サイトへ無料で埋め込み（SEO・回遊強化）。</span></li>
+              <li className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" /><span><strong className="text-white">掲載枠スポンサー（県×面）</strong>：都道府県・ページ種別を指定した月額固定の掲載枠。成果報酬ではなく定額でのご出稿をご希望の場合はこちらをご相談ください（「広告」表記込み・商圏の独占可）。</span></li>
             </ul>
           </section>
 
           {/* 生徒配布資料・データ提供 */}
-          <section className="mb-10 rounded-2xl border border-white/10 bg-white/5 p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-white"><Printer className="h-5 w-5 text-emerald-300" />生徒配布資料・データ提供</h2>
+          <section className="mb-10 rounded-lg border border-white/10 bg-white/5 p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-white"><Printer className="h-5 w-5 text-brand-300" />生徒配布資料・データ提供</h2>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+              <div className="rounded-lg border border-white/10 bg-white/5 p-5">
                 <h3 className="mb-2 text-sm font-bold text-white">生徒配布用の印刷資料</h3>
                 <p className="mb-3 text-sm leading-relaxed text-slate-300">
                   都道府県別の内申点計算方法・注意点・出典をまとめたA4印刷対応ページを、入塾説明・体験授業時の配布資料としてそのままご利用いただけます。無料・出典明記済みです。
                 </p>
-                <Link href="/pref/tokyo" className="inline-flex items-center gap-1 text-sm font-bold text-emerald-300 hover:underline">
+                <Link href="/pref/tokyo" className="inline-flex items-center gap-1 text-sm font-bold text-brand-300 hover:underline">
                   印刷対応ページの例（東京都）を見る<ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+              <div className="rounded-lg border border-white/10 bg-white/5 p-5">
                 <h3 className="mb-2 text-sm font-bold text-white">データ提供メニュー</h3>
                 <p className="mb-3 text-sm leading-relaxed text-slate-300">
                   47都道府県の内申点・総合得点・偏差値対応表をCSV・APIで提供しています。塾内システムへの組み込みや、自社の指導資料・コンテンツ制作の基礎データとしてご利用いただけます。
                 </p>
-                <Link href="/developers" className="inline-flex items-center gap-1 text-sm font-bold text-emerald-300 hover:underline">
+                <Link href="/developers" className="inline-flex items-center gap-1 text-sm font-bold text-brand-300 hover:underline">
                   データ提供・APIの詳細を見る<ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -146,8 +146,8 @@ export default function PartnerPage() {
           </section>
 
           {/* 模試会社・EdTech SaaS向け（データ連携・V-5） */}
-          <section className="mb-10 rounded-2xl border border-white/10 bg-white/5 p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-white"><Code2 className="h-5 w-5 text-emerald-300" />模試会社・教育SaaS運営者様へ（データ連携）</h2>
+          <section className="mb-10 rounded-lg border border-white/10 bg-white/5 p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-white"><Code2 className="h-5 w-5 text-brand-300" />模試会社・教育SaaS運営者様へ（データ連携）</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-300">
               内申点×合否判定は貴社の本業そのものかと思います。全国47都道府県の公立高校入試における
               <strong className="text-white">内申点（調査書点）・総合得点（内申×当日点）・偏差値</strong>の計算方式を機械可読データ化し、
@@ -155,25 +155,25 @@ export default function PartnerPage() {
               都道府県ごとに異なる計算ロジックを組み込むことで、開発コストをかけずに47都道府県対応の合否判定・内申点表示を実現できます。
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <code className="text-xs text-emerald-300">GET /api/naishin/{'{code}'}</code>
+              <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                <code className="text-xs text-brand-300">GET /api/naishin/{'{code}'}</code>
                 <p className="mt-1 text-xs leading-relaxed text-slate-400">都道府県別の内申点計算</p>
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <code className="text-xs text-emerald-300">GET /api/total-score/{'{code}'}</code>
+              <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                <code className="text-xs text-brand-300">GET /api/total-score/{'{code}'}</code>
                 <p className="mt-1 text-xs leading-relaxed text-slate-400">内申×当日点の総合得点（S値・K値等）</p>
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <code className="text-xs text-emerald-300">GET /api/hensachi</code>
+              <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                <code className="text-xs text-brand-300">GET /api/hensachi</code>
                 <p className="mt-1 text-xs leading-relaxed text-slate-400">偏差値・上位パーセンタイル計算</p>
               </div>
             </div>
             <p className="mt-4 text-xs leading-relaxed text-slate-400">
               データ連携・API組み込みではなく、成績帳票・Webサイトへの掲載枠（スポンサー掲載）にご興味があれば、そちらの形でのご相談も可能です。
-              媒体資料（トラフィック・カバレッジ実績）は<Link href="/contact" className="font-bold text-emerald-300 hover:underline">お問い合わせ</Link>いただければ個別にお送りします。
+              媒体資料（トラフィック・カバレッジ実績）は<Link href="/contact" className="font-bold text-brand-300 hover:underline">お問い合わせ</Link>いただければ個別にお送りします。
             </p>
             <div className="mt-4">
-              <Link href="/developers" className="inline-flex items-center gap-1 text-sm font-bold text-emerald-300 hover:underline">
+              <Link href="/developers" className="inline-flex items-center gap-1 text-sm font-bold text-brand-300 hover:underline">
                 API/MCPの詳細仕様を見る（/developers）<ChevronRight className="h-4 w-4" />
               </Link>
             </div>
@@ -184,8 +184,8 @@ export default function PartnerPage() {
             <h2 className="mb-4 text-lg font-bold text-white">提携までの流れ</h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {STEPS.map((s) => (
-                <div key={s.n} className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                  <div className="mb-2 grid h-8 w-8 place-items-center rounded-full bg-emerald-500 text-sm font-black text-white">{s.n}</div>
+                <div key={s.n} className="rounded-lg border border-white/10 bg-white/5 p-5">
+                  <div className="mb-2 grid h-8 w-8 place-items-center rounded-full bg-brand-500 text-sm font-bold text-white">{s.n}</div>
                   <div className="text-sm font-bold text-white">{s.t}</div>
                   <p className="mt-1 text-xs leading-relaxed text-slate-300">{s.d}</p>
                 </div>
@@ -194,16 +194,16 @@ export default function PartnerPage() {
           </section>
 
           {/* CTA */}
-          <section className="rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 p-8 text-center shadow-xl">
+          <section className="rounded-lg bg-brand-500 p-8 text-center">
             <h2 className="text-xl font-bold text-white md:text-2xl">まずはお気軽にご相談ください</h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-emerald-50">
+            <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-brand-50">
               塾名・対応地域・ご希望（CPA提携／直接送客／ウィジェット）をお書き添えのうえ、お問い合わせフォームよりご連絡ください。担当より折り返しご連絡します。
             </p>
             <div className="mt-5 flex flex-col items-stretch justify-center gap-2 sm:flex-row">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-emerald-700 shadow-md transition-all hover:-translate-y-0.5">
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-bold text-brand-700 transition-all">
                 <Mail className="h-4 w-4" />お問い合わせフォームへ
               </Link>
-              <Link href="/embed" className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700/40 px-6 py-3.5 text-sm font-bold text-white ring-1 ring-white/30 transition-colors hover:bg-emerald-700/60">
+              <Link href="/embed" className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-700/40 px-6 py-3.5 text-sm font-bold text-white ring-1 ring-white/30 transition-colors hover:bg-brand-700/60">
                 <Code2 className="h-4 w-4" />ウィジェットを見る
               </Link>
             </div>
@@ -213,7 +213,7 @@ export default function PartnerPage() {
             ※ 送客実績はクリック実数（一次データ）でご提示します。成果の確定・報酬条件は提携形態により異なります。
           </p>
           <p className="mt-3 text-center text-xs leading-relaxed text-slate-500">
-            学校・進路指導のご担当者様は<Link href="/for-teachers" className="font-bold text-emerald-700 hover:underline">先生・進路指導のご担当者様へ</Link>のページもご覧ください。
+            学校・進路指導のご担当者様は<Link href="/for-teachers" className="font-bold text-brand-700 hover:underline">先生・進路指導のご担当者様へ</Link>のページもご覧ください。
           </p>
         </div>
       </div>

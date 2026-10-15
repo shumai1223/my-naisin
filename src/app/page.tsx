@@ -9,7 +9,7 @@ import { HowToSchema } from '@/components/StructuredData/HowToSchema';
 import { PrefectureNaishinTable } from '@/components/PrefectureNaishinTable';
 import { KantenHyokaOfficial } from '@/components/KantenHyokaOfficial';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
-import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap, TrendingUp, Target, HelpCircle } from 'lucide-react';
+import { Calculator, BookOpen, MapPin, Sparkles, ShieldCheck, ChevronRight, Calendar, Clock, ArrowRight, Zap, TrendingUp, Target, HelpCircle } from '@/components/icons';
 
 export const metadata: Metadata = {
   // pos3.4まで上昇したが「内申点 計算」CTRは8.6%で身内の高CTR面（14〜16%）の半分止まり。
@@ -89,14 +89,14 @@ export default function Page() {
 
       {/* Latest Articles — homepage funnel */}
       <section className="mx-auto max-w-5xl px-4 pt-12">
-        <div className="rounded-3xl bg-white p-6 sm:p-8 shadow-sm ring-1 ring-gray-100">
+        <div className="rounded-lg bg-white p-6 sm:p-8 ring-1 ring-slate-100">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1 text-xs font-bold text-rose-600 ring-1 ring-rose-100">
+              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1 text-xs font-bold text-red-600 ring-1 ring-red-100">
                 <Zap className="h-3 w-3" />
                 新着記事
               </div>
-              <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">
+              <h2 className="text-2xl font-bold tracking-tight text-slate-900">
                 最新の受験コラム
               </h2>
               <p className="mt-1 text-sm text-slate-500">
@@ -105,7 +105,7 @@ export default function Page() {
             </div>
             <Link
               href="/blog"
-              className="inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
+              className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-bold text-white transition-all"
             >
               すべての記事
               <ArrowRight className="h-4 w-4" />
@@ -117,11 +117,11 @@ export default function Page() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className={`group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md ${
+                className={`group flex flex-col rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-brand-200 ${
                   i === 0 ? 'lg:col-span-1' : ''
                 }`}
               >
-                <div className="mb-3 flex items-center gap-2 text-[11px] font-medium text-slate-400">
+                <div className="mb-3 flex items-center gap-2 text-xs text-slate-400">
                   <span className="inline-flex items-center gap-1 rounded-md bg-slate-50 px-2 py-0.5">
                     {post.category}
                   </span>
@@ -134,10 +134,10 @@ export default function Page() {
                     {post.readTime}
                   </span>
                 </div>
-                <h3 className="flex-1 text-sm font-bold leading-snug text-slate-900 transition-colors group-hover:text-blue-600 line-clamp-3">
+                <h3 className="flex-1 text-sm font-bold leading-snug text-slate-900 transition-colors group-hover:text-brand-600 line-clamp-3">
                   {post.title}
                 </h3>
-                <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-blue-600 opacity-0 transition-all group-hover:opacity-100">
+                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-brand-600 opacity-0 transition-all group-hover:opacity-100">
                   記事を読む <ArrowRight className="h-3 w-3" />
                 </div>
               </Link>
@@ -154,7 +154,7 @@ export default function Page() {
           <div className="min-w-0 lg:col-span-2 space-y-12">
             <div>
               <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                <Calculator className="text-blue-600" />
+                <Calculator className="text-brand-600" />
                 2026年度（令和8年度）入試対応の内申点計算
               </h2>
               <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed">
@@ -169,8 +169,8 @@ export default function Page() {
             </div>
 
             {/* 5教科 偏差値計算サイトへの内部リンク強化（SEO: 偏差値計算サイト 5教科 / 中学生） */}
-            <div className="rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50/60 via-purple-50/40 to-blue-50/60 p-6 md:p-7">
-              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-indigo-700 ring-1 ring-indigo-100">
+            <div className="rounded-lg border border-brand-100 bg-brand-50/60 p-6 md:p-7">
+              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
                 <TrendingUp className="h-3 w-3" />
                 内申点と合わせて使う
               </div>
@@ -179,11 +179,11 @@ export default function Page() {
               </h3>
               <p className="mb-4 text-sm leading-relaxed text-slate-700">
                 内申点と並んで合否を左右するのが <strong>5教科の偏差値</strong>。
-                <Link href="/hensachi" className="font-bold text-indigo-700 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800">
+                <Link href="/hensachi" className="font-bold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800">
                   偏差値計算サイト（5教科対応・中学生/高校生）
                 </Link>
                 では、点数・平均点・標準偏差から自分の偏差値を瞬時に算出。教科別の偏差値や、平均点しか分からない場合の簡易モードにも対応しています。通知表からそのまま入力できる
-                <Link href="/hyotei-heikin" className="font-bold text-indigo-700 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800">
+                <Link href="/hyotei-heikin" className="font-bold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800">
                   評定平均の自動計算ツール
                 </Link>
                 と組み合わせれば、内申点・評定平均・偏差値を一気通貫で把握でき、志望校との距離をひと目で確認できます。
@@ -191,7 +191,7 @@ export default function Page() {
               <div className="flex flex-wrap gap-2">
                 <Link
                   href="/hensachi"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-5 py-2 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-brand-600 px-5 py-2 text-sm font-bold text-white transition-all hover:bg-brand-700"
                 >
                   <Target className="h-3.5 w-3.5" />
                   5教科の偏差値を計算する
@@ -199,7 +199,7 @@ export default function Page() {
                 </Link>
                 <Link
                   href="/hyotei-heikin"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 transition-all hover:bg-indigo-50"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-sm font-bold text-brand-700 ring-1 ring-brand-200 transition-all hover:bg-brand-50"
                 >
                   評定平均を計算する
                   <ChevronRight className="h-3.5 w-3.5" />
@@ -208,8 +208,8 @@ export default function Page() {
             </div>
 
             {/* 都立高校 総合得点（1020点）計算ツールへの内部リンク強化 */}
-            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/60 via-indigo-50/40 to-violet-50/60 p-6 md:p-7">
-              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">
+            <div className="rounded-lg border border-brand-100 bg-brand-50/60 p-6 md:p-7">
+              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
                 <Calculator className="h-3 w-3" />
                 東京都の受験生向け
               </div>
@@ -222,7 +222,7 @@ export default function Page() {
               <div className="flex flex-wrap gap-2">
                 <Link
                   href="/tokyo/total-score"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-5 py-2 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-brand-600 px-5 py-2 text-sm font-bold text-white transition-all hover:bg-brand-700"
                 >
                   <Calculator className="h-3.5 w-3.5" />
                   都立 総合得点を計算する（1020点）
@@ -230,7 +230,7 @@ export default function Page() {
                 </Link>
                 <Link
                   href="/tokyo/naishin"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-sm font-bold text-blue-700 ring-1 ring-blue-200 transition-all hover:bg-blue-50"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-sm font-bold text-brand-700 ring-1 ring-brand-200 transition-all hover:bg-brand-50"
                 >
                   東京都の内申点だけ計算する
                   <ChevronRight className="h-3.5 w-3.5" />
@@ -239,8 +239,8 @@ export default function Page() {
             </div>
 
             {/* 都道府県別の合否判定ツール（新設の種火ページへ評価を流す内部リンクハブ） */}
-            <div className="rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50/50 via-orange-50/30 to-white p-6 md:p-7">
-              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-rose-700 ring-1 ring-rose-100">
+            <div className="rounded-lg border border-red-100 bg-red-50/50 p-6 md:p-7">
+              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-red-700 ring-1 ring-red-100">
                 <Target className="h-3 w-3" />
                 総合得点・合否判定
               </div>
@@ -264,7 +264,7 @@ export default function Page() {
                   <Link
                     key={t.href}
                     href={t.href}
-                    className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-sm font-bold text-rose-700 ring-1 ring-rose-200 transition-all hover:-translate-y-0.5 hover:bg-rose-50"
+                    className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-sm font-bold text-red-700 ring-1 ring-red-200 transition-all hover:bg-red-50"
                   >
                     {t.label}
                     <ChevronRight className="h-3.5 w-3.5 opacity-60" />
@@ -275,19 +275,19 @@ export default function Page() {
 
             <div>
               <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                <MapPin className="text-emerald-600" />
+                <MapPin className="text-brand-600" />
                 都道府県別の入試対策・計算ツール
               </h3>
               <div className="grid gap-6">
                 {REGIONS.map(region => (
-                  <div key={region} className="rounded-2xl border border-slate-100 bg-slate-50/50 p-6">
+                  <div key={region} className="rounded-lg border border-slate-100 bg-slate-50/50 p-6">
                     <h4 className="font-bold text-slate-800 mb-4 border-b border-slate-200 pb-2">{region}</h4>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
                       {getPrefecturesByRegion(region).map(pref => (
                         <Link
                           key={pref.code}
                           href={`/${pref.code}`}
-                          className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all hover:bg-blue-50 hover:text-blue-700 hover:ring-blue-300"
+                          className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200 transition-all hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-300"
                         >
                           {pref.name}
                           <ChevronRight className="h-3 w-3 opacity-30" />
@@ -302,9 +302,9 @@ export default function Page() {
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 <Link
                   href="/ask"
-                  className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md"
+                  className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-brand-300"
                 >
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
                     <Sparkles className="h-5 w-5" />
                   </span>
                   <span>
@@ -316,9 +316,9 @@ export default function Page() {
                 </Link>
                 <Link
                   href="/dashboard"
-                  className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
+                  className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-brand-300"
                 >
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
                     <TrendingUp className="h-5 w-5" />
                   </span>
                   <span>
@@ -335,9 +335,9 @@ export default function Page() {
             <PrefectureNaishinTable />
 
             {/* 「内申点 計算」semantic enrichment：GSCで pos 7 → 3 を狙うためのキーワード密度UP */}
-            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 via-indigo-50/30 to-white p-6 md:p-8">
+            <div className="rounded-lg border border-brand-100 bg-brand-50/40 p-6 md:p-8">
               <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <Calculator className="text-blue-600 h-5 w-5" />
+                <Calculator className="text-brand-600 h-5 w-5" />
                 内申点 計算サイトとしてのMy Naishinの強み
               </h2>
               <div className="prose prose-slate max-w-none text-sm leading-relaxed text-slate-600 space-y-3">
@@ -350,8 +350,8 @@ export default function Page() {
                 <p>
                   <strong>内申点 計算結果</strong>と志望校のボーダーラインを比較する機能、<strong>志望校から必要な当日点を逆算</strong>する機能、<strong>評定平均・偏差値の同時算出</strong>機能も完備。高校受験で合否を分ける内申点を「計算するだけ」で終わらせず、戦略立案までサポートします。
                 </p>
-                <div className="rounded-xl bg-white border border-blue-100 p-4 mt-4">
-                  <h3 className="text-sm font-bold text-blue-900 mb-2 flex items-center gap-1.5">
+                <div className="rounded-lg bg-white border border-brand-100 p-4 mt-4">
+                  <h3 className="text-sm font-bold text-brand-900 mb-2 flex items-center gap-1.5">
                     <Sparkles className="h-3.5 w-3.5" />
                     内申点 計算でMy Naishinが選ばれる5つの理由
                   </h3>
@@ -379,7 +379,7 @@ export default function Page() {
               note="【そら塾】オンライン個別指導の無料体験（PR）"
             />
 
-            <div className="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white">
+            <div className="rounded-lg bg-brand-600 p-8 text-white">
               <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                 <Sparkles />
                 内申点を1点でも上げるための3つの鉄則
@@ -401,16 +401,16 @@ export default function Page() {
             </div>
 
             {/* 内申点 計算 関連 FAQ（FAQPageSchema と一致した可視テキスト） */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+            <div className="rounded-lg border border-slate-200 bg-white p-6 md:p-8">
               <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                <HelpCircle className="text-blue-600 h-5 w-5" />
+                <HelpCircle className="text-brand-600 h-5 w-5" />
                 内申点 計算サイトのよくある質問
               </h2>
               <div className="space-y-3">
                 {HOME_FAQS.map((faq, i) => (
-                  <details key={i} className="group rounded-xl border border-slate-200 bg-slate-50/40 overflow-hidden">
+                  <details key={i} className="group rounded-lg border border-slate-200 bg-slate-50/40 overflow-hidden">
                     <summary className="flex cursor-pointer items-start gap-3 px-5 py-4 hover:bg-slate-100/60">
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-black text-white">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-600 text-xs font-bold text-white">
                         Q
                       </span>
                       <span className="flex-1 pt-0.5 text-sm font-bold text-slate-800">{faq.question}</span>
@@ -418,7 +418,7 @@ export default function Page() {
                     </summary>
                     <div className="border-t border-slate-200 bg-white px-5 py-4">
                       <div className="flex items-start gap-3">
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-500 text-xs font-black text-white">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
                           A
                         </span>
                         <p className="flex-1 pt-0.5 text-sm leading-relaxed text-slate-700">{faq.answer}</p>
@@ -427,9 +427,9 @@ export default function Page() {
                   </details>
                 ))}
               </div>
-              <div className="mt-6 rounded-xl border border-blue-100 bg-blue-50/40 p-4 text-center">
+              <div className="mt-6 rounded-lg border border-brand-100 bg-brand-50/40 p-4 text-center">
                 <p className="text-sm text-slate-700">
-                  もっと詳しく知りたい方は <Link href="/blog/naishin-guide" className="font-bold text-blue-700 underline">内申点ガイド</Link>・<Link href="/blog/how-to-raise-naishinten" className="font-bold text-blue-700 underline">内申点の上げ方</Link>・<Link href="/blog/naishinten-average-score" className="font-bold text-blue-700 underline">内申点の平均は何点？</Link>・<Link href="/naishin-kakusa" className="font-bold text-blue-700 underline">都道府県別 内申点格差レポート</Link>・<Link href="/koukou-hiyou" className="font-bold text-blue-700 underline">高校の費用シミュレーター</Link>・<Link href="/blog" className="font-bold text-blue-700 underline">受験コラム一覧</Link>へ
+                  もっと詳しく知りたい方は <Link href="/blog/naishin-guide" className="font-bold text-brand-700 underline">内申点ガイド</Link>・<Link href="/blog/how-to-raise-naishinten" className="font-bold text-brand-700 underline">内申点の上げ方</Link>・<Link href="/blog/naishinten-average-score" className="font-bold text-brand-700 underline">内申点の平均は何点？</Link>・<Link href="/naishin-kakusa" className="font-bold text-brand-700 underline">都道府県別 内申点格差レポート</Link>・<Link href="/koukou-hiyou" className="font-bold text-brand-700 underline">高校の費用シミュレーター</Link>・<Link href="/blog" className="font-bold text-brand-700 underline">受験コラム一覧</Link>へ
                 </p>
               </div>
             </div>
@@ -438,7 +438,7 @@ export default function Page() {
           {/* Sidebar/Right Column（PC: stickyで本文が長くても右側が空かないよう追従＋回遊モジュール増設） */}
           <div className="min-w-0">
             <div className="space-y-8 lg:sticky lg:top-24">
-            <div className="rounded-2xl border border-amber-100 bg-amber-50 p-6">
+            <div className="rounded-lg border border-amber-100 bg-amber-50 p-6">
               <h3 className="font-bold text-amber-900 mb-4 flex items-center gap-2">
                 <ShieldCheck className="text-amber-600" />
                 情報の正確性について
@@ -454,9 +454,9 @@ export default function Page() {
             </div>
 
             {/* 回遊モジュール：無料の計算ツール（内部リンク強化＋右側を埋める） */}
-            <div className="rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50/50 to-white p-6 shadow-sm">
+            <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-6">
               <h3 className="mb-4 flex items-center gap-2 font-bold text-slate-900">
-                <Calculator className="h-5 w-5 text-indigo-500" />
+                <Calculator className="h-5 w-5 text-brand-500" />
                 無料の計算ツール
               </h3>
               <div className="space-y-2">
@@ -471,7 +471,7 @@ export default function Page() {
                   <Link
                     key={tool.href}
                     href={tool.href}
-                    className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-200 transition-all hover:bg-indigo-50 hover:text-indigo-700 hover:ring-indigo-200"
+                    className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200 transition-all hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-200"
                   >
                     {tool.label}
                     <ChevronRight className="h-3.5 w-3.5 opacity-40" />
@@ -481,9 +481,9 @@ export default function Page() {
             </div>
 
             {/* 回遊モジュール：よく見られる都道府県（高トラフィック県への内部リンク） */}
-            <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+            <div className="rounded-lg border border-brand-100 bg-white p-6">
               <h3 className="mb-4 flex items-center gap-2 font-bold text-slate-900">
-                <MapPin className="h-5 w-5 text-blue-500" />
+                <MapPin className="h-5 w-5 text-brand-500" />
                 よく見られる都道府県
               </h3>
               <div className="grid grid-cols-2 gap-2">
@@ -500,7 +500,7 @@ export default function Page() {
                   <Link
                     key={pref.code}
                     href={`/${pref.code}/naishin`}
-                    className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-200 transition-all hover:bg-blue-50 hover:text-blue-700 hover:ring-blue-200"
+                    className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200 transition-all hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-200"
                   >
                     {pref.name}
                     <ChevronRight className="h-3 w-3 opacity-40" />
@@ -509,21 +509,21 @@ export default function Page() {
               </div>
               <Link
                 href="/prefectures"
-                className="mt-3 block text-center text-xs font-bold text-blue-600 hover:text-blue-700"
+                className="mt-3 block text-center text-xs font-bold text-brand-600 hover:text-brand-700"
               >
                 47都道府県すべて見る
               </Link>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="rounded-lg border border-slate-200 bg-white p-6">
               <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <BookOpen className="text-blue-500" />
+                <BookOpen className="text-brand-500" />
                 最新の受験コラム
               </h3>
               <div className="space-y-4">
                 {sidebarPosts.map((post) => (
                   <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
-                    <p className="text-sm font-medium text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    <p className="text-sm text-slate-800 group-hover:text-brand-600 transition-colors line-clamp-2">
                       {post.title}
                     </p>
                     <p className="text-xs text-slate-500 mt-1">
@@ -532,7 +532,7 @@ export default function Page() {
                   </Link>
                 ))}
               </div>
-              <Link href="/blog" className="mt-6 block text-center text-sm font-bold text-blue-600 hover:text-blue-700">
+              <Link href="/blog" className="mt-6 block text-center text-sm font-bold text-brand-600 hover:text-brand-700">
                 記事一覧を見る
               </Link>
             </div>

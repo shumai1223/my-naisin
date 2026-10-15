@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Target, ChevronRightSquare } from 'lucide-react';
+import { Home, ChevronRight, Target, ChevronRightSquare } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -72,30 +72,30 @@ export default function GaihyouDistancePage() {
         steps={HOWTO_STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-emerald-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-emerald-600">評定平均計算</Link>
+            <Link href="/hyotei-heikin" className="hover:text-brand-600">評定平均計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-emerald-600">学習成績の状況</Link>
+            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-brand-600">学習成績の状況</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">概評の境界まで</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Target className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               学習成績概評 境界チェック
             </h1>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              学習成績概評は<strong className="text-emerald-700">境界で1段階変わります</strong>。
+              学習成績概評は<strong className="text-brand-700">境界で1段階変わります</strong>。
               現在の全体の学習成績の状況を入力すると、次の区分まであと何点必要かがわかります。
             </p>
           </header>
@@ -104,16 +104,16 @@ export default function GaihyouDistancePage() {
             <GaihyouDistanceCalculator />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               学習成績概評A〜Eの区分
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-emerald-600 text-white text-left">
-                    <th className="border border-emerald-400 px-3 py-2 font-bold">全体の学習成績の状況</th>
-                    <th className="border border-emerald-400 px-3 py-2 font-bold text-center">学習成績概評</th>
+                  <tr className="bg-brand-600 text-white text-left">
+                    <th className="border border-brand-400 px-3 py-2 font-bold">全体の学習成績の状況</th>
+                    <th className="border border-brand-400 px-3 py-2 font-bold text-center">学習成績概評</th>
                   </tr>
                 </thead>
                 <tbody className="text-slate-700">
@@ -124,7 +124,7 @@ export default function GaihyouDistancePage() {
                     ['2.6 〜 1.9', 'D'],
                     ['1.8 以下', 'E'],
                   ].map(([range, rank]) => (
-                    <tr key={rank} className="odd:bg-white even:bg-emerald-50/40">
+                    <tr key={rank} className="odd:bg-white even:bg-brand-50/40">
                       <td className="border border-slate-200 px-3 py-2 font-mono">{range}</td>
                       <td className="border border-slate-200 px-3 py-2 text-center font-bold">{rank}</td>
                     </tr>
@@ -135,8 +135,8 @@ export default function GaihyouDistancePage() {
           </section>
 
           {/* 境界の丸め方の注意 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               「あと0.1」の境界は、四捨五入のどちらに転ぶかで決まる
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -145,7 +145,7 @@ export default function GaihyouDistancePage() {
               4.24であれば4.2のままCです。境界付近にいる場合、次の評価で評定が1つ変わるかどうかよりも先に、
               小数点第2位のわずかな差で区分が変わることがある点に注意してください。
             </p>
-            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「『学習成績概評』の欄は、高等学校における同一学年生徒全員（中略）の3か年間における全体の学習成績の
               状況を次の区分に従って、A、B、C、D、Eの5段階に分け、その生徒の属する成績段階を記入すること。」
             </blockquote>
@@ -156,7 +156,7 @@ export default function GaihyouDistancePage() {
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -164,8 +164,8 @@ export default function GaihyouDistancePage() {
           </section>
 
           {/* Aの上に何があるか（正直な現状確認） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               Aの上の区分は無いのか
             </h2>
             <p className="text-sm leading-relaxed text-slate-700">
@@ -179,8 +179,8 @@ export default function GaihyouDistancePage() {
           </section>
 
           {/* 概評が実際に問われる場面（T-N5第2ラウンド・外部一次ソースA） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               学習成績概評は、どの入試方式で実際に使われるのか
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -197,7 +197,7 @@ export default function GaihyouDistancePage() {
                 href="https://www.mext.go.jp/content/20251126-mxt_daigakuc02-000045982_01.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -209,8 +209,8 @@ export default function GaihyouDistancePage() {
           </section>
 
           {/* 自分の概評だけでなく同学年の分布も調査書に載る(T-N5第3ラウンド) */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               調査書には自分の概評だけでなく、同学年の人数分布も載る
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -218,7 +218,7 @@ export default function GaihyouDistancePage() {
               自分の概評だけでなく、<strong>同一学年の生徒がA〜Eの各段階に何人ずつ属しているか</strong>も
               記載されます。
             </p>
-            <blockquote className="mb-3 border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="mb-3 border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「『成績段階別人数』の欄は、各段階に属する人数とその合計を、『Ａ○○人、Ｂ○○人、Ｃ○○人、
               Ｄ○○人、Ｅ○○人、合計○○人』のように記入すること。」
             </blockquote>
@@ -234,23 +234,23 @@ export default function GaihyouDistancePage() {
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               あわせて確認したいツール
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700">
                 全体の学習成績の状況を計算
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
-              <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+              <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700">
                 調査書シミュレーター
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Play, Loader2, Gauge } from 'lucide-react';
+import { Play, Loader2, Gauge } from '@/components/icons';
 import { PREFECTURES } from '@/lib/prefectures';
 
 /**
@@ -46,7 +46,7 @@ export function ApiPlayground() {
   }
 
   return (
-    <div className="rounded-2xl border-2 border-indigo-200 bg-indigo-50/30 p-6">
+    <div className="rounded-lg border-2 border-brand-200 bg-brand-50/30 p-6">
       <div className="mb-4 grid gap-3 sm:grid-cols-3">
         <label className="block">
           <span className="text-xs font-bold text-slate-600">都道府県</span>
@@ -88,7 +88,7 @@ export function ApiPlayground() {
       <button
         onClick={run}
         disabled={loading}
-        className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-indigo-700 disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-brand-700 disabled:opacity-60"
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}
         実際にAPIを呼び出す
@@ -104,7 +104,7 @@ export function ApiPlayground() {
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-xs font-bold text-slate-600">
-              レスポンス {status !== null && <span className={status === 200 ? 'text-emerald-600' : 'text-amber-600'}>({status})</span>}
+              レスポンス {status !== null && <span className={status === 200 ? 'text-brand-600' : 'text-amber-600'}>({status})</span>}
             </span>
             {remaining !== null && (
               <span className="flex items-center gap-1 text-xs text-slate-500">
@@ -113,7 +113,7 @@ export function ApiPlayground() {
               </span>
             )}
           </div>
-          <pre className="max-h-96 overflow-auto rounded-xl bg-slate-900 p-4 text-xs leading-relaxed text-emerald-300">
+          <pre className="max-h-96 overflow-auto rounded-lg bg-slate-900 p-4 text-xs leading-relaxed text-brand-300">
             {response}
           </pre>
         </div>
@@ -122,7 +122,7 @@ export function ApiPlayground() {
       <p className="mt-3 text-xs leading-relaxed text-slate-500">
         このプレイグラウンドはお使いのブラウザから同一オリジンで実際のAPIを呼び出します（匿名利用枠30回/分の範囲内）。
         大量アクセスや自動テストには
-        <a href="#pricing" className="mx-1 font-semibold text-indigo-700 underline">
+        <a href="#pricing" className="mx-1 font-bold text-brand-700 underline">
           APIキー
         </a>
         の発行をご利用ください。

@@ -70,7 +70,7 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
       {prefecture && (
         <>
         <section className="mx-auto max-w-4xl px-4 py-8">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="text-lg font-bold text-slate-800 mb-3">
               {prefecture.name}の内申点計算について
             </h2>
@@ -80,21 +80,21 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
             </p>
             <dl className="grid grid-cols-2 gap-3 text-sm mb-4">
               <div className="rounded-lg bg-slate-50 p-3">
-                <dt className="font-medium text-slate-500">満点</dt>
+                <dt className="text-slate-500">満点</dt>
                 <dd className="text-lg font-bold text-slate-800">{prefecture.maxScore}点</dd>
               </div>
               <div className="rounded-lg bg-slate-50 p-3">
-                <dt className="font-medium text-slate-500">対象学年</dt>
+                <dt className="text-slate-500">対象学年</dt>
                 <dd className="text-lg font-bold text-slate-800">
                   中{prefecture.targetGrades.join('・')}年
                 </dd>
               </div>
               <div className="rounded-lg bg-slate-50 p-3">
-                <dt className="font-medium text-slate-500">5教科倍率</dt>
+                <dt className="text-slate-500">5教科倍率</dt>
                 <dd className="text-lg font-bold text-slate-800">{prefecture.coreMultiplier}倍</dd>
               </div>
               <div className="rounded-lg bg-slate-50 p-3">
-                <dt className="font-medium text-slate-500">実技4教科倍率</dt>
+                <dt className="text-slate-500">実技4教科倍率</dt>
                 <dd className="text-lg font-bold text-slate-800">{prefecture.practicalMultiplier}倍</dd>
               </div>
             </dl>
@@ -110,7 +110,7 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
                   href={prefecture.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:text-blue-600"
+                  className="text-brand-500 hover:text-brand-600"
                 >
                   {prefecture.sourceTitle ?? `${prefecture.name}教育委員会`}
                 </a>

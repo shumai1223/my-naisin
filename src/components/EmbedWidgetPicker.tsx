@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Check, Code2 } from 'lucide-react';
+import { Check, Code2 } from '@/components/icons';
 
 type WidgetKey = 'naishin' | 'hensachi' | 'gakushu_seiseki';
 
@@ -49,7 +49,7 @@ export function EmbedWidgetPicker() {
             type="button"
             onClick={() => setActive(key)}
             className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
-              active === key ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              active === key ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             {WIDGETS[key].label}
@@ -57,7 +57,7 @@ export function EmbedWidgetPicker() {
         ))}
       </div>
 
-      <div className="flex justify-center rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <div className="flex justify-center rounded-lg border border-slate-200 bg-slate-50 p-4">
         <iframe
           key={widget.path}
           src={widget.path}
@@ -69,7 +69,7 @@ export function EmbedWidgetPicker() {
         />
       </div>
 
-      <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-900 p-4 shadow-sm">
+      <div className="mt-4 rounded-lg border border-slate-200 bg-slate-900 p-4">
         <div className="mb-2 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-xs font-bold text-slate-300">
             <Code2 className="h-3.5 w-3.5" />
@@ -78,13 +78,13 @@ export function EmbedWidgetPicker() {
           <button
             type="button"
             onClick={copy}
-            className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white transition-colors hover:bg-blue-700"
+            className="inline-flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-bold text-white transition-colors hover:bg-brand-700"
           >
             {copied ? <Check className="h-3.5 w-3.5" /> : <Code2 className="h-3.5 w-3.5" />}
             {copied ? 'コピーしました' : 'コードをコピー'}
           </button>
         </div>
-        <pre className="overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-slate-950 p-3 text-[11px] leading-relaxed text-emerald-300">
+        <pre className="overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-slate-950 p-3 text-xs leading-relaxed text-brand-300">
           <code>{snippetFor(active)}</code>
         </pre>
       </div>

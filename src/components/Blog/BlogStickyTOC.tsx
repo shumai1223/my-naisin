@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { List } from 'lucide-react';
+import { List } from '@/components/icons';
 
 interface TocItem {
   id: string;
@@ -74,10 +74,10 @@ export function BlogStickyTOC({ rootSelector = '.blog-content' }: BlogStickyTOCP
       aria-label="目次"
       className="hidden xl:block sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto"
     >
-      <div className="rounded-2xl border border-gray-200/70 bg-white/80 backdrop-blur p-5 shadow-sm">
-        <div className="mb-3 flex items-center gap-2 border-b border-gray-100 pb-3">
-          <List className="h-4 w-4 text-blue-500" />
-          <h2 className="text-sm font-bold text-gray-800">目次</h2>
+      <div className="rounded-lg border border-slate-200/70 bg-white p-5">
+        <div className="mb-3 flex items-center gap-2 border-b border-slate-100 pb-3">
+          <List className="h-4 w-4 text-brand-500" />
+          <h2 className="text-sm font-bold text-slate-800">目次</h2>
         </div>
         <nav>
           <ul className="space-y-1 text-sm">
@@ -92,8 +92,8 @@ export function BlogStickyTOC({ rootSelector = '.blog-content' }: BlogStickyTOCP
                       item.level === 3 ? 'pl-5 text-xs' : ''
                     } ${
                       isActive
-                        ? 'bg-blue-50 text-blue-700 font-semibold border-l-2 border-blue-500'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-2 border-transparent'
+                        ? 'bg-brand-50 text-brand-700 font-bold border-l-2 border-brand-500'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 border-l-2 border-transparent'
                     }`}
                   >
                     {item.text}

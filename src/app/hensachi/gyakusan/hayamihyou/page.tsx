@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Undo2, AlertTriangle, Calculator } from 'lucide-react';
+import { Home, ChevronRight, Undo2, AlertTriangle, Calculator } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -79,17 +79,17 @@ export default function HensachiGyakusanHayamihyouPage() {
       />
       <FAQPageSchema faqItems={faqItems} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="hover:text-slate-600">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi/gyakusan" className="hover:text-purple-600">逆算計算機</Link>
+            <Link href="/hensachi/gyakusan" className="hover:text-slate-600">逆算計算機</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">早見表</span>
           </nav>
@@ -101,7 +101,7 @@ export default function HensachiGyakusanHayamihyouPage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
+          <section className="mb-8 rounded-lg border-2 border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
               <p className="text-sm leading-relaxed text-amber-900">
@@ -110,8 +110,8 @@ export default function HensachiGyakusanHayamihyouPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 border-l-4 border-slate-500 pl-3 text-lg font-bold text-slate-800">
               偏差値↔点数 対応表（{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点）
             </h2>
             <div className="overflow-x-auto">
@@ -136,20 +136,20 @@ export default function HensachiGyakusanHayamihyouPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-indigo-50/40 p-6 text-center shadow-sm">
+          <section className="mb-8 rounded-lg border-2 border-slate-200 bg-slate-50 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">自分のテストで正確な点数を出す</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
               過去問・模試の平均点・標準偏差が分かれば、あなたの状況に合った正確な「あと何点」を計算できます。
             </p>
             <Link
               href="/hensachi/gyakusan"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-purple-700"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-slate-700"
             >
               <Undo2 className="h-4 w-4" />
               目標偏差値まであと何点？逆算計算機へ
             </Link>
             <div className="mt-3">
-              <Link href="/hensachi" className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-purple-700 hover:underline">
+              <Link href="/hensachi" className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 hover:underline">
                 <Calculator className="h-3.5 w-3.5" />
                 通常の偏差値計算（点数から算出）はこちら
               </Link>
@@ -164,7 +164,7 @@ export default function HensachiGyakusanHayamihyouPage() {
           {/* T-ADS1 AdSense RESULT_BELOW: 答え（対応表）の後・保護者CTAより下。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
           <AdUnit unit="RESULT_BELOW" />
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {faqItems.map((f) => (

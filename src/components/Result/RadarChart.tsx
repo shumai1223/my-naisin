@@ -1,4 +1,4 @@
-import { Hexagon } from 'lucide-react';
+import { Hexagon } from '@/components/icons';
 
 import type { Scores } from '@/lib/types';
 import { SUBJECTS } from '@/lib/constants';
@@ -41,12 +41,12 @@ export function RadarChart({ scores }: RadarChartProps) {
   const dataPoints = polygon(n, R, valueAt);
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="rounded-lg border border-slate-200 bg-white">
       {/* Header */}
-      <div className="relative border-b border-slate-100 bg-gradient-to-r from-indigo-50 via-blue-50 to-violet-50 px-5 py-4">
+      <div className="relative border-b border-slate-100 bg-brand-50 px-5 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-200">
+            <div className="grid h-10 w-10 place-items-center rounded-lg bg-brand-500">
               <Hexagon className="h-5 w-5 text-white" />
             </div>
             <div>
@@ -54,9 +54,9 @@ export function RadarChart({ scores }: RadarChartProps) {
               <p className="text-xs text-slate-500">Subject Balance Chart</p>
             </div>
           </div>
-          <div className="rounded-xl bg-white/80 px-4 py-2 shadow-sm">
+          <div className="rounded-lg bg-white/80 px-4 py-2">
             <div className="text-xs text-slate-500">平均</div>
-            <div className="text-lg font-bold text-indigo-600">{average}</div>
+            <div className="text-lg font-bold text-brand-600">{average}</div>
           </div>
         </div>
       </div>
@@ -131,12 +131,12 @@ export function RadarChart({ scores }: RadarChartProps) {
         {/* Legend */}
         <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
           <div className="flex items-center gap-1.5">
-            <div className="h-3 w-3 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500" />
-            <span className="text-xs font-medium text-slate-600">あなたの成績</span>
+            <div className="h-3 w-3 rounded-full bg-brand-500" />
+            <span className="text-xs text-slate-600">あなたの成績</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="h-3 w-3 rounded-full border-2 border-slate-300 bg-white" />
-            <span className="text-xs font-medium text-slate-500">満点(5)</span>
+            <span className="text-xs text-slate-500">満点(5)</span>
           </div>
         </div>
       </div>

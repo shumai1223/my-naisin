@@ -1,5 +1,5 @@
-import type { LucideIcon } from 'lucide-react';
-import { Quote } from 'lucide-react';
+import type { LucideIcon } from '@/components/icons';
+import { Quote } from '@/components/icons';
 
 export type CaseStudyOrganizationType = 'school' | 'juku' | 'developer' | 'media';
 
@@ -36,10 +36,10 @@ const ORG_TYPE_LABEL: Record<CaseStudyOrganizationType, string> = {
  */
 export function CaseStudyCard({ data, icon: Icon, className = '' }: { data: CaseStudyData; icon?: LucideIcon; className?: string }) {
   return (
-    <div className={`rounded-2xl border border-slate-200 bg-white p-6 shadow-sm ${className}`}>
+    <div className={`rounded-lg border border-slate-200 bg-white p-6 ${className}`}>
       <div className="mb-3 flex items-center gap-3">
         {Icon && (
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
             <Icon className="h-5 w-5" />
           </span>
         )}
@@ -48,7 +48,7 @@ export function CaseStudyCard({ data, icon: Icon, className = '' }: { data: Case
           <div className="text-xs text-slate-500">{ORG_TYPE_LABEL[data.organizationType]} ／ {data.useCaseSummary}</div>
         </div>
       </div>
-      <blockquote className="flex gap-2 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
+      <blockquote className="flex gap-2 rounded-lg bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
         <Quote className="h-4 w-4 shrink-0 text-slate-300" />
         <span>{data.quote}</span>
       </blockquote>

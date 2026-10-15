@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, LineChart } from 'lucide-react';
+import { Home, ChevronRight, LineChart } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -69,11 +69,11 @@ export default function DashboardPage() {
       />
       <FAQPageSchema faqItems={DASHBOARD_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500 print:hidden">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -83,7 +83,7 @@ export default function DashboardPage() {
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <LineChart className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">成績の記録ダッシュボード</h1>
@@ -103,7 +103,7 @@ export default function DashboardPage() {
               {DASHBOARD_FAQS.map((faq) => (
                 <details
                   key={faq.question}
-                  className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+                  className="group rounded-lg border border-slate-200 bg-white p-4"
                 >
                   <summary className="cursor-pointer list-none font-bold text-slate-800">
                     {faq.question}
@@ -115,20 +115,20 @@ export default function DashboardPage() {
           </section>
 
           {/* 関連ツール（内部リンク） */}
-          <nav className="mt-10 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm print:hidden">
+          <nav className="mt-10 rounded-lg border border-slate-200 bg-white p-5 print:hidden">
             <h2 className="mb-3 text-sm font-bold text-slate-700">関連ツール</h2>
             <ul className="grid gap-2 text-sm sm:grid-cols-2">
               <li>
-                <Link href="/" className="text-blue-600 hover:underline">内申点を計算する（全国対応）</Link>
+                <Link href="/" className="text-brand-600 hover:underline">内申点を計算する（全国対応）</Link>
               </li>
               <li>
-                <Link href="/reverse" className="text-blue-600 hover:underline">志望校から逆算する</Link>
+                <Link href="/reverse" className="text-brand-600 hover:underline">志望校から逆算する</Link>
               </li>
               <li>
-                <Link href="/hensachi" className="text-blue-600 hover:underline">偏差値を計算する</Link>
+                <Link href="/hensachi" className="text-brand-600 hover:underline">偏差値を計算する</Link>
               </li>
               <li>
-                <Link href="/hyotei-heikin" className="text-blue-600 hover:underline">評定平均を計算する</Link>
+                <Link href="/hyotei-heikin" className="text-brand-600 hover:underline">評定平均を計算する</Link>
               </li>
             </ul>
           </nav>

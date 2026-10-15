@@ -3,7 +3,7 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { ArrowRight, RotateCcw, Calculator, ChevronRight, TrendingUp as TrendingUpIcon } from 'lucide-react';
+import { ArrowRight, RotateCcw, Calculator, ChevronRight, TrendingUp as TrendingUpIcon } from '@/components/icons';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { getPrefectureByCode, resolvePrefectureConfig, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -55,7 +55,7 @@ import { AdUnit } from '@/components/AdSlot';
 
 const SECTION_LOADER = (
   <div
-    className="flex h-32 items-center justify-center rounded-2xl border border-slate-200 bg-white"
+    className="flex h-32 items-center justify-center rounded-lg border border-slate-200 bg-white"
     aria-busy="true"
   >
     <Loader variant="inline" message="セクションを準備しています..." />
@@ -356,10 +356,10 @@ export default function HomeClient() {
       <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="min-w-0">
-            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+            <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
               <Header titleTag="h1" />
               <div className="px-4 pb-4 md:px-6">
-                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100">
+                <div className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
                   2026年度入試対応（令和8年度入学者選抜）
                 </div>
                 <ThreeStepGuide />
@@ -383,20 +383,20 @@ export default function HomeClient() {
                           ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }, 80);
                     }}
-                    className="group flex w-full items-center justify-between gap-3 rounded-2xl border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 via-blue-50 to-sky-50 px-5 py-4 text-left transition-all hover:border-indigo-400 hover:shadow-md"
+                    className="group flex w-full items-center justify-between gap-3 rounded-lg border-2 border-brand-200 bg-brand-50 px-5 py-4 text-left transition-all hover:border-brand-400"
                   >
                     <span className="min-w-0">
-                      <span className="flex items-center gap-2 text-sm font-bold text-indigo-900">
+                      <span className="flex items-center gap-2 text-sm font-bold text-brand-900">
                         <TrendingUpIcon className="h-4 w-4 shrink-0" />
                         おかえりなさい！前回の続きから
                       </span>
-                      <span className="mt-0.5 block truncate text-xs text-indigo-700">
+                      <span className="mt-0.5 block truncate text-xs text-brand-700">
                         {savedGoal.gap > 0
                           ? `${savedGoal.targetLabel ?? '目標'}まであと ${savedGoal.gap}点（前回の内申 ${savedGoal.score}）`
                           : `${savedGoal.targetLabel ?? '目標'}に到達（前回の内申 ${savedGoal.score}）。今の成績で再チェック`}
                       </span>
                     </span>
-                    <span className="flex items-center gap-1 rounded-lg bg-indigo-600 px-3 py-2 text-xs font-bold text-white shadow-sm transition-all group-hover:bg-indigo-700">
+                    <span className="flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-2 text-xs font-bold text-white transition-all group-hover:bg-brand-700">
                       続ける
                       <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </span>
@@ -407,9 +407,9 @@ export default function HomeClient() {
               {/* 人気急上昇ツール バナー（select画面のみ・/hensachi /hyotei-heikin /tokyo/total-scoreへの強誘導） */}
               {navigationMode === 'select' && (
                 <div className="px-4 pb-4 md:px-6">
-                  <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 p-4 shadow-md">
+                  <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-4">
                     <div className="mb-3 flex items-center gap-2">
-                      <span className="inline-flex animate-pulse items-center gap-1 rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-black text-white">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-red-500 px-2 py-0.5 text-xs font-bold text-white">
                         🔥 急上昇
                       </span>
                       <span className="text-xs font-bold text-amber-900">今、最も検索されている計算ツール</span>
@@ -417,42 +417,42 @@ export default function HomeClient() {
                     <div className="grid gap-2 sm:grid-cols-3">
                       <Link
                         href="/hyotei-heikin"
-                        className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+                        className="group flex items-center gap-3 rounded-lg bg-white p-3 transition-all"
                       >
-                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
                           <Calculator className="h-5 w-5" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-slate-800 group-hover:text-emerald-600">評定平均 自動計算</div>
-                          <div className="text-[11px] text-slate-500">通知表から評定平均と素内申を一括算出</div>
+                          <div className="text-sm font-bold text-slate-800 group-hover:text-brand-600">評定平均 自動計算</div>
+                          <div className="text-xs text-slate-500">通知表から評定平均と素内申を一括算出</div>
                         </div>
-                        <ChevronRight className="h-4 w-4 text-emerald-500 transition-transform group-hover:translate-x-1" />
+                        <ChevronRight className="h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
                       </Link>
                       <Link
                         href="/hensachi"
-                        className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+                        className="group flex items-center gap-3 rounded-lg bg-white p-3 transition-all"
                       >
-                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white">
+                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-slate-500 text-white">
                           <TrendingUpIcon className="h-5 w-5" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-slate-800 group-hover:text-purple-600">偏差値計算（5教科）</div>
-                          <div className="text-[11px] text-slate-500">点数と平均点から偏差値を瞬時に算出</div>
+                          <div className="text-sm font-bold text-slate-800 group-hover:text-slate-600">偏差値計算（5教科）</div>
+                          <div className="text-xs text-slate-500">点数と平均点から偏差値を瞬時に算出</div>
                         </div>
-                        <ChevronRight className="h-4 w-4 text-purple-500 transition-transform group-hover:translate-x-1" />
+                        <ChevronRight className="h-4 w-4 text-slate-500 transition-transform group-hover:translate-x-1" />
                       </Link>
                       <Link
                         href="/tokyo/total-score"
-                        className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+                        className="group flex items-center gap-3 rounded-lg bg-white p-3 transition-all"
                       >
-                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-700 text-white">
+                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
                           <Calculator className="h-5 w-5" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-slate-800 group-hover:text-blue-600">都立 総合得点 計算（1020点）</div>
-                          <div className="text-[11px] text-slate-500">学力検査・調査書・ESAT-Jを一括算出</div>
+                          <div className="text-sm font-bold text-slate-800 group-hover:text-brand-600">都立 総合得点 計算（1020点）</div>
+                          <div className="text-xs text-slate-500">学力検査・調査書・ESAT-Jを一括算出</div>
                         </div>
-                        <ChevronRight className="h-4 w-4 text-blue-500 transition-transform group-hover:translate-x-1" />
+                        <ChevronRight className="h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
                       </Link>
                     </div>
                   </div>
@@ -474,20 +474,20 @@ export default function HomeClient() {
                 <div className="px-4 pb-4 md:px-6">
                   <Link
                     href="/hiyou"
-                    className="group flex items-center gap-3 rounded-2xl border border-indigo-200 bg-gradient-to-r from-indigo-50 via-white to-emerald-50 px-4 py-3 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md"
+                    className="group flex items-center gap-3 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 transition-all hover:border-brand-300"
                   >
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-600 text-white shadow-sm">
-                      <span className="text-lg font-black">¥</span>
+                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
+                      <span className="text-lg font-bold">¥</span>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <div className="text-sm font-bold text-slate-800 group-hover:text-indigo-700">
+                      <div className="text-sm font-bold text-slate-800 group-hover:text-brand-700">
                         保護者の方へ｜教育費・学費・塾代のシミュレーター
                       </div>
-                      <div className="text-[11px] text-slate-500">
+                      <div className="text-xs text-slate-500">
                         高校〜大学の費用・高校無償化・就学支援金を文科省データで無料試算
                       </div>
                     </div>
-                    <ChevronRight className="h-4 w-4 text-indigo-500 transition-transform group-hover:translate-x-1" />
+                    <ChevronRight className="h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
               )}
@@ -507,10 +507,10 @@ export default function HomeClient() {
                   {navigationMode === 'calculate' && (
                     <>
                       <Card className="overflow-hidden">
-                        <div className="border-b border-slate-100/80 bg-gradient-to-r from-indigo-50/80 via-blue-50/60 to-violet-50/80 px-5 py-5 md:px-6">
+                        <div className="border-b border-slate-100/80 bg-brand-50/80 px-5 py-5 md:px-6">
                           <div className="flex flex-wrap items-center justify-between gap-4">
                             <div className="flex items-center gap-4">
-                              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 via-blue-500 to-violet-600 shadow-lg shadow-indigo-300/40">
+                              <div className="grid h-12 w-12 place-items-center rounded-lg bg-brand-500">
                                 <ArrowRight className="h-6 w-6 text-white" />
                               </div>
                               <div>
@@ -521,15 +521,15 @@ export default function HomeClient() {
                             <div className="flex items-center gap-2">
                               <button
                                 onClick={() => setNavigationMode('select')}
-                                className="rounded-lg border border-blue-300 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 shadow-sm transition-all duration-300 hover:border-blue-400 hover:bg-blue-100 hover:shadow-md"
+                                className="rounded-lg border border-brand-300 bg-brand-50 px-4 py-2 text-sm text-brand-700 transition-all duration-300 hover:border-brand-400 hover:bg-brand-100"
                               >
                                 目的を変更
                               </button>
-                              <div className="rounded-2xl border border-indigo-200/60 bg-gradient-to-br from-indigo-50/90 via-blue-50/80 to-violet-50/90 px-5 py-3 shadow-sm backdrop-blur-sm">
-                                <div className="text-sm font-bold text-indigo-700">
+                              <div className="rounded-lg border border-brand-200/60 bg-brand-50/90 px-5 py-3">
+                                <div className="text-sm font-bold text-brand-700">
                                   {selectedPrefecture?.name ?? '都道府県を選択'}
                                 </div>
-                                <div className="mt-0.5 text-xs text-indigo-600/70">満点：{max}点</div>
+                                <div className="mt-0.5 text-xs text-brand-600/70">満点：{max}点</div>
                               </div>
                             </div>
                           </div>
@@ -560,7 +560,7 @@ export default function HomeClient() {
                             <Button
                               onClick={onReveal}
                               leftIcon={<ArrowRight className="h-4 w-4" />}
-                              className="w-full sm:w-auto shadow-md shadow-blue-500/20"
+                              className="w-full sm:w-auto"
                             >
                               結果を見る
                             </Button>

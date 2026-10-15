@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, GraduationCap, CalendarClock, Scale, HelpCircle, Sparkles } from 'lucide-react';
+import { Home, ChevronRight, GraduationCap, CalendarClock, Scale, HelpCircle, Sparkles } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -56,20 +56,20 @@ export default function SougouGataSenbatsuPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">総合型選抜とは</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-violet-600 px-3 py-1 text-xs font-bold text-white">
+            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-slate-600 px-3 py-1 text-xs font-bold text-white">
               <Sparkles className="h-3.5 w-3.5" />
               いま急増中の大学入試
             </div>
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <GraduationCap className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">総合型選抜とは？</h1>
@@ -88,9 +88,9 @@ export default function SougouGataSenbatsuPage() {
           </AnswerBox>
 
           {/* 総合型 vs 学校推薦型 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Scale className="h-5 w-5 text-violet-600" />
+              <Scale className="h-5 w-5 text-slate-600" />
               総合型選抜と学校推薦型選抜の違い
             </h2>
             <div className="overflow-x-auto">
@@ -105,7 +105,7 @@ export default function SougouGataSenbatsuPage() {
                 <tbody className="text-slate-700">
                   <tr className="odd:bg-white even:bg-slate-50"><td className="border border-slate-200 px-3 py-2 font-bold">通称</td><td className="border border-slate-200 px-3 py-2">指定校推薦・公募推薦</td><td className="border border-slate-200 px-3 py-2">旧AO入試</td></tr>
                   <tr className="odd:bg-white even:bg-slate-50"><td className="border border-slate-200 px-3 py-2 font-bold">学校長の推薦</td><td className="border border-slate-200 px-3 py-2">必要</td><td className="border border-slate-200 px-3 py-2">不要（自己推薦）</td></tr>
-                  <tr className="odd:bg-white even:bg-slate-50"><td className="border border-slate-200 px-3 py-2 font-bold">評定平均の基準</td><td className="border border-slate-200 px-3 py-2 font-bold text-violet-700">ほぼ必須（3.3〜4.5目安）</td><td className="border border-slate-200 px-3 py-2">大学による（不問〜4.0）</td></tr>
+                  <tr className="odd:bg-white even:bg-slate-50"><td className="border border-slate-200 px-3 py-2 font-bold">評定平均の基準</td><td className="border border-slate-200 px-3 py-2 font-bold text-slate-700">ほぼ必須（3.3〜4.5目安）</td><td className="border border-slate-200 px-3 py-2">大学による（不問〜4.0）</td></tr>
                   <tr className="odd:bg-white even:bg-slate-50"><td className="border border-slate-200 px-3 py-2 font-bold">主に評価されるもの</td><td className="border border-slate-200 px-3 py-2">評定平均・校内選考</td><td className="border border-slate-200 px-3 py-2">志望理由書・面接・小論文・活動実績</td></tr>
                   <tr className="odd:bg-white even:bg-slate-50"><td className="border border-slate-200 px-3 py-2 font-bold">出願時期</td><td className="border border-slate-200 px-3 py-2">高3の11月〜</td><td className="border border-slate-200 px-3 py-2">高3の9月〜</td></tr>
                 </tbody>
@@ -113,14 +113,14 @@ export default function SougouGataSenbatsuPage() {
             </div>
             <p className="mt-2 text-xs text-slate-500">
               ※ 大学・学部・年度で大きく異なる目安です。指定校推薦の評定基準のレンジは
-              <Link href="/hyotei-heikin/suisen-kijun" className="font-bold text-violet-600 hover:underline">推薦の評定基準ページ</Link>で詳しく確認できます。
+              <Link href="/hyotei-heikin/suisen-kijun" className="font-bold text-slate-600 hover:underline">推薦の評定基準ページ</Link>で詳しく確認できます。
             </p>
           </section>
 
           {/* タイムライン */}
-          <section className="mt-8 rounded-2xl border-2 border-violet-200 bg-gradient-to-br from-violet-50/50 to-indigo-50/40 p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-slate-200 bg-slate-50/50 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <CalendarClock className="h-5 w-5 text-violet-600" />
+              <CalendarClock className="h-5 w-5 text-slate-600" />
               準備は「高1の1学期」から始まっている
             </h2>
             <p className="text-sm leading-relaxed text-slate-700">
@@ -132,7 +132,7 @@ export default function SougouGataSenbatsuPage() {
           </section>
 
           {/* my-shingaku 相互送客（推薦→大学ルート）＋大学受験Z会 */}
-          <section className="mt-8 overflow-hidden rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-violet-50/60 to-white p-6 shadow-sm">
+          <section className="mt-8 overflow-hidden rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
             <h2 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">
               推薦・総合型で大学へ進むなら、早めに「大学の選び方と費用」も把握を
             </h2>
@@ -145,7 +145,7 @@ export default function SougouGataSenbatsuPage() {
                 href="https://my-shingaku.com/sougou-suisen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand-700 sm:w-auto"
               >
                 大学の総合型・学校推薦型選抜と費用を調べる（My Shingaku）
                 <ChevronRight className="h-4 w-4" />
@@ -162,7 +162,7 @@ export default function SougouGataSenbatsuPage() {
               { href: '/chousasho', title: '調査書とは？（評定がどう使われるか）' },
               { href: '/shinro-hiyou', title: '高校〜大学の教育費（進路別）' },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+              <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-700 transition-shadow">
                 {c.title}
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
@@ -178,11 +178,11 @@ export default function SougouGataSenbatsuPage() {
             />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-violet-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-slate-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

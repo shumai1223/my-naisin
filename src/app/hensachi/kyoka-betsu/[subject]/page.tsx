@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Home, ChevronRight, Sparkles } from 'lucide-react';
+import { Home, ChevronRight, Sparkles } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -61,25 +61,25 @@ export default async function SubjectHensachiPage({ params }: PageProps) {
       />
       <FAQPageSchema faqItems={faqItems} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="hover:text-slate-600">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi/kyoka-betsu" className="hover:text-purple-600">教科別の偏差値</Link>
+            <Link href="/hensachi/kyoka-betsu" className="hover:text-slate-600">教科別の偏差値</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">{content.label}の上げ方</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <Sparkles className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -92,15 +92,15 @@ export default async function SubjectHensachiPage({ params }: PageProps) {
           <HensachiCalculator />
 
           {/* 教科別の上げ方 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 border-l-4 border-slate-500 pl-3 text-lg font-bold text-slate-800">
               {content.label}の偏差値を上げる具体的な方法
             </h2>
             <div className="space-y-4">
               {content.methods.map((m, i) => (
-                <div key={m.title} className="rounded-xl border border-purple-100 bg-purple-50/50 p-4">
-                  <h3 className="mb-1 text-sm font-bold text-purple-900">方法{i + 1}：{m.title}</h3>
-                  <p className="text-sm leading-relaxed text-purple-800">{m.body}</p>
+                <div key={m.title} className="rounded-lg border border-slate-100 bg-slate-50/50 p-4">
+                  <h3 className="mb-1 text-sm font-bold text-slate-900">方法{i + 1}：{m.title}</h3>
+                  <p className="text-sm leading-relaxed text-slate-800">{m.body}</p>
                 </div>
               ))}
             </div>
@@ -112,7 +112,7 @@ export default async function SubjectHensachiPage({ params }: PageProps) {
           </div>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {content.faqs.map((f) => (
@@ -125,14 +125,14 @@ export default async function SubjectHensachiPage({ params }: PageProps) {
           </section>
 
           {/* 他教科への導線 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">他の教科の偏差値の上げ方</h2>
             <div className="flex flex-wrap gap-2">
               {SUBJECT_CONTENTS.filter((s) => s.slug !== content.slug).map((s) => (
                 <Link
                   key={s.slug}
                   href={`/hensachi/kyoka-betsu/${s.slug}`}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-purple-300 hover:bg-purple-50 hover:text-purple-700"
+                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700"
                 >
                   {s.label}
                 </Link>

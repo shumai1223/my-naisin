@@ -1,4 +1,4 @@
-import { Shield, ArrowLeft, Cookie, Eye, BarChart3, ExternalLink, Users, Database, Lock, Mail, Bell, FileCheck } from 'lucide-react';
+import { Shield, ArrowLeft, Cookie, Eye, BarChart3, ExternalLink, Users, Database, Lock, Mail, Bell, FileCheck } from '@/components/icons';
 import Link from 'next/link';
 
 import { APP_NAME } from '@/lib/constants';
@@ -8,12 +8,12 @@ export default function PrivacyPage() {
   const lastUpdated = '2026年8月13日';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-3xl px-4 py-12">
         {/* Back link */}
         <Link 
           href="/" 
-          className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm transition-all hover:bg-slate-50 hover:shadow"
+          className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm text-slate-600 transition-all hover:bg-slate-50"
         >
           <ArrowLeft className="h-4 w-4" />
           トップに戻る
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
 
         {/* Header */}
         <div className="mb-8 flex items-center gap-4">
-          <div className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-200">
+          <div className="grid h-14 w-14 place-items-center rounded-lg bg-brand-500">
             <Shield className="h-7 w-7 text-white" />
           </div>
           <div>
@@ -31,33 +31,33 @@ export default function PrivacyPage() {
         </div>
 
         {/* Summary Box */}
-        <div className="mb-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6">
-          <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-emerald-800">
+        <div className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
+          <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-brand-800">
             <FileCheck className="h-5 w-5" />
             プライバシーポリシーの要約
           </h3>
-          <ul className="space-y-2 text-sm text-emerald-700">
+          <ul className="space-y-2 text-sm text-brand-700">
             <li className="flex gap-2">
-              <span className="text-emerald-500">✓</span>
+              <span className="text-brand-500">✓</span>
               <span><strong>ツール利用時：</strong>個人情報を収集しません（端末内のみ保存）</span>
             </li>
             <li className="flex gap-2">
-              <span className="text-emerald-500">✓</span>
+              <span className="text-brand-500">✓</span>
               <span><strong>お問い合わせ・受け取り登録時：</strong>返信・配信のためメールアドレス等を取得します（任意）</span>
             </li>
             <li className="flex gap-2">
-              <span className="text-emerald-500">✓</span>
+              <span className="text-brand-500">✓</span>
               <span><strong>広告：</strong>アフィリエイト広告を掲載しています。閲覧履歴に基づくパーソナライズ広告は配信していません</span>
             </li>
             <li className="flex gap-2">
-              <span className="text-emerald-500">✓</span>
+              <span className="text-brand-500">✓</span>
               <span><strong>データ利用：</strong>Google等のサービスが利用データを収集・分析します</span>
             </li>
           </ul>
         </div>
 
         {/* Content */}
-        <div className="space-y-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+        <div className="space-y-8 rounded-lg border border-slate-200 bg-white p-6 md:p-8">
           
           {/* はじめに */}
           <section>
@@ -77,11 +77,11 @@ export default function PrivacyPage() {
               当サイトは、日本国内の法令および国際的なプライバシー保護の基準に準拠し、
               透明性のある情報管理を行うことをお約束いたします。
             </p>
-            <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
-              <p className="text-sm font-medium leading-relaxed text-blue-800">
+            <div className="mt-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
+              <p className="text-sm leading-relaxed text-brand-800">
                 <strong>対象：</strong>中学生・高校生（主に13歳以上）
               </p>
-              <p className="mt-1 text-xs text-blue-700">
+              <p className="mt-1 text-xs text-brand-700">
                 13歳未満の方は保護者の同意のもとご利用ください。
               </p>
             </div>
@@ -90,14 +90,14 @@ export default function PrivacyPage() {
           {/* 収集する情報 */}
           <section>
             <div className="mb-3 flex items-center gap-2">
-              <Database className="h-5 w-5 text-emerald-500" />
+              <Database className="h-5 w-5 text-brand-500" />
               <h2 className="text-lg font-bold text-slate-800">2. 収集する情報</h2>
             </div>
-            <div className="rounded-xl bg-emerald-50 p-4">
-              <p className="text-sm font-medium text-emerald-700">
+            <div className="rounded-lg bg-brand-50 p-4">
+              <p className="text-sm text-brand-700">
                 ✓ ツール利用時は個人情報を収集しません（端末内のみ保存）
               </p>
-              <p className="mt-1 text-xs text-emerald-600">
+              <p className="mt-1 text-xs text-brand-600">
                 ※ お問い合わせ時のみ、返信のためメールアドレス等を取得します（詳細は2.2参照）
               </p>
             </div>
@@ -109,7 +109,7 @@ export default function PrivacyPage() {
             </p>
             
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.2 お問い合わせ時の情報</h3>
-            <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="text-sm leading-relaxed text-amber-800">
                 <strong>お問い合わせフォームをご利用の場合：</strong>返信のためにメールアドレス等の個人情報を取得します。
               </p>
@@ -132,23 +132,23 @@ export default function PrivacyPage() {
             </p>
             <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
-                <span className="text-emerald-500">•</span>
+                <span className="text-brand-500">•</span>
                 ブラウザの種類およびバージョン
               </li>
               <li className="flex gap-2">
-                <span className="text-emerald-500">•</span>
+                <span className="text-brand-500">•</span>
                 オペレーティングシステムの種類
               </li>
               <li className="flex gap-2">
-                <span className="text-emerald-500">•</span>
+                <span className="text-brand-500">•</span>
                 アクセス日時およびページ閲覧履歴
               </li>
               <li className="flex gap-2">
-                <span className="text-emerald-500">•</span>
+                <span className="text-brand-500">•</span>
                 リファラー（参照元URL）
               </li>
               <li className="flex gap-2">
-                <span className="text-emerald-500">•</span>
+                <span className="text-brand-500">•</span>
                 IPアドレス（匿名化処理を行います）
               </li>
             </ul>
@@ -159,12 +159,12 @@ export default function PrivacyPage() {
             </p>
 
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.4 受験情報の受け取り登録（任意）</h3>
-            <div className="rounded-xl border border-sky-200 bg-sky-50 p-4">
-              <p className="text-sm leading-relaxed text-sky-800">
+            <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+              <p className="text-sm leading-relaxed text-brand-800">
                 <strong>「結果を保存・受け取る」機能をご利用の場合：</strong>受験情報・内申対策のお届けのため、
                 メールアドレスを取得します。登録は完全に任意で、ツールの利用に登録は必要ありません。
               </p>
-              <ul className="mt-2 space-y-1 text-xs text-sky-700">
+              <ul className="mt-2 space-y-1 text-xs text-brand-700">
                 <li>• <strong>取得項目：</strong>メールアドレス、登録時の文脈情報（選択中の都道府県・内申点・目標・差。任意）</li>
                 <li>• <strong>利用目的：</strong>受験情報・内申対策・志望校情報の配信のみ（同意した場合に限る）</li>
                 <li>• <strong>配信解除：</strong>各配信またはお問い合わせからいつでも解除できます</li>
@@ -174,14 +174,14 @@ export default function PrivacyPage() {
             </div>
 
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.5 匿名統計への協力（任意）</h3>
-            <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-              <p className="text-sm leading-relaxed text-emerald-800">
+            <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+              <p className="text-sm leading-relaxed text-brand-800">
                 <strong>「匿名で統計に協力する」にチェックを入れた場合：</strong>計算結果（内申点・偏差値・総合得点等の数値のみ）を、
                 氏名・メールアドレス・IPアドレス等を一切含まない形で送信し、全国の傾向を示す統計データ（
-                <Link href="/stats" className="text-emerald-700 underline">全国統計データページ</Link>
+                <Link href="/stats" className="text-brand-700 underline">全国統計データページ</Link>
                 ）の作成に利用します。
               </p>
-              <ul className="mt-2 space-y-1 text-xs text-emerald-700">
+              <ul className="mt-2 space-y-1 text-xs text-brand-700">
                 <li>• <strong>取得項目：</strong>指標の種類（内申点／偏差値／総合得点）、数値、都道府県コード（任意）のみ。個人を特定できる情報は一切含みません</li>
                 <li>• <strong>利用目的：</strong>全国の匿名集計統計データの作成・公開（サンプルサイズが一定件数未満の項目は非公開）</li>
                 <li>• <strong>同意の撤回：</strong>チェックを外すことでいつでも協力を停止できます（過去に送信済みのデータは個人と紐づいていないため個別の削除はできません）</li>
@@ -190,23 +190,23 @@ export default function PrivacyPage() {
             </div>
 
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">2.6 開発者向けAPI利用・有償プランのお申し込み</h3>
-            <div className="rounded-xl border border-violet-200 bg-violet-50 p-4">
-              <p className="text-sm leading-relaxed text-violet-800">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <p className="text-sm leading-relaxed text-slate-800">
                 <strong>APIキーを発行する場合：</strong>ラベル（任意の管理用メモ）・メールアドレス（任意）を
                 当サイトのデータベースに保存します。
               </p>
-              <ul className="mt-2 space-y-1 text-xs text-violet-700">
+              <ul className="mt-2 space-y-1 text-xs text-slate-700">
                 <li>• <strong>取得項目：</strong>ラベル、メールアドレス（いずれも任意入力）</li>
                 <li>• <strong>利用目的：</strong>発行済みキーの管理、無料プランから有償プランへの移行状況の把握、重要なお知らせの送付</li>
                 <li>• <strong>削除方法：</strong>削除をご希望の場合はお問い合わせください</li>
               </ul>
-              <p className="mt-3 text-sm leading-relaxed text-violet-800">
+              <p className="mt-3 text-sm leading-relaxed text-slate-800">
                 <strong>Pro／Business／Enterpriseプランをお申し込みの場合：</strong>決済はStripe社の
                 決済ページ（Stripe Checkout）で行われます。お支払い情報・メールアドレスはStripe社が
                 管理し、当サイトのサーバーには保存しません。当サイトからStripe社へは、選択いただいた
                 プラン種別と、利用規約への同意時刻のみを記録用に送信します。
               </p>
-              <ul className="mt-2 space-y-1 text-xs text-violet-700">
+              <ul className="mt-2 space-y-1 text-xs text-slate-700">
                 <li>• <strong>Stripe社への送信項目：</strong>プラン種別、利用規約への同意時刻、（入力した場合）メールアドレス</li>
                 <li>• <strong>第三者提供：</strong>Stripe社のプライバシーポリシーが別途適用されます</li>
               </ul>
@@ -216,7 +216,7 @@ export default function PrivacyPage() {
           {/* ローカルストレージ */}
           <section>
             <div className="mb-3 flex items-center gap-2">
-              <Lock className="h-5 w-5 text-blue-500" />
+              <Lock className="h-5 w-5 text-brand-500" />
               <h2 className="text-lg font-bold text-slate-800">3. ローカルストレージの使用</h2>
             </div>
             <p className="mb-3 text-sm leading-relaxed text-slate-600">
@@ -228,23 +228,23 @@ export default function PrivacyPage() {
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">3.1 保存される情報の種類</h3>
             <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>成績データ：</strong>入力した各教科の評定値（ページを閉じても復元可能）
               </li>
               <li className="flex gap-2">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>都道府県選択：</strong>選択した都道府県の計算方式（全国47都道府県対応）
               </li>
               <li className="flex gap-2">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>成績履歴：</strong>保存機能ONの場合、過去の計算結果（保存日時・任意のメモを含む、最大30件）
               </li>
               <li className="flex gap-2">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>Cookie同意状態：</strong>Cookie使用への同意有無
               </li>
               <li className="flex gap-2">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>保存機能の設定：</strong>記録保存機能のON/OFF状態
               </li>
             </ul>
@@ -262,19 +262,19 @@ export default function PrivacyPage() {
             </p>
             <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 ブラウザの設定から「閲覧履歴データの削除」を実行
               </li>
               <li className="flex gap-2">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 ブラウザの開発者ツールからローカルストレージを手動で削除
               </li>
               <li className="flex gap-2">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 当サイトの「記録を保存」機能をOFFにする（履歴のみ削除対象外）
               </li>
             </ul>
-            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="text-sm leading-relaxed text-amber-800">
                 <strong>ご注意：</strong>ブラウザの設定変更、キャッシュのクリア、プライベートブラウジングモードの使用、
                 または端末の変更により、保存されたデータが消失する場合があります。
@@ -297,20 +297,20 @@ export default function PrivacyPage() {
             <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">4.1 使用するCookieの種類</h3>
             
             <div className="mt-3 space-y-3">
-              <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-                <h4 className="flex items-center gap-2 text-sm font-bold text-blue-800">
-                  <span className="rounded bg-blue-500 px-1.5 py-0.5 text-[10px] text-white">必須</span>
+              <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                <h4 className="flex items-center gap-2 text-sm font-bold text-brand-800">
+                  <span className="rounded bg-brand-500 px-1.5 py-0.5 text-xs text-white">必須</span>
                   必須Cookie（ファーストパーティ）
                 </h4>
-                <p className="mt-2 text-xs leading-relaxed text-blue-700">
+                <p className="mt-2 text-xs leading-relaxed text-brand-700">
                   サイトの基本機能に必要なCookieです。Cookie同意の設定状態や、記録保存機能のON/OFF状態を
                   記憶するために使用します。これらのCookieを無効にすると、サイトが正常に動作しない場合があります。
                 </p>
               </div>
               
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <h4 className="flex items-center gap-2 text-sm font-bold text-slate-700">
-                  <span className="rounded bg-slate-400 px-1.5 py-0.5 text-[10px] text-white">任意</span>
+                  <span className="rounded bg-slate-400 px-1.5 py-0.5 text-xs text-white">任意</span>
                   分析Cookie（サードパーティ）
                 </h4>
                 <p className="mt-2 text-xs leading-relaxed text-slate-600">
@@ -338,7 +338,7 @@ export default function PrivacyPage() {
                 <strong>オプトアウト：</strong>各サービス提供元のオプトアウトページを利用
               </li>
             </ul>
-            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="text-sm leading-relaxed text-amber-800">
                 <strong>ご注意：</strong>必須Cookie以外を無効にしても、当サイトの基本機能はご利用いただけます。
                 ただし、一部の機能や表示が制限される場合があります。
@@ -354,7 +354,7 @@ export default function PrivacyPage() {
               「掲載していない」と書き続けることは、このサイトの拠り所である「公表値のみ・捏造ゼロ」に反する。 */}
           <section>
             <div className="mb-3 flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-orange-500" />
+              <BarChart3 className="h-5 w-5 text-amber-500" />
               <h2 className="text-lg font-bold text-slate-800">5. 広告（アフィリエイト）と第三者Cookieについて</h2>
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
@@ -363,9 +363,9 @@ export default function PrivacyPage() {
               リンク経由でお申し込みがあった場合、広告主から当サイトに紹介料が支払われることがあります。
               紹介料の有無によって、計算結果や順位・評価を変えることはありません。
             </p>
-            <div className="mt-3 rounded-xl border border-orange-200 bg-orange-50 p-4">
-              <h4 className="text-sm font-bold text-orange-800">利用しているサービスと外部への送信</h4>
-              <p className="mt-2 text-xs leading-relaxed text-orange-700">
+            <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-4">
+              <h4 className="text-sm font-bold text-amber-800">利用しているサービスと外部への送信</h4>
+              <p className="mt-2 text-xs leading-relaxed text-amber-700">
                 • 利用しているASP（広告仲介事業者）：A8.net、もしもアフィリエイト、ACCESS TRADE<br/>
                 • 広告リンクをクリックすると、当サイトの計測用URL（/go）を経由して広告主のサイトへ移動します。
                 その際、どの広告がクリックされたかを当サイト内に記録します（氏名・メールアドレス等は含みません）。<br/>
@@ -383,19 +383,19 @@ export default function PrivacyPage() {
             </p>
             <ul className="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
-                <span className="text-orange-500">•</span>
+                <span className="text-amber-500">•</span>
                 広告リンクをクリックしない（クリックしなければ広告主・ASPへの遷移は発生しません）
               </li>
               <li className="flex gap-2">
-                <span className="text-orange-500">•</span>
+                <span className="text-amber-500">•</span>
                 ブラウザの設定で「サードパーティCookie」を無効にする
               </li>
               <li className="flex gap-2">
-                <span className="text-orange-500">•</span>
+                <span className="text-amber-500">•</span>
                 広告ブロック拡張機能を使う（当サイトの計算機は広告をブロックした状態でも通常どおり動作します）
               </li>
             </ul>
-            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="text-sm leading-relaxed text-amber-800">
                 <strong>ご注意：</strong>広告Cookieを無効にしても、当サイトの基本機能はご利用いただけます。
                 ただし、広告の関連性が低下する場合があります。
@@ -403,7 +403,7 @@ export default function PrivacyPage() {
             </div>
 
             {/* 子ども向け扱いに関する注意 */}
-            <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4">
+            <div className="mt-6 rounded-lg border border-red-200 bg-red-50 p-4">
               <h4 className="text-sm font-bold text-red-800 flex items-center gap-2">
                 <Users className="h-4 w-4" />
                 13歳未満のユーザーに関する特別な配慮
@@ -455,14 +455,14 @@ export default function PrivacyPage() {
                 href="https://tools.google.com/dlpage/gaoptout" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-blue-600 underline hover:text-blue-700"
+                className="inline-flex items-center gap-1 text-brand-600 underline hover:text-brand-700"
               >
                 Googleアナリティクス オプトアウト アドオン
                 <ExternalLink className="h-3 w-3" />
               </a>
               をブラウザにインストールしてください。
             </p>
-            <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="text-xs leading-relaxed text-amber-800">
                 <strong>広告について：</strong>アフィリエイト広告（塾・通信教育・FP無料相談等の紹介リンク）を掲載しています。閲覧履歴に基づくパーソナライズ広告は配信しておらず、Google AdSense・Amazonアソシエイトは利用していません。詳しくは「5. 広告（アフィリエイト）と第三者Cookieについて」をご覧ください。
               </p>
@@ -472,11 +472,11 @@ export default function PrivacyPage() {
           {/* 未成年者のプライバシー */}
           <section>
             <div className="mb-3 flex items-center gap-2">
-              <Users className="h-5 w-5 text-purple-500" />
+              <Users className="h-5 w-5 text-slate-500" />
               <h2 className="text-lg font-bold text-slate-800">7. 未成年者のプライバシーについて</h2>
             </div>
-            <div className="rounded-xl border border-purple-200 bg-purple-50 p-4">
-              <p className="text-sm font-medium leading-relaxed text-purple-800">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <p className="text-sm leading-relaxed text-slate-800">
                 当サイトは主に中学生・高校生を対象としたサービスです。
                 18歳未満の方は、保護者の同意を得た上でご利用ください。
               </p>
@@ -497,7 +497,7 @@ export default function PrivacyPage() {
           {/* ユーザーの権利 */}
           <section>
             <div className="mb-3 flex items-center gap-2">
-              <Bell className="h-5 w-5 text-indigo-500" />
+              <Bell className="h-5 w-5 text-brand-500" />
               <h2 className="text-lg font-bold text-slate-800">8. ユーザーの権利</h2>
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
@@ -505,19 +505,19 @@ export default function PrivacyPage() {
             </p>
             <ul className="mt-3 space-y-2 text-sm leading-relaxed text-slate-600">
               <li className="flex gap-2">
-                <span className="text-indigo-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>アクセス権：</strong>お使いの端末に保存されているデータを確認する権利
               </li>
               <li className="flex gap-2">
-                <span className="text-indigo-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>削除権：</strong>ブラウザ設定からローカルストレージのデータを削除する権利
               </li>
               <li className="flex gap-2">
-                <span className="text-indigo-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>オプトアウト権：</strong>Cookie同意画面で「必須のみ許可」を選択し、分析Cookieを拒否する権利
               </li>
               <li className="flex gap-2">
-                <span className="text-indigo-500">•</span>
+                <span className="text-brand-500">•</span>
                 <strong>情報提供を受ける権利：</strong>データの取り扱いについて説明を求める権利
               </li>
             </ul>
@@ -540,12 +540,12 @@ export default function PrivacyPage() {
             </p>
             
             {/* 子ども向けポリシーの変更について */}
-            <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
-              <h4 className="text-sm font-bold text-blue-800 flex items-center gap-2">
+            <div className="mt-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
+              <h4 className="text-sm font-bold text-brand-800 flex items-center gap-2">
                 <Users className="h-4 w-4" />
                 子ども向けポリシーの優先的な変更
               </h4>
-              <p className="mt-2 text-xs leading-relaxed text-blue-700">
+              <p className="mt-2 text-xs leading-relaxed text-brand-700">
                 子どものプライバシー保護に関する法律やガイドラインが変更された場合、
                 その他の変更に優先して本ポリシーを更新し、速やかに告知いたします。
               </p>
@@ -555,21 +555,21 @@ export default function PrivacyPage() {
           {/* お問い合わせ */}
           <section>
             <div className="mb-3 flex items-center gap-2">
-              <Mail className="h-5 w-5 text-teal-500" />
+              <Mail className="h-5 w-5 text-brand-500" />
               <h2 className="text-lg font-bold text-slate-800">10. お問い合わせ</h2>
             </div>
             <p className="text-sm leading-relaxed text-slate-600">
               本プライバシーポリシーに関するご質問、ご意見、苦情、またはデータに関するリクエストは、
               以下の方法でお問い合わせください：
             </p>
-            <div className="mt-4 rounded-xl border border-teal-200 bg-teal-50 p-4">
-              <p className="text-sm leading-relaxed text-teal-800">
+            <div className="mt-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
+              <p className="text-sm leading-relaxed text-brand-800">
                 <strong>お問い合わせフォーム：</strong>
-                <Link href="/contact" className="ml-1 text-teal-700 underline hover:text-teal-900">
+                <Link href="/contact" className="ml-1 text-brand-700 underline hover:text-brand-900">
                   お問い合わせページ
                 </Link>
               </p>
-              <p className="mt-2 text-xs text-teal-700">
+              <p className="mt-2 text-xs text-brand-700">
                 ※ お問い合わせへの回答には、通常3〜5営業日程度お時間をいただく場合がございます。
               </p>
             </div>
@@ -579,7 +579,7 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <div className="rounded-xl bg-slate-50 p-4 text-center text-xs text-slate-500">
+          <div className="rounded-lg bg-slate-50 p-4 text-center text-xs text-slate-500">
             最終更新日: {lastUpdated}
           </div>
         </div>

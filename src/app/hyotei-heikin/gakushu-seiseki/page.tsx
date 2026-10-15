@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, GraduationCap, FileText, ChevronRightSquare, ShieldCheck } from 'lucide-react';
+import { Home, ChevronRight, GraduationCap, FileText, ChevronRightSquare, ShieldCheck } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -93,21 +93,21 @@ export default function GakushuSeisekiPage() {
         steps={HOWTO_STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-emerald-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-emerald-600">評定平均計算</Link>
+            <Link href="/hyotei-heikin" className="hover:text-brand-600">評定平均計算</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">学習成績の状況（大学受験）</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <GraduationCap className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -115,14 +115,14 @@ export default function GakushuSeisekiPage() {
             </h1>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
               総合型選抜・学校推薦型選抜の調査書に書かれる「学習成績の状況」（通称：評定平均）を、
-              文部科学省の公式計算方法どおりに算出します。<strong className="text-emerald-700">修得単位数は計算に使いません。</strong>
+              文部科学省の公式計算方法どおりに算出します。<strong className="text-brand-700">修得単位数は計算に使いません。</strong>
             </p>
           </header>
 
           {/* 出典カード */}
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
             <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <div className="text-xs leading-relaxed text-slate-600">
@@ -139,8 +139,8 @@ export default function GakushuSeisekiPage() {
           </div>
 
           {/* 調査書シミュレーターへの導線（§7①本命ページ） */}
-          <div className="mt-6 rounded-2xl border-2 border-emerald-300 bg-white p-5 text-center shadow-sm">
-            <h2 className="mb-2 font-bold text-emerald-900">
+          <div className="mt-6 rounded-lg border-2 border-brand-300 bg-white p-5 text-center">
+            <h2 className="mb-2 font-bold text-brand-900">
               実際の調査書と同じ見た目で確認したい方へ
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
@@ -148,14 +148,14 @@ export default function GakushuSeisekiPage() {
             </p>
             <Link
               href="/hyotei-heikin/gakushu-seiseki/chousasho"
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-emerald-700"
+              className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
             >
               調査書シミュレーターを開く
             </Link>
           </div>
 
           {/* なぜ単位数を入れないのか */}
-          <section className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">なぜ単位数を入力しないのか</h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
               文部科学省の通知が示す公式計算例では、4単位の科目も2単位の科目も、同じ「評定数1」として数えています。
@@ -168,20 +168,20 @@ export default function GakushuSeisekiPage() {
           </section>
 
           {/* 公式計算例 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               文部科学省の公式計算例で検算する
             </h2>
             <div className="space-y-4 text-sm leading-relaxed text-slate-700">
-              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-                <h3 className="font-bold text-emerald-900 mb-2">教科の学習成績の状況（理科の例）</h3>
-                <div className="font-mono text-sm text-emerald-900">
+              <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                <h3 className="font-bold text-brand-900 mb-2">教科の学習成績の状況（理科の例）</h3>
+                <div className="font-mono text-sm text-brand-900">
                   物理基礎3・化学基礎3・生物基礎5 → (3+3+5) ÷ 3 = 3.66… → <strong className="text-base">3.7</strong>
                 </div>
               </div>
-              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-                <h3 className="font-bold text-emerald-900 mb-2">全体の学習成績の状況の例</h3>
-                <div className="font-mono text-sm text-emerald-900">
+              <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                <h3 className="font-bold text-brand-900 mb-2">全体の学習成績の状況の例</h3>
+                <div className="font-mono text-sm text-brand-900">
                   評定の合計120 ÷ 評定数31 = 3.87… → <strong className="text-base">3.9</strong>
                 </div>
               </div>
@@ -189,16 +189,16 @@ export default function GakushuSeisekiPage() {
           </section>
 
           {/* 概評の表 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               学習成績概評A〜Eの区分
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-emerald-600 text-white text-left">
-                    <th className="border border-emerald-400 px-3 py-2 font-bold">全体の学習成績の状況</th>
-                    <th className="border border-emerald-400 px-3 py-2 font-bold text-center">学習成績概評</th>
+                  <tr className="bg-brand-600 text-white text-left">
+                    <th className="border border-brand-400 px-3 py-2 font-bold">全体の学習成績の状況</th>
+                    <th className="border border-brand-400 px-3 py-2 font-bold text-center">学習成績概評</th>
                   </tr>
                 </thead>
                 <tbody className="text-slate-700">
@@ -209,7 +209,7 @@ export default function GakushuSeisekiPage() {
                     ['2.6 〜 1.9', 'D'],
                     ['1.8 以下', 'E'],
                   ].map(([range, rank]) => (
-                    <tr key={rank} className="odd:bg-white even:bg-emerald-50/40">
+                    <tr key={rank} className="odd:bg-white even:bg-brand-50/40">
                       <td className="border border-slate-200 px-3 py-2 font-mono">{range}</td>
                       <td className="border border-slate-200 px-3 py-2 text-center font-bold">{rank}</td>
                     </tr>
@@ -229,8 +229,8 @@ export default function GakushuSeisekiPage() {
           </section>
 
           {/* 調査書の全体像（学習成績の状況以外の記載欄） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-2 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-2 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               調査書は「学習成績の状況」以外に何が書かれているか
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-700">
@@ -239,7 +239,7 @@ export default function GakushuSeisekiPage() {
               多面的・総合的に評価するための材料として使われます。以下、様式の構成をそのまま解説します。
             </p>
             <div className="space-y-4 text-sm leading-relaxed text-slate-700">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <h3 className="font-bold text-slate-800 mb-1">5. 総合的な探究の時間の記録</h3>
                 <p>
                   「学習活動」「観点」「評価」の3列で構成されます。⚠️令和4年度以前の実施要項では
@@ -249,7 +249,7 @@ export default function GakushuSeisekiPage() {
                   理数科で「理数探究基礎」「理数探究」の履修によって代替した場合は、この欄に斜線が引かれます。
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <h3 className="font-bold text-slate-800 mb-1">6. 特別活動の記録</h3>
                 <p>
                   「ホームルーム活動」「生徒会活動」「学校行事」の3項目について、各学校が設定した観点に照らして
@@ -257,7 +257,7 @@ export default function GakushuSeisekiPage() {
                   部活動の実績はここではなく、次の「指導上参考となる諸事項」で扱われます。
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <h3 className="font-bold text-slate-800 mb-1">7. 指導上参考となる諸事項</h3>
                 <p>
                   生徒の特徴・特技や学校外の活動等について、学習指導等を進めていく上で必要な情報として精選して記入される欄です。
@@ -265,7 +265,7 @@ export default function GakushuSeisekiPage() {
                   留学に該当する場合は留学期間・留学先の国名・学校名も、この欄に記入されます。
                 </p>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <h3 className="font-bold text-slate-800 mb-1">9. 出欠の記録</h3>
                 <p>
                   学年ごとに「授業日数」「出席停止・忌引き等の日数」「留学中の授業日数」「出席しなければならない日数」
@@ -281,8 +281,8 @@ export default function GakushuSeisekiPage() {
           </section>
 
           {/* 令和9年度からの面接原則必須化 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               令和9年度から、総合型・学校推薦型選抜は面接が原則必須に
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -290,7 +290,7 @@ export default function GakushuSeisekiPage() {
               現行の実施要項では、令和9年度大学入学者選抜から、総合型選抜・学校推薦型選抜の両方で面接が
               原則として必須化されました。
             </p>
-            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「入学志願者の能力・意欲・適性等を多面的・総合的に評価・判定する総合型選抜の趣旨に鑑み、志望する
               学問分野に対する意欲や適性等に係る面接（ディベート、集団討論、プレゼンテーション、口頭試問等を
               含む。オンラインによる実施を含む。）による評価を必ず行う。」
@@ -302,7 +302,7 @@ export default function GakushuSeisekiPage() {
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -316,8 +316,8 @@ export default function GakushuSeisekiPage() {
           </section>
 
           {/* 「評定平均」から「学習成績の状況」への名称変更の経緯 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               なぜ「評定平均」ではなく「学習成績の状況」と呼ぶのか
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -325,7 +325,7 @@ export default function GakushuSeisekiPage() {
               文部科学省が定める公式名称ではありません。令和3年度以降の大学入学者選抜実施要項および調査書の様式では、
               一貫して「学習成績の状況」という表記が使われています。
             </p>
-            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「『学習成績概評』の欄は、高等学校における同一学年生徒全員（中略）の3か年間における全体の学習成績の状況を
               次の区分に従って、A、B、C、D、Eの5段階に分け、その生徒の属する成績段階を記入すること。」
             </blockquote>
@@ -336,7 +336,7 @@ export default function GakushuSeisekiPage() {
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -349,8 +349,8 @@ export default function GakushuSeisekiPage() {
           </section>
 
           {/* なぜ学習成績の状況が重要なのか（T-N5第2ラウンド・外部一次ソースA） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               なぜ学習成績の状況が重要なのか（推薦・総合型選抜の実施状況）
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -369,15 +369,15 @@ export default function GakushuSeisekiPage() {
                 <tbody>
                   <tr className="border-b border-slate-100">
                     <td className="py-2 pr-4 text-slate-600">国立大学</td>
-                    <td className="py-2 pr-4 text-right font-semibold text-slate-700">12.7%</td>
+                    <td className="py-2 pr-4 text-right font-bold text-slate-700">12.7%</td>
                   </tr>
                   <tr className="border-b border-slate-100">
                     <td className="py-2 pr-4 text-slate-600">公立大学</td>
-                    <td className="py-2 pr-4 text-right font-semibold text-slate-700">26.9%</td>
+                    <td className="py-2 pr-4 text-right font-bold text-slate-700">26.9%</td>
                   </tr>
                   <tr>
                     <td className="py-2 pr-4 text-slate-600">私立大学</td>
-                    <td className="py-2 pr-4 text-right font-semibold text-slate-700">38.8%</td>
+                    <td className="py-2 pr-4 text-right font-bold text-slate-700">38.8%</td>
                   </tr>
                 </tbody>
               </table>
@@ -390,7 +390,7 @@ export default function GakushuSeisekiPage() {
                 href="https://www.mext.go.jp/content/20251126-mxt_daigakuc02-000045982_01.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -404,8 +404,8 @@ export default function GakushuSeisekiPage() {
           </section>
 
           {/* 評定はどう付くのか（T-N5第2ラウンド・外部一次ソースB） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               評定はどう付くのか（3観点から5段階への総括）
             </h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
@@ -414,7 +414,7 @@ export default function GakushuSeisekiPage() {
               各教科の学習評価は、まず3つの観点それぞれをA・B・Cの3段階で評価し、
               それらを<strong>総括</strong>したものが5段階の評定になります。
             </p>
-            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
               「各教科における観点別学習状況の評価の観点については、「知識・技能」「思考・判断・表現」
               「主体的に学習に取り組む態度」の3観点に整理されています。」
             </blockquote>
@@ -425,7 +425,7 @@ export default function GakushuSeisekiPage() {
                 href="https://www.nier.go.jp/kaihatsu/pdf/gakushuhyouka_R010613-02.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -443,70 +443,70 @@ export default function GakushuSeisekiPage() {
           </section>
 
           {/* 相互リンク */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               あわせて確認したいツール
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link
                 href="/hyotei-heikin"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 中学生向け評定平均計算（9教科）
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gyakusan"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 目標に必要な評定を逆算する
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/suisen-kijun"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 推薦・併願優遇の評定基準を見る
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gakushu-seiseki/kyoka-betsu"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 教科ごとの学習成績の状況を計算
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gakushu-seiseki/gaihyou"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 概評A〜Eまであと何点？境界チェック
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gakushu-seiseki/yokuaru-machigai"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 計算でよくある3つの誤りを検証
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gakushu-seiseki/tousei-han-i"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 到達可能範囲をチェック（高1・高2向け）
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/kakomon-jisaiten"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 過去問の自己採点結果と併せて確認する
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/developers"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 <span className="flex items-center gap-1.5">
                   <FileText className="h-4 w-4" />

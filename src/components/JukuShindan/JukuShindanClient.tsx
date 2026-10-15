@@ -13,7 +13,7 @@ import {
   Check,
   ChevronRight,
   Search,
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { PREFECTURES } from '@/lib/prefectures';
 import { recommendJuku, type JukuFormat, type JukuSituation, type JukuRecommendation } from '@/lib/juku-match';
@@ -63,9 +63,9 @@ function Pill({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-xl border px-3 py-2.5 text-sm font-bold transition-all ${
+      className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition-all ${
         active
-          ? 'border-blue-500 bg-blue-50 text-blue-700 ring-2 ring-blue-500/20'
+          ? 'border-brand-500 bg-brand-50 text-brand-700 ring-2 ring-brand-500/20'
           : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
       }`}
     >
@@ -162,10 +162,10 @@ export function JukuShindanClient() {
   return (
     <div>
       {/* 入力フォーム */}
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
+      <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-7">
         {/* 県 */}
         <label htmlFor="juku-shindan-prefecture" className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <MapPin className="h-4 w-4 text-blue-600" />
+          <MapPin className="h-4 w-4 text-brand-600" />
           お住まいの都道府県
         </label>
         <select
@@ -175,7 +175,7 @@ export function JukuShindanClient() {
             onFirstTouch();
             setPrefectureCode(e.target.value);
           }}
-          className="mb-5 h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          className="mb-5 h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
         >
           <option value="">選択してください（任意）</option>
           {PREFECTURES.map((p) => (
@@ -187,7 +187,7 @@ export function JukuShindanClient() {
 
         {/* 学年 */}
         <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <GraduationCap className="h-4 w-4 text-blue-600" />
+          <GraduationCap className="h-4 w-4 text-brand-600" />
           学年
         </div>
         <div className="mb-5 grid grid-cols-3 gap-2">
@@ -207,18 +207,18 @@ export function JukuShindanClient() {
 
         {/* 目標との差 */}
         <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <Target className="h-4 w-4 text-blue-600" />
+          <Target className="h-4 w-4 text-brand-600" />
           志望校の目標との差
         </div>
         {savedGap !== null ? (
-          <div className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800">
+          <div className="mb-5 rounded-lg border border-brand-200 bg-brand-50 px-3 py-2.5 text-sm text-brand-800">
             保存した目標を使います：
             {prefName ? `${prefName}・` : ''}
             {savedGap > 0 ? <strong>あと{savedGap}点</strong> : <strong>目標に到達</strong>}
             <button
               type="button"
               onClick={() => setSavedGap(null)}
-              className="ml-2 text-xs font-semibold text-emerald-700 underline"
+              className="ml-2 text-xs font-bold text-brand-700 underline"
             >
               手動で選ぶ
             </button>
@@ -242,7 +242,7 @@ export function JukuShindanClient() {
 
         {/* 希望形態 */}
         <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <Monitor className="h-4 w-4 text-blue-600" />
+          <Monitor className="h-4 w-4 text-brand-600" />
           希望する形態
         </div>
         <div className="mb-5 grid grid-cols-3 gap-2">
@@ -268,7 +268,7 @@ export function JukuShindanClient() {
 
         {/* 状況 */}
         <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <Sparkles className="h-4 w-4 text-blue-600" />
+          <Sparkles className="h-4 w-4 text-brand-600" />
           お子さまの状況
         </div>
         <div className="mb-6 grid gap-2 sm:grid-cols-3">
@@ -280,9 +280,9 @@ export function JukuShindanClient() {
                 onFirstTouch();
                 setSituation(o.value);
               }}
-              className={`rounded-xl border p-3 text-left transition-all ${
+              className={`rounded-lg border p-3 text-left transition-all ${
                 situation === o.value
-                  ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500/20'
+                  ? 'border-brand-500 bg-brand-50 ring-2 ring-brand-500/20'
                   : 'border-slate-200 bg-white hover:border-slate-300'
               }`}
             >
@@ -295,12 +295,12 @@ export function JukuShindanClient() {
         <button
           type="button"
           onClick={onDiagnose}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 active:scale-[0.99]"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-[0.99]"
         >
           <Search className="h-4 w-4" />
           結果に合う塾を診断する
         </button>
-        <p className="mt-2 text-center text-[11px] text-slate-400">
+        <p className="mt-2 text-center text-xs text-slate-400">
           提携中の塾・家庭教師の中から、条件に合うものだけを表示します（無料体験・無料相談のみ）。
         </p>
       </section>
@@ -309,13 +309,13 @@ export function JukuShindanClient() {
       {recs !== null && (
         <div ref={resultRef} className="mt-6 scroll-mt-6">
           {recs.length === 0 ? (
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-500">
+            <div className="rounded-lg border border-slate-200 bg-white p-6 text-center text-sm text-slate-500">
               条件に合う提携中の塾が見つかりませんでした。条件を変えて再度お試しください。
             </div>
           ) : (
             <>
               <div className="mb-3 flex items-center gap-2">
-                <Check className="h-5 w-5 text-emerald-600" />
+                <Check className="h-5 w-5 text-brand-600" />
                 <h2 className="text-lg font-bold text-slate-900">
                   {prefName ? `${prefName}・` : ''}あなたの条件に合う塾（{recs.length}件）
                 </h2>
@@ -323,12 +323,12 @@ export function JukuShindanClient() {
 
               <div className="space-y-3">
                 {recs.map((r, i) => (
-                  <div key={r.id} className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white p-5 shadow-sm">
+                  <div key={r.id} className="rounded-lg border border-brand-200 bg-brand-50 p-5">
                     <div className="mb-1 flex items-center gap-2">
-                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-600 text-xs font-black text-white">
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-600 text-xs font-bold text-white">
                         {i + 1}
                       </span>
-                      <span className="text-xs font-bold text-emerald-700">{r.formatLabel}</span>
+                      <span className="text-xs font-bold text-brand-700">{r.formatLabel}</span>
                     </div>
                     <h3 className="mb-1.5 text-base font-bold text-slate-900">{r.programName}</h3>
                     <p className="mb-4 text-sm leading-relaxed text-slate-700">{r.fact}</p>
@@ -341,9 +341,9 @@ export function JukuShindanClient() {
                       viewPref={prefectureCode || undefined}
                       placement={PLACEMENT}
                       pref={prefectureCode || undefined}
-                      linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700 active:scale-95 sm:w-auto"
+                      linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-95 sm:w-auto"
                     />
-                    <span className="mt-1.5 block text-[11px] text-slate-500">
+                    <span className="mt-1.5 block text-xs text-slate-500">
                       {r.programName}の無料体験・資料請求（PR）／費用はかかりません
                     </span>
                   </div>
@@ -354,7 +354,7 @@ export function JukuShindanClient() {
               <button
                 type="button"
                 onClick={onShareToParent}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-blue-200 bg-blue-50 px-4 py-3 text-sm font-bold text-blue-700 transition-all hover:border-blue-300 hover:bg-blue-100"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-brand-200 bg-brand-50 px-4 py-3 text-sm font-bold text-brand-700 transition-all hover:border-brand-300 hover:bg-brand-100"
               >
                 {shared ? (
                   <>
@@ -381,8 +381,8 @@ export function JukuShindanClient() {
                 body="今回おすすめした塾の無料体験の締切や、志望校の最新情報・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
               />
 
-              <div className="mt-4 rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
-                <Link href="/mendan" className="inline-flex items-center gap-1.5 font-bold text-blue-600 hover:text-blue-700">
+              <div className="mt-4 rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-600">
+                <Link href="/mendan" className="inline-flex items-center gap-1.5 font-bold text-brand-600 hover:text-brand-700">
                   三者面談の準備チェックリストへ
                   <ChevronRight className="h-4 w-4" />
                 </Link>

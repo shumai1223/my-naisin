@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -98,29 +98,29 @@ export default function ChibaTotalScorePage() {
       />
       <FAQPageSchema faqItems={CHIBA_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/chiba" className="hover:text-blue-600">千葉県</Link>
+            <Link href="/chiba" className="hover:text-brand-600">千葉県</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">調査書点・K値計算</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Calculator className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               千葉県公立高校 調査書点・K値・総合得点 計算
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-teal-100 px-3 py-1 text-xs font-bold text-teal-700">
+            <div className="mt-2 inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
               学力500点＋評定135×K＋学校設定検査・2026年度入試対応
             </div>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -130,30 +130,30 @@ export default function ChibaTotalScorePage() {
           </header>
 
           {/* 仕組み */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-teal-500" />
+              <BookOpen className="h-5 w-5 text-brand-500" />
               千葉県の総合得点の内訳
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
               千葉県公立高校入試の総合得点は、次の要素を合計して決まります。配点は高校ごとに異なります。
             </p>
             <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-between rounded-xl border border-teal-200 bg-teal-50 px-4 py-3">
-                <span className="font-bold text-teal-800">① 学力検査（5教科×100）</span>
-                <span className="font-black text-teal-700">500点</span>
+              <div className="flex items-center justify-between rounded-lg border border-brand-200 bg-brand-50 px-4 py-3">
+                <span className="font-bold text-brand-800">① 学力検査（5教科×100）</span>
+                <span className="font-bold text-brand-700">500点</span>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
-                <span className="font-bold text-emerald-800">② 調査書点（評定135 × K値）</span>
-                <span className="font-black text-emerald-700">67.5〜270点</span>
+              <div className="flex items-center justify-between rounded-lg border border-brand-200 bg-brand-50 px-4 py-3">
+                <span className="font-bold text-brand-800">② 調査書点（評定135 × K値）</span>
+                <span className="font-bold text-brand-700">67.5〜270点</span>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+              <div className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
                 <span className="font-bold text-slate-700">③ 調査書のその他</span>
-                <span className="font-black text-slate-600">0〜50点</span>
+                <span className="font-bold text-slate-600">0〜50点</span>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+              <div className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
                 <span className="font-bold text-slate-700">④ 学校設定検査（面接・作文・適性検査など）</span>
-                <span className="font-black text-slate-600">10〜150点</span>
+                <span className="font-bold text-slate-600">10〜150点</span>
               </div>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
@@ -167,9 +167,9 @@ export default function ChibaTotalScorePage() {
           </div>
 
           {/* K値 早見表 */}
-          <section className="mb-8 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/40 to-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-emerald-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               K値 早見表（評定合計 × K ＝ 調査書点）
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
@@ -178,10 +178,10 @@ export default function ChibaTotalScorePage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-emerald-600 text-white text-left">
-                    <th className="border border-emerald-400 px-3 py-2 font-bold">評定合計＼K値</th>
+                  <tr className="bg-brand-600 text-white text-left">
+                    <th className="border border-brand-400 px-3 py-2 font-bold">評定合計＼K値</th>
                     {K_VALUES.map((kv) => (
-                      <th key={kv.k} className="border border-emerald-400 px-3 py-2 font-bold text-right">K={kv.k}</th>
+                      <th key={kv.k} className="border border-brand-400 px-3 py-2 font-bold text-right">K={kv.k}</th>
                     ))}
                   </tr>
                 </thead>
@@ -199,7 +199,7 @@ export default function ChibaTotalScorePage() {
                 </tbody>
               </table>
             </div>
-            <div className="mt-3 grid gap-1 text-[11px] text-slate-500 sm:grid-cols-2">
+            <div className="mt-3 grid gap-1 text-xs text-slate-500 sm:grid-cols-2">
               {K_VALUES.map((kv) => (
                 <div key={kv.k}>K={kv.k}：{kv.label}</div>
               ))}
@@ -207,15 +207,15 @@ export default function ChibaTotalScorePage() {
           </section>
 
           {/* 計算例 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-teal-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               総合得点の計算例
             </h2>
             <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-teal-200 bg-teal-50 p-4">
-                <h3 className="font-bold text-teal-900 mb-1">例：評定合計108・学力検査380点</h3>
-                <ul className="text-teal-900 text-xs space-y-1 ml-4 list-disc">
+              <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+                <h3 className="font-bold text-brand-900 mb-1">例：評定合計108・学力検査380点</h3>
+                <ul className="text-brand-900 text-xs space-y-1 ml-4 list-disc">
                   <li>進学校（K=0.5）：調査書点 ＝ 108 × 0.5 ＝ 54。総合 ＝ 380 ＋ 54 ＝ <strong>434点</strong>（＋学校設定検査）</li>
                   <li>標準（K=1.0）：調査書点 ＝ 108。総合 ＝ 380 ＋ 108 ＝ <strong>488点</strong>（＋学校設定検査）</li>
                   <li>内申重視（K=2.0）：調査書点 ＝ 216。総合 ＝ 380 ＋ 216 ＝ <strong>596点</strong>（＋学校設定検査）</li>
@@ -239,7 +239,7 @@ export default function ChibaTotalScorePage() {
           />
 
           {/* よくある質問 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {CHIBA_FAQS.map((faq, i) => (
@@ -252,7 +252,7 @@ export default function ChibaTotalScorePage() {
           </section>
 
           {/* 注意 */}
-          <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
@@ -262,23 +262,23 @@ export default function ChibaTotalScorePage() {
           </div>
 
           {/* 関連リンク */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/chiba/naishin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">千葉県の内申点を計算する</span>
+              <Link href="/chiba/naishin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">千葉県の内申点を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/chiba" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">千葉県の入試制度ガイド</span>
+              <Link href="/chiba" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">千葉県の入試制度ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">5教科の偏差値を計算する</span>
+              <Link href="/hensachi" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">5教科の偏差値を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/reverse?pref=chiba" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">志望校から逆算する</span>
+              <Link href="/reverse?pref=chiba" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">志望校から逆算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
             </div>

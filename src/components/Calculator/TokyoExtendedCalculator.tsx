@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, Target, Info, ExternalLink } from 'lucide-react';
+import { Calculator, Target, Info, ExternalLink } from '@/components/icons';
 
 import { Card } from '@/components/ui/Card';
 
@@ -45,9 +45,9 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
 
   return (
     <Card className="overflow-hidden">
-      <div className="border-b border-slate-100 bg-gradient-to-r from-rose-50 via-pink-50 to-fuchsia-50 px-5 py-4">
+      <div className="border-b border-slate-100 bg-red-50 px-5 py-4">
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 shadow-lg shadow-rose-200/50">
+          <div className="grid h-10 w-10 place-items-center rounded-lg bg-red-500">
             <Calculator className="h-5 w-5 text-white" />
           </div>
           <div>
@@ -55,8 +55,8 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
             <div className="text-xs text-slate-500">内申300点＋学力検査700点＋ESAT-J 20点＝1020点</div>
           </div>
         </div>
-        <div className="mt-3 rounded-lg bg-blue-50 border border-blue-200 p-3">
-          <p className="text-xs text-blue-800 leading-relaxed">
+        <div className="mt-3 rounded-lg bg-brand-50 border border-brand-200 p-3">
+          <p className="text-xs text-brand-800 leading-relaxed">
             <strong>💡 このツールについて：</strong>東京都立高校の入試では、内申点・学力検査・ESAT-Jの3つを合計した1020点満点で合否判定されます。下記で当日点やESAT-Jの成績を入力すると、合計点や目標達成に必要な点数が分かります。
           </p>
         </div>
@@ -64,9 +64,9 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
 
       <div className="p-5 space-y-5">
         {/* 現在の換算内申表示 */}
-        <div className="rounded-xl bg-slate-50 p-4">
+        <div className="rounded-lg bg-slate-50 p-4">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-medium text-slate-600">あなたの換算内申</div>
+            <div className="text-sm text-slate-600">あなたの換算内申</div>
             <div className="text-right">
               <span className="text-2xl font-bold text-slate-800">{kansoNaishin}</span>
               <span className="text-sm text-slate-500">/65点</span>
@@ -77,7 +77,7 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
 
         {/* 学力検査点入力 */}
         <div>
-          <label htmlFor="tokyo-exam-score" className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
+          <label htmlFor="tokyo-exam-score" className="mb-2 flex items-center gap-2 text-sm text-slate-700">
             <span>📝 学力検査（当日点）</span>
             <span className="text-xs text-slate-400">500点満点</span>
           </label>
@@ -90,7 +90,7 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
               value={examScore}
               onChange={(e) => setExamScore(Number(e.target.value))}
               aria-label="学力検査（当日点）"
-              className="flex-1 h-2 rounded-full bg-slate-200 appearance-none cursor-pointer accent-rose-500"
+              className="flex-1 h-2 rounded-full bg-slate-200 appearance-none cursor-pointer accent-red-500"
             />
             <input
               id="tokyo-exam-score"
@@ -107,7 +107,7 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
 
         {/* ESAT-J選択 */}
         <div>
-          <label className="mb-2 flex flex-col gap-1 text-sm font-medium text-slate-700">
+          <label className="mb-2 flex flex-col gap-1 text-sm text-slate-700">
             <span className="flex items-center gap-2">
               <span>🎤 ESAT-J（スピーキングテスト）の成績</span>
               <span className="text-xs text-slate-400">任意入力・20点満点</span>
@@ -118,13 +118,13 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
             <button
               type="button"
               onClick={() => setEsatJGrade('')}
-              className={`rounded-xl border-2 p-3 text-center transition-all ${
+              className={`rounded-lg border-2 p-3 text-center transition-all ${
                 esatJGrade === ''
-                  ? 'border-blue-400 bg-blue-50 ring-2 ring-blue-200'
+                  ? 'border-brand-400 bg-brand-50 ring-2 ring-brand-200'
                   : 'border-slate-200 bg-white hover:border-slate-300'
               }`}
             >
-              <div className={`text-sm font-bold ${esatJGrade === '' ? 'text-blue-600' : 'text-slate-700'}`}>
+              <div className={`text-sm font-bold ${esatJGrade === '' ? 'text-brand-600' : 'text-slate-700'}`}>
                 未入力
               </div>
               <div className="text-xs text-slate-500">0点</div>
@@ -134,13 +134,13 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
                 key={grade.grade}
                 type="button"
                 onClick={() => setEsatJGrade(grade.grade)}
-                className={`rounded-xl border-2 p-3 text-center transition-all ${
+                className={`rounded-lg border-2 p-3 text-center transition-all ${
                   esatJGrade === grade.grade
-                    ? 'border-rose-400 bg-rose-50 ring-2 ring-rose-200'
+                    ? 'border-red-400 bg-red-50 ring-2 ring-red-200'
                     : 'border-slate-200 bg-white hover:border-slate-300'
                 }`}
               >
-                <div className={`text-lg font-bold ${esatJGrade === grade.grade ? 'text-rose-600' : 'text-slate-700'}`}>
+                <div className={`text-lg font-bold ${esatJGrade === grade.grade ? 'text-red-600' : 'text-slate-700'}`}>
                   {grade.grade}
                 </div>
                 <div className="text-xs text-slate-500">{grade.points}点</div>
@@ -150,10 +150,10 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
         </div>
 
         {/* 総合得点表示 */}
-        <div className="rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 p-5 text-white">
-          <div className="text-sm font-medium text-white/80">総合得点</div>
+        <div className="rounded-lg bg-red-500 p-5 text-white">
+          <div className="text-sm text-white/80">総合得点</div>
           <div className="flex items-end gap-2">
-            <span className="text-4xl font-black">{totalScore}</span>
+            <span className="text-4xl font-bold">{totalScore}</span>
             <span className="text-lg text-white/70">/1020点</span>
           </div>
           <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
@@ -173,9 +173,9 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
         </div>
 
         {/* 目標設定と逆算 */}
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
+        <div className="rounded-lg border border-slate-200 bg-white p-4">
           <div className="flex items-center gap-2 mb-3">
-            <Target className="h-4 w-4 text-indigo-500" />
+            <Target className="h-4 w-4 text-brand-500" />
             <span className="text-sm font-bold text-slate-700">目標から逆算</span>
           </div>
           <div className="flex items-center gap-3 mb-3">
@@ -191,9 +191,9 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
             />
             <span className="text-sm text-slate-400">/1020点</span>
           </div>
-          <div className={`rounded-lg p-3 ${gap <= 0 ? 'bg-emerald-50' : 'bg-amber-50'}`}>
+          <div className={`rounded-lg p-3 ${gap <= 0 ? 'bg-brand-50' : 'bg-amber-50'}`}>
             {gap <= 0 ? (
-              <p className="text-sm text-emerald-700">
+              <p className="text-sm text-brand-700">
                 🎉 <strong>目標達成！</strong> 現在の点数で目標をクリアしています。
               </p>
             ) : (
@@ -214,7 +214,7 @@ export function TokyoExtendedCalculator({ kansoNaishin }: TokyoExtendedCalculato
               href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-1 inline-flex items-center gap-1 text-blue-500 hover:text-blue-600"
+              className="mt-1 inline-flex items-center gap-1 text-brand-500 hover:text-brand-600"
             >
               東京都教育委員会
               <ExternalLink className="h-3 w-3" />

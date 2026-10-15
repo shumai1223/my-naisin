@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge, Play, ShieldCheck } from 'lucide-react';
+import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge, Play, ShieldCheck } from '@/components/icons';
 
 import { ApiKeyIssuer } from '@/components/Developers/ApiKeyIssuer';
 import { ApiPlayground } from '@/components/Developers/ApiPlayground';
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 function CodeBlock({ children }: { children: string }) {
   return (
-    <pre className="overflow-x-auto rounded-xl border border-slate-200 bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">
+    <pre className="overflow-x-auto rounded-lg border border-slate-200 bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">
       <code>{children}</code>
     </pre>
   );
@@ -257,7 +257,7 @@ naishin = calculate_naishin_via_mcp("tokyo", {
 print(naishin["total"])  # -> 52`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-slate-50">
       <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: `${SITE_URL}/` },
@@ -277,14 +277,14 @@ print(naishin["total"])  # -> 52`;
       <div className="mx-auto max-w-3xl px-4 py-12">
         <Link
           href="/"
-          className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm transition-all hover:bg-slate-50 hover:shadow"
+          className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm text-slate-600 transition-all hover:bg-slate-50"
         >
           <ArrowLeft className="h-4 w-4" />
           トップに戻る
         </Link>
 
         <div className="mb-8 flex items-center gap-4">
-          <div className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-200">
+          <div className="grid h-14 w-14 place-items-center rounded-lg bg-brand-500">
             <Database className="h-7 w-7 text-white" />
           </div>
           <div>
@@ -293,8 +293,8 @@ print(naishin["total"])  # -> 52`;
           </div>
         </div>
 
-        <div className="mb-8 rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 to-violet-50 p-6">
-          <p className="text-sm leading-relaxed text-indigo-900">
+        <div className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
+          <p className="text-sm leading-relaxed text-brand-900">
             全国47都道府県の<strong>公立高校入試における内申点（調査書点）の計算方式</strong>を、
             機械可読のJSON APIと<strong>MCP（Model Context Protocol）互換サーバ</strong>で公開しています。
             AIアシスタント・進路支援ツール・研究での利用を歓迎します。出典を明記いただければ、商用・非商用問わず無料です。
@@ -304,7 +304,7 @@ print(naishin["total"])  # -> 52`;
         {/* クイックスタート（curl 3行・E-3） */}
         <section className="mb-10">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Terminal className="h-5 w-5 text-indigo-500" />
+            <Terminal className="h-5 w-5 text-brand-500" />
             クイックスタート（30秒）
           </h2>
           <p className="mb-3 text-sm leading-relaxed text-slate-600">
@@ -316,7 +316,7 @@ print(naishin["total"])  # -> 52`;
         {/* APIプレイグラウンド（W-15・その場で動くものをお見せできる実演用） */}
         <section className="mb-10">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Play className="h-5 w-5 text-indigo-500" />
+            <Play className="h-5 w-5 text-brand-500" />
             APIプレイグラウンド
           </h2>
           <p className="mb-3 text-sm leading-relaxed text-slate-600">
@@ -328,7 +328,7 @@ print(naishin["total"])  # -> 52`;
         {/* 学習成績の状況プレイグラウンド（T-C4・大学受験の評定平均） */}
         <section className="mb-10">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Play className="h-5 w-5 text-emerald-500" />
+            <Play className="h-5 w-5 text-brand-500" />
             学習成績の状況（大学受験の評定平均）プレイグラウンド
           </h2>
           <p className="mb-3 text-sm leading-relaxed text-slate-600">
@@ -337,11 +337,11 @@ print(naishin["total"])  # -> 52`;
           <GakushuSeisekiPlayground />
           <p className="mt-3 text-xs leading-relaxed text-slate-500">
             この計算ツールは{' '}
-            <Link href="/embed" className="font-bold text-indigo-600 underline">
+            <Link href="/embed" className="font-bold text-brand-600 underline">
               埋め込みウィジェット
             </Link>{' '}
             として貴サイトの記事にも設置できます（
-            <Link href="/embed/demo" className="font-bold text-indigo-600 underline">
+            <Link href="/embed/demo" className="font-bold text-brand-600 underline">
               埋め込みデモを見る
             </Link>
             ）。
@@ -351,29 +351,29 @@ print(naishin["total"])  # -> 52`;
         {/* 利用シーン（事例・E-3） */}
         <section className="mb-10">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Sparkles className="h-5 w-5 text-violet-500" />
+            <Sparkles className="h-5 w-5 text-slate-500" />
             どんな用途で使えるか
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
               <div className="text-sm font-bold text-slate-800">進路相談AIエージェント</div>
               <p className="mt-1 text-xs leading-relaxed text-slate-600">
                 MCPツール（calculate_naishin・reverse_calc等）を呼び出し、生徒の評定から内申点を厳密計算し、目標までの差を答える。
               </p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
               <div className="text-sm font-bold text-slate-800">塾・進路支援SaaSの内申自動算出</div>
               <p className="mt-1 text-xs leading-relaxed text-slate-600">
                 47都道府県ぶんの計算方式を自前実装せず、REST APIから都道府県コードを渡すだけで内申点を算出。
               </p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
               <div className="text-sm font-bold text-slate-800">受験情報メディア・比較サイト</div>
               <p className="mt-1 text-xs leading-relaxed text-slate-600">
                 CSV/JSONを定期取得し、都道府県別の入試制度比較表・記事の一次データとして引用（出典明記）。
               </p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
               <div className="text-sm font-bold text-slate-800">研究・統計利用</div>
               <p className="mt-1 text-xs leading-relaxed text-slate-600">
                 全国の内申点算出方式の構造化データセットとして、比較研究や教育政策分析に利用。
@@ -383,9 +383,9 @@ print(naishin["total"])  # -> 52`;
         </section>
 
         {/* 組み込みコードサンプル（模試会社・塾管理SaaS向け・V-10） */}
-        <section className="mb-10 rounded-2xl border-2 border-emerald-200 bg-emerald-50/40 p-6">
+        <section className="mb-10 rounded-lg border-2 border-brand-200 bg-brand-50/40 p-6">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Code2 className="h-5 w-5 text-emerald-600" />
+            <Code2 className="h-5 w-5 text-brand-600" />
             組み込みコードサンプル：模試の合否判定に内申計算を足す
           </h2>
           <p className="mb-3 text-sm leading-relaxed text-slate-600">
@@ -402,14 +402,14 @@ print(naishin["total"])  # -> 52`;
           <CodeBlock>{integrationCurlExample}</CodeBlock>
           <p className="mt-3 text-xs leading-relaxed text-slate-500">
             レート制限・商用利用時の出典表記省略は
-            <Link href="#pricing" className="mx-1 font-semibold text-emerald-700 underline">Proプラン</Link>
+            <Link href="#pricing" className="mx-1 font-bold text-brand-700 underline">Proプラン</Link>
             をご参照ください。データ連携のご相談は
-            <Link href="/partner" className="mx-1 font-semibold text-emerald-700 underline">パートナー募集ページ</Link>
+            <Link href="/partner" className="mx-1 font-bold text-brand-700 underline">パートナー募集ページ</Link>
             からどうぞ。
           </p>
         </section>
 
-        <section className="mb-10 rounded-2xl border border-slate-200 bg-white p-6">
+        <section className="mb-10 rounded-lg border border-slate-200 bg-white p-6">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
             <Scale className="h-5 w-5 text-slate-500" />
             計算ロジックの検証可能性
@@ -423,7 +423,7 @@ print(naishin["total"])  # -> 52`;
             href="https://github.com/shumai1223/my-naisin/blob/main/docs/calculation-verification-2026.md"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:underline"
+            className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-brand-600 hover:underline"
           >
             計算ロジック検証ガイドを見る（GitHub） <ExternalLink className="h-3.5 w-3.5" />
           </a>
@@ -432,7 +432,7 @@ print(naishin["total"])  # -> 52`;
         {/* REST API */}
         <section className="mb-10">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Code2 className="h-5 w-5 text-indigo-500" />
+            <Code2 className="h-5 w-5 text-brand-500" />
             REST API（JSON）
           </h2>
 
@@ -455,7 +455,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/naishin/tokyo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/naishin/tokyo <ExternalLink className="h-3 w-3" />
             </a>
@@ -464,7 +464,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/naishin"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/naishin <ExternalLink className="h-3 w-3" />
             </a>
@@ -481,7 +481,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/openapi"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/openapi <ExternalLink className="h-3 w-3" />
             </a>
@@ -499,7 +499,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/naishin/csv"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/naishin/csv <ExternalLink className="h-3 w-3" />
             </a>
@@ -520,7 +520,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/naishin/national-comparison"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/naishin/national-comparison <ExternalLink className="h-3 w-3" />
             </a>
@@ -543,7 +543,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/total-score/hyogo?academicRaw=500&reportRaw=250"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/total-score/hyogo?academicRaw=500&amp;reportRaw=250 <ExternalLink className="h-3 w-3" />
             </a>
@@ -568,7 +568,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/hensachi?score=70&average=60&stdDev=10"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/hensachi?score=70&amp;average=60&amp;stdDev=10 <ExternalLink className="h-3 w-3" />
             </a>
@@ -587,7 +587,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/hensachi/percentile-table"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/hensachi/percentile-table <ExternalLink className="h-3 w-3" />
             </a>
@@ -606,7 +606,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/education-cost?currentGrade=1&juniorCourse=public&highCourse=public&jukuType=kobetsu"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/education-cost（例） <ExternalLink className="h-3 w-3" />
             </a>
@@ -627,7 +627,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/bairitsu?applicants=120&capacity=80"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/bairitsu?applicants=120&amp;capacity=80 <ExternalLink className="h-3 w-3" />
             </a>
@@ -647,7 +647,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/gakushu-seiseki"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/gakushu-seiseki <ExternalLink className="h-3 w-3" />
             </a>
@@ -663,7 +663,7 @@ print(naishin["total"])  # -> 52`;
             継続的に積み上げている</strong>点に価値があります。教育委員会が公表後にPDFを削除し他社が再取得不能に
             なった過年度分（一部県）も収録済みで、<strong>この差は時間でしか埋められません</strong>。今後も年次で追加されます。
           </p>
-          <div className="mb-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mb-3 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <p className="text-sm font-bold text-amber-900">購入前に知っておくべき制約（3点）</p>
             <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-amber-800">
               <li><strong>公立高校のみ</strong>を収録しています（私立高校は含みません）</li>
@@ -690,7 +690,7 @@ print(naishin["total"])  # -> 52`;
             商用第三者資料のみを唯一の出典とするレコードは配布ポリシー上あらかじめ除外済みです。
           </p>
           <p className="mb-2 text-xs text-slate-500">
-            お見積り・全件データのご相談は<Link href="/contact" className="mx-1 font-semibold text-indigo-600 underline">お問い合わせ</Link>
+            お見積り・全件データのご相談は<Link href="/contact" className="mx-1 font-bold text-brand-600 underline">お問い合わせ</Link>
             から（{TIER_POLICIES.scale.label}）。
           </p>
 
@@ -722,7 +722,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/schools/tokyo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/schools/tokyo <ExternalLink className="h-3 w-3" />
             </a>
@@ -745,7 +745,7 @@ print(naishin["total"])  # -> 52`;
               href="/api/stats/distribution?metric=naishin"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/stats/distribution?metric=naishin <ExternalLink className="h-3 w-3" />
             </a>
@@ -762,14 +762,14 @@ print(naishin["total"])  # -> 52`;
               href="/api/status"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline"
+              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
             >
               /api/status <ExternalLink className="h-3 w-3" />
             </a>
           </p>
           <p className="mt-2 text-xs text-slate-500">
             データの最終検証日・一次ソース確認履歴も含めた信頼性の全体像は{' '}
-            <Link href="/reliability" className="font-semibold text-indigo-600 underline">
+            <Link href="/reliability" className="font-bold text-brand-600 underline">
               /reliability
             </Link>{' '}
             にまとめています。
@@ -785,14 +785,14 @@ print(naishin["total"])  # -> 52`;
         </section>
 
         {/* T-C8: 個人情報を受け取らない設計（学校・企業向け提案書に添付できる説明） */}
-        <section className="mb-10 rounded-2xl border-2 border-emerald-200 bg-emerald-50/30 p-6">
+        <section className="mb-10 rounded-lg border-2 border-brand-200 bg-brand-50/30 p-6">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <ShieldCheck className="h-5 w-5 text-emerald-600" />
+            <ShieldCheck className="h-5 w-5 text-brand-600" />
             個人情報を受け取らない設計
           </h2>
           <p className="mb-4 text-sm leading-relaxed text-slate-600">
             公開データ/計算API（学習成績の状況・内申点・偏差値・総合得点・倍率・教育費・匿名統計・MCP）は、
-            <strong className="text-emerald-700">氏名・学籍番号・学校名・生年月日を受け取るフィールドが存在しません。</strong>
+            <strong className="text-brand-700">氏名・学籍番号・学校名・生年月日を受け取るフィールドが存在しません。</strong>
             「送らない運用」ではなく「送れない設計」です。教科・科目・学年・評定や得点・都道府県コードなど、
             計算に必要な数値・区分だけを受け取ります。以下はそのままの実例です。
           </p>
@@ -822,7 +822,7 @@ print(naishin["total"])  # -> 52`;
           </ul>
           <p className="mt-4 text-xs text-slate-500">
             データの信頼性・検証プロセスの全体像は{' '}
-            <Link href="/reliability" className="font-semibold text-indigo-600 underline">
+            <Link href="/reliability" className="font-bold text-brand-600 underline">
               /reliability
             </Link>{' '}
             にもまとめています。
@@ -832,7 +832,7 @@ print(naishin["total"])  # -> 52`;
         {/* MCP */}
         <section className="mb-10">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Bot className="h-5 w-5 text-violet-500" />
+            <Bot className="h-5 w-5 text-slate-500" />
             MCP（AIエージェント向け）
           </h2>
           <p className="mb-3 text-sm leading-relaxed text-slate-600">
@@ -872,11 +872,11 @@ print(naishin["total"])  # -> 52`;
           <CodeBlock>{mcpConfig}</CodeBlock>
 
           <h3 className="mb-2 mt-5 flex items-center gap-2 text-sm font-bold text-slate-700">
-            <Terminal className="h-4 w-4 text-violet-500" />
+            <Terminal className="h-4 w-4 text-slate-500" />
             内申点を厳密計算する（概算で終わらせない）
           </h3>
           <CodeBlock>{mcpCall}</CodeBlock>
-          <div className="mt-3 flex items-start gap-2 rounded-xl border border-violet-200 bg-violet-50 p-4 text-xs leading-relaxed text-violet-800">
+          <div className="mt-3 flex items-start gap-2 rounded-lg border border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-800">
             <Sparkles className="mt-0.5 h-4 w-4 shrink-0" />
             <span>
               {DATASET_META.aiUsageNote}
@@ -885,9 +885,9 @@ print(naishin["total"])  # -> 52`;
         </section>
 
         {/* 使う場所別クイックスタート（ZZ-6b・2026-07-24） */}
-        <section className="mb-10 rounded-2xl border-2 border-violet-200 bg-violet-50/40 p-6">
+        <section className="mb-10 rounded-lg border-2 border-slate-200 bg-slate-50/40 p-6">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Bot className="h-5 w-5 text-violet-600" />
+            <Bot className="h-5 w-5 text-slate-600" />
             使う場所別クイックスタート（10分）
           </h2>
           <p className="mb-5 text-sm leading-relaxed text-slate-600">
@@ -913,7 +913,7 @@ print(naishin["total"])  # -> 52`;
           <p className="mb-2 text-sm text-slate-600">
             入力例：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">{claudeDesktopAskExample}</code>
           </p>
-          <p className="mb-2 text-xs font-semibold text-slate-500">実際に返る値（ツール呼び出しの結果）：</p>
+          <p className="mb-2 text-xs font-bold text-slate-500">実際に返る値（ツール呼び出しの結果）：</p>
           <CodeBlock>{claudeDesktopResponseExample}</CodeBlock>
 
           <h3 className="mb-2 mt-8 text-sm font-bold text-slate-700">② Cursor</h3>
@@ -922,7 +922,7 @@ print(naishin["total"])  # -> 52`;
           <p className="mb-2 mt-3 text-sm text-slate-600">
             入力例：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">{cursorAskExample}</code>
           </p>
-          <p className="mb-2 text-xs font-semibold text-slate-500">実際に返る値（ツール呼び出しの結果）：</p>
+          <p className="mb-2 text-xs font-bold text-slate-500">実際に返る値（ツール呼び出しの結果）：</p>
           <CodeBlock>{cursorResponseExample}</CodeBlock>
 
           <h3 className="mb-2 mt-8 text-sm font-bold text-slate-700">③ コードから（Node.js / Python）</h3>
@@ -944,7 +944,7 @@ print(naishin["total"])  # -> 52`;
         {/* 料金プラン・APIキー */}
         <section id="pricing" className="mb-10 scroll-mt-6">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Gauge className="h-5 w-5 text-indigo-500" />
+            <Gauge className="h-5 w-5 text-brand-500" />
             料金プランとレート上限
           </h2>
           <p className="mb-4 text-sm leading-relaxed text-slate-600">
@@ -955,11 +955,11 @@ print(naishin["total"])  # -> 52`;
           </p>
 
           {/* Pro / Business の1問判定（2026-08-13価格決定・修正1） */}
-          <div className="mb-4 rounded-xl border border-indigo-200 bg-indigo-50 p-4">
-            <p className="text-sm font-bold text-indigo-900">
+          <div className="mb-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
+            <p className="text-sm font-bold text-brand-900">
               「あなた以外の第三者が、このデータを使いますか？」
             </p>
-            <ul className="mt-2 space-y-1 text-sm text-indigo-800">
+            <ul className="mt-2 space-y-1 text-sm text-brand-800">
               <li>
                 <strong>いいえ</strong>（自分で使う・社内で使う・検証する） → <strong>Pro</strong>
               </li>
@@ -967,7 +967,7 @@ print(naishin["total"])  # -> 52`;
                 <strong>はい</strong>（自社サービスの利用者に提供する・自社商品に組み込む） → <strong>Business</strong>
               </li>
             </ul>
-            <p className="mt-2 text-xs text-indigo-700">
+            <p className="mt-2 text-xs text-brand-700">
               ※ Proでの商用利用が判明した場合、Business相当額を遡って請求する場合があります（
               <Link href="/terms" className="underline">利用規約</Link>
               第2条の3）。
@@ -978,11 +978,11 @@ print(naishin["total"])  # -> 52`;
             <table className="w-full min-w-[560px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b-2 border-slate-200 text-xs text-slate-500">
-                  <th className="py-2 pr-3 font-semibold">プラン</th>
-                  <th className="py-2 pr-3 font-semibold">レート/分</th>
-                  <th className="py-2 pr-3 font-semibold">月次クォータ</th>
-                  <th className="py-2 pr-3 font-semibold">料金</th>
-                  <th className="py-2 font-semibold">対象</th>
+                  <th className="py-2 pr-3 font-bold">プラン</th>
+                  <th className="py-2 pr-3 font-bold">レート/分</th>
+                  <th className="py-2 pr-3 font-bold">月次クォータ</th>
+                  <th className="py-2 pr-3 font-bold">料金</th>
+                  <th className="py-2 font-bold">対象</th>
                 </tr>
               </thead>
               <tbody>
@@ -990,12 +990,12 @@ print(naishin["total"])  # -> 52`;
                   const p = TIER_POLICIES[t];
                   return (
                     <tr key={t} className="border-b border-slate-100 align-top">
-                      <td className="py-2.5 pr-3 font-semibold text-slate-800">{p.label}</td>
+                      <td className="py-2.5 pr-3 font-bold text-slate-800">{p.label}</td>
                       <td className="py-2.5 pr-3 text-slate-600">{p.ratePerMinute.toLocaleString('ja-JP')}</td>
                       <td className="py-2.5 pr-3 text-slate-600">
                         {p.monthlyQuota > 0 ? p.monthlyQuota.toLocaleString('ja-JP') : '個別 / 計測なし'}
                       </td>
-                      <td className="py-2.5 pr-3 font-medium text-slate-700">{formatTierPrice(t)}</td>
+                      <td className="py-2.5 pr-3 text-slate-700">{formatTierPrice(t)}</td>
                       <td className="py-2.5 text-xs text-slate-500">{p.audience}</td>
                     </tr>
                   );
@@ -1014,9 +1014,9 @@ print(naishin["total"])  # -> 52`;
             <table className="w-full min-w-[560px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b-2 border-slate-200 text-xs text-slate-500">
-                  <th className="py-2 pr-3 font-semibold">機能</th>
+                  <th className="py-2 pr-3 font-bold">機能</th>
                   {(['anonymous', 'free', 'pro', 'business', 'scale'] as ApiTier[]).map((t) => (
-                    <th key={t} className="py-2 pr-3 text-center font-semibold">{TIER_POLICIES[t].label.split('（')[0]}</th>
+                    <th key={t} className="py-2 pr-3 text-center font-bold">{TIER_POLICIES[t].label.split('（')[0]}</th>
                   ))}
                 </tr>
               </thead>
@@ -1027,7 +1027,7 @@ print(naishin["total"])  # -> 52`;
                     {(['anonymous', 'free', 'pro', 'business', 'scale'] as ApiTier[]).map((t) => (
                       <td key={t} className="py-2 pr-3 text-center">
                         {cap.has(TIER_POLICIES[t]) ? (
-                          <span className="font-bold text-emerald-600">✓</span>
+                          <span className="font-bold text-brand-600">✓</span>
                         ) : (
                           <span className="text-slate-300">—</span>
                         )}
@@ -1040,7 +1040,7 @@ print(naishin["total"])  # -> 52`;
           </div>
 
           <h3 className="mb-2 mt-6 flex items-center gap-2 text-sm font-bold text-slate-700">
-            <KeyRound className="h-4 w-4 text-indigo-500" />
+            <KeyRound className="h-4 w-4 text-brand-500" />
             無料APIキーを今すぐ発行
           </h3>
           <ApiKeyIssuer />
@@ -1050,7 +1050,7 @@ print(naishin["total"])  # -> 52`;
           </p>
 
           {/* Pro：非商用（個人・社内・検証） */}
-          <div className="mt-6 rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-6">
+          <div className="mt-6 rounded-lg border-2 border-amber-200 bg-amber-50 p-6">
             <h3 className="text-base font-bold text-slate-800">個人・社内での本格利用なら Pro</h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
               47都道府県×全方式（東京1020点・神奈川S値・大阪タイプ・千葉K値・北海道ランク…）の内申点計算を
@@ -1066,14 +1066,14 @@ print(naishin["total"])  # -> 52`;
           {/* Business：2026-08-13新設。2026-09（T-SS1 SS1-2）でセルフ決済化。
               STRIPE_PRICE_BUSINESS未設定時はUpgradeButtonが自動で「準備中・お問い合わせ」表示に落ちるため、
               商品未登録の状態でも壊れない（Proと同じ導線を踏襲・新規実装なし）。 */}
-          <div className="mt-6 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6">
+          <div className="mt-6 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
             <h3 className="text-base font-bold text-slate-800">自社サービスに組み込むなら Business</h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
               模試会社・塾管理SaaS・中堅塾本部向け。<strong>商用利用（第三者への提供・自社商品への組み込み）</strong>を
               許諾し、月次クォータ<strong>200,000回</strong>・出典明記不要・優先サポート付き。
               受験アプリ・進路SaaS・塾チェーンの内申自動算出にそのまま組み込めます。要綱改訂の追従も当方が肩代わりします。
             </p>
-            <p className="mt-3 text-lg font-bold text-emerald-700">{formatTierPrice('business')}</p>
+            <p className="mt-3 text-lg font-bold text-brand-700">{formatTierPrice('business')}</p>
             <p className="mt-1 text-xs text-slate-500">初年度価格。契約主体は親権者名義。詳細は<Link href="/tokushoho" className="mx-1 underline">特定商取引法に基づく表記</Link>参照。</p>
             <div className="mt-4">
               <UpgradeButton tier="business" label="Businessにアップグレード（年額 ¥240,000〜）" />
@@ -1081,26 +1081,26 @@ print(naishin["total"])  # -> 52`;
             <div className="mt-3 flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-300 bg-white px-5 py-2.5 text-sm font-bold text-emerald-700 transition-all hover:bg-emerald-50"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-300 bg-white px-5 py-2.5 text-sm font-bold text-brand-700 transition-all hover:bg-brand-50"
               >
                 Businessについて相談する
               </Link>
               <Link
                 href="/mitsumori"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-300 bg-white px-5 py-2.5 text-sm font-bold text-emerald-700 transition-all hover:bg-emerald-50"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-300 bg-white px-5 py-2.5 text-sm font-bold text-brand-700 transition-all hover:bg-brand-50"
               >
                 見積書を作成する
               </Link>
             </div>
             <p className="mt-3 text-xs text-slate-500">
               塾・学習塾・進路指導の事業者様は、
-              <Link href="/partner" className="mx-1 font-semibold text-emerald-700 underline">パートナー向けページ</Link>
+              <Link href="/partner" className="mx-1 font-bold text-brand-700 underline">パートナー向けページ</Link>
               で埋め込みウィジェットやデータ提供メニューもご覧いただけます。
             </p>
           </div>
 
           {/* Enterprise（Scale）：基本＋オプション加算を明示（2026-08-13価格決定・修正3） */}
-          <div className="mt-6 rounded-2xl border-2 border-slate-300 bg-gradient-to-br from-slate-50 to-indigo-100 p-6">
+          <div className="mt-6 rounded-lg border-2 border-slate-300 bg-slate-50 p-6">
             <h3 className="text-base font-bold text-slate-800">
               大規模利用・データライセンスなら {TIER_POLICIES.scale.label}
             </h3>
@@ -1115,15 +1115,15 @@ print(naishin["total"])  # -> 52`;
               <table className="w-full min-w-[420px] border-collapse text-left text-sm">
                 <thead>
                   <tr className="border-b border-slate-300 text-xs text-slate-500">
-                    <th className="py-1.5 pr-3 font-semibold">構成</th>
-                    <th className="py-1.5 font-semibold">年額</th>
+                    <th className="py-1.5 pr-3 font-bold">構成</th>
+                    <th className="py-1.5 font-bold">年額</th>
                   </tr>
                 </thead>
                 <tbody>
                   {QUOTE_PLANS.filter((p) => p.id.startsWith('enterprise')).map((p) => (
                     <tr key={p.id} className="border-b border-slate-200 last:border-b-0">
                       <td className="py-1.5 pr-3 text-slate-700">{p.label.replace('Enterprise（', '').replace('）', '')}</td>
-                      <td className="py-1.5 font-semibold text-slate-800">¥{p.annualPriceJpy.toLocaleString('ja-JP')}</td>
+                      <td className="py-1.5 font-bold text-slate-800">¥{p.annualPriceJpy.toLocaleString('ja-JP')}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1137,20 +1137,20 @@ print(naishin["total"])  # -> 52`;
               <UpgradeButton tier="scale" label="Enterpriseについて相談する" />
               <Link
                 href="/mitsumori"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-50"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-50"
               >
                 見積書を作成する
               </Link>
             </div>
             <p className="mt-3 text-xs text-slate-500">
               上記は実際の提示額です。
-              <Link href="/contact" className="mx-1 font-semibold text-indigo-700 underline">お問い合わせ</Link>ください。
+              <Link href="/contact" className="mx-1 font-bold text-brand-700 underline">お問い合わせ</Link>ください。
             </p>
           </div>
 
           <p className="mt-3 text-xs text-slate-500">
             有償プランのお申し込みにあたっては、
-            <Link href="/tokushoho" className="mx-1 font-semibold text-slate-600 underline">
+            <Link href="/tokushoho" className="mx-1 font-bold text-slate-600 underline">
               特定商取引法に基づく表記
             </Link>
             をご確認ください。
@@ -1160,25 +1160,25 @@ print(naishin["total"])  # -> 52`;
         {/* License */}
         <section className="mb-10">
           <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Scale className="h-5 w-5 text-emerald-500" />
+            <Scale className="h-5 w-5 text-brand-500" />
             利用条件・出典
           </h2>
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-sm leading-relaxed text-emerald-900">
+          <div className="rounded-lg border border-brand-200 bg-brand-50 p-5 text-sm leading-relaxed text-brand-900">
             <p>{DATASET_META.license.summary}</p>
-            <p className="mt-3 font-mono text-xs text-emerald-700">
+            <p className="mt-3 font-mono text-xs text-brand-700">
               出典表記例： 出典: My Naishin（{SITE_URL}）
             </p>
           </div>
           <p className="mt-4 text-sm text-slate-600">
             計算方式の一次情報は各都道府県教育委員会の入学者選抜要綱に基づきます。各ページの
-            <Link href="/quality" className="mx-1 font-semibold text-indigo-600 underline">
+            <Link href="/quality" className="mx-1 font-bold text-brand-600 underline">
               情報の信頼性への取り組み
             </Link>
             もご覧ください。
           </p>
         </section>
 
-        <div className="rounded-xl bg-slate-50 p-4 text-center text-xs text-slate-500">
+        <div className="rounded-lg bg-slate-50 p-4 text-center text-xs text-slate-500">
           運営：
           <Link href="/about/editor-profile" className="mx-1 underline">
             現役中学生エンジニア・ないしんパンダ

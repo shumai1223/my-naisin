@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Sparkles } from 'lucide-react';
+import { Home, ChevronRight, Sparkles } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -92,23 +92,23 @@ export default function HensachiShindanPage() {
       />
       <FAQPageSchema faqItems={SHINDAN_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-blue-600">偏差値計算</Link>
+            <Link href="/hensachi" className="hover:text-brand-600">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">偏差値診断</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <Sparkles className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -124,7 +124,7 @@ export default function HensachiShindanPage() {
           <ShindanResultFlow />
 
           {/* 学年別で診断する */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">学年別で診断する</h2>
             <p className="mb-3 text-xs leading-relaxed text-slate-500">
               学年ごとに診断結果の使い方（志望校の見通し・内申とのバランス確認など）が変わります。あらかじめ学年を選んだ状態で診断したい場合はこちらから。
@@ -134,7 +134,7 @@ export default function HensachiShindanPage() {
                 <Link
                   key={g.slug}
                   href={`/hensachi/shindan/${g.slug}`}
-                  className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
                 >
                   {g.label}向け診断
                 </Link>
@@ -143,7 +143,7 @@ export default function HensachiShindanPage() {
           </section>
 
           {/* 目的別で診断する */}
-          <section className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">目的別で診断する</h2>
             <p className="mb-3 text-xs leading-relaxed text-slate-500">
               「志望校を決めたい」「内申を挽回したい」「塾に通うか迷っている」など、今知りたいことに合わせて診断したい場合はこちらから。
@@ -153,7 +153,7 @@ export default function HensachiShindanPage() {
                 <Link
                   key={p.slug}
                   href={`/hensachi/shindan/mokuteki/${p.slug}`}
-                  className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
                 >
                   {p.label}
                 </Link>
@@ -171,7 +171,7 @@ export default function HensachiShindanPage() {
             <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-3">
               {SHINDAN_FAQS.map((faq) => (
-                <details key={faq.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
                   <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
                     <span className="flex items-center justify-between gap-3">
                       {faq.question}

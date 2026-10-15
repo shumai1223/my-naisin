@@ -31,7 +31,7 @@ export default function NendomatsuPackPage() {
   const priceConfirmed = isPriceConfirmed();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
         <header className="mb-6">
           <h1 className="text-xl font-bold text-slate-900">{NENDOMATSU_PACK.productName}</h1>
@@ -41,14 +41,14 @@ export default function NendomatsuPackPage() {
           {!priceConfirmed && (
             <p
               data-testid="price-pending-banner"
-              className="mt-3 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm leading-relaxed text-amber-900"
+              className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm leading-relaxed text-amber-900"
             >
               価格は確定していません（確定待ち）。このページは内部確認用で、公開されていません。
             </p>
           )}
         </header>
 
-        <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="mb-6 rounded-lg border border-slate-200 bg-white p-4">
           <h2 className="mb-2 text-base font-bold text-slate-900">何が、どの作業に置き換わるか</h2>
           <p className="text-sm leading-relaxed text-slate-700">
             毎年2月に、各県教育委員会が公表する公立高校の出願状況（学校・学科ごとの募集人員・出願者数・倍率）のPDFを追って手作業で転記している作業を、
@@ -59,7 +59,7 @@ export default function NendomatsuPackPage() {
           </p>
         </section>
 
-        <section className="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <section className="mb-6 overflow-hidden rounded-lg border border-slate-200 bg-white">
           <div className="p-4 pb-2">
             <h2 className="text-base font-bold text-slate-900">いつ、どの県が届くか（納品予定表）</h2>
             <p className="mt-1 text-xs leading-relaxed text-slate-500">
@@ -80,7 +80,7 @@ export default function NendomatsuPackPage() {
                 const base = r9Baseline(d.code);
                 return (
                   <tr key={d.code} className="border-t border-slate-100" data-testid="delivery-row">
-                    <td className="px-3 py-2 font-medium text-slate-900">{d.name}</td>
+                    <td className="px-3 py-2 text-slate-900">{d.name}</td>
                     <td className="px-3 py-2 text-slate-700">{base.date ? `${base.date.replace(/-/g, '/')}（目安）` : 'R9日程の公表待ち'}</td>
                     <td className="px-3 py-2 text-slate-700">
                       {d.deliveryClass === 'A' ? NENDOMATSU_PACK.deliveryPromise.A : NENDOMATSU_PACK.deliveryPromise.B}
@@ -95,25 +95,25 @@ export default function NendomatsuPackPage() {
           </p>
         </section>
 
-        <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="mb-6 rounded-lg border border-slate-200 bg-white p-4">
           <h2 className="mb-2 text-base font-bold text-slate-900">価格・お支払い</h2>
           <dl className="text-sm text-slate-700">
             <div className="flex gap-3 border-b border-slate-100 py-2">
-              <dt className="w-24 shrink-0 font-medium text-slate-900">価格</dt>
+              <dt className="w-24 shrink-0 text-slate-900">価格</dt>
               <dd data-testid="price-label">{displayPriceLabel()}（買い切り）</dd>
             </div>
             <div className="flex gap-3 border-b border-slate-100 py-2">
-              <dt className="w-24 shrink-0 font-medium text-slate-900">お支払い</dt>
+              <dt className="w-24 shrink-0 text-slate-900">お支払い</dt>
               <dd>請求書払い・支払期限 {NENDOMATSU_PACK.paymentDeadline}</dd>
             </div>
             <div className="flex gap-3 py-2">
-              <dt className="w-24 shrink-0 font-medium text-slate-900">インボイス</dt>
+              <dt className="w-24 shrink-0 text-slate-900">インボイス</dt>
               <dd>{NENDOMATSU_PACK.invoiceNotice}</dd>
             </div>
           </dl>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="rounded-lg border border-slate-200 bg-white p-4">
           <h2 className="mb-2 text-base font-bold text-slate-900">利用条件・正確性</h2>
           <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">
             <li>社内利用、および貴社の紙面・模試資料・塾内資料・自社サイトへの掲載は可。出典として各県教育委員会を明記してください。</li>

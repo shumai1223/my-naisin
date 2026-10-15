@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowUpDown, MapPin, TrendingUp, Info, CheckCircle } from 'lucide-react';
+import { ArrowUpDown, MapPin, TrendingUp, Info, CheckCircle } from '@/components/icons';
 import Link from 'next/link';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
@@ -37,7 +37,7 @@ export default function ComparisonClient() {
         ]}
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <div className="min-h-screen bg-brand-50">
         <div className="container mx-auto px-4 py-8">
           {/* ヒーローセクション */}
           <section className="mb-8 text-center">
@@ -62,17 +62,17 @@ export default function ComparisonClient() {
                   onClick={() => togglePrefecture(prefecture.code)}
                   className={`rounded-lg border p-3 text-left transition-colors ${
                     selectedPrefectures.includes(prefecture.code)
-                      ? 'border-blue-500 bg-blue-50'
+                      ? 'border-brand-500 bg-brand-50'
                       : 'border-slate-200 bg-white hover:border-slate-300'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-semibold text-slate-800">{prefecture.name}</h3>
+                      <h3 className="font-bold text-slate-800">{prefecture.name}</h3>
                       <p className="text-sm text-slate-600">{prefecture.maxScore}点満点</p>
                     </div>
                     {selectedPrefectures.includes(prefecture.code) && (
-                      <CheckCircle className="h-5 w-5 text-blue-500" />
+                      <CheckCircle className="h-5 w-5 text-brand-500" />
                     )}
                   </div>
                 </button>
@@ -104,9 +104,9 @@ export default function ComparisonClient() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setComparisonMode('basic')}
-                    className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                    className={`rounded-lg px-4 py-2 text-sm transition-colors ${
                       comparisonMode === 'basic'
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-brand-600 text-white'
                         : 'bg-white text-slate-600 hover:bg-slate-50'
                     }`}
                   >
@@ -114,9 +114,9 @@ export default function ComparisonClient() {
                   </button>
                   <button
                     onClick={() => setComparisonMode('detailed')}
-                    className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                    className={`rounded-lg px-4 py-2 text-sm transition-colors ${
                       comparisonMode === 'detailed'
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-brand-600 text-white'
                         : 'bg-white text-slate-600 hover:bg-slate-50'
                     }`}
                   >
@@ -129,11 +129,11 @@ export default function ComparisonClient() {
                 <table className="w-full rounded-lg border border-slate-200 bg-white">
                   <thead className="bg-slate-50">
                     <tr>
-                      <th className="border-b border-slate-200 px-4 py-3 text-left text-sm font-semibold text-slate-700">
+                      <th className="border-b border-slate-200 px-4 py-3 text-left text-sm font-bold text-slate-700">
                         項目
                       </th>
                       {selectedPrefectureData.map(prefecture => (
-                        <th key={prefecture.code} className="border-b border-slate-200 px-4 py-3 text-center text-sm font-semibold text-slate-700">
+                        <th key={prefecture.code} className="border-b border-slate-200 px-4 py-3 text-center text-sm font-bold text-slate-700">
                           {prefecture.name}
                         </th>
                       ))}
@@ -142,7 +142,7 @@ export default function ComparisonClient() {
                   <tbody>
                     {/* 基本情報 */}
                     <tr className="hover:bg-slate-50">
-                      <td className="border-b border-slate-200 px-4 py-3 text-sm font-medium text-slate-700">
+                      <td className="border-b border-slate-200 px-4 py-3 text-sm text-slate-700">
                         満点
                       </td>
                       {selectedPrefectureData.map(prefecture => (
@@ -153,7 +153,7 @@ export default function ComparisonClient() {
                     </tr>
                     
                     <tr className="hover:bg-slate-50">
-                      <td className="border-b border-slate-200 px-4 py-3 text-sm font-medium text-slate-700">
+                      <td className="border-b border-slate-200 px-4 py-3 text-sm text-slate-700">
                         対象学年
                       </td>
                       {selectedPrefectureData.map(prefecture => (
@@ -164,7 +164,7 @@ export default function ComparisonClient() {
                     </tr>
                     
                     <tr className="hover:bg-slate-50">
-                      <td className="border-b border-slate-200 px-4 py-3 text-sm font-medium text-slate-700">
+                      <td className="border-b border-slate-200 px-4 py-3 text-sm text-slate-700">
                         実技倍率
                       </td>
                       {selectedPrefectureData.map(prefecture => (
@@ -177,7 +177,7 @@ export default function ComparisonClient() {
                     {comparisonMode === 'detailed' && (
                       <>
                         <tr className="hover:bg-slate-50">
-                          <td className="border-b border-slate-200 px-4 py-3 text-sm font-medium text-slate-700">
+                          <td className="border-b border-slate-200 px-4 py-3 text-sm text-slate-700">
                             主要教科倍率
                           </td>
                           {selectedPrefectureData.map(prefecture => (
@@ -188,7 +188,7 @@ export default function ComparisonClient() {
                         </tr>
                         
                         <tr className="hover:bg-slate-50">
-                          <td className="border-b border-slate-200 px-4 py-3 text-sm font-medium text-slate-700">
+                          <td className="border-b border-slate-200 px-4 py-3 text-sm text-slate-700">
                             学年倍率
                           </td>
                           {selectedPrefectureData.map(prefecture => (
@@ -202,7 +202,7 @@ export default function ComparisonClient() {
                         </tr>
                         
                         <tr className="hover:bg-slate-50">
-                          <td className="border-b border-slate-200 px-4 py-3 text-sm font-medium text-slate-700">
+                          <td className="border-b border-slate-200 px-4 py-3 text-sm text-slate-700">
                             地域
                           </td>
                           {selectedPrefectureData.map(prefecture => (
@@ -221,8 +221,8 @@ export default function ComparisonClient() {
 
           {/* アクション */}
           {selectedPrefectureData.length >= 2 && (
-            <section className="rounded-2xl border border-blue-200 bg-blue-50 p-6">
-              <h3 className="mb-4 text-lg font-bold text-blue-800">
+            <section className="rounded-lg border border-brand-200 bg-brand-50 p-6">
+              <h3 className="mb-4 text-lg font-bold text-brand-800">
                 次のアクション
               </h3>
               <div className="grid gap-4 md:grid-cols-2">
@@ -230,10 +230,10 @@ export default function ComparisonClient() {
                   <Link
                     key={prefecture.code}
                     href={`/${prefecture.code}/naishin`}
-                    className="rounded-lg border border-blue-200 bg-white p-4 transition-colors hover:bg-blue-50"
+                    className="rounded-lg border border-brand-200 bg-white p-4 transition-colors hover:bg-brand-50"
                   >
-                    <h4 className="font-semibold text-blue-800">{prefecture.name}の詳細</h4>
-                    <p className="mt-1 text-sm text-blue-600">
+                    <h4 className="font-bold text-brand-800">{prefecture.name}の詳細</h4>
+                    <p className="mt-1 text-sm text-brand-600">
                       内申点計算ツールで具体的な点数を確認
                     </p>
                   </Link>
@@ -244,7 +244,7 @@ export default function ComparisonClient() {
 
           {/* 使い方ガイド */}
           {selectedPrefectureData.length === 0 && (
-            <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="rounded-lg border border-slate-200 bg-white p-6">
               <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
                 <Info className="h-5 w-5" />
                 使い方ガイド

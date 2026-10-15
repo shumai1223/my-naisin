@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { Flame, Calendar, Trophy, Star, Zap, Target, Award } from 'lucide-react';
+import { Flame, Calendar, Trophy, Star, Zap, Target, Award } from '@/components/icons';
 
 const STREAK_KEY = 'my-naishin:streak';
 const LAST_VISIT_KEY = 'my-naishin:last-visit';
@@ -65,11 +65,11 @@ function updateStreak(): StreakData {
 }
 
 const MILESTONES = [
-  { days: 3, icon: Zap, label: '3日連続', color: 'text-yellow-500', bg: 'bg-yellow-50' },
-  { days: 7, icon: Star, label: '1週間', color: 'text-orange-500', bg: 'bg-orange-50' },
-  { days: 14, icon: Target, label: '2週間', color: 'text-rose-500', bg: 'bg-rose-50' },
-  { days: 30, icon: Trophy, label: '1ヶ月', color: 'text-purple-500', bg: 'bg-purple-50' },
-  { days: 60, icon: Award, label: '2ヶ月', color: 'text-indigo-500', bg: 'bg-indigo-50' },
+  { days: 3, icon: Zap, label: '3日連続', color: 'text-amber-500', bg: 'bg-amber-50' },
+  { days: 7, icon: Star, label: '1週間', color: 'text-amber-500', bg: 'bg-amber-50' },
+  { days: 14, icon: Target, label: '2週間', color: 'text-red-500', bg: 'bg-red-50' },
+  { days: 30, icon: Trophy, label: '1ヶ月', color: 'text-slate-500', bg: 'bg-slate-50' },
+  { days: 60, icon: Award, label: '2ヶ月', color: 'text-brand-500', bg: 'bg-brand-50' },
   { days: 100, icon: Flame, label: '100日', color: 'text-red-500', bg: 'bg-red-50' },
 ];
 
@@ -121,15 +121,15 @@ export function StudyStreakCard() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 p-5 text-white relative overflow-hidden">
+      <div className="bg-amber-500 p-5 text-white relative overflow-hidden">
         {showCelebration && (
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-10"
+            className="absolute inset-0 flex items-center justify-center bg-black/20 z-10"
           >
             <div className="text-center">
               <div className="text-4xl mb-2">🎉</div>
@@ -140,7 +140,7 @@ export function StudyStreakCard() {
         
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
               <Flame className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -149,7 +149,7 @@ export function StudyStreakCard() {
             </div>
           </div>
           <div className="text-right">
-            <div className="text-3xl font-black">{streak.current}</div>
+            <div className="text-3xl font-bold">{streak.current}</div>
             <div className="text-xs text-white/80">日連続</div>
           </div>
         </div>
@@ -157,25 +157,25 @@ export function StudyStreakCard() {
 
       <div className="p-5">
         {/* Motivation message */}
-        <div className="rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 p-4 mb-4 border border-amber-200">
-          <p className="text-sm font-medium text-amber-800 text-center">
+        <div className="rounded-lg bg-amber-50 p-4 mb-4 border border-amber-200">
+          <p className="text-sm text-amber-800 text-center">
             {getStreakMessage()}
           </p>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3 mb-4">
-          <div className="rounded-xl bg-slate-50 p-3 text-center">
-            <div className="text-2xl font-bold text-orange-500">{streak.current}</div>
-            <div className="text-[10px] font-medium text-slate-500">現在の連続</div>
+          <div className="rounded-lg bg-slate-50 p-3 text-center">
+            <div className="text-2xl font-bold text-amber-500">{streak.current}</div>
+            <div className="text-xs text-slate-500">現在の連続</div>
           </div>
-          <div className="rounded-xl bg-slate-50 p-3 text-center">
+          <div className="rounded-lg bg-slate-50 p-3 text-center">
             <div className="text-2xl font-bold text-amber-500">{streak.longest}</div>
-            <div className="text-[10px] font-medium text-slate-500">最長記録</div>
+            <div className="text-xs text-slate-500">最長記録</div>
           </div>
-          <div className="rounded-xl bg-slate-50 p-3 text-center">
-            <div className="text-2xl font-bold text-yellow-600">{streak.totalDays}</div>
-            <div className="text-[10px] font-medium text-slate-500">累計日数</div>
+          <div className="rounded-lg bg-slate-50 p-3 text-center">
+            <div className="text-2xl font-bold text-amber-600">{streak.totalDays}</div>
+            <div className="text-xs text-slate-500">累計日数</div>
           </div>
         </div>
 
@@ -191,7 +191,7 @@ export function StudyStreakCard() {
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(progressToNext, 100)}%` }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="h-full bg-gradient-to-r from-orange-400 to-amber-400 rounded-full"
+                className="h-full bg-amber-400 rounded-full"
               />
             </div>
           </div>
@@ -210,7 +210,7 @@ export function StudyStreakCard() {
                     className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 ${milestone.bg} border border-slate-200`}
                   >
                     <Icon className={`h-3.5 w-3.5 ${milestone.color}`} />
-                    <span className="text-xs font-medium text-slate-700">{milestone.label}</span>
+                    <span className="text-xs text-slate-700">{milestone.label}</span>
                   </div>
                 );
               })}
@@ -233,9 +233,9 @@ export function StudyStreakCard() {
               return (
                 <div
                   key={i}
-                  className={`aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] ${
+                  className={`aspect-square rounded-lg flex flex-col items-center justify-center text-xs ${
                     isToday 
-                      ? 'bg-gradient-to-br from-orange-400 to-amber-400 text-white font-bold'
+                      ? 'bg-amber-400 text-white font-bold'
                       : isActive
                         ? 'bg-amber-100 text-amber-700'
                         : 'bg-slate-50 text-slate-400'

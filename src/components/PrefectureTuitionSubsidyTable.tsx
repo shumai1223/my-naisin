@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { HandCoins, ExternalLink, ShieldCheck } from 'lucide-react';
+import { HandCoins, ExternalLink, ShieldCheck } from '@/components/icons';
 
 import { REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
 import type { PrefectureConfig } from '@/lib/prefectures';
@@ -39,16 +39,16 @@ function SubsidyRow({ pref }: { pref: PrefectureConfig }) {
   const confirmed = entry?.status === 'confirmed';
 
   return (
-    <tr className="border-b border-slate-100 last:border-0 even:bg-slate-50/40 hover:bg-emerald-50/50">
+    <tr className="border-b border-slate-100 last:border-0 even:bg-slate-50/40 hover:bg-brand-50/50">
       <th scope="row" className="whitespace-nowrap px-3 py-2.5 text-left font-bold text-slate-800">
         <span className="flex items-center gap-1.5">
           {pref.name}
           {confirmed ? (
-            <span className="shrink-0 rounded-full bg-emerald-50 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-100">
+            <span className="shrink-0 rounded-full bg-brand-50 px-1.5 py-0.5 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
               確認済み
             </span>
           ) : (
-            <span className="shrink-0 rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-500 ring-1 ring-slate-200">
+            <span className="shrink-0 rounded-full bg-slate-100 px-1.5 py-0.5 text-xs font-bold text-slate-500 ring-1 ring-slate-200">
               未確認
             </span>
           )}
@@ -59,7 +59,7 @@ function SubsidyRow({ pref }: { pref: PrefectureConfig }) {
           <td className="px-3 py-2.5 text-left text-xs leading-relaxed text-slate-700">
             {entry!.programName}
             {entry!.confidence === 'medium' && (
-              <span className="ml-1.5 rounded-full bg-amber-50 px-1.5 py-0.5 text-[10px] font-bold text-amber-700 ring-1 ring-amber-100">
+              <span className="ml-1.5 rounded-full bg-amber-50 px-1.5 py-0.5 text-xs font-bold text-amber-700 ring-1 ring-amber-100">
                 金額は要リーフレット確認
               </span>
             )}
@@ -76,7 +76,7 @@ function SubsidyRow({ pref }: { pref: PrefectureConfig }) {
                 href={entry!.source.url}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 underline underline-offset-2 hover:text-blue-900"
+                className="inline-flex items-center gap-1 text-xs font-bold text-brand-700 underline underline-offset-2 hover:text-brand-900"
               >
                 公式
                 <ExternalLink className="h-3 w-3" />
@@ -105,10 +105,10 @@ export function PrefectureTuitionSubsidyTable() {
     <section
       id="pref-subsidy"
       aria-labelledby="pref-subsidy-heading"
-      className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
+      className="scroll-mt-24 rounded-lg border border-slate-200 bg-white p-6 md:p-8"
     >
       <div className="mb-4">
-        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-100">
+        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
           <HandCoins className="h-3 w-3" />
           一次情報・都道府県別
         </div>
@@ -122,11 +122,11 @@ export function PrefectureTuitionSubsidyTable() {
         </p>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-slate-200">
+      <div className="overflow-x-auto rounded-lg border border-slate-200">
         <table className="w-full min-w-[720px] border-collapse text-sm">
           <caption className="sr-only">都道府県別の独自授業料上乗せ・軽減制度の一覧（制度名・対象・金額の目安・出典）</caption>
           <thead>
-            <tr className="bg-slate-100 text-xs uppercase tracking-wide text-slate-600">
+            <tr className="bg-slate-100 text-xs text-slate-600">
               <th scope="col" className="px-3 py-3 text-left">都道府県</th>
               <th scope="col" className="px-3 py-3 text-left">制度名 / 対象</th>
               <th scope="col" className="px-3 py-3 text-center">対象課程</th>
@@ -137,7 +137,7 @@ export function PrefectureTuitionSubsidyTable() {
           {REGIONS.map((region) => (
             <tbody key={region}>
               <tr>
-                <th scope="colgroup" colSpan={5} className="bg-emerald-600/5 px-3 py-2 text-left text-xs font-bold text-emerald-800">
+                <th scope="colgroup" colSpan={5} className="bg-brand-600/5 px-3 py-2 text-left text-xs font-bold text-brand-800">
                   {region}
                 </th>
               </tr>
@@ -149,7 +149,7 @@ export function PrefectureTuitionSubsidyTable() {
         </table>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-amber-100 bg-amber-50/60 px-4 py-3">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-amber-100 bg-amber-50/60 px-4 py-3">
         <p className="flex items-start gap-2 text-xs leading-relaxed text-amber-900">
           <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-600" />
           <span>
@@ -159,7 +159,7 @@ export function PrefectureTuitionSubsidyTable() {
         </p>
         <Link
           href="/prefectures"
-          className="inline-flex min-h-[44px] shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200 transition-all hover:bg-emerald-50"
+          className="inline-flex min-h-[44px] shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-brand-700 ring-1 ring-brand-200 transition-all hover:bg-brand-50"
         >
           都道府県一覧へ
         </Link>

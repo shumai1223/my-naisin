@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { MapPin } from "lucide-react";
+import { MapPin } from "@/components/icons";
 
 interface RegionSwitchProps {
   prefectureCode: string;
@@ -20,7 +20,7 @@ export function RegionSwitch({ prefectureCode, className }: RegionSwitchProps) {
   return (
     <div
       className={
-        "flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm " +
+        "flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 " +
         (className ?? "")
       }
     >

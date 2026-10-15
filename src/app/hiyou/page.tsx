@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, Calculator, HandCoins, School, GraduationCap, HelpCircle, Info, Receipt } from 'lucide-react';
+import { Home, ChevronRight, Wallet, Calculator, HandCoins, School, GraduationCap, HelpCircle, Info, Receipt } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -121,10 +121,10 @@ export default function HiyouHubPage() {
         }}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -132,7 +132,7 @@ export default function HiyouHubPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-emerald-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Wallet className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校受験・進学にかかるお金まとめ</h1>
@@ -150,9 +150,9 @@ export default function HiyouHubPage() {
                   key={c.href}
                   href={c.href}
                   {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-md"
+                  className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-brand-200"
                 >
-                  <div className="rounded-xl bg-indigo-50 p-2.5 text-indigo-600">
+                  <div className="rounded-lg bg-brand-50 p-2.5 text-brand-600">
                     <Icon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
@@ -172,9 +172,9 @@ export default function HiyouHubPage() {
           <ParentLeadCTAExperiment experimentId="hiyou-third-round-copy-2026" placement="hiyou" className="mb-10" />
 
           {/* なぜ早めに把握するか */}
-          <section className="mb-10 rounded-2xl border border-indigo-100 bg-indigo-50/40 p-6">
+          <section className="mb-10 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Info className="h-5 w-5 text-indigo-500" />
+              <Info className="h-5 w-5 text-brand-500" />
               早めにお金の全体像を把握するメリット
             </h2>
             <p className="leading-relaxed text-slate-700">
@@ -188,11 +188,11 @@ export default function HiyouHubPage() {
           {/* FAQ */}
           <section className="mb-10">
             <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-indigo-600" />よくある質問
+              <HelpCircle className="h-5 w-5 text-brand-600" />よくある質問
             </h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
                   <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
                     <span className="flex items-center justify-between gap-3">
                       {f.question}
@@ -206,23 +206,23 @@ export default function HiyouHubPage() {
           </section>
 
           {/* 関連ハブ */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">内申点を計算する（都道府県別）</span>
+              <Link href="/" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">内申点を計算する（都道府県別）</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/tools" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">すべての受験ツールを見る</span>
+              <Link href="/tools" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">すべての受験ツールを見る</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hogosha" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">保護者の方へ</span>
+              <Link href="/hogosha" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">保護者の方へ</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/mendan" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">三者面談の準備チェックリスト</span>
+              <Link href="/mendan" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">三者面談の準備チェックリスト</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
             </div>

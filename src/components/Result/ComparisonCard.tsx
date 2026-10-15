@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3 } from 'lucide-react';
+import { BarChart3 } from '@/components/icons';
 
 import { SUBJECTS } from '@/lib/constants';
 import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -42,11 +42,11 @@ function BarRow(props: {
   deltaText?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
           <div className="text-xs font-bold text-slate-700">{props.label}</div>
-          <div className="mt-0.5 text-[11px] text-slate-500">
+          <div className="mt-0.5 text-xs text-slate-500">
             前回 {props.prevValueText} → 今回 {props.currentValueText}
           </div>
         </div>
@@ -64,7 +64,7 @@ function BarRow(props: {
             style={{ width: `${Math.max(0, Math.min(100, props.prevPercent))}%` }}
           />
           <motion.div
-            className="relative h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 shadow-sm"
+            className="relative h-full rounded-full bg-brand-500"
             initial={{ width: 0 }}
             animate={{ width: `${Math.max(0, Math.min(100, props.currentPercent))}%` }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -166,10 +166,10 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
 
   return (
     <Card className="overflow-hidden">
-      <div className="border-b border-slate-100 bg-gradient-to-r from-indigo-50 via-blue-50 to-violet-50 px-6 py-4">
+      <div className="border-b border-slate-100 bg-brand-50 px-6 py-4">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-md shadow-indigo-200">
+            <div className="grid h-9 w-9 place-items-center rounded-lg bg-brand-500">
               <BarChart3 className="h-4 w-4 text-white" />
             </div>
             <div>
@@ -179,7 +179,7 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
           </div>
 
           {previous ? (
-            <div className="rounded-full bg-white/80 px-3 py-1 text-[11px] font-medium text-slate-600 shadow-sm">
+            <div className="rounded-full bg-white/80 px-3 py-1 text-xs text-slate-600">
               前回：{new Date(previous.savedAt).toLocaleDateString('ja-JP')}
               {previous.memo ? <span className="ml-2 text-slate-500">「{previous.memo}」</span> : null}
             </div>
@@ -189,7 +189,7 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
 
       <div className="p-6">
         {!previous || !metrics ? (
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
             <div className="text-sm font-bold text-slate-800">まだ比較できるデータがありません</div>
             <div className="mt-1 text-xs leading-relaxed text-slate-600">
               {saveEnabled
@@ -228,7 +228,7 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
             </div>
 
             {feedback.length ? (
-              <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <div className="text-xs font-bold text-slate-700">フィードバック</div>
                 <div className="mt-2 space-y-1">
                   {feedback.map((line, i) => (

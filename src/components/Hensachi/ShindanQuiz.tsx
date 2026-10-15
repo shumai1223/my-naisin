@@ -12,7 +12,7 @@ import {
   ChevronRight,
   Check,
   Users,
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { PREFECTURES } from '@/lib/prefectures';
 import {
@@ -42,9 +42,9 @@ function Pill({ active, onClick, children }: { active: boolean; onClick: () => v
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-xl border px-3 py-2.5 text-sm font-bold transition-all ${
+      className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition-all ${
         active
-          ? 'border-purple-500 bg-purple-50 text-purple-700 ring-2 ring-purple-500/20'
+          ? 'border-slate-500 bg-slate-50 text-slate-700 ring-2 ring-slate-500/20'
           : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
       }`}
     >
@@ -128,10 +128,10 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
 
   return (
     <div>
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
+      <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-7">
         {/* Q1 学年 */}
         <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <GraduationCap className="h-4 w-4 text-purple-600" />
+          <GraduationCap className="h-4 w-4 text-slate-600" />
           Q1. 学年
         </div>
         <div className="mb-5 grid grid-cols-3 gap-2">
@@ -144,7 +144,7 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
 
         {/* Q2 順位バンド（点数を知らなくても回答できる） */}
         <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <BarChart3 className="h-4 w-4 text-purple-600" />
+          <BarChart3 className="h-4 w-4 text-slate-600" />
           Q2. 最近のテストの順位は、だいたいどのくらい？
         </div>
         <div className="mb-5 grid gap-2">
@@ -157,14 +157,14 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
 
         {/* Q3 都道府県 */}
         <label htmlFor="shindan-prefecture" className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <MapPin className="h-4 w-4 text-purple-600" />
+          <MapPin className="h-4 w-4 text-slate-600" />
           Q3. お住まいの都道府県
         </label>
         <select
           id="shindan-prefecture"
           value={prefectureCode}
           onChange={(e) => { onFirstTouch(); setPrefectureCode(e.target.value); }}
-          className="mb-5 h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+          className="mb-5 h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20"
         >
           <option value="">選択してください</option>
           {PREFECTURES.map((p) => (
@@ -174,7 +174,7 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
 
         {/* Q4 内申・評定平均の自己申告 */}
         <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <BookOpen className="h-4 w-4 text-purple-600" />
+          <BookOpen className="h-4 w-4 text-slate-600" />
           Q4. 通知表の評定は、だいたいどのくらい？
         </div>
         <div className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -187,7 +187,7 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
 
         {/* Q5 気になっていること */}
         <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <HelpCircle className="h-4 w-4 text-purple-600" />
+          <HelpCircle className="h-4 w-4 text-slate-600" />
           Q5. 今、一番気になっていることは？
         </div>
         <div className="mb-6 grid gap-2 sm:grid-cols-2">
@@ -202,26 +202,26 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
           type="button"
           onClick={onDiagnose}
           disabled={!canSubmit}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-purple-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-600 px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-slate-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
         >
           <Search className="h-4 w-4" />
           診断する
         </button>
         {!canSubmit && (
-          <p className="mt-2 text-center text-[11px] text-slate-400">5つすべて選ぶと診断結果が出ます</p>
+          <p className="mt-2 text-center text-xs text-slate-400">5つすべて選ぶと診断結果が出ます</p>
         )}
       </section>
 
       {submitted && range && naishinRef && currentTier && reach && (
         <div ref={resultRef} className="mt-6 scroll-mt-6 space-y-4">
-          <div className="rounded-2xl border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-indigo-50 p-6 shadow-sm">
+          <div className="rounded-lg border-2 border-slate-200 bg-slate-50 p-6">
             <div className="mb-3 flex items-center gap-2">
-              <Check className="h-5 w-5 text-purple-600" />
+              <Check className="h-5 w-5 text-slate-600" />
               <h2 className="text-lg font-bold text-slate-900">
                 {prefName ? `${prefName}・中${grade}` : ''}のあなたの偏差値の目安
               </h2>
             </div>
-            <div className="text-3xl font-black text-purple-700">
+            <div className="text-3xl font-bold text-slate-700">
               {range.min !== null && range.max !== null
                 ? `偏差値 ${range.min}〜${range.max}`
                 : range.min !== null
@@ -230,11 +230,11 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
             </div>
             <p className="mt-2 text-xs leading-relaxed text-slate-500">
               ※ テストの順位（自己申告）を正規分布の数式に当てはめた目安です。実際の点数・平均点・標準偏差で計算するとより正確です。
-              <Link href="/hensachi" className="ml-1 font-bold text-purple-700 underline">正確な偏差値を計算する →</Link>
+              <Link href="/hensachi" className="ml-1 font-bold text-slate-700 underline">正確な偏差値を計算する →</Link>
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-lg border border-slate-200 bg-white p-5">
             <h3 className="mb-2 text-sm font-bold text-slate-800">評定「{naishinRef.label}」との整合性</h3>
             <p className="text-sm leading-relaxed text-slate-600">
               評定「{naishinRef.label}」は、一般的には偏差値<strong className="text-slate-800">{naishinRef.hensachiGuide}</strong>くらいの高校を志望する人と同じレベル帯で見られることが多い組み合わせです（換算式ではなく、あくまで並置の目安）。
@@ -242,18 +242,18 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-lg border border-slate-200 bg-white p-5">
             <h3 className="mb-3 text-sm font-bold text-slate-800">届く高校レベルの目安</h3>
             <div className="grid gap-2 sm:grid-cols-3">
-              <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-3 text-center">
-                <div className="text-xs font-bold text-emerald-700">安全圏</div>
+              <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-3 text-center">
+                <div className="text-xs font-bold text-brand-700">安全圏</div>
                 <div className="mt-1 text-sm font-bold text-slate-800">{reach.safe.label}</div>
               </div>
-              <div className="rounded-xl border-2 border-purple-200 bg-purple-50 p-3 text-center">
-                <div className="text-xs font-bold text-purple-700">実力相応</div>
+              <div className="rounded-lg border-2 border-slate-200 bg-slate-50 p-3 text-center">
+                <div className="text-xs font-bold text-slate-700">実力相応</div>
                 <div className="mt-1 text-sm font-bold text-slate-800">{reach.match.label}</div>
               </div>
-              <div className="rounded-xl border border-amber-100 bg-amber-50/50 p-3 text-center">
+              <div className="rounded-lg border border-amber-100 bg-amber-50/50 p-3 text-center">
                 <div className="text-xs font-bold text-amber-700">チャレンジ</div>
                 <div className="mt-1 text-sm font-bold text-slate-800">{reach.challenge.label}</div>
               </div>
@@ -261,15 +261,15 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
           </div>
 
           {/* 次の一手（Q5の関心に応じて分岐・S-2③） */}
-          <div className="rounded-2xl border-2 border-blue-200 bg-blue-50/40 p-5 shadow-sm">
+          <div className="rounded-lg border-2 border-brand-200 bg-brand-50/40 p-5">
             <h3 className="mb-3 text-sm font-bold text-slate-800">次の一手</h3>
             {concern === 'reach' && (
               <div className="space-y-2">
-                <Link href="/hensachi/shiboukou" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
-                  <span className="text-sm font-bold text-blue-700">偏差値→志望校レンジを詳しく見る</span>
-                  <ChevronRight className="h-4 w-4 text-blue-400" />
+                <Link href="/hensachi/shiboukou" className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 transition-all">
+                  <span className="text-sm font-bold text-brand-700">偏差値→志望校レンジを詳しく見る</span>
+                  <ChevronRight className="h-4 w-4 text-brand-400" />
                 </Link>
-                <Link href="/hogosha" className="flex items-center justify-between gap-3 rounded-xl bg-white p-3 shadow-sm hover:-translate-y-0.5 transition-all">
+                <Link href="/hogosha" className="flex items-center justify-between gap-3 rounded-lg bg-white p-3 transition-all">
                   <span className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
                     <Users className="h-3.5 w-3.5 text-slate-400" />
                     保護者の方へ：志望校が見えたら学費・塾代の目安を確認する
@@ -280,20 +280,20 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
             )}
             {concern === 'improve' && (
               <div className="space-y-3">
-                <Link href="/hensachi/agekata" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
-                  <span className="text-sm font-bold text-blue-700">偏差値の上げ方・具体策を見る</span>
-                  <ChevronRight className="h-4 w-4 text-blue-400" />
+                <Link href="/hensachi/agekata" className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 transition-all">
+                  <span className="text-sm font-bold text-brand-700">偏差値の上げ方・具体策を見る</span>
+                  <ChevronRight className="h-4 w-4 text-brand-400" />
                 </Link>
                 {representativeHensachi !== null && <HensachiGapToTarget value={representativeHensachi} />}
               </div>
             )}
             {concern === 'juku' && (
               <div className="space-y-2">
-                <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
-                  <span className="text-sm font-bold text-blue-700">結果に合う塾を診断する（無料）</span>
-                  <ChevronRight className="h-4 w-4 text-blue-400" />
+                <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 transition-all">
+                  <span className="text-sm font-bold text-brand-700">結果に合う塾を診断する（無料）</span>
+                  <ChevronRight className="h-4 w-4 text-brand-400" />
                 </Link>
-                <Link href="/hogosha" className="flex items-center justify-between gap-3 rounded-xl bg-white p-3 shadow-sm hover:-translate-y-0.5 transition-all">
+                <Link href="/hogosha" className="flex items-center justify-between gap-3 rounded-lg bg-white p-3 transition-all">
                   <span className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
                     <Users className="h-3.5 w-3.5 text-slate-400" />
                     保護者の方へ：塾・費用の選び方を確認する
@@ -304,11 +304,11 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
             )}
             {concern === 'futoukou' && (
               <div className="space-y-2">
-                <Link href="/futoukou" className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm hover:-translate-y-0.5 transition-all">
-                  <span className="text-sm font-bold text-blue-700">不登校でも高校受験はできる（内申点・出席の扱いを見る）</span>
-                  <ChevronRight className="h-4 w-4 text-blue-400" />
+                <Link href="/futoukou" className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 transition-all">
+                  <span className="text-sm font-bold text-brand-700">不登校でも高校受験はできる（内申点・出席の扱いを見る）</span>
+                  <ChevronRight className="h-4 w-4 text-brand-400" />
                 </Link>
-                <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-xl bg-white p-3 shadow-sm hover:-translate-y-0.5 transition-all">
+                <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-lg bg-white p-3 transition-all">
                   <span className="text-xs font-bold text-slate-600">不登校対応の塾・オンライン学習を診断する</span>
                   <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
                 </Link>

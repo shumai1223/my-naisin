@@ -6,7 +6,7 @@ import {
   Calculator,
   ChevronRight,
   Sparkles
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPercent, encodeScoresQuery } from '@/lib/utils';
@@ -72,9 +72,9 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
   };
 
   return (
-    <section className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 p-6 shadow-lg">
+    <section className="rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg">
+        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-500 text-white">
           <Sparkles className="h-6 w-6" />
         </div>
         <div>
@@ -87,7 +87,7 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
         </div>
       </div>
 
-      <div className="rounded-xl bg-white p-4 shadow-sm">
+      <div className="rounded-lg bg-white p-4">
         <InputForm
           prefectureCode={prefectureCode}
           scores={scores}
@@ -98,7 +98,7 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
         <div className="mt-6 flex justify-center">
           <button
             onClick={handleCalculate}
-            className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-3 text-lg font-bold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105"
+            className="rounded-lg bg-brand-600 px-8 py-3 text-lg font-bold text-white transition-all hover:scale-105"
           >
             内申点を計算する
           </button>
@@ -106,14 +106,14 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
       </div>
 
       {showResult && (
-        <div id="result" className="mt-6 rounded-xl bg-white p-6 shadow-sm" role="status" aria-live="polite">
+        <div id="result" className="mt-6 rounded-lg bg-white p-6" role="status" aria-live="polite">
           <h3 className="mb-4 text-center text-lg font-bold text-slate-800">
             あなたの{prefectureName}での内申点
           </h3>
           <div className="flex flex-col items-center gap-6 md:flex-row md:justify-center">
             <ScoreGauge percent={percent} total={total} max={max} />
             <div className="text-center md:text-left">
-              <div className="text-4xl font-bold text-blue-600">{total}点</div>
+              <div className="text-4xl font-bold text-brand-600">{total}点</div>
               <div className="text-sm text-slate-500">/ {max}点満点（達成率 {percent}%）</div>
               <div className="mt-2">
                 <RankCard result={{ prefectureCode, total, max, percent, rank }} />
@@ -122,8 +122,8 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
           </div>
 
           {prefectureCode === 'kanagawa' && (
-            <div className="mt-4 rounded-xl border border-indigo-200 bg-indigo-50 p-4">
-              <div className="text-sm font-bold text-indigo-700">A（評定合計）と a値</div>
+            <div className="mt-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
+              <div className="text-sm font-bold text-brand-700">A（評定合計）と a値</div>
               <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-slate-700">
                 <span>A（評定合計）: <strong>{total}点</strong></span>
                 <span>a値（100点換算）: <strong>{Math.round((total / max) * 100)}点</strong></span>
@@ -149,9 +149,9 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
             maxScore={max}
           />
 
-          <div className="mt-4 rounded-xl border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-5">
+          <div className="mt-4 rounded-lg border-2 border-brand-100 bg-brand-50 p-5">
             <div className="flex items-start gap-3">
-              <Sparkles className="h-6 w-6 flex-shrink-0 text-blue-600 mt-1" />
+              <Sparkles className="h-6 w-6 flex-shrink-0 text-brand-600 mt-1" />
               <div className="flex-1">
                 <h4 className="mb-2 font-bold text-slate-800">さらに詳しい分析をご希望の方へ</h4>
                 <p className="mb-3 text-sm leading-relaxed text-slate-600">
@@ -160,7 +160,7 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
                 </p>
                 <Link
                   href={`/?pref=${prefectureCode}&scores=${encodeScoresQuery(scores)}`}
-                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
+                  className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-bold text-white transition-all hover:scale-105"
                 >
                   <Calculator className="h-4 w-4" />
                   詳細な分析・計算はこちら

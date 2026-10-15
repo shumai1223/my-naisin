@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, Copy, Share2 } from 'lucide-react';
+import { Check, Copy, Share2 } from '@/components/icons';
 
 interface BlogShareButtonsProps {
   title: string;
@@ -53,10 +53,10 @@ export function BlogShareButtons({ title, url, variant = 'card' }: BlogShareButt
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200/70 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border border-slate-200/70 bg-white p-5">
       <div className="mb-4 flex items-center gap-2">
-        <Share2 className="h-4 w-4 text-blue-500" />
-        <h3 className="text-sm font-bold text-gray-800">この記事をシェア</h3>
+        <Share2 className="h-4 w-4 text-brand-500" />
+        <h3 className="text-sm font-bold text-slate-800">この記事をシェア</h3>
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <ShareButtons xUrl={xUrl} lineUrl={lineUrl} facebookUrl={facebookUrl} onCopy={handleCopy} copied={copied} />
@@ -90,7 +90,7 @@ function ShareButtons({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Xでシェア"
-        className={`inline-flex items-center gap-1.5 rounded-full bg-black text-white font-bold transition-all hover:-translate-y-0.5 hover:shadow-md ${padding}`}
+        className={`inline-flex items-center gap-1.5 rounded-full bg-black text-white font-bold transition-all ${padding}`}
       >
         <XIcon className={iconCls} />
         <span>Xでポスト</span>
@@ -100,7 +100,7 @@ function ShareButtons({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LINEで送る"
-        className={`inline-flex items-center gap-1.5 rounded-full bg-[#06C755] text-white font-bold transition-all hover:-translate-y-0.5 hover:shadow-md ${padding}`}
+        className={`inline-flex items-center gap-1.5 rounded-full bg-[#06C755] text-white font-bold transition-all ${padding}`}
       >
         <LineIcon className={iconCls} />
         <span>LINEで送る</span>
@@ -110,7 +110,7 @@ function ShareButtons({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Facebookでシェア"
-        className={`inline-flex items-center gap-1.5 rounded-full bg-[#1877F2] text-white font-bold transition-all hover:-translate-y-0.5 hover:shadow-md ${padding}`}
+        className={`inline-flex items-center gap-1.5 rounded-full bg-[#1877F2] text-white font-bold transition-all ${padding}`}
       >
         <FbIcon className={iconCls} />
         <span>Facebook</span>
@@ -119,12 +119,12 @@ function ShareButtons({
         type="button"
         onClick={onCopy}
         aria-label="リンクをコピー"
-        className={`inline-flex items-center gap-1.5 rounded-full bg-gray-100 text-gray-700 font-bold ring-1 ring-gray-200 transition-all hover:-translate-y-0.5 hover:bg-gray-200 hover:shadow ${padding}`}
+        className={`inline-flex items-center gap-1.5 rounded-full bg-slate-100 text-slate-700 font-bold ring-1 ring-slate-200 transition-all hover:bg-slate-200 ${padding}`}
       >
         {copied ? (
           <>
-            <Check className={`${iconCls} text-emerald-600`} />
-            <span className="text-emerald-700">コピーしました</span>
+            <Check className={`${iconCls} text-brand-600`} />
+            <span className="text-brand-700">コピーしました</span>
           </>
         ) : (
           <>

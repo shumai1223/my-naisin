@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Target, Search, MessageCircle, ChevronRight } from 'lucide-react';
+import { Target, Search, MessageCircle, ChevronRight } from '@/components/icons';
 
 import { lineAddUrl } from '@/lib/line';
 import type { SchoolPageCta } from '@/lib/school-page-clicks-db';
@@ -41,9 +41,9 @@ function reportClick(prefectureCode: string, schoolCode: string, cta: SchoolPage
 
 export function SchoolPageConvertCTA({ schoolName, prefectureCode, schoolCode, className = '' }: SchoolPageConvertCTAProps) {
   return (
-    <section className={`rounded-2xl border border-blue-200 bg-blue-50/60 p-6 shadow-sm ${className}`}>
+    <section className={`rounded-lg border border-brand-200 bg-brand-50/60 p-6 ${className}`}>
       <h2 className="mb-1 flex items-center gap-2 text-lg font-bold text-slate-800">
-        <Target className="h-5 w-5 shrink-0 text-blue-600" />
+        <Target className="h-5 w-5 shrink-0 text-brand-600" />
         {schoolName}を目指すなら
       </h2>
       <p className="mb-4 text-sm leading-relaxed text-slate-600">
@@ -53,7 +53,7 @@ export function SchoolPageConvertCTA({ schoolName, prefectureCode, schoolCode, c
         <Link
           href={`/reverse?pref=${prefectureCode}`}
           onClick={() => reportClick(prefectureCode, schoolCode, 'reverse')}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
         >
           <Target className="h-4 w-4 shrink-0" />
           必要な当日点を逆算する
@@ -61,7 +61,7 @@ export function SchoolPageConvertCTA({ schoolName, prefectureCode, schoolCode, c
         <Link
           href="/juku-shindan"
           onClick={() => reportClick(prefectureCode, schoolCode, 'juku-shindan')}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-blue-300 bg-white px-4 py-3 text-sm font-bold text-blue-700 transition-all hover:bg-blue-50"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-brand-300 bg-white px-4 py-3 text-sm font-bold text-brand-700 transition-all hover:bg-brand-50"
         >
           <Search className="h-4 w-4 shrink-0" />
           条件に合う塾を無料診断
@@ -73,7 +73,7 @@ export function SchoolPageConvertCTA({ schoolName, prefectureCode, schoolCode, c
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => reportClick(prefectureCode, schoolCode, 'line')}
-        className="mt-2.5 flex items-center justify-center gap-2 rounded-xl bg-[#06C755] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+        className="mt-2.5 flex items-center justify-center gap-2 rounded-lg bg-[#06C755] px-4 py-2.5 text-sm font-bold text-white transition-all"
       >
         <MessageCircle className="h-4 w-4 shrink-0" />
         受験情報をLINEで受け取る

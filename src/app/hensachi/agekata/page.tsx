@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, TrendingUp, Calculator, Eye, Rocket, User, ShieldCheck, Calendar, FileCheck } from 'lucide-react';
+import { Home, ChevronRight, TrendingUp, Calculator, Eye, Rocket, User, ShieldCheck, Calendar, FileCheck } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
@@ -81,23 +81,23 @@ export default function HensachiAgekataPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="hover:text-slate-600">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">出し方・上げ方・見方</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <TrendingUp className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">偏差値の出し方・上げ方・見方</h1>
@@ -107,15 +107,15 @@ export default function HensachiAgekataPage() {
           </header>
 
           {/* E-E-A-T カード */}
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
             <div className="flex items-start gap-4">
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-md">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-slate-500 text-white">
                 <User className="h-6 w-6" />
               </div>
               <div className="flex-1">
                 <div className="mb-1 flex flex-wrap items-center gap-2">
                   <div className="text-sm font-bold text-slate-800">監修・運営：ないしんパンダ</div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-200">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2 py-0.5 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
                     <ShieldCheck className="h-3 w-3" />
                     2026年度受験生
                   </span>
@@ -123,7 +123,7 @@ export default function HensachiAgekataPage() {
                 <p className="text-xs leading-relaxed text-slate-600">
                   現役中学生エンジニアが、自分と周りの受験経験をもとにまとめた偏差値の使いこなしガイドです。
                 </p>
-                <div className="mt-2 flex flex-wrap gap-3 text-[10px] text-slate-500">
+                <div className="mt-2 flex flex-wrap gap-3 text-xs text-slate-500">
                   <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />最終更新：2026年6月12日</span>
                   <span className="flex items-center gap-1"><FileCheck className="h-3 w-3" />上位%・順位は正規分布から算出</span>
                 </div>
@@ -132,12 +132,12 @@ export default function HensachiAgekataPage() {
           </div>
 
           {/* 出し方 */}
-          <section className="mt-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-purple-500" />
+          <section className="mt-2 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-slate-500 pl-3 text-lg font-bold text-slate-800">
+              <Calculator className="h-5 w-5 text-slate-500" />
               偏差値の出し方（計算方法）
             </h2>
-            <div className="rounded-xl bg-slate-900 p-4 text-center text-slate-100">
+            <div className="rounded-lg bg-slate-900 p-4 text-center text-slate-100">
               <div className="font-mono text-sm md:text-base">偏差値 = 50 + 10 × (自分の点数 − 平均点) ÷ 標準偏差</div>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
@@ -145,11 +145,11 @@ export default function HensachiAgekataPage() {
               標準偏差が分からない場合は、定期テストなら15前後を目安にします。5教科をまとめて計算するなら、当サイトの計算ツールが速くて正確です。
             </p>
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              <Link href="/hensachi" className="group flex items-center justify-between rounded-xl border border-purple-100 bg-purple-50 px-4 py-3 text-sm font-bold text-purple-800 transition-all hover:bg-purple-100">
+              <Link href="/hensachi" className="group flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800 transition-all hover:bg-slate-100">
                 偏差値を計算する（5教科・無料）
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
-              <Link href="/hensachi/kyoka-betsu" className="group flex items-center justify-between rounded-xl border border-purple-100 bg-purple-50 px-4 py-3 text-sm font-bold text-purple-800 transition-all hover:bg-purple-100">
+              <Link href="/hensachi/kyoka-betsu" className="group flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800 transition-all hover:bg-slate-100">
                 教科別に偏差値を出す
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
@@ -157,9 +157,9 @@ export default function HensachiAgekataPage() {
           </section>
 
           {/* 見方 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-indigo-500 pl-3 text-lg font-bold text-slate-800">
-              <Eye className="h-5 w-5 text-indigo-500" />
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
+              <Eye className="h-5 w-5 text-brand-500" />
               偏差値の見方（偏差値50は上位何%？）
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
@@ -168,11 +168,11 @@ export default function HensachiAgekataPage() {
             <div className="overflow-x-auto">
               <table className="min-w-full text-xs md:text-sm">
                 <thead>
-                  <tr className="bg-indigo-600 text-white">
-                    <th className="border border-indigo-400 px-3 py-2 text-left font-bold">偏差値</th>
-                    <th className="border border-indigo-400 px-3 py-2 text-right font-bold">上位</th>
-                    <th className="border border-indigo-400 px-3 py-2 text-right font-bold">300人中</th>
-                    <th className="border border-indigo-400 px-3 py-2 text-right font-bold">1000人中</th>
+                  <tr className="bg-brand-600 text-white">
+                    <th className="border border-brand-400 px-3 py-2 text-left font-bold">偏差値</th>
+                    <th className="border border-brand-400 px-3 py-2 text-right font-bold">上位</th>
+                    <th className="border border-brand-400 px-3 py-2 text-right font-bold">300人中</th>
+                    <th className="border border-brand-400 px-3 py-2 text-right font-bold">1000人中</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -188,19 +188,19 @@ export default function HensachiAgekataPage() {
               </table>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-slate-500">
-              偏差値→届く高校レベルの目安は<Link href="/hensachi/shiboukou" className="font-bold text-indigo-600 hover:underline">志望校レンジ逆引きツール</Link>で確認できます。
+              偏差値→届く高校レベルの目安は<Link href="/hensachi/shiboukou" className="font-bold text-brand-600 hover:underline">志望校レンジ逆引きツール</Link>で確認できます。
             </p>
           </section>
 
           {/* 上げ方 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-rose-500 pl-3 text-lg font-bold text-slate-800">
-              <Rocket className="h-5 w-5 text-rose-500" />
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-red-500 pl-3 text-lg font-bold text-slate-800">
+              <Rocket className="h-5 w-5 text-red-500" />
               偏差値の上げ方（効率の良い順番）
             </h2>
             <div className="space-y-3">
               {RAISE_STEPS.map((s) => (
-                <div key={s.title} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div key={s.title} className="rounded-lg border border-slate-100 bg-slate-50 p-4">
                   <h3 className="mb-1 text-sm font-bold text-slate-800">{s.title}</h3>
                   <p className="text-xs leading-relaxed text-slate-600">{s.body}</p>
                 </div>
@@ -226,7 +226,7 @@ export default function HensachiAgekataPage() {
           </div>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (

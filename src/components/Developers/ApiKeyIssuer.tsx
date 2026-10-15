@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { KeyRound, Copy, Check, Loader2, AlertCircle } from 'lucide-react';
+import { KeyRound, Copy, Check, Loader2, AlertCircle } from '@/components/icons';
 
 /**
  * 無料APIキーの自己発行UI（堀B／課金ゲートの入口）。
@@ -64,24 +64,24 @@ export function ApiKeyIssuer() {
 
   if (apiKey) {
     return (
-      <div className="rounded-2xl border-2 border-emerald-300 bg-emerald-50 p-5">
-        <p className="mb-2 flex items-center gap-2 text-sm font-bold text-emerald-800">
+      <div className="rounded-lg border-2 border-brand-300 bg-brand-50 p-5">
+        <p className="mb-2 flex items-center gap-2 text-sm font-bold text-brand-800">
           <Check className="h-4 w-4" /> APIキーを発行しました（この一度きりの表示です）
         </p>
         <div className="flex items-center gap-2">
-          <code className="flex-1 overflow-x-auto rounded-lg border border-emerald-200 bg-white px-3 py-2 font-mono text-xs text-slate-800">
+          <code className="flex-1 overflow-x-auto rounded-lg border border-brand-200 bg-white px-3 py-2 font-mono text-xs text-slate-800">
             {apiKey}
           </code>
           <button
             type="button"
             onClick={copyKey}
-            className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-emerald-600 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-700"
+            className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-brand-600 px-3 py-2 text-xs font-bold text-white hover:bg-brand-700"
           >
             {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             {copied ? 'コピー済' : 'コピー'}
           </button>
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-emerald-900">
+        <p className="mt-3 text-xs leading-relaxed text-brand-900">
           <strong>再表示はできません。</strong>安全に保管してください。リクエストに
           <code className="mx-1 rounded bg-white px-1.5 py-0.5">Authorization: Bearer &lt;key&gt;</code>
           または <code className="mx-1 rounded bg-white px-1.5 py-0.5">x-api-key: &lt;key&gt;</code>
@@ -92,9 +92,9 @@ export function ApiKeyIssuer() {
   }
 
   return (
-    <div className="rounded-2xl border border-indigo-200 bg-white p-5">
+    <div className="rounded-lg border border-brand-200 bg-white p-5">
       <div className="grid gap-3 sm:grid-cols-2">
-        <label className="text-xs font-medium text-slate-600">
+        <label className="text-xs text-slate-600">
           用途メモ（任意）
           <input
             type="text"
@@ -102,10 +102,10 @@ export function ApiKeyIssuer() {
             maxLength={80}
             onChange={(e) => setLabel(e.target.value)}
             placeholder="例: 進路アプリの内申計算"
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-indigo-400 focus:outline-none"
+            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-brand-400 focus:outline-none"
           />
         </label>
-        <label className="text-xs font-medium text-slate-600">
+        <label className="text-xs text-slate-600">
           連絡先メール（任意・障害時のお知らせ用）
           <input
             type="email"
@@ -113,7 +113,7 @@ export function ApiKeyIssuer() {
             maxLength={254}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="dev@example.com"
-            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-indigo-400 focus:outline-none"
+            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-brand-400 focus:outline-none"
           />
         </label>
       </div>
@@ -125,7 +125,7 @@ export function ApiKeyIssuer() {
           className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300"
         />
         <span>
-          <a href="/terms" target="_blank" rel="noreferrer" className="font-semibold text-indigo-600 underline">
+          <a href="/terms" target="_blank" rel="noreferrer" className="font-bold text-brand-600 underline">
             利用規約
           </a>
           に同意します
@@ -135,7 +135,7 @@ export function ApiKeyIssuer() {
         type="button"
         onClick={issue}
         disabled={loading || !agreed}
-        className="mt-3 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-200 transition-all hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-3 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-bold text-white transition-all disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
         無料APIキーを発行
@@ -147,7 +147,7 @@ export function ApiKeyIssuer() {
         </p>
       )}
       {error && (
-        <p className="mt-3 flex items-start gap-2 rounded-lg bg-rose-50 p-3 text-xs leading-relaxed text-rose-700">
+        <p className="mt-3 flex items-start gap-2 rounded-lg bg-red-50 p-3 text-xs leading-relaxed text-red-700">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
           {error}
         </p>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GraduationCap, TrendingDown, Sparkles, Calculator, FileText } from 'lucide-react';
+import { GraduationCap, TrendingDown, Sparkles, Calculator, FileText } from '@/components/icons';
 
 import type { SnapshotMetric } from '@/lib/juku-saas-db';
 import { latestTrendDelta, type StudentTrendByMetric, type DeclineAlert } from '@/lib/juku-student-progress';
@@ -41,28 +41,28 @@ export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref, r
     <div className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-4xl px-4 py-8">
         {isDemo && (
-          <div className="mb-4 flex items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-bold text-indigo-700">
+          <div className="mb-4 flex items-center gap-2 rounded-lg border border-brand-200 bg-brand-50 px-4 py-2 text-xs font-bold text-brand-700">
             <Sparkles className="h-4 w-4" />
             これはデモデータです（架空の生徒・実在の教育委員会一次データに基づく計算エンジンで算出）
           </div>
         )}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-lg">
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-brand-600 text-white">
               <GraduationCap className="h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-xl font-black text-slate-900">{jukuName} 生徒ダッシュボード</h1>
+              <h1 className="text-xl font-bold text-slate-900">{jukuName} 生徒ダッシュボード</h1>
               <p className="mt-0.5 text-xs text-slate-500">
                 生徒{studentViews.length}人・低下アラート
-                <span className={totalAlerts > 0 ? 'font-bold text-rose-600' : ''}> {totalAlerts}件</span>
+                <span className={totalAlerts > 0 ? 'font-bold text-red-600' : ''}> {totalAlerts}件</span>
               </p>
             </div>
           </div>
           {simulatorHref && (
             <Link
               href={simulatorHref}
-              className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-blue-700"
+              className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-xs font-bold text-white hover:bg-brand-700"
             >
               <Calculator className="h-3.5 w-3.5" />
               内申点シミュレーター
@@ -72,7 +72,7 @@ export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref, r
 
         <div className="mt-6">
           {studentViews.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-400">
+            <div className="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-400">
               まだ生徒が登録されていません。CSV一括取込で追加してください。
             </div>
           ) : (
@@ -80,12 +80,12 @@ export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref, r
               {studentViews.map(({ id, displayName, trend, alerts }) => {
                 const alertMetrics = new Set(alerts.map((a) => a.metric));
                 return (
-                  <div key={id} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                  <div key={id} className="rounded-lg border border-slate-200 bg-white p-4">
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-slate-800">{displayName}</span>
                       <div className="flex items-center gap-2">
                         {alerts.length > 0 && (
-                          <span className="flex items-center gap-1 rounded-full bg-rose-50 px-2 py-0.5 text-xs font-bold text-rose-600">
+                          <span className="flex items-center gap-1 rounded-full bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600">
                             <TrendingDown className="h-3 w-3" />
                             {alerts.length}件低下
                           </span>
@@ -93,7 +93,7 @@ export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref, r
                         {reportHrefForStudent && (
                           <Link
                             href={reportHrefForStudent(id)}
-                            className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600 hover:bg-slate-200"
+                            className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600 hover:bg-slate-200"
                           >
                             <FileText className="h-3 w-3" />
                             帳票
@@ -110,7 +110,7 @@ export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref, r
                         return (
                           <div
                             key={metric}
-                            className={`rounded-lg p-2 ${isDeclining ? 'bg-rose-50 ring-1 ring-rose-200' : 'bg-slate-50'}`}
+                            className={`rounded-lg p-2 ${isDeclining ? 'bg-red-50 ring-1 ring-red-200' : 'bg-slate-50'}`}
                           >
                             <div className="text-slate-400">{METRIC_LABEL[metric]}</div>
                             {latest ? (
@@ -118,7 +118,7 @@ export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref, r
                                 {latest.value}
                                 {latest.maxValue !== null ? `/${latest.maxValue}` : ''}
                                 {delta !== null && (
-                                  <span className={delta < 0 ? 'ml-1 text-rose-600' : 'ml-1 text-emerald-600'}>
+                                  <span className={delta < 0 ? 'ml-1 text-red-600' : 'ml-1 text-brand-600'}>
                                     {delta >= 0 ? '+' : ''}
                                     {delta}
                                   </span>

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Inbox, Target, PartyPopper, TrendingUp } from 'lucide-react';
+import { Inbox, Target, PartyPopper, TrendingUp } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -90,8 +90,8 @@ export function ParentShareBanner() {
       : null;
 
   return (
-    <section className="mb-8 overflow-hidden rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50/70 to-white p-6 shadow-sm md:p-7">
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-200">
+    <section className="mb-8 overflow-hidden rounded-lg border-2 border-brand-200 bg-brand-50 p-6 md:p-7">
+      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
         <Inbox className="h-3.5 w-3.5" />
         お子さまから成績レポートが届きました
       </div>
@@ -102,24 +102,24 @@ export function ParentShareBanner() {
 
       {hasScore && (
         <div className="mb-4 flex flex-wrap items-center gap-3">
-          <div className="rounded-xl border border-slate-200 bg-white px-4 py-2.5">
-            <div className="text-[11px] font-bold text-slate-500">現在の{metric}</div>
-            <div className="text-2xl font-black tracking-tight text-slate-800">
+          <div className="rounded-lg border border-slate-200 bg-white px-4 py-2.5">
+            <div className="text-xs font-bold text-slate-500">現在の{metric}</div>
+            <div className="text-2xl font-bold tracking-tight text-slate-800">
               {score}
-              {typeof max === 'number' && <span className="text-base font-semibold text-slate-400">/{max}</span>}
+              {typeof max === 'number' && <span className="text-base font-bold text-slate-400">/{max}</span>}
             </div>
           </div>
 
           {typeof target === 'number' && (
             <div
-              className={`flex items-center gap-2 rounded-xl border-2 px-4 py-2.5 ${
-                met ? 'border-emerald-200 bg-emerald-50/70 text-emerald-800' : 'border-amber-200 bg-amber-50/70 text-amber-800'
+              className={`flex items-center gap-2 rounded-lg border-2 px-4 py-2.5 ${
+                met ? 'border-brand-200 bg-brand-50/70 text-brand-800' : 'border-amber-200 bg-amber-50/70 text-amber-800'
               }`}
             >
               {met ? <PartyPopper className="h-5 w-5" /> : <Target className="h-5 w-5" />}
               <div>
-                <div className="text-[11px] font-bold opacity-80">{targetWord}（{target}）まで</div>
-                <div className="text-lg font-black">
+                <div className="text-xs font-bold opacity-80">{targetWord}（{target}）まで</div>
+                <div className="text-lg font-bold">
                   {met ? `目標を ${Math.abs(gap as number)}点 達成` : `あと ${gap}点`}
                 </div>
               </div>
@@ -128,11 +128,11 @@ export function ParentShareBanner() {
 
           {/* ②この点数の意味（全国/県内位置）。k-匿名性ガード後の実測値のみ表示・未計測時は出さない。 */}
           {hasPercentile && (
-            <div className="flex items-center gap-2 rounded-xl border-2 border-indigo-200 bg-indigo-50/70 px-4 py-2.5 text-indigo-800">
+            <div className="flex items-center gap-2 rounded-lg border-2 border-brand-200 bg-brand-50/70 px-4 py-2.5 text-brand-800">
               <TrendingUp className="h-5 w-5" />
               <div>
-                <div className="text-[11px] font-bold opacity-80">{percentileScopeLabel}での位置</div>
-                <div className="text-lg font-black">上位 {Math.max(1, 100 - (percentile as number))}%相当</div>
+                <div className="text-xs font-bold opacity-80">{percentileScopeLabel}での位置</div>
+                <div className="text-lg font-bold">上位 {Math.max(1, 100 - (percentile as number))}%相当</div>
               </div>
             </div>
           )}
@@ -146,7 +146,7 @@ export function ParentShareBanner() {
       </p>
 
       {cardSrc && (
-        <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div className="mt-4 overflow-hidden rounded-lg border border-slate-200 bg-white">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={cardSrc}

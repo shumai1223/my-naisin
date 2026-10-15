@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, Minus, BookOpen, ArrowRight, Sparkles } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, BookOpen, ArrowRight, Sparkles } from '@/components/icons';
 
 import { readHistory } from '@/lib/persistence';
 import { SUBJECTS } from '@/lib/constants';
@@ -60,12 +60,12 @@ export function SubjectImprovementCard({ currentScores }: SubjectImprovementCard
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.35 }}
-      className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 p-5 text-white">
+      <div className="bg-brand-500 p-5 text-white">
         <div className="flex items-center gap-3">
-          <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
+          <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
             <BookOpen className="h-6 w-6 text-white" />
           </div>
           <div>
@@ -78,26 +78,26 @@ export function SubjectImprovementCard({ currentScores }: SubjectImprovementCard
       <div className="p-5">
         {/* Summary */}
         <div className="grid grid-cols-3 gap-3 mb-4">
-          <div className="rounded-xl bg-emerald-50 p-3 text-center border border-emerald-200">
+          <div className="rounded-lg bg-brand-50 p-3 text-center border border-brand-200">
             <div className="flex items-center justify-center gap-1">
-              <TrendingUp className="h-4 w-4 text-emerald-500" />
-              <span className="text-lg font-bold text-emerald-600">{improvements.length}</span>
+              <TrendingUp className="h-4 w-4 text-brand-500" />
+              <span className="text-lg font-bold text-brand-600">{improvements.length}</span>
             </div>
-            <div className="text-[10px] font-medium text-emerald-600">上昇</div>
+            <div className="text-xs text-brand-600">上昇</div>
           </div>
-          <div className="rounded-xl bg-slate-50 p-3 text-center border border-slate-200">
+          <div className="rounded-lg bg-slate-50 p-3 text-center border border-slate-200">
             <div className="flex items-center justify-center gap-1">
               <Minus className="h-4 w-4 text-slate-400" />
               <span className="text-lg font-bold text-slate-600">{stable.length}</span>
             </div>
-            <div className="text-[10px] font-medium text-slate-500">維持</div>
+            <div className="text-xs text-slate-500">維持</div>
           </div>
-          <div className="rounded-xl bg-rose-50 p-3 text-center border border-rose-200">
+          <div className="rounded-lg bg-red-50 p-3 text-center border border-red-200">
             <div className="flex items-center justify-center gap-1">
-              <TrendingDown className="h-4 w-4 text-rose-500" />
-              <span className="text-lg font-bold text-rose-600">{declines.length}</span>
+              <TrendingDown className="h-4 w-4 text-red-500" />
+              <span className="text-lg font-bold text-red-600">{declines.length}</span>
             </div>
-            <div className="text-[10px] font-medium text-rose-600">下降</div>
+            <div className="text-xs text-red-600">下降</div>
           </div>
         </div>
 
@@ -105,21 +105,21 @@ export function SubjectImprovementCard({ currentScores }: SubjectImprovementCard
         {improvements.length > 0 && (
           <div className="mb-4">
             <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="h-4 w-4 text-emerald-500" />
-              <span className="text-xs font-bold text-emerald-700">成績UP！</span>
+              <Sparkles className="h-4 w-4 text-brand-500" />
+              <span className="text-xs font-bold text-brand-700">成績UP！</span>
             </div>
             <div className="space-y-2">
               {improvements.map((item) => (
                 <div
                   key={item.key}
-                  className="flex items-center justify-between rounded-lg bg-emerald-50 px-3 py-2 border border-emerald-100"
+                  className="flex items-center justify-between rounded-lg bg-brand-50 px-3 py-2 border border-brand-100"
                 >
-                  <span className="text-sm font-medium text-slate-700">{item.label}</span>
+                  <span className="text-sm text-slate-700">{item.label}</span>
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-slate-400">{item.previous}</span>
-                    <ArrowRight className="h-3 w-3 text-emerald-500" />
-                    <span className="text-sm font-bold text-emerald-600">{item.current}</span>
-                    <span className="text-xs font-bold text-emerald-500 bg-emerald-100 px-1.5 py-0.5 rounded">
+                    <ArrowRight className="h-3 w-3 text-brand-500" />
+                    <span className="text-sm font-bold text-brand-600">{item.current}</span>
+                    <span className="text-xs font-bold text-brand-500 bg-brand-100 px-1.5 py-0.5 rounded">
                       +{item.change}
                     </span>
                   </div>
@@ -133,21 +133,21 @@ export function SubjectImprovementCard({ currentScores }: SubjectImprovementCard
         {declines.length > 0 && (
           <div className="mb-4">
             <div className="flex items-center gap-2 mb-2">
-              <TrendingDown className="h-4 w-4 text-rose-500" />
-              <span className="text-xs font-bold text-rose-700">要注意</span>
+              <TrendingDown className="h-4 w-4 text-red-500" />
+              <span className="text-xs font-bold text-red-700">要注意</span>
             </div>
             <div className="space-y-2">
               {declines.map((item) => (
                 <div
                   key={item.key}
-                  className="flex items-center justify-between rounded-lg bg-rose-50 px-3 py-2 border border-rose-100"
+                  className="flex items-center justify-between rounded-lg bg-red-50 px-3 py-2 border border-red-100"
                 >
-                  <span className="text-sm font-medium text-slate-700">{item.label}</span>
+                  <span className="text-sm text-slate-700">{item.label}</span>
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-slate-400">{item.previous}</span>
-                    <ArrowRight className="h-3 w-3 text-rose-500" />
-                    <span className="text-sm font-bold text-rose-600">{item.current}</span>
-                    <span className="text-xs font-bold text-rose-500 bg-rose-100 px-1.5 py-0.5 rounded">
+                    <ArrowRight className="h-3 w-3 text-red-500" />
+                    <span className="text-sm font-bold text-red-600">{item.current}</span>
+                    <span className="text-xs font-bold text-red-500 bg-red-100 px-1.5 py-0.5 rounded">
                       {item.change}
                     </span>
                   </div>
@@ -178,8 +178,8 @@ export function SubjectImprovementCard({ currentScores }: SubjectImprovementCard
         )}
 
         {/* Motivation */}
-        <div className="mt-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-3 border border-blue-200">
-          <p className="text-xs text-blue-700 text-center">
+        <div className="mt-4 rounded-lg bg-brand-50 p-3 border border-brand-200">
+          <p className="text-xs text-brand-700 text-center">
             {improvements.length > declines.length && '🎉 全体的に上昇傾向！この調子で頑張ろう！'}
             {improvements.length < declines.length && '💪 次回は上昇を目指そう！一歩ずつ前進！'}
             {improvements.length === declines.length && '📊 バランスが取れています。得意を伸ばそう！'}

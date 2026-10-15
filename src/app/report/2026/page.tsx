@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ChevronRightSquare, BookMarked } from 'lucide-react';
+import { Home, ChevronRight, ChevronRightSquare, BookMarked } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -124,10 +124,10 @@ export default async function Report2026Page() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -136,7 +136,7 @@ export default async function Report2026Page() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-800 to-indigo-900 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-800 text-white">
               <BookMarked className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">内申点白書2026</h1>
@@ -146,14 +146,14 @@ export default async function Report2026Page() {
             </p>
             <p className="mt-2 text-xs text-slate-400">
               発行: My Naishin ／ 発行日: 2026年7月 ／ 対象年度: 2026年度入試 ／{' '}
-              <Link href="/report/2026/en" className="font-semibold text-indigo-700 underline">
+              <Link href="/report/2026/en" className="font-bold text-brand-700 underline">
                 English summary
               </Link>
             </p>
           </header>
 
           {/* ① エグゼクティブサマリー */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">① エグゼクティブサマリー</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               日本の公立高校入試における「内申点」は、都道府県ごとに教育委員会が独自の算出方式を定めており、
@@ -168,7 +168,7 @@ export default async function Report2026Page() {
           </section>
 
           {/* ③ 構造的発見トップ5（先に提示し、後段の全件表で裏付ける構成） */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">② 構造的発見トップ5</h2>
             <ol className="space-y-4 text-sm leading-relaxed text-slate-600">
               <li>
@@ -204,7 +204,7 @@ export default async function Report2026Page() {
           </section>
 
           {/* ② 47都道府県比較表 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">③ 47都道府県 比較表（全件）</h2>
             <p className="mb-4 text-xs text-slate-500">
               実技傾斜倍率（実技4教科÷主要5教科）の降順。出典URLは各都道府県教育委員会の公式ページです。
@@ -212,7 +212,7 @@ export default async function Report2026Page() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs md:text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 text-[11px] text-slate-500">
+                  <tr className="border-b border-slate-200 text-xs text-slate-500">
                     <th className="py-2 pr-2">都道府県</th>
                     <th className="py-2 pr-2">地域</th>
                     <th className="py-2 pr-2">実技傾斜</th>
@@ -225,9 +225,9 @@ export default async function Report2026Page() {
                 <tbody>
                   {ROWS.map((r) => (
                     <tr key={r.code} className="border-b border-slate-100 last:border-0">
-                      <td className="py-1.5 pr-2 font-medium text-slate-800">
+                      <td className="py-1.5 pr-2 text-slate-800">
                         {REPORT_2026_DIGEST_CODES.includes(r.code) ? (
-                          <Link href={`/report/2026/${r.code}`} className="text-indigo-700 underline decoration-dotted hover:text-indigo-900">
+                          <Link href={`/report/2026/${r.code}`} className="text-brand-700 underline decoration-dotted hover:text-brand-900">
                             {r.name}
                           </Link>
                         ) : (
@@ -235,7 +235,7 @@ export default async function Report2026Page() {
                         )}
                       </td>
                       <td className="py-1.5 pr-2 text-slate-500">{r.region}</td>
-                      <td className="py-1.5 pr-2 font-bold text-indigo-700">{r.practicalSkew}倍</td>
+                      <td className="py-1.5 pr-2 font-bold text-brand-700">{r.practicalSkew}倍</td>
                       <td className="py-1.5 pr-2 text-slate-600">{r.grade3WeightPct}%</td>
                       <td className="py-1.5 pr-2 text-slate-600">{r.gradeCount}学年</td>
                       <td className="py-1.5 pr-2 text-slate-600">{r.maxScore}点</td>
@@ -245,7 +245,7 @@ export default async function Report2026Page() {
                             href={r.sourceUrl}
                             target="_blank"
                             rel="noopener noreferrer nofollow"
-                            className="text-indigo-600 underline hover:text-indigo-800"
+                            className="text-brand-600 underline hover:text-brand-800"
                           >
                             教委
                           </a>
@@ -261,7 +261,7 @@ export default async function Report2026Page() {
           </section>
 
           {/* ④ 匿名統計サマリー（/statsと同一データソース・n≥30の指標のみ） */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">④ 匿名統計サマリー</h2>
             <p className="mb-4 text-xs text-slate-500">
               各計算機ページで「匿名で統計に協力する」に任意でオプトインした利用者の実測データです（個人を特定できる情報は一切含みません）。
@@ -270,12 +270,12 @@ export default async function Report2026Page() {
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               {liveStats.map(({ metric, aggregate, count, suppressed }) => (
-                <div key={metric} className="rounded-xl bg-slate-50 p-4">
+                <div key={metric} className="rounded-lg bg-slate-50 p-4">
                   <div className="text-xs font-bold text-slate-500">{METRIC_LABEL[metric]}</div>
                   {aggregate ? (
                     <>
-                      <div className="mt-1 text-xl font-black text-indigo-700">平均{aggregate.mean.toFixed(1)}</div>
-                      <div className="mt-1 text-[11px] text-slate-400">
+                      <div className="mt-1 text-xl font-bold text-brand-700">平均{aggregate.mean.toFixed(1)}</div>
+                      <div className="mt-1 text-xs text-slate-400">
                         最小{formatStatValue(aggregate.min)}〜最大{formatStatValue(aggregate.max)}（n={aggregate.count}）
                       </div>
                     </>
@@ -288,12 +288,12 @@ export default async function Report2026Page() {
               ))}
             </div>
             <p className="mt-3 text-xs text-slate-400">
-              詳細な分布・API・CSVダウンロードは<Link href="/stats" className="text-indigo-600 underline">全国統計データページ</Link>をご覧ください。
+              詳細な分布・API・CSVダウンロードは<Link href="/stats" className="text-brand-600 underline">全国統計データページ</Link>をご覧ください。
             </p>
           </section>
 
           {/* ⑤ 出典・方法論 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">⑤ 出典・方法論</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               都道府県別の制度データは、各都道府県教育委員会が公式に発表する入学者選抜実施要項・実施要領を一次情報源とし、
@@ -301,24 +301,24 @@ export default async function Report2026Page() {
               個別の出典URLは上表の「教委」リンク、または各都道府県の内申点計算ページに掲載しています。
               実際の選抜では高校・学科ごとにさらに詳細な傾斜配点が設定される場合があるため、
               個別校の合否判定には必ず志望校・教育委員会の最新発表もあわせてご確認ください。
-              匿名統計セクションの方法論は<Link href="/quality" className="text-indigo-600 underline">データの品質・出典について</Link>で公開しています。
+              匿名統計セクションの方法論は<Link href="/quality" className="text-brand-600 underline">データの品質・出典について</Link>で公開しています。
             </p>
           </section>
 
           {/* ⑥ 引用・転載ガイドライン */}
-          <section className="mb-8 rounded-2xl border-2 border-indigo-200 bg-indigo-50 p-6">
+          <section className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">⑥ 引用・転載ガイドライン</h2>
             <p className="text-sm leading-relaxed text-slate-700">
               本白書のデータ・図表は、「出典: My Naishin（{url}）」の形でクレジットいただければ、
               報道・教育・研究目的での引用・転載を自由に行っていただけます。事前のご連絡は不要です。
               個別高校の合否可能性の断定や、学校別ボーダーラインとしての再利用はお控えください
               （本サイトはその種のデータを保持・提供していません）。データ提供・追加集計軸のご相談は
-              <Link href="/contact" className="text-indigo-600 underline">お問い合わせページ</Link>からご連絡ください。
+              <Link href="/contact" className="text-brand-600 underline">お問い合わせページ</Link>からご連絡ください。
             </p>
           </section>
 
           {REPORT_2026_DIGEST_CODES.length > 0 && (
-            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
               <h2 className="mb-3 text-lg font-bold text-slate-800">都道府県別ダイジェスト版</h2>
               <p className="mb-4 text-xs text-slate-500">
                 白書全体でなく、特定の県だけを1ページに凝縮したミニレポートです（執筆済みの県のみ順次公開）。
@@ -331,7 +331,7 @@ export default async function Report2026Page() {
                     <Link
                       key={code}
                       href={`/report/2026/${code}`}
-                      className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                      className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
                     >
                       {pref.name}版ダイジェスト
                       <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
@@ -345,35 +345,35 @@ export default async function Report2026Page() {
           <section className="mb-8 grid gap-2 sm:grid-cols-2">
             <Link
               href="/naishin-kakusa"
-              className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:border-indigo-200 hover:bg-indigo-50/50"
+              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
             >
               平易な解説版（内申点格差レポート）を読む
               <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
             </Link>
             <Link
               href="/naishin-map"
-              className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:border-indigo-200 hover:bg-indigo-50/50"
+              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
             >
               内申点の日本地図で見る
               <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
             </Link>
             <Link
               href="/developers"
-              className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:border-indigo-200 hover:bg-indigo-50/50"
+              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
             >
               このデータをAPIで使う
               <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
             </Link>
             <Link
               href="/press"
-              className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:border-indigo-200 hover:bg-indigo-50/50"
+              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
             >
               取材・掲載用の媒体資料を見る
               <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
             </Link>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (

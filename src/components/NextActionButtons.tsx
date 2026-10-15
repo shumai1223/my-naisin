@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { ArrowRight, TrendingUp, AlertTriangle, Target } from 'lucide-react';
+import { ArrowRight, TrendingUp, AlertTriangle, Target } from '@/components/icons';
 import { Button } from '@/components/ui/Button';
 import { getPrefectureByCode } from '@/lib/prefectures';
 
@@ -100,7 +100,7 @@ export function NextActionButtons({ prefectureCode, scores, totalScore, maxScore
         <Link href={`/reverse?pref=${prefectureCode}&current=${totalScore}`}>
           <Button 
             variant="primary" 
-            className="w-full h-14 text-base font-bold shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30"
+            className="w-full h-14 text-base font-bold"
             leftIcon={<Target className="h-5 w-5" />}
           >
             志望校配点で逆算する
@@ -111,7 +111,7 @@ export function NextActionButtons({ prefectureCode, scores, totalScore, maxScore
         <div className="group relative">
           <Button 
             variant="secondary" 
-            className="w-full h-14 text-base font-bold border-2 border-blue-200 hover:border-blue-300 hover:bg-blue-50"
+            className="w-full h-14 text-base font-bold border-2 border-brand-200 hover:border-brand-300 hover:bg-brand-50"
             leftIcon={<TrendingUp className="h-5 w-5" />}
           >
             どの教科を上げると効率いい？
@@ -119,7 +119,7 @@ export function NextActionButtons({ prefectureCode, scores, totalScore, maxScore
           
           {/* ホバー時に表示するランキング */}
           <div className="absolute top-full left-0 right-0 z-50 mt-2 hidden group-hover:block">
-            <div className="bg-white border border-slate-200 rounded-xl shadow-xl p-4 max-h-64 overflow-y-auto">
+            <div className="bg-white border border-slate-200 rounded-lg p-4 max-h-64 overflow-y-auto">
               <h4 className="font-bold text-slate-800 mb-3 text-sm">教科別の伸び代ランキング</h4>
               <div className="space-y-2">
                 {subjectImprovements.slice(0, 5).map((subject, index) => (
@@ -128,9 +128,9 @@ export function NextActionButtons({ prefectureCode, scores, totalScore, maxScore
                       <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">
                         {index + 1}
                       </span>
-                      <span className="font-medium text-slate-700">{subject.name}</span>
+                      <span className="text-slate-700">{subject.name}</span>
                       {subject.efficiency === 'high' && (
-                        <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">2倍</span>
+                        <span className="text-xs bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full">2倍</span>
                       )}
                     </div>
                     <div className="text-right">
@@ -152,7 +152,7 @@ export function NextActionButtons({ prefectureCode, scores, totalScore, maxScore
       </div>
 
       {/* 県の注意点 */}
-      <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-4">
+      <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-4">
         <div className="flex items-start gap-3">
           <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5" />
           <div>

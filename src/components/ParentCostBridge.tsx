@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Wallet, ChevronRight } from 'lucide-react';
+import { Wallet, ChevronRight } from '@/components/icons';
 
 interface ParentCostBridgeProps {
   className?: string;
@@ -21,9 +21,9 @@ export function ParentCostBridge({ className = '', prefectureName }: ParentCostB
   // 2026-07-15: 結果直下のカード渋滞で主役CTA(名簿/解放ゲート)が埋没するため、
   // 情報導線のこの面は「細い1行+テキストリンク」に格下げ（機能は3リンクとも維持）。
   return (
-    <section className={`rounded-xl border border-slate-200/80 bg-white/60 px-4 py-3 ${className}`}>
+    <section className={`rounded-lg border border-slate-200/80 bg-white/60 px-4 py-3 ${className}`}>
       <p className="flex items-center gap-1.5 text-xs font-bold text-slate-500">
-        <Wallet className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
+        <Wallet className="h-3.5 w-3.5 shrink-0 text-brand-500" />
         次は「お金」——{where}の費用（公立と私立で3年総額は数百万円差）を保護者の方と確認
       </p>
       <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
@@ -35,7 +35,7 @@ export function ParentCostBridge({ className = '', prefectureName }: ParentCostB
           <Link
             key={c.href}
             href={c.href}
-            className="group inline-flex items-center gap-0.5 text-xs font-semibold text-emerald-700 underline-offset-2 hover:underline"
+            className="group inline-flex items-center gap-0.5 text-xs font-bold text-brand-700 underline-offset-2 hover:underline"
           >
             {c.label}
             <ChevronRight className="h-3 w-3 shrink-0 transition-transform group-hover:translate-x-0.5" />

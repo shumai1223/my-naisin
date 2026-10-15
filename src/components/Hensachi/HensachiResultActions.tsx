@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { MessageCircle, Target, Bookmark } from 'lucide-react';
+import { MessageCircle, Target, Bookmark } from '@/components/icons';
 
 import { lineAddUrl } from '@/lib/line';
 import { track } from '@/lib/track';
@@ -31,7 +31,7 @@ export function HensachiResultActions({ value }: { value: number | null }) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => track('line_friend_click', { source: 'hensachi', placement: 'hensachi-result' })}
-          className="flex items-center justify-center gap-2 rounded-xl bg-[#06C755] px-5 py-3.5 text-center text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
+          className="flex items-center justify-center gap-2 rounded-lg bg-[#06C755] px-5 py-3.5 text-center text-sm font-bold text-white transition-all active:scale-[0.99]"
         >
           <MessageCircle className="h-5 w-5 shrink-0" />
           {/* 「無料相談」は1:1返信体制が無く履行できない約束のため、配信ベースの文言に統一(2026-07-15) */}
@@ -42,7 +42,7 @@ export function HensachiResultActions({ value }: { value: number | null }) {
         <Link
           href="/hensachi/shiboukou"
           onClick={() => track('click', { source: 'hensachi', placement: 'hensachi-result', to: 'shiboukou' })}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-purple-200 bg-white px-4 py-2.5 text-sm font-bold text-purple-700 transition-all hover:border-purple-400 hover:bg-purple-50"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
         >
           <Target className="h-4 w-4" />
           この偏差値で狙える高校を見る
@@ -50,7 +50,7 @@ export function HensachiResultActions({ value }: { value: number | null }) {
         <button
           type="button"
           onClick={scrollToSave}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-sky-200 bg-white px-4 py-2.5 text-sm font-bold text-sky-700 transition-all hover:border-sky-400 hover:bg-sky-50"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-200 bg-white px-4 py-2.5 text-sm font-bold text-brand-700 transition-all hover:border-brand-400 hover:bg-brand-50"
         >
           <Bookmark className="h-4 w-4" />
           結果を保存・記録する

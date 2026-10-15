@@ -96,7 +96,7 @@ export function NaishinMapGrid() {
             }}
             className={`rounded-full px-4 py-2 text-sm font-bold transition-colors ${
               m.id === metricId
-                ? 'bg-indigo-600 text-white shadow-md'
+                ? 'bg-brand-600 text-white'
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
@@ -127,7 +127,7 @@ export function NaishinMapGrid() {
 
       {/* 地図本体（実際の都道府県境の形をしたSVGパス。沖縄県は距離が離れているため別枠表示） */}
       <div
-        className="relative rounded-2xl border border-slate-200 bg-slate-50 p-4"
+        className="relative rounded-lg border border-slate-200 bg-slate-50 p-4"
         onMouseLeave={() => setTooltip(null)}
       >
         <svg
@@ -151,7 +151,7 @@ export function NaishinMapGrid() {
 
         {/* 沖縄インセット（本州から離れた実際の位置のまま表示すると地図全体が縦長になりすぎるため、
             一般的な日本地図の慣習に倣い左下に別枠で表示） */}
-        <div className="absolute bottom-3 left-3 w-[15%] min-w-[48px] max-w-[72px] rounded-md border border-slate-300 bg-white/80 p-1 shadow-sm">
+        <div className="absolute bottom-3 left-3 w-[15%] min-w-[48px] max-w-[72px] rounded-md border border-slate-300 bg-white/80 p-1">
           <svg
             viewBox={`${OKINAWA_VIEWBOX.x} ${OKINAWA_VIEWBOX.y} ${OKINAWA_VIEWBOX.width} ${OKINAWA_VIEWBOX.height}`}
             role="img"
@@ -167,12 +167,12 @@ export function NaishinMapGrid() {
               onLeave={() => setTooltip(null)}
             />
           </svg>
-          <p className="mt-0.5 text-center text-[9px] leading-none text-slate-400">沖縄（別枠）</p>
+          <p className="mt-0.5 text-center text-xs leading-none text-slate-400">沖縄（別枠）</p>
         </div>
 
         {tooltip && (
           <div
-            className="pointer-events-none fixed z-50 rounded-lg bg-slate-900 px-3 py-2 text-xs text-white shadow-lg"
+            className="pointer-events-none fixed z-50 rounded-lg bg-slate-900 px-3 py-2 text-xs text-white"
             style={{ left: tooltip.x + 12, top: tooltip.y + 12 }}
           >
             <div className="font-bold">{tooltip.cell.name}</div>
@@ -183,7 +183,7 @@ export function NaishinMapGrid() {
         )}
       </div>
 
-      <p className="mt-2 text-[11px] text-slate-400">
+      <p className="mt-2 text-xs text-slate-400">
         ※このマップは都道府県境の形状を簡略化したSVG地図です。縮尺・詳細な境界線は実際の地図と異なる場合があります。タップ/クリックで各県の内申点の重み解説へ移動できます。
       </p>
 
@@ -192,12 +192,12 @@ export function NaishinMapGrid() {
         <button
           type="button"
           onClick={() => setShowTable((v) => !v)}
-          className="text-sm font-bold text-indigo-700 hover:underline"
+          className="text-sm font-bold text-brand-700 hover:underline"
         >
           {showTable ? '▲ 表を閉じる' : '▼ 47都道府県すべてを表で見る'}
         </button>
         {showTable && (
-          <div className="mt-3 max-h-96 overflow-y-auto overflow-x-auto rounded-xl border border-slate-200">
+          <div className="mt-3 max-h-96 overflow-y-auto overflow-x-auto rounded-lg border border-slate-200">
             <table className="w-full text-left text-sm">
               <thead className="sticky top-0 bg-slate-100">
                 <tr className="text-xs text-slate-500">
@@ -211,13 +211,13 @@ export function NaishinMapGrid() {
                 {sortedByValue.map((cell, i) => (
                   <tr key={cell.code} className="border-t border-slate-100">
                     <td className="px-3 py-1.5 text-slate-400">{i + 1}</td>
-                    <td className="px-3 py-1.5 font-medium text-slate-800">
-                      <a href={`/${cell.code}/naishin-omomi`} className="hover:text-indigo-700 hover:underline">
+                    <td className="px-3 py-1.5 text-slate-800">
+                      <a href={`/${cell.code}/naishin-omomi`} className="hover:text-brand-700 hover:underline">
                         {cell.name}
                       </a>
                     </td>
                     <td className="px-3 py-1.5 text-slate-500">{cell.region}</td>
-                    <td className="px-3 py-1.5 font-bold text-indigo-700">{cell.formatted}</td>
+                    <td className="px-3 py-1.5 font-bold text-brand-700">{cell.formatted}</td>
                   </tr>
                 ))}
               </tbody>

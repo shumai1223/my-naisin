@@ -1,6 +1,6 @@
 'use client';
 
-import { Calendar, RefreshCw, Info } from 'lucide-react';
+import { Calendar, RefreshCw, Info } from '@/components/icons';
 
 interface BlogUpdateInfoProps {
   lastUpdated: string;
@@ -10,7 +10,7 @@ interface BlogUpdateInfoProps {
 
 export function BlogUpdateInfo({ lastUpdated, updateContent, updateReason }: BlogUpdateInfoProps) {
   return (
-    <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 shadow-sm">
+    <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
       <div className="flex items-start gap-3">
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-200">
           <RefreshCw className="h-4 w-4 text-amber-700" />
@@ -23,14 +23,14 @@ export function BlogUpdateInfo({ lastUpdated, updateContent, updateReason }: Blo
           
           {updateReason && (
             <div className="mt-2 rounded-lg border border-amber-300 bg-amber-100 p-2">
-              <p className="text-xs font-medium text-amber-800">
+              <p className="text-xs text-amber-800">
                 📝 更新理由：{updateReason}
               </p>
             </div>
           )}
           
           <div className="mt-2">
-            <h4 className="mb-1 text-xs font-semibold text-amber-700">更新内容</h4>
+            <h4 className="mb-1 text-xs font-bold text-amber-700">更新内容</h4>
             <ul className="space-y-1">
               {updateContent.map((content, index) => (
                 <li key={index} className="flex items-start gap-2 text-xs text-amber-700">

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ClipboardList, Brain, Lightbulb, HeartHandshake, HelpCircle, Calculator } from 'lucide-react';
+import { Home, ChevronRight, ClipboardList, Brain, Lightbulb, HeartHandshake, HelpCircle, Calculator } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -89,16 +89,16 @@ export default function HyoukaKijunPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">観点別評価の仕組み</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <ClipboardList className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">観点別評価の仕組み</h1>
@@ -128,14 +128,14 @@ export default function HyoukaKijunPage() {
             {VIEWPOINTS.map((v) => {
               const Icon = v.icon;
               return (
-                <div key={v.name} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div key={v.name} className="rounded-lg border border-slate-200 bg-white p-6">
                   <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600"><Icon className="h-5 w-5" /></span>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600"><Icon className="h-5 w-5" /></span>
                     {v.name}
                   </h3>
                   <ul className="space-y-1.5 text-sm leading-relaxed text-slate-700">
                     {v.whatGood.map((g) => (
-                      <li key={g} className="flex gap-2"><span className="text-emerald-500">✓</span><span>{g}</span></li>
+                      <li key={g} className="flex gap-2"><span className="text-brand-500">✓</span><span>{g}</span></li>
                     ))}
                   </ul>
                   <p className="mt-3 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500"><strong className="text-slate-600">主に測られる場面：</strong>{v.measured}</p>
@@ -145,26 +145,26 @@ export default function HyoukaKijunPage() {
           </section>
 
           {/* 実技・授業態度が響く理由 → /jitsugika 送客 */}
-          <section className="mt-8 rounded-2xl border-2 border-rose-200 bg-rose-50/40 p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-red-200 bg-red-50/40 p-6">
             <h2 className="mb-2 text-lg font-bold text-slate-800">実技・授業態度が「響く」理由</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-700">
               実技4教科は「思考・判断・表現」「主体的に取り組む態度」の比重が大きく、技能が苦手でも作品・提出物・振り返りで評定を上げやすい教科です。
               さらに多くの都道府県で実技は内申点が加重されるため、観点を意識した取り組みが合否に直結します。
             </p>
-            <Link href="/jitsugika" className="inline-flex items-center gap-2 rounded-xl bg-rose-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-rose-700">
+            <Link href="/jitsugika" className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-red-700">
               実技4教科の内申点対策を見る<ChevronRight className="h-4 w-4" />
             </Link>
           </section>
 
           {/* 現状把握ツール */}
-          <section className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50/40 p-6 text-center shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">3観点を意識して上げた評定が、内申点で何点になるか</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">評定を1上げると内申点・合否がどう動くか、お住まいの都道府県の方式で確認できます。</p>
             <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700">
+              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700">
                 <Calculator className="h-4 w-4" />内申点を計算する（47都道府県）
               </Link>
-              <Link href="/naishin-age-kata" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-emerald-700 ring-1 ring-emerald-200 transition-colors hover:bg-emerald-50">
+              <Link href="/naishin-age-kata" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-brand-700 ring-1 ring-brand-200 transition-colors hover:bg-brand-50">
                 内申点の上げ方（4軸）を見る
               </Link>
             </div>
@@ -179,11 +179,11 @@ export default function HyoukaKijunPage() {
             />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-emerald-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

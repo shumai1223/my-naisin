@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Calculator } from 'lucide-react';
+import { Home, ChevronRight, Calculator } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
@@ -23,10 +23,10 @@ export default function NaishinOruHubPage() {
           { name: 'オール3・4・5の内申点は何点？', url },
         ]}
       />
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -48,22 +48,22 @@ export default function NaishinOruHubPage() {
               <Link
                 key={grade}
                 href={`/naishin-oru/${grade}`}
-                className="flex flex-col items-center rounded-2xl border-2 border-blue-200 bg-white p-6 text-center shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-md"
+                className="flex flex-col items-center rounded-lg border-2 border-brand-200 bg-white p-6 text-center transition-all hover:border-brand-400"
               >
-                <span className="text-2xl font-bold text-blue-700">{ORU_GRADE_LABEL[grade]}</span>
+                <span className="text-2xl font-bold text-brand-700">{ORU_GRADE_LABEL[grade]}</span>
                 <span className="mt-1 text-xs text-slate-500">の内申点を都道府県別に見る</span>
               </Link>
             ))}
           </section>
 
-          <section className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 text-center shadow-sm">
+          <section className="rounded-lg border-2 border-brand-200 bg-brand-50 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">自分の実際の内申点を計算する</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
               9教科すべてが同じ評定とは限りません。教科ごとの実際の評定を入力すれば、正確な内申点をその場で計算できます。
             </p>
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
             >
               <Calculator className="h-4 w-4" />
               自分の内申点を計算する（47都道府県）

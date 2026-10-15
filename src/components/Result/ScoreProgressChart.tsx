@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, Minus, Calendar, ChevronDown, ChevronUp, History } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, Calendar, ChevronDown, ChevronUp, History } from '@/components/icons';
 
 import { readHistory } from '@/lib/persistence';
 import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -123,11 +123,11 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+        className="rounded-lg border border-slate-200 bg-white overflow-hidden"
       >
-        <div className="bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-5 text-white">
+        <div className="bg-brand-500 p-5 text-white">
           <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
               <History className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -140,7 +140,7 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
           <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-slate-100">
             <TrendingUp className="h-8 w-8 text-slate-400" />
           </div>
-          <p className="text-sm font-medium text-slate-600">まだ十分なデータがありません</p>
+          <p className="text-sm text-slate-600">まだ十分なデータがありません</p>
           <p className="mt-1 text-xs text-slate-400">
             2回以上保存すると成績の推移グラフが表示されます
           </p>
@@ -153,21 +153,21 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
   }
 
   const TrendIcon = trend.direction === 'up' ? TrendingUp : trend.direction === 'down' ? TrendingDown : Minus;
-  const trendColor = trend.direction === 'up' ? 'text-emerald-500' : trend.direction === 'down' ? 'text-rose-500' : 'text-slate-400';
-  const trendBg = trend.direction === 'up' ? 'bg-emerald-50' : trend.direction === 'down' ? 'bg-rose-50' : 'bg-slate-50';
+  const trendColor = trend.direction === 'up' ? 'text-brand-500' : trend.direction === 'down' ? 'text-red-500' : 'text-slate-400';
+  const trendBg = trend.direction === 'up' ? 'bg-brand-50' : trend.direction === 'down' ? 'bg-red-50' : 'bg-slate-50';
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
     >
       {/* Header */}
-      <div className="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-5 text-white">
+      <div className="w-full bg-brand-500 p-5 text-white">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
               <History className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -186,7 +186,7 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
             </div>
             <button
               onClick={() => setExpanded(!expanded)}
-              className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-black text-emerald-700 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+              className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-bold text-brand-700 transition"
             >
               {expanded ? (
                 <ChevronUp className="h-4 w-4" />
@@ -337,26 +337,26 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-3">
-            <div className="rounded-xl bg-slate-50 p-3 text-center">
-              <div className="text-[10px] font-medium text-slate-500">初回</div>
+            <div className="rounded-lg bg-slate-50 p-3 text-center">
+              <div className="text-xs text-slate-500">初回</div>
               <div className="mt-1 text-lg font-bold text-slate-700">{chartData[0]?.percent.toFixed(0)}%</div>
-              <div className="text-[10px] text-slate-400">{chartData[0]?.total}/{chartData[0]?.max}点</div>
+              <div className="text-xs text-slate-400">{chartData[0]?.total}/{chartData[0]?.max}点</div>
             </div>
-            <div className="rounded-xl bg-gradient-to-br from-teal-50 to-emerald-50 p-3 text-center border border-teal-200">
-              <div className="text-[10px] font-medium text-teal-600">最新</div>
-              <div className="mt-1 text-lg font-bold text-teal-700">
+            <div className="rounded-lg bg-brand-50 p-3 text-center border border-brand-200">
+              <div className="text-xs text-brand-600">最新</div>
+              <div className="mt-1 text-lg font-bold text-brand-700">
                 {chartData[chartData.length - 1]?.percent.toFixed(0)}%
               </div>
-              <div className="text-[10px] text-teal-500">
+              <div className="text-xs text-brand-500">
                 {chartData[chartData.length - 1]?.total}/{chartData[chartData.length - 1]?.max}点
               </div>
             </div>
-            <div className={`rounded-xl p-3 text-center ${trendBg}`}>
-              <div className="text-[10px] font-medium text-slate-500">変化</div>
+            <div className={`rounded-lg p-3 text-center ${trendBg}`}>
+              <div className="text-xs text-slate-500">変化</div>
               <div className={`mt-1 text-lg font-bold ${trendColor}`}>
                 {trend.change >= 0 ? '+' : ''}{trend.change.toFixed(1)}%
               </div>
-              <div className="text-[10px] text-slate-400">
+              <div className="text-xs text-slate-400">
                 {trend.direction === 'up' ? '成長中！' : trend.direction === 'down' ? '要注意' : '安定'}
               </div>
             </div>
@@ -397,8 +397,8 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
           </div>
 
           {/* Motivation message */}
-          <div className="mt-4 rounded-xl bg-gradient-to-r from-cyan-50 to-emerald-50 p-3 border border-teal-200">
-            <p className="text-xs text-teal-700 text-center">
+          <div className="mt-4 rounded-lg bg-brand-50 p-3 border border-brand-200">
+            <p className="text-xs text-brand-700 text-center">
               {trend.direction === 'up' && '🎉 着実に成長しています！この調子で頑張ろう！'}
               {trend.direction === 'down' && '💪 一時的な下降は成長の一部。諦めずに続けよう！'}
               {trend.direction === 'neutral' && '📊 安定した成績をキープ中。さらなる高みを目指そう！'}

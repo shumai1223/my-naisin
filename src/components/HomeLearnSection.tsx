@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, BookOpen, ChevronRight, ExternalLink, FileText, MapPin } from 'lucide-react';
+import { ArrowLeft, BookOpen, ChevronRight, ExternalLink, FileText, MapPin } from '@/components/icons';
 
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -45,10 +45,10 @@ export function HomeLearnSection({ onBack }: HomeLearnSectionProps) {
   return (
     <div className="space-y-4">
       <Card className="overflow-hidden">
-        <div className="border-b border-slate-100/80 bg-gradient-to-r from-amber-50/80 via-orange-50/60 to-rose-50/80 px-5 py-5 md:px-6">
+        <div className="border-b border-slate-100/80 bg-amber-50/80 px-5 py-5 md:px-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 shadow-lg shadow-amber-300/40">
+              <div className="grid h-12 w-12 place-items-center rounded-lg bg-amber-500">
                 <BookOpen className="h-6 w-6 text-white" />
               </div>
               <div>
@@ -73,9 +73,9 @@ export function HomeLearnSection({ onBack }: HomeLearnSectionProps) {
                 <button
                   key={region.name}
                   onClick={() => setSelectedRegion(selectedRegion === region.name ? null : region.name)}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                  className={`rounded-full px-4 py-2 text-sm transition-all ${
                     selectedRegion === region.name
-                      ? 'bg-amber-500 text-white shadow-md'
+                      ? 'bg-amber-500 text-white'
                       : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
                   }`}
                 >
@@ -85,7 +85,7 @@ export function HomeLearnSection({ onBack }: HomeLearnSectionProps) {
             </div>
 
             {selectedRegion && (
-              <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/50 p-4">
+              <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50/50 p-4">
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
                   {LEARN_REGIONS.find((r) => r.name === selectedRegion)?.codes.map((code) => {
                     const pref = PREFECTURES.find((p) => p.code === code);
@@ -94,7 +94,7 @@ export function HomeLearnSection({ onBack }: HomeLearnSectionProps) {
                       <Link
                         key={code}
                         href={`/${code}/naishin`}
-                        className="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition-all hover:bg-amber-50 hover:shadow-md"
+                        className="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-sm text-slate-700 transition-all hover:bg-amber-50"
                       >
                         <span>{pref.name}</span>
                         <ChevronRight className="h-3 w-3 text-slate-400" />
@@ -106,54 +106,54 @@ export function HomeLearnSection({ onBack }: HomeLearnSectionProps) {
             )}
           </div>
 
-          <div className="mb-6 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
             <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-slate-800">
-              <FileText className="h-5 w-5 text-blue-500" />
+              <FileText className="h-5 w-5 text-brand-500" />
               新着コラム
             </h3>
             <div className="space-y-2">
               <Link
                 href="/blog/naishin-guide"
-                className="group flex items-center justify-between rounded-lg bg-white p-3 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md"
+                className="group flex items-center justify-between rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
               >
                 <div>
-                  <span className="mb-1 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                  <span className="mb-1 inline-block rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">
                     基礎知識
                   </span>
-                  <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700">【完全保存版】内申点の計算方法を徹底解説</div>
+                  <div className="text-sm text-slate-700 group-hover:text-brand-700">【完全保存版】内申点の計算方法を徹底解説</div>
                 </div>
-                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" />
               </Link>
               <Link
                 href="/blog/kansan-naishin-vs-su-naishin"
-                className="group flex items-center justify-between rounded-lg bg-white p-3 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md"
+                className="group flex items-center justify-between rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
               >
                 <div>
-                  <span className="mb-1 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                  <span className="mb-1 inline-block rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">
                     基礎知識
                   </span>
-                  <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700">【図解】換算内申と素内申の違いとは？</div>
+                  <div className="text-sm text-slate-700 group-hover:text-brand-700">【図解】換算内申と素内申の違いとは？</div>
                 </div>
-                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" />
               </Link>
               <Link
                 href="/blog/tokyo-kansan-naishin-guide"
-                className="group flex items-center justify-between rounded-lg bg-white p-3 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md"
+                className="group flex items-center justify-between rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
               >
                 <div>
-                  <span className="mb-1 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                  <span className="mb-1 inline-block rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">
                     都道府県別
                   </span>
-                  <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700">【東京都】換算内申の計算方法と都立高校入試</div>
+                  <div className="text-sm text-slate-700 group-hover:text-brand-700">【東京都】換算内申の計算方法と都立高校入試</div>
                 </div>
-                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" />
               </Link>
             </div>
           </div>
 
-          <div className="mb-6 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
             <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-slate-800">
-              <FileText className="h-5 w-5 text-blue-500" />
+              <FileText className="h-5 w-5 text-brand-500" />
               人気のコラム
             </h3>
             <div className="space-y-2">
@@ -161,40 +161,40 @@ export function HomeLearnSection({ onBack }: HomeLearnSectionProps) {
                 <Link
                   key={article.slug}
                   href={`/blog/${article.slug}`}
-                  className="group flex items-center justify-between rounded-lg bg-white p-3 shadow-sm transition-all hover:bg-blue-50 hover:shadow-md"
+                  className="group flex items-center justify-between rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
                 >
                   <div>
-                    <span className="mb-1 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                    <span className="mb-1 inline-block rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">
                       {article.category}
                     </span>
-                    <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700">{article.title}</div>
+                    <div className="text-sm text-slate-700 group-hover:text-brand-700">{article.title}</div>
                   </div>
-                  <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-blue-500" />
+                  <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" />
                 </Link>
               ))}
             </div>
             <Link
               href="/blog"
-              className="mt-3 flex items-center justify-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
+              className="mt-3 flex items-center justify-center gap-1 text-sm text-brand-600 hover:text-brand-700"
             >
               すべてのコラムを見る
               <ExternalLink className="h-3 w-3" />
             </Link>
           </div>
 
-          <div className="rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-4">
-            <h3 className="mb-2 text-base font-bold text-emerald-800">📌 ポイント</h3>
-            <ul className="space-y-2 text-sm text-emerald-700">
+          <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
+            <h3 className="mb-2 text-base font-bold text-brand-800">📌 ポイント</h3>
+            <ul className="space-y-2 text-sm text-brand-700">
               <li className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-500" />
                 内申点の計算方法は都道府県によって大きく異なります
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-500" />
                 実技4教科の配点が高い地域が多いです
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-500" />
                 最新の入試情報は各都道府県教育委員会で確認しましょう
               </li>
             </ul>

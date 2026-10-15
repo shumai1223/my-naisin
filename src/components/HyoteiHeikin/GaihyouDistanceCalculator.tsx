@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Target } from 'lucide-react';
+import { Target } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { toGaihyou, type GakushuSeihyou } from '@/lib/gakushu-seiseki';
@@ -9,9 +9,9 @@ import { calcRequiredAverageForTarget } from '@/lib/hyotei-heikin';
 
 const GAIHYOU_STYLE: Record<GakushuSeihyou, string> = {
   A: 'text-red-700',
-  B: 'text-orange-700',
+  B: 'text-amber-700',
   C: 'text-amber-700',
-  D: 'text-blue-700',
+  D: 'text-brand-700',
   E: 'text-slate-600',
 };
 
@@ -62,10 +62,10 @@ export function GaihyouDistanceCalculator() {
   }, [valid, currentValue]);
 
   return (
-    <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
+      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Target className="h-5 w-5 text-emerald-600" />
+          <Target className="h-5 w-5 text-brand-600" />
           現在の全体の学習成績の状況を入力
         </h2>
       </div>
@@ -87,11 +87,11 @@ export function GaihyouDistanceCalculator() {
       </div>
 
       {valid && gaihyou && (
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200" role="status" aria-live="polite">
+        <div className="bg-brand-50 px-6 py-6 border-t-2 border-brand-200" role="status" aria-live="polite">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="text-center">
               <div className="text-xs font-bold text-slate-600 mb-1">現在の学習成績概評</div>
-              <div className={`text-5xl font-black ${GAIHYOU_STYLE[gaihyou]}`}>{gaihyou}</div>
+              <div className={`text-5xl font-bold ${GAIHYOU_STYLE[gaihyou]}`}>{gaihyou}</div>
             </div>
             <div className="text-center">
               {next ? (
@@ -99,11 +99,11 @@ export function GaihyouDistanceCalculator() {
                   <div className="text-xs font-bold text-slate-600 mb-1">
                     {next.rank}まであと
                   </div>
-                  <div className="text-5xl font-black text-emerald-700">{distance !== null ? distance.toFixed(1) : '—'}</div>
+                  <div className="text-5xl font-bold text-brand-700">{distance !== null ? distance.toFixed(1) : '—'}</div>
                   <div className="text-xs text-slate-500 mt-1">全体の学習成績の状況を上げる必要</div>
                 </>
               ) : (
-                <div className="text-sm font-bold text-emerald-700">
+                <div className="text-sm font-bold text-brand-700">
                   すでに最上位の概評Aです
                 </div>
               )}
@@ -111,11 +111,11 @@ export function GaihyouDistanceCalculator() {
           </div>
 
           {next && (
-            <div className="mt-6 rounded-xl border border-emerald-200 bg-white p-4">
+            <div className="mt-6 rounded-lg border border-brand-200 bg-white p-4">
               <div className="mb-2 text-xs font-bold text-slate-600">残りの科目数から逆算する（任意）</div>
               <div className="grid gap-2 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-[11px] text-slate-500">現在までの評定数</label>
+                  <label className="mb-1 block text-xs text-slate-500">現在までの評定数</label>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -128,7 +128,7 @@ export function GaihyouDistanceCalculator() {
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-[11px] text-slate-500">残りの評価回数</label>
+                  <label className="mb-1 block text-xs text-slate-500">残りの評価回数</label>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -144,13 +144,13 @@ export function GaihyouDistanceCalculator() {
               {projection && (
                 <div className="mt-3 text-center">
                   {projection.alreadyAchieved ? (
-                    <div className="text-sm font-bold text-emerald-700">すでに{next.rank}に必要な水準に達しています</div>
+                    <div className="text-sm font-bold text-brand-700">すでに{next.rank}に必要な水準に達しています</div>
                   ) : (
                     <>
                       <div className="text-xs text-slate-600">
                         {next.rank}（{next.threshold.toFixed(1)}以上）に届かせるには、残りの評価で平均
                       </div>
-                      <div className="text-3xl font-black text-emerald-700">
+                      <div className="text-3xl font-bold text-brand-700">
                         {projection.requiredAverageForRemaining.toFixed(2)}
                       </div>
                       <div className="text-xs text-slate-600">

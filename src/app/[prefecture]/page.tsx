@@ -16,7 +16,7 @@ import {
   MapPin,
   Sparkles,
   GraduationCap
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { getPrefectureByCode, PREFECTURES } from '@/lib/prefectures';
 import { getPrefectureGuide, PREFECTURES_WITH_GUIDE } from '@/lib/prefecture-guides';
@@ -82,34 +82,34 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
 
       <div className="min-h-screen bg-slate-50">
         {/* Hero Section */}
-        <div className="bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-900 py-12 text-white md:py-20">
+        <div className="bg-brand-700 py-12 text-white md:py-20">
           <div className="mx-auto max-w-5xl px-4 text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-bold backdrop-blur-md ring-1 ring-white/20">
-              <MapPin className="h-4 w-4 text-blue-300" />
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold ring-1 ring-white/20">
+              <MapPin className="h-4 w-4 text-brand-300" />
               {pref.region}エリア
             </div>
-            <h1 className="mb-6 text-3xl font-black tracking-tight md:text-5xl lg:text-6xl">
+            <h1 className="mb-6 text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
               {pref.name}公立高校入試<br className="md:hidden" />
-              <span className="text-blue-300">内申点完全攻略ガイド</span>
+              <span className="text-brand-300">内申点完全攻略ガイド</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-lg text-blue-100/90 md:text-xl font-bold">
+            <p className="mx-auto max-w-2xl text-lg text-brand-100/90 md:text-xl font-bold">
               令和8年度（2026年度）入学者選抜に完全対応。
             </p>
-            <p className="mx-auto max-w-2xl mt-2 text-blue-100/80">
+            <p className="mx-auto max-w-2xl mt-2 text-brand-100/80">
               {pref.name}特有の計算ルール、実技倍率、合否判定における内申の重みを徹底解析しました。
             </p>
             
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Link
                 href={`/${code}/naishin`}
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-lg font-bold text-blue-900 shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl active:scale-95"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-4 text-lg font-bold text-brand-900 transition-all active:scale-95"
               >
                 <Calculator className="h-6 w-6" />
                 内申点を今すぐ計算
               </Link>
               <Link
                 href={`/reverse?pref=${code}`}
-                className="inline-flex items-center gap-2 rounded-xl bg-blue-600/30 px-8 py-4 text-lg font-bold text-white shadow-lg backdrop-blur-md ring-1 ring-white/30 transition-all hover:bg-blue-600/50 hover:-translate-y-1"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand-600/30 px-8 py-4 text-lg font-bold text-white ring-1 ring-white/30 transition-all hover:bg-brand-600/50"
               >
                 <Target className="h-6 w-6" />
                 合格目標から逆算
@@ -124,28 +124,28 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
             <div className="space-y-12 lg:col-span-2">
               
               {/* 3つのポイント */}
-              <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+              <section className="rounded-lg border border-slate-200 bg-white p-8">
                 <h2 className="mb-8 flex items-center gap-3 text-2xl font-bold text-slate-800">
                   <Award className="h-7 w-7 text-amber-500" />
                   {pref.name}入試の要点まとめ
                 </h2>
                 <div className="grid gap-6 sm:grid-cols-1">
-                   <div className="flex items-start gap-4 p-5 rounded-2xl bg-blue-50/50 border border-blue-100">
-                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-blue-600 font-bold text-white shadow-lg">1</div>
+                   <div className="flex items-start gap-4 p-5 rounded-lg bg-brand-50/50 border border-brand-100">
+                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand-600 font-bold text-white">1</div>
                      <div>
                        <h3 className="font-bold text-slate-800 text-lg">対象学年と配点</h3>
                        <p className="mt-2 text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: guide.summary3lines.target }} />
                      </div>
                    </div>
-                   <div className="flex items-start gap-4 p-5 rounded-2xl bg-indigo-50/50 border border-indigo-100">
-                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-indigo-600 font-bold text-white shadow-lg">2</div>
+                   <div className="flex items-start gap-4 p-5 rounded-lg bg-brand-50/50 border border-brand-100">
+                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand-600 font-bold text-white">2</div>
                      <div>
                        <h3 className="font-bold text-slate-800 text-lg">実技教科の重要度</h3>
                        <p className="mt-2 text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: guide.summary3lines.practical }} />
                      </div>
                    </div>
-                   <div className="flex items-start gap-4 p-5 rounded-2xl bg-emerald-50/50 border border-emerald-100">
-                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-emerald-600 font-bold text-white shadow-lg">3</div>
+                   <div className="flex items-start gap-4 p-5 rounded-lg bg-brand-50/50 border border-brand-100">
+                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand-600 font-bold text-white">3</div>
                      <div>
                        <h3 className="font-bold text-slate-800 text-lg">合計満点と換算方式</h3>
                        <p className="mt-2 text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: guide.summary3lines.maxScore }} />
@@ -162,48 +162,48 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
 
               {/* 関連ナビゲーション */}
               <section className="grid gap-4 sm:grid-cols-2">
-                <Link href={`/${code}/naishin`} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-blue-300 hover:shadow-md">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                <Link href={`/${code}/naishin`} className="group rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-brand-300">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-brand-100 text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white">
                     <Calculator className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold text-slate-800">{pref.name}用計算ツール</h3>
                   <p className="mt-2 text-sm text-slate-500">あなたの今の内申点が何点になるか瞬時に算出します。</p>
-                  <div className="mt-4 flex items-center font-bold text-blue-600 group-hover:underline">
+                  <div className="mt-4 flex items-center font-bold text-brand-600 group-hover:underline">
                     ツールを開く <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
                 </Link>
-                <Link href={`/reverse?pref=${code}`} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-indigo-300 hover:shadow-md">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                <Link href={`/reverse?pref=${code}`} className="group rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-brand-300">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-brand-100 text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white">
                     <TrendingUp className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold text-slate-800">合格点シミュレーター</h3>
                   <p className="mt-2 text-sm text-slate-500">志望校合格に必要な当日点と内申点の比率を逆算します。</p>
-                  <div className="mt-4 flex items-center font-bold text-indigo-600 group-hover:underline">
+                  <div className="mt-4 flex items-center font-bold text-brand-600 group-hover:underline">
                     シミュレーションする <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
                 </Link>
-                <Link href="/hensachi" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-purple-300 hover:shadow-md">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600 transition-colors group-hover:bg-purple-600 group-hover:text-white">
+                <Link href="/hensachi" className="group rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-slate-300">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition-colors group-hover:bg-slate-600 group-hover:text-white">
                     <TrendingUp className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold text-slate-800">偏差値計算ツール</h3>
                   <p className="mt-2 text-sm text-slate-500">5教科の点数から偏差値を瞬時に算出。志望校レベルと比較できます。</p>
-                  <div className="mt-4 flex items-center font-bold text-purple-600 group-hover:underline">
+                  <div className="mt-4 flex items-center font-bold text-slate-600 group-hover:underline">
                     偏差値を計算する <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
                 </Link>
-                <Link href="/hyotei-heikin" className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-teal-300 hover:shadow-md">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 text-teal-600 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+                <Link href="/hyotei-heikin" className="group rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-brand-300">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-brand-100 text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white">
                     <Calculator className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold text-slate-800">評定平均 自動計算</h3>
                   <p className="mt-2 text-sm text-slate-500">通知表の評定から平均値と素内申を同時表示。推薦入試の確認に。</p>
-                  <div className="mt-4 flex items-center font-bold text-teal-600 group-hover:underline">
+                  <div className="mt-4 flex items-center font-bold text-brand-600 group-hover:underline">
                     評定平均を計算する <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
                 </Link>
-                <Link href={`/${code}/nyuushi-nittei`} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-amber-300 hover:shadow-md">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-600 transition-colors group-hover:bg-amber-600 group-hover:text-white">
+                <Link href={`/${code}/nyuushi-nittei`} className="group rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-amber-300">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-amber-100 text-amber-600 transition-colors group-hover:bg-amber-600 group-hover:text-white">
                     <Calendar className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold text-slate-800">{pref.name}公立高校 入試日程</h3>
@@ -213,13 +213,13 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                   </div>
                 </Link>
                 {ALTERNATIVE_TRACK_PREFECTURE_CODES.includes(code) && (
-                  <Link href={`/${code}/teiji-tsushin`} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-teal-300 hover:shadow-md">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 text-teal-600 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+                  <Link href={`/${code}/teiji-tsushin`} className="group rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-brand-300">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-brand-100 text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white">
                       <GraduationCap className="h-6 w-6" />
                     </div>
                     <h3 className="text-xl font-bold text-slate-800">{pref.name}の定時制・通信制高校一覧</h3>
                     <p className="mt-2 text-sm text-slate-500">全日制以外に公表されている選抜区分を、募集人員・出願者数・倍率とあわせて掲載。</p>
-                    <div className="mt-4 flex items-center font-bold text-teal-600 group-hover:underline">
+                    <div className="mt-4 flex items-center font-bold text-brand-600 group-hover:underline">
                       一覧を確認する <ArrowRight className="ml-1 h-4 w-4" />
                     </div>
                   </Link>
@@ -233,10 +233,10 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
               <section>
                 <div className="mb-6 flex items-center justify-between">
                   <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
-                    <FileText className="h-6 w-6 text-blue-500" />
+                    <FileText className="h-6 w-6 text-brand-500" />
                     {pref.name}の受験お役立ち情報
                   </h2>
-                  <Link href="/blog" className="text-sm font-bold text-blue-600 hover:underline">
+                  <Link href="/blog" className="text-sm font-bold text-brand-600 hover:underline">
                     一覧を見る
                   </Link>
                 </div>
@@ -246,9 +246,9 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
               <TrustInfo />
 
               {/* 信頼性と根拠 */}
-              <section className="rounded-3xl bg-slate-800 p-8 text-white shadow-xl">
+              <section className="rounded-lg bg-slate-800 p-8 text-white">
                  <div className="flex items-start gap-4">
-                   <div className="rounded-xl bg-blue-500 p-3 shadow-lg shadow-blue-500/20">
+                   <div className="rounded-lg bg-brand-500 p-3">
                      <ShieldCheck className="h-8 w-8" />
                    </div>
                    <div>
@@ -256,7 +256,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                      <p className="mt-3 text-slate-300 text-sm leading-relaxed">
                        当サイトの情報は、{pref.name}教育委員会が公式に発表している「令和8年度（2026年度）入学者選抜実施要綱」等の一次資料を元に、現役のエンジニアと受験専門チームが1点1点の計算ロジックを検証しています。
                      </p>
-                     <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold text-blue-300">
+                     <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-bold text-brand-300">
                        <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Calendar className="h-3 w-3" /> 2026年4月最終更新済</span>
                        <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Search className="h-3 w-3" /> 一次資料検証済</span>
                        <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><Sparkles className="h-3 w-3" /> 2026年度入試結果反映</span>
@@ -269,7 +269,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* 地域別リンク */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="rounded-lg border border-slate-200 bg-white p-6">
                 <h3 className="mb-4 font-bold text-slate-800 flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-slate-400" />
                   近隣の都道府県
@@ -281,7 +281,7 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
                       <Link
                         key={p.code}
                         href={`/${p.code}`}
-                        className="flex items-center justify-between rounded-xl border border-slate-50 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-600 transition-all hover:bg-blue-50 hover:text-blue-700 hover:border-blue-100"
+                        className="flex items-center justify-between rounded-lg border border-slate-50 bg-slate-50 px-4 py-3 text-sm text-slate-600 transition-all hover:bg-brand-50 hover:text-brand-700 hover:border-brand-100"
                       >
                         {p.name}の対策
                         <ChevronRight className="h-4 w-4 opacity-50" />
@@ -291,17 +291,17 @@ export default async function PrefecturePage({ params }: PrefecturePageProps) {
               </div>
 
               {/* お問い合わせ */}
-              <div className="rounded-2xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
-                <h3 className="font-bold text-blue-900 flex items-center gap-2">
+              <div className="rounded-lg border border-brand-100 bg-brand-50 p-6">
+                <h3 className="font-bold text-brand-900 flex items-center gap-2">
                   <MessageSquare className="h-4 w-4" />
                   相談・誤り報告
                 </h3>
-                <p className="mt-2 text-xs text-blue-700 leading-relaxed">
+                <p className="mt-2 text-xs text-brand-700 leading-relaxed">
                   {pref.name}の入試制度変更や、計算結果の相違にお気づきの場合は、こちらからお知らせください。
                 </p>
                 <Link
                   href="/contact"
-                  className="mt-4 block rounded-xl bg-blue-600 px-4 py-2 text-center text-xs font-bold text-white shadow-md transition-all hover:bg-blue-700"
+                  className="mt-4 block rounded-lg bg-brand-600 px-4 py-2 text-center text-xs font-bold text-white transition-all hover:bg-brand-700"
                 >
                   報告・連絡する
                 </Link>

@@ -33,7 +33,7 @@ export function BairitsuCalculator() {
   const actualRatio = testTakers !== '' && passers !== '' ? calcActualRatio(testTakersNum, passersNum) : null;
 
   return (
-    <div className="rounded-2xl border-2 border-indigo-200 bg-white p-5 shadow-lg md:p-6">
+    <div className="rounded-lg border-2 border-brand-200 bg-white p-5 md:p-6">
       <div className="mb-2 text-sm font-bold text-slate-700">① 志願倍率（志願者数 ÷ 募集人員）</div>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block">
@@ -48,7 +48,7 @@ export function BairitsuCalculator() {
               setCapacity(e.target.value);
             }}
             placeholder="例：200"
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
           />
         </label>
         <label className="block">
@@ -63,14 +63,14 @@ export function BairitsuCalculator() {
               setApplicants(e.target.value);
             }}
             placeholder="例：280"
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
           />
         </label>
       </div>
       {applicationRatio !== null && (
-        <div className="mt-3 rounded-xl border-2 border-indigo-200 bg-indigo-50/60 p-4 text-center">
+        <div className="mt-3 rounded-lg border-2 border-brand-200 bg-brand-50/60 p-4 text-center">
           <div className="text-xs font-bold text-slate-600">志願倍率</div>
-          <div className="mt-1 text-3xl font-black text-indigo-700">{roundRatio(applicationRatio)}倍</div>
+          <div className="mt-1 text-3xl font-bold text-brand-700">{roundRatio(applicationRatio)}倍</div>
         </div>
       )}
 
@@ -88,7 +88,7 @@ export function BairitsuCalculator() {
               setTestTakers(e.target.value);
             }}
             placeholder="例：270"
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
           />
         </label>
         <label className="block">
@@ -103,14 +103,14 @@ export function BairitsuCalculator() {
               setPassers(e.target.value);
             }}
             placeholder="例：200"
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
           />
         </label>
       </div>
       {actualRatio !== null && (
-        <div className="mt-3 rounded-xl border-2 border-indigo-200 bg-indigo-50/60 p-4 text-center">
+        <div className="mt-3 rounded-lg border-2 border-brand-200 bg-brand-50/60 p-4 text-center">
           <div className="text-xs font-bold text-slate-600">実質倍率</div>
-          <div className="mt-1 text-3xl font-black text-indigo-700">{roundRatio(actualRatio)}倍</div>
+          <div className="mt-1 text-3xl font-bold text-brand-700">{roundRatio(actualRatio)}倍</div>
         </div>
       )}
 
@@ -118,7 +118,7 @@ export function BairitsuCalculator() {
         <p className="mt-4 text-center text-xs text-slate-400">募集人員・志願者数（または受験者数・合格者数）を入力してください</p>
       )}
 
-      <p className="mt-4 text-[11px] leading-relaxed text-slate-400">
+      <p className="mt-4 text-xs leading-relaxed text-slate-400">
         ※ このツールは数字を入れて倍率を計算する汎用計算機です。学校別・年度別の実際の募集人員・志願者数・合格者数は当サイトでは保持していません。志望校の最新の倍率は、必ず志望する都道府県教育委員会の発表資料でご確認ください。
       </p>
     </div>

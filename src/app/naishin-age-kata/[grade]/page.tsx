@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Home, ChevronRight, Calculator, TrendingUp } from 'lucide-react';
+import { Home, ChevronRight, Calculator, TrendingUp } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -52,23 +52,23 @@ export default async function GradeNaishinAgeKataPage({ params }: PageProps) {
       />
       <FAQPageSchema faqItems={faqItems} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/naishin-age-kata" className="hover:text-blue-600">内申点の上げ方</Link>
+            <Link href="/naishin-age-kata" className="hover:text-brand-600">内申点の上げ方</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">{content.label}</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">
+            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
               {content.badge}
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -78,29 +78,29 @@ export default async function GradeNaishinAgeKataPage({ params }: PageProps) {
           </header>
 
           {/* まず現状把握 */}
-          <section className="mb-8 rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 text-center shadow-sm">
+          <section className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">まずは今の内申点を計算する</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">対策を始める前に、現在地を数値で把握すると優先順位が決まります。</p>
             <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700">
+              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700">
                 <Calculator className="h-4 w-4" />内申点を計算する（47都道府県）
               </Link>
-              <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-blue-700 ring-1 ring-blue-200 transition-colors hover:bg-blue-50">
+              <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-brand-700 ring-1 ring-brand-200 transition-colors hover:bg-brand-50">
                 <TrendingUp className="h-4 w-4" />伸びを記録・グラフ化する
               </Link>
             </div>
           </section>
 
           {/* 学年別の優先事項 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 border-l-4 border-blue-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
               {content.headline}
             </h2>
             <div className="space-y-4">
               {content.priorities.map((p, i) => (
-                <div key={p.title} className="rounded-xl border border-blue-100 bg-blue-50/50 p-4">
-                  <h3 className="mb-1 text-sm font-bold text-blue-900">{i + 1}. {p.title}</h3>
-                  <p className="text-sm leading-relaxed text-blue-800">{p.body}</p>
+                <div key={p.title} className="rounded-lg border border-brand-100 bg-brand-50/50 p-4">
+                  <h3 className="mb-1 text-sm font-bold text-brand-900">{i + 1}. {p.title}</h3>
+                  <p className="text-sm leading-relaxed text-brand-800">{p.body}</p>
                 </div>
               ))}
             </div>
@@ -116,7 +116,7 @@ export default async function GradeNaishinAgeKataPage({ params }: PageProps) {
           </div>
 
           {/* FAQ */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {content.faqs.map((f) => (
@@ -129,21 +129,21 @@ export default async function GradeNaishinAgeKataPage({ params }: PageProps) {
           </section>
 
           {/* 他学年への導線 */}
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">他の学年の内申点の上げ方</h2>
             <div className="flex flex-wrap gap-2">
               {GRADE_CONTENTS.filter((g) => g.slug !== content.slug).map((g) => (
                 <Link
                   key={g.slug}
                   href={`/naishin-age-kata/${g.slug}`}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700"
                 >
                   {g.label}
                 </Link>
               ))}
               <Link
                 href="/naishin-age-kata"
-                className="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-xs font-bold text-blue-700 transition-colors hover:bg-blue-100"
+                className="rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-xs font-bold text-brand-700 transition-colors hover:bg-brand-100"
               >
                 4軸の全体解説へ
               </Link>

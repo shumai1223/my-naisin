@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from '@/components/icons';
 
 interface ErrorReportLinkProps {
   prefectureCode: string;
@@ -17,7 +17,7 @@ export function ErrorReportLink({
   sourceUrl 
 }: ErrorReportLinkProps) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+    <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-4 w-4 text-slate-600" />
@@ -25,7 +25,7 @@ export function ErrorReportLink({
         </div>
         <Link
           href={`/contact?type=bug&pref=${prefectureCode}`}
-          className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+          className="text-sm text-brand-600 hover:text-brand-800 hover:underline"
         >
           報告フォームへ
         </Link>

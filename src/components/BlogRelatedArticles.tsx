@@ -2,7 +2,7 @@ import { BlogPost } from '@/lib/blog/types';
 import { BLOG_POSTS } from '@/lib/blog/index';
 import { getPrefectureByCode } from '@/lib/prefectures';
 import Link from 'next/link';
-import { BookOpen, ChevronRight, Sparkles } from 'lucide-react';
+import { BookOpen, ChevronRight, Sparkles } from '@/components/icons';
 
 interface BlogRelatedArticlesProps {
   currentSlug?: string;
@@ -64,13 +64,13 @@ export function BlogRelatedArticles({
   const finalPosts = displayPosts.slice(0, limit);
 
   return (
-    <section className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-white to-blue-50/30 p-6 shadow-sm">
+    <section className="mt-8 rounded-lg border border-brand-100 bg-white p-6">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Sparkles className="h-5 w-5 text-blue-500" />
+          <Sparkles className="h-5 w-5 text-brand-500" />
           {prefName ? `${prefName}入試に役立つ攻略記事` : 'あわせて読みたい攻略記事'}
         </h2>
-        <Link href="/blog" className="text-sm font-medium text-blue-600 hover:underline flex items-center">
+        <Link href="/blog" className="text-sm text-brand-600 hover:underline flex items-center">
           記事一覧へ <ChevronRight className="h-4 w-4" />
         </Link>
       </div>
@@ -80,18 +80,18 @@ export function BlogRelatedArticles({
           <Link 
             key={post.slug} 
             href={`/blog/${post.slug}`}
-            className="group flex flex-col rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-blue-300 hover:shadow-md"
+            className="group flex flex-col rounded-lg border border-slate-200 bg-white p-4 transition-all hover:border-brand-300"
           >
             <div className="mb-2 flex items-center gap-2">
-              <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-700 uppercase">
+              <span className="rounded-full bg-brand-100 px-2 py-0.5 text-xs font-bold text-brand-700">
                 {post.category}
               </span>
-              <span className="text-[10px] text-slate-400">{post.date}</span>
+              <span className="text-xs text-slate-400">{post.date}</span>
             </div>
-            <h3 className="line-clamp-2 flex-1 text-sm font-bold text-slate-800 group-hover:text-blue-600">
+            <h3 className="line-clamp-2 flex-1 text-sm font-bold text-slate-800 group-hover:text-brand-600">
               {post.title}
             </h3>
-            <div className="mt-3 flex items-center gap-1 text-xs font-medium text-blue-500">
+            <div className="mt-3 flex items-center gap-1 text-xs text-brand-500">
               <BookOpen className="h-3 w-3" />
               記事を読む
             </div>

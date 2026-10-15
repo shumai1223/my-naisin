@@ -35,7 +35,7 @@ export function ScaleScoreCalculator() {
       : null;
 
   return (
-    <div className="rounded-2xl border-2 border-blue-200 bg-white p-5 shadow-lg md:p-6">
+    <div className="rounded-lg border-2 border-brand-200 bg-white p-5 md:p-6">
       <div className="mb-4">
         <span className="mb-1 block text-xs font-bold text-slate-600">元の満点</span>
         <div className="flex flex-wrap gap-2">
@@ -48,7 +48,7 @@ export function ScaleScoreCalculator() {
                 setRawMax(String(p));
               }}
               className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
-                Number(rawMax) === p ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600'
+                Number(rawMax) === p ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600'
               }`}
             >
               {p}点満点
@@ -63,7 +63,7 @@ export function ScaleScoreCalculator() {
               onFirstUse();
               setRawMax(e.target.value);
             }}
-            className="h-8 w-24 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+            className="h-8 w-24 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
             aria-label="元の満点を直接入力"
           />
         </div>
@@ -81,7 +81,7 @@ export function ScaleScoreCalculator() {
                 setTargetMax(String(p));
               }}
               className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
-                Number(targetMax) === p ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600'
+                Number(targetMax) === p ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600'
               }`}
             >
               {p}点満点
@@ -96,7 +96,7 @@ export function ScaleScoreCalculator() {
               onFirstUse();
               setTargetMax(e.target.value);
             }}
-            className="h-8 w-24 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+            className="h-8 w-24 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
             aria-label="換算後の満点を直接入力"
           />
         </div>
@@ -113,19 +113,19 @@ export function ScaleScoreCalculator() {
             setScore(e.target.value);
           }}
           placeholder={`例：${Math.round(rawMaxNum * 0.7) || 350}`}
-          className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
         />
       </label>
 
       {result !== null ? (
-        <div className="mt-5 rounded-xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-5 text-center" role="status" aria-live="polite">
+        <div className="mt-5 rounded-lg border-2 border-brand-200 bg-brand-50 p-5 text-center" role="status" aria-live="polite">
           <div className="text-xs font-bold text-slate-600">{rawMax}点満点中 {score}点 → {targetMax}点満点に換算すると</div>
-          <div className="mt-1 text-4xl font-black text-blue-700">{result}<span className="ml-1 text-base font-bold text-slate-500">点</span></div>
+          <div className="mt-1 text-4xl font-bold text-brand-700">{result}<span className="ml-1 text-base font-bold text-slate-500">点</span></div>
         </div>
       ) : (
         <p className="mt-4 text-center text-xs text-slate-400">点数を入力してください</p>
       )}
-      <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+      <p className="mt-3 text-xs leading-relaxed text-slate-400">
         ※ 得点 ÷ 元の満点 × 換算後の満点、で比例計算しています（新潟県公立高校入試の「調査書・学力をそれぞれ1000点に換算する」方式と同じ考え方）。
       </p>
     </div>

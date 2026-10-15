@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Calculator, ExternalLink, ChevronRightSquare } from 'lucide-react';
+import { Calculator, ExternalLink, ChevronRightSquare } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { PREFECTURES } from '@/lib/prefectures';
@@ -50,10 +50,10 @@ export function KakomonJisaitenCalculator() {
   }, [result, prefCode]);
 
   return (
-    <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
+      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Calculator className="h-5 w-5 text-emerald-600" />
+          <Calculator className="h-5 w-5 text-brand-600" />
           都道府県を選ぶ
         </h2>
         <select
@@ -78,7 +78,7 @@ export function KakomonJisaitenCalculator() {
           </p>
           <Link
             href={route.url}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-emerald-700"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-brand-700"
           >
             {route.label}
             <ChevronRightSquare className="h-4 w-4" />
@@ -86,7 +86,7 @@ export function KakomonJisaitenCalculator() {
           <div className="mt-4">
             <Link
               href={`/${prefCode}/naishin`}
-              className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 underline"
+              className="inline-flex items-center gap-1 text-xs font-bold text-brand-700 underline"
             >
               {prefName}の内申点を計算する
               <ExternalLink className="h-3 w-3" />
@@ -104,7 +104,7 @@ export function KakomonJisaitenCalculator() {
             <div className="grid grid-cols-5 gap-2">
               {SUBJECT_LABELS.map((label, i) => (
                 <div key={label}>
-                  <label className="mb-1 block text-[11px] text-slate-500">{label}</label>
+                  <label className="mb-1 block text-xs text-slate-500">{label}</label>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -145,7 +145,7 @@ export function KakomonJisaitenCalculator() {
               />
               <Link
                 href={`/${prefCode}/naishin`}
-                className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 underline"
+                className="inline-flex items-center gap-1 text-xs font-bold text-brand-700 underline"
               >
                 先に内申点を計算する
                 <ExternalLink className="h-3 w-3" />
@@ -154,23 +154,23 @@ export function KakomonJisaitenCalculator() {
           </div>
 
           {result && (
-            <div className="mt-6 rounded-xl border-2 border-emerald-300 bg-emerald-50 p-5 text-center" role="status" aria-live="polite">
+            <div className="mt-6 rounded-lg border-2 border-brand-300 bg-brand-50 p-5 text-center" role="status" aria-live="polite">
               <div className="text-xs font-bold text-slate-600 mb-1">
                 {prefName}の方式（{system.localTerm}）による総合得点
               </div>
-              <div className="text-4xl font-black text-emerald-700">
+              <div className="text-4xl font-bold text-brand-700">
                 {result.total} <span className="text-lg font-bold text-slate-500">/ {result.totalMax}</span>
               </div>
               <div className="mt-2 text-xs text-slate-600">
                 学力検査換算 {result.academic}点 ＋ 内申換算 {result.report}点
               </div>
-              <p className="mt-3 text-[11px] leading-relaxed text-slate-500">
+              <p className="mt-3 text-xs leading-relaxed text-slate-500">
                 これは{prefName}が公表している総合得点の算出方式に基づく数値です。合否ラインは公表されておらず、
                 この数値だけで合否を判断することはできません。
               </p>
               <Link
                 href={`/${prefCode}/total-score`}
-                className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-emerald-700 underline"
+                className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-brand-700 underline"
               >
                 {prefName}の総合得点方式の仕組みを詳しく見る
                 <ChevronRightSquare className="h-3 w-3" />

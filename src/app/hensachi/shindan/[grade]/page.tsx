@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Home, ChevronRight, Sparkles } from 'lucide-react';
+import { Home, ChevronRight, Sparkles } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -55,25 +55,25 @@ export default async function GradeShindanPage({ params }: PageProps) {
       />
       <FAQPageSchema faqItems={faqItems} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-blue-600">偏差値計算</Link>
+            <Link href="/hensachi" className="hover:text-brand-600">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi/shindan" className="hover:text-blue-600">偏差値診断</Link>
+            <Link href="/hensachi/shindan" className="hover:text-brand-600">偏差値診断</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">{content.label}</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-purple-700 ring-1 ring-purple-100">
+            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-slate-50 px-3 py-1 text-xs font-bold text-slate-700 ring-1 ring-slate-100">
               <Sparkles className="h-3.5 w-3.5" />
               {content.badge}
             </div>
@@ -87,15 +87,15 @@ export default async function GradeShindanPage({ params }: PageProps) {
           <ShindanResultFlow defaultGrade={content.grade} />
 
           {/* この学年ならではの使い方 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 border-l-4 border-slate-500 pl-3 text-lg font-bold text-slate-800">
               {content.label}で診断結果をどう使うか
             </h2>
             <div className="space-y-4">
               {content.useCase.map((u, i) => (
-                <div key={u.title} className="rounded-xl border border-purple-100 bg-purple-50/50 p-4">
-                  <h3 className="mb-1 text-sm font-bold text-purple-900">{i + 1}. {u.title}</h3>
-                  <p className="text-sm leading-relaxed text-purple-800">{u.body}</p>
+                <div key={u.title} className="rounded-lg border border-slate-100 bg-slate-50/50 p-4">
+                  <h3 className="mb-1 text-sm font-bold text-slate-900">{i + 1}. {u.title}</h3>
+                  <p className="text-sm leading-relaxed text-slate-800">{u.body}</p>
                 </div>
               ))}
             </div>
@@ -111,7 +111,7 @@ export default async function GradeShindanPage({ params }: PageProps) {
             <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-3">
               {content.faqs.map((f) => (
-                <div key={f.question} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div key={f.question} className="rounded-lg border border-slate-200 bg-white p-5">
                   <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
                   <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
                 </div>
@@ -120,21 +120,21 @@ export default async function GradeShindanPage({ params }: PageProps) {
           </section>
 
           {/* 他の学年への導線 */}
-          <section className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">他の学年の偏差値診断</h2>
             <div className="flex flex-wrap gap-2">
               {SHINDAN_GRADE_CONTENTS.filter((g) => g.slug !== content.slug).map((g) => (
                 <Link
                   key={g.slug}
                   href={`/hensachi/shindan/${g.slug}`}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-purple-300 hover:bg-purple-50 hover:text-purple-700"
+                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700"
                 >
                   {g.label}向け診断
                 </Link>
               ))}
               <Link
                 href="/hensachi/shindan"
-                className="rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-100"
+                className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-100"
               >
                 学年を選ばず診断する
               </Link>
@@ -142,14 +142,14 @@ export default async function GradeShindanPage({ params }: PageProps) {
           </section>
 
           {/* 目的別診断への導線（S-2⑤：学年軸↔目的軸のクロスリンク） */}
-          <section className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">目的で診断したい場合はこちら</h2>
             <div className="flex flex-wrap gap-2">
               {SHINDAN_PURPOSE_CONTENTS.map((p) => (
                 <Link
                   key={p.slug}
                   href={`/hensachi/shindan/mokuteki/${p.slug}`}
-                  className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
                 >
                   {p.label}
                 </Link>

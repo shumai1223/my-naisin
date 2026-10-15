@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, MapPin, Building2, AlertTriangle, ChevronRightSquare } from 'lucide-react';
+import { Home, ChevronRight, MapPin, Building2, AlertTriangle, ChevronRightSquare } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -54,25 +54,25 @@ export default function MockExamIchiranPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="hover:text-slate-600">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi/moshi" className="hover:text-purple-600">模試の偏差値の見方</Link>
+            <Link href="/hensachi/moshi" className="hover:text-slate-600">模試の偏差値の見方</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">主要な地域模試ガイド</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <MapPin className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">主要な地域模試ガイド</h1>
@@ -85,10 +85,10 @@ export default function MockExamIchiranPage() {
           {/* 模試一覧 */}
           <section className="space-y-4">
             {MOCK_EXAMS.map((exam) => (
-              <div key={exam.key} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div key={exam.key} className="rounded-lg border border-slate-200 bg-white p-6">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
                   <h2 className="text-lg font-bold text-slate-900">{exam.name}</h2>
-                  <span className="rounded-full bg-purple-50 px-2.5 py-0.5 text-[11px] font-bold text-purple-700 ring-1 ring-purple-100">
+                  <span className="rounded-full bg-slate-50 px-2.5 py-0.5 text-xs font-bold text-slate-700 ring-1 ring-slate-100">
                     {exam.regions.join('・')}
                   </span>
                 </div>
@@ -102,7 +102,7 @@ export default function MockExamIchiranPage() {
           </section>
 
           {/* 換算の考え方 */}
-          <section className="mt-8 rounded-2xl border-2 border-amber-200 bg-amber-50/50 p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-amber-200 bg-amber-50/50 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
               <AlertTriangle className="h-5 w-5 text-amber-600" />
               模試どうしの偏差値、どう比べればいい？
@@ -115,7 +115,7 @@ export default function MockExamIchiranPage() {
               各社は模試間の数値換算表を公式には公表していません。ネット上に非公式な換算表が出回っていることがありますが、
               根拠が不確かなものも多いため、当サイトでは換算表を作成・掲載しません。
             </p>
-            <div className="rounded-xl bg-white p-4">
+            <div className="rounded-lg bg-white p-4">
               <div className="mb-1 text-sm font-bold text-slate-800">正確に立ち位置を知るには</div>
               <ul className="space-y-1.5 text-sm leading-relaxed text-slate-600">
                 <li>・志望校がある地域の模試を<strong>継続して</strong>受ける（同じ模試内の推移が最も正確）</li>
@@ -126,18 +126,18 @@ export default function MockExamIchiranPage() {
           </section>
 
           {/* 内部リンク */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/hensachi/moshi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
+              <Link href="/hensachi/moshi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 模試の偏差値の見方（母集団・推移の解説）
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/hensachi/moshi/nittei" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
+              <Link href="/hensachi/moshi/nittei" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 各模試の公式日程一覧を見る
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
+              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 偏差値を計算する（無料）
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
@@ -150,7 +150,7 @@ export default function MockExamIchiranPage() {
           </div>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (

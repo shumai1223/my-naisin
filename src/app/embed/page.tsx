@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Code2, Check, Zap, Gift, ShieldCheck, ChevronRight, Home, ListChecks } from 'lucide-react';
+import { Code2, Check, Zap, Gift, ShieldCheck, ChevronRight, Home, ListChecks } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HowToSchema } from '@/components/StructuredData/HowToSchema';
@@ -60,11 +60,11 @@ export default function EmbedPage() {
         steps={PLATFORM_GUIDES[0].steps.map((s) => ({ name: s, text: s }))}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-8 md:py-12">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -74,7 +74,7 @@ export default function EmbedPage() {
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <Code2 className="h-8 w-8" />
             </div>
             <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
@@ -88,18 +88,18 @@ export default function EmbedPage() {
 
           {/* メリット */}
           <div className="mb-8 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm">
-              <Gift className="mx-auto mb-2 h-6 w-6 text-blue-600" />
+            <div className="rounded-lg border border-slate-200 bg-white p-4 text-center">
+              <Gift className="mx-auto mb-2 h-6 w-6 text-brand-600" />
               <div className="text-sm font-bold text-slate-800">完全無料</div>
               <div className="text-xs text-slate-500">料金・登録は一切不要</div>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm">
+            <div className="rounded-lg border border-slate-200 bg-white p-4 text-center">
               <Zap className="mx-auto mb-2 h-6 w-6 text-amber-500" />
               <div className="text-sm font-bold text-slate-800">コピペで設置</div>
               <div className="text-xs text-slate-500">下のコードを貼るだけ</div>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm">
-              <ShieldCheck className="mx-auto mb-2 h-6 w-6 text-emerald-600" />
+            <div className="rounded-lg border border-slate-200 bg-white p-4 text-center">
+              <ShieldCheck className="mx-auto mb-2 h-6 w-6 text-brand-600" />
               <div className="text-sm font-bold text-slate-800">入力は端末内のみ</div>
               <div className="text-xs text-slate-500">成績は外部送信されません</div>
             </div>
@@ -108,7 +108,7 @@ export default function EmbedPage() {
           {/* ライブプレビュー＋埋め込みコード（ウィジェット選択つき） */}
           <section className="mb-8">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Check className="h-5 w-5 text-emerald-600" />
+              <Check className="h-5 w-5 text-brand-600" />
               好きなウィジェットを選んで、この2行を貼るだけ
             </h2>
             <EmbedWidgetPicker />
@@ -118,7 +118,7 @@ export default function EmbedPage() {
             </p>
             <p className="mt-2 text-xs leading-relaxed text-slate-500">
               記事に埋め込んだときの見え方は{' '}
-              <Link href="/embed/demo" className="font-bold text-blue-700 underline">
+              <Link href="/embed/demo" className="font-bold text-brand-700 underline">
                 埋め込みデモページ
               </Link>{' '}
               で確認できます。
@@ -126,9 +126,9 @@ export default function EmbedPage() {
           </section>
 
           {/* プラットフォーム別 設置ガイド（P-4） */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ListChecks className="h-5 w-5 text-blue-600" />
+              <ListChecks className="h-5 w-5 text-brand-600" />
               プラットフォーム別 設置ガイド
             </h2>
             <div className="space-y-5">
@@ -138,7 +138,7 @@ export default function EmbedPage() {
                   <ol className="space-y-1 text-sm leading-relaxed text-slate-600">
                     {g.steps.map((s, i) => (
                       <li key={s} className="flex gap-2">
-                        <span className="shrink-0 font-bold text-blue-600">{i + 1}.</span>
+                        <span className="shrink-0 font-bold text-brand-600">{i + 1}.</span>
                         {s}
                       </li>
                     ))}
@@ -157,7 +157,7 @@ export default function EmbedPage() {
                 href="https://github.com/shumai1223/my-naisin/tree/main/wordpress-plugin/my-naishin-calculator"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-blue-700 underline"
+                className="font-bold text-brand-700 underline"
               >
                 プラグインファイルを見る
               </a>
@@ -166,7 +166,7 @@ export default function EmbedPage() {
           </section>
 
           {/* お願い */}
-          <section className="mb-8 rounded-2xl border border-amber-100 bg-amber-50/60 p-5">
+          <section className="mb-8 rounded-lg border border-amber-100 bg-amber-50/60 p-5">
             <h2 className="mb-2 text-sm font-bold text-amber-900">ご利用にあたってのお願い</h2>
             <ul className="space-y-1.5 text-xs leading-relaxed text-amber-800">
               <li>・コードに含まれる <strong>「by My Naishin（内申点 計算サイト）」のクレジットリンク</strong>（iframeのすぐ下の行）は、そのまま残してください。無料で提供を続けるための唯一のお願いです。</li>
@@ -176,7 +176,7 @@ export default function EmbedPage() {
           </section>
 
           {/* 塾・学校サイト運営者向けパートナー導線（被リンク量産＝堀B。申請はcontact流用） */}
-          <section className="mb-8 overflow-hidden rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 shadow-sm">
+          <section className="mb-8 overflow-hidden rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
             <h2 className="mb-2 text-base font-bold text-slate-800">塾・学校・教育ブログ運営者の方へ（無料パートナー）</h2>
             <p className="mb-3 text-sm leading-relaxed text-slate-700">
               生徒・保護者がよく使う「内申点・評定平均」「偏差値」の計算ツールを、貴サイトに無料で設置できます。
@@ -193,7 +193,7 @@ export default function EmbedPage() {
             </p>
             <Link
               href="/contact?topic=embed"
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
             >
               埋め込み・提携について相談する
               <ChevronRight className="h-4 w-4" />
@@ -201,17 +201,17 @@ export default function EmbedPage() {
           </section>
 
           {/* 関連 */}
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-base font-bold text-slate-800">本家サイトのツール</h2>
             <p className="mb-4 text-xs text-slate-500">
               ウィジェットは「素内申・評定平均」「偏差値（簡易・標準偏差15固定）」の2種類です。都道府県別の換算内申・標準偏差指定の偏差値・S値などは本家サイトでどうぞ。
             </p>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/" className="flex items-center justify-between rounded-xl bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700">
+              <Link href="/" className="flex items-center justify-between rounded-lg bg-slate-50 p-3 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-700">
                 内申点を計算する（47都道府県）
                 <ChevronRight className="h-4 w-4 opacity-50" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700">
+              <Link href="/hensachi" className="flex items-center justify-between rounded-lg bg-slate-50 p-3 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-700">
                 偏差値を計算する（5教科）
                 <ChevronRight className="h-4 w-4 opacity-50" />
               </Link>

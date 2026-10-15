@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Calculator, ChevronRight, MapPin, Target } from 'lucide-react';
+import { Calculator, ChevronRight, MapPin, Target } from '@/components/icons';
 
 import { PREFECTURES, REGIONS, getPrefecturesByRegion } from '@/lib/prefectures';
 
@@ -24,18 +24,18 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
 
   if (variant === 'compact') {
     return (
-      <div className="rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
+      <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <Calculator className="h-5 w-5 text-blue-600" />
-            <span className="font-medium text-slate-700">今すぐ内申点を計算</span>
+            <Calculator className="h-5 w-5 text-brand-600" />
+            <span className="text-slate-700">今すぐ内申点を計算</span>
           </div>
           <div className="flex items-center gap-2">
             <select
               aria-label="都道府県を選択"
               value={selectedPrefecture}
               onChange={(e) => setSelectedPrefecture(e.target.value)}
-              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none focus:border-blue-500"
+              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none focus:border-brand-500"
             >
               <option value="">都道府県を選択</option>
               {REGIONS.map(region => (
@@ -48,7 +48,7 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
             </select>
             <Link
               href={selectedPrefecture ? `/${selectedPrefecture}/naishin` : '/prefectures'}
-              className="flex h-9 items-center gap-1 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white hover:bg-blue-700"
+              className="flex h-9 items-center gap-1 rounded-lg bg-brand-600 px-4 text-sm text-white hover:bg-brand-700"
             >
               計算する
               <ChevronRight className="h-4 w-4" />
@@ -60,10 +60,10 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
   }
 
   return (
-    <div className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white shadow-lg">
+    <div className="rounded-lg bg-brand-600 p-6 text-white">
       <div className="text-center">
         <h3 className="text-xl font-bold">あなたの内申点を計算してみよう！</h3>
-        <p className="mt-2 text-sm text-blue-100">
+        <p className="mt-2 text-sm text-brand-100">
           都道府県を選んで、すぐに計算を始められます
         </p>
       </div>
@@ -72,7 +72,7 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
         <div className="relative w-full sm:w-auto">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex h-12 w-full items-center justify-between gap-2 rounded-xl bg-white/20 px-4 text-left backdrop-blur-sm transition-colors hover:bg-white/30 sm:w-64"
+            className="flex h-12 w-full items-center justify-between gap-2 rounded-lg bg-white px-4 text-left transition-colors hover:bg-white sm:w-64"
           >
             <div className="flex items-center gap-2">
               <MapPin className="h-5 w-5" />
@@ -82,16 +82,16 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
           </button>
 
           {isOpen && (
-            <div className="absolute left-0 top-full z-10 mt-2 max-h-64 w-full overflow-y-auto rounded-xl bg-white p-2 shadow-xl sm:w-64">
+            <div className="absolute left-0 top-full z-10 mt-2 max-h-64 w-full overflow-y-auto rounded-lg bg-white p-2 sm:w-64">
               {REGIONS.map(region => (
                 <div key={region}>
-                  <div className="px-2 py-1 text-xs font-medium text-slate-400">{region}</div>
+                  <div className="px-2 py-1 text-xs text-slate-400">{region}</div>
                   {getPrefecturesByRegion(region).map(p => (
                     <button
                       key={p.code}
                       onClick={() => handlePrefectureSelect(p.code)}
-                      className={`w-full rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-blue-50 ${
-                        selectedPrefecture === p.code ? 'bg-blue-100 text-blue-700' : 'text-slate-700'
+                      className={`w-full rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-brand-50 ${
+                        selectedPrefecture === p.code ? 'bg-brand-100 text-brand-700' : 'text-slate-700'
                       }`}
                     >
                       {p.name}
@@ -106,7 +106,7 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
 
         <Link
           href={selectedPrefecture ? `/${selectedPrefecture}/naishin` : '/prefectures'}
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-white px-6 font-bold text-blue-600 shadow-md transition-all hover:shadow-lg sm:w-auto"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-6 font-bold text-brand-600 transition-all sm:w-auto"
         >
           <Calculator className="h-5 w-5" />
           {selectedPrefecture ? '計算する' : '都道府県一覧へ'}
@@ -114,7 +114,7 @@ export function BlogCTA({ prefectureCode, variant = 'default' }: BlogCTAProps) {
         </Link>
       </div>
 
-      <div className="mt-4 flex justify-center gap-4 text-xs text-blue-200">
+      <div className="mt-4 flex justify-center gap-4 text-xs text-brand-200">
         <Link href="/prefectures" className="hover:text-white hover:underline">
           47都道府県一覧
         </Link>

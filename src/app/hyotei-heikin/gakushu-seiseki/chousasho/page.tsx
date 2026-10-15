@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, NotebookPen, ChevronRightSquare, ShieldCheck } from 'lucide-react';
+import { Home, ChevronRight, NotebookPen, ChevronRightSquare, ShieldCheck } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -77,36 +77,36 @@ export default function ChousashoSimulatorPage() {
         steps={HOWTO_STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-emerald-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-emerald-600">評定平均計算</Link>
+            <Link href="/hyotei-heikin" className="hover:text-brand-600">評定平均計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-emerald-600">学習成績の状況</Link>
+            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-brand-600">学習成績の状況</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">調査書シミュレーター</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <NotebookPen className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               調査書シミュレーター【大学受験】
             </h1>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              科目と評定を入力すると、実際の<strong className="text-emerald-700">調査書 様式１</strong>と同じ並びで
+              科目と評定を入力すると、実際の<strong className="text-brand-700">調査書 様式１</strong>と同じ並びで
               「あなたの調査書はこう書かれる」を確認できます。生徒本人は原本を見る機会がないため、事前に仕組みを知る目的で作りました。
             </p>
           </header>
 
           {/* 高校受験(内申点)との混同を避ける導線 */}
-          <div className="mb-6 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+          <div className="mb-6 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-900">
             このページは<strong>大学受験向け</strong>の調査書（学習成績の状況）シミュレーターです。
             高校受験（中学生）の調査書・内申点について知りたい場合は
             <Link href="/chousasho" className="font-bold underline">
@@ -115,9 +115,9 @@ export default function ChousashoSimulatorPage() {
             をご覧ください。
           </div>
 
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
             <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <div className="text-xs leading-relaxed text-slate-600">
@@ -134,8 +134,8 @@ export default function ChousashoSimulatorPage() {
           </div>
 
           {/* このシミュレーターに映らない残りの記載欄 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-2 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-2 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               大学に届く調査書1枚には、あと何が書かれているか
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-700">
@@ -145,22 +145,22 @@ export default function ChousashoSimulatorPage() {
               「自分の調査書に何が書かれるか」を知っておいて損はありません。
             </p>
             <div className="grid gap-3 sm:grid-cols-2 text-sm leading-relaxed text-slate-700">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <div className="mb-1 font-bold text-slate-800">総合的な探究の時間の記録</div>
                 学習活動・観点・評価の3列。専門学科で「課題研究」等に、理数科で「理数探究」等に代替した場合は
                 斜線が引かれ空欄になる。
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <div className="mb-1 font-bold text-slate-800">特別活動の記録</div>
                 ホームルーム活動・生徒会活動・学校行事の3項目について、各学校が設定した観点で十分満足できる
                 活動状況と判断された学年に○印。
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <div className="mb-1 font-bold text-slate-800">指導上参考となる諸事項</div>
                 部活動・資格取得・表彰歴・留学経験など、学習指導を進める上で必要な情報として学校が精選して
                 記入する自由記述欄。記入する内容が無ければその旨が明示される。
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <div className="mb-1 font-bold text-slate-800">出欠の記録</div>
                 授業日数・出席停止や忌引き等の日数・欠席日数・出席日数などを学年ごとに記載。指導要録の記載を
                 そのまま転記するもので、学校側の解釈や要約は入らない。
@@ -173,7 +173,7 @@ export default function ChousashoSimulatorPage() {
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline"
               >
                 原文PDF
               </a>
@@ -181,49 +181,49 @@ export default function ChousashoSimulatorPage() {
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
               あわせて確認したいツール
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link
                 href="/hyotei-heikin/gakushu-seiseki"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 学習成績の状況 計算ツール（一覧表示）
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gyakusan"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 目標に必要な評定を逆算する
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gakushu-seiseki/kyoka-betsu"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 教科ごとの学習成績の状況を計算
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gakushu-seiseki/gaihyou"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 概評A〜Eまであと何点？境界チェック
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gakushu-seiseki/yokuaru-machigai"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 計算でよくある3つの誤りを検証
                 <ChevronRightSquare className="h-4 w-4" />
               </Link>
               <Link
                 href="/hyotei-heikin/gakushu-seiseki/tousei-han-i"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700"
+                className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700"
               >
                 到達可能範囲をチェック（高1・高2向け）
                 <ChevronRightSquare className="h-4 w-4" />

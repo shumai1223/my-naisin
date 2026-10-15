@@ -1,16 +1,16 @@
 'use client';
 
 import * as React from 'react';
-import { TrendingUp, TrendingDown, Gauge } from 'lucide-react';
+import { TrendingUp, TrendingDown, Gauge } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { calcAttainableRange, toGaihyou, type GakushuSeihyou } from '@/lib/gakushu-seiseki';
 
 const GAIHYOU_STYLE: Record<GakushuSeihyou, string> = {
   A: 'text-red-700',
-  B: 'text-orange-700',
+  B: 'text-amber-700',
   C: 'text-amber-700',
-  D: 'text-blue-700',
+  D: 'text-brand-700',
   E: 'text-slate-600',
 };
 
@@ -56,10 +56,10 @@ export function TouseiHanICalculator() {
   }, [range]);
 
   return (
-    <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
+      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Gauge className="h-5 w-5 text-emerald-600" />
+          <Gauge className="h-5 w-5 text-brand-600" />
           現在までの実績を入力
         </h2>
         <p className="mt-2 text-xs text-slate-600">
@@ -110,24 +110,24 @@ export function TouseiHanICalculator() {
       </div>
 
       {valid && range && (
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200" role="status" aria-live="polite">
+        <div className="bg-brand-50 px-6 py-6 border-t-2 border-brand-200" role="status" aria-live="polite">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border-2 border-emerald-300 bg-white p-4 text-center">
-              <div className="mb-1 flex items-center justify-center gap-1 text-xs font-bold text-emerald-700">
+            <div className="rounded-lg border-2 border-brand-300 bg-white p-4 text-center">
+              <div className="mb-1 flex items-center justify-center gap-1 text-xs font-bold text-brand-700">
                 <TrendingUp className="h-4 w-4" />
                 残り全部が5なら最大
               </div>
-              <div className="text-4xl font-black text-emerald-700">{range.max.toFixed(1)}</div>
+              <div className="text-4xl font-bold text-brand-700">{range.max.toFixed(1)}</div>
               <div className={`mt-1 text-xs font-bold ${GAIHYOU_STYLE[toGaihyou(range.max)]}`}>
                 概評 {toGaihyou(range.max)}
               </div>
             </div>
-            <div className="rounded-xl border-2 border-slate-300 bg-white p-4 text-center">
+            <div className="rounded-lg border-2 border-slate-300 bg-white p-4 text-center">
               <div className="mb-1 flex items-center justify-center gap-1 text-xs font-bold text-slate-600">
                 <TrendingDown className="h-4 w-4" />
                 残り全部が1でも最低
               </div>
-              <div className="text-4xl font-black text-slate-700">{range.min.toFixed(1)}</div>
+              <div className="text-4xl font-bold text-slate-700">{range.min.toFixed(1)}</div>
               <div className={`mt-1 text-xs font-bold ${GAIHYOU_STYLE[toGaihyou(range.min)]}`}>
                 概評 {toGaihyou(range.min)}
               </div>

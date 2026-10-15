@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Sparkles } from 'lucide-react';
+import { Home, ChevronRight, Sparkles } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -86,10 +86,10 @@ export default function NaishinTypeShindanPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -98,7 +98,7 @@ export default function NaishinTypeShindanPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Sparkles className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">内申点タイプ診断</h1>
@@ -114,7 +114,7 @@ export default function NaishinTypeShindanPage() {
             <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((faq) => (
-                <details key={faq.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
                   <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
                     <span className="flex items-center justify-between gap-3">
                       {faq.question}

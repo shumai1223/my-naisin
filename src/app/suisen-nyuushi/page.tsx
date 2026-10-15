@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Award, Scale, FileText, Percent, Sigma, CalendarClock, HelpCircle } from 'lucide-react';
+import { Home, ChevronRight, Award, Scale, FileText, Percent, Sigma, CalendarClock, HelpCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -95,16 +95,16 @@ export default function SuisenNyuushiPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-amber-50/40 to-white">
+      <div className="min-h-screen bg-amber-50/40">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">推薦入試とは</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-amber-500 text-white">
               <Award className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">推薦入試とは？</h1>
@@ -125,17 +125,17 @@ export default function SuisenNyuushiPage() {
           </AnswerBox>
 
           {/* 3種類の違い */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
               <Scale className="h-5 w-5 text-amber-600" />
               指定校推薦・公募推薦・総合型選抜の違い
             </h2>
             <div className="space-y-3">
               {TYPES.map((t) => (
-                <div key={t.name} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div key={t.name} className="rounded-lg border border-slate-100 bg-slate-50 p-4">
                   <div className="mb-1 flex flex-wrap items-center gap-2">
                     <span className="text-sm font-bold text-slate-800">{t.name}</span>
-                    <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-[10px] font-bold text-amber-700">{t.tag}</span>
+                    <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-700">{t.tag}</span>
                   </div>
                   <p className="text-sm leading-relaxed text-slate-600">{t.desc}</p>
                   <p className="mt-1 text-xs font-bold text-amber-700">{t.emphasis}</p>
@@ -157,14 +157,14 @@ export default function SuisenNyuushiPage() {
             {STEPS.map((s) => {
               const Icon = s.icon;
               return (
-                <div key={s.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div key={s.title} className="rounded-lg border border-slate-200 bg-white p-6">
                   <h3 className="mb-2 flex items-center gap-2 text-base font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-amber-50 text-amber-600"><Icon className="h-5 w-5" /></span>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-amber-50 text-amber-600"><Icon className="h-5 w-5" /></span>
                     {s.title}
                   </h3>
                   <p className="mb-3 text-sm leading-relaxed text-slate-600">{s.body}</p>
                   <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-                    <Link href={s.href} className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-amber-700 sm:w-auto">
+                    <Link href={s.href} className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amber-700 sm:w-auto">
                       {s.cta}<ChevronRight className="h-4 w-4" />
                     </Link>
                     <Link href={s.sub.href} className="inline-flex items-center justify-center gap-1 text-xs font-bold text-amber-700 hover:underline">
@@ -182,29 +182,29 @@ export default function SuisenNyuushiPage() {
           </div>
 
           {/* 大学受験の推薦・総合型は姉妹サイトへ */}
-          <section className="mt-8 overflow-hidden rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-violet-50/60 to-white p-6 shadow-sm">
+          <section className="mt-8 overflow-hidden rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
             <h2 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">大学の推薦・総合型選抜を詳しく知りたい方へ</h2>
             <p className="mb-5 text-sm leading-relaxed text-slate-700">
               大学進学者の半数以上が推薦・総合型で進む時代。評定平均で出願できる大学のレンジ、学費・奨学金の目安は、大学受験専門の姉妹サイトでまとめて調べられます。
             </p>
             <div className="flex flex-col items-stretch gap-2 sm:flex-row">
-              <Link href="/sougou-gata-senbatsu" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-violet-700 sm:w-auto">
+              <Link href="/sougou-gata-senbatsu" className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-600 px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-slate-700 sm:w-auto">
                 総合型選抜とは？評定の目安・準備時期<ChevronRight className="h-4 w-4" />
               </Link>
-              <Link href="/shutsugan-junbi" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-violet-700 ring-1 ring-violet-200 transition-colors hover:bg-violet-50 sm:w-auto">
+              <Link href="/shutsugan-junbi" className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-bold text-slate-700 ring-1 ring-slate-200 transition-colors hover:bg-slate-50 sm:w-auto">
                 出願準備チェックリストを見る
               </Link>
-              <a href="https://my-shingaku.com/sougou-suisen" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 transition-colors hover:bg-indigo-50 sm:w-auto">
+              <a href="https://my-shingaku.com/sougou-suisen" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-bold text-brand-700 ring-1 ring-brand-200 transition-colors hover:bg-brand-50 sm:w-auto">
                 大学の総合型選抜・学校推薦型選抜を見る（My Shingaku）
               </a>
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-amber-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

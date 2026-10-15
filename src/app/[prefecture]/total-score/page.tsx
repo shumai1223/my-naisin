@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, ExternalLink, ListOrdered, HelpCircle, TableProperties } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, ExternalLink, ListOrdered, HelpCircle, TableProperties } from '@/components/icons';
 
 import { getTotalScoreSystem, VERIFIED_TOTAL_SCORE_CODES } from '@/lib/total-score/registry';
 import { getExplainer, EXPLAINER_CODES } from '@/lib/total-score/explainers';
@@ -115,16 +115,16 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
         <FAQPageSchema faqItems={system.faqs.map((f) => ({ question: f.q, answer: f.a }))} />
       )}
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href={`/${system.code}`} className="hover:text-blue-600">
+            <Link href={`/${system.code}`} className="hover:text-brand-600">
               {system.name}
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -133,13 +133,13 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <Calculator className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               {system.name}公立高校 総合得点 計算サイト
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-700">
+            <div className="mt-2 inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
               {system.localTerm}・{total ? `${total}点満点・` : ''}
               {system.fiscalYear}年度（令和8年度）入試対応
             </div>
@@ -151,34 +151,34 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
           </header>
 
           {/* 制度概要（本文・SEO/GEO） */}
-          <section className="mb-8 rounded-2xl border border-blue-100 bg-blue-50/40 p-6">
+          <section className="mb-8 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
             <p className="leading-loose text-slate-700">{system.overview}</p>
           </section>
 
           {/* 満点の内訳 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-blue-500" />
+              <BookOpen className="h-5 w-5 text-brand-500" />
               {system.name}の総合得点の仕組み
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border-2 border-blue-200 bg-blue-50 p-4 text-center">
-                <div className="mb-1 text-xs font-bold text-blue-600">学力検査（当日点）</div>
-                <div className="text-3xl font-black text-blue-700">
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
+                <div className="mb-1 text-xs font-bold text-brand-600">学力検査（当日点）</div>
+                <div className="text-3xl font-bold text-brand-700">
                   {system.academic.rawMax}
                   <span className="text-base font-bold">点</span>
                 </div>
-                <div className="mt-1 text-xs text-blue-600">
+                <div className="mt-1 text-xs text-brand-600">
                   {system.academic.subjects}教科 × {system.academic.perSubjectMax}点
                 </div>
               </div>
-              <div className="rounded-xl border-2 border-emerald-200 bg-emerald-50 p-4 text-center">
-                <div className="mb-1 text-xs font-bold text-emerald-600">内申点（調査書点）</div>
-                <div className="text-3xl font-black text-emerald-700">
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
+                <div className="mb-1 text-xs font-bold text-brand-600">内申点（調査書点）</div>
+                <div className="text-3xl font-bold text-brand-700">
                   {system.report.rawMax}
                   <span className="text-base font-bold">点</span>
                 </div>
-                <div className="mt-1 text-xs text-emerald-600">
+                <div className="mt-1 text-xs text-brand-600">
                   対象：中{system.report.targetGrades.join('・中')}年
                 </div>
               </div>
@@ -203,15 +203,15 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
           </div>
 
           {/* 計算の手順（番号付き） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ListOrdered className="h-5 w-5 text-blue-500" />
+              <ListOrdered className="h-5 w-5 text-brand-500" />
               {system.name}の総合得点が決まるまで（{system.computeSteps.length}ステップ）
             </h2>
             <ol className="space-y-3">
               {system.computeSteps.map((step, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
                     {i + 1}
                   </span>
                   <span className="pt-0.5 text-sm leading-relaxed text-slate-700">{step}</span>
@@ -221,9 +221,9 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
           </section>
 
           {/* 得点率→総合得点 早見表（engine算出） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <TableProperties className="h-5 w-5 text-blue-500" />
+              <TableProperties className="h-5 w-5 text-brand-500" />
               {system.name} 総合得点 早見表
             </h2>
             <p className="mb-4 text-xs text-slate-500">
@@ -239,9 +239,9 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
                       内申＼学力
                     </th>
                     {quickTable[0].cells.map((c) => (
-                      <th key={c.academicPct} className="border border-slate-200 bg-blue-50 px-2 py-2 text-xs font-bold text-blue-700">
+                      <th key={c.academicPct} className="border border-slate-200 bg-brand-50 px-2 py-2 text-xs font-bold text-brand-700">
                         {Math.round(c.academicPct * 100)}%
-                        <span className="block text-[10px] font-normal text-blue-500">{c.academicRaw}点</span>
+                        <span className="block text-xs font-normal text-brand-500">{c.academicRaw}点</span>
                       </th>
                     ))}
                   </tr>
@@ -249,9 +249,9 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
                 <tbody>
                   {quickTable.map((row) => (
                     <tr key={row.reportPct}>
-                      <th className="border border-slate-200 bg-emerald-50 px-2 py-2 text-xs font-bold text-emerald-700">
+                      <th className="border border-slate-200 bg-brand-50 px-2 py-2 text-xs font-bold text-brand-700">
                         {Math.round(row.reportPct * 100)}%
-                        <span className="block text-[10px] font-normal text-emerald-500">{row.reportRaw}点</span>
+                        <span className="block text-xs font-normal text-brand-500">{row.reportRaw}点</span>
                       </th>
                       {row.cells.map((c) => (
                         <td key={c.academicPct} className="border border-slate-200 px-2 py-2 font-bold text-slate-700">
@@ -263,16 +263,16 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+            <p className="mt-3 text-xs leading-relaxed text-slate-400">
               縦＝内申点の得点率、横＝学力検査の得点率。セルの数字が総合得点（{quickTable[0].cells.length > 0 ? `${system.ratioOptions[0].academicMax + system.ratioOptions[0].reportMax}点満点` : ''}）の目安です。
             </p>
           </section>
 
           {/* 計算例（engine算出・捏造ゼロ） */}
           {system.examples && system.examples.length > 0 && (
-            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
               <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <Calculator className="h-5 w-5 text-blue-500" />
+                <Calculator className="h-5 w-5 text-brand-500" />
                 {system.name}の総合得点 計算例
               </h2>
               <div className="space-y-3">
@@ -283,14 +283,14 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
                     ratioOptionId: ex.ratioOptionId,
                   });
                   return (
-                    <div key={i} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                    <div key={i} className="rounded-lg border border-slate-100 bg-slate-50 p-4">
                       <div className="mb-2 text-sm font-bold text-slate-700">{ex.label}</div>
                       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600">
-                        <span>学力 <strong className="text-blue-700">{r.academic}点</strong>/{r.option.academicMax}</span>
+                        <span>学力 <strong className="text-brand-700">{r.academic}点</strong>/{r.option.academicMax}</span>
                         <span className="text-slate-300">＋</span>
-                        <span>内申 <strong className="text-emerald-700">{r.report}点</strong>/{r.option.reportMax}</span>
+                        <span>内申 <strong className="text-brand-700">{r.report}点</strong>/{r.option.reportMax}</span>
                         <span className="text-slate-300">＝</span>
-                        <span className="text-base">総合 <strong className="text-indigo-700">{r.total}点</strong>/{r.totalMax}（{((r.total / r.totalMax) * 100).toFixed(1)}%）</span>
+                        <span className="text-base">総合 <strong className="text-brand-700">{r.total}点</strong>/{r.totalMax}（{((r.total / r.totalMax) * 100).toFixed(1)}%）</span>
                       </div>
                       {ex.note && <p className="mt-1 text-xs text-slate-400">{ex.note}</p>}
                     </div>
@@ -301,9 +301,9 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
           )}
 
           {/* 計算式の解説 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-blue-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               {system.name}の総合得点の計算方法
             </h2>
             <div className="space-y-4 text-sm">
@@ -312,7 +312,7 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
                 <p className="leading-relaxed text-slate-700">{system.report.note ?? `中${system.report.targetGrades.join('・中')}年の評定をもとに算出します。`}</p>
                 <p className="mt-2 text-xs text-slate-500">
                   内申点が分からない場合は
-                  <Link href={`/${system.code}/naishin`} className="font-bold text-blue-600 underline">
+                  <Link href={`/${system.code}/naishin`} className="font-bold text-brand-600 underline">
                     {system.name}の内申点計算ツール
                   </Link>
                   で先に算出できます。
@@ -371,7 +371,7 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
           <AdUnit unit="IN_CONTENT" />
 
           {/* 出典 */}
-          <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs leading-relaxed text-amber-800">
@@ -387,20 +387,20 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
 
           {/* よくある質問（FAQ・県固有） */}
           {system.faqs.length > 0 && (
-            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
               <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <HelpCircle className="h-5 w-5 text-blue-500" />
+                <HelpCircle className="h-5 w-5 text-brand-500" />
                 {system.name}の総合得点 よくある質問
               </h2>
               <div className="space-y-4">
                 {system.faqs.map((f, i) => (
-                  <div key={i} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                  <div key={i} className="rounded-lg border border-slate-100 bg-slate-50 p-4">
                     <h3 className="mb-2 flex gap-2 text-sm font-bold text-slate-800">
-                      <span className="text-blue-600">Q.</span>
+                      <span className="text-brand-600">Q.</span>
                       {f.q}
                     </h3>
                     <p className="flex gap-2 text-sm leading-relaxed text-slate-600">
-                      <span className="font-bold text-emerald-600">A.</span>
+                      <span className="font-bold text-brand-600">A.</span>
                       <span>{f.a}</span>
                     </p>
                   </div>
@@ -410,27 +410,27 @@ export default async function PrefectureTotalScorePage({ params }: PageProps) {
           )}
 
           {/* 関連リンク */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href={`/${system.code}/naishin`} className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">{system.name}の内申点を計算する</span>
+              <Link href={`/${system.code}/naishin`} className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">{system.name}の内申点を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href={`/${system.code}`} className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">{system.name}の入試制度ガイド</span>
+              <Link href={`/${system.code}`} className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">{system.name}の入試制度ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">偏差値を計算する</span>
+              <Link href="/hensachi" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">偏差値を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">評定平均を自動計算する</span>
+              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">評定平均を自動計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/chousasho/hyoutei" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">調査書点と内申点・評定平均の関係</span>
+              <Link href="/chousasho/hyoutei" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">調査書点と内申点・評定平均の関係</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
             </div>

@@ -1,4 +1,4 @@
-import { HelpCircle, AlertTriangle, Calendar, BookOpen } from 'lucide-react';
+import { HelpCircle, AlertTriangle, Calendar, BookOpen } from '@/components/icons';
 import type { ReactNode } from 'react';
 import { PREFECTURE_FAQ_DATA, type FAQIconKey } from '../lib/prefecture-faq-data';
 
@@ -18,9 +18,9 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
   const data = PREFECTURE_FAQ_DATA[prefectureCode] || PREFECTURE_FAQ_DATA.default;
 
   return (
-    <div className={`rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50/80 via-orange-50/60 to-rose-50/80 p-6 shadow-lg shadow-amber-100/50 ${className}`}>
+    <div className={`rounded-lg border border-amber-200 bg-amber-50/80 p-6 ${className}`}>
       <div className="flex items-start gap-4">
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-amber-500 via-orange-600 to-rose-600 shadow-lg shadow-amber-300/40">
+        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-amber-500">
           <HelpCircle className="h-6 w-6 text-white" />
         </div>
         
@@ -47,7 +47,7 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
                       {FAQ_ICONS[faq.icon]}
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-semibold text-slate-800 mb-2">
+                      <h4 className="font-bold text-slate-800 mb-2">
                         {faq.question}
                       </h4>
                       <p className="text-sm text-slate-600 leading-relaxed">
@@ -63,7 +63,7 @@ export function PrefectureFAQ({ prefectureCode, className = '' }: PrefectureFAQP
             <div className="mt-6 p-4 bg-amber-100/50 rounded-lg border border-amber-200">
               <div className="flex items-center gap-2 mb-2">
                 <AlertTriangle className="h-4 w-4 text-amber-700" />
-                <span className="text-sm font-semibold text-amber-800">特に注意が必要な点</span>
+                <span className="text-sm font-bold text-amber-800">特に注意が必要な点</span>
               </div>
               <ul className="space-y-1">
                 {data.specificNotes.map((note, index) => (

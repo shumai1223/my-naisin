@@ -1,4 +1,4 @@
-import { AlertTriangle, HelpCircle, Calendar, BookOpen, TrendingUp, Star, Lightbulb, CheckCircle2 } from 'lucide-react';
+import { AlertTriangle, HelpCircle, Calendar, BookOpen, TrendingUp, Star, Lightbulb, CheckCircle2 } from '@/components/icons';
 
 interface PrefectureSearchIntentProps {
   prefectureCode: string;
@@ -109,9 +109,9 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
   const intent = searchIntents[prefectureCode] || searchIntents.default;
 
   return (
-    <div className={`rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/80 p-6 shadow-xl ${className}`}>
+    <div className={`rounded-lg border border-brand-200 bg-brand-50/80 p-6 ${className}`}>
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-lg">
+        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-600 text-white">
           <Star className="h-6 w-6" />
         </div>
         <div>
@@ -124,7 +124,7 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* よくある勘違い */}
-        <div className="rounded-xl border border-red-100 bg-red-50/50 p-5">
+        <div className="rounded-lg border border-red-100 bg-red-50/50 p-5">
           <h4 className="mb-3 flex items-center gap-2 font-bold text-red-800">
             <AlertTriangle className="h-5 w-5" />
             よくある勘違い
@@ -140,31 +140,31 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
         </div>
 
         {/* 逆転合格の秘策 */}
-        <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-5">
-          <h4 className="mb-3 flex items-center gap-2 font-bold text-emerald-800">
+        <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-5">
+          <h4 className="mb-3 flex items-center gap-2 font-bold text-brand-800">
             <Lightbulb className="h-5 w-5" />
             逆転合格のヒント
           </h4>
-          <p className="text-sm leading-relaxed text-emerald-900/80">
+          <p className="text-sm leading-relaxed text-brand-900/80">
             {intent.reversalStrategy}
           </p>
-          <div className="mt-4 flex items-center gap-2 rounded-lg bg-white/60 p-2 text-xs text-emerald-700">
+          <div className="mt-4 flex items-center gap-2 rounded-lg bg-white/60 p-2 text-xs text-brand-700">
             <CheckCircle2 className="h-4 w-4 shrink-0" />
             <span>この戦略で「内申点への不安」を解消しましょう。</span>
           </div>
         </div>
 
         {/* いつの成績が使われるか */}
-        <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-5">
-          <h4 className="mb-3 flex items-center gap-2 font-bold text-blue-800">
+        <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-5">
+          <h4 className="mb-3 flex items-center gap-2 font-bold text-brand-800">
             <Calendar className="h-5 w-5" />
             対象となる成績
           </h4>
-          <div className="text-sm leading-relaxed text-blue-900/80" dangerouslySetInnerHTML={{ __html: intent.targetGrades }} />
+          <div className="text-sm leading-relaxed text-brand-900/80" dangerouslySetInnerHTML={{ __html: intent.targetGrades }} />
         </div>
 
         {/* 特記事項 */}
-        <div className="rounded-xl border border-slate-100 bg-slate-50/50 p-5">
+        <div className="rounded-lg border border-slate-100 bg-slate-50/50 p-5">
           <h4 className="mb-3 flex items-center gap-2 font-bold text-slate-800">
             <BookOpen className="h-5 w-5" />
             2026年度の特記事項
@@ -172,7 +172,7 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
           <ul className="space-y-2">
             {intent.specialNotes.map((note, index) => (
               <li key={index} className="flex items-start gap-2 text-sm text-slate-700 leading-snug">
-                <span className="text-blue-500">•</span>
+                <span className="text-brand-500">•</span>
                 {note}
               </li>
             ))}

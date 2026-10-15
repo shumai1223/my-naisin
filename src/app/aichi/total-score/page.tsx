@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -96,29 +96,29 @@ export default function AichiTotalScorePage() {
       />
       <FAQPageSchema faqItems={AICHI_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/aichi" className="hover:text-blue-600">愛知県</Link>
+            <Link href="/aichi" className="hover:text-brand-600">愛知県</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">総合得点・評価方法計算</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-red-500 text-white">
               <Calculator className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               愛知県公立高校 総合得点・評価方法 計算
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-rose-100 px-3 py-1 text-xs font-bold text-rose-700">
+            <div className="mt-2 inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700">
               内申90点＋当日110点・評価方法Ⅰ〜Ⅴ・2026年度入試対応
             </div>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -128,21 +128,21 @@ export default function AichiTotalScorePage() {
           </header>
 
           {/* 仕組み */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-rose-500" />
+              <BookOpen className="h-5 w-5 text-red-500" />
               愛知県の合否は「内申点＋当日点」を評価方法で重み付け
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border-2 border-rose-200 bg-rose-50 p-4 text-center">
-                <div className="text-xs font-bold text-rose-600 mb-1">内申点（評定得点）</div>
-                <div className="text-3xl font-black text-rose-700">90<span className="text-base font-bold">点</span></div>
-                <div className="text-xs text-rose-600 mt-1">中3の9教科評定合計(最大45)×2</div>
+              <div className="rounded-lg border-2 border-red-200 bg-red-50 p-4 text-center">
+                <div className="text-xs font-bold text-red-600 mb-1">内申点（評定得点）</div>
+                <div className="text-3xl font-bold text-red-700">90<span className="text-base font-bold">点</span></div>
+                <div className="text-xs text-red-600 mt-1">中3の9教科評定合計(最大45)×2</div>
               </div>
-              <div className="rounded-xl border-2 border-blue-200 bg-blue-50 p-4 text-center">
-                <div className="text-xs font-bold text-blue-600 mb-1">当日点（学力検査）</div>
-                <div className="text-3xl font-black text-blue-700">110<span className="text-base font-bold">点</span></div>
-                <div className="text-xs text-blue-600 mt-1">5教科 × 22点</div>
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
+                <div className="text-xs font-bold text-brand-600 mb-1">当日点（学力検査）</div>
+                <div className="text-3xl font-bold text-brand-700">110<span className="text-base font-bold">点</span></div>
+                <div className="text-xs text-brand-600 mt-1">5教科 × 22点</div>
               </div>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
@@ -156,9 +156,9 @@ export default function AichiTotalScorePage() {
           </div>
 
           {/* 評定得点 早見表 */}
-          <section className="mb-8 rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50/40 to-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-red-100 bg-red-50/40 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-rose-500" />
+              <Calculator className="h-5 w-5 text-red-500" />
               評定合計 → 評定得点（90点満点）換算早見表
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
@@ -167,10 +167,10 @@ export default function AichiTotalScorePage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-rose-600 text-white text-left">
-                    <th className="border border-rose-400 px-3 py-2 font-bold">9教科の評定合計（／45）</th>
-                    <th className="border border-rose-400 px-3 py-2 font-bold text-right">評定得点（×2・／90）</th>
-                    <th className="border border-rose-400 px-3 py-2 font-bold">目安</th>
+                  <tr className="bg-red-600 text-white text-left">
+                    <th className="border border-red-400 px-3 py-2 font-bold">9教科の評定合計（／45）</th>
+                    <th className="border border-red-400 px-3 py-2 font-bold text-right">評定得点（×2・／90）</th>
+                    <th className="border border-red-400 px-3 py-2 font-bold">目安</th>
                   </tr>
                 </thead>
                 <tbody className="text-slate-700">
@@ -193,12 +193,12 @@ export default function AichiTotalScorePage() {
               </table>
             </div>
             <p className="mt-3 text-xs text-slate-500">
-              ※ 評定は中3のみが対象。9教科の評定を入れて合計を出すなら<Link href="/aichi/naishin" className="text-rose-600 underline font-bold">愛知県の内申点計算ツール</Link>が便利です。
+              ※ 評定は中3のみが対象。9教科の評定を入れて合計を出すなら<Link href="/aichi/naishin" className="text-red-600 underline font-bold">愛知県の内申点計算ツール</Link>が便利です。
             </p>
           </section>
 
           {/* 評価方法Ⅰ〜Ⅴ 早見表 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
               <Award className="h-5 w-5 text-amber-500" />
               評価方法Ⅰ〜Ⅴ 早見表（計算式・満点・特徴）
@@ -219,7 +219,7 @@ export default function AichiTotalScorePage() {
                 <tbody className="text-slate-700">
                   {HYOKA_METHODS.map((m) => (
                     <tr key={m.type} className="odd:bg-white even:bg-slate-50">
-                      <td className="border border-slate-200 px-3 py-2 font-bold text-rose-700">{m.type}</td>
+                      <td className="border border-slate-200 px-3 py-2 font-bold text-red-700">{m.type}</td>
                       <td className="border border-slate-200 px-3 py-2 font-mono text-xs">{m.formula}</td>
                       <td className="border border-slate-200 px-3 py-2 text-right font-bold">{m.total}</td>
                       <td className="border border-slate-200 px-3 py-2 text-xs">{m.note}</td>
@@ -234,15 +234,15 @@ export default function AichiTotalScorePage() {
           </section>
 
           {/* 計算例 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-rose-500" />
+              <Calculator className="h-5 w-5 text-red-500" />
               総合得点の計算例
             </h2>
             <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-rose-200 bg-rose-50 p-4">
-                <h3 className="font-bold text-rose-900 mb-1">例：評定合計38・当日点95点</h3>
-                <ul className="text-rose-900 text-xs space-y-1 ml-4 list-disc">
+              <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+                <h3 className="font-bold text-red-900 mb-1">例：評定合計38・当日点95点</h3>
+                <ul className="text-red-900 text-xs space-y-1 ml-4 list-disc">
                   <li>評定得点 ＝ 38 × 2 ＝ <strong>76点</strong></li>
                   <li>評価方法Ⅰ（等倍）：76 ＋ 95 ＝ <strong>171点</strong>（／200）</li>
                   <li>評価方法Ⅲ（当日×1.5）：76 ＋ 95×1.5 ＝ 76 ＋ 142.5 ＝ <strong>218.5点</strong>（／255）</li>
@@ -269,7 +269,7 @@ export default function AichiTotalScorePage() {
           />
 
           {/* よくある質問 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {AICHI_FAQS.map((faq, i) => (
@@ -282,7 +282,7 @@ export default function AichiTotalScorePage() {
           </section>
 
           {/* 注意 */}
-          <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
@@ -292,23 +292,23 @@ export default function AichiTotalScorePage() {
           </div>
 
           {/* 関連リンク */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/aichi/naishin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">愛知県の内申点を計算する</span>
+              <Link href="/aichi/naishin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">愛知県の内申点を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/aichi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">愛知県の入試制度ガイド</span>
+              <Link href="/aichi" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">愛知県の入試制度ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">5教科の偏差値を計算する</span>
+              <Link href="/hensachi" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">5教科の偏差値を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/reverse?pref=aichi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">志望校から逆算する</span>
+              <Link href="/reverse?pref=aichi" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">志望校から逆算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
             </div>

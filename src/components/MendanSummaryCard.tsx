@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ClipboardCheck } from 'lucide-react';
+import { ClipboardCheck } from '@/components/icons';
 
 import { readSavedGoal, type SavedGoal } from '@/lib/persistence';
 
@@ -22,34 +22,34 @@ export function MendanSummaryCard() {
   if (!loaded) return null;
 
   return (
-    <section className="mb-10 rounded-2xl border-2 border-blue-200 bg-white p-6 shadow-sm print:border print:shadow-none">
+    <section className="mb-10 rounded-lg border-2 border-brand-200 bg-white p-6 print:border print:shadow-none">
       <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-        <ClipboardCheck className="h-5 w-5 text-blue-600 print:hidden" />
+        <ClipboardCheck className="h-5 w-5 text-brand-600 print:hidden" />
         面談で見せる現在の数値
       </h2>
       <div className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border border-slate-200 p-4">
+        <div className="rounded-lg border border-slate-200 p-4">
           <div className="text-xs font-bold text-slate-500">内申点</div>
-          <div className="mt-1 text-2xl font-black text-slate-900">
+          <div className="mt-1 text-2xl font-bold text-slate-900">
             {goal ? `${goal.score}点` : '＿＿＿点'}
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 p-4">
+        <div className="rounded-lg border border-slate-200 p-4">
           <div className="text-xs font-bold text-slate-500">
             志望校の目標{goal?.targetLabel ? `（${goal.targetLabel}）` : ''}
           </div>
-          <div className="mt-1 text-2xl font-black text-slate-900">
+          <div className="mt-1 text-2xl font-bold text-slate-900">
             {goal ? `${goal.target}点` : '＿＿＿点'}
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 p-4">
+        <div className="rounded-lg border border-slate-200 p-4">
           <div className="text-xs font-bold text-slate-500">目標との差</div>
-          <div className="mt-1 text-2xl font-black text-slate-900">
+          <div className="mt-1 text-2xl font-bold text-slate-900">
             {goal ? (goal.gap > 0 ? `あと${goal.gap}点` : `${Math.abs(goal.gap)}点 達成`) : '＿＿＿点'}
           </div>
         </div>
       </div>
-      <div className="mt-3 rounded-xl border border-dashed border-slate-300 p-4">
+      <div className="mt-3 rounded-lg border border-dashed border-slate-300 p-4">
         <div className="text-xs font-bold text-slate-500">偏差値（模試の結果があれば記入）</div>
         <div className="mt-1 text-lg font-bold text-slate-400">＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</div>
       </div>

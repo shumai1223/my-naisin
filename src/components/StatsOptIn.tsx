@@ -9,7 +9,7 @@
  * 同意していない・値が無い場合は何も送信しない（見せかけの機能にしない設計を維持）。
  */
 import { useEffect, useRef, useState } from 'react';
-import { BarChart3, ShieldCheck } from 'lucide-react';
+import { BarChart3, ShieldCheck } from '@/components/icons';
 
 import { readStatsConsent, grantStatsConsent, revokeStatsConsent } from '@/lib/stats-consent';
 import { submitStatsResult } from '@/lib/stats-submit-client';
@@ -109,10 +109,10 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
 
   return (
     <div
-      className={`rounded-2xl border-2 p-4 shadow-sm transition-colors ${
+      className={`rounded-lg border-2 p-4 transition-colors ${
         granted
-          ? 'border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50'
-          : 'border-sky-300 bg-gradient-to-br from-sky-50 to-cyan-50'
+          ? 'border-brand-300 bg-brand-50'
+          : 'border-brand-300 bg-brand-50'
       } ${className}`}
     >
       <label className="flex cursor-pointer items-start gap-3">
@@ -120,12 +120,12 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
           type="checkbox"
           checked={granted}
           onChange={handleToggle}
-          className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded border-sky-400 accent-sky-600"
+          className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded border-brand-400 accent-brand-600"
         />
         <span>
           <span className="flex items-center gap-2 text-[15px] font-bold text-slate-900">
-            <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${granted ? 'bg-emerald-100' : 'bg-sky-100'}`}>
-              <BarChart3 className={`h-4 w-4 ${granted ? 'text-emerald-600' : 'text-sky-600'}`} />
+            <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${granted ? 'bg-brand-100' : 'bg-brand-100'}`}>
+              <BarChart3 className={`h-4 w-4 ${granted ? 'text-brand-600' : 'text-brand-600'}`} />
             </span>
             {heading}
           </span>
@@ -141,7 +141,7 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
         </span>
       </label>
       {granted && consentedAt && (
-        <p className="mt-2 flex items-center gap-1 text-xs font-medium text-emerald-700">
+        <p className="mt-2 flex items-center gap-1 text-xs text-brand-700">
           <ShieldCheck className="h-4 w-4" />
           ご協力ありがとうございます（{new Date(consentedAt).toLocaleDateString('ja-JP')}に同意済み）
         </p>

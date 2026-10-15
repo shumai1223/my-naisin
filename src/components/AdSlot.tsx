@@ -82,7 +82,7 @@ export function AdSlot({
   // minHeight=0 を渡せば予約しない（高さ完全可変の枠用）。広告は予約高さを超えて伸びる分には問題ない。
   return (
     <aside aria-label="広告" className="my-6 print:hidden">
-      <p className="mb-1 text-[10px] leading-none text-slate-400">スポンサーリンク</p>
+      <p className="mb-1 text-xs leading-none text-slate-400">スポンサーリンク</p>
       <ins
         className={`adsbygoogle ${className}`}
         style={{ display: 'block', ...(minHeight > 0 ? { minHeight } : {}), ...style }}

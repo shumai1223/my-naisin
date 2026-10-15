@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, PenLine, CalendarClock, HelpCircle, AlertCircle } from 'lucide-react';
+import { Home, ChevronRight, PenLine, CalendarClock, HelpCircle, AlertCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -77,18 +77,18 @@ export default function ChousashoKakikataPage() {
         steps={STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/chousasho" className="hover:text-blue-600">調査書とは</Link>
+            <Link href="/chousasho" className="hover:text-brand-600">調査書とは</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">書き方・発行の流れ</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <PenLine className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">調査書の書き方・発行の流れ</h1>
@@ -106,15 +106,15 @@ export default function ChousashoKakikataPage() {
           </AnswerBox>
 
           {/* 手順 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <CalendarClock className="h-5 w-5 text-blue-600" />
+              <CalendarClock className="h-5 w-5 text-brand-600" />
               発行〜出願までの4ステップ
             </h2>
             <ol className="space-y-3">
               {STEPS.map((s, i) => (
-                <li key={s.name} className="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-blue-600 text-xs font-black text-white">{i + 1}</span>
+                <li key={s.name} className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 p-4">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-600 text-xs font-bold text-white">{i + 1}</span>
                   <span>
                     <span className="block text-sm font-bold text-slate-800">{s.name}</span>
                     <span className="mt-0.5 block text-sm leading-relaxed text-slate-600">{s.text}</span>
@@ -125,7 +125,7 @@ export default function ChousashoKakikataPage() {
           </section>
 
           {/* 注意 */}
-          <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <section className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <h2 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-900">
               <AlertCircle className="h-4 w-4" />
               よくある“出願直前のつまずき”
@@ -150,7 +150,7 @@ export default function ChousashoKakikataPage() {
               { href: '/mendan', title: '三者面談の準備（先生に聞くこと）' },
               { href: '/juken-schedule', title: '受験スケジュール・出願時期' },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+              <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-700 transition-shadow">
                 {c.title}
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
@@ -162,11 +162,11 @@ export default function ChousashoKakikataPage() {
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-blue-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

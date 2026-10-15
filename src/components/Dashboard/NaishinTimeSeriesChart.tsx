@@ -89,7 +89,7 @@ export function NaishinTimeSeriesChart({
             strokeWidth={1.5}
             strokeDasharray="5 4"
           />
-          <text x={PAD.left + innerW} y={y(targetValue) - 4} textAnchor="end" className="fill-emerald-600" fontSize={10} fontWeight={700}>
+          <text x={PAD.left + innerW} y={y(targetValue) - 4} textAnchor="end" className="fill-brand-600" fontSize={10} fontWeight={700}>
             {targetLabel ?? `目標 ${Math.round(targetValue)}`}
           </text>
         </g>

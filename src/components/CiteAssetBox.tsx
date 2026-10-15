@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Link2, Check, Quote } from 'lucide-react';
+import { Link2, Check, Quote } from '@/components/icons';
 
 /**
  * 「引用・出典として使ってもOK」を明示し、出典リンク付きHTMLをワンクリックでコピーさせる被リンク導線。
@@ -28,24 +28,24 @@ export function CiteAssetBox() {
   }, []);
 
   return (
-    <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+    <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50/70 p-4">
       <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-700">
-        <Quote className="h-3.5 w-3.5 text-blue-500" />
+        <Quote className="h-3.5 w-3.5 text-brand-500" />
         この一覧表は出典明記で自由に引用・転載できます
       </div>
-      <p className="mb-3 text-[11px] leading-relaxed text-slate-500">
+      <p className="mb-3 text-xs leading-relaxed text-slate-500">
         ブログ・記事・配布資料などにご活用ください。引用時は下記のクレジット（出典リンク）の併記にご協力ください。
       </p>
 
       <div className="flex flex-col gap-2 sm:flex-row">
-        <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap rounded-lg border border-slate-200 bg-white px-3 py-2 text-[11px] text-slate-600">
+        <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-600">
           {citeSnippet}
         </code>
         <div className="flex shrink-0 gap-2">
           <button
             type="button"
             onClick={() => copy(citeSnippet, 'cite')}
-            className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-blue-700"
+            className="inline-flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-brand-700"
           >
             {copied === 'cite' ? <Check className="h-3.5 w-3.5" /> : <Quote className="h-3.5 w-3.5" />}
             {copied === 'cite' ? 'コピーしました' : '引用クレジットをコピー'}

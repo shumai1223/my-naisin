@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Home, ChevronRight, Building2, Code2, ShieldCheck } from 'lucide-react';
+import { Home, ChevronRight, Building2, Code2, ShieldCheck } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { isPartnerDemoEnabled } from '@/lib/partner-demo/flag';
@@ -73,10 +73,10 @@ export default function PartnerDemoPage() {
         ]}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -85,7 +85,7 @@ export default function PartnerDemoPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-600 to-slate-800 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-600 text-white">
               <Building2 className="h-8 w-8" />
             </div>
             <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">パートナー統合デモ（内部確認用）</h1>
@@ -99,7 +99,7 @@ export default function PartnerDemoPage() {
           </header>
 
           {/* パターン①: 画面組み込み型 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
               <Building2 className="h-5 w-5 text-slate-600" />
               パターン① 画面組み込み型（iframe埋め込み）
@@ -107,7 +107,7 @@ export default function PartnerDemoPage() {
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
               生徒・保護者向け画面に、貴社サービスの世界観のまま計算ツールを埋め込むイメージです（下の枠は貴社サービスの画面を模したプレースホルダ）。
             </p>
-            <div className="overflow-hidden rounded-xl border-2 border-dashed border-slate-300">
+            <div className="overflow-hidden rounded-lg border-2 border-dashed border-slate-300">
               <div className="flex items-center gap-2 bg-slate-800 px-4 py-2.5 text-white">
                 <div className="h-5 w-5 rounded bg-slate-400" aria-hidden />
                 <span className="text-sm font-bold">御社名 保護者向けサービス（イメージ）</span>
@@ -129,7 +129,7 @@ export default function PartnerDemoPage() {
           </section>
 
           {/* パターン②: バックエンド連携型 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
               <Code2 className="h-5 w-5 text-slate-600" />
               パターン② バックエンド連携型（模試判定システム等からのAPI呼び出し）
@@ -140,34 +140,34 @@ export default function PartnerDemoPage() {
             </p>
             <div className="mb-3">
               <div className="mb-1 text-xs font-bold text-slate-500">リクエスト例（東京都・9教科オール4）</div>
-              <pre className="overflow-x-auto rounded-xl bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">{API_SAMPLE_REQUEST}</pre>
+              <pre className="overflow-x-auto rounded-lg bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">{API_SAMPLE_REQUEST}</pre>
             </div>
             <div>
               <div className="mb-1 text-xs font-bold text-slate-500">レスポンス例（2026-07-24実測）</div>
-              <pre className="overflow-x-auto rounded-xl bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">{API_SAMPLE_RESPONSE}</pre>
+              <pre className="overflow-x-auto rounded-lg bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">{API_SAMPLE_RESPONSE}</pre>
             </div>
           </section>
 
           {/* レート/SLA要約 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
               <ShieldCheck className="h-5 w-5 text-slate-600" />
               本番組込み向け（Proティア）の目安
             </h2>
             <dl className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-              <div className="rounded-xl bg-slate-50 p-3">
+              <div className="rounded-lg bg-slate-50 p-3">
                 <dt className="text-xs text-slate-500">レート上限</dt>
                 <dd className="font-bold text-slate-800">{pro.ratePerMinute.toLocaleString()}req/分</dd>
               </div>
-              <div className="rounded-xl bg-slate-50 p-3">
+              <div className="rounded-lg bg-slate-50 p-3">
                 <dt className="text-xs text-slate-500">月次クォータ</dt>
                 <dd className="font-bold text-slate-800">{pro.monthlyQuota.toLocaleString()}/月</dd>
               </div>
-              <div className="rounded-xl bg-slate-50 p-3">
+              <div className="rounded-lg bg-slate-50 p-3">
                 <dt className="text-xs text-slate-500">SLA目安</dt>
                 <dd className="font-bold text-slate-800">{pro.sla}</dd>
               </div>
-              <div className="rounded-xl bg-slate-50 p-3">
+              <div className="rounded-lg bg-slate-50 p-3">
                 <dt className="text-xs text-slate-500">月額目安</dt>
                 <dd className="font-bold text-slate-800">¥{pro.monthlyPriceJpy.toLocaleString()}〜</dd>
               </div>

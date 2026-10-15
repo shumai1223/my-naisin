@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -89,29 +89,29 @@ export default function FukuokaTotalScorePage() {
       />
       <FAQPageSchema faqItems={FUKUOKA_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/fukuoka" className="hover:text-blue-600">福岡県</Link>
+            <Link href="/fukuoka" className="hover:text-brand-600">福岡県</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">内申点・当日点計算</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Calculator className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               福岡県公立高校 内申点・当日点 計算
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-sky-100 px-3 py-1 text-xs font-bold text-sky-700">
+            <div className="mt-2 inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
               内申45点（中3のみ）＋学力300点・2026年度入試対応
             </div>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -121,32 +121,32 @@ export default function FukuokaTotalScorePage() {
           </header>
 
           {/* 中1中2は不算入の強調 */}
-          <section className="mb-8 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6 shadow-sm">
-            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-sky-900">
-              <AlertCircle className="h-5 w-5 text-sky-600" />
+          <section className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
+            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-brand-900">
+              <AlertCircle className="h-5 w-5 text-brand-600" />
               福岡県の内申点は「中3のみ」45点満点
             </h2>
-            <p className="text-sm leading-relaxed text-sky-900">
+            <p className="text-sm leading-relaxed text-brand-900">
               よくある誤解ですが、<strong>福岡県の合否判定に使う内申点は中3の9教科だけ</strong>です。中1・中2の評定は調査書に記載されますが、得点には反映されません。だからこそ<strong>中3の成績が直接合否に効きます</strong>。
             </p>
           </section>
 
           {/* 仕組み */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-sky-500" />
+              <BookOpen className="h-5 w-5 text-brand-500" />
               福岡県の合否は「学力300点＋内申45点」の2軸
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border-2 border-blue-200 bg-blue-50 p-4 text-center">
-                <div className="text-xs font-bold text-blue-600 mb-1">学力検査（当日点）</div>
-                <div className="text-3xl font-black text-blue-700">300<span className="text-base font-bold">点</span></div>
-                <div className="text-xs text-blue-600 mt-1">5教科 × 60点</div>
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
+                <div className="text-xs font-bold text-brand-600 mb-1">学力検査（当日点）</div>
+                <div className="text-3xl font-bold text-brand-700">300<span className="text-base font-bold">点</span></div>
+                <div className="text-xs text-brand-600 mt-1">5教科 × 60点</div>
               </div>
-              <div className="rounded-xl border-2 border-sky-200 bg-sky-50 p-4 text-center">
-                <div className="text-xs font-bold text-sky-600 mb-1">内申点（調査書）</div>
-                <div className="text-3xl font-black text-sky-700">45<span className="text-base font-bold">点</span></div>
-                <div className="text-xs text-sky-600 mt-1">中3の9教科 × 5段階</div>
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
+                <div className="text-xs font-bold text-brand-600 mb-1">内申点（調査書）</div>
+                <div className="text-3xl font-bold text-brand-700">45<span className="text-base font-bold">点</span></div>
+                <div className="text-xs text-brand-600 mt-1">中3の9教科 × 5段階</div>
               </div>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
@@ -155,21 +155,21 @@ export default function FukuokaTotalScorePage() {
           </section>
 
           {/* 内申点 早見表 */}
-          <section className="mb-8 rounded-2xl border border-sky-100 bg-gradient-to-br from-sky-50/40 to-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-sky-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               内申点（45点満点）早見表＋学力検査の換算
             </h2>
             <div className="grid gap-5 md:grid-cols-2">
               {/* 内申点 */}
               <div>
-                <h3 className="mb-2 text-sm font-bold text-sky-900">① 中3の評定パターン → 内申点（／45）</h3>
+                <h3 className="mb-2 text-sm font-bold text-brand-900">① 中3の評定パターン → 内申点（／45）</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-sky-600 text-white text-left">
-                        <th className="border border-sky-400 px-3 py-1.5 font-bold">評定の目安</th>
-                        <th className="border border-sky-400 px-3 py-1.5 font-bold text-right">内申点</th>
+                      <tr className="bg-brand-600 text-white text-left">
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold">評定の目安</th>
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold text-right">内申点</th>
                       </tr>
                     </thead>
                     <tbody className="text-slate-700">
@@ -190,17 +190,17 @@ export default function FukuokaTotalScorePage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-1 text-[11px] text-slate-500">内申点 ＝ 中3の9教科の評定合計</p>
+                <p className="mt-1 text-xs text-slate-500">内申点 ＝ 中3の9教科の評定合計</p>
               </div>
               {/* 学力検査 */}
               <div>
-                <h3 className="mb-2 text-sm font-bold text-blue-900">② 学力検査 5教科の合計 → 300点満点</h3>
+                <h3 className="mb-2 text-sm font-bold text-brand-900">② 学力検査 5教科の合計 → 300点満点</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-blue-600 text-white text-left">
-                        <th className="border border-blue-400 px-3 py-1.5 font-bold">1教科平均（／60）</th>
-                        <th className="border border-blue-400 px-3 py-1.5 font-bold text-right">5教科合計</th>
+                      <tr className="bg-brand-600 text-white text-left">
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold">1教科平均（／60）</th>
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold text-right">5教科合計</th>
                       </tr>
                     </thead>
                     <tbody className="text-slate-700">
@@ -220,7 +220,7 @@ export default function FukuokaTotalScorePage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-1 text-[11px] text-slate-500">学力検査 ＝ 5教科 × 各60点（最大300）</p>
+                <p className="mt-1 text-xs text-slate-500">学力検査 ＝ 5教科 × 各60点（最大300）</p>
               </div>
             </div>
           </section>
@@ -242,7 +242,7 @@ export default function FukuokaTotalScorePage() {
           />
 
           {/* よくある質問 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FUKUOKA_FAQS.map((faq, i) => (
@@ -255,7 +255,7 @@ export default function FukuokaTotalScorePage() {
           </section>
 
           {/* 注意 */}
-          <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
@@ -265,23 +265,23 @@ export default function FukuokaTotalScorePage() {
           </div>
 
           {/* 関連リンク */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/fukuoka/naishin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">福岡県の内申点を計算する</span>
+              <Link href="/fukuoka/naishin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">福岡県の内申点を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/fukuoka" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">福岡県の入試制度ガイド</span>
+              <Link href="/fukuoka" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">福岡県の入試制度ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">5教科の偏差値を計算する</span>
+              <Link href="/hensachi" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">5教科の偏差値を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/reverse?pref=fukuoka" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">志望校から逆算する</span>
+              <Link href="/reverse?pref=fukuoka" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">志望校から逆算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
             </div>

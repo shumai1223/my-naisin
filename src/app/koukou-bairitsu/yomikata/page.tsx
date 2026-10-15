@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, HelpCircle, AlertTriangle, ChevronRightSquare, BookOpenCheck } from 'lucide-react';
+import { Home, ChevronRight, HelpCircle, AlertTriangle, ChevronRightSquare, BookOpenCheck } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -83,15 +83,15 @@ export default function BairitsuYomikataPage() {
         totalTime="P10D"
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/koukou-bairitsu" className="hover:text-indigo-600">
+            <Link href="/koukou-bairitsu" className="hover:text-brand-600">
               倍率計算
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -105,7 +105,7 @@ export default function BairitsuYomikataPage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
+          <section className="mb-8 rounded-lg border-2 border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
               <p className="text-sm leading-relaxed text-amber-900">
@@ -114,19 +114,19 @@ export default function BairitsuYomikataPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-indigo-500 pl-3 text-lg font-bold text-slate-800">
-              <BookOpenCheck className="h-5 w-5 text-indigo-500" />
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
+              <BookOpenCheck className="h-5 w-5 text-brand-500" />
               出願倍率を読む一般的な流れ
             </h2>
             <div className="space-y-4">
               {STEPS.map((s, i) => (
                 <div key={s.title} className="flex gap-4">
                   <div className="flex flex-col items-center">
-                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700">
+                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
                       {i + 1}
                     </div>
-                    {i < STEPS.length - 1 && <div className="mt-1 h-full w-px flex-1 bg-indigo-100" />}
+                    {i < STEPS.length - 1 && <div className="mt-1 h-full w-px flex-1 bg-brand-100" />}
                   </div>
                   <div className="pb-2">
                     <div className="text-sm font-bold text-slate-800">{s.title}</div>
@@ -137,13 +137,13 @@ export default function BairitsuYomikataPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
                 <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
                   <h3 className="mb-1 flex items-start gap-1.5 text-sm font-bold text-slate-800">
-                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-indigo-400" />
+                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
                     Q. {f.question}
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
@@ -157,22 +157,22 @@ export default function BairitsuYomikataPage() {
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/koukou-bairitsu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/koukou-bairitsu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 志願倍率・実質倍率を計算する
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/juken-schedule" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/juken-schedule" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 受験の年間スケジュール
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/heigan-yuugu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/heigan-yuugu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 併願優遇の仕組み
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 当日点・内申が足りないときの対策
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>

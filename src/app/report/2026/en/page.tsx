@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, BookMarked, Globe } from 'lucide-react';
+import { Home, ChevronRight, BookMarked, Globe } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -84,10 +84,10 @@ export default function Report2026EnglishPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               Home
             </Link>
@@ -96,7 +96,7 @@ export default function Report2026EnglishPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-800 to-indigo-900 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-800 text-white">
               <BookMarked className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">Naishin Whitepaper 2026</h1>
@@ -108,14 +108,14 @@ export default function Report2026EnglishPage() {
             </p>
             <p className="mt-2 text-xs text-slate-400">
               Published by My Naishin · July 2026 · Covers the 2026 academic-year admissions cycle ·{' '}
-              <Link href="/report/2026" className="font-semibold text-indigo-700 underline">
+              <Link href="/report/2026" className="font-bold text-brand-700 underline">
                 日本語版はこちら
               </Link>
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-5">
-            <p className="flex items-start gap-2 text-xs leading-relaxed text-indigo-900">
+          <section className="mb-8 rounded-lg border border-brand-100 bg-brand-50/50 p-5">
+            <p className="flex items-start gap-2 text-xs leading-relaxed text-brand-900">
               <Globe className="mt-0.5 h-4 w-4 shrink-0" />
               This page includes the full 47-prefecture comparison table. Detailed source citations
               (each prefecture&apos;s official board-of-education document titles) and interactive
@@ -131,7 +131,7 @@ export default function Report2026EnglishPage() {
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">Executive Summary</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               In Japan, public high school admissions use a metric called &quot;naishin-ten&quot;
@@ -148,7 +148,7 @@ export default function Report2026EnglishPage() {
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">Top 5 Structural Findings</h2>
             <ol className="space-y-4 text-sm leading-relaxed text-slate-600">
               <li>
@@ -200,12 +200,12 @@ export default function Report2026EnglishPage() {
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">All 47 Prefectures (Full Comparison Table)</h2>
             <p className="mb-4 text-xs text-slate-500">
               Sorted by practical-subject weighting multiplier (descending). For official source
               citations, see the{' '}
-              <Link href="/report/2026" className="font-semibold text-indigo-700 underline">
+              <Link href="/report/2026" className="font-bold text-brand-700 underline">
                 Japanese-language edition
               </Link>
               .
@@ -213,7 +213,7 @@ export default function Report2026EnglishPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs md:text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 text-[11px] text-slate-500">
+                  <tr className="border-b border-slate-200 text-xs text-slate-500">
                     <th className="py-2 pr-2">Prefecture</th>
                     <th className="py-2 pr-2">Region</th>
                     <th className="py-2 pr-2">Practical-subject weight</th>
@@ -225,11 +225,11 @@ export default function Report2026EnglishPage() {
                 <tbody>
                   {ROWS.map((r) => (
                     <tr key={r.code} className="border-b border-slate-100 last:border-0">
-                      <td className="py-1.5 pr-2 font-medium text-slate-800">
+                      <td className="py-1.5 pr-2 text-slate-800">
                         {getPrefectureEnName(r.code) ?? r.name}
                       </td>
                       <td className="py-1.5 pr-2 text-slate-500">{getRegionEnName(r.region)}</td>
-                      <td className="py-1.5 pr-2 font-bold text-indigo-700">{r.practicalSkew}x</td>
+                      <td className="py-1.5 pr-2 font-bold text-brand-700">{r.practicalSkew}x</td>
                       <td className="py-1.5 pr-2 text-slate-600">{r.grade3WeightPct}%</td>
                       <td className="py-1.5 pr-2 text-slate-600">{r.gradeCount}</td>
                       <td className="py-1.5 pr-2 text-slate-600">{r.maxScore} pts</td>
@@ -240,7 +240,7 @@ export default function Report2026EnglishPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">Citation &amp; Reuse</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               This summary and the underlying dataset are free to cite in journalism, blog posts, or
@@ -248,14 +248,14 @@ export default function Report2026EnglishPage() {
               (https://my-naishin.com/report/2026)&quot;. Please do not use this data to assert
               school-specific admissions cutoffs — this site does not collect or publish that
               information. For questions about the underlying methodology, see the{' '}
-              <Link href="/report/2026" className="font-semibold text-indigo-700 underline">
+              <Link href="/report/2026" className="font-bold text-brand-700 underline">
                 Japanese-language edition
               </Link>
               , which includes the full 47-prefecture comparison table and per-prefecture source URLs.
             </p>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">FAQ</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (

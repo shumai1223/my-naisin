@@ -38,7 +38,7 @@ function Gate() {
 function PostCard({ post, token }: { post: CommunityPostRow; token: string }) {
   const piiReasons = post.pii_risk_reasons ? post.pii_risk_reasons.split(',') : [];
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex items-center justify-between gap-2">
         <span className="text-xs font-bold text-slate-500">
           #{post.id} ・ {post.category === 'question' ? '質問' : '相互支援'}
@@ -51,7 +51,7 @@ function PostCard({ post, token }: { post: CommunityPostRow; token: string }) {
       </div>
       <p className="mt-2 whitespace-pre-wrap text-sm text-slate-700">{post.body}</p>
       <div className="mt-2 flex items-center justify-between gap-2">
-        <span className="text-[11px] text-slate-400">{post.created_at}</span>
+        <span className="text-xs text-slate-400">{post.created_at}</span>
         <CommunityPostModerationActions id={post.id} currentStatus={post.status} token={token} />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Target, ShieldCheck, User, Calendar, FileCheck, AlertTriangle, BookOpen } from 'lucide-react';
+import { Home, ChevronRight, Target, ShieldCheck, User, Calendar, FileCheck, AlertTriangle, BookOpen } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -14,12 +14,12 @@ import { HIGH_SCHOOL_TIERS } from '@/lib/hensachi';
 
 const TIER_BG: Record<string, string> = {
   red: 'bg-red-50 text-red-700',
-  orange: 'bg-orange-50 text-orange-700',
+  orange: 'bg-amber-50 text-amber-700',
   amber: 'bg-amber-50 text-amber-700',
-  emerald: 'bg-emerald-50 text-emerald-700',
-  teal: 'bg-teal-50 text-teal-700',
-  sky: 'bg-sky-50 text-sky-700',
-  blue: 'bg-blue-50 text-blue-700',
+  emerald: 'bg-brand-50 text-brand-700',
+  teal: 'bg-brand-50 text-brand-700',
+  sky: 'bg-brand-50 text-brand-700',
+  blue: 'bg-brand-50 text-brand-700',
   slate: 'bg-slate-50 text-slate-700',
 };
 
@@ -84,23 +84,23 @@ export default function HensachiShiboukouPage() {
         dateModified="2026-06-12"
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="hover:text-slate-600">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">志望校レンジ逆引き</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <Target className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">偏差値から行ける高校がわかる</h1>
@@ -111,15 +111,15 @@ export default function HensachiShiboukouPage() {
           </header>
 
           {/* E-E-A-T カード */}
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
             <div className="flex items-start gap-4">
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-md">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-slate-500 text-white">
                 <User className="h-6 w-6" />
               </div>
               <div className="flex-1">
                 <div className="mb-1 flex flex-wrap items-center gap-2">
                   <div className="text-sm font-bold text-slate-800">監修・運営：ないしんパンダ</div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-200">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2 py-0.5 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
                     <ShieldCheck className="h-3 w-3" />
                     2026年度受験生
                   </span>
@@ -127,7 +127,7 @@ export default function HensachiShiboukouPage() {
                 <p className="text-xs leading-relaxed text-slate-600">
                   レンジ判定は正規分布に基づく数学的な算出と、一般的な受験指導の経験則（安全圏≒−3／チャレンジ≒+5）に基づきます。特定校のボーダーは扱いません。
                 </p>
-                <div className="mt-2 flex flex-wrap gap-3 text-[10px] text-slate-500">
+                <div className="mt-2 flex flex-wrap gap-3 text-xs text-slate-500">
                   <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />最終更新：2026年6月12日</span>
                   <span className="flex items-center gap-1"><FileCheck className="h-3 w-3" />算出根拠：正規分布＋一般的な難易度区分</span>
                 </div>
@@ -156,8 +156,8 @@ export default function HensachiShiboukouPage() {
           </div>
 
           {/* 偏差値→高校レベル対応表 */}
-          <section id="tier-table" className="mt-8 scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-2 flex items-center gap-2 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
+          <section id="tier-table" className="mt-8 scroll-mt-20 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-2 flex items-center gap-2 border-l-4 border-slate-500 pl-3 text-lg font-bold text-slate-800">
               偏差値→高校レベル 対応表【偏差値40〜70】
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
@@ -167,11 +167,11 @@ export default function HensachiShiboukouPage() {
             <div className="overflow-x-auto">
               <table className="min-w-full text-xs md:text-sm">
                 <thead>
-                  <tr className="bg-purple-600 text-white">
-                    <th className="border border-purple-400 px-3 py-2 text-left font-bold">偏差値</th>
-                    <th className="border border-purple-400 px-3 py-2 text-left font-bold">高校レベルの目安</th>
-                    <th className="border border-purple-400 px-3 py-2 text-center font-bold whitespace-nowrap">内申(45点満点)</th>
-                    <th className="border border-purple-400 px-3 py-2 text-left font-bold">イメージ</th>
+                  <tr className="bg-slate-600 text-white">
+                    <th className="border border-slate-400 px-3 py-2 text-left font-bold">偏差値</th>
+                    <th className="border border-slate-400 px-3 py-2 text-left font-bold">高校レベルの目安</th>
+                    <th className="border border-slate-400 px-3 py-2 text-center font-bold whitespace-nowrap">内申(45点満点)</th>
+                    <th className="border border-slate-400 px-3 py-2 text-left font-bold">イメージ</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -193,7 +193,7 @@ export default function HensachiShiboukouPage() {
           </section>
 
           {/* 注意点 */}
-          <section className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-5">
+          <section className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
               <div>
@@ -213,7 +213,7 @@ export default function HensachiShiboukouPage() {
           </div>
 
           {/* 都道府県別の内申計算 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">志望校が決まったら、内申点もチェック</h2>
             <p className="mb-4 text-xs text-slate-500">偏差値で候補を絞ったら、お住まいの都道府県の方式で内申点も計算しておきましょう。</p>
             <div className="grid gap-2 sm:grid-cols-3">
@@ -228,7 +228,7 @@ export default function HensachiShiboukouPage() {
                 <Link
                   key={pref.code}
                   href={`/${pref.code}/naishin`}
-                  className="flex items-center justify-between rounded-lg bg-purple-50 px-3 py-2 text-sm font-medium text-purple-800 transition-colors hover:bg-purple-100"
+                  className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-800 transition-colors hover:bg-slate-100"
                 >
                   {pref.name}の内申計算
                   <ChevronRight className="h-3 w-3 opacity-60" />
@@ -236,12 +236,12 @@ export default function HensachiShiboukouPage() {
               ))}
             </div>
             <div className="mt-3 text-center">
-              <Link href="/prefectures" className="text-sm font-bold text-purple-600 hover:underline">47都道府県すべての入試制度を見る →</Link>
+              <Link href="/prefectures" className="text-sm font-bold text-slate-600 hover:underline">47都道府県すべての入試制度を見る →</Link>
             </div>
           </section>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
@@ -254,7 +254,7 @@ export default function HensachiShiboukouPage() {
           </section>
 
           {/* 関連コラム */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連コラム</h2>
             <div className="space-y-3">
               {[
@@ -262,10 +262,10 @@ export default function HensachiShiboukouPage() {
                 { slug: 'all-3-high-school-options-2026-update', title: 'オール3（内申27）で行ける高校と逆転戦略【2026年】' },
                 { slug: 'how-to-choose-high-school-2026', title: '失敗しない高校の選び方【2026年版】偏差値だけで決めない' },
               ].map((a) => (
-                <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-3 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 transition-colors hover:border-purple-200 hover:bg-purple-50">
-                  <BookOpen className="h-4 w-4 shrink-0 text-purple-500" />
-                  <span className="text-sm font-medium text-slate-700 group-hover:text-purple-700">{a.title}</span>
-                  <ChevronRight className="ml-auto h-4 w-4 text-slate-400 group-hover:text-purple-500" />
+                <Link key={a.slug} href={`/blog/${a.slug}`} className="group flex items-center gap-3 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 transition-colors hover:border-slate-200 hover:bg-slate-50">
+                  <BookOpen className="h-4 w-4 shrink-0 text-slate-500" />
+                  <span className="text-sm text-slate-700 group-hover:text-slate-700">{a.title}</span>
+                  <ChevronRight className="ml-auto h-4 w-4 text-slate-400 group-hover:text-slate-500" />
                 </Link>
               ))}
             </div>

@@ -10,7 +10,7 @@ import {
   ArrowRight,
   Home,
   Sparkles,
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { getAllPosts } from '@/lib/blog-data';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -95,30 +95,30 @@ export default async function TagPage({ params }: PageProps) {
       />
       <div className="min-h-screen bg-[#fafafa]">
         {/* Hero */}
-        <div className="relative overflow-hidden bg-white border-b border-gray-100">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white pointer-events-none" />
+        <div className="relative overflow-hidden bg-white border-b border-slate-100">
+          <div className="absolute inset-0 bg-slate-50 pointer-events-none" />
           <div className="relative mx-auto max-w-5xl px-4 py-12">
-            <nav className="mb-6 flex items-center gap-2 text-sm text-gray-500">
-              <Link href="/" className="flex items-center gap-1 transition-colors hover:text-blue-600">
+            <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
+              <Link href="/" className="flex items-center gap-1 transition-colors hover:text-brand-600">
                 <Home className="h-3.5 w-3.5" />
                 ホーム
               </Link>
-              <ChevronRight className="h-3.5 w-3.5 text-gray-300" />
-              <Link href="/blog" className="transition-colors hover:text-blue-600">
+              <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+              <Link href="/blog" className="transition-colors hover:text-brand-600">
                 コラム
               </Link>
-              <ChevronRight className="h-3.5 w-3.5 text-gray-300" />
-              <span className="truncate text-gray-700">#{tag}</span>
+              <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
+              <span className="truncate text-slate-700">#{tag}</span>
             </nav>
 
-            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600 ring-1 ring-blue-100">
+            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-600 ring-1 ring-brand-100">
               <TagIcon className="h-3 w-3" />
               タグページ
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
               #{tag}
             </h1>
-            <p className="mt-3 text-base text-gray-500">
+            <p className="mt-3 text-base text-slate-500">
               「{tag}」に関する記事が {posts.length} 件あります。
             </p>
           </div>
@@ -127,17 +127,17 @@ export default async function TagPage({ params }: PageProps) {
         <div className="mx-auto max-w-5xl px-4 py-12">
           {/* 関連タグ */}
           {relatedTags.length > 0 && (
-            <div className="mb-10 rounded-2xl border border-gray-200/60 bg-white p-5 shadow-sm">
+            <div className="mb-10 rounded-lg border border-slate-200/60 bg-white p-5">
               <div className="mb-3 flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-amber-500" />
-                <h2 className="text-sm font-bold text-gray-800">関連タグ</h2>
+                <h2 className="text-sm font-bold text-slate-800">関連タグ</h2>
               </div>
               <div className="flex flex-wrap gap-2">
                 {relatedTags.map((t) => (
                   <Link
                     key={t}
                     href={`/blog/tag/${encodeURIComponent(t)}`}
-                    className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700 ring-1 ring-gray-200 transition-colors hover:bg-blue-50 hover:text-blue-600 hover:ring-blue-200"
+                    className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-xs text-slate-700 ring-1 ring-slate-200 transition-colors hover:bg-brand-50 hover:text-brand-600 hover:ring-brand-200"
                   >
                     <TagIcon className="h-3 w-3" />
                     {t}
@@ -153,10 +153,10 @@ export default async function TagPage({ params }: PageProps) {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group flex flex-col rounded-2xl bg-white border border-gray-200/60 p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-blue-100 hover:-translate-y-0.5"
+                className="group flex flex-col rounded-lg bg-white border border-slate-200/60 p-6 transition-all duration-300 hover:border-brand-100"
               >
-                <div className="mb-4 flex items-center gap-3 text-xs font-medium text-gray-400">
-                  <span className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-md">
+                <div className="mb-4 flex items-center gap-3 text-xs text-slate-400">
+                  <span className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-md">
                     <Calendar className="h-3.5 w-3.5" />
                     {new Date(post.date).toLocaleDateString('ja-JP')}
                   </span>
@@ -165,10 +165,10 @@ export default async function TagPage({ params }: PageProps) {
                     {post.readTime}
                   </span>
                 </div>
-                <h3 className="flex-1 text-base font-bold leading-relaxed text-gray-900 transition-colors group-hover:text-blue-600 line-clamp-2">
+                <h3 className="flex-1 text-base font-bold leading-relaxed text-slate-900 transition-colors group-hover:text-brand-600 line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-gray-500 line-clamp-2">
+                <p className="mt-3 text-sm leading-relaxed text-slate-500 line-clamp-2">
                   {post.description}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
@@ -178,7 +178,7 @@ export default async function TagPage({ params }: PageProps) {
                     .map((t) => (
                       <span
                         key={t}
-                        className="inline-flex items-center gap-1 rounded-md bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-500"
+                        className="inline-flex items-center gap-1 rounded-md bg-slate-50 px-2.5 py-1 text-xs text-slate-500"
                       >
                         <TagIcon className="h-3 w-3" />
                         {t}
@@ -193,14 +193,14 @@ export default async function TagPage({ params }: PageProps) {
           <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-6 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:bg-gray-200"
+              className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-6 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-200"
             >
               <ChevronLeft className="h-4 w-4" />
               コラム一覧へ戻る
             </Link>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-700"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-brand-700"
             >
               <BookOpen className="h-4 w-4" />
               内申点を計算する

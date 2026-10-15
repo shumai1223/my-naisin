@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { Calculator, RotateCcw } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 
@@ -75,11 +75,11 @@ export function HyoteiHeikinCalculator({ onResult, resultFooter }: HyoteiHeikinC
   }, [average, onResult]);
 
   return (
-    <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
+      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-emerald-600" />
+            <Calculator className="h-5 w-5 text-brand-600" />
             通知表の評定を入力
           </h2>
           <button
@@ -95,7 +95,7 @@ export function HyoteiHeikinCalculator({ onResult, resultFooter }: HyoteiHeikinC
       </div>
 
       <div className="px-6 py-4">
-        <div className="mb-2 text-xs font-bold text-slate-500 uppercase">主要5教科</div>
+        <div className="mb-2 text-xs font-bold text-slate-500">主要5教科</div>
         <div className="space-y-2 mb-4">
           {SUBJECTS.filter((s) => s.group === 'main').map((subject) => (
             <SubjectRow
@@ -107,7 +107,7 @@ export function HyoteiHeikinCalculator({ onResult, resultFooter }: HyoteiHeikinC
           ))}
         </div>
 
-        <div className="mb-2 text-xs font-bold text-slate-500 uppercase">実技4教科</div>
+        <div className="mb-2 text-xs font-bold text-slate-500">実技4教科</div>
         <div className="space-y-2">
           {SUBJECTS.filter((s) => s.group === 'practical').map((subject) => (
             <SubjectRow
@@ -122,11 +122,11 @@ export function HyoteiHeikinCalculator({ onResult, resultFooter }: HyoteiHeikinC
 
       {/* 結果表示 */}
       {average !== null && (
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200" role="status" aria-live="polite">
+        <div className="bg-brand-50 px-6 py-6 border-t-2 border-brand-200" role="status" aria-live="polite">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="text-center">
               <div className="text-xs font-bold text-slate-600 mb-1">評定平均</div>
-              <div className="text-5xl font-black text-emerald-700">
+              <div className="text-5xl font-bold text-brand-700">
                 {average.toFixed(1)}
               </div>
               <div className="text-xs text-slate-500 mt-1">/ 5.0</div>
@@ -135,7 +135,7 @@ export function HyoteiHeikinCalculator({ onResult, resultFooter }: HyoteiHeikinC
               <div className="text-xs font-bold text-slate-600 mb-1">
                 内申点（素内申）{allFilled ? '' : '※途中'}
               </div>
-              <div className="text-5xl font-black text-teal-700">
+              <div className="text-5xl font-bold text-brand-700">
                 {total}
               </div>
               <div className="text-xs text-slate-500 mt-1">
@@ -163,7 +163,7 @@ interface SubjectRowProps {
 
 function SubjectRow({ label, value, onSelect }: SubjectRowProps) {
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2">
+    <div className="flex items-center gap-3 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2">
       <div className="w-20 text-sm font-bold text-slate-700 shrink-0">{label}</div>
       <div className="flex flex-1 gap-1 justify-end">
         {RATING_OPTIONS.map((rating) => (
@@ -173,8 +173,8 @@ function SubjectRow({ label, value, onSelect }: SubjectRowProps) {
             onClick={() => onSelect(rating)}
             className={`h-9 w-9 rounded-lg text-sm font-bold transition-all ${
               value === rating
-                ? 'bg-emerald-600 text-white shadow-md scale-110'
-                : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-emerald-50 hover:ring-emerald-200'
+                ? 'bg-brand-600 text-white scale-110'
+                : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-brand-50 hover:ring-brand-200'
             }`}
             aria-label={`${label}を${rating}に設定`}
           >

@@ -31,7 +31,7 @@ export function TargetDistancePanel({
   const distance = hasTarget ? targetTotal - total : null;
 
   return (
-    <div className="mt-6 rounded-xl border border-indigo-100 bg-white p-4">
+    <div className="mt-6 rounded-lg border border-brand-100 bg-white p-4">
       <label htmlFor={inputId} className="mb-2 block text-xs font-bold text-slate-600">
         目標の総合得点（任意・ご自身で設定した目安）
       </label>
@@ -44,12 +44,12 @@ export function TargetDistancePanel({
         value={targetInput}
         onChange={(e) => onTargetInputChange(e.target.value)}
         placeholder="例：志望校の目安点"
-        className="h-11 w-full rounded-lg border border-slate-200 px-4 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+        className="h-11 w-full rounded-lg border border-slate-200 px-4 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
       />
       {hasTarget && distance !== null && (
         <div
           className={`mt-3 rounded-lg p-3 text-center ${
-            distance <= 0 ? 'bg-emerald-50 text-emerald-800' : 'bg-indigo-50 text-indigo-800'
+            distance <= 0 ? 'bg-brand-50 text-brand-800' : 'bg-brand-50 text-brand-800'
           }`}
           role="status"
           aria-live="polite"
@@ -59,13 +59,13 @@ export function TargetDistancePanel({
           ) : (
             <>
               <span className="text-xs font-bold">目標まであと</span>
-              <span className="mx-1 text-2xl font-black">{Math.round(distance)}</span>
+              <span className="mx-1 text-2xl font-bold">{Math.round(distance)}</span>
               <span className="text-xs font-bold">点</span>
             </>
           )}
         </div>
       )}
-      <p className="mt-2 text-[11px] leading-relaxed text-slate-400">
+      <p className="mt-2 text-xs leading-relaxed text-slate-400">
         ※ 目標の総合得点はご自身で設定した目安です。学校別の合格ボーダーではありません。
       </p>
     </div>

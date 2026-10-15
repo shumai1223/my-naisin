@@ -11,7 +11,7 @@ import {
   BookOpen,
   Target,
   TrendingUp
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { PREFECTURES, REGIONS } from '@/lib/prefectures';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -43,11 +43,11 @@ export default function PrefecturesPage() {
         ]}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -57,7 +57,7 @@ export default function PrefecturesPage() {
 
           {/* Header */}
           <header className="mb-12 text-center">
-            <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl mb-6">
+            <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white mb-6">
               <MapPin className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -74,7 +74,7 @@ export default function PrefecturesPage() {
               <a
                 key={region}
                 href={`#region-${region}`}
-                className="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-600 border border-slate-200 shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all"
+                className="rounded-full bg-white px-4 py-2 text-sm text-slate-600 border border-slate-200 hover:border-brand-300 hover:text-brand-600 transition-all"
               >
                 {region}
               </a>
@@ -84,10 +84,10 @@ export default function PrefecturesPage() {
           {/* 総合得点ハブへの導線 */}
           <Link
             href="/total-score"
-            className="mb-12 flex items-center justify-between gap-4 rounded-2xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-violet-50 p-5 shadow-sm transition-all hover:shadow-md"
+            className="mb-12 flex items-center justify-between gap-4 rounded-lg border-2 border-brand-200 bg-brand-50 p-5 transition-all"
           >
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-violet-700 text-white shadow">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-600 text-white">
                 <Target className="h-6 w-6" />
               </div>
               <div>
@@ -97,7 +97,7 @@ export default function PrefecturesPage() {
                 </p>
               </div>
             </div>
-            <ChevronRight className="h-5 w-5 shrink-0 text-blue-400" />
+            <ChevronRight className="h-5 w-5 shrink-0 text-brand-400" />
           </Link>
 
           {/* Grid of Regions */}
@@ -108,10 +108,10 @@ export default function PrefecturesPage() {
               return (
                 <section key={region} id={`region-${region}`} className="scroll-mt-20">
                   <div className="flex items-center gap-3 mb-3">
-                    <h2 className="text-xl font-bold text-slate-800 border-l-4 border-blue-500 pl-3">
+                    <h2 className="text-xl font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
                       {region}
                     </h2>
-                    <span className="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+                    <span className="text-xs text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
                       {prefsInRegion.length} 都道府県
                     </span>
                   </div>
@@ -125,7 +125,7 @@ export default function PrefecturesPage() {
                     {prefsInRegion.map(pref => (
                       <div
                         key={pref.code}
-                        className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-blue-300 hover:shadow-md"
+                        className="group relative overflow-hidden rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-brand-300"
                       >
                         <div className="flex items-center justify-between mb-4">
                           <h3 className="text-lg font-bold text-slate-800">
@@ -137,7 +137,7 @@ export default function PrefecturesPage() {
                         <div className="space-y-2 mb-6">
                           <Link 
                             href={`/${pref.code}/naishin`}
-                            className="flex items-center justify-between rounded-xl bg-blue-50 px-4 py-2.5 text-sm font-bold text-blue-700 transition-all hover:bg-blue-600 hover:text-white"
+                            className="flex items-center justify-between rounded-lg bg-brand-50 px-4 py-2.5 text-sm font-bold text-brand-700 transition-all hover:bg-brand-600 hover:text-white"
                           >
                             <span className="flex items-center gap-2">
                               <Calculator className="h-4 w-4" />
@@ -147,7 +147,7 @@ export default function PrefecturesPage() {
                           </Link>
                           <Link
                             href={`/${pref.code}`}
-                            className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-800 hover:text-white"
+                            className="flex items-center justify-between rounded-lg bg-slate-50 px-4 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-800 hover:text-white"
                           >
                             <span className="flex items-center gap-2">
                               <BookOpen className="h-4 w-4" />
@@ -157,7 +157,7 @@ export default function PrefecturesPage() {
                           </Link>
                           <Link
                             href={`/pref/${pref.code}`}
-                            className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-2 text-xs font-bold text-slate-500 transition-all hover:bg-slate-800 hover:text-white"
+                            className="flex items-center justify-between rounded-lg bg-slate-50 px-4 py-2 text-xs font-bold text-slate-500 transition-all hover:bg-slate-800 hover:text-white"
                           >
                             <span className="flex items-center gap-2">
                               <TrendingUp className="h-3.5 w-3.5" />
@@ -167,7 +167,7 @@ export default function PrefecturesPage() {
                           </Link>
                         </div>
                         
-                        <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        <div className="flex items-center justify-between text-xs font-bold text-slate-400">
                           <span>満点: {pref.maxScore}点</span>
                           <span>実技: {pref.practicalMultiplier > 1 ? `${pref.practicalMultiplier}倍` : '等倍'}</span>
                         </div>
@@ -180,10 +180,10 @@ export default function PrefecturesPage() {
           </div>
 
           {/* Bottom Info */}
-          <div className="mt-12 rounded-3xl bg-slate-900 p-8 text-white shadow-2xl md:p-12">
+          <div className="mt-12 rounded-lg bg-slate-900 p-8 text-white md:p-12">
             <div className="grid gap-12 md:grid-cols-2 md:items-center">
               <div>
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 text-blue-400 mb-6">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-brand-500/20 text-brand-400 mb-6">
                   <Sparkles className="h-6 w-6" />
                 </div>
                 <h2 className="text-2xl font-bold mb-4">
@@ -194,23 +194,23 @@ export default function PrefecturesPage() {
                 </p>
                 <Link
                   href="/blog"
-                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-bold text-white transition-all hover:bg-blue-700 hover:scale-105"
+                  className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 font-bold text-white transition-all hover:bg-brand-700 hover:scale-105"
                 >
                   受験攻略コラムを読む
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
               <div className="grid gap-4">
-                <div className="rounded-2xl bg-white/5 p-5 border border-white/10">
+                <div className="rounded-lg bg-white/5 p-5 border border-white/10">
                   <h3 className="font-bold mb-2 flex items-center gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-brand-400" />
                     最新年度（2026年）完全対応
                   </h3>
                   <p className="text-sm text-slate-400">毎年の入試制度変更を反映。令和8年度入試に向けた正確なシミュレーションが可能です。</p>
                 </div>
-                <div className="rounded-2xl bg-white/5 p-5 border border-white/10">
+                <div className="rounded-lg bg-white/5 p-5 border border-white/10">
                   <h3 className="font-bold mb-2 flex items-center gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-brand-400" />
                     公式資料に基づく算出
                   </h3>
                   <p className="text-sm text-slate-400">各都道府県教育委員会の「入学者選抜実施要綱」を根拠に、1教科ずつの重みを忠実に再現しています。</p>

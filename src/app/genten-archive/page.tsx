@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Archive, ExternalLink } from 'lucide-react';
+import { Home, ChevronRight, Archive, ExternalLink } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -109,10 +109,10 @@ export default function GentenArchivePage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -121,7 +121,7 @@ export default function GentenArchivePage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-600 to-slate-800 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-600 text-white">
               <Archive className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -133,7 +133,7 @@ export default function GentenArchivePage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-slate-200 bg-slate-50 p-6">
+          <section className="mb-8 rounded-lg border-2 border-slate-200 bg-slate-50 p-6">
             <p className="text-sm leading-relaxed text-slate-700">
               現在{histories.length}都道府県ぶん・計{totalEntries}件の確認記録があります
               （最終更新: {latestDate}）。今後、制度改定の確認・再検証を行うたびに記録を追加していきます。
@@ -141,7 +141,7 @@ export default function GentenArchivePage() {
           </section>
 
           {/* T-C9: 47都道府県×確認日×応募状況データ年度数の一覧表（詳細カードより俯瞰しやすい表形式） */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-2 text-lg font-bold text-slate-800">都道府県別サマリー</h2>
             <p className="mb-4 text-xs leading-relaxed text-slate-500">
               「何県分を、いつ確認したか」が一目で分かる一覧です。詳細（出典URL・資料名）は下の県別セクションを参照してください。
@@ -159,7 +159,7 @@ export default function GentenArchivePage() {
                 <tbody>
                   {summaryRows.map((row) => (
                     <tr key={row.code} className="odd:bg-white even:bg-slate-50/60">
-                      <td className="border border-slate-200 px-2 py-1 font-semibold text-slate-700">{row.name}</td>
+                      <td className="border border-slate-200 px-2 py-1 font-bold text-slate-700">{row.name}</td>
                       <td className="border border-slate-200 px-2 py-1 font-mono text-slate-500">
                         {row.latestNaishinDate ?? '未確認'}
                       </td>
@@ -176,7 +176,7 @@ export default function GentenArchivePage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-6">
+          <section className="mb-8 rounded-lg border border-amber-200 bg-amber-50 p-6">
             <h2 className="mb-2 text-sm font-bold text-amber-900">次に再検証すべき都道府県（最終確認日が古い順）</h2>
             <p className="mb-3 text-xs leading-relaxed text-amber-800">
               運営側の再検証キューです。ここに載っている県から順に、教育委員会の一次ソースが最新の内容と
@@ -202,10 +202,10 @@ export default function GentenArchivePage() {
                 <h2 className="mb-3 text-lg font-bold text-slate-800">{region}</h2>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {regionHistories.map((pref) => (
-                    <div key={pref.code} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <div key={pref.code} className="rounded-lg border border-slate-200 bg-white p-4">
                       <div className="mb-2 flex items-center justify-between">
                         <span className="font-bold text-slate-800">{pref.name}</span>
-                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-500">
+                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-500">
                           {pref.history.length}件の記録
                         </span>
                       </div>
@@ -218,7 +218,7 @@ export default function GentenArchivePage() {
                               href={snap.sourceUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-indigo-600 hover:underline"
+                              className="text-brand-600 hover:underline"
                             >
                               {snap.sourceTitle}
                               <ExternalLink className="ml-0.5 inline h-3 w-3" />
@@ -234,7 +234,7 @@ export default function GentenArchivePage() {
             );
           })}
 
-          <section className="mb-8 rounded-2xl border-2 border-slate-200 bg-slate-50 p-6">
+          <section className="mb-8 rounded-lg border-2 border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-2 text-lg font-bold text-slate-800">
               募集人員・応募者数・倍率データの一次ソース確認履歴（S6-2）
             </h2>
@@ -253,10 +253,10 @@ export default function GentenArchivePage() {
                 <h3 className="mb-3 text-base font-bold text-slate-800">{region}（倍率データ）</h3>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {regionRateHistories.map((pref) => (
-                    <div key={pref.code} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <div key={pref.code} className="rounded-lg border border-slate-200 bg-white p-4">
                       <div className="mb-2 flex items-center justify-between">
                         <span className="font-bold text-slate-800">{pref.name}</span>
-                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-500">
+                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-500">
                           {pref.sources.length}件の資料
                         </span>
                       </div>
@@ -269,7 +269,7 @@ export default function GentenArchivePage() {
                               href={src.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-indigo-600 hover:underline"
+                              className="text-brand-600 hover:underline"
                             >
                               {src.docTitle}
                               <ExternalLink className="ml-0.5 inline h-3 w-3" />
@@ -285,7 +285,7 @@ export default function GentenArchivePage() {
             );
           })}
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
@@ -297,29 +297,29 @@ export default function GentenArchivePage() {
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center">
             <div className="flex flex-wrap justify-center gap-2">
               <Link
                 href="/naishin-kakusa"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
               >
                 内申点格差レポート
               </Link>
               <Link
                 href="/nyushi-seido-henkou"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
               >
                 今年度入試変更点まとめ
               </Link>
               <Link
                 href="/report/2026"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
               >
                 内申点白書2026
               </Link>
               <Link
                 href="/reliability"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
               >
                 データ鮮度・稼働状況サマリー
               </Link>

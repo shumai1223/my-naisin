@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { Calculator, RotateCcw } from '@/components/icons';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 import { KANAGAWA_RATIO_OPTIONS, KANAGAWA_S_VALUE_MAX, computeKanagawaSValue, kanagawaRankLabel } from '@/lib/total-score/kanagawa';
 
@@ -48,20 +48,20 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
 
   const getRankColor = () => {
     if (s1 >= 900) return 'text-red-700';
-    if (s1 >= 800) return 'text-orange-700';
+    if (s1 >= 800) return 'text-amber-700';
     if (s1 >= 700) return 'text-amber-700';
-    if (s1 >= 600) return 'text-emerald-700';
-    return 'text-blue-700';
+    if (s1 >= 600) return 'text-brand-700';
+    return 'text-brand-700';
   };
 
   const getRankLabel = () => kanagawaRankLabel(s1);
 
   return (
-    <div className="rounded-2xl border-2 border-blue-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
+      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-blue-600" />
+            <Calculator className="h-5 w-5 text-brand-600" />
             神奈川S値（S1・S2）を計算
           </h2>
           <button
@@ -90,7 +90,7 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
             placeholder="例：110"
             min="0"
             max="135"
-            className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-base focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-base focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
           />
         </div>
 
@@ -107,7 +107,7 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
             placeholder="例：400"
             min="0"
             max="500"
-            className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-base focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-base focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
           />
         </div>
 
@@ -122,7 +122,7 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
                 onClick={() => setRatioIndex(i)}
                 className={`rounded-lg px-3 py-2 text-xs font-bold transition-all ${
                   i === ratioIndex
-                    ? 'bg-blue-600 text-white shadow-md'
+                    ? 'bg-brand-600 text-white'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
@@ -145,26 +145,26 @@ export function KanagawaSValueCalculator({ onResult }: KanagawaSValueCalculatorP
             placeholder="例：70（実施しない場合は空欄）"
             min="0"
             max="100"
-            className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-base focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-base focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
           />
         </div>
       </div>
 
       {/* 結果 */}
       {hasInput && (
-        <div className="border-t-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 px-6 py-6">
+        <div className="border-t-2 border-brand-100 bg-brand-50 px-6 py-6">
           <div className="text-center">
             <div className="text-xs font-bold text-slate-600 mb-2">あなたのS1値（1000点満点）</div>
-            <div className={`text-5xl font-black ${getRankColor()}`}>{s1}<span className="text-xl">点</span></div>
+            <div className={`text-5xl font-bold ${getRankColor()}`}>{s1}<span className="text-xl">点</span></div>
             {tokushoku > 0 && (
               <div className="mt-3">
                 <div className="text-xs font-bold text-slate-600">S2値（特色検査込み）</div>
-                <div className={`text-3xl font-black ${getRankColor()}`}>{s2}<span className="text-base">点</span></div>
+                <div className={`text-3xl font-bold ${getRankColor()}`}>{s2}<span className="text-base">点</span></div>
               </div>
             )}
             <div className="mt-4 text-sm font-bold text-slate-700">{getRankLabel()}</div>
 
-            <div className="mt-4 rounded-xl bg-white border border-blue-100 p-3 text-left">
+            <div className="mt-4 rounded-lg bg-white border border-brand-100 p-3 text-left">
               <div className="text-xs font-bold text-slate-700 mb-2">計算内訳</div>
               <ul className="text-xs text-slate-600 space-y-1">
                 <li>内申点換算：{naishin} ÷ 135 × 100 × {ratio.naishin} ＝ {Math.round(naishinConverted)}点</li>

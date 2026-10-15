@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Users, ChevronRightSquare, CheckCircle, HelpCircle } from 'lucide-react';
+import { Home, ChevronRight, Users, ChevronRightSquare, CheckCircle, HelpCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -58,10 +58,10 @@ export default function KateiKyoshiPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -70,7 +70,7 @@ export default function KateiKyoshiPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Users className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">家庭教師の選び方比較</h1>
@@ -79,27 +79,27 @@ export default function KateiKyoshiPage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <CheckCircle className="h-5 w-5 text-indigo-500" />
+              <CheckCircle className="h-5 w-5 text-brand-500" />
               指導形態ごとの違い
             </h2>
             <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4">
-                <div className="text-sm font-bold text-indigo-900">訪問型 家庭教師</div>
-                <p className="mt-1 text-xs leading-relaxed text-indigo-800">
+              <div className="rounded-lg border border-brand-100 bg-brand-50 p-4">
+                <div className="text-sm font-bold text-brand-900">訪問型 家庭教師</div>
+                <p className="mt-1 text-xs leading-relaxed text-brand-800">
                   指導者が自宅に来て1対1で指導。移動不要・自分のペースで質問しやすい。料金はやや高め（1回3,000〜8,000円目安）。
                 </p>
               </div>
-              <div className="rounded-xl border border-violet-100 bg-violet-50 p-4">
-                <div className="text-sm font-bold text-violet-900">オンライン家庭教師</div>
-                <p className="mt-1 text-xs leading-relaxed text-violet-800">
+              <div className="rounded-lg border border-slate-100 bg-slate-50 p-4">
+                <div className="text-sm font-bold text-slate-900">オンライン家庭教師</div>
+                <p className="mt-1 text-xs leading-relaxed text-slate-800">
                   ビデオ通話で1対1指導。地方在住でも都市部の指導者に習えることが多く、料金はやや抑えめ（1回2,000〜5,000円目安）。
                 </p>
               </div>
-              <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
-                <div className="text-sm font-bold text-emerald-900">個別指導塾</div>
-                <p className="mt-1 text-xs leading-relaxed text-emerald-800">
+              <div className="rounded-lg border border-brand-100 bg-brand-50 p-4">
+                <div className="text-sm font-bold text-brand-900">個別指導塾</div>
+                <p className="mt-1 text-xs leading-relaxed text-brand-800">
                   教室に通い1〜3対1で指導。自習室・複数講師・進路指導のノウハウが強み。教室により料金体系は様々。
                 </p>
               </div>
@@ -109,7 +109,7 @@ export default function KateiKyoshiPage() {
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">選び方のポイント</h2>
             <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
               <li>① まずはお子さまの内申点・偏差値を数値で把握し、志望校との差を確認する。</li>
@@ -136,23 +136,23 @@ export default function KateiKyoshiPage() {
             className="mb-10"
           />
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/juku-hiyou" className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/juku-hiyou" className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 塾代の相場を確認する
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/naishin-age-kata" className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/naishin-age-kata" className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 内申点の上げ方（学年別）
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-indigo-500" />
+              <HelpCircle className="h-5 w-5 text-brand-500" />
               よくある質問
             </h2>
             <div className="space-y-4">

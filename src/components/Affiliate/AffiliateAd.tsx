@@ -54,7 +54,7 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
   };
 
   const label = !hideLabel && (
-    <div className="mb-1 text-[10px] font-medium text-slate-400">広告</div>
+    <div className="mb-1 text-xs text-slate-400">広告</div>
   );
 
   const trackingPixel = (
@@ -72,13 +72,13 @@ export function AffiliateAd({ id, className = '', centered = true, hideLabel = f
     return (
       <span className={className}>
         {viewTracker}
-        {!hideLabel && <span className="mr-1 text-[10px] font-medium text-slate-400">[PR]</span>}
+        {!hideLabel && <span className="mr-1 text-xs text-slate-400">[PR]</span>}
         <a
           href={href}
           rel="nofollow sponsored noopener"
           target="_blank"
           {...clickDataAttrs}
-          className={linkClassName ?? 'font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700 hover:decoration-blue-500'}
+          className={linkClassName ?? 'font-bold text-brand-600 underline decoration-brand-300 underline-offset-2 hover:text-brand-700 hover:decoration-brand-500'}
         >
           {ctaText ?? ad.text}
         </a>

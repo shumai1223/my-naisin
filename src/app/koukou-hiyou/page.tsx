@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { School, Home, ChevronRight, HelpCircle, BookCheck } from 'lucide-react';
+import { School, Home, ChevronRight, HelpCircle, BookCheck } from '@/components/icons';
 
 import { KoukouHiyouCalculator } from '@/components/KoukouHiyouCalculator';
 import { AnswerBox } from '@/components/AnswerBox';
@@ -54,15 +54,15 @@ export default function KoukouHiyouPage() {
 
       <div className="mx-auto max-w-3xl px-4 py-8">
         <nav className="mb-5 flex items-center gap-1.5 text-xs text-slate-500">
-          <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-3.5 w-3.5" />ホーム</Link>
+          <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-3.5 w-3.5" />ホーム</Link>
           <ChevronRight className="h-3.5 w-3.5" />
           <span className="text-slate-700">高校の費用</span>
         </nav>
 
-        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">
+        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
           <School className="h-3.5 w-3.5" />無料・一次情報準拠
         </div>
-        <h1 className="text-2xl font-black leading-tight tracking-tight text-slate-900 md:text-4xl">高校3年間で、お金はいくらかかる？</h1>
+        <h1 className="text-2xl font-bold leading-tight tracking-tight text-slate-900 md:text-4xl">高校3年間で、お金はいくらかかる？</h1>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
           公立・私立を選ぶだけで、高校3年間の費用（学費・教材費・通学費など）の総額を自動計算。
           数値は<strong>文部科学省「子供の学習費調査」</strong>に基づきます。
@@ -83,30 +83,30 @@ export default function KoukouHiyouPage() {
         {/* 公立vs私立 3年総額（就学支援金＝無償化を年収で反映）への導線 */}
         <Link
           href="/koukou-hiyou/kokoroze"
-          className="mt-6 flex items-center justify-between gap-3 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50/50 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
+          className="mt-6 flex items-center justify-between gap-3 rounded-lg border-2 border-brand-200 bg-brand-50 p-5 transition-all hover:border-brand-300"
         >
           <span>
-            <span className="block text-sm font-bold text-emerald-800">公立 vs 私立、3年間の「実質負担」を比較する →</span>
+            <span className="block text-sm font-bold text-brand-800">公立 vs 私立、3年間の「実質負担」を比較する →</span>
             <span className="mt-0.5 block text-xs leading-relaxed text-slate-600">高校無償化（就学支援金）を世帯年収で反映。私立は無償化後いくらか・公立とどれだけ違うかが分かります。</span>
           </span>
-          <ChevronRight className="h-5 w-5 shrink-0 text-emerald-500" />
+          <ChevronRight className="h-5 w-5 shrink-0 text-brand-500" />
         </Link>
 
         {/* 出典（一次情報準拠） */}
-        <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
+        <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50/60 p-4">
           <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-            <BookCheck className="h-3.5 w-3.5 text-blue-600" />
+            <BookCheck className="h-3.5 w-3.5 text-brand-600" />
             出典・参考データ（一次情報）
           </div>
           <ul className="space-y-1.5 text-xs leading-relaxed">
             <li>
-              <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+              <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 文部科学省「子供の学習費調査」
               </a>
               <span className="text-slate-400"> — 公立高校 約60万円/年・私立高校 約118万円/年（学習費総額）</span>
             </li>
             <li>
-              <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+              <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 文部科学省「高校生等への修学支援（就学支援金）」
               </a>
               <span className="text-slate-400"> — 公立は授業料実質無償、私立は上限39.6万円/年の支援</span>
@@ -134,10 +134,10 @@ export default function KoukouHiyouPage() {
 
         {/* FAQ */}
         <section className="mt-10">
-          <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-900"><HelpCircle className="h-5 w-5 text-blue-600" />よくある質問</h2>
+          <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-900"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
           <div className="space-y-3">
             {FAQS.map((f, i) => (
-              <details key={i} className="group rounded-xl border border-slate-200 bg-white">
+              <details key={i} className="group rounded-lg border border-slate-200 bg-white">
                 <summary className="flex cursor-pointer items-center justify-between gap-3 px-5 py-4 text-sm font-bold text-slate-800 hover:bg-slate-50">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></summary>
                 <p className="border-t border-slate-100 px-5 py-4 text-sm leading-relaxed text-slate-700">{f.answer}</p>
               </details>
@@ -149,13 +149,13 @@ export default function KoukouHiyouPage() {
         <section className="mt-10">
           <h2 className="mb-3 text-lg font-bold text-slate-900">関連ツール</h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/kyouiku-hi" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">教育費シミュレーター（中学〜高校卒業）→</Link>
-            <Link href="/juku-hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">塾代シミュレーター（相場・総額）→</Link>
-            <Link href="/shinro-hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">高校〜大学の教育費（進路別シミュレーター）→</Link>
-            <Link href="/shougakukin" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">高校無償化・就学支援金ガイド →</Link>
-            <Link href="/hiyou" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">お金・費用まとめ →</Link>
-            <Link href="/mendan" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">三者面談の準備チェックリスト →</Link>
-            <Link href="/" className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 shadow-sm hover:border-blue-200">内申点を計算する →</Link>
+            <Link href="/kyouiku-hi" className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 hover:border-brand-200">教育費シミュレーター（中学〜高校卒業）→</Link>
+            <Link href="/juku-hiyou" className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 hover:border-brand-200">塾代シミュレーター（相場・総額）→</Link>
+            <Link href="/shinro-hiyou" className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 hover:border-brand-200">高校〜大学の教育費（進路別シミュレーター）→</Link>
+            <Link href="/shougakukin" className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 hover:border-brand-200">高校無償化・就学支援金ガイド →</Link>
+            <Link href="/hiyou" className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 hover:border-brand-200">お金・費用まとめ →</Link>
+            <Link href="/mendan" className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 hover:border-brand-200">三者面談の準備チェックリスト →</Link>
+            <Link href="/" className="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-slate-900 hover:border-brand-200">内申点を計算する →</Link>
           </div>
         </section>
       </div>

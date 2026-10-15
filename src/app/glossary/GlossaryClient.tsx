@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { BookOpen, ChevronRight, Home, Search } from 'lucide-react';
+import { BookOpen, ChevronRight, Home, Search } from '@/components/icons';
 import * as React from 'react';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { HUB_ALL } from '@/lib/total-score/hub';
@@ -25,7 +25,7 @@ export default function GlossaryClient() {
   }, [searchQuery]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-slate-50">
       <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
@@ -35,7 +35,7 @@ export default function GlossaryClient() {
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-          <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
             <Home className="h-4 w-4" />
             ホーム
           </Link>
@@ -46,7 +46,7 @@ export default function GlossaryClient() {
         {/* Header */}
         <header className="mb-8">
           <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg">
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-amber-500">
               <BookOpen className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -69,19 +69,19 @@ export default function GlossaryClient() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="用語を検索..."
-            className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm shadow-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+            className="h-12 w-full rounded-lg border border-slate-200 bg-white pl-10 pr-4 text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
           />
         </div>
 
         {/* 目次 */}
-        <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
           <h2 className="mb-3 text-sm font-bold text-slate-700">用語一覧（{filteredTerms.length}件）</h2>
           <div className="flex flex-wrap gap-2">
             {filteredTerms.map((t) => (
               <a
                 key={t.id}
                 href={`#${t.id}`}
-                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 transition-colors"
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700 transition-colors"
               >
                 {t.term.split('（')[0]}
               </a>
@@ -95,24 +95,24 @@ export default function GlossaryClient() {
             <article
               key={t.id}
               id={t.id}
-              className="scroll-mt-20 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              className="scroll-mt-20 rounded-lg border border-slate-200 bg-white p-6"
             >
               <h2 className="text-lg font-bold text-slate-800">{t.term}</h2>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">{t.description}</p>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-xl border border-blue-200 bg-blue-50 p-3">
-                  <div className="text-xs font-bold text-blue-700">例</div>
-                  <p className="mt-1 text-xs leading-relaxed text-blue-600">{t.example}</p>
+                <div className="rounded-lg border border-brand-200 bg-brand-50 p-3">
+                  <div className="text-xs font-bold text-brand-700">例</div>
+                  <p className="mt-1 text-xs leading-relaxed text-brand-600">{t.example}</p>
                 </div>
-                <div className="rounded-xl border border-amber-200 bg-amber-50 p-3">
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
                   <div className="text-xs font-bold text-amber-700">注意点</div>
                   <p className="mt-1 text-xs leading-relaxed text-amber-600">{t.note}</p>
                 </div>
               </div>
 
               {t.relatedPrefectures && (
-                <div className="mt-3 rounded-xl bg-slate-50 p-3">
+                <div className="mt-3 rounded-lg bg-slate-50 p-3">
                   <div className="text-xs font-bold text-slate-500">県差</div>
                   <p className="mt-1 text-xs leading-relaxed text-slate-500">{t.relatedPrefectures}</p>
                 </div>
@@ -124,7 +124,7 @@ export default function GlossaryClient() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="inline-flex items-center gap-1 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 hover:bg-indigo-100 transition-colors"
+                      className="inline-flex items-center gap-1 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs text-brand-700 hover:bg-brand-100 transition-colors"
                     >
                       {link.label}
                       <ChevronRight className="h-3 w-3" />
@@ -145,14 +145,14 @@ export default function GlossaryClient() {
         </div>
 
         {filteredTerms.length === 0 && (
-          <div className="rounded-xl border border-slate-200 bg-white p-12 text-center">
+          <div className="rounded-lg border border-slate-200 bg-white p-12 text-center">
             <div className="text-4xl">🔍</div>
-            <div className="mt-4 text-lg font-medium text-slate-600">
+            <div className="mt-4 text-lg text-slate-600">
               該当する用語が見つかりません
             </div>
             <button
               onClick={() => setSearchQuery('')}
-              className="mt-4 text-sm text-blue-600 hover:underline"
+              className="mt-4 text-sm text-brand-600 hover:underline"
             >
               検索をリセット
             </button>
@@ -160,7 +160,7 @@ export default function GlossaryClient() {
         )}
 
         {/* 都道府県別の呼び方対応表（O-3: 用語×県方式の差異辞典） */}
-        <section className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <section className="mt-10 rounded-lg border border-slate-200 bg-white p-6">
           <h2 className="mb-1 text-lg font-bold text-slate-800">都道府県別の呼び方対応表</h2>
           <p className="mb-4 text-sm leading-relaxed text-slate-500">
             「換算内申」「S値」「K値」など、内申点・総合得点にまつわる呼び方や計算方式は都道府県ごとに異なります。お住まいの都道府県の呼び方をここで確認できます。
@@ -190,49 +190,49 @@ export default function GlossaryClient() {
         </section>
 
         {/* 関連リンク */}
-        <section className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+        <section className="mt-10 rounded-lg border border-slate-200 bg-slate-50 p-6">
           <h2 className="mb-4 text-lg font-bold text-slate-800">関連コンテンツ</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             <Link
               href="/"
-              className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+              className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
             >
-              <span className="text-sm font-medium text-slate-700">内申点を計算する</span>
+              <span className="text-sm text-slate-700">内申点を計算する</span>
               <ChevronRight className="h-4 w-4 text-slate-400" />
             </Link>
             <Link
               href="/hensachi"
-              className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+              className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
             >
-              <span className="text-sm font-medium text-slate-700">偏差値を計算する</span>
+              <span className="text-sm text-slate-700">偏差値を計算する</span>
               <ChevronRight className="h-4 w-4 text-slate-400" />
             </Link>
             <Link
               href="/hyotei-heikin"
-              className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+              className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
             >
-              <span className="text-sm font-medium text-slate-700">評定平均を自動計算する</span>
+              <span className="text-sm text-slate-700">評定平均を自動計算する</span>
               <ChevronRight className="h-4 w-4 text-slate-400" />
             </Link>
             <Link
               href="/reverse"
-              className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+              className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
             >
-              <span className="text-sm font-medium text-slate-700">志望校から逆算する</span>
+              <span className="text-sm text-slate-700">志望校から逆算する</span>
               <ChevronRight className="h-4 w-4 text-slate-400" />
             </Link>
             <Link
               href="/prefectures"
-              className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+              className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
             >
-              <span className="text-sm font-medium text-slate-700">都道府県別の計算方法を見る</span>
+              <span className="text-sm text-slate-700">都道府県別の計算方法を見る</span>
               <ChevronRight className="h-4 w-4 text-slate-400" />
             </Link>
             <Link
               href="/blog/kansan-naishin-vs-su-naishin"
-              className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+              className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow"
             >
-              <span className="text-sm font-medium text-slate-700">換算内申と素内申の違いを解説</span>
+              <span className="text-sm text-slate-700">換算内申と素内申の違いを解説</span>
               <ChevronRight className="h-4 w-4 text-slate-400" />
             </Link>
           </div>

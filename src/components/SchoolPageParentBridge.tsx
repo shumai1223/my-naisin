@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Send, Check } from 'lucide-react';
+import { Send, Check } from '@/components/icons';
 
 import { track, EVENTS } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -58,14 +58,14 @@ export function SchoolPageParentBridge({ schoolName, prefectureCode, className =
   }, [schoolName, prefectureCode]);
 
   return (
-    <div className={`rounded-2xl border border-indigo-200 bg-indigo-50/60 p-5 shadow-sm ${className}`}>
+    <div className={`rounded-lg border border-brand-200 bg-brand-50/60 p-5 ${className}`}>
       <p className="mb-3 text-sm leading-relaxed text-slate-700">
         受験の相談は、おうちの人と一緒に。{schoolName}の情報をそのまま共有できます。
       </p>
       <button
         type="button"
         onClick={onShare}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
       >
         {copied ? (
           <>

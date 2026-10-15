@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, NotebookPen, MessageCircleHeart, ListTodo, HelpCircle, AlertCircle } from 'lucide-react';
+import { Home, ChevronRight, NotebookPen, MessageCircleHeart, ListTodo, HelpCircle, AlertCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -101,18 +101,18 @@ export default function ChousashoReibunPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/chousasho" className="hover:text-blue-600">調査書とは</Link>
+            <Link href="/chousasho" className="hover:text-brand-600">調査書とは</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">書き方例文・依頼マナー・チェックリスト</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <NotebookPen className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -131,21 +131,21 @@ export default function ChousashoReibunPage() {
           </AnswerBox>
 
           {/* 例文集 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <NotebookPen className="h-5 w-5 text-blue-600" />
+              <NotebookPen className="h-5 w-5 text-brand-600" />
               活動報告書・自己申告書の書き方例文
             </h2>
             <div className="space-y-4">
               {REIBUN_CATEGORIES.map((c) => (
-                <div key={c.title} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                  <h3 className="mb-2 text-sm font-bold text-blue-800">{c.title}</h3>
+                <div key={c.title} className="rounded-lg border border-slate-100 bg-slate-50 p-4">
+                  <h3 className="mb-2 text-sm font-bold text-brand-800">{c.title}</h3>
                   <p className="mb-2 rounded-lg bg-white p-3 text-sm leading-relaxed text-slate-700 ring-1 ring-slate-100">
                     「{c.example}」
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {c.points.map((p) => (
-                      <span key={p} className="rounded-full bg-blue-100 px-2.5 py-1 text-[11px] font-bold text-blue-700">
+                      <span key={p} className="rounded-full bg-brand-100 px-2.5 py-1 text-xs font-bold text-brand-700">
                         {p}
                       </span>
                     ))}
@@ -159,42 +159,42 @@ export default function ChousashoReibunPage() {
           </section>
 
           {/* 依頼マナー */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <MessageCircleHeart className="h-5 w-5 text-rose-500" />
+              <MessageCircleHeart className="h-5 w-5 text-red-500" />
               先生への依頼マナー
             </h2>
             <div className="space-y-3">
               {MANNER_TIPS.map((t) => (
-                <div key={t.title} className="rounded-xl border border-rose-100 bg-rose-50/50 p-4">
-                  <h3 className="mb-1 text-sm font-bold text-rose-900">{t.title}</h3>
-                  <p className="text-sm leading-relaxed text-rose-900/90">{t.text}</p>
+                <div key={t.title} className="rounded-lg border border-red-100 bg-red-50/50 p-4">
+                  <h3 className="mb-1 text-sm font-bold text-red-900">{t.title}</h3>
+                  <p className="text-sm leading-relaxed text-red-900/90">{t.text}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* チェックリスト */}
-          <section className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50/40 p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-brand-200 bg-brand-50/40 p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ListTodo className="h-5 w-5 text-emerald-600" />
+              <ListTodo className="h-5 w-5 text-brand-600" />
               出願前の期限チェックリスト
             </h2>
             <ul className="space-y-2">
               {CHECKLIST.map((item) => (
-                <li key={item} className="flex items-start gap-2 rounded-lg bg-white p-3 text-sm text-slate-700 shadow-sm ring-1 ring-emerald-100">
-                  <span className="mt-0.5 h-4 w-4 shrink-0 rounded border-2 border-emerald-400" aria-hidden />
+                <li key={item} className="flex items-start gap-2 rounded-lg bg-white p-3 text-sm text-slate-700 ring-1 ring-brand-100">
+                  <span className="mt-0.5 h-4 w-4 shrink-0 rounded border-2 border-brand-400" aria-hidden />
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="mt-3 text-xs text-emerald-800">
+            <p className="mt-3 text-xs text-brand-800">
               ※ 具体的な締切日は学校・志望校により異なります。必ず在籍校の進路指導と各高校の募集要項でご確認ください。
             </p>
           </section>
 
           {/* 注意 */}
-          <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <section className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <h2 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-900">
               <AlertCircle className="h-4 w-4" />
               書くときの注意点
@@ -215,7 +215,7 @@ export default function ChousashoReibunPage() {
               { href: '/mendan', title: '三者面談の準備（先生に聞くこと）' },
               { href: '/juken-schedule', title: '受験スケジュール・出願時期' },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+              <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-700 transition-shadow">
                 {c.title}
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
@@ -227,11 +227,11 @@ export default function ChousashoReibunPage() {
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-blue-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

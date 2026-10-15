@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Sparkles, Send } from 'lucide-react';
+import { Sparkles, Send } from '@/components/icons';
 
 import { InputForm } from '@/components/Calculator/InputForm';
 import { DEFAULT_SCORES } from '@/lib/constants';
@@ -21,7 +21,7 @@ function renderInline(text: string): React.ReactNode[] {
     if (m.index > lastIndex) nodes.push(text.slice(lastIndex, m.index));
     if (m[1] !== undefined) {
       nodes.push(
-        <Link key={key++} href={m[2]} className="font-bold text-blue-600 underline">
+        <Link key={key++} href={m[2]} className="font-bold text-brand-600 underline">
           {m[1]}
         </Link>
       );
@@ -95,7 +95,7 @@ export function AdvisorClient() {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <form onSubmit={onSubmit} className="space-y-4 rounded-lg border border-slate-200 bg-white p-5">
         <div>
           <label htmlFor="advisor-question" className="mb-1 block text-sm font-bold text-slate-700">
             質問を入力してください
@@ -106,7 +106,7 @@ export function AdvisorClient() {
             onChange={(e) => setRaw(e.target.value)}
             rows={3}
             placeholder="例：東京都の内申点を計算して／偏差値を計算して／目標まであと何点か教えて"
-            className="w-full rounded-xl border border-slate-200 p-3 text-sm focus:border-blue-400 focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 p-3 text-sm focus:border-brand-400 focus:outline-none"
           />
         </div>
 
@@ -118,7 +118,7 @@ export function AdvisorClient() {
             id="advisor-pref"
             value={prefectureCode}
             onChange={(e) => setPrefectureCode(e.target.value)}
-            className="w-full rounded-xl border border-slate-200 p-2.5 text-sm"
+            className="w-full rounded-lg border border-slate-200 p-2.5 text-sm"
           >
             {PREFECTURES.map((p) => (
               <option key={p.code} value={p.code}>
@@ -128,14 +128,14 @@ export function AdvisorClient() {
           </select>
         </div>
 
-        <details className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+        <details className="rounded-lg border border-slate-100 bg-slate-50 p-3">
           <summary className="cursor-pointer text-xs font-bold text-slate-600">9教科の評定（内申点・総合得点・逆算の質問で使用）</summary>
           <div className="mt-3">
             <InputForm prefectureCode={prefectureCode} scores={scores} onChange={onScoreChange} />
           </div>
         </details>
 
-        <details className="rounded-xl border border-slate-100 bg-slate-50 p-3">
+        <details className="rounded-lg border border-slate-100 bg-slate-50 p-3">
           <summary className="cursor-pointer text-xs font-bold text-slate-600">詳細オプション（総合得点・偏差値・逆算・県比較）</summary>
           <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <label className="text-xs text-slate-600">
@@ -174,7 +174,7 @@ export function AdvisorClient() {
 
         <button
           type="submit"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:shadow-xl"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 text-base font-bold text-white transition-all"
         >
           <Send className="h-4 w-4" />
           質問する
@@ -182,8 +182,8 @@ export function AdvisorClient() {
       </form>
 
       {answer && (
-        <div id="advisor-answer" className="scroll-mt-24 rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">
-          <div className="mb-3 flex items-center gap-1.5 text-xs font-bold text-blue-600">
+        <div id="advisor-answer" className="scroll-mt-24 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
+          <div className="mb-3 flex items-center gap-1.5 text-xs font-bold text-brand-600">
             <Sparkles className="h-3.5 w-3.5" />
             回答
           </div>

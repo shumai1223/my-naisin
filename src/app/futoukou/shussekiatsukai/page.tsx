@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Home as HomeIcon, MessageCircle, ClipboardCheck, Scale, HelpCircle } from 'lucide-react';
+import { Home, ChevronRight, Home as HomeIcon, MessageCircle, ClipboardCheck, Scale, HelpCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -79,18 +79,18 @@ export default function FutoukouShussekiatsukaiPage() {
         steps={STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-rose-50/40 to-white">
+      <div className="min-h-screen bg-red-50/40">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/futoukou" className="hover:text-blue-600">不登校と内申点</Link>
+            <Link href="/futoukou" className="hover:text-brand-600">不登校と内申点</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">出席扱いとは</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-red-500 text-white">
               <ClipboardCheck className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">「出席扱い」とは？相談の流れ</h1>
@@ -114,8 +114,8 @@ export default function FutoukouShussekiatsukaiPage() {
               {STEPS.map((s, i) => {
                 const Icon = STEP_ICONS[i];
                 return (
-                  <div key={s.name} className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-rose-50 text-rose-600"><Icon className="h-5 w-5" /></span>
+                  <div key={s.name} className="flex gap-3 rounded-lg border border-slate-200 bg-white p-5">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-red-50 text-red-600"><Icon className="h-5 w-5" /></span>
                     <div>
                       <div className="text-sm font-bold text-slate-800">{i + 1}. {s.name}</div>
                       <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.text}</p>
@@ -130,16 +130,16 @@ export default function FutoukouShussekiatsukaiPage() {
           </section>
 
           {/* 通信制ページへの導線（内申が伸びなかった場合の選択肢） */}
-          <section className="mt-8 rounded-2xl border-2 border-rose-200 bg-rose-50/40 p-6 text-center shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-red-200 bg-red-50/40 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">出席扱いにならなくても、選択肢はあります</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
               通信制・定時制など、内申点の比重が小さい進路や、当日点重視の選抜区分から届く学校を探すこともできます。
             </p>
             <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/futoukou/tsugaku" className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-rose-700">
+              <Link href="/futoukou/tsugaku" className="inline-flex items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-red-700">
                 通信制・フリースクールという選択肢を見る
               </Link>
-              <Link href="/reverse" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-rose-700 ring-1 ring-rose-200 transition-colors hover:bg-rose-50">
+              <Link href="/reverse" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-red-700 ring-1 ring-red-200 transition-colors hover:bg-red-50">
                 当日点で届くか逆算する
               </Link>
             </div>
@@ -149,7 +149,7 @@ export default function FutoukouShussekiatsukaiPage() {
           <FutoukouLeadCTA className="mt-8" />
 
           {/* 回遊 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ページ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
@@ -158,7 +158,7 @@ export default function FutoukouShussekiatsukaiPage() {
                 { href: '/chousasho', title: '調査書とは？出欠・評定がどう書かれるか' },
                 { href: '/mendan', title: '三者面談で進路を相談する準備' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 text-sm text-slate-700 transition-shadow">
                   {c.title}
                   <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
                 </Link>
@@ -166,11 +166,11 @@ export default function FutoukouShussekiatsukaiPage() {
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-rose-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-red-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

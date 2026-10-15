@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, HandHeart, ListChecks, HelpCircle, AlertCircle, ChevronRightSquare } from 'lucide-react';
+import { Home, ChevronRight, HandHeart, ListChecks, HelpCircle, AlertCircle, ChevronRightSquare } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -61,16 +61,16 @@ export default function HeiganYuuguPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-teal-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">併願優遇・併願校の制度解説</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <HandHeart className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">併願優遇・併願校の制度解説</h1>
@@ -87,9 +87,9 @@ export default function HeiganYuuguPage() {
             </p>
           </AnswerBox>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ListChecks className="h-5 w-5 text-teal-600" />
+              <ListChecks className="h-5 w-5 text-brand-600" />
               併願優遇の一般的な仕組み
             </h2>
             <ol className="space-y-3">
@@ -100,8 +100,8 @@ export default function HeiganYuuguPage() {
                 { name: '私立の入試（学力検査等）を受験', text: '併願優遇でも学力検査を受験する学校が多く、基準を満たしていれば高い確率で合格となる運用が一般的です（学校により異なります）。' },
                 { name: '公立の結果に応じて進学先が決まる', text: '公立に合格すれば公立へ、公立が不合格だった場合は併願優遇で合格した私立へ進学するのが基本的な流れです。' },
               ].map((s, i) => (
-                <li key={s.name} className="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-teal-600 text-xs font-black text-white">{i + 1}</span>
+                <li key={s.name} className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 p-4">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-600 text-xs font-bold text-white">{i + 1}</span>
                   <span>
                     <span className="block text-sm font-bold text-slate-800">{s.name}</span>
                     <span className="mt-0.5 block text-sm leading-relaxed text-slate-600">{s.text}</span>
@@ -111,7 +111,7 @@ export default function HeiganYuuguPage() {
             </ol>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">単願推薦・一般入試との違い</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -124,7 +124,7 @@ export default function HeiganYuuguPage() {
                 </thead>
                 <tbody className="text-slate-700">
                   <tr className="odd:bg-white even:bg-slate-50">
-                    <td className="border border-slate-200 px-3 py-2 font-bold text-teal-700">併願優遇</td>
+                    <td className="border border-slate-200 px-3 py-2 font-bold text-brand-700">併願優遇</td>
                     <td className="border border-slate-200 px-3 py-2">公立を第一志望として受験できる</td>
                     <td className="border border-slate-200 px-3 py-2">公立が不合格の場合の受け皿</td>
                   </tr>
@@ -146,7 +146,7 @@ export default function HeiganYuuguPage() {
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <section className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <h2 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-900">
               <AlertCircle className="h-4 w-4" />
               確認しておきたいポイント
@@ -162,26 +162,26 @@ export default function HeiganYuuguPage() {
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">あわせて確認</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/heigan-yuugu/tokyo" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:shadow-md">
+              <Link href="/heigan-yuugu/tokyo" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
                 オール3で行ける私立高校（東京都・公式基準つき）
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/mendan" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:shadow-md">
+              <Link href="/mendan" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
                 三者面談の準備チェックリスト
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/koukou-hiyou" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:shadow-md">
+              <Link href="/koukou-hiyou" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
                 私立高校の費用シミュレーター
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:shadow-md">
+              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
                 内申点・当日点が足りない冬の緊急対策
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/juken-schedule" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:shadow-md">
+              <Link href="/juken-schedule" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
                 受験スケジュール・出願時期
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
@@ -193,11 +193,11 @@ export default function HeiganYuuguPage() {
             <ParentLeadCTA placement="hiyou" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-teal-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

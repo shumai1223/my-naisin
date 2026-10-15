@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { Calculator, RotateCcw } from '@/components/icons';
 
 import type { TotalScoreSystem } from '@/lib/total-score/types';
 import { computeTotalScore } from '@/lib/total-score/engine';
@@ -56,18 +56,18 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
     percent >= 80
       ? 'text-red-700'
       : percent >= 65
-        ? 'text-orange-700'
+        ? 'text-amber-700'
         : percent >= 50
-          ? 'text-emerald-700'
-          : 'text-blue-700';
+          ? 'text-brand-700'
+          : 'text-brand-700';
 
   const multipleOptions = system.ratioOptions.length > 1;
 
   return (
-    <div className="overflow-hidden rounded-2xl border-2 border-blue-200 bg-white shadow-lg">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4">
+    <div className="overflow-hidden rounded-lg border-2 border-brand-200 bg-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-brand-100 bg-brand-50 px-6 py-4">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Calculator className="h-5 w-5 text-blue-600" />
+          <Calculator className="h-5 w-5 text-brand-600" />
           {system.name}の総合得点を計算
         </h2>
         <button
@@ -96,8 +96,8 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
                   onClick={() => setOptionId(opt.id)}
                   className={`rounded-lg border-2 px-3 py-2 text-center text-xs font-bold transition-all ${
                     optionId === opt.id
-                      ? 'border-indigo-500 bg-indigo-50 text-indigo-700 shadow-sm'
-                      : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-200'
+                      ? 'border-brand-500 bg-brand-50 text-brand-700'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
                   }`}
                 >
                   {opt.label}
@@ -124,10 +124,10 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
             value={academicInput}
             onChange={(e) => setAcademicInput(e.target.value)}
             placeholder={`例：${Math.round(system.academic.rawMax * 0.7)}`}
-            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
           {academicInput !== '' && (
-            <div className="mt-2 text-xs text-blue-700">
+            <div className="mt-2 text-xs text-brand-700">
               → 換算：<strong className="text-base">{result.academic}点</strong> / {result.option.academicMax}点
             </div>
           )}
@@ -148,10 +148,10 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
             value={reportInput}
             onChange={(e) => setReportInput(e.target.value)}
             placeholder={`例：${Math.round(system.report.rawMax * 0.75)}`}
-            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
           {reportInput !== '' && (
-            <div className="mt-2 text-xs text-emerald-700">
+            <div className="mt-2 text-xs text-brand-700">
               → 換算：<strong className="text-base">{result.report}点</strong> / {result.option.reportMax}点
             </div>
           )}
@@ -161,10 +161,10 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
 
       {/* 結果 */}
       {hasInput && (
-        <div className="border-t-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 px-6 py-6">
+        <div className="border-t-2 border-brand-200 bg-brand-50 px-6 py-6">
           <div className="text-center">
             <div className="mb-1 text-xs font-bold text-slate-600">あなたの総合得点</div>
-            <div className={`text-6xl font-black ${tone}`}>
+            <div className={`text-6xl font-bold ${tone}`}>
               {result.total}
               <span className="text-2xl font-bold text-slate-400">/{result.totalMax}</span>
             </div>
@@ -172,15 +172,15 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
           </div>
 
           <div className="mt-6 grid gap-2 text-center sm:grid-cols-2">
-            <div className="rounded-lg border border-blue-100 bg-white p-3">
-              <div className="text-[10px] font-bold uppercase text-blue-600">学力検査</div>
-              <div className="text-xl font-black text-blue-700">{result.academic}</div>
-              <div className="text-[10px] text-slate-500">/{result.option.academicMax}点</div>
+            <div className="rounded-lg border border-brand-100 bg-white p-3">
+              <div className="text-xs font-bold text-brand-600">学力検査</div>
+              <div className="text-xl font-bold text-brand-700">{result.academic}</div>
+              <div className="text-xs text-slate-500">/{result.option.academicMax}点</div>
             </div>
-            <div className="rounded-lg border border-emerald-100 bg-white p-3">
-              <div className="text-[10px] font-bold uppercase text-emerald-600">内申点</div>
-              <div className="text-xl font-black text-emerald-700">{result.report}</div>
-              <div className="text-[10px] text-slate-500">/{result.option.reportMax}点</div>
+            <div className="rounded-lg border border-brand-100 bg-white p-3">
+              <div className="text-xs font-bold text-brand-600">内申点</div>
+              <div className="text-xl font-bold text-brand-700">{result.report}</div>
+              <div className="text-xs text-slate-500">/{result.option.reportMax}点</div>
             </div>
           </div>
 
@@ -206,7 +206,7 @@ export function TotalScoreCalculator({ system, onResult }: Props) {
             }}
           />
 
-          <p className="mt-4 text-center text-[11px] leading-relaxed text-slate-500">
+          <p className="mt-4 text-center text-xs leading-relaxed text-slate-500">
             ※ 満点・配点は{system.name}教育委員会の令和8年度入学者選抜要項に基づく目安です。実際の合否は倍率・他の受験者の得点で変動します。学校別の合格ボーダーは掲載していません。
           </p>
         </div>

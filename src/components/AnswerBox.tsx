@@ -1,4 +1,4 @@
-import { Sparkles } from 'lucide-react';
+import { Sparkles } from '@/components/icons';
 import type { ReactNode } from 'react';
 
 /**
@@ -13,12 +13,12 @@ import type { ReactNode } from 'react';
  */
 export function AnswerBox({ question, children }: { question: string; children: ReactNode }) {
   return (
-    <section className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-5 shadow-sm">
-      <div className="mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold text-blue-700">
+    <section className="rounded-lg border border-brand-200 bg-brand-50 p-5">
+      <div className="mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700">
         <Sparkles className="h-3.5 w-3.5" />
         30秒でわかる答え
       </div>
-      <p className="text-sm font-semibold text-slate-700">{question}</p>
+      <p className="text-sm font-bold text-slate-700">{question}</p>
       <div className="mt-1.5 text-sm leading-relaxed text-slate-800">{children}</div>
     </section>
   );

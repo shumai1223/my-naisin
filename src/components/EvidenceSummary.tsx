@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { FileText, Calendar, AlertTriangle, CheckCircle, ExternalLink, BookOpen } from 'lucide-react';
+import { FileText, Calendar, AlertTriangle, CheckCircle, ExternalLink, BookOpen } from '@/components/icons';
 
 interface EvidenceSummaryProps {
   prefectureCode: string;
@@ -87,61 +87,61 @@ export function EvidenceSummary({ prefectureCode, className = '' }: EvidenceSumm
   const data = evidenceData[prefectureCode] || evidenceData.default;
 
   return (
-    <div className={`rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50/80 via-teal-50/60 to-cyan-50/80 p-6 shadow-lg shadow-emerald-100/50 ${className}`}>
+    <div className={`rounded-lg border border-brand-200 bg-brand-50/80 p-6 ${className}`}>
       <div className="flex items-start gap-4">
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 shadow-lg shadow-emerald-300/40">
+        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-brand-500">
           <FileText className="h-6 w-6 text-white" />
         </div>
         
         <div className="flex-1 space-y-4">
           <div>
-            <h3 className="text-lg font-bold text-emerald-800 mb-2">計算根拠の透明性</h3>
-            <p className="text-sm text-emerald-700">
+            <h3 className="text-lg font-bold text-brand-800 mb-2">計算根拠の透明性</h3>
+            <p className="text-sm text-brand-700">
               このツールは公式資料に基づき計算しています。根拠情報を公開することで透明性を確保しています。
             </p>
           </div>
 
           {/* 根拠資料情報 */}
-          <div className="rounded-xl border border-emerald-200/50 bg-white/60 p-4">
+          <div className="rounded-lg border border-brand-200/50 bg-white/60 p-4">
             <div className="flex items-center gap-2 mb-3">
-              <BookOpen className="h-4 w-4 text-emerald-600" />
-              <h4 className="font-semibold text-emerald-800">今年度の根拠資料</h4>
+              <BookOpen className="h-4 w-4 text-brand-600" />
+              <h4 className="font-bold text-brand-800">今年度の根拠資料</h4>
             </div>
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
-                <span className="font-medium text-emerald-700">資料名:</span>
+                <span className="text-brand-700">資料名:</span>
                 <span className="text-slate-700">{data.sourceDocument}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="font-medium text-emerald-700">対象箇所:</span>
+                <span className="text-brand-700">対象箇所:</span>
                 <span className="text-slate-700">{data.chapter} / {data.pageNumber}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-emerald-600" />
-                <span className="font-medium text-emerald-700">最終確認日:</span>
+                <Calendar className="h-4 w-4 text-brand-600" />
+                <span className="text-brand-700">最終確認日:</span>
                 <span className="text-slate-700">{data.lastConfirmed}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="font-medium text-emerald-700">ページ更新日:</span>
+                <span className="text-brand-700">ページ更新日:</span>
                 <span className="text-slate-700">{data.pageUpdated}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="font-medium text-emerald-700">テスト実行日:</span>
+                <span className="text-brand-700">テスト実行日:</span>
                 <span className="text-slate-700">{data.lastTested}</span>
               </div>
             </div>
           </div>
 
           {/* 県独自の計算特徴 */}
-          <div className="rounded-xl border border-emerald-200/50 bg-white/60 p-4">
+          <div className="rounded-lg border border-brand-200/50 bg-white/60 p-4">
             <div className="flex items-center gap-2 mb-3">
-              <CheckCircle className="h-4 w-4 text-emerald-600" />
-              <h4 className="font-semibold text-emerald-800">計算のどこが県独自か</h4>
+              <CheckCircle className="h-4 w-4 text-brand-600" />
+              <h4 className="font-bold text-brand-800">計算のどこが県独自か</h4>
             </div>
             <ul className="space-y-1 text-sm">
               {data.uniqueFeatures.map((feature, index) => (
                 <li key={index} className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
                   <span className="text-slate-700">{feature}</span>
                 </li>
               ))}
@@ -149,10 +149,10 @@ export function EvidenceSummary({ prefectureCode, className = '' }: EvidenceSumm
           </div>
 
           {/* 例外事項 */}
-          <div className="rounded-xl border border-amber-200/50 bg-amber-50/60 p-4">
+          <div className="rounded-lg border border-amber-200/50 bg-amber-50/60 p-4">
             <div className="flex items-center gap-2 mb-3">
               <AlertTriangle className="h-4 w-4 text-amber-600" />
-              <h4 className="font-semibold text-amber-800">例外：学校・コースで違う可能性がある項目</h4>
+              <h4 className="font-bold text-amber-800">例外：学校・コースで違う可能性がある項目</h4>
             </div>
             <ul className="space-y-1 text-sm">
               {data.exceptions.map((exception, index) => (
@@ -168,13 +168,13 @@ export function EvidenceSummary({ prefectureCode, className = '' }: EvidenceSumm
           </div>
 
           {/* 外部リンク */}
-          <div className="text-xs text-emerald-600">
+          <div className="text-xs text-brand-600">
             <p className="mb-1">
               <strong>運営者のソース確認方針:</strong> 都道府県教育委員会の公式PDFを直接確認し、複数資料がある場合は「実施要綱＞選考基準＞学校別資料」の優先順位で採用しています。
             </p>
             <p>
               計算ロジックのテスト結果は{' '}
-              <Link href="/quality" className="underline hover:text-emerald-700">
+              <Link href="/quality" className="underline hover:text-brand-700">
                 品質保証ページ
               </Link>
               {' '}で公開しています。

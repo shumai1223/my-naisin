@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { Crown, Sparkles } from 'lucide-react';
+import { Crown, Sparkles } from '@/components/icons';
 
 import { RANK_DEFINITIONS } from '@/lib/constants';
 import { getPrefectureByCode } from '@/lib/prefectures';
@@ -45,10 +45,10 @@ export function RankCard({ result }: RankCardProps) {
 
   const rankVisual = React.useMemo(() => {
     const visuals: Record<string, { color: string; bg: string; gradient: string; border: string; glow: string; glowClass: string }> = {
-      S: { color: 'text-violet-600', bg: 'bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50', gradient: 'from-violet-500 via-purple-500 to-fuchsia-500', border: 'border-violet-200/60', glow: 'shadow-violet-300/50', glowClass: 'rank-s-glow' },
-      A: { color: 'text-indigo-600', bg: 'bg-gradient-to-br from-indigo-50 via-blue-50 to-violet-50', gradient: 'from-indigo-500 via-blue-500 to-violet-500', border: 'border-indigo-200/60', glow: 'shadow-indigo-300/40', glowClass: 'rank-a-glow' },
-      B: { color: 'text-blue-600', bg: 'bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50', gradient: 'from-blue-500 via-cyan-500 to-sky-500', border: 'border-blue-200/60', glow: 'shadow-blue-300/40', glowClass: 'rank-b-glow' },
-      C: { color: 'text-slate-600', bg: 'bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100', gradient: 'from-slate-400 via-slate-500 to-slate-600', border: 'border-slate-200/60', glow: 'shadow-slate-300/30', glowClass: '' }
+      S: { color: 'text-slate-600', bg: 'bg-slate-50', gradient: 'bg-slate-500', border: 'border-slate-200/60', glow: '', glowClass: 'rank-s-glow' },
+      A: { color: 'text-brand-600', bg: 'bg-brand-50', gradient: 'bg-brand-500', border: 'border-brand-200/60', glow: '', glowClass: 'rank-a-glow' },
+      B: { color: 'text-brand-600', bg: 'bg-brand-50', gradient: 'bg-brand-500', border: 'border-brand-200/60', glow: '', glowClass: 'rank-b-glow' },
+      C: { color: 'text-slate-600', bg: 'bg-slate-50', gradient: 'bg-slate-400', border: 'border-slate-200/60', glow: '', glowClass: '' }
     };
     return visuals[result.rank.code] ?? visuals.C;
   }, [result.rank.code]);
@@ -85,7 +85,7 @@ export function RankCard({ result }: RankCardProps) {
         <div className={cn('border-b px-6 py-4', rankVisual.border, rankVisual.bg)}>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <div className={cn('grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br shadow-md', rankVisual.gradient, rankVisual.glow)}>
+              <div className={cn('grid h-8 w-8 place-items-center rounded-lg ', rankVisual.gradient, rankVisual.glow)}>
                 {isS ? (
                   <Sparkles className="h-4 w-4 text-white" />
                 ) : (
@@ -112,14 +112,14 @@ export function RankCard({ result }: RankCardProps) {
                 animate={{ scale: 1, rotate: 0, opacity: 1 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 className={cn(
-                  'relative grid h-24 w-24 place-items-center rounded-3xl bg-gradient-to-br text-5xl font-black text-white',
+                  'relative grid h-24 w-24 place-items-center rounded-lg text-5xl font-bold text-white',
                   rankVisual.gradient,
                   rankVisual.glowClass
                 )}
               >
                 {/* Inner shine effect */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-transparent via-white/10 to-white/20" />
-                <span className="relative drop-shadow-lg">{result.rank.code}</span>
+                <div className="absolute inset-0 rounded-lg bg-transparent" />
+                <span className="relative">{result.rank.code}</span>
               </motion.div>
               <div>
                 <div className="text-xl font-bold text-slate-800">
@@ -128,27 +128,27 @@ export function RankCard({ result }: RankCardProps) {
                 <div className="mt-1 text-sm text-slate-500">あなたの達成度</div>
               </div>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white px-5 py-3 text-right shadow-sm">
-              <div className="text-xs font-medium text-slate-500">獲得率</div>
+            <div className="rounded-lg border border-slate-200 bg-slate-50 px-5 py-3 text-right">
+              <div className="text-xs text-slate-500">獲得率</div>
               <div className={cn('text-3xl font-bold', rankVisual.color)}>{Math.round(result.percent)}%</div>
             </div>
           </div>
 
         {nextInfo ? (
-          <div className="mt-6 rounded-2xl border border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 p-4">
+          <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-blue-500" />
-                <div className="text-sm font-semibold text-slate-700">次のランクまで</div>
+                <div className="h-2 w-2 rounded-full bg-brand-500" />
+                <div className="text-sm font-bold text-slate-700">次のランクまで</div>
               </div>
-              <div className="rounded-full bg-blue-50 px-3 py-1 text-xs">
-                あと <span className="font-bold text-blue-600">{nextInfo.diff}</span> 点で <span className="font-black text-blue-600">{nextInfo.nextCode}ランク</span>
+              <div className="rounded-full bg-brand-50 px-3 py-1 text-xs">
+                あと <span className="font-bold text-brand-600">{nextInfo.diff}</span> 点で <span className="font-bold text-brand-600">{nextInfo.nextCode}ランク</span>
               </div>
             </div>
 
             <div className="mt-3 h-3 overflow-hidden rounded-full bg-slate-200">
               <motion.div
-                className="h-full rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 shadow-sm"
+                className="h-full rounded-full bg-brand-400"
                 initial={{ width: 0 }}
                 animate={{ width: `${nextInfo.progress}%` }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -156,7 +156,7 @@ export function RankCard({ result }: RankCardProps) {
             </div>
           </div>
         ) : (
-          <div className={cn('mt-6 rounded-2xl border p-4', rankVisual.border, rankVisual.bg)}>
+          <div className={cn('mt-6 rounded-lg border p-4', rankVisual.border, rankVisual.bg)}>
             <div className="flex items-center gap-2">
               <Sparkles className={cn('h-5 w-5', rankVisual.color)} />
               <div className={cn('text-sm font-bold', rankVisual.color)}>MAX到達！おめでとう！</div>
@@ -165,7 +165,7 @@ export function RankCard({ result }: RankCardProps) {
           </div>
         )}
 
-        <div className="mt-5 rounded-xl bg-slate-50 p-4">
+        <div className="mt-5 rounded-lg bg-slate-50 p-4">
           <p className="text-sm leading-relaxed text-slate-600">{result.rank.message}</p>
         </div>
         </div>

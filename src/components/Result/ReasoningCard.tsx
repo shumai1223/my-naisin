@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calculator, BookOpen, Trophy, ListChecks, ChevronRight, Info } from 'lucide-react';
+import { Calculator, BookOpen, Trophy, ListChecks, ChevronRight, Info } from '@/components/icons';
 
 import { RANK_DEFINITIONS, SUBJECTS } from '@/lib/constants';
 import { getPrefectureByCode } from '@/lib/prefectures';
@@ -67,13 +67,13 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
   return (
     <Card className="overflow-hidden">
       {/* Header */}
-      <div className="border-b border-slate-100 bg-gradient-to-r from-indigo-50 via-blue-50 to-indigo-50 px-6 py-5">
+      <div className="border-b border-slate-100 bg-brand-50 px-6 py-5">
         <div className="flex items-center gap-4">
-          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg shadow-indigo-200">
+          <div className="grid h-12 w-12 place-items-center rounded-lg bg-brand-500">
             <BookOpen className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="text-base font-black text-slate-800">計算の根拠</h3>
+            <h3 className="text-base font-bold text-slate-800">計算の根拠</h3>
             <p className="mt-0.5 text-sm text-slate-600">スコアがどのように計算されたかを確認できます</p>
           </div>
         </div>
@@ -89,17 +89,17 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  'group relative flex shrink-0 items-center gap-2 px-4 py-3 text-sm font-semibold transition-colors',
+                  'group relative flex shrink-0 items-center gap-2 px-4 py-3 text-sm font-bold transition-colors',
                   isActive
-                    ? 'text-blue-600'
+                    ? 'text-brand-600'
                     : 'text-slate-500 hover:text-slate-700'
                 )}
                 aria-selected={isActive}
                 role="tab"
               >
                 <span className={cn(
-                  'grid h-8 w-8 place-items-center rounded-xl transition-colors',
-                  isActive ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-500 group-hover:bg-slate-200'
+                  'grid h-8 w-8 place-items-center rounded-lg transition-colors',
+                  isActive ? 'bg-brand-100 text-brand-600' : 'bg-slate-100 text-slate-500 group-hover:bg-slate-200'
                 )}>
                   {tab.icon}
                 </span>
@@ -107,7 +107,7 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                 {isActive && (
                   <motion.div
                     layoutId="reasoning-tab-indicator"
-                    className="absolute inset-x-0 -bottom-px h-0.5 bg-blue-600"
+                    className="absolute inset-x-0 -bottom-px h-0.5 bg-brand-600"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -129,53 +129,53 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
               transition={{ duration: 0.2 }}
             >
               {/* Mode Badge */}
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 text-sm font-bold text-white shadow-md shadow-blue-200">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-brand-500 px-4 py-2 text-sm font-bold text-white">
                 <Calculator className="h-4 w-4" />
                 {prefectureLabel}
               </div>
 
               <div className="grid gap-4 lg:grid-cols-2">
                 {/* Formula Card */}
-                <div className="rounded-2xl border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-5">
-                  <div className="flex items-center gap-2 text-sm font-black text-blue-800">
+                <div className="rounded-lg border-2 border-brand-100 bg-brand-50 p-5">
+                  <div className="flex items-center gap-2 text-sm font-bold text-brand-800">
                     <ChevronRight className="h-4 w-4" />
                     計算式
                   </div>
-                  <div className="mt-3 rounded-xl bg-white/80 p-4 font-mono text-sm font-semibold text-slate-800 shadow-sm">
+                  <div className="mt-3 rounded-lg bg-white/80 p-4 font-mono text-sm font-bold text-slate-800">
                     <div>合計 = (5教科 × {coreWeight})</div>
                     <div className="mt-1 pl-8">+ (実技4教科 × {practicalWeight})</div>
                   </div>
                   <div className="mt-4 space-y-2">
                     <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-2">
-                      <span className="text-xs font-medium text-slate-600">満点</span>
-                      <span className="text-sm font-black text-slate-800">{result.max}点</span>
+                      <span className="text-xs text-slate-600">満点</span>
+                      <span className="text-sm font-bold text-slate-800">{result.max}点</span>
                     </div>
                     <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-2">
-                      <span className="text-xs font-medium text-slate-600">5教科の重み</span>
+                      <span className="text-xs text-slate-600">5教科の重み</span>
                       <span className="text-sm font-bold text-slate-800">× {coreWeight}</span>
                     </div>
                     <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-2">
-                      <span className="text-xs font-medium text-slate-600">実技4教科の重み</span>
+                      <span className="text-xs text-slate-600">実技4教科の重み</span>
                       <span className="text-sm font-bold text-slate-800">× {practicalWeight}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Percent Formula Card */}
-                <div className="rounded-2xl border-2 border-emerald-100 bg-gradient-to-br from-emerald-50 to-green-50 p-5">
-                  <div className="flex items-center gap-2 text-sm font-black text-emerald-800">
+                <div className="rounded-lg border-2 border-brand-100 bg-brand-50 p-5">
+                  <div className="flex items-center gap-2 text-sm font-bold text-brand-800">
                     <ChevronRight className="h-4 w-4" />
                     達成率の計算
                   </div>
-                  <div className="mt-3 rounded-xl bg-white/80 p-4 font-mono text-sm font-semibold text-slate-800 shadow-sm">
+                  <div className="mt-3 rounded-lg bg-white/80 p-4 font-mono text-sm font-bold text-slate-800">
                     達成率 = floor(合計 ÷ 満点 × 100)
                   </div>
-                  <div className="mt-4 rounded-xl bg-white/60 p-4">
-                    <div className="text-xs font-medium text-slate-600">あなたの計算:</div>
-                    <div className="mt-3 rounded-xl bg-white/80 p-4 font-mono text-sm font-semibold text-slate-800 shadow-sm">
+                  <div className="mt-4 rounded-lg bg-white/60 p-4">
+                    <div className="text-xs text-slate-600">あなたの計算:</div>
+                    <div className="mt-3 rounded-lg bg-white/80 p-4 font-mono text-sm font-bold text-slate-800">
                       <span className="font-mono font-bold text-slate-800">floor({totalComputed} ÷ {result.max} × 100)</span>
                       <span className="text-slate-400">=</span>
-                      <span className="rounded-lg bg-emerald-100 px-3 py-1 font-black text-emerald-700">{result.percent}%</span>
+                      <span className="rounded-lg bg-brand-100 px-3 py-1 font-bold text-brand-700">{result.percent}%</span>
                     </div>
                   </div>
                   <div className="mt-4 flex items-start gap-2 rounded-lg bg-amber-50 p-3">
@@ -198,7 +198,7 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
               transition={{ duration: 0.2 }}
             >
               <p className="mb-4 text-sm text-slate-600">
-                達成率に応じて4段階のランクが決定されます。あなたは現在 <strong className="text-blue-600">{result.rank.code}ランク</strong> です。
+                達成率に応じて4段階のランクが決定されます。あなたは現在 <strong className="text-brand-600">{result.rank.code}ランク</strong> です。
               </p>
 
               <div className="grid gap-3 sm:grid-cols-2">
@@ -211,14 +211,14 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                     <div
                       key={r.code}
                       className={cn(
-                        'relative overflow-hidden rounded-2xl border-2 p-4 transition-all',
+                        'relative overflow-hidden rounded-lg border-2 p-4 transition-all',
                         isCurrent
-                          ? 'border-blue-300 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg shadow-blue-100'
+                          ? 'border-brand-300 bg-brand-50'
                           : 'border-slate-200 bg-white hover:border-slate-300'
                       )}
                     >
                       {isCurrent && (
-                        <div className="absolute right-3 top-3 rounded-full bg-blue-500 px-2 py-0.5 text-[10px] font-bold text-white">
+                        <div className="absolute right-3 top-3 rounded-full bg-brand-500 px-2 py-0.5 text-xs font-bold text-white">
                           現在のランク
                         </div>
                       )}
@@ -226,16 +226,16 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                       <div className="flex items-center gap-3">
                         <div
                           className={cn(
-                            'grid h-12 w-12 place-items-center rounded-xl text-lg font-black',
+                            'grid h-12 w-12 place-items-center rounded-lg text-lg font-bold',
                             isCurrent
-                              ? 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md shadow-blue-200'
+                              ? 'bg-brand-500 text-white'
                               : 'bg-slate-100 text-slate-600'
                           )}
                         >
                           {r.code}
                         </div>
                         <div>
-                          <div className={cn('text-sm font-bold', isCurrent ? 'text-blue-800' : 'text-slate-800')}>
+                          <div className={cn('text-sm font-bold', isCurrent ? 'text-brand-800' : 'text-slate-800')}>
                             {r.title}
                           </div>
                           <div className="mt-0.5 text-xs text-slate-500">
@@ -244,9 +244,9 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                         </div>
                       </div>
 
-                      <div className="mt-3 flex items-center justify-between rounded-xl bg-white/80 px-3 py-2">
+                      <div className="mt-3 flex items-center justify-between rounded-lg bg-white/80 px-3 py-2">
                         <span className="text-xs text-slate-500">必要スコア</span>
-                        <span className={cn('text-sm font-bold', isCurrent ? 'text-blue-700' : 'text-slate-700')}>
+                        <span className={cn('text-sm font-bold', isCurrent ? 'text-brand-700' : 'text-slate-700')}>
                           {minTotal}〜{maxTotal} / {result.max}点
                         </span>
                       </div>
@@ -270,7 +270,7 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
               </p>
 
               {/* Subject breakdown table */}
-              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+              <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
                 {/* Header */}
                 <div className="grid grid-cols-[1fr_60px_60px_70px] gap-2 border-b border-slate-100 bg-slate-50 px-4 py-3 text-xs font-bold text-slate-600">
                   <div>教科</div>
@@ -290,12 +290,12 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                       className="grid grid-cols-[1fr_60px_60px_70px] items-center gap-2 px-4 py-3 hover:bg-slate-50"
                     >
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-slate-800">{row.label}</span>
+                        <span className="text-sm text-slate-800">{row.label}</span>
                         <span
                           className={cn(
-                            'rounded-md px-1.5 py-0.5 text-[10px] font-bold',
+                            'rounded-md px-1.5 py-0.5 text-xs font-bold',
                             row.category === 'core'
-                              ? 'bg-blue-100 text-blue-700'
+                              ? 'bg-brand-100 text-brand-700'
                               : 'bg-amber-100 text-amber-700'
                           )}
                         >
@@ -314,17 +314,17 @@ export function ReasoningCard({ result, scores }: ReasoningCardProps) {
                 </div>
 
                 {/* Total */}
-                <div className="border-t-2 border-slate-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-4">
+                <div className="border-t-2 border-slate-200 bg-brand-50 px-4 py-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Trophy className="h-5 w-5 text-blue-600" />
+                      <Trophy className="h-5 w-5 text-brand-600" />
                       <span className="text-sm font-bold text-slate-700">合計スコア</span>
                     </div>
                     <motion.div
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ delay: 0.3, type: 'spring' }}
-                      className="rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 text-base font-black text-white shadow-md shadow-blue-200"
+                      className="rounded-lg bg-brand-500 px-4 py-2 text-base font-bold text-white"
                     >
                       {totalComputed} / {result.max}点
                     </motion.div>

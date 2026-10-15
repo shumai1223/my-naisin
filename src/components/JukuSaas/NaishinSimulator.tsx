@@ -37,12 +37,12 @@ export function NaishinSimulator() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <section className="rounded-lg border border-slate-200 bg-white p-4">
         <h2 className="mb-3 text-sm font-bold text-slate-700">9教科の評定を入力</h2>
         <InputForm prefectureCode={referenceCode} scores={scores} onChange={handleScoreChange} />
       </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <section className="rounded-lg border border-slate-200 bg-white p-4">
         <h2 className="mb-3 text-sm font-bold text-slate-700">比較する都道府県を選択（{selectedCodes.length}件）</h2>
         <div className="grid max-h-64 grid-cols-2 gap-1.5 overflow-y-auto pr-1 sm:grid-cols-3 md:grid-cols-4">
           {PREFECTURES.map((p) => (
@@ -59,7 +59,7 @@ export function NaishinSimulator() {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <section className="rounded-lg border border-slate-200 bg-white p-4">
         <h2 className="mb-3 text-sm font-bold text-slate-700">内申点シミュレーション結果</h2>
         {results.length === 0 ? (
           <p className="text-sm text-slate-400">都道府県を1つ以上選んでください。</p>
@@ -80,10 +80,10 @@ export function NaishinSimulator() {
                   .sort((a, b) => b.percent - a.percent)
                   .map((r) => (
                     <tr key={r.code} className="border-b border-slate-100">
-                      <td className="py-2 pr-4 font-medium text-slate-700">{r.name}</td>
+                      <td className="py-2 pr-4 text-slate-700">{r.name}</td>
                       <td className="py-2 pr-4 text-right text-slate-600">{r.total}</td>
                       <td className="py-2 pr-4 text-right text-slate-600">{r.max}</td>
-                      <td className="py-2 text-right font-semibold text-slate-700">{r.percent}%</td>
+                      <td className="py-2 text-right font-bold text-slate-700">{r.percent}%</td>
                     </tr>
                   ))}
               </tbody>

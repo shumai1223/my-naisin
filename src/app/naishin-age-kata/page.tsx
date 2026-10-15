@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, TrendingUp, ClipboardCheck, MessageSquare, Palette, Calculator, HelpCircle, BookOpen, Sprout, Layers, Flame, LineChart } from 'lucide-react';
+import { Home, ChevronRight, TrendingUp, ClipboardCheck, MessageSquare, Palette, Calculator, HelpCircle, BookOpen, Sprout, Layers, Flame, LineChart } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -51,7 +51,7 @@ const GRADE_PLANS = [
     grade: '中3',
     slug: 'chu3',
     icon: Flame,
-    accent: 'from-rose-500 to-orange-600',
+    accent: 'bg-red-500',
     badge: '残り期間で最大化',
     headline: '上げられる上限を見極め、優先度をつける',
     points: [
@@ -65,7 +65,7 @@ const GRADE_PLANS = [
     grade: '中2',
     slug: 'chu2',
     icon: Layers,
-    accent: 'from-blue-500 to-indigo-600',
+    accent: 'bg-brand-500',
     badge: '中3に備えた土台作り',
     headline: '中だるみを防ぎ、評定の「型」を固める',
     points: [
@@ -79,7 +79,7 @@ const GRADE_PLANS = [
     grade: '中1',
     slug: 'chu1',
     icon: Sprout,
-    accent: 'from-emerald-500 to-teal-600',
+    accent: 'bg-brand-500',
     badge: '習慣形成が最大レバー',
     headline: 'いちばん効くのは「良い習慣」を先に作ること',
     points: [
@@ -125,16 +125,16 @@ export default function NaishinAgeKataPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">内申点の上げ方</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <TrendingUp className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">内申点の上げ方</h1>
@@ -153,14 +153,14 @@ export default function NaishinAgeKataPage() {
           </AnswerBox>
 
           {/* まず現状把握 */}
-          <section className="mt-8 rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 text-center shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">まずは「今の内申点」と志望校との差を知る</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">上げ方を実践する前に、現在地を数値で把握すると対策の優先順位が決まります。</p>
             <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700">
+              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700">
                 <Calculator className="h-4 w-4" />内申点を計算する（47都道府県）
               </Link>
-              <Link href="/reverse" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-blue-700 ring-1 ring-blue-200 transition-colors hover:bg-blue-50">
+              <Link href="/reverse" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-brand-700 ring-1 ring-brand-200 transition-colors hover:bg-brand-50">
                 志望校から「あと何点」を逆算
               </Link>
             </div>
@@ -171,14 +171,14 @@ export default function NaishinAgeKataPage() {
             {AXES.map((a) => {
               const Icon = a.icon;
               return (
-                <div key={a.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div key={a.title} className="rounded-lg border border-slate-200 bg-white p-6">
                   <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600"><Icon className="h-5 w-5" /></span>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600"><Icon className="h-5 w-5" /></span>
                     {a.title}
                   </h2>
                   <ul className="space-y-1.5 text-sm leading-relaxed text-slate-700">
                     {a.points.map((p) => (
-                      <li key={p} className="flex gap-2"><span className="text-blue-500">・</span><span>{p}</span></li>
+                      <li key={p} className="flex gap-2"><span className="text-brand-500">・</span><span>{p}</span></li>
                     ))}
                   </ul>
                 </div>
@@ -196,23 +196,23 @@ export default function NaishinAgeKataPage() {
               {GRADE_PLANS.map((g) => {
                 const Icon = g.icon;
                 return (
-                  <div key={g.grade} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                    <div className={`flex items-center justify-between gap-3 bg-gradient-to-r ${g.accent} px-5 py-3 text-white`}>
+                  <div key={g.grade} className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <div className={`flex items-center justify-between gap-3 ${g.accent} px-5 py-3 text-white`}>
                       <div className="flex items-center gap-2">
                         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white/20"><Icon className="h-5 w-5" /></span>
-                        <span className="text-lg font-black">{g.grade}</span>
+                        <span className="text-lg font-bold">{g.grade}</span>
                         <span className="text-sm font-bold opacity-90">{g.headline}</span>
                       </div>
-                      <span className="hidden shrink-0 rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-bold sm:inline">{g.badge}</span>
+                      <span className="hidden shrink-0 rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-bold sm:inline">{g.badge}</span>
                     </div>
                     <ul className="space-y-1.5 p-5 text-sm leading-relaxed text-slate-700">
                       {g.points.map((p) => (
-                        <li key={p} className="flex gap-2"><span className="text-blue-500">・</span><span>{p}</span></li>
+                        <li key={p} className="flex gap-2"><span className="text-brand-500">・</span><span>{p}</span></li>
                       ))}
                     </ul>
                     <Link
                       href={`/naishin-age-kata/${g.slug}`}
-                      className="flex items-center justify-between gap-2 border-t border-slate-100 px-5 py-3 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-50/50 hover:underline"
+                      className="flex items-center justify-between gap-2 border-t border-slate-100 px-5 py-3 text-xs font-bold text-brand-600 transition-colors hover:bg-brand-50/50 hover:underline"
                     >
                       {g.grade}向けにさらに詳しく見る
                       <ChevronRight className="h-3.5 w-3.5" />
@@ -222,7 +222,7 @@ export default function NaishinAgeKataPage() {
               })}
             </div>
             {/* dashboard の学年選択と連動＝リテンション */}
-            <Link href="/dashboard" className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-indigo-200 bg-indigo-50/50 p-4 text-sm font-bold text-indigo-700 transition-colors hover:bg-indigo-50">
+            <Link href="/dashboard" className="mt-4 flex items-center justify-between gap-3 rounded-lg border border-brand-200 bg-brand-50/50 p-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50">
               <span className="flex items-center gap-2"><LineChart className="h-4 w-4" />学年を選んで、内申点の伸びを記録・グラフ化する（無料）</span>
               <ChevronRight className="h-4 w-4 shrink-0" />
             </Link>
@@ -238,7 +238,7 @@ export default function NaishinAgeKataPage() {
           </div>
 
           {/* 深掘り（権威記事＝canonicalな解説へ） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">さらに詳しく（攻略記事）</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
@@ -249,7 +249,7 @@ export default function NaishinAgeKataPage() {
                 { href: '/chousasho', title: '調査書とは？内申点との違い' },
                 { href: '/juku-hiyou', title: '塾代シミュレーター（無料体験の比較）' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 text-sm text-slate-700 transition-shadow">
                   {c.title}
                   <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
                 </Link>
@@ -257,11 +257,11 @@ export default function NaishinAgeKataPage() {
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-blue-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

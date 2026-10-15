@@ -50,7 +50,7 @@ export function JukuReviewModerationActions({
             type="button"
             onClick={() => act('approved')}
             disabled={pending !== null}
-            className="rounded-md bg-emerald-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+            className="rounded-md bg-brand-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
           >
             {pending === 'approved' ? '処理中…' : '承認'}
           </button>
@@ -60,13 +60,13 @@ export function JukuReviewModerationActions({
             type="button"
             onClick={() => act('rejected')}
             disabled={pending !== null}
-            className="rounded-md bg-rose-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+            className="rounded-md bg-red-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
           >
             {pending === 'rejected' ? '処理中…' : '却下'}
           </button>
         )}
       </div>
-      {error && <p className="text-xs text-rose-600">{error}</p>}
+      {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
 }

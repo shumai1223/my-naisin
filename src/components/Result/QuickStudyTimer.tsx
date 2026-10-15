@@ -2,13 +2,13 @@
 
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Timer, Play, Pause, RotateCcw, Coffee, Brain, Zap } from 'lucide-react';
+import { Timer, Play, Pause, RotateCcw, Coffee, Brain, Zap } from '@/components/icons';
 
 const TIMER_PRESETS = [
-  { label: '5分', seconds: 5 * 60, icon: Zap, color: 'from-green-400 to-emerald-500' },
-  { label: '15分', seconds: 15 * 60, icon: Brain, color: 'from-blue-400 to-indigo-500' },
-  { label: '25分', seconds: 25 * 60, icon: Timer, color: 'from-purple-400 to-violet-500' },
-  { label: '休憩5分', seconds: 5 * 60, icon: Coffee, color: 'from-amber-400 to-orange-500', isBreak: true },
+  { label: '5分', seconds: 5 * 60, icon: Zap, color: 'bg-brand-400' },
+  { label: '15分', seconds: 15 * 60, icon: Brain, color: 'bg-brand-400' },
+  { label: '25分', seconds: 25 * 60, icon: Timer, color: 'bg-slate-400' },
+  { label: '休憩5分', seconds: 5 * 60, icon: Coffee, color: 'bg-amber-400', isBreak: true },
 ];
 
 const TOTAL_STUDY_KEY = 'my-naishin:total-study-time';
@@ -121,17 +121,17 @@ export function QuickStudyTimer() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.25 }}
-      className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-5 text-white relative overflow-hidden">
+      <div className="bg-brand-500 p-5 text-white relative overflow-hidden">
         <AnimatePresence>
           {showComplete && (
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
-              className="absolute inset-0 flex items-center justify-center bg-emerald-500/90 backdrop-blur-sm z-10"
+              className="absolute inset-0 flex items-center justify-center bg-brand-500/90 z-10"
             >
               <div className="text-center">
                 <div className="text-4xl mb-2">🎉</div>
@@ -143,7 +143,7 @@ export function QuickStudyTimer() {
         
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
+            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
               <Timer className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -169,7 +169,7 @@ export function QuickStudyTimer() {
                   <button
                     key={index}
                     onClick={() => startTimer(index)}
-                    className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r ${preset.color} text-white hover:shadow-lg transition-all hover:scale-[1.02]`}
+                    className={`flex items-center gap-3 p-4 rounded-lg ${preset.color} text-white transition-all hover:scale-[1.02]`}
                   >
                     <Icon className="h-5 w-5" />
                     <span className="font-bold">{preset.label}</span>
@@ -190,13 +190,13 @@ export function QuickStudyTimer() {
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
-                  className={`h-full bg-gradient-to-r ${TIMER_PRESETS[selectedPreset].color} rounded-full`}
+                  className={`h-full ${TIMER_PRESETS[selectedPreset].color} rounded-full`}
                 />
               </div>
             </div>
 
             <div className="text-center mb-4">
-              <div className="text-5xl font-black text-slate-800 font-mono">
+              <div className="text-5xl font-bold text-slate-800 font-mono">
                 {formatTime(timeLeft)}
               </div>
               <div className="text-sm text-slate-500 mt-1">
@@ -209,10 +209,10 @@ export function QuickStudyTimer() {
             <div className="flex items-center justify-center gap-4">
               <button
                 onClick={toggleTimer}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white transition-all hover:scale-105 ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white transition-all hover:scale-105 ${
                   isRunning
                     ? 'bg-amber-500 hover:bg-amber-600'
-                    : 'bg-emerald-500 hover:bg-emerald-600'
+                    : 'bg-brand-500 hover:bg-brand-600'
                 }`}
               >
                 {isRunning ? (
@@ -229,7 +229,7 @@ export function QuickStudyTimer() {
               </button>
               <button
                 onClick={resetTimer}
-                className="flex items-center gap-2 px-4 py-3 rounded-xl font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all"
+                className="flex items-center gap-2 px-4 py-3 rounded-lg text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all"
               >
                 <RotateCcw className="h-4 w-4" />
                 リセット
@@ -239,8 +239,8 @@ export function QuickStudyTimer() {
         )}
 
         {/* Tips */}
-        <div className="mt-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 p-3 border border-indigo-200">
-          <p className="text-xs text-indigo-700 text-center">
+        <div className="mt-4 rounded-lg bg-brand-50 p-3 border border-brand-200">
+          <p className="text-xs text-brand-700 text-center">
             💡 25分勉強→5分休憩のポモドーロ法で集中力UP！
           </p>
         </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { AlertTriangle, Send, CheckCircle } from 'lucide-react';
+import { AlertTriangle, Send, CheckCircle } from '@/components/icons';
 
 import { CONTACT_EMAIL, submitContact, openMailtoFallback } from '@/lib/contact';
 
@@ -46,16 +46,16 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
 
   if (isSubmitted) {
     return (
-      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center">
-        <CheckCircle className="mx-auto h-12 w-12 text-emerald-600" />
-        <h3 className="mt-4 text-lg font-semibold text-emerald-800">ご報告ありがとうございます</h3>
+      <div className="rounded-lg border border-brand-200 bg-brand-50 p-6 text-center">
+        <CheckCircle className="mx-auto h-12 w-12 text-brand-600" />
+        <h3 className="mt-4 text-lg font-bold text-brand-800">ご報告ありがとうございます</h3>
         {mailtoMode ? (
-          <p className="mt-2 text-sm text-emerald-600">
+          <p className="mt-2 text-sm text-brand-600">
             メールアプリに内容を下書きしました。<strong>そのまま送信</strong>してください。<br />
             開かない場合は <a href={`mailto:${CONTACT_EMAIL}`} className="font-bold underline">{CONTACT_EMAIL}</a> までお願いします。
           </p>
         ) : (
-          <p className="mt-2 text-sm text-emerald-600">
+          <p className="mt-2 text-sm text-brand-600">
             内容を確認し、必要に応じて修正いたします。
           </p>
         )}
@@ -64,10 +64,10 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
   }
 
   return (
-    <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6">
+    <div className="rounded-lg border border-amber-200 bg-amber-50 p-6">
       <div className="mb-4 flex items-center gap-2">
         <AlertTriangle className="h-5 w-5 text-amber-600" />
-        <h3 className="text-lg font-semibold text-amber-800">情報の誤りを報告する</h3>
+        <h3 className="text-lg font-bold text-amber-800">情報の誤りを報告する</h3>
       </div>
       
       <p className="mb-4 text-sm text-amber-700">
@@ -76,14 +76,14 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="error-report-type" className="mb-2 block text-sm font-medium text-slate-700">
+          <label htmlFor="error-report-type" className="mb-2 block text-sm text-slate-700">
             報告内容 <span className="text-red-500">*</span>
           </label>
           <select
             id="error-report-type"
             name="type"
             required
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           >
             <option value="">選択してください</option>
             <option value="calculation">計算式が間違っている</option>
@@ -95,7 +95,7 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
         </div>
 
         <div>
-          <label className="mb-2 block text-sm font-medium text-slate-700">
+          <label className="mb-2 block text-sm text-slate-700">
             詳細 <span className="text-red-500">*</span>
           </label>
           <textarea
@@ -103,12 +103,12 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
             required
             rows={3}
             placeholder="具体的な誤り内容や、正しい情報をご記入ください"
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
 
         <div>
-          <label htmlFor="error-report-email" className="mb-2 block text-sm font-medium text-slate-700">
+          <label htmlFor="error-report-email" className="mb-2 block text-sm text-slate-700">
             メールアドレス（任意）
           </label>
           <input
@@ -116,14 +116,14 @@ export function ErrorReportForm({ prefectureCode, prefectureName }: ErrorReportF
             type="email"
             name="email"
             placeholder="確認が必要な場合にご連絡します"
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
           />
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-2 rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 rounded-lg bg-amber-600 px-4 py-2 text-sm text-white transition-colors hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>

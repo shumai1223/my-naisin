@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, BarChart3, ShieldCheck, HelpCircle, Info } from 'lucide-react';
+import { Home, ChevronRight, BarChart3, ShieldCheck, HelpCircle, Info } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -143,10 +143,10 @@ export default async function StatsPage() {
         ]}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -155,7 +155,7 @@ export default async function StatsPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <BarChart3 className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">統計データ（利用者オプトイン集計）</h1>
@@ -167,10 +167,10 @@ export default async function StatsPage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-emerald-200 bg-emerald-50 p-5">
+          <section className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-5">
             <div className="flex items-start gap-3">
-              <ShieldCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-600" />
-              <p className="text-sm leading-relaxed text-emerald-900">
+              <ShieldCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-600" />
+              <p className="text-sm leading-relaxed text-brand-900">
                 このデータは各計算機ページで「匿名で統計に協力する」に同意した方の結果のみを集計したものです。氏名・メールアドレス・IPアドレス等は一切収集していません。サンプルサイズが{STATS_MIN_SAMPLE_SIZE}件未満の項目は、個人の値が推測されるのを防ぐため（k-匿名性）、件数のみ表示し集計値は表示しません。
               </p>
             </div>
@@ -180,40 +180,40 @@ export default async function StatsPage() {
             {stats.map(({ metric, aggregate, count, suppressed, prefectureCells }) => {
               const meta = METRIC_META[metric];
               return (
-                <div key={metric} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div key={metric} className="rounded-lg border border-slate-200 bg-white p-6">
                   {/* DW-1: 「全国分布」は母集団を代表しているかのように読める。実体は
                       オプトインした協力者の集計なので、見出しでもそう名乗る。 */}
                   <h2 className="mb-3 text-lg font-bold text-slate-800">{meta.label}の分布（協力者の集計）</h2>
                   {aggregate ? (
                     <>
                       <div className="grid grid-cols-3 gap-3 text-center">
-                        <div className="rounded-xl bg-slate-50 p-3">
-                          <div className="text-[11px] font-bold text-slate-500">平均</div>
-                          <div className="text-2xl font-black text-emerald-700">
+                        <div className="rounded-lg bg-slate-50 p-3">
+                          <div className="text-xs font-bold text-slate-500">平均</div>
+                          <div className="text-2xl font-bold text-brand-700">
                             {aggregate.mean.toFixed(1)}
                             {meta.unit}
                           </div>
                         </div>
-                        <div className="rounded-xl bg-slate-50 p-3">
-                          <div className="text-[11px] font-bold text-slate-500">最小</div>
-                          <div className="text-2xl font-black text-slate-700">
+                        <div className="rounded-lg bg-slate-50 p-3">
+                          <div className="text-xs font-bold text-slate-500">最小</div>
+                          <div className="text-2xl font-bold text-slate-700">
                             {formatStatValue(aggregate.min)}
                             {meta.unit}
                           </div>
                         </div>
-                        <div className="rounded-xl bg-slate-50 p-3">
-                          <div className="text-[11px] font-bold text-slate-500">最大</div>
-                          <div className="text-2xl font-black text-slate-700">
+                        <div className="rounded-lg bg-slate-50 p-3">
+                          <div className="text-xs font-bold text-slate-500">最大</div>
+                          <div className="text-2xl font-bold text-slate-700">
                             {formatStatValue(aggregate.max)}
                             {meta.unit}
                           </div>
                         </div>
                       </div>
-                      <p className="mt-3 text-[11px] text-slate-400">サンプルサイズ：{aggregate.count}件</p>
+                      <p className="mt-3 text-xs text-slate-400">サンプルサイズ：{aggregate.count}件</p>
                     </>
                   ) : (
                     <div
-                      className="rounded-xl border border-dashed border-slate-200 bg-slate-50 p-4 text-center text-sm text-slate-500"
+                      className="rounded-lg border border-dashed border-slate-200 bg-slate-50 p-4 text-center text-sm text-slate-500"
                       role="status"
                     >
                       {suppressed?.code === 'insufficient_sample'
@@ -221,7 +221,7 @@ export default async function StatsPage() {
                         : suppressed?.message}
                     </div>
                   )}
-                  <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-relaxed text-slate-400">
+                  <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-slate-400">
                     <Info className="mt-0.5 h-3 w-3 shrink-0" />
                     {meta.note}
                   </p>
@@ -247,7 +247,7 @@ export default async function StatsPage() {
                       </div>
                     </div>
                   ) : (
-                    <p className="mt-4 border-t border-slate-100 pt-4 text-[11px] leading-relaxed text-slate-400">
+                    <p className="mt-4 border-t border-slate-100 pt-4 text-xs leading-relaxed text-slate-400">
                       都道府県別の内訳は、{STATS_MIN_SAMPLE_SIZE}件以上のデータが集まった都道府県からk-匿名性を保ちつつ順次表示します（現時点で条件を満たす都道府県はまだありません）。
                     </p>
                   )}
@@ -256,13 +256,13 @@ export default async function StatsPage() {
             })}
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
                 <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
                   <h3 className="mb-1 flex items-start gap-1.5 text-sm font-bold text-slate-800">
-                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
                     Q. {f.question}
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
@@ -271,26 +271,26 @@ export default async function StatsPage() {
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 偏差値を計算する
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+              <Link href="/" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 内申点を計算する
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/total-score" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+              <Link href="/total-score" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 総合得点の仕組みを見る
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/quality" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+              <Link href="/quality" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 データの品質・出典について
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/report/2026" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-emerald-200 hover:bg-emerald-50/50">
+              <Link href="/report/2026" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
                 内申点白書2026（47都道府県データ）
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>

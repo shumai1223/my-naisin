@@ -36,7 +36,7 @@ export function FullScoreHensachiCalculator() {
       : null;
 
   return (
-    <div className="rounded-2xl border-2 border-purple-200 bg-white p-5 shadow-lg md:p-6">
+    <div className="rounded-lg border-2 border-slate-200 bg-white p-5 md:p-6">
       <div className="mb-4">
         <span className="mb-1 block text-xs font-bold text-slate-600">満点</span>
         <div className="flex flex-wrap gap-2">
@@ -49,7 +49,7 @@ export function FullScoreHensachiCalculator() {
                 setFullScore(String(p));
               }}
               className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
-                Number(fullScore) === p ? 'bg-purple-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600'
+                Number(fullScore) === p ? 'bg-slate-600 text-white' : 'bg-slate-100 text-slate-600'
               }`}
             >
               {p}点満点
@@ -64,7 +64,7 @@ export function FullScoreHensachiCalculator() {
               onFirstUse();
               setFullScore(e.target.value);
             }}
-            className="h-8 w-24 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+            className="h-8 w-24 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20"
             aria-label="満点を直接入力"
           />
         </div>
@@ -82,7 +82,7 @@ export function FullScoreHensachiCalculator() {
               setScore(e.target.value);
             }}
             placeholder={`例：${Math.round(fullScoreNum * 0.7) || 350}`}
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20"
           />
         </label>
         <label className="block">
@@ -96,7 +96,7 @@ export function FullScoreHensachiCalculator() {
               setAverage(e.target.value);
             }}
             placeholder={`未入力なら${Math.round(fullScoreNum * 0.5) || 250}`}
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20"
           />
         </label>
         <label className="block">
@@ -110,20 +110,20 @@ export function FullScoreHensachiCalculator() {
               setStdDev(e.target.value);
             }}
             placeholder={`未入力なら${Math.round(fullScoreNum * 0.15) || 75}`}
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20"
           />
         </label>
       </div>
 
       {hensachi !== null ? (
-        <div className="mt-5 rounded-xl border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-indigo-50 p-5 text-center" role="status" aria-live="polite">
+        <div className="mt-5 rounded-lg border-2 border-slate-200 bg-slate-50 p-5 text-center" role="status" aria-live="polite">
           <div className="text-xs font-bold text-slate-600">{fullScore}点満点中 {score}点の偏差値</div>
-          <div className="mt-1 text-4xl font-black text-purple-700">{roundHensachi(hensachi)}</div>
+          <div className="mt-1 text-4xl font-bold text-slate-700">{roundHensachi(hensachi)}</div>
         </div>
       ) : (
         <p className="mt-4 text-center text-xs text-slate-400">点数を入力してください</p>
       )}
-      <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+      <p className="mt-3 text-xs leading-relaxed text-slate-400">
         ※ 偏差値の式は満点の大きさに左右されません（点数・平均点・標準偏差の関係が同じなら、100点満点でも1000点満点でも同じ偏差値になります）。
         平均点・標準偏差が分からない場合は、平均点=満点の50%・標準偏差=満点の15%を仮定した目安値で計算します。
       </p>

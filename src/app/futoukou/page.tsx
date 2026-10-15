@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Heart, CalendarX, FileText, ShieldCheck, HelpCircle, Route } from 'lucide-react';
+import { Home, ChevronRight, Heart, CalendarX, FileText, ShieldCheck, HelpCircle, Route } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -84,16 +84,16 @@ export default function FutoukouPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-rose-50/40 to-white">
+      <div className="min-h-screen bg-red-50/40">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">不登校と内申点</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-red-500 text-white">
               <Heart className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">不登校と内申点</h1>
@@ -117,9 +117,9 @@ export default function FutoukouPage() {
             {POINTS.map((p) => {
               const Icon = p.icon;
               return (
-                <div key={p.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div key={p.title} className="rounded-lg border border-slate-200 bg-white p-5">
                   <div className="mb-2 flex items-center gap-2 font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-rose-50 text-rose-600"><Icon className="h-5 w-5" /></span>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-red-50 text-red-600"><Icon className="h-5 w-5" /></span>
                     {p.title}
                   </div>
                   <p className="text-sm leading-relaxed text-slate-600">{p.body}</p>
@@ -129,16 +129,16 @@ export default function FutoukouPage() {
           </section>
 
           {/* 内申点が低くても届くか確認（捏造しない・ツール誘導） */}
-          <section className="mt-8 rounded-2xl border-2 border-rose-200 bg-rose-50/40 p-6 text-center shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-red-200 bg-red-50/40 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">「当日点で何点取れば届くか」を逆算する</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
               欠席が多い・内申点が低いときは、当日点で勝負できる学校・区分を選ぶのが現実的です。志望校のボーダーから、当日に必要な点数を逆算してみましょう。
             </p>
             <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/reverse" className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-rose-700">
+              <Link href="/reverse" className="inline-flex items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-red-700">
                 <Route className="h-4 w-4" />志望校から必要な当日点を逆算する
               </Link>
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-rose-700 ring-1 ring-rose-200 transition-colors hover:bg-rose-50">
+              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-red-700 ring-1 ring-red-200 transition-colors hover:bg-red-50">
                 今の内申点を計算する（47都道府県）
               </Link>
             </div>
@@ -146,30 +146,30 @@ export default function FutoukouPage() {
 
           {/* 通信制・フリースクール子ページ */}
           <section className="mt-8 space-y-3">
-            <Link href="/futoukou/tsugaku" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
+            <Link href="/futoukou/tsugaku" className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-red-300">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-red-500 text-white">
                 <Route className="h-5 w-5" />
               </span>
               <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">通信制高校・フリースクールという選択肢<ChevronRight className="h-4 w-4 text-slate-400" /></span>
+                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-red-700">通信制高校・フリースクールという選択肢<ChevronRight className="h-4 w-4 text-slate-400" /></span>
                 <span className="mt-1 block text-sm leading-relaxed text-slate-600">全日制以外の進路の違い（通信制・定時制・サポート校・フリースクール）と、出席扱いの仕組み・在宅で学ぶ方法。</span>
               </span>
             </Link>
-            <Link href="/futoukou/shussekiatsukai" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
+            <Link href="/futoukou/shussekiatsukai" className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-red-300">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-red-500 text-white">
                 <ShieldCheck className="h-5 w-5" />
               </span>
               <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">「出席扱い」とは？相談の流れ<ChevronRight className="h-4 w-4 text-slate-400" /></span>
+                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-red-700">「出席扱い」とは？相談の流れ<ChevronRight className="h-4 w-4 text-slate-400" /></span>
                 <span className="mt-1 block text-sm leading-relaxed text-slate-600">自宅学習・フリースクールが出席扱いになる仕組みと、学校への相談から校長判断までの一般的な流れ。</span>
               </span>
             </Link>
-            <Link href="/futoukou/teiji-tsushin-hikaku" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
+            <Link href="/futoukou/teiji-tsushin-hikaku" className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-red-300">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-red-500 text-white">
                 <Route className="h-5 w-5" />
               </span>
               <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">定時制・通信制の倍率を都道府県で比較<ChevronRight className="h-4 w-4 text-slate-400" /></span>
+                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-red-700">定時制・通信制の倍率を都道府県で比較<ChevronRight className="h-4 w-4 text-slate-400" /></span>
                 <span className="mt-1 block text-sm leading-relaxed text-slate-600">各都道府県教育委員会が公表している募集人員・出願者数・倍率を、都道府県別にそのまま集計しました。</span>
               </span>
             </Link>
@@ -179,7 +179,7 @@ export default function FutoukouPage() {
           <FutoukouLeadCTA className="mt-8" />
 
           {/* 回遊（調査書文脈で自然につながる） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ページ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
@@ -188,7 +188,7 @@ export default function FutoukouPage() {
                 { href: '/prefectures', title: '都道府県別の選抜方式（当日点比率）' },
                 { href: '/mendan', title: '三者面談で進路を相談する準備' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 text-sm text-slate-700 transition-shadow">
                   {c.title}
                   <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
                 </Link>
@@ -196,11 +196,11 @@ export default function FutoukouPage() {
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-rose-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-red-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

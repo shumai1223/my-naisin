@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { GraduationCap, ChevronRight, Home, AlertCircle, ExternalLink, Info } from 'lucide-react';
+import { GraduationCap, ChevronRight, Home, AlertCircle, ExternalLink, Info } from '@/components/icons';
 
 import { getPrefectureAlternativeTracks, ALTERNATIVE_TRACK_PREFECTURE_CODES } from '@/lib/teiji-tsushin-options';
 import { PREFECTURES } from '@/lib/prefectures';
@@ -75,16 +75,16 @@ export default async function PrefectureTeijiTsushinPage({ params }: PageProps) 
         keywords={[pref.name, '定時制', '通信制', '倍率', '公立高校入試']}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href={`/${pref.code}`} className="hover:text-blue-600">
+            <Link href={`/${pref.code}`} className="hover:text-brand-600">
               {pref.name}
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -93,7 +93,7 @@ export default async function PrefectureTeijiTsushinPage({ params }: PageProps) 
 
           {/* Header */}
           <header className="mb-6 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-600 to-emerald-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <GraduationCap className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -106,7 +106,7 @@ export default async function PrefectureTeijiTsushinPage({ params }: PageProps) 
           </header>
 
           {/* ガードレール注記（P1-0：あなたはここへ行くべきとは書かない・不安を煽らない） */}
-          <div className="mb-8 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mb-8 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
             <p className="text-xs leading-relaxed text-amber-800">
               このページは{pref.name}教育委員会が公表した資料に基づく<strong>制度の説明</strong>です。
@@ -116,24 +116,24 @@ export default async function PrefectureTeijiTsushinPage({ params }: PageProps) 
           </div>
 
           {data.coverageStatus === 'partial' && (
-            <div className="mb-8 flex items-start gap-2 rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className="mb-8 flex items-start gap-2 rounded-lg border border-slate-200 bg-slate-50 p-4">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
               <p className="text-xs leading-relaxed text-slate-600">{data.coverageNote}</p>
             </div>
           )}
 
           {teijiSchools.length > 0 && (
-            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+            <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
               <h2 className="mb-4 text-lg font-bold text-slate-800">定時制課程（{teijiSchools.length}件）</h2>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[480px] text-left text-sm">
                   <thead>
                     <tr className="border-b border-slate-200 text-xs text-slate-500">
-                      <th className="py-2 pr-3 font-medium">学校名</th>
-                      <th className="py-2 pr-3 font-medium">学科</th>
-                      <th className="py-2 pr-3 text-right font-medium">募集人員</th>
-                      <th className="py-2 pr-3 text-right font-medium">出願者数</th>
-                      <th className="py-2 text-right font-medium">倍率</th>
+                      <th className="py-2 pr-3">学校名</th>
+                      <th className="py-2 pr-3">学科</th>
+                      <th className="py-2 pr-3 text-right">募集人員</th>
+                      <th className="py-2 pr-3 text-right">出願者数</th>
+                      <th className="py-2 text-right">倍率</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -153,17 +153,17 @@ export default async function PrefectureTeijiTsushinPage({ params }: PageProps) 
           )}
 
           {tsushinSchools.length > 0 && (
-            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+            <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
               <h2 className="mb-4 text-lg font-bold text-slate-800">通信制課程（{tsushinSchools.length}件）</h2>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[480px] text-left text-sm">
                   <thead>
                     <tr className="border-b border-slate-200 text-xs text-slate-500">
-                      <th className="py-2 pr-3 font-medium">学校名</th>
-                      <th className="py-2 pr-3 font-medium">学科</th>
-                      <th className="py-2 pr-3 text-right font-medium">募集人員</th>
-                      <th className="py-2 pr-3 text-right font-medium">出願者数</th>
-                      <th className="py-2 text-right font-medium">倍率</th>
+                      <th className="py-2 pr-3">学校名</th>
+                      <th className="py-2 pr-3">学科</th>
+                      <th className="py-2 pr-3 text-right">募集人員</th>
+                      <th className="py-2 pr-3 text-right">出願者数</th>
+                      <th className="py-2 text-right">倍率</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -183,16 +183,16 @@ export default async function PrefectureTeijiTsushinPage({ params }: PageProps) 
           )}
 
           {/* 通信制・定時制とは何かという一般的な説明への誘導（重複を避けるため相互リンクのみ） */}
-          <div className="mb-8 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+          <div className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
             定時制・通信制・サポート校・フリースクールの違いや選び方は
-            <Link href="/futoukou/tsugaku" className="mx-1 font-bold text-teal-700 underline">
+            <Link href="/futoukou/tsugaku" className="mx-1 font-bold text-brand-700 underline">
               通信制高校・フリースクールという選択肢
             </Link>
             で解説しています。
           </div>
 
           {/* 出典 */}
-          <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs leading-relaxed text-amber-800">

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { FileText, Download, Calendar, ExternalLink } from 'lucide-react';
+import { FileText, Download, Calendar, ExternalLink } from '@/components/icons';
 import { Button } from '@/components/ui/Button';
 import { getPrefectureByCode } from '@/lib/prefectures';
 
@@ -225,7 +225,7 @@ export function PDFExportButton({
     <Button 
       variant="secondary" 
       onClick={handlePDFExport}
-      className={`w-full h-12 text-sm font-medium ${className}`}
+      className={`w-full h-12 text-sm ${className}`}
       leftIcon={<FileText className="h-4 w-4" />}
     >
       結果をPDFで保存（印刷）

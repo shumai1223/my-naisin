@@ -11,7 +11,7 @@ import {
   CheckSquare,
   MessageCircleQuestion,
   CalendarClock,
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -131,11 +131,11 @@ export default function MendanPage() {
       />
       <FAQPageSchema faqItems={MENDAN_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500 print:hidden">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -145,7 +145,7 @@ export default function MendanPage() {
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl print:hidden">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white print:hidden">
               <Users className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">三者面談 準備チェックリスト</h1>
@@ -159,7 +159,7 @@ export default function MendanPage() {
           </header>
 
           {/* タイミングの案内 */}
-          <section className="mb-8 rounded-2xl border border-amber-200 bg-amber-50/60 p-5 print:hidden">
+          <section className="mb-8 rounded-lg border border-amber-200 bg-amber-50/60 p-5 print:hidden">
             <div className="mb-2 flex items-center gap-2 font-bold text-amber-800">
               <CalendarClock className="h-5 w-5" />
               面談の時期と狙い
@@ -180,15 +180,15 @@ export default function MendanPage() {
               {PREP_STEPS.map((s) => {
                 const Icon = s.icon;
                 return (
-                  <div key={s.title} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                  <div key={s.title} className="flex flex-col rounded-lg border border-slate-200 bg-white p-5">
+                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="mb-1.5 text-sm font-bold text-slate-800">{s.title}</h3>
                     <p className="mb-4 flex-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
                     <Link
                       href={s.href}
-                      className="inline-flex items-center justify-center gap-1 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-blue-700"
+                      className="inline-flex items-center justify-center gap-1 rounded-lg bg-brand-600 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-brand-700"
                     >
                       {s.cta}
                     </Link>
@@ -205,18 +205,18 @@ export default function MendanPage() {
           <section className="mb-10">
             <div className="mb-4 flex items-center gap-2">
               <h2 className="flex items-center gap-2 text-xl font-bold text-slate-800">
-                <MessageCircleQuestion className="h-5 w-5 text-indigo-600 print:hidden" />
+                <MessageCircleQuestion className="h-5 w-5 text-brand-600 print:hidden" />
                 先生に聞くことリスト
               </h2>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border print:shadow-none">
+            <div className="rounded-lg border border-slate-200 bg-white p-6 print:border print:shadow-none">
               <p className="mb-4 text-sm text-slate-500 print:hidden">
                 印刷して持参すると、聞き忘れを防げます。気になる項目にチェックを入れてお使いください。
               </p>
               <ul className="space-y-3">
                 {QUESTIONS.map((q) => (
                   <li key={q} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">
-                    <CheckSquare className="mt-0.5 h-5 w-5 shrink-0 text-indigo-400" />
+                    <CheckSquare className="mt-0.5 h-5 w-5 shrink-0 text-brand-400" />
                     <span>{q}</span>
                   </li>
                 ))}
@@ -227,10 +227,10 @@ export default function MendanPage() {
           {/* 保護者が準備すること */}
           <section className="mb-10 print:hidden">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <ClipboardList className="h-5 w-5 text-emerald-600" />
+              <ClipboardList className="h-5 w-5 text-brand-600" />
               保護者が面談前に整理しておくこと
             </h2>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="rounded-lg border border-slate-200 bg-white p-6">
               <ul className="space-y-2.5 text-sm leading-relaxed text-slate-700">
                 <li>・志望校の<strong>費用感</strong>（公立・私立の学費、塾代を含む3年間の総額イメージ）</li>
                 <li>・<strong>通学範囲</strong>（無理なく通える距離・通学時間）</li>
@@ -242,7 +242,7 @@ export default function MendanPage() {
               </p>
               <p className="mt-2 text-xs text-slate-500">
                 英語が不安な場合は、
-                <AffiliateAd placement="mendan" id="moshimo-rewrite" hideLabel linkClassName="font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700" />
+                <AffiliateAd placement="mendan" id="moshimo-rewrite" hideLabel linkClassName="font-bold text-brand-600 underline decoration-brand-300 underline-offset-2 hover:text-brand-700" />
                 （PR）で受験英語専門の無料相談もできます。
               </p>
             </div>
@@ -253,7 +253,7 @@ export default function MendanPage() {
             <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-3">
               {MENDAN_FAQS.map((faq) => (
-                <details key={faq.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
                   <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
                     <span className="flex items-center justify-between gap-3">
                       {faq.question}

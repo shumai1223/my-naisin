@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { Calculator, RotateCcw } from '@/components/icons';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 import { SAITAMA_MAX_GAKURYOKU, SAITAMA_ASSUMED_TOTAL_CEILING, computeSaitamaTotalScore } from '@/lib/total-score/saitama';
 
@@ -43,10 +43,10 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border-2 border-violet-200 bg-white shadow-lg">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-violet-100 bg-gradient-to-r from-violet-50 to-purple-50 px-6 py-4">
+    <div className="overflow-hidden rounded-lg border-2 border-slate-200 bg-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 bg-slate-50 px-6 py-4">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Calculator className="h-5 w-5 text-violet-600" />
+          <Calculator className="h-5 w-5 text-slate-600" />
           埼玉県の総合得点（目安）を計算
         </h2>
         <button
@@ -73,7 +73,7 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
             placeholder="例：380"
-            className="h-12 w-full rounded-xl border border-slate-200 px-4 text-base outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
         </div>
 
@@ -89,7 +89,7 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
             value={chosashoInput}
             onChange={(e) => setChosashoInput(e.target.value)}
             placeholder="例：260"
-            className="h-12 w-full rounded-xl border border-slate-200 px-4 text-base outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           />
           <p className="mt-2 text-xs leading-relaxed text-slate-500">
             調査書点の満点・換算方法は高校・学科ごとに異なります。上の「学年比率 早見表」で重み付けを確認したうえで、志望校の募集要項に沿ってご自身で換算した点数を入力してください。
@@ -98,10 +98,10 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
       </div>
 
       {hasInput && (
-        <div className="border-t-2 border-violet-100 bg-gradient-to-br from-violet-50 to-purple-50 px-6 py-6 text-center">
+        <div className="border-t-2 border-slate-100 bg-slate-50 px-6 py-6 text-center">
           <div className="mb-1 text-xs font-bold text-slate-600">学力検査＋調査書点の合計（目安）</div>
-          <div className="text-5xl font-black text-violet-700">{total}</div>
-          <div className="mx-auto mt-4 max-w-sm rounded-xl border border-violet-100 bg-white p-3 text-left">
+          <div className="text-5xl font-bold text-slate-700">{total}</div>
+          <div className="mx-auto mt-4 max-w-sm rounded-lg border border-slate-100 bg-white p-3 text-left">
             <div className="mb-2 text-xs font-bold text-slate-700">内訳</div>
             <ul className="space-y-1 text-xs text-slate-600">
               <li>学力検査：{gakuryoku} / {SAITAMA_MAX_GAKURYOKU}点</li>
@@ -109,7 +109,7 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
               <li className="border-t border-slate-100 pt-1 font-bold">合計：{total}点</li>
             </ul>
           </div>
-          <p className="mx-auto mt-3 max-w-sm text-[11px] leading-relaxed text-slate-400">
+          <p className="mx-auto mt-3 max-w-sm text-xs leading-relaxed text-slate-400">
             ※ 埼玉県は調査書点の満点・学力検査との比率が高校・学科ごとに異なるため、この合計は入力値をそのまま足しただけの目安です。学校別の合格ボーダーを示すものではありません。
           </p>
 

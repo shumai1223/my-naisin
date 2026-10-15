@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, BookCheck, HelpCircle, TrendingUp, GraduationCap } from 'lucide-react';
+import { Home, ChevronRight, Wallet, BookCheck, HelpCircle, TrendingUp, GraduationCap } from '@/components/icons';
 
 import { EducationCostCalculator } from '@/components/EducationCostCalculator';
 import { AnswerBox } from '@/components/AnswerBox';
@@ -87,10 +87,10 @@ export default function KyouikuHiPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -98,7 +98,7 @@ export default function KyouikuHiPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Wallet className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">中学〜高校卒業まで、教育費はいくら？</h1>
@@ -126,13 +126,13 @@ export default function KyouikuHiPage() {
           {/* 進路別ざっくり比較（engine算出・捏造ゼロ） */}
           <section className="mb-10">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <TrendingUp className="h-5 w-5 text-indigo-600" />
+              <TrendingUp className="h-5 w-5 text-brand-600" />
               進路別・高校3年間の費用の目安
             </h2>
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="bg-indigo-600 text-white">
+                  <tr className="bg-brand-600 text-white">
                     <th className="px-4 py-3 text-left font-bold">進路</th>
                     <th className="px-4 py-3 text-left font-bold">高校3年間の総額（準備費込み）</th>
                   </tr>
@@ -153,9 +153,9 @@ export default function KyouikuHiPage() {
           </section>
 
           {/* 都道府県独自の上乗せ制度への橋渡し（Y-9・私立は国の支援金だけで判断しない） */}
-          <section className="mb-10 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-6">
-            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-emerald-900">
-              <Wallet className="h-5 w-5 text-emerald-600" />
+          <section className="mb-10 rounded-lg border border-brand-200 bg-brand-50/50 p-6">
+            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-brand-900">
+              <Wallet className="h-5 w-5 text-brand-600" />
               私立を検討中なら、都道府県独自の上乗せ制度も確認を
             </h2>
             <p className="text-sm leading-relaxed text-slate-700">
@@ -164,7 +164,7 @@ export default function KyouikuHiPage() {
             </p>
             <Link
               href="/shougakukin#pref-subsidy"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 hover:text-emerald-800"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-brand-700 hover:text-brand-800"
             >
               都道府県別の上乗せ制度を確認する
               <ChevronRight className="h-4 w-4" />
@@ -172,9 +172,9 @@ export default function KyouikuHiPage() {
           </section>
 
           {/* 大学進学の橋渡し（姉妹サイト My Shingaku へ） */}
-          <section className="mb-10 rounded-2xl border border-violet-200 bg-violet-50/50 p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-violet-900">
-              <GraduationCap className="h-5 w-5 text-violet-600" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-slate-50/50 p-6">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-900">
+              <GraduationCap className="h-5 w-5 text-slate-600" />
               大学進学まで考えると（概算の目安）
             </h2>
             <ul className="space-y-1.5 text-sm leading-relaxed text-slate-700">
@@ -189,7 +189,7 @@ export default function KyouikuHiPage() {
               href="https://my-shingaku.com/gakuhi"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-violet-700 hover:text-violet-800"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-slate-800"
             >
               大学進学の費用を詳しく見る（姉妹サイト My Shingaku）
               <ChevronRight className="h-4 w-4" />
@@ -197,20 +197,20 @@ export default function KyouikuHiPage() {
           </section>
 
           {/* 出典 */}
-          <div className="mb-10 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
+          <div className="mb-10 rounded-lg border border-slate-200 bg-slate-50/60 p-4">
             <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-              <BookCheck className="h-3.5 w-3.5 text-indigo-600" />
+              <BookCheck className="h-3.5 w-3.5 text-brand-600" />
               出典・参考データ（一次情報）
             </div>
             <ul className="space-y-1.5 text-xs leading-relaxed">
               <li>
-                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
                 </a>
                 <span className="text-slate-400"> — 中学・高校の学習費総額（公立/私立）</span>
               </li>
               <li>
-                <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「高校生等への修学支援（就学支援金）」
                 </a>
                 <span className="text-slate-400"> — 授業料の軽減制度</span>
@@ -230,11 +230,11 @@ export default function KyouikuHiPage() {
           {/* FAQ */}
           <section className="mb-10">
             <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-indigo-600" />よくある質問
+              <HelpCircle className="h-5 w-5 text-brand-600" />よくある質問
             </h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
                   <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
                     <span className="flex items-center justify-between gap-3">
                       {f.question}

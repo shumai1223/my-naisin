@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { BookOpen, HelpCircle, Calculator, GraduationCap, ChevronRight, MapPin } from 'lucide-react';
+import { BookOpen, HelpCircle, Calculator, GraduationCap, ChevronRight, MapPin } from '@/components/icons';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { getPrefectureByCode } from '@/lib/prefectures';
 
@@ -46,11 +46,11 @@ export function NaishinGuideSection() {
   return (
     <>
       <FAQPageSchema faqItems={FAQ_ITEMS} />
-      <section className="mt-8 rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-slate-100/80 p-6 md:p-8">
+      <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6 md:p-8">
       {/* Section Header */}
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100">
-          <BookOpen className="h-5 w-5 text-blue-600" />
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100">
+          <BookOpen className="h-5 w-5 text-brand-600" />
         </div>
         <div>
           <h2 className="text-lg font-bold text-slate-800">内申点ガイド</h2>
@@ -66,11 +66,11 @@ export function NaishinGuideSection() {
           return (
             <div
               key={index}
-              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+              className="rounded-lg border border-slate-200 bg-white p-5 transition-shadow"
             >
               <div className="mb-3 flex items-center gap-2">
-                <Icon className="h-5 w-5 text-blue-500" />
-                <h3 className="font-semibold text-slate-800">{card.title}</h3>
+                <Icon className="h-5 w-5 text-brand-500" />
+                <h3 className="font-bold text-slate-800">{card.title}</h3>
               </div>
               <p className="text-sm leading-relaxed text-slate-600">
                 {card.summary}
@@ -82,7 +82,7 @@ export function NaishinGuideSection() {
               )}
               <button
                 onClick={() => setExpandedCard(isExpanded ? null : index)}
-                className="mt-3 flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
+                className="mt-3 flex items-center gap-1 text-sm text-brand-600 hover:text-brand-700"
               >
                 {isExpanded ? '閉じる' : '詳しく見る'}
                 <ChevronRight className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
@@ -93,18 +93,18 @@ export function NaishinGuideSection() {
       </div>
 
       {/* FAQ Section with native details/summary (SSR-friendly) */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="rounded-lg border border-slate-200 bg-white p-5">
         <div className="mb-4 flex items-center gap-2">
           <HelpCircle className="h-5 w-5 text-amber-500" />
-          <h3 className="font-semibold text-slate-800">よくある質問</h3>
+          <h3 className="font-bold text-slate-800">よくある質問</h3>
         </div>
         <div className="space-y-2">
           {FAQ_ITEMS.map((item, index) => (
             <details
               key={index}
-              className="group rounded-xl border border-slate-100 bg-slate-50/50 transition-colors open:bg-blue-50/30"
+              className="group rounded-lg border border-slate-100 bg-slate-50/50 transition-colors open:bg-brand-50/30"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-medium text-slate-700 hover:text-slate-900 [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm text-slate-700 hover:text-slate-900 [&::-webkit-details-marker]:hidden">
                 <span>Q. {item.question}</span>
                 <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-open:rotate-90" />
               </summary>
@@ -117,10 +117,10 @@ export function NaishinGuideSection() {
       </div>
 
       {/* Prefecture Links for SEO */}
-      <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
         <div className="mb-4 flex items-center gap-2">
-          <MapPin className="h-5 w-5 text-blue-500" />
-          <h3 className="font-semibold text-slate-800">都道府県別の内申点計算</h3>
+          <MapPin className="h-5 w-5 text-brand-500" />
+          <h3 className="font-bold text-slate-800">都道府県別の内申点計算</h3>
         </div>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
           {[
@@ -139,9 +139,9 @@ export function NaishinGuideSection() {
               <Link
                 key={code}
                 href={`/${code}/naishin`}
-                className="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-2 text-center transition-colors hover:border-blue-200 hover:bg-blue-50"
+                className="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-2 text-center transition-colors hover:border-brand-200 hover:bg-brand-50"
               >
-                <span className="text-sm font-medium text-slate-700">{pref.name}</span>
+                <span className="text-sm text-slate-700">{pref.name}</span>
                 <span className="text-xs text-slate-500">{pref.maxScore}点満点</span>
               </Link>
             );

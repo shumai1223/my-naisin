@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Info, ExternalLink, Calendar, BookOpen, AlertTriangle } from 'lucide-react';
+import { Info, ExternalLink, Calendar, BookOpen, AlertTriangle } from '@/components/icons';
 
 import { getPrefectureByCode, resolvePrefectureConfig } from '@/lib/prefectures';
 import { sourceTrustLabel } from '@/lib/source-trust';
@@ -39,35 +39,35 @@ export function CalculationBasis({ prefectureCode, variantCode, total, max }: Ca
     : `中学${targetGrades.join('・')}年`;
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
+    <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
       <div className="mb-3 flex items-center gap-2">
-        <Info className="h-4 w-4 text-blue-500" />
+        <Info className="h-4 w-4 text-brand-500" />
         <span className="text-sm font-bold text-slate-700">この計算の根拠</span>
       </div>
 
       <div className="grid gap-3 text-sm md:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-lg bg-white p-3 shadow-sm">
-          <div className="mb-1 text-xs font-medium text-slate-500">対象学年</div>
+        <div className="rounded-lg bg-white p-3">
+          <div className="mb-1 text-xs text-slate-500">対象学年</div>
           <div className="font-bold text-slate-800">{gradeText}</div>
         </div>
 
-        <div className="rounded-lg bg-white p-3 shadow-sm">
-          <div className="mb-1 text-xs font-medium text-slate-500">倍率・配点</div>
+        <div className="rounded-lg bg-white p-3">
+          <div className="mb-1 text-xs text-slate-500">倍率・配点</div>
           <div className="font-bold text-slate-800">{multiplierInfo}</div>
         </div>
 
-        <div className="rounded-lg bg-white p-3 shadow-sm">
-          <div className="mb-1 text-xs font-medium text-slate-500">満点</div>
+        <div className="rounded-lg bg-white p-3">
+          <div className="mb-1 text-xs text-slate-500">満点</div>
           <div className="font-bold text-slate-800">{max}点</div>
           {prefecture.simplifiedCalc && typeof prefecture.actualMaxScore === 'number' && (
-            <div className="mt-0.5 text-[11px] font-medium text-amber-600">
+            <div className="mt-0.5 text-xs text-amber-600">
               実選抜換算 {prefecture.actualMaxScore}点
             </div>
           )}
         </div>
 
-        <div className="rounded-lg bg-white p-3 shadow-sm">
-          <div className="mb-1 text-xs font-medium text-slate-500">あなたの得点率</div>
+        <div className="rounded-lg bg-white p-3">
+          <div className="mb-1 text-xs text-slate-500">あなたの得点率</div>
           <div className="font-bold text-slate-800">{Math.round((total / max) * 100)}%</div>
         </div>
       </div>
@@ -88,9 +88,9 @@ export function CalculationBasis({ prefectureCode, variantCode, total, max }: Ca
               href={prefecture.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs transition-colors ${
                 official
-                  ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                  ? 'bg-brand-50 text-brand-600 hover:bg-brand-100'
                   : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
               }`}
             >
@@ -116,7 +116,7 @@ export function CalculationBasis({ prefectureCode, variantCode, total, max }: Ca
       {(() => {
         const trust = sourceTrustLabel(prefecture);
         return trust?.note ? (
-          <p className="mt-2 text-[11px] leading-relaxed text-slate-400">{trust.note}</p>
+          <p className="mt-2 text-xs leading-relaxed text-slate-400">{trust.note}</p>
         ) : null;
       })()}
     </div>

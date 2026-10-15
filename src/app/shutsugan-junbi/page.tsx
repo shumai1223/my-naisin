@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, CalendarClock, ClipboardList, ChevronRightSquare, HelpCircle } from 'lucide-react';
+import { Home, ChevronRight, CalendarClock, ClipboardList, ChevronRightSquare, HelpCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -102,10 +102,10 @@ export default function ShutsuganJunbiPage() {
         steps={TIMELINE.map((t) => ({ name: `${t.period}：${t.title}`, text: t.desc }))}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-violet-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -114,7 +114,7 @@ export default function ShutsuganJunbiPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
               <ClipboardList className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">学校推薦型・総合型選抜の出願準備チェックリスト</h1>
@@ -125,15 +125,15 @@ export default function ShutsuganJunbiPage() {
           </header>
 
           {/* タイムライン */}
-          <section className="rounded-2xl border-2 border-violet-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border-2 border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <CalendarClock className="h-5 w-5 text-violet-600" />
+              <CalendarClock className="h-5 w-5 text-slate-600" />
               準備タイムライン（一般的な目安）
             </h2>
             <ol className="space-y-4">
               {TIMELINE.map((t) => (
-                <li key={t.period} className="flex gap-4 border-l-4 border-violet-200 pl-4">
-                  <div className="w-20 shrink-0 pt-0.5 text-sm font-black text-violet-700">{t.period}</div>
+                <li key={t.period} className="flex gap-4 border-l-4 border-slate-200 pl-4">
+                  <div className="w-20 shrink-0 pt-0.5 text-sm font-bold text-slate-700">{t.period}</div>
                   <div>
                     <div className="text-sm font-bold text-slate-800">{t.title}</div>
                     <p className="mt-1 text-sm leading-relaxed text-slate-600">{t.desc}</p>
@@ -144,15 +144,15 @@ export default function ShutsuganJunbiPage() {
           </section>
 
           {/* 書類チェックリスト */}
-          <section className="mt-8 rounded-2xl border-2 border-violet-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ClipboardList className="h-5 w-5 text-violet-600" />
+              <ClipboardList className="h-5 w-5 text-slate-600" />
               必要書類チェックリスト（一般的な一覧）
             </h2>
             <ul className="space-y-3">
               {DOCUMENT_CHECKLIST.map((d) => (
-                <li key={d.item} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3">
-                  <input type="checkbox" aria-label={`${d.item}の準備チェック`} className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 text-violet-600" />
+                <li key={d.item} className="flex items-start gap-3 rounded-lg border border-slate-100 bg-slate-50 p-3">
+                  <input type="checkbox" aria-label={`${d.item}の準備チェック`} className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 text-slate-600" />
                   <div>
                     <div className="text-sm font-bold text-slate-800">{d.item}</div>
                     <div className="mt-0.5 text-xs leading-relaxed text-slate-500">{d.note}</div>
@@ -160,7 +160,7 @@ export default function ShutsuganJunbiPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+            <p className="mt-3 text-xs leading-relaxed text-slate-400">
               ※ 必要書類は大学・学部・入試方式によって異なります。上記は一般的に求められることが多い書類の一覧であり、
               志望大学の募集要項に記載の必要書類を必ず確認してください。
             </p>
@@ -171,30 +171,30 @@ export default function ShutsuganJunbiPage() {
             <ParentLeadCTA placement="suisen" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/shutsugan-junbi/shibou-riyuusho" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
+              <Link href="/shutsugan-junbi/shibou-riyuusho" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 志望理由書の書き方・構成
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/shutsugan-junbi/kounai-senkou" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
+              <Link href="/shutsugan-junbi/kounai-senkou" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 校内選考とは？
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/suisen-nyuushi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
+              <Link href="/suisen-nyuushi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 推薦入試の仕組み
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/sougou-gata-senbatsu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
+              <Link href="/sougou-gata-senbatsu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 総合型選抜の仕組み
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/hyotei-heikin/suisen-kijun" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
+              <Link href="/hyotei-heikin/suisen-kijun" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 推薦・併願優遇の評定平均ガイド
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
-              <Link href="/hyotei-heikin/gyakusan" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
+              <Link href="/hyotei-heikin/gyakusan" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
                 残りで必要な評定平均を逆算する
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
@@ -202,17 +202,17 @@ export default function ShutsuganJunbiPage() {
                 href="https://my-shingaku.com/sougou-suisen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between gap-2 rounded-xl border border-indigo-100 bg-indigo-50/50 p-4 text-sm font-bold text-indigo-700 hover:border-indigo-200 hover:bg-indigo-50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-brand-100 bg-brand-50/50 p-4 text-sm font-bold text-brand-700 hover:border-brand-200 hover:bg-brand-50"
               >
                 大学の総合型・学校推薦型選抜を調べる（My Shingaku）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-indigo-400" />
+                <ChevronRightSquare className="h-4 w-4 shrink-0 text-brand-400" />
               </a>
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-violet-600" />
+              <HelpCircle className="h-5 w-5 text-slate-600" />
               よくある質問
             </h2>
             <div className="space-y-4">

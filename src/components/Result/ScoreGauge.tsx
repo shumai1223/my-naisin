@@ -95,14 +95,14 @@ export function ScoreGauge({ percent, total, max, className }: ScoreGaugeProps) 
         >
           <div className="relative">
             <span 
-              className="text-4xl font-black tracking-tight"
+              className="text-4xl font-bold tracking-tight"
               style={{ color: colors.mid }}
             >
               {Math.round(safe)}
             </span>
             <span className="text-lg font-bold text-slate-400">%</span>
           </div>
-          <div className="mt-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+          <div className="mt-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
             {total} / {max}
           </div>
         </motion.div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarPlus } from 'lucide-react';
+import { CalendarPlus } from '@/components/icons';
 
 import { track } from '@/lib/track';
 
@@ -23,7 +23,7 @@ export function ExamScheduleIcsLink({
       href={`/api/calendar/${prefectureCode}`}
       download={`my-naishin-nyuushi-nittei-${prefectureCode}.ics`}
       onClick={() => track('ics_download', { tool: 'exam-schedule', prefecture: prefectureCode })}
-      className="inline-flex items-center gap-2 rounded-xl bg-sky-600 px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-sky-700 active:scale-95"
+      className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-95"
     >
       <CalendarPlus className="h-4 w-4" />
       {prefectureName}の入試日程をカレンダーに追加（無料・ICS）

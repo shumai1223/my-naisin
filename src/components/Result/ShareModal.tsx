@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Download, Share2, X, Loader2, CheckCircle, Sparkles, Smartphone } from 'lucide-react';
+import { Download, Share2, X, Loader2, CheckCircle, Sparkles, Smartphone } from '@/components/icons';
 // canvas-confetti / html2canvas は重い（html2canvas は約150KB+）。共有モーダルを開いて
 // 実際に使う瞬間まで読み込まないよう、ハンドラ内の動的 import に寄せて初期バンドルから外す。
 
@@ -174,10 +174,10 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
   }, [open, onClose]);
 
   const rankColors: Record<string, { gradient: string; glow: string }> = {
-    S: { gradient: 'from-violet-500 via-purple-500 to-fuchsia-500', glow: 'shadow-purple-500/25' },
-    A: { gradient: 'from-blue-500 via-indigo-500 to-violet-500', glow: 'shadow-indigo-500/25' },
-    B: { gradient: 'from-cyan-500 via-blue-500 to-indigo-500', glow: 'shadow-blue-500/25' },
-    C: { gradient: 'from-slate-400 via-slate-500 to-slate-600', glow: 'shadow-slate-500/25' },
+    S: { gradient: 'bg-slate-500', glow: '' },
+    A: { gradient: 'bg-brand-500', glow: '' },
+    B: { gradient: 'bg-brand-500', glow: '' },
+    C: { gradient: 'bg-slate-400', glow: '' },
   };
   const colors = rankColors[result.rank.code] || rankColors.C;
 
@@ -191,7 +191,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="fixed inset-0 bg-gradient-to-br from-slate-900/60 via-slate-800/50 to-slate-900/60 backdrop-blur-md"
+            className="fixed inset-0 bg-slate-900/60"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -206,13 +206,13 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="w-full"
             >
-              <div className="overflow-hidden rounded-3xl bg-white shadow-2xl">
+              <div className="overflow-hidden rounded-lg bg-white">
                 {/* Header with gradient */}
-                <div className={cn('relative bg-gradient-to-r p-6 text-white', colors.gradient)}>
+                <div className={cn('relative p-6 text-white', colors.gradient)}>
                   <div className="absolute inset-0 bg-white/5" />
                   <div className="relative flex items-start justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white/20 backdrop-blur-sm">
+                      <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
                         <Sparkles className="h-6 w-6" />
                       </div>
                       <div>
@@ -223,7 +223,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
                     <button
                       type="button"
                       onClick={onClose}
-                      className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white"
+                      className="grid h-10 w-10 place-items-center rounded-lg bg-white text-white/80 transition-all hover:bg-white hover:text-white"
                       aria-label="閉じる"
                     >
                       <X className="h-5 w-5" />
@@ -237,7 +237,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
                     {/* Preview */}
                     <div className="mx-auto w-full max-w-[200px]">
                       <div className={cn(
-                        'aspect-[9/16] w-full overflow-hidden rounded-2xl border-2 border-slate-100 bg-white shadow-xl',
+                        'aspect-[9/16] w-full overflow-hidden rounded-lg border-2 border-slate-100 bg-white',
                         colors.glow
                       )}>
                         <div className="h-full w-full origin-top-left scale-[0.533]">
@@ -254,14 +254,14 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
                     {/* Actions */}
                     <div className="space-y-4">
                       {/* Tips */}
-                      <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
+                      <div className="rounded-lg bg-brand-50 p-4">
                         <div className="flex items-start gap-3">
-                          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue-100">
-                            <Sparkles className="h-4 w-4 text-blue-600" />
+                          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand-100">
+                            <Sparkles className="h-4 w-4 text-brand-600" />
                           </div>
                           <div>
-                            <div className="text-sm font-semibold text-blue-900">おうちの人に見せると、相談がはじめやすい</div>
-                            <p className="mt-1 text-xs leading-relaxed text-blue-700">
+                            <div className="text-sm font-bold text-brand-900">おうちの人に見せると、相談がはじめやすい</div>
+                            <p className="mt-1 text-xs leading-relaxed text-brand-700">
                               「端末の共有機能」からLINEで送るのが一番カンタン。リンクから保護者の方が「今からできる対策」を確認できます。
                             </p>
                           </div>
@@ -275,13 +275,13 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
                           onClick={onDownload}
                           disabled={busy}
                           className={cn(
-                            'group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r py-4 text-white shadow-lg transition-all hover:shadow-xl disabled:opacity-70',
+                            'group relative w-full overflow-hidden rounded-lg py-4 text-white transition-all disabled:opacity-70',
                             colors.gradient,
                             colors.glow
                           )}
                         >
                           <div className="absolute inset-0 bg-white/0 transition-all group-hover:bg-white/10" />
-                          <div className="relative flex items-center justify-center gap-2 font-semibold">
+                          <div className="relative flex items-center justify-center gap-2 font-bold">
                             {saveStatus === 'generating' ? (
                               <>
                                 <Loader2 className="h-5 w-5 animate-spin" />
@@ -305,9 +305,9 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
                           type="button"
                           onClick={onNativeShare}
                           disabled={preparing}
-                          className="group w-full rounded-2xl border-2 border-slate-200 bg-white py-3.5 text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50 disabled:opacity-70"
+                          className="group w-full rounded-lg border-2 border-slate-200 bg-white py-3.5 text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50 disabled:opacity-70"
                         >
-                          <div className="flex items-center justify-center gap-2 font-medium">
+                          <div className="flex items-center justify-center gap-2">
                             {preparing ? (
                               <>
                                 <Loader2 className="h-4 w-4 animate-spin text-slate-500" />
@@ -341,7 +341,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
                     exit={{ opacity: 0, y: -20 }}
                     className="pointer-events-none absolute inset-x-0 bottom-[-60px] flex justify-center"
                   >
-                    <div className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-xl">
+                    <div className="rounded-full bg-slate-900 px-5 py-2.5 text-sm text-white">
                       {toast}
                     </div>
                   </motion.div>

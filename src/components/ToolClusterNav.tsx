@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calculator, TrendingUp, Percent, Target, MapPin, Users, ChevronRight, Wrench, Sigma, Wallet, ClipboardCheck } from 'lucide-react';
+import { Calculator, TrendingUp, Percent, Target, MapPin, Users, ChevronRight, Wrench, Sigma, Wallet, ClipboardCheck } from '@/components/icons';
 
 /**
  * サイト横断のツールクラスタ・ハブ&スポーク内部リンク（情報設計 §7）。
@@ -44,9 +44,9 @@ const CLUSTER_PAGES: ClusterPage[] = [
 export function ToolClusterNav({ current, className = '' }: { current?: ToolClusterKey; className?: string }) {
   const others = CLUSTER_PAGES.filter((p) => p.key !== current);
   return (
-    <nav aria-label="受験対策ツール一覧" className={`rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50/60 to-white p-5 shadow-sm md:p-6 ${className}`}>
+    <nav aria-label="受験対策ツール一覧" className={`rounded-lg border border-brand-100 bg-brand-50/60 p-5 md:p-6 ${className}`}>
       <h2 className="mb-1 flex items-center gap-2 text-base font-bold text-slate-800">
-        <Wrench className="h-5 w-5 text-indigo-500" />
+        <Wrench className="h-5 w-5 text-brand-500" />
         受験対策ツール（無料・登録不要）
       </h2>
       <p className="mb-4 text-xs leading-relaxed text-slate-500">
@@ -59,15 +59,15 @@ export function ToolClusterNav({ current, className = '' }: { current?: ToolClus
             <li key={p.key}>
               <Link
                 href={p.href}
-                className="group flex items-start gap-3 rounded-xl border border-slate-100 bg-white px-4 py-3 transition-all hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="group flex items-start gap-3 rounded-lg border border-slate-100 bg-white px-4 py-3 transition-all hover:border-brand-200 hover:bg-brand-50/50"
               >
-                <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-indigo-100 text-indigo-600 transition-colors group-hover:bg-indigo-200">
+                <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand-100 text-brand-600 transition-colors group-hover:bg-brand-200">
                   <Icon className="h-4 w-4" />
                 </span>
                 <span className="flex-1">
-                  <span className="flex items-center gap-1 text-sm font-bold text-slate-800 group-hover:text-indigo-700">
+                  <span className="flex items-center gap-1 text-sm font-bold text-slate-800 group-hover:text-brand-700">
                     {p.title}
-                    <ChevronRight className="h-3.5 w-3.5 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-indigo-400" />
+                    <ChevronRight className="h-3.5 w-3.5 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-400" />
                   </span>
                   <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{p.desc}</span>
                 </span>

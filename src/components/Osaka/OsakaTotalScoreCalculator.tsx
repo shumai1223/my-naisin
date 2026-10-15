@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { Calculator, RotateCcw } from '@/components/icons';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 import { OSAKA_TYPE_OPTIONS, OSAKA_TOTAL_SCORE_MAX, computeOsakaTotalScore, osakaRankLabel } from '@/lib/total-score/osaka';
 
@@ -45,20 +45,20 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
 
   const getRankColor = () => {
     if (total >= 760) return 'text-red-700';
-    if (total >= 680) return 'text-orange-700';
+    if (total >= 680) return 'text-amber-700';
     if (total >= 600) return 'text-amber-700';
-    if (total >= 500) return 'text-emerald-700';
-    return 'text-blue-700';
+    if (total >= 500) return 'text-brand-700';
+    return 'text-brand-700';
   };
 
   const getRankLabel = () => osakaRankLabel(total);
 
   return (
-    <div className="rounded-2xl border-2 border-orange-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-orange-100 bg-gradient-to-r from-orange-50 to-amber-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-amber-200 bg-white overflow-hidden">
+      <div className="border-b border-amber-100 bg-amber-50 px-6 py-4">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-orange-600" />
+            <Calculator className="h-5 w-5 text-amber-600" />
             大阪府 総合点を計算（タイプⅠ〜Ⅴ対応）
           </h2>
           <button
@@ -87,7 +87,7 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
             placeholder="例：350"
             min="0"
             max="450"
-            className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-base focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-100"
+            className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-base focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-100"
           />
         </div>
 
@@ -104,7 +104,7 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
             placeholder="例：350"
             min="0"
             max="450"
-            className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-base focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-100"
+            className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-base focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-100"
           />
         </div>
 
@@ -119,7 +119,7 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
                 onClick={() => setTypeIndex(i)}
                 className={`w-full rounded-lg px-3 py-2 text-xs font-bold transition-all text-left ${
                   i === typeIndex
-                    ? 'bg-orange-600 text-white shadow-md'
+                    ? 'bg-amber-600 text-white'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
@@ -132,14 +132,14 @@ export function OsakaTotalScoreCalculator({ onResult }: OsakaTotalScoreCalculato
 
       {/* 結果 */}
       {hasInput && (
-        <div className="border-t-2 border-orange-100 bg-gradient-to-br from-orange-50 to-amber-50 px-6 py-6">
+        <div className="border-t-2 border-amber-100 bg-amber-50 px-6 py-6">
           <div className="text-center">
             <div className="text-xs font-bold text-slate-600 mb-2">あなたの総合点（900点満点）</div>
-            <div className={`text-5xl font-black ${getRankColor()}`}>{total}<span className="text-xl">点</span></div>
+            <div className={`text-5xl font-bold ${getRankColor()}`}>{total}<span className="text-xl">点</span></div>
             <div className="mt-1 text-sm text-slate-500">満点比 {percent.toFixed(1)}%</div>
             <div className="mt-4 text-sm font-bold text-slate-700">{getRankLabel()}</div>
 
-            <div className="mt-4 rounded-xl bg-white border border-orange-100 p-3 text-left">
+            <div className="mt-4 rounded-lg bg-white border border-amber-100 p-3 text-left">
               <div className="text-xs font-bold text-slate-700 mb-2">計算内訳</div>
               <ul className="text-xs text-slate-600 space-y-1">
                 <li>学力検査：{gakuryoku} × {type.gakuryoku} ＝ {gakuryokuScore.toFixed(1)}点</li>

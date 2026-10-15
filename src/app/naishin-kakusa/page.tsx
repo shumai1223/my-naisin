@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ChevronRightSquare, Scale } from 'lucide-react';
+import { Home, ChevronRight, ChevronRightSquare, Scale } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -118,10 +118,10 @@ export default function NaishinKakusaPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -130,7 +130,7 @@ export default function NaishinKakusaPage() {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <Scale className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -142,7 +142,7 @@ export default function NaishinKakusaPage() {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">
               ① 実技教科の傾斜倍率：鹿児島県が突出
             </h2>
@@ -164,8 +164,8 @@ export default function NaishinKakusaPage() {
                 <tbody>
                   {TOP_SKEW.map((s) => (
                     <tr key={s.code} className="border-b border-slate-100 last:border-0">
-                      <td className="py-2 pr-2 font-medium text-slate-800">{s.name}</td>
-                      <td className="py-2 pr-2 font-bold text-indigo-700">{s.ratio}倍</td>
+                      <td className="py-2 pr-2 text-slate-800">{s.name}</td>
+                      <td className="py-2 pr-2 font-bold text-brand-700">{s.ratio}倍</td>
                       <td className="py-2 text-slate-500">
                         {s.core}:{s.practical}
                       </td>
@@ -179,7 +179,7 @@ export default function NaishinKakusaPage() {
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">
               ② 中1・中2は関係ある？ 学年別の重み付け3タイプ
             </h2>
@@ -187,16 +187,16 @@ export default function NaishinKakusaPage() {
               内申点にどの学年の成績を使うかも県によって全く違います。47都道府県は大きく3タイプに分かれます。
             </p>
             <div className="space-y-3">
-              <div className="rounded-xl bg-rose-50 p-4">
-                <p className="text-sm font-bold text-rose-800">
+              <div className="rounded-lg bg-red-50 p-4">
+                <p className="text-sm font-bold text-red-800">
                   中3のみで判定（{GRADE3_ONLY.length}都道府県）
                 </p>
-                <p className="mt-1 text-xs leading-relaxed text-rose-700">
+                <p className="mt-1 text-xs leading-relaxed text-red-700">
                   {GRADE3_ONLY.map((p) => p.name).join('、')}
                   ―中1・中2の内申点は入試の合否には使われません（推薦入試等で別途参照される場合を除く）。
                 </p>
               </div>
-              <div className="rounded-xl bg-amber-50 p-4">
+              <div className="rounded-lg bg-amber-50 p-4">
                 <p className="text-sm font-bold text-amber-800">
                   中3を重く傾斜（{GRADE3_WEIGHTED.length}都道府県）
                 </p>
@@ -205,11 +205,11 @@ export default function NaishinKakusaPage() {
                   ―中1・中2も使われますが、中3の比重が最も大きくなるよう倍率が設定されています。
                 </p>
               </div>
-              <div className="rounded-xl bg-emerald-50 p-4">
-                <p className="text-sm font-bold text-emerald-800">
+              <div className="rounded-lg bg-brand-50 p-4">
+                <p className="text-sm font-bold text-brand-800">
                   中1〜中3を均等に判定（{EQUAL_WEIGHT.length}都道府県）
                 </p>
-                <p className="mt-1 text-xs leading-relaxed text-emerald-700">
+                <p className="mt-1 text-xs leading-relaxed text-brand-700">
                   {EQUAL_WEIGHT.map((p) => p.name).join('、')}
                   ―中1から積み上げた成績がそのまま入試の内申点になります。
                 </p>
@@ -217,7 +217,7 @@ export default function NaishinKakusaPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">
               ③ 満点の設計思想もバラバラ
             </h2>
@@ -229,29 +229,29 @@ export default function NaishinKakusaPage() {
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-indigo-200 bg-indigo-50 p-6 text-center">
+          <section className="mb-8 rounded-lg border border-brand-200 bg-brand-50 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">地図で一目で見る</h2>
             <p className="mb-4 text-sm text-slate-600">
               このレポートのデータを、色分けされた日本地図で全国比較できます。
             </p>
             <Link
               href="/naishin-map"
-              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
             >
               内申点の日本地図を見る
               <ChevronRightSquare className="h-4 w-4" />
             </Link>
             <p className="mt-4 text-xs text-slate-500">
               47都道府県全件の詳細データ・出典・引用ガイドラインは
-              <Link href="/report/2026" className="font-bold text-indigo-700 underline">内申点白書2026</Link>
+              <Link href="/report/2026" className="font-bold text-brand-700 underline">内申点白書2026</Link>
               にまとめています。制度改定の最新情報は
-              <Link href="/nyushi-seido-henkou" className="font-bold text-indigo-700 underline">入試制度変更点まとめ</Link>
+              <Link href="/nyushi-seido-henkou" className="font-bold text-brand-700 underline">入試制度変更点まとめ</Link>
               でも随時更新しています。
             </p>
           </section>
 
           {REPORT_2026_DIGEST_CODES.length > 0 && (
-            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
               <h2 className="mb-3 text-lg font-bold text-slate-800">白書2026の県別ダイジェストを読む</h2>
               <p className="mb-4 text-xs text-slate-500">
                 特に構造的に特徴のある都道府県について、1ページに凝縮したミニレポートを用意しています（順次追加中）。
@@ -264,7 +264,7 @@ export default function NaishinKakusaPage() {
                     <Link
                       key={code}
                       href={`/report/2026/${code}`}
-                      className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                      className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
                     >
                       {pref.name}版ダイジェスト
                       <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
@@ -275,7 +275,7 @@ export default function NaishinKakusaPage() {
             </section>
           )}
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">県別の詳しい分析を読む</h2>
             <p className="mb-4 text-xs text-slate-500">
               特に特徴的な都道府県について、近隣県との比較を交えた詳しい解説を用意しています（順次追加中）。
@@ -288,7 +288,7 @@ export default function NaishinKakusaPage() {
                   <Link
                     key={code}
                     href={`/${code}/naishin-omomi`}
-                    className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                    className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
                   >
                     {pref.name}の内申の重みを詳しく見る
                     <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
@@ -298,7 +298,7 @@ export default function NaishinKakusaPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">自分の県の内申点を計算する</h2>
             <p className="mb-4 text-xs text-slate-500">
               47都道府県すべてで、実際の成績を入れて内申点を計算できます。
@@ -308,7 +308,7 @@ export default function NaishinKakusaPage() {
                 <Link
                   key={pref.code}
                   href={`/${pref.code}/naishin`}
-                  className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-indigo-800 shadow-sm transition-colors hover:bg-indigo-50 hover:text-indigo-900"
+                  className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm text-brand-800 transition-colors hover:bg-brand-50 hover:text-brand-900"
                 >
                   <span className="truncate">{pref.name}</span>
                   <ChevronRightSquare className="h-3 w-3 shrink-0 opacity-60" />
@@ -317,33 +317,33 @@ export default function NaishinKakusaPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
             <div className="grid gap-2 sm:grid-cols-2">
               <Link
                 href="/hensachi"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
               >
                 偏差値を計算する
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
               <Link
                 href="/total-score"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
               >
                 都道府県別の総合得点の仕組みを見る
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
               <Link
                 href="/developers"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
               >
                 このデータをAPIで使う
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
               </Link>
               <Link
                 href="/koukou-bairitsu"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
+                className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
               >
                 高校入試の倍率を計算する
                 <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
@@ -356,7 +356,7 @@ export default function NaishinKakusaPage() {
             <ParentLeadCTA placement="prefecture" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (

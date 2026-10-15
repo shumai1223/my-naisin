@@ -35,14 +35,14 @@ function Gate() {
 
 function ReviewCard({ review, token }: { review: ReviewRow; token: string }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex items-center justify-between gap-2">
         <span className="text-xs font-bold text-slate-500">#{review.id} ・ {review.juku_id}</span>
         <span className="text-xs text-amber-600">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</span>
       </div>
       <p className="mt-2 text-sm text-slate-700">{review.comment}</p>
       <div className="mt-2 flex items-center justify-between gap-2">
-        <span className="text-[11px] text-slate-400">
+        <span className="text-xs text-slate-400">
           {review.prefecture_code ?? '地域未指定'} ・ {review.created_at}
         </span>
         <JukuReviewModerationActions id={review.id} currentStatus={review.status} token={token} />

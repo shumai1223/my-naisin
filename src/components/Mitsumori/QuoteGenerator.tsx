@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { AlertCircle, Printer } from 'lucide-react';
+import { AlertCircle, Printer } from '@/components/icons';
 
 import { BUSINESS_INFO, isBusinessInfoPending } from '@/lib/business-info';
 import { QUOTE_PLANS, type QuotePlan } from '@/lib/quote-plans';
@@ -40,34 +40,34 @@ export function QuoteGenerator() {
   return (
     <div>
       {/* 入力フォーム（印刷時は非表示） */}
-      <div className="print:hidden mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="print:hidden mb-8 rounded-lg border border-slate-200 bg-white p-6">
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block text-sm">
-            <span className="mb-1 block font-semibold text-slate-700">宛先の会社名</span>
+            <span className="mb-1 block font-bold text-slate-700">宛先の会社名</span>
             <input
               type="text"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
               placeholder="例）〇〇株式会社"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
             />
           </label>
           <label className="block text-sm">
-            <span className="mb-1 block font-semibold text-slate-700">ご担当者名（任意）</span>
+            <span className="mb-1 block font-bold text-slate-700">ご担当者名（任意）</span>
             <input
               type="text"
               value={person}
               onChange={(e) => setPerson(e.target.value)}
               placeholder="例）〇〇 様"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
             />
           </label>
           <label className="block text-sm sm:col-span-2">
-            <span className="mb-1 block font-semibold text-slate-700">プラン</span>
+            <span className="mb-1 block font-bold text-slate-700">プラン</span>
             <select
               value={planId}
               onChange={(e) => setPlanId(e.target.value as QuotePlan['id'])}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
             >
               {QUOTE_PLANS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -82,7 +82,7 @@ export function QuoteGenerator() {
           <p className="mt-4 flex items-start gap-2 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-700">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             発行者情報（事業者名・所在地）が未設定のため、この見積書はまだ先方へ送付できる状態ではありません。
-            <a href="/tokushoho" className="mx-1 font-semibold underline">
+            <a href="/tokushoho" className="mx-1 font-bold underline">
               特定商取引法に基づく表記
             </a>
             の設定後にご利用ください。
@@ -92,7 +92,7 @@ export function QuoteGenerator() {
         <button
           type="button"
           onClick={() => window.print()}
-          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-200 transition-all hover:shadow-lg"
+          className="mt-5 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-bold text-white transition-all"
         >
           <Printer className="h-4 w-4" />
           PDFとして保存 / 印刷する
@@ -103,12 +103,12 @@ export function QuoteGenerator() {
       </div>
 
       {/* 見積書本体（印刷対象） */}
-      <div className="mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-white p-8 shadow-sm print:rounded-none print:border-0 print:p-0 print:shadow-none">
+      <div className="mx-auto max-w-2xl rounded-lg border border-slate-200 bg-white p-8 print:rounded-none print:border-0 print:p-0 print:shadow-none">
         <h2 className="text-center text-2xl font-bold tracking-widest text-slate-800">御見積書</h2>
 
         <div className="mt-6 flex items-start justify-between text-sm">
           <div>
-            <p className="text-base font-semibold text-slate-800">
+            <p className="text-base font-bold text-slate-800">
               {company ? `${company} 御中` : '＿＿＿＿＿＿＿＿＿ 御中'}
             </p>
             {person && <p className="mt-1 text-slate-600">{person} 様</p>}
@@ -119,8 +119,8 @@ export function QuoteGenerator() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-xl bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
-          <p className="font-semibold text-slate-700">発行者</p>
+        <div className="mt-6 rounded-lg bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
+          <p className="font-bold text-slate-700">発行者</p>
           <p>{APP_NAME}（{BUSINESS_INFO.sellerName}）</p>
           <p>運営統括責任者：{BUSINESS_INFO.responsiblePerson}</p>
           <p>所在地：{BUSINESS_INFO.address}</p>
@@ -129,15 +129,15 @@ export function QuoteGenerator() {
         <table className="mt-6 w-full border-collapse text-left text-sm">
           <thead>
             <tr className="border-b-2 border-slate-300 text-xs text-slate-500">
-              <th className="py-2 pr-3 font-semibold">品目</th>
-              <th className="py-2 pr-3 text-center font-semibold">数量</th>
-              <th className="py-2 text-right font-semibold">金額（税込・年額）</th>
+              <th className="py-2 pr-3 font-bold">品目</th>
+              <th className="py-2 pr-3 text-center font-bold">数量</th>
+              <th className="py-2 text-right font-bold">金額（税込・年額）</th>
             </tr>
           </thead>
           <tbody>
             <tr className="border-b border-slate-200">
               <td className="py-3 pr-3 align-top">
-                <p className="font-semibold text-slate-800">
+                <p className="font-bold text-slate-800">
                   My Naishin 内申点データAPI / データライセンス — {plan.label}
                 </p>
                 <ul className="mt-1 space-y-0.5 text-xs text-slate-500">
@@ -147,7 +147,7 @@ export function QuoteGenerator() {
                 </ul>
               </td>
               <td className="py-3 pr-3 text-center align-top">1</td>
-              <td className="py-3 text-right align-top font-semibold text-slate-800">{yen(plan.annualPriceJpy)}</td>
+              <td className="py-3 text-right align-top font-bold text-slate-800">{yen(plan.annualPriceJpy)}</td>
             </tr>
           </tbody>
           <tfoot>
@@ -155,7 +155,7 @@ export function QuoteGenerator() {
               <td colSpan={2} className="py-3 pr-3 text-right font-bold text-slate-800">
                 合計（税込）
               </td>
-              <td className="py-3 text-right text-lg font-bold text-indigo-700">{yen(plan.annualPriceJpy)}</td>
+              <td className="py-3 text-right text-lg font-bold text-brand-700">{yen(plan.annualPriceJpy)}</td>
             </tr>
           </tfoot>
         </table>

@@ -25,7 +25,7 @@ export function Tabs({ items, activeId, onChange, className }: TabsProps) {
       role="tablist"
       aria-label="結果の表示切り替え"
       className={cn(
-        'sticky top-2 z-20 flex w-full items-stretch gap-2 rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-lg backdrop-blur',
+        'sticky top-2 z-20 flex w-full items-stretch gap-1 rounded-lg border border-slate-200 bg-white p-1',
         className
       )}
     >
@@ -41,30 +41,20 @@ export function Tabs({ items, activeId, onChange, className }: TabsProps) {
             id={`tab-${item.id}`}
             onClick={() => onChange(item.id)}
             className={cn(
-              'group relative flex flex-1 flex-col items-center justify-center gap-1 overflow-hidden rounded-xl px-4 py-3.5 text-base font-bold transition-all duration-200',
+              'flex min-h-11 flex-1 flex-col items-center justify-center gap-1 rounded px-4 py-3 text-base font-bold transition-colors duration-100',
               active
-                ? 'bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-300/50'
-                : 'border border-dashed border-slate-300 bg-slate-50 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700'
+                ? 'bg-brand-700 text-white'
+                : 'bg-white text-slate-700 hover:bg-slate-100 hover:text-brand-800'
             )}
           >
-            {/* 非アクティブタブにアニメーション pulse リング */}
-            {!active && (
-              <span
-                aria-hidden
-                className="absolute inset-0 rounded-xl ring-2 ring-indigo-300/60 animate-ping opacity-0 group-hover:opacity-100"
-              />
-            )}
-
-            <span className="relative flex items-center gap-2">
+            <span className="flex items-center gap-2">
               {item.icon}
               <span className="text-base leading-none">{item.label}</span>
               {item.badge ? (
                 <span
                   className={cn(
-                    'rounded-full px-2 py-0.5 text-xs font-extrabold',
-                    active
-                      ? 'bg-white/25 text-white'
-                      : 'bg-indigo-100 text-indigo-700'
+                    'rounded border px-1.5 py-0.5 text-xs font-bold',
+                    active ? 'border-white/60 text-white' : 'border-slate-300 text-slate-700'
                   )}
                 >
                   {item.badge}
@@ -73,12 +63,7 @@ export function Tabs({ items, activeId, onChange, className }: TabsProps) {
             </span>
 
             {item.description ? (
-              <span
-                className={cn(
-                  'relative text-[11px] font-medium leading-none',
-                  active ? 'text-white/80' : 'text-slate-400 group-hover:text-indigo-500'
-                )}
-              >
+              <span className={cn('text-xs leading-none', active ? 'text-white/90' : 'text-slate-600')}>
                 {item.description}
               </span>
             ) : null}

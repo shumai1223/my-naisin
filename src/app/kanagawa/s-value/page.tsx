@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -94,29 +94,29 @@ export default function KanagawaSValuePage() {
       />
       <FAQPageSchema faqItems={KANAGAWA_S_VALUE_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/kanagawa" className="hover:text-blue-600">神奈川県</Link>
+            <Link href="/kanagawa" className="hover:text-brand-600">神奈川県</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">S値計算</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <Calculator className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               神奈川県 S値 自動計算ツール
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-700">
+            <div className="mt-2 inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
               S1値・S2値対応・1000点満点・2026年度入試対応
             </div>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -126,24 +126,24 @@ export default function KanagawaSValuePage() {
           </header>
 
           {/* S値の仕組み */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-blue-500" />
+              <BookOpen className="h-5 w-5 text-brand-500" />
               神奈川県S値の仕組み
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
               神奈川県の公立高校入試は、内申点（135点満点）と学力検査点（500点満点）を志望校ごとに定められた比率で合計したS値（1000点満点）で合否が判定されます。制度上の許容範囲は<strong>2:8〜8:2</strong>ですが、実際に採用されている比率は<strong>3:7〜7:3</strong>の5種のみです。
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border-2 border-blue-200 bg-blue-50 p-4">
-                <div className="text-xs font-bold text-blue-600 mb-1">S1値</div>
-                <div className="text-2xl font-black text-blue-700">1000<span className="text-base">点満点</span></div>
-                <div className="text-xs text-blue-600 mt-2">内申点＋学力検査の合計</div>
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4">
+                <div className="text-xs font-bold text-brand-600 mb-1">S1値</div>
+                <div className="text-2xl font-bold text-brand-700">1000<span className="text-base">点満点</span></div>
+                <div className="text-xs text-brand-600 mt-2">内申点＋学力検査の合計</div>
               </div>
-              <div className="rounded-xl border-2 border-indigo-200 bg-indigo-50 p-4">
-                <div className="text-xs font-bold text-indigo-600 mb-1">S2値</div>
-                <div className="text-2xl font-black text-indigo-700">最大1500<span className="text-base">点</span></div>
-                <div className="text-xs text-indigo-600 mt-2">S1＋特色検査（最大500点換算）</div>
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4">
+                <div className="text-xs font-bold text-brand-600 mb-1">S2値</div>
+                <div className="text-2xl font-bold text-brand-700">最大1500<span className="text-base">点</span></div>
+                <div className="text-xs text-brand-600 mt-2">S1＋特色検査（最大500点換算）</div>
               </div>
             </div>
           </section>
@@ -158,15 +158,15 @@ export default function KanagawaSValuePage() {
           <KanagawaResultFlow />
 
           {/* S値の計算式 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-blue-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               S値の計算式
             </h2>
             <div className="space-y-4 text-sm">
               <div>
                 <h3 className="font-bold text-slate-800 mb-2">S1値の計算式</h3>
-                <div className="rounded-xl bg-slate-900 p-4 text-slate-100">
+                <div className="rounded-lg bg-slate-900 p-4 text-slate-100">
                   <div className="font-mono text-xs md:text-sm">
                     S1 = (内申/135 × 100 × 内申比率) + (学力検査/500 × 100 × 学力比率)
                   </div>
@@ -177,7 +177,7 @@ export default function KanagawaSValuePage() {
               </div>
               <div>
                 <h3 className="font-bold text-slate-800 mb-2">S2値の計算式（特色検査実施校）</h3>
-                <div className="rounded-xl bg-slate-900 p-4 text-slate-100">
+                <div className="rounded-lg bg-slate-900 p-4 text-slate-100">
                   <div className="font-mono text-xs md:text-sm">
                     S2 = S1 + (特色検査の素点 × 特色検査比率)
                   </div>
@@ -190,9 +190,9 @@ export default function KanagawaSValuePage() {
           </section>
 
           {/* S値 換算早見表（SEO: 神奈川 内申 100点換算 / s値 早見表 / 学力検査 換算） */}
-          <section className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 to-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-blue-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               S値の換算早見表（手計算用）
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
@@ -201,13 +201,13 @@ export default function KanagawaSValuePage() {
             <div className="grid gap-5 md:grid-cols-2">
               {/* 内申135 → 100換算 */}
               <div>
-                <h3 className="mb-2 text-sm font-bold text-blue-900">① 内申点（135満点）→ 100点換算</h3>
+                <h3 className="mb-2 text-sm font-bold text-brand-900">① 内申点（135満点）→ 100点換算</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-blue-600 text-white text-left">
-                        <th className="border border-blue-400 px-3 py-1.5 font-bold">内申（／135）</th>
-                        <th className="border border-blue-400 px-3 py-1.5 font-bold text-right">100点換算</th>
+                      <tr className="bg-brand-600 text-white text-left">
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold">内申（／135）</th>
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold text-right">100点換算</th>
                       </tr>
                     </thead>
                     <tbody className="text-slate-700">
@@ -223,17 +223,17 @@ export default function KanagawaSValuePage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-1 text-[11px] text-slate-500">換算式：内申 ÷ 135 × 100</p>
+                <p className="mt-1 text-xs text-slate-500">換算式：内申 ÷ 135 × 100</p>
               </div>
               {/* 学力500 → 100換算 */}
               <div>
-                <h3 className="mb-2 text-sm font-bold text-indigo-900">② 学力検査（500満点）→ 100点換算</h3>
+                <h3 className="mb-2 text-sm font-bold text-brand-900">② 学力検査（500満点）→ 100点換算</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-indigo-600 text-white text-left">
-                        <th className="border border-indigo-400 px-3 py-1.5 font-bold">学力（／500）</th>
-                        <th className="border border-indigo-400 px-3 py-1.5 font-bold text-right">100点換算</th>
+                      <tr className="bg-brand-600 text-white text-left">
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold">学力（／500）</th>
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold text-right">100点換算</th>
                       </tr>
                     </thead>
                     <tbody className="text-slate-700">
@@ -249,14 +249,14 @@ export default function KanagawaSValuePage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-1 text-[11px] text-slate-500">換算式：学力 ÷ 500 × 100</p>
+                <p className="mt-1 text-xs text-slate-500">換算式：学力 ÷ 500 × 100</p>
               </div>
             </div>
-            <div className="mt-4 rounded-xl bg-white border border-blue-100 p-4">
+            <div className="mt-4 rounded-lg bg-white border border-brand-100 p-4">
               <h3 className="text-sm font-bold text-slate-800 mb-2">S1の計算例（比率4:6の高校）</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 内申115（換算85.2）・学力400点（換算80）・比率<strong>内申4:学力6</strong>の場合：<br />
-                S1 ＝ 85.2 × 4 ＋ 80 × 6 ＝ 340.8 ＋ 480 ＝ <strong className="text-blue-700">約821点</strong>（川和の目安S1 830にあと一歩）
+                S1 ＝ 85.2 × 4 ＋ 80 × 6 ＝ 340.8 ＋ 480 ＝ <strong className="text-brand-700">約821点</strong>（川和の目安S1 830にあと一歩）
               </p>
             </div>
             <p className="mt-3 text-xs text-slate-500">
@@ -265,7 +265,7 @@ export default function KanagawaSValuePage() {
           </section>
 
           {/* 主要校の比率と合格ライン */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
               <Award className="h-5 w-5 text-amber-500" />
               主要神奈川公立高校の比率と合格目安【2026年最新】
@@ -296,13 +296,13 @@ export default function KanagawaSValuePage() {
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">柏陽</td>
                     <td className="border border-slate-200 px-3 py-2 text-center">3:5:2</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-orange-700 font-bold">S2 1180+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-amber-700 font-bold">S2 1180+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">71</td>
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">厚木</td>
                     <td className="border border-slate-200 px-3 py-2 text-center">3:5:2</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-orange-700 font-bold">S2 1150+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-amber-700 font-bold">S2 1150+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">70</td>
                   </tr>
                   <tr>
@@ -332,13 +332,13 @@ export default function KanagawaSValuePage() {
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">鎌倉</td>
                     <td className="border border-slate-200 px-3 py-2 text-center">4:6</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-emerald-700 font-bold">S1 700+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-brand-700 font-bold">S1 700+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">61</td>
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">市立横浜サイエンスフロンティア</td>
                     <td className="border border-slate-200 px-3 py-2 text-center">3:5:2</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-emerald-700 font-bold">S2 1100+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-brand-700 font-bold">S2 1100+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">68</td>
                   </tr>
                 </tbody>
@@ -361,7 +361,7 @@ export default function KanagawaSValuePage() {
           />
 
           {/* よくある質問 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               <div>
@@ -379,7 +379,7 @@ export default function KanagawaSValuePage() {
               <div>
                 <div className="font-bold text-slate-800 text-sm">Q. 神奈川の内申点はいつの成績？</div>
                 <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                  神奈川県の内申点は<strong>中2の評定合計＋中3の評定合計×2</strong>で計算されます（135点満点）。中3の比重が大きいため、中3の成績アップが内申点全体に効きます。詳しくは<Link href="/kanagawa/naishin" className="text-blue-600 underline font-bold">神奈川県の内申点計算ツール</Link>もご覧ください。
+                  神奈川県の内申点は<strong>中2の評定合計＋中3の評定合計×2</strong>で計算されます（135点満点）。中3の比重が大きいため、中3の成績アップが内申点全体に効きます。詳しくは<Link href="/kanagawa/naishin" className="text-brand-600 underline font-bold">神奈川県の内申点計算ツール</Link>もご覧ください。
                 </p>
               </div>
               <div>
@@ -392,7 +392,7 @@ export default function KanagawaSValuePage() {
           </section>
 
           {/* 注意 */}
-          <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
@@ -403,23 +403,23 @@ export default function KanagawaSValuePage() {
           </div>
 
           {/* 関連リンク */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/kanagawa/naishin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">神奈川県の内申点を計算する</span>
+              <Link href="/kanagawa/naishin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">神奈川県の内申点を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/kanagawa" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">神奈川県の入試制度ガイド</span>
+              <Link href="/kanagawa" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">神奈川県の入試制度ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/reverse?pref=kanagawa" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">志望校から逆算する</span>
+              <Link href="/reverse?pref=kanagawa" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">志望校から逆算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/blog/kanagawa-naishin-calculation-guide" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">神奈川県の内申点ガイド</span>
+              <Link href="/blog/kanagawa-naishin-calculation-guide" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">神奈川県の内申点ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
             </div>

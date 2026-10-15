@@ -1,6 +1,6 @@
 'use client';
 
-import { ExternalLink, Calendar, Shield, AlertCircle } from 'lucide-react';
+import { ExternalLink, Calendar, Shield, AlertCircle } from '@/components/icons';
 
 interface Source {
   name: string;
@@ -19,9 +19,9 @@ export function SourceInfoBox({ sources, lastVerified, prefectureName }: SourceI
   if (!hasInfo) return null;
 
   return (
-    <div className="rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-4">
+    <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
       <div className="mb-3 flex items-center gap-2">
-        <Shield className="h-5 w-5 text-emerald-600" />
+        <Shield className="h-5 w-5 text-brand-600" />
         <h4 className="font-bold text-slate-800">
           情報の根拠・出典
         </h4>
@@ -35,7 +35,7 @@ export function SourceInfoBox({ sources, lastVerified, prefectureName }: SourceI
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-emerald-700 hover:text-emerald-900 hover:underline"
+                className="inline-flex items-center gap-1.5 text-sm text-brand-700 hover:text-brand-900 hover:underline"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
                 {source.name}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ShieldCheck, ExternalLink, Calendar, FileText, AlertCircle } from 'lucide-react';
+import { ShieldCheck, ExternalLink, Calendar, FileText, AlertCircle } from '@/components/icons';
 
 interface TrustInfoProps {
   sources?: Array<{
@@ -15,8 +15,8 @@ interface TrustInfoProps {
 export function TrustInfo({ sources, lastUpdated, prefectureName }: TrustInfoProps) {
   if (sources && lastUpdated && prefectureName) {
     return (
-      <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 shadow-sm mt-12">
-        <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-blue-800">
+      <div className="rounded-lg border border-brand-200 bg-brand-50 p-6 mt-12">
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-brand-800">
           <FileText className="h-5 w-5" />
           {prefectureName}の情報源と更新履歴
         </h3>
@@ -24,21 +24,21 @@ export function TrustInfo({ sources, lastUpdated, prefectureName }: TrustInfoPro
         <div className="space-y-4">
           {/* 参照資料 */}
           <div>
-            <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-blue-700">
+            <h4 className="mb-2 flex items-center gap-2 text-sm font-bold text-brand-700">
               <FileText className="h-4 w-4" />
               参照した公式資料
             </h4>
             <div className="space-y-2">
               {sources.map((source, index) => (
-                <div key={index} className="rounded-lg border border-blue-200 bg-white p-3">
+                <div key={index} className="rounded-lg border border-brand-200 bg-white p-3">
                   <div className="flex items-start gap-3">
-                    <div className="mt-1 h-2 w-2 rounded-full bg-blue-500 flex-shrink-0" />
+                    <div className="mt-1 h-2 w-2 rounded-full bg-brand-500 flex-shrink-0" />
                     <div className="flex-1">
-                      <h5 className="font-medium text-blue-800">{source.name}</h5>
+                      <h5 className="text-brand-800">{source.name}</h5>
                       {source.description && (
-                        <p className="mt-1 text-xs text-blue-600">{source.description}</p>
+                        <p className="mt-1 text-xs text-brand-600">{source.description}</p>
                       )}
-                      <div className="mt-2 flex items-center gap-4 text-xs text-blue-500">
+                      <div className="mt-2 flex items-center gap-4 text-xs text-brand-500">
                         <span className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
                           最終確認: {source.lastVerified}
@@ -47,7 +47,7 @@ export function TrustInfo({ sources, lastUpdated, prefectureName }: TrustInfoPro
                           href={source.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-blue-600 hover:text-blue-800"
+                          className="flex items-center gap-1 text-brand-600 hover:text-brand-800"
                         >
                           <span>公式サイトで確認</span>
                         </a>
@@ -61,19 +61,19 @@ export function TrustInfo({ sources, lastUpdated, prefectureName }: TrustInfoPro
 
           {/* 更新履歴 */}
           <div>
-            <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-blue-700">
+            <h4 className="mb-2 flex items-center gap-2 text-sm font-bold text-brand-700">
               <Calendar className="h-4 w-4" />
               更新履歴
             </h4>
-            <div className="rounded-lg border border-blue-200 bg-white p-3">
+            <div className="rounded-lg border border-brand-200 bg-white p-3">
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-blue-800">ページ最終更新</span>
-                  <span className="text-blue-600">{lastUpdated}</span>
+                  <span className="text-brand-800">ページ最終更新</span>
+                  <span className="text-brand-600">{lastUpdated}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-blue-800">データ最終検証</span>
-                  <span className="text-blue-600">{sources[0]?.lastVerified || '未確認'}</span>
+                  <span className="text-brand-800">データ最終検証</span>
+                  <span className="text-brand-600">{sources[0]?.lastVerified || '未確認'}</span>
                 </div>
               </div>
             </div>
@@ -81,7 +81,7 @@ export function TrustInfo({ sources, lastUpdated, prefectureName }: TrustInfoPro
 
           {/* 注意事項 */}
           <div>
-            <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-amber-700">
+            <h4 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-700">
               <AlertCircle className="h-4 w-4" />
               利用上の注意
             </h4>
@@ -100,19 +100,19 @@ export function TrustInfo({ sources, lastUpdated, prefectureName }: TrustInfoPro
   }
 
   return (
-    <section className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-6 md:p-8">
+    <section className="mt-12 rounded-lg border border-slate-200 bg-slate-50 p-6 md:p-8">
       <div className="flex flex-col md:flex-row items-center gap-6">
-        <div className="h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-white shadow-md">
+        <div className="h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-white">
           <img 
             src="/favicon.svg" 
             alt="内申点シミュレーター 運営チーム" 
-            className="h-full w-full object-cover bg-blue-600 p-2"
+            className="h-full w-full object-cover bg-brand-600 p-2"
           />
         </div>
         <div className="flex-1 text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
             <h3 className="text-lg font-bold text-slate-800">内申点シミュレーター 開発・運営チーム</h3>
-            <ShieldCheck className="h-5 w-5 text-blue-600" />
+            <ShieldCheck className="h-5 w-5 text-brand-600" />
           </div>
           <p className="text-sm text-slate-600 leading-relaxed">
             現役のエンジニアと受験指導経験者によって運営されています。各都道府県の教育委員会が発表する最新の「入学者選抜実施要綱」を1点1点プログラムに落とし込み、常に最新の計算ロジックを提供できるよう保守管理を行っています。
@@ -120,14 +120,14 @@ export function TrustInfo({ sources, lastUpdated, prefectureName }: TrustInfoPro
           <div className="mt-4 flex flex-wrap justify-center md:justify-start gap-4">
             <Link 
               href="/about/editor-profile"
-              className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-brand-600 hover:underline flex items-center gap-1"
             >
               運営者プロフィール
               <ExternalLink className="h-3 w-3" />
             </Link>
             <Link 
               href="/quality"
-              className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-brand-600 hover:underline flex items-center gap-1"
             >
               情報の正確性への取り組み
               <ExternalLink className="h-3 w-3" />

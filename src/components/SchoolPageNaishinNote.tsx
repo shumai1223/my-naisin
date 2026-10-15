@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BookOpen, ExternalLink, ChevronRight } from 'lucide-react';
+import { BookOpen, ExternalLink, ChevronRight } from '@/components/icons';
 
 import type { PrefectureConfig } from '@/lib/prefectures';
 
@@ -30,9 +30,9 @@ export function SchoolPageNaishinNote({ schoolName, prefecture }: SchoolPageNais
   const hasVaryingMultipliers = new Set(multiplierEntries.map(([, m]) => m)).size > 1;
 
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <section className="rounded-lg border border-slate-200 bg-white p-6">
       <h2 className="mb-1 flex items-center gap-2 text-lg font-bold text-slate-800">
-        <BookOpen className="h-5 w-5 shrink-0 text-blue-500" />
+        <BookOpen className="h-5 w-5 shrink-0 text-brand-500" />
         {schoolName}を目指す場合の内申点のしくみ
       </h2>
       <p className="mb-4 text-xs text-slate-500">
@@ -40,19 +40,19 @@ export function SchoolPageNaishinNote({ schoolName, prefecture }: SchoolPageNais
       </p>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        <div className="rounded-xl bg-slate-50 p-4">
-          <div className="text-xs font-semibold text-slate-500">対象学年</div>
+        <div className="rounded-lg bg-slate-50 p-4">
+          <div className="text-xs font-bold text-slate-500">対象学年</div>
           <div className="mt-1 text-sm font-bold text-slate-800">{gradeLabel}</div>
         </div>
-        <div className="rounded-xl bg-slate-50 p-4">
-          <div className="text-xs font-semibold text-slate-500">内申点の満点</div>
+        <div className="rounded-lg bg-slate-50 p-4">
+          <div className="text-xs font-bold text-slate-500">内申点の満点</div>
           <div className="mt-1 text-sm font-bold text-slate-800">{prefecture.maxScore}点</div>
         </div>
       </div>
 
       {hasVaryingMultipliers && (
-        <div className="mt-3 rounded-xl bg-slate-50 p-4">
-          <div className="text-xs font-semibold text-slate-500">学年別の比重</div>
+        <div className="mt-3 rounded-lg bg-slate-50 p-4">
+          <div className="text-xs font-bold text-slate-500">学年別の比重</div>
           <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-700">
             {multiplierEntries.map(([grade, mult]) => (
               <span key={grade}>
@@ -67,7 +67,7 @@ export function SchoolPageNaishinNote({ schoolName, prefecture }: SchoolPageNais
 
       <Link
         href={`/${prefecture.code}/naishin`}
-        className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-blue-600 hover:underline"
+        className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-brand-600 hover:underline"
       >
         {prefecture.name}の内申点を計算する
         <ChevronRight className="h-4 w-4 shrink-0" />

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { Calculator, RotateCcw } from '@/components/icons';
 import { CHIBA_K_PRESETS, computeChibaKValue } from '@/lib/total-score/chiba';
 
 export interface ChibaKValueResult {
@@ -58,10 +58,10 @@ export function ChibaKValueCalculator({ onResult }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border-2 border-emerald-200 bg-white shadow-lg">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
+    <div className="overflow-hidden rounded-lg border-2 border-brand-200 bg-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-brand-100 bg-brand-50 px-6 py-4">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Calculator className="h-5 w-5 text-emerald-600" />
+          <Calculator className="h-5 w-5 text-brand-600" />
           千葉県の総合得点（K値）を計算
         </h2>
         <button
@@ -88,7 +88,7 @@ export function ChibaKValueCalculator({ onResult }: Props) {
             value={hyoteiInput}
             onChange={(e) => setHyoteiInput(e.target.value)}
             placeholder="例：108"
-            className="h-12 w-full rounded-xl border border-slate-200 px-4 text-base outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
         </div>
 
@@ -105,7 +105,7 @@ export function ChibaKValueCalculator({ onResult }: Props) {
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
             placeholder="例：380"
-            className="h-12 w-full rounded-xl border border-slate-200 px-4 text-base outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
         </div>
 
@@ -118,7 +118,7 @@ export function ChibaKValueCalculator({ onResult }: Props) {
                 type="button"
                 onClick={() => setKValue(String(p))}
                 className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
-                  Number(kValue) === p ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600'
+                  Number(kValue) === p ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600'
                 }`}
               >
                 K={p}
@@ -132,7 +132,7 @@ export function ChibaKValueCalculator({ onResult }: Props) {
               max={2}
               value={kValue}
               onChange={(e) => setKValue(e.target.value)}
-              className="h-8 w-20 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+              className="h-8 w-20 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
               aria-label="K値を直接入力"
             />
           </div>
@@ -149,7 +149,7 @@ export function ChibaKValueCalculator({ onResult }: Props) {
               value={othersInput}
               onChange={(e) => setOthersInput(e.target.value)}
               placeholder="未入力なら0点"
-              className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200"
+              className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
             />
           </label>
           <label className="block">
@@ -162,20 +162,20 @@ export function ChibaKValueCalculator({ onResult }: Props) {
               value={schoolExamInput}
               onChange={(e) => setSchoolExamInput(e.target.value)}
               placeholder="未入力なら0点"
-              className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200"
+              className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
             />
           </label>
         </div>
       </div>
 
       {hasInput && (
-        <div className="border-t-2 border-emerald-100 bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 text-center">
+        <div className="border-t-2 border-brand-100 bg-brand-50 px-6 py-6 text-center">
           <div className="mb-1 text-xs font-bold text-slate-600">あなたの総合得点（目安）</div>
-          <div className="text-5xl font-black text-emerald-700">
+          <div className="text-5xl font-bold text-brand-700">
             {total}
             <span className="text-xl font-bold text-slate-400">/{max}</span>
           </div>
-          <div className="mx-auto mt-4 max-w-sm rounded-xl border border-emerald-100 bg-white p-3 text-left">
+          <div className="mx-auto mt-4 max-w-sm rounded-lg border border-brand-100 bg-white p-3 text-left">
             <div className="mb-2 text-xs font-bold text-slate-700">計算内訳</div>
             <ul className="space-y-1 text-xs text-slate-600">
               <li>調査書点：評定合計{hyotei} × K{k} ＝ {Math.round(reportScore * 10) / 10}点</li>
@@ -185,7 +185,7 @@ export function ChibaKValueCalculator({ onResult }: Props) {
               <li className="border-t border-slate-100 pt-1 font-bold">総合得点：{total}点</li>
             </ul>
           </div>
-          <p className="mx-auto mt-3 max-w-sm text-[11px] leading-relaxed text-slate-400">
+          <p className="mx-auto mt-3 max-w-sm text-xs leading-relaxed text-slate-400">
             ※ K値・学校設定検査の配点は高校ごとに異なります。満点は入力した項目から概算した目安です。
           </p>
         </div>

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Target, TrendingUp, Award, Flame, Star, Zap, Trophy, Rocket } from 'lucide-react';
+import { Sparkles, Target, TrendingUp, Award, Flame, Star, Zap, Trophy, Rocket } from '@/components/icons';
 
 import type { ResultData } from '@/lib/types';
 
@@ -33,8 +33,8 @@ const MOTIVATION_MESSAGES: Record<string, {
       '記述問題で論理展開を意識して差をつける',
     ],
     icon: Trophy,
-    gradient: 'from-amber-400 via-yellow-500 to-orange-500',
-    bgGradient: 'from-amber-50 via-yellow-50 to-orange-50',
+    gradient: 'bg-amber-400',
+    bgGradient: 'bg-amber-50',
     borderColor: 'border-amber-300',
     textColor: 'text-amber-700',
   },
@@ -50,10 +50,10 @@ const MOTIVATION_MESSAGES: Record<string, {
       '提出物は期限より2日前に仕上げる',
     ],
     icon: Star,
-    gradient: 'from-blue-500 via-indigo-500 to-violet-500',
-    bgGradient: 'from-blue-50 via-indigo-50 to-violet-50',
-    borderColor: 'border-blue-300',
-    textColor: 'text-blue-700',
+    gradient: 'bg-brand-500',
+    bgGradient: 'bg-brand-50',
+    borderColor: 'border-brand-300',
+    textColor: 'text-brand-700',
   },
   B: {
     title: '📈 良い調子！伸びしろたっぷり！',
@@ -67,10 +67,10 @@ const MOTIVATION_MESSAGES: Record<string, {
       '授業のポイントを1行でまとめる癖をつける',
     ],
     icon: TrendingUp,
-    gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
-    bgGradient: 'from-emerald-50 via-teal-50 to-cyan-50',
-    borderColor: 'border-emerald-300',
-    textColor: 'text-emerald-700',
+    gradient: 'bg-brand-500',
+    bgGradient: 'bg-brand-50',
+    borderColor: 'border-brand-300',
+    textColor: 'text-brand-700',
   },
   C: {
     title: '🔥 ここから逆転のスタート！',
@@ -84,10 +84,10 @@ const MOTIVATION_MESSAGES: Record<string, {
       '1日10分でも継続して習慣化する',
     ],
     icon: Flame,
-    gradient: 'from-orange-500 via-red-500 to-pink-500',
-    bgGradient: 'from-orange-50 via-red-50 to-pink-50',
-    borderColor: 'border-orange-300',
-    textColor: 'text-orange-700',
+    gradient: 'bg-amber-500',
+    bgGradient: 'bg-amber-50',
+    borderColor: 'border-amber-300',
+    textColor: 'text-amber-700',
   },
   D: {
     title: '🚀 諦めない心が最強の武器！',
@@ -101,10 +101,10 @@ const MOTIVATION_MESSAGES: Record<string, {
       '朝の5分だけ復習してリズムを作る',
     ],
     icon: Rocket,
-    gradient: 'from-rose-500 via-pink-500 to-fuchsia-500',
-    bgGradient: 'from-rose-50 via-pink-50 to-fuchsia-50',
-    borderColor: 'border-rose-300',
-    textColor: 'text-rose-700',
+    gradient: 'bg-red-500',
+    bgGradient: 'bg-red-50',
+    borderColor: 'border-red-300',
+    textColor: 'text-red-700',
   },
 };
 
@@ -139,7 +139,7 @@ export function MotivationCard({ result }: MotivationCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className={`relative overflow-hidden rounded-2xl border-2 ${config.borderColor} bg-gradient-to-br ${config.bgGradient} p-5 shadow-lg`}
+      className={`relative overflow-hidden rounded-lg border-2 ${config.borderColor} ${config.bgGradient} p-5`}
     >
       {/* Decorative elements */}
       <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/40 blur-3xl" />
@@ -155,9 +155,9 @@ export function MotivationCard({ result }: MotivationCardProps) {
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: 'spring', delay: 0.3, stiffness: 200 }}
-            className={`grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${config.gradient} shadow-xl`}
+            className={`grid h-16 w-16 shrink-0 place-items-center rounded-lg ${config.gradient} `}
           >
-            <Icon className="h-8 w-8 text-white drop-shadow-md" />
+            <Icon className="h-8 w-8 text-white" />
           </motion.div>
           <div className="flex-1 min-w-0">
             <motion.h3
@@ -186,21 +186,21 @@ export function MotivationCard({ result }: MotivationCardProps) {
           transition={{ delay: 0.6 }}
           className="mt-5 grid grid-cols-2 gap-2"
         >
-          <div className="rounded-xl bg-white/70 p-3 text-center shadow-sm backdrop-blur-sm">
-            <div className="flex items-center justify-center gap-1 text-[10px] font-medium text-slate-500">
+          <div className="rounded-lg bg-white p-3 text-center">
+            <div className="flex items-center justify-center gap-1 text-xs text-slate-500">
               <Award className="h-3 w-3" />
               ランク
             </div>
-            <div className={`mt-1 text-2xl font-black bg-gradient-to-r ${config.gradient} bg-clip-text text-transparent`}>
+            <div className={`mt-1 text-2xl font-bold ${config.gradient} bg-clip-text text-transparent`}>
               {rankCode}
             </div>
           </div>
-          <div className="rounded-xl bg-white/70 p-3 text-center shadow-sm backdrop-blur-sm">
-            <div className="flex items-center justify-center gap-1 text-[10px] font-medium text-slate-500">
+          <div className="rounded-lg bg-white p-3 text-center">
+            <div className="flex items-center justify-center gap-1 text-xs text-slate-500">
               <Target className="h-3 w-3" />
               達成率
             </div>
-            <div className="mt-1 text-2xl font-black text-slate-700">
+            <div className="mt-1 text-2xl font-bold text-slate-700">
               {displayPercent}<span className="text-sm">%</span>
             </div>
           </div>
@@ -211,18 +211,18 @@ export function MotivationCard({ result }: MotivationCardProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
-          className="mt-4 rounded-xl bg-white/60 p-4 shadow-sm backdrop-blur-sm"
+          className="mt-4 rounded-lg bg-white p-4"
         >
           <div className="flex items-start gap-3">
-            <div className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br ${config.gradient}`}>
+            <div className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${config.gradient}`}>
               <Sparkles className="h-4 w-4 text-white" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">今日のアドバイス</div>
+                <div className="text-xs font-bold text-slate-400">今日のアドバイス</div>
                 <button
                   onClick={() => setShowAllTips(!showAllTips)}
-                  className="text-[10px] text-slate-400 hover:text-slate-600"
+                  className="text-xs text-slate-400 hover:text-slate-600"
                 >
                   {showAllTips ? '閉じる' : 'すべて見る'}
                 </button>
@@ -231,7 +231,7 @@ export function MotivationCard({ result }: MotivationCardProps) {
                 <ul className="mt-2 space-y-2">
                   {config.tips.map((tip, i) => (
                     <li key={i} className={`text-xs ${config.textColor} flex items-start gap-2`}>
-                      <span className={`shrink-0 grid h-4 w-4 place-items-center rounded-full text-[10px] font-bold text-white bg-gradient-to-br ${config.gradient}`}>
+                      <span className={`shrink-0 grid h-4 w-4 place-items-center rounded-full text-xs font-bold text-white ${config.gradient}`}>
                         {i + 1}
                       </span>
                       {tip}
@@ -243,7 +243,7 @@ export function MotivationCard({ result }: MotivationCardProps) {
                   key={tipIndex}
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`mt-1 text-sm font-medium ${config.textColor}`}
+                  className={`mt-1 text-sm ${config.textColor}`}
                 >
                   {config.tips[tipIndex]}
                 </motion.p>
@@ -256,7 +256,7 @@ export function MotivationCard({ result }: MotivationCardProps) {
                 <button
                   key={i}
                   onClick={() => setTipIndex(i)}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${i === tipIndex ? `bg-gradient-to-r ${config.gradient}` : 'bg-slate-300'}`}
+                  className={`w-1.5 h-1.5 rounded-full transition-all ${i === tipIndex ? ` ${config.gradient}` : 'bg-slate-300'}`}
                 />
               ))}
             </div>
@@ -270,7 +270,7 @@ export function MotivationCard({ result }: MotivationCardProps) {
           transition={{ delay: 0.8 }}
           className="mt-3 text-center"
         >
-          <span className={`inline-flex items-center gap-1.5 rounded-full bg-white/50 px-4 py-1.5 text-xs font-medium ${config.textColor}`}>
+          <span className={`inline-flex items-center gap-1.5 rounded-full bg-white/50 px-4 py-1.5 text-xs ${config.textColor}`}>
             <TrendingUp className="h-3 w-3" />
             {config.subMessage}
           </span>

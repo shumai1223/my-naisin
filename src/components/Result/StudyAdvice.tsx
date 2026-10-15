@@ -22,7 +22,7 @@ import {
   Sparkles,
   Trophy,
   AlertCircle
-} from 'lucide-react';
+} from '@/components/icons';
 
 import type { Scores, ResultData } from '@/lib/types';
 import { SUBJECTS } from '@/lib/constants';
@@ -359,39 +359,39 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
 
   const priorityConfig = {
     critical: { 
-      bg: 'bg-gradient-to-r from-red-50 to-rose-50', 
+      bg: 'bg-red-50', 
       border: 'border-red-300',
       label: '最優先',
       labelBg: 'bg-red-500',
       icon: 'text-red-600'
     },
     high: { 
-      bg: 'bg-gradient-to-r from-rose-50 to-orange-50', 
-      border: 'border-rose-200',
+      bg: 'bg-red-50', 
+      border: 'border-red-200',
       label: '重要',
-      labelBg: 'bg-rose-500',
-      icon: 'text-rose-600'
+      labelBg: 'bg-red-500',
+      icon: 'text-red-600'
     },
     medium: { 
-      bg: 'bg-gradient-to-r from-amber-50 to-yellow-50', 
+      bg: 'bg-amber-50', 
       border: 'border-amber-200',
       label: 'おすすめ',
       labelBg: 'bg-amber-500',
       icon: 'text-amber-600'
     },
     low: { 
-      bg: 'bg-gradient-to-r from-emerald-50 to-teal-50', 
-      border: 'border-emerald-200',
+      bg: 'bg-brand-50', 
+      border: 'border-brand-200',
       label: '維持',
-      labelBg: 'bg-emerald-500',
-      icon: 'text-emerald-600'
+      labelBg: 'bg-brand-500',
+      icon: 'text-brand-600'
     },
     tip: { 
-      bg: 'bg-gradient-to-r from-blue-50 to-indigo-50', 
-      border: 'border-blue-200',
+      bg: 'bg-brand-50', 
+      border: 'border-brand-200',
       label: 'ヒント',
-      labelBg: 'bg-blue-500',
-      icon: 'text-blue-600'
+      labelBg: 'bg-brand-500',
+      icon: 'text-brand-600'
     },
   };
 
@@ -400,12 +400,12 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
-      className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 p-5 text-white">
+      <div className="bg-slate-500 p-5 text-white">
         <div className="flex items-center gap-3">
-          <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
+          <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
             <Lightbulb className="h-6 w-6 text-white" />
           </div>
           <div>
@@ -415,10 +415,10 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
         </div>
         
         {/* Motivation quote */}
-        <div className="mt-4 rounded-xl bg-white/10 p-3 backdrop-blur-sm">
+        <div className="mt-4 rounded-lg bg-white p-3">
           <div className="flex items-center gap-2">
-            <Heart className="h-4 w-4 text-pink-300" />
-            <p className="text-sm font-medium text-white/90">{motivation}</p>
+            <Heart className="h-4 w-4 text-slate-300" />
+            <p className="text-sm text-white/90">{motivation}</p>
           </div>
         </div>
       </div>
@@ -426,24 +426,24 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       {/* Summary Stats */}
       <div className="grid grid-cols-3 border-b border-slate-100">
         <div className="border-r border-slate-100 p-4 text-center">
-          <div className="text-2xl font-black text-rose-500">{weakSubjects.length}</div>
-          <div className="text-[10px] font-medium text-slate-500">要改善</div>
+          <div className="text-2xl font-bold text-red-500">{weakSubjects.length}</div>
+          <div className="text-xs text-slate-500">要改善</div>
           <div className="mt-1 h-1 rounded-full bg-slate-100 overflow-hidden">
-            <div className="h-full bg-rose-400" style={{ width: `${(weakSubjects.length / 9) * 100}%` }} />
+            <div className="h-full bg-red-400" style={{ width: `${(weakSubjects.length / 9) * 100}%` }} />
           </div>
         </div>
         <div className="border-r border-slate-100 p-4 text-center">
-          <div className="text-2xl font-black text-amber-500">{improvableSubjects.length}</div>
-          <div className="text-[10px] font-medium text-slate-500">伸びしろ</div>
+          <div className="text-2xl font-bold text-amber-500">{improvableSubjects.length}</div>
+          <div className="text-xs text-slate-500">伸びしろ</div>
           <div className="mt-1 h-1 rounded-full bg-slate-100 overflow-hidden">
             <div className="h-full bg-amber-400" style={{ width: `${(improvableSubjects.length / 9) * 100}%` }} />
           </div>
         </div>
         <div className="p-4 text-center">
-          <div className="text-2xl font-black text-emerald-500">{strongSubjects.length}</div>
-          <div className="text-[10px] font-medium text-slate-500">得意科目</div>
+          <div className="text-2xl font-bold text-brand-500">{strongSubjects.length}</div>
+          <div className="text-xs text-slate-500">得意科目</div>
           <div className="mt-1 h-1 rounded-full bg-slate-100 overflow-hidden">
-            <div className="h-full bg-emerald-400" style={{ width: `${(strongSubjects.length / 9) * 100}%` }} />
+            <div className="h-full bg-brand-400" style={{ width: `${(strongSubjects.length / 9) * 100}%` }} />
           </div>
         </div>
       </div>
@@ -459,16 +459,16 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 * index + 0.3 }}
-              className={`rounded-xl border ${config.border} ${config.bg} p-4`}
+              className={`rounded-lg border ${config.border} ${config.bg} p-4`}
             >
               <div className="flex items-start gap-3">
-                <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white shadow-sm ${config.icon}`}>
+                <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white ${config.icon}`}>
                   <Icon className="h-5 w-5" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-sm font-bold text-slate-800">{item.title}</span>
-                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold text-white ${config.labelBg}`}>
+                    <span className={`rounded-full px-2 py-0.5 text-xs font-bold text-white ${config.labelBg}`}>
                       {config.label}
                     </span>
                   </div>
@@ -488,7 +488,7 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       {/* Action prompt */}
       <div className="border-t border-slate-100 bg-slate-50 p-4">
         <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
-          <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+          <CheckCircle2 className="h-4 w-4 text-brand-500" />
           <span>今日から1つでも実践してみよう！</span>
         </div>
       </div>

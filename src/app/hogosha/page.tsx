@@ -14,7 +14,7 @@ import {
   Clock,
   Wallet,
   MessageCircleQuestion,
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -129,35 +129,35 @@ const TOOLS = [
     icon: Calculator,
     title: '内申点を計算する',
     desc: '9教科の評定を入れるだけ。全国47都道府県の最新方式に対応。',
-    accent: 'from-blue-500 to-indigo-600',
+    accent: 'bg-brand-500',
   },
   {
     href: '/hensachi',
     icon: TrendingUp,
     title: '偏差値を計算する',
     desc: '点数と平均点から偏差値を30秒で算出。上位何%かもわかる。',
-    accent: 'from-purple-500 to-indigo-600',
+    accent: 'bg-slate-500',
   },
   {
     href: '/hyotei-heikin',
     icon: Percent,
     title: '評定平均を計算する',
     desc: '推薦のカギになる評定平均を計算。基準早見表つき。',
-    accent: 'from-emerald-500 to-teal-600',
+    accent: 'bg-brand-500',
   },
   {
     href: '/reverse',
     icon: Target,
     title: '志望校から逆算する',
     desc: '目標校から必要な内申点・当日点を逆算。今の現在地がわかる。',
-    accent: 'from-violet-500 to-purple-600',
+    accent: 'bg-slate-500',
   },
   {
     href: '/prefectures',
     icon: MapPin,
     title: '都道府県別の入試制度',
     desc: 'お住まいの地域の配点比率・内申の比重を確認できる。',
-    accent: 'from-rose-500 to-pink-600',
+    accent: 'bg-red-500',
   },
 ];
 
@@ -191,11 +191,11 @@ export default function HogoshaPage() {
       <FAQPageSchema faqItems={PARENT_FAQS} />
 
       <ParentLeadCTAPositionProvider>
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -211,7 +211,7 @@ export default function HogoshaPage() {
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
               <Heart className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">保護者の方へ</h1>
@@ -247,9 +247,9 @@ export default function HogoshaPage() {
                 return (
                   <div
                     key={a.title}
-                    className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                    className="rounded-lg border border-slate-200 bg-white p-5"
                   >
-                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="mb-1.5 text-sm font-bold text-slate-800">{a.title}</h3>
@@ -292,10 +292,10 @@ export default function HogoshaPage() {
                   <Link
                     key={t.href}
                     href={t.href}
-                    className="group flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
+                    className="group flex items-start gap-4 rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-brand-300"
                   >
                     <div
-                      className={`grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-gradient-to-br ${t.accent} text-white shadow-md`}
+                      className={`grid h-11 w-11 flex-shrink-0 place-items-center rounded-lg ${t.accent} text-white`}
                     >
                       <Icon className="h-5 w-5" />
                     </div>
@@ -323,14 +323,14 @@ export default function HogoshaPage() {
           {/* 保護者FAQ */}
           <section className="mb-10">
             <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <MessageCircleQuestion className="h-5 w-5 text-emerald-600" />
+              <MessageCircleQuestion className="h-5 w-5 text-brand-600" />
               保護者の方からよくある質問
             </h2>
             <div className="space-y-3">
               {PARENT_FAQS.map((f) => (
                 <details
                   key={f.question}
-                  className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                  className="group rounded-lg border border-slate-200 bg-white p-5"
                 >
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800 marker:hidden">
                     <span className="flex items-center justify-between gap-3">

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, FileText } from 'lucide-react';
+import { ArrowLeft, FileText } from '@/components/icons';
 
 import { isJukuSaasEnabled } from '@/lib/juku-saas/flag';
 import { verifyInviteToken, listJukuStudents, getStudentSnapshots, type SnapshotMetric } from '@/lib/juku-saas-db';
@@ -71,12 +71,12 @@ export default async function JukuStudentReportPage({
   const alertMetrics = new Set(alerts.map((a) => a.metric));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-3xl px-4 py-8 md:py-12">
         <nav className="mb-6 flex items-center justify-between print:hidden">
           <Link
             href={`/juku/dashboard?token=${encodeURIComponent(token)}`}
-            className="flex items-center gap-1 text-xs text-slate-500 hover:text-blue-600"
+            className="flex items-center gap-1 text-xs text-slate-500 hover:text-brand-600"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             ダッシュボードへ戻る
@@ -85,7 +85,7 @@ export default async function JukuStudentReportPage({
         </nav>
 
         <header className="mb-8 flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg print:hidden">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-500 text-white print:hidden">
             <FileText className="h-6 w-6" />
           </div>
           <div>
@@ -101,11 +101,11 @@ export default async function JukuStudentReportPage({
           {METRICS.map((metric) => {
             const points = trend[metric];
             return (
-              <section key={metric} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <section key={metric} className="rounded-lg border border-slate-200 bg-white p-6">
                 <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
                   {METRIC_LABEL[metric]}の推移
                   {alertMetrics.has(metric) && (
-                    <span className="rounded-full bg-rose-50 px-2 py-0.5 text-xs font-bold text-rose-600">直近低下</span>
+                    <span className="rounded-full bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600">直近低下</span>
                   )}
                 </h2>
                 {points.length === 0 ? (
@@ -124,7 +124,7 @@ export default async function JukuStudentReportPage({
                         {points.map((p, i) => (
                           <tr key={i} className="border-b border-slate-100">
                             <td className="py-2 pr-4 text-slate-600">{p.recordedAt}</td>
-                            <td className="py-2 pr-4 text-right font-semibold text-slate-700">
+                            <td className="py-2 pr-4 text-right font-bold text-slate-700">
                               {p.value}
                               {p.maxValue !== null ? `/${p.maxValue}` : ''}
                             </td>

@@ -40,17 +40,17 @@ export default function InterimBulletinPreviewPage() {
   const rows = [...(rateShown ?? []), ...(rateHidden ?? [])];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
         <header className="mb-6">
           <h1 className="text-xl font-bold text-slate-900">速報面プレビュー（内部確認用）</h1>
-          <p className="mt-2 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm leading-relaxed text-amber-900">
+          <p className="mt-2 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm leading-relaxed text-amber-900">
             ⚠️ このページに表示されているデータは<strong>すべて架空のサンプル</strong>です。実在の学校・数値ではありません。
             実際のライブ速報データが取得できるようになるまでの表示イメージ確認用（非公開・noindex）です。
           </p>
         </header>
 
-        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-lg border border-slate-200 bg-white">
           <table className="w-full text-sm">
             <thead className="bg-slate-100 text-left text-xs text-slate-500">
               <tr>

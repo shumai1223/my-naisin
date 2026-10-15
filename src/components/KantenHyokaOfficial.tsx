@@ -1,4 +1,4 @@
-import { ExternalLink, ShieldCheck, BookOpenCheck } from 'lucide-react';
+import { ExternalLink, ShieldCheck, BookOpenCheck } from '@/components/icons';
 
 /**
  * 観点別評価（3観点）と評定の公式な仕組みを、文部科学省の一次情報を出典として解説する権威コンテンツ。
@@ -34,14 +34,14 @@ export function KantenHyokaOfficial() {
   return (
     <section
       aria-labelledby="kanten-hyoka-heading"
-      className="rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/60 via-white to-teal-50/40 p-6 md:p-8"
+      className="rounded-lg border border-brand-100 bg-brand-50/60 p-6 md:p-8"
     >
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-100">
+      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
         <ShieldCheck className="h-3 w-3" />
         文部科学省 一次情報にもとづく解説
       </div>
       <h2 id="kanten-hyoka-heading" className="mb-3 flex items-center gap-2 text-xl font-bold text-slate-900">
-        <BookOpenCheck className="h-5 w-5 text-emerald-600" />
+        <BookOpenCheck className="h-5 w-5 text-brand-600" />
         内申点の土台「観点別評価（3観点）」と評定の関係
       </h2>
       <p className="mb-5 text-sm leading-relaxed text-slate-700">
@@ -54,20 +54,20 @@ export function KantenHyokaOfficial() {
 
       <div className="grid gap-3 md:grid-cols-3">
         {KANTEN.map((k, i) => (
-          <div key={k.name} className="rounded-xl border border-emerald-100 bg-white p-4 shadow-sm">
+          <div key={k.name} className="rounded-lg border border-brand-100 bg-white p-4">
             <div className="mb-2 flex items-center gap-2">
-              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-600 text-xs font-black text-white">
+              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-600 text-xs font-bold text-white">
                 {i + 1}
               </span>
               <h3 className="text-sm font-bold text-slate-900">{k.name}</h3>
             </div>
-            <div className="mb-1 text-[11px] font-bold text-emerald-700">{k.pillar}</div>
+            <div className="mb-1 text-xs font-bold text-brand-700">{k.pillar}</div>
             <p className="text-xs leading-relaxed text-slate-600">{k.desc}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-5 rounded-xl border border-amber-100 bg-amber-50/60 p-4">
+      <div className="mt-5 rounded-lg border border-amber-100 bg-amber-50/60 p-4">
         <p className="text-xs leading-relaxed text-amber-900">
           <strong>ポイント：</strong>3観点（A・B・C）から評定（5・4・3・2・1）への
           <strong>換算方法に全国統一のルールはありません</strong>。
@@ -76,12 +76,12 @@ export function KantenHyokaOfficial() {
         </p>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-3 text-[11px]">
+      <div className="mt-4 flex flex-wrap gap-3 text-xs">
         <a
           href="https://www.mext.go.jp/b_menu/hakusho/nc/1415169.htm"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 font-bold text-emerald-700 hover:underline"
+          className="inline-flex items-center gap-1 font-bold text-brand-700 hover:underline"
         >
           <ExternalLink className="h-3 w-3" />
           文科省「指導要録の改善等について（通知）平成31年3月29日」
@@ -90,7 +90,7 @@ export function KantenHyokaOfficial() {
           href="https://www.mext.go.jp/a_menu/shotou/new-cs/qa/1421956.htm"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 font-bold text-emerald-700 hover:underline"
+          className="inline-flex items-center gap-1 font-bold text-brand-700 hover:underline"
         >
           <ExternalLink className="h-3 w-3" />
           文科省「学習評価に関するQ&A」

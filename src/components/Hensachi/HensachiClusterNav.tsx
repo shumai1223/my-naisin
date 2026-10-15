@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calculator, BookOpen, Target, TrendingUp, BarChart3, Sparkles, ChevronRight, ArrowLeftRight, Undo2 } from 'lucide-react';
+import { Calculator, BookOpen, Target, TrendingUp, BarChart3, Sparkles, ChevronRight, ArrowLeftRight, Undo2 } from '@/components/icons';
 
 /**
  * 偏差値クラスタのハブ＆スポーク内部リンク（情報設計 §7）。
@@ -31,9 +31,9 @@ const CLUSTER_PAGES: ClusterPage[] = [
 export function HensachiClusterNav({ current }: { current: HensachiClusterKey }) {
   const others = CLUSTER_PAGES.filter((p) => p.key !== current);
   return (
-    <nav aria-label="偏差値ツール一覧" className="rounded-2xl border border-purple-100 bg-gradient-to-br from-purple-50/60 to-white p-5 shadow-sm md:p-6">
+    <nav aria-label="偏差値ツール一覧" className="rounded-lg border border-slate-100 bg-slate-50/60 p-5 md:p-6">
       <h2 className="mb-1 flex items-center gap-2 text-base font-bold text-slate-800">
-        <TrendingUp className="h-5 w-5 text-purple-500" />
+        <TrendingUp className="h-5 w-5 text-slate-500" />
         偏差値ツール・ガイド
       </h2>
       <p className="mb-4 text-xs leading-relaxed text-slate-500">
@@ -46,15 +46,15 @@ export function HensachiClusterNav({ current }: { current: HensachiClusterKey })
             <li key={p.key}>
               <Link
                 href={p.href}
-                className="group flex items-start gap-3 rounded-xl border border-slate-100 bg-white px-4 py-3 transition-all hover:border-purple-200 hover:bg-purple-50/50"
+                className="group flex items-start gap-3 rounded-lg border border-slate-100 bg-white px-4 py-3 transition-all hover:border-slate-200 hover:bg-slate-50/50"
               >
-                <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-purple-100 text-purple-600 transition-colors group-hover:bg-purple-200">
+                <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-600 transition-colors group-hover:bg-slate-200">
                   <Icon className="h-4 w-4" />
                 </span>
                 <span className="flex-1">
-                  <span className="flex items-center gap-1 text-sm font-bold text-slate-800 group-hover:text-purple-700">
+                  <span className="flex items-center gap-1 text-sm font-bold text-slate-800 group-hover:text-slate-700">
                     {p.title}
-                    <ChevronRight className="h-3.5 w-3.5 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-purple-400" />
+                    <ChevronRight className="h-3.5 w-3.5 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-slate-400" />
                   </span>
                   <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{p.desc}</span>
                 </span>

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ChevronDown, MapPin, Info, AlertTriangle, Sparkles, ExternalLink, Calendar } from 'lucide-react';
+import { ChevronDown, MapPin, Info, AlertTriangle, Sparkles, ExternalLink, Calendar } from '@/components/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { PREFECTURES, REGIONS, getPrefecturesByRegion, resolvePrefectureConfig, type PrefectureConfig } from '@/lib/prefectures';
@@ -63,11 +63,11 @@ export function PrefectureSelector({
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-2xl border-2 border-amber-300 bg-gradient-to-r from-amber-50 via-yellow-50 to-orange-50 p-4 shadow-lg shadow-amber-100/50"
+          className="relative overflow-hidden rounded-lg border-2 border-amber-300 bg-amber-50 p-4"
         >
           <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-amber-200/30 blur-2xl" />
           <div className="relative flex items-start gap-3">
-            <div className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 shadow-md">
+            <div className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-amber-400">
               <AlertTriangle className="h-5 w-5 text-white" />
             </div>
             <div className="flex-1">
@@ -93,20 +93,20 @@ export function PrefectureSelector({
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            'flex w-full items-center justify-between gap-3 rounded-2xl border-2 bg-white px-4 py-4 text-left transition-all',
+            'flex w-full items-center justify-between gap-3 rounded-lg border-2 bg-white px-4 py-4 text-left transition-all',
             isDefaultPrefecture
-              ? 'border-amber-400 bg-gradient-to-r from-amber-50/50 to-orange-50/50 shadow-lg shadow-amber-200/40 hover:border-amber-500 animate-pulse-subtle'
-              : 'border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400',
-            isOpen && 'ring-2 ring-blue-500/20 border-blue-400'
+              ? 'border-amber-400 bg-amber-50/50 hover:border-amber-500'
+              : 'border-slate-200 hover:border-brand-300',
+            'focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400',
+            isOpen && 'ring-2 ring-brand-500/20 border-brand-400'
           )}
         >
           <div className="flex items-center gap-3">
             <div className={cn(
-              'grid h-12 w-12 place-items-center rounded-xl shadow-md transition-all',
+              'grid h-12 w-12 place-items-center rounded-lg transition-all',
               isDefaultPrefecture
-                ? 'bg-gradient-to-br from-amber-400 to-orange-500'
-                : 'bg-gradient-to-br from-blue-500 to-indigo-600'
+                ? 'bg-amber-400'
+                : 'bg-brand-500'
             )}>
               {isDefaultPrefecture ? (
                 <Sparkles className="h-6 w-6 text-white" />
@@ -123,7 +123,7 @@ export function PrefectureSelector({
                   {selectedPrefecture?.name ?? '都道府県を選択'}
                 </div>
                 {isDefaultPrefecture && (
-                  <span className="rounded-full bg-amber-400 px-2 py-0.5 text-[10px] font-bold text-amber-900 animate-bounce">
+                  <span className="rounded-full bg-amber-400 px-2 py-0.5 text-xs font-bold text-amber-900">
                     変更推奨
                   </span>
                 )}
@@ -155,11 +155,11 @@ export function PrefectureSelector({
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.15 }}
-              className="absolute z-50 mt-2 max-h-80 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl"
+              className="absolute z-50 mt-2 max-h-80 w-full overflow-auto rounded-lg border border-slate-200 bg-white"
             >
               {REGIONS.map(region => (
                 <div key={region}>
-                  <div className="sticky top-0 bg-gradient-to-r from-slate-100 to-slate-50 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <div className="sticky top-0 bg-slate-100 px-4 py-2 text-xs font-bold text-slate-500">
                     {region}
                   </div>
                   <div className="grid grid-cols-2 gap-1 p-2 sm:grid-cols-3">
@@ -169,9 +169,9 @@ export function PrefectureSelector({
                         type="button"
                         onClick={() => handleSelect(pref.code)}
                         className={cn(
-                          'rounded-xl px-3 py-2 text-left text-sm transition-all',
+                          'rounded-lg px-3 py-2 text-left text-sm transition-all',
                           pref.code === selectedCode
-                            ? 'bg-gradient-to-r from-blue-500 to-indigo-500 font-bold text-white shadow-md'
+                            ? 'bg-brand-500 font-bold text-white'
                             : 'text-slate-700 hover:bg-slate-100'
                         )}
                       >
@@ -191,11 +191,11 @@ export function PrefectureSelector({
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/80 to-indigo-50/80 p-4"
+          className="rounded-lg border border-brand-100 bg-brand-50/80 p-4"
         >
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 grid h-8 w-8 place-items-center rounded-lg bg-blue-500/10">
-              <Info className="h-4 w-4 text-blue-600" />
+            <div className="mt-0.5 grid h-8 w-8 place-items-center rounded-lg bg-brand-500/10">
+              <Info className="h-4 w-4 text-brand-600" />
             </div>
             <div className="flex-1">
               <div className="text-sm font-bold text-slate-800">{selectedPrefecture.name}の計算方法</div>
@@ -207,28 +207,28 @@ export function PrefectureSelector({
                   ※ {selectedPrefecture.note}
                 </div>
               )}
-              <div className="mt-3 rounded-xl border border-white/60 bg-white/80 p-3 text-xs text-slate-600">
+              <div className="mt-3 rounded-lg border border-white/60 bg-white/80 p-3 text-xs text-slate-600">
                 <div className="flex flex-wrap items-center gap-2">
                   <a
                     href={selectedPrefecture.sourceUrl || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 font-medium text-blue-700 hover:bg-blue-100"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-brand-700 hover:bg-brand-100"
                   >
                     {selectedPrefecture.sourceTitle || `${selectedPrefecture.name}教育委員会`}
                     <ExternalLink className="h-3 w-3" />
                   </a>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 font-medium text-slate-600 shadow-sm">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-slate-600">
                     <Calendar className="h-3 w-3" />
                     最終確認日: {selectedPrefecture.lastVerified ?? '未確認'}
                   </span>
                 </div>
               </div>
               <div className="mt-2 flex flex-wrap gap-2">
-                <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-700 shadow-sm">
+                <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs text-slate-700">
                   満点: {selectedPrefecture.maxScore}点
                 </span>
-                <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-700 shadow-sm">
+                <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs text-slate-700">
                   対象: 中{selectedPrefecture.targetGrades.join('・')}
                 </span>
               </div>
@@ -242,7 +242,7 @@ export function PrefectureSelector({
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-4"
+          className="rounded-lg border border-amber-200 bg-amber-50 p-4"
         >
           <div className="flex items-center justify-between gap-4">
             <div>
@@ -257,13 +257,13 @@ export function PrefectureSelector({
               className={cn(
                 'relative h-7 w-12 rounded-full transition-all duration-200',
                 use10PointScale
-                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 shadow-inner'
+                  ? 'bg-amber-500'
                   : 'bg-slate-200'
               )}
             >
               <span
                 className={cn(
-                  'absolute top-0.5 h-6 w-6 rounded-full bg-white shadow-md transition-all duration-200',
+                  'absolute top-0.5 h-6 w-6 rounded-full bg-white transition-all duration-200',
                   use10PointScale ? 'left-[22px]' : 'left-0.5'
                 )}
               />
@@ -277,7 +277,7 @@ export function PrefectureSelector({
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-blue-50 p-4"
+          className="rounded-lg border border-brand-200 bg-brand-50 p-4"
         >
           <div className="text-sm font-bold text-slate-800">志望校のパターンを選択</div>
           <div className="mt-0.5 text-xs text-slate-600">
@@ -292,14 +292,14 @@ export function PrefectureSelector({
                   type="button"
                   onClick={() => onVariantChange(variant.code)}
                   className={cn(
-                    'rounded-xl border px-3 py-2 text-left text-xs transition-all',
+                    'rounded-lg border px-3 py-2 text-left text-xs transition-all',
                     isActive
-                      ? 'border-indigo-400 bg-indigo-500 text-white shadow-md'
-                      : 'border-slate-200 bg-white text-slate-600 hover:border-indigo-300'
+                      ? 'border-brand-400 bg-brand-500 text-white'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-brand-300'
                   )}
                 >
                   <div className="font-bold">{variant.name}（{variant.maxScore}点満点）</div>
-                  <div className={cn('mt-0.5 leading-relaxed', isActive ? 'text-indigo-50' : 'text-slate-500')}>
+                  <div className={cn('mt-0.5 leading-relaxed', isActive ? 'text-brand-50' : 'text-slate-500')}>
                     {variant.description}
                   </div>
                 </button>

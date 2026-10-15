@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { Calculator, RotateCcw } from '@/components/icons';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 import { FUKUOKA_MAX_NAISHIN, FUKUOKA_MAX_GAKURYOKU, FUKUOKA_MAX_TOTAL, computeFukuokaScore } from '@/lib/total-score/fukuoka';
 
@@ -40,10 +40,10 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border-2 border-sky-200 bg-white shadow-lg">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-sky-100 bg-gradient-to-r from-sky-50 to-blue-50 px-6 py-4">
+    <div className="overflow-hidden rounded-lg border-2 border-brand-200 bg-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-brand-100 bg-brand-50 px-6 py-4">
         <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Calculator className="h-5 w-5 text-sky-600" />
+          <Calculator className="h-5 w-5 text-brand-600" />
           福岡県の内申点＋当日点を計算
         </h2>
         <button
@@ -70,7 +70,7 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
             value={naishinInput}
             onChange={(e) => setNaishinInput(e.target.value)}
             placeholder="例：36"
-            className="h-12 w-full rounded-xl border border-slate-200 px-4 text-base outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
         </div>
 
@@ -87,20 +87,20 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
             placeholder="例：210"
-            className="h-12 w-full rounded-xl border border-slate-200 px-4 text-base outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
+            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
         </div>
       </div>
 
       {hasInput && (
-        <div className="border-t-2 border-sky-100 bg-gradient-to-br from-sky-50 to-blue-50 px-6 py-6 text-center">
+        <div className="border-t-2 border-brand-100 bg-brand-50 px-6 py-6 text-center">
           <div className="mb-1 text-xs font-bold text-slate-600">内申＋当日点の合計（目安）</div>
-          <div className="text-5xl font-black text-sky-700">
+          <div className="text-5xl font-bold text-brand-700">
             {total}
             <span className="text-xl font-bold text-slate-400">/{FUKUOKA_MAX_TOTAL}</span>
           </div>
           <div className="mt-2 text-xs font-bold text-slate-600">満点比 {percent.toFixed(1)}%</div>
-          <div className="mx-auto mt-4 max-w-sm rounded-xl border border-sky-100 bg-white p-3 text-left">
+          <div className="mx-auto mt-4 max-w-sm rounded-lg border border-brand-100 bg-white p-3 text-left">
             <div className="mb-2 text-xs font-bold text-slate-700">内訳</div>
             <ul className="space-y-1 text-xs text-slate-600">
               <li>内申点（中3）：{naishin} / {FUKUOKA_MAX_NAISHIN}点</li>
@@ -108,7 +108,7 @@ export function FukuokaScoreCalculator({ onResult }: Props) {
               <li className="border-t border-slate-100 pt-1 font-bold">合計：{total} / {FUKUOKA_MAX_TOTAL}点</li>
             </ul>
           </div>
-          <p className="mx-auto mt-3 max-w-sm text-[11px] leading-relaxed text-slate-400">
+          <p className="mx-auto mt-3 max-w-sm text-xs leading-relaxed text-slate-400">
             ※ 福岡県はA群（学力・内申の両方の順位が合格圏）とB群（総合判断）の二段階選抜です。この合計は目安であり、単純合計の順位だけで合否が決まるわけではありません。
           </p>
 

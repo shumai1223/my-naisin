@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award, Target } from 'lucide-react';
+import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award, Target } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -86,29 +86,29 @@ export default function TokyoTotalScorePage() {
       />
       <FAQPageSchema faqItems={TOKYO_TOTAL_SCORE_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/tokyo" className="hover:text-blue-600">東京都</Link>
+            <Link href="/tokyo" className="hover:text-brand-600">東京都</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">総合得点計算</span>
           </nav>
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
               <Calculator className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
               都立高校 総合得点 計算サイト
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-700">
+            <div className="mt-2 inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
               1020点満点・2026年度入試対応
             </div>
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -118,31 +118,31 @@ export default function TokyoTotalScorePage() {
           </header>
 
           {/* 1020点満点の仕組み */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-blue-500" />
+              <BookOpen className="h-5 w-5 text-brand-500" />
               都立高校 1020点満点の内訳
             </h2>
             <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border-2 border-blue-200 bg-blue-50 p-4 text-center">
-                <div className="text-xs font-bold text-blue-600 mb-1">学力検査</div>
-                <div className="text-3xl font-black text-blue-700">700<span className="text-base font-bold">点</span></div>
-                <div className="text-xs text-blue-600 mt-1">5教科 × 100点を換算</div>
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
+                <div className="text-xs font-bold text-brand-600 mb-1">学力検査</div>
+                <div className="text-3xl font-bold text-brand-700">700<span className="text-base font-bold">点</span></div>
+                <div className="text-xs text-brand-600 mt-1">5教科 × 100点を換算</div>
               </div>
-              <div className="rounded-xl border-2 border-emerald-200 bg-emerald-50 p-4 text-center">
-                <div className="text-xs font-bold text-emerald-600 mb-1">調査書点（内申）</div>
-                <div className="text-3xl font-black text-emerald-700">300<span className="text-base font-bold">点</span></div>
-                <div className="text-xs text-emerald-600 mt-1">換算内申65点を換算</div>
+              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
+                <div className="text-xs font-bold text-brand-600 mb-1">調査書点（内申）</div>
+                <div className="text-3xl font-bold text-brand-700">300<span className="text-base font-bold">点</span></div>
+                <div className="text-xs text-brand-600 mt-1">換算内申65点を換算</div>
               </div>
-              <div className="rounded-xl border-2 border-amber-200 bg-amber-50 p-4 text-center">
+              <div className="rounded-lg border-2 border-amber-200 bg-amber-50 p-4 text-center">
                 <div className="text-xs font-bold text-amber-600 mb-1">ESAT-J</div>
-                <div className="text-3xl font-black text-amber-700">20<span className="text-base font-bold">点</span></div>
+                <div className="text-3xl font-bold text-amber-700">20<span className="text-base font-bold">点</span></div>
                 <div className="text-xs text-amber-600 mt-1">英語スピーキングテスト</div>
               </div>
             </div>
             <div className="mt-4 rounded-lg bg-slate-50 border border-slate-100 p-3 text-center">
               <span className="text-sm text-slate-600">合計：</span>
-              <span className="text-2xl font-black text-slate-800">1020点満点</span>
+              <span className="text-2xl font-bold text-slate-800">1020点満点</span>
             </div>
           </section>
 
@@ -156,15 +156,15 @@ export default function TokyoTotalScorePage() {
           <TokyoTotalScoreResultFlow />
 
           {/* 計算式の解説 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-blue-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               総合得点の計算式
             </h2>
             <div className="space-y-4 text-sm">
               <div>
                 <h3 className="font-bold text-slate-800 mb-2">学力検査（700点満点）の換算式</h3>
-                <div className="rounded-xl bg-slate-900 p-4 text-slate-100">
+                <div className="rounded-lg bg-slate-900 p-4 text-slate-100">
                   <div className="font-mono text-xs md:text-sm">
                     学力検査700点 = (5教科合計500点 ÷ 500) × 700
                   </div>
@@ -175,13 +175,13 @@ export default function TokyoTotalScorePage() {
               </div>
               <div>
                 <h3 className="font-bold text-slate-800 mb-2">調査書点（300点満点）の換算式</h3>
-                <div className="rounded-xl bg-slate-900 p-4 text-slate-100">
+                <div className="rounded-lg bg-slate-900 p-4 text-slate-100">
                   <div className="font-mono text-xs md:text-sm">
                     調査書点300点 = (換算内申 ÷ 65) × 300
                   </div>
                 </div>
                 <p className="mt-2 text-xs text-slate-500">
-                  ※ 換算内申は主要5教科×1倍 + 実技4教科×2倍 = 最大65点。<Link href="/tokyo/naishin" className="text-blue-600 underline">東京都の内申点計算</Link>もご利用ください。
+                  ※ 換算内申は主要5教科×1倍 + 実技4教科×2倍 = 最大65点。<Link href="/tokyo/naishin" className="text-brand-600 underline">東京都の内申点計算</Link>もご利用ください。
                 </p>
               </div>
               <div>
@@ -194,9 +194,9 @@ export default function TokyoTotalScorePage() {
           </section>
 
           {/* 当日点・換算内申の換算早見表（SEO: 当日点計算 サイト / 1000点換算 サイト / 都立 換算 早見表 / 都立高校 1000点満点 計算） */}
-          <section id="kansan-hayami" className="mt-8 scroll-mt-20 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 to-white p-6 shadow-sm">
+          <section id="kansan-hayami" className="mt-8 scroll-mt-20 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-blue-500" />
+              <Calculator className="h-5 w-5 text-brand-500" />
               当日点・換算内申の換算早見表（手計算用）
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
@@ -206,13 +206,13 @@ export default function TokyoTotalScorePage() {
             <div className="grid gap-5 md:grid-cols-2">
               {/* 当日点 → 700点換算 */}
               <div>
-                <h3 className="mb-2 text-sm font-bold text-blue-900">① 5教科の素点合計 → 学力検査700点換算</h3>
+                <h3 className="mb-2 text-sm font-bold text-brand-900">① 5教科の素点合計 → 学力検査700点換算</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-blue-600 text-white text-left">
-                        <th className="border border-blue-400 px-3 py-1.5 font-bold">素点（／500）</th>
-                        <th className="border border-blue-400 px-3 py-1.5 font-bold text-right">700点換算</th>
+                      <tr className="bg-brand-600 text-white text-left">
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold">素点（／500）</th>
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold text-right">700点換算</th>
                       </tr>
                     </thead>
                     <tbody className="text-slate-700">
@@ -228,17 +228,17 @@ export default function TokyoTotalScorePage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-1 text-[11px] text-slate-500">換算式：素点 ÷ 500 × 700</p>
+                <p className="mt-1 text-xs text-slate-500">換算式：素点 ÷ 500 × 700</p>
               </div>
               {/* 換算内申 → 300点換算 */}
               <div>
-                <h3 className="mb-2 text-sm font-bold text-emerald-900">② 換算内申 → 調査書点300点換算</h3>
+                <h3 className="mb-2 text-sm font-bold text-brand-900">② 換算内申 → 調査書点300点換算</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-emerald-600 text-white text-left">
-                        <th className="border border-emerald-400 px-3 py-1.5 font-bold">換算内申（／65）</th>
-                        <th className="border border-emerald-400 px-3 py-1.5 font-bold text-right">300点換算</th>
+                      <tr className="bg-brand-600 text-white text-left">
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold">換算内申（／65）</th>
+                        <th className="border border-brand-400 px-3 py-1.5 font-bold text-right">300点換算</th>
                       </tr>
                     </thead>
                     <tbody className="text-slate-700">
@@ -254,17 +254,17 @@ export default function TokyoTotalScorePage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-1 text-[11px] text-slate-500">換算式：換算内申 ÷ 65 × 300（四捨五入）</p>
+                <p className="mt-1 text-xs text-slate-500">換算式：換算内申 ÷ 65 × 300（四捨五入）</p>
               </div>
             </div>
             <p className="mt-3 text-xs text-slate-500 leading-relaxed">
               ※ ①の700点換算＋②の300点換算＋ESAT-J（最大20点）＝総合得点（1020点満点）。換算内申がわからない場合は
-              <Link href="/tokyo/naishin" className="text-blue-600 underline font-bold">東京都の内申点計算ツール</Link>で先に算出してから、上のツールに入力してください。
+              <Link href="/tokyo/naishin" className="text-brand-600 underline font-bold">東京都の内申点計算ツール</Link>で先に算出してから、上のツールに入力してください。
             </p>
           </section>
 
           {/* 主要都立高校の合格ライン目安 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
               <Award className="h-5 w-5 text-amber-500" />
               主要都立高校の合格ライン目安【2026年最新】
@@ -296,12 +296,12 @@ export default function TokyoTotalScorePage() {
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">戸山（自校作成）</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-orange-700 font-bold">840点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-amber-700 font-bold">840点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">70</td>
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">青山（自校作成）</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-orange-700 font-bold">830点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-amber-700 font-bold">830点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">69</td>
                   </tr>
                   <tr>
@@ -316,22 +316,22 @@ export default function TokyoTotalScorePage() {
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">小山台</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-emerald-700 font-bold">750点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-brand-700 font-bold">750点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">63</td>
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">三田</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-emerald-700 font-bold">720点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-brand-700 font-bold">720点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">62</td>
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">城東</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-blue-700 font-bold">680点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-brand-700 font-bold">680点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">60</td>
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">広尾</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-blue-700 font-bold">640点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-brand-700 font-bold">640点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">58</td>
                   </tr>
                 </tbody>
@@ -343,9 +343,9 @@ export default function TokyoTotalScorePage() {
           </section>
 
           {/* 合格基準点シミュレーション（SEO: 都立高校 合格基準点 シュミレーション / 都立 点数 計算） */}
-          <section className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/40 via-indigo-50/30 to-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Target className="h-5 w-5 text-blue-500" />
+              <Target className="h-5 w-5 text-brand-500" />
               都立高校 合格基準点 シミュレーション（点数計算の早見表）
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-4">
@@ -373,7 +373,7 @@ export default function TokyoTotalScorePage() {
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">戸山・青山クラス</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-orange-700 font-bold">830点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-amber-700 font-bold">830点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">430点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">58+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">A〜B</td>
@@ -387,14 +387,14 @@ export default function TokyoTotalScorePage() {
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">小山台・三田クラス</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-emerald-700 font-bold">730点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-brand-700 font-bold">730点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">370点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">52+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">B〜C</td>
                   </tr>
                   <tr>
                     <td className="border border-slate-200 px-3 py-2 font-bold">城東・広尾クラス</td>
-                    <td className="border border-slate-200 px-3 py-2 text-right text-blue-700 font-bold">660点+</td>
+                    <td className="border border-slate-200 px-3 py-2 text-right text-brand-700 font-bold">660点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">330点+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">48+</td>
                     <td className="border border-slate-200 px-3 py-2 text-right">C〜D</td>
@@ -417,7 +417,7 @@ export default function TokyoTotalScorePage() {
               </table>
             </div>
 
-            <div className="mt-4 rounded-xl bg-white border border-blue-100 p-4">
+            <div className="mt-4 rounded-lg bg-white border border-brand-100 p-4">
               <h3 className="text-sm font-bold text-slate-800 mb-2">点数計算のシミュレーション例</h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-2">
                 例：<strong>新宿高校（合格目安780点+）志望、当日点400点・換算内申55・ESAT-J「B」</strong>の場合
@@ -426,7 +426,7 @@ export default function TokyoTotalScorePage() {
                 <li>学力検査700点換算：400 ÷ 500 × 700 ≒ <strong>560点</strong></li>
                 <li>調査書点300点換算：55 ÷ 65 × 300 ≒ <strong>254点</strong></li>
                 <li>ESAT-J：B評価 → <strong>16点</strong></li>
-                <li>合計：560 + 254 + 16 ＝ <strong className="text-blue-700">830点</strong>（新宿の合格目安780を超過）</li>
+                <li>合計：560 + 254 + 16 ＝ <strong className="text-brand-700">830点</strong>（新宿の合格目安780を超過）</li>
               </ul>
             </div>
 
@@ -450,7 +450,7 @@ export default function TokyoTotalScorePage() {
           <AdUnit unit="IN_CONTENT" />
 
           {/* よくある質問 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               <div>
@@ -474,14 +474,14 @@ export default function TokyoTotalScorePage() {
               <div>
                 <div className="font-bold text-slate-800 text-sm">Q. 換算内申はどう計算する？</div>
                 <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                  東京都の換算内申は「主要5教科の評定 ×1倍 + 実技4教科の評定 ×2倍」で最大65点になります。詳しくは<Link href="/tokyo/naishin" className="text-blue-600 underline font-bold">東京都の内申点計算ツール</Link>と<Link href="/blog/tokyo-kansan-naishin-guide" className="text-blue-600 underline font-bold">換算内申の徹底ガイド</Link>をご覧ください。
+                  東京都の換算内申は「主要5教科の評定 ×1倍 + 実技4教科の評定 ×2倍」で最大65点になります。詳しくは<Link href="/tokyo/naishin" className="text-brand-600 underline font-bold">東京都の内申点計算ツール</Link>と<Link href="/blog/tokyo-kansan-naishin-guide" className="text-brand-600 underline font-bold">換算内申の徹底ガイド</Link>をご覧ください。
                 </p>
               </div>
             </div>
           </section>
 
           {/* 注意 */}
-          <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <p className="text-xs text-amber-800 leading-relaxed">
@@ -491,31 +491,31 @@ export default function TokyoTotalScorePage() {
           </div>
 
           {/* 関連リンク */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/tokyo/naishin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">東京都の内申点を計算する</span>
+              <Link href="/tokyo/naishin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">東京都の内申点を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/tokyo" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">東京都の入試制度ガイド</span>
+              <Link href="/tokyo" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">東京都の入試制度ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/reverse?pref=tokyo" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">志望校から必要な当日点を逆算</span>
+              <Link href="/reverse?pref=tokyo" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">志望校から必要な当日点を逆算</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">偏差値を計算する</span>
+              <Link href="/hensachi" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">偏差値を計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">評定平均を自動計算する</span>
+              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">評定平均を自動計算する</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
-              <Link href="/blog/tokyo-kansan-naishin-guide" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">換算内申の徹底ガイド</span>
+              <Link href="/blog/tokyo-kansan-naishin-guide" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
+                <span className="text-sm text-slate-700">換算内申の徹底ガイド</span>
                 <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
             </div>

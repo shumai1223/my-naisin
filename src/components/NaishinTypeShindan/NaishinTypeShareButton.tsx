@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Share2, Download, Loader2 } from 'lucide-react';
+import { Share2, Download, Loader2 } from '@/components/icons';
 
 import { APP_NAME } from '@/lib/constants';
 import type { NaishinTypeDefinition } from '@/lib/naishin-type-diagnosis';
@@ -109,7 +109,7 @@ export function NaishinTypeShareButton({ type, prefectureName }: NaishinTypeShar
           type="button"
           onClick={onShare}
           disabled={preparing}
-          className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg disabled:opacity-60"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-3 text-sm font-bold text-white transition-all disabled:opacity-60"
         >
           {preparing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Share2 className="h-4 w-4" />}
           友達にシェアする
@@ -118,13 +118,13 @@ export function NaishinTypeShareButton({ type, prefectureName }: NaishinTypeShar
           type="button"
           onClick={onDownload}
           disabled={preparing || !preparedDataUrl}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-600 transition-all hover:bg-slate-50 disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-600 transition-all hover:bg-slate-50 disabled:opacity-60"
         >
           <Download className="h-4 w-4" />
           保存
         </button>
       </div>
-      {toast && <p className="text-center text-xs font-medium text-slate-500">{toast}</p>}
+      {toast && <p className="text-center text-xs text-slate-500">{toast}</p>}
 
       {/* キャプチャ用の隠し要素（画面表示はしない） */}
       <div className="fixed left-[-9999px] top-0 overflow-hidden">

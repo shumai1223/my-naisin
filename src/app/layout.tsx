@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Noto_Sans_JP } from 'next/font/google';
+import { BIZ_UDPGothic, Noto_Sans_JP } from 'next/font/google';
 import type { ReactNode } from 'react';
 import Script from 'next/script';
 
@@ -16,6 +16,17 @@ import { SiteEngagementTracker } from '@/components/SiteEngagementTracker';
 import { ExitIntentLineModal } from '@/components/ExitIntentLineModal';
 import { StickyConvertBar } from '@/components/StickyConvertBar';
 
+// 本文・見出しの書体: BIZ UDPゴシック（ユニバーサルデザインの書体）。太さは400と700だけ。
+// 日本語フォントは巨大なので preload しない（LCP を悪化させない）。
+const bizUd = BIZ_UDPGothic({
+  variable: '--font-biz-ud',
+  weight: ['400', '700'],
+  display: 'swap',
+  preload: false,
+  fallback: ['Noto Sans JP', 'system-ui', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', 'sans-serif'],
+});
+
+// 予備の書体（BIZ UDPゴシックに無い字を補う）。
 const notoSansJp = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
   display: 'swap',
@@ -79,12 +90,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#4f46e5',
+  themeColor: '#17543e',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ja" className={`h-full ${notoSansJp.variable}`}>
+    <html lang="ja" className={`h-full ${bizUd.variable} ${notoSansJp.variable}`}>
       <head>
         {/* 第三者オリジンへの接続を前倒し（CWV：LCP/INP改善）。フォントは next/font が自己ホストするため
             fonts.gstatic.com への preconnect は不要（むしろアンチパターン）。計測/広告のみ前倒しする。 */}
@@ -92,10 +103,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://i.moshimo.com" />
       </head>
-      <body className={`min-h-screen mesh-gradient text-slate-900 antialiased`}>
+      <body className="min-h-screen bg-paper font-sans text-slate-900 antialiased">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-indigo-700 focus:shadow-lg focus:ring-2 focus:ring-indigo-500"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:border focus:border-brand-700 focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-brand-700"
         >
           本文へスキップ
         </a>

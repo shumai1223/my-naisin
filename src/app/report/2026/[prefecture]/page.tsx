@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, BookMarked, ChevronRightSquare } from 'lucide-react';
+import { Home, ChevronRight, BookMarked, ChevronRightSquare } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -71,15 +71,15 @@ export default async function Report2026PrefecturePage({ params }: PageProps) {
       />
       <FAQPageSchema faqItems={entry.faqs} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/report/2026" className="hover:text-indigo-600">
+            <Link href="/report/2026" className="hover:text-brand-600">
               内申点白書2026
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -87,7 +87,7 @@ export default async function Report2026PrefecturePage({ params }: PageProps) {
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-800 to-indigo-900 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-800 text-white">
               <BookMarked className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
@@ -96,34 +96,34 @@ export default async function Report2026PrefecturePage({ params }: PageProps) {
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">{entry.highlight}</p>
           </header>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">この県の位置づけ</h2>
             <p className="text-sm leading-relaxed text-slate-600">{entry.context}</p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">全国47都道府県中の順位</h2>
             <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl bg-slate-50 p-4 text-center">
-                <div className="text-[11px] font-bold text-slate-500">実技傾斜倍率</div>
-                <div className="mt-1 text-xl font-black text-indigo-700">{row!.practicalSkew}倍</div>
-                <div className="mt-1 text-[11px] text-slate-400">全国{practicalRank}位</div>
+              <div className="rounded-lg bg-slate-50 p-4 text-center">
+                <div className="text-xs font-bold text-slate-500">実技傾斜倍率</div>
+                <div className="mt-1 text-xl font-bold text-brand-700">{row!.practicalSkew}倍</div>
+                <div className="mt-1 text-xs text-slate-400">全国{practicalRank}位</div>
               </div>
-              <div className="rounded-xl bg-slate-50 p-4 text-center">
-                <div className="text-[11px] font-bold text-slate-500">中3の重み</div>
-                <div className="mt-1 text-xl font-black text-indigo-700">{row!.grade3WeightPct}%</div>
-                <div className="mt-1 text-[11px] text-slate-400">全国{grade3Rank}位</div>
+              <div className="rounded-lg bg-slate-50 p-4 text-center">
+                <div className="text-xs font-bold text-slate-500">中3の重み</div>
+                <div className="mt-1 text-xl font-bold text-brand-700">{row!.grade3WeightPct}%</div>
+                <div className="mt-1 text-xs text-slate-400">全国{grade3Rank}位</div>
               </div>
-              <div className="rounded-xl bg-slate-50 p-4 text-center">
-                <div className="text-[11px] font-bold text-slate-500">満点</div>
-                <div className="mt-1 text-xl font-black text-indigo-700">{row!.maxScore}点</div>
-                <div className="mt-1 text-[11px] text-slate-400">全国{maxScoreRank}位</div>
+              <div className="rounded-lg bg-slate-50 p-4 text-center">
+                <div className="text-xs font-bold text-slate-500">満点</div>
+                <div className="mt-1 text-xl font-bold text-brand-700">{row!.maxScore}点</div>
+                <div className="mt-1 text-xs text-slate-400">全国{maxScoreRank}位</div>
               </div>
             </div>
             <p className="mt-3 text-xs text-slate-400">
               順位は{REPORT_2026_ROWS.length}都道府県中（同値は同順位）。出典：
               {row!.sourceUrl ? (
-                <a href={row!.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="text-indigo-600 underline">
+                <a href={row!.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="text-brand-600 underline">
                   {prefecture.name}教育委員会
                 </a>
               ) : (
@@ -135,21 +135,21 @@ export default async function Report2026PrefecturePage({ params }: PageProps) {
           <section className="mb-8 grid gap-2 sm:grid-cols-2">
             <Link
               href="/report/2026"
-              className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:border-indigo-200 hover:bg-indigo-50/50"
+              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
             >
               白書2026（47都道府県全件版）を見る
               <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
             </Link>
             <Link
               href={`/${code}/naishin`}
-              className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 shadow-sm hover:border-indigo-200 hover:bg-indigo-50/50"
+              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
             >
               {prefecture.name}の内申点を計算する
               <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
             </Link>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {entry.faqs.map((f) => (

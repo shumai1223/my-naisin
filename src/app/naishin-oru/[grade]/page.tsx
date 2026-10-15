@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Home, ChevronRight, Calculator, AlertTriangle } from 'lucide-react';
+import { Home, ChevronRight, Calculator, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -110,15 +110,15 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
       />
       <FAQPageSchema faqItems={faqItems} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/naishin-oru" className="hover:text-blue-600">オール3・4・5の内申点は何点？</Link>
+            <Link href="/naishin-oru" className="hover:text-brand-600">オール3・4・5の内申点は何点？</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">{label}</span>
           </nav>
@@ -130,7 +130,7 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
+          <section className="mb-8 rounded-lg border-2 border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
               <p className="text-sm leading-relaxed text-amber-900">
@@ -139,11 +139,11 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
                   <>
                     {' '}
                     地域ごとの偏差値レンジの目安（学校名の断定なし）は
-                    <Link href="/blog/all-3-high-school-options-2026-update" className="font-bold text-blue-700 hover:underline">
+                    <Link href="/blog/all-3-high-school-options-2026-update" className="font-bold text-brand-700 hover:underline">
                       オール3で行ける高校一覧の記事
                     </Link>
                     でも紹介しています。私立高校の併願優遇については、学校の公式サイトで内申基準を確認できた例を
-                    <Link href="/heigan-yuugu/tokyo" className="font-bold text-blue-700 hover:underline">
+                    <Link href="/heigan-yuugu/tokyo" className="font-bold text-brand-700 hover:underline">
                       東京都の併願優遇 公式基準まとめ
                     </Link>
                     で紹介しています。
@@ -153,8 +153,8 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 border-l-4 border-blue-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
               主要都道府県の{label}の内申点
             </h2>
             <div className="overflow-x-auto">
@@ -170,7 +170,7 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
                   {highlighted.map((e) => (
                     <tr key={e.code} className="border-b border-slate-100 last:border-0">
                       <td className="py-2 pr-3">
-                        <Link href={`/${e.code}/naishin`} className="font-bold text-blue-700 hover:underline">
+                        <Link href={`/${e.code}/naishin`} className="font-bold text-brand-700 hover:underline">
                           {e.name}
                         </Link>
                       </td>
@@ -185,7 +185,7 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             </div>
           </section>
 
-          <details className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <details className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <summary className="cursor-pointer text-sm font-bold text-slate-700">47都道府県すべての{label}の内申点を見る</summary>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full min-w-[420px] text-sm">
@@ -200,7 +200,7 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
                   {examples.map((e) => (
                     <tr key={e.code} className="border-b border-slate-100 last:border-0">
                       <td className="py-2 pr-3">
-                        <Link href={`/${e.code}/naishin`} className="font-bold text-blue-700 hover:underline">
+                        <Link href={`/${e.code}/naishin`} className="font-bold text-brand-700 hover:underline">
                           {e.name}
                         </Link>
                       </td>
@@ -215,14 +215,14 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             </div>
           </details>
 
-          <section className="mb-8 rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 text-center shadow-sm">
+          <section className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">9教科すべてが{grade}とは限らない方へ</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
               実際は教科ごとに評定が違うことがほとんどです。教科ごとの評定を入力すれば、あなたの正確な内申点をその場で計算できます。
             </p>
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
             >
               <Calculator className="h-4 w-4" />
               自分の内申点を計算する（47都道府県）
@@ -237,7 +237,7 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             />
           </div>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-4">
               {faqItems.map((f) => (
@@ -249,21 +249,21 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-sm font-bold text-slate-700">他の評定パターンを見る</h2>
             <div className="flex flex-wrap gap-2">
               {ORU_GRADES.filter((g) => g !== grade).map((g) => (
                 <Link
                   key={g}
                   href={`/naishin-oru/${g}`}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700"
                 >
                   {ORU_GRADE_LABEL[g]}
                 </Link>
               ))}
               <Link
                 href="/naishin-age-kata"
-                className="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-xs font-bold text-blue-700 transition-colors hover:bg-blue-100"
+                className="rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-xs font-bold text-brand-700 transition-colors hover:bg-brand-100"
               >
                 内申点の上げ方（学年別）へ
               </Link>

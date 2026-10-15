@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CheckCircle, FileText, Calendar, Calculator, TrendingUp, ShieldCheck, RefreshCw, Search, Award } from 'lucide-react';
+import { CheckCircle, FileText, Calendar, Calculator, TrendingUp, ShieldCheck, RefreshCw, Search, Award } from '@/components/icons';
 import { Button } from '@/components/ui/Button';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { Metadata } from 'next';
@@ -73,7 +73,7 @@ const globalUpdateHistory = [
 
 export default function QualityPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-slate-50">
       <BreadcrumbSchema 
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
@@ -83,7 +83,7 @@ export default function QualityPage() {
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
         {/* ヘッダー */}
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 shadow-lg shadow-blue-300/40">
+          <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-lg bg-brand-600">
             <ShieldCheck className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-slate-800 md:text-4xl">
@@ -97,9 +97,9 @@ export default function QualityPage() {
 
         {/* 信頼の証明セクション */}
         <div className="grid gap-6 md:grid-cols-2 mb-12">
-          <div className="rounded-2xl border-2 border-blue-100 bg-white p-8">
+          <div className="rounded-lg border-2 border-brand-100 bg-white p-8">
             <div className="flex items-center gap-3 mb-4">
-              <Search className="h-6 w-6 text-blue-600" />
+              <Search className="h-6 w-6 text-brand-600" />
               <h2 className="text-xl font-bold text-slate-800">公式の選抜要綱を主軸にした検証</h2>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -107,9 +107,9 @@ export default function QualityPage() {
               県によっては、公式資料に加えて信頼できる教育情報サイトの解説も補助的に参照し、内容を相互に突き合わせて検証しています。
             </p>
           </div>
-          <div className="rounded-2xl border-2 border-emerald-100 bg-white p-8">
+          <div className="rounded-lg border-2 border-brand-100 bg-white p-8">
             <div className="flex items-center gap-3 mb-4">
-              <Calculator className="h-6 w-6 text-emerald-600" />
+              <Calculator className="h-6 w-6 text-brand-600" />
               <h2 className="text-xl font-bold text-slate-800">自動テストと目視確認</h2>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -122,34 +122,34 @@ export default function QualityPage() {
         {/* テスト結果の可視化 */}
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-            <Award className="h-6 w-6 text-blue-600" />
+            <Award className="h-6 w-6 text-brand-600" />
             代表的な計算ロジックの検証結果
           </h2>
           <div className="grid gap-6">
             {testResults.map((pref, i) => (
-              <div key={i} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div key={i} className="overflow-hidden rounded-lg border border-slate-200 bg-white">
                 <div className="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
                   <h3 className="font-bold text-slate-800">{pref.prefecture}：{pref.notes}</h3>
-                  <span className="text-[10px] font-bold text-slate-400">VER: {pref.version}</span>
+                  <span className="text-xs font-bold text-slate-400">VER: {pref.version}</span>
                 </div>
                 <div className="p-6">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="text-slate-400 text-xs border-b border-slate-100">
-                        <th className="text-left pb-3 font-medium">テストケース</th>
-                        <th className="text-center pb-3 font-medium">期待される結果</th>
-                        <th className="text-center pb-3 font-medium">ツールの出力</th>
-                        <th className="text-center pb-3 font-medium">ステータス</th>
+                        <th className="text-left pb-3">テストケース</th>
+                        <th className="text-center pb-3">期待される結果</th>
+                        <th className="text-center pb-3">ツールの出力</th>
+                        <th className="text-center pb-3">ステータス</th>
                       </tr>
                     </thead>
                     <tbody>
                       {pref.testCases.map((tc, j) => (
                         <tr key={j} className="border-b border-slate-50 last:border-0">
-                          <td className="py-4 font-medium text-slate-700">{tc.name}</td>
+                          <td className="py-4 text-slate-700">{tc.name}</td>
                           <td className="py-4 text-center text-slate-600 font-mono">{tc.expected}</td>
                           <td className="py-4 text-center text-slate-600 font-mono">{tc.actual}</td>
                           <td className="py-4 text-center">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-600">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2 py-0.5 text-xs font-bold text-brand-600">
                               <CheckCircle className="h-3 w-3" /> PASS
                             </span>
                           </td>
@@ -171,9 +171,9 @@ export default function QualityPage() {
           </h2>
           <div className="space-y-4">
             {globalUpdateHistory.map((update, i) => (
-              <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6">
+              <div key={i} className="rounded-lg border border-slate-200 bg-white p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-sm font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{update.version}</span>
+                  <span className="text-sm font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded">{update.version}</span>
                   <span className="text-xs text-slate-400">{update.date}</span>
                 </div>
                 <ul className="space-y-2">
@@ -190,26 +190,26 @@ export default function QualityPage() {
         </div>
 
         {/* 統計データへの導線＋方法論・限界の開示（TIER N-8・研究/メディア利用向け） */}
-        <div className="mb-16 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+        <div className="mb-16 rounded-lg border border-brand-200 bg-brand-50 p-6">
           <h2 className="mb-2 text-lg font-bold text-slate-800">利用者の匿名データによる統計</h2>
           <p className="mb-4 text-sm leading-relaxed text-slate-600">
             計算機の結果を任意でオプトインいただいた匿名データから、内申点・偏差値・総合得点の分布を集計しています。任意参加の自己選択標本であり、母集団を代表する統計ではありません。個人を特定できる情報は一切含みません。
             {/* DW-1（2026-08-10）: 投稿の真正性を検証できないことが判明したため、現在は数値の公開を停止している。
                 「公開しています」と書き続けると、このページ自体が信頼性の説明として嘘になる。 */}
             <br />
-            <span className="mt-2 inline-block font-bold text-emerald-800">
+            <span className="mt-2 inline-block font-bold text-brand-800">
               ※ 2026-08-10 より、投稿の真正性を検証できないため集計値の公開を停止しています。送信元の検証を実装したうえで再収集します。件数の表示は続けています。
             </span>
           </p>
-          <Link href="/stats" className="mb-6 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
+          <Link href="/stats" className="mb-6 inline-flex items-center gap-1 text-sm font-bold text-brand-700 hover:underline">
             統計データのページを見る →
           </Link>
           <br />
-          <Link href="/reliability" className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
+          <Link href="/reliability" className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-brand-700 hover:underline">
             データの鮮度・検証履歴・API稼働状況のサマリーを見る →
           </Link>
 
-          <div className="mt-4 rounded-xl border border-emerald-200 bg-white p-5">
+          <div className="mt-4 rounded-lg border border-brand-200 bg-white p-5">
             <h3 className="mb-3 text-sm font-bold text-slate-800">研究・メディアの方へ：この統計データの方法論と限界</h3>
             <ul className="space-y-2.5 text-xs leading-relaxed text-slate-600">
               <li>
@@ -223,7 +223,7 @@ export default function QualityPage() {
               <li>
                 <strong className="text-slate-700">プライバシー保護（k-匿名性）：</strong>
                 個人の値が推測されるリスクを避けるため、サンプルサイズが30件未満のセグメントは集計値を非公開にし、件数のみを表示します（
-                <Link href="/stats" className="font-semibold text-emerald-700 underline">/stats</Link>
+                <Link href="/stats" className="font-bold text-brand-700 underline">/stats</Link>
                 で「収集中」と表示される項目）。
               </li>
               <li>
@@ -237,7 +237,7 @@ export default function QualityPage() {
               <li>
                 <strong className="text-slate-700">お問い合わせ：</strong>
                 研究・報道での利用にあたり詳細（収集期間・生データの取り扱い等）についてご質問がある場合は、
-                <Link href="/contact" className="font-semibold text-emerald-700 underline">お問い合わせフォーム</Link>
+                <Link href="/contact" className="font-bold text-brand-700 underline">お問い合わせフォーム</Link>
                 からご連絡ください。
               </li>
             </ul>
@@ -245,7 +245,7 @@ export default function QualityPage() {
         </div>
 
         {/* 誤り報告 */}
-        <div className="rounded-2xl bg-slate-900 p-8 text-white text-center">
+        <div className="rounded-lg bg-slate-900 p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">受験生の正確な情報を守るために</h2>
           <p className="text-slate-400 text-sm mb-8 leading-relaxed max-w-xl mx-auto">
             情報の誤りは受験生の人生に影響を及ぼす重大な問題だと認識しています。

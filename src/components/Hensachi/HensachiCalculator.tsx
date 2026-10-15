@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw, Settings2 } from 'lucide-react';
+import { Calculator, RotateCcw, Settings2 } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 
@@ -45,47 +45,47 @@ function evaluateLabel(hensachi: number | null): EvalResult | null {
       label: '最難関レベル（上位2%）',
       textClass: 'text-red-700',
       subClass: 'text-red-600',
-      bgGradient: 'from-red-50 to-red-100',
+      bgGradient: 'bg-red-50',
       borderClass: 'border-red-200',
     };
   if (hensachi >= 65)
     return {
       label: '難関校レベル（上位7%）',
-      textClass: 'text-orange-700',
-      subClass: 'text-orange-600',
-      bgGradient: 'from-orange-50 to-orange-100',
-      borderClass: 'border-orange-200',
+      textClass: 'text-amber-700',
+      subClass: 'text-amber-600',
+      bgGradient: 'bg-amber-50',
+      borderClass: 'border-amber-200',
     };
   if (hensachi >= 60)
     return {
       label: '上位校レベル（上位16%）',
       textClass: 'text-amber-700',
       subClass: 'text-amber-600',
-      bgGradient: 'from-amber-50 to-amber-100',
+      bgGradient: 'bg-amber-50',
       borderClass: 'border-amber-200',
     };
   if (hensachi >= 55)
     return {
       label: '中堅上位レベル（上位31%）',
-      textClass: 'text-emerald-700',
-      subClass: 'text-emerald-600',
-      bgGradient: 'from-emerald-50 to-emerald-100',
-      borderClass: 'border-emerald-200',
+      textClass: 'text-brand-700',
+      subClass: 'text-brand-600',
+      bgGradient: 'bg-brand-50',
+      borderClass: 'border-brand-200',
     };
   if (hensachi >= 50)
     return {
       label: '平均レベル',
-      textClass: 'text-blue-700',
-      subClass: 'text-blue-600',
-      bgGradient: 'from-blue-50 to-blue-100',
-      borderClass: 'border-blue-200',
+      textClass: 'text-brand-700',
+      subClass: 'text-brand-600',
+      bgGradient: 'bg-brand-50',
+      borderClass: 'border-brand-200',
     };
   if (hensachi >= 45)
     return {
       label: '平均より少し下',
       textClass: 'text-slate-700',
       subClass: 'text-slate-600',
-      bgGradient: 'from-slate-50 to-slate-100',
+      bgGradient: 'bg-slate-50',
       borderClass: 'border-slate-200',
     };
   if (hensachi >= 40)
@@ -93,14 +93,14 @@ function evaluateLabel(hensachi: number | null): EvalResult | null {
       label: '中堅下位レベル',
       textClass: 'text-slate-700',
       subClass: 'text-slate-600',
-      bgGradient: 'from-slate-50 to-slate-100',
+      bgGradient: 'bg-slate-50',
       borderClass: 'border-slate-200',
     };
   return {
     label: 'もう一歩レベル',
     textClass: 'text-slate-700',
     subClass: 'text-slate-600',
-    bgGradient: 'from-slate-50 to-slate-100',
+    bgGradient: 'bg-slate-50',
     borderClass: 'border-slate-200',
   };
 }
@@ -172,11 +172,11 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
   }, [totalHensachi, onResult]);
 
   return (
-    <div className="rounded-2xl border-2 border-purple-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-purple-100 bg-gradient-to-r from-purple-50 to-indigo-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-slate-200 bg-white overflow-hidden">
+      <div className="border-b border-slate-100 bg-slate-50 px-6 py-4">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-purple-600" />
+            <Calculator className="h-5 w-5 text-slate-600" />
             偏差値計算ツール
           </h2>
           <div className="flex items-center gap-2">
@@ -217,10 +217,10 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
                 <div className="text-sm font-bold text-slate-800">{subject.label}</div>
                 {result.hensachi !== null && evalResult && (
                   <div className="text-right">
-                    <div className={`text-xl font-black ${evalResult.textClass}`}>
+                    <div className={`text-xl font-bold ${evalResult.textClass}`}>
                       偏差値 {result.hensachi.toFixed(1)}
                     </div>
-                    <div className={`text-[10px] font-bold ${evalResult.subClass}`}>
+                    <div className={`text-xs font-bold ${evalResult.subClass}`}>
                       {evalResult.label}
                     </div>
                   </div>
@@ -228,7 +228,7 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
               </div>
               <div className={`grid gap-3 ${mode === 'simple' ? 'sm:grid-cols-2' : 'sm:grid-cols-3'}`}>
                 <div>
-                  <label htmlFor={`hensachi-${subject.key}-score`} className="block text-[10px] font-bold text-slate-500 uppercase mb-1">点数</label>
+                  <label htmlFor={`hensachi-${subject.key}-score`} className="block text-xs font-bold text-slate-500 mb-1">点数</label>
                   <input
                     id={`hensachi-${subject.key}-score`}
                     type="number"
@@ -236,11 +236,11 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
                     value={input.score}
                     onChange={(e) => updateField(subject.key, 'score', e.target.value)}
                     placeholder="例：80"
-                    className="h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                    className="h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                   />
                 </div>
                 <div>
-                  <label htmlFor={`hensachi-${subject.key}-average`} className="block text-[10px] font-bold text-slate-500 uppercase mb-1">平均点</label>
+                  <label htmlFor={`hensachi-${subject.key}-average`} className="block text-xs font-bold text-slate-500 mb-1">平均点</label>
                   <input
                     id={`hensachi-${subject.key}-average`}
                     type="number"
@@ -248,12 +248,12 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
                     value={input.average}
                     onChange={(e) => updateField(subject.key, 'average', e.target.value)}
                     placeholder="50"
-                    className="h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                    className="h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                   />
                 </div>
                 {mode === 'advanced' && (
                   <div>
-                    <label htmlFor={`hensachi-${subject.key}-stddev`} className="block text-[10px] font-bold text-slate-500 uppercase mb-1">標準偏差</label>
+                    <label htmlFor={`hensachi-${subject.key}-stddev`} className="block text-xs font-bold text-slate-500 mb-1">標準偏差</label>
                     <input
                       id={`hensachi-${subject.key}-stddev`}
                       type="number"
@@ -261,7 +261,7 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
                       value={input.stdDev}
                       onChange={(e) => updateField(subject.key, 'stdDev', e.target.value)}
                       placeholder="15"
-                      className="h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                      className="h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                     />
                   </div>
                 )}
@@ -273,10 +273,10 @@ export function HensachiCalculator({ onResult, resultFooter }: HensachiCalculato
 
       {/* 5教科合計の偏差値 */}
       {totalHensachi !== null && totalEval && (
-        <div className={`bg-gradient-to-br ${totalEval.bgGradient} px-6 py-6 border-t-2 ${totalEval.borderClass}`} role="status" aria-live="polite">
+        <div className={` ${totalEval.bgGradient} px-6 py-6 border-t-2 ${totalEval.borderClass}`} role="status" aria-live="polite">
           <div className="text-center">
             <div className="text-xs font-bold text-slate-600 mb-1">5教科の平均偏差値</div>
-            <div className={`text-5xl font-black ${totalEval.textClass}`}>
+            <div className={`text-5xl font-bold ${totalEval.textClass}`}>
               {totalHensachi.toFixed(1)}
             </div>
             <div className={`mt-2 text-sm font-bold ${totalEval.textClass}`}>

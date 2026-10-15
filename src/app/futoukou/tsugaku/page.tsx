@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Route, School, Laptop, Building2, HelpCircle } from 'lucide-react';
+import { Home, ChevronRight, Route, School, Laptop, Building2, HelpCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -84,18 +84,18 @@ export default function FutoukouTsugakuPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-rose-50/40 to-white">
+      <div className="min-h-screen bg-red-50/40">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/futoukou" className="hover:text-blue-600">不登校と内申点</Link>
+            <Link href="/futoukou" className="hover:text-brand-600">不登校と内申点</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">通信制・フリースクール</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-red-500 text-white">
               <Route className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">通信制高校・フリースクールという選択肢</h1>
@@ -118,13 +118,13 @@ export default function FutoukouTsugakuPage() {
             {OPTIONS.map((o) => {
               const Icon = o.icon;
               return (
-                <div key={o.name} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div key={o.name} className="rounded-lg border border-slate-200 bg-white p-5">
                   <div className="mb-2 flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 font-bold text-slate-800">
-                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-rose-50 text-rose-600"><Icon className="h-5 w-5" /></span>
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-red-50 text-red-600"><Icon className="h-5 w-5" /></span>
                       {o.name}
                     </div>
-                    <span className="rounded-full bg-rose-100 px-2.5 py-0.5 text-[10px] font-bold text-rose-700">{o.cred}</span>
+                    <span className="rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-bold text-red-700">{o.cred}</span>
                   </div>
                   <p className="text-sm leading-relaxed text-slate-600">{o.body}</p>
                 </div>
@@ -133,14 +133,14 @@ export default function FutoukouTsugakuPage() {
           </section>
 
           {/* 選び方の軸 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="mb-3 text-lg font-bold text-slate-800">選ぶときに見るポイント</h2>
             <ul className="space-y-1.5 text-sm leading-relaxed text-slate-700">
-              <li className="flex gap-2"><span className="text-rose-500">・</span><span><strong>登校頻度</strong>：毎日・週数日・年数回など、いまの体調・気持ちに合うペースを選べるか。</span></li>
-              <li className="flex gap-2"><span className="text-rose-500">・</span><span><strong>進学・進路サポート</strong>：大学・専門学校への進学実績、個別指導や進学コースの有無。</span></li>
-              <li className="flex gap-2"><span className="text-rose-500">・</span><span><strong>学び直しのしやすさ</strong>：小中学校の内容からの学び直しに対応しているか。</span></li>
-              <li className="flex gap-2"><span className="text-rose-500">・</span><span><strong>費用</strong>：通信制も就学支援金（高校無償化）の対象。実質負担を早めに把握しておく。</span></li>
-              <li className="flex gap-2"><span className="text-rose-500">・</span><span><strong>出席扱いの連携</strong>：在籍校と連携できる事業者か（中学段階での出席扱いを目指す場合）。</span></li>
+              <li className="flex gap-2"><span className="text-red-500">・</span><span><strong>登校頻度</strong>：毎日・週数日・年数回など、いまの体調・気持ちに合うペースを選べるか。</span></li>
+              <li className="flex gap-2"><span className="text-red-500">・</span><span><strong>進学・進路サポート</strong>：大学・専門学校への進学実績、個別指導や進学コースの有無。</span></li>
+              <li className="flex gap-2"><span className="text-red-500">・</span><span><strong>学び直しのしやすさ</strong>：小中学校の内容からの学び直しに対応しているか。</span></li>
+              <li className="flex gap-2"><span className="text-red-500">・</span><span><strong>費用</strong>：通信制も就学支援金（高校無償化）の対象。実質負担を早めに把握しておく。</span></li>
+              <li className="flex gap-2"><span className="text-red-500">・</span><span><strong>出席扱いの連携</strong>：在籍校と連携できる事業者か（中学段階での出席扱いを目指す場合）。</span></li>
             </ul>
           </section>
 
@@ -148,7 +148,7 @@ export default function FutoukouTsugakuPage() {
           <FutoukouLeadCTA className="mt-8" />
 
           {/* 回遊 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">関連ページ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
@@ -159,7 +159,7 @@ export default function FutoukouTsugakuPage() {
                 { href: '/koukou-hiyou', title: '高校の費用（通信制も就学支援金の対象）' },
                 { href: '/shougakukin', title: '高校無償化・就学支援金ガイド' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 text-sm text-slate-700 transition-shadow">
                   {c.title}
                   <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
                 </Link>
@@ -167,11 +167,11 @@ export default function FutoukouTsugakuPage() {
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-rose-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-red-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

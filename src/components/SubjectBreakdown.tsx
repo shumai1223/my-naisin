@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { BarChart3, ArrowUp, Minus } from 'lucide-react';
+import { BarChart3, ArrowUp, Minus } from '@/components/icons';
 
 import type { Scores } from '@/lib/types';
 import { SUBJECTS } from '@/lib/constants';
@@ -39,9 +39,9 @@ export function SubjectBreakdown({ scores, prefectureCode }: SubjectBreakdownPro
 
   return (
     <Card className="overflow-hidden">
-      <div className="border-b border-slate-100 bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 px-5 py-4">
+      <div className="border-b border-slate-100 bg-brand-50 px-5 py-4">
         <div className="flex items-center gap-2">
-          <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 shadow-sm">
+          <div className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500">
             <BarChart3 className="h-4 w-4 text-white" />
           </div>
           <div>
@@ -59,15 +59,15 @@ export function SubjectBreakdown({ scores, prefectureCode }: SubjectBreakdownPro
               className="group flex animate-fade-in items-center gap-3 rounded-lg bg-slate-50 p-2.5 transition-colors hover:bg-slate-100"
               style={{ animationDelay: `${i * 30}ms` }}
             >
-              <div className="w-16 shrink-0 text-xs font-medium text-slate-600">{subject.label}</div>
+              <div className="w-16 shrink-0 text-xs text-slate-600">{subject.label}</div>
               <div className="flex-1">
                 <div className="h-2 overflow-hidden rounded-full bg-slate-200">
                   {/* バーは width をインラインで指定し、CSS transition で伸びを表現（framer-motion非依存） */}
                   <div
                     className={`h-full rounded-full transition-[width] duration-500 ease-out ${
-                      subject.isHigh ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' :
-                      subject.isLow ? 'bg-gradient-to-r from-amber-400 to-orange-400' :
-                      'bg-gradient-to-r from-blue-400 to-blue-500'
+                      subject.isHigh ? 'bg-brand-400' :
+                      subject.isLow ? 'bg-amber-400' :
+                      'bg-brand-400'
                     }`}
                     style={{ width: `${subject.percent}%` }}
                   />
@@ -78,7 +78,7 @@ export function SubjectBreakdown({ scores, prefectureCode }: SubjectBreakdownPro
                 <span className="text-xs text-slate-400">/5</span>
               </div>
               {getSubjectWeight(prefectureCode, subject.category) > 1 && (
-                <div className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-medium text-blue-600">×{getSubjectWeight(prefectureCode, subject.category)}</div>
+                <div className="rounded bg-brand-100 px-1.5 py-0.5 text-xs text-brand-600">×{getSubjectWeight(prefectureCode, subject.category)}</div>
               )}
             </div>
           ))}
@@ -87,14 +87,14 @@ export function SubjectBreakdown({ scores, prefectureCode }: SubjectBreakdownPro
         {(lowSubjects.length > 0 || highSubjects.length > 0) && (
           <div className="mt-5 grid gap-3 md:grid-cols-2">
             {highSubjects.length > 0 && (
-              <div className="rounded-xl bg-emerald-50 p-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-emerald-700">
+              <div className="rounded-lg bg-brand-50 p-4">
+                <div className="flex items-center gap-2 text-sm font-bold text-brand-700">
                   <ArrowUp className="h-4 w-4" />
                   得意教科
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {highSubjects.map(s => (
-                    <span key={s.key} className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-700">
+                    <span key={s.key} className="rounded-full bg-brand-100 px-2.5 py-1 text-xs text-brand-700">
                       {s.label}
                     </span>
                   ))}
@@ -102,14 +102,14 @@ export function SubjectBreakdown({ scores, prefectureCode }: SubjectBreakdownPro
               </div>
             )}
             {lowSubjects.length > 0 && (
-              <div className="rounded-xl bg-amber-50 p-4">
+              <div className="rounded-lg bg-amber-50 p-4">
                 <div className="flex items-center gap-2 text-sm font-bold text-amber-700">
                   <Minus className="h-4 w-4" />
                   伸びしろあり！
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {lowSubjects.map(s => (
-                    <span key={s.key} className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700">
+                    <span key={s.key} className="rounded-full bg-amber-100 px-2.5 py-1 text-xs text-amber-700">
                       {s.label}
                     </span>
                   ))}

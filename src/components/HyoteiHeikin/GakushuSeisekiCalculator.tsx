@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw, Plus, Trash2 } from 'lucide-react';
+import { Calculator, RotateCcw, Plus, Trash2 } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { calcKyokaStatus, calcOverallStatus, toGaihyou, type Kamoku } from '@/lib/gakushu-seiseki';
@@ -41,9 +41,9 @@ function emptyRow(): Row {
 
 const GAIHYOU_STYLE: Record<string, string> = {
   A: 'text-red-700',
-  B: 'text-orange-700',
+  B: 'text-amber-700',
   C: 'text-amber-700',
-  D: 'text-blue-700',
+  D: 'text-brand-700',
   E: 'text-slate-600',
 };
 
@@ -87,11 +87,11 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
   }, [overall, onResult]);
 
   return (
-    <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
+    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
+      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-emerald-600" />
+            <Calculator className="h-5 w-5 text-brand-600" />
             科目ごとの評定を入力
           </h2>
           <button
@@ -105,7 +105,7 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
         </div>
         <p className="mt-2 text-xs text-slate-600">
           教科・科目名・学年・評定（5段階）を入力してください。
-          <strong className="text-emerald-700">修得単位数は入力欄がありません</strong>
+          <strong className="text-brand-700">修得単位数は入力欄がありません</strong>
           （文部科学省の計算例では単位数の大小にかかわらず評定数1として数えるため。詳しくは下記の「なぜ単位数を入れないのか」参照）。
         </p>
       </div>
@@ -115,7 +115,7 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
           {rows.map((row) => (
             <div
               key={row.id}
-              className="grid grid-cols-1 gap-2 rounded-xl border border-slate-100 bg-slate-50 p-3 sm:grid-cols-[1fr_1fr_auto_auto_auto] sm:items-center"
+              className="grid grid-cols-1 gap-2 rounded-lg border border-slate-100 bg-slate-50 p-3 sm:grid-cols-[1fr_1fr_auto_auto_auto] sm:items-center"
             >
               <select
                 value={row.kyoka}
@@ -157,8 +157,8 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
                     onClick={() => updateRow(row.id, { hyotei: r })}
                     className={`h-9 w-9 rounded-lg text-sm font-bold transition-all ${
                       row.hyotei === r
-                        ? 'bg-emerald-600 text-white shadow-md scale-110'
-                        : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-emerald-50'
+                        ? 'bg-brand-600 text-white scale-110'
+                        : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-brand-50'
                     }`}
                     aria-label={`評定${r}`}
                   >
@@ -180,7 +180,7 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
         <button
           type="button"
           onClick={addRow}
-          className="mt-3 inline-flex items-center gap-1 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-100"
+          className="mt-3 inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-2 text-xs font-bold text-brand-700 ring-1 ring-brand-200 hover:bg-brand-100"
         >
           <Plus className="h-3.5 w-3.5" />
           科目を追加
@@ -188,16 +188,16 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
       </div>
 
       {overall !== null && gaihyou !== null && (
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200" role="status" aria-live="polite">
+        <div className="bg-brand-50 px-6 py-6 border-t-2 border-brand-200" role="status" aria-live="polite">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="text-center">
               <div className="text-xs font-bold text-slate-600 mb-1">全体の学習成績の状況</div>
-              <div className="text-5xl font-black text-emerald-700">{overall.toFixed(1)}</div>
+              <div className="text-5xl font-bold text-brand-700">{overall.toFixed(1)}</div>
               <div className="text-xs text-slate-500 mt-1">/ 5.0（旧称：評定平均）</div>
             </div>
             <div className="text-center">
               <div className="text-xs font-bold text-slate-600 mb-1">学習成績概評</div>
-              <div className={`text-5xl font-black ${GAIHYOU_STYLE[gaihyou]}`}>{gaihyou}</div>
+              <div className={`text-5xl font-bold ${GAIHYOU_STYLE[gaihyou]}`}>{gaihyou}</div>
               <div className="text-xs text-slate-500 mt-1">A〜Eの5段階</div>
             </div>
           </div>
@@ -209,9 +209,9 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
                 <table className="w-full text-sm">
                   <tbody>
                     {Object.entries(kyokaStatus).map(([kyoka, value]) => (
-                      <tr key={kyoka} className="odd:bg-white even:bg-emerald-50/40">
+                      <tr key={kyoka} className="odd:bg-white even:bg-brand-50/40">
                         <td className="border border-slate-200 px-3 py-1.5 font-bold text-slate-700">{kyoka}</td>
-                        <td className="border border-slate-200 px-3 py-1.5 text-right font-mono text-emerald-800">
+                        <td className="border border-slate-200 px-3 py-1.5 text-right font-mono text-brand-800">
                           {value.toFixed(1)}
                         </td>
                       </tr>

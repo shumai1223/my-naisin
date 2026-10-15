@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { History, Trash2, Clock, ChevronDown, ChevronUp, LineChart, ArrowRight } from 'lucide-react';
+import { History, Trash2, Clock, ChevronDown, ChevronUp, LineChart, ArrowRight } from '@/components/icons';
 
 import { readHistory, clearHistory } from '@/lib/persistence';
 import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -50,14 +50,14 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="rounded-lg border border-slate-200 bg-white">
       <button
         type="button"
         onClick={() => setIsExpanded(!isExpanded)}
         className="flex w-full items-center justify-between gap-3 px-5 py-4"
       >
         <div className="flex items-center gap-3">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-slate-500 to-slate-600 shadow-sm">
+          <div className="grid h-9 w-9 place-items-center rounded-lg bg-slate-500">
             <History className="h-4 w-4 text-white" />
           </div>
           <div className="text-left">
@@ -75,10 +75,10 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
       {isExpanded && (
         <div className="border-t border-slate-100 px-5 py-4">
           {series.length >= 2 && (
-            <div className="mb-4 rounded-xl border border-slate-100 bg-slate-50 p-3">
+            <div className="mb-4 rounded-lg border border-slate-100 bg-slate-50 p-3">
               <div className="mb-1.5 flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-600">達成率の推移</span>
-                <span className="text-xs font-bold text-blue-600">最新 {series[series.length - 1]}%</span>
+                <span className="text-xs font-bold text-brand-600">最新 {series[series.length - 1]}%</span>
               </div>
               <Sparkline values={series} />
             </div>
@@ -87,7 +87,7 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
           {/* 製品ループ：保存→ダッシュボードで中1→中3の推移を継続トラッキング */}
           <Link
             href="/dashboard"
-            className="mb-4 flex items-center justify-between gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-bold text-blue-700 transition-colors hover:bg-blue-100"
+            className="mb-4 flex items-center justify-between gap-2 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-100"
           >
             <span className="flex items-center gap-2">
               <LineChart className="h-4 w-4" />
@@ -108,14 +108,14 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
                   key={entry.id}
                   type="button"
                   onClick={() => handleLoadEntry(entry)}
-                  className="w-full rounded-xl border border-slate-100 bg-slate-50 p-3 text-left transition-colors hover:border-blue-200 hover:bg-blue-50"
+                  className="w-full rounded-lg border border-slate-100 bg-slate-50 p-3 text-left transition-colors hover:border-brand-200 hover:bg-brand-50"
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                       <div className="text-lg font-bold text-slate-800">
                         {total}<span className="text-sm text-slate-400">/{max}</span>
                       </div>
-                      <div className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                      <div className="rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">
                         {Math.round(percent)}%
                       </div>
                     </div>
@@ -144,7 +144,7 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
           <button
             type="button"
             onClick={handleClearHistory}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-100"
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-600 transition-colors hover:bg-red-100"
           >
             <Trash2 className="h-4 w-4" />
             履歴をクリア

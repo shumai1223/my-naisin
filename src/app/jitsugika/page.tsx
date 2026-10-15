@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Palette, Music, Dumbbell, Hammer, HelpCircle, Calculator } from 'lucide-react';
+import { Home, ChevronRight, Palette, Music, Dumbbell, Hammer, HelpCircle, Calculator } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -64,16 +64,16 @@ export default function JitsugikaPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-slate-700">実技4教科の内申点対策</span>
           </nav>
 
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-red-500 text-white">
               <Palette className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">実技4教科の内申点対策</h1>
@@ -97,9 +97,9 @@ export default function JitsugikaPage() {
             {SUBJECTS.map((s) => {
               const Icon = s.icon;
               return (
-                <div key={s.name} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div key={s.name} className="rounded-lg border border-slate-200 bg-white p-5">
                   <div className="mb-2 flex items-center gap-2 font-bold text-slate-800">
-                    <span className="grid h-9 w-9 place-items-center rounded-xl bg-rose-50 text-rose-600"><Icon className="h-5 w-5" /></span>
+                    <span className="grid h-9 w-9 place-items-center rounded-lg bg-red-50 text-red-600"><Icon className="h-5 w-5" /></span>
                     {s.name}
                   </div>
                   <p className="text-sm leading-relaxed text-slate-600">{s.tips}</p>
@@ -109,16 +109,16 @@ export default function JitsugikaPage() {
           </section>
 
           {/* 地域別倍率の確認（検証済みデータへ誘導・捏造しない） */}
-          <section className="mt-8 rounded-2xl border-2 border-rose-200 bg-rose-50/40 p-6 text-center shadow-sm">
+          <section className="mt-8 rounded-lg border-2 border-red-200 bg-red-50/40 p-6 text-center">
             <h2 className="mb-2 text-lg font-bold text-slate-800">自分の地域は実技が何倍？を確認する</h2>
             <p className="mb-4 text-sm leading-relaxed text-slate-600">
               実技の倍率は都道府県で異なります。お住まいの地域の換算方式を確認し、実技の評定を変えると内申点がどう動くかを計算してみましょう。
             </p>
             <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-rose-700">
+              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-red-700">
                 <Calculator className="h-4 w-4" />内申点を計算する（実技の倍率対応）
               </Link>
-              <Link href="/prefectures" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-rose-700 ring-1 ring-rose-200 transition-colors hover:bg-rose-50">
+              <Link href="/prefectures" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-red-700 ring-1 ring-red-200 transition-colors hover:bg-red-50">
                 都道府県別の換算方式を見る
               </Link>
             </div>
@@ -134,7 +134,7 @@ export default function JitsugikaPage() {
           </div>
 
           {/* 深掘り */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-lg font-bold text-slate-800">さらに詳しく</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
@@ -143,7 +143,7 @@ export default function JitsugikaPage() {
                 { href: '/naishin-age-kata', title: '内申点の上げ方（4軸）' },
                 { href: '/hyotei-heikin', title: '評定平均を計算する' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 text-sm text-slate-700 transition-shadow">
                   {c.title}
                   <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
                 </Link>
@@ -151,11 +151,11 @@ export default function JitsugikaPage() {
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-rose-600" />よくある質問</h2>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-red-600" />よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
                   <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
                     <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
                   </summary>

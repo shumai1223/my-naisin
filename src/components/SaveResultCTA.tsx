@@ -14,7 +14,7 @@ import {
   Send,
   Sparkles,
   ChevronRight,
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT, type LineAudience } from '@/lib/line';
@@ -256,7 +256,7 @@ export function SaveResultCTA({
         rel="noopener noreferrer"
         onClick={onLineClick}
         tabIndex={lineVisible ? 0 : -1}
-        className="flex items-center justify-between gap-3 rounded-2xl border-2 border-[#06C755] bg-[#06C755] px-5 py-3.5 text-left text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
+        className="flex items-center justify-between gap-3 rounded-lg border-2 border-[#06C755] bg-[#06C755] px-5 py-3.5 text-left text-white transition-all active:scale-[0.99]"
       >
         <span className="flex items-center gap-2.5">
           <MessageCircle className="h-5 w-5" />
@@ -267,7 +267,7 @@ export function SaveResultCTA({
         </span>
         <span className="rounded-lg bg-white/20 px-2.5 py-1 text-xs font-bold">無料</span>
       </a>
-      <p className="mt-1.5 text-[11px] leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
+      <p className="mt-1.5 text-xs leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
     </div>
   );
 
@@ -275,7 +275,7 @@ export function SaveResultCTA({
   const emailBlock = (
     <form onSubmit={onSubmit} className="space-y-3">
       <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
-        <Mail className="h-3.5 w-3.5 text-sky-600" />
+        <Mail className="h-3.5 w-3.5 text-brand-600" />
         メールで受け取る
       </div>
       <div className="flex flex-col gap-2 sm:flex-row">
@@ -291,12 +291,12 @@ export function SaveResultCTA({
           onFocus={onFormStart}
           placeholder="メールアドレス"
           aria-label="メールアドレス"
-          className="h-11 flex-1 rounded-2xl border border-slate-200 bg-white px-4 text-sm text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
+          className="h-11 flex-1 rounded-lg border border-slate-200 bg-white px-4 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
         />
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-sky-600 px-6 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-sky-700 hover:shadow-lg active:scale-95 disabled:cursor-not-allowed disabled:opacity-70"
+          className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === 'submitting' ? (
             <>
@@ -317,18 +317,18 @@ export function SaveResultCTA({
           type="checkbox"
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
         />
         <span>
           受験情報・内申対策の受け取りに同意します（
-          <Link href="/privacy" className="font-semibold text-slate-600 underline">
+          <Link href="/privacy" className="font-bold text-slate-600 underline">
             プライバシーポリシー
           </Link>
           ）。配信はいつでも解除できます。
         </span>
       </label>
 
-      {error && <p className="text-xs font-semibold text-rose-600">{error}</p>}
+      {error && <p className="text-xs font-bold text-red-600">{error}</p>}
     </form>
   );
 
@@ -380,13 +380,13 @@ export function SaveResultCTA({
   return (
     <section
       ref={sectionRef}
-      className={`relative overflow-hidden rounded-2xl border-2 border-sky-300 bg-gradient-to-br from-sky-50 via-blue-50 to-white p-6 shadow-lg shadow-sky-100/80 md:p-7 ${className}`}
+      className={`relative overflow-hidden rounded-lg border-2 border-brand-300 bg-brand-50 p-6 md:p-7 ${className}`}
     >
       {/* 視線を止めるアクセント光（2026-07-14: 淡色カードの連続で名簿CTAが埋没する👤指摘への強調。
           UnlockGateと同じ「報酬カード」の視覚言語＝濃縁+塗りバッジ+強影で結果直下の主役に格上げ） */}
-      <div className="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full bg-sky-300/30 blur-2xl" />
+      <div className="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full bg-brand-300/30 blur-2xl" />
 
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-3 py-1 text-xs font-bold text-white shadow-sm">
+      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white">
         <Bookmark className="h-3.5 w-3.5" />
         結果を保存・受け取る
       </div>
@@ -402,22 +402,22 @@ export function SaveResultCTA({
       {done ? (
         <div className="space-y-4">
           {/* 確認＋登録の見返りの見出し（何が手に入ったかを名指し） */}
-          <div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-            <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+          <div className="flex items-start gap-3 rounded-lg border border-brand-200 bg-brand-50 p-4">
+            <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-500 text-white">
               <Check className="h-4 w-4" />
             </div>
-            <div className="text-sm leading-relaxed text-emerald-900">
+            <div className="text-sm leading-relaxed text-brand-900">
               <div className="font-bold">{leadMagnet.headline}</div>
-              <p className="mt-1 text-emerald-800">{leadMagnet.subline}</p>
+              <p className="mt-1 text-brand-800">{leadMagnet.subline}</p>
               {status === 'fallback' && (
                 <>
-                  <p className="mt-2 text-emerald-800">
+                  <p className="mt-2 text-brand-800">
                     確実にお届けするため、メールアプリが開きます。そのまま送信してください。
                   </p>
                   <button
                     type="button"
                     onClick={() => openLeadMailtoFallback(payload)}
-                    className="mt-1 text-xs font-semibold text-emerald-700 underline"
+                    className="mt-1 text-xs font-bold text-brand-700 underline"
                   >
                     メールアプリが開かない場合はこちら
                   </button>
@@ -428,16 +428,16 @@ export function SaveResultCTA({
 
           {/* 見返り①：成績カード（画像）。score+max が揃ったときだけ。登録の互恵性の核。 */}
           {leadMagnet.cardPath && (
-            <div className="rounded-2xl border border-slate-200 bg-white p-4">
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
               <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-                <Sparkles className="h-3.5 w-3.5 text-sky-600" />
+                <Sparkles className="h-3.5 w-3.5 text-brand-600" />
                 あなたの成績カードができました
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={leadMagnet.cardPath}
                 alt="あなたの成績カード"
-                className="w-full rounded-xl border border-slate-100 shadow-sm"
+                className="w-full rounded-lg border border-slate-100"
                 loading="lazy"
               />
               <div className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -446,7 +446,7 @@ export function SaveResultCTA({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onCardClick}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-sky-200 bg-white px-4 py-3 text-sm font-bold text-sky-700 transition-all hover:border-sky-400 hover:bg-sky-50 active:scale-[0.99]"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-200 bg-white px-4 py-3 text-sm font-bold text-brand-700 transition-all hover:border-brand-400 hover:bg-brand-50 active:scale-[0.99]"
                 >
                   <Download className="h-4 w-4" />
                   画像を保存する
@@ -455,7 +455,7 @@ export function SaveResultCTA({
                   <Link
                     href={leadMagnet.parentSharePath}
                     onClick={onParentMagnetClick}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 active:scale-[0.99]"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-[0.99]"
                   >
                     <Send className="h-4 w-4" />
                     おうちの人に送る
@@ -469,13 +469,13 @@ export function SaveResultCTA({
           <Link
             href={leadMagnet.nextStep.href}
             onClick={onNextMagnetClick}
-            className="group flex items-center justify-between gap-3 rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-blue-50 px-5 py-4 transition-all hover:border-sky-400 hover:shadow-md"
+            className="group flex items-center justify-between gap-3 rounded-lg border-2 border-brand-200 bg-brand-50 px-5 py-4 transition-all hover:border-brand-400"
           >
             <div>
-              <div className="text-sm font-bold text-sky-900">{leadMagnet.nextStep.label}</div>
-              <div className="mt-0.5 text-xs text-sky-700">{leadMagnet.nextStep.description}</div>
+              <div className="text-sm font-bold text-brand-900">{leadMagnet.nextStep.label}</div>
+              <div className="mt-0.5 text-xs text-brand-700">{leadMagnet.nextStep.description}</div>
             </div>
-            <ChevronRight className="h-5 w-5 shrink-0 text-sky-500 transition-transform group-hover:translate-x-0.5" />
+            <ChevronRight className="h-5 w-5 shrink-0 text-brand-500 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
       ) : (
@@ -484,8 +484,8 @@ export function SaveResultCTA({
               「受験情報」では曖昧なので、受け取れる中身を3つ明示する。 */}
           <ul className="grid gap-1.5 sm:grid-cols-3">
             {LIST_BENEFITS.map((b) => (
-              <li key={b} className="flex items-start gap-1.5 rounded-lg bg-white/70 px-2.5 py-2 text-xs font-medium text-slate-600 ring-1 ring-sky-100">
-                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
+              <li key={b} className="flex items-start gap-1.5 rounded-lg bg-white/70 px-2.5 py-2 text-xs text-slate-600 ring-1 ring-brand-100">
+                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-500" />
                 {b}
               </li>
             ))}
@@ -504,7 +504,7 @@ export function SaveResultCTA({
             </>
           )}
 
-          <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
+          <div className="flex items-center gap-1.5 text-xs text-slate-400">
             <ShieldCheck className="h-3.5 w-3.5" />
             登録は無料。メールアドレスは受験情報の配信にのみ使用します。
           </div>

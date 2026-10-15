@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ShieldCheck, Info } from 'lucide-react';
+import { ShieldCheck, Info } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { shugakuShienAnnual, highSchoolSupportOver3Years, highSchoolTotal, formatYen, toManYen } from '@/lib/education-cost/engine';
@@ -40,15 +40,15 @@ export function ShugakuShienEstimator() {
   };
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-7">
       <span className="block text-sm font-bold text-slate-800">進学先の高校</span>
       <div className="mt-2 grid grid-cols-2 gap-2">
         {(['public', 'private'] as const).map((c) => (
           <button
             key={c}
             onClick={() => onSelect({ course: c })}
-            className={`rounded-xl border px-3 py-2.5 text-sm font-bold transition-all ${
-              course === c ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-200 bg-white text-slate-600 hover:border-emerald-200'
+            className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition-all ${
+              course === c ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
             }`}
           >
             {c === 'public' ? '公立高校' : '私立高校'}
@@ -62,8 +62,8 @@ export function ShugakuShienEstimator() {
           <button
             key={t.bracket}
             onClick={() => onSelect({ bracket: t.bracket })}
-            className={`rounded-xl border px-3 py-2.5 text-left text-sm font-bold transition-all ${
-              bracket === t.bracket ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-200 bg-white text-slate-600 hover:border-emerald-200'
+            className={`rounded-lg border px-3 py-2.5 text-left text-sm font-bold transition-all ${
+              bracket === t.bracket ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
             }`}
           >
             {t.label}
@@ -71,18 +71,18 @@ export function ShugakuShienEstimator() {
         ))}
       </div>
 
-      <div className="mt-6 rounded-2xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50 p-5">
-        <div className="flex items-center justify-center gap-1.5 text-sm font-bold text-emerald-800">
+      <div className="mt-6 rounded-lg border-2 border-brand-300 bg-brand-50 p-5">
+        <div className="flex items-center justify-center gap-1.5 text-sm font-bold text-brand-800">
           <ShieldCheck className="h-4 w-4" />
           就学支援金の支援額の目安（{course === 'public' ? '公立' : '私立'}高校）
         </div>
-        <div className="mt-1 text-center text-4xl font-black tracking-tight text-emerald-700 md:text-5xl">
+        <div className="mt-1 text-center text-4xl font-bold tracking-tight text-brand-700 md:text-5xl">
           {annual > 0 ? `${formatYen(annual)}/年` : '対象外'}
         </div>
-        <div className="mt-1 text-center text-xs text-emerald-700">
+        <div className="mt-1 text-center text-xs text-brand-700">
           {annual > 0 ? `3年間で約 ${toManYen(over3)} の授業料軽減` : '従来は支援の対象外（自治体独自の補助は要確認）'}
         </div>
-        <div className="mt-3 rounded-xl bg-white/70 p-3 text-xs leading-relaxed text-slate-600">
+        <div className="mt-3 rounded-lg bg-white/70 p-3 text-xs leading-relaxed text-slate-600">
           {tier.note}
           <br />
           <span className="text-slate-500">参考：{course === 'public' ? '公立' : '私立'}高校の3年間の学習費総額は約 {toManYen(total)}（授業料以外も含む総額）。支援は授業料部分が対象です。</span>

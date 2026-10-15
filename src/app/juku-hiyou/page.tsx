@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, Calculator, Users, GraduationCap, Lightbulb, BookCheck } from 'lucide-react';
+import { Home, ChevronRight, Wallet, Calculator, Users, GraduationCap, Lightbulb, BookCheck } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -80,11 +80,11 @@ export default function JukuHiyouPage() {
       />
       <FAQPageSchema faqItems={JUKU_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
@@ -94,7 +94,7 @@ export default function JukuHiyouPage() {
 
           {/* Header */}
           <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl">
+            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-amber-500 text-white">
               <Wallet className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">塾代シミュレーター</h1>
@@ -127,7 +127,7 @@ export default function JukuHiyouPage() {
               <Calculator className="h-5 w-5 text-amber-600" />
               中学生の塾代の相場（目安）
             </h2>
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
               <table className="min-w-full text-sm">
                 <thead>
                   <tr className="bg-amber-600 text-white">
@@ -155,9 +155,9 @@ export default function JukuHiyouPage() {
           </section>
 
           {/* 抑えるコツ */}
-          <section className="mb-10 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-emerald-900">
-              <Lightbulb className="h-5 w-5 text-emerald-600" />
+          <section className="mb-10 rounded-lg border border-brand-200 bg-brand-50/50 p-6">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-brand-900">
+              <Lightbulb className="h-5 w-5 text-brand-600" />
               塾代を賢く抑える4つのコツ
             </h2>
             <ul className="space-y-2 text-sm leading-relaxed text-slate-700">
@@ -170,7 +170,7 @@ export default function JukuHiyouPage() {
 
           {/* 塾リード接続（コツ④の「無料体験で比較」を実行可能に。FP相談=上部、塾体験=ここで二毛作）。
               page intent（塾を比べたい保護者）に最も合う全国オンライン個別の無料体験へ。cta_view計装つき。 */}
-          <section className="mb-10 rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50/60 p-6 shadow-sm">
+          <section className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-6">
             <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-amber-700 ring-1 ring-amber-200">
               <Users className="h-3.5 w-3.5" />
               塾選びは「無料体験」で比べてから
@@ -185,21 +185,21 @@ export default function JukuHiyouPage() {
               trackView
               viewPlacement="juku-hiyou"
               ctaText="オンライン個別指導の無料体験を申し込む"
-              linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-amber-700 active:scale-95 sm:w-auto"
+              linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber-600 px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-amber-700 active:scale-95 sm:w-auto"
             />
-            <div className="mt-2 text-[11px] text-slate-400">そら塾（オンライン個別指導）の無料体験（PR）</div>
+            <div className="mt-2 text-xs text-slate-400">そら塾（オンライン個別指導）の無料体験（PR）</div>
           </section>
 
           {/* 出典（一次情報準拠。塾代の相場自体は特定の一次資料を持たない一般的な目安のため、
               ページ内で唯一の公的統計参照＝高校の学費比較の出典のみを明示する） */}
-          <div className="mb-10 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
+          <div className="mb-10 rounded-lg border border-slate-200 bg-slate-50/60 p-4">
             <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
               <BookCheck className="h-3.5 w-3.5 text-amber-600" />
               出典・参考データ（一次情報）
             </div>
             <ul className="space-y-1.5 text-xs leading-relaxed">
               <li>
-                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
                 </a>
                 <span className="text-slate-400"> — 高校の学費比較（公立 約179万円・私立 約354万円/3年間）の出典。塾代の相場自体は特定の統計によらない一般的な目安です。</span>
@@ -212,7 +212,7 @@ export default function JukuHiyouPage() {
             <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
             <div className="space-y-3">
               {JUKU_FAQS.map((faq) => (
-                <details key={faq.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
                   <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
                     <span className="flex items-center justify-between gap-3">
                       {faq.question}

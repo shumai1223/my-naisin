@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { GraduationCap, ArrowRight, RotateCcw } from 'lucide-react';
+import { GraduationCap, ArrowRight, RotateCcw } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 
@@ -78,7 +78,7 @@ export function JukuhiCalculator() {
   };
 
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-7">
       {/* 形態 */}
       <span className="block text-sm font-bold text-slate-800">塾の形態</span>
       <div className="mt-2 grid grid-cols-3 gap-2">
@@ -86,7 +86,7 @@ export function JukuhiCalculator() {
           <button
             key={t}
             onClick={() => applyType(t)}
-            className={`rounded-xl border px-2 py-2.5 text-sm font-bold transition-all ${
+            className={`rounded-lg border px-2 py-2.5 text-sm font-bold transition-all ${
               type === t ? 'border-amber-500 bg-amber-50 text-amber-700' : 'border-slate-200 bg-white text-slate-600 hover:border-amber-200'
             }`}
           >
@@ -103,7 +103,7 @@ export function JukuhiCalculator() {
           <button
             key={g}
             onClick={() => applyGrade(g)}
-            className={`rounded-xl border px-2 py-2.5 text-sm font-bold transition-all ${
+            className={`rounded-lg border px-2 py-2.5 text-sm font-bold transition-all ${
               grade === g ? 'border-amber-500 bg-amber-50 text-amber-700' : 'border-slate-200 bg-white text-slate-600 hover:border-amber-200'
             }`}
           >
@@ -122,23 +122,23 @@ export function JukuhiCalculator() {
       </p>
 
       <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-        <button onClick={onCalc} className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber-600 px-6 py-3.5 text-base font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-amber-700 active:scale-95">
+        <button onClick={onCalc} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-amber-600 px-6 py-3.5 text-base font-bold text-white transition-all hover:bg-amber-700 active:scale-95">
           塾代の総額を計算する
           <ArrowRight className="h-5 w-5" />
         </button>
-        <button onClick={reset} className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm font-medium text-slate-600 hover:bg-slate-50">
+        <button onClick={reset} className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 bg-white px-4 py-3.5 text-sm text-slate-600 hover:bg-slate-50">
           <RotateCcw className="h-4 w-4" />リセット
         </button>
       </div>
 
       {show && (
         <div id="jk-result" className="mt-8 scroll-mt-20" role="status" aria-live="polite">
-          <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-orange-50 p-5 text-center">
+          <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-5 text-center">
             <div className="flex items-center justify-center gap-1.5 text-sm font-bold text-amber-800">
               <GraduationCap className="h-4 w-4" />
               {GRADE[grade].label}から受験（中3）までの塾代の目安
             </div>
-            <div className="mt-1 text-4xl font-black tracking-tight text-amber-700 md:text-5xl">{yen(total)}</div>
+            <div className="mt-1 text-4xl font-bold tracking-tight text-amber-700 md:text-5xl">{yen(total)}</div>
             <div className="mt-1 text-xs text-amber-700">（{TYPE_PRESET[type].label}・約{GRADE[grade].years}年間の概算）</div>
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -156,8 +156,8 @@ export function JukuhiCalculator() {
 
 function Field({ label, value, step, onChange }: { label: string; value: number; step: number; onChange: (n: number) => void }) {
   return (
-    <label className="block rounded-xl border border-slate-200 bg-slate-50/60 p-3">
-      <span className="text-sm font-semibold text-slate-700">{label}</span>
+    <label className="block rounded-lg border border-slate-200 bg-slate-50/60 p-3">
+      <span className="text-sm font-bold text-slate-700">{label}</span>
       <div className="mt-1 flex items-center gap-1">
         <span className="text-slate-400">¥</span>
         <input
@@ -176,9 +176,9 @@ function Field({ label, value, step, onChange }: { label: string; value: number;
 
 function ResultCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4">
-      <div className="text-xs font-medium text-slate-500">{label}</div>
-      <div className="mt-1 text-2xl font-black tracking-tight text-slate-900">{value}</div>
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
+      <div className="text-xs text-slate-500">{label}</div>
+      <div className="mt-1 text-2xl font-bold tracking-tight text-slate-900">{value}</div>
     </div>
   );
 }

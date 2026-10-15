@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { GraduationCap, ChevronRight } from 'lucide-react';
+import { GraduationCap, ChevronRight } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { beaconStudentFunnelEvent } from '@/lib/student-funnel-beacon';
@@ -69,8 +69,8 @@ export function HyoteiUniversityBridge({ value }: { value: number | null }) {
   if (grade === 'koukou') {
     const v = typeof value === 'number' ? value.toFixed(1) : null;
     return (
-      <div className="mt-6 rounded-2xl border border-indigo-200 bg-indigo-50/60 p-4 md:p-5">
-        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-indigo-700 ring-1 ring-indigo-200">
+      <div className="mt-6 rounded-lg border border-brand-200 bg-brand-50/60 p-4 md:p-5">
+        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
           <GraduationCap className="h-3.5 w-3.5" />
           高校生の方へ
         </div>
@@ -84,7 +84,7 @@ export function HyoteiUniversityBridge({ value }: { value: number | null }) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={onBridgeClick}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-indigo-700"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-bold text-white transition-all hover:bg-brand-700"
         >
           My Shingakuで大学の費用・進路を調べる
           <ChevronRight className="h-4 w-4" />
@@ -94,20 +94,20 @@ export function HyoteiUniversityBridge({ value }: { value: number | null }) {
   }
 
   return (
-    <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 md:p-5">
-      <p className="mb-3 text-sm font-semibold text-slate-700">今の学年を教えてください（あなたに合った次の一歩をご案内します）</p>
+    <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50/70 p-4 md:p-5">
+      <p className="mb-3 text-sm font-bold text-slate-700">今の学年を教えてください（あなたに合った次の一歩をご案内します）</p>
       <div className="grid grid-cols-2 gap-2">
         <button
           type="button"
           onClick={() => selectGrade('chugaku')}
-          className="rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
+          className="rounded-lg border-2 border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
         >
           中学生
         </button>
         <button
           type="button"
           onClick={() => selectGrade('koukou')}
-          className="rounded-xl border-2 border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
+          className="rounded-lg border-2 border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
         >
           高校生
         </button>

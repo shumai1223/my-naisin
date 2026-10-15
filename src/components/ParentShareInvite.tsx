@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { MessageCircle, Share2, Check } from 'lucide-react';
+import { MessageCircle, Share2, Check } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -93,7 +93,7 @@ export function ParentShareInvite({
   const hasCard = isNum(shareCtx.max);
 
   return (
-    <section className={`rounded-2xl border border-slate-200 bg-slate-50/70 p-4 md:p-5 ${className}`}>
+    <section className={`rounded-lg border border-slate-200 bg-slate-50/70 p-4 md:p-5 ${className}`}>
       <p className="mb-3 text-sm leading-relaxed text-slate-600">
         この結果は、おうちの人に共有できます。保護者向けのLINEでは、費用や進路の情報もお届けしています。
       </p>
@@ -104,7 +104,7 @@ export function ParentShareInvite({
           <button
             type="button"
             onClick={onPlainShare}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 transition-all hover:border-emerald-300 hover:bg-emerald-100"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-brand-200 bg-brand-50 px-4 py-3 text-sm font-bold text-brand-700 transition-all hover:border-brand-300 hover:bg-brand-100"
           >
             {copied ? (
               <>
@@ -124,7 +124,7 @@ export function ParentShareInvite({
           target="_blank"
           rel="noopener noreferrer"
           onClick={onLineClick}
-          className="flex items-center justify-center gap-2 rounded-xl border-2 border-[#06C755] bg-[#06C755] px-4 py-3 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99]"
+          className="flex items-center justify-center gap-2 rounded-lg border-2 border-[#06C755] bg-[#06C755] px-4 py-3 text-sm font-bold text-white transition-all active:scale-[0.99]"
         >
           <MessageCircle className="h-4 w-4" />
           保護者向けLINEに登録する

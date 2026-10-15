@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Calculator, Target, BookOpen, ChevronRight, TrendingUp, GraduationCap } from 'lucide-react';
+import { Calculator, Target, BookOpen, ChevronRight, TrendingUp, GraduationCap } from '@/components/icons';
 
 export type NavigationMode = 'select' | 'calculate' | 'reverse' | 'learn';
 
@@ -25,7 +25,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
         <p className="mt-3 text-slate-600 md:text-lg">
           通知表の数字を入れるだけ。計算根拠と公式資料も一緒に確認できます。
         </p>
-        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3 py-1 text-xs font-bold text-rose-700 ring-1 ring-rose-100">
+        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1 text-xs font-bold text-red-700 ring-1 ring-red-100">
           <span aria-hidden="true">✍️</span>
           運営者は<strong>2026年度受験生・現役中3</strong>。当事者が作る内申点ツール
         </p>
@@ -42,9 +42,9 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
                   document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 50);
               }}
-              className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 px-8 py-4 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] md:py-5 md:text-lg"
+              className="group relative w-full overflow-hidden rounded-lg bg-brand-600 px-8 py-4 text-center font-bold text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] md:py-5 md:text-lg"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-white/20 opacity-0 transition-opacity group-hover:opacity-100" />
 
               <div className="relative flex items-center justify-center gap-3">
                 <Calculator className="h-5 w-5 md:h-6 md:w-6" />
@@ -80,7 +80,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               >
                 <Link
                   href={`/${pref.code}/naishin`}
-                  className="group inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition-all duration-300 hover:border-blue-300 hover:shadow-md hover:bg-blue-50 hover:text-blue-700"
+                  className="group inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 transition-all duration-300 hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700"
                 >
                   <span>{pref.name}</span>
                   <ChevronRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" />
@@ -91,7 +91,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
           
           <Link
             href="/prefectures"
-            className="text-xs text-slate-500 hover:text-blue-600"
+            className="text-xs text-slate-500 hover:text-brand-600"
           >
             全47都道府県から選ぶ →
           </Link>
@@ -107,15 +107,15 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             <div className="animate-fade-in-up" style={{ animationDelay: '100ms' }}>
               <Link
                 href="/reverse"
-                className="group flex h-full flex-col gap-1 rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-emerald-300 hover:shadow-md"
+                className="group flex h-full flex-col gap-1 rounded-lg border border-brand-200 bg-brand-50 p-4 text-left transition-all duration-300 hover:border-brand-300"
               >
                 <div className="flex items-center gap-2">
-                  <Target className="h-5 w-5 text-emerald-600" />
+                  <Target className="h-5 w-5 text-brand-600" />
                   <span className="text-base font-bold text-slate-800">志望校から逆算</span>
-                  <ChevronRight className="ml-auto h-4 w-4 text-emerald-500 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="ml-auto h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
                 </div>
                 <p className="text-xs text-slate-600">目標点から必要な当日点を計算</p>
-                <p className="mt-1 text-xs text-emerald-700">
+                <p className="mt-1 text-xs text-brand-700">
                   例：「志望校の目標点に届くか確かめたい」→ こちら
                 </p>
               </Link>
@@ -124,15 +124,15 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             <div className="animate-fade-in-up" style={{ animationDelay: '150ms' }}>
               <Link
                 href="/hensachi"
-                className="group flex h-full flex-col gap-1 rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 via-indigo-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-purple-300 hover:shadow-md"
+                className="group flex h-full flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 p-4 text-left transition-all duration-300 hover:border-slate-300"
               >
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-purple-600" />
+                  <TrendingUp className="h-5 w-5 text-slate-600" />
                   <span className="text-base font-bold text-slate-800">偏差値を計算</span>
-                  <ChevronRight className="ml-auto h-4 w-4 text-purple-500 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="ml-auto h-4 w-4 text-slate-500 transition-transform group-hover:translate-x-1" />
                 </div>
                 <p className="text-xs text-slate-600">5教科の点数から偏差値を瞬時に算出</p>
-                <p className="mt-1 text-xs text-purple-700">
+                <p className="mt-1 text-xs text-slate-700">
                   例：「模試の点数から偏差値を知りたい」→ こちら
                 </p>
               </Link>
@@ -141,15 +141,15 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             <div className="animate-fade-in-up" style={{ animationDelay: '200ms' }}>
               <Link
                 href="/hyotei-heikin"
-                className="group flex h-full flex-col gap-1 rounded-xl border border-teal-200 bg-gradient-to-br from-teal-50 via-cyan-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-teal-300 hover:shadow-md"
+                className="group flex h-full flex-col gap-1 rounded-lg border border-brand-200 bg-brand-50 p-4 text-left transition-all duration-300 hover:border-brand-300"
               >
                 <div className="flex items-center gap-2">
-                  <Calculator className="h-5 w-5 text-teal-600" />
+                  <Calculator className="h-5 w-5 text-brand-600" />
                   <span className="text-base font-bold text-slate-800">評定平均を自動計算</span>
-                  <ChevronRight className="ml-auto h-4 w-4 text-teal-500 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="ml-auto h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
                 </div>
                 <p className="text-xs text-slate-600">通知表の評定から平均値・素内申を算出</p>
-                <p className="mt-1 text-xs text-teal-700">
+                <p className="mt-1 text-xs text-brand-700">
                   例：「推薦入試の評定平均を確認したい」→ こちら
                 </p>
               </Link>
@@ -158,7 +158,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             <div className="animate-fade-in-up" style={{ animationDelay: '250ms' }}>
               <Link
                 href="/guide"
-                className="group flex h-full flex-col gap-1 rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-amber-300 hover:shadow-md"
+                className="group flex h-full flex-col gap-1 rounded-lg border border-amber-200 bg-amber-50 p-4 text-left transition-all duration-300 hover:border-amber-300"
               >
                 <div className="flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-amber-600" />
@@ -178,15 +178,15 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             <div className="animate-fade-in-up" style={{ animationDelay: '300ms' }}>
               <Link
                 href="/prefectures"
-                className="group flex h-full flex-col gap-1 rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50/50 to-white p-4 text-left shadow-sm transition-all duration-300 hover:border-blue-300 hover:shadow-md"
+                className="group flex h-full flex-col gap-1 rounded-lg border border-brand-200 bg-brand-50 p-4 text-left transition-all duration-300 hover:border-brand-300"
               >
                 <div className="flex items-center gap-2">
-                  <GraduationCap className="h-5 w-5 text-blue-600" />
+                  <GraduationCap className="h-5 w-5 text-brand-600" />
                   <span className="text-base font-bold text-slate-800">高校の倍率を調べる</span>
-                  <ChevronRight className="ml-auto h-4 w-4 text-blue-500 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="ml-auto h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
                 </div>
                 <p className="text-xs text-slate-600">県内の高校別の募集人員・志願者数・倍率を確認</p>
-                <p className="mt-1 text-xs text-blue-700">
+                <p className="mt-1 text-xs text-brand-700">
                   例：「気になる高校の倍率を先に見ておきたい」→ こちら
                 </p>
               </Link>

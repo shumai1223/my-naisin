@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { TrendingUp, Target, Lightbulb, ChevronUp } from 'lucide-react';
+import { TrendingUp, Target, Lightbulb, ChevronUp } from '@/components/icons';
 
 import { SUBJECTS, RANK_DEFINITIONS } from '@/lib/constants';
 import { getPrefectureByCode } from '@/lib/prefectures';
@@ -96,12 +96,12 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
 
   if (analysis.length === 0) {
     return (
-      <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-green-50 p-6 text-center">
-        <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-emerald-100">
-          <Target className="h-6 w-6 text-emerald-600" />
+      <div className="rounded-lg border border-brand-200 bg-brand-50 p-6 text-center">
+        <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-brand-100">
+          <Target className="h-6 w-6 text-brand-600" />
         </div>
-        <div className="text-lg font-bold text-emerald-800">完璧なスコア！</div>
-        <div className="mt-1 text-sm text-emerald-600">
+        <div className="text-lg font-bold text-brand-800">完璧なスコア！</div>
+        <div className="mt-1 text-sm text-brand-600">
           各教科で満点を達成しています
         </div>
       </div>
@@ -109,9 +109,9 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
       <div className="mb-4 flex items-center gap-3">
-        <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500">
+        <div className="grid h-10 w-10 place-items-center rounded-lg bg-amber-400">
           <Lightbulb className="h-5 w-5 text-white" />
         </div>
         <div>
@@ -122,18 +122,18 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
 
       {/* 次のランクまで */}
       {nextRankInfo && nextRankInfo.pointsNeeded > 0 && (
-        <div className="mb-4 rounded-xl bg-gradient-to-r from-purple-50 to-fuchsia-50 p-4 border border-purple-100">
+        <div className="mb-4 rounded-lg bg-slate-50 p-4 border border-slate-100">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-medium text-purple-700">
+            <div className="text-sm text-slate-700">
               次のランク「{nextRankInfo.nextRank.code}」まで
             </div>
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-purple-600">あと{nextRankInfo.pointsNeeded}</span>
-              <span className="text-sm text-purple-500">点</span>
+              <span className="text-2xl font-bold text-slate-600">あと{nextRankInfo.pointsNeeded}</span>
+              <span className="text-sm text-slate-500">点</span>
             </div>
           </div>
           {topRecommendations[0] && (
-            <div className="mt-2 text-xs text-purple-600">
+            <div className="mt-2 text-xs text-slate-600">
               💡 「{topRecommendations[0].label}」を1点上げれば +{topRecommendations[0].multiplier}点
               {nextRankInfo.pointsNeeded <= topRecommendations[0].multiplier && (
                 <span className="ml-1 font-bold">→ ランクアップ可能！</span>
@@ -144,11 +144,11 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
       )}
 
       {/* 総合ポテンシャル */}
-      <div className="mb-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
+      <div className="mb-4 rounded-lg bg-brand-50 p-4">
         <div className="flex items-center justify-between">
           <div className="text-sm text-slate-600">伸びしろ合計</div>
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-blue-600">+{totalPotentialGain}</span>
+            <span className="text-2xl font-bold text-brand-600">+{totalPotentialGain}</span>
             <span className="text-sm text-slate-500">点</span>
           </div>
         </div>
@@ -158,13 +158,13 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
       </div>
 
       {/* 優先度高い教科 */}
-      <div className="mb-3 text-sm font-semibold text-slate-700">優先的に取り組む教科</div>
+      <div className="mb-3 text-sm font-bold text-slate-700">優先的に取り組む教科</div>
       <div className="space-y-2">
         {topRecommendations.map((item, index) => (
           <div
             key={item.key}
             className={cn(
-              'flex items-center gap-3 rounded-xl p-3 transition-colors',
+              'flex items-center gap-3 rounded-lg p-3 transition-colors',
               item.priority === 'high' && 'bg-red-50 border border-red-100',
               item.priority === 'medium' && 'bg-amber-50 border border-amber-100',
               item.priority === 'low' && 'bg-slate-50 border border-slate-100'
@@ -181,9 +181,9 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
 
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <span className="font-semibold text-slate-800">{item.label}</span>
+                <span className="font-bold text-slate-800">{item.label}</span>
                 {item.multiplier > 1 && (
-                  <span className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600">
+                  <span className="rounded bg-brand-100 px-1.5 py-0.5 text-xs font-bold text-brand-600">
                     ×{item.multiplier}
                   </span>
                 )}
@@ -193,7 +193,7 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
               </div>
             </div>
 
-            <div className="flex shrink-0 items-center gap-1 text-emerald-600">
+            <div className="flex shrink-0 items-center gap-1 text-brand-600">
               <ChevronUp className="h-4 w-4" />
               <span className="text-sm font-bold">+{item.potentialGain}</span>
             </div>
@@ -202,7 +202,7 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
       </div>
 
       {/* アドバイス */}
-      <div className="mt-4 rounded-xl bg-slate-50 p-3">
+      <div className="mt-4 rounded-lg bg-slate-50 p-3">
         <div className="flex items-start gap-2">
           <TrendingUp className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
           <p className="text-xs leading-relaxed text-slate-600">

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { CalendarClock, Users, MessageCircle, ChevronRight } from 'lucide-react';
+import { CalendarClock, Users, MessageCircle, ChevronRight } from '@/components/icons';
 
 import {
   activeParentWindow,
@@ -92,11 +92,11 @@ export function ParentWindowBridge({
 
   return (
     <section
-      className={`overflow-hidden rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-blue-50/60 to-white p-6 shadow-sm md:p-7 ${className}`}
+      className={`overflow-hidden rounded-lg border border-brand-200 bg-brand-50 p-6 md:p-7 ${className}`}
     >
       <CtaViewTracker placement={PLACEMENT} pref={prefectureCode} />
 
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-indigo-700 ring-1 ring-indigo-200">
+      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
         <CalendarClock className="h-3.5 w-3.5" />
         {copy.badge}
       </div>
@@ -104,19 +104,19 @@ export function ParentWindowBridge({
       <h3 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">{copy.heading}</h3>
       <p className="mb-4 text-sm leading-relaxed text-slate-700">
         {copy.intro}
-        {isSpikeDay && <span className="mt-1 block font-semibold text-indigo-700">{END_OF_TERM_SPIKE_DAY_NOTE}</span>}
+        {isSpikeDay && <span className="mt-1 block font-bold text-brand-700">{END_OF_TERM_SPIKE_DAY_NOTE}</span>}
       </p>
 
       {/* ① 現在地サマリ（結果値入り）。数値が無い面では見出しだけの現在地カードにフォールバック。 */}
       {hasScore && (
-        <div className="mb-4 rounded-xl border border-indigo-100 bg-white/80 p-4">
+        <div className="mb-4 rounded-lg border border-brand-100 bg-white/80 p-4">
           <div className="text-xs font-bold text-slate-500">面談に持って行く「現在地」</div>
           <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <span className="text-sm text-slate-600">
               {prefectureName ? `${prefectureName}・` : ''}
               いまの{metricLabel}
             </span>
-            <span className="text-2xl font-black tabular-nums text-indigo-700">
+            <span className="text-2xl font-bold tabular-nums text-brand-700">
               {Math.round(score as number)}
               {isNum(max) && <span className="ml-0.5 text-sm font-bold text-slate-400">/{Math.round(max)}</span>}
             </span>
@@ -134,7 +134,7 @@ export function ParentWindowBridge({
         <Link
           href="/mendan"
           onClick={onMendanLinkClick}
-          className="group flex items-center justify-between gap-2 rounded-xl bg-indigo-600 px-4 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 active:scale-[0.99]"
+          className="group flex items-center justify-between gap-2 rounded-lg bg-brand-600 px-4 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-[0.99]"
         >
           <span className="flex items-center gap-2">
             <Users className="h-4 w-4" />
@@ -149,7 +149,7 @@ export function ParentWindowBridge({
           target="_blank"
           rel="noopener noreferrer"
           onClick={onLineClick}
-          className="flex items-center justify-between gap-2 rounded-xl border-2 border-[#06C755] bg-[#06C755] px-4 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
+          className="flex items-center justify-between gap-2 rounded-lg border-2 border-[#06C755] bg-[#06C755] px-4 py-3.5 text-sm font-bold text-white transition-all active:scale-[0.99]"
         >
           <span className="flex items-center gap-2">
             <MessageCircle className="h-4 w-4" />
