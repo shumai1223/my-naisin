@@ -1,0 +1,93 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UI方向性の見本</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;800&family=Noto+Serif+JP:wght@600;700&display=swap">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e9eaec;color:#1c1f24;font-family:'Noto Sans JP',system-ui,sans-serif;line-height:1.7}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
+h1.page{font-size:20px;margin:0 0 6px}p.lead{margin:0 0 20px;color:#4b5563;font-size:14px;max-width:760px}
+.now{display:block;max-width:100%;border:1px solid #cfd3d8;border-radius:6px;margin-bottom:6px}
+.cap{font-size:12px;color:#6b7280;margin:0 0 28px}
+.dir{margin:0 0 40px}.dir-label{display:flex;gap:12px;align-items:baseline;margin:0 0 8px;font-size:14px}.dir-label span{color:#6b7280;font-size:13px}
+.site{background:var(--bg);color:var(--ink);border:1px solid #cfd3d8;font-family:var(--font);max-width:900px}
+.top{display:flex;gap:24px;align-items:center;padding:14px 28px;border-bottom:1px solid var(--line);background:var(--topbg)}
+.brand{font-weight:700;font-size:16px;color:var(--brand);margin-right:auto;letter-spacing:.02em}
+.top nav{display:flex;gap:20px;font-size:13px;color:var(--sub)}
+main{padding:26px 28px 32px;max-width:760px}
+.crumb{font-size:12px;color:var(--sub);margin-bottom:14px}
+h1{font-family:var(--hfont);font-size:var(--h1);line-height:1.35;margin:0 0 6px;font-weight:var(--hw);letter-spacing:var(--hls)}
+.meta{font-size:12.5px;color:var(--sub);margin:0 0 18px}
+.answer{font-size:15.5px;margin:0 0 20px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0 0 26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts div{padding:12px 14px;border-left:1px solid var(--line)}.facts div:first-child{border-left:0;padding-left:0}
+.facts dt{font-size:12px;color:var(--sub)}.facts dd{margin:0}.big{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;font-family:var(--nfont)}
+h2{font-family:var(--hfont);font-size:17px;margin:0 0 8px;font-weight:var(--hw)}
+.calc{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:14px}
+.calc th,.calc td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;font-weight:400}.calc thead th{font-size:12px;color:var(--sub);border-bottom:1px solid var(--ink)}
+.calc .num{font-variant-numeric:tabular-nums;font-weight:700;width:60px}.calc .bar{width:44%}.calc .bar span{display:block;height:6px;background:var(--accent);opacity:.85}
+.result{display:flex;justify-content:space-between;align-items:baseline;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:18px}
+.result b{font-size:30px;font-variant-numeric:tabular-nums;color:var(--accent);font-family:var(--nfont)}.result small{font-size:13px;color:var(--sub);font-weight:400}
+.source{font-size:12.5px;color:var(--sub);border-top:1px solid var(--line);padding-top:12px;margin:0}.source b{color:var(--ink);margin-right:4px}.source a{color:var(--accent);text-decoration:underline;margin-right:14px}
+.spec{font-size:12.5px;color:#4b5563;margin:10px 0 0;max-width:900px}
+.spec code{background:#f3f4f6;padding:1px 5px;border-radius:3px}
+/* A: 白書 */
+.A{--bg:#fff;--topbg:#fff;--ink:#1a1a1a;--sub:#5b616b;--line:#d5d8dc;--brand:#1f3a5f;--accent:#1f3a5f;--panel:#f6f7f8;--r:2px;--font:'Noto Sans JP',sans-serif;--hfont:'Noto Serif JP',serif;--h1:30px;--hw:700;--hls:0;--nfont:'Noto Serif JP',serif}
+.A .top{border-bottom:2px solid #1f3a5f}
+/* B: やさしい学習帳 */
+.B{--bg:#f4f7f5;--topbg:#f4f7f5;--ink:#17231d;--sub:#4f6158;--line:#cddad3;--brand:#17543e;--accent:#17543e;--panel:#fff;--r:8px;--font:'BIZ UDPGothic','Noto Sans JP',sans-serif;--hfont:'BIZ UDPGothic','Noto Sans JP',sans-serif;--h1:28px;--hw:700;--hls:.01em;--nfont:'BIZ UDPGothic',sans-serif}
+.B main{font-size:16px}.B .answer{font-size:17px}.B .top{border-bottom:1px solid var(--line)}
+/* C: データ・ドキュメント */
+.C{--bg:#fafafa;--topbg:#fafafa;--ink:#111418;--sub:#606873;--line:#dcdfe3;--brand:#111418;--accent:#3b3fb8;--panel:#fff;--r:6px;--font:'Noto Sans JP',sans-serif;--hfont:'Noto Sans JP',sans-serif;--h1:27px;--hw:700;--hls:-.01em;--nfont:'Noto Sans JP',sans-serif}
+.C .top{border-bottom:1px solid var(--line)}.C .brand{font-weight:800}
+@media(max-width:640px){.top nav{display:none}.facts{grid-template-columns:1fr}.facts div{border-left:0;border-top:1px solid var(--line);padding-left:0}.facts div:first-child{border-top:0}main{padding:20px 16px}.top{padding:12px 16px}}
+</style></head><body><div class="wrap">
+<h1 class="page">UI方向性の見本（神奈川県のページ）</h1>
+<p class="lead">同じ内容（数字・文言・出典）を、いまの見た目と、3つの方向で描きました。グラデーション・絵文字・色違いのバッジ・影をやめて、<b>出典・更新日・訂正窓口</b>を最初から見える位置に置いています。計算値の「72 / 90点」は見本用の仮の数字です。</p>
+<img class="now" src="now-kanagawa.png" alt="現状"><p class="cap">↑ 現状（本番サイトの撮影・広告枠は非表示）</p>
+<section class="dir A" aria-label="A 白書・官報">
+  <div class="dir-label"><b>A 白書・官報</b><span>公的資料に近い。信用感は最も強いが、いまの親しみやすさは薄れる</span></div>
+  <div class="site">
+    <header class="top"><a class="brand">My Naishin</a><nav><a>内申点を計算</a><a>都道府県</a><a>高校の費用</a><a>データと出典</a><a>運営について</a></nav></header>
+    <main>
+      <nav class="crumb">ホーム ／ 都道府県 ／ 神奈川県</nav>
+      <h1>神奈川県の内申点の計算方法</h1>
+      <p class="meta">令和8年度（2026年度）入試 ／ 出典：神奈川県教育委員会 ／ 最終確認 2026年10月</p>
+      <p class="answer"><b>神奈川県の内申点は135点満点です。</b>対象は中学2年と3年の成績で、中2の45点と中3の90点を合わせます。主要5教科と実技4教科は同じ重み（等倍）で数えます。</p>
+      <dl class="facts"><div><dt>満点</dt><dd><span class="big">135</span>点</dd></div><div><dt>対象学年</dt><dd><span class="big">中2・中3</span></dd></div><div><dt>実技教科</dt><dd><span class="big">等倍</span></dd></div></dl>
+      <h2>評定を入れて計算する</h2>
+      <table class="calc"><thead><tr><th>教科</th><th>評定</th><th>5段階</th></tr></thead><tbody><tr><th scope="row">国語</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">社会</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">数学</th><td class="num">5</td><td class="bar"><span style="width:100%"></span></td></tr><tr><th scope="row">理科</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">英語</th><td class="num">5</td><td class="bar"><span style="width:100%"></span></td></tr><tr><th scope="row">音楽</th><td class="num">3</td><td class="bar"><span style="width:60%"></span></td></tr><tr><th scope="row">美術</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">保健体育</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">技術・家庭</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr></tbody></table>
+      <div class="result"><span>あなたの内申点（中3のみの試算）</span><b>72<small> / 90点</small></b></div>
+      <p class="source"><b>出典</b> 神奈川県教育委員会「令和8年度 神奈川県公立高等学校入学者選抜 実施要項」。<a>資料を開く</a>　<b>誤りを見つけたら</b> <a>訂正を知らせる</a></p>
+    </main>
+  </div></section><p class="spec">色: 白地・墨・紺（#1f3a5f）の1色／見出し: 明朝系（Noto Serif JP）／角: ほぼ直角（2px）／装飾: なし。罫線と表だけ。白書・官報・新聞のデータ面の雰囲気。</p>
+<section class="dir B" aria-label="B やさしい学習帳">
+  <div class="dir-label"><b>B やさしい学習帳</b><span>大きい文字・UDフォント。保護者向けに最も読みやすい</span></div>
+  <div class="site">
+    <header class="top"><a class="brand">My Naishin</a><nav><a>内申点を計算</a><a>都道府県</a><a>高校の費用</a><a>データと出典</a><a>運営について</a></nav></header>
+    <main>
+      <nav class="crumb">ホーム ／ 都道府県 ／ 神奈川県</nav>
+      <h1>神奈川県の内申点の計算方法</h1>
+      <p class="meta">令和8年度（2026年度）入試 ／ 出典：神奈川県教育委員会 ／ 最終確認 2026年10月</p>
+      <p class="answer"><b>神奈川県の内申点は135点満点です。</b>対象は中学2年と3年の成績で、中2の45点と中3の90点を合わせます。主要5教科と実技4教科は同じ重み（等倍）で数えます。</p>
+      <dl class="facts"><div><dt>満点</dt><dd><span class="big">135</span>点</dd></div><div><dt>対象学年</dt><dd><span class="big">中2・中3</span></dd></div><div><dt>実技教科</dt><dd><span class="big">等倍</span></dd></div></dl>
+      <h2>評定を入れて計算する</h2>
+      <table class="calc"><thead><tr><th>教科</th><th>評定</th><th>5段階</th></tr></thead><tbody><tr><th scope="row">国語</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">社会</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">数学</th><td class="num">5</td><td class="bar"><span style="width:100%"></span></td></tr><tr><th scope="row">理科</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">英語</th><td class="num">5</td><td class="bar"><span style="width:100%"></span></td></tr><tr><th scope="row">音楽</th><td class="num">3</td><td class="bar"><span style="width:60%"></span></td></tr><tr><th scope="row">美術</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">保健体育</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">技術・家庭</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr></tbody></table>
+      <div class="result"><span>あなたの内申点（中3のみの試算）</span><b>72<small> / 90点</small></b></div>
+      <p class="source"><b>出典</b> 神奈川県教育委員会「令和8年度 神奈川県公立高等学校入学者選抜 実施要項」。<a>資料を開く</a>　<b>誤りを見つけたら</b> <a>訂正を知らせる</a></p>
+    </main>
+  </div></section><p class="spec">色: 薄い緑灰の地・濃い緑（#17543e）の1色／書体: BIZ UDPゴシック（ユニバーサルデザイン）／文字は一回り大きい（16〜17px）／角: 8px。保護者・年配の読み手を意識した、読みやすさ重視。</p>
+<section class="dir C" aria-label="C データ・ドキュメント">
+  <div class="dir-label"><b>C データ・ドキュメント</b><span>現状から最も近い。改修の工数が最小</span></div>
+  <div class="site">
+    <header class="top"><a class="brand">My Naishin</a><nav><a>内申点を計算</a><a>都道府県</a><a>高校の費用</a><a>データと出典</a><a>運営について</a></nav></header>
+    <main>
+      <nav class="crumb">ホーム ／ 都道府県 ／ 神奈川県</nav>
+      <h1>神奈川県の内申点の計算方法</h1>
+      <p class="meta">令和8年度（2026年度）入試 ／ 出典：神奈川県教育委員会 ／ 最終確認 2026年10月</p>
+      <p class="answer"><b>神奈川県の内申点は135点満点です。</b>対象は中学2年と3年の成績で、中2の45点と中3の90点を合わせます。主要5教科と実技4教科は同じ重み（等倍）で数えます。</p>
+      <dl class="facts"><div><dt>満点</dt><dd><span class="big">135</span>点</dd></div><div><dt>対象学年</dt><dd><span class="big">中2・中3</span></dd></div><div><dt>実技教科</dt><dd><span class="big">等倍</span></dd></div></dl>
+      <h2>評定を入れて計算する</h2>
+      <table class="calc"><thead><tr><th>教科</th><th>評定</th><th>5段階</th></tr></thead><tbody><tr><th scope="row">国語</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">社会</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">数学</th><td class="num">5</td><td class="bar"><span style="width:100%"></span></td></tr><tr><th scope="row">理科</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">英語</th><td class="num">5</td><td class="bar"><span style="width:100%"></span></td></tr><tr><th scope="row">音楽</th><td class="num">3</td><td class="bar"><span style="width:60%"></span></td></tr><tr><th scope="row">美術</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">保健体育</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr><tr><th scope="row">技術・家庭</th><td class="num">4</td><td class="bar"><span style="width:80%"></span></td></tr></tbody></table>
+      <div class="result"><span>あなたの内申点（中3のみの試算）</span><b>72<small> / 90点</small></b></div>
+      <p class="source"><b>出典</b> 神奈川県教育委員会「令和8年度 神奈川県公立高等学校入学者選抜 実施要項」。<a>資料を開く</a>　<b>誤りを見つけたら</b> <a>訂正を知らせる</a></p>
+    </main>
+  </div></section><p class="spec">色: 無彩色の地・藍（#3b3fb8）の1色／書体: Noto Sans JP／角: 6px／数字は等幅。ドキュメント・データサービスの雰囲気。いまのサイトに最も近い（最小の変更で済む）。</p>
+</div></body></html>
