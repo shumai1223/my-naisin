@@ -12,8 +12,8 @@ export default function manifest(): MetadataRoute.Manifest {
       '全国47都道府県の内申点・偏差値・評定平均を無料で計算。志望校からの逆算・学習計画にも対応。',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#4f46e5',
+    background_color: '#f4f7f5',
+    theme_color: '#17543e',
     lang: 'ja',
     categories: ['education', 'utilities'],
     icons: [
