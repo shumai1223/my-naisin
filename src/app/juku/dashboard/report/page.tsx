@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, FileText } from '@/components/icons';
+import { ArrowLeft, TrendingDown } from '@/components/icons';
 
 import { isJukuSaasEnabled } from '@/lib/juku-saas/flag';
 import { verifyInviteToken, listJukuStudents, getStudentSnapshots, type SnapshotMetric } from '@/lib/juku-saas-db';
@@ -32,9 +32,9 @@ const METRICS: SnapshotMetric[] = ['naishin', 'hensachi', 'total-score'];
 
 function Gate() {
   return (
-    <div className="mx-auto max-w-md px-4 py-20 text-center">
-      <h1 className="text-lg font-bold text-slate-800">招待トークンが必要です</h1>
-      <p className="mt-2 text-sm text-slate-500">
+    <div className="mx-auto max-w-md px-4 py-20">
+      <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">招待トークンが必要です</h1>
+      <p className="mt-3 text-base leading-[1.8] text-slate-900">
         このページは招待された塾専用です。<code>?token=</code>と<code>studentId</code>を指定してアクセスしてください。
       </p>
     </div>
@@ -76,45 +76,43 @@ export default async function JukuStudentReportPage({
         <nav className="mb-6 flex items-center justify-between print:hidden">
           <Link
             href={`/juku/dashboard?token=${encodeURIComponent(token)}`}
-            className="flex items-center gap-1 text-xs text-slate-500 hover:text-brand-600"
+            className="inline-flex min-h-[44px] items-center gap-1 text-sm text-slate-600 hover:text-brand-700 hover:underline"
           >
-            <ArrowLeft className="h-3.5 w-3.5" />
+            <ArrowLeft className="h-4 w-4" />
             ダッシュボードへ戻る
           </Link>
           <PrintButton />
         </nav>
 
-        <header className="mb-8 flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-500 text-white print:hidden">
-            <FileText className="h-6 w-6" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-slate-800">{student.displayName} さんの成績帳票</h1>
-            <p className="mt-1 text-sm text-slate-500">
-              {account.name}
-              {student.prefectureCode ? ` ・ 志望県: ${student.prefectureCode}` : ''}
-            </p>
-          </div>
+        <header className="mb-8">
+          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">{student.displayName} さんの成績帳票</h1>
+          <p className="mt-1 text-sm text-slate-600">
+            {account.name}
+            {student.prefectureCode ? ` ・ 志望県: ${student.prefectureCode}` : ''}
+          </p>
         </header>
 
         <div className="space-y-6">
           {METRICS.map((metric) => {
             const points = trend[metric];
             return (
-              <section key={metric} className="rounded-lg border border-slate-200 bg-white p-6">
-                <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
+              <section key={metric} className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+                <h2 className="mb-4 flex flex-wrap items-center gap-2 text-xl font-bold text-slate-900">
                   {METRIC_LABEL[metric]}の推移
                   {alertMetrics.has(metric) && (
-                    <span className="rounded-full bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600">直近低下</span>
+                    <span className="inline-flex items-center gap-1 rounded border border-red-200 bg-red-50 px-2 py-0.5 text-xs font-bold text-red-800">
+                      <TrendingDown className="h-4 w-4" />
+                      直近低下
+                    </span>
                   )}
                 </h2>
                 {points.length === 0 ? (
-                  <p className="text-sm text-slate-400">記録がありません。</p>
+                  <p className="text-sm text-slate-600">記録がありません。</p>
                 ) : (
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-slate-200 text-left text-slate-500">
+                        <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
                           <th className="py-2 pr-4">記録日</th>
                           <th className="py-2 pr-4 text-right">値</th>
                           <th className="py-2 text-right">割合</th>
@@ -122,13 +120,13 @@ export default async function JukuStudentReportPage({
                       </thead>
                       <tbody>
                         {points.map((p, i) => (
-                          <tr key={i} className="border-b border-slate-100">
-                            <td className="py-2 pr-4 text-slate-600">{p.recordedAt}</td>
-                            <td className="py-2 pr-4 text-right font-bold text-slate-700">
+                          <tr key={i} className="border-b border-slate-200">
+                            <td className="py-2 pr-4 text-slate-900">{p.recordedAt}</td>
+                            <td className="py-2 pr-4 text-right font-bold tabular-nums text-slate-900">
                               {p.value}
                               {p.maxValue !== null ? `/${p.maxValue}` : ''}
                             </td>
-                            <td className="py-2 text-right text-slate-600">{p.percent !== null ? `${p.percent}%` : '—'}</td>
+                            <td className="py-2 text-right tabular-nums text-slate-900">{p.percent !== null ? `${p.percent}%` : '—'}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -139,7 +137,7 @@ export default async function JukuStudentReportPage({
             );
           })}
 
-          <p className="hidden text-xs text-slate-500 print:block">
+          <p className="hidden text-xs text-slate-600 print:block">
             出典: My Naishin 塾ダッシュボード（{account.name}）
           </p>
         </div>

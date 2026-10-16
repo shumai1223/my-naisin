@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TrendingUp, ArrowRight } from '@/components/icons';
+import { ArrowRight } from '@/components/icons';
 
 /**
  * /hensachi（偏差値計算サイト 5教科）への文脈内部リンク・ブロック。
@@ -10,20 +10,19 @@ import { TrendingUp, ArrowRight } from '@/components/icons';
 export function HensachiPromo({ className = '' }: { className?: string }) {
   return (
     <section
-      className={`rounded-lg border border-slate-100 bg-slate-50/70 p-5 md:p-6 ${className}`}
+      className={`rounded-lg border border-slate-200 bg-white p-5 md:p-6 ${className}`}
     >
-      <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700 ring-1 ring-slate-100">
-        <TrendingUp className="h-3 w-3" />
+      <div className="mb-2 inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
         内申点と一緒に確認
       </div>
-      <h3 className="mb-1.5 text-lg font-bold text-slate-900">
+      <h3 className="mb-2 text-[17px] font-bold text-slate-900">
         当日点・学力の立ち位置は「偏差値」で確認
       </h3>
-      <p className="mb-4 text-sm leading-relaxed text-slate-700">
+      <p className="mb-4 text-base leading-[1.8] text-slate-900">
         合否は内申点と当日点（学力）の合計で決まります。学力の立ち位置を測るなら
         <Link
           href="/hensachi"
-          className="font-bold text-slate-700 underline decoration-slate-300 underline-offset-2 hover:text-slate-800"
+          className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
         >
           偏差値計算サイト（5教科）
         </Link>
@@ -31,10 +30,10 @@ export function HensachiPromo({ className = '' }: { className?: string }) {
       </p>
       <Link
         href="/hensachi"
-        className="inline-flex items-center gap-1.5 rounded-full bg-slate-600 px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-slate-700"
+        className="inline-flex min-h-[44px] items-center gap-1.5 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800"
       >
         5教科の偏差値を計算する
-        <ArrowRight className="h-3.5 w-3.5" />
+        <ArrowRight className="h-4 w-4" />
       </Link>
     </section>
   );

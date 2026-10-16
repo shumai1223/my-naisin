@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from '@/components/icons';
+import { AlertTriangle, ChevronRight, Home } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -14,6 +14,14 @@ import { AdUnit } from '@/components/AdSlot';
 // ZZ-10c: 出典リンクはprefectures.ts(X-14再検証で更新される単一ソース)から動的取得し、
 // ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
 const FUKUOKA_SOURCE_URL = getPrefectureByCode('fukuoka')?.sourceUrl ?? 'https://www.pref.fukuoka.lg.jp/';
+
+// ページ冒頭のメタ行の「制度の最終確認」。値は prefectures.ts の既存データをそのまま表示するだけ（新しい日付は作らない）。
+const FUKUOKA_PREF = getPrefectureByCode('fukuoka');
+const formatYearMonth = (iso: string) => {
+  const [y, m] = iso.split('-');
+  return y && m && !Number.isNaN(Number(m)) ? `${y}年${Number(m)}月` : iso;
+};
+const FUKUOKA_LAST_VERIFIED = FUKUOKA_PREF?.lastVerified ? formatYearMonth(FUKUOKA_PREF.lastVerified) : null;
 
 const FUKUOKA_FAQS = [
   {
@@ -92,87 +100,82 @@ export default function FukuokaTotalScorePage() {
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/fukuoka" className="hover:text-brand-600">福岡県</Link>
+            <Link href="/fukuoka" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">福岡県</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">内申点・当日点計算</span>
+            <span className="text-slate-900">内申点・当日点計算</span>
           </nav>
 
-          {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <Calculator className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          {/* ページの頭: h1 → メタ行（年度・出典・最終確認）→ 結論の段落 */}
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               福岡県公立高校 内申点・当日点 計算
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
-              内申45点（中3のみ）＋学力300点・2026年度入試対応
-            </div>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              福岡県公立高校入試は、内申点（中3の9教科＝45点）と学力検査（5教科×60＝300点）の<br />
-              「両方の順位」で合否（A群・B群）が決まります。仕組みを早見表で整理しました。
+            <p className="mt-2 text-sm text-slate-600">
+              内申45点（中3のみ）＋学力300点・2026年度入試対応 ／ 出典：
+              <a href={FUKUOKA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">福岡県教育委員会の公式情報</a>
+              {FUKUOKA_LAST_VERIFIED && <> ／ 制度の最終確認 {FUKUOKA_LAST_VERIFIED}</>}
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              福岡県公立高校入試は、内申点（中3の9教科＝45点）と学力検査（5教科×60＝300点）の「両方の順位」で合否（A群・B群）が決まります。仕組みを早見表で整理しました。
             </p>
           </header>
 
-          {/* 中1中2は不算入の強調 */}
-          <section className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
-            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-brand-900">
-              <AlertCircle className="h-5 w-5 text-brand-600" />
+          {/* 中1中2は不算入の強調（注釈の型: 薄い面＋太字の見出し。この1か所だけ bg-brand-50） */}
+          <section className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-4 md:p-5">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">
               福岡県の内申点は「中3のみ」45点満点
             </h2>
-            <p className="text-sm leading-relaxed text-brand-900">
+            <p className="text-base leading-[1.8] text-slate-900">
               よくある誤解ですが、<strong>福岡県の合否判定に使う内申点は中3の9教科だけ</strong>です。中1・中2の評定は調査書に記載されますが、得点には反映されません。だからこそ<strong>中3の成績が直接合否に効きます</strong>。
             </p>
           </section>
 
           {/* 仕組み */}
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-brand-500" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               福岡県の合否は「学力300点＋内申45点」の2軸
             </h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
-                <div className="text-xs font-bold text-brand-600 mb-1">学力検査（当日点）</div>
-                <div className="text-3xl font-bold text-brand-700">300<span className="text-base font-bold">点</span></div>
-                <div className="text-xs text-brand-600 mt-1">5教科 × 60点</div>
+            <dl className="grid grid-cols-2 divide-x divide-slate-200 border-y border-slate-200">
+              <div className="px-4 py-4">
+                <dt className="text-xs text-slate-600">学力検査（当日点）</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">300<span className="text-base font-bold">点</span></dd>
+                <dd className="mt-1 text-xs text-slate-600">5教科 × 60点</dd>
               </div>
-              <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-4 text-center">
-                <div className="text-xs font-bold text-brand-600 mb-1">内申点（調査書）</div>
-                <div className="text-3xl font-bold text-brand-700">45<span className="text-base font-bold">点</span></div>
-                <div className="text-xs text-brand-600 mt-1">中3の9教科 × 5段階</div>
+              <div className="px-4 py-4">
+                <dt className="text-xs text-slate-600">内申点（調査書）</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">45<span className="text-base font-bold">点</span></dd>
+                <dd className="mt-1 text-xs text-slate-600">中3の9教科 × 5段階</dd>
               </div>
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+            </dl>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               福岡県は二段階選抜です。学力検査（300点）と内申点（45点）の<strong>どちらの順位も合格圏に入る受験生を「A群」</strong>として先に合格予定とし、残りを総合的に判断して「B群」で選考します。学力と内申の<strong>両方のバランス</strong>が鍵です。
             </p>
           </section>
 
           {/* 内申点 早見表 */}
-          <section className="mb-8 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-brand-500" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               内申点（45点満点）早見表＋学力検査の換算
             </h2>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2">
               {/* 内申点 */}
               <div>
-                <h3 className="mb-2 text-sm font-bold text-brand-900">① 中3の評定パターン → 内申点（／45）</h3>
+                <h3 className="mb-2 text-[17px] font-bold text-slate-900">① 中3の評定パターン → 内申点（／45）</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-brand-600 text-white text-left">
-                        <th className="border border-brand-400 px-3 py-1.5 font-bold">評定の目安</th>
-                        <th className="border border-brand-400 px-3 py-1.5 font-bold text-right">内申点</th>
+                      <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                        <th className="px-3 py-2 font-bold">評定の目安</th>
+                        <th className="px-3 py-2 text-right font-bold">内申点</th>
                       </tr>
                     </thead>
-                    <tbody className="text-slate-700">
+                    <tbody className="divide-y divide-slate-200 text-slate-900">
                       {[
                         ['オール5', '45'],
                         ['5と4が中心', '40'],
@@ -182,28 +185,28 @@ export default function FukuokaTotalScorePage() {
                         ['3と2が中心', '23'],
                         ['オール2', '18'],
                       ].map(([pattern, score]) => (
-                        <tr key={pattern} className="odd:bg-white even:bg-slate-50">
-                          <td className="border border-slate-200 px-3 py-1.5">{pattern}</td>
-                          <td className="border border-slate-200 px-3 py-1.5 text-right font-bold">{score}</td>
+                        <tr key={pattern}>
+                          <td className="px-3 py-2">{pattern}</td>
+                          <td className="px-3 py-2 text-right font-bold tabular-nums">{score}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-1 text-xs text-slate-500">内申点 ＝ 中3の9教科の評定合計</p>
+                <p className="mt-2 text-sm text-slate-600">内申点 ＝ 中3の9教科の評定合計</p>
               </div>
               {/* 学力検査 */}
               <div>
-                <h3 className="mb-2 text-sm font-bold text-brand-900">② 学力検査 5教科の合計 → 300点満点</h3>
+                <h3 className="mb-2 text-[17px] font-bold text-slate-900">② 学力検査 5教科の合計 → 300点満点</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-brand-600 text-white text-left">
-                        <th className="border border-brand-400 px-3 py-1.5 font-bold">1教科平均（／60）</th>
-                        <th className="border border-brand-400 px-3 py-1.5 font-bold text-right">5教科合計</th>
+                      <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                        <th className="px-3 py-2 font-bold">1教科平均（／60）</th>
+                        <th className="px-3 py-2 text-right font-bold">5教科合計</th>
                       </tr>
                     </thead>
-                    <tbody className="text-slate-700">
+                    <tbody className="divide-y divide-slate-200 text-slate-900">
                       {[
                         ['54', '270'],
                         ['48', '240'],
@@ -212,27 +215,27 @@ export default function FukuokaTotalScorePage() {
                         ['30', '150'],
                         ['24', '120'],
                       ].map(([avg, total]) => (
-                        <tr key={avg} className="odd:bg-white even:bg-slate-50">
-                          <td className="border border-slate-200 px-3 py-1.5 font-bold">{avg}</td>
-                          <td className="border border-slate-200 px-3 py-1.5 text-right">{total}</td>
+                        <tr key={avg}>
+                          <td className="px-3 py-2 font-bold tabular-nums">{avg}</td>
+                          <td className="px-3 py-2 text-right tabular-nums">{total}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                <p className="mt-1 text-xs text-slate-500">学力検査 ＝ 5教科 × 各60点（最大300）</p>
+                <p className="mt-2 text-sm text-slate-600">学力検査 ＝ 5教科 × 各60点（最大300）</p>
               </div>
             </div>
           </section>
 
           {/* B-5: 実数入力の計算機（結果連動の名簿導線つき） */}
-          <div className="mb-8">
+          <div className="mb-10">
             <FukuokaResultFlow />
           </div>
 
           {/* 保護者向けリード（旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}
           <ParentLeadCTA
-            className="mb-8"
+            className="mb-10"
             placement="prefecture"
             heading="福岡の志望校、内申と当日点の両方が届いていますか？"
             body="福岡はA群でまず合否が決まるため、学力と内申の両立がカギ。お子さまにいま必要な対策を、オンライン個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
@@ -242,49 +245,58 @@ export default function FukuokaTotalScorePage() {
           />
 
           {/* よくある質問 */}
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="space-y-5">
               {FUKUOKA_FAQS.map((faq, i) => (
                 <div key={i}>
-                  <div className="font-bold text-slate-800 text-sm">Q. {faq.question}</div>
-                  <p className="mt-1 text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
+                  <h3 className="text-[17px] font-bold text-slate-900">Q. {faq.question}</h3>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 注意 */}
-          <div className="mb-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
-            <div className="flex items-start gap-2">
-              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-              <p className="text-xs text-amber-800 leading-relaxed">
-                合否判定の詳細・加重評価の対象学科・各高校の選考方法は年度により異なります。最新の情報は<a href={FUKUOKA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">福岡県教育委員会の公式情報</a>でご確認ください。
-              </p>
-            </div>
+          <div className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="flex items-center gap-1.5 text-sm font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-sm leading-[1.8] text-amber-900">
+              合否判定の詳細・加重評価の対象学科・各高校の選考方法は年度により異なります。最新の情報は<a href={FUKUOKA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">福岡県教育委員会の公式情報</a>でご確認ください。
+            </p>
           </div>
 
           {/* 関連リンク */}
-          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/fukuoka/naishin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">福岡県の内申点を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/fukuoka" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">福岡県の入試制度ガイド</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">5教科の偏差値を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/reverse?pref=fukuoka" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">志望校から逆算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-            </div>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">関連ツール・コンテンツ</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/fukuoka/naishin" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">福岡県の内申点を計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/fukuoka" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">福岡県の入試制度ガイド</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hensachi" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">5教科の偏差値を計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/reverse?pref=fukuoka" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">志望校から逆算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
 
           {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。保護者リードCTAより後ろ。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}

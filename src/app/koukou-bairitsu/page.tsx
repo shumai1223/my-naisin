@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Percent, ChevronRightSquare } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -60,89 +60,94 @@ export default function KoukouBairitsuPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">高校入試 倍率計算</span>
+            <span className="text-slate-900">高校入試 倍率計算</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
-              <Percent className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校入試 倍率計算サイト</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">高校入試 倍率計算サイト</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               募集人員・志願者数（または受験者数・合格者数）を入れるだけで、<strong>志願倍率・実質倍率</strong>を計算します。
             </p>
           </header>
 
           <BairitsuCalculator />
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">志願倍率と実質倍率の違い</h2>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">志願倍率と実質倍率の違い</h2>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
               「倍率」という言葉には2種類あります。出願直後に発表される<strong>志願倍率</strong>（志願者数÷募集人員）と、
               入試後に確定する<strong>実質倍率</strong>（受験者数÷合格者数）です。出願後の志願変更や当日欠席があるため、
               この2つの数字は一致しないことがよくあります。実際の競争の厳しさをより正確に表すのは実質倍率です。
             </p>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">都道府県別の入試制度・内申点を確認する</h2>
-            <p className="mb-4 text-xs text-slate-500">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">都道府県別の入試制度・内申点を確認する</h2>
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               県ごとの内申点の仕組みを確認できます。学校別の倍率は、各県教育委員会の公表値を転記して県別の入試ページに掲載しています（掲載範囲は県によって異なります）。最新の倍率は都道府県教育委員会の公式発表でもご確認ください。
             </p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+            <ul className="mt-3 grid grid-cols-2 gap-x-4 sm:grid-cols-3 md:grid-cols-4">
               {PREFECTURES.map((pref) => (
-                <Link
-                  key={pref.code}
-                  href={`/${pref.code}/naishin`}
-                  className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm text-brand-800 transition-colors hover:bg-brand-50 hover:text-brand-900"
-                >
-                  <span className="truncate">{pref.name}</span>
-                  <ChevronRightSquare className="h-3 w-3 shrink-0 opacity-60" />
-                </Link>
+                <li key={pref.code}>
+                  <Link
+                    href={`/${pref.code}/naishin`}
+                    className="flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                  >
+                    {pref.name}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                偏差値を計算する
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/total-score" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                都道府県別の総合得点の仕組みを見る
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/koukou-bairitsu/yomikata" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                出願倍率の読み方を見る
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/naishin-kakusa" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                都道府県別 内申点格差レポートを見る
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="mt-2 divide-y divide-slate-200">
+              <li>
+                <Link href="/hensachi" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  偏差値を計算する
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/total-score" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  都道府県別の総合得点の仕組みを見る
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/koukou-bairitsu/yomikata" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  出願倍率の読み方を見る
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/naishin-kakusa" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  都道府県別 内申点格差レポートを見る
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="prefecture" />
           </div>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="mt-1 divide-y divide-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

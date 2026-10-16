@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, Receipt, Info } from '@/components/icons';
 
 import { funnel, EVENTS, track } from '@/lib/track';
 
@@ -68,16 +67,13 @@ export function JukenRyouCalculator() {
   }, [result.min, result.max]);
 
   return (
-    <section className="rounded-lg border border-slate-200 bg-white p-6">
-      <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-        <Calculator className="h-5 w-5 text-brand-600" />
-        受験料・模試代シミュレーター
-      </h2>
+    <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+      <h2 className="mb-5 text-xl font-bold text-slate-900">受験料・模試代シミュレーター</h2>
 
       <div className="space-y-5">
         {/* 公立受験 */}
-        <label className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50/60 px-4 py-3">
-          <span className="text-sm text-slate-700">公立高校を受験する（選抜手数料 {yen(PUBLIC_EXAM_FEE)} 前後）</span>
+        <label className="flex min-h-[44px] items-center justify-between gap-3 rounded border border-slate-300 bg-white px-4 py-3">
+          <span className="text-base text-slate-900">公立高校を受験する（選抜手数料 {yen(PUBLIC_EXAM_FEE)} 前後）</span>
           <input
             type="checkbox"
             checked={takesPublic}
@@ -85,15 +81,15 @@ export function JukenRyouCalculator() {
               onInteract();
               setTakesPublic(e.target.checked);
             }}
-            className="h-5 w-5 accent-brand-600"
+            className="h-5 w-5 shrink-0 accent-brand-700"
           />
         </label>
 
         {/* 私立併願校数 */}
         <div>
-          <div className="mb-1 flex items-center justify-between">
-            <label htmlFor="jukenryou-private-count" className="text-sm text-slate-700">私立高校の受験校数（併願含む）</label>
-            <span className="text-sm font-bold text-brand-700">{privateCount}校</span>
+          <div className="mb-1 flex items-center justify-between gap-3">
+            <label htmlFor="jukenryou-private-count" className="text-base text-slate-900">私立高校の受験校数（併願含む）</label>
+            <span className="shrink-0 text-base font-bold tabular-nums text-brand-700">{privateCount}校</span>
           </div>
           <input
             id="jukenryou-private-count"
@@ -105,16 +101,16 @@ export function JukenRyouCalculator() {
               onInteract();
               setPrivateCount(Number(e.target.value));
             }}
-            className="w-full accent-brand-600"
+            className="h-11 w-full accent-brand-700"
           />
-          <p className="mt-1 text-xs text-slate-500">1校あたりの受験料の目安：{yen(PRIVATE_EXAM_FEE.min)}〜{yen(PRIVATE_EXAM_FEE.max)}</p>
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">1校あたりの受験料の目安：{yen(PRIVATE_EXAM_FEE.min)}〜{yen(PRIVATE_EXAM_FEE.max)}</p>
         </div>
 
         {/* 模試回数 */}
         <div>
-          <div className="mb-1 flex items-center justify-between">
-            <label htmlFor="jukenryou-moshi-count" className="text-sm text-slate-700">受ける模試の回数（中3の年間）</label>
-            <span className="text-sm font-bold text-brand-700">{moshiCount}回</span>
+          <div className="mb-1 flex items-center justify-between gap-3">
+            <label htmlFor="jukenryou-moshi-count" className="text-base text-slate-900">受ける模試の回数（中3の年間）</label>
+            <span className="shrink-0 text-base font-bold tabular-nums text-brand-700">{moshiCount}回</span>
           </div>
           <input
             id="jukenryou-moshi-count"
@@ -126,14 +122,14 @@ export function JukenRyouCalculator() {
               onInteract();
               setMoshiCount(Number(e.target.value));
             }}
-            className="w-full accent-brand-600"
+            className="h-11 w-full accent-brand-700"
           />
-          <p className="mt-1 text-xs text-slate-500">1回あたりの目安：{yen(MOSHI_FEE.min)}〜{yen(MOSHI_FEE.max)}</p>
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">1回あたりの目安：{yen(MOSHI_FEE.min)}〜{yen(MOSHI_FEE.max)}</p>
         </div>
 
         {/* 入学する高校 */}
         <div>
-          <label className="mb-1 block text-sm text-slate-700">入学時の初期費用も含める</label>
+          <label className="mb-2 block text-base text-slate-900">入学時の初期費用も含める</label>
           <div className="grid grid-cols-3 gap-2">
             {([
               { v: 'none', label: '含めない' },
@@ -143,14 +139,15 @@ export function JukenRyouCalculator() {
               <button
                 key={opt.v}
                 type="button"
+                aria-pressed={enroll === opt.v}
                 onClick={() => {
                   onInteract();
                   setEnroll(opt.v);
                 }}
-                className={`rounded-lg border-2 px-3 py-2 text-sm font-bold transition-colors ${
+                className={`inline-flex min-h-[44px] items-center justify-center rounded border px-2 py-2 text-sm leading-snug transition-colors ${
                   enroll === opt.v
-                    ? 'border-brand-500 bg-brand-50 text-brand-700'
-                    : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
+                    ? 'border-brand-700 bg-brand-50 font-bold text-brand-800'
+                    : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 {opt.label}
@@ -158,55 +155,51 @@ export function JukenRyouCalculator() {
             ))}
           </div>
           {enroll === 'public' && (
-            <p className="mt-1 text-xs text-slate-500">公立の入学料の目安：{yen(PUBLIC_ENROLL)} 前後（自治体による）</p>
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">公立の入学料の目安：{yen(PUBLIC_ENROLL)} 前後（自治体による）</p>
           )}
           {enroll === 'private' && (
-            <p className="mt-1 text-xs text-slate-500">私立の入学金の目安：{yen(PRIVATE_ENROLL.min)}〜{yen(PRIVATE_ENROLL.max)}（施設費等は別途）</p>
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">私立の入学金の目安：{yen(PRIVATE_ENROLL.min)}〜{yen(PRIVATE_ENROLL.max)}（施設費等は別途）</p>
           )}
         </div>
       </div>
 
       {/* 結果 */}
-      <div className="mt-6 rounded-lg border-2 border-brand-300 bg-brand-50 p-5">
-        <div className="flex items-center gap-2 text-sm font-bold text-brand-800">
-          <Receipt className="h-4 w-4" />
-          受験シーズンにかかるお金の目安
-        </div>
-        <div className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+      <div className="mt-6 rounded-lg border border-slate-200 bg-brand-50 p-5">
+        <div className="text-sm font-bold text-brand-800">受験シーズンにかかるお金の目安</div>
+        <div className="mt-2 text-2xl font-bold tabular-nums text-slate-900 md:text-3xl">
           {yen(result.min)} 〜 {yen(result.max)}
         </div>
-        <div className="text-sm font-bold text-brand-700">（{man(result.min)} 〜 {man(result.max)}）</div>
+        <div className="mt-1 text-sm font-bold tabular-nums text-slate-700">（{man(result.min)} 〜 {man(result.max)}）</div>
 
-        <dl className="mt-4 space-y-1.5 text-sm text-slate-700">
+        <dl className="mt-4 divide-y divide-slate-200 border-t border-slate-200 text-sm text-slate-900">
           {result.publicExam > 0 && (
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-3 py-2">
               <dt>公立の選抜手数料</dt>
-              <dd className="font-mono">{yen(result.publicExam)}</dd>
+              <dd className="text-right tabular-nums">{yen(result.publicExam)}</dd>
             </div>
           )}
           {privateCount > 0 && (
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-3 py-2">
               <dt>私立の受験料（{privateCount}校）</dt>
-              <dd className="font-mono">{yen(result.privateMin)}〜{yen(result.privateMax)}</dd>
+              <dd className="text-right tabular-nums">{yen(result.privateMin)}〜{yen(result.privateMax)}</dd>
             </div>
           )}
           {moshiCount > 0 && (
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-3 py-2">
               <dt>模試代（{moshiCount}回）</dt>
-              <dd className="font-mono">{yen(result.moshiMin)}〜{yen(result.moshiMax)}</dd>
+              <dd className="text-right tabular-nums">{yen(result.moshiMin)}〜{yen(result.moshiMax)}</dd>
             </div>
           )}
           {enroll !== 'none' && (
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-3 py-2">
               <dt>入学時の初期費用（{enroll === 'public' ? '公立' : '私立'}）</dt>
-              <dd className="font-mono">{result.enrollMin === result.enrollMax ? yen(result.enrollMin) : `${yen(result.enrollMin)}〜${yen(result.enrollMax)}`}</dd>
+              <dd className="text-right tabular-nums">{result.enrollMin === result.enrollMax ? yen(result.enrollMin) : `${yen(result.enrollMin)}〜${yen(result.enrollMax)}`}</dd>
             </div>
           )}
         </dl>
       </div>
 
-      <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-slate-500">
-        <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+      <p className="mt-3 text-sm leading-[1.8] text-slate-600">
         金額はいずれも一般に公表されている範囲の<strong>目安</strong>です。公立の手数料・入学料は自治体の条例、私立の受験料・入学金は各校で異なります。交通費・宿泊費（遠方受験）・併願校の延納手続き等は含みません。正確な額は受験校の募集要項をご確認ください。
       </p>
     </section>

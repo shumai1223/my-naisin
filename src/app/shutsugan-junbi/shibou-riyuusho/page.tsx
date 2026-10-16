@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, FileText, ChevronRightSquare, HelpCircle, ListChecks } from '@/components/icons';
+import { Home, ChevronRight, ChevronRightSquare } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -77,41 +77,35 @@ export default function ShibouRiyuushoPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/shutsugan-junbi" className="hover:text-slate-600">出願準備チェックリスト</Link>
+            <Link href="/shutsugan-junbi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">出願準備チェックリスト</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">志望理由書の書き方</span>
+            <span className="text-slate-900">志望理由書の書き方</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
-              <FileText className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">志望理由書の書き方・構成</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">志望理由書の書き方・構成</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               学校推薦型・総合型選抜で使う志望理由書の<strong>一般的な構成</strong>と、
               <strong>テーマ決めから清書までの書き方の手順</strong>をまとめました。大学個別の評価基準は書かず、構成の一般論のみを解説します。
             </p>
           </header>
 
           {/* 構成5要素 */}
-          <section className="rounded-lg border-2 border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ListChecks className="h-5 w-5 text-slate-600" />
-              一般的な構成（5要素）
-            </h2>
-            <ol className="space-y-4">
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">一般的な構成（5要素）</h2>
+            <ol className="divide-y divide-slate-200">
               {STRUCTURE.map((s, i) => (
-                <li key={s.label} className="flex gap-4 border-l-4 border-slate-200 pl-4">
-                  <div className="w-8 shrink-0 pt-0.5 text-lg font-bold text-slate-700">{i + 1}</div>
+                <li key={s.label} className="flex gap-3 py-4 first:pt-0 last:pb-0">
+                  <div className="w-7 shrink-0 text-[17px] font-bold leading-snug tabular-nums text-brand-700">{i + 1}.</div>
                   <div>
-                    <div className="text-sm font-bold text-slate-800">{s.label}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.desc}</p>
+                    <div className="text-[17px] font-bold leading-snug text-slate-900">{s.label}</div>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.desc}</p>
                   </div>
                 </li>
               ))}
@@ -119,18 +113,15 @@ export default function ShibouRiyuushoPage() {
           </section>
 
           {/* 書き方STEP */}
-          <section className="mt-8 rounded-lg border-2 border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <FileText className="h-5 w-5 text-slate-600" />
-              書き方の手順（5STEP）
-            </h2>
-            <ol className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">書き方の手順（5STEP）</h2>
+            <ol className="divide-y divide-slate-200">
               {STEPS.map((s, i) => (
-                <li key={s.name} className="flex gap-4 border-l-4 border-brand-200 pl-4">
-                  <div className="w-8 shrink-0 pt-0.5 text-lg font-bold text-brand-700">{i + 1}</div>
+                <li key={s.name} className="flex gap-3 py-4 first:pt-0 last:pb-0">
+                  <div className="w-7 shrink-0 text-[17px] font-bold leading-snug tabular-nums text-brand-700">{i + 1}.</div>
                   <div>
-                    <div className="text-sm font-bold text-slate-800">{s.name}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.text}</p>
+                    <div className="text-[17px] font-bold leading-snug text-slate-900">{s.name}</div>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.text}</p>
                   </div>
                 </li>
               ))}
@@ -138,42 +129,39 @@ export default function ShibouRiyuushoPage() {
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="suisen" />
           </div>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/shutsugan-junbi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/shutsugan-junbi" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 出願準備チェックリスト（タイムライン・書類）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRightSquare className="h-4 w-4 shrink-0" />
               </Link>
-              <Link href="/suisen-nyuushi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
+              <Link href="/suisen-nyuushi" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 推薦入試の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRightSquare className="h-4 w-4 shrink-0" />
               </Link>
-              <Link href="/sougou-gata-senbatsu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
+              <Link href="/sougou-gata-senbatsu" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 総合型選抜の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRightSquare className="h-4 w-4 shrink-0" />
               </Link>
-              <Link href="/hyotei-heikin/gyakusan" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
+              <Link href="/hyotei-heikin/gyakusan" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 残りで必要な評定平均を逆算する
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRightSquare className="h-4 w-4 shrink-0" />
               </Link>
             </div>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-slate-600" />
-              よくある質問
-            </h2>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-2 text-[17px] font-bold leading-snug text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

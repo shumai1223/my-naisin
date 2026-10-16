@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, Calculator, HandCoins, School, GraduationCap, HelpCircle, Info, Receipt } from '@/components/icons';
+import { Home, ChevronRight, Wallet, Calculator, HandCoins, School, GraduationCap, Receipt } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -123,20 +123,28 @@ export default function HiyouHubPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">お金・費用まとめ</span>
+            <span className="text-slate-900">お金・費用まとめ</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <Wallet className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校受験・進学にかかるお金まとめ</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">高校受験・進学にかかるお金まとめ</h1>
+            <p className="mt-2 text-sm text-slate-600">
+              出典：
+              <a
+                href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              >
+                文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
+              </a>
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               教育費の総額・高校の学費・塾代・高校無償化（就学支援金）・大学費用まで。
               <strong>文部科学省の一次データ</strong>に基づき、進路にかかるお金を無料でまとめて把握できます。
             </p>
@@ -150,17 +158,15 @@ export default function HiyouHubPage() {
                   key={c.href}
                   href={c.href}
                   {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-all hover:border-brand-200"
+                  className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:bg-brand-50"
                 >
-                  <div className="rounded-lg bg-brand-50 p-2.5 text-brand-600">
-                    <Icon className="h-5 w-5" />
-                  </div>
+                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
                   <div className="min-w-0">
-                    <div className="flex items-center gap-1 text-sm font-bold text-slate-800">
+                    <div className="flex items-center gap-1 text-base font-bold text-brand-700 group-hover:underline">
                       {c.title}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-300 transition-transform group-hover:translate-x-0.5" />
+                      <ChevronRight className="h-4 w-4 shrink-0" />
                     </div>
-                    <p className="mt-1 text-xs leading-relaxed text-slate-500">{c.desc}</p>
+                    <p className="mt-1 text-sm leading-[1.8] text-slate-600">{c.desc}</p>
                   </div>
                 </Link>
               );
@@ -172,12 +178,9 @@ export default function HiyouHubPage() {
           <ParentLeadCTAExperiment experimentId="hiyou-third-round-copy-2026" placement="hiyou" className="mb-10" />
 
           {/* なぜ早めに把握するか */}
-          <section className="mb-10 rounded-lg border border-brand-100 bg-brand-50/40 p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Info className="h-5 w-5 text-brand-500" />
-              早めにお金の全体像を把握するメリット
-            </h2>
-            <p className="leading-relaxed text-slate-700">
+          <section className="mb-10">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">早めにお金の全体像を把握するメリット</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               教育費は「いつ・いくら必要か」が見えていないと、進路選択や塾の利用をためらいがちです。
               高校3年間だけでも公立で約179万円・私立で約354万円かかり、塾代・大学費用を加えると数百万円規模になります。
               一方で、高校無償化（就学支援金）や奨学給付金で授業料の負担は大きく軽減できます。
@@ -187,43 +190,41 @@ export default function HiyouHubPage() {
 
           {/* FAQ */}
           <section className="mb-10">
-            <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-brand-600" />よくある質問
-            </h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
                 <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
           {/* 関連ハブ */}
-          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール</h2>
+          <section>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">関連ツール</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">内申点を計算する（都道府県別）</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-brand-50">
+                <span className="text-base text-slate-900">内申点を計算する（都道府県別）</span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/tools" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">すべての受験ツールを見る</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/tools" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-brand-50">
+                <span className="text-base text-slate-900">すべての受験ツールを見る</span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hogosha" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">保護者の方へ</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/hogosha" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-brand-50">
+                <span className="text-base text-slate-900">保護者の方へ</span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/mendan" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">三者面談の準備チェックリスト</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/mendan" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-brand-50">
+                <span className="text-base text-slate-900">三者面談の準備チェックリスト</span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>

@@ -37,21 +37,21 @@ export function NaishinSimulator() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-lg border border-slate-200 bg-white p-4">
-        <h2 className="mb-3 text-sm font-bold text-slate-700">9教科の評定を入力</h2>
+      <section className="rounded-lg border border-slate-200 bg-white p-5">
+        <h2 className="mb-4 text-xl font-bold text-slate-900">9教科の評定を入力</h2>
         <InputForm prefectureCode={referenceCode} scores={scores} onChange={handleScoreChange} />
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-4">
-        <h2 className="mb-3 text-sm font-bold text-slate-700">比較する都道府県を選択（{selectedCodes.length}件）</h2>
-        <div className="grid max-h-64 grid-cols-2 gap-1.5 overflow-y-auto pr-1 sm:grid-cols-3 md:grid-cols-4">
+      <section className="rounded-lg border border-slate-200 bg-white p-5">
+        <h2 className="mb-4 text-xl font-bold text-slate-900">比較する都道府県を選択（{selectedCodes.length}件）</h2>
+        <div className="grid max-h-80 grid-cols-2 gap-1 overflow-y-auto pr-1 sm:grid-cols-3 md:grid-cols-4">
           {PREFECTURES.map((p) => (
-            <label key={p.code} className="flex items-center gap-1.5 rounded-md px-1.5 py-1 text-xs hover:bg-slate-50">
+            <label key={p.code} className="flex min-h-[44px] items-center gap-2 rounded px-2 text-sm text-slate-900 hover:bg-slate-50">
               <input
                 type="checkbox"
                 checked={selectedCodes.includes(p.code)}
                 onChange={() => toggleCode(p.code)}
-                className="h-3.5 w-3.5"
+                className="h-4 w-4 accent-brand-700"
               />
               {p.name}
             </label>
@@ -59,19 +59,19 @@ export function NaishinSimulator() {
         </div>
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-4">
-        <h2 className="mb-3 text-sm font-bold text-slate-700">内申点シミュレーション結果</h2>
+      <section className="rounded-lg border border-slate-200 bg-white p-5">
+        <h2 className="mb-4 text-xl font-bold text-slate-900">内申点シミュレーション結果</h2>
         {results.length === 0 ? (
-          <p className="text-sm text-slate-400">都道府県を1つ以上選んでください。</p>
+          <p className="text-sm text-slate-600">都道府県を1つ以上選んでください。</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-slate-200 text-left text-slate-500">
-                  <th className="py-2 pr-4">都道府県</th>
-                  <th className="py-2 pr-4 text-right">内申点</th>
-                  <th className="py-2 pr-4 text-right">満点</th>
-                  <th className="py-2 text-right">割合</th>
+                <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                  <th scope="col" className="py-2 pr-4">都道府県</th>
+                  <th scope="col" className="py-2 pr-4 text-right">内申点</th>
+                  <th scope="col" className="py-2 pr-4 text-right">満点</th>
+                  <th scope="col" className="py-2 text-right">割合</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,11 +79,11 @@ export function NaishinSimulator() {
                   .slice()
                   .sort((a, b) => b.percent - a.percent)
                   .map((r) => (
-                    <tr key={r.code} className="border-b border-slate-100">
-                      <td className="py-2 pr-4 text-slate-700">{r.name}</td>
-                      <td className="py-2 pr-4 text-right text-slate-600">{r.total}</td>
-                      <td className="py-2 pr-4 text-right text-slate-600">{r.max}</td>
-                      <td className="py-2 text-right font-bold text-slate-700">{r.percent}%</td>
+                    <tr key={r.code} className="border-b border-slate-200">
+                      <td className="py-3 pr-4 text-slate-900">{r.name}</td>
+                      <td className="py-3 pr-4 text-right tabular-nums text-slate-900">{r.total}</td>
+                      <td className="py-3 pr-4 text-right tabular-nums text-slate-600">{r.max}</td>
+                      <td className="py-3 text-right font-bold tabular-nums text-slate-900">{r.percent}%</td>
                     </tr>
                   ))}
               </tbody>

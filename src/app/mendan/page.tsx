@@ -1,17 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import {
-  Home,
-  ChevronRight,
-  Users,
-  Calculator,
-  TrendingUp,
-  Target,
-  ClipboardList,
-  CheckSquare,
-  MessageCircleQuestion,
-  CalendarClock,
-} from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -64,22 +53,19 @@ const QUESTIONS = [
 /** 面談前の準備3ステップ（数値の持参を促す） */
 const PREP_STEPS = [
   {
-    icon: Calculator,
-    title: '① 内申点を計算して持参する',
+    title: '内申点を計算して持参する',
     body: 'お住まいの都道府県の最新方式で換算内申を計算。実技4教科の倍率が高い地域もあるため、数値で把握しておくと面談での話が具体的になります。',
     href: '/',
     cta: '内申点を計算する',
   },
   {
-    icon: TrendingUp,
-    title: '② 偏差値・評定平均を確認する',
+    title: '偏差値・評定平均を確認する',
     body: '模試の点数から偏差値を、通知表から評定平均を計算。当日点・推薦の判断材料になります。通知表が出る7月・12月の面談前にちょうど更新できます。',
     href: '/hensachi',
     cta: '偏差値を計算する',
   },
   {
-    icon: Target,
-    title: '③ 志望校から逆算して差を出す',
+    title: '志望校から逆算して差を出す',
     body: '志望校の目安から、必要な内申点・当日点を逆算。「あと何点」が一目でわかるので、面談で先生に的確に相談できます。',
     href: '/reverse',
     cta: '志望校から逆算する',
@@ -134,22 +120,19 @@ export default function MendanPage() {
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500 print:hidden">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600 print:hidden">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">三者面談の準備</span>
+            <span className="text-slate-900">三者面談の準備</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white print:hidden">
-              <Users className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">三者面談 準備チェックリスト</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600 print:hidden">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">三者面談 準備チェックリスト</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900 print:hidden">
               三者面談は<strong>限られた時間</strong>です。お子さまの「現在地」を数値で把握し、聞くことを整理しておくだけで、
               貴重な面談を最大限に活かせます。<strong>7月・12月の面談前</strong>に、このページをそのままお使いください。
             </p>
@@ -159,14 +142,11 @@ export default function MendanPage() {
           </header>
 
           {/* タイミングの案内 */}
-          <section className="mb-8 rounded-lg border border-amber-200 bg-amber-50/60 p-5 print:hidden">
-            <div className="mb-2 flex items-center gap-2 font-bold text-amber-800">
-              <CalendarClock className="h-5 w-5" />
-              面談の時期と狙い
-            </div>
-            <ul className="space-y-1.5 text-sm leading-relaxed text-slate-700">
-              <li>・<strong>7月（1学期末）</strong>：1学期の評定が出る時期。夏休みの過ごし方と志望校の方向性を確認。</li>
-              <li>・<strong>12月（2学期末・中3）</strong>：内申が実質確定し、出願校を決める最重要の面談。</li>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-4 print:hidden">
+            <p className="text-sm font-bold text-slate-900">面談の時期と狙い</p>
+            <ul className="mt-2 list-disc space-y-1.5 pl-5 text-base leading-[1.8] text-slate-900">
+              <li><strong>7月（1学期末）</strong>：1学期の評定が出る時期。夏休みの過ごし方と志望校の方向性を確認。</li>
+              <li><strong>12月（2学期末・中3）</strong>：内申が実質確定し、出願校を決める最重要の面談。</li>
             </ul>
           </section>
 
@@ -175,27 +155,29 @@ export default function MendanPage() {
 
           {/* 面談前の準備3ステップ */}
           <section className="mb-10 print:hidden">
-            <h2 className="mb-5 text-xl font-bold text-slate-800">面談前に「数値」を準備する3ステップ</h2>
-            <div className="grid gap-4 md:grid-cols-3">
-              {PREP_STEPS.map((s) => {
-                const Icon = s.icon;
-                return (
-                  <div key={s.title} className="flex flex-col rounded-lg border border-slate-200 bg-white p-5">
-                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
-                      <Icon className="h-5 w-5" />
+            <h2 className="mb-5 text-xl font-bold text-slate-900">面談前に「数値」を準備する3ステップ</h2>
+            <ol className="rounded-lg border border-slate-200 bg-white">
+              {PREP_STEPS.map((s, i) => (
+                <li
+                  key={s.title}
+                  className="flex flex-col gap-3 border-b border-slate-200 p-5 last:border-b-0 md:flex-row md:items-center md:justify-between md:gap-6"
+                >
+                  <div className="flex gap-3">
+                    <span className="w-6 shrink-0 text-base font-bold tabular-nums text-brand-700">{i + 1}.</span>
+                    <div>
+                      <h3 className="text-[17px] font-bold text-slate-900">{s.title}</h3>
+                      <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.body}</p>
                     </div>
-                    <h3 className="mb-1.5 text-sm font-bold text-slate-800">{s.title}</h3>
-                    <p className="mb-4 flex-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
-                    <Link
-                      href={s.href}
-                      className="inline-flex items-center justify-center gap-1 rounded-lg bg-brand-600 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-brand-700"
-                    >
-                      {s.cta}
-                    </Link>
                   </div>
-                );
-              })}
-            </div>
+                  <Link
+                    href={s.href}
+                    className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-5 py-3 font-bold text-brand-700 hover:bg-brand-50 md:w-52 md:shrink-0"
+                  >
+                    {s.cta}
+                  </Link>
+                </li>
+              ))}
+            </ol>
           </section>
 
           {/* 面談で見せる1枚：現在の数値（印刷対象） */}
@@ -203,20 +185,15 @@ export default function MendanPage() {
 
           {/* 印刷できる：先生に聞くことリスト */}
           <section className="mb-10">
-            <div className="mb-4 flex items-center gap-2">
-              <h2 className="flex items-center gap-2 text-xl font-bold text-slate-800">
-                <MessageCircleQuestion className="h-5 w-5 text-brand-600 print:hidden" />
-                先生に聞くことリスト
-              </h2>
-            </div>
-            <div className="rounded-lg border border-slate-200 bg-white p-6 print:border print:shadow-none">
-              <p className="mb-4 text-sm text-slate-500 print:hidden">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">先生に聞くことリスト</h2>
+            <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <p className="mb-4 text-sm leading-[1.8] text-slate-600 print:hidden">
                 印刷して持参すると、聞き忘れを防げます。気になる項目にチェックを入れてお使いください。
               </p>
               <ul className="space-y-3">
                 {QUESTIONS.map((q) => (
-                  <li key={q} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">
-                    <CheckSquare className="mt-0.5 h-5 w-5 shrink-0 text-brand-400" />
+                  <li key={q} className="flex items-start gap-3 text-base leading-[1.8] text-slate-900">
+                    <span aria-hidden="true" className="mt-1.5 h-4 w-4 shrink-0 rounded border border-slate-400 bg-white" />
                     <span>{q}</span>
                   </li>
                 ))}
@@ -226,23 +203,20 @@ export default function MendanPage() {
 
           {/* 保護者が準備すること */}
           <section className="mb-10 print:hidden">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <ClipboardList className="h-5 w-5 text-brand-600" />
-              保護者が面談前に整理しておくこと
-            </h2>
-            <div className="rounded-lg border border-slate-200 bg-white p-6">
-              <ul className="space-y-2.5 text-sm leading-relaxed text-slate-700">
-                <li>・志望校の<strong>費用感</strong>（公立・私立の学費、塾代を含む3年間の総額イメージ）</li>
-                <li>・<strong>通学範囲</strong>（無理なく通える距離・通学時間）</li>
-                <li>・併願（私立）をどこまで受けるか、家庭の方針</li>
-                <li>・お子さまの数値（内申点・偏差値・志望校との差）を本人と共有しておく</li>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">保護者が面談前に整理しておくこと</h2>
+            <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <ul className="list-disc space-y-2 pl-5 text-base leading-[1.8] text-slate-900">
+                <li>志望校の<strong>費用感</strong>（公立・私立の学費、塾代を含む3年間の総額イメージ）</li>
+                <li><strong>通学範囲</strong>（無理なく通える距離・通学時間）</li>
+                <li>併願（私立）をどこまで受けるか、家庭の方針</li>
+                <li>お子さまの数値（内申点・偏差値・志望校との差）を本人と共有しておく</li>
               </ul>
-              <p className="mt-4 text-xs text-slate-500">
+              <p className="mt-4 text-sm leading-[1.8] text-slate-600">
                 費用は無料の資料請求・無料体験で比較しておくと、選択肢を狭めずに判断できます。
               </p>
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-sm leading-[1.8] text-slate-600">
                 英語が不安な場合は、
-                <AffiliateAd placement="mendan" id="moshimo-rewrite" hideLabel linkClassName="font-bold text-brand-600 underline decoration-brand-300 underline-offset-2 hover:text-brand-700" />
+                <AffiliateAd placement="mendan" id="moshimo-rewrite" hideLabel linkClassName="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800" />
                 （PR）で受験英語専門の無料相談もできます。
               </p>
             </div>
@@ -250,17 +224,17 @@ export default function MendanPage() {
 
           {/* FAQ */}
           <section className="mb-10 print:hidden">
-            <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
+            <h2 className="mb-5 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {MENDAN_FAQS.map((faq) => (
                 <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {faq.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{faq.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </details>
               ))}
             </div>

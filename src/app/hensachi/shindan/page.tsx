@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Sparkles } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -95,26 +95,23 @@ export default function HensachiShindanPage() {
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-brand-600">偏差値計算</Link>
+            <Link href="/hensachi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">偏差値診断</span>
+            <span className="text-slate-900">偏差値診断</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
-              <Sparkles className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               偏差値診断【点数不要・中学生向け】
             </h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               点数・平均点が分からなくても大丈夫。<strong>5つの質問</strong>に答えるだけで、
               偏差値の目安・届く高校レベル・次にやるべきことがわかります。
             </p>
@@ -124,9 +121,9 @@ export default function HensachiShindanPage() {
           <ShindanResultFlow />
 
           {/* 学年別で診断する */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">学年別で診断する</h2>
-            <p className="mb-3 text-xs leading-relaxed text-slate-500">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-[17px] font-bold text-slate-900">学年別で診断する</h2>
+            <p className="mb-4 text-sm leading-[1.8] text-slate-600">
               学年ごとに診断結果の使い方（志望校の見通し・内申とのバランス確認など）が変わります。あらかじめ学年を選んだ状態で診断したい場合はこちらから。
             </p>
             <div className="flex flex-wrap gap-2">
@@ -134,7 +131,7 @@ export default function HensachiShindanPage() {
                 <Link
                   key={g.slug}
                   href={`/hensachi/shindan/${g.slug}`}
-                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
+                  className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
                 >
                   {g.label}向け診断
                 </Link>
@@ -143,9 +140,9 @@ export default function HensachiShindanPage() {
           </section>
 
           {/* 目的別で診断する */}
-          <section className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">目的別で診断する</h2>
-            <p className="mb-3 text-xs leading-relaxed text-slate-500">
+          <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-[17px] font-bold text-slate-900">目的別で診断する</h2>
+            <p className="mb-4 text-sm leading-[1.8] text-slate-600">
               「志望校を決めたい」「内申を挽回したい」「塾に通うか迷っている」など、今知りたいことに合わせて診断したい場合はこちらから。
             </p>
             <div className="flex flex-wrap gap-2">
@@ -153,7 +150,7 @@ export default function HensachiShindanPage() {
                 <Link
                   key={p.slug}
                   href={`/hensachi/shindan/mokuteki/${p.slug}`}
-                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
+                  className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
                 >
                   {p.label}
                 </Link>
@@ -168,17 +165,17 @@ export default function HensachiShindanPage() {
 
           {/* FAQ */}
           <section className="mt-10">
-            <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
+            <h2 className="mb-5 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {SHINDAN_FAQS.map((faq) => (
                 <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {faq.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{faq.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </details>
               ))}
             </div>

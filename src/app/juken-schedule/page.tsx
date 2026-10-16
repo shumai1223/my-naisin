@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, CalendarDays, HelpCircle, Target, Sparkles, CalendarPlus } from '@/components/icons';
+import { Home, ChevronRight, CalendarPlus } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -62,20 +62,17 @@ export default function JukenSchedulePage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">高校受験の年間スケジュール</span>
+            <span className="text-slate-900">高校受験の年間スケジュール</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <CalendarDays className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校受験の年間スケジュール（中3）</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">高校受験の年間スケジュール（中3）</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               中3の<strong>4月から3月まで</strong>、いつ何をするかを月別にまとめました。
               内申が決まる時期・三者面談・夏期講習・志望校の絞り込み・出願の流れを、ひと目で把握できます。
             </p>
@@ -83,74 +80,66 @@ export default function JukenSchedulePage() {
 
           {/* 月別スケジュール */}
           <section className="mb-10">
-            <div className="space-y-3">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">月別スケジュール</h2>
+            <ol className="rounded-lg border border-slate-200 bg-white">
               {SCHEDULE.map((m) => (
-                <div key={m.month} className="flex gap-4 rounded-lg border border-slate-200 bg-white p-4">
-                  <div className="flex w-16 shrink-0 flex-col items-center justify-center rounded-lg bg-brand-50 py-2 text-brand-700">
-                    <span className="text-lg font-bold">{m.month}</span>
-                  </div>
+                <li key={m.month} className="flex gap-4 border-b border-slate-200 p-4 last:border-b-0 md:p-5">
+                  <div className="w-14 shrink-0 text-base font-bold tabular-nums text-brand-700">{m.month}</div>
                   <div className="min-w-0">
-                    <div className="flex items-center gap-1.5 text-sm font-bold text-slate-900">
-                      <Sparkles className="h-3.5 w-3.5 text-brand-500" />
-                      {m.phase}
-                    </div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{m.todo}</p>
+                    <h3 className="text-[17px] font-bold text-slate-900">{m.phase}</h3>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{m.todo}</p>
                     {m.link && (
-                      <Link href={m.link.href} className="mt-1.5 inline-flex items-center gap-1 text-xs font-bold text-brand-600 hover:text-brand-700">
+                      <Link href={m.link.href} className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800">
                         {m.link.label}
-                        <ChevronRight className="h-3.5 w-3.5" />
+                        <ChevronRight className="h-4 w-4" />
                       </Link>
                     )}
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
-            <p className="mt-3 text-xs text-slate-500">
+            </ol>
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               ※ 一般的な流れの目安です。私立はおおむね1〜2月、公立は2〜3月に入試が行われますが、具体的な日程・選抜方式は都道府県・学校で異なります。必ず募集要項で確認してください。
             </p>
 
             {/* 名簿の“商品”：月別の準備ToDoをカレンダーに取り込めるICS（公式日程ではなく準備リマインダー）。 */}
-            <div className="mt-5 flex flex-col items-center gap-2 rounded-lg border border-brand-200 bg-brand-50/50 p-5 text-center">
-              <div className="text-sm font-bold text-slate-800">この準備スケジュールをカレンダーに入れておく</div>
-              <p className="text-xs leading-relaxed text-slate-600">
+            <div className="mt-6 flex flex-col items-start gap-3 rounded-lg border border-slate-200 bg-brand-50 p-5">
+              <h3 className="text-[17px] font-bold text-slate-900">この準備スケジュールをカレンダーに入れておく</h3>
+              <p className="text-sm leading-[1.8] text-slate-600">
                 各月の「やること」を終日リマインダーとして、Googleカレンダー・Appleカレンダーに取り込めます（公式の入試日ではなく準備の目安です）。
               </p>
               <JukenIcsButton />
               {/* 購読（自動更新）: webcal:// でカレンダーアプリに登録すると毎年の準備ToDoが届き続ける＝Google非依存の再訪チャネル */}
               <a
                 href="webcal://my-naishin.com/api/calendar"
-                className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-200 bg-white px-5 py-2.5 text-sm font-bold text-brand-700 transition-colors hover:border-brand-300 hover:bg-brand-50"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 font-bold text-brand-700 hover:bg-brand-50"
               >
                 <CalendarPlus className="h-4 w-4" />
                 カレンダーに「購読」（自動更新）
               </a>
-              <p className="text-xs leading-relaxed text-slate-500">
-                購読がうまくいかない場合は、カレンダーの「URLで追加」に <span className="font-mono text-slate-600">https://my-naishin.com/api/calendar</span> を貼り付けてください。
+              <p className="text-sm leading-[1.8] text-slate-600">
+                購読がうまくいかない場合は、カレンダーの「URLで追加」に <span className="break-all font-mono text-slate-900">https://my-naishin.com/api/calendar</span> を貼り付けてください。
               </p>
             </div>
 
             {/* Web Push：出願・通知表のリマインド（カレンダー購読と並ぶGoogle非依存の再訪チャネル） */}
-            <WebPushOptIn className="mt-5" />
+            <WebPushOptIn className="mt-6" />
           </section>
 
           {/* 保護者リード */}
           <ParentLeadCTA placement="parent-lp" className="mb-10" />
 
           {/* 中1・中2の過ごし方 */}
-          <section className="mb-10 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-lg border border-brand-100 bg-brand-50/40 p-5">
-              <div className="mb-2 flex items-center gap-1.5 text-sm font-bold text-brand-900">
-                <Target className="h-4 w-4 text-brand-600" />中1の過ごし方
-              </div>
-              <p className="text-xs leading-relaxed text-slate-700">
+          <section className="mb-10 grid gap-4 lg:grid-cols-2">
+            <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="mb-2 text-xl font-bold text-slate-900">中1の過ごし方</h2>
+              <p className="text-base leading-[1.8] text-slate-900">
                 内申点が中1から対象になる地域では、1年生の成績がそのまま入試に影響します。定期テストと提出物の習慣を早く作るほど後が楽になります。お住まいの地域の対象学年を確認しましょう。
               </p>
             </div>
-            <div className="rounded-lg border border-brand-100 bg-brand-50/40 p-5">
-              <div className="mb-2 flex items-center gap-1.5 text-sm font-bold text-brand-900">
-                <Target className="h-4 w-4 text-brand-600" />中2の過ごし方
-              </div>
-              <p className="text-xs leading-relaxed text-slate-700">
+            <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="mb-2 text-xl font-bold text-slate-900">中2の過ごし方</h2>
+              <p className="text-base leading-[1.8] text-slate-900">
                 中だるみしやすい時期。中2の内申を対象にする地域も多く、ここでの取りこぼしは中3で取り返しにくくなります。苦手教科を放置せず、偏差値で立ち位置を定点観測しておきましょう。
               </p>
             </div>
@@ -167,19 +156,17 @@ export default function JukenSchedulePage() {
 
           {/* FAQ */}
           <section className="mb-10">
-            <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-brand-600" />よくある質問
-            </h2>
+            <h2 className="mb-5 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
                 <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>

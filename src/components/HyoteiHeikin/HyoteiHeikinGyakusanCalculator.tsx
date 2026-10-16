@@ -67,10 +67,10 @@ export function HyoteiHeikinGyakusanCalculator({ onResult }: HyoteiHeikinGyakusa
   }, [plan, currentAverageNum, targetAverageNum, onResult]);
 
   return (
-    <div className="rounded-lg border-2 border-brand-200 bg-white p-5 md:p-6">
-      <div className="grid gap-3 sm:grid-cols-2">
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+      <div className="grid gap-3 sm:grid-cols-2 sm:items-end">
         <label htmlFor="hyotei-gyakusan-current-average" className="block">
-          <span className="mb-1 block text-xs font-bold text-slate-600">現在の評定平均</span>
+          <span className="mb-1 block text-sm font-bold text-slate-900">現在の評定平均</span>
           <input
             id="hyotei-gyakusan-current-average"
             type="number"
@@ -84,11 +84,11 @@ export function HyoteiHeikinGyakusanCalculator({ onResult }: HyoteiHeikinGyakusa
               setCurrentAverage(e.target.value);
             }}
             placeholder="例：4.0"
-            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </label>
         <label htmlFor="hyotei-gyakusan-current-count" className="block">
-          <span className="mb-1 block text-xs font-bold text-slate-600">現在までの評価済み回数（9教科×学期数）</span>
+          <span className="mb-1 block text-sm font-bold text-slate-900">現在までの評価済み回数（9教科×学期数）</span>
           <input
             id="hyotei-gyakusan-current-count"
             type="number"
@@ -100,14 +100,14 @@ export function HyoteiHeikinGyakusanCalculator({ onResult }: HyoteiHeikinGyakusa
               setCurrentCount(e.target.value);
             }}
             placeholder="例：18（9教科×2学期）"
-            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </label>
       </div>
 
-      <div className="mt-5 border-t border-slate-100 pt-5">
+      <div className="mt-5 border-t border-slate-200 pt-5">
         <label htmlFor="hyotei-gyakusan-target" className="block">
-          <span className="mb-1 block text-xs font-bold text-slate-600">目標の評定平均</span>
+          <span className="mb-1 block text-sm font-bold text-slate-900">目標の評定平均</span>
           <input
             id="hyotei-gyakusan-target"
             type="number"
@@ -120,22 +120,23 @@ export function HyoteiHeikinGyakusanCalculator({ onResult }: HyoteiHeikinGyakusa
               onFirstUse();
               setTargetAverage(e.target.value);
             }}
-            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </label>
-        <div className="mt-2 flex flex-wrap gap-1.5">
+        <div className="mt-2 flex flex-wrap gap-2">
           {TARGET_PRESETS.map((preset) => (
             <button
               key={preset}
               type="button"
+              aria-pressed={targetAverage === String(preset)}
               onClick={() => {
                 onFirstUse();
                 setTargetAverage(String(preset));
               }}
-              className={`rounded-full border px-3 py-1 text-xs font-bold transition-colors ${
+              className={`inline-flex h-11 min-w-[44px] items-center justify-center rounded border px-3 text-sm font-bold tabular-nums transition-colors ${
                 targetAverage === String(preset)
-                  ? 'border-brand-500 bg-brand-50 text-brand-700'
-                  : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
+                  ? 'border-brand-700 bg-brand-50 text-brand-700'
+                  : 'border-slate-300 bg-white text-slate-700 hover:bg-brand-50'
               }`}
             >
               {preset.toFixed(1)}
@@ -144,7 +145,7 @@ export function HyoteiHeikinGyakusanCalculator({ onResult }: HyoteiHeikinGyakusa
         </div>
 
         <label htmlFor="hyotei-gyakusan-remaining" className="mt-4 block">
-          <span className="mb-1 block text-xs font-bold text-slate-600">残りの評価回数（出願までにあと何回評価されるか）</span>
+          <span className="mb-1 block text-sm font-bold text-slate-900">残りの評価回数（出願までにあと何回評価されるか）</span>
           <input
             id="hyotei-gyakusan-remaining"
             type="number"
@@ -156,30 +157,30 @@ export function HyoteiHeikinGyakusanCalculator({ onResult }: HyoteiHeikinGyakusa
               setRemainingCount(e.target.value);
             }}
             placeholder="例：9（残り1学期分）"
-            className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </label>
 
         {plan && (
-          <div className="mt-4 rounded-lg border-2 border-brand-200 bg-brand-50 p-5 text-center" role="status" aria-live="polite">
+          <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-5 text-center" role="status" aria-live="polite">
             {plan.alreadyAchieved ? (
-              <div className="text-sm font-bold text-brand-700">
+              <div className="text-base font-bold text-brand-700">
                 現在の評定平均ですでに目標{targetAverage}に届いています
               </div>
             ) : remainingCountNum === 0 ? (
-              <div className="text-sm font-bold text-red-700">残りの評価回数が0のため、これ以上平均は変わりません</div>
+              <div className="text-base font-bold text-red-700">残りの評価回数が0のため、これ以上平均は変わりません</div>
             ) : (
               <>
-                <div className="text-xs font-bold text-slate-600">目標{targetAverage}に必要な、残り{remainingCountNum}回の平均</div>
-                <div className="mt-1 text-4xl font-bold text-brand-700">
+                <div className="text-sm font-bold text-slate-600">目標{targetAverage}に必要な、残り{remainingCountNum}回の平均</div>
+                <div className="mt-1 text-4xl font-bold tabular-nums text-brand-700">
                   {Math.round(plan.requiredAverageForRemaining * 100) / 100}
-                  <span className="ml-1 text-base font-bold text-slate-500">/ 5.0</span>
+                  <span className="ml-1 text-base font-bold text-slate-600">/ 5.0</span>
                 </div>
-                <div className="mt-2 text-sm font-bold text-slate-700">
+                <div className="mt-2 text-sm font-bold tabular-nums text-slate-700">
                   合計であと{plan.requiredTotalForRemaining}点（残り{remainingCountNum}回分）
                 </div>
                 {!plan.achievable && (
-                  <div className="mt-2 text-xs font-bold text-red-600">
+                  <div className="mt-2 text-sm font-bold text-red-700">
                     5段階評価の最大値（オール5）でも届かない差です。目標の見直しや対策の相談も検討してください。
                   </div>
                 )}
@@ -189,7 +190,7 @@ export function HyoteiHeikinGyakusanCalculator({ onResult }: HyoteiHeikinGyakusa
         )}
       </div>
 
-      <p className="mt-3 text-xs leading-relaxed text-slate-400">
+      <p className="mt-3 text-sm leading-[1.8] text-slate-600">
         ※ 「目標平均×（現在+残り回数）－現在の合計」を残り回数で割った逆算式で計算しています。
         推薦・総合型選抜で対象になる評価範囲（学年・学期）は学校・大学によって異なるため、
         現在の評定平均・評価済み回数・残り回数はご自身の状況に合わせて入力してください。

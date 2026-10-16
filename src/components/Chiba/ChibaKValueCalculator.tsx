@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from '@/components/icons';
+import { RotateCcw } from '@/components/icons';
 import { CHIBA_K_PRESETS, computeChibaKValue } from '@/lib/total-score/chiba';
 
 export interface ChibaKValueResult {
@@ -58,26 +58,23 @@ export function ChibaKValueCalculator({ onResult }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-lg border-2 border-brand-200 bg-white">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-brand-100 bg-brand-50 px-6 py-4">
-        <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Calculator className="h-5 w-5 text-brand-600" />
-          千葉県の総合得点（K値）を計算
-        </h2>
+    <div className="rounded-lg border border-slate-200 bg-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 px-5 py-4 md:px-6">
+        <h2 className="text-xl font-bold text-slate-900">千葉県の総合得点（K値）を計算</h2>
         <button
           type="button"
           onClick={reset}
-          className="inline-flex items-center gap-1 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+          className="inline-flex min-h-[44px] items-center gap-1 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
         >
-          <RotateCcw className="h-3.5 w-3.5" />
+          <RotateCcw className="h-4 w-4" />
           リセット
         </button>
       </div>
 
-      <div className="space-y-5 p-6">
+      <div className="space-y-5 p-5 md:p-6">
         <div>
-          <label htmlFor="chiba-hyotei-sum" className="mb-1 block text-sm font-bold text-slate-800">
-            評定合計（135点満点）<span className="ml-2 text-xs font-normal text-slate-500">9教科×5段階×3学年</span>
+          <label htmlFor="chiba-hyotei-sum" className="mb-1 block text-sm font-bold text-slate-900">
+            評定合計（135点満点）<span className="ml-2 text-xs font-normal text-slate-600">9教科×5段階×3学年</span>
           </label>
           <input
             id="chiba-hyotei-sum"
@@ -88,13 +85,13 @@ export function ChibaKValueCalculator({ onResult }: Props) {
             value={hyoteiInput}
             onChange={(e) => setHyoteiInput(e.target.value)}
             placeholder="例：108"
-            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </div>
 
         <div>
-          <label htmlFor="chiba-gakuryoku" className="mb-1 block text-sm font-bold text-slate-800">
-            学力検査点（500点満点）<span className="ml-2 text-xs font-normal text-slate-500">5教科×100点</span>
+          <label htmlFor="chiba-gakuryoku" className="mb-1 block text-sm font-bold text-slate-900">
+            学力検査点（500点満点）<span className="ml-2 text-xs font-normal text-slate-600">5教科×100点</span>
           </label>
           <input
             id="chiba-gakuryoku"
@@ -105,20 +102,23 @@ export function ChibaKValueCalculator({ onResult }: Props) {
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
             placeholder="例：380"
-            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </div>
 
-        <div>
-          <label className="mb-1 block text-sm font-bold text-slate-800">志望校のK値</label>
-          <div className="flex flex-wrap gap-2">
+        <fieldset className="min-w-0">
+          <legend className="mb-1 text-sm font-bold text-slate-900">志望校のK値</legend>
+          <div className="flex flex-wrap items-center gap-2">
             {CHIBA_K_PRESETS.map((p) => (
               <button
                 key={p}
                 type="button"
                 onClick={() => setKValue(String(p))}
-                className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
-                  Number(kValue) === p ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600'
+                aria-pressed={Number(kValue) === p}
+                className={`min-h-[44px] rounded border px-4 text-sm font-bold transition-colors ${
+                  Number(kValue) === p
+                    ? 'border-brand-700 bg-brand-700 text-white'
+                    : 'border-slate-300 bg-white text-slate-900 hover:bg-brand-50'
                 }`}
               >
                 K={p}
@@ -132,15 +132,15 @@ export function ChibaKValueCalculator({ onResult }: Props) {
               max={2}
               value={kValue}
               onChange={(e) => setKValue(e.target.value)}
-              className="h-8 w-20 rounded-full border border-slate-200 px-3 text-xs outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              className="h-11 w-24 rounded border border-slate-300 bg-white px-3 text-base text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-700"
               aria-label="K値を直接入力"
             />
           </div>
-        </div>
+        </fieldset>
 
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="block">
-            <span className="mb-1 block text-xs font-bold text-slate-600">調査書のその他（任意・0〜50）</span>
+            <span className="mb-1 block text-sm font-bold text-slate-900">調査書のその他（任意・0〜50）</span>
             <input
               type="number"
               inputMode="decimal"
@@ -149,11 +149,11 @@ export function ChibaKValueCalculator({ onResult }: Props) {
               value={othersInput}
               onChange={(e) => setOthersInput(e.target.value)}
               placeholder="未入力なら0点"
-              className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+              className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs font-bold text-slate-600">学校設定検査（任意・0〜150）</span>
+            <span className="mb-1 block text-sm font-bold text-slate-900">学校設定検査（任意・0〜150）</span>
             <input
               type="number"
               inputMode="decimal"
@@ -162,30 +162,30 @@ export function ChibaKValueCalculator({ onResult }: Props) {
               value={schoolExamInput}
               onChange={(e) => setSchoolExamInput(e.target.value)}
               placeholder="未入力なら0点"
-              className="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+              className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
             />
           </label>
         </div>
       </div>
 
       {hasInput && (
-        <div className="border-t-2 border-brand-100 bg-brand-50 px-6 py-6 text-center">
-          <div className="mb-1 text-xs font-bold text-slate-600">あなたの総合得点（目安）</div>
-          <div className="text-5xl font-bold text-brand-700">
+        <div className="rounded-b-lg border-t border-slate-200 bg-brand-50 px-5 py-6 text-center md:px-6">
+          <div className="mb-1 text-sm font-bold text-slate-900">あなたの総合得点（目安）</div>
+          <div className="text-4xl font-bold tabular-nums text-slate-900">
             {total}
-            <span className="text-xl font-bold text-slate-400">/{max}</span>
+            <span className="text-xl font-bold text-slate-600">/{max}</span>
           </div>
-          <div className="mx-auto mt-4 max-w-sm rounded-lg border border-brand-100 bg-white p-3 text-left">
-            <div className="mb-2 text-xs font-bold text-slate-700">計算内訳</div>
-            <ul className="space-y-1 text-xs text-slate-600">
+          <div className="mx-auto mt-4 max-w-sm border-t border-slate-200 pt-3 text-left">
+            <div className="mb-2 text-sm font-bold text-slate-900">計算内訳</div>
+            <ul className="space-y-1 text-sm tabular-nums text-slate-900">
               <li>調査書点：評定合計{hyotei} × K{k} ＝ {Math.round(reportScore * 10) / 10}点</li>
               <li>学力検査：{gakuryoku}点</li>
               {othersInput !== '' && <li>調査書のその他：{others}点</li>}
               {schoolExamInput !== '' && <li>学校設定検査：{schoolExam}点</li>}
-              <li className="border-t border-slate-100 pt-1 font-bold">総合得点：{total}点</li>
+              <li className="border-t border-slate-200 pt-2 font-bold">総合得点：{total}点</li>
             </ul>
           </div>
-          <p className="mx-auto mt-3 max-w-sm text-xs leading-relaxed text-slate-400">
+          <p className="mx-auto mt-3 max-w-sm text-left text-sm leading-[1.8] text-slate-600">
             ※ K値・学校設定検査の配点は高校ごとに異なります。満点は入力した項目から概算した目安です。
           </p>
         </div>

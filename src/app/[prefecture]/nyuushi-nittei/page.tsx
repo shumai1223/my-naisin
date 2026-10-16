@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { CalendarDays, ChevronRight, Home, AlertCircle, ExternalLink, Info } from '@/components/icons';
+import { ChevronRight, Home, AlertCircle, ExternalLink } from '@/components/icons';
 
 import { EXAM_SCHEDULE_BY_PREFECTURE, EXAM_SCHEDULE_PREFECTURE_CODES } from '@/data/exam-schedules';
 import { PREFECTURES } from '@/lib/prefectures';
@@ -48,6 +48,7 @@ export default async function PrefectureNyuushiNitteiPage({ params }: PageProps)
 
   const url = `${BASE}/${pref.code}/nyuushi-nittei`;
   const offer = selectLeadOffer({ prefectureCode: pref.code, placement: 'prefecture' });
+  const latestYear = file.years[file.years.length - 1];
 
   return (
     <>
@@ -76,38 +77,53 @@ export default async function PrefectureNyuushiNitteiPage({ params }: PageProps)
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href={`/${pref.code}`} className="hover:text-brand-600">
+            <Link href={`/${pref.code}`} className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">
               {pref.name}
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">入試日程</span>
+            <span className="text-slate-900">入試日程</span>
           </nav>
 
-          {/* Header */}
-          <header className="mb-6 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-600 text-white">
-              <CalendarDays className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          {/* 頭: h1 → メタ行（年度・出典・確認日）→ 結論の段落 */}
+          <header>
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               {pref.name}公立高校 入試日程
             </h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+            <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-600">
+              <span>{latestYear.fiscalYear} 入学者選抜</span>
+              <span>
+                出典：
+                <a
+                  href={latestYear.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                >
+                  {latestYear.docTitle}
+                </a>
+              </span>
+              <span>確認日 {latestYear.fetchedAt}</span>
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               {pref.name}教育委員会が公表する公立高等学校入学者選抜の日程を、そのまま掲載しています。
             </p>
           </header>
 
           {/* ファーストビュー内の注記（公表資料のとおり・非公式の参考情報） */}
-          <div className="mb-8 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-4">
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-            <p className="text-xs leading-relaxed text-amber-800">
+          <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-900">
+            <p className="flex items-center gap-1.5 text-sm font-bold">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-sm leading-[1.8]">
               このページは{pref.name}教育委員会が公表した資料をもとにした<strong>非公式の参考情報</strong>です。項目名・日付は公表資料の記載をそのまま転記しており、独自の解釈・言い換え・推定は一切行っていません。学校ごとに個別の日程が定められる場合があります。出願前に必ず
-              <a href={file.years[file.years.length - 1].sourceUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-amber-900 underline">
+              <a href={latestYear.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-bold underline underline-offset-2">
                 {pref.name}教育委員会の公式発表
               </a>
               でご確認ください。
@@ -116,51 +132,48 @@ export default async function PrefectureNyuushiNitteiPage({ params }: PageProps)
 
           {/* 年度ごとの日程 */}
           {file.years.map((year) => (
-            <section key={year.fiscalYear} className="mb-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <CalendarDays className="h-5 w-5 text-brand-500" />
+            <section key={year.fiscalYear} className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="mb-2 text-xl font-bold text-slate-900">
                 {year.fiscalYear} 入学者選抜日程
               </h2>
-              <ol className="space-y-3">
+              <ol className="divide-y divide-slate-200">
                 {year.events.map((event, i) => (
-                  <li key={`${event.label}-${i}`} className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 p-3">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-600 text-xs font-bold text-white">
-                      {i + 1}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="font-bold text-slate-800">{event.label}</div>
-                      <div className="mt-0.5 text-sm text-slate-600">
-                        {event.startDate}
-                        {event.endDate && event.endDate !== event.startDate ? `〜${event.endDate}` : ''}
-                        {event.note ? <span className="ml-2 text-xs text-slate-400">（{event.note}）</span> : null}
-                      </div>
+                  <li
+                    key={`${event.label}-${i}`}
+                    className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                  >
+                    <div className="font-bold text-slate-900">{event.label}</div>
+                    <div className="tabular-nums text-slate-900 sm:text-right">
+                      {event.startDate}
+                      {event.endDate && event.endDate !== event.startDate ? `〜${event.endDate}` : ''}
+                      {event.note ? <span className="ml-2 text-xs text-slate-600">（{event.note}）</span> : null}
                     </div>
                   </li>
                 ))}
               </ol>
-              <p className="mt-4 text-xs leading-relaxed text-slate-400">
+              <p className="mt-4 text-xs leading-[1.8] text-slate-600">
                 出典: {year.docTitle}（確認日: {year.fetchedAt}）
               </p>
             </section>
           ))}
 
           {/* ICSカレンダー追加（T-Y12段階3・堀A） */}
-          <div className="mb-8 flex justify-center">
+          <div className="mt-8">
             <ExamScheduleIcsLink prefectureCode={pref.code} prefectureName={pref.name} />
           </div>
 
           {/* 全国共通の目安（/juken-schedule）への内部リンク */}
-          <div className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+          <p className="mt-8 text-sm leading-[1.8] text-slate-600">
             全国的な入試シーズンの流れは
-            <Link href="/juken-schedule" className="mx-1 font-bold text-brand-600 underline">
+            <Link href="/juken-schedule" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
               受験スケジュール（全国共通の目安）
             </Link>
             もあわせてご覧ください。
-          </div>
+          </p>
 
           {/* 保護者向けリード */}
           <ParentLeadCTA
-            className="mt-2"
+            className="mt-10"
             placement="prefecture"
             prefectureCode={pref.code}
             heading={offer.heading}
@@ -171,18 +184,16 @@ export default async function PrefectureNyuushiNitteiPage({ params }: PageProps)
           />
 
           {/* 出典（詳細） */}
-          <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
-            <div className="flex items-start gap-2">
-              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-              <p className="text-xs leading-relaxed text-amber-800">
-                本ページの日程は{pref.name}教育委員会が公表した資料に基づく参考情報です。学校・課程（全日制／定時制／通信制）により日程が異なる場合があります。最新の情報は
-                <a href={file.years[file.years.length - 1].sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 font-bold text-amber-900 underline">
-                  {pref.name}教育委員会の公式情報
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-                でご確認ください（確認日：{file.years[file.years.length - 1].fetchedAt}）。
-              </p>
-            </div>
+          <div className="mt-10 rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <p className="text-sm font-bold text-slate-900">出典</p>
+            <p className="mt-1 text-sm leading-[1.8] text-slate-900">
+              本ページの日程は{pref.name}教育委員会が公表した資料に基づく参考情報です。学校・課程（全日制／定時制／通信制）により日程が異なる場合があります。最新の情報は
+              <a href={latestYear.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                {pref.name}教育委員会の公式情報
+                <ExternalLink className="h-4 w-4" />
+              </a>
+              でご確認ください（確認日：{latestYear.fetchedAt}）。
+            </p>
           </div>
         </div>
       </div>

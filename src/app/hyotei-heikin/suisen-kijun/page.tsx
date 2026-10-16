@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Award, Calculator, TrendingUp, User, ShieldCheck, Calendar, FileCheck, AlertTriangle, GraduationCap, Undo2 } from '@/components/icons';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -79,78 +79,66 @@ export default function HyoteiSuisenKijunPage() {
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav aria-label="パンくずリスト" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-brand-600">評定平均 計算</Link>
+            <Link href="/hyotei-heikin" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">評定平均 計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">推薦の評定平均 基準</span>
+            <span className="text-slate-900">推薦の評定平均 基準</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <Award className="h-8 w-8" />
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">推薦に必要な評定平均は？早見表</h1>
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600">
+              <span>最終更新：2026年6月12日</span>
+              <span>出典：各校募集要項の一般的な区分</span>
             </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">推薦に必要な評定平均は？早見表</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               高校受験の推薦・私立併願優遇、大学の指定校推薦・総合型選抜で必要な<strong>評定平均の目安</strong>を早見表にまとめました。
-              いまの評定平均は<Link href="/hyotei-heikin" className="font-bold text-brand-600 hover:underline">計算ツール</Link>で30秒で確認できます。
+              いまの評定平均は<Link href="/hyotei-heikin" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">計算ツール</Link>で30秒で確認できます。
             </p>
           </header>
 
           {/* E-E-A-T カード */}
-          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
-            <div className="flex items-start gap-4">
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
-                <User className="h-6 w-6" />
-              </div>
-              <div className="flex-1">
-                <div className="mb-1 flex flex-wrap items-center gap-2">
-                  <div className="text-sm font-bold text-slate-800">監修・運営：ないしんパンダ</div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2 py-0.5 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
-                    <ShieldCheck className="h-3 w-3" />
-                    2026年度受験生
-                  </span>
-                </div>
-                <p className="text-xs leading-relaxed text-slate-600">
-                  掲載の基準は<strong>一般的な目安バンド</strong>です。特定校のボーダーは扱いません。実際の出願基準は必ず各校の最新募集要項で確認してください。
-                </p>
-                <div className="mt-2 flex flex-wrap gap-3 text-xs text-slate-500">
-                  <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />最終更新：2026年6月12日</span>
-                  <span className="flex items-center gap-1"><FileCheck className="h-3 w-3" />出典：各校募集要項の一般的な区分</span>
-                </div>
-              </div>
+          <div className="rounded-lg border border-slate-200 bg-brand-50 p-4 md:p-5">
+            <div className="mb-1 flex flex-wrap items-center gap-2">
+              <div className="font-bold text-slate-900">監修・運営：ないしんパンダ</div>
+              <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
+                2026年度受験生
+              </span>
             </div>
+            <p className="text-base leading-[1.8] text-slate-900">
+              掲載の基準は<strong>一般的な目安バンド</strong>です。特定校のボーダーは扱いません。実際の出願基準は必ず各校の最新募集要項で確認してください。
+            </p>
           </div>
 
           {/* 高校推薦の早見表 */}
-          <section id="hs-table" className="scroll-mt-20 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-2 flex items-center gap-2 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
-              <Award className="h-5 w-5 text-brand-500" />
+          <section id="hs-table" className="mt-10 scroll-mt-20 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold leading-snug text-slate-900">
               高校受験｜推薦・併願優遇の評定平均 目安
             </h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               公立高校の推薦入試では「評定平均◯以上」が出願基準として示されることが多く、私立の併願優遇でも評定平均が基準になります。一般的な目安は次のとおりです。
             </p>
             <div className="overflow-x-auto">
-              <table className="min-w-full text-xs md:text-sm">
+              <table className="min-w-full text-sm md:text-base">
                 <thead>
-                  <tr className="bg-brand-600 text-white">
-                    <th className="border border-brand-400 px-3 py-2 text-left font-bold">進路の目安</th>
-                    <th className="border border-brand-400 px-3 py-2 text-center font-bold whitespace-nowrap">評定平均</th>
-                    <th className="border border-brand-400 px-3 py-2 text-left font-bold">ポイント</th>
+                  <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                    <th className="px-3 py-2 font-normal">進路の目安</th>
+                    <th className="whitespace-nowrap px-3 py-2 text-center font-normal">評定平均</th>
+                    <th className="px-3 py-2 font-normal">ポイント</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-slate-900">
                   {HS_SUISEN_BANDS.map((r) => (
-                    <tr key={r.tier} className="odd:bg-white even:bg-slate-50">
-                      <td className="border border-slate-200 px-3 py-2 font-bold text-slate-800">{r.tier}</td>
-                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-brand-700 whitespace-nowrap">{r.band}</td>
-                      <td className="border border-slate-200 px-3 py-2 text-slate-600">{r.note}</td>
+                    <tr key={r.tier} className="border-b border-slate-200">
+                      <td className="px-3 py-2 font-bold">{r.tier}</td>
+                      <td className="whitespace-nowrap px-3 py-2 text-center font-bold tabular-nums text-brand-700">{r.band}</td>
+                      <td className="px-3 py-2">{r.note}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -159,29 +147,28 @@ export default function HyoteiSuisenKijunPage() {
           </section>
 
           {/* 大学推薦の早見表 */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-2 flex items-center gap-2 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
-              <GraduationCap className="h-5 w-5 text-brand-500" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold leading-snug text-slate-900">
               大学受験｜指定校推薦・総合型選抜の評定平均 目安
             </h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               大学受験で使う評定平均（学習成績の状況）は、<strong>高1〜高3前期の全科目</strong>を平均します。高1の成績から対象になるのがポイントです。
             </p>
             <div className="overflow-x-auto">
-              <table className="min-w-full text-xs md:text-sm">
+              <table className="min-w-full text-sm md:text-base">
                 <thead>
-                  <tr className="bg-brand-600 text-white">
-                    <th className="border border-brand-400 px-3 py-2 text-left font-bold">入試区分</th>
-                    <th className="border border-brand-400 px-3 py-2 text-center font-bold whitespace-nowrap">評定平均</th>
-                    <th className="border border-brand-400 px-3 py-2 text-left font-bold">ポイント</th>
+                  <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                    <th className="px-3 py-2 font-normal">入試区分</th>
+                    <th className="whitespace-nowrap px-3 py-2 text-center font-normal">評定平均</th>
+                    <th className="px-3 py-2 font-normal">ポイント</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-slate-900">
                   {UNIV_SUISEN_BANDS.map((r) => (
-                    <tr key={r.tier} className="odd:bg-white even:bg-slate-50">
-                      <td className="border border-slate-200 px-3 py-2 font-bold text-slate-800">{r.tier}</td>
-                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-brand-700 whitespace-nowrap">{r.band}</td>
-                      <td className="border border-slate-200 px-3 py-2 text-slate-600">{r.note}</td>
+                    <tr key={r.tier} className="border-b border-slate-200">
+                      <td className="px-3 py-2 font-bold">{r.tier}</td>
+                      <td className="whitespace-nowrap px-3 py-2 text-center font-bold tabular-nums text-brand-700">{r.band}</td>
+                      <td className="px-3 py-2">{r.note}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -190,12 +177,11 @@ export default function HyoteiSuisenKijunPage() {
           </section>
 
           {/* 大学進学の橋渡し（姉妹サイト My Shingaku へ） */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50/50 p-6">
-            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-slate-900">
-              <GraduationCap className="h-5 w-5 text-slate-600" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold leading-snug text-slate-900">
               大学受験の指定校推薦・総合型選抜を詳しく調べるなら
             </h2>
-            <p className="text-sm leading-relaxed text-slate-700">
+            <p className="text-base leading-[1.8] text-slate-900">
               指定校推薦・総合型選抜の仕組みや、大学の学費・奨学金の目安まで詳しく知りたい方は、
               大学受験に特化した姉妹サイト「My Shingaku」もあわせてご覧ください。
             </p>
@@ -203,7 +189,7 @@ export default function HyoteiSuisenKijunPage() {
               href="https://my-shingaku.com/gakuhi"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-slate-800"
+              className="mt-2 inline-flex min-h-[44px] items-center gap-1.5 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
               大学進学の費用を詳しく見る（姉妹サイト My Shingaku）
               <ChevronRight className="h-4 w-4" />
@@ -211,37 +197,36 @@ export default function HyoteiSuisenKijunPage() {
           </section>
 
           {/* 注意 */}
-          <section className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-5">
+          <section className="mt-10 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
+              <AlertTriangle className="mt-1 h-5 w-5 shrink-0 text-amber-900" />
               <div>
-                <h3 className="text-sm font-bold text-amber-900">早見表を使うときの注意</h3>
-                <ul className="mt-2 space-y-1 text-xs text-amber-800">
-                  <li>• 数値は一般的な目安です。実際の出願基準は学校・コース・年度で変わるため、必ず最新の募集要項で確認してください。</li>
-                  <li>• 評定平均の対象学年・対象教科（9教科か主要5教科か）は学校により異なります。</li>
-                  <li>• 推薦は「出願できるか」の基準。合否は面接・小論文・調査書全体で総合的に判断されます。</li>
+                <h2 className="text-[17px] font-bold text-amber-900">早見表を使うときの注意</h2>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-base leading-[1.8] text-amber-900">
+                  <li>数値は一般的な目安です。実際の出願基準は学校・コース・年度で変わるため、必ず最新の募集要項で確認してください。</li>
+                  <li>評定平均の対象学年・対象教科（9教科か主要5教科か）は学校により異なります。</li>
+                  <li>推薦は「出願できるか」の基準。合否は面接・小論文・調査書全体で総合的に判断されます。</li>
                 </ul>
               </div>
             </div>
           </section>
 
           {/* 出し方・上げ方クイック */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <TrendingUp className="h-5 w-5 text-brand-500" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold leading-snug text-slate-900">
               評定平均の出し方・上げ方
             </h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-lg border border-slate-100 bg-slate-50 p-4">
-                <h3 className="mb-1 text-sm font-bold text-slate-800">出し方（計算方法）</h3>
-                <p className="text-xs leading-relaxed text-slate-600">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div>
+                <h3 className="mb-1 text-[17px] font-bold text-slate-900">出し方（計算方法）</h3>
+                <p className="text-base leading-[1.8] text-slate-900">
                   評定平均＝<strong>9教科の評定の合計 ÷ 9</strong>。たとえば合計38なら 38÷9＝約4.2。素内申（合計）と評定平均（1教科あたり）は同じデータの別表現です。
-                  <Link href="/hyotei-heikin" className="ml-1 font-bold text-brand-600 hover:underline">計算ツールで自動算出 →</Link>
+                  <Link href="/hyotei-heikin" className="ml-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">計算ツールで自動算出 →</Link>
                 </p>
               </div>
-              <div className="rounded-lg border border-slate-100 bg-slate-50 p-4">
-                <h3 className="mb-1 text-sm font-bold text-slate-800">上げ方（5つの基本）</h3>
-                <ul className="space-y-0.5 text-xs leading-relaxed text-slate-600">
+              <div>
+                <h3 className="mb-1 text-[17px] font-bold text-slate-900">上げ方（5つの基本）</h3>
+                <ul className="space-y-0.5 text-base leading-[1.8] text-slate-900">
                   <li>① 提出物を期限内＋丁寧に</li>
                   <li>② 授業の発言・振り返りで主体性評価UP</li>
                   <li>③ 定期テストで平均点+10点を安定</li>
@@ -253,7 +238,7 @@ export default function HyoteiSuisenKijunPage() {
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA
               placement="hyotei-heikin"
               heading="推薦の評定基準に届く？保護者の方へ"
@@ -265,40 +250,40 @@ export default function HyoteiSuisenKijunPage() {
           </div>
 
           {/* 関連ツール */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">次の一手・関連ツール</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700"><Calculator className="mr-2 inline h-4 w-4 text-brand-500" />評定平均を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold leading-snug text-slate-900">次の一手・関連ツール</h2>
+            <div className="grid gap-x-6 sm:grid-cols-2">
+              <Link href="/hyotei-heikin" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
+                評定平均を計算する
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hyotei-heikin/gyakusan" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700"><Undo2 className="mr-2 inline h-4 w-4 text-brand-500" />残りで必要な平均を逆算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/hyotei-heikin/gyakusan" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
+                残りで必要な平均を逆算する
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">内申点を計算する（47都道府県）</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
+                内申点を計算する（47都道府県）
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hensachi/shiboukou" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">偏差値から行ける高校を見る</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/hensachi/shiboukou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
+                偏差値から行ける高校を見る
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/blog/parent-hyotei-heikin-suisen-guide" className="flex items-center justify-between rounded-lg bg-white p-4 transition-shadow">
-                <span className="text-sm text-slate-700">保護者向け・推薦と評定平均の完全ガイド</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/blog/parent-hyotei-heikin-suisen-guide" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
+                保護者向け・推薦と評定平均の完全ガイド
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold leading-snug text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, AlertTriangle, ChevronRightSquare, ShieldCheck, XCircle, CheckCircle2 } from '@/components/icons';
+import { Home, ChevronRight, XCircle, CheckCircle2 } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -119,67 +119,71 @@ export default function YokuaruMachigaiPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-brand-600">評定平均計算</Link>
+            <Link href="/hyotei-heikin" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">評定平均計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-brand-600">学習成績の状況</Link>
+            <Link href="/hyotei-heikin/gakushu-seiseki" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">学習成績の状況</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">よくある3つの誤り</span>
+            <span className="text-slate-900">よくある3つの誤り</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <AlertTriangle className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               学習成績の状況｜よくある3つの誤り
             </h1>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              同じ評定データでも、計算方法を間違えると<strong className="text-brand-700">違う数値</strong>になります。
+            <p className="mt-3 text-sm text-slate-600">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              >
+                原文PDF
+              </a>
+              ）
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              同じ評定データでも、計算方法を間違えると<strong>違う数値</strong>になります。
               実際に数字を動かして、正しい方法との差を検証します。
             </p>
           </header>
 
-          <div className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
-            <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <p className="text-xs leading-relaxed text-slate-600">
-                以下の3つの検証で使う具体例は、文部科学省の通知に定められた<strong>計算ルール</strong>（単位数不使用・全評定の単純平均・3か年間対象）
-                を正確に反映した、当サイトが作成したわかりやすい例です。通知自身が示す公式計算例（理科3.66→3.7・全体120÷31=3.87→3.9）は
-                <Link href="/hyotei-heikin/gakushu-seiseki" className="font-bold text-brand-700 underline">学習成績の状況 計算ツール</Link>
-                のページで確認できます。
-              </p>
-            </div>
+          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
+            <p className="text-sm leading-[1.8] text-slate-600">
+              以下の3つの検証で使う具体例は、文部科学省の通知に定められた<strong>計算ルール</strong>（単位数不使用・全評定の単純平均・3か年間対象）
+              を正確に反映した、当サイトが作成したわかりやすい例です。通知自身が示す公式計算例（理科3.66→3.7・全体120÷31=3.87→3.9）は
+              <Link href="/hyotei-heikin/gakushu-seiseki" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">学習成績の状況 計算ツール</Link>
+              のページで確認できます。
+            </p>
           </div>
 
           <div className="space-y-6">
             {ERROR_CASES.map((c) => (
-              <section key={c.title} className="rounded-lg border-2 border-slate-200 bg-white p-6">
-                <h2 className="mb-1 text-lg font-bold text-slate-800">{c.title}</h2>
-                <div className="mb-3 text-xs font-bold text-brand-700">{c.reasonTitle}</div>
-                <p className="mb-4 text-sm leading-relaxed text-slate-600">{c.reason}</p>
-                <div className="mb-3 rounded-lg bg-slate-50 px-3 py-2 text-xs font-mono text-slate-600">{c.data}</div>
+              <section key={c.title} className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+                <h2 className="mb-1 text-xl font-bold text-slate-900">{c.title}</h2>
+                <div className="mb-3 text-sm font-bold text-brand-700">{c.reasonTitle}</div>
+                <p className="mb-3 text-base leading-[1.8] text-slate-900">{c.reason}</p>
+                <p className="mb-4 text-sm leading-[1.8] text-slate-600">{c.data}</p>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-lg border-2 border-brand-300 bg-brand-50 p-4">
-                    <div className="mb-1 flex items-center gap-1.5 text-xs font-bold text-brand-800">
-                      <CheckCircle2 className="h-4 w-4" />
+                  <div className="rounded-lg border border-slate-200 bg-brand-50 p-4">
+                    <div className="mb-1 flex items-start gap-1.5 text-sm font-bold text-brand-800">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
                       {c.correctLabel}
                     </div>
-                    <div className="font-mono text-sm font-bold text-brand-900">{c.correctValue}</div>
+                    <div className="text-base font-bold tabular-nums text-slate-900">{c.correctValue}</div>
                   </div>
-                  <div className="rounded-lg border-2 border-red-200 bg-red-50 p-4">
-                    <div className="mb-1 flex items-center gap-1.5 text-xs font-bold text-red-700">
-                      <XCircle className="h-4 w-4" />
+                  <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+                    <div className="mb-1 flex items-start gap-1.5 text-sm font-bold text-red-800">
+                      <XCircle className="mt-0.5 h-4 w-4 shrink-0" />
                       {c.wrongLabel}
                     </div>
-                    <div className="font-mono text-sm font-bold text-red-800">{c.wrongValue}</div>
+                    <div className="text-base font-bold tabular-nums text-red-800">{c.wrongValue}</div>
                   </div>
                 </div>
               </section>
@@ -187,36 +191,38 @@ export default function YokuaruMachigaiPage() {
           </div>
 
           {/* 原文の定義をそのまま確認する */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               定義を原文で確認する
             </h2>
-            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+            <p className="mb-3 text-base leading-[1.8] text-slate-900">
               上の3つの誤りが起きやすい理由の1つは、文部科学省の通知が示す公式の計算例が
               「（国語4+3）＋（地歴5+4+4+4）＋・・・」のように途中を省略した略式表記になっており、
               定義そのものの一文を読み飛ばしてしまいやすいことです。定義の条文自体は次のとおりです。
             </p>
-            <blockquote className="mb-3 border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="mb-3 rounded-lg border border-slate-200 bg-brand-50 p-4 text-base leading-[1.8] text-slate-900">
+              <span className="mb-1 block font-bold">原文</span>
               「各教科の学習成績の状況は、指導要録に基づき、各教科ごとに各科目の評定の合計数を各教科の評定数で
               除した数値（小数点以下第2位を四捨五入）を記入すること。」
             </blockquote>
-            <blockquote className="border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="rounded-lg border border-slate-200 bg-brand-50 p-4 text-base leading-[1.8] text-slate-900">
+              <span className="mb-1 block font-bold">原文</span>
               「全体の学習成績の状況は、指導要録に基づき、すべての教科・科目の評定の合計数をすべての評定数で
               除した数値（小数点以下第2位を四捨五入）を記入すること。」
             </blockquote>
-            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
               調査書記入上の注意事項等について8(2)・8(4)
               <a
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-brand-700 underline"
+                className="ml-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
               >
                 原文PDF
               </a>
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
               2つの定義に共通するのは「合計数を評定数（科目数）で除する」という単純平均であり、単位数・重み・
               教科という中間段階を一切経由しない点です。「教科ごとの学習成績の状況」と「全体の学習成績の状況」は
               別々に、それぞれ指導要録の評定から直接計算する独立した値であることが、条文からも読み取れます。
@@ -224,61 +230,69 @@ export default function YokuaruMachigaiPage() {
           </section>
 
           {/* T-N5第3ラウンド: 留学・IBという「計算に含める/含めない」の境界ケース */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               留学・国際バカロレアは含める？含めない？
             </h2>
-            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+            <p className="mb-3 text-base leading-[1.8] text-slate-900">
               「3つの誤り」以外にも、通知には計算対象の範囲そのものを左右する2つの規定があります。
               単位数の重み付けや教科平均の平均と違い、こちらは「この単位・評定を計算に入れるかどうか」の
               境界を定めたものです。
             </p>
-            <h3 className="mb-2 text-sm font-bold text-slate-800">留学中に修得した単位は算入しない</h3>
-            <blockquote className="mb-3 border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <h3 className="mb-2 text-[17px] font-bold text-slate-900">留学中に修得した単位は算入しない</h3>
+            <blockquote className="mb-3 rounded-lg border border-slate-200 bg-brand-50 p-4 text-base leading-[1.8] text-slate-900">
+              <span className="mb-1 block font-bold">原文</span>
               「「各教科の学習成績の状況」及び「全体の学習成績の状況」の欄については、次のように記入すること。
               なお、留学に係る修得単位については、算入する必要がない。」
             </blockquote>
-            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               留学先の高等学校で修得した単位の評定は、学習成績の状況の計算そのものには含めなくてよいと
               定められています（留学の記録自体は別欄に記載されます）。
             </p>
-            <h3 className="mb-2 text-sm font-bold text-slate-800">国際バカロレア（IB）の科目は含める</h3>
-            <blockquote className="mb-3 border-l-4 border-brand-400 bg-brand-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <h3 className="mb-2 text-[17px] font-bold text-slate-900">国際バカロレア（IB）の科目は含める</h3>
+            <blockquote className="mb-3 rounded-lg border border-slate-200 bg-brand-50 p-4 text-base leading-[1.8] text-slate-900">
+              <span className="mb-1 block font-bold">原文</span>
               「国際バカロレア・ディプロマ・プログラムの科目に係る調査書の扱いについては、国際バカロレア・
               ディプロマ・プログラムの科目等の履修及び単位の修得をもって高等学校学習指導要領の科目の履修
               及び単位の修得とみなしている場合又は代替している場合についても、それらに係る学校設定科目等
               の評定を含めて学習成績の状況を算出すること（事務連絡参照）。」
             </blockquote>
-            <p className="text-sm leading-relaxed text-slate-700">
+            <p className="text-base leading-[1.8] text-slate-900">
               留学単位とは逆に、IBディプロマ・プログラムの科目が高等学校の科目の履修・単位修得とみなされて
               いる場合は、その学校設定科目等の評定を学習成績の状況の計算に含めることが明記されています。
             </p>
-            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
               調査書記入上の注意事項等について8柱書・8(3)
               <a
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-brand-700 underline"
+                className="ml-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
               >
                 原文PDF
               </a>
             </p>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">
               あわせて確認したいツール
             </h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700">
+            <div className="grid gap-x-6 sm:grid-cols-2">
+              <Link
+                href="/hyotei-heikin/gakushu-seiseki"
+                className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700"
+              >
                 学習成績の状況 計算ツール
-                <ChevronRightSquare className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700">
+              <Link
+                href="/hyotei-heikin/gakushu-seiseki/chousasho"
+                className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700"
+              >
                 調査書シミュレーター
-                <ChevronRightSquare className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>

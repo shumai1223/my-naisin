@@ -28,7 +28,7 @@ export function HyoteiResultActions({ value }: { value: number | null }) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => track('line_friend_click', { source: 'hyotei', placement: 'hyotei-result' })}
-          className="flex items-center justify-center gap-2 rounded-lg bg-[#06C755] px-5 py-3.5 text-center text-sm font-bold text-white transition-all active:scale-[0.99]"
+          className="flex items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-center text-base font-bold text-white transition-colors hover:bg-brand-800"
         >
           <MessageCircle className="h-5 w-5 shrink-0" />
           {/* 「無料相談」は1:1返信体制が無く履行できない約束のため、配信ベースの文言に統一(2026-07-15) */}
@@ -39,7 +39,7 @@ export function HyoteiResultActions({ value }: { value: number | null }) {
         <Link
           href="/hyotei-heikin/suisen-kijun"
           onClick={() => track('click', { source: 'hyotei', placement: 'hyotei-result', to: 'suisen-kijun' })}
-          className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-200 bg-white px-4 py-2.5 text-sm font-bold text-brand-700 transition-all hover:border-brand-400 hover:bg-brand-50"
+          className="inline-flex items-center justify-center gap-2 rounded border border-brand-700 bg-white px-4 py-3 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
         >
           <Award className="h-4 w-4" />
           推薦・併願優遇の評定基準を見る
@@ -47,7 +47,7 @@ export function HyoteiResultActions({ value }: { value: number | null }) {
         <button
           type="button"
           onClick={scrollToSave}
-          className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-200 bg-white px-4 py-2.5 text-sm font-bold text-brand-700 transition-all hover:border-brand-400 hover:bg-brand-50"
+          className="inline-flex items-center justify-center gap-2 rounded border border-brand-700 bg-white px-4 py-3 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
         >
           <Bookmark className="h-4 w-4" />
           結果を保存・記録する

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Target, Search, MessageCircle, ChevronRight } from '@/components/icons';
+import { Target, Search, MessageCircle } from '@/components/icons';
 
 import { lineAddUrl } from '@/lib/line';
 import type { SchoolPageCta } from '@/lib/school-page-clicks-db';
@@ -41,31 +41,27 @@ function reportClick(prefectureCode: string, schoolCode: string, cta: SchoolPage
 
 export function SchoolPageConvertCTA({ schoolName, prefectureCode, schoolCode, className = '' }: SchoolPageConvertCTAProps) {
   return (
-    <section className={`rounded-lg border border-brand-200 bg-brand-50/60 p-6 ${className}`}>
-      <h2 className="mb-1 flex items-center gap-2 text-lg font-bold text-slate-800">
-        <Target className="h-5 w-5 shrink-0 text-brand-600" />
-        {schoolName}を目指すなら
-      </h2>
-      <p className="mb-4 text-sm leading-relaxed text-slate-600">
+    <section className={`rounded-lg border border-slate-200 bg-white p-5 ${className}`}>
+      <h2 className="text-xl font-bold text-slate-900">{schoolName}を目指すなら</h2>
+      <p className="mt-2 text-base leading-[1.8] text-slate-900">
         今の内申点で足りているか、県の配点比率から必要な当日点を逆算できます。無料体験のある塾を条件付きで探すこともできます。
       </p>
-      <div className="flex flex-col gap-2.5 sm:flex-row">
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <Link
           href={`/reverse?pref=${prefectureCode}`}
           onClick={() => reportClick(prefectureCode, schoolCode, 'reverse')}
-          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
+          className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800"
         >
-          <Target className="h-4 w-4 shrink-0" />
+          <Target className="h-5 w-5 shrink-0" />
           必要な当日点を逆算する
         </Link>
         <Link
           href="/juku-shindan"
           onClick={() => reportClick(prefectureCode, schoolCode, 'juku-shindan')}
-          className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-brand-300 bg-white px-4 py-3 text-sm font-bold text-brand-700 transition-all hover:bg-brand-50"
+          className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50"
         >
-          <Search className="h-4 w-4 shrink-0" />
+          <Search className="h-5 w-5 shrink-0" />
           条件に合う塾を無料診断
-          <ChevronRight className="h-3.5 w-3.5 shrink-0" />
         </Link>
       </div>
       <a
@@ -73,9 +69,9 @@ export function SchoolPageConvertCTA({ schoolName, prefectureCode, schoolCode, c
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => reportClick(prefectureCode, schoolCode, 'line')}
-        className="mt-2.5 flex items-center justify-center gap-2 rounded-lg bg-[#06C755] px-4 py-2.5 text-sm font-bold text-white transition-all"
+        className="mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50"
       >
-        <MessageCircle className="h-4 w-4 shrink-0" />
+        <MessageCircle className="h-5 w-5 shrink-0" />
         受験情報をLINEで受け取る
       </a>
     </section>

@@ -2,17 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import {
-  GraduationCap,
-  MapPin,
-  BarChart3,
-  BookOpen,
-  HelpCircle,
-  Search,
-  ChevronRight,
-  Check,
-  Users,
-} from '@/components/icons';
+import { Search, ChevronRight } from '@/components/icons';
 
 import { PREFECTURES } from '@/lib/prefectures';
 import {
@@ -37,15 +27,20 @@ const CONCERN_OPTIONS: { value: Concern; label: string }[] = [
   { value: 'futoukou', label: '不登校・登校が難しい' },
 ];
 
+/** 「次の一手」の行リンク（全て同じ見た目。強調は文字の太さと色で付ける）。 */
+const NEXT_LINK_CLASS =
+  'flex min-h-[44px] items-center justify-between gap-3 rounded border border-slate-200 bg-white px-4 py-3 transition-colors hover:bg-brand-50';
+
 function Pill({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition-all ${
+      aria-pressed={active}
+      className={`min-h-[44px] rounded border px-3 py-2.5 text-sm font-bold transition-colors ${
         active
-          ? 'border-slate-500 bg-slate-50 text-slate-700 ring-2 ring-slate-500/20'
-          : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+          ? 'border-brand-700 bg-brand-50 text-brand-800'
+          : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
       }`}
     >
       {children}
@@ -128,12 +123,9 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
 
   return (
     <div>
-      <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-7">
+      <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
         {/* Q1 学年 */}
-        <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <GraduationCap className="h-4 w-4 text-slate-600" />
-          Q1. 学年
-        </div>
+        <div className="mb-2 text-base font-bold text-slate-900">Q1. 学年</div>
         <div className="mb-5 grid grid-cols-3 gap-2">
           {GRADE_OPTIONS.map((g) => (
             <Pill key={g} active={grade === g} onClick={() => { onFirstTouch(); setGrade(g); }}>
@@ -143,10 +135,7 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
         </div>
 
         {/* Q2 順位バンド（点数を知らなくても回答できる） */}
-        <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <BarChart3 className="h-4 w-4 text-slate-600" />
-          Q2. 最近のテストの順位は、だいたいどのくらい？
-        </div>
+        <div className="mb-2 text-base font-bold text-slate-900">Q2. 最近のテストの順位は、だいたいどのくらい？</div>
         <div className="mb-5 grid gap-2">
           {RANK_BANDS.map((b) => (
             <Pill key={b.id} active={rankBandId === b.id} onClick={() => { onFirstTouch(); setRankBandId(b.id); }}>
@@ -156,15 +145,14 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
         </div>
 
         {/* Q3 都道府県 */}
-        <label htmlFor="shindan-prefecture" className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <MapPin className="h-4 w-4 text-slate-600" />
+        <label htmlFor="shindan-prefecture" className="mb-2 block text-base font-bold text-slate-900">
           Q3. お住まいの都道府県
         </label>
         <select
           id="shindan-prefecture"
           value={prefectureCode}
           onChange={(e) => { onFirstTouch(); setPrefectureCode(e.target.value); }}
-          className="mb-5 h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20"
+          className="mb-5 h-11 w-full rounded border border-slate-300 bg-white px-3 text-base text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-700"
         >
           <option value="">選択してください</option>
           {PREFECTURES.map((p) => (
@@ -173,10 +161,7 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
         </select>
 
         {/* Q4 内申・評定平均の自己申告 */}
-        <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <BookOpen className="h-4 w-4 text-slate-600" />
-          Q4. 通知表の評定は、だいたいどのくらい？
-        </div>
+        <div className="mb-2 text-base font-bold text-slate-900">Q4. 通知表の評定は、だいたいどのくらい？</div>
         <div className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {NAISHIN_REFERENCES.map((ref, i) => (
             <Pill key={ref.naishin45} active={naishinRefIndex === i} onClick={() => { onFirstTouch(); setNaishinRefIndex(i); }}>
@@ -186,10 +171,7 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
         </div>
 
         {/* Q5 気になっていること */}
-        <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <HelpCircle className="h-4 w-4 text-slate-600" />
-          Q5. 今、一番気になっていることは？
-        </div>
+        <div className="mb-2 text-base font-bold text-slate-900">Q5. 今、一番気になっていることは？</div>
         <div className="mb-6 grid gap-2 sm:grid-cols-2">
           {CONCERN_OPTIONS.map((o) => (
             <Pill key={o.value} active={concern === o.value} onClick={() => { onFirstTouch(); setConcern(o.value); }}>
@@ -202,115 +184,110 @@ export function ShindanQuiz({ defaultGrade, defaultConcern, onResult }: ShindanQ
           type="button"
           onClick={onDiagnose}
           disabled={!canSubmit}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-600 px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-slate-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
+          className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-brand-700"
         >
           <Search className="h-4 w-4" />
           診断する
         </button>
         {!canSubmit && (
-          <p className="mt-2 text-center text-xs text-slate-400">5つすべて選ぶと診断結果が出ます</p>
+          <p className="mt-2 text-center text-sm text-slate-600">5つすべて選ぶと診断結果が出ます</p>
         )}
       </section>
 
       {submitted && range && naishinRef && currentTier && reach && (
         <div ref={resultRef} className="mt-6 scroll-mt-6 space-y-4">
-          <div className="rounded-lg border-2 border-slate-200 bg-slate-50 p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <Check className="h-5 w-5 text-slate-600" />
-              <h2 className="text-lg font-bold text-slate-900">
-                {prefName ? `${prefName}・中${grade}` : ''}のあなたの偏差値の目安
-              </h2>
-            </div>
-            <div className="text-3xl font-bold text-slate-700">
+          <div className="rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
+              {prefName ? `${prefName}・中${grade}` : ''}のあなたの偏差値の目安
+            </h2>
+            <div className="text-3xl font-bold tabular-nums text-brand-700">
               {range.min !== null && range.max !== null
                 ? `偏差値 ${range.min}〜${range.max}`
                 : range.min !== null
                   ? `偏差値 ${range.min} 以上`
                   : `偏差値 ${range.max} 以下`}
             </div>
-            <p className="mt-2 text-xs leading-relaxed text-slate-500">
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">
               ※ テストの順位（自己申告）を正規分布の数式に当てはめた目安です。実際の点数・平均点・標準偏差で計算するとより正確です。
-              <Link href="/hensachi" className="ml-1 font-bold text-slate-700 underline">正確な偏差値を計算する →</Link>
+              <Link href="/hensachi" className="ml-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">正確な偏差値を計算する →</Link>
             </p>
           </div>
 
           <div className="rounded-lg border border-slate-200 bg-white p-5">
-            <h3 className="mb-2 text-sm font-bold text-slate-800">評定「{naishinRef.label}」との整合性</h3>
-            <p className="text-sm leading-relaxed text-slate-600">
-              評定「{naishinRef.label}」は、一般的には偏差値<strong className="text-slate-800">{naishinRef.hensachiGuide}</strong>くらいの高校を志望する人と同じレベル帯で見られることが多い組み合わせです（換算式ではなく、あくまで並置の目安）。
+            <h3 className="mb-2 text-[17px] font-bold text-slate-900">評定「{naishinRef.label}」との整合性</h3>
+            <p className="text-base leading-[1.8] text-slate-900">
+              評定「{naishinRef.label}」は、一般的には偏差値<strong>{naishinRef.hensachiGuide}</strong>くらいの高校を志望する人と同じレベル帯で見られることが多い組み合わせです（換算式ではなく、あくまで並置の目安）。
               今回の偏差値の目安と比べて大きく離れていなければ、今の学力と内申のバランスは取れていると考えられます。
             </p>
           </div>
 
           <div className="rounded-lg border border-slate-200 bg-white p-5">
-            <h3 className="mb-3 text-sm font-bold text-slate-800">届く高校レベルの目安</h3>
+            <h3 className="mb-3 text-[17px] font-bold text-slate-900">届く高校レベルの目安</h3>
             <div className="grid gap-2 sm:grid-cols-3">
-              <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-3 text-center">
-                <div className="text-xs font-bold text-brand-700">安全圏</div>
-                <div className="mt-1 text-sm font-bold text-slate-800">{reach.safe.label}</div>
+              <div className="rounded-lg border border-slate-200 bg-white p-3 text-center">
+                <div className="text-sm text-slate-600">安全圏</div>
+                <div className="mt-1 text-base font-bold text-slate-900">{reach.safe.label}</div>
               </div>
-              <div className="rounded-lg border-2 border-slate-200 bg-slate-50 p-3 text-center">
-                <div className="text-xs font-bold text-slate-700">実力相応</div>
-                <div className="mt-1 text-sm font-bold text-slate-800">{reach.match.label}</div>
+              <div className="rounded-lg border border-slate-200 bg-brand-50 p-3 text-center">
+                <div className="text-sm text-slate-600">実力相応</div>
+                <div className="mt-1 text-base font-bold text-slate-900">{reach.match.label}</div>
               </div>
-              <div className="rounded-lg border border-amber-100 bg-amber-50/50 p-3 text-center">
-                <div className="text-xs font-bold text-amber-700">チャレンジ</div>
-                <div className="mt-1 text-sm font-bold text-slate-800">{reach.challenge.label}</div>
+              <div className="rounded-lg border border-slate-200 bg-white p-3 text-center">
+                <div className="text-sm text-slate-600">チャレンジ</div>
+                <div className="mt-1 text-base font-bold text-slate-900">{reach.challenge.label}</div>
               </div>
             </div>
           </div>
 
           {/* 次の一手（Q5の関心に応じて分岐・S-2③） */}
-          <div className="rounded-lg border-2 border-brand-200 bg-brand-50/40 p-5">
-            <h3 className="mb-3 text-sm font-bold text-slate-800">次の一手</h3>
+          <div className="rounded-lg border border-slate-200 bg-white p-5">
+            <h3 className="mb-3 text-[17px] font-bold text-slate-900">次の一手</h3>
             {concern === 'reach' && (
               <div className="space-y-2">
-                <Link href="/hensachi/shiboukou" className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 transition-all">
+                <Link href="/hensachi/shiboukou" className={NEXT_LINK_CLASS}>
                   <span className="text-sm font-bold text-brand-700">偏差値→志望校レンジを詳しく見る</span>
-                  <ChevronRight className="h-4 w-4 text-brand-400" />
+                  <ChevronRight className="h-4 w-4 shrink-0 text-brand-700" />
                 </Link>
-                <Link href="/hogosha" className="flex items-center justify-between gap-3 rounded-lg bg-white p-3 transition-all">
-                  <span className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
-                    <Users className="h-3.5 w-3.5 text-slate-400" />
+                <Link href="/hogosha" className={NEXT_LINK_CLASS}>
+                  <span className="text-sm font-bold text-slate-700">
                     保護者の方へ：志望校が見えたら学費・塾代の目安を確認する
                   </span>
-                  <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+                  <ChevronRight className="h-4 w-4 shrink-0 text-brand-700" />
                 </Link>
               </div>
             )}
             {concern === 'improve' && (
               <div className="space-y-3">
-                <Link href="/hensachi/agekata" className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 transition-all">
+                <Link href="/hensachi/agekata" className={NEXT_LINK_CLASS}>
                   <span className="text-sm font-bold text-brand-700">偏差値の上げ方・具体策を見る</span>
-                  <ChevronRight className="h-4 w-4 text-brand-400" />
+                  <ChevronRight className="h-4 w-4 shrink-0 text-brand-700" />
                 </Link>
                 {representativeHensachi !== null && <HensachiGapToTarget value={representativeHensachi} />}
               </div>
             )}
             {concern === 'juku' && (
               <div className="space-y-2">
-                <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 transition-all">
+                <Link href="/juku-shindan" className={NEXT_LINK_CLASS}>
                   <span className="text-sm font-bold text-brand-700">結果に合う塾を診断する（無料）</span>
-                  <ChevronRight className="h-4 w-4 text-brand-400" />
+                  <ChevronRight className="h-4 w-4 shrink-0 text-brand-700" />
                 </Link>
-                <Link href="/hogosha" className="flex items-center justify-between gap-3 rounded-lg bg-white p-3 transition-all">
-                  <span className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
-                    <Users className="h-3.5 w-3.5 text-slate-400" />
+                <Link href="/hogosha" className={NEXT_LINK_CLASS}>
+                  <span className="text-sm font-bold text-slate-700">
                     保護者の方へ：塾・費用の選び方を確認する
                   </span>
-                  <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+                  <ChevronRight className="h-4 w-4 shrink-0 text-brand-700" />
                 </Link>
               </div>
             )}
             {concern === 'futoukou' && (
               <div className="space-y-2">
-                <Link href="/futoukou" className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 transition-all">
+                <Link href="/futoukou" className={NEXT_LINK_CLASS}>
                   <span className="text-sm font-bold text-brand-700">不登校でも高校受験はできる（内申点・出席の扱いを見る）</span>
-                  <ChevronRight className="h-4 w-4 text-brand-400" />
+                  <ChevronRight className="h-4 w-4 shrink-0 text-brand-700" />
                 </Link>
-                <Link href="/juku-shindan" className="flex items-center justify-between gap-3 rounded-lg bg-white p-3 transition-all">
-                  <span className="text-xs font-bold text-slate-600">不登校対応の塾・オンライン学習を診断する</span>
-                  <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+                <Link href="/juku-shindan" className={NEXT_LINK_CLASS}>
+                  <span className="text-sm font-bold text-slate-700">不登校対応の塾・オンライン学習を診断する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-brand-700" />
                 </Link>
               </div>
             )}

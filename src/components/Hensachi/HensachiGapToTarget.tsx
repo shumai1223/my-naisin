@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Target, TrendingUp, PartyPopper, CalendarRange } from '@/components/icons';
+import { Check } from '@/components/icons';
 
 import { buildHensachiWeeklyPlan, roundHensachi } from '@/lib/hensachi';
 import { track } from '@/lib/track';
@@ -58,14 +58,11 @@ export function HensachiGapToTarget({ value, onTargetChange }: HensachiGapToTarg
   if (value === null) return null;
 
   return (
-    <div className="rounded-lg border-2 border-slate-200 bg-white p-5 md:p-6">
-      <div className="mb-4 flex items-center gap-2">
-        <Target className="h-5 w-5 text-slate-600" />
-        <div className="text-base font-bold text-slate-800">目標偏差値までの週次プラン</div>
-      </div>
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+      <h3 className="mb-4 text-[17px] font-bold text-slate-900">目標偏差値までの週次プラン</h3>
 
       <label className="block">
-        <span className="mb-1 block text-xs font-bold text-slate-600">
+        <span className="mb-1 block text-sm font-bold text-slate-900">
           目標偏差値（既定＝今の偏差値+5＝チャレンジ帯の目安）
         </span>
         <input
@@ -73,31 +70,23 @@ export function HensachiGapToTarget({ value, onTargetChange }: HensachiGapToTarg
           inputMode="decimal"
           value={target ?? ''}
           onChange={(e) => handleTargetInput(e.target.value)}
-          className="h-11 w-full max-w-[10rem] rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20"
+          className="h-11 w-full max-w-[10rem] rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
         />
       </label>
 
       {state && gap !== null && target !== null && (
         <div className="mt-4 space-y-4">
-          <div
-            className={`rounded-lg border-2 p-4 text-center ${
-              state === 'far'
-                ? 'border-red-200 bg-red-50/70'
-                : state === 'close'
-                  ? 'border-amber-200 bg-amber-50/70'
-                  : 'border-brand-200 bg-brand-50/70'
-            }`}
-          >
+          <div className="rounded-lg border border-slate-200 bg-brand-50 p-4 text-center">
             {state === 'met' ? (
-              <div className="flex items-center justify-center gap-2 text-brand-800">
-                <PartyPopper className="h-5 w-5" />
+              <div className="flex items-center justify-center gap-2 text-brand-700">
+                <Check className="h-5 w-5" />
                 <span className="text-base font-bold">目標偏差値{target}に到達しています</span>
               </div>
             ) : (
-              <div className={state === 'far' ? 'text-red-800' : 'text-amber-800'}>
-                <div className="text-xs font-bold opacity-80">目標偏差値{target}まで</div>
-                <div className="text-2xl font-bold tracking-tight">
-                  あと <span className="text-3xl">{gap}</span>
+              <div className="text-slate-900">
+                <div className="text-sm text-slate-600">目標偏差値{target}まで</div>
+                <div className="text-2xl font-bold">
+                  あと <span className="text-3xl tabular-nums">{gap}</span>
                 </div>
               </div>
             )}
@@ -105,22 +94,21 @@ export function HensachiGapToTarget({ value, onTargetChange }: HensachiGapToTarg
 
           {plan.length > 0 && (
             <div>
-              <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-                <CalendarRange className="h-3.5 w-3.5" />5週間で目標へ直線的に近づく場合の目安
+              <div className="mb-2 text-sm font-bold text-slate-900">
+                5週間で目標へ直線的に近づく場合の目安
               </div>
-              <ul className="grid grid-cols-5 gap-1.5">
+              <ul className="grid grid-cols-5 divide-x divide-slate-200 border-y border-slate-200">
                 {plan.map((p) => (
                   <li
                     key={p.week}
-                    className="rounded-lg border border-slate-100 bg-slate-50/60 px-1 py-2 text-center"
+                    className="px-1 py-2 text-center"
                   >
-                    <div className="text-xs font-bold text-slate-500">{p.week}週目</div>
-                    <div className="text-sm font-bold text-slate-700">{p.targetHensachi}</div>
+                    <div className="text-xs text-slate-600">{p.week}週目</div>
+                    <div className="text-base font-bold tabular-nums text-slate-900">{p.targetHensachi}</div>
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 flex items-center gap-1 text-xs leading-relaxed text-slate-400">
-                <TrendingUp className="h-3 w-3 shrink-0" />
+              <p className="mt-2 text-sm leading-[1.8] text-slate-600">
                 実際の伸びは一直線にはなりません。あくまで「均等に近づけた場合」の目安です。
               </p>
             </div>

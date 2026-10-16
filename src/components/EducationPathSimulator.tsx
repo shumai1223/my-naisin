@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Wallet, ArrowRight, RotateCcw, GraduationCap, School, Home as HomeIcon, ShieldCheck } from '@/components/icons';
+import { ArrowRight, RotateCcw } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { simulateHighToUniversity, formatYen, toManYen } from '@/lib/education-cost/engine';
@@ -31,6 +31,12 @@ const INCOME_OPTIONS: { id: IncomeBracket; short: string }[] = [
   { id: 'under910', short: '590〜910万円' },
   { id: 'over910', short: '910万円〜' },
 ];
+
+/** 選択肢ボタンの見た目。選択中は「濃い枠線・薄い緑の面・太字」で、色だけに頼らず区別する。 */
+const chipClass = (selected: boolean) =>
+  `inline-flex min-h-[44px] items-center justify-center rounded border px-3 py-2 text-sm leading-snug transition-colors ${
+    selected ? 'border-brand-700 bg-brand-50 font-bold text-brand-800' : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+  }`;
 
 export function EducationPathSimulator() {
   const [highCourse, setHighCourse] = React.useState<CourseType>('public');
@@ -70,17 +76,16 @@ export function EducationPathSimulator() {
   };
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-7">
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
       {/* 高校 */}
-      <span className="block text-sm font-bold text-slate-800">① 進学先の高校</span>
+      <span className="block text-sm font-bold text-slate-900">① 進学先の高校</span>
       <div className="mt-2 grid grid-cols-2 gap-2">
         {(['public', 'private'] as const).map((c) => (
           <button
             key={c}
+            aria-pressed={highCourse === c}
             onClick={() => { markStart(); setHighCourse(c); }}
-            className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition-all ${
-              highCourse === c ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
-            }`}
+            className={chipClass(highCourse === c)}
           >
             {c === 'public' ? '公立高校' : '私立高校'}
           </button>
@@ -88,32 +93,30 @@ export function EducationPathSimulator() {
       </div>
 
       {/* 世帯年収（就学支援金） */}
-      <span className="mt-5 block text-sm font-bold text-slate-800">② 世帯年収の目安（就学支援金の判定用）</span>
+      <span className="mt-5 block text-sm font-bold text-slate-900">② 世帯年収の目安（就学支援金の判定用）</span>
       <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3">
         {INCOME_OPTIONS.map((o) => (
           <button
             key={o.id}
+            aria-pressed={incomeBracket === o.id}
             onClick={() => { markStart(); setIncomeBracket(o.id); }}
-            className={`rounded-lg border px-2 py-2.5 text-sm font-bold transition-all ${
-              incomeBracket === o.id ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
-            }`}
+            className={chipClass(incomeBracket === o.id)}
           >
             {o.short}
           </button>
         ))}
       </div>
-      <p className="mt-1 text-xs text-slate-400">※ 正確な判定は市町村民税の課税標準額で行われます。年収は目安です。</p>
+      <p className="mt-2 text-sm leading-[1.8] text-slate-600">※ 正確な判定は市町村民税の課税標準額で行われます。年収は目安です。</p>
 
       {/* 大学 */}
-      <span className="mt-5 block text-sm font-bold text-slate-800">③ 進学先の大学</span>
+      <span className="mt-5 block text-sm font-bold text-slate-900">③ 進学先の大学</span>
       <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {UNIVERSITY_OPTIONS.map((o) => (
           <button
             key={o.id}
+            aria-pressed={universityType === o.id}
             onClick={() => { markStart(); setUniversityType(o.id); }}
-            className={`rounded-lg border px-2 py-2.5 text-xs font-bold transition-all sm:text-sm ${
-              universityType === o.id ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
-            }`}
+            className={chipClass(universityType === o.id)}
           >
             {o.label}
           </button>
@@ -123,22 +126,21 @@ export function EducationPathSimulator() {
       {/* 通学形態（大学進学時のみ意味がある） */}
       {hasUniversity && (
         <>
-          <span className="mt-5 block text-sm font-bold text-slate-800">④ 大学の通学形態</span>
+          <span className="mt-5 block text-sm font-bold text-slate-900">④ 大学の通学形態</span>
           <div className="mt-2 grid grid-cols-2 gap-2">
             {(['home', 'away'] as const).map((r) => (
               <button
                 key={r}
+                aria-pressed={residence === r}
                 onClick={() => { markStart(); setResidence(r); }}
-                className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition-all ${
-                  residence === r ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
-                }`}
+                className={chipClass(residence === r)}
               >
                 {r === 'home' ? '自宅から通学' : '下宿・一人暮らし'}
               </button>
             ))}
           </div>
           {residence === 'away' && (
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">
               ※ 自宅外は{UNIVERSITY_AWAY_COST.note}を加算（{UNIVERSITY_ESTIMATE.national.label}等の学費とは別）。
             </p>
           )}
@@ -146,58 +148,52 @@ export function EducationPathSimulator() {
       )}
 
       <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-        <button onClick={onCalc} className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 text-base font-bold text-white transition-all hover:bg-brand-700 active:scale-95">
+        <button onClick={onCalc} className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800">
           高校〜大学の総額を計算する
           <ArrowRight className="h-5 w-5" />
         </button>
-        <button onClick={reset} className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 bg-white px-4 py-3.5 text-sm text-slate-600 hover:bg-slate-50">
+        <button onClick={reset} className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded border border-brand-700 bg-white px-5 py-3 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50">
           <RotateCcw className="h-4 w-4" />リセット
         </button>
       </div>
 
       {show && (
         <div id="path-result" className="mt-8 scroll-mt-20" role="status" aria-live="polite">
-          <div className="rounded-lg border-2 border-brand-300 bg-brand-50 p-5 text-center">
-            <div className="flex items-center justify-center gap-1.5 text-sm font-bold text-brand-800">
-              <Wallet className="h-4 w-4" />
-              高校入学〜大学卒業までの教育費の目安
-            </div>
-            <div className="mt-1 text-4xl font-bold tracking-tight text-brand-700 md:text-5xl">{formatYen(result.total)}</div>
-            <div className="mt-1 text-xs text-brand-700">
+          <div className="rounded-lg border border-slate-200 bg-brand-50 p-5">
+            <div className="text-sm font-bold text-brand-800">高校入学〜大学卒業までの教育費の目安</div>
+            <div className="mt-1 text-3xl font-bold tabular-nums text-brand-800 md:text-4xl">{formatYen(result.total)}</div>
+            <div className="mt-1 text-sm text-slate-700">
               （{toManYen(result.total)}／{highCourse === 'public' ? '公立' : '私立'}高校・
               {hasUniversity ? `${UNIVERSITY_OPTIONS.find((o) => o.id === universityType)?.label}${residence === 'away' ? '・下宿' : '・自宅'}` : '高卒'}）
             </div>
           </div>
 
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          <dl className="mt-3 grid divide-y divide-slate-200 border-y border-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             <Breakdown
-              icon={<School className="h-4 w-4" />}
               label="高校3年（就学支援金 控除後）"
               value={formatYen(result.highSchoolReal)}
               sub={result.highSchoolSupport > 0 ? `支援 −${toManYen(result.highSchoolSupport)}` : undefined}
             />
             <Breakdown
-              icon={<GraduationCap className="h-4 w-4" />}
               label="大学の学費（4年）"
               value={formatYen(result.universityTuition)}
             />
             <Breakdown
-              icon={<HomeIcon className="h-4 w-4" />}
               label="下宿・生活費（4年）"
               value={formatYen(result.universityLiving)}
               sub={result.universityLiving === 0 ? '自宅は0' : undefined}
             />
-          </div>
+          </dl>
 
-          <div className="mt-4 flex items-start gap-2 rounded-lg border border-brand-200 bg-brand-50/70 p-4">
-            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
-            <p className="text-xs leading-relaxed text-brand-900">
+          <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <p className="text-sm font-bold text-slate-900">ポイント</p>
+            <p className="mt-1 text-sm leading-[1.8] text-slate-900">
               これは進路を選んだ場合の<strong>概算の目安</strong>です。実際は学校・地域・受講数で変わります。
               「我が家はいくら必要で、どう備えるか」を早めに把握しておくと、進路の選択肢を狭めずに済みます。
               大学費用の詳しい内訳は姉妹サイト「My Shingaku」でも確認できます。
             </p>
           </div>
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-sm leading-[1.8] text-slate-600">
             ※ 就学支援金の区分：{SHUGAKU_SHIEN_TIERS.find((t) => t.bracket === incomeBracket)?.label}。制度・金額は年度で見直されます。
           </p>
         </div>
@@ -206,15 +202,12 @@ export function EducationPathSimulator() {
   );
 }
 
-function Breakdown({ icon, label, value, sub }: { icon: React.ReactNode; label: string; value: string; sub?: string }) {
+function Breakdown({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4">
-      <div className="flex items-center gap-1.5 text-xs text-slate-500">
-        <span className="text-brand-500">{icon}</span>
-        {label}
-      </div>
-      <div className="mt-1 text-xl font-bold tracking-tight text-slate-900">{value}</div>
-      {sub && <div className="mt-0.5 text-xs font-bold text-brand-600">{sub}</div>}
+    <div className="py-3 sm:px-4 sm:first:pl-0">
+      <dt className="text-xs text-slate-600">{label}</dt>
+      <dd className="mt-1 text-xl font-bold tabular-nums text-slate-900 md:text-2xl">{value}</dd>
+      {sub && <dd className="mt-0.5 text-xs font-bold text-slate-700">{sub}</dd>}
     </div>
   );
 }

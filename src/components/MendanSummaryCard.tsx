@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { ClipboardCheck } from '@/components/icons';
 
 import { readSavedGoal, type SavedGoal } from '@/lib/persistence';
 
@@ -22,39 +21,38 @@ export function MendanSummaryCard() {
   if (!loaded) return null;
 
   return (
-    <section className="mb-10 rounded-lg border-2 border-brand-200 bg-white p-6 print:border print:shadow-none">
-      <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-        <ClipboardCheck className="h-5 w-5 text-brand-600 print:hidden" />
-        面談で見せる現在の数値
-      </h2>
-      <div className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-lg border border-slate-200 p-4">
-          <div className="text-xs font-bold text-slate-500">内申点</div>
-          <div className="mt-1 text-2xl font-bold text-slate-900">
+    <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+      <h2 className="mb-4 text-xl font-bold text-slate-900">面談で見せる現在の数値</h2>
+      <dl className="grid divide-y divide-slate-200 border-y border-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <div className="p-4">
+          <dt className="text-xs text-slate-600">内申点</dt>
+          <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">
             {goal ? `${goal.score}点` : '＿＿＿点'}
-          </div>
+          </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 p-4">
-          <div className="text-xs font-bold text-slate-500">
+        <div className="p-4">
+          <dt className="text-xs text-slate-600">
             志望校の目標{goal?.targetLabel ? `（${goal.targetLabel}）` : ''}
-          </div>
-          <div className="mt-1 text-2xl font-bold text-slate-900">
+          </dt>
+          <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">
             {goal ? `${goal.target}点` : '＿＿＿点'}
-          </div>
+          </dd>
         </div>
-        <div className="rounded-lg border border-slate-200 p-4">
-          <div className="text-xs font-bold text-slate-500">目標との差</div>
-          <div className="mt-1 text-2xl font-bold text-slate-900">
+        <div className="p-4">
+          <dt className="text-xs text-slate-600">目標との差</dt>
+          <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">
             {goal ? (goal.gap > 0 ? `あと${goal.gap}点` : `${Math.abs(goal.gap)}点 達成`) : '＿＿＿点'}
-          </div>
+          </dd>
         </div>
-      </div>
-      <div className="mt-3 rounded-lg border border-dashed border-slate-300 p-4">
-        <div className="text-xs font-bold text-slate-500">偏差値（模試の結果があれば記入）</div>
-        <div className="mt-1 text-lg font-bold text-slate-400">＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</div>
-      </div>
+      </dl>
+      <dl className="border-b border-slate-200">
+        <div className="p-4">
+          <dt className="text-xs text-slate-600">偏差値（模試の結果があれば記入）</dt>
+          <dd className="mt-1 text-lg font-bold text-slate-600">＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</dd>
+        </div>
+      </dl>
       {!goal && (
-        <p className="mt-4 text-xs leading-relaxed text-slate-500 print:hidden">
+        <p className="mt-4 text-sm leading-[1.7] text-slate-600 print:hidden">
           内申点計算サイトで目標を保存すると、ここに自動で数値が表示されます。今は空欄のまま印刷して、手書きでも使えます。
         </p>
       )}

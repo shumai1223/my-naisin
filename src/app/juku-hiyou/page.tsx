@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, Calculator, Users, GraduationCap, Lightbulb, BookCheck } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -83,22 +83,19 @@ export default function JukuHiyouPage() {
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">塾代シミュレーター</span>
+            <span className="text-slate-900">塾代シミュレーター</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-amber-500 text-white">
-              <Wallet className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">塾代シミュレーター</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">塾代シミュレーター</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               中学生の塾代は<strong>形態と学年</strong>で大きく変わります。集団塾・個別指導・家庭教師の月謝に、
               見落としがちな<strong>季節講習費</strong>まで含めて、受験までの総額をその場で試算できます。
             </p>
@@ -123,44 +120,38 @@ export default function JukuHiyouPage() {
 
           {/* 相場の目安テーブル */}
           <section className="mb-10">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-amber-600" />
-              中学生の塾代の相場（目安）
-            </h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">中学生の塾代の相場（目安）</h2>
             <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-              <table className="min-w-full text-sm">
+              <table className="w-full min-w-[480px] text-sm">
                 <thead>
-                  <tr className="bg-amber-600 text-white">
-                    <th className="px-4 py-3 text-left font-bold">形態</th>
-                    <th className="px-4 py-3 text-left font-bold">月謝の目安</th>
-                    <th className="px-4 py-3 text-left font-bold">季節講習（年間）</th>
-                    <th className="px-4 py-3 text-left font-bold">特徴</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th className="px-3 py-3 text-left sm:px-4">形態</th>
+                    <th className="px-3 py-3 text-right sm:px-4">月謝の目安</th>
+                    <th className="px-3 py-3 text-right sm:px-4">季節講習（年間）</th>
+                    <th className="px-3 py-3 text-left sm:px-4">特徴</th>
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
+                <tbody className="text-slate-900">
                   {RATE_TABLE.map((r) => (
-                    <tr key={r.type} className="odd:bg-white even:bg-slate-50">
-                      <td className="px-4 py-3 font-bold">{r.type}</td>
-                      <td className="px-4 py-3">{r.monthly}</td>
-                      <td className="px-4 py-3">{r.koushuu}</td>
-                      <td className="px-4 py-3 text-xs">{r.feature}</td>
+                    <tr key={r.type} className="border-b border-slate-200 last:border-b-0">
+                      <td className="whitespace-nowrap px-3 py-3 font-bold sm:px-4">{r.type}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-right tabular-nums sm:px-4">{r.monthly}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-right tabular-nums sm:px-4">{r.koushuu}</td>
+                      <td className="px-3 py-3 text-sm text-slate-600 sm:px-4">{r.feature}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-xs text-slate-500">
+            <p className="mt-2 text-xs leading-[1.8] text-slate-600">
               ※ 一般的な相場の目安です。地域・塾・受講コマ数で大きく変動し、受験学年（中3）は月謝・講習費とも上がる傾向があります。
             </p>
           </section>
 
           {/* 抑えるコツ */}
-          <section className="mb-10 rounded-lg border border-brand-200 bg-brand-50/50 p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-brand-900">
-              <Lightbulb className="h-5 w-5 text-brand-600" />
-              塾代を賢く抑える4つのコツ
-            </h2>
-            <ul className="space-y-2 text-sm leading-relaxed text-slate-700">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">塾代を賢く抑える4つのコツ</h2>
+            <ul className="space-y-2 text-base leading-[1.8] text-slate-900">
               <li>① <strong>必要な教科だけ</strong>に絞る（苦手・配点の高い教科を優先）</li>
               <li>② <strong>季節講習</strong>は本当に必要なコマだけ選ぶ（全部受けると総額が跳ね上がる）</li>
               <li>③ 兄弟割引・友人紹介・早期入塾などの<strong>特典</strong>を確認する</li>
@@ -170,13 +161,10 @@ export default function JukuHiyouPage() {
 
           {/* 塾リード接続（コツ④の「無料体験で比較」を実行可能に。FP相談=上部、塾体験=ここで二毛作）。
               page intent（塾を比べたい保護者）に最も合う全国オンライン個別の無料体験へ。cta_view計装つき。 */}
-          <section className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-6">
-            <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-amber-700 ring-1 ring-amber-200">
-              <Users className="h-3.5 w-3.5" />
-              塾選びは「無料体験」で比べてから
-            </div>
-            <h2 className="mb-2 text-lg font-bold text-amber-900">月謝の安さだけで決めない。相性は体験で分かる</h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <p className="mb-1 text-sm font-bold text-brand-700">塾選びは「無料体験」で比べてから</p>
+            <h2 className="mb-2 text-xl font-bold text-slate-900">月謝の安さだけで決めない。相性は体験で分かる</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               同じ予算でも、指導の相性・講師・教室の雰囲気で伸び方は変わります。送迎不要・全国どこからでも受けられるオンライン個別指導なら、まず無料体験で「合うかどうか」を確かめてから決められます。費用はかかりません。
             </p>
             <AffiliateAd
@@ -185,41 +173,38 @@ export default function JukuHiyouPage() {
               trackView
               viewPlacement="juku-hiyou"
               ctaText="オンライン個別指導の無料体験を申し込む"
-              linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber-600 px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-amber-700 active:scale-95 sm:w-auto"
+              linkClassName="inline-flex min-h-[44px] w-full items-center justify-center rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800 sm:w-auto"
             />
-            <div className="mt-2 text-xs text-slate-400">そら塾（オンライン個別指導）の無料体験（PR）</div>
+            <div className="mt-2 text-xs text-slate-600">そら塾（オンライン個別指導）の無料体験（PR）</div>
           </section>
 
           {/* 出典（一次情報準拠。塾代の相場自体は特定の一次資料を持たない一般的な目安のため、
               ページ内で唯一の公的統計参照＝高校の学費比較の出典のみを明示する） */}
-          <div className="mb-10 rounded-lg border border-slate-200 bg-slate-50/60 p-4">
-            <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-              <BookCheck className="h-3.5 w-3.5 text-amber-600" />
-              出典・参考データ（一次情報）
-            </div>
-            <ul className="space-y-1.5 text-xs leading-relaxed">
+          <div className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <div className="mb-2 text-sm font-bold text-slate-900">出典・参考データ（一次情報）</div>
+            <ul className="space-y-1.5 text-sm leading-[1.8]">
               <li>
                 <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
                 </a>
-                <span className="text-slate-400"> — 高校の学費比較（公立 約179万円・私立 約354万円/3年間）の出典。塾代の相場自体は特定の統計によらない一般的な目安です。</span>
+                <span className="text-slate-600"> — 高校の学費比較（公立 約179万円・私立 約354万円/3年間）の出典。塾代の相場自体は特定の統計によらない一般的な目安です。</span>
               </li>
             </ul>
           </div>
 
           {/* FAQ */}
           <section className="mb-10">
-            <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {JUKU_FAQS.map((faq) => (
                 <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {faq.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{faq.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </details>
               ))}
             </div>

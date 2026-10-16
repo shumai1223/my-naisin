@@ -10,7 +10,7 @@ interface LayoutProps {
 export async function generateMetadata({ params }: { params: Promise<{ prefecture: string }> }): Promise<Metadata> {
   const { prefecture: code } = await params;
   const prefecture = PREFECTURES.find(p => p.code === code);
-  
+
   if (!prefecture) {
     return {
       title: '都道府県が見つかりません | My Naishin',
@@ -70,47 +70,47 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
       {prefecture && (
         <>
         <section className="mx-auto max-w-4xl px-4 py-8">
-          <div className="rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-3">
+          <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               {prefecture.name}の内申点計算について
             </h2>
-            <p className="text-sm leading-relaxed text-slate-600 mb-3">
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               {prefecture.name}の内申点は{prefecture.maxScore}点満点で計算されます。
               {prefecture.description}
             </p>
-            <dl className="grid grid-cols-2 gap-3 text-sm mb-4">
-              <div className="rounded-lg bg-slate-50 p-3">
-                <dt className="text-slate-500">満点</dt>
-                <dd className="text-lg font-bold text-slate-800">{prefecture.maxScore}点</dd>
+            <dl className="mb-4 grid grid-cols-2 border-t border-slate-200">
+              <div className="border-b border-slate-200 py-3 pr-4 odd:border-r even:pl-4">
+                <dt className="text-xs text-slate-600">満点</dt>
+                <dd className="mt-1 text-xl font-bold tabular-nums text-slate-900">{prefecture.maxScore}点</dd>
               </div>
-              <div className="rounded-lg bg-slate-50 p-3">
-                <dt className="text-slate-500">対象学年</dt>
-                <dd className="text-lg font-bold text-slate-800">
+              <div className="border-b border-slate-200 py-3 pr-4 odd:border-r even:pl-4">
+                <dt className="text-xs text-slate-600">対象学年</dt>
+                <dd className="mt-1 text-xl font-bold tabular-nums text-slate-900">
                   中{prefecture.targetGrades.join('・')}年
                 </dd>
               </div>
-              <div className="rounded-lg bg-slate-50 p-3">
-                <dt className="text-slate-500">5教科倍率</dt>
-                <dd className="text-lg font-bold text-slate-800">{prefecture.coreMultiplier}倍</dd>
+              <div className="border-b border-slate-200 py-3 pr-4 odd:border-r even:pl-4">
+                <dt className="text-xs text-slate-600">5教科倍率</dt>
+                <dd className="mt-1 text-xl font-bold tabular-nums text-slate-900">{prefecture.coreMultiplier}倍</dd>
               </div>
-              <div className="rounded-lg bg-slate-50 p-3">
-                <dt className="text-slate-500">実技4教科倍率</dt>
-                <dd className="text-lg font-bold text-slate-800">{prefecture.practicalMultiplier}倍</dd>
+              <div className="border-b border-slate-200 py-3 pr-4 odd:border-r even:pl-4">
+                <dt className="text-xs text-slate-600">実技4教科倍率</dt>
+                <dd className="mt-1 text-xl font-bold tabular-nums text-slate-900">{prefecture.practicalMultiplier}倍</dd>
               </div>
             </dl>
             {prefecture.note && (
-              <p className="text-xs text-slate-500 mb-3">
+              <p className="mb-3 text-sm leading-[1.8] text-slate-600">
                 ※ {prefecture.note}
               </p>
             )}
             {prefecture.sourceUrl && (
-              <p className="text-xs text-slate-400">
+              <p className="text-xs leading-[1.8] text-slate-600">
                 出典：
                 <a
                   href={prefecture.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-brand-500 hover:text-brand-600"
+                  className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
                 >
                   {prefecture.sourceTitle ?? `${prefecture.name}教育委員会`}
                 </a>

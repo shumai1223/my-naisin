@@ -37,7 +37,7 @@ export function JukenIcsButton() {
     <button
       type="button"
       onClick={onDownload}
-      className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-95"
+      className="inline-flex min-h-[44px] items-center gap-2 rounded bg-brand-700 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-800"
     >
       {done ? <Check className="h-4 w-4" /> : <CalendarPlus className="h-4 w-4" />}
       {done ? 'ダウンロードしました' : '受験準備カレンダーを追加（無料・ICS）'}

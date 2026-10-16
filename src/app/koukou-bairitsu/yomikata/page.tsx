@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, HelpCircle, AlertTriangle, ChevronRightSquare, BookOpenCheck } from '@/components/icons';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -85,98 +85,98 @@ export default function BairitsuYomikataPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/koukou-bairitsu" className="hover:text-brand-600">
+            <Link href="/koukou-bairitsu" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">
               倍率計算
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">出願倍率の読み方</span>
+            <span className="text-slate-900">出願倍率の読み方</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">出願倍率の読み方</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header>
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">出願倍率の読み方</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               出願期間中に発表される倍率は、中間発表と確定発表で数字が変わります。どの段階の数字を見ればいいのか、一般的な読み方の流れをまとめました。
             </p>
           </header>
 
-          <section className="mb-8 rounded-lg border-2 border-amber-200 bg-amber-50 p-5">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
-              <p className="text-sm leading-relaxed text-amber-900">
-                発表のタイミング・回数・志願変更の制度は都道府県ごとに異なります。このページは一般的な読み方の目安であり、正式なスケジュールは志望校がある都道府県教育委員会の公式発表を必ず確認してください。
-              </p>
-            </div>
+          <section className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="flex items-center gap-1.5 font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-sm leading-[1.8] text-amber-900">
+              発表のタイミング・回数・志願変更の制度は都道府県ごとに異なります。このページは一般的な読み方の目安であり、正式なスケジュールは志望校がある都道府県教育委員会の公式発表を必ず確認してください。
+            </p>
           </section>
 
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
-              <BookOpenCheck className="h-5 w-5 text-brand-500" />
-              出願倍率を読む一般的な流れ
-            </h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">出願倍率を読む一般的な流れ</h2>
+            <ol className="mt-4 space-y-6">
               {STEPS.map((s, i) => (
-                <div key={s.title} className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
-                      {i + 1}
-                    </div>
-                    {i < STEPS.length - 1 && <div className="mt-1 h-full w-px flex-1 bg-brand-100" />}
+                <li key={s.title} className="flex gap-4">
+                  <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-slate-300 text-sm font-bold tabular-nums text-slate-900">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-[17px] font-bold leading-snug text-slate-900">{s.title}</h3>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.body}</p>
                   </div>
-                  <div className="pb-2">
-                    <div className="text-sm font-bold text-slate-800">{s.title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
-                  </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </section>
 
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="mt-1 divide-y divide-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 flex items-start gap-1.5 text-sm font-bold text-slate-800">
-                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
-                    Q. {f.question}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/koukou-bairitsu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                志願倍率・実質倍率を計算する
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/juken-schedule" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                受験の年間スケジュール
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/heigan-yuugu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                併願優遇の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                当日点・内申が足りないときの対策
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="mt-2 divide-y divide-slate-200">
+              <li>
+                <Link href="/koukou-bairitsu" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  志願倍率・実質倍率を計算する
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/juken-schedule" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  受験の年間スケジュール
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/heigan-yuugu" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  併願優遇の仕組み
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/tarinai-taisaku" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  当日点・内申が足りないときの対策
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

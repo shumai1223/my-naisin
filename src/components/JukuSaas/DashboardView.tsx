@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GraduationCap, TrendingDown, Sparkles, Calculator, FileText } from '@/components/icons';
+import { TrendingDown, Info, Calculator, FileText } from '@/components/icons';
 
 import type { SnapshotMetric } from '@/lib/juku-saas-db';
 import { latestTrendDelta, type StudentTrendByMetric, type DeclineAlert } from '@/lib/juku-student-progress';
@@ -41,96 +41,91 @@ export function DashboardView({ jukuName, studentViews, isDemo, simulatorHref, r
     <div className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-4xl px-4 py-8">
         {isDemo && (
-          <div className="mb-4 flex items-center gap-2 rounded-lg border border-brand-200 bg-brand-50 px-4 py-2 text-xs font-bold text-brand-700">
-            <Sparkles className="h-4 w-4" />
+          <div className="mb-6 flex items-start gap-2 rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm font-bold leading-[1.8] text-slate-900">
+            <Info className="mt-1 h-4 w-4 shrink-0 text-brand-700" />
             これはデモデータです（架空の生徒・実在の教育委員会一次データに基づく計算エンジンで算出）
           </div>
         )}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-lg bg-brand-600 text-white">
-              <GraduationCap className="h-6 w-6" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-slate-900">{jukuName} 生徒ダッシュボード</h1>
-              <p className="mt-0.5 text-xs text-slate-500">
-                生徒{studentViews.length}人・低下アラート
-                <span className={totalAlerts > 0 ? 'font-bold text-red-600' : ''}> {totalAlerts}件</span>
-              </p>
-            </div>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">{jukuName} 生徒ダッシュボード</h1>
+            <p className="mt-1 text-sm text-slate-600">
+              生徒{studentViews.length}人・低下アラート
+              <span className={totalAlerts > 0 ? 'font-bold text-red-800' : ''}> {totalAlerts}件</span>
+            </p>
           </div>
           {simulatorHref && (
             <Link
               href={simulatorHref}
-              className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-xs font-bold text-white hover:bg-brand-700"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded bg-brand-700 px-4 py-2 text-sm font-bold text-white hover:bg-brand-800"
             >
-              <Calculator className="h-3.5 w-3.5" />
+              <Calculator className="h-4 w-4" />
               内申点シミュレーター
             </Link>
           )}
         </div>
 
-        <div className="mt-6">
+        <div className="mt-8">
           {studentViews.length === 0 ? (
-            <div className="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-400">
+            <div className="rounded-lg border border-slate-200 bg-white p-8 text-center text-sm text-slate-600">
               まだ生徒が登録されていません。CSV一括取込で追加してください。
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {studentViews.map(({ id, displayName, trend, alerts }) => {
                 const alertMetrics = new Set(alerts.map((a) => a.metric));
                 return (
                   <div key={id} className="rounded-lg border border-slate-200 bg-white p-4">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-slate-800">{displayName}</span>
-                      <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="font-bold text-slate-900">{displayName}</span>
+                      <div className="flex items-center gap-3">
                         {alerts.length > 0 && (
-                          <span className="flex items-center gap-1 rounded-full bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600">
-                            <TrendingDown className="h-3 w-3" />
+                          <span className="inline-flex items-center gap-1 rounded border border-red-200 bg-red-50 px-2 py-0.5 text-xs font-bold text-red-800">
+                            <TrendingDown className="h-4 w-4" />
                             {alerts.length}件低下
                           </span>
                         )}
                         {reportHrefForStudent && (
                           <Link
                             href={reportHrefForStudent(id)}
-                            className="flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600 hover:bg-slate-200"
+                            className="inline-flex min-h-[44px] items-center gap-1 text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800"
                           >
-                            <FileText className="h-3 w-3" />
+                            <FileText className="h-4 w-4" />
                             帳票
                           </Link>
                         )}
                       </div>
                     </div>
-                    <div className="mt-2 grid grid-cols-3 gap-2 text-xs">
+                    <dl className="mt-2 grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200">
                       {METRICS.map((metric) => {
                         const points = trend[metric];
                         const latest = points[points.length - 1];
                         const delta = latestTrendDelta(points);
                         const isDeclining = alertMetrics.has(metric);
                         return (
-                          <div
-                            key={metric}
-                            className={`rounded-lg p-2 ${isDeclining ? 'bg-red-50 ring-1 ring-red-200' : 'bg-slate-50'}`}
-                          >
-                            <div className="text-slate-400">{METRIC_LABEL[metric]}</div>
+                          <div key={metric} className={`px-3 py-2 ${isDeclining ? 'bg-red-50' : ''}`}>
+                            <dt className="text-xs text-slate-600">
+                              {METRIC_LABEL[metric]}
+                              {isDeclining && <span className="ml-1 font-bold text-red-800">低下</span>}
+                            </dt>
                             {latest ? (
-                              <div className="font-bold text-slate-800">
+                              <dd className="flex flex-wrap items-baseline gap-x-1 font-bold tabular-nums text-slate-900">
                                 {latest.value}
                                 {latest.maxValue !== null ? `/${latest.maxValue}` : ''}
                                 {delta !== null && (
-                                  <span className={delta < 0 ? 'ml-1 text-red-600' : 'ml-1 text-brand-600'}>
+                                  <span className={delta < 0 ? 'text-red-800' : 'text-brand-700'}>
                                     {delta >= 0 ? '+' : ''}
                                     {delta}
                                   </span>
                                 )}
-                              </div>
+                              </dd>
                             ) : (
-                              <div className="text-slate-300">記録なし</div>
+                              <dd className="text-slate-600">記録なし</dd>
                             )}
                           </div>
                         );
                       })}
-                    </div>
+                    </dl>
                   </div>
                 );
               })}

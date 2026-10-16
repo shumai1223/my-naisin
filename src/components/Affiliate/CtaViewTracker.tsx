@@ -57,7 +57,7 @@ export function CtaViewTracker({ placement, pref, program, variant }: CtaViewTra
     return () => observer.disconnect();
   }, [placement, pref, program, variant]);
 
-  // ⚠️ 幅・高さを0にすると intersectionRatio の分母(targetArea)が0になり、
+  // 注意: 幅・高さを0にすると intersectionRatio の分母(targetArea)が0になり、
   // threshold>0では仕様上いつまでもratioが0のまま発火しなくなる（2026-09-06発見・
   // T-M1-3bで「cta_viewが1週間動かない」として報告された現象の実装側の原因）。
   // 1px×1pxの実面積を持たせることで正しく交差判定される。

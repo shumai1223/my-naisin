@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ChevronRight, Home, GraduationCap, MapPin, AlertTriangle } from '@/components/icons';
+import { ChevronRight, Home, MapPin, AlertTriangle, TrendingUp, TrendingDown, ArrowRight } from '@/components/icons';
 
 import { getPrefectureByCode } from '@/lib/prefectures';
 import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
@@ -123,56 +123,56 @@ export default async function SchoolPage({ params }: PageProps) {
       <HighSchoolSchema name={school.schoolName} url={canonicalUrl} address={school.address || undefined} />
       <FAQPageSchema faqItems={faqItems} />
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
-        <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-          <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+        <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+          <Link
+            href="/"
+            className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
+          >
             <Home className="h-4 w-4" />
             ホーム
           </Link>
           <ChevronRight className="h-4 w-4" />
-          <Link href={`/pref/${prefecture.code}`} className="hover:text-brand-600">
+          <Link
+            href={`/pref/${prefecture.code}`}
+            className="inline-flex min-h-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800"
+          >
             {prefecture.name}
           </Link>
           <ChevronRight className="h-4 w-4" />
-          <span className="text-slate-700">{school.schoolName}</span>
+          <span className="text-slate-900">{school.schoolName}</span>
         </nav>
 
         <header className="mb-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <GraduationCap className="h-6 w-6" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">
-                {school.schoolName}
-                {shortName && <span className="ml-2 text-lg font-bold text-slate-500 md:text-xl">（{shortName}）</span>}
-              </h1>
-              {school.address && (
-                <p className="mt-1 flex items-center gap-1 text-sm text-slate-500">
-                  <MapPin className="h-3.5 w-3.5" />
-                  {school.address}
-                </p>
-              )}
-            </div>
-          </div>
+          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
+            {school.schoolName}
+            {shortName && <span className="ml-2 text-lg font-bold text-slate-600 md:text-xl">（{shortName}）</span>}
+          </h1>
+          {school.address && (
+            <p className="mt-2 flex items-center gap-1 text-sm text-slate-600">
+              <MapPin className="h-4 w-4 shrink-0" />
+              {school.address}
+            </p>
+          )}
+          <p className="mt-1 text-sm text-slate-600">出典：教育委員会公表の一次データ</p>
         </header>
 
         <div className="space-y-6">
-          <section className="rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">今季の入試倍率（学校全体）</h2>
-            <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-lg bg-brand-50 p-4 text-center">
-                <div className="text-2xl font-bold text-brand-700">{school.totalQuota}名</div>
-                <div className="mt-1 text-xs text-brand-600">募集人員（全学科合計）</div>
+          <section className="rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">今季の入試倍率（学校全体）</h2>
+            <dl className="grid grid-cols-1 divide-y divide-slate-200 border-y border-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              <div className="px-4 py-3">
+                <dt className="text-xs text-slate-600">募集人員（全学科合計）</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{school.totalQuota}名</dd>
               </div>
-              <div className="rounded-lg bg-brand-50 p-4 text-center">
-                <div className="text-2xl font-bold text-brand-700">{school.totalApplicants}名</div>
-                <div className="mt-1 text-xs text-brand-600">応募者数（全学科合計）</div>
+              <div className="px-4 py-3">
+                <dt className="text-xs text-slate-600">応募者数（全学科合計）</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{school.totalApplicants}名</dd>
               </div>
-              <div className="rounded-lg bg-slate-50 p-4 text-center">
-                <div className="text-2xl font-bold text-slate-700">{school.overallRate}倍</div>
-                <div className="mt-1 text-xs text-slate-600">倍率（応募者数÷募集人員）</div>
+              <div className="px-4 py-3">
+                <dt className="text-xs text-slate-600">倍率（応募者数÷募集人員）</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{school.overallRate}倍</dd>
               </div>
-            </div>
+            </dl>
           </section>
 
           <SchoolPageParentBridge schoolName={school.schoolName} prefectureCode={prefecture.code} />
@@ -200,25 +200,25 @@ export default async function SchoolPage({ params }: PageProps) {
           <AdUnit unit="IN_CONTENT" />
 
           {school.departmentRates.length > 1 && (
-            <section className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="mb-4 text-lg font-bold text-slate-800">学科別の内訳</h2>
+            <section className="rounded-lg border border-slate-200 bg-white p-5">
+              <h2 className="mb-4 text-xl font-bold text-slate-900">学科別の内訳</h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-slate-200 text-left text-slate-500">
-                      <th className="py-2 pr-4">学科</th>
-                      <th className="py-2 pr-4 text-right">募集人員</th>
-                      <th className="py-2 pr-4 text-right">応募者数</th>
-                      <th className="py-2 text-right">倍率</th>
+                    <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                      <th className="py-2 pr-4 font-bold">学科</th>
+                      <th className="py-2 pr-4 text-right font-bold">募集人員</th>
+                      <th className="py-2 pr-4 text-right font-bold">応募者数</th>
+                      <th className="py-2 text-right font-bold">倍率</th>
                     </tr>
                   </thead>
                   <tbody>
                     {school.departmentRates.map((d, i) => (
-                      <tr key={i} className="border-b border-slate-100">
-                        <td className="py-2 pr-4 text-slate-700">{d.department}</td>
-                        <td className="py-2 pr-4 text-right text-slate-600">{d.quota}名</td>
-                        <td className="py-2 pr-4 text-right text-slate-600">{d.finalApplicants}名</td>
-                        <td className="py-2 text-right font-bold text-slate-700">{d.finalRate}倍</td>
+                      <tr key={i} className="border-b border-slate-200">
+                        <td className="py-2 pr-4 text-slate-900">{d.department}</td>
+                        <td className="py-2 pr-4 text-right tabular-nums text-slate-900">{d.quota}名</td>
+                        <td className="py-2 pr-4 text-right tabular-nums text-slate-900">{d.finalApplicants}名</td>
+                        <td className="py-2 text-right font-bold tabular-nums text-slate-900">{d.finalRate}倍</td>
                       </tr>
                     ))}
                   </tbody>
@@ -228,58 +228,67 @@ export default async function SchoolPage({ params }: PageProps) {
           )}
 
           {schoolHistoryByDepartment.length > 0 && (
-            <section className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="mb-1 text-lg font-bold text-slate-800">この学校の募集人員・応募者数・倍率の推移</h2>
-              <p className="mb-4 text-xs text-slate-500">
+            <section className="rounded-lg border border-slate-200 bg-white p-5">
+              <h2 className="mb-1 text-xl font-bold text-slate-900">この学校の募集人員・応募者数・倍率の推移</h2>
+              <p className="mb-4 text-sm text-slate-600">
                 {school.schoolName}固有の一次データです（下記の「県全体の傾向」とは別物）。
               </p>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {schoolHistoryByDepartment.map((group) => {
                   const yoy = computeSchoolHistoryYoy(group);
                   return (
                   <div key={group.department} className="overflow-x-auto">
                     {schoolHistoryByDepartment.length > 1 && (
-                      <h3 className="mb-2 text-sm font-bold text-slate-600">{group.department}</h3>
+                      <h3 className="mb-2 text-[17px] font-bold text-slate-900">{group.department}</h3>
                     )}
                     {yoy && (
-                      <p className="mb-2 text-xs font-bold text-slate-500">
-                        {yoy.direction === 'up' ? '▲' : yoy.direction === 'down' ? '▼' : '→'} 前年比
-                        {yoy.rateDelta > 0 ? `+${yoy.rateDelta}` : yoy.rateDelta}倍（{yoy.previousFiscalYear}の{yoy.previousRate}倍
-                        →{yoy.currentFiscalYear}の{yoy.currentRate}倍）
+                      <p className="mb-2 flex items-start gap-1.5 text-sm font-bold text-slate-900">
+                        {yoy.direction === 'up' ? (
+                          <TrendingUp className="mt-0.5 h-4 w-4 shrink-0" />
+                        ) : yoy.direction === 'down' ? (
+                          <TrendingDown className="mt-0.5 h-4 w-4 shrink-0" />
+                        ) : (
+                          <ArrowRight className="mt-0.5 h-4 w-4 shrink-0" />
+                        )}
+                        <span>
+                          前年比
+                          {yoy.rateDelta > 0 ? `+${yoy.rateDelta}` : yoy.rateDelta}倍（{yoy.previousFiscalYear}の{yoy.previousRate}倍
+                          →{yoy.currentFiscalYear}の{yoy.currentRate}倍）
+                        </span>
                       </p>
                     )}
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-slate-200 text-left text-slate-500">
-                          <th className="py-2 pr-4 font-normal">年度</th>
+                        <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                          <th className="py-2 pr-4 font-bold">年度</th>
                           {group.entries.map((e) => (
-                            <th key={e.fiscalYear} className="py-2 pr-4 text-right font-normal">
+                            <th key={e.fiscalYear} className="py-2 pr-4 text-right font-bold">
                               {e.fiscalYear}
                             </th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="border-b border-slate-100">
-                          <td className="py-2 pr-4 text-slate-500">募集人員</td>
+                        <tr className="border-b border-slate-200">
+                          <td className="py-2 pr-4 text-slate-600">募集人員</td>
                           {group.entries.map((e) => (
-                            <td key={e.fiscalYear} className="py-2 pr-4 text-right text-slate-600">
+                            <td key={e.fiscalYear} className="py-2 pr-4 text-right tabular-nums text-slate-900">
                               {e.quota}名
                             </td>
                           ))}
                         </tr>
-                        <tr className="border-b border-slate-100">
-                          <td className="py-2 pr-4 text-slate-500">応募者数</td>
+                        <tr className="border-b border-slate-200">
+                          <td className="py-2 pr-4 text-slate-600">応募者数</td>
                           {group.entries.map((e) => (
-                            <td key={e.fiscalYear} className="py-2 pr-4 text-right text-slate-600">
+                            <td key={e.fiscalYear} className="py-2 pr-4 text-right tabular-nums text-slate-900">
                               {e.applicants}名
                             </td>
                           ))}
                         </tr>
-                        <tr>
-                          <td className="py-2 pr-4 text-slate-500">倍率</td>
+                        <tr className="border-b border-slate-200">
+                          <td className="py-2 pr-4 text-slate-600">倍率</td>
                           {group.entries.map((e) => (
-                            <td key={e.fiscalYear} className="py-2 pr-4 text-right font-bold text-slate-700">
+                            <td key={e.fiscalYear} className="py-2 pr-4 text-right font-bold tabular-nums text-slate-900">
                               {e.rate}倍
                             </td>
                           ))}
@@ -289,13 +298,13 @@ export default async function SchoolPage({ params }: PageProps) {
                     {/* S6-1(2026-08-24): 1データ点1出典(Y-0憲法②)。数値の直下に年度ごとの一次資料を明示する。
                         resolveRecordSourceIndexで一意に解決できた年度のみ表示(捏造ゼロ＝断定できない出典は出さない)。 */}
                     {group.entries.some((e) => e.source) && (
-                      <ul className="mt-2 space-y-0.5 text-xs leading-relaxed text-slate-400">
+                      <ul className="mt-2 space-y-0.5 text-sm leading-[1.8] text-slate-600">
                         {group.entries
                           .filter((e) => e.source)
                           .map((e) => (
                             <li key={e.fiscalYear}>
                               出典（{e.fiscalYear}）：
-                              <a href={e.source!.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-600">
+                              <a href={e.source!.url} target="_blank" rel="noopener noreferrer" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                                 {e.source!.docTitle}
                               </a>
                               （取得日: {e.source!.fetchedAt}）
@@ -314,35 +323,35 @@ export default async function SchoolPage({ params }: PageProps) {
           {schoolHistoryByDepartment.length > 0 && <AdUnit unit="IN_CONTENT" />}
 
           {categoryTrends.length > 0 && (
-            <section className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="mb-1 text-lg font-bold text-slate-800">
+            <section className="rounded-lg border border-slate-200 bg-white p-5">
+              <h2 className="mb-1 text-xl font-bold text-slate-900">
                 {categoryTrends.some((t) => t.granularity === 'grand-total-only')
                   ? '県内公立高校全体の倍率の推移'
                   : '学科の県内区分別・倍率の推移'}
               </h2>
-              <p className="mb-4 text-xs text-slate-500">
+              <p className="mb-4 text-sm text-slate-600">
                 {categoryTrends.some((t) => t.granularity === 'grand-total-only')
                   ? `この学校固有の推移ではなく、${prefecture.name}の公立高校全体を合算した「県全体の傾向」です(この県は学科区分別の集計が公表されていないため全体合計のみを掲載)。`
                   : `この学校固有の推移ではなく、同じ学科区分に属する${prefecture.name}内の高校をまとめた「県全体の傾向」です。`}
               </p>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {categoryTrends.map((trend) => (
                   <div key={trend.categoryLabel} className="overflow-x-auto">
-                    <h3 className="mb-2 text-sm font-bold text-slate-600">{trend.categoryLabel}</h3>
+                    <h3 className="mb-2 text-[17px] font-bold text-slate-900">{trend.categoryLabel}</h3>
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-slate-200 text-left text-slate-500">
+                        <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
                           {trend.points.map((p) => (
-                            <th key={p.fiscalYear} className="py-2 pr-4 text-right font-normal">
+                            <th key={p.fiscalYear} className="py-2 pr-4 text-right font-bold">
                               {p.fiscalYear}
                             </th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        <tr className="border-b border-slate-200">
                           {trend.points.map((p) => (
-                            <td key={p.fiscalYear} className="py-2 pr-4 text-right font-bold text-slate-700">
+                            <td key={p.fiscalYear} className="py-2 pr-4 text-right font-bold tabular-nums text-slate-900">
                               {p.rate}倍
                             </td>
                           ))}
@@ -360,28 +369,28 @@ export default async function SchoolPage({ params }: PageProps) {
               school-teiji-lookup.ts経由でT-P1のteiji-competition-ratesデータを引くだけの
               完全に独立した追加（該当データが無い学校では何も表示されない）。 */}
           {teijiRecords.length > 0 && (
-            <section className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="mb-1 text-lg font-bold text-slate-800">定時制・通信制課程</h2>
-              <p className="mb-4 text-xs text-slate-500">
+            <section className="rounded-lg border border-slate-200 bg-white p-5">
+              <h2 className="mb-1 text-xl font-bold text-slate-900">定時制・通信制課程</h2>
+              <p className="mb-4 text-sm text-slate-600">
                 全日制とは別に、{prefecture.name}教育委員会が公表している定時制・通信制課程の募集人員・出願者数・倍率です。
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[420px] text-left text-sm">
                   <thead>
-                    <tr className="border-b border-slate-200 text-xs text-slate-500">
-                      <th className="py-2 pr-3">学科</th>
-                      <th className="py-2 pr-3 text-right">募集人員</th>
-                      <th className="py-2 pr-3 text-right">出願者数</th>
-                      <th className="py-2 text-right">倍率</th>
+                    <tr className="border-b border-slate-900 text-xs text-slate-600">
+                      <th className="py-2 pr-3 font-bold">学科</th>
+                      <th className="py-2 pr-3 text-right font-bold">募集人員</th>
+                      <th className="py-2 pr-3 text-right font-bold">出願者数</th>
+                      <th className="py-2 text-right font-bold">倍率</th>
                     </tr>
                   </thead>
                   <tbody>
                     {teijiRecords.map((r, i) => (
-                      <tr key={`${r.department}-${i}`} className="border-b border-slate-100">
-                        <td className="py-2 pr-3 text-slate-700">{r.department}</td>
-                        <td className="py-2 pr-3 text-right text-slate-600">{r.quota}</td>
-                        <td className="py-2 pr-3 text-right text-slate-600">{r.finalApplicants}</td>
-                        <td className="py-2 text-right font-bold text-slate-800">{r.finalRate.toFixed(2)}</td>
+                      <tr key={`${r.department}-${i}`} className="border-b border-slate-200">
+                        <td className="py-2 pr-3 text-slate-900">{r.department}</td>
+                        <td className="py-2 pr-3 text-right tabular-nums text-slate-900">{r.quota}</td>
+                        <td className="py-2 pr-3 text-right tabular-nums text-slate-900">{r.finalApplicants}</td>
+                        <td className="py-2 text-right font-bold tabular-nums text-slate-900">{r.finalRate.toFixed(2)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -389,7 +398,7 @@ export default async function SchoolPage({ params }: PageProps) {
               </div>
               <Link
                 href={`/${prefecture.code}/teiji-tsushin`}
-                className="mt-4 inline-block text-xs font-bold text-brand-700 underline underline-offset-2"
+                className="mt-2 inline-flex min-h-[44px] items-center text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
               >
                 {prefecture.name}の定時制・通信制高校一覧を見る
               </Link>
@@ -399,19 +408,19 @@ export default async function SchoolPage({ params }: PageProps) {
           <SchoolPageNaishinNote schoolName={school.schoolName} prefecture={prefecture} />
 
           {nearbySchools.length > 0 && (
-            <section className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="mb-4 text-lg font-bold text-slate-800">
+            <section className="rounded-lg border border-slate-200 bg-white p-5">
+              <h2 className="mb-4 text-xl font-bold text-slate-900">
                 {school.area ? `同じ学区（${school.area}）の高校` : '近隣の高校'}
               </h2>
-              <ul className="grid gap-2 sm:grid-cols-1">
+              <ul className="border-t border-slate-200">
                 {nearbySchools.map((n) => (
                   <li key={n.schoolCode}>
                     <Link
                       href={`/pref/${prefecture.code}/school/${n.schoolCode}`}
-                      className="flex items-center justify-between rounded-lg bg-slate-50 px-4 py-3 text-sm hover:bg-slate-100"
+                      className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 px-1 py-2 text-base hover:bg-brand-50"
                     >
-                      <span className="text-slate-700">{n.schoolName}</span>
-                      <span className="text-slate-500">倍率 {n.overallRate}倍</span>
+                      <span className="text-slate-900">{n.schoolName}</span>
+                      <span className="shrink-0 tabular-nums text-slate-600">倍率 {n.overallRate}倍</span>
                     </Link>
                   </li>
                 ))}
@@ -419,10 +428,13 @@ export default async function SchoolPage({ params }: PageProps) {
             </section>
           )}
 
-          <section className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-xs leading-relaxed text-amber-700">
+          <section className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-[1.8] text-amber-900">
             <p className="flex items-start gap-2">
-              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-現在は募集人員・応募者数・倍率と、この学校固有の多年度推移・学科区分の県内推移を掲載しています（いずれも教育委員会公表の一次データに基づく）。近隣校リンクは学区によって表示件数が少ない場合があります。偏差値・合格最低点は掲載していません。学校選びの最終判断は必ず各校の公式サイト・教育委員会の最新情報でご確認ください。
+              <AlertTriangle className="mt-1 h-4 w-4 shrink-0" />
+              <span>
+                <strong>注意：</strong>
+                現在は募集人員・応募者数・倍率と、この学校固有の多年度推移・学科区分の県内推移を掲載しています（いずれも教育委員会公表の一次データに基づく）。近隣校リンクは学区によって表示件数が少ない場合があります。偏差値・合格最低点は掲載していません。学校選びの最終判断は必ず各校の公式サイト・教育委員会の最新情報でご確認ください。
+              </span>
             </p>
           </section>
           {/* T-ADS1 AdSense 3枠目: ページ最下部（フッターの前）の関連コンテンツ型ユニット */}

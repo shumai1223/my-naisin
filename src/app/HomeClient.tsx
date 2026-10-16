@@ -3,7 +3,7 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { ArrowRight, RotateCcw, Calculator, ChevronRight, TrendingUp as TrendingUpIcon } from '@/components/icons';
+import { ArrowRight, RotateCcw, ChevronRight } from '@/components/icons';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { getPrefectureByCode, resolvePrefectureConfig, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -30,7 +30,6 @@ import { track, EVENTS } from '@/lib/track';
 import { Header } from '@/components/Header';
 import { HeroNavigation, NavigationMode } from '@/components/HeroNavigation';
 import { TipsSection } from '@/components/TipsSection';
-import { StatsBar } from '@/components/StatsBar';
 import { InputForm } from '@/components/Calculator/InputForm';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
 import { ReverseCalculator } from '@/components/Calculator/ReverseCalculator';
@@ -50,7 +49,6 @@ import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { StaticToolEntryLinks } from '@/components/StaticToolEntryLinks';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
-import { ThreeStepGuide } from '@/components/ThreeStepGuide';
 import { AdUnit } from '@/components/AdSlot';
 
 const SECTION_LOADER = (
@@ -79,19 +77,6 @@ const ShareModal = dynamic(
   () => import('@/components/Result/ShareModal').then((m) => ({ default: m.ShareModal })),
   { ssr: false }
 );
-
-async function popConfetti() {
-  // 動的 import で canvas-confetti を初期バンドルから外す（演出時のみ読み込む）。
-  const confetti = (await import('canvas-confetti')).default;
-  confetti({
-    particleCount: 120,
-    spread: 70,
-    startVelocity: 38,
-    ticks: 220,
-    scalar: 0.95,
-    origin: { y: 0.65 }
-  });
-}
 
 function scoresDifferFromDefault(scores: Scores): boolean {
   return (Object.keys(scores) as SubjectKey[]).some((key) => scores[key] !== DEFAULT_SCORES[key]);
@@ -321,7 +306,6 @@ export default function HomeClient() {
     }
 
     window.setTimeout(() => {
-      popConfetti();
       document.getElementById('result')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
   }, [prefectureCode, saveEnabled, saveMemo, scores]);
@@ -358,20 +342,17 @@ export default function HomeClient() {
           <div className="min-w-0">
             <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
               <Header titleTag="h1" />
-              <div className="px-4 pb-4 md:px-6">
-                <div className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-100">
-                  2026年度入試対応（令和8年度入学者選抜）
-                </div>
-                <ThreeStepGuide />
-              </div>
 
-              <div className="px-4 pb-4 md:px-6">
-                <StatsBar />
-              </div>
+              {/* メタ行。selectモードでは HeroNavigation の見出しの下に同じ行を出す（ページの頭の型: 見出し → メタ行 → 結論） */}
+              {navigationMode !== 'select' && (
+                <div className="px-4 pb-4 pt-4 md:px-6">
+                  <p className="text-sm text-slate-600">2026年度入試対応（令和8年度入学者選抜）</p>
+                </div>
+              )}
 
               {/* 堀A（再訪導線）：保存した目標があれば「前回の続き＝あと◯点」を出し、使い捨てを再訪に変える */}
               {savedGoal && (
-                <div className="px-4 pb-4 md:px-6">
+                <div className="px-4 pb-4 pt-4 md:px-6">
                   <button
                     type="button"
                     onClick={() => {
@@ -383,80 +364,73 @@ export default function HomeClient() {
                           ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }, 80);
                     }}
-                    className="group flex w-full items-center justify-between gap-3 rounded-lg border-2 border-brand-200 bg-brand-50 px-5 py-4 text-left transition-all hover:border-brand-400"
+                    className="group flex w-full items-center justify-between gap-3 rounded-lg border border-slate-200 bg-brand-50 px-4 py-3 text-left hover:bg-brand-100"
                   >
                     <span className="min-w-0">
-                      <span className="flex items-center gap-2 text-sm font-bold text-brand-900">
-                        <TrendingUpIcon className="h-4 w-4 shrink-0" />
-                        おかえりなさい！前回の続きから
+                      <span className="block text-base font-bold text-slate-900">
+                        おかえりなさい。前回の続きから
                       </span>
-                      <span className="mt-0.5 block truncate text-xs text-brand-700">
+                      <span className="mt-0.5 block text-sm text-slate-600">
                         {savedGoal.gap > 0
                           ? `${savedGoal.targetLabel ?? '目標'}まであと ${savedGoal.gap}点（前回の内申 ${savedGoal.score}）`
                           : `${savedGoal.targetLabel ?? '目標'}に到達（前回の内申 ${savedGoal.score}）。今の成績で再チェック`}
                       </span>
                     </span>
-                    <span className="flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-2 text-xs font-bold text-white transition-all group-hover:bg-brand-700">
+                    <span className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded bg-brand-700 px-4 text-sm font-bold text-white group-hover:bg-brand-800">
                       続ける
-                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      <ChevronRight className="h-4 w-4" />
                     </span>
                   </button>
                 </div>
               )}
 
-              {/* 人気急上昇ツール バナー（select画面のみ・/hensachi /hyotei-heikin /tokyo/total-scoreへの強誘導） */}
+              {/* ページの頭（結論の1段落＋主ボタン）。select画面だけ描画される。手順・都道府県・目的別の一覧もここに含む。 */}
+              <HeroNavigation onModeChange={setNavigationMode} currentMode={navigationMode} />
+
+              {/* よく使う計算ツール（select画面のみ・/hyotei-heikin /hensachi /tokyo/total-scoreへの内部リンク）。
+                  旧「急上昇」バナーを、通常のリンク一覧に直した。 */}
               {navigationMode === 'select' && (
-                <div className="px-4 pb-4 md:px-6">
-                  <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-4">
-                    <div className="mb-3 flex items-center gap-2">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-red-500 px-2 py-0.5 text-xs font-bold text-white">
-                        🔥 急上昇
-                      </span>
-                      <span className="text-xs font-bold text-amber-900">今、最も検索されている計算ツール</span>
-                    </div>
-                    <div className="grid gap-2 sm:grid-cols-3">
+                <section className="px-4 pb-4 pt-4 md:px-6">
+                  <h2 className="text-xl font-bold text-slate-900">よく使う計算ツール</h2>
+                  <ul className="mt-4 divide-y divide-slate-200 overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <li>
                       <Link
                         href="/hyotei-heikin"
-                        className="group flex items-center gap-3 rounded-lg bg-white p-3 transition-all"
+                        className="flex min-h-11 items-center justify-between gap-3 px-4 py-3 hover:bg-brand-50"
                       >
-                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
-                          <Calculator className="h-5 w-5" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-slate-800 group-hover:text-brand-600">評定平均 自動計算</div>
-                          <div className="text-xs text-slate-500">通知表から評定平均と素内申を一括算出</div>
-                        </div>
-                        <ChevronRight className="h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
+                        <span className="min-w-0">
+                          <span className="block text-base font-bold text-slate-900">評定平均 自動計算</span>
+                          <span className="block text-sm text-slate-600">通知表から評定平均と素内申を一括算出</span>
+                        </span>
+                        <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                       </Link>
+                    </li>
+                    <li>
                       <Link
                         href="/hensachi"
-                        className="group flex items-center gap-3 rounded-lg bg-white p-3 transition-all"
+                        className="flex min-h-11 items-center justify-between gap-3 px-4 py-3 hover:bg-brand-50"
                       >
-                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-slate-500 text-white">
-                          <TrendingUpIcon className="h-5 w-5" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-slate-800 group-hover:text-slate-600">偏差値計算（5教科）</div>
-                          <div className="text-xs text-slate-500">点数と平均点から偏差値を瞬時に算出</div>
-                        </div>
-                        <ChevronRight className="h-4 w-4 text-slate-500 transition-transform group-hover:translate-x-1" />
+                        <span className="min-w-0">
+                          <span className="block text-base font-bold text-slate-900">偏差値計算（5教科）</span>
+                          <span className="block text-sm text-slate-600">点数と平均点から偏差値を瞬時に算出</span>
+                        </span>
+                        <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                       </Link>
+                    </li>
+                    <li>
                       <Link
                         href="/tokyo/total-score"
-                        className="group flex items-center gap-3 rounded-lg bg-white p-3 transition-all"
+                        className="flex min-h-11 items-center justify-between gap-3 px-4 py-3 hover:bg-brand-50"
                       >
-                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
-                          <Calculator className="h-5 w-5" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-slate-800 group-hover:text-brand-600">都立 総合得点 計算（1020点）</div>
-                          <div className="text-xs text-slate-500">学力検査・調査書・ESAT-Jを一括算出</div>
-                        </div>
-                        <ChevronRight className="h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
+                        <span className="min-w-0">
+                          <span className="block text-base font-bold text-slate-900">都立 総合得点 計算（1020点）</span>
+                          <span className="block text-sm text-slate-600">学力検査・調査書・ESAT-Jを一括算出</span>
+                        </span>
+                        <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                       </Link>
-                    </div>
-                  </div>
-                </div>
+                    </li>
+                  </ul>
+                </section>
               )}
 
               {/* S4-1: /hogosha・/juku-shindanへの静的（select画面のみ・クロール可視）内部リンク。
@@ -474,25 +448,20 @@ export default function HomeClient() {
                 <div className="px-4 pb-4 md:px-6">
                   <Link
                     href="/hiyou"
-                    className="group flex items-center gap-3 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 transition-all hover:border-brand-300"
+                    className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 hover:bg-brand-50"
                   >
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
-                      <span className="text-lg font-bold">¥</span>
-                    </div>
                     <div className="min-w-0 flex-1">
-                      <div className="text-sm font-bold text-slate-800 group-hover:text-brand-700">
+                      <div className="text-base font-bold text-slate-900">
                         保護者の方へ｜教育費・学費・塾代のシミュレーター
                       </div>
-                      <div className="text-xs text-slate-500">
+                      <div className="text-sm text-slate-600">
                         高校〜大学の費用・高校無償化・就学支援金を文科省データで無料試算
                       </div>
                     </div>
-                    <ChevronRight className="h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
+                    <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                   </Link>
                 </div>
               )}
-
-              <HeroNavigation onModeChange={setNavigationMode} currentMode={navigationMode} />
 
               <main id="calculator" className="px-4 pb-10 md:px-6">
                 <div className="space-y-6">
@@ -507,29 +476,24 @@ export default function HomeClient() {
                   {navigationMode === 'calculate' && (
                     <>
                       <Card className="overflow-hidden">
-                        <div className="border-b border-slate-100/80 bg-brand-50/80 px-5 py-5 md:px-6">
+                        <div className="border-b border-slate-200 px-5 py-5 md:px-6">
                           <div className="flex flex-wrap items-center justify-between gap-4">
-                            <div className="flex items-center gap-4">
-                              <div className="grid h-12 w-12 place-items-center rounded-lg bg-brand-500">
-                                <ArrowRight className="h-6 w-6 text-white" />
-                              </div>
-                              <div>
-                                <div className="text-xl font-bold tracking-tight text-slate-800">内申点を入力</div>
-                                <div className="text-sm text-slate-500">スライダーまたは数値入力で成績を選択</div>
-                              </div>
+                            <div>
+                              <h2 className="text-xl font-bold text-slate-900">内申点を入力</h2>
+                              <p className="mt-1 text-sm text-slate-600">スライダーまたは数値入力で成績を選択</p>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-3">
                               <button
                                 onClick={() => setNavigationMode('select')}
-                                className="rounded-lg border border-brand-300 bg-brand-50 px-4 py-2 text-sm text-brand-700 transition-all duration-300 hover:border-brand-400 hover:bg-brand-100"
+                                className="inline-flex min-h-11 items-center rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 hover:bg-brand-50"
                               >
                                 目的を変更
                               </button>
-                              <div className="rounded-lg border border-brand-200/60 bg-brand-50/90 px-5 py-3">
-                                <div className="text-sm font-bold text-brand-700">
+                              <div className="rounded border border-slate-200 bg-white px-4 py-2">
+                                <div className="text-sm font-bold text-slate-900">
                                   {selectedPrefecture?.name ?? '都道府県を選択'}
                                 </div>
-                                <div className="mt-0.5 text-xs text-brand-600/70">満点：{max}点</div>
+                                <div className="mt-0.5 text-xs tabular-nums text-slate-600">満点：{max}点</div>
                               </div>
                             </div>
                           </div>
@@ -672,11 +636,11 @@ export default function HomeClient() {
                 </div>
               </main>
 
-              <div className="mx-auto max-w-4xl px-4 pb-8">
+              <div className="mx-auto max-w-4xl px-4 pb-8 md:px-6">
                 <NaishinGuideSection />
               </div>
 
-              <div className="mx-auto max-w-4xl px-4 pb-8">
+              <div className="mx-auto max-w-4xl px-4 pb-8 md:px-6">
                 <ChangeLogSection limit={5} />
               </div>
 

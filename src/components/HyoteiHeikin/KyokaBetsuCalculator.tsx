@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw, Plus, Trash2 } from '@/components/icons';
+import { RotateCcw, Plus, Trash2 } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { calcKyokaStatus, type Kamoku } from '@/lib/gakushu-seiseki';
@@ -74,29 +74,26 @@ export function KyokaBetsuCalculator() {
   }, [result, kyoka]);
 
   return (
-    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
-      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
-        <div className="flex items-center justify-between gap-3 flex-wrap">
-          <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-brand-600" />
-            教科を選んで科目・評定を入力
-          </h2>
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+      <div className="border-b border-slate-200 px-6 py-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-xl font-bold text-slate-900">教科を選んで科目・評定を入力</h2>
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center gap-1 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded border border-slate-300 bg-white px-4 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-50"
           >
-            <RotateCcw className="h-3.5 w-3.5" />
+            <RotateCcw className="h-4 w-4" />
             リセット
           </button>
         </div>
         <div className="mt-3">
-          <label className="mb-1 block text-xs font-bold text-slate-600">教科</label>
+          <label className="mb-1 block text-sm font-bold text-slate-900">教科</label>
           <select
             value={kyoka}
             onChange={(e) => setKyoka(e.target.value)}
             aria-label="教科"
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm sm:w-64"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700 sm:w-64"
           >
             {KYOKA_LIST.map((k) => (
               <option key={k} value={k}>
@@ -108,27 +105,28 @@ export function KyokaBetsuCalculator() {
       </div>
 
       <div className="px-4 py-4 sm:px-6">
-        <div className="space-y-2">
+        <div className="divide-y divide-slate-200">
           {rows.map((row) => (
-            <div key={row.id} className="grid grid-cols-1 gap-2 rounded-lg border border-slate-100 bg-slate-50 p-3 sm:grid-cols-[1fr_auto_auto] sm:items-center">
+            <div key={row.id} className="grid grid-cols-1 gap-2 py-3 first:pt-0 sm:grid-cols-[1fr_auto_auto] sm:items-center">
               <input
                 type="text"
                 value={row.kamoku}
                 onChange={(e) => updateRow(row.id, { kamoku: e.target.value })}
                 placeholder="科目名（例: 物理基礎）"
-                className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm"
+                className="h-11 rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
                 aria-label="科目名"
               />
-              <div className="flex gap-1 justify-center">
+              <div className="flex justify-center gap-1.5">
                 {RATING_OPTIONS.map((r) => (
                   <button
                     key={r}
                     type="button"
+                    aria-pressed={row.hyotei === r}
                     onClick={() => updateRow(row.id, { hyotei: r })}
-                    className={`h-9 w-9 rounded-lg text-sm font-bold transition-all ${
+                    className={`h-11 w-11 rounded border text-base font-bold tabular-nums transition-colors ${
                       row.hyotei === r
-                        ? 'bg-brand-600 text-white scale-110'
-                        : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-brand-50'
+                        ? 'border-brand-700 bg-brand-700 text-white'
+                        : 'border-slate-300 bg-white text-slate-700 hover:bg-brand-50'
                     }`}
                     aria-label={`評定${r}`}
                   >
@@ -139,10 +137,10 @@ export function KyokaBetsuCalculator() {
               <button
                 type="button"
                 onClick={() => removeRow(row.id)}
-                className="justify-self-end rounded-lg p-2 text-slate-400 hover:bg-red-50 hover:text-red-600 sm:justify-self-center"
+                className="inline-flex items-center justify-center justify-self-end rounded p-3 text-slate-600 transition-colors hover:bg-red-50 hover:text-red-700 sm:justify-self-center"
                 aria-label="この科目を削除"
               >
-                <Trash2 className="h-4 w-4" />
+                <Trash2 className="h-5 w-5" />
               </button>
             </div>
           ))}
@@ -150,18 +148,18 @@ export function KyokaBetsuCalculator() {
         <button
           type="button"
           onClick={addRow}
-          className="mt-3 inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-2 text-xs font-bold text-brand-700 ring-1 ring-brand-200 hover:bg-brand-100"
+          className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
         >
-          <Plus className="h-3.5 w-3.5" />
+          <Plus className="h-4 w-4" />
           科目を追加
         </button>
       </div>
 
       {result !== null && result !== undefined && (
-        <div className="bg-brand-50 px-6 py-6 border-t-2 border-brand-200 text-center" role="status" aria-live="polite">
-          <div className="text-xs font-bold text-slate-600 mb-1">{kyoka}の学習成績の状況</div>
-          <div className="text-5xl font-bold text-brand-700">{result.toFixed(1)}</div>
-          <div className="text-xs text-slate-500 mt-1">/ 5.0</div>
+        <div className="border-t border-slate-200 bg-brand-50 px-6 py-6 text-center" role="status" aria-live="polite">
+          <div className="mb-1 text-sm font-bold text-slate-600">{kyoka}の学習成績の状況</div>
+          <div className="text-5xl font-bold tabular-nums text-brand-700">{result.toFixed(1)}</div>
+          <div className="mt-1 text-sm text-slate-600">/ 5.0</div>
         </div>
       )}
     </div>

@@ -42,8 +42,8 @@ export function ReferralRequestButton({
 
   if (status === 'success') {
     return (
-      <div className="flex items-center gap-1.5 rounded-lg bg-brand-50 px-3 py-2 text-xs font-bold text-brand-700">
-        <CheckCircle2 className="h-4 w-4" />
+      <div className="flex items-start gap-1.5 rounded-lg border border-slate-200 bg-brand-50 px-3 py-2 text-sm font-bold text-brand-700">
+        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
         依頼を受け付けました。担当者からのご連絡をお待ちください。
       </div>
     );
@@ -55,13 +55,13 @@ export function ReferralRequestButton({
         type="button"
         onClick={onClick}
         disabled={status === 'submitting'}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex min-h-[44px] items-center gap-1.5 rounded bg-brand-700 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-brand-800 disabled:opacity-60"
       >
-        {status === 'submitting' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
+        {status === 'submitting' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
         この塾に紹介を依頼する
       </button>
       {status === 'error' && (
-        <p className="mt-1.5 text-xs text-red-500">送信に失敗しました。時間をおいて再度お試しください。</p>
+        <p className="mt-2 text-sm text-red-800">送信に失敗しました。時間をおいて再度お試しください。</p>
       )}
     </div>
   );

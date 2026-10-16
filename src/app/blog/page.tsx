@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BookOpen, Sparkles, TrendingUp, ArrowRight } from '@/components/icons';
+import { ArrowRight, ChevronRight } from '@/components/icons';
 
 import { getAllPosts } from '@/lib/blog-data';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -50,66 +50,60 @@ export default function BlogPage() {
           { name: '内申点コラム', url: 'https://my-naishin.com/blog' },
         ]}
       />
-      <div className="min-h-screen bg-[#fafafa]">
-        {/* Hero */}
-        <div className="relative overflow-hidden bg-white border-b border-slate-100">
-          <div className="absolute inset-0 bg-slate-50 pointer-events-none" />
-          <div className="relative mx-auto max-w-5xl px-4 py-16 text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-1.5 text-sm text-brand-600 ring-1 ring-brand-100/50">
-              <BookOpen className="h-4 w-4" />
-              2026年度入試対応
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              内申点対策コラム
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
-              内申点の基礎知識から、主要5教科・実技4教科の具体的な成績アップ術まで。
-              <br className="hidden sm:inline" />
-              2026年（令和8年）4月15日現在の最新入試データに基づき解説。
-            </p>
-            <div className="mt-8 flex items-center justify-center gap-6 text-sm text-slate-500">
-              <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-full ring-1 ring-slate-100">
-                <BookOpen className="h-4 w-4 text-brand-500" />
-                全 {posts.length} 記事
-              </span>
-              <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-full ring-1 ring-slate-100">
-                <TrendingUp className="h-4 w-4 text-brand-500" />
-                定期更新
-              </span>
-            </div>
-          </div>
-        </div>
+      <div className="min-h-screen">
+        {/* ページの頭: パンくず → h1 → メタ行 → 結論の段落 */}
+        <header className="mx-auto max-w-5xl px-4 pb-2 pt-6">
+          <nav className="mb-4 flex items-center gap-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] min-w-[44px] items-center hover:text-brand-700 hover:underline">
+              ホーム
+            </Link>
+            <ChevronRight className="h-3.5 w-3.5 shrink-0" />
+            <span className="text-slate-900">内申点コラム</span>
+          </nav>
+          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
+            内申点対策コラム
+          </h1>
+          <p className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-slate-600">
+            <span>2026年度入試対応</span>
+            <span className="tabular-nums">
+              全 {posts.length} 記事
+            </span>
+            <span>定期更新</span>
+          </p>
+          <p className="mt-4 max-w-2xl text-base leading-[1.8] text-slate-900">
+            内申点の基礎知識から、主要5教科・実技4教科の具体的な成績アップ術まで。
+            <br className="hidden sm:inline" />
+            2026年（令和8年）4月15日現在の最新入試データに基づき解説。
+          </p>
+        </header>
 
         <div className="mx-auto max-w-5xl px-4">
           <BlogListClient posts={listItems} />
 
           {/* Bottom CTA */}
-          <div className="rounded-lg bg-white p-8 sm:p-12 text-center ring-1 ring-slate-100 mb-24 max-w-4xl mx-auto">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 mb-6">
-              <Sparkles className="h-8 w-8 text-brand-600" />
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
-              志望校との距離を正確に測る
-            </h3>
-            <p className="text-slate-500 mb-8 max-w-2xl mx-auto leading-relaxed">
-              47都道府県の最新入試データに対応。あなたの内申点と当日点の目安を瞬時にシミュレーションできます。
+          <section className="mx-auto mb-14 max-w-4xl rounded-lg border border-slate-200 bg-white p-6 sm:p-8">
+            <h2 className="text-xl font-bold text-slate-900">
+              志望校との距離を測る
+            </h2>
+            <p className="mt-3 max-w-2xl text-base leading-[1.8] text-slate-900">
+              47都道府県の最新入試データに対応。あなたの内申点と当日点の目安をシミュレーションできます。
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/"
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-brand-600 px-8 py-4 text-sm font-bold text-white transition-all duration-200 hover:bg-brand-700 active:scale-95"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors duration-150 hover:bg-brand-800"
               >
                 内申点を計算する
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/reverse"
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-slate-50 px-8 py-4 text-sm font-bold text-slate-700 ring-1 ring-inset ring-slate-200 transition-all duration-200 hover:bg-slate-100 active:scale-95"
+                className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-5 py-3 font-bold text-brand-700 transition-colors duration-150 hover:bg-brand-50"
               >
                 目標から逆算する
               </Link>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </>

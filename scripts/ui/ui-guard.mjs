@@ -21,7 +21,7 @@ import { ROOT, rel, parse, stringSegments, gitBase, gitShow, changedFiles, EMOJI
 const args = process.argv.slice(2);
 const baseIdx = args.indexOf('--base');
 const BASE = baseIdx >= 0 ? args[baseIdx + 1] : gitBase();
-const fileArgs = args.filter((a, i) => !a.startsWith('--') && i !== baseIdx + 1);
+const fileArgs = args.filter((a, i) => !a.startsWith('--') && !(baseIdx >= 0 && i === baseIdx + 1));
 const JSON_OUT = args.includes('--json');
 
 const ICON_MODULES = new Set(['lucide-react', '@/components/icons']);

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { FileSpreadsheet, ArrowLeft } from '@/components/icons';
+import { ArrowLeft } from '@/components/icons';
 
 import { QuoteGenerator } from '@/components/Mitsumori/QuoteGenerator';
 
@@ -18,24 +18,19 @@ export const metadata: Metadata = {
 export default function MitsumoriPage() {
   return (
     <div className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-3xl px-4 py-12">
+      <div className="mx-auto max-w-3xl px-4 py-10">
         <Link
           href="/developers#pricing"
-          className="print:hidden mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm text-slate-600 transition-all hover:bg-slate-50"
+          className="print:hidden mb-4 inline-flex min-h-[44px] items-center gap-1.5 text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800"
         >
           <ArrowLeft className="h-4 w-4" />
           料金プランに戻る
         </Link>
 
-        <div className="print:hidden mb-8 flex items-center gap-4">
-          <div className="grid h-14 w-14 place-items-center rounded-lg bg-brand-500">
-            <FileSpreadsheet className="h-7 w-7 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-slate-800">見積書の作成</h1>
-            <p className="text-sm text-slate-500">Business / Enterprise プランの見積書をその場で作成できます</p>
-          </div>
-        </div>
+        <header className="print:hidden mb-8">
+          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">見積書の作成</h1>
+          <p className="mt-3 text-base leading-[1.8] text-slate-900">Business / Enterprise プランの見積書をその場で作成できます</p>
+        </header>
 
         <QuoteGenerator />
       </div>

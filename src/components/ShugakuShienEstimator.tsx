@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ShieldCheck, Info } from '@/components/icons';
+import { AlertCircle } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { shugakuShienAnnual, highSchoolSupportOver3Years, highSchoolTotal, formatYen, toManYen } from '@/lib/education-cost/engine';
@@ -40,15 +40,16 @@ export function ShugakuShienEstimator() {
   };
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-7">
-      <span className="block text-sm font-bold text-slate-800">進学先の高校</span>
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+      <span className="block text-sm font-bold text-slate-900">進学先の高校</span>
       <div className="mt-2 grid grid-cols-2 gap-2">
         {(['public', 'private'] as const).map((c) => (
           <button
             key={c}
             onClick={() => onSelect({ course: c })}
-            className={`rounded-lg border px-3 py-2.5 text-sm font-bold transition-all ${
-              course === c ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
+            aria-pressed={course === c}
+            className={`min-h-[44px] rounded border px-3 py-2 text-sm font-bold transition-colors ${
+              course === c ? 'border-brand-700 bg-brand-50 text-brand-800 ring-1 ring-brand-700' : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
             }`}
           >
             {c === 'public' ? '公立高校' : '私立高校'}
@@ -56,14 +57,15 @@ export function ShugakuShienEstimator() {
         ))}
       </div>
 
-      <span className="mt-5 block text-sm font-bold text-slate-800">世帯年収の区分（目安）</span>
+      <span className="mt-6 block text-sm font-bold text-slate-900">世帯年収の区分（目安）</span>
       <div className="mt-2 grid gap-2">
         {SHUGAKU_SHIEN_TIERS.map((t) => (
           <button
             key={t.bracket}
             onClick={() => onSelect({ bracket: t.bracket })}
-            className={`rounded-lg border px-3 py-2.5 text-left text-sm font-bold transition-all ${
-              bracket === t.bracket ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 bg-white text-slate-600 hover:border-brand-200'
+            aria-pressed={bracket === t.bracket}
+            className={`min-h-[44px] rounded border px-3 py-2 text-left text-sm font-bold transition-colors ${
+              bracket === t.bracket ? 'border-brand-700 bg-brand-50 text-brand-800 ring-1 ring-brand-700' : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
             }`}
           >
             {t.label}
@@ -71,29 +73,33 @@ export function ShugakuShienEstimator() {
         ))}
       </div>
 
-      <div className="mt-6 rounded-lg border-2 border-brand-300 bg-brand-50 p-5">
-        <div className="flex items-center justify-center gap-1.5 text-sm font-bold text-brand-800">
-          <ShieldCheck className="h-4 w-4" />
+      <div className="mt-6 rounded-lg border border-slate-200 bg-brand-50 p-5">
+        <div className="text-center text-sm font-bold text-slate-900">
           就学支援金の支援額の目安（{course === 'public' ? '公立' : '私立'}高校）
         </div>
-        <div className="mt-1 text-center text-4xl font-bold tracking-tight text-brand-700 md:text-5xl">
+        <div className="mt-1 text-center text-4xl font-bold tabular-nums text-brand-700">
           {annual > 0 ? `${formatYen(annual)}/年` : '対象外'}
         </div>
-        <div className="mt-1 text-center text-xs text-brand-700">
+        <div className="mt-1 text-center text-sm text-slate-900">
           {annual > 0 ? `3年間で約 ${toManYen(over3)} の授業料軽減` : '従来は支援の対象外（自治体独自の補助は要確認）'}
         </div>
-        <div className="mt-3 rounded-lg bg-white/70 p-3 text-xs leading-relaxed text-slate-600">
+        <div className="mt-4 border-t border-slate-200 pt-3 text-sm leading-[1.8] text-slate-600">
           {tier.note}
           <br />
-          <span className="text-slate-500">参考：{course === 'public' ? '公立' : '私立'}高校の3年間の学習費総額は約 {toManYen(total)}（授業料以外も含む総額）。支援は授業料部分が対象です。</span>
+          <span>参考：{course === 'public' ? '公立' : '私立'}高校の3年間の学習費総額は約 {toManYen(total)}（授業料以外も含む総額）。支援は授業料部分が対象です。</span>
         </div>
       </div>
 
-      <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-slate-500">
-        <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-500" />
-        年収はあくまで目安です。実際は世帯の「市町村民税の課税標準額×6%−調整控除額」で判定され、家族構成や共働きで変わります。
-        制度は年度で見直されるため、最新の金額・所得基準は必ず文部科学省・お住まいの都道府県でご確認ください。
-      </p>
+      <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-[1.8] text-amber-900">
+        <p className="flex items-center gap-1.5 font-bold">
+          <AlertCircle className="h-4 w-4 shrink-0" />
+          注意
+        </p>
+        <p className="mt-1">
+          年収はあくまで目安です。実際は世帯の「市町村民税の課税標準額×6%−調整控除額」で判定され、家族構成や共働きで変わります。
+          制度は年度で見直されるため、最新の金額・所得基準は必ず文部科学省・お住まいの都道府県でご確認ください。
+        </p>
+      </div>
     </div>
   );
 }

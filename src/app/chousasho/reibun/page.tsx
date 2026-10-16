@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, NotebookPen, MessageCircleHeart, ListTodo, HelpCircle, AlertCircle } from '@/components/icons';
+import { Home, ChevronRight, AlertCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -103,22 +103,19 @@ export default function ChousashoReibunPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/chousasho" className="hover:text-brand-600">調査書とは</Link>
+            <Link href="/chousasho" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">調査書とは</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">書き方例文・依頼マナー・チェックリスト</span>
+            <span className="text-slate-900">書き方例文・依頼マナー・チェックリスト</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <NotebookPen className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               調査書・活動報告書の書き方【例文つき】
             </h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               自己申告書・活動報告書の書き方例文、先生への依頼マナー、出願前の期限チェックリストをまとめました。
             </p>
           </header>
@@ -131,21 +128,18 @@ export default function ChousashoReibunPage() {
           </AnswerBox>
 
           {/* 例文集 */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <NotebookPen className="h-5 w-5 text-brand-600" />
-              活動報告書・自己申告書の書き方例文
-            </h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">活動報告書・自己申告書の書き方例文</h2>
+            <div className="divide-y divide-slate-200">
               {REIBUN_CATEGORIES.map((c) => (
-                <div key={c.title} className="rounded-lg border border-slate-100 bg-slate-50 p-4">
-                  <h3 className="mb-2 text-sm font-bold text-brand-800">{c.title}</h3>
-                  <p className="mb-2 rounded-lg bg-white p-3 text-sm leading-relaxed text-slate-700 ring-1 ring-slate-100">
+                <div key={c.title} className="py-5 first:pt-0 last:pb-0">
+                  <h3 className="mb-2 text-[17px] font-bold text-slate-900">{c.title}</h3>
+                  <p className="mb-3 rounded bg-slate-50 px-4 py-3 text-base leading-[1.8] text-slate-900">
                     「{c.example}」
                   </p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2">
                     {c.points.map((p) => (
-                      <span key={p} className="rounded-full bg-brand-100 px-2.5 py-1 text-xs font-bold text-brand-700">
+                      <span key={p} className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                         {p}
                       </span>
                     ))}
@@ -153,89 +147,83 @@ export default function ChousashoReibunPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-xs text-slate-500">
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               ※ 例文はあくまで書き方の参考です。実際の様式・記入項目は学校指定のものに従ってください。
             </p>
           </section>
 
           {/* 依頼マナー */}
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <MessageCircleHeart className="h-5 w-5 text-red-500" />
-              先生への依頼マナー
-            </h2>
-            <div className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">先生への依頼マナー</h2>
+            <div className="divide-y divide-slate-200">
               {MANNER_TIPS.map((t) => (
-                <div key={t.title} className="rounded-lg border border-red-100 bg-red-50/50 p-4">
-                  <h3 className="mb-1 text-sm font-bold text-red-900">{t.title}</h3>
-                  <p className="text-sm leading-relaxed text-red-900/90">{t.text}</p>
+                <div key={t.title} className="py-4 first:pt-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">{t.title}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">{t.text}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* チェックリスト */}
-          <section className="mt-8 rounded-lg border border-brand-200 bg-brand-50/40 p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ListTodo className="h-5 w-5 text-brand-600" />
-              出願前の期限チェックリスト
-            </h2>
-            <ul className="space-y-2">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">出願前の期限チェックリスト</h2>
+            <ul className="divide-y divide-slate-200">
               {CHECKLIST.map((item) => (
-                <li key={item} className="flex items-start gap-2 rounded-lg bg-white p-3 text-sm text-slate-700 ring-1 ring-brand-100">
-                  <span className="mt-0.5 h-4 w-4 shrink-0 rounded border-2 border-brand-400" aria-hidden />
+                <li key={item} className="flex items-start gap-3 py-3 text-base leading-[1.8] text-slate-900 first:pt-0 last:pb-0">
+                  <span className="mt-1.5 h-4 w-4 shrink-0 rounded border border-slate-400" aria-hidden />
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="mt-3 text-xs text-brand-800">
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               ※ 具体的な締切日は学校・志望校により異なります。必ず在籍校の進路指導と各高校の募集要項でご確認ください。
             </p>
           </section>
 
           {/* 注意 */}
-          <section className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-5">
-            <h2 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-900">
-              <AlertCircle className="h-4 w-4" />
+          <section className="mt-10 rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-900">
+            <h2 className="flex items-center gap-2 text-base font-bold">
+              <AlertCircle className="h-5 w-5 shrink-0" />
               書くときの注意点
             </h2>
-            <ul className="space-y-1.5 text-sm leading-relaxed text-amber-900">
-              <li>・誇張せず事実を書く（数字・期間は正確に）。</li>
-              <li>・「頑張った」だけの抽象的な表現は避け、具体的な行動・成果を書く。</li>
-              <li>・学校指定の様式・文字数制限がある場合はそれに従う。</li>
-              <li>・不安な内容は自己判断せず、担任・進路指導の先生に相談する。</li>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-[1.8]">
+              <li>誇張せず事実を書く（数字・期間は正確に）。</li>
+              <li>「頑張った」だけの抽象的な表現は避け、具体的な行動・成果を書く。</li>
+              <li>学校指定の様式・文字数制限がある場合はそれに従う。</li>
+              <li>不安な内容は自己判断せず、担任・進路指導の先生に相談する。</li>
             </ul>
           </section>
 
           {/* 回遊 */}
-          <section className="mt-8 grid gap-3 sm:grid-cols-2">
+          <section className="mt-10 grid gap-3 sm:grid-cols-2">
             {[
               { href: '/chousasho', title: '調査書とは？（記載内容・内申点との違い）' },
               { href: '/chousasho/kakikata', title: '調査書の発行〜出願までの流れ' },
               { href: '/mendan', title: '三者面談の準備（先生に聞くこと）' },
               { href: '/juken-schedule', title: '受験スケジュール・出願時期' },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-700 transition-shadow">
+              <Link key={c.href} href={c.href} className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 transition-colors hover:bg-brand-50">
                 {c.title}
-                <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             ))}
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white">
+                  <summary className="cursor-pointer list-none p-4 text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" /></span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="px-4 pb-4 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>

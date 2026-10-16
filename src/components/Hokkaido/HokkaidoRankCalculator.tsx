@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from '@/components/icons';
+import { RotateCcw } from '@/components/icons';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 import { HOKKAIDO_TOTAL_SCORE_MAX, computeHokkaidoRank } from '@/lib/total-score/hokkaido';
 
@@ -38,39 +38,28 @@ export function HokkaidoRankCalculator({ onResult }: Props = {}) {
     setTargetInput('');
   };
 
-  const getRankColor = () => {
-    if (['A', 'B'].includes(rankInfo.rank)) return 'text-red-700';
-    if (['C', 'D'].includes(rankInfo.rank)) return 'text-amber-700';
-    if (['E', 'F', 'G'].includes(rankInfo.rank)) return 'text-amber-700';
-    if (['H', 'I'].includes(rankInfo.rank)) return 'text-brand-700';
-    return 'text-brand-700';
-  };
-
   return (
-    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
-      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
-        <div className="flex items-center justify-between gap-3 flex-wrap">
-          <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-brand-600" />
-            北海道 内申ランク（A〜M）を判定
-          </h2>
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+      <div className="border-b border-slate-200 px-5 py-4 md:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-xl font-bold text-slate-900">北海道 内申ランク（A〜M）を判定</h2>
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center gap-1 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 hover:bg-brand-50"
           >
-            <RotateCcw className="h-3.5 w-3.5" />
+            <RotateCcw className="h-4 w-4" />
             リセット
           </button>
         </div>
-        <p className="mt-2 text-xs text-slate-600">内申点と学力検査点を入力すると、ランクと総合点が判定されます</p>
+        <p className="mt-2 text-sm text-slate-600">内申点と学力検査点を入力すると、ランクと総合点が判定されます</p>
       </div>
 
-      <div className="p-6 space-y-5">
+      <div className="space-y-5 p-5 md:p-6">
         {/* 内申点 */}
         <div>
-          <label htmlFor="hokkaido-naishin" className="block text-sm font-bold text-slate-800 mb-1">
-            内申点（315点満点）<span className="text-xs font-normal text-slate-500 ml-2">中1〜中3 9教科</span>
+          <label htmlFor="hokkaido-naishin" className="mb-1 block text-sm font-bold text-slate-900">
+            内申点（315点満点）<span className="ml-2 text-xs font-normal text-slate-600">中1〜中3 9教科</span>
           </label>
           <input
             id="hokkaido-naishin"
@@ -80,17 +69,17 @@ export function HokkaidoRankCalculator({ onResult }: Props = {}) {
             placeholder="例：240"
             min="0"
             max="315"
-            className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-base focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
-          <p className="mt-1 text-xs text-slate-500">
-            北海道の内申点は中1×2 + 中2×2 + 中3×3の重みで計算されます（簡略表示）。詳しくは<a href="/hokkaido/naishin" className="text-brand-600 underline">北海道の内申点計算ツール</a>もご利用ください。
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
+            北海道の内申点は中1×2 + 中2×2 + 中3×3の重みで計算されます（簡略表示）。詳しくは<a href="/hokkaido/naishin" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">北海道の内申点計算ツール</a>もご利用ください。
           </p>
         </div>
 
         {/* 学力検査 */}
         <div>
-          <label htmlFor="hokkaido-gakuryoku" className="block text-sm font-bold text-slate-800 mb-1">
-            学力検査点（300点満点）<span className="text-xs font-normal text-slate-500 ml-2">5教科 × 60点</span>
+          <label htmlFor="hokkaido-gakuryoku" className="mb-1 block text-sm font-bold text-slate-900">
+            学力検査点（300点満点）<span className="ml-2 text-xs font-normal text-slate-600">5教科 × 60点</span>
           </label>
           <input
             id="hokkaido-gakuryoku"
@@ -100,35 +89,34 @@ export function HokkaidoRankCalculator({ onResult }: Props = {}) {
             placeholder="例：240"
             min="0"
             max="300"
-            className="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-base focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </div>
       </div>
 
       {/* 結果 */}
       {hasInput && (
-        <div className="border-t-2 border-brand-100 bg-brand-50 px-6 py-6">
+        <div className="border-t border-slate-200 bg-brand-50 px-5 py-6 md:px-6">
           <div className="text-center">
-            <div className="text-xs font-bold text-slate-600 mb-2">あなたの内申ランク</div>
-            <div className={`text-6xl font-bold ${getRankColor()}`}>{rankInfo.rank}<span className="text-2xl">ランク</span></div>
-            <div className="mt-2 text-sm font-bold text-slate-700">{rankInfo.label}</div>
+            <div className="mb-2 text-sm font-bold text-slate-600">あなたの内申ランク</div>
+            <div className="text-6xl font-bold text-brand-700">{rankInfo.rank}<span className="text-2xl">ランク</span></div>
+            <div className="mt-2 text-base font-bold text-slate-900">{rankInfo.label}</div>
 
-            <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              <div className="rounded-lg bg-white border border-brand-100 p-3">
-                <div className="text-xs text-slate-500">内申点</div>
-                <div className="text-xl font-bold text-brand-700">{naishin}<span className="text-xs">/315</span></div>
+            <dl className="mt-4 grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200">
+              <div className="px-2 py-3">
+                <dt className="text-xs text-slate-600">内申点</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{naishin}<span className="text-xs font-normal text-slate-600">/315</span></dd>
               </div>
-              <div className="rounded-lg bg-white border border-brand-100 p-3">
-                <div className="text-xs text-slate-500">学力検査</div>
-                <div className="text-xl font-bold text-brand-700">{gakuryoku}<span className="text-xs">/300</span></div>
+              <div className="px-2 py-3">
+                <dt className="text-xs text-slate-600">学力検査</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{gakuryoku}<span className="text-xs font-normal text-slate-600">/300</span></dd>
               </div>
-            </div>
-
-            <div className="mt-3 rounded-lg bg-white border border-brand-100 p-3">
-              <div className="text-xs text-slate-500">総合点</div>
-              <div className="text-2xl font-bold text-brand-700">{total}<span className="text-sm">/{maxTotal}</span></div>
-              <div className="text-xs text-slate-500 mt-1">満点比 {percent.toFixed(1)}%</div>
-            </div>
+              <div className="px-2 py-3">
+                <dt className="text-xs text-slate-600">総合点</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-brand-700">{total}<span className="text-xs font-normal text-slate-600">/{maxTotal}</span></dd>
+              </div>
+            </dl>
+            <p className="mt-2 text-sm tabular-nums text-slate-600">満点比 {percent.toFixed(1)}%</p>
           </div>
 
           <TargetDistancePanel

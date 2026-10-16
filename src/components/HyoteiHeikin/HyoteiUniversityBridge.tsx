@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { GraduationCap, ChevronRight } from '@/components/icons';
+import { ChevronRight } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { beaconStudentFunnelEvent } from '@/lib/student-funnel-beacon';
@@ -69,12 +69,9 @@ export function HyoteiUniversityBridge({ value }: { value: number | null }) {
   if (grade === 'koukou') {
     const v = typeof value === 'number' ? value.toFixed(1) : null;
     return (
-      <div className="mt-6 rounded-lg border border-brand-200 bg-brand-50/60 p-4 md:p-5">
-        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
-          <GraduationCap className="h-3.5 w-3.5" />
-          高校生の方へ
-        </div>
-        <p className="mb-3 text-sm leading-relaxed text-slate-700">
+      <div className="mt-6 rounded-lg border border-slate-200 bg-brand-50 p-4 md:p-5">
+        <p className="mb-1 text-sm font-bold text-slate-900">高校生の方へ</p>
+        <p className="mb-3 text-base leading-[1.8] text-slate-900">
           {v ? `評定平均${v}は` : '今の評定平均は'}
           指定校推薦・総合型選抜の出願基準に直結します。大学の学費・奨学金・一人暮らしの費用まで、姉妹サイト「My
           Shingaku」で無料で調べられます。
@@ -84,7 +81,7 @@ export function HyoteiUniversityBridge({ value }: { value: number | null }) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={onBridgeClick}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-bold text-white transition-all hover:bg-brand-700"
+          className="inline-flex items-center justify-center gap-1.5 rounded bg-brand-700 px-5 py-3 text-center text-base font-bold text-white transition-colors hover:bg-brand-800"
         >
           My Shingakuで大学の費用・進路を調べる
           <ChevronRight className="h-4 w-4" />
@@ -94,20 +91,20 @@ export function HyoteiUniversityBridge({ value }: { value: number | null }) {
   }
 
   return (
-    <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50/70 p-4 md:p-5">
-      <p className="mb-3 text-sm font-bold text-slate-700">今の学年を教えてください（あなたに合った次の一歩をご案内します）</p>
+    <div className="mt-6 rounded-lg border border-slate-200 bg-white p-4 md:p-5">
+      <p className="mb-3 text-base font-bold text-slate-900">今の学年を教えてください（あなたに合った次の一歩をご案内します）</p>
       <div className="grid grid-cols-2 gap-2">
         <button
           type="button"
           onClick={() => selectGrade('chugaku')}
-          className="rounded-lg border-2 border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
+          className="rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50"
         >
           中学生
         </button>
         <button
           type="button"
           onClick={() => selectGrade('koukou')}
-          className="rounded-lg border-2 border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
+          className="rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50"
         >
           高校生
         </button>

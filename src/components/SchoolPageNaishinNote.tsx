@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BookOpen, ExternalLink, ChevronRight } from '@/components/icons';
+import { ChevronRight } from '@/components/icons';
 
 import type { PrefectureConfig } from '@/lib/prefectures';
 
@@ -30,54 +30,55 @@ export function SchoolPageNaishinNote({ schoolName, prefecture }: SchoolPageNais
   const hasVaryingMultipliers = new Set(multiplierEntries.map(([, m]) => m)).size > 1;
 
   return (
-    <section className="rounded-lg border border-slate-200 bg-white p-6">
-      <h2 className="mb-1 flex items-center gap-2 text-lg font-bold text-slate-800">
-        <BookOpen className="h-5 w-5 shrink-0 text-brand-500" />
-        {schoolName}を目指す場合の内申点のしくみ
-      </h2>
-      <p className="mb-4 text-xs text-slate-500">
+    <section className="rounded-lg border border-slate-200 bg-white p-5">
+      <h2 className="text-xl font-bold text-slate-900">{schoolName}を目指す場合の内申点のしくみ</h2>
+      <p className="mt-2 text-sm leading-[1.7] text-slate-600">
         {prefecture.name}の公立高校は、どの学校を受けるかにかかわらず県内共通の方式で内申点を計算します。
       </p>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div className="rounded-lg bg-slate-50 p-4">
-          <div className="text-xs font-bold text-slate-500">対象学年</div>
-          <div className="mt-1 text-sm font-bold text-slate-800">{gradeLabel}</div>
+      <dl className="mt-4 grid grid-cols-1 divide-y divide-slate-200 border-y border-slate-200 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+        <div className="px-4 py-3">
+          <dt className="text-xs text-slate-600">対象学年</dt>
+          <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{gradeLabel}</dd>
         </div>
-        <div className="rounded-lg bg-slate-50 p-4">
-          <div className="text-xs font-bold text-slate-500">内申点の満点</div>
-          <div className="mt-1 text-sm font-bold text-slate-800">{prefecture.maxScore}点</div>
+        <div className="px-4 py-3">
+          <dt className="text-xs text-slate-600">内申点の満点</dt>
+          <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{prefecture.maxScore}点</dd>
         </div>
-      </div>
+      </dl>
 
       {hasVaryingMultipliers && (
-        <div className="mt-3 rounded-lg bg-slate-50 p-4">
-          <div className="text-xs font-bold text-slate-500">学年別の比重</div>
-          <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-700">
+        <dl className="border-b border-slate-200 px-4 py-3">
+          <dt className="text-xs text-slate-600">学年別の比重</dt>
+          <dd className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-base font-bold tabular-nums text-slate-900">
             {multiplierEntries.map(([grade, mult]) => (
               <span key={grade}>
                 中{grade}: ×{mult}
               </span>
             ))}
-          </div>
-        </div>
+          </dd>
+        </dl>
       )}
 
-      <p className="mt-4 text-sm leading-relaxed text-slate-600">{prefecture.description}</p>
+      <p className="mt-4 text-base leading-[1.8] text-slate-900">{prefecture.description}</p>
 
       <Link
         href={`/${prefecture.code}/naishin`}
-        className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-brand-600 hover:underline"
+        className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-base font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
       >
         {prefecture.name}の内申点を計算する
         <ChevronRight className="h-4 w-4 shrink-0" />
       </Link>
 
       {prefecture.sourceUrl && (
-        <p className="mt-4 flex items-start gap-1.5 text-xs text-slate-400">
-          <ExternalLink className="mt-0.5 h-3 w-3 shrink-0" />
+        <p className="mt-2 border-t border-slate-200 pt-3 text-sm text-slate-600">
           出典:{' '}
-          <a href={prefecture.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-600">
+          <a
+            href={prefecture.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+          >
             {prefecture.sourceTitle ?? `${prefecture.name}教育委員会`}
           </a>
           {prefecture.lastVerified && `（最終確認: ${prefecture.lastVerified}）`}

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Home, ChevronRight, ChevronRightSquare, ClipboardCheck, HelpCircle, AlertTriangle } from '@/components/icons';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -123,99 +123,100 @@ export default function JukenChokuzenCheckPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">入試直前チェックリスト</span>
+            <span className="text-slate-900">入試直前チェックリスト</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">入試直前チェックリスト</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">入試直前チェックリスト</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               出願直前〜入試本番までにやることを、7つのステップでまとめました。
               すでに確認済みのステップは飛ばして、必要なところだけご活用ください。
             </p>
           </header>
 
-          <section className="mb-8 rounded-lg border-2 border-amber-200 bg-amber-50 p-5">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
-              <p className="text-sm leading-relaxed text-amber-900">
-                このページは新しい採点基準・合格ボーダー等の情報を追加で提供するものではありません。当サイトの既存ツール・解説ページを、直前期にやるべき順番でまとめた案内です。学校からの正式な指示が最優先です。
-              </p>
-            </div>
+          <section className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="flex items-center gap-1.5 text-sm font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-base leading-[1.8] text-amber-900">
+              このページは新しい採点基準・合格ボーダー等の情報を追加で提供するものではありません。当サイトの既存ツール・解説ページを、直前期にやるべき順番でまとめた案内です。学校からの正式な指示が最優先です。
+            </p>
           </section>
 
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-brand-500 pl-3 text-lg font-bold text-slate-800">
-              <ClipboardCheck className="h-5 w-5 text-brand-500" />
-              直前チェックリスト（7ステップ）
-            </h2>
-            <div className="space-y-4">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">直前チェックリスト（7ステップ）</h2>
+            <ol className="space-y-5">
               {CHECKLIST_STEPS.map((s, i) => (
-                <div key={s.title} className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
-                      {i + 1}
-                    </div>
-                    {i < CHECKLIST_STEPS.length - 1 && <div className="mt-1 h-full w-px flex-1 bg-brand-100" />}
-                  </div>
-                  <div className="pb-2">
-                    <div className="text-sm font-bold text-slate-800">{s.title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
-                    <Link href={s.href} className="mt-1.5 inline-flex items-center gap-1 text-xs font-bold text-brand-600 hover:underline">
+                <li key={s.title} className="flex gap-3">
+                  <span className="w-6 shrink-0 text-base font-bold tabular-nums text-brand-700">{i + 1}.</span>
+                  <div>
+                    <h3 className="text-[17px] font-bold text-slate-900">{s.title}</h3>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.body}</p>
+                    <Link
+                      href={s.href}
+                      className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                    >
                       {s.linkLabel}
-                      <ChevronRightSquare className="h-3 w-3" />
+                      <ChevronRight className="h-4 w-4" />
                     </Link>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </section>
 
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 flex items-start gap-1.5 text-sm font-bold text-slate-800">
-                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
-                    Q. {f.question}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mb-10">
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/juken-toujitsu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                受験当日の持ち物・タイムライン
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/jikosaiten" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                自己採点のやり方
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/heigan-yuugu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                併願優遇の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/chousasho" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
-                調査書ガイド
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/juken-toujitsu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">受験当日の持ち物・タイムライン</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/jikosaiten" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">自己採点のやり方</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/heigan-yuugu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">併願優遇の仕組み</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/chousasho" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">調査書ガイド</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

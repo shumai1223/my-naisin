@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Home, ChevronRight, BookOpen, HelpCircle, AlertTriangle, MapPin, Lightbulb } from '@/components/icons';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -57,114 +57,97 @@ export default async function GlossaryTermPage({ params }: PageProps) {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/glossary" className="hover:text-brand-600">用語辞典</Link>
+            <Link href="/glossary" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">用語辞典</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">{label}</span>
+            <span className="text-slate-900">{label}</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-amber-500 text-white">
-              <BookOpen className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">{label}とは</h1>
-            <p className="mx-auto mt-2 text-sm text-slate-400">読み方：{t.reading}</p>
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">{label}とは</h1>
+            <p className="mt-2 text-sm text-slate-600">読み方：{t.reading}</p>
           </header>
 
-          <section className="mb-6 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-amber-500" />
-              意味・定義
-            </h2>
-            <p className="text-sm leading-relaxed text-slate-600">{t.description}</p>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">意味・定義</h2>
+            <p className="text-base leading-[1.8] text-slate-900">{t.description}</p>
           </section>
 
-          <section className="mb-6 rounded-lg border border-brand-200 bg-brand-50 p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Lightbulb className="h-5 w-5 text-brand-600" />
-              具体例
-            </h2>
-            <p className="text-sm leading-relaxed text-brand-800">{t.example}</p>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">具体例</h2>
+            <p className="text-base leading-[1.8] text-slate-900">{t.example}</p>
           </section>
 
           {t.relatedPrefectures && (
-            <section className="mb-6 rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <MapPin className="h-5 w-5 text-brand-500" />
-                都道府県による違い
-              </h2>
-              <p className="text-sm leading-relaxed text-slate-600">{t.relatedPrefectures}</p>
+            <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="mb-3 text-xl font-bold text-slate-900">都道府県による違い</h2>
+              <p className="text-base leading-[1.8] text-slate-900">{t.relatedPrefectures}</p>
             </section>
           )}
 
-          <section className="mb-6 rounded-lg border-2 border-amber-200 bg-amber-50 p-6">
-            <div className="flex items-start gap-2">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
-              <div>
-                <h2 className="mb-1 text-sm font-bold text-amber-900">注意点</h2>
-                <p className="text-sm leading-relaxed text-amber-800">{t.note}</p>
-              </div>
-            </div>
+          <section className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4 md:p-5">
+            <h2 className="mb-1 flex items-center gap-1.5 text-base font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意点
+            </h2>
+            <p className="text-base leading-[1.8] text-amber-900">{t.note}</p>
           </section>
 
           {t.links && t.links.length > 0 && (
-            <section className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
-              <h2 className="mb-3 text-sm font-bold text-slate-700">{label}を使って計算する</h2>
-              <div className="flex flex-wrap gap-2">
+            <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="mb-3 text-xl font-bold text-slate-900">{label}を使って計算する</h2>
+              <div className="flex flex-wrap gap-3">
                 {t.links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="flex items-center gap-1 rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 transition-colors hover:bg-brand-50"
+                    className="inline-flex min-h-[44px] items-center gap-1 rounded border border-brand-700 bg-white px-4 py-2 text-base font-bold text-brand-700 hover:bg-brand-50"
                   >
                     {link.label}
-                    <ChevronRight className="h-3.5 w-3.5" />
+                    <ChevronRight className="h-4 w-4" />
                   </Link>
                 ))}
               </div>
             </section>
           )}
 
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-amber-500" />
-              よくある質問
-            </h2>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {faqs.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mb-10">
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">他の用語も見る</h2>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">他の用語も見る</h2>
             <div className="flex flex-wrap gap-2">
               {otherTerms.map((o) => (
                 <Link
                   key={o.id}
                   href={`/glossary/${o.id}`}
-                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-700 transition-colors hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700"
+                  className="inline-flex min-h-[44px] items-center rounded border border-slate-300 bg-white px-3 text-sm text-brand-700 hover:bg-brand-50"
                 >
                   {shortTermLabel(o)}
                 </Link>
               ))}
               <Link
                 href="/glossary"
-                className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700 transition-colors hover:bg-amber-100"
+                className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-3 text-sm font-bold text-brand-700 hover:bg-brand-50"
               >
                 用語辞典トップへ
               </Link>

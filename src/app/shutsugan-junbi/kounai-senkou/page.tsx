@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Users, ChevronRightSquare, HelpCircle, ClipboardCheck } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -72,85 +72,85 @@ export default function KounaiSenkouPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/shutsugan-junbi" className="hover:text-slate-600">出願準備チェックリスト</Link>
+            <Link href="/shutsugan-junbi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">出願準備チェックリスト</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">校内選考とは</span>
+            <span className="text-slate-900">校内選考とは</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
-              <Users className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">校内選考とは？</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">校内選考とは？</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               学校推薦型選抜で行われる<strong>「校内選考」</strong>の一般的な流れと、準備のポイントをまとめました。
               学校ごとの具体的な基準は非公表につき断定せず、確認すべきポイントを整理します。
             </p>
           </header>
 
-          <section className="mt-8">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">校内選考の一般的な流れ</h2>
-            <div className="space-y-3">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">校内選考の一般的な流れ</h2>
+            <ol className="space-y-5">
               {STEPS.map((s, i) => (
-                <div key={s.name} className="flex gap-3 rounded-lg border border-slate-200 bg-white p-5">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-slate-50 text-slate-600">
-                    <ClipboardCheck className="h-5 w-5" />
-                  </span>
+                <li key={s.name} className="flex gap-3">
+                  <span className="w-6 shrink-0 text-base font-bold tabular-nums text-brand-700">{i + 1}.</span>
                   <div>
-                    <div className="text-sm font-bold text-slate-800">{i + 1}. {s.name}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.text}</p>
+                    <h3 className="text-[17px] font-bold text-slate-900">{s.name}</h3>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.text}</p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
-            <p className="mt-3 text-xs leading-relaxed text-slate-400">
+            </ol>
+            <p className="mt-5 text-sm leading-[1.8] text-slate-600">
               ※ 校内選考の実施有無・基準・時期は学校ごとに異なります。学校推薦型選抜を検討する場合は、
               早めに担任・進路指導の先生に相談してください。
             </p>
           </section>
 
-          <div className="mt-8">
+          <div className="mb-10">
             <ParentLeadCTA placement="suisen" />
           </div>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">関連ページ</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">関連ページ</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
               {[
                 { href: '/shutsugan-junbi', title: '出願準備チェックリスト' },
                 { href: '/shutsugan-junbi/shibou-riyuusho', title: '志望理由書の書き方・構成' },
                 { href: '/suisen-nyuushi', title: '推薦入試の仕組み' },
                 { href: '/hyotei-heikin/suisen-kijun', title: '推薦に必要な評定平均 早見表' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-lg bg-white p-4 text-sm text-slate-700 transition-shadow">
-                  {c.title}
-                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
-                </Link>
+                <li key={c.href}>
+                  <Link href={c.href} className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                    <span className="underline underline-offset-2">{c.title}</span>
+                    <ChevronRight className="h-4 w-4 shrink-0" />
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-slate-600" />よくある質問</h2>
+          <section className="mb-10">
+            <h2 className="mb-5 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
+                      {f.question}
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
+                    </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
-          <p className="mt-8 text-center text-xs leading-relaxed text-slate-400">
+          <p className="text-sm leading-[1.8] text-slate-600">
             ※ 校内選考の実施有無・基準・時期は学校・大学により異なります。最終的な情報は在籍校・志望大学の募集要項でご確認ください。
           </p>
         </div>

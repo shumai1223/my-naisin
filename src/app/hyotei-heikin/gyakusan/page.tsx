@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Undo2, ChevronRightSquare } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -74,73 +74,70 @@ export default function HyoteiHeikinGyakusanPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-brand-600">評定平均計算</Link>
+            <Link href="/hyotei-heikin" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">評定平均計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">評定平均の逆算</span>
+            <span className="text-slate-900">評定平均の逆算</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <Undo2 className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">推薦に必要な評定平均、残りでいくつ必要？</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">推薦に必要な評定平均、残りでいくつ必要？</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               現在の評定平均と評価済み回数から、<strong>目標に届かせるために残りで必要な平均</strong>をその場で逆算します。
             </p>
           </header>
 
           <HyoteiHeikinGyakusanResultFlow />
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">逆算の考え方</h2>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">逆算の考え方</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               評定平均は「評定の合計 ÷ 評価回数」で決まります。目標平均に必要な合計（目標平均×全体の回数）から、
               現在までの合計を引き、残りの回数で割ると「残りで必要な平均」が出ます。
-              計算に使う式そのものは<Link href="/hyotei-heikin" className="font-bold text-brand-600 hover:underline">通常の評定平均計算</Link>と同じ考え方で、逆向きに解いているだけです。
+              計算に使う式そのものは<Link href="/hyotei-heikin" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">通常の評定平均計算</Link>と同じ考え方で、逆向きに解いているだけです。
               推薦・総合型選抜で評価対象になる範囲（学年・学期）は学校・大学によって異なるため、
               ご自身の状況に合わせて「評価済み回数」「残り回数」を入力してください。
             </p>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/hyotei-heikin/suisen-kijun" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <div className="grid gap-x-6 sm:grid-cols-2">
+              <Link href="/hyotei-heikin/suisen-kijun" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
                 推薦・併願優遇の評定平均ガイド
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/suisen-nyuushi" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
+              <Link href="/suisen-nyuushi" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
                 推薦入試の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/sougou-gata-senbatsu" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
+              <Link href="/sougou-gata-senbatsu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
                 総合型選抜の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hensachi/gyakusan" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
+              <Link href="/hensachi/gyakusan" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
                 目標偏差値まであと何点？逆算
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50">
+              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
                 大学受験の「学習成績の状況」を計算
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

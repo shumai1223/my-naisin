@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from '@/components/icons';
+import { RotateCcw } from '@/components/icons';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 import { SAITAMA_MAX_GAKURYOKU, SAITAMA_ASSUMED_TOTAL_CEILING, computeSaitamaTotalScore } from '@/lib/total-score/saitama';
 
@@ -43,26 +43,23 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-lg border-2 border-slate-200 bg-white">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 bg-slate-50 px-6 py-4">
-        <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Calculator className="h-5 w-5 text-slate-600" />
-          埼玉県の総合得点（目安）を計算
-        </h2>
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 px-5 py-4 md:px-6">
+        <h2 className="text-xl font-bold text-slate-900">埼玉県の総合得点（目安）を計算</h2>
         <button
           type="button"
           onClick={reset}
-          className="inline-flex items-center gap-1 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+          className="inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50"
         >
-          <RotateCcw className="h-3.5 w-3.5" />
+          <RotateCcw className="h-4 w-4" />
           リセット
         </button>
       </div>
 
-      <div className="space-y-5 p-6">
+      <div className="space-y-5 px-5 py-6 md:px-6">
         <div>
-          <label htmlFor="saitama-gakuryoku" className="mb-1 block text-sm font-bold text-slate-800">
-            学力検査点（500点満点）<span className="ml-2 text-xs font-normal text-slate-500">5教科×100点</span>
+          <label htmlFor="saitama-gakuryoku" className="mb-1 block text-sm font-bold text-slate-900">
+            学力検査点（500点満点）<span className="ml-2 text-xs font-normal text-slate-600">5教科×100点</span>
           </label>
           <input
             id="saitama-gakuryoku"
@@ -73,13 +70,13 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
             value={gakuryokuInput}
             onChange={(e) => setGakuryokuInput(e.target.value)}
             placeholder="例：380"
-            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+            className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </div>
 
         <div>
-          <label htmlFor="saitama-chosasho" className="mb-1 block text-sm font-bold text-slate-800">
-            調査書点（換算後）<span className="ml-2 text-xs font-normal text-slate-500">ご自身で把握している点数</span>
+          <label htmlFor="saitama-chosasho" className="mb-1 block text-sm font-bold text-slate-900">
+            調査書点（換算後）<span className="ml-2 text-xs font-normal text-slate-600">ご自身で把握している点数</span>
           </label>
           <input
             id="saitama-chosasho"
@@ -89,31 +86,31 @@ export function SaitamaTotalScoreCalculator({ onResult }: Props) {
             value={chosashoInput}
             onChange={(e) => setChosashoInput(e.target.value)}
             placeholder="例：260"
-            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+            className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
-          <p className="mt-2 text-xs leading-relaxed text-slate-500">
+          <p className="mt-2 text-sm leading-[1.7] text-slate-600">
             調査書点の満点・換算方法は高校・学科ごとに異なります。上の「学年比率 早見表」で重み付けを確認したうえで、志望校の募集要項に沿ってご自身で換算した点数を入力してください。
           </p>
         </div>
       </div>
 
       {hasInput && (
-        <div className="border-t-2 border-slate-100 bg-slate-50 px-6 py-6 text-center">
-          <div className="mb-1 text-xs font-bold text-slate-600">学力検査＋調査書点の合計（目安）</div>
-          <div className="text-5xl font-bold text-slate-700">{total}</div>
-          <div className="mx-auto mt-4 max-w-sm rounded-lg border border-slate-100 bg-white p-3 text-left">
-            <div className="mb-2 text-xs font-bold text-slate-700">内訳</div>
-            <ul className="space-y-1 text-xs text-slate-600">
+        <div className="border-t border-slate-200 bg-brand-50 px-5 py-6 md:px-6">
+          <div className="text-sm font-bold text-slate-700">学力検査＋調査書点の合計（目安）</div>
+          <div className="mt-1 text-5xl font-bold tabular-nums text-slate-900">{total}</div>
+          <div className="mt-4 max-w-sm border-t border-slate-200 pt-3">
+            <div className="mb-1 text-sm font-bold text-slate-900">内訳</div>
+            <ul className="space-y-1 text-sm tabular-nums text-slate-700">
               <li>学力検査：{gakuryoku} / {SAITAMA_MAX_GAKURYOKU}点</li>
               <li>調査書点（自己申告）：{chosasho}点</li>
-              <li className="border-t border-slate-100 pt-1 font-bold">合計：{total}点</li>
+              <li className="border-t border-slate-200 pt-1 font-bold text-slate-900">合計：{total}点</li>
             </ul>
           </div>
-          <p className="mx-auto mt-3 max-w-sm text-xs leading-relaxed text-slate-400">
+          <p className="mt-4 text-sm leading-[1.7] text-slate-600">
             ※ 埼玉県は調査書点の満点・学力検査との比率が高校・学科ごとに異なるため、この合計は入力値をそのまま足しただけの目安です。学校別の合格ボーダーを示すものではありません。
           </p>
 
-          <div className="mx-auto max-w-sm text-left">
+          <div className="max-w-sm">
             <TargetDistancePanel
               targetInput={targetInput}
               onTargetInputChange={setTargetInput}

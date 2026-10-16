@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Bell, BellRing, Check, X } from '@/components/icons';
+import { Bell, Check, X } from '@/components/icons';
 
 import { track } from '@/lib/track';
 import { VAPID_PUBLIC_KEY } from '@/lib/push-config';
@@ -99,39 +99,34 @@ export function WebPushOptIn({
   if (!supported) return null;
 
   return (
-    <section className={`rounded-lg border border-brand-200 bg-brand-50 p-5 ${className}`}>
-      <div className="flex items-start gap-3">
-        <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-100 text-brand-600">
-          {state === 'subscribed' ? <BellRing className="h-5 w-5" /> : <Bell className="h-5 w-5" />}
-        </span>
-        <div className="flex-1">
-          <h3 className="text-sm font-bold text-slate-800">{heading}</h3>
-          <p className="mt-1 text-xs leading-relaxed text-slate-600">{body}</p>
+    <section className={`rounded-lg border border-slate-200 bg-brand-50 p-5 ${className}`}>
+      <h3 className="text-base font-bold text-slate-900">{heading}</h3>
+      <p className="mt-1 text-sm leading-[1.7] text-slate-600">{body}</p>
 
-          {state === 'subscribed' ? (
-            <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-brand-50 px-3 py-2 text-xs font-bold text-brand-700">
-              <Check className="h-4 w-4" />通知をオンにしました。出願・通知表の時期にお知らせします。
-            </p>
-          ) : state === 'denied' ? (
-            <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs text-slate-500">
-              <X className="h-4 w-4" />通知がブロックされています。ブラウザの設定から許可すると受け取れます。
-            </p>
-          ) : (
-            <button
-              type="button"
-              onClick={subscribe}
-              disabled={state === 'working'}
-              className="mt-3 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              <Bell className="h-4 w-4" />
-              {state === 'working' ? '設定中…' : '通知を受け取る（無料）'}
-            </button>
-          )}
-          {state === 'error' && (
-            <p className="mt-2 text-xs text-red-600">設定に失敗しました。時間をおいて再度お試しください。</p>
-          )}
-        </div>
-      </div>
+      {state === 'subscribed' ? (
+        <p className="mt-3 flex items-start gap-1.5 text-sm font-bold text-brand-700">
+          <Check className="mt-0.5 h-4 w-4 shrink-0" />
+          通知をオンにしました。出願・通知表の時期にお知らせします。
+        </p>
+      ) : state === 'denied' ? (
+        <p className="mt-3 flex items-start gap-1.5 text-sm text-slate-700">
+          <X className="mt-0.5 h-4 w-4 shrink-0" />
+          通知がブロックされています。ブラウザの設定から許可すると受け取れます。
+        </p>
+      ) : (
+        <button
+          type="button"
+          onClick={subscribe}
+          disabled={state === 'working'}
+          className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded bg-brand-700 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          <Bell className="h-4 w-4" />
+          {state === 'working' ? '設定中…' : '通知を受け取る（無料）'}
+        </button>
+      )}
+      {state === 'error' && (
+        <p className="mt-2 text-sm text-red-800">設定に失敗しました。時間をおいて再度お試しください。</p>
+      )}
     </section>
   );
 }

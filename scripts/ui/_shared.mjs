@@ -8,7 +8,8 @@ import ts from 'typescript';
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 /** 絵文字・記号（UIに出してはいけないもの）。→ ※ ・ ● ■ ▶ などの活字記号は許可。 */
-export const EMOJI_RX = /\p{Extended_Pictographic}|[✓✔✕✖✗✘★☆️‍]/gu;
+// 活字の記号（© ® ™ ‼ ℹ ← → ↔ ↑ ↓ ▶ ◀ など）は絵文字扱いにしない。
+export const EMOJI_RX = /(?![©®‼⁉™ℹ←-⇿▪▫▶◀◻-◾])\p{Extended_Pictographic}|[✓✔✕✖✗✘★☆️‍]/gu;
 export const JA_RX = /[぀-ヿ㐀-鿿ｦ-ﾟ]/;
 
 export function walk(dir, out = []) {

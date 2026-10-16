@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calculator, BookOpen, Target, TrendingUp, BarChart3, Sparkles, ChevronRight, ArrowLeftRight, Undo2 } from '@/components/icons';
+import { Calculator, BookOpen, Target, TrendingUp, BarChart3, ClipboardList, ChevronRight, ArrowLeftRight, Undo2 } from '@/components/icons';
 
 /**
  * 偏差値クラスタのハブ＆スポーク内部リンク（情報設計 §7）。
@@ -19,7 +19,7 @@ interface ClusterPage {
 
 const CLUSTER_PAGES: ClusterPage[] = [
   { key: 'hub', href: '/hensachi', title: '偏差値計算サイト（5教科）', desc: '点数・平均点から偏差値を30秒で算出。早見表・順位換算つき', icon: Calculator },
-  { key: 'shindan', href: '/hensachi/shindan', title: '偏差値診断（点数不要）', desc: '点数が分からなくても5つの質問で偏差値の目安を診断', icon: Sparkles },
+  { key: 'shindan', href: '/hensachi/shindan', title: '偏差値診断（点数不要）', desc: '点数が分からなくても5つの質問で偏差値の目安を診断', icon: ClipboardList },
   { key: 'kyoka-betsu', href: '/hensachi/kyoka-betsu', title: '教科別の偏差値を出す', desc: '国語・数学・英語・理科・社会／5教科・3教科を個別に計算', icon: BookOpen },
   { key: 'shiboukou', href: '/hensachi/shiboukou', title: '偏差値→志望校レンジ逆引き', desc: '偏差値から届く高校レベルと、内申点との並置を確認', icon: Target },
   { key: 'agekata', href: '/hensachi/agekata', title: '偏差値の出し方・上げ方', desc: '計算式の使い方と、1か月で偏差値を上げる具体策', icon: TrendingUp },
@@ -31,32 +31,29 @@ const CLUSTER_PAGES: ClusterPage[] = [
 export function HensachiClusterNav({ current }: { current: HensachiClusterKey }) {
   const others = CLUSTER_PAGES.filter((p) => p.key !== current);
   return (
-    <nav aria-label="偏差値ツール一覧" className="rounded-lg border border-slate-100 bg-slate-50/60 p-5 md:p-6">
-      <h2 className="mb-1 flex items-center gap-2 text-base font-bold text-slate-800">
-        <TrendingUp className="h-5 w-5 text-slate-500" />
+    <nav aria-label="偏差値ツール一覧" className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+      <h2 className="mb-1 text-xl font-bold text-slate-900">
         偏差値ツール・ガイド
       </h2>
-      <p className="mb-4 text-xs leading-relaxed text-slate-500">
-        偏差値は<strong className="text-slate-700">計算式だけで確定する</strong>ので、当サイトの偏差値ツールはすべて無料・登録不要・その場で結果が出ます。
+      <p className="mb-2 text-sm leading-[1.8] text-slate-600">
+        偏差値は<strong className="text-slate-900">計算式だけで確定する</strong>ので、当サイトの偏差値ツールはすべて無料・登録不要・その場で結果が出ます。
       </p>
-      <ul className="grid gap-2 sm:grid-cols-2">
+      <ul className="grid gap-x-6 sm:grid-cols-2">
         {others.map((p) => {
           const Icon = p.icon;
           return (
             <li key={p.key}>
               <Link
                 href={p.href}
-                className="group flex items-start gap-3 rounded-lg border border-slate-100 bg-white px-4 py-3 transition-all hover:border-slate-200 hover:bg-slate-50/50"
+                className="group flex min-h-[44px] items-start gap-3 border-b border-slate-200 py-3"
               >
-                <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-600 transition-colors group-hover:bg-slate-200">
-                  <Icon className="h-4 w-4" />
-                </span>
+                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
                 <span className="flex-1">
-                  <span className="flex items-center gap-1 text-sm font-bold text-slate-800 group-hover:text-slate-700">
+                  <span className="flex items-center gap-1 text-base font-bold text-slate-900 group-hover:text-brand-700">
                     {p.title}
-                    <ChevronRight className="h-3.5 w-3.5 text-slate-300 transition-transform group-hover:translate-x-0.5 group-hover:text-slate-400" />
+                    <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
                   </span>
-                  <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{p.desc}</span>
+                  <span className="mt-0.5 block text-sm leading-relaxed text-slate-600">{p.desc}</span>
                 </span>
               </Link>
             </li>

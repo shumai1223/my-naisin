@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Undo2, ChevronRightSquare } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -61,74 +61,71 @@ export default function HensachiGyakusanPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-slate-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-slate-600">偏差値計算</Link>
+            <Link href="/hensachi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">目標偏差値まであと何点？逆算</span>
+            <span className="text-slate-900">目標偏差値まであと何点？逆算</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-500 text-white">
-              <Undo2 className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">目標偏差値まであと何点？逆算計算機</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">目標偏差値まであと何点？逆算計算機</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               過去問・模試の得点から今の偏差値を出し、<strong>目標の偏差値に必要な点数</strong>をその場で逆算します。
             </p>
           </header>
 
           <HensachiGyakusanResultFlow />
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">逆算の考え方</h2>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">逆算の考え方</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               偏差値の式「偏差値 = 50 + 10 ×（点数 − 平均点）÷ 標準偏差」を点数について解くと、
               「必要な点数 = 平均点 + 標準偏差 ×（目標偏差値 − 50）÷ 10」になります。
               今の得点との差が、目標に届くまでの「あと何点」です。
-              計算に使う式そのものは<Link href="/hensachi" className="font-bold text-slate-600 hover:underline">通常の偏差値計算</Link>と全く同じで、逆向きに解いているだけです。
+              計算に使う式そのものは<Link href="/hensachi" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">通常の偏差値計算</Link>と全く同じで、逆向きに解いているだけです。
             </p>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/hensachi/gyakusan/hayamihyou" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
-                偏差値↔点数 早見表
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <div className="grid gap-x-6 sm:grid-cols-2">
+              <Link href="/hensachi/gyakusan/hayamihyou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
+                偏差値と点数の早見表
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hensachi/shiboukou" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
+              <Link href="/hensachi/shiboukou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
                 偏差値→志望校レンジ逆引き
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hensachi/agekata" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
+              <Link href="/hensachi/agekata" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
                 偏差値の出し方・上げ方
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-slate-200 hover:bg-slate-50/50">
+              <Link href="/tarinai-taisaku" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
                 内申点・当日点が足りない冬の緊急対策
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4 first:pt-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          <div className="mt-8">
+          <div className="mt-10">
             <HensachiClusterNav current="gyakusan" />
           </div>
 

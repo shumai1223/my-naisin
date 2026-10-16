@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { NotebookPen, Plus, Trash2, RotateCcw } from '@/components/icons';
+import { Plus, Trash2, RotateCcw } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { calcKyokaStatus, calcOverallStatus, toGaihyou, type Kamoku } from '@/lib/gakushu-seiseki';
@@ -37,14 +37,6 @@ function nextRowId(): string {
 function emptyRow(): Row {
   return { id: nextRowId(), kyoka: KYOKA_LIST[0], kamoku: '', gakunen: 1, hyotei: 3 };
 }
-
-const GAIHYOU_STYLE: Record<string, string> = {
-  A: 'text-red-700',
-  B: 'text-amber-700',
-  C: 'text-amber-700',
-  D: 'text-brand-700',
-  E: 'text-slate-600',
-};
 
 /** 「２．各教科・科目等の学習の記録」の表と同じ形（科目ごとに学年別の評定を横に並べる）へ変換する。 */
 interface PivotRow {
@@ -103,23 +95,20 @@ export function ChousashoSimulator() {
   return (
     <div className="space-y-6">
       {/* 入力エリア */}
-      <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
-        <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
-          <div className="flex items-center justify-between gap-3 flex-wrap">
-            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-              <NotebookPen className="h-5 w-5 text-brand-600" />
-              科目を入力する
-            </h2>
+      <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+        <div className="border-b border-slate-200 px-5 py-4 md:px-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-xl font-bold text-slate-900">科目を入力する</h2>
             <button
               type="button"
               onClick={reset}
-              className="inline-flex items-center gap-1 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 hover:bg-brand-50"
             >
-              <RotateCcw className="h-3.5 w-3.5" />
+              <RotateCcw className="h-4 w-4" />
               リセット
             </button>
           </div>
-          <p className="mt-2 text-xs text-slate-600">
+          <p className="mt-2 text-sm text-slate-600">
             入力すると、下に実際の調査書 様式１と同じ並び（教科・科目→教科別学習成績の状況→全体→概評）で結果が表示されます。
           </p>
         </div>
@@ -128,12 +117,12 @@ export function ChousashoSimulator() {
             {rows.map((row) => (
               <div
                 key={row.id}
-                className="grid grid-cols-1 gap-2 rounded-lg border border-slate-100 bg-slate-50 p-3 sm:grid-cols-[1fr_1fr_auto_auto_auto] sm:items-center"
+                className="grid grid-cols-1 gap-2 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[1fr_1fr_auto_auto_auto] md:items-center"
               >
                 <select
                   value={row.kyoka}
                   onChange={(e) => updateRow(row.id, { kyoka: e.target.value })}
-                  className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm"
+                  className="h-11 rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
                   aria-label="教科"
                 >
                   {KYOKA_LIST.map((k) => (
@@ -147,13 +136,13 @@ export function ChousashoSimulator() {
                   value={row.kamoku}
                   onChange={(e) => updateRow(row.id, { kamoku: e.target.value })}
                   placeholder="科目名（例: 物理基礎）"
-                  className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm"
+                  className="h-11 rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
                   aria-label="科目名"
                 />
                 <select
                   value={row.gakunen}
                   onChange={(e) => updateRow(row.id, { gakunen: Number(e.target.value) as Kamoku['gakunen'] })}
-                  className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm"
+                  className="h-11 rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
                   aria-label="学年"
                 >
                   {GAKUNEN_LIST.map((g) => (
@@ -162,16 +151,17 @@ export function ChousashoSimulator() {
                     </option>
                   ))}
                 </select>
-                <div className="flex gap-1 justify-center">
+                <div className="flex justify-center gap-1">
                   {RATING_OPTIONS.map((r) => (
                     <button
                       key={r}
                       type="button"
                       onClick={() => updateRow(row.id, { hyotei: r })}
-                      className={`h-9 w-9 rounded-lg text-sm font-bold transition-all ${
+                      aria-pressed={row.hyotei === r}
+                      className={`h-11 w-11 rounded border text-base font-bold tabular-nums transition-colors ${
                         row.hyotei === r
-                          ? 'bg-brand-600 text-white scale-110'
-                          : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-brand-50'
+                          ? 'border-brand-700 bg-brand-700 text-white'
+                          : 'border-slate-300 bg-white text-slate-700 hover:bg-brand-50'
                       }`}
                       aria-label={`評定${r}`}
                     >
@@ -182,23 +172,23 @@ export function ChousashoSimulator() {
                 <button
                   type="button"
                   onClick={() => removeRow(row.id)}
-                  className="justify-self-end rounded-lg p-2 text-slate-400 hover:bg-red-50 hover:text-red-600 sm:justify-self-center"
+                  className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center justify-self-end rounded text-slate-600 hover:bg-red-50 hover:text-red-700 md:justify-self-center"
                   aria-label="この科目を削除"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-5 w-5" />
                 </button>
               </div>
             ))}
           </div>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-sm text-slate-600">
             保健体育のように複数学年で履修する科目は、学年ごとに行を分けて入力してください（各学年1科目分として計算します）。
           </p>
           <button
             type="button"
             onClick={addRow}
-            className="mt-3 inline-flex items-center gap-1 rounded-lg bg-brand-50 px-3 py-2 text-xs font-bold text-brand-700 ring-1 ring-brand-200 hover:bg-brand-100"
+            className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 hover:bg-brand-50"
           >
-            <Plus className="h-3.5 w-3.5" />
+            <Plus className="h-4 w-4" />
             科目を追加
           </button>
         </div>
@@ -206,25 +196,25 @@ export function ChousashoSimulator() {
 
       {/* 調査書 様式風の結果表示 */}
       {pivotRows.length > 0 && overall !== null && gaihyou !== null && (
-        <div className="rounded-lg border-2 border-slate-300 bg-white overflow-hidden" role="status" aria-live="polite">
-          <div className="border-b-2 border-slate-300 bg-slate-800 px-6 py-3">
-            <div className="text-center text-sm font-bold tracking-widest text-white">調　査　書（様式１）</div>
+        <div className="overflow-hidden rounded-lg border border-slate-200 bg-white" role="status" aria-live="polite">
+          <div className="border-b border-slate-900 px-5 py-3 md:px-6">
+            <div className="text-center text-base font-bold text-slate-900">調　査　書（様式１）</div>
           </div>
 
           {/* ２．各教科・科目等の学習の記録 */}
           <div className="px-4 py-4 sm:px-6">
-            <div className="mb-2 text-xs font-bold text-slate-500">２．各教科・科目等の学習の記録</div>
+            <div className="mb-2 text-sm font-bold text-slate-900">２．各教科・科目等の学習の記録</div>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[560px] border-collapse text-xs sm:text-sm">
+              <table className="w-full min-w-[560px] border-collapse text-sm">
                 <thead>
-                  <tr className="bg-slate-100 text-slate-700">
-                    <th className="border border-slate-300 px-2 py-1.5 font-bold">教科</th>
-                    <th className="border border-slate-300 px-2 py-1.5 font-bold">科目</th>
-                    <th className="border border-slate-300 px-2 py-1.5 font-bold text-slate-400" title="このツールでは入力を受け付けません（計算に使わないため）">
+                  <tr className="border-b border-slate-900 text-slate-600">
+                    <th className="px-2 py-2 text-left font-bold">教科</th>
+                    <th className="px-2 py-2 text-left font-bold">科目</th>
+                    <th className="px-2 py-2 text-center font-bold" title="このツールでは入力を受け付けません（計算に使わないため）">
                       修得単位数
                     </th>
                     {GAKUNEN_LIST.map((g) => (
-                      <th key={g} className="border border-slate-300 px-2 py-1.5 font-bold">
+                      <th key={g} className="px-2 py-2 text-center font-bold">
                         第{g}学年
                       </th>
                     ))}
@@ -232,12 +222,12 @@ export function ChousashoSimulator() {
                 </thead>
                 <tbody>
                   {pivotRows.map((row) => (
-                    <tr key={row.key} className="odd:bg-white even:bg-slate-50">
-                      <td className="border border-slate-200 px-2 py-1.5 font-bold text-slate-700">{row.kyoka}</td>
-                      <td className="border border-slate-200 px-2 py-1.5 text-slate-700">{row.kamoku}</td>
-                      <td className="border border-slate-200 px-2 py-1.5 text-center text-slate-300">—</td>
+                    <tr key={row.key} className="border-b border-slate-200">
+                      <td className="px-2 py-2 font-bold text-slate-900">{row.kyoka}</td>
+                      <td className="px-2 py-2 text-slate-900">{row.kamoku}</td>
+                      <td className="px-2 py-2 text-center text-slate-600">—</td>
                       {GAKUNEN_LIST.map((g) => (
-                        <td key={g} className="border border-slate-200 px-2 py-1.5 text-center font-mono">
+                        <td key={g} className="px-2 py-2 text-center tabular-nums text-slate-900">
                           {row.byGakunen[g] ?? ''}
                         </td>
                       ))}
@@ -246,21 +236,21 @@ export function ChousashoSimulator() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-xs text-slate-400">
+            <p className="mt-2 text-xs text-slate-600">
               ※「修得単位数」欄は実際の調査書には記載されますが、学習成績の状況の計算には使用しません（文部科学省の計算例に基づく）。
             </p>
           </div>
 
           {/* ３．各教科の学習成績の状況 */}
           <div className="border-t border-slate-200 px-4 py-4 sm:px-6">
-            <div className="mb-2 text-xs font-bold text-slate-500">３．各教科の学習成績の状況</div>
+            <div className="mb-2 text-sm font-bold text-slate-900">３．各教科の学習成績の状況</div>
             <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-xs sm:text-sm">
+              <table className="w-full border-collapse text-sm">
                 <tbody>
                   {Object.entries(kyokaStatus).map(([kyoka, value]) => (
-                    <tr key={kyoka} className="odd:bg-white even:bg-brand-50/40">
-                      <td className="border border-slate-200 px-3 py-1.5 font-bold text-slate-700">{kyoka}</td>
-                      <td className="border border-slate-200 px-3 py-1.5 text-right font-mono text-brand-800">
+                    <tr key={kyoka} className="border-b border-slate-200">
+                      <td className="px-3 py-2 font-bold text-slate-900">{kyoka}</td>
+                      <td className="px-3 py-2 text-right font-bold tabular-nums text-slate-900">
                         {value.toFixed(1)}
                       </td>
                     </tr>
@@ -271,16 +261,16 @@ export function ChousashoSimulator() {
           </div>
 
           {/* ４．学習成績概評 */}
-          <div className="border-t-2 border-slate-300 bg-brand-50 px-4 py-5 sm:px-6">
-            <div className="mb-2 text-xs font-bold text-slate-500">４．学習成績概評</div>
+          <div className="border-t border-slate-200 bg-brand-50 px-4 py-5 sm:px-6">
+            <div className="mb-2 text-sm font-bold text-slate-900">４．学習成績概評</div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="text-center">
-                <div className="text-xs font-bold text-slate-600 mb-1">全体の学習成績の状況</div>
-                <div className="text-4xl font-bold text-brand-700">{overall.toFixed(1)}</div>
+                <div className="mb-1 text-sm text-slate-600">全体の学習成績の状況</div>
+                <div className="text-4xl font-bold tabular-nums text-brand-700">{overall.toFixed(1)}</div>
               </div>
               <div className="text-center">
-                <div className="text-xs font-bold text-slate-600 mb-1">学習成績概評</div>
-                <div className={`text-4xl font-bold ${GAIHYOU_STYLE[gaihyou]}`}>{gaihyou}</div>
+                <div className="mb-1 text-sm text-slate-600">学習成績概評</div>
+                <div className="text-4xl font-bold text-brand-700">{gaihyou}</div>
               </div>
             </div>
           </div>

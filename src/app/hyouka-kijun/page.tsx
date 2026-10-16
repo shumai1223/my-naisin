@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ClipboardList, Brain, Lightbulb, HeartHandshake, HelpCircle, Calculator } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -59,19 +59,16 @@ export const metadata: Metadata = {
 
 const VIEWPOINTS = [
   {
-    icon: Brain,
     name: '① 知識・技能',
     whatGood: ['用語・公式・基礎事項を正しく理解し、説明できる', '基礎〜標準問題を確実に解ける', '計算・実技などの技能が身についている'],
     measured: '定期テストの基礎〜標準問題・小テスト・実技テスト',
   },
   {
-    icon: Lightbulb,
     name: '② 思考・判断・表現',
     whatGood: ['知識を活用して課題を解決できる', '根拠を示して説明・記述できる', '資料を読み取り、自分の考えを表現できる'],
     measured: '応用・記述問題・レポート・発表・作品',
   },
   {
-    icon: HeartHandshake,
     name: '③ 主体的に学習に取り組む態度',
     whatGood: ['粘り強く取り組もうとしている', '自分の学習を振り返り、調整しようとしている', '提出物を期限内に・丁寧に出している'],
     measured: '振り返りシート・ノート・提出物・授業での取り組み',
@@ -91,18 +88,15 @@ export default function HyoukaKijunPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">観点別評価の仕組み</span>
+            <span className="text-slate-900">観点別評価の仕組み</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <ClipboardList className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">観点別評価の仕組み</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">観点別評価の仕組み</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               通知表の評定（＝内申点の土台）は、<strong>3つの観点</strong>で評価した結果を総括して決まります。
               各観点で「何が評価されるか」を知ると、評定アップの打ち手が具体的になります。
             </p>
@@ -118,60 +112,54 @@ export default function HyoukaKijunPage() {
           </AnswerBox>
 
           {/* 文科省一次情報の権威コンポーネント */}
-          <div className="mt-8">
+          <div className="mt-10">
             <KantenHyokaOfficial />
           </div>
 
           {/* 観点別「何が評価されるか」 */}
-          <section className="mt-8 space-y-4">
-            <h2 className="text-lg font-bold text-slate-800">観点別に「何が評価されるか」</h2>
-            {VIEWPOINTS.map((v) => {
-              const Icon = v.icon;
-              return (
-                <div key={v.name} className="rounded-lg border border-slate-200 bg-white p-6">
-                  <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600"><Icon className="h-5 w-5" /></span>
-                    {v.name}
-                  </h3>
-                  <ul className="space-y-1.5 text-sm leading-relaxed text-slate-700">
-                    {v.whatGood.map((g) => (
-                      <li key={g} className="flex gap-2"><span className="text-brand-500">✓</span><span>{g}</span></li>
-                    ))}
-                  </ul>
-                  <p className="mt-3 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-500"><strong className="text-slate-600">主に測られる場面：</strong>{v.measured}</p>
-                </div>
-              );
-            })}
+          <section className="mt-10 space-y-4">
+            <h2 className="text-xl font-bold text-slate-900">観点別に「何が評価されるか」</h2>
+            {VIEWPOINTS.map((v) => (
+              <div key={v.name} className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+                <h3 className="mb-3 text-[17px] font-bold text-slate-900">{v.name}</h3>
+                <ul className="list-disc space-y-1.5 pl-5 text-base leading-[1.8] text-slate-900">
+                  {v.whatGood.map((g) => (
+                    <li key={g}>{g}</li>
+                  ))}
+                </ul>
+                <p className="mt-3 border-t border-slate-200 pt-3 text-sm text-slate-600"><strong className="font-bold text-slate-900">主に測られる場面：</strong>{v.measured}</p>
+              </div>
+            ))}
           </section>
 
           {/* 実技・授業態度が響く理由 → /jitsugika 送客 */}
-          <section className="mt-8 rounded-lg border-2 border-red-200 bg-red-50/40 p-6">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">実技・授業態度が「響く」理由</h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">実技・授業態度が「響く」理由</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               実技4教科は「思考・判断・表現」「主体的に取り組む態度」の比重が大きく、技能が苦手でも作品・提出物・振り返りで評定を上げやすい教科です。
-              さらに多くの都道府県で実技は内申点が加重されるため、観点を意識した取り組みが合否に直結します。
+              さらに多くの都道府県で実技は内申点が加重されるため、観点を意識した取り組みが合否に影響します。
             </p>
-            <Link href="/jitsugika" className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-red-700">
+            <Link href="/jitsugika" className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50">
               実技4教科の内申点対策を見る<ChevronRight className="h-4 w-4" />
             </Link>
           </section>
 
           {/* 現状把握ツール */}
-          <section className="mt-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6 text-center">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">3観点を意識して上げた評定が、内申点で何点になるか</h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">評定を1上げると内申点・合否がどう動くか、お住まいの都道府県の方式で確認できます。</p>
-            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700">
-                <Calculator className="h-4 w-4" />内申点を計算する（47都道府県）
+          <section className="mt-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">3観点を意識して上げた評定が、内申点で何点になるか</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">評定を1上げると内申点・合否がどう動くか、お住まいの都道府県の方式で確認できます。</p>
+            <div className="flex flex-col items-stretch gap-3 sm:flex-row">
+              <Link href="/" className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800">
+                内申点を計算する（47都道府県）
               </Link>
-              <Link href="/naishin-age-kata" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-brand-700 ring-1 ring-brand-200 transition-colors hover:bg-brand-50">
+              <Link href="/naishin-age-kata" className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50">
                 内申点の上げ方（4軸）を見る
               </Link>
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA
               placement="result"
               heading="3観点の対策、家庭だけで続けられるか不安なら"
@@ -179,21 +167,21 @@ export default function HyoukaKijunPage() {
             />
           </div>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
-            <div className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question}>
+                  <summary className="cursor-pointer py-3 text-base font-bold text-slate-900">
+                    {f.question}
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="pb-4 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
-          <ToolClusterNav current="naishin" className="mt-8" />
+          <ToolClusterNav current="naishin" className="mt-10" />
         </div>
       </div>
     </>

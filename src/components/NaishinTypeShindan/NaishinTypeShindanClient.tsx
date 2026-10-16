@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Sparkles, RotateCcw } from '@/components/icons';
+import { RotateCcw } from '@/components/icons';
 
 import { InputForm } from '@/components/Calculator/InputForm';
 import { PrefectureSelector } from '@/components/Calculator/PrefectureSelector';
@@ -57,39 +57,38 @@ export function NaishinTypeShindanClient() {
       />
 
       <div className="rounded-lg border border-slate-200 bg-white p-5">
-        <h2 className="mb-3 text-sm font-bold text-slate-700">9教科の評定を入力してください</h2>
+        <h2 className="mb-3 text-xl font-bold text-slate-900">9教科の評定を入力してください</h2>
         <InputForm prefectureCode={prefectureCode} scores={scores} onChange={onScoreChange} maxGrade={use10PointScale ? 10 : 5} />
       </div>
 
       <button
         type="button"
         onClick={onDiagnose}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-4 text-base font-bold text-white transition-all"
+        className="inline-flex min-h-[44px] w-full items-center justify-center rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800"
       >
-        <Sparkles className="h-5 w-5" />
         タイプを診断する
       </button>
 
       {result && (
         <div id="naishin-type-result" className="scroll-mt-24 space-y-6">
-          <div className="rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
-            <div className="text-xs font-bold text-brand-600">あなたの内申点タイプ</div>
+          <div className="rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <div className="text-sm font-bold text-brand-700">あなたの内申点タイプ</div>
             <div className="mt-1 text-2xl font-bold text-slate-900">{result.type.label}</div>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700">{result.type.basis}</p>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">{result.type.basis}</p>
             {result.prefectureNote && (
-              <p className="mt-3 rounded-lg border border-brand-100 bg-white/70 p-3 text-xs leading-relaxed text-slate-600">
+              <p className="mt-3 border-t border-slate-200 pt-3 text-sm leading-[1.8] text-slate-900">
                 {result.prefectureNote}
               </p>
             )}
-            <p className="mt-4 text-xs leading-relaxed text-slate-400">
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               ※タイプに優劣はありません。9教科の評定パターンと、お住まいの都道府県の制度（検証済みデータ）から機械的に分類したものです。
             </p>
             <button
               type="button"
               onClick={onRetry}
-              className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:underline"
+              className="mt-2 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              <RotateCcw className="h-3.5 w-3.5" />
+              <RotateCcw className="h-4 w-4" />
               評定を入力し直す
             </button>
           </div>

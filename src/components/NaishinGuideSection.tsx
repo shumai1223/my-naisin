@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { BookOpen, HelpCircle, Calculator, GraduationCap, ChevronRight, MapPin } from '@/components/icons';
+import { ChevronRight } from '@/components/icons';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { getPrefectureByCode } from '@/lib/prefectures';
 
@@ -27,18 +27,21 @@ const FAQ_ITEMS = [
 
 const GUIDE_CARDS = [
   {
-    icon: Calculator,
     title: '内申点の計算方法',
     summary: '9教科の5段階評価を合計して算出します。地域・方式で比率が大きく異なります。',
     detail: '計算方式は地域によって大きく異なります。例：東京都は実技4教科が2倍の「換算内申」方式（<a href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">公式要綱参照</a>）、神奈川県は中2・3年の成績を使用、大阪府は450点満点など。満点も45点〜450点以上まで様々です。'
   },
   {
-    icon: GraduationCap,
     title: '高校受験での活用',
     summary: '入試の合否は「内申点」と「当日の学力検査」の合計で決まります。',
     detail: '配点比率は地域・高校・入試方式で大きく異なります。例：東京都立高校は内申:学力＝300:700（<a href="https://www.kyoiku.metro.tokyo.lg.jp/admission/high_school/exam/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">公式要綱第4章</a>）、神奈川県はS値方式など。志望校の募集要項で必ず確認してください。'
   }
 ];
+
+// 上の FAQ_ITEMS・GUIDE_CARDS の文字列は HTML として差し込まれる（FAQPageSchema にも同じ文字列が入るため書き換えない）。
+// HTML の中の <a> には className（React の属性名）が効かず、リンクが本文と同じ見た目になってしまう。
+// そこで差し込み先の親から子孫の a に、文字リンクの見た目（深緑・下線）を当てる。
+const LINK_IN_HTML = '[&_a]:text-brand-700 [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-brand-800';
 
 export function NaishinGuideSection() {
   const [expandedCard, setExpandedCard] = React.useState<number | null>(null);
@@ -46,46 +49,39 @@ export function NaishinGuideSection() {
   return (
     <>
       <FAQPageSchema faqItems={FAQ_ITEMS} />
-      <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6 md:p-8">
+      <section className="mt-8">
       {/* Section Header */}
-      <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100">
-          <BookOpen className="h-5 w-5 text-brand-600" />
-        </div>
-        <div>
-          <h2 className="text-lg font-bold text-slate-800">内申点ガイド</h2>
-          <p className="text-sm text-slate-500">高校受験に役立つ基礎知識</p>
-        </div>
+      <div className="mb-6">
+        <h2 className="text-xl font-bold text-slate-900">内申点ガイド</h2>
+        <p className="mt-1 text-sm text-slate-600">高校受験に役立つ基礎知識</p>
       </div>
 
       {/* Guide Cards */}
       <div className="mb-8 grid gap-4 sm:grid-cols-2">
         {GUIDE_CARDS.map((card, index) => {
-          const Icon = card.icon;
           const isExpanded = expandedCard === index;
           return (
             <div
               key={index}
-              className="rounded-lg border border-slate-200 bg-white p-5 transition-shadow"
+              className="rounded-lg border border-slate-200 bg-white p-5"
             >
-              <div className="mb-3 flex items-center gap-2">
-                <Icon className="h-5 w-5 text-brand-500" />
-                <h3 className="font-bold text-slate-800">{card.title}</h3>
-              </div>
-              <p className="text-sm leading-relaxed text-slate-600">
+              <h3 className="mb-3 text-[17px] font-bold text-slate-900">{card.title}</h3>
+              <p className="text-base leading-[1.8] text-slate-900">
                 {card.summary}
               </p>
               {isExpanded && (
-                <div className="mt-3 overflow-hidden transition-all duration-300">
-                  <p className="border-t border-slate-100 pt-3 text-sm leading-relaxed text-slate-600" dangerouslySetInnerHTML={{ __html: card.detail }} />
+                <div className="mt-3">
+                  <p className={`border-t border-slate-200 pt-3 text-base leading-[1.8] text-slate-900 ${LINK_IN_HTML}`} dangerouslySetInnerHTML={{ __html: card.detail }} />
                 </div>
               )}
               <button
+                type="button"
                 onClick={() => setExpandedCard(isExpanded ? null : index)}
-                className="mt-3 flex items-center gap-1 text-sm text-brand-600 hover:text-brand-700"
+                aria-expanded={isExpanded}
+                className="mt-2 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
               >
                 {isExpanded ? '閉じる' : '詳しく見る'}
-                <ChevronRight className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                <ChevronRight className={`h-4 w-4 ${isExpanded ? 'rotate-90' : ''}`} />
               </button>
             </div>
           );
@@ -94,21 +90,19 @@ export function NaishinGuideSection() {
 
       {/* FAQ Section with native details/summary (SSR-friendly) */}
       <div className="rounded-lg border border-slate-200 bg-white p-5">
-        <div className="mb-4 flex items-center gap-2">
-          <HelpCircle className="h-5 w-5 text-amber-500" />
-          <h3 className="font-bold text-slate-800">よくある質問</h3>
-        </div>
-        <div className="space-y-2">
+        <h3 className="mb-4 text-[17px] font-bold text-slate-900">よくある質問</h3>
+        {/* 質問は枠で囲まず、罫線で区切った行にする（カードの中にカードを入れない） */}
+        <div className="divide-y divide-slate-200 border-y border-slate-200">
           {FAQ_ITEMS.map((item, index) => (
             <details
               key={index}
-              className="group rounded-lg border border-slate-100 bg-slate-50/50 transition-colors open:bg-brand-50/30"
+              className="group open:bg-brand-50"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm text-slate-700 hover:text-slate-900 [&::-webkit-details-marker]:hidden">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-3 py-3 text-base font-bold text-slate-900 hover:bg-brand-50 [&::-webkit-details-marker]:hidden">
                 <span>Q. {item.question}</span>
-                <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-open:rotate-90" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-600 group-open:rotate-90" />
               </summary>
-              <div className="px-4 pb-4 text-sm leading-relaxed text-slate-600">
+              <div className={`px-3 pb-4 text-base leading-[1.8] text-slate-900 ${LINK_IN_HTML}`}>
                 <p dangerouslySetInnerHTML={{ __html: `A. ${item.answer}` }} />
               </div>
             </details>
@@ -118,10 +112,7 @@ export function NaishinGuideSection() {
 
       {/* Prefecture Links for SEO */}
       <div className="mt-6 rounded-lg border border-slate-200 bg-white p-5">
-        <div className="mb-4 flex items-center gap-2">
-          <MapPin className="h-5 w-5 text-brand-500" />
-          <h3 className="font-bold text-slate-800">都道府県別の内申点計算</h3>
-        </div>
+        <h3 className="mb-4 text-[17px] font-bold text-slate-900">都道府県別の内申点計算</h3>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
           {[
             'tokyo',
@@ -139,16 +130,16 @@ export function NaishinGuideSection() {
               <Link
                 key={code}
                 href={`/${code}/naishin`}
-                className="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-2 text-center transition-colors hover:border-brand-200 hover:bg-brand-50"
+                className="flex min-h-11 flex-col items-center justify-center rounded border border-slate-200 bg-white p-2 text-center hover:border-brand-700 hover:bg-brand-50"
               >
-                <span className="text-sm text-slate-700">{pref.name}</span>
-                <span className="text-xs text-slate-500">{pref.maxScore}点満点</span>
+                <span className="text-sm font-bold text-slate-900">{pref.name}</span>
+                <span className="text-xs tabular-nums text-slate-600">{pref.maxScore}点満点</span>
               </Link>
             );
           })}
         </div>
-        <div className="mt-3 text-center">
-          <span className="text-xs text-slate-400">その他の都道府県も対応しています</span>
+        <div className="mt-3">
+          <span className="text-sm text-slate-600">その他の都道府県も対応しています</span>
         </div>
       </div>
     </section>

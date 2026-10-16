@@ -1,18 +1,10 @@
 'use client';
 
 import * as React from 'react';
-import { TrendingUp, TrendingDown, Gauge } from '@/components/icons';
+import { TrendingUp, TrendingDown } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
-import { calcAttainableRange, toGaihyou, type GakushuSeihyou } from '@/lib/gakushu-seiseki';
-
-const GAIHYOU_STYLE: Record<GakushuSeihyou, string> = {
-  A: 'text-red-700',
-  B: 'text-amber-700',
-  C: 'text-amber-700',
-  D: 'text-brand-700',
-  E: 'text-slate-600',
-};
+import { calcAttainableRange, toGaihyou } from '@/lib/gakushu-seiseki';
 
 export function TouseiHanICalculator() {
   const [currentSum, setCurrentSum] = React.useState<string>('');
@@ -56,20 +48,17 @@ export function TouseiHanICalculator() {
   }, [range]);
 
   return (
-    <div className="rounded-lg border-2 border-brand-200 bg-white overflow-hidden">
-      <div className="border-b border-brand-100 bg-brand-50 px-6 py-4">
-        <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Gauge className="h-5 w-5 text-brand-600" />
-          現在までの実績を入力
-        </h2>
-        <p className="mt-2 text-xs text-slate-600">
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+      <div className="border-b border-slate-200 px-6 py-4">
+        <h2 className="text-xl font-bold text-slate-900">現在までの実績を入力</h2>
+        <p className="mt-1 text-sm text-slate-600">
           高1終了時点・高2終了時点など、これまでの評定の合計と件数を入力してください。
         </p>
       </div>
 
-      <div className="grid gap-3 px-6 py-4 sm:grid-cols-3">
+      <div className="grid gap-3 px-6 py-4 sm:grid-cols-3 sm:items-end">
         <div>
-          <label className="mb-1 block text-xs font-bold text-slate-600">現在までの評定の合計</label>
+          <label className="mb-1 block text-sm font-bold text-slate-900">現在までの評定の合計</label>
           <input
             type="number"
             inputMode="numeric"
@@ -78,11 +67,11 @@ export function TouseiHanICalculator() {
             onChange={(e) => onChange(setCurrentSum)(e.target.value)}
             placeholder="例: 70"
             aria-label="現在までの評定の合計"
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-bold text-slate-600">現在までの評定数</label>
+          <label className="mb-1 block text-sm font-bold text-slate-900">現在までの評定数</label>
           <input
             type="number"
             inputMode="numeric"
@@ -91,11 +80,11 @@ export function TouseiHanICalculator() {
             onChange={(e) => onChange(setCurrentCount)(e.target.value)}
             placeholder="例: 20"
             aria-label="現在までの評定数"
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-bold text-slate-600">残りの評価回数（見込み）</label>
+          <label className="mb-1 block text-sm font-bold text-slate-900">残りの評価回数（見込み）</label>
           <input
             type="number"
             inputMode="numeric"
@@ -104,35 +93,35 @@ export function TouseiHanICalculator() {
             onChange={(e) => onChange(setRemainingCount)(e.target.value)}
             placeholder="例: 10"
             aria-label="残りの評価回数"
-            className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </div>
       </div>
 
       {valid && range && (
-        <div className="bg-brand-50 px-6 py-6 border-t-2 border-brand-200" role="status" aria-live="polite">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-lg border-2 border-brand-300 bg-white p-4 text-center">
-              <div className="mb-1 flex items-center justify-center gap-1 text-xs font-bold text-brand-700">
+        <div className="border-t border-slate-200 bg-brand-50 px-6 py-6" role="status" aria-live="polite">
+          <dl className="grid grid-cols-1 divide-y divide-slate-300 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+            <div className="py-4 text-center first:pt-0 last:pb-0 sm:px-4 sm:py-0">
+              <dt className="mb-1 flex items-center justify-center gap-1 text-sm font-bold text-brand-700">
                 <TrendingUp className="h-4 w-4" />
                 残り全部が5なら最大
-              </div>
-              <div className="text-4xl font-bold text-brand-700">{range.max.toFixed(1)}</div>
-              <div className={`mt-1 text-xs font-bold ${GAIHYOU_STYLE[toGaihyou(range.max)]}`}>
-                概評 {toGaihyou(range.max)}
-              </div>
+              </dt>
+              <dd>
+                <span className="block text-4xl font-bold tabular-nums text-brand-700">{range.max.toFixed(1)}</span>
+                <span className="mt-1 block text-sm font-bold text-slate-700">概評 {toGaihyou(range.max)}</span>
+              </dd>
             </div>
-            <div className="rounded-lg border-2 border-slate-300 bg-white p-4 text-center">
-              <div className="mb-1 flex items-center justify-center gap-1 text-xs font-bold text-slate-600">
+            <div className="py-4 text-center first:pt-0 last:pb-0 sm:px-4 sm:py-0">
+              <dt className="mb-1 flex items-center justify-center gap-1 text-sm font-bold text-slate-600">
                 <TrendingDown className="h-4 w-4" />
                 残り全部が1でも最低
-              </div>
-              <div className="text-4xl font-bold text-slate-700">{range.min.toFixed(1)}</div>
-              <div className={`mt-1 text-xs font-bold ${GAIHYOU_STYLE[toGaihyou(range.min)]}`}>
-                概評 {toGaihyou(range.min)}
-              </div>
+              </dt>
+              <dd>
+                <span className="block text-4xl font-bold tabular-nums text-slate-700">{range.min.toFixed(1)}</span>
+                <span className="mt-1 block text-sm font-bold text-slate-700">概評 {toGaihyou(range.min)}</span>
+              </dd>
             </div>
-          </div>
+          </dl>
         </div>
       )}
     </div>

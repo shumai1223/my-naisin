@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Archive, ExternalLink } from '@/components/icons';
+import { Home, ChevronRight, ExternalLink } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -111,62 +111,56 @@ export default function GentenArchivePage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">一次ソース確認履歴アーカイブ</span>
+            <span className="text-slate-900">一次ソース確認履歴アーカイブ</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-600 text-white">
-              <Archive className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               入試一次ソース確認履歴アーカイブ
             </h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+            <p className="mt-2 text-sm text-slate-600">
+              現在{histories.length}都道府県ぶん・計{totalEntries}件の確認記録があります
+              （最終更新: {latestDate}）。今後、制度改定の確認・再検証を行うたびに記録を追加していきます。
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               47都道府県教育委員会の公立高校入学者選抜に関する一次ソースを、いつ・どのURLで確認したかを
               記録し続ける継続更新型のページです。
             </p>
           </header>
 
-          <section className="mb-8 rounded-lg border-2 border-slate-200 bg-slate-50 p-6">
-            <p className="text-sm leading-relaxed text-slate-700">
-              現在{histories.length}都道府県ぶん・計{totalEntries}件の確認記録があります
-              （最終更新: {latestDate}）。今後、制度改定の確認・再検証を行うたびに記録を追加していきます。
-            </p>
-          </section>
-
           {/* T-C9: 47都道府県×確認日×応募状況データ年度数の一覧表（詳細カードより俯瞰しやすい表形式） */}
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">都道府県別サマリー</h2>
-            <p className="mb-4 text-xs leading-relaxed text-slate-500">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">都道府県別サマリー</h2>
+            <p className="mb-4 text-sm text-slate-600">
               「何県分を、いつ確認したか」が一目で分かる一覧です。詳細（出典URL・資料名）は下の県別セクションを参照してください。
             </p>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[560px] text-xs">
+              <table className="w-full min-w-[560px] text-sm">
                 <thead>
-                  <tr className="bg-slate-100 text-left text-slate-600">
-                    <th className="border border-slate-200 px-2 py-1.5 font-bold">都道府県</th>
-                    <th className="border border-slate-200 px-2 py-1.5 font-bold">計算方式の最終確認日</th>
-                    <th className="border border-slate-200 px-2 py-1.5 font-bold">応募状況データ収録年度数</th>
-                    <th className="border border-slate-200 px-2 py-1.5 font-bold">応募状況データの最終確認日</th>
+                  <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                    <th scope="col" className="px-2 py-2 font-bold">都道府県</th>
+                    <th scope="col" className="px-2 py-2 font-bold">計算方式の最終確認日</th>
+                    <th scope="col" className="py-2 pl-2 pr-6 text-right font-bold">応募状況データ収録年度数</th>
+                    <th scope="col" className="px-2 py-2 font-bold">応募状況データの最終確認日</th>
                   </tr>
                 </thead>
                 <tbody>
                   {summaryRows.map((row) => (
-                    <tr key={row.code} className="odd:bg-white even:bg-slate-50/60">
-                      <td className="border border-slate-200 px-2 py-1 font-bold text-slate-700">{row.name}</td>
-                      <td className="border border-slate-200 px-2 py-1 font-mono text-slate-500">
+                    <tr key={row.code} className="border-b border-slate-200">
+                      <td className="px-2 py-2 font-bold text-slate-900">{row.name}</td>
+                      <td className="px-2 py-2 tabular-nums text-slate-900">
                         {row.latestNaishinDate ?? '未確認'}
                       </td>
-                      <td className="border border-slate-200 px-2 py-1 text-center text-slate-600">
+                      <td className="py-2 pl-2 pr-6 text-right tabular-nums text-slate-900">
                         {row.fiscalYearCount > 0 ? `${row.fiscalYearCount}年度分` : '未収録'}
                       </td>
-                      <td className="border border-slate-200 px-2 py-1 font-mono text-slate-500">
+                      <td className="px-2 py-2 tabular-nums text-slate-900">
                         {row.latestRateDate ?? '—'}
                       </td>
                     </tr>
@@ -176,19 +170,19 @@ export default function GentenArchivePage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-lg border border-amber-200 bg-amber-50 p-6">
-            <h2 className="mb-2 text-sm font-bold text-amber-900">次に再検証すべき都道府県（最終確認日が古い順）</h2>
-            <p className="mb-3 text-xs leading-relaxed text-amber-800">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">次に再検証すべき都道府県（最終確認日が古い順）</h2>
+            <p className="mb-3 text-sm text-slate-600">
               運営側の再検証キューです。ここに載っている県から順に、教育委員会の一次ソースが最新の内容と
               一致しているかを確認していきます。
             </p>
-            <ol className="space-y-1.5 text-sm text-amber-900">
+            <ol className="border-y border-slate-200 text-base text-slate-900">
               {staleTop.map((s, i) => (
-                <li key={s.code} className="flex items-center justify-between gap-2">
+                <li key={s.code} className="flex items-center justify-between gap-2 border-b border-slate-200 py-2 last:border-b-0">
                   <span>
                     {i + 1}. {s.name}
                   </span>
-                  <span className="text-xs text-amber-600">最終確認: {s.lastVerified}</span>
+                  <span className="text-sm tabular-nums text-slate-600">最終確認: {s.lastVerified}</span>
                 </li>
               ))}
             </ol>
@@ -198,32 +192,32 @@ export default function GentenArchivePage() {
             const regionHistories = histories.filter((h) => h.region === region);
             if (regionHistories.length === 0) return null;
             return (
-              <section key={region} className="mb-8">
-                <h2 className="mb-3 text-lg font-bold text-slate-800">{region}</h2>
-                <div className="grid gap-3 sm:grid-cols-2">
+              <section key={region} className="mb-10">
+                <h2 className="mb-3 text-xl font-bold text-slate-900">{region}</h2>
+                <div className="grid gap-4 sm:grid-cols-2">
                   {regionHistories.map((pref) => (
                     <div key={pref.code} className="rounded-lg border border-slate-200 bg-white p-4">
-                      <div className="mb-2 flex items-center justify-between">
-                        <span className="font-bold text-slate-800">{pref.name}</span>
-                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-500">
+                      <div className="mb-2 flex items-center justify-between gap-2">
+                        <span className="font-bold text-slate-900">{pref.name}</span>
+                        <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                           {pref.history.length}件の記録
                         </span>
                       </div>
-                      <ul className="space-y-1.5">
+                      <ul className="space-y-2">
                         {pref.history.map((snap) => (
-                          <li key={`${pref.code}-${snap.date}`} className="text-xs leading-relaxed text-slate-500">
-                            <span className="font-mono text-slate-400">{snap.date}</span>
+                          <li key={`${pref.code}-${snap.date}`} className="text-sm leading-[1.7] text-slate-600">
+                            <span className="tabular-nums">{snap.date}</span>
                             {' — '}
                             <a
                               href={snap.sourceUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-brand-600 hover:underline"
+                              className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
                             >
                               {snap.sourceTitle}
-                              <ExternalLink className="ml-0.5 inline h-3 w-3" />
+                              <ExternalLink className="ml-0.5 inline h-4 w-4 align-text-bottom" />
                             </a>
-                            <span className="text-slate-400">（{snap.note}）</span>
+                            <span>（{snap.note}）</span>
                           </li>
                         ))}
                       </ul>
@@ -234,11 +228,11 @@ export default function GentenArchivePage() {
             );
           })}
 
-          <section className="mb-8 rounded-lg border-2 border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">
-              募集人員・応募者数・倍率データの一次ソース確認履歴（S6-2）
+          <section className="mb-10 border-t border-slate-200 pt-8">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">
+              募集人員・応募者数・倍率データの一次ソース確認履歴
             </h2>
-            <p className="text-sm leading-relaxed text-slate-700">
+            <p className="text-base leading-[1.8] text-slate-900">
               上記は内申点の計算方式に関する確認履歴です。ここからは、各学校の募集人員・応募者数・倍率の
               数値データについて、都道府県教育委員会が公表する年度ごとの資料をいつ・どのURLで確認したかを
               記録します。現在{rateHistories.length}都道府県ぶん・計{totalRateSources}件の確認記録があります。
@@ -249,32 +243,32 @@ export default function GentenArchivePage() {
             const regionRateHistories = rateHistories.filter((h) => h.region === region);
             if (regionRateHistories.length === 0) return null;
             return (
-              <section key={`rate-${region}`} className="mb-8">
-                <h3 className="mb-3 text-base font-bold text-slate-800">{region}（倍率データ）</h3>
-                <div className="grid gap-3 sm:grid-cols-2">
+              <section key={`rate-${region}`} className="mb-10">
+                <h3 className="mb-3 text-[17px] font-bold text-slate-900">{region}（倍率データ）</h3>
+                <div className="grid gap-4 sm:grid-cols-2">
                   {regionRateHistories.map((pref) => (
                     <div key={pref.code} className="rounded-lg border border-slate-200 bg-white p-4">
-                      <div className="mb-2 flex items-center justify-between">
-                        <span className="font-bold text-slate-800">{pref.name}</span>
-                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-500">
+                      <div className="mb-2 flex items-center justify-between gap-2">
+                        <span className="font-bold text-slate-900">{pref.name}</span>
+                        <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                           {pref.sources.length}件の資料
                         </span>
                       </div>
-                      <ul className="space-y-1.5">
+                      <ul className="space-y-2">
                         {pref.sources.map((src) => (
-                          <li key={`${pref.code}-${src.fiscalYear}-${src.url}`} className="text-xs leading-relaxed text-slate-500">
-                            <span className="font-mono text-slate-400">{src.fiscalYear}</span>
+                          <li key={`${pref.code}-${src.fiscalYear}-${src.url}`} className="text-sm leading-[1.7] text-slate-600">
+                            <span className="tabular-nums">{src.fiscalYear}</span>
                             {' — '}
                             <a
                               href={src.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-brand-600 hover:underline"
+                              className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
                             >
                               {src.docTitle}
-                              <ExternalLink className="ml-0.5 inline h-3 w-3" />
+                              <ExternalLink className="ml-0.5 inline h-4 w-4 align-text-bottom" />
                             </a>
-                            <span className="text-slate-400">（確認日: {src.fetchedAt}）</span>
+                            <span>（確認日: {src.fetchedAt}）</span>
                           </li>
                         ))}
                       </ul>
@@ -285,45 +279,58 @@ export default function GentenArchivePage() {
             );
           })}
 
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="rounded-lg border border-slate-200 bg-slate-50 p-6 text-center">
-            <div className="flex flex-wrap justify-center gap-2">
-              <Link
-                href="/naishin-kakusa"
-                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
-              >
-                内申点格差レポート
-              </Link>
-              <Link
-                href="/nyushi-seido-henkou"
-                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
-              >
-                今年度入試変更点まとめ
-              </Link>
-              <Link
-                href="/report/2026"
-                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
-              >
-                内申点白書2026
-              </Link>
-              <Link
-                href="/reliability"
-                className="rounded-full border border-brand-200 bg-white px-4 py-2 text-xs font-bold text-brand-700 hover:bg-brand-50"
-              >
-                データ鮮度・稼働状況サマリー
-              </Link>
-            </div>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link
+                  href="/naishin-kakusa"
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800"
+                >
+                  <span className="underline underline-offset-2">内申点格差レポート</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/nyushi-seido-henkou"
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800"
+                >
+                  <span className="underline underline-offset-2">今年度入試変更点まとめ</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/report/2026"
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800"
+                >
+                  <span className="underline underline-offset-2">内申点白書2026</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/reliability"
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800"
+                >
+                  <span className="underline underline-offset-2">データ鮮度・稼働状況サマリー</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, HandHeart, ListChecks, HelpCircle, AlertCircle, ChevronRightSquare } from '@/components/icons';
+import { Home, ChevronRight, AlertTriangle, ChevronRightSquare } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -63,18 +63,15 @@ export default function HeiganYuuguPage() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600"><Home className="h-4 w-4" />ホーム</Link>
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">併願優遇・併願校の制度解説</span>
+            <span className="text-slate-900">併願優遇・併願校の制度解説</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-brand-500 text-white">
-              <HandHeart className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">併願優遇・併願校の制度解説</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">併願優遇・併願校の制度解説</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               私立高校の「併願優遇」とは何か、単願推薦との違い、確認すべきポイントをわかりやすく解説します。
             </p>
           </header>
@@ -87,12 +84,11 @@ export default function HeiganYuuguPage() {
             </p>
           </AnswerBox>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ListChecks className="h-5 w-5 text-brand-600" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               併願優遇の一般的な仕組み
             </h2>
-            <ol className="space-y-3">
+            <ol className="space-y-5">
               {[
                 { name: '学校説明会・個別相談で基準を確認', text: '各私立高校が独自に設定する基準（内申点・欠席日数の目安など）を、学校説明会や個別相談で確認します。基準は非公表または限定公開の場合が多く、学校ごとに異なります。' },
                 { name: '出願前に基準を満たすか確認', text: '内申点などの見込みが基準を満たしているかを、担任や学校の進路指導も交えて確認します。' },
@@ -100,108 +96,121 @@ export default function HeiganYuuguPage() {
                 { name: '私立の入試（学力検査等）を受験', text: '併願優遇でも学力検査を受験する学校が多く、基準を満たしていれば高い確率で合格となる運用が一般的です（学校により異なります）。' },
                 { name: '公立の結果に応じて進学先が決まる', text: '公立に合格すれば公立へ、公立が不合格だった場合は併願優遇で合格した私立へ進学するのが基本的な流れです。' },
               ].map((s, i) => (
-                <li key={s.name} className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 p-4">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-600 text-xs font-bold text-white">{i + 1}</span>
-                  <span>
-                    <span className="block text-sm font-bold text-slate-800">{s.name}</span>
-                    <span className="mt-0.5 block text-sm leading-relaxed text-slate-600">{s.text}</span>
-                  </span>
+                <li key={s.name} className="flex gap-3">
+                  <span className="w-6 shrink-0 text-base font-bold tabular-nums text-brand-700">{i + 1}.</span>
+                  <div>
+                    <h3 className="text-[17px] font-bold text-slate-900">{s.name}</h3>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.text}</p>
+                  </div>
                 </li>
               ))}
             </ol>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">単願推薦・一般入試との違い</h2>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">単願推薦・一般入試との違い</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-slate-100 text-left">
-                    <th className="border border-slate-200 px-3 py-2 font-bold">方式</th>
-                    <th className="border border-slate-200 px-3 py-2 font-bold">公立の受験</th>
-                    <th className="border border-slate-200 px-3 py-2 font-bold">合格時の扱い</th>
+                  <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                    <th className="px-3 py-2 font-bold">方式</th>
+                    <th className="px-3 py-2 font-bold">公立の受験</th>
+                    <th className="px-3 py-2 font-bold">合格時の扱い</th>
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
-                  <tr className="odd:bg-white even:bg-slate-50">
-                    <td className="border border-slate-200 px-3 py-2 font-bold text-brand-700">併願優遇</td>
-                    <td className="border border-slate-200 px-3 py-2">公立を第一志望として受験できる</td>
-                    <td className="border border-slate-200 px-3 py-2">公立が不合格の場合の受け皿</td>
+                <tbody className="divide-y divide-slate-200 text-slate-900">
+                  <tr className="bg-brand-50">
+                    <td className="px-3 py-2 font-bold">併願優遇</td>
+                    <td className="px-3 py-2">公立を第一志望として受験できる</td>
+                    <td className="px-3 py-2">公立が不合格の場合の受け皿</td>
                   </tr>
-                  <tr className="odd:bg-white even:bg-slate-50">
-                    <td className="border border-slate-200 px-3 py-2 font-bold text-slate-700">単願推薦</td>
-                    <td className="border border-slate-200 px-3 py-2">原則、公立は受験しない（専願）</td>
-                    <td className="border border-slate-200 px-3 py-2">合格したら原則入学</td>
+                  <tr>
+                    <td className="px-3 py-2 font-bold">単願推薦</td>
+                    <td className="px-3 py-2">原則、公立は受験しない（専願）</td>
+                    <td className="px-3 py-2">合格したら原則入学</td>
                   </tr>
-                  <tr className="odd:bg-white even:bg-slate-50">
-                    <td className="border border-slate-200 px-3 py-2 font-bold text-slate-700">一般入試</td>
-                    <td className="border border-slate-200 px-3 py-2">公立との併願も自由</td>
-                    <td className="border border-slate-200 px-3 py-2">合否は当日の得点等で決定・確約なし</td>
+                  <tr>
+                    <td className="px-3 py-2 font-bold">一般入試</td>
+                    <td className="px-3 py-2">公立との併願も自由</td>
+                    <td className="px-3 py-2">合否は当日の得点等で決定・確約なし</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-xs text-slate-500">
+            <p className="mt-3 text-sm text-slate-600">
               ※ 呼び方（併願優遇・併願確約など）や運用は都道府県・学校により異なります。必ず志望校の募集要項・学校説明会で確認してください。
             </p>
           </section>
 
-          <section className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-5">
-            <h2 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-900">
-              <AlertCircle className="h-4 w-4" />
+          <section className="mt-10 rounded-lg border border-amber-200 bg-amber-50 p-4 md:p-5">
+            <h2 className="mb-2 flex items-center gap-2 text-base font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
               確認しておきたいポイント
             </h2>
-            <ul className="space-y-1.5 text-sm leading-relaxed text-amber-900">
+            <ul className="space-y-1.5 text-base leading-[1.8] text-amber-900">
               <li>・基準（内申点・欠席日数など）は学校ごとに個別設定され、非公表または限定公開のことが多い。</li>
               <li>・基準を満たしても、その後の評定低下や出席状況によって優遇が取り消される場合がある。</li>
               <li>・学力検査の有無・当日点の扱いは学校により異なる（受けても形式的な学校、当日点も考慮する学校がある）。</li>
               <li>・地域によって「併願優遇」という制度自体が無い、または呼び方が異なる場合がある。</li>
             </ul>
-            <p className="mt-2 text-xs text-amber-800">
+            <p className="mt-2 text-sm leading-[1.8] text-amber-900">
               ※ 当ページは併願優遇という制度の一般的な仕組みの解説です。特定校の基準・合否を保証するものではありません。
             </p>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">あわせて確認</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/heigan-yuugu/tokyo" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
-                オール3で行ける私立高校（東京都・公式基準つき）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/mendan" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
-                三者面談の準備チェックリスト
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/koukou-hiyou" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
-                私立高校の費用シミュレーター
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
-                内申点・当日点が足りない冬の緊急対策
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/juken-schedule" className="flex items-center justify-between gap-2 rounded-lg bg-white p-4 text-sm font-bold text-slate-700">
-                受験スケジュール・出願時期
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/heigan-yuugu/tokyo" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">オール3で行ける私立高校（東京都・公式基準つき）</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/mendan" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">三者面談の準備チェックリスト</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/koukou-hiyou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">私立高校の費用シミュレーター</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/tarinai-taisaku" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">内申点・当日点が足りない冬の緊急対策</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/juken-schedule" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">受験スケジュール・出願時期</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="hiyou" />
           </div>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-brand-600" />よくある質問</h2>
-            <div className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-lg border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question} className="group py-1">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
+                      {f.question}
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-600 group-open:rotate-90" />
+                    </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="pb-3 pt-1 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
