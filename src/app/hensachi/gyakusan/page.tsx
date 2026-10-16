@@ -95,7 +95,7 @@ export default function HensachiGyakusanPage() {
             <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
             <div className="grid gap-x-6 sm:grid-cols-2">
               <Link href="/hensachi/gyakusan/hayamihyou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">
-                偏差値と点数の早見表
+                偏差値↔点数 早見表
                 <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
               <Link href="/hensachi/shiboukou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700">

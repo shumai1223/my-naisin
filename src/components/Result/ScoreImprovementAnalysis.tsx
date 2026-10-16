@@ -217,7 +217,7 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
               </li>
               <li>
                 <Link
-                  href="/blog/tokyo-kansan-naishin-guide"
+                  href="/blog/practical-subjects-naishin-strategy"
                   className="flex min-h-11 items-center justify-between gap-3 py-3 hover:bg-brand-50"
                 >
                   <span className="min-w-0">
@@ -229,7 +229,7 @@ export function ScoreImprovementAnalysis({ currentScores, prefectureCode, target
               </li>
               <li>
                 <Link
-                  href="/blog/naishinten-calculation-by-prefecture"
+                  href="/blog/teishutsubutsu-jugyou-taido-guide"
                   className="flex min-h-11 items-center justify-between gap-3 py-3 hover:bg-brand-50"
                 >
                   <span className="min-w-0">

@@ -195,7 +195,7 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
       {
         title: '偏差値→志望校レンジ逆引き',
         description: '偏差値を入れるだけで、届く高校レベルを安全圏・実力相応・チャレンジの3段階で表示',
-        features: ['偏差値から逆引き', '3段階レンジ', '偏差値と内申の並置', '高校レベル目安'],
+        features: ['偏差値から逆引き', '3段階レンジ', '偏差値↔内申の並置', '高校レベル目安'],
         href: '/hensachi/shiboukou',
       },
       {

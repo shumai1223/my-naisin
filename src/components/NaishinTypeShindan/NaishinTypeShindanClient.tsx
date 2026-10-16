@@ -50,6 +50,7 @@ export function NaishinTypeShindanClient() {
   return (
     <div className="space-y-6">
       <PrefectureSelector
+        headingLevel={2}
         selectedCode={prefectureCode}
         onChange={setPrefectureCode}
         use10PointScale={use10PointScale}

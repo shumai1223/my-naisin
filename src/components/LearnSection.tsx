@@ -23,8 +23,8 @@ const REGIONS = [
 
 const POPULAR_ARTICLES = [
   {
-    slug: 'naishinten-calculation-by-prefecture',
-    title: '【完全保存版】内申点の計算方法を都道府県別に徹底解説！',
+    slug: 'naishin-47-prefectures-comparison',
+    title: '【独自データ】47都道府県の内申点を全部比較してわかった5つの事実',
     category: '内申点の基礎',
   },
   {
