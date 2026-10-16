@@ -936,8 +936,8 @@ print(naishin["total"])  # -> 52`;
               <thead>
                 <tr className="border-b border-slate-900 text-xs text-slate-600">
                   <th className="px-3 py-2 font-bold">プラン</th>
-                  <th className="px-3 py-2 text-right font-bold">レート/分</th>
-                  <th className="px-3 py-2 text-right font-bold">月次クォータ</th>
+                  <th className="whitespace-nowrap px-3 py-2 text-right font-bold">レート/分</th>
+                  <th className="whitespace-nowrap px-3 py-2 text-right font-bold">月次クォータ</th>
                   <th className="px-3 py-2 font-bold">料金</th>
                   <th className="px-3 py-2 font-bold">対象</th>
                 </tr>
@@ -948,8 +948,8 @@ print(naishin["total"])  # -> 52`;
                   return (
                     <tr key={t} className="border-b border-slate-200 align-top last:border-b-0">
                       <td className="px-3 py-3 font-bold text-slate-900">{p.label}</td>
-                      <td className="px-3 py-3 text-right tabular-nums text-slate-900">{p.ratePerMinute.toLocaleString('ja-JP')}</td>
-                      <td className="px-3 py-3 text-right tabular-nums text-slate-900">
+                      <td className="whitespace-nowrap px-3 py-3 text-right tabular-nums text-slate-900">{p.ratePerMinute.toLocaleString('ja-JP')}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-right tabular-nums text-slate-900">
                         {p.monthlyQuota > 0 ? p.monthlyQuota.toLocaleString('ja-JP') : '個別 / 計測なし'}
                       </td>
                       <td className="px-3 py-3 text-slate-900">{formatTierPrice(t)}</td>
@@ -1077,7 +1077,7 @@ print(naishin["total"])  # -> 52`;
                   {QUOTE_PLANS.filter((p) => p.id.startsWith('enterprise')).map((p) => (
                     <tr key={p.id} className="border-b border-slate-200 last:border-b-0">
                       <td className="py-2 pr-3 text-slate-900">{p.label.replace('Enterprise（', '').replace('）', '')}</td>
-                      <td className="py-2 text-right font-bold tabular-nums text-slate-900">¥{p.annualPriceJpy.toLocaleString('ja-JP')}</td>
+                      <td className="whitespace-nowrap py-2 text-right font-bold tabular-nums text-slate-900">¥{p.annualPriceJpy.toLocaleString('ja-JP')}</td>
                     </tr>
                   ))}
                 </tbody>

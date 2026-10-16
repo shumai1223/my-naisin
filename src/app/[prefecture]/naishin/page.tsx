@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronRight, ExternalLink } from '@/components/icons';
+import { ChevronRight, ExternalLink, Home } from '@/components/icons';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { ALTERNATIVE_TRACK_PREFECTURE_CODES } from '@/lib/teiji-tsushin-options';
@@ -26,6 +26,12 @@ import { AdUnit } from '@/components/AdSlot';
 
 interface PageProps {
   params: Promise<{ prefecture: string }>;
+}
+
+// メタ行の「最終確認」: データの値（YYYY-MM-DD）を日本語の日付で表示するだけ（新しい日付は作らない）。
+function formatJaDate(iso: string) {
+  const m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(iso);
+  return m ? `${m[1]}年${Number(m[2])}月${Number(m[3])}日` : iso;
 }
 
 // 47都道府県すべてをビルド時に静的生成（SSG）し、毎リクエストのSSRをなくす。
@@ -338,7 +344,10 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
           <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
-            <Link href="/" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">ホーム</Link>
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
+              <Home className="h-4 w-4" />
+              ホーム
+            </Link>
             <ChevronRight className="h-4 w-4" />
             <Link href="/prefectures" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">都道府県一覧</Link>
             <ChevronRight className="h-4 w-4" />
@@ -366,7 +375,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                   </a>
                 </span>
               )}
-              {prefecture.lastVerified && <span>最終確認 {prefecture.lastVerified}</span>}
+              {prefecture.lastVerified && <span>最終確認 {formatJaDate(prefecture.lastVerified)}</span>}
             </p>
           </header>
 
@@ -485,17 +494,17 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
                 <div>
                   <h3 className="mb-3 text-[17px] font-bold text-slate-900">内申点（合計）の目安</h3>
                   <dl className="border-t border-slate-200">
-                    <div className="flex items-baseline justify-between gap-4 border-b border-slate-200 py-3">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-slate-200 py-3">
                       <dt className="text-sm text-slate-600">オール3の場合</dt>
-                      <dd className="text-right font-bold tabular-nums text-slate-900">{guide.examples.all3}</dd>
+                      <dd className="font-bold tabular-nums text-slate-900">{guide.examples.all3}</dd>
                     </div>
-                    <div className="flex items-baseline justify-between gap-4 border-b border-slate-200 py-3">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-slate-200 py-3">
                       <dt className="text-sm text-slate-600">オール4の場合</dt>
-                      <dd className="text-right font-bold tabular-nums text-slate-900">{guide.examples.all4}</dd>
+                      <dd className="font-bold tabular-nums text-slate-900">{guide.examples.all4}</dd>
                     </div>
-                    <div className="flex items-baseline justify-between gap-4 border-b border-slate-200 py-3">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-slate-200 py-3">
                       <dt className="text-sm text-slate-600">実技を1つ上げると</dt>
-                      <dd className="text-right font-bold tabular-nums text-slate-900">{guide.examples.practicalPlus1}</dd>
+                      <dd className="font-bold tabular-nums text-slate-900">{guide.examples.practicalPlus1}</dd>
                     </div>
                   </dl>
                   <p className="mt-3 text-xs leading-[1.8] text-slate-600">
@@ -568,7 +577,7 @@ export default async function PrefectureNaishinPage({ params }: PageProps) {
             <TrustInfo />
 
             {/* 回遊性アップ：関連ブログ・地域リンク */}
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2 [&>section]:mt-0">
               <BlogRelatedArticles prefectureCode={prefectureCode} limit={4} />
 
               <section className="flex flex-col rounded-lg border border-slate-200 bg-white p-5 md:p-6">

@@ -126,19 +126,23 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
           {/* 2026-08-08 Cowork実地監査: 直下のNextActionButtonsの「志望校配点で逆算する」ボタンと
               遷移先(/reverse?pref=X&current=Y)が完全に重複していた「逆算機能への誘導」カードを削除。
               結果画面に逆算への導線が3つ連続で並び、うち2つの遷移先がほぼ同じという指摘への対応。 */}
-          <NextActionButtons
-            prefectureCode={prefectureCode}
-            scores={scores}
-            totalScore={total}
-            maxScore={max}
-          />
+          <div className="mt-4">
+            <NextActionButtons
+              prefectureCode={prefectureCode}
+              scores={scores}
+              totalScore={total}
+              maxScore={max}
+            />
+          </div>
 
-          <PDFExportButton
-            prefectureCode={prefectureCode}
-            scores={scores}
-            totalScore={total}
-            maxScore={max}
-          />
+          <div className="mt-4">
+            <PDFExportButton
+              prefectureCode={prefectureCode}
+              scores={scores}
+              totalScore={total}
+              maxScore={max}
+            />
+          </div>
 
           <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-5">
             <h4 className="mb-2 text-base font-bold text-slate-900">さらに詳しい分析をご希望の方へ</h4>

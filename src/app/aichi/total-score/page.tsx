@@ -215,7 +215,7 @@ export default function AichiTotalScorePage() {
                   <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
                     <th className="whitespace-nowrap px-3 py-2 font-bold">評価方法</th>
                     <th className="px-3 py-2 font-bold">計算式</th>
-                    <th className="px-3 py-2 text-right font-bold">満点</th>
+                    <th className="whitespace-nowrap px-3 py-2 text-right font-bold">満点</th>
                     <th className="px-3 py-2 font-bold">特徴</th>
                   </tr>
                 </thead>
@@ -224,7 +224,7 @@ export default function AichiTotalScorePage() {
                     <tr key={m.type}>
                       <td className="px-3 py-2 font-bold">{m.type}</td>
                       <td className="whitespace-nowrap px-3 py-2">{m.formula}</td>
-                      <td className="px-3 py-2 text-right font-bold tabular-nums">{m.total}</td>
+                      <td className="whitespace-nowrap px-3 py-2 text-right font-bold tabular-nums">{m.total}</td>
                       <td className="px-3 py-2">{m.note}</td>
                     </tr>
                   ))}
@@ -243,10 +243,10 @@ export default function AichiTotalScorePage() {
             </h2>
             <h3 className="mb-2 text-[17px] font-bold text-slate-900">例：評定合計38・当日点95点</h3>
             <ul className="list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
-              <li>評定得点 ＝ 38 × 2 ＝ <strong>76点</strong></li>
-              <li>評価方法Ⅰ（等倍）：76 ＋ 95 ＝ <strong>171点</strong>（／200）</li>
-              <li>評価方法Ⅲ（当日×1.5）：76 ＋ 95×1.5 ＝ 76 ＋ 142.5 ＝ <strong>218.5点</strong>（／255）</li>
-              <li>評価方法Ⅳ（内申×2）：76×2 ＋ 95 ＝ 152 ＋ 95 ＝ <strong>247点</strong>（／290）</li>
+              <li>評定得点 ＝ 38 × 2 ＝ <strong className="whitespace-nowrap">76点</strong></li>
+              <li>評価方法Ⅰ（等倍）：76 ＋ 95 ＝ <strong className="whitespace-nowrap">171点</strong>（／200）</li>
+              <li>評価方法Ⅲ（当日×1.5）：76 ＋ 95×1.5 ＝ 76 ＋ 142.5 ＝ <strong className="whitespace-nowrap">218.5点</strong>（／255）</li>
+              <li>評価方法Ⅳ（内申×2）：76×2 ＋ 95 ＝ 152 ＋ 95 ＝ <strong className="whitespace-nowrap">247点</strong>（／290）</li>
             </ul>
             <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               同じ生徒でも、志望校の評価方法によって有利・不利が変わります。当日点が強い人は評価方法Ⅲ・Ⅴの高校、内申が強い人は評価方法Ⅱ・Ⅳの高校が相対的に有利になりやすいです。
@@ -295,26 +295,26 @@ export default function AichiTotalScorePage() {
             <h2 className="mb-2 text-xl font-bold text-slate-900">関連ツール・コンテンツ</h2>
             <ul className="grid gap-x-8 sm:grid-cols-2">
               <li>
-                <Link href="/aichi/naishin" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
-                  <span className="underline underline-offset-2">愛知県の内申点を計算する</span>
+                <Link href="/aichi/naishin" className="group flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 font-bold text-brand-700 hover:text-brand-800">
+                  <span className="group-hover:underline group-hover:underline-offset-2">愛知県の内申点を計算する</span>
                   <ChevronRight className="h-4 w-4 shrink-0" />
                 </Link>
               </li>
               <li>
-                <Link href="/aichi" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
-                  <span className="underline underline-offset-2">愛知県の入試制度ガイド</span>
+                <Link href="/aichi" className="group flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 font-bold text-brand-700 hover:text-brand-800">
+                  <span className="group-hover:underline group-hover:underline-offset-2">愛知県の入試制度ガイド</span>
                   <ChevronRight className="h-4 w-4 shrink-0" />
                 </Link>
               </li>
               <li>
-                <Link href="/hensachi" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
-                  <span className="underline underline-offset-2">5教科の偏差値を計算する</span>
+                <Link href="/hensachi" className="group flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 font-bold text-brand-700 hover:text-brand-800">
+                  <span className="group-hover:underline group-hover:underline-offset-2">5教科の偏差値を計算する</span>
                   <ChevronRight className="h-4 w-4 shrink-0" />
                 </Link>
               </li>
               <li>
-                <Link href="/reverse?pref=aichi" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
-                  <span className="underline underline-offset-2">志望校から逆算する</span>
+                <Link href="/reverse?pref=aichi" className="group flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 font-bold text-brand-700 hover:text-brand-800">
+                  <span className="group-hover:underline group-hover:underline-offset-2">志望校から逆算する</span>
                   <ChevronRight className="h-4 w-4 shrink-0" />
                 </Link>
               </li>

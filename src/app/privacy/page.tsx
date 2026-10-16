@@ -240,8 +240,8 @@ export default function PrivacyPage() {
 
             <div className="mt-3 space-y-3">
               <div className="rounded-lg border border-slate-200 bg-brand-50 p-4">
-                <h4 className="flex items-center gap-2 text-base font-bold text-slate-900">
-                  <span className="inline-flex items-center rounded border border-slate-300 bg-white px-2 py-0.5 text-xs font-normal text-slate-700">必須</span>
+                <h4 className="flex items-baseline gap-2 text-base font-bold text-slate-900">
+                  <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded border border-slate-300 bg-white px-2 py-0.5 text-xs font-normal text-slate-700">必須</span>
                   必須Cookie（ファーストパーティ）
                 </h4>
                 <p className="mt-2 text-sm leading-[1.8] text-slate-900">
@@ -251,8 +251,8 @@ export default function PrivacyPage() {
               </div>
 
               <div className="rounded-lg border border-slate-200 bg-brand-50 p-4">
-                <h4 className="flex items-center gap-2 text-base font-bold text-slate-900">
-                  <span className="inline-flex items-center rounded border border-slate-300 bg-white px-2 py-0.5 text-xs font-normal text-slate-700">任意</span>
+                <h4 className="flex items-baseline gap-2 text-base font-bold text-slate-900">
+                  <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded border border-slate-300 bg-white px-2 py-0.5 text-xs font-normal text-slate-700">任意</span>
                   分析Cookie（サードパーティ）
                 </h4>
                 <p className="mt-2 text-sm leading-[1.8] text-slate-900">
@@ -379,10 +379,10 @@ export default function PrivacyPage() {
                 href="https://tools.google.com/dlpage/gaoptout"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
               >
                 Googleアナリティクス オプトアウト アドオン
-                <ExternalLink className="h-4 w-4" />
+                <ExternalLink className="ml-1 inline h-4 w-4 align-text-bottom" />
               </a>
               をブラウザにインストールしてください。
             </p>

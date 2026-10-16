@@ -86,7 +86,7 @@ export default function PressPage() {
             <dl className="grid grid-cols-2 gap-px border-y border-slate-200 bg-slate-200 sm:grid-cols-4">
               {STATS.map((s) => (
                 <div key={s.label} className="bg-white px-4 py-3">
-                  <dt className="text-xs text-slate-600">{s.label}</dt>
+                  <dt className="break-keep text-xs text-slate-600">{s.label}</dt>
                   <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{s.value}</dd>
                 </div>
               ))}

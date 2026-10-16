@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight } from '@/components/icons';
+import { ArrowRight, ChevronRight, Home } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -437,7 +437,17 @@ export default function ToolsPage() {
       <FAQPageSchema faqItems={TOOLS_FAQS} />
 
       <div className="min-h-screen bg-slate-50">
-        <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
+        <div className="mx-auto max-w-5xl px-4 py-6 md:py-10">
+          {/* パンくず（BreadcrumbSchema と同じ階層。他のページの頭と型をそろえる） */}
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
+              <Home className="h-4 w-4" />
+              ホーム
+            </Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-slate-900">ツール一覧</span>
+          </nav>
+
           {/* ページの頭 */}
           <header>
             <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">

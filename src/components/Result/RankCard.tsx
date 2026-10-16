@@ -81,7 +81,7 @@ export function RankCard({ result }: RankCardProps) {
             <div className="mt-1 text-sm text-slate-600">あなたの達成度</div>
           </div>
         </div>
-        <div className="shrink-0 text-right">
+        <div className="ml-auto shrink-0 text-right">
           <div className="text-xs text-slate-600">獲得率</div>
           <div className="text-3xl font-bold tabular-nums text-slate-900">{Math.round(result.percent)}%</div>
           <div className="text-sm tabular-nums text-slate-600">{result.total}/{result.max}点</div>

@@ -136,21 +136,21 @@ export default function QualityPage() {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-slate-900 text-xs text-slate-600">
-                        <th className="pb-2 text-left font-bold">テストケース</th>
-                        <th className="pb-2 pl-4 text-right font-bold">期待される結果</th>
-                        <th className="pb-2 pl-4 text-right font-bold">ツールの出力</th>
-                        <th className="pb-2 pl-4 text-left font-bold">ステータス</th>
+                        <th className="whitespace-nowrap pb-2 text-left font-bold">テストケース</th>
+                        <th className="whitespace-nowrap pb-2 pl-2 text-right font-bold sm:pl-4">期待される<br className="sm:hidden" />結果</th>
+                        <th className="whitespace-nowrap pb-2 pl-2 text-right font-bold sm:pl-4">ツールの<br className="sm:hidden" />出力</th>
+                        <th className="whitespace-nowrap pb-2 pl-2 text-left font-bold sm:pl-4">ステータス</th>
                       </tr>
                     </thead>
                     <tbody>
                       {pref.testCases.map((tc, j) => (
                         <tr key={j} className="border-b border-slate-200 last:border-0">
                           <td className="py-3 text-slate-900">{tc.name}</td>
-                          <td className="py-3 pl-4 text-right tabular-nums text-slate-900">{tc.expected}</td>
-                          <td className="py-3 pl-4 text-right tabular-nums text-slate-900">{tc.actual}</td>
-                          <td className="py-3 pl-4">
-                            <span className="inline-flex items-center gap-1 rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-bold text-brand-700">
-                              <CheckCircle className="h-4 w-4" /> PASS
+                          <td className="whitespace-nowrap py-3 pl-2 text-right tabular-nums text-slate-900 sm:pl-4">{tc.expected}</td>
+                          <td className="whitespace-nowrap py-3 pl-2 text-right tabular-nums text-slate-900 sm:pl-4">{tc.actual}</td>
+                          <td className="py-3 pl-2 sm:pl-4">
+                            <span className="inline-flex items-center gap-1 whitespace-nowrap rounded border border-slate-200 bg-white px-1.5 py-0.5 text-xs font-bold text-brand-700 sm:px-2">
+                              <CheckCircle className="h-4 w-4 shrink-0" /> PASS
                             </span>
                           </td>
                         </tr>

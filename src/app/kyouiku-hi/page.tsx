@@ -98,13 +98,13 @@ export default function KyouikuHiPage() {
           </nav>
 
           <header className="mb-8">
-            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">中学〜高校卒業まで、教育費はいくら？</h1>
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 [text-wrap:balance] md:text-[28px]">中学〜高校卒業まで、教育費はいくら？</h1>
             <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               出典：
               <a href={MEXT_GAKUSHUHI_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
               </a>
-              （最終確認 {MEXT_GAKUSHUHI_SOURCE.lastChecked}）
+              <span className="whitespace-nowrap">（最終確認 {MEXT_GAKUSHUHI_SOURCE.lastChecked}）</span>
             </p>
             <p className="mt-4 text-base leading-[1.8] text-slate-900">
               現在の<strong>学年・進学先（公立/私立）・塾の形態</strong>を選ぶだけで、高校卒業までにかかる教育費の総額を
@@ -126,7 +126,7 @@ export default function KyouikuHiPage() {
           </section>
 
           {/* 保護者リード（最高インテント＝お金を計算した直後） */}
-          <ParentLeadCTA placement="hiyou" className="mb-10" />
+          <ParentLeadCTA placement="hiyou" className="mb-10" headingLevel="h2" />
 
           {/* 進路別ざっくり比較（engine算出・捏造ゼロ） */}
           <section className="mb-10">
@@ -136,14 +136,14 @@ export default function KyouikuHiPage() {
                 <thead>
                   <tr className="border-b border-slate-900 text-xs text-slate-600">
                     <th scope="col" className="px-4 py-3 text-left font-bold">進路</th>
-                    <th scope="col" className="px-4 py-3 text-right font-bold">高校3年間の総額（準備費込み）</th>
+                    <th scope="col" className="px-4 py-3 text-right font-bold [text-wrap:balance]">高校3年間の総額（準備費込み）</th>
                   </tr>
                 </thead>
                 <tbody className="text-slate-900">
                   {COMPARE.map((c) => (
                     <tr key={c.route} className="border-b border-slate-200 last:border-b-0">
                       <td className="px-4 py-3 font-bold">{c.route}</td>
-                      <td className="px-4 py-3 text-right tabular-nums">{toManYen(highSchoolTotal(c.high))}（{c.high === 'public' ? '公立高校' : '私立高校'}）</td>
+                      <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">{toManYen(highSchoolTotal(c.high))}（{c.high === 'public' ? '公立高校' : '私立高校'}）</td>
                     </tr>
                   ))}
                 </tbody>
@@ -173,10 +173,10 @@ export default function KyouikuHiPage() {
           {/* 大学進学の橋渡し（姉妹サイト My Shingaku へ） */}
           <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5">
             <h2 className="mb-3 text-xl font-bold text-slate-900">大学進学まで考えると（概算の目安）</h2>
-            <ul className="space-y-1 text-base leading-[1.8] text-slate-900">
-              <li>・{UNIVERSITY_ESTIMATE.national.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.national.fourYear)}（{UNIVERSITY_ESTIMATE.national.note}）</li>
-              <li>・{UNIVERSITY_ESTIMATE.privateHumanities.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.privateHumanities.fourYear)} 前後</li>
-              <li>・{UNIVERSITY_ESTIMATE.privateScience.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.privateScience.fourYear)} 前後</li>
+            <ul className="list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900 marker:text-slate-500">
+              <li>{UNIVERSITY_ESTIMATE.national.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.national.fourYear)}（{UNIVERSITY_ESTIMATE.national.note}）</li>
+              <li>{UNIVERSITY_ESTIMATE.privateHumanities.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.privateHumanities.fourYear)} 前後</li>
+              <li>{UNIVERSITY_ESTIMATE.privateScience.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.privateScience.fourYear)} 前後</li>
             </ul>
             <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               ※ 大学費用は学部・大学で大きく異なります。一人暮らしの場合は別途生活費がかかります。
@@ -217,6 +217,7 @@ export default function KyouikuHiPage() {
               source="home"
               heading="教育費と受験情報を、無料で受け取りませんか？"
               body="学費の備え方・就学支援金・志望校選びのコツを、LINEまたはメールでお届けします。いつでも解除できます。"
+              headingLevel="h2"
             />
           </div>
 
@@ -225,14 +226,14 @@ export default function KyouikuHiPage() {
             <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white px-5">
                   <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
-                    <span className="flex min-h-[44px] items-center justify-between gap-3">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3 py-2">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-600 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
+                  <p className="pb-5 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>

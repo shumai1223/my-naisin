@@ -120,7 +120,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       {/* Article Body */}
       <div className="mx-auto max-w-3xl xl:max-w-[78rem] px-4">
-        <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_18rem] xl:gap-10">
+        {/* 右の列（目次）が空のときは1列にして、本文を中央に置く（右だけ空白になって左に寄って見えるのを防ぐ） */}
+        <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_18rem] xl:gap-10 xl:[&:has(>div:empty)]:grid-cols-1">
           <div className="min-w-0 xl:max-w-3xl xl:mx-auto">
         {/* 記事の頭: パンくず → h1 → メタ行 → 結論の段落（ヒーロー帯は作らない） */}
         <header className="pb-8 pt-6">
@@ -139,7 +140,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {/* Title */}
           {/* 本文の h2（blog.css: 1.55rem）より一段大きくして、見出しの階層を保つ */}
-          <h1 className="text-[1.75rem] font-bold leading-snug text-slate-900 md:text-[2rem]">
+          <h1 className="text-[1.75rem] font-bold leading-snug text-slate-900 [text-wrap:balance] [word-break:auto-phrase] md:text-[2rem]">
             {post.title}
           </h1>
 
@@ -438,7 +439,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
           </div>
           {/* Sticky TOC (desktop only) */}
-          <div className="xl:mt-8">
+          <div className="empty:hidden xl:mt-8">
             <BlogStickyTOC rootSelector=".blog-content" />
           </div>
         </div>

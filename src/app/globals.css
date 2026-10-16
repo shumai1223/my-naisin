@@ -43,6 +43,25 @@ body {
   overflow-wrap: anywhere;
 }
 
+/*
+ * 日本語の折り返し。見出しは文節の途中で切らず、行の長さをそろえる（「…中1か / ら)」「…かか / る？」のように
+ * 最後の行に1〜2字だけ残るのを防ぐ）。本文の段落・箇条書き・表のセルは、最後の行が1字だけにならないよう調整する。
+ * word-break: auto-phrase（Chrome 119+）と text-wrap（balance/pretty）は、非対応のブラウザでは何も起きない（従来どおりの折り返し）。
+ */
+h1,
+h2,
+h3,
+h4 {
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
 ::selection {
   background: rgba(23, 84, 62, 0.18);
 }

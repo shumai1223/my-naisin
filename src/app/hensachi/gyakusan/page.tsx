@@ -73,12 +73,14 @@ export default function HensachiGyakusanPage() {
           </nav>
 
           <header className="mb-8">
-            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">目標偏差値まであと何点？逆算計算機</h1>
+            <h1 className="text-balance text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">目標偏差値まであと何点？逆算計算機</h1>
             <p className="mt-4 text-base leading-[1.8] text-slate-900">
               過去問・模試の得点から今の偏差値を出し、<strong>目標の偏差値に必要な点数</strong>をその場で逆算します。
             </p>
           </header>
 
+          {/* 計算ツールとその直後の案内（保護者向け・保存）の見出しをまとめる、画面には出さない h2（h1 → h3 と飛ばないように） */}
+          <h2 className="sr-only">逆算計算機</h2>
           <HensachiGyakusanResultFlow />
 
           <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">

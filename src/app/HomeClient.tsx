@@ -337,11 +337,13 @@ export default function HomeClient() {
         url="https://my-naishin.com"
       />
       <BreadcrumbSchema items={[{ name: 'ホーム', url: 'https://my-naishin.com/' }]} />
-      <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8">
+      {/* 他のページと同じく、ヘッダーは全幅で一番上に置く（外側に大きな白い枠を作らない＝カードの中にカードを入れない）。
+          selectモードでは HeroNavigation が <h1> を持つので、ここは <p>（見出しを1つにする）。 */}
+      <Header titleTag={navigationMode === 'select' ? 'p' : 'h1'} />
+      <div className="mx-auto max-w-7xl pb-6">
         <div className="mx-auto max-w-4xl">
           <div className="min-w-0">
-            <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
-              <Header titleTag="h1" />
+            <div>
 
               {/* メタ行。selectモードでは HeroNavigation の見出しの下に同じ行を出す（ページの頭の型: 見出し → メタ行 → 結論） */}
               {navigationMode !== 'select' && (
@@ -463,7 +465,8 @@ export default function HomeClient() {
                 </div>
               )}
 
-              <main id="calculator" className="px-4 pb-10 md:px-6">
+              {/* layout.tsx がすでに <main id="main-content"> を持つので、ここは <div>（main を二重にしない） */}
+              <div id="calculator" className="px-4 pb-10 md:px-6">
                 <div className="space-y-6">
                   {navigationMode === 'reverse' && (
                     <ReverseCalculator onBack={() => setNavigationMode('select')} />
@@ -634,7 +637,7 @@ export default function HomeClient() {
 
                   <BlogSection />
                 </div>
-              </main>
+              </div>
 
               <div className="mx-auto max-w-4xl px-4 pb-8 md:px-6">
                 <NaishinGuideSection />

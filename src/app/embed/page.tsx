@@ -161,9 +161,9 @@ export default function EmbedPage() {
           <section className="mb-8 rounded-lg border border-amber-200 bg-amber-50 p-4 md:p-5">
             <h2 className="mb-2 text-base font-bold text-amber-900">ご利用にあたってのお願い</h2>
             <ul className="space-y-1.5 text-base leading-[1.8] text-amber-900">
-              <li>・コードに含まれる <strong>「by My Naishin（内申点 計算サイト）」のクレジットリンク</strong>（iframeのすぐ下の行）は、そのまま残してください。無料で提供を続けるための唯一のお願いです。</li>
-              <li>・リンクの削除・差し替え・改変はご遠慮ください。枠の色など外側のスタイル調整は自由です。</li>
-              <li>・商用・非商用問わず、教育目的の範囲で自由にご利用いただけます。</li>
+              <li className="flex"><span className="shrink-0">・</span><span>コードに含まれる <strong>「by My Naishin（内申点 計算サイト）」のクレジットリンク</strong>（iframeのすぐ下の行）は、そのまま残してください。無料で提供を続けるための唯一のお願いです。</span></li>
+              <li className="flex"><span className="shrink-0">・</span><span>リンクの削除・差し替え・改変はご遠慮ください。枠の色など外側のスタイル調整は自由です。</span></li>
+              <li className="flex"><span className="shrink-0">・</span><span>商用・非商用問わず、教育目的の範囲で自由にご利用いただけます。</span></li>
             </ul>
           </section>
 

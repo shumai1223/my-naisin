@@ -90,7 +90,7 @@ export function ParentShareBanner() {
       : null;
 
   return (
-    <section className="mb-8 overflow-hidden rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+    <section className="mb-8 mt-4 overflow-hidden rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
       <div className="mb-3 inline-flex items-center gap-1.5 rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-bold text-slate-700">
         <Inbox className="h-4 w-4" />
         お子さまから成績レポートが届きました
@@ -144,7 +144,7 @@ export function ParentShareBanner() {
       </p>
 
       {cardSrc && (
-        <div className="mt-4 overflow-hidden rounded-lg border border-slate-200 bg-white">
+        <div className="mt-4 max-w-xl overflow-hidden rounded-lg border border-slate-200 bg-white">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={cardSrc}

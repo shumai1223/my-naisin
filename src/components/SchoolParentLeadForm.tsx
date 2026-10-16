@@ -152,7 +152,7 @@ export function SchoolParentLeadForm({ prefectureCode, prefectureName, schoolNam
               onFocus={onFormStart}
               placeholder="保護者の方のメールアドレス"
               aria-label="メールアドレス"
-              className="h-12 flex-1 rounded border border-slate-300 bg-white px-3 text-base placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
+              className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700 sm:min-w-0 sm:flex-1"
             />
             <button
               type="submit"

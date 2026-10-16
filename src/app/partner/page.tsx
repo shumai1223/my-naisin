@@ -182,7 +182,7 @@ export default function PartnerPage() {
           </section>
 
           {/* CTA */}
-          <section className="rounded-lg border border-slate-200 bg-brand-50 p-6">
+          <section className="rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
             <h2 className="text-xl font-bold text-slate-900">まずはお気軽にご相談ください</h2>
             <p className="mt-2 text-base leading-[1.8] text-slate-900">
               塾名・対応地域・ご希望（CPA提携／直接送客／ウィジェット）をお書き添えのうえ、お問い合わせフォームよりご連絡ください。担当より折り返しご連絡します。

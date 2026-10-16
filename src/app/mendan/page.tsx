@@ -151,7 +151,7 @@ export default function MendanPage() {
           </section>
 
           {/* 保護者リード（最高インテント・面談=保護者が決裁者） */}
-          <ParentLeadCTA placement="mendan" className="mb-10 print:hidden" />
+          <ParentLeadCTA placement="mendan" className="mb-10 print:hidden" headingLevel="h2" />
 
           {/* 面談前の準備3ステップ */}
           <section className="mb-10 print:hidden">
@@ -227,14 +227,14 @@ export default function MendanPage() {
             <h2 className="mb-5 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {MENDAN_FAQS.map((faq) => (
-                <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white px-5">
                   <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
-                    <span className="flex min-h-[44px] items-center justify-between gap-3">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3 py-2">
                       {faq.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-600 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
+                  <p className="pb-5 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </details>
               ))}
             </div>

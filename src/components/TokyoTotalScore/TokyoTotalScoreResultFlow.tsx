@@ -25,7 +25,7 @@ export function TokyoTotalScoreResultFlow() {
 
       {/* 保護者ウィンドウ（三者面談・出願期だけ点灯）：都立総合得点の現在地＋成績カードを面談へ持って行く導線 */}
       <ParentWindowBridge
-        className="mb-6"
+        className="mt-6 mb-6"
         metricLabel="総合得点"
         score={result?.total}
         max={result?.max}
@@ -33,7 +33,7 @@ export function TokyoTotalScoreResultFlow() {
         prefectureName="東京都"
       />
 
-      <ParentCostBridge prefectureName="東京都" className="mb-6" />
+      <ParentCostBridge prefectureName="東京都" className="mt-6 mb-6" />
 
       <div id="save-result" className="scroll-mt-24">
         <SaveResultCTA

@@ -24,6 +24,26 @@
   line-height: 1.9;
   color: var(--blog-text-main);
   -webkit-font-smoothing: antialiased;
+  /* 日本語の改行は文節の途中で切らない（Chrome 119+ の auto-phrase。非対応のブラウザは従来どおり）。 */
+  word-break: auto-phrase;
+}
+
+/* 見出し・表の見出し・目次は行の長さをそろえ、最後の行に1字だけ残らないようにする。
+   本文・箇条書き・表のセルは、最後の行が1字だけにならないよう調整する（pretty）。
+   どちらも非対応のブラウザでは何も起きない。 */
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content th,
+.blog-content .toc a,
+.blog-content .cta-box h3 {
+  text-wrap: balance;
+}
+
+.blog-content p,
+.blog-content li,
+.blog-content td {
+  text-wrap: pretty;
 }
 
 /* ===========================
@@ -49,6 +69,7 @@
 .blog-content h3 {
   font-size: 1.2rem;
   font-weight: 700;
+  line-height: 1.5;
   margin: 3rem 0 1.25rem;
   color: var(--blog-text-main);
 }
@@ -60,6 +81,7 @@
 .blog-content h4 {
   font-size: 1rem;
   font-weight: 700;
+  line-height: 1.6;
   margin: 2rem 0 0.75rem;
   color: var(--blog-text-sub);
 }
@@ -92,6 +114,15 @@
   padding-left: 1.5rem;
 }
 
+/* Tailwind の初期化で list-style が消えているため、本文の箇条書きは点・番号を戻す（目次の ul は下で none にしている） */
+.blog-content ul {
+  list-style: disc outside;
+}
+
+.blog-content ol {
+  list-style: decimal outside;
+}
+
 .blog-content li {
   margin-bottom: 0.9rem;
   padding-left: 0.25rem;
@@ -99,7 +130,7 @@
 }
 
 .blog-content ul li::marker {
-  color: var(--blog-border-strong);
+  color: var(--blog-text-muted);
 }
 
 /* ===========================
@@ -298,7 +329,7 @@
 .blog-content .tip-num {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--blog-border-strong);
+  color: var(--blog-accent);
   line-height: 1;
   font-variant-numeric: tabular-nums;
   padding-top: 0.1em;
@@ -347,6 +378,9 @@
   border-bottom: 1px solid var(--blog-text-main);
   font-weight: 700;
   text-align: left;
+  /* 幅の狭い箱の中でも「満点」「45点」が1字ずつ折り返されないように（body の overflow-wrap:anywhere が表の列幅を1字まで縮めるため）。
+     box-sizing が border-box なので、余白の分を含めて 4.5em を下限にする */
+  min-width: 4.5em;
 }
 
 .blog-content td {
@@ -354,6 +388,14 @@
   border-bottom: 1px solid var(--blog-border);
   vertical-align: top;
   line-height: 1.7;
+  min-width: 4.5em;
+}
+
+/* 箱（point-box など）の中に置いた表は、上下の余白を詰める */
+.blog-content .point-box .table-container,
+.blog-content .summary-box .table-container,
+.blog-content .card .table-container {
+  margin: 1.25rem 0;
 }
 
 .blog-content tr:last-child td {
@@ -377,6 +419,7 @@
 .blog-content .cta-box h3 {
   color: var(--blog-text-main);
   font-size: 1.35rem;
+  line-height: 1.5;
   margin-top: 0;
   font-weight: 700;
   border: none;
@@ -446,4 +489,56 @@
   margin-bottom: 0.7rem;
   font-size: 0.9375rem;
   line-height: 1.7;
+}
+
+/* ===========================
+   箱の中の先頭・末尾の要素は、外側の余白（h4 の上 2rem・p の下 1.9rem）を持たない。
+   持たせると箱の上下だけが空きすぎる。
+   =========================== */
+
+.blog-content .point-box > :first-child,
+.blog-content .summary-box > :first-child,
+.blog-content .card > :first-child,
+.blog-content .cta-box > :first-child {
+  margin-top: 0;
+}
+
+.blog-content .point-box > :last-child,
+.blog-content .summary-box > :last-child,
+.blog-content .card > :last-child {
+  margin-bottom: 0;
+}
+
+/* ===========================
+   スマホ幅（640px 以下）: 箱の内側の余白を減らし、表が1字ずつ折り返されないようにする
+   =========================== */
+
+@media (max-width: 640px) {
+  .blog-content .toc,
+  .blog-content .point-box,
+  .blog-content .summary-box {
+    padding: 1.25rem 1.125rem;
+  }
+
+  .blog-content .card {
+    padding: 1.25rem;
+  }
+
+  .blog-content .cta-box {
+    padding: 2rem 1.25rem;
+  }
+
+  .blog-content th,
+  .blog-content td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .blog-content .tip {
+    grid-template-columns: 2rem 1fr;
+    gap: 0.875rem;
+  }
+
+  .blog-content .tip-num {
+    font-size: 1.5rem;
+  }
 }

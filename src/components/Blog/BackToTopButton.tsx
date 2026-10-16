@@ -24,7 +24,7 @@ export function BackToTopButton() {
       type="button"
       onClick={handleClick}
       aria-label="ページ先頭へ戻る"
-      className={`fixed bottom-6 right-6 z-40 inline-flex items-center justify-center rounded border border-slate-300 bg-white p-3 text-slate-700 transition-[opacity,visibility,background-color] duration-150 hover:bg-brand-50 hover:text-brand-800 motion-reduce:transition-none ${
+      className={`fixed bottom-20 right-4 z-40 inline-flex sm:right-6 items-center justify-center rounded border border-slate-300 bg-white p-3 text-slate-700 transition-[opacity,visibility,background-color] duration-150 hover:bg-brand-50 hover:text-brand-800 motion-reduce:transition-none ${
         visible ? 'opacity-100' : 'invisible opacity-0'
       }`}
     >

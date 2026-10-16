@@ -263,7 +263,7 @@ export default function KanagawaSValuePage() {
               <h3 className="text-[17px] font-bold text-slate-900">S1の計算例（比率4:6の高校）</h3>
               <p className="mt-2 text-base leading-[1.8] text-slate-900">
                 内申115（換算85.2）・学力400点（換算80）・比率<strong>内申4:学力6</strong>の場合：<br />
-                S1 ＝ 85.2 × 4 ＋ 80 × 6 ＝ 340.8 ＋ 480 ＝ <strong>約821点</strong>（川和の目安S1 830にあと一歩）
+                S1 ＝ 85.2 × 4 ＋ 80 × 6 ＝ 340.8 ＋ 480 ＝ <strong className="whitespace-nowrap">約821点</strong>（川和の目安S1 830にあと一歩）
               </p>
             </div>
             <p className="mt-4 text-sm leading-[1.8] text-slate-600">
@@ -275,75 +275,75 @@ export default function KanagawaSValuePage() {
           <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
             <h2 className="text-xl font-bold text-slate-900">主要神奈川公立高校の比率と合格目安【2026年最新】</h2>
             <div className="mt-4 overflow-x-auto">
-              <table className="w-full min-w-[480px] text-sm">
+              <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
-                    <th scope="col" className="py-2 pr-3 font-bold">高校</th>
-                    <th scope="col" className="px-3 py-2 text-center font-bold">比率（内申:学力:特色）</th>
-                    <th scope="col" className="px-3 py-2 text-right font-bold">S値合格目安</th>
-                    <th scope="col" className="py-2 pl-3 text-right font-bold">偏差値</th>
+                    <th scope="col" className="w-[7.5rem] py-2 pr-2 font-bold sm:w-auto sm:pr-3">高校</th>
+                    <th scope="col" className="px-2 py-2 text-center font-bold [overflow-wrap:normal] [word-break:keep-all] sm:px-3">比率（内申:学力:特色）</th>
+                    <th scope="col" className="whitespace-nowrap px-2 py-2 text-right font-bold sm:px-3">S値合格目安</th>
+                    <th scope="col" className="py-2 pl-2 text-right font-bold sm:pl-3">偏差値</th>
                   </tr>
                 </thead>
                 <tbody className="text-slate-900">
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">横浜翠嵐</td>
-                    <td className="px-3 py-2 text-center tabular-nums">2:6:2</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S2 1300+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">75</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">横浜翠嵐</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">2:6:2</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S2 1300+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">75</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">湘南</td>
-                    <td className="px-3 py-2 text-center tabular-nums">3:5:2</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S2 1250+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">73</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">湘南</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">3:5:2</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S2 1250+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">73</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">柏陽</td>
-                    <td className="px-3 py-2 text-center tabular-nums">3:5:2</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S2 1180+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">71</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">柏陽</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">3:5:2</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S2 1180+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">71</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">厚木</td>
-                    <td className="px-3 py-2 text-center tabular-nums">3:5:2</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S2 1150+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">70</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">厚木</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">3:5:2</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S2 1150+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">70</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">川和</td>
-                    <td className="px-3 py-2 text-center tabular-nums">4:6</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S1 830+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">68</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">川和</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">4:6</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S1 830+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">68</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">光陵</td>
-                    <td className="px-3 py-2 text-center tabular-nums">4:6</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S1 780+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">65</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">光陵</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">4:6</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S1 780+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">65</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">希望ヶ丘</td>
-                    <td className="px-3 py-2 text-center tabular-nums">4:6</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S1 750+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">63</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">希望ヶ丘</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">4:6</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S1 750+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">63</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">小田原</td>
-                    <td className="px-3 py-2 text-center tabular-nums">4:6</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S1 740+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">63</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">小田原</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">4:6</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S1 740+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">63</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">鎌倉</td>
-                    <td className="px-3 py-2 text-center tabular-nums">4:6</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S1 700+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">61</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">鎌倉</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">4:6</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S1 700+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">61</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <td className="py-2 pr-3 font-bold">市立横浜サイエンスフロンティア</td>
-                    <td className="px-3 py-2 text-center tabular-nums">3:5:2</td>
-                    <td className="px-3 py-2 text-right font-bold tabular-nums">S2 1100+</td>
-                    <td className="py-2 pl-3 text-right tabular-nums">68</td>
+                    <td className="py-2 pr-2 font-bold sm:pr-3">市立横浜サイエンスフロンティア</td>
+                    <td className="px-2 py-2 text-center tabular-nums sm:px-3">3:5:2</td>
+                    <td className="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums sm:px-3">S2 1100+</td>
+                    <td className="py-2 pl-2 text-right tabular-nums sm:pl-3">68</td>
                   </tr>
                 </tbody>
               </table>

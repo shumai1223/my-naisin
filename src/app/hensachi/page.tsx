@@ -811,7 +811,7 @@ export default function HensachiPage() {
             <div className="divide-y divide-slate-200 border-y border-slate-200">
               {HENSACHI_FAQS.map((faq, i) => (
                 <details key={i} className="group">
-                  <summary className="flex min-h-[44px] cursor-pointer items-start gap-3 py-4 hover:text-brand-700">
+                  <summary className="flex min-h-[44px] cursor-pointer list-none items-start gap-3 py-4 hover:text-brand-700 [&::-webkit-details-marker]:hidden">
                     <span className="w-5 shrink-0 font-bold text-brand-700">Q</span>
                     <span className="flex-1 text-base font-bold text-slate-900">{faq.question}</span>
                     <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />

@@ -750,7 +750,7 @@ export default function HyoteiHeikinPage() {
               <div className="border-t border-slate-200">
                 {HYOTEI_FAQS.slice(-4).map((faq, i) => (
                   <details key={i} className="group border-b border-slate-200">
-                    <summary className="flex min-h-[44px] cursor-pointer items-start gap-2 py-3 text-base font-bold text-slate-900 hover:text-brand-700">
+                    <summary className="flex min-h-[44px] cursor-pointer list-none items-start gap-2 py-3 text-base font-bold text-slate-900 hover:text-brand-700 [&::-webkit-details-marker]:hidden">
                       <span className="shrink-0 text-brand-700">Q</span>
                       <span className="flex-1">{faq.question}</span>
                       <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />

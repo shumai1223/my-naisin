@@ -64,7 +64,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
             内申点を計算する
           </Button>
           <p className="mt-3 text-sm text-slate-600">
-            例：「通知表の数字をいま入れて、内申点を出したい」→ こちら
+            例：「通知表の数字をいま入れて、内申点を出したい」<span className="whitespace-nowrap">→ こちら</span>
           </p>
         </div>
 
@@ -139,7 +139,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               </span>
               <span className="text-sm text-slate-600">目標点から必要な当日点を計算</span>
               <span className="mt-1 text-sm text-brand-700">
-                例：「志望校の目標点に届くか確かめたい」→ こちら
+                例：「志望校の目標点に届くか確かめたい」<span className="whitespace-nowrap">→ こちら</span>
               </span>
             </Link>
           </li>
@@ -155,7 +155,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               </span>
               <span className="text-sm text-slate-600">5教科の点数から偏差値を瞬時に算出</span>
               <span className="mt-1 text-sm text-brand-700">
-                例：「模試の点数から偏差値を知りたい」→ こちら
+                例：「模試の点数から偏差値を知りたい」<span className="whitespace-nowrap">→ こちら</span>
               </span>
             </Link>
           </li>
@@ -171,7 +171,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               </span>
               <span className="text-sm text-slate-600">通知表の評定から平均値・素内申を算出</span>
               <span className="mt-1 text-sm text-brand-700">
-                例：「推薦入試の評定平均を確認したい」→ こちら
+                例：「推薦入試の評定平均を確認したい」<span className="whitespace-nowrap">→ こちら</span>
               </span>
             </Link>
           </li>
@@ -187,7 +187,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               </span>
               <span className="text-sm text-slate-600">都道府県別の計算方法・コラム</span>
               <span className="mt-1 text-sm text-brand-700">
-                例：「換算内申って何？まず仕組みを知りたい」→ こちら
+                例：「換算内申って何？まず仕組みを知りたい」<span className="whitespace-nowrap">→ こちら</span>
               </span>
             </Link>
           </li>
@@ -206,7 +206,7 @@ export function HeroNavigation({ onModeChange, currentMode }: HeroNavigationProp
               </span>
               <span className="text-sm text-slate-600">県内の高校別の募集人員・志願者数・倍率を確認</span>
               <span className="mt-1 text-sm text-brand-700">
-                例：「気になる高校の倍率を先に見ておきたい」→ こちら
+                例：「気になる高校の倍率を先に見ておきたい」<span className="whitespace-nowrap">→ こちら</span>
               </span>
             </Link>
           </li>

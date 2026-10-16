@@ -90,7 +90,7 @@ function ReversePageContent() {
 
         {/* SSR説明セクション */}
         <header className="mb-8">
-          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">内申点シミュレーター｜志望校から逆算</h1>
+          <h1 className="text-balance text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">内申点シミュレーター｜志望校から逆算</h1>
           <p className="mt-2 text-sm text-slate-600">2026年度入試対応（令和8年度入学者選抜）</p>
           <p className="mt-4 text-base leading-[1.8] text-slate-900">
             「この高校に受かるには、当日の試験で何点取ればいい？」——そんな疑問に答える逆算ツールです。
@@ -182,15 +182,15 @@ function ReversePageContent() {
               <table className="w-full border-t border-slate-200 text-base">
                 <tbody>
                   <tr className="border-b border-slate-200">
-                    <th scope="row" className="py-2 pr-3 text-left font-normal text-slate-600">換算内申</th>
+                    <th scope="row" className="whitespace-nowrap py-2 pr-3 text-left font-normal text-slate-600">換算内申</th>
                     <td className="py-2 text-right tabular-nums text-slate-900">50 / 65</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <th scope="row" className="py-2 pr-3 text-left font-normal text-slate-600">目標総合点</th>
+                    <th scope="row" className="whitespace-nowrap py-2 pr-3 text-left font-normal text-slate-600">目標総合点</th>
                     <td className="py-2 text-right tabular-nums text-slate-900">931 / 1020</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <th scope="row" className="py-2 pr-3 text-left font-normal text-slate-600">ESAT-J見込み</th>
+                    <th scope="row" className="whitespace-nowrap py-2 pr-3 text-left font-normal text-slate-600">ESAT-J見込み</th>
                     <td className="py-2 text-right tabular-nums text-slate-900">20 / 20</td>
                   </tr>
                 </tbody>
@@ -202,19 +202,19 @@ function ReversePageContent() {
               <table className="w-full border-t border-slate-200 text-base">
                 <tbody>
                   <tr className="border-b border-slate-200">
-                    <th scope="row" className="py-2 pr-3 text-left font-normal text-slate-600">調査書点（推定）</th>
+                    <th scope="row" className="whitespace-nowrap py-2 pr-3 text-left font-normal text-slate-600">調査書点（推定）</th>
                     <td className="py-2 text-right font-bold tabular-nums text-slate-900">round(50 ÷ 65 × 300) = 231点</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <th scope="row" className="py-2 pr-3 text-left font-normal text-slate-600">必要学力検査点</th>
+                    <th scope="row" className="whitespace-nowrap py-2 pr-3 text-left font-normal text-slate-600">必要学力検査点</th>
                     <td className="py-2 text-right font-bold tabular-nums text-slate-900">931 - 231 - 20 = 680点 / 700点</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <th scope="row" className="py-2 pr-3 text-left font-normal text-slate-600">必要得点率</th>
+                    <th scope="row" className="whitespace-nowrap py-2 pr-3 text-left font-normal text-slate-600">必要得点率</th>
                     <td className="py-2 text-right font-bold tabular-nums text-slate-900">約97%</td>
                   </tr>
                   <tr className="border-b border-slate-200">
-                    <th scope="row" className="py-2 pr-3 text-left font-normal text-slate-600">5教科平均</th>
+                    <th scope="row" className="whitespace-nowrap py-2 pr-3 text-left font-normal text-slate-600">5教科平均</th>
                     <td className="py-2 text-right font-bold tabular-nums text-slate-900">約136点 / 140点</td>
                   </tr>
                 </tbody>

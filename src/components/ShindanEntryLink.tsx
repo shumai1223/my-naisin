@@ -17,7 +17,7 @@ export function ShindanEntryLink({ className = '' }: { className?: string }) {
     >
       <span className="min-w-0">
         <span className="block text-base font-bold text-slate-900">結果に合う塾を診断する（無料）</span>
-        <span className="block text-sm text-slate-600">県・目標との差・希望形態から、条件に合う塾だけを表示</span>
+        <span className="block text-pretty text-sm text-slate-600">県・目標との差・希望形態から、条件に合う塾だけを表示</span>
       </span>
       <ChevronRight className="h-5 w-5 shrink-0 text-brand-700" />
     </Link>

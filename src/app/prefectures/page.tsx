@@ -39,10 +39,10 @@ export default function PrefecturesPage() {
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
           {/* Breadcrumb */}
-          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
             <Link
               href="/"
-              className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"
             >
               <Home className="h-4 w-4" />
               ホーム

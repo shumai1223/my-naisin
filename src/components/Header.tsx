@@ -23,7 +23,7 @@ export function Header({ titleTag = 'p' }: { titleTag?: 'h1' | 'p' } = {}) {
         <TitleTag className="text-lg font-bold leading-tight text-brand-800">
           <Link href="/" className="hover:underline hover:underline-offset-2">
             {APP_NAME}
-            <span className="mx-2 text-slate-400">|</span>
+            <span className="mx-2 text-slate-500">|</span>
             <span className="text-slate-700">{APP_NAME_JA}</span>
           </Link>
         </TitleTag>
@@ -32,7 +32,7 @@ export function Header({ titleTag = 'p' }: { titleTag?: 'h1' | 'p' } = {}) {
             <Link
               key={item.href}
               href={item.href}
-              className="whitespace-nowrap rounded px-2.5 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-brand-800"
+              className="inline-flex min-h-11 items-center whitespace-nowrap rounded px-2.5 text-sm text-slate-700 hover:bg-slate-100 hover:text-brand-800"
             >
               {item.label}
             </Link>

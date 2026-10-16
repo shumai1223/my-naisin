@@ -61,17 +61,17 @@ export default function KoukouHiyouPage() {
         </nav>
 
         <header>
-          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">高校3年間で、お金はいくらかかる？</h1>
+          <h1 className="text-2xl font-bold leading-snug text-slate-900 [text-wrap:balance] md:text-[28px]">高校3年間で、お金はいくらかかる？</h1>
           <p className="mt-3 text-sm leading-[1.8] text-slate-600">
             出典：
             <a href={MEXT_GAKUSHUHI_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
               文部科学省「子供の学習費調査」
             </a>
-            （最終確認 {MEXT_GAKUSHUHI_SOURCE.lastChecked}）、
+            <span className="whitespace-nowrap">（最終確認 {MEXT_GAKUSHUHI_SOURCE.lastChecked}）</span>、
             <a href={MEXT_SHUGAKU_SHIEN_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
               文部科学省「高校生等への修学支援（就学支援金）」
             </a>
-            （最終確認 {MEXT_SHUGAKU_SHIEN_SOURCE.lastChecked}）
+            <span className="whitespace-nowrap">（最終確認 {MEXT_SHUGAKU_SHIEN_SOURCE.lastChecked}）</span>
           </p>
           <p className="mt-4 text-base leading-[1.8] text-slate-900">
             公立・私立を選ぶだけで、高校3年間の費用（学費・教材費・通学費など）の総額を自動計算。
@@ -97,7 +97,7 @@ export default function KoukouHiyouPage() {
           href="/koukou-hiyou/kokoroze"
           className="mt-6 block rounded-lg border border-slate-200 bg-brand-50 p-5 transition-colors hover:bg-brand-100"
         >
-          <span className="block text-base font-bold text-brand-800">公立 vs 私立、3年間の「実質負担」を比較する →</span>
+          <span className="block text-base font-bold text-brand-800 [text-wrap:balance]">公立 vs 私立、3年間の「実質負担」を比較する →</span>
           <span className="mt-1 block text-sm leading-[1.8] text-slate-600">高校無償化（就学支援金）を世帯年収で反映。私立は無償化後いくらか・公立とどれだけ違うかが分かります。</span>
         </Link>
 
@@ -126,6 +126,7 @@ export default function KoukouHiyouPage() {
             placement="parent-lp"
             heading="高校の学費、今のうちに備えていますか？"
             body="高校3年間の費用は公立でも約179万円。早めの準備で選択肢が広がります。ご家庭に合った学習・進学プランを、まずは無料の資料で確認できます。"
+            headingLevel="h2"
           />
         </div>
 
@@ -135,6 +136,7 @@ export default function KoukouHiyouPage() {
             source="home"
             heading="進学費用と受験情報を、無料で受け取りませんか？"
             body="学費の備え方・就学支援金・志望校選びのコツを、LINEまたはメールでお届けします。いつでも解除できます。"
+            headingLevel="h2"
           />
         </div>
 

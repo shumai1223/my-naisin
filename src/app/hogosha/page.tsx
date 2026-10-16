@@ -190,15 +190,15 @@ export default function HogoshaPage() {
             <span className="text-slate-900">保護者の方へ</span>
           </nav>
 
-          {/* 橋②バトンの着地：生徒が共有したリンク（?from=share）で来た保護者に、結果を文脈付きで提示。
-              useSearchParams を内包するため Suspense で包み、/hogosha は静的（SSG）のまま維持する。 */}
-          <Suspense fallback={null}>
-            <ParentShareBanner />
-          </Suspense>
-
           {/* Header */}
           <header className="mb-8">
             <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">保護者の方へ</h1>
+            {/* 橋②バトンの着地：生徒が共有したリンク（?from=share）で来た保護者に、結果を文脈付きで提示。
+                useSearchParams を内包するため Suspense で包み、/hogosha は静的（SSG）のまま維持する。
+                見出しの順（h1 → h2）を保つため、h1 の直後に置く（以前は h1 より前で、h2 が先に来ていた）。 */}
+            <Suspense fallback={null}>
+              <ParentShareBanner />
+            </Suspense>
             <p className="mt-4 text-base leading-[1.8] text-slate-900">
               高校受験は、ご家庭のサポートで結果が大きく変わります。<br />
               <strong>内申点の上げ方</strong>・<strong>塾はいつから</strong>・<strong>費用の目安</strong>を当事者目線で整理しました。
@@ -292,6 +292,7 @@ export default function HogoshaPage() {
             heading="お子さまの受験情報を、受験本番まで無料で受け取りませんか？"
             body="内申点アップのコツ・出願スケジュール・志望校の最新情報を、保護者の方へお届けします。LINEまたはメールで、いつでも解除できます。"
             className="mb-10"
+            headingLevel="h2"
           />
 
           {/* 保護者FAQ */}

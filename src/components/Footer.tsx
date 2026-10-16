@@ -59,7 +59,8 @@ const headingClass = 'text-sm font-bold text-slate-900';
 export function Footer() {
   return (
     <footer className="mt-16 border-t border-slate-200 bg-white print:hidden">
-      <div className="mx-auto max-w-5xl px-4 py-10 md:px-6">
+      {/* 下の余白は、画面下に固定されるLINEバー（最大65px）が最後の行を隠さないための分 */}
+      <div className="mx-auto max-w-5xl px-4 pb-20 pt-10 md:px-6">
         <div className="grid gap-10 md:grid-cols-3">
           {/* サイトについて */}
           <div>
@@ -149,15 +150,15 @@ export function Footer() {
         <div className="mt-8 flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-slate-600">© 2026 {APP_NAME}. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <Link href="/terms" className="text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline">利用規約</Link>
-            <Link href="/privacy" className="text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline">プライバシーポリシー</Link>
+            <Link href="/terms" className="inline-flex min-h-11 items-center text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline">利用規約</Link>
+            <Link href="/privacy" className="inline-flex min-h-11 items-center text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline">プライバシーポリシー</Link>
             {SUPPORT_URL && (
               /* 応援リンク（T-REV2 R5）: 小さく1つだけ・見返りは約束しない。URL未設定の間は描画しない */
               <a
                 href={SUPPORT_URL}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                className="text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline"
+                className="inline-flex min-h-11 items-center text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline"
                 title="いただいた応援は運営費にあてます（見返りはありません）"
               >
                 このサイトを応援する

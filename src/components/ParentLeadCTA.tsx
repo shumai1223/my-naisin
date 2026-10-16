@@ -89,7 +89,7 @@ export function ParentLeadCTA({ heading, body, className = '', affiliateId, note
           pref={prefectureCode}
           placement={placement}
           variant={variant}
-          linkClassName="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800 sm:w-auto"
+          linkClassName="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-center text-base font-bold text-white transition-colors [text-wrap:balance] hover:bg-brand-800 sm:w-auto"
         />
         <span className="inline-flex items-center justify-center gap-1.5 text-sm text-slate-600">
           <FileText className="h-4 w-4 shrink-0" />
@@ -98,8 +98,8 @@ export function ParentLeadCTA({ heading, body, className = '', affiliateId, note
       </div>
 
       {secondary && (
-        <div className="mt-4 flex flex-col items-stretch gap-1 border-t border-slate-200 pt-4 sm:flex-row sm:items-center sm:gap-3">
-          <span className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-900">
+        <div className="mt-4 flex flex-col items-stretch gap-1 border-t border-slate-200 pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-1">
+          <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-bold text-slate-900">
             <Plus className="h-4 w-4 shrink-0" />
             あわせて検討したい方はこちら
           </span>

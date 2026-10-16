@@ -255,16 +255,16 @@ export function SaveResultCTA({
         rel="noopener noreferrer"
         onClick={onLineClick}
         tabIndex={lineVisible ? 0 : -1}
-        className="flex min-h-[44px] items-center justify-between gap-3 rounded bg-[#06C755] px-5 py-3 text-left text-white transition-colors hover:bg-[#05b34c]"
+        className="flex min-h-[44px] items-center justify-between gap-3 rounded bg-[#06C755] px-4 py-3 text-left text-white transition-colors hover:bg-[#05b34c] sm:px-5"
       >
-        <span className="flex items-center gap-2.5">
+        <span className="flex min-w-0 items-center gap-2.5">
           <MessageCircle className="h-5 w-5 shrink-0" />
-          <span>
-            <span className="block text-base font-bold">LINEで受験情報を受け取る</span>
-            <span className="block text-sm">{lineSubtitle}</span>
+          <span className="min-w-0">
+            <span className="block text-balance text-base font-bold">LINEで受験情報を受け取る</span>
+            <span className="block text-balance text-sm">{lineSubtitle}</span>
           </span>
         </span>
-        <span className="rounded bg-white px-2 py-0.5 text-xs font-bold text-slate-900">無料</span>
+        <span className="shrink-0 whitespace-nowrap rounded bg-white px-2 py-0.5 text-xs font-bold text-slate-900">無料</span>
       </a>
       <p className="mt-2 text-xs leading-relaxed text-slate-600">{LINE_UNFRIEND_HELP_TEXT}</p>
     </div>

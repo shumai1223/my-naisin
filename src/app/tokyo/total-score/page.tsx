@@ -423,10 +423,10 @@ export default function TokyoTotalScorePage() {
                 例：<strong>新宿高校（合格目安780点+）志望、当日点400点・換算内申55・ESAT-J「B」</strong>の場合
               </p>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
-                <li>学力検査700点換算：400 ÷ 500 × 700 ≒ <strong>560点</strong></li>
-                <li>調査書点300点換算：55 ÷ 65 × 300 ≒ <strong>254点</strong></li>
-                <li>ESAT-J：B評価 → <strong>16点</strong></li>
-                <li>合計：560 + 254 + 16 ＝ <strong>830点</strong>（新宿の合格目安780を超過）</li>
+                <li>学力検査700点換算：400 ÷ 500 × 700 ≒ <strong className="whitespace-nowrap">560点</strong></li>
+                <li>調査書点300点換算：55 ÷ 65 × 300 ≒ <strong className="whitespace-nowrap">254点</strong></li>
+                <li>ESAT-J：B評価 → <strong className="whitespace-nowrap">16点</strong></li>
+                <li>合計：560 + 254 + 16 ＝ <strong className="whitespace-nowrap">830点</strong>（新宿の合格目安780を超過）</li>
               </ul>
             </div>
 

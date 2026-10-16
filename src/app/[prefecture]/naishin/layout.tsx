@@ -7,6 +7,12 @@ interface LayoutProps {
   params: Promise<{ prefecture: string }>;
 }
 
+// 「確認」日: データの値（YYYY-MM-DD）を日本語の日付で表示するだけ（新しい日付は作らない）。
+function formatJaDate(iso: string) {
+  const m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(iso);
+  return m ? `${m[1]}年${Number(m[2])}月${Number(m[3])}日` : iso;
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ prefecture: string }> }): Promise<Metadata> {
   const { prefecture: code } = await params;
   const prefecture = PREFECTURES.find(p => p.code === code);
@@ -115,7 +121,7 @@ export default async function PrefectureNaishinLayout({ children, params }: Layo
                   {prefecture.sourceTitle ?? `${prefecture.name}教育委員会`}
                 </a>
                 {prefecture.lastVerified && (
-                  <span>（{prefecture.lastVerified} 確認）</span>
+                  <span>（{formatJaDate(prefecture.lastVerified)} 確認）</span>
                 )}
               </p>
             )}

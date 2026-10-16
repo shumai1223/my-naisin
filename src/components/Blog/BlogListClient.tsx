@@ -122,7 +122,7 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="キーワード・タイトル・タグで検索"
             aria-label="記事を検索"
-            className={`w-full text-ellipsis rounded border border-slate-300 bg-white py-3 pl-10 text-base text-slate-900 placeholder:text-slate-500 ${
+            className={`w-full text-ellipsis rounded border border-slate-300 bg-white py-3 pl-10 text-base text-slate-900 placeholder:text-slate-500 [&::-webkit-search-cancel-button]:hidden ${
               query ? 'pr-12' : 'pr-3'
             }`}
           />

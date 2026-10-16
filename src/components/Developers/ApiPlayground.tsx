@@ -47,7 +47,7 @@ export function ApiPlayground() {
 
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-5">
-      <div className="mb-4 grid gap-4 sm:grid-cols-3">
+      <div className="mb-4 grid gap-4 sm:grid-cols-3 sm:items-end">
         <label className="block">
           <span className="text-sm font-bold text-slate-700">都道府県</span>
           <select

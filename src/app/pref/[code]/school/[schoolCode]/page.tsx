@@ -123,10 +123,10 @@ export default async function SchoolPage({ params }: PageProps) {
       <HighSchoolSchema name={school.schoolName} url={canonicalUrl} address={school.address || undefined} />
       <FAQPageSchema faqItems={faqItems} />
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
-        <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+        <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
           <Link
             href="/"
-            className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
+            className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"
           >
             <Home className="h-4 w-4" />
             ホーム
@@ -134,7 +134,7 @@ export default async function SchoolPage({ params }: PageProps) {
           <ChevronRight className="h-4 w-4" />
           <Link
             href={`/pref/${prefecture.code}`}
-            className="inline-flex min-h-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800"
+            className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline"
           >
             {prefecture.name}
           </Link>
@@ -145,7 +145,7 @@ export default async function SchoolPage({ params }: PageProps) {
         <header className="mb-8">
           <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
             {school.schoolName}
-            {shortName && <span className="ml-2 text-lg font-bold text-slate-600 md:text-xl">（{shortName}）</span>}
+            {shortName && <span className="ml-2 inline-block text-lg font-bold text-slate-600 md:text-xl">（{shortName}）</span>}
           </h1>
           {school.address && (
             <p className="mt-2 flex items-center gap-1 text-sm text-slate-600">
@@ -237,7 +237,7 @@ export default async function SchoolPage({ params }: PageProps) {
                 {schoolHistoryByDepartment.map((group) => {
                   const yoy = computeSchoolHistoryYoy(group);
                   return (
-                  <div key={group.department} className="overflow-x-auto">
+                  <div key={group.department}>
                     {schoolHistoryByDepartment.length > 1 && (
                       <h3 className="mb-2 text-[17px] font-bold text-slate-900">{group.department}</h3>
                     )}
@@ -257,44 +257,50 @@ export default async function SchoolPage({ params }: PageProps) {
                         </span>
                       </p>
                     )}
+                    {/* スマホでは年度の列が多く、文字が1字ずつ折り返して読めなくなるため、折り返しを止めて表の中だけ横に動かす。
+                        先頭の項目名の列は固定し、スクロールしても見える。年度は「（」の前で2段に分ける（文字は同じ）。 */}
+                    <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
-                          <th className="py-2 pr-4 font-bold">年度</th>
+                          <th className="sticky left-0 whitespace-nowrap bg-white py-2 pr-4 align-bottom font-bold">年度</th>
                           {group.entries.map((e) => (
-                            <th key={e.fiscalYear} className="py-2 pr-4 text-right font-bold">
-                              {e.fiscalYear}
+                            <th key={e.fiscalYear} className="whitespace-nowrap py-2 pr-4 text-right align-bottom font-bold">
+                              {e.fiscalYear.split(/(?=[（(])/).map((part, i) => (
+                                <span key={i} className="block">{part}</span>
+                              ))}
                             </th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="border-b border-slate-200">
-                          <td className="py-2 pr-4 text-slate-600">募集人員</td>
+                          <td className="sticky left-0 whitespace-nowrap bg-white py-2 pr-4 text-slate-600">募集人員</td>
                           {group.entries.map((e) => (
-                            <td key={e.fiscalYear} className="py-2 pr-4 text-right tabular-nums text-slate-900">
+                            <td key={e.fiscalYear} className="whitespace-nowrap py-2 pr-4 text-right tabular-nums text-slate-900">
                               {e.quota}名
                             </td>
                           ))}
                         </tr>
                         <tr className="border-b border-slate-200">
-                          <td className="py-2 pr-4 text-slate-600">応募者数</td>
+                          <td className="sticky left-0 whitespace-nowrap bg-white py-2 pr-4 text-slate-600">応募者数</td>
                           {group.entries.map((e) => (
-                            <td key={e.fiscalYear} className="py-2 pr-4 text-right tabular-nums text-slate-900">
+                            <td key={e.fiscalYear} className="whitespace-nowrap py-2 pr-4 text-right tabular-nums text-slate-900">
                               {e.applicants}名
                             </td>
                           ))}
                         </tr>
                         <tr className="border-b border-slate-200">
-                          <td className="py-2 pr-4 text-slate-600">倍率</td>
+                          <td className="sticky left-0 whitespace-nowrap bg-white py-2 pr-4 text-slate-600">倍率</td>
                           {group.entries.map((e) => (
-                            <td key={e.fiscalYear} className="py-2 pr-4 text-right font-bold tabular-nums text-slate-900">
+                            <td key={e.fiscalYear} className="whitespace-nowrap py-2 pr-4 text-right font-bold tabular-nums text-slate-900">
                               {e.rate}倍
                             </td>
                           ))}
                         </tr>
                       </tbody>
                     </table>
+                    </div>
                     {/* S6-1(2026-08-24): 1データ点1出典(Y-0憲法②)。数値の直下に年度ごとの一次資料を明示する。
                         resolveRecordSourceIndexで一意に解決できた年度のみ表示(捏造ゼロ＝断定できない出典は出さない)。 */}
                     {group.entries.some((e) => e.source) && (
