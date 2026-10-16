@@ -16,12 +16,15 @@
   --brand-dark: #123f2f;
 }
 
+/*
+ * スクロールは文書（window）で行う。
+ * 以前は html と body の両方に height:100% と overflow-y:auto !important があり、body が入れ子のスクロール領域になっていた。
+ * その結果 window.scrollY が常に 0 になり、ブログの読書進捗バー・「先頭へ戻る」・目次の追従・スクロール量の計測が動かなかった（本番で確認）。
+ * 横はみ出しは overflow-x: clip で隠す（hidden だとスクロール領域になって sticky が効かなくなる）。
+ */
 html,
 body {
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: clip;
 }
 
 html {
