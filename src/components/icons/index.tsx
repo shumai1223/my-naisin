@@ -11,158 +11,156 @@
  */
 import * as React from 'react';
 import type { IconProps } from '@phosphor-icons/react';
-import {
-  AlarmIcon as PhAlarm,
-  ArchiveIcon as PhArchive,
-  ArrowCounterClockwiseIcon as PhArrowCounterClockwise,
-  ArrowLeftIcon as PhArrowLeft,
-  ArrowRightIcon as PhArrowRight,
-  ArrowSquareOutIcon as PhArrowSquareOut,
-  ArrowUUpLeftIcon as PhArrowUUpLeft,
-  ArrowUpIcon as PhArrowUp,
-  ArrowUpRightIcon as PhArrowUpRight,
-  ArrowsClockwiseIcon as PhArrowsClockwise,
-  ArrowsDownUpIcon as PhArrowsDownUp,
-  ArrowsLeftRightIcon as PhArrowsLeftRight,
-  BankIcon as PhBank,
-  BarbellIcon as PhBarbell,
-  BellIcon as PhBell,
-  BellRingingIcon as PhBellRinging,
-  BookBookmarkIcon as PhBookBookmark,
-  BookOpenIcon as PhBookOpen,
-  BookOpenTextIcon as PhBookOpenText,
-  BookmarkSimpleIcon as PhBookmarkSimple,
-  BrainIcon as PhBrain,
-  BugIcon as PhBug,
-  BuildingsIcon as PhBuildings,
-  CalculatorIcon as PhCalculator,
-  CalendarIcon as PhCalendar,
-  CalendarBlankIcon as PhCalendarBlank,
-  CalendarCheckIcon as PhCalendarCheck,
-  CalendarDotsIcon as PhCalendarDots,
-  CalendarPlusIcon as PhCalendarPlus,
-  CalendarXIcon as PhCalendarX,
-  CaretDownIcon as PhCaretDown,
-  CaretLeftIcon as PhCaretLeft,
-  CaretRightIcon as PhCaretRight,
-  CaretUpIcon as PhCaretUp,
-  ChartBarIcon as PhChartBar,
-  ChartLineIcon as PhChartLine,
-  ChatCircleIcon as PhChatCircle,
-  ChatCircleDotsIcon as PhChatCircleDots,
-  ChatTextIcon as PhChatText,
-  CheckIcon as PhCheck,
-  CheckCircleIcon as PhCheckCircle,
-  CheckSquareIcon as PhCheckSquare,
-  CircleNotchIcon as PhCircleNotch,
-  ClipboardTextIcon as PhClipboardText,
-  ClockIcon as PhClock,
-  ClockCounterClockwiseIcon as PhClockCounterClockwise,
-  CodeIcon as PhCode,
-  CoffeeIcon as PhCoffee,
-  ConfettiIcon as PhConfetti,
-  CookieIcon as PhCookie,
-  CopyIcon as PhCopy,
-  CrosshairIcon as PhCrosshair,
-  CrownIcon as PhCrown,
-  DatabaseIcon as PhDatabase,
-  DeviceMobileIcon as PhDeviceMobile,
-  DevicesIcon as PhDevices,
-  DiamondIcon as PhDiamond,
-  DownloadSimpleIcon as PhDownloadSimple,
-  EnvelopeIcon as PhEnvelope,
-  EyeIcon as PhEye,
-  FileTextIcon as PhFileText,
-  FileXIcon as PhFileX,
-  FileXlsIcon as PhFileXls,
-  FireIcon as PhFire,
-  FlaskIcon as PhFlask,
-  FloppyDiskIcon as PhFloppyDisk,
-  FunnelIcon as PhFunnel,
-  GaugeIcon as PhGauge,
-  GiftIcon as PhGift,
-  GithubLogoIcon as PhGithubLogo,
-  GlobeIcon as PhGlobe,
-  GraduationCapIcon as PhGraduationCap,
-  HammerIcon as PhHammer,
-  HandCoinsIcon as PhHandCoins,
-  HandHeartIcon as PhHandHeart,
-  HandshakeIcon as PhHandshake,
-  HeartIcon as PhHeart,
-  HexagonIcon as PhHexagon,
-  HouseIcon as PhHouse,
-  ImageIcon as PhImage,
-  InfoIcon as PhInfo,
-  KeyIcon as PhKey,
-  LaptopIcon as PhLaptop,
-  LightbulbIcon as PhLightbulb,
-  LightningIcon as PhLightning,
-  LinkIcon as PhLink,
-  ListIcon as PhList,
-  ListChecksIcon as PhListChecks,
-  ListNumbersIcon as PhListNumbers,
-  LockIcon as PhLock,
-  MagnifyingGlassIcon as PhMagnifyingGlass,
-  MapPinIcon as PhMapPin,
-  MapTrifoldIcon as PhMapTrifold,
-  MedalIcon as PhMedal,
-  MinusIcon as PhMinus,
-  MonitorIcon as PhMonitor,
-  MoonIcon as PhMoon,
-  MusicNotesIcon as PhMusicNotes,
-  NewspaperIcon as PhNewspaper,
-  NotePencilIcon as PhNotePencil,
-  PaletteIcon as PhPalette,
-  PaperPlaneTiltIcon as PhPaperPlaneTilt,
-  PathIcon as PhPath,
-  PauseIcon as PhPause,
-  PenNibIcon as PhPenNib,
-  PencilLineIcon as PhPencilLine,
-  PencilSimpleIcon as PhPencilSimple,
-  PercentIcon as PhPercent,
-  PiggyBankIcon as PhPiggyBank,
-  PlantIcon as PhPlant,
-  PlayIcon as PhPlay,
-  PlusIcon as PhPlus,
-  PrinterIcon as PhPrinter,
-  PulseIcon as PhPulse,
-  QrCodeIcon as PhQrCode,
-  QuestionIcon as PhQuestion,
-  QuotesIcon as PhQuotes,
-  ReceiptIcon as PhReceipt,
-  RobotIcon as PhRobot,
-  RocketIcon as PhRocket,
-  ScalesIcon as PhScales,
-  ShareNetworkIcon as PhShareNetwork,
-  ShieldIcon as PhShield,
-  ShieldCheckIcon as PhShieldCheck,
-  ShieldWarningIcon as PhShieldWarning,
-  SigmaIcon as PhSigma,
-  SlidersHorizontalIcon as PhSlidersHorizontal,
-  SparkleIcon as PhSparkle,
-  StackIcon as PhStack,
-  StarIcon as PhStar,
-  StudentIcon as PhStudent,
-  SunIcon as PhSun,
-  TableIcon as PhTable,
-  TagIcon as PhTag,
-  TargetIcon as PhTarget,
-  TerminalIcon as PhTerminal,
-  TimerIcon as PhTimer,
-  TrashIcon as PhTrash,
-  TrayIcon as PhTray,
-  TrendDownIcon as PhTrendDown,
-  TrendUpIcon as PhTrendUp,
-  TrophyIcon as PhTrophy,
-  UserIcon as PhUser,
-  UsersIcon as PhUsers,
-  WalletIcon as PhWallet,
-  WarningIcon as PhWarning,
-  WarningCircleIcon as PhWarningCircle,
-  WrenchIcon as PhWrench,
-  XIcon as PhX,
-  XCircleIcon as PhXCircle,
-} from '@phosphor-icons/react/dist/ssr';
+import { AlarmIcon as PhAlarm } from '@phosphor-icons/react/dist/ssr/Alarm';
+import { ArchiveIcon as PhArchive } from '@phosphor-icons/react/dist/ssr/Archive';
+import { ArrowCounterClockwiseIcon as PhArrowCounterClockwise } from '@phosphor-icons/react/dist/ssr/ArrowCounterClockwise';
+import { ArrowLeftIcon as PhArrowLeft } from '@phosphor-icons/react/dist/ssr/ArrowLeft';
+import { ArrowRightIcon as PhArrowRight } from '@phosphor-icons/react/dist/ssr/ArrowRight';
+import { ArrowSquareOutIcon as PhArrowSquareOut } from '@phosphor-icons/react/dist/ssr/ArrowSquareOut';
+import { ArrowUUpLeftIcon as PhArrowUUpLeft } from '@phosphor-icons/react/dist/ssr/ArrowUUpLeft';
+import { ArrowUpIcon as PhArrowUp } from '@phosphor-icons/react/dist/ssr/ArrowUp';
+import { ArrowUpRightIcon as PhArrowUpRight } from '@phosphor-icons/react/dist/ssr/ArrowUpRight';
+import { ArrowsClockwiseIcon as PhArrowsClockwise } from '@phosphor-icons/react/dist/ssr/ArrowsClockwise';
+import { ArrowsDownUpIcon as PhArrowsDownUp } from '@phosphor-icons/react/dist/ssr/ArrowsDownUp';
+import { ArrowsLeftRightIcon as PhArrowsLeftRight } from '@phosphor-icons/react/dist/ssr/ArrowsLeftRight';
+import { BankIcon as PhBank } from '@phosphor-icons/react/dist/ssr/Bank';
+import { BarbellIcon as PhBarbell } from '@phosphor-icons/react/dist/ssr/Barbell';
+import { BellIcon as PhBell } from '@phosphor-icons/react/dist/ssr/Bell';
+import { BellRingingIcon as PhBellRinging } from '@phosphor-icons/react/dist/ssr/BellRinging';
+import { BookBookmarkIcon as PhBookBookmark } from '@phosphor-icons/react/dist/ssr/BookBookmark';
+import { BookOpenIcon as PhBookOpen } from '@phosphor-icons/react/dist/ssr/BookOpen';
+import { BookOpenTextIcon as PhBookOpenText } from '@phosphor-icons/react/dist/ssr/BookOpenText';
+import { BookmarkSimpleIcon as PhBookmarkSimple } from '@phosphor-icons/react/dist/ssr/BookmarkSimple';
+import { BrainIcon as PhBrain } from '@phosphor-icons/react/dist/ssr/Brain';
+import { BugIcon as PhBug } from '@phosphor-icons/react/dist/ssr/Bug';
+import { BuildingsIcon as PhBuildings } from '@phosphor-icons/react/dist/ssr/Buildings';
+import { CalculatorIcon as PhCalculator } from '@phosphor-icons/react/dist/ssr/Calculator';
+import { CalendarIcon as PhCalendar } from '@phosphor-icons/react/dist/ssr/Calendar';
+import { CalendarBlankIcon as PhCalendarBlank } from '@phosphor-icons/react/dist/ssr/CalendarBlank';
+import { CalendarCheckIcon as PhCalendarCheck } from '@phosphor-icons/react/dist/ssr/CalendarCheck';
+import { CalendarDotsIcon as PhCalendarDots } from '@phosphor-icons/react/dist/ssr/CalendarDots';
+import { CalendarPlusIcon as PhCalendarPlus } from '@phosphor-icons/react/dist/ssr/CalendarPlus';
+import { CalendarXIcon as PhCalendarX } from '@phosphor-icons/react/dist/ssr/CalendarX';
+import { CaretDownIcon as PhCaretDown } from '@phosphor-icons/react/dist/ssr/CaretDown';
+import { CaretLeftIcon as PhCaretLeft } from '@phosphor-icons/react/dist/ssr/CaretLeft';
+import { CaretRightIcon as PhCaretRight } from '@phosphor-icons/react/dist/ssr/CaretRight';
+import { CaretUpIcon as PhCaretUp } from '@phosphor-icons/react/dist/ssr/CaretUp';
+import { ChartBarIcon as PhChartBar } from '@phosphor-icons/react/dist/ssr/ChartBar';
+import { ChartLineIcon as PhChartLine } from '@phosphor-icons/react/dist/ssr/ChartLine';
+import { ChatCircleIcon as PhChatCircle } from '@phosphor-icons/react/dist/ssr/ChatCircle';
+import { ChatCircleDotsIcon as PhChatCircleDots } from '@phosphor-icons/react/dist/ssr/ChatCircleDots';
+import { ChatTextIcon as PhChatText } from '@phosphor-icons/react/dist/ssr/ChatText';
+import { CheckIcon as PhCheck } from '@phosphor-icons/react/dist/ssr/Check';
+import { CheckCircleIcon as PhCheckCircle } from '@phosphor-icons/react/dist/ssr/CheckCircle';
+import { CheckSquareIcon as PhCheckSquare } from '@phosphor-icons/react/dist/ssr/CheckSquare';
+import { CircleNotchIcon as PhCircleNotch } from '@phosphor-icons/react/dist/ssr/CircleNotch';
+import { ClipboardTextIcon as PhClipboardText } from '@phosphor-icons/react/dist/ssr/ClipboardText';
+import { ClockIcon as PhClock } from '@phosphor-icons/react/dist/ssr/Clock';
+import { ClockCounterClockwiseIcon as PhClockCounterClockwise } from '@phosphor-icons/react/dist/ssr/ClockCounterClockwise';
+import { CodeIcon as PhCode } from '@phosphor-icons/react/dist/ssr/Code';
+import { CoffeeIcon as PhCoffee } from '@phosphor-icons/react/dist/ssr/Coffee';
+import { ConfettiIcon as PhConfetti } from '@phosphor-icons/react/dist/ssr/Confetti';
+import { CookieIcon as PhCookie } from '@phosphor-icons/react/dist/ssr/Cookie';
+import { CopyIcon as PhCopy } from '@phosphor-icons/react/dist/ssr/Copy';
+import { CrosshairIcon as PhCrosshair } from '@phosphor-icons/react/dist/ssr/Crosshair';
+import { CrownIcon as PhCrown } from '@phosphor-icons/react/dist/ssr/Crown';
+import { DatabaseIcon as PhDatabase } from '@phosphor-icons/react/dist/ssr/Database';
+import { DeviceMobileIcon as PhDeviceMobile } from '@phosphor-icons/react/dist/ssr/DeviceMobile';
+import { DevicesIcon as PhDevices } from '@phosphor-icons/react/dist/ssr/Devices';
+import { DiamondIcon as PhDiamond } from '@phosphor-icons/react/dist/ssr/Diamond';
+import { DownloadSimpleIcon as PhDownloadSimple } from '@phosphor-icons/react/dist/ssr/DownloadSimple';
+import { EnvelopeIcon as PhEnvelope } from '@phosphor-icons/react/dist/ssr/Envelope';
+import { EyeIcon as PhEye } from '@phosphor-icons/react/dist/ssr/Eye';
+import { FileTextIcon as PhFileText } from '@phosphor-icons/react/dist/ssr/FileText';
+import { FileXIcon as PhFileX } from '@phosphor-icons/react/dist/ssr/FileX';
+import { FileXlsIcon as PhFileXls } from '@phosphor-icons/react/dist/ssr/FileXls';
+import { FireIcon as PhFire } from '@phosphor-icons/react/dist/ssr/Fire';
+import { FlaskIcon as PhFlask } from '@phosphor-icons/react/dist/ssr/Flask';
+import { FloppyDiskIcon as PhFloppyDisk } from '@phosphor-icons/react/dist/ssr/FloppyDisk';
+import { FunnelIcon as PhFunnel } from '@phosphor-icons/react/dist/ssr/Funnel';
+import { GaugeIcon as PhGauge } from '@phosphor-icons/react/dist/ssr/Gauge';
+import { GiftIcon as PhGift } from '@phosphor-icons/react/dist/ssr/Gift';
+import { GithubLogoIcon as PhGithubLogo } from '@phosphor-icons/react/dist/ssr/GithubLogo';
+import { GlobeIcon as PhGlobe } from '@phosphor-icons/react/dist/ssr/Globe';
+import { GraduationCapIcon as PhGraduationCap } from '@phosphor-icons/react/dist/ssr/GraduationCap';
+import { HammerIcon as PhHammer } from '@phosphor-icons/react/dist/ssr/Hammer';
+import { HandCoinsIcon as PhHandCoins } from '@phosphor-icons/react/dist/ssr/HandCoins';
+import { HandHeartIcon as PhHandHeart } from '@phosphor-icons/react/dist/ssr/HandHeart';
+import { HandshakeIcon as PhHandshake } from '@phosphor-icons/react/dist/ssr/Handshake';
+import { HeartIcon as PhHeart } from '@phosphor-icons/react/dist/ssr/Heart';
+import { HexagonIcon as PhHexagon } from '@phosphor-icons/react/dist/ssr/Hexagon';
+import { HouseIcon as PhHouse } from '@phosphor-icons/react/dist/ssr/House';
+import { ImageIcon as PhImage } from '@phosphor-icons/react/dist/ssr/Image';
+import { InfoIcon as PhInfo } from '@phosphor-icons/react/dist/ssr/Info';
+import { KeyIcon as PhKey } from '@phosphor-icons/react/dist/ssr/Key';
+import { LaptopIcon as PhLaptop } from '@phosphor-icons/react/dist/ssr/Laptop';
+import { LightbulbIcon as PhLightbulb } from '@phosphor-icons/react/dist/ssr/Lightbulb';
+import { LightningIcon as PhLightning } from '@phosphor-icons/react/dist/ssr/Lightning';
+import { LinkIcon as PhLink } from '@phosphor-icons/react/dist/ssr/Link';
+import { ListIcon as PhList } from '@phosphor-icons/react/dist/ssr/List';
+import { ListChecksIcon as PhListChecks } from '@phosphor-icons/react/dist/ssr/ListChecks';
+import { ListNumbersIcon as PhListNumbers } from '@phosphor-icons/react/dist/ssr/ListNumbers';
+import { LockIcon as PhLock } from '@phosphor-icons/react/dist/ssr/Lock';
+import { MagnifyingGlassIcon as PhMagnifyingGlass } from '@phosphor-icons/react/dist/ssr/MagnifyingGlass';
+import { MapPinIcon as PhMapPin } from '@phosphor-icons/react/dist/ssr/MapPin';
+import { MapTrifoldIcon as PhMapTrifold } from '@phosphor-icons/react/dist/ssr/MapTrifold';
+import { MedalIcon as PhMedal } from '@phosphor-icons/react/dist/ssr/Medal';
+import { MinusIcon as PhMinus } from '@phosphor-icons/react/dist/ssr/Minus';
+import { MonitorIcon as PhMonitor } from '@phosphor-icons/react/dist/ssr/Monitor';
+import { MoonIcon as PhMoon } from '@phosphor-icons/react/dist/ssr/Moon';
+import { MusicNotesIcon as PhMusicNotes } from '@phosphor-icons/react/dist/ssr/MusicNotes';
+import { NewspaperIcon as PhNewspaper } from '@phosphor-icons/react/dist/ssr/Newspaper';
+import { NotePencilIcon as PhNotePencil } from '@phosphor-icons/react/dist/ssr/NotePencil';
+import { PaletteIcon as PhPalette } from '@phosphor-icons/react/dist/ssr/Palette';
+import { PaperPlaneTiltIcon as PhPaperPlaneTilt } from '@phosphor-icons/react/dist/ssr/PaperPlaneTilt';
+import { PathIcon as PhPath } from '@phosphor-icons/react/dist/ssr/Path';
+import { PauseIcon as PhPause } from '@phosphor-icons/react/dist/ssr/Pause';
+import { PenNibIcon as PhPenNib } from '@phosphor-icons/react/dist/ssr/PenNib';
+import { PencilLineIcon as PhPencilLine } from '@phosphor-icons/react/dist/ssr/PencilLine';
+import { PencilSimpleIcon as PhPencilSimple } from '@phosphor-icons/react/dist/ssr/PencilSimple';
+import { PercentIcon as PhPercent } from '@phosphor-icons/react/dist/ssr/Percent';
+import { PiggyBankIcon as PhPiggyBank } from '@phosphor-icons/react/dist/ssr/PiggyBank';
+import { PlantIcon as PhPlant } from '@phosphor-icons/react/dist/ssr/Plant';
+import { PlayIcon as PhPlay } from '@phosphor-icons/react/dist/ssr/Play';
+import { PlusIcon as PhPlus } from '@phosphor-icons/react/dist/ssr/Plus';
+import { PrinterIcon as PhPrinter } from '@phosphor-icons/react/dist/ssr/Printer';
+import { PulseIcon as PhPulse } from '@phosphor-icons/react/dist/ssr/Pulse';
+import { QrCodeIcon as PhQrCode } from '@phosphor-icons/react/dist/ssr/QrCode';
+import { QuestionIcon as PhQuestion } from '@phosphor-icons/react/dist/ssr/Question';
+import { QuotesIcon as PhQuotes } from '@phosphor-icons/react/dist/ssr/Quotes';
+import { ReceiptIcon as PhReceipt } from '@phosphor-icons/react/dist/ssr/Receipt';
+import { RobotIcon as PhRobot } from '@phosphor-icons/react/dist/ssr/Robot';
+import { RocketIcon as PhRocket } from '@phosphor-icons/react/dist/ssr/Rocket';
+import { ScalesIcon as PhScales } from '@phosphor-icons/react/dist/ssr/Scales';
+import { ShareNetworkIcon as PhShareNetwork } from '@phosphor-icons/react/dist/ssr/ShareNetwork';
+import { ShieldIcon as PhShield } from '@phosphor-icons/react/dist/ssr/Shield';
+import { ShieldCheckIcon as PhShieldCheck } from '@phosphor-icons/react/dist/ssr/ShieldCheck';
+import { ShieldWarningIcon as PhShieldWarning } from '@phosphor-icons/react/dist/ssr/ShieldWarning';
+import { SigmaIcon as PhSigma } from '@phosphor-icons/react/dist/ssr/Sigma';
+import { SlidersHorizontalIcon as PhSlidersHorizontal } from '@phosphor-icons/react/dist/ssr/SlidersHorizontal';
+import { SparkleIcon as PhSparkle } from '@phosphor-icons/react/dist/ssr/Sparkle';
+import { StackIcon as PhStack } from '@phosphor-icons/react/dist/ssr/Stack';
+import { StarIcon as PhStar } from '@phosphor-icons/react/dist/ssr/Star';
+import { StudentIcon as PhStudent } from '@phosphor-icons/react/dist/ssr/Student';
+import { SunIcon as PhSun } from '@phosphor-icons/react/dist/ssr/Sun';
+import { TableIcon as PhTable } from '@phosphor-icons/react/dist/ssr/Table';
+import { TagIcon as PhTag } from '@phosphor-icons/react/dist/ssr/Tag';
+import { TargetIcon as PhTarget } from '@phosphor-icons/react/dist/ssr/Target';
+import { TerminalIcon as PhTerminal } from '@phosphor-icons/react/dist/ssr/Terminal';
+import { TimerIcon as PhTimer } from '@phosphor-icons/react/dist/ssr/Timer';
+import { TrashIcon as PhTrash } from '@phosphor-icons/react/dist/ssr/Trash';
+import { TrayIcon as PhTray } from '@phosphor-icons/react/dist/ssr/Tray';
+import { TrendDownIcon as PhTrendDown } from '@phosphor-icons/react/dist/ssr/TrendDown';
+import { TrendUpIcon as PhTrendUp } from '@phosphor-icons/react/dist/ssr/TrendUp';
+import { TrophyIcon as PhTrophy } from '@phosphor-icons/react/dist/ssr/Trophy';
+import { UserIcon as PhUser } from '@phosphor-icons/react/dist/ssr/User';
+import { UsersIcon as PhUsers } from '@phosphor-icons/react/dist/ssr/Users';
+import { WalletIcon as PhWallet } from '@phosphor-icons/react/dist/ssr/Wallet';
+import { WarningIcon as PhWarning } from '@phosphor-icons/react/dist/ssr/Warning';
+import { WarningCircleIcon as PhWarningCircle } from '@phosphor-icons/react/dist/ssr/WarningCircle';
+import { WrenchIcon as PhWrench } from '@phosphor-icons/react/dist/ssr/Wrench';
+import { XIcon as PhX } from '@phosphor-icons/react/dist/ssr/X';
+import { XCircleIcon as PhXCircle } from '@phosphor-icons/react/dist/ssr/XCircle';
 
 export type AppIconProps = Omit<IconProps, 'ref'> & {
   /** lucide との互換のために受け取るだけで使わない */

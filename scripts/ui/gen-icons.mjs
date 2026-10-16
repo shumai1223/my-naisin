@@ -92,11 +92,10 @@ lines.push(`/**
  * 生成: node scripts/ui/gen-icons.mjs（手で編集しない。名前の対応は scripts/ui/gen-icons.mjs）
  */
 import * as React from 'react';
-import type { IconProps } from '@phosphor-icons/react';
-import {`);
-for (const b of bases) lines.push(`  ${b}Icon as Ph${b},`);
-lines.push(`} from '@phosphor-icons/react/dist/ssr';
-
+import type { IconProps } from '@phosphor-icons/react';`);
+// 1つずつ深いパスから読む。バレル（dist/ssr）から読むと、開発サーバーが約1,500個のアイコンを全部コンパイルして遅い・重い。
+for (const b of bases) lines.push(`import { ${b}Icon as Ph${b} } from '@phosphor-icons/react/dist/ssr/${b}';`);
+lines.push(`
 export type AppIconProps = Omit<IconProps, 'ref'> & {
   /** lucide との互換のために受け取るだけで使わない */
   strokeWidth?: number | string;
