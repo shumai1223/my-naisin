@@ -50,6 +50,8 @@ for (const route of pages) {
   for (const w of WIDTHS) {
     const mobile = w < 600;
     const ctx = await browser.newContext({ viewport: { width: w, height: mobile ? 844 : 800 }, deviceScaleFactor: mobile ? 2 : 1.5, ignoreHTTPSErrors: true, locale: 'ja-JP', reducedMotion: 'reduce', isMobile: mobile, hasTouch: mobile });
+    // 離脱モーダルを確認する実行（--exit-modal）以外では、スクロールで出て画面が暗くならないよう「表示済み」にしておく。
+    if (!EXIT) await ctx.addInitScript(() => { try { window.sessionStorage.setItem('mn_exit_modal_seen', '1'); } catch (e) { /* 無し */ } });
     const page = await ctx.newPage();
     const row = { route, width: w };
     try {

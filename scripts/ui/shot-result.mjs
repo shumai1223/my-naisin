@@ -40,6 +40,8 @@ const browser = await chromium.launch();
 const report = [];
 for (const w of WIDTHS) {
   const ctx = await browser.newContext({ viewport: { width: w, height: SLICE_H }, deviceScaleFactor: w < 600 ? 2 : 1.5, ignoreHTTPSErrors: true, locale: 'ja-JP', reducedMotion: 'reduce', isMobile: w < 600, hasTouch: w < 600 });
+  // 撮影のための上下スクロールで離脱モーダル（LINE）が出て画面が暗くならないように、このセッションは「表示済み」にしておく。
+  await ctx.addInitScript(() => { try { window.sessionStorage.setItem('mn_exit_modal_seen', '1'); } catch (e) { /* 無し */ } });
   const page = await ctx.newPage();
   const row = { width: w, files: [] };
   try {

@@ -65,6 +65,8 @@ for (const w of WIDTHS) {
     isMobile: w < 600,
     hasTouch: w < 600,
   });
+  // 撮影のための上下スクロールで離脱モーダル（LINE）が出て画面が暗くならないように、このセッションは「表示済み」にしておく。
+  await ctx.addInitScript(() => { try { window.sessionStorage.setItem('mn_exit_modal_seen', '1'); } catch (e) { /* 無し */ } });
   for (const p of pages) {
     const page = await ctx.newPage();
     const url = BASE + p;

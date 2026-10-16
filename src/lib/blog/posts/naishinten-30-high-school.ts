@@ -58,10 +58,10 @@ export const post: BlogPost = {
   <p>本記事では、内申点30の正確な意味、行ける公立・私立高校の具体例、私立併願優遇の基準、内申点30から35に上げる現実的な3ヶ月戦略まで、2026年度（令和8年度）入試に対応した最新情報で徹底解説します。</p>
 </div>
 
-<div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%); border: 2px solid #bfdbfe; border-radius: 16px;">
-  <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #1e3a8a;">🧮 自分の正確な内申点を確認</p>
-  <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #1e40af; line-height: 1.6;">都道府県によって内申点の満点・倍率が異なります。素内申30が実際の合否判定でどう扱われるか、都道府県別ツールで確認しましょう。</p>
-  <p style="margin: 0;"><a href="/" style="display: inline-block; padding: 0.5rem 1.25rem; background: #2563eb; color: #fff; font-weight: 700; border-radius: 9999px; text-decoration: none;">▶ 都道府県別 内申点を計算する（無料）</a></p>
+<div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: #f0f6f3; border: 1px solid #cddad3; border-radius: 8px;">
+  <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #17231d;">自分の正確な内申点を確認</p>
+  <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #4f6158; line-height: 1.6;">都道府県によって内申点の満点・倍率が異なります。素内申30が実際の合否判定でどう扱われるか、都道府県別ツールで確認しましょう。</p>
+  <p style="margin: 0;"><a href="/" style="display: inline-block; padding: 0.5rem 1.25rem; background: #17543e; color: #fff; font-weight: 700; border-radius: 6px; text-decoration: none;">▶ 都道府県別 内申点を計算する（無料）</a></p>
 </div>
 
 <hr>

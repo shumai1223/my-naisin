@@ -39,10 +39,10 @@ export const post: BlogPost = {
   <p>本記事では、評定平均4.5の正確な意味、行ける難関高校の具体例、推薦入試の出願基準、特待生制度の詳細、4.5から4.8以上に上げる最終調整戦略まで、2026年度（令和8年度）入試に対応した最新情報で徹底解説します。</p>
 </div>
 
-<div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%); border: 2px solid #99f6e4; border-radius: 16px;">
-  <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #134e4a;">🧮 自分の評定平均を正確に確認</p>
-  <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #115e59; line-height: 1.6;">9教科の評定を入れるだけで評定平均と素内申を瞬時に算出。「4.5前後」のあいまいさを数字で確定させてから戦略を立てましょう。</p>
-  <p style="margin: 0;"><a href="/hyotei-heikin" style="display: inline-block; padding: 0.5rem 1.25rem; background: #0d9488; color: #fff; font-weight: 700; border-radius: 9999px; text-decoration: none;">▶ 評定平均を今すぐ計算する（無料）</a></p>
+<div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: #f0f6f3; border: 1px solid #cddad3; border-radius: 8px;">
+  <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #17231d;">自分の評定平均を正確に確認</p>
+  <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #4f6158; line-height: 1.6;">9教科の評定を入れるだけで評定平均と素内申を瞬時に算出。「4.5前後」のあいまいさを数字で確定させてから戦略を立てましょう。</p>
+  <p style="margin: 0;"><a href="/hyotei-heikin" style="display: inline-block; padding: 0.5rem 1.25rem; background: #17543e; color: #fff; font-weight: 700; border-radius: 6px; text-decoration: none;">▶ 評定平均を今すぐ計算する（無料）</a></p>
 </div>
 
 <hr>

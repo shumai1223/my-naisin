@@ -20,10 +20,10 @@ export const post: BlogPost = {
       <p>自分の今の成績から志望校に届くのか、入試本番で何点取れば逆転できるのかを知るための完全ガイドとしてご活用ください。</p>
     </div>
 
-    <div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%); border: 2px solid #bfdbfe; border-radius: 16px;">
-      <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #1e3a8a;">🧮 計算式を読む前に、まず数字を確かめたい方へ</p>
-      <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #1e40af; line-height: 1.6;">本記事で解説する全ての計算（換算内申・調査書点・1020点総合得点）は、当サイトの<strong>都立高校 総合得点 計算サイト</strong>で自動算出できます。記事を読む前に、まず自分の現在地を確認してから読むと理解が圧倒的に早くなります。</p>
-      <p style="margin: 0;"><a href="/tokyo/total-score" style="display: inline-block; padding: 0.5rem 1.25rem; background: #2563eb; color: #fff; font-weight: 700; border-radius: 9999px; text-decoration: none;">▶ 都立 総合得点（1020点）を今すぐ計算する</a></p>
+    <div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: #f0f6f3; border: 1px solid #cddad3; border-radius: 8px;">
+      <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #17231d;">計算式を読む前に、まず数字を確かめたい方へ</p>
+      <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #4f6158; line-height: 1.6;">本記事で解説する全ての計算（換算内申・調査書点・1020点総合得点）は、当サイトの<strong>都立高校 総合得点 計算サイト</strong>で自動算出できます。記事を読む前に、まず自分の現在地を確認してから読むと理解が圧倒的に早くなります。</p>
+      <p style="margin: 0;"><a href="/tokyo/total-score" style="display: inline-block; padding: 0.5rem 1.25rem; background: #17543e; color: #fff; font-weight: 700; border-radius: 6px; text-decoration: none;">▶ 都立 総合得点（1020点）を今すぐ計算する</a></p>
     </div>
 
     <div class="toc">
