@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Target, Calculator, Info, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle, MapPin } from 'lucide-react';
+import { Calculator, ArrowLeft, ChevronDown, ExternalLink, Copy, Check, HelpCircle, AlertTriangle } from '@/components/icons';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import { getExamRatioByCode, DEFAULT_EXAM_RATIO } from '@/lib/prefecture-exam-data';
@@ -82,6 +82,14 @@ const TERM_HELP: Record<string, { title: string; description: string }> = {
     description: '内申点を入試の配点に換算した点数です。東京都では換算内申を300点満点に換算します。'
   }
 };
+
+// フォーカスの輪郭（入力・ボタン共通。DESIGN-SYSTEM.md §3 入力）
+const FOCUS_OUTLINE = 'outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700';
+// 数値入力の見た目（高さ・幅・文字サイズは呼び出し側で足す）
+const INPUT_BASE = `rounded border border-slate-300 bg-white tabular-nums text-slate-900 ${FOCUS_OUTLINE}`;
+// 切り替えボタン（選択中 / それ以外）
+const TOGGLE_ON = 'border-brand-700 bg-brand-700 text-white';
+const TOGGLE_OFF = 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50';
 
 export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) {
   const searchParams = useSearchParams();
@@ -281,14 +289,14 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
       if (requiredExamScore > examMaxScore) {
         message = '目標点に対して内申点が不足しています。内申点を上げるか、目標を調整してください。';
       } else {
-        message = '現在の内申点だけで目標を達成できます！';
+        message = '現在の内申点だけで目標を達成できます。';
       }
     } else if (examPercent >= 90) {
       message = '非常に高い当日点が必要です。内申点アップも検討しましょう。';
     } else if (examPercent >= 70) {
       message = '当日点で挽回可能ですが、内申点も上げると楽になります。';
     } else {
-      message = '十分達成可能な目標です。この調子で頑張りましょう！';
+      message = '十分達成可能な目標です。この調子で頑張りましょう。';
     }
 
     setResult({
@@ -332,33 +340,29 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
 
   return (
     <div className="space-y-4">
-      <Card className="overflow-hidden">
-        <div className="border-b border-slate-100/80 bg-gradient-to-r from-emerald-50/80 via-teal-50/60 to-cyan-50/80 px-5 py-5 md:px-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 shadow-lg shadow-emerald-300/40">
-                <Target className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <div className="text-xl font-bold tracking-tight text-slate-800">志望校から逆算</div>
-                <div className="text-sm text-slate-500">目標点から必要な当日点を計算</div>
-              </div>
+      <Card>
+        <div className="border-b border-slate-200 px-5 py-5 md:px-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 className="text-xl font-bold text-slate-900">志望校から逆算</h2>
+              <p className="mt-1 text-sm text-slate-600">目標点から必要な当日点を計算</p>
             </div>
-            <Button variant="ghost" onClick={onBack} leftIcon={<ArrowLeft className="h-4 w-4" />}>
+            <Button variant="secondary" size="sm" onClick={onBack} leftIcon={<ArrowLeft className="h-4 w-4" />}>
               戻る
             </Button>
           </div>
         </div>
 
-        <div className="p-5 md:p-6">
-          <div className="flex flex-wrap gap-3">
+        <div className="space-y-6 p-5 md:p-6">
+          <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => {
                 setMode('general');
                 if (prefectureCode === 'tokyo') setPrefectureCode('tokyo');
               }}
-              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'general' ? 'bg-emerald-500 text-white shadow-emerald-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-emerald-300'}`}
+              aria-pressed={mode === 'general'}
+              className={`min-h-11 rounded border px-4 text-sm font-bold transition-colors duration-100 ${mode === 'general' ? TOGGLE_ON : TOGGLE_OFF}`}
             >
               一般モード
             </button>
@@ -368,7 +372,8 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                 setMode('tokyo');
                 setPrefectureCode('tokyo');
               }}
-              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'tokyo' ? 'bg-rose-500 text-white shadow-rose-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-rose-300'}`}
+              aria-pressed={mode === 'tokyo'}
+              className={`min-h-11 rounded border px-4 text-sm font-bold transition-colors duration-100 ${mode === 'tokyo' ? TOGGLE_ON : TOGGLE_OFF}`}
             >
               東京都(1020)
             </button>
@@ -378,7 +383,8 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                 setMode('kanagawa');
                 setPrefectureCode('kanagawa');
               }}
-              className={`rounded-xl px-4 py-2 text-sm font-bold transition-all transform hover:scale-105 shadow-md ${mode === 'kanagawa' ? 'bg-indigo-500 text-white shadow-indigo-200' : 'bg-white text-slate-700 border border-slate-200 hover:border-indigo-300'}`}
+              aria-pressed={mode === 'kanagawa'}
+              className={`min-h-11 rounded border px-4 text-sm font-bold transition-colors duration-100 ${mode === 'kanagawa' ? TOGGLE_ON : TOGGLE_OFF}`}
             >
               神奈川(S1/S2)
             </button>
@@ -386,17 +392,14 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
 
           {/* 高校別プリセット */}
           {mode === 'general' && prefectureCode && SCHOOL_PRESETS[prefectureCode as keyof typeof SCHOOL_PRESETS] && (
-            <div className="mb-4 rounded-xl border border-purple-200 bg-purple-50 p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm font-semibold text-purple-700">{getPrefectureByCode(prefectureCode)?.name} 上位校の比率</span>
-                <Info className="h-4 w-4 text-purple-500" />
-              </div>
-              <div className="grid gap-2 max-h-60 overflow-y-auto">
+            <section>
+              <h3 className="mb-2 text-base font-bold text-slate-900">{getPrefectureByCode(prefectureCode)?.name} 上位校の比率</h3>
+              <div className="grid max-h-60 gap-2 overflow-y-auto">
                 {SCHOOL_PRESETS[prefectureCode as keyof typeof SCHOOL_PRESETS].map((school, index) => {
                   const totalRatio = Object.values(school.ratio).reduce((sum, val) => sum + val, 0);
                   const naishinRatio = Math.round((school.ratio.naishin / totalRatio) * 100);
                   const examRatio = Math.round((school.ratio.gakuryoku / totalRatio) * 100);
-                  
+
                   return (
                     <button
                       key={index}
@@ -405,25 +408,23 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                         setNaishinRatio(naishinRatio);
                         setExamMaxScore(school.examMax);
                       }}
-                      className="rounded-lg border border-purple-200 bg-white p-3 text-left hover:bg-purple-50 transition-colors"
+                      className="rounded border border-slate-200 bg-white p-3 text-left transition-colors duration-100 hover:bg-brand-50"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-purple-800 text-sm">{school.name}</div>
-                          <div className="text-xs text-slate-600 mt-1">{school.description}</div>
-                          <div className="text-xs text-purple-600 mt-1">内申{naishinRatio}%・学力{examRatio}%</div>
-                          <div className="flex flex-wrap gap-1 mt-1">
+                        <div className="min-w-0 flex-1">
+                          <div className="text-sm font-bold text-slate-900">{school.name}</div>
+                          <div className="mt-1 text-xs text-slate-600">{school.description}</div>
+                          <div className="mt-1 text-xs tabular-nums text-slate-600">内申{naishinRatio}%・学力{examRatio}%</div>
+                          <div className="mt-1 flex flex-wrap gap-1">
                             {school.features.slice(0, 2).map((feature, i) => (
-                              <span key={i} className="inline-block px-1.5 py-0.5 text-xs bg-purple-100 text-purple-700 rounded">
+                              <span key={i} className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                                 {feature}
                               </span>
                             ))}
                           </div>
                         </div>
-                        <div className="flex-shrink-0">
-                          <span className={`inline-block px-2 py-1 text-xs font-medium rounded ${
-                            school.type === '進学校' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'
-                          }`}>
+                        <div className="shrink-0">
+                          <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                             {school.type}
                           </span>
                         </div>
@@ -432,22 +433,19 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                   );
                 })}
               </div>
-            </div>
+            </section>
           )}
 
           {/* 都道府県別プリセット */}
           {mode === 'general' && prefectureCode && RATIO_PRESETS[prefectureCode as keyof typeof RATIO_PRESETS] && (
-            <div className="mb-4 rounded-xl border border-slate-200 bg-white p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm font-semibold text-slate-700">{getPrefectureByCode(prefectureCode)?.name}のよくある比率</span>
-                <Info className="h-4 w-4 text-slate-500" />
-              </div>
+            <section>
+              <h3 className="mb-2 text-base font-bold text-slate-900">{getPrefectureByCode(prefectureCode)?.name}のよくある比率</h3>
               <div className="grid gap-2">
                 {RATIO_PRESETS[prefectureCode as keyof typeof RATIO_PRESETS].map((preset, index) => {
                   const totalRatio = Object.values(preset.ratio).reduce((sum, val) => sum + val, 0);
                   const naishinRatio = Math.round((preset.ratio.naishin / totalRatio) * 100);
                   const examRatio = Math.round((preset.ratio.gakuryoku / totalRatio) * 100);
-                  
+
                   return (
                     <button
                       key={index}
@@ -456,49 +454,46 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                         setNaishinRatio(naishinRatio);
                         setExamMaxScore(500); // デフォルト値
                       }}
-                      className="rounded-lg border border-blue-200 bg-white p-3 text-left hover:bg-blue-50 transition-colors"
+                      className="rounded border border-slate-200 bg-white p-3 text-left transition-colors duration-100 hover:bg-brand-50"
                     >
-                      <div className="font-semibold text-blue-700 text-sm">{preset.name}</div>
-                      <div className="text-xs text-slate-600 mt-1">{preset.description}</div>
-                      <div className="text-xs text-blue-600 mt-1">内申{naishinRatio}%・学力{examRatio}%</div>
-                      <div className="text-xs text-amber-600 mt-1">{preset.note}</div>
+                      <div className="text-sm font-bold text-slate-900">{preset.name}</div>
+                      <div className="mt-1 text-xs text-slate-600">{preset.description}</div>
+                      <div className="mt-1 text-xs tabular-nums text-slate-700">内申{naishinRatio}%・学力{examRatio}%</div>
+                      <div className="mt-1 text-xs text-amber-900">{preset.note}</div>
                     </button>
                   );
                 })}
               </div>
-            </div>
+            </section>
           )}
 
           {/* 従来のプリセット */}
           {mode === 'general' && prefectureCode && PREFECTURE_RATIO_PRESETS[prefectureCode] && (
-            <div className="mb-4 rounded-xl border border-slate-200 bg-white p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-sm font-semibold text-slate-700">従来の比率プリセット</span>
-                <Info className="h-4 w-4 text-slate-500" />
-              </div>
+            <section>
+              <h3 className="mb-2 text-base font-bold text-slate-900">従来の比率プリセット</h3>
               <div className="grid gap-2">
                 {PREFECTURE_RATIO_PRESETS[prefectureCode].map((preset, index) => (
-                  <div key={index} className="rounded-lg border border-blue-200 bg-white p-3 hover:bg-blue-50 transition-colors">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="font-semibold text-blue-700 text-sm">{preset.label}</div>
-                        <div className="text-xs text-slate-600 mt-1">{preset.description}</div>
-                        <div className="text-xs text-blue-600 mt-1">内申{preset.ratio}%・学力{100-preset.ratio}%</div>
+                  <div key={index} className="rounded border border-slate-200 bg-white p-3">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm font-bold text-slate-900">{preset.label}</div>
+                        <div className="mt-1 text-xs text-slate-600">{preset.description}</div>
+                        <div className="mt-1 text-xs tabular-nums text-slate-700">内申{preset.ratio}%・学力{100-preset.ratio}%</div>
                       </div>
-                      <div className="flex gap-1">
+                      <div className="flex gap-2">
                         <button
                           type="button"
                           onClick={() => {
                             setNaishinRatio(preset.ratio);
                             setExamMaxScore(preset.examMax);
                           }}
-                          className="rounded px-2 py-1 text-xs bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+                          className="inline-flex min-h-11 items-center rounded bg-brand-700 px-4 text-sm font-bold text-white transition-colors duration-100 hover:bg-brand-800"
                         >
                           適用
                         </button>
                         <Link
                           href={`/${prefectureCode}/naishin`}
-                          className="rounded px-2 py-1 text-xs bg-slate-500 text-white hover:bg-slate-600 transition-colors"
+                          className="inline-flex min-h-11 items-center rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors duration-100 hover:bg-brand-50"
                         >
                           詳細
                         </Link>
@@ -507,43 +502,38 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
           {/* 用語ヘルプ */}
-          <div className="mb-4 rounded-xl border border-amber-100 bg-amber-50 p-4">
-            <div className="mb-3 flex items-center gap-2">
-              <span className="text-sm font-semibold text-amber-800">用語ヘルプ</span>
-              <Info className="h-4 w-4 text-amber-600" />
-            </div>
+          <section>
+            <h3 className="mb-2 text-base font-bold text-slate-900">用語ヘルプ</h3>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {Object.entries(TERM_HELP).map(([term, help]) => (
-                <div key={term} className="rounded-lg border border-amber-200 bg-white p-3">
-                  <div className="flex items-start gap-2">
-                    <button
-                      type="button"
-                      onClick={() => alert(`${help.title}\n\n${help.description}`)}
-                      className="rounded-full bg-amber-100 p-1 hover:bg-amber-200 transition-colors"
-                    >
-                      <HelpCircle className="h-3 w-3 text-amber-700" />
-                    </button>
-                    <div className="flex-1">
-                      <div className="font-semibold text-amber-700 text-sm">{term}</div>
-                      <div className="text-xs text-slate-600 mt-1 line-clamp-2">{help.description}</div>
-                    </div>
-                  </div>
-                </div>
+                <button
+                  key={term}
+                  type="button"
+                  onClick={() => alert(`${help.title}\n\n${help.description}`)}
+                  aria-label={help.title}
+                  className="flex min-h-11 items-start gap-2 rounded border border-slate-200 bg-white p-3 text-left transition-colors duration-100 hover:bg-brand-50"
+                >
+                  <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-slate-600" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-bold text-slate-900">{term}</span>
+                    <span className="mt-1 block text-xs text-slate-600 line-clamp-2">{help.description}</span>
+                  </span>
+                </button>
               ))}
             </div>
-          </div>
+          </section>
 
           {mode === 'tokyo' ? (
-            <div className="space-y-4">
-              <div className="rounded-xl border border-rose-100 bg-rose-50/60 p-4 text-sm text-rose-700">
+            <div className="space-y-6">
+              <div className="rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm leading-[1.8] text-slate-900">
                 都立一般（1020点満点）を自動設定しています。換算内申・学力検査・ESAT-Jで必要当日点を逆算できます。
               </div>
-              <div className="rounded-xl border border-slate-200 bg-white p-4">
-                <label htmlFor="reverse-tokyo-kanso-naishin" className="mb-2 block text-sm font-bold text-slate-700">現在の換算内申</label>
+              <div>
+                <label htmlFor="reverse-tokyo-kanso-naishin" className="mb-2 block text-sm font-bold text-slate-900">現在の換算内申</label>
                 <div className="flex items-center gap-2">
                   <input
                     id="reverse-tokyo-kanso-naishin"
@@ -568,48 +558,42 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                         }
                       }
                     }}
-                    className="h-11 w-32 rounded-xl border border-slate-200 bg-white px-3 text-center text-sm font-bold text-slate-800 shadow-sm outline-none focus:border-rose-500"
+                    className={`h-11 w-32 px-3 text-center text-base font-bold ${INPUT_BASE}`}
                   />
-                  <span className="text-sm text-slate-500">/65点</span>
+                  <span className="text-sm text-slate-600">/65点</span>
                 </div>
               </div>
-              <TokyoExtendedCalculator kansoNaishin={tokyoKansoNaishin} />
+              <TokyoExtendedCalculator kansoNaishin={tokyoKansoNaishin} headingLevel="h3" />
             </div>
           ) : (
-          <div className="space-y-5">
+          <div className="space-y-6">
             <div ref={dropdownRef}>
               <div className="mb-2">
-                <h3 className="text-sm font-bold text-slate-700">都道府県の選択</h3>
-                <p className="text-xs text-slate-500">お住まいの地域を選んでください</p>
+                <h3 className="text-base font-bold text-slate-900">都道府県の選択</h3>
+                <p className="text-sm text-slate-600">お住まいの地域を選んでください</p>
               </div>
-              
+
               <div className="relative">
                 <button
                   type="button"
                   onClick={() => setIsPrefectureDropdownOpen(!isPrefectureDropdownOpen)}
-                  className="flex w-full items-center justify-between gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-4 text-left transition-all shadow-sm hover:border-blue-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                  aria-expanded={isPrefectureDropdownOpen}
+                  className={`flex min-h-14 w-full items-center justify-between gap-3 rounded border border-slate-300 bg-white px-4 py-3 text-left transition-colors duration-100 hover:bg-slate-50 ${FOCUS_OUTLINE}`}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md">
-                      <MapPin className="h-6 w-6 text-white" />
+                  <div>
+                    <div className="text-base font-bold text-slate-900">
+                      {prefecture?.name ?? '都道府県を選択'}
                     </div>
-                    <div>
-                      <div className="text-base font-bold text-slate-800">
-                        {prefecture?.name ?? '都道府県を選択'}
-                      </div>
-                      <div className="text-xs text-slate-500">
-                        {prefecture?.description ?? '計算方法を選んでください'}
-                      </div>
+                    <div className="text-sm text-slate-600">
+                      {prefecture?.description ?? '計算方法を選んでください'}
                     </div>
                   </div>
-                  <div className="rounded-full bg-slate-100 p-2">
-                    <ChevronDown className={`h-5 w-5 text-slate-400 transition-transform ${isPrefectureDropdownOpen ? 'rotate-180' : ''}`} />
-                  </div>
+                  <ChevronDown className={`h-5 w-5 shrink-0 text-slate-600 ${isPrefectureDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {isPrefectureDropdownOpen && (
-                  <div className="absolute z-50 mt-2 max-h-80 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl">
-                    <div className="max-h-80 overflow-y-auto">
+                  <div className="absolute z-50 mt-2 max-h-80 w-full overflow-auto rounded-lg border border-slate-200 bg-white shadow-overlay">
+                    <div className="max-h-80 divide-y divide-slate-200 overflow-y-auto">
                       {PREFECTURES.map((pref) => (
                         <button
                           key={pref.code}
@@ -618,20 +602,24 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                             setPrefectureCode(pref.code);
                             setIsPrefectureDropdownOpen(false);
                           }}
-                          className={`w-full px-4 py-3 text-left transition-colors hover:bg-blue-50 ${
-                            prefectureCode === pref.code ? 'bg-blue-50 border-l-4 border-blue-500' : ''
+                          aria-current={prefectureCode === pref.code ? 'true' : undefined}
+                          className={`flex min-h-11 w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors duration-100 hover:bg-brand-50 ${
+                            prefectureCode === pref.code ? 'bg-brand-50' : ''
                           }`}
                         >
-                          <div className="font-medium text-slate-800">{pref.name}</div>
-                          <div className="text-xs text-slate-500">{pref.description}</div>
+                          <span className="min-w-0">
+                            <span className={`block text-slate-900 ${prefectureCode === pref.code ? 'font-bold' : ''}`}>{pref.name}</span>
+                            <span className="block text-xs text-slate-600">{pref.description}</span>
+                          </span>
+                          {prefectureCode === pref.code && <Check className="h-4 w-4 shrink-0 text-brand-700" />}
                         </button>
                       ))}
                     </div>
                   </div>
                 )}
               </div>
-              
-              <div className="mt-1 text-xs text-slate-500">
+
+              <div className="mt-2 text-sm text-slate-600">
                 選択すると自動で配点比率が設定されます
               </div>
               {prefecture?.sourceUrl && (
@@ -639,9 +627,9 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                   href={prefecture.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-1 text-xs text-emerald-600 hover:underline"
+                  className="inline-flex min-h-11 items-center gap-1 text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800"
                 >
-                  <ExternalLink className="h-3 w-3" />
+                  <ExternalLink className="h-4 w-4" />
                   {prefecture.name}の公式情報を見る
                 </a>
               )}
@@ -649,10 +637,10 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label htmlFor="reverse-target-score" className="mb-2 block text-sm font-bold text-slate-700">
+                <label htmlFor="reverse-target-score" className="mb-2 block text-sm font-bold text-slate-900">
                   目標総合点
-                  <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
-                  <span className="ml-1 text-xs font-normal text-slate-500">（内申＋当日点の合計）</span>
+                  <span className="ml-1 text-xs font-normal text-amber-900">※必須</span>
+                  <span className="ml-1 text-xs font-normal text-slate-600">（内申＋当日点の合計）</span>
                 </label>
                 <div className="flex items-center gap-2">
                   <input
@@ -668,13 +656,13 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                         setTargetTotalScore(value === '' ? 0 : Number(value));
                       }
                     }}
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+                    className={`h-12 w-full px-4 text-lg font-bold ${INPUT_BASE}`}
                     placeholder={`例: ${prefecture?.reverseCalc ? Math.round(prefecture.reverseCalc.totalMaxScore * 0.7) : "700"}`}
                   />
-                  <span className="text-sm text-slate-500">点</span>
+                  <span className="text-sm text-slate-600">点</span>
                 </div>
-                <div className="mt-1 text-xs text-slate-500">
-                  {prefecture?.reverseCalc 
+                <div className="mt-1 text-sm text-slate-600">
+                  {prefecture?.reverseCalc
                     ? `${prefecture.name}なら${Math.round(prefecture.reverseCalc.totalMaxScore * 0.7)}点程度（${prefecture.reverseCalc.totalMaxScore}点満点中）`
                     : '合格ラインの目安（例: 東京都なら720点程度）'
                   }
@@ -682,10 +670,10 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
               </div>
 
               <div>
-                <label htmlFor="reverse-current-naishin" className="mb-2 block text-sm font-bold text-slate-700">
+                <label htmlFor="reverse-current-naishin" className="mb-2 block text-sm font-bold text-slate-900">
                   {prefectureCode === 'kanagawa' ? 'A（評定合計）' : '現在の内申点'}
-                  <span className="ml-1 text-xs font-normal text-amber-500">※必須</span>
-                  <span className="ml-1 text-xs font-normal text-slate-500">（{naishinMax}点満点）</span>
+                  <span className="ml-1 text-xs font-normal text-amber-900">※必須</span>
+                  <span className="ml-1 text-xs font-normal text-slate-600">（{naishinMax}点満点）</span>
                 </label>
                 <div className="flex items-center gap-2">
                   <input
@@ -701,52 +689,50 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                         setCurrentNaishin(value === '' ? 0 : Number(value));
                       }
                     }}
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-slate-800 shadow-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+                    className={`h-12 w-full px-4 text-lg font-bold ${INPUT_BASE}`}
                     placeholder={`例: ${Math.round(naishinMax * 0.8)}`}
                   />
-                  <span className="text-sm text-slate-500">点</span>
+                  <span className="text-sm text-slate-600">点</span>
                 </div>
                 {prefectureCode === 'kanagawa' && (
-                  <div className="mt-2 text-xs text-slate-500">
+                  <div className="mt-2 text-sm tabular-nums text-slate-600">
                     a値（100点換算）: {currentNaishin > 0 ? Math.round((currentNaishin / naishinMax) * 100) : 0}点
                   </div>
                 )}
-                <div className="mt-1 text-xs text-slate-500">
-                  不明な場合は先に内申点を計算 → 
-                  <Link href="/" className="text-blue-600 hover:underline">計算ツール</Link>
+                <div className="mt-1 text-sm text-slate-600">
+                  不明な場合は先に内申点を計算 →{' '}
+                  <Link href="/" className="inline-flex min-h-11 items-center text-brand-700 underline underline-offset-2 hover:text-brand-800">計算ツール</Link>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <div className="mb-3 flex items-center gap-2 text-sm font-bold text-slate-700">
-                <Info className="h-4 w-4 text-slate-500" />
-                配点設定（学校・入試方式によって異なります）
-              </div>
+            <section className="border-t border-slate-200 pt-6">
+              <h3 className="mb-3 text-base font-bold text-slate-900">配点設定（学校・入試方式によって異なります）</h3>
               {prefectureCode === 'osaka' && prefecture?.reverseCalc?.osakaTypes && (
-                <div className="mb-3">
-                  <label className="mb-2 block text-xs font-medium text-slate-600">大阪府のタイプ選択</label>
+                <div className="mb-4">
+                  <div className="mb-2 text-sm text-slate-700">大阪府のタイプ選択</div>
                   <div className="flex flex-wrap gap-2">
                     {prefecture.reverseCalc.osakaTypes.map((type) => (
                       <button
                         key={type.code}
                         type="button"
                         onClick={() => setOsakaType(type.code)}
-                        className={`rounded-lg border px-3 py-2 text-xs font-medium transition-colors ${
+                        aria-pressed={osakaType === type.code}
+                        className={`min-h-11 rounded border px-3 py-2 text-left text-sm transition-colors duration-100 ${
                           osakaType === type.code
-                            ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
-                            : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                            ? 'border-brand-700 bg-brand-50 text-slate-900'
+                            : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
                         }`}
                       >
-                        <div className="font-semibold">{type.name}</div>
-                        <div className="text-[10px] text-slate-500">{type.description}</div>
+                        <div className="font-bold">{type.name}</div>
+                        <div className="text-xs text-slate-600">{type.description}</div>
                       </button>
                     ))}
                   </div>
                 </div>
               )}
               {prefectureCode === 'kanagawa' && (
-                <div className="mb-3 flex flex-wrap gap-2">
+                <div className="mb-4 flex flex-wrap gap-2">
                   {KANAGAWA_RATIO_PRESETS.map((ratio) => (
                     <button
                       key={ratio}
@@ -761,19 +747,19 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                           setExamMaxInputValue('500');
                         }
                       }}
-                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-colors cursor-pointer"
+                      className="inline-flex min-h-11 items-center rounded border border-slate-300 bg-white px-4 text-sm font-bold tabular-nums text-slate-700 transition-colors duration-100 hover:bg-slate-50"
                     >
                       {ratio.replace('-', ':')}
                     </button>
                   ))}
-                  <div className="w-full text-[11px] text-slate-400">
+                  <div className="w-full text-sm text-slate-600">
                     ※ f:g は合計10（2以上の整数）。学校・学科ごとに異なる（2:8〜8:2）。特色検査は最大5。
                   </div>
                 </div>
               )}
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="reverse-naishin-ratio" className="mb-1 block text-xs font-medium text-slate-600">内申点の比率</label>
+                  <label htmlFor="reverse-naishin-ratio" className="mb-1 block text-sm text-slate-700">内申点の比率</label>
                   <div className="flex items-center gap-2">
                     <input
                       id="reverse-naishin-ratio"
@@ -791,13 +777,13 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                           }
                         }
                       }}
-                      className="h-10 w-20 rounded-lg border border-slate-200 bg-white px-3 text-center text-sm font-medium text-slate-800 outline-none focus:border-emerald-500"
+                      className={`h-11 w-20 px-3 text-center text-base ${INPUT_BASE}`}
                     />
-                    <span className="text-sm text-slate-500">%（当日点 {100 - naishinRatio}%）</span>
+                    <span className="text-sm tabular-nums text-slate-600">%（当日点 {100 - naishinRatio}%）</span>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="reverse-exam-max" className="mb-1 block text-xs font-medium text-slate-600">当日点の満点</label>
+                  <label htmlFor="reverse-exam-max" className="mb-1 block text-sm text-slate-700">当日点の満点</label>
                   <div className="flex items-center gap-2">
                     <input
                       id="reverse-exam-max"
@@ -812,16 +798,16 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                           setExamMaxScore(value === '' ? 0 : Number(value));
                         }
                       }}
-                      className="h-10 w-24 rounded-lg border border-slate-200 bg-white px-3 text-center text-sm font-medium text-slate-800 outline-none focus:border-emerald-500"
+                      className={`h-11 w-24 px-3 text-center text-base ${INPUT_BASE}`}
                     />
-                    <span className="text-sm text-slate-500">点</span>
+                    <span className="text-sm text-slate-600">点</span>
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
 
             {validationError && (
-              <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-700">
+              <div role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
                 {validationError}
               </div>
             )}
@@ -829,7 +815,7 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
             <Button
               onClick={handleCalculate}
               leftIcon={<Calculator className="h-4 w-4" />}
-              className="w-full shadow-md shadow-emerald-500/20"
+              className="w-full"
             >
               必要な当日点を計算
             </Button>
@@ -839,126 +825,112 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
       </Card>
 
       {result && (
-        <div className="animate-fade-in-up">
-          <Card className="overflow-hidden" variant="elevated">
-            <div className="border-b border-slate-100/80 bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 px-6 py-5">
-              <div className="text-lg font-bold text-slate-800">📊 逆算結果</div>
+        <div className="motion-safe:animate-fade-in">
+          <Card>
+            <div className="border-b border-slate-200 px-5 py-4 md:px-6">
+              <h2 className="text-xl font-bold text-slate-900">逆算結果</h2>
             </div>
-            <div className="p-6">
-              <div className="mb-6 grid gap-4 md:grid-cols-3">
-                <div className="rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-4 text-center">
-                  <div className="text-sm font-medium text-emerald-600">必要な当日点</div>
-                  <div className="mt-1 text-3xl font-bold text-emerald-700">
+            <div className="p-5 md:p-6">
+              <dl className="mb-6 grid divide-y divide-slate-200 border-y border-slate-200 md:grid-cols-3 md:divide-x md:divide-y-0">
+                <div className="flex items-baseline justify-between gap-3 py-3 md:block md:px-4 md:py-4 md:text-center">
+                  <dt className="text-sm text-slate-600">必要な当日点</dt>
+                  <dd className="text-2xl font-bold tabular-nums text-slate-900">
                     {result.requiredExamScore}
-                    <span className="text-lg text-emerald-500">/{result.examMaxScore}</span>
-                  </div>
+                    <span className="text-base font-normal text-slate-600">/{result.examMaxScore}</span>
+                  </dd>
                 </div>
-                <div className="rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-4 text-center">
-                  <div className="text-sm font-medium text-blue-600">得点率</div>
-                  <div className="mt-1 text-3xl font-bold text-blue-700">
+                <div className="flex items-baseline justify-between gap-3 py-3 md:block md:px-4 md:py-4 md:text-center">
+                  <dt className="text-sm text-slate-600">得点率</dt>
+                  <dd className="text-2xl font-bold tabular-nums text-slate-900">
                     {result.examPercent}
-                    <span className="text-lg text-blue-500">%</span>
-                  </div>
+                    <span className="text-base font-normal text-slate-600">%</span>
+                  </dd>
                 </div>
-                <div className="rounded-xl border border-violet-200 bg-gradient-to-br from-violet-50 to-purple-50 p-4 text-center">
-                  <div className="text-sm font-medium text-violet-600">1教科平均</div>
-                  <div className="mt-1 text-3xl font-bold text-violet-700">
+                <div className="flex items-baseline justify-between gap-3 py-3 md:block md:px-4 md:py-4 md:text-center">
+                  <dt className="text-sm text-slate-600">1教科平均</dt>
+                  <dd className="text-2xl font-bold tabular-nums text-slate-900">
                     {result.perSubjectScore === -1 ? 'N/A' : result.perSubjectScore}
-                    <span className="text-lg text-violet-500">{result.perSubjectScore === -1 ? '' : '点'}</span>
-                  </div>
+                    <span className="text-base font-normal text-slate-600">{result.perSubjectScore === -1 ? '' : '点'}</span>
+                  </dd>
                 </div>
-              </div>
+              </dl>
 
-              <div className={`rounded-xl p-4 ${result.isAchievable ? 'bg-emerald-50 border border-emerald-200' : 'bg-amber-50 border border-amber-200'}`}>
-                <p className={`text-sm font-medium ${result.isAchievable ? 'text-emerald-700' : 'text-amber-700'}`}>
+              <div className={`rounded-lg border p-4 ${result.isAchievable ? 'border-slate-200 bg-brand-50' : 'border-amber-200 bg-amber-50'}`}>
+                <p className={`text-base leading-[1.8] ${result.isAchievable ? 'text-slate-900' : 'text-amber-900'}`}>
                   {result.message}
                 </p>
               </div>
 
               {/* 安全圏/標準/挑戦の3ライン表示 */}
-              <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <div className="text-xs font-bold text-slate-600 mb-3">目標ライン別必要点数</div>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between rounded-lg border border-emerald-200 bg-emerald-50 p-3">
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
-                      <span className="text-sm font-medium text-emerald-700">安全圏 (+20点)</span>
-                    </div>
-                    <div className="text-sm font-bold text-emerald-800">
-                      {Math.min(result.requiredExamScore + 20, result.examMaxScore)}点
-                      <span className="text-xs text-emerald-600 ml-1">({Math.round(((Math.min(result.requiredExamScore + 20, result.examMaxScore) / result.examMaxScore) * 100))}%)</span>
-                      {result.perSubjectScore === -1 && (
-                        <span className="text-xs text-red-600 ml-2">1教科平均: N/A</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between rounded-lg border border-blue-200 bg-blue-50 p-3">
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-blue-500"></div>
-                      <span className="text-sm font-medium text-blue-700">標準</span>
-                    </div>
-                    <div className="text-sm font-bold text-blue-800">
-                      {result.requiredExamScore}点
-                      <span className="text-xs text-blue-600 ml-1">({result.examPercent}%)</span>
-                      {result.perSubjectScore === -1 && (
-                        <span className="text-xs text-red-600 ml-2">1教科平均: N/A</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between rounded-lg border border-orange-200 bg-orange-50 p-3">
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-orange-500"></div>
-                      <span className="text-sm font-medium text-orange-700">挑戦 (-20点)</span>
-                    </div>
-                    <div className="text-sm font-bold text-orange-800">
-                      {Math.max(result.requiredExamScore - 20, 0)}点
-                      <span className="text-xs text-orange-600 ml-1">({Math.round(((Math.max(result.requiredExamScore - 20, 0) / result.examMaxScore) * 100))}%)</span>
-                      {result.perSubjectScore === -1 && (
-                        <span className="text-xs text-red-600 ml-2">1教科平均: N/A</span>
-                      )}
-                    </div>
-                  </div>
+              <section className="mt-6">
+                <h3 className="mb-2 text-base font-bold text-slate-900">目標ライン別必要点数</h3>
+                <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                  <table className="w-full text-sm">
+                    <tbody>
+                      <tr className="border-b border-slate-200">
+                        <th scope="row" className="px-4 py-3 text-left font-normal text-slate-900">安全圏 (+20点)</th>
+                        <td className="px-4 py-3 text-right tabular-nums">
+                          <span className="font-bold text-slate-900">{Math.min(result.requiredExamScore + 20, result.examMaxScore)}点</span>
+                          <span className="ml-1 text-xs text-slate-600">({Math.round(((Math.min(result.requiredExamScore + 20, result.examMaxScore) / result.examMaxScore) * 100))}%)</span>
+                          {result.perSubjectScore === -1 && (
+                            <span className="ml-2 text-xs text-amber-900">1教科平均: N/A</span>
+                          )}
+                        </td>
+                      </tr>
+                      <tr className="border-b border-slate-200">
+                        <th scope="row" className="px-4 py-3 text-left font-normal text-slate-900">標準</th>
+                        <td className="px-4 py-3 text-right tabular-nums">
+                          <span className="font-bold text-slate-900">{result.requiredExamScore}点</span>
+                          <span className="ml-1 text-xs text-slate-600">({result.examPercent}%)</span>
+                          {result.perSubjectScore === -1 && (
+                            <span className="ml-2 text-xs text-amber-900">1教科平均: N/A</span>
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" className="px-4 py-3 text-left font-normal text-slate-900">挑戦 (-20点)</th>
+                        <td className="px-4 py-3 text-right tabular-nums">
+                          <span className="font-bold text-slate-900">{Math.max(result.requiredExamScore - 20, 0)}点</span>
+                          <span className="ml-1 text-xs text-slate-600">({Math.round(((Math.max(result.requiredExamScore - 20, 0) / result.examMaxScore) * 100))}%)</span>
+                          {result.perSubjectScore === -1 && (
+                            <span className="ml-2 text-xs text-amber-900">1教科平均: N/A</span>
+                          )}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <div className="mt-3 text-xs text-slate-500">
+                <div className="mt-2 text-sm text-slate-600">
                   ※ 安全圏は余裕を持った目標、挑戦は最低限の目標としてご活用ください
                 </div>
-              </div>
+              </section>
 
               {/* 3ラインの説明文（固定表示） */}
-              <div className="mt-4 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-slate-100 p-4">
-                <div className="text-xs font-bold text-slate-600 mb-3">目標ラインの意味</div>
-                <div className="space-y-2">
-                  <div className="flex items-start gap-2">
-                    <div className="h-2 w-2 rounded-full bg-emerald-500 mt-1.5"></div>
-                    <div>
-                      <span className="text-sm font-medium text-emerald-700">安全圏：</span>
-                      <span className="text-sm text-slate-600">当日のブレを吸収するライン</span>
-                    </div>
+              <section className="mt-6">
+                <h3 className="mb-2 text-base font-bold text-slate-900">目標ラインの意味</h3>
+                <dl className="space-y-2 text-sm">
+                  <div className="flex items-baseline gap-1">
+                    <dt className="shrink-0 font-bold text-slate-900">安全圏：</dt>
+                    <dd className="text-slate-600">当日のブレを吸収するライン</dd>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <div className="h-2 w-2 rounded-full bg-blue-500 mt-1.5"></div>
-                    <div>
-                      <span className="text-sm font-medium text-blue-700">標準：</span>
-                      <span className="text-sm text-slate-600">合格ライン目安</span>
-                    </div>
+                  <div className="flex items-baseline gap-1">
+                    <dt className="shrink-0 font-bold text-slate-900">標準：</dt>
+                    <dd className="text-slate-600">合格ライン目安</dd>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <div className="h-2 w-2 rounded-full bg-orange-500 mt-1.5"></div>
-                    <div>
-                      <span className="text-sm font-medium text-orange-700">挑戦：</span>
-                      <span className="text-sm text-slate-600">最低限ライン（要リスク管理）</span>
-                    </div>
+                  <div className="flex items-baseline gap-1">
+                    <dt className="shrink-0 font-bold text-slate-900">挑戦：</dt>
+                    <dd className="text-slate-600">最低限ライン（要リスク管理）</dd>
                   </div>
+                </dl>
+                <div className="mt-3 border-t border-slate-200 pt-3 text-sm text-slate-600">
+                  上記の目標ラインを参考に、自分の学力や志望校に合わせた学習計画を立てましょう
                 </div>
-                <div className="mt-3 text-xs text-slate-500 border-t border-slate-200 pt-3">
-                  💡 上記の目標ラインを参考に、自分の学力や志望校に合わせた学習計画を立てましょう
-                </div>
-              </div>
+              </section>
 
               {/* 計算式（都道府県別） */}
-              <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <div className="text-xs font-bold text-slate-600">計算式</div>
-                <code className="mt-1 block text-xs leading-relaxed text-slate-500">
+              <section className="mt-6">
+                <h3 className="mb-2 text-base font-bold text-slate-900">計算式</h3>
+                <code className="block break-words rounded border border-slate-200 bg-slate-50 p-3 font-sans text-sm leading-relaxed text-slate-700">
                   {prefecture?.reverseCalc ? (
                     prefecture.reverseCalc.calcType === 'osaka' ? (
                       <>
@@ -968,17 +940,17 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                       <>
                         東京都方式: 目標{targetTotalScore}点 − 内申{currentNaishin}×{(300/65).toFixed(2)}（実技2倍換算）＝ 必要当日点{result.requiredExamScore}点（{prefecture.reverseCalc.tokyoSettings ? (examMaxScore - prefecture.reverseCalc.tokyoSettings.esatjMaxScore) : examMaxScore}点満点中{result.examPercent}%）
                         {prefecture.reverseCalc.tokyoSettings && (
-                          <div className="text-[10px] text-slate-400 mt-1">
+                          <span className="mt-1 block text-xs text-slate-600">
                             ※ ESAT-J（スピーキングテスト）{prefecture.reverseCalc.tokyoSettings.esatjMaxScore}点を除く
-                          </div>
+                          </span>
                         )}
                       </>
                     ) : prefecture.reverseCalc.calcType === 'kanagawa' ? (
                       <>
                         神奈川県方式（S1値）: a=A÷135×100={Math.round((currentNaishin / naishinMax) * 100)} ／ 目標S1{targetTotalScore} − a×{Math.round(naishinRatio / 10)} ＝ 必要b×{Math.round((100 - naishinRatio) / 10)} → 必要当日点{result.requiredExamScore}点（500点満点中{result.examPercent}%）
-                        <div className="text-[10px] text-slate-400 mt-1">
+                        <span className="mt-1 block text-xs text-slate-600">
                           ※ 特色検査（S2値）は本ツール未対応。S1値のみで計算
-                        </div>
+                        </span>
                       </>
                     ) : prefecture.reverseCalc.calcType === 'chiba' ? (
                       <>
@@ -995,10 +967,11 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                     </>
                   )}
                 </code>
-              </div>
+              </section>
 
               {/* コピーボタン */}
               <button
+                type="button"
                 onClick={() => {
                   const text = `必要当日点：${result.requiredExamScore}/${result.examMaxScore}（${result.examPercent}%）／1教科平均：${result.perSubjectScore}点`;
                   navigator.clipboard.writeText(text).then(() => {
@@ -1006,31 +979,29 @@ export function ReverseCalculator({ onBack, onResult }: ReverseCalculatorProps) 
                     setTimeout(() => setCopied(false), 2000);
                   });
                 }}
-                className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 shadow-sm hover:bg-slate-50 transition-colors"
+                className="mt-6 inline-flex min-h-11 items-center gap-2 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors duration-100 hover:bg-brand-50"
               >
-                {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
+                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 {copied ? 'コピーしました' : '結果をコピー'}
               </button>
 
-              <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
-                <div className="flex items-start gap-2">
-                  <HelpCircle className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
-                  <div className="text-xs text-amber-800">
-                    <div className="font-bold mb-1">⚠️ 重要な注意事項</div>
-                    <div className="space-y-1 text-amber-700">
-                      <div>• このシミュレーションは一般的な配点比率に基づいています</div>
-                      <div>• 実技教科の換算（東京都）、学年ごとの内申比率（神奈川県）は考慮されていません</div>
-                      <div>• <strong>傾斜配点</strong>：理数科・国際科などで特定教科（英語・数学）の点数が1.5〜2倍になる場合があります</div>
-                      <div>• 大阪府のタイプ別倍率、東京都のESAT-J（スピーキングテスト）は含まれていません</div>
-                      <div className="font-semibold mt-2 pt-2 border-t border-amber-200">
-                        正確な合否判定には、必ず志望校の募集要項をご確認ください
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
+                <h3 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-900">
+                  <AlertTriangle className="h-4 w-4 shrink-0" />
+                  重要な注意事項
+                </h3>
+                <ul className="list-disc space-y-1 pl-5 text-sm leading-[1.8] text-amber-900">
+                  <li>このシミュレーションは一般的な配点比率に基づいています</li>
+                  <li>実技教科の換算（東京都）、学年ごとの内申比率（神奈川県）は考慮されていません</li>
+                  <li><strong>傾斜配点</strong>：理数科・国際科などで特定教科（英語・数学）の点数が1.5〜2倍になる場合があります</li>
+                  <li>大阪府のタイプ別倍率、東京都のESAT-J（スピーキングテスト）は含まれていません</li>
+                </ul>
+                <p className="mt-3 border-t border-amber-200 pt-3 text-sm font-bold text-amber-900">
+                  正確な合否判定には、必ず志望校の募集要項をご確認ください
+                </p>
               </div>
 
-              <div className="mt-3 text-xs text-slate-500">
+              <div className="mt-4 text-sm text-slate-600">
                 ※ この計算は目安です。実際の配点は志望校・入試方式によって異なります。
               </div>
             </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ArrowLeftRight } from 'lucide-react';
+import { ArrowLeftRight } from '@/components/icons';
 
 import { hensachiToUpperPercent, hensachiToRank, rankToHensachi, roundHensachi } from '@/lib/hensachi';
 import { funnel } from '@/lib/track';
@@ -49,29 +49,35 @@ export function RankHensachiCalculator() {
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
       <div className="mb-4 flex items-center justify-center gap-2">
         <button
           type="button"
+          aria-pressed={mode === 'fromHensachi'}
           onClick={() => {
             onFirstUse();
             setMode('fromHensachi');
           }}
-          className={`rounded-full px-4 py-2 text-xs font-bold transition-all ${
-            mode === 'fromHensachi' ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600'
+          className={`min-h-[44px] rounded border px-4 text-sm font-bold transition-colors ${
+            mode === 'fromHensachi'
+              ? 'border-brand-700 bg-brand-700 text-white'
+              : 'border-slate-300 bg-white text-slate-700 hover:bg-brand-50'
           }`}
         >
           偏差値 → 順位
         </button>
-        <ArrowLeftRight className="h-4 w-4 text-slate-400" />
+        <ArrowLeftRight className="h-4 w-4 shrink-0 text-slate-600" />
         <button
           type="button"
+          aria-pressed={mode === 'fromRank'}
           onClick={() => {
             onFirstUse();
             setMode('fromRank');
           }}
-          className={`rounded-full px-4 py-2 text-xs font-bold transition-all ${
-            mode === 'fromRank' ? 'bg-indigo-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600'
+          className={`min-h-[44px] rounded border px-4 text-sm font-bold transition-colors ${
+            mode === 'fromRank'
+              ? 'border-brand-700 bg-brand-700 text-white'
+              : 'border-slate-300 bg-white text-slate-700 hover:bg-brand-50'
           }`}
         >
           順位 → 偏差値
@@ -81,7 +87,7 @@ export function RankHensachiCalculator() {
       <div className="grid gap-3 sm:grid-cols-2">
         {mode === 'fromHensachi' ? (
           <label className="block">
-            <span className="mb-1 block text-xs font-bold text-slate-600">偏差値</span>
+            <span className="mb-1 block text-sm font-bold text-slate-900">偏差値</span>
             <input
               type="number"
               inputMode="decimal"
@@ -91,12 +97,12 @@ export function RankHensachiCalculator() {
                 onFirstUse();
                 setHensachi(e.target.value);
               }}
-              className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+              className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums focus-visible:outline-2 focus-visible:outline-brand-700"
             />
           </label>
         ) : (
           <label className="block">
-            <span className="mb-1 block text-xs font-bold text-slate-600">自分の順位（上位から）</span>
+            <span className="mb-1 block text-sm font-bold text-slate-900">自分の順位（上位から）</span>
             <input
               type="number"
               inputMode="numeric"
@@ -106,12 +112,12 @@ export function RankHensachiCalculator() {
                 onFirstUse();
                 setRank(e.target.value);
               }}
-              className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+              className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums focus-visible:outline-2 focus-visible:outline-brand-700"
             />
           </label>
         )}
         <label className="block">
-          <span className="mb-1 block text-xs font-bold text-slate-600">母集団の人数</span>
+          <span className="mb-1 block text-sm font-bold text-slate-900">母集団の人数</span>
           <input
             type="number"
             inputMode="numeric"
@@ -121,30 +127,30 @@ export function RankHensachiCalculator() {
               onFirstUse();
               setPopulation(e.target.value);
             }}
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </label>
       </div>
 
       {resultHensachi !== null && resultUpperPercent !== null && resultRank !== null ? (
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <div className="rounded-xl border border-indigo-100 bg-indigo-50/50 p-3 text-center">
-            <div className="text-lg font-black text-indigo-700">{roundHensachi(resultHensachi)}</div>
-            <div className="mt-0.5 text-[11px] font-bold text-indigo-600">偏差値</div>
+        <dl className="mt-4 grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200 text-center">
+          <div className="min-w-0 px-2 py-4">
+            <dt className="text-xs text-slate-600">偏差値</dt>
+            <dd className="mt-1 text-2xl font-bold tabular-nums text-brand-700">{roundHensachi(resultHensachi)}</dd>
           </div>
-          <div className="rounded-xl border border-purple-100 bg-purple-50/50 p-3 text-center">
-            <div className="text-lg font-black text-purple-700">{resultUpperPercent.toFixed(1)}%</div>
-            <div className="mt-0.5 text-[11px] font-bold text-purple-600">上位</div>
+          <div className="min-w-0 px-2 py-4">
+            <dt className="text-xs text-slate-600">上位</dt>
+            <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{resultUpperPercent.toFixed(1)}%</dd>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-center">
-            <div className="text-lg font-black text-slate-700">{resultRank}位</div>
-            <div className="mt-0.5 text-[11px] font-bold text-slate-600">{population}人中</div>
+          <div className="min-w-0 px-2 py-4">
+            <dt className="break-all text-xs text-slate-600">{population}人中</dt>
+            <dd className="mt-1 break-all text-2xl font-bold tabular-nums text-slate-900">{resultRank}位</dd>
           </div>
-        </div>
+        </dl>
       ) : (
-        <p className="mt-4 text-center text-xs text-slate-400">数値を入力してください</p>
+        <p className="mt-4 text-center text-sm text-slate-600">数値を入力してください</p>
       )}
-      <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+      <p className="mt-3 text-xs leading-relaxed text-slate-600">
         ※ 正規分布（平均50・標準偏差10）に基づく数学的な換算です。実際の模試の分布は完全な正規分布からややずれるため、
         特に偏差値の端（75以上・25以下）では目安としてご覧ください。
       </p>

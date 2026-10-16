@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Search, ChevronRight } from 'lucide-react';
+import { ChevronRight } from '@/components/icons';
 
 /**
  * 「結果に合う塾を診断」への軽量な入口（Build 2 ファネルの導線）。
@@ -9,21 +9,17 @@ import { Search, ChevronRight } from 'lucide-react';
  */
 export function ShindanEntryLink({ className = '' }: { className?: string }) {
   return (
-    // 2026-07-15: 主役CTA埋没対策の階層整理で影と余白を一段軽く（夏期講習需要面につき降格はここまで）
+    // 2026-07-15: 主役CTA埋没対策の階層整理で余白を軽くした面（夏期講習需要面につき降格はここまで）。
+    // 白＋罫線のカード・アイコンの箱なし。対の HogoshaEntryLink と見た目を揃えること。
     <Link
       href="/juku-shindan"
-      className={`group flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white/70 px-4 py-3 transition-all hover:border-blue-300 hover:bg-white ${className}`}
+      className={`flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 transition-colors hover:bg-brand-50 ${className}`}
     >
-      <span className="flex items-center gap-3">
-        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600">
-          <Search className="h-5 w-5" />
-        </span>
-        <span className="min-w-0">
-          <span className="block text-sm font-bold text-slate-800">結果に合う塾を診断する（無料）</span>
-          <span className="block text-xs text-slate-500">県・目標との差・希望形態から、条件に合う塾だけを表示</span>
-        </span>
+      <span className="min-w-0">
+        <span className="block text-base font-bold text-slate-900">結果に合う塾を診断する（無料）</span>
+        <span className="block text-pretty text-sm text-slate-600">県・目標との差・希望形態から、条件に合う塾だけを表示</span>
       </span>
-      <ChevronRight className="h-5 w-5 shrink-0 text-blue-400 transition-transform group-hover:translate-x-0.5" />
+      <ChevronRight className="h-5 w-5 shrink-0 text-brand-700" />
     </Link>
   );
 }

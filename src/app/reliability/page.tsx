@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ShieldCheck, RefreshCw, Activity, Archive, ExternalLink, FileCheck2 } from 'lucide-react';
+import { Home, ChevronRight, ExternalLink } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -97,111 +97,104 @@ export default function ReliabilityPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">信頼性・データ鮮度</span>
+            <span className="text-slate-900">信頼性・データ鮮度</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
-              <ShieldCheck className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               データの信頼性・鮮度・稼働状況
             </h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+            <p className="mt-2 text-sm text-slate-600">
+              対象: {DATASET_META.fiscalYear} ／ 出典：各都道府県教育委員会の一次資料（
+              <Link href="/genten-archive" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">一次ソース確認履歴</Link>
+              ） ／ 最終確認 {latestVerifiedDate ?? '未確認'}
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               AIエージェント・開発者の方が「このデータは今も新鮮か・検証されているか・APIは動いているか」を
               1ページで確認できるサマリーです。数値は全て本番データから動的に算出しています。
             </p>
           </header>
 
           {/* データ鮮度 */}
-          <section className="mb-8 rounded-2xl border-2 border-blue-100 bg-white p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <RefreshCw className="h-5 w-5 text-blue-600" />
-              <h2 className="text-lg font-bold text-slate-800">データ鮮度</h2>
-            </div>
-            <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">データ鮮度</h2>
+            <ul className="space-y-2 text-base leading-[1.8] text-slate-900">
               <li>
-                データセットバージョン: <span className="font-mono font-semibold text-slate-800">{DATASET_META.version}</span>
+                データセットバージョン: <span className="font-mono font-bold">{DATASET_META.version}</span>
                 {' '}（対象: {DATASET_META.fiscalYear}）
               </li>
               <li>
-                内申点計算方式: 47都道府県中 <span className="font-semibold text-slate-800">{verifiedPrefectures.length}県</span> で
+                内申点計算方式: 47都道府県中 <span className="font-bold">{verifiedPrefectures.length}県</span> で
                 教育委員会一次ソースURL・最終確認日を記録済み
               </li>
               <li>
-                直近の一次ソース確認日: <span className="font-mono font-semibold text-slate-800">{latestVerifiedDate ?? '未確認'}</span>
+                直近の一次ソース確認日: <span className="font-mono font-bold">{latestVerifiedDate ?? '未確認'}</span>
               </li>
               <li>
                 総合得点方式（学力検査点＋内申点）の統一エンジン対応:{' '}
-                <span className="font-semibold text-slate-800">{VERIFIED_TOTAL_SCORE_CODES.length}県</span>
+                <span className="font-bold">{VERIFIED_TOTAL_SCORE_CODES.length}県</span>
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2 text-xs">
-              <a href="/api/naishin" className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-700 hover:bg-blue-100">
-                /api/naishin(JSON) <ExternalLink className="ml-1 inline h-3 w-3" />
+            <div className="mt-3 flex flex-wrap gap-x-6">
+              <a href="/api/naishin" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                /api/naishin(JSON) <ExternalLink className="h-4 w-4" />
               </a>
-              <a href="/api/naishin/csv" className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-700 hover:bg-blue-100">
-                /api/naishin/csv <ExternalLink className="ml-1 inline h-3 w-3" />
+              <a href="/api/naishin/csv" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                /api/naishin/csv <ExternalLink className="h-4 w-4" />
               </a>
             </div>
           </section>
 
           {/* 検証履歴 */}
-          <section className="mb-8 rounded-2xl border-2 border-emerald-100 bg-white p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <Archive className="h-5 w-5 text-emerald-600" />
-              <h2 className="text-lg font-bold text-slate-800">一次ソース検証履歴</h2>
-            </div>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">一次ソース検証履歴</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               各都道府県教育委員会の一次ソースを「いつ・どのURLで確認したか」の履歴を継続的に蓄積しています。
-              現在 <span className="font-semibold text-slate-800">{histories.length}都道府県ぶん・計{totalHistoryEntries}件</span> の
-              確認記録があり、最終更新は <span className="font-mono font-semibold text-slate-800">{latestHistoryDate ?? '未記録'}</span> です。
+              現在 <span className="font-bold">{histories.length}都道府県ぶん・計{totalHistoryEntries}件</span> の
+              確認記録があり、最終更新は <span className="font-mono font-bold">{latestHistoryDate ?? '未記録'}</span> です。
             </p>
             <Link
               href="/genten-archive"
-              className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline"
+              className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
               全都道府県の確認履歴を見る →
             </Link>
           </section>
 
           {/* T-C9: 応募状況データの再配布・引用許諾状況（教育委員会からの明示的な許諾のみを掲載・個人名は含めない） */}
-          <section className="mb-8 rounded-2xl border-2 border-teal-100 bg-white p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <FileCheck2 className="h-5 w-5 text-teal-600" />
-              <h2 className="text-lg font-bold text-slate-800">募集人員・応募者数・倍率データの再配布・引用許諾状況</h2>
-            </div>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">募集人員・応募者数・倍率データの再配布・引用許諾状況</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               各校の募集人員・応募者数・倍率（「応募状況」）データを掲載するにあたり、都道府県教育委員会へ
               個別に出典明記のうえでの掲載可否を確認しています。現在{' '}
-              <span className="font-semibold text-slate-800">{licensedPrefectures.length}県</span>{' '}
+              <span className="font-bold">{licensedPrefectures.length}県</span>{' '}
               から、出典を明記したうえでの掲載について明示的な許諾を得ています。
             </p>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <ul className="grid gap-x-8 border-b border-slate-200 sm:grid-cols-2">
               {licensedPrefectures.map((p) => (
-                <div key={p.code} className="rounded-xl border border-teal-100 bg-teal-50/40 p-4">
-                  <div className="mb-1 flex items-center justify-between">
-                    <span className="font-bold text-slate-800">{p.name}</span>
-                    <span className="font-mono text-xs text-slate-500">{p.verifiedAt}</span>
+                <li key={p.code} className="border-t border-slate-200 py-3">
+                  <div className="mb-1 flex items-baseline justify-between gap-3">
+                    <span className="font-bold text-slate-900">{p.name}</span>
+                    <span className="font-mono text-xs text-slate-600">{p.verifiedAt}</span>
                   </div>
-                  <p className="text-xs leading-relaxed text-slate-600">{p.text}</p>
+                  <p className="text-sm leading-[1.8] text-slate-600">{p.text}</p>
                   {p.backlink && (
-                    <span className="mt-2 inline-block rounded-full bg-teal-600 px-2 py-0.5 text-[10px] font-bold text-white">
+                    <span className="mt-2 inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                       当委員会サイトへのリンク設定も許諾
                     </span>
                   )}
-                </div>
+                </li>
               ))}
-            </div>
-            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+            </ul>
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               許諾はいずれも当該教育委員会の担当課からの正式な回答に基づきます（回答者個人名は公開しません）。
               未確認の都道府県は掲載を見送っており、独自の推測で応募状況データを補うことはありません。
             </p>
@@ -209,30 +202,27 @@ export default function ReliabilityPage() {
 
           {/* T-C9: 年次更新の実績（実例）。/termsの「公表から60日以内に反映」の裏付けとして、
               経過日数のSLA計測（公表日データが無く不可能）ではなく実際に検知・記録した変更を示す。 */}
-          <section className="mb-8 rounded-2xl border-2 border-indigo-100 bg-white p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <RefreshCw className="h-5 w-5 text-indigo-600" />
-              <h2 className="text-lg font-bold text-slate-800">年次更新の実績（実例）</h2>
-            </div>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">年次更新の実績（実例）</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               入試制度は都道府県ごとに毎年見直しが入ります。当サイトは各都道府県教育委員会の公表資料を
               継続的に再確認し、内申点の計算方式に影響する変更を検知した場合はデータへ反映しています。
               実際に検知・記録した変更の例：
             </p>
-            <ul className="space-y-3">
+            <ul className="border-b border-slate-200">
               {annualUpdateExamples.map((ex) => (
-                <li key={`${ex.prefecture}-${ex.date}`} className="rounded-xl border border-indigo-100 bg-indigo-50/40 p-4">
-                  <div className="mb-1 flex items-center justify-between">
-                    <span className="font-bold text-slate-800">{ex.prefectureName}</span>
-                    <span className="font-mono text-xs text-slate-500">検知日: {ex.date}</span>
+                <li key={`${ex.prefecture}-${ex.date}`} className="border-t border-slate-200 py-3">
+                  <div className="mb-1 flex items-baseline justify-between gap-3">
+                    <span className="font-bold text-slate-900">{ex.prefectureName}</span>
+                    <span className="font-mono text-xs text-slate-600">検知日: {ex.date}</span>
                   </div>
-                  <p className="text-xs leading-relaxed text-slate-600">{ex.summary}</p>
+                  <p className="text-sm leading-[1.8] text-slate-600">{ex.summary}</p>
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               上記{annualUpdateExamples.length}件はいずれも
-              <Link href="/genten-archive" className="mx-1 font-semibold text-indigo-600 underline">
+              <Link href="/genten-archive" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 一次ソース確認履歴アーカイブ
               </Link>
               に記録済みの実例です。教育委員会が制度改定を公表した正確な日付を記録するデータは
@@ -241,24 +231,21 @@ export default function ReliabilityPage() {
           </section>
 
           {/* S6-3(2026-08-24): データの検証方法（自社の方針の自己記述のみ・他社への言及は行わない） */}
-          <section className="mb-8 rounded-2xl border-2 border-amber-100 bg-white p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <FileCheck2 className="h-5 w-5 text-amber-600" />
-              <h2 className="text-lg font-bold text-slate-800">データの検証方法</h2>
-            </div>
-            <ul className="space-y-3 text-sm leading-relaxed text-slate-600">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">データの検証方法</h2>
+            <ul className="space-y-3 text-base leading-[1.8] text-slate-900">
               <li>
-                <strong className="text-slate-800">一次資料のみを出典とする：</strong>
+                <strong>一次資料のみを出典とする：</strong>
                 募集人員・応募者数・倍率・内申点の計算方式は、教育委員会が公表する入学者選抜要綱・
                 入学者選抜結果等の一次資料のみを出典とし、独自に推測した数値は掲載しません。
               </li>
               <li>
-                <strong className="text-slate-800">公式公表値との突合テスト：</strong>
+                <strong>公式公表値との突合テスト：</strong>
                 募集人員・応募者数の合計を学校単位で積み上げた値と、一次資料が公式に公表している
                 小計・合計値とを突合するテストを実施しています。一致しない場合はデータを取り込みません。
               </li>
               <li>
-                <strong className="text-slate-800">独自推定はしない：</strong>
+                <strong>独自推定はしない：</strong>
                 学校別の偏差値・合格ボーダーラインなど、公表資料に無い数値を独自に推定して掲載する
                 ことはありません。一次資料が機械可読な形で取得できない場合は、正直に「未収録」として
                 扱い、推測で埋めることはしません。
@@ -267,12 +254,9 @@ export default function ReliabilityPage() {
           </section>
 
           {/* T-C8: 個人情報を受け取らない設計（データの信頼性の一部として要約表示） */}
-          <section className="mb-8 rounded-2xl border-2 border-emerald-100 bg-white p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-emerald-600" />
-              <h2 className="text-lg font-bold text-slate-800">個人情報を受け取らない設計</h2>
-            </div>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">個人情報を受け取らない設計</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               公開データ/計算API・MCPは、氏名・学籍番号・学校名・生年月日を受け取るフィールドが存在しません。
               「送らない運用」ではなく「送れない設計」です。受け取った内容は計算してレスポンスを返すのみで保存せず、
               アクセスログにも生徒個人のスコアや入力値は残しません。この設計はリクエストスキーマとログ出力の両方を
@@ -280,58 +264,53 @@ export default function ReliabilityPage() {
             </p>
             <Link
               href="/developers"
-              className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline"
+              className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
               リクエスト・レスポンスの実例を見る →
             </Link>
           </section>
 
           {/* 稼働状況 */}
-          <section className="mb-8 rounded-2xl border-2 border-slate-200 bg-white p-6">
-            <div className="mb-3 flex items-center gap-2">
-              <Activity className="h-5 w-5 text-slate-700" />
-              <h2 className="text-lg font-bold text-slate-800">稼働状況</h2>
-            </div>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">稼働状況</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               公開API・MCPサーバーはCloudflareのグローバルエッジ上で稼働しています。稼働状況とデータセットの
               バージョンは認証不要・レート制限なしの軽量エンドポイントでリアルタイムに確認できます。
               全エンドポイントの仕様はOpenAPI 3.1形式でも機械可読に公開しており、コード変更のたびに
               自動テストで契約(レスポンス構造・応答時間)を検証しています。
             </p>
-            <div className="mt-4 flex flex-wrap gap-2 text-xs">
-              <a href="/api/status" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-100">
-                /api/status(稼働確認) <ExternalLink className="ml-1 inline h-3 w-3" />
+            <div className="mt-3 flex flex-wrap gap-x-6">
+              <a href="/api/status" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                /api/status(稼働確認) <ExternalLink className="h-4 w-4" />
               </a>
-              <a href="/api/openapi" className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-100">
-                /api/openapi(仕様書) <ExternalLink className="ml-1 inline h-3 w-3" />
+              <a href="/api/openapi" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                /api/openapi(仕様書) <ExternalLink className="h-4 w-4" />
               </a>
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold leading-snug text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
-            <div className="flex flex-wrap justify-center gap-2">
-              <Link href="/quality" className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50">
-                品質保証と検証プロセス
-              </Link>
-              <Link href="/genten-archive" className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50">
-                一次ソース確認履歴
-              </Link>
-              <Link href="/developers" className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50">
-                API / MCPドキュメント
-              </Link>
-            </div>
+          <section className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link href="/quality" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
+              品質保証と検証プロセス
+            </Link>
+            <Link href="/genten-archive" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
+              一次ソース確認履歴
+            </Link>
+            <Link href="/developers" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
+              API / MCPドキュメント
+            </Link>
           </section>
         </div>
       </div>

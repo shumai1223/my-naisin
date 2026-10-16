@@ -25,17 +25,17 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           onCheckedChange?.(!checked);
         }}
         className={cn(
-          'relative inline-flex h-6 w-11 select-none items-center rounded-full border border-slate-200 bg-slate-100 p-0.5 outline-none ring-offset-2 ring-offset-white transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-blue-500/50 disabled:cursor-not-allowed disabled:opacity-60',
-          checked ? 'border-blue-500 bg-blue-500' : 'border-slate-200 bg-slate-100',
+          'relative inline-flex h-6 w-11 select-none items-center rounded-full border p-0.5 outline-none transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:cursor-not-allowed disabled:opacity-60',
+          checked ? 'border-brand-700 bg-brand-700' : 'border-slate-300 bg-slate-200',
           className
         )}
         {...props}
       >
-        {/* framer-motion を外し、つまみの移動は CSS transform（translate-x）で再現 */}
+        {/* つまみの移動は CSS transform（translate-x） */}
         <span
           aria-hidden="true"
           className={cn(
-            'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-150 ease-out',
+            'pointer-events-none inline-block h-5 w-5 rounded-full bg-white transition-transform duration-150 ease-out',
             checked ? 'translate-x-5' : 'translate-x-0'
           )}
         />

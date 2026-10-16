@@ -1,481 +1,544 @@
 /* ===============================
-   Note-style Editorial Blog Styles
-   Clean, minimal, reading-first design
+   ブログ本文のスタイル（デザインシステム「やさしい学習帳」）
+   読むことを最優先。罫線と余白だけで区切り、色はブランドの深緑1色。
    =============================== */
 
-   :root {
-    --blog-text-main: #1a1a1a;
-    --blog-text-muted: #888888;
-    --blog-text-sub: #555555;
-    --blog-accent: #3b82f6;
-    --blog-accent-light: rgba(59, 130, 246, 0.08);
-    --blog-bg-soft: #f7f7f7;
-    --blog-border: #e8e8e8;
-    --blog-border-strong: #d0d0d0;
-    --font-serif: "Shippori Mincho", "Hiragino Mincho ProN", serif;
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
-  }
-  
-  /* ===========================
-     Base Typography
-     =========================== */
-  
-  .blog-content {
-    font-family: var(--font-sans);
-    font-size: 1.0625rem;
-    line-height: 1.9;
-    color: var(--blog-text-main);
-    letter-spacing: 0.01em;
-    font-feature-settings: "palt";
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  /* ===========================
-     Headings
-     =========================== */
-  
-  .blog-content h2 {
-    font-family: var(--font-sans);
-    font-size: 1.55rem;
-    font-weight: 700;
-    margin: 4.5rem 0 1.5rem;
-    line-height: 1.4;
-    letter-spacing: -0.01em;
-    color: var(--blog-text-main);
-    padding-bottom: 0.9rem;
-    border-bottom: 2px solid var(--blog-text-main);
-    display: block;
-    position: static;
-  }
-  
-  .blog-content h2::before {
-    display: none;
-  }
-  
-  .blog-content h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 3rem 0 1.25rem;
-    padding-bottom: 0;
-    border-bottom: none;
-    color: var(--blog-text-main);
-    position: relative;
-    padding-left: 0.9rem;
-  }
-  
-  .blog-content h3::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.2em;
-    width: 3px;
-    height: 0.9em;
-    background: var(--blog-border-strong);
-    border-radius: 2px;
-  }
-  
-  .blog-content h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin: 2rem 0 0.75rem;
-    color: var(--blog-text-sub);
-    letter-spacing: 0.02em;
-  }
-  
-  /* ===========================
-     Text Content
-     =========================== */
-  
-  .blog-content p {
-    margin-bottom: 1.9rem;
-  }
-  
-  .blog-content strong {
-    font-weight: 700;
-    background: linear-gradient(transparent 65%, rgba(59, 130, 246, 0.12) 65%);
-    padding: 0 0.1em;
-  }
-  
-  .blog-content em {
-    font-style: normal;
-    font-weight: 600;
-    color: var(--blog-text-sub);
-  }
-  
-  /* ===========================
-     Lists
-     =========================== */
-  
-  .blog-content ul,
-  .blog-content ol {
-    margin: 2rem 0;
-    padding-left: 1.5rem;
-  }
-  
-  .blog-content li {
-    margin-bottom: 0.9rem;
-    padding-left: 0.25rem;
-    line-height: 1.75;
-  }
-  
-  .blog-content ul li::marker {
-    color: var(--blog-border-strong);
-  }
-  
-  /* ===========================
-     Blockquote
-     =========================== */
-  
-  .blog-content blockquote {
-    margin: 3rem 0;
-    padding: 1.25rem 1.5rem;
-    background: var(--blog-bg-soft);
-    border-radius: 0;
-    border-left: 3px solid var(--blog-border-strong);
-    font-size: 1rem;
-    line-height: 1.85;
-    color: var(--blog-text-sub);
-    text-align: left;
-    position: static;
-  }
-  
-  .blog-content blockquote::before {
-    display: none;
-  }
-  
-  /* ===========================
-     Divider
-     =========================== */
-  
-  .blog-content hr {
-    border: none;
-    margin: 4rem 0;
-    height: 1px;
-    background: var(--blog-border);
-    overflow: visible;
-    text-align: center;
-  }
-  
-  .blog-content hr::after {
-    display: none;
-  }
-  
-  /* ===========================
-     Lead
-     =========================== */
-  
-  .blog-content .lead {
-    font-size: 1.125rem;
-    line-height: 1.9;
-    color: var(--blog-text-sub);
-    margin-bottom: 4rem;
-    padding: 1.5rem 0;
-    background: none;
-    border: none;
-    border-top: 1px solid var(--blog-border);
-    border-bottom: 1px solid var(--blog-border);
-    box-shadow: none;
-    font-weight: 400;
-    letter-spacing: 0.015em;
-  }
-  
-  /* ===========================
-     TOC
-     =========================== */
-  
-  .blog-content .toc {
-    background: var(--blog-bg-soft);
-    border: none;
-    border-left: 3px solid var(--blog-accent);
-    padding: 2rem 2.5rem;
-    border-radius: 0;
-    margin: 3.5rem 0;
-  }
-  
-  .blog-content .toc h3 {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--blog-text-muted);
-    border: none;
-    padding: 0;
-    text-align: left;
-    margin-bottom: 1.25rem;
-  }
-  
-  .blog-content .toc h3::before {
-    display: none;
-  }
-  
-  .blog-content .toc ul {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.3rem 2rem;
-    margin: 0;
-  }
-  
-  .blog-content .toc li {
-    font-size: 0.9rem;
-    border: none;
-    padding: 0.35rem 0;
-    margin: 0;
-    line-height: 1.5;
-  }
-  
-  .blog-content .toc a {
-    text-decoration: none;
-    color: var(--blog-text-sub);
-    transition: color 0.15s;
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-  }
-  
-  .blog-content .toc a:hover {
-    color: var(--blog-accent);
-  }
-  
-  .blog-content .toc a::before {
-    content: '·';
-    font-size: 1.1rem;
-    opacity: 0.4;
-    line-height: 1;
-  }
-  
-  /* ===========================
-     Inline Links（本文中のリンク）
+:root {
+  --blog-text-main: #17231d;
+  --blog-text-muted: #66786e;
+  --blog-text-sub: #4f6158;
+  --blog-accent: #17543e;
+  --blog-accent-light: #f0f6f3;
+  --blog-bg-soft: #f4f7f5;
+  --blog-border: #cddad3;
+  --blog-border-strong: #aebfb6;
+}
 
-     ⚠️2026-08-07修正: これまで `.blog-content a` の指定が存在せず、Tailwindのリセット
-     （a { color: inherit; text-decoration: inherit }）がそのまま効いていたため、
-     **本文中のリンクが黒い地の文と見分けがつかない状態**だった。
-     全49記事のうち46記事が本文中にリンクを持っており、内部リンク（/hensachi 等への誘導）も
-     外部リンクも読者から見えていなかった＝クリックされようがなかった。
-     .toc a / .cta-box a のように個別指定のある箇所だけが例外的に見えていた。
-     =========================== */
+/* ===========================
+   Base Typography
+   =========================== */
 
-  .blog-content a {
-    color: var(--blog-accent);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
-    text-decoration-color: rgba(59, 130, 246, 0.4);
-    transition: text-decoration-color 0.15s, color 0.15s;
-  }
+.blog-content {
+  font-family: var(--font-biz-ud), var(--font-noto-sans-jp), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  color: var(--blog-text-main);
+  -webkit-font-smoothing: antialiased;
+  /* 日本語の改行は文節の途中で切らない（Chrome 119+ の auto-phrase。非対応のブラウザは従来どおり）。 */
+  word-break: auto-phrase;
+}
 
-  .blog-content a:hover {
-    text-decoration-color: var(--blog-accent);
-  }
+/* 見出し・表の見出し・目次は行の長さをそろえ、最後の行に1字だけ残らないようにする。
+   本文・箇条書き・表のセルは、最後の行が1字だけにならないよう調整する（pretty）。
+   どちらも非対応のブラウザでは何も起きない。 */
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content th,
+.blog-content .toc a,
+.blog-content .cta-box h3 {
+  text-wrap: balance;
+}
 
-  /* 外部リンクはタップ領域を確保しつつ、地の文の行間を崩さない。 */
-  .blog-content a[target='_blank'] {
-    word-break: break-word;
-  }
+.blog-content p,
+.blog-content li,
+.blog-content td {
+  text-wrap: pretty;
+}
 
-  /* ボックス内で個別にスタイルが当たっている箇所は従来どおり（上の指定を打ち消す）。 */
-  .blog-content .toc a,
-  .blog-content .cta-box a {
-    text-decoration: none;
-  }
+/* ===========================
+   Headings
+   =========================== */
 
-  /* ===========================
-     Point Box
-     =========================== */
+.blog-content h2 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin: 4rem 0 1.5rem;
+  line-height: 1.4;
+  color: var(--blog-text-main);
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--blog-text-main);
+  display: block;
+  position: static;
+}
 
-  .blog-content .point-box {
-    background: var(--blog-bg-soft);
-    border: 1px solid var(--blog-border);
-    padding: 2rem 2.25rem;
-    border-radius: 6px;
-    margin: 3.5rem 0;
-    box-shadow: none;
-  }
-  
-  .blog-content .point-box h4 {
-    margin-top: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 1.25rem;
-    color: var(--blog-text-main);
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--blog-border);
-  }
-  
-  /* ===========================
-     Tips List
-     =========================== */
-  
-  .blog-content .tips-list {
-    display: grid;
-    gap: 1.75rem;
-    margin: 3.5rem 0;
-  }
-  
-  .blog-content .tip {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 1.25rem;
-    align-items: start;
-  }
-  
-  .blog-content .tip-num {
-    font-size: 2.25rem;
-    font-weight: 300;
-    color: var(--blog-border-strong);
-    line-height: 1;
-    font-family: var(--font-serif);
-    padding-top: 0.1em;
-  }
-  
-  /* ===========================
-     Card Grid
-     =========================== */
-  
-  .blog-content .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    margin: 3.5rem 0;
-  }
-  
-  .blog-content .card {
-    background: white;
-    padding: 1.75rem;
-    border: 1px solid var(--blog-border);
-    border-radius: 6px;
-    height: 100%;
-    transition: border-color 0.2s;
-  }
-  
-  .blog-content .card:hover {
-    border-color: var(--blog-border-strong);
-  }
-  
-  /* ===========================
-     Tables
-     =========================== */
-  
-  .blog-content .table-container {
-    margin: 3.5rem 0;
-    overflow-x: auto;
-  }
-  
-  .blog-content table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9375rem;
-  }
-  
-  .blog-content th {
-    background: var(--blog-bg-soft);
-    color: var(--blog-text-muted);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.875rem 1rem;
-    border-bottom: 1px solid var(--blog-border-strong);
-    font-weight: 600;
-    text-align: left;
-  }
-  
-  .blog-content td {
-    padding: 1rem 1rem;
-    border-bottom: 1px solid var(--blog-border);
-    vertical-align: top;
-    line-height: 1.7;
-  }
-  
-  .blog-content tr:last-child td {
-    border-bottom: none;
-  }
-  
-  /* ===========================
-     CTA Box
-     =========================== */
-  
-  .blog-content .cta-box {
-    background: #111111;
-    color: white;
-    padding: 4rem 2.5rem;
-    border-radius: 8px;
-    text-align: center;
-    margin: 5rem 0;
-  }
-  
-  .blog-content .cta-box h3 {
-    color: white;
-    font-size: 1.65rem;
-    margin-top: 0;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    border: none;
-    padding: 0;
-  }
-  
-  .blog-content .cta-box h3::before {
-    display: none;
-  }
-  
-  .blog-content .cta-box p {
-    color: #999999;
-    margin: 1.25rem 0 2rem;
-    font-size: 0.95rem;
-    line-height: 1.75;
-  }
-  
-  .blog-content .cta-box a {
-    background: white;
-    color: #111111;
-    padding: 0.9rem 2.75rem;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 0.9375rem;
-    text-decoration: none;
-    transition: opacity 0.2s;
-    display: inline-block;
-    letter-spacing: 0.02em;
-  }
-  
-  .blog-content .cta-box a:hover {
-    opacity: 0.85;
-    transform: none;
-  }
-  
-  /* ===========================
-     Summary Box
-     =========================== */
-  
+.blog-content h2::before {
+  display: none;
+}
+
+.blog-content h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 3rem 0 1.25rem;
+  color: var(--blog-text-main);
+}
+
+.blog-content h3::before {
+  display: none;
+}
+
+.blog-content h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.6;
+  margin: 2rem 0 0.75rem;
+  color: var(--blog-text-sub);
+}
+
+/* ===========================
+   Text Content
+   =========================== */
+
+.blog-content p {
+  margin-bottom: 1.9rem;
+}
+
+.blog-content strong {
+  font-weight: 700;
+}
+
+.blog-content em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--blog-text-sub);
+}
+
+/* ===========================
+   Lists
+   =========================== */
+
+.blog-content ul,
+.blog-content ol {
+  margin: 2rem 0;
+  padding-left: 1.5rem;
+}
+
+/* Tailwind の初期化で list-style が消えているため、本文の箇条書きは点・番号を戻す（目次の ul は下で none にしている） */
+.blog-content ul {
+  list-style: disc outside;
+}
+
+.blog-content ol {
+  list-style: decimal outside;
+}
+
+.blog-content li {
+  margin-bottom: 0.9rem;
+  padding-left: 0.25rem;
+  line-height: 1.75;
+}
+
+.blog-content ul li::marker {
+  color: var(--blog-text-muted);
+}
+
+/* ===========================
+   Blockquote（引用）: 左の色線は付けず、薄い面と罫線で示す
+   =========================== */
+
+.blog-content blockquote {
+  margin: 3rem 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--blog-bg-soft);
+  border: 1px solid var(--blog-border);
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--blog-text-sub);
+  text-align: left;
+  position: static;
+}
+
+.blog-content blockquote::before {
+  display: none;
+}
+
+/* ===========================
+   Divider
+   =========================== */
+
+.blog-content hr {
+  border: none;
+  margin: 4rem 0;
+  height: 1px;
+  background: var(--blog-border);
+  overflow: visible;
+  text-align: center;
+}
+
+.blog-content hr::after {
+  display: none;
+}
+
+/* ===========================
+   Lead
+   =========================== */
+
+.blog-content .lead {
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: var(--blog-text-sub);
+  margin-bottom: 3.5rem;
+  padding: 1.5rem 0;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--blog-border);
+  border-bottom: 1px solid var(--blog-border);
+  box-shadow: none;
+  font-weight: 400;
+}
+
+/* ===========================
+   TOC
+   =========================== */
+
+.blog-content .toc {
+  background: var(--blog-bg-soft);
+  border: 1px solid var(--blog-border);
+  padding: 1.75rem 2rem;
+  border-radius: 8px;
+  margin: 3.5rem 0;
+}
+
+.blog-content .toc h3 {
+  font-size: 0.9375rem;
+  color: var(--blog-text-main);
+  border: none;
+  padding: 0;
+  text-align: left;
+  margin: 0 0 1rem;
+}
+
+.blog-content .toc h3::before {
+  display: none;
+}
+
+.blog-content .toc ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.3rem 2rem;
+  margin: 0;
+}
+
+.blog-content .toc li {
+  font-size: 0.9375rem;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 押す面は縦44px以上（スマホで指が当たりやすい） */
+.blog-content .toc a {
+  text-decoration: none;
+  color: var(--blog-text-sub);
+  transition: color 0.15s;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 0.5rem;
+}
+
+.blog-content .toc a:hover {
+  color: var(--blog-accent);
+  text-decoration: underline;
+}
+
+.blog-content .toc a::before {
+  content: '·';
+  font-size: 1.1rem;
+  opacity: 0.5;
+  line-height: 1;
+}
+
+/* ===========================
+   Inline Links（本文中のリンク）
+
+   ⚠️2026-08-07: `.blog-content a` の指定が無いと Tailwind のリセットで本文中のリンクが
+   地の文と見分けがつかなくなる（全49記事のうち46記事が本文中にリンクを持つ）。
+   下線つきのブランド色で、必ず見分けられるようにする。
+   =========================== */
+
+.blog-content a {
+  color: var(--blog-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.15s;
+}
+
+.blog-content a:hover {
+  color: #123f2f;
+  text-decoration-thickness: 2px;
+}
+
+/* 外部リンクはタップ領域を確保しつつ、地の文の行間を崩さない。 */
+.blog-content a[target='_blank'] {
+  word-break: break-word;
+}
+
+/* ボックス内で個別にスタイルが当たっている箇所は従来どおり（上の指定を打ち消す）。 */
+.blog-content .toc a,
+.blog-content .cta-box a {
+  text-decoration: none;
+}
+
+/* ===========================
+   Point Box
+   =========================== */
+
+.blog-content .point-box {
+  background: var(--blog-accent-light);
+  border: 1px solid var(--blog-border);
+  padding: 1.75rem 2rem;
+  border-radius: 8px;
+  margin: 3.5rem 0;
+  box-shadow: none;
+}
+
+.blog-content .point-box h4 {
+  margin-top: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--blog-text-main);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--blog-border);
+}
+
+/* ===========================
+   Tips List
+   =========================== */
+
+.blog-content .tips-list {
+  display: grid;
+  gap: 1.75rem;
+  margin: 3.5rem 0;
+}
+
+.blog-content .tip {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.blog-content .tip-num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--blog-accent);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.1em;
+}
+
+/* ===========================
+   Card Grid
+   =========================== */
+
+.blog-content .card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 3.5rem 0;
+}
+
+.blog-content .card {
+  background: white;
+  padding: 1.5rem;
+  border: 1px solid var(--blog-border);
+  border-radius: 8px;
+  height: 100%;
+}
+
+/* ===========================
+   Tables
+   =========================== */
+
+.blog-content .table-container {
+  margin: 3.5rem 0;
+  overflow-x: auto;
+}
+
+.blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.blog-content th {
+  background: none;
+  color: var(--blog-text-sub);
+  font-size: 0.8125rem;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--blog-text-main);
+  font-weight: 700;
+  text-align: left;
+  /* 幅の狭い箱の中でも「満点」「45点」が1字ずつ折り返されないように（body の overflow-wrap:anywhere が表の列幅を1字まで縮めるため）。
+     box-sizing が border-box なので、余白の分を含めて 4.5em を下限にする */
+  min-width: 4.5em;
+}
+
+.blog-content td {
+  padding: 1rem 1rem;
+  border-bottom: 1px solid var(--blog-border);
+  vertical-align: top;
+  line-height: 1.7;
+  min-width: 4.5em;
+}
+
+/* 箱（point-box など）の中に置いた表は、上下の余白を詰める */
+.blog-content .point-box .table-container,
+.blog-content .summary-box .table-container,
+.blog-content .card .table-container {
+  margin: 1.25rem 0;
+}
+
+.blog-content tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===========================
+   CTA Box: 黒ベタの大きな面は使わない。白い面＋罫線＋主ボタン
+   =========================== */
+
+.blog-content .cta-box {
+  background: white;
+  color: var(--blog-text-main);
+  border: 1px solid var(--blog-border);
+  padding: 2.5rem 2rem;
+  border-radius: 8px;
+  text-align: center;
+  margin: 4rem 0;
+}
+
+.blog-content .cta-box h3 {
+  color: var(--blog-text-main);
+  font-size: 1.35rem;
+  line-height: 1.5;
+  margin-top: 0;
+  font-weight: 700;
+  border: none;
+  padding: 0;
+}
+
+.blog-content .cta-box h3::before {
+  display: none;
+}
+
+.blog-content .cta-box p {
+  color: var(--blog-text-sub);
+  margin: 1rem 0 1.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+.blog-content .cta-box a {
+  background: var(--blog-accent);
+  color: white;
+  padding: 0.85rem 2.25rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.15s;
+  display: inline-block;
+  min-height: 44px;
+}
+
+.blog-content .cta-box a:hover {
+  background: #123f2f;
+}
+
+/* ===========================
+   Summary Box
+   =========================== */
+
+.blog-content .summary-box {
+  background: white;
+  padding: 1.75rem 2rem;
+  border-radius: 8px;
+  margin: 4rem 0;
+  border: 1px solid var(--blog-border);
+}
+
+.blog-content .summary-box h3 {
+  margin-top: 0;
+  border: none;
+  padding: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--blog-text-main);
+  margin-bottom: 1.25rem;
+}
+
+.blog-content .summary-box h3::before {
+  display: none;
+}
+
+.blog-content .summary-box ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.blog-content .summary-box li {
+  margin-bottom: 0.7rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* ===========================
+   箱の中の先頭・末尾の要素は、外側の余白（h4 の上 2rem・p の下 1.9rem）を持たない。
+   持たせると箱の上下だけが空きすぎる。
+   =========================== */
+
+.blog-content .point-box > :first-child,
+.blog-content .summary-box > :first-child,
+.blog-content .card > :first-child,
+.blog-content .cta-box > :first-child {
+  margin-top: 0;
+}
+
+.blog-content .point-box > :last-child,
+.blog-content .summary-box > :last-child,
+.blog-content .card > :last-child {
+  margin-bottom: 0;
+}
+
+/* ===========================
+   スマホ幅（640px 以下）: 箱の内側の余白を減らし、表が1字ずつ折り返されないようにする
+   =========================== */
+
+@media (max-width: 640px) {
+  .blog-content .toc,
+  .blog-content .point-box,
   .blog-content .summary-box {
-    background: white;
-    padding: 2.25rem 2.5rem;
-    border-radius: 6px;
-    margin: 4rem 0;
-    border: 1px solid var(--blog-border);
-    border-top: 3px solid var(--blog-text-main);
+    padding: 1.25rem 1.125rem;
   }
-  
-  .blog-content .summary-box h3 {
-    margin-top: 0;
-    border: none;
-    padding: 0;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--blog-text-main);
-    margin-bottom: 1.5rem;
+
+  .blog-content .card {
+    padding: 1.25rem;
   }
-  
-  .blog-content .summary-box h3::before {
-    display: none;
+
+  .blog-content .cta-box {
+    padding: 2rem 1.25rem;
   }
-  
-  .blog-content .summary-box ul {
-    margin: 0;
-    padding-left: 1.25rem;
+
+  .blog-content th,
+  .blog-content td {
+    padding: 0.75rem 0.5rem;
   }
-  
-  .blog-content .summary-box li {
-    margin-bottom: 0.7rem;
-    font-size: 0.9375rem;
-    line-height: 1.7;
+
+  .blog-content .tip {
+    grid-template-columns: 2rem 1fr;
+    gap: 0.875rem;
   }
+
+  .blog-content .tip-num {
+    font-size: 1.5rem;
+  }
+}

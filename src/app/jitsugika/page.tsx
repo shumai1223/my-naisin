@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Palette, Music, Dumbbell, Hammer, HelpCircle, Calculator } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -47,10 +47,10 @@ export const metadata: Metadata = {
 };
 
 const SUBJECTS = [
-  { icon: Music, name: '音楽', tips: 'リコーダー/歌のテストは練習量が出る。鑑賞レポート・ワークの提出を完璧に。' },
-  { icon: Palette, name: '美術', tips: '完成度より「工夫した点」を言語化。下書き・制作メモ・期限内提出で姿勢を見せる。' },
-  { icon: Dumbbell, name: '保健体育', tips: '実技が苦手でも保健の筆記で得点。準備・片付け・声出しなど取り組む姿勢が効く。' },
-  { icon: Hammer, name: '技術・家庭', tips: '作品の丁寧さ・レポート・安全への配慮。提出物の質で評定が動きやすい。' },
+  { name: '音楽', tips: 'リコーダー/歌のテストは練習量が出る。鑑賞レポート・ワークは期限内に提出する。' },
+  { name: '美術', tips: '完成度より「工夫した点」を言語化。下書き・制作メモ・期限内提出で姿勢を見せる。' },
+  { name: '保健体育', tips: '実技が苦手でも保健の筆記で得点。準備・片付け・声出しなど取り組む姿勢が効く。' },
+  { name: '技術・家庭', tips: '作品の丁寧さ・レポート・安全への配慮。提出物の質で評定が動きやすい。' },
 ];
 
 export default function JitsugikaPage() {
@@ -64,20 +64,17 @@ export default function JitsugikaPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">実技4教科の内申点対策</span>
+            <span className="text-slate-900">実技4教科の内申点対策</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-xl">
-              <Palette className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">実技4教科の内申点対策</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">実技4教科の内申点対策</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               音楽・美術・保健体育・技術家庭は、多くの地域で内申点が<strong>2倍などに加重</strong>される
               「合否への影響が大きい」教科です。技能が苦手でも評定を上げる方法を整理しました。
             </p>
@@ -93,39 +90,33 @@ export default function JitsugikaPage() {
           </AnswerBox>
 
           {/* 教科別 */}
-          <section className="mt-8 grid gap-4 sm:grid-cols-2">
-            {SUBJECTS.map((s) => {
-              const Icon = s.icon;
-              return (
-                <div key={s.name} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <div className="mb-2 flex items-center gap-2 font-bold text-slate-800">
-                    <span className="grid h-9 w-9 place-items-center rounded-xl bg-rose-50 text-rose-600"><Icon className="h-5 w-5" /></span>
-                    {s.name}
-                  </div>
-                  <p className="text-sm leading-relaxed text-slate-600">{s.tips}</p>
-                </div>
-              );
-            })}
+          <section className="mt-10 grid gap-4 sm:grid-cols-2">
+            {SUBJECTS.map((s) => (
+              <div key={s.name} className="rounded-lg border border-slate-200 bg-white p-5">
+                <div className="mb-2 text-[17px] font-bold text-slate-900">{s.name}</div>
+                <p className="text-base leading-[1.8] text-slate-900">{s.tips}</p>
+              </div>
+            ))}
           </section>
 
           {/* 地域別倍率の確認（検証済みデータへ誘導・捏造しない） */}
-          <section className="mt-8 rounded-2xl border-2 border-rose-200 bg-rose-50/40 p-6 text-center shadow-sm">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">自分の地域は実技が何倍？を確認する</h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">自分の地域は実技が何倍？を確認する</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               実技の倍率は都道府県で異なります。お住まいの地域の換算方式を確認し、実技の評定を変えると内申点がどう動くかを計算してみましょう。
             </p>
-            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-rose-700">
-                <Calculator className="h-4 w-4" />内申点を計算する（実技の倍率対応）
+            <div className="flex flex-col items-stretch gap-3 sm:flex-row">
+              <Link href="/" className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800">
+                内申点を計算する（実技の倍率対応）
               </Link>
-              <Link href="/prefectures" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-rose-700 ring-1 ring-rose-200 transition-colors hover:bg-rose-50">
+              <Link href="/prefectures" className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50">
                 都道府県別の換算方式を見る
               </Link>
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA
               placement="jitsugika"
               heading="実技を含めた内申アップを、効率よく進めるなら"
@@ -134,38 +125,40 @@ export default function JitsugikaPage() {
           </div>
 
           {/* 深掘り */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">さらに詳しく</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">さらに詳しく</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
               {[
                 { href: '/blog/practical-subjects-all-5-strategy-2026-update', title: '実技4教科でオール5を狙う戦略【2026年】' },
                 { href: '/blog/fukukyoka-bairitsu-by-prefecture', title: '都道府県別の副教科倍率まとめ' },
                 { href: '/naishin-age-kata', title: '内申点の上げ方（4軸）' },
                 { href: '/hyotei-heikin', title: '評定平均を計算する' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
-                  {c.title}
-                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
-                </Link>
+                <li key={c.href}>
+                  <Link href={c.href} className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                    <span className="underline underline-offset-2">{c.title}</span>
+                    <ChevronRight className="h-4 w-4 shrink-0" />
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-rose-600" />よくある質問</h2>
-            <div className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question}>
+                  <summary className="cursor-pointer py-3 text-base font-bold text-slate-900">
+                    {f.question}
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="pb-4 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
-          <ToolClusterNav current="naishin" className="mt-8" />
+          <ToolClusterNav current="naishin" className="mt-10" />
         </div>
       </div>
     </>

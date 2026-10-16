@@ -2,18 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import {
-  MapPin,
-  GraduationCap,
-  Target,
-  Monitor,
-  Building2,
-  Sparkles,
-  Send,
-  Check,
-  ChevronRight,
-  Search,
-} from 'lucide-react';
+import { Monitor, Building2, Send, Check, ChevronRight, Search } from '@/components/icons';
 
 import { PREFECTURES } from '@/lib/prefectures';
 import { recommendJuku, type JukuFormat, type JukuSituation, type JukuRecommendation } from '@/lib/juku-match';
@@ -63,10 +52,11 @@ function Pill({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-xl border px-3 py-2.5 text-sm font-bold transition-all ${
+      aria-pressed={active}
+      className={`min-h-[44px] rounded border px-3 py-2 text-sm font-bold transition-colors ${
         active
-          ? 'border-blue-500 bg-blue-50 text-blue-700 ring-2 ring-blue-500/20'
-          : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+          ? 'border-brand-700 bg-brand-50 text-brand-800 ring-1 ring-brand-700'
+          : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
       }`}
     >
       {children}
@@ -162,10 +152,9 @@ export function JukuShindanClient() {
   return (
     <div>
       {/* 入力フォーム */}
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-7">
+      <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
         {/* 県 */}
-        <label htmlFor="juku-shindan-prefecture" className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <MapPin className="h-4 w-4 text-blue-600" />
+        <label htmlFor="juku-shindan-prefecture" className="mb-2 block text-sm font-bold text-slate-900">
           お住まいの都道府県
         </label>
         <select
@@ -175,7 +164,7 @@ export function JukuShindanClient() {
             onFirstTouch();
             setPrefectureCode(e.target.value);
           }}
-          className="mb-5 h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          className="mb-6 h-11 w-full rounded border border-slate-300 bg-white px-3 text-base text-slate-900"
         >
           <option value="">選択してください（任意）</option>
           {PREFECTURES.map((p) => (
@@ -186,11 +175,8 @@ export function JukuShindanClient() {
         </select>
 
         {/* 学年 */}
-        <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <GraduationCap className="h-4 w-4 text-blue-600" />
-          学年
-        </div>
-        <div className="mb-5 grid grid-cols-3 gap-2">
+        <div className="mb-2 text-sm font-bold text-slate-900">学年</div>
+        <div className="mb-6 grid grid-cols-3 gap-2">
           {GRADE_OPTIONS.map((g) => (
             <Pill
               key={g}
@@ -206,25 +192,22 @@ export function JukuShindanClient() {
         </div>
 
         {/* 目標との差 */}
-        <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <Target className="h-4 w-4 text-blue-600" />
-          志望校の目標との差
-        </div>
+        <div className="mb-2 text-sm font-bold text-slate-900">志望校の目標との差</div>
         {savedGap !== null ? (
-          <div className="mb-5 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-800">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm leading-[1.8] text-slate-900">
             保存した目標を使います：
             {prefName ? `${prefName}・` : ''}
             {savedGap > 0 ? <strong>あと{savedGap}点</strong> : <strong>目標に到達</strong>}
             <button
               type="button"
               onClick={() => setSavedGap(null)}
-              className="ml-2 text-xs font-semibold text-emerald-700 underline"
+              className="ml-2 inline-flex min-h-[44px] items-center text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
               手動で選ぶ
             </button>
           </div>
         ) : (
-          <div className="mb-5 grid grid-cols-2 gap-2">
+          <div className="mb-6 grid grid-cols-2 gap-2">
             {GAP_OPTIONS.map((o) => (
               <Pill
                 key={o.value}
@@ -241,11 +224,8 @@ export function JukuShindanClient() {
         )}
 
         {/* 希望形態 */}
-        <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <Monitor className="h-4 w-4 text-blue-600" />
-          希望する形態
-        </div>
-        <div className="mb-5 grid grid-cols-3 gap-2">
+        <div className="mb-2 text-sm font-bold text-slate-900">希望する形態</div>
+        <div className="mb-6 grid grid-cols-3 gap-2">
           {FORMAT_OPTIONS.map((o) => {
             const Icon = o.icon;
             return (
@@ -257,7 +237,7 @@ export function JukuShindanClient() {
                   setFormat(o.value);
                 }}
               >
-                <span className="flex items-center justify-center gap-1.5">
+                <span className="flex flex-col items-center justify-center gap-1 sm:flex-row sm:gap-1.5">
                   <Icon className="h-4 w-4" />
                   {o.label}
                 </span>
@@ -267,10 +247,7 @@ export function JukuShindanClient() {
         </div>
 
         {/* 状況 */}
-        <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-700">
-          <Sparkles className="h-4 w-4 text-blue-600" />
-          お子さまの状況
-        </div>
+        <div className="mb-2 text-sm font-bold text-slate-900">お子さまの状況</div>
         <div className="mb-6 grid gap-2 sm:grid-cols-3">
           {SITUATION_OPTIONS.map((o) => (
             <button
@@ -280,14 +257,15 @@ export function JukuShindanClient() {
                 onFirstTouch();
                 setSituation(o.value);
               }}
-              className={`rounded-xl border p-3 text-left transition-all ${
+              aria-pressed={situation === o.value}
+              className={`min-h-[44px] rounded border p-3 text-left transition-colors ${
                 situation === o.value
-                  ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500/20'
-                  : 'border-slate-200 bg-white hover:border-slate-300'
+                  ? 'border-brand-700 bg-brand-50 ring-1 ring-brand-700'
+                  : 'border-slate-300 bg-white hover:bg-slate-50'
               }`}
             >
-              <div className="text-sm font-bold text-slate-800">{o.label}</div>
-              <div className="mt-0.5 text-xs text-slate-500">{o.sub}</div>
+              <div className="text-sm font-bold text-slate-900">{o.label}</div>
+              <div className="mt-0.5 text-xs text-slate-600">{o.sub}</div>
             </button>
           ))}
         </div>
@@ -295,12 +273,12 @@ export function JukuShindanClient() {
         <button
           type="button"
           onClick={onDiagnose}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700 active:scale-[0.99]"
+          className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800"
         >
           <Search className="h-4 w-4" />
           結果に合う塾を診断する
         </button>
-        <p className="mt-2 text-center text-[11px] text-slate-400">
+        <p className="mt-3 text-center text-sm text-slate-600">
           提携中の塾・家庭教師の中から、条件に合うものだけを表示します（無料体験・無料相談のみ）。
         </p>
       </section>
@@ -309,29 +287,28 @@ export function JukuShindanClient() {
       {recs !== null && (
         <div ref={resultRef} className="mt-6 scroll-mt-6">
           {recs.length === 0 ? (
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-500">
+            <div className="rounded-lg border border-slate-200 bg-white p-6 text-center text-base leading-[1.8] text-slate-900">
               条件に合う提携中の塾が見つかりませんでした。条件を変えて再度お試しください。
             </div>
           ) : (
             <>
-              <div className="mb-3 flex items-center gap-2">
-                <Check className="h-5 w-5 text-emerald-600" />
-                <h2 className="text-lg font-bold text-slate-900">
-                  {prefName ? `${prefName}・` : ''}あなたの条件に合う塾（{recs.length}件）
-                </h2>
-              </div>
+              <h2 className="mb-4 text-xl font-bold text-slate-900">
+                {prefName ? `${prefName}・` : ''}あなたの条件に合う塾（{recs.length}件）
+              </h2>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {recs.map((r, i) => (
-                  <div key={r.id} className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white p-5 shadow-sm">
-                    <div className="mb-1 flex items-center gap-2">
-                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-600 text-xs font-black text-white">
+                  <div key={r.id} className="rounded-lg border border-slate-200 bg-white p-5">
+                    <div className="mb-2 flex items-center gap-2">
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded border border-slate-300 text-xs font-bold tabular-nums text-slate-700">
                         {i + 1}
                       </span>
-                      <span className="text-xs font-bold text-emerald-700">{r.formatLabel}</span>
+                      <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
+                        {r.formatLabel}
+                      </span>
                     </div>
-                    <h3 className="mb-1.5 text-base font-bold text-slate-900">{r.programName}</h3>
-                    <p className="mb-4 text-sm leading-relaxed text-slate-700">{r.fact}</p>
+                    <h3 className="mb-2 text-[17px] font-bold text-slate-900">{r.programName}</h3>
+                    <p className="mb-4 text-base leading-[1.8] text-slate-900">{r.fact}</p>
                     <AffiliateAd
                       id={r.id}
                       hideLabel
@@ -341,9 +318,9 @@ export function JukuShindanClient() {
                       viewPref={prefectureCode || undefined}
                       placement={PLACEMENT}
                       pref={prefectureCode || undefined}
-                      linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-emerald-700 active:scale-95 sm:w-auto"
+                      linkClassName="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800 sm:w-auto"
                     />
-                    <span className="mt-1.5 block text-[11px] text-slate-500">
+                    <span className="mt-2 block text-sm text-slate-600">
                       {r.programName}の無料体験・資料請求（PR）／費用はかかりません
                     </span>
                   </div>
@@ -354,7 +331,7 @@ export function JukuShindanClient() {
               <button
                 type="button"
                 onClick={onShareToParent}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-blue-200 bg-blue-50 px-4 py-3 text-sm font-bold text-blue-700 transition-all hover:border-blue-300 hover:bg-blue-100"
+                className="mt-4 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50"
               >
                 {shared ? (
                   <>
@@ -381,13 +358,16 @@ export function JukuShindanClient() {
                 body="今回おすすめした塾の無料体験の締切や、志望校の最新情報・出願スケジュールを、受験本番まで無料でお届けします。LINEかメールで、いつでも解除できます。"
               />
 
-              <div className="mt-4 rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
-                <Link href="/mendan" className="inline-flex items-center gap-1.5 font-bold text-blue-600 hover:text-blue-700">
+              <div className="mt-4 rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-600">
+                <Link
+                  href="/mendan"
+                  className="inline-flex min-h-[44px] items-center gap-1.5 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                >
                   三者面談の準備チェックリストへ
                   <ChevronRight className="h-4 w-4" />
                 </Link>
-                <p className="mt-1 text-xs text-slate-500">
-                  面談の前に「今の現在地」を整理しておくと、塾選び・進路の相談がぐっと具体的になります。
+                <p className="mt-1 text-sm text-slate-600">
+                  面談の前に「今の現在地」を整理しておくと、塾選び・進路の相談が具体的になります。
                 </p>
               </div>
             </>

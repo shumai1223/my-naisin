@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, HandHeart, AlertCircle, ChevronRightSquare, ExternalLink } from 'lucide-react';
+import { Home, ChevronRight, AlertTriangle, ChevronRightSquare, ExternalLink } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -38,6 +38,9 @@ const VERIFIED_SCHOOLS = [
     verifiedOn: '2026-07-19',
   },
 ] as const;
+
+// ページ先頭のメタ行に出す「最終確認」。各校の確認日（verifiedOn）のうち最も新しいものを使う（新しい日付は作らない）。
+const LAST_VERIFIED = VERIFIED_SCHOOLS.map((s) => s.verifiedOn).reduce((a, b) => (a > b ? a : b));
 
 const FAQS = [
   {
@@ -97,29 +100,30 @@ export default function HeiganYuuguTokyoPage() {
         citation="各校公式サイト・公式募集要項PDF（ページ内に個別リンクあり）"
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-teal-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/heigan-yuugu" className="hover:text-teal-600">
+            <Link href="/heigan-yuugu" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">
               併願優遇・併願校の制度解説
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">オール3で行ける私立高校（東京都）</span>
+            <span className="text-slate-900">オール3で行ける私立高校（東京都）</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-600 text-white shadow-xl">
-              <HandHeart className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          {/* ページの頭: h1 → メタ行（年度・出典・最終確認）→ 結論の段落 */}
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               オール3で行ける私立高校（東京都）
             </h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+            <p className="mt-2 text-sm text-slate-600">
+              2026年7月時点 ／ 出典：各校の公式サイト・公式募集要項PDF（学校ごとのリンクは下の一覧） ／ 最終確認 {LAST_VERIFIED}
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               東京都の私立高校の併願優遇制度について、内申基準（9教科合計）を学校の公式サイト・公式募集要項PDFで
               個別に確認できた学校のみを、根拠となる出典つきで紹介します。
             </p>
@@ -134,43 +138,43 @@ export default function HeiganYuuguTokyoPage() {
             </p>
           </AnswerBox>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               公式に内申基準を確認できた学校（2026年7月時点）
             </h2>
-            <div className="space-y-4">
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {VERIFIED_SCHOOLS.map((s) => (
-                <div key={s.name} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+                <div key={s.name} className="py-5">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="text-base font-bold text-slate-800">{s.name}</h3>
-                    <span className="rounded-full bg-teal-100 px-2.5 py-0.5 text-xs font-bold text-teal-800">
+                    <h3 className="text-[17px] font-bold text-slate-900">{s.name}</h3>
+                    <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                       {s.gender}
                     </span>
                   </div>
-                  <p className="mt-1 text-xs text-slate-500">{s.course}｜{s.fiscalYear}入試</p>
-                  <p className="mt-2 text-lg font-black text-teal-700">{s.criteria}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.note}</p>
+                  <p className="mt-1 text-sm text-slate-600">{s.course}｜{s.fiscalYear}入試</p>
+                  <p className="mt-2 text-lg font-bold tabular-nums text-brand-700">{s.criteria}</p>
+                  <p className="mt-2 text-base leading-[1.8] text-slate-900">{s.note}</p>
                   <a
                     href={s.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-teal-700 hover:underline"
+                    className="mt-2 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
                   >
-                    <ExternalLink className="h-3.5 w-3.5" />
+                    <ExternalLink className="h-4 w-4 shrink-0" />
                     出典: {s.sourceLabel}
                   </a>
-                  <p className="mt-1 text-[11px] text-slate-400">確認日: {s.verifiedOn}</p>
+                  <p className="text-sm text-slate-600">確認日: {s.verifiedOn}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
-            <h2 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-900">
-              <AlertCircle className="h-4 w-4" />
+          <section className="mt-10 rounded-lg border border-amber-200 bg-amber-50 p-4 md:p-5">
+            <h2 className="mb-2 flex items-center gap-2 text-base font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
               このページの限界（正直に書きます）
             </h2>
-            <ul className="space-y-1.5 text-sm leading-relaxed text-amber-900">
+            <ul className="space-y-1.5 text-base leading-[1.8] text-amber-900">
               <li>
                 ・掲載しているのは、学校の公式サイト・公式PDFで内申基準を直接確認できた学校<strong>のみ</strong>です。
                 現時点では男子校・女子校が1校ずつで、共学校はまだ確認できていません。
@@ -181,59 +185,67 @@ export default function HeiganYuuguTokyoPage() {
             </ul>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">まず自分の内申点（素内申）を確認する</h2>
-            <p className="mb-4 text-xs text-slate-500">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">まず自分の内申点（素内申）を確認する</h2>
+            <p className="mb-4 text-sm text-slate-600">
               9教科の評定を入れるだけで、素内申（9教科合計）と評定平均をすぐに計算できます。
             </p>
             <Link
               href="/hyotei-heikin"
-              className="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-teal-700"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800"
             >
               素内申・評定平均を計算する
               <ChevronRightSquare className="h-4 w-4" />
             </Link>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">あわせて確認</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/heigan-yuugu" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-100 hover:shadow-md">
-                併願優遇とは？（制度の基本を解説）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/naishin-oru/3" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-100 hover:shadow-md">
-                オール3の内申点は何点？（47都道府県）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/koukou-hiyou" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-100 hover:shadow-md">
-                私立高校の費用シミュレーター
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/tokyo/total-score" className="flex items-center justify-between gap-2 rounded-xl bg-white p-4 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-100 hover:shadow-md">
-                都立高校 総合得点計算（1020点満点）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/heigan-yuugu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">併願優遇とは？（制度の基本を解説）</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/naishin-oru/3" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">オール3の内申点は何点？（47都道府県）</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/koukou-hiyou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">私立高校の費用シミュレーター</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/tokyo/total-score" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">都立高校 総合得点計算（1020点満点）</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="prefecture" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">
+                <details key={f.question} className="group py-1">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-600 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="pb-3 pt-1 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>

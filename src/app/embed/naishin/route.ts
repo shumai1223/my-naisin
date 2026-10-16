@@ -20,33 +20,35 @@ const HTML = `<!DOCTYPE html>
 <title>内申点（素内申）・評定平均 計算ツール | My Naishin</title>
 <style>
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#fff;color:#0f172a;-webkit-text-size-adjust:100%}
-  .wrap{max-width:480px;margin:0 auto;padding:16px}
-  .hd{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-  .logo{width:34px;height:34px;border-radius:8px;display:block;box-shadow:0 1px 3px rgba(15,23,42,.15);flex:0 0 auto}
-  .ttl{font-size:14px;font-weight:800;line-height:1.3;color:#0f172a}
-  .sub{font-size:11px;color:#64748b;margin-top:2px}
-  .list{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden}
-  .row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 12px}
-  .row+.row{border-top:1px solid #f1f5f9}
-  .row:nth-child(even){background:#f8fafc}
-  .lab{font-size:13px;font-weight:600;color:#334155;white-space:nowrap}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#fff;color:#17231d;-webkit-text-size-adjust:100%}
+  .wrap{max-width:480px;margin:0 auto;padding:12px 16px}
+  .hd{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .logo{width:34px;height:34px;border-radius:6px;display:block;flex:0 0 auto}
+  .ttl{font-size:14px;font-weight:700;line-height:1.3;color:#17231d}
+  .sub{font-size:12px;color:#4f6158;margin-top:2px}
+  .list{border:1px solid #cddad3;border-radius:8px;overflow:hidden}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 12px}
+  .row+.row{border-top:1px solid #e9efeb}
+  .row:nth-child(even){background:#f4f7f5}
+  .lab{font-size:13px;font-weight:700;color:#17231d;white-space:nowrap}
   .seg{display:inline-flex;gap:4px}
-  .seg button{width:30px;height:30px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;color:#64748b;font-weight:700;font-size:13px;cursor:pointer;-webkit-appearance:none;appearance:none;transition:background .12s,color .12s,border-color .12s,box-shadow .12s}
-  .seg button:hover{border-color:#93c5fd;color:#2563eb}
-  .seg button.on{background:linear-gradient(135deg,#2563eb,#4f46e5);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(37,99,235,.35)}
-  .out{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .card{border-radius:14px;padding:13px;text-align:center}
-  .c1{background:#eff6ff;border:1px solid #bfdbfe}
-  .c2{background:#f0fdf4;border:1px solid #bbf7d0}
-  .num{font-size:30px;font-weight:900;line-height:1}
-  .c1 .num{color:#1d4ed8}
-  .c2 .num{color:#15803d}
-  .lbl{font-size:11px;font-weight:700;margin-top:6px;color:#475569}
-  .cta{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;text-align:center;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;text-decoration:none;padding:12px;border-radius:12px;font-weight:800;font-size:13px;box-shadow:0 4px 12px rgba(37,99,235,.3)}
-  .cta:hover{filter:brightness(1.05)}
-  .pw{margin-top:10px;text-align:center;font-size:11px;color:#94a3b8}
-  .pw a{color:#2563eb;text-decoration:none;font-weight:700}
+  .seg button{position:relative;width:30px;height:30px;border-radius:6px;border:1px solid #cddad3;background:#fff;color:#4f6158;font-weight:700;font-size:13px;cursor:pointer;-webkit-appearance:none;appearance:none;transition:background .12s,color .12s,border-color .12s,box-shadow .12s}
+  .seg button::before{content:"";position:absolute;top:-7px;bottom:-7px;left:-2px;right:-2px}
+  .seg button:hover{border-color:#cddad3;color:#17543e}
+  .seg button:focus-visible{outline:2px solid #17543e;outline-offset:2px}
+  .seg button.on{background:#17543e;border-color:transparent;color:#fff;}
+  .out{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .card{border-radius:8px;padding:11px 13px;text-align:center}
+  .c1{background:#f0f6f3;border:1px solid #cddad3}
+  .c2{background:#fff;border:1px solid #cddad3}
+  .num{font-size:30px;font-weight:700;line-height:1}
+  .c1 .num{color:#17543e}
+  .c2 .num{color:#17231d}
+  .lbl{font-size:12px;font-weight:700;margin-top:4px;color:#4f6158}
+  .cta{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;text-align:center;background:#17543e;color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-weight:700;font-size:13px;}
+  .cta:hover{background:#123f2f}
+  .pw{margin-top:13px;text-align:center;font-size:12px;color:#4f6158}
+  .pw a{display:inline-block;margin:-13px 0;padding:13px 4px;color:#17543e;text-decoration:none;font-weight:700}
 </style>
 </head>
 <body>

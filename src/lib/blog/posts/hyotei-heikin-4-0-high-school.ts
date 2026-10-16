@@ -59,10 +59,10 @@ export const post: BlogPost = {
   <p>本記事では、評定平均4.0の正確な意味、行ける高校の具体例、私立併願優遇・公立推薦の基準、4.0をキープしながら4.2以上を狙う勉強法まで、2026年度（令和8年度）入試に対応した最新情報で徹底解説します。</p>
 </div>
 
-<div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%); border: 2px solid #99f6e4; border-radius: 16px;">
-  <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #134e4a;">🧮 自分の評定平均をまだ計算していない方へ</p>
-  <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #115e59; line-height: 1.6;">通知表の評定を入れるだけで評定平均と素内申を瞬時に算出できます。「自分は本当に4.0あるのか」を先に確認してから読むと理解が早いです。</p>
-  <p style="margin: 0;"><a href="/hyotei-heikin" style="display: inline-block; padding: 0.5rem 1.25rem; background: #0d9488; color: #fff; font-weight: 700; border-radius: 9999px; text-decoration: none;">▶ 評定平均を今すぐ計算する（無料）</a></p>
+<div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: #f0f6f3; border: 1px solid #cddad3; border-radius: 8px;">
+  <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #17231d;">自分の評定平均をまだ計算していない方へ</p>
+  <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #4f6158; line-height: 1.6;">通知表の評定を入れるだけで評定平均と素内申を瞬時に算出できます。「自分は本当に4.0あるのか」を先に確認してから読むと理解が早いです。</p>
+  <p style="margin: 0;"><a href="/hyotei-heikin" style="display: inline-block; padding: 0.5rem 1.25rem; background: #17543e; color: #fff; font-weight: 700; border-radius: 6px; text-decoration: none;">▶ 評定平均を今すぐ計算する（無料）</a></p>
 </div>
 
 <hr>

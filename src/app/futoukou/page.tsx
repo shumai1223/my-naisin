@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Heart, CalendarX, FileText, ShieldCheck, HelpCircle, Route } from 'lucide-react';
+import { Home, ChevronRight, CalendarX, FileText, ShieldCheck, Route } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -84,20 +84,17 @@ export default function FutoukouPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-rose-50/40 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">不登校と内申点</span>
+            <span className="text-slate-900">不登校と内申点</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-xl">
-              <Heart className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">不登校と内申点</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">不登校と内申点</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               「学校に行けていない＝高校に行けない」ではありません。不登校で<strong>内申点（評定）はどうなるか</strong>、
               <strong>欠席日数は調査書にどう影響するか</strong>、そして<strong>当日点で届く道</strong>を、当事者目線で整理しました。
             </p>
@@ -113,74 +110,59 @@ export default function FutoukouPage() {
           </AnswerBox>
 
           {/* 4つのポイント */}
-          <section className="mt-8 grid gap-4 sm:grid-cols-2">
+          <section className="mt-10 grid gap-4 sm:grid-cols-2">
             {POINTS.map((p) => {
               const Icon = p.icon;
               return (
-                <div key={p.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <div className="mb-2 flex items-center gap-2 font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-rose-50 text-rose-600"><Icon className="h-5 w-5" /></span>
+                <div key={p.title} className="rounded-lg border border-slate-200 bg-white p-5">
+                  <div className="flex items-start gap-2 text-base font-bold text-slate-900">
+                    <Icon className="mt-0.5 h-5 w-5 shrink-0" />
                     {p.title}
                   </div>
-                  <p className="text-sm leading-relaxed text-slate-600">{p.body}</p>
+                  <p className="mt-2 text-base leading-[1.8] text-slate-900">{p.body}</p>
                 </div>
               );
             })}
           </section>
 
           {/* 内申点が低くても届くか確認（捏造しない・ツール誘導） */}
-          <section className="mt-8 rounded-2xl border-2 border-rose-200 bg-rose-50/40 p-6 text-center shadow-sm">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">「当日点で何点取れば届くか」を逆算する</h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">「当日点で何点取れば届くか」を逆算する</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               欠席が多い・内申点が低いときは、当日点で勝負できる学校・区分を選ぶのが現実的です。志望校のボーダーから、当日に必要な点数を逆算してみましょう。
             </p>
-            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/reverse" className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-rose-700">
-                <Route className="h-4 w-4" />志望校から必要な当日点を逆算する
+            <div className="flex flex-col items-stretch gap-3 sm:flex-row">
+              <Link href="/reverse" className="inline-flex min-h-[44px] items-center justify-center rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800">
+                志望校から必要な当日点を逆算する
               </Link>
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-rose-700 ring-1 ring-rose-200 transition-colors hover:bg-rose-50">
+              <Link href="/" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50">
                 今の内申点を計算する（47都道府県）
               </Link>
             </div>
           </section>
 
           {/* 通信制・フリースクール子ページ */}
-          <section className="mt-8 space-y-3">
-            <Link href="/futoukou/tsugaku" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
-                <Route className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">通信制高校・フリースクールという選択肢<ChevronRight className="h-4 w-4 text-slate-400" /></span>
-                <span className="mt-1 block text-sm leading-relaxed text-slate-600">全日制以外の進路の違い（通信制・定時制・サポート校・フリースクール）と、出席扱いの仕組み・在宅で学ぶ方法。</span>
-              </span>
+          <section className="mt-10 space-y-3">
+            <Link href="/futoukou/tsugaku" className="group block rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:bg-brand-50">
+              <span className="flex items-center gap-1 text-base font-bold text-brand-700 group-hover:underline">通信制高校・フリースクールという選択肢<ChevronRight className="h-4 w-4 shrink-0" /></span>
+              <span className="mt-1 block text-sm leading-[1.8] text-slate-600">全日制以外の進路の違い（通信制・定時制・サポート校・フリースクール）と、出席扱いの仕組み・在宅で学ぶ方法。</span>
             </Link>
-            <Link href="/futoukou/shussekiatsukai" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
-                <ShieldCheck className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">「出席扱い」とは？相談の流れ<ChevronRight className="h-4 w-4 text-slate-400" /></span>
-                <span className="mt-1 block text-sm leading-relaxed text-slate-600">自宅学習・フリースクールが出席扱いになる仕組みと、学校への相談から校長判断までの一般的な流れ。</span>
-              </span>
+            <Link href="/futoukou/shussekiatsukai" className="group block rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:bg-brand-50">
+              <span className="flex items-center gap-1 text-base font-bold text-brand-700 group-hover:underline">「出席扱い」とは？相談の流れ<ChevronRight className="h-4 w-4 shrink-0" /></span>
+              <span className="mt-1 block text-sm leading-[1.8] text-slate-600">自宅学習・フリースクールが出席扱いになる仕組みと、学校への相談から校長判断までの一般的な流れ。</span>
             </Link>
-            <Link href="/futoukou/teiji-tsushin-hikaku" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-rose-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
-                <Route className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-rose-700">定時制・通信制の倍率を都道府県で比較<ChevronRight className="h-4 w-4 text-slate-400" /></span>
-                <span className="mt-1 block text-sm leading-relaxed text-slate-600">各都道府県教育委員会が公表している募集人員・出願者数・倍率を、都道府県別にそのまま集計しました。</span>
-              </span>
+            <Link href="/futoukou/teiji-tsushin-hikaku" className="group block rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:bg-brand-50">
+              <span className="flex items-center gap-1 text-base font-bold text-brand-700 group-hover:underline">定時制・通信制の倍率を都道府県で比較<ChevronRight className="h-4 w-4 shrink-0" /></span>
+              <span className="mt-1 block text-sm leading-[1.8] text-slate-600">各都道府県教育委員会が公表している募集人員・出願者数・倍率を、都道府県別にそのまま集計しました。</span>
             </Link>
           </section>
 
           {/* 不登校専用の保護者リード（もしも live・内申不問/在宅/無料） */}
-          <FutoukouLeadCTA className="mt-8" />
+          <FutoukouLeadCTA className="mt-10" />
 
           {/* 回遊（調査書文脈で自然につながる） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">関連ページ</h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">関連ページ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
                 { href: '/chousasho', title: '調査書とは？出欠・評定がどう書かれるか' },
@@ -188,29 +170,29 @@ export default function FutoukouPage() {
                 { href: '/prefectures', title: '都道府県別の選抜方式（当日点比率）' },
                 { href: '/mendan', title: '三者面談で進路を相談する準備' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 transition-colors hover:bg-brand-50">
                   {c.title}
-                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
                 </Link>
               ))}
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-rose-600" />よくある質問</h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" /></span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
-          <p className="mt-8 text-center text-xs leading-relaxed text-slate-400">
+          <p className="mt-10 text-xs leading-[1.8] text-slate-600">
             ※ 選抜区分・出欠の扱い・出席扱いの認定は都道府県・学校で異なります。最終的な判断は在籍校・志望校・各教育委員会の最新情報をご確認ください。
           </p>
         </div>

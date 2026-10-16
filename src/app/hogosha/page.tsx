@@ -4,17 +4,12 @@ import Link from 'next/link';
 import {
   Home,
   ChevronRight,
-  Heart,
   Calculator,
   TrendingUp,
   Percent,
   Target,
   MapPin,
-  ShieldCheck,
-  Clock,
-  Wallet,
-  MessageCircleQuestion,
-} from 'lucide-react';
+} from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -129,52 +124,44 @@ const TOOLS = [
     icon: Calculator,
     title: '内申点を計算する',
     desc: '9教科の評定を入れるだけ。全国47都道府県の最新方式に対応。',
-    accent: 'from-blue-500 to-indigo-600',
   },
   {
     href: '/hensachi',
     icon: TrendingUp,
     title: '偏差値を計算する',
     desc: '点数と平均点から偏差値を30秒で算出。上位何%かもわかる。',
-    accent: 'from-purple-500 to-indigo-600',
   },
   {
     href: '/hyotei-heikin',
     icon: Percent,
     title: '評定平均を計算する',
     desc: '推薦のカギになる評定平均を計算。基準早見表つき。',
-    accent: 'from-emerald-500 to-teal-600',
   },
   {
     href: '/reverse',
     icon: Target,
     title: '志望校から逆算する',
     desc: '目標校から必要な内申点・当日点を逆算。今の現在地がわかる。',
-    accent: 'from-violet-500 to-purple-600',
   },
   {
     href: '/prefectures',
     icon: MapPin,
     title: '都道府県別の入試制度',
     desc: 'お住まいの地域の配点比率・内申の比重を確認できる。',
-    accent: 'from-rose-500 to-pink-600',
   },
 ];
 
 const PARENT_ACTIONS = [
   {
-    icon: Calculator,
-    title: '① 現在地を「数値」で把握する',
+    title: '1. 現在地を「数値」で把握する',
     body: 'まずはお子さまの内申点・偏差値を計算し、志望校との差を確認します。感覚ではなく数値で見ると、家庭での声かけも具体的になります。',
   },
   {
-    icon: Clock,
-    title: '② 早めに動く（内申は中1から）',
+    title: '2. 早めに動く（内申は中1から）',
     body: '内申点は中1から評価される地域が多く、提出物・授業態度・定期テストの積み重ねで決まります。早く現状を知るほど、打てる手が増えます。',
   },
   {
-    icon: Wallet,
-    title: '③ 無料で比較してから決める',
+    title: '3. 無料で比較してから決める',
     body: '塾・通信教育は無料体験や無料の資料請求ができます。費用・カリキュラム・通いやすさを比較してから選ぶと、ミスマッチを避けられます。',
   },
 ];
@@ -191,31 +178,28 @@ export default function HogoshaPage() {
       <FAQPageSchema faqItems={PARENT_FAQS} />
 
       <ParentLeadCTAPositionProvider>
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">保護者の方へ</span>
+            <span className="text-slate-900">保護者の方へ</span>
           </nav>
 
-          {/* 橋②バトンの着地：生徒が共有したリンク（?from=share）で来た保護者に、結果を文脈付きで提示。
-              useSearchParams を内包するため Suspense で包み、/hogosha は静的（SSG）のまま維持する。 */}
-          <Suspense fallback={null}>
-            <ParentShareBanner />
-          </Suspense>
-
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
-              <Heart className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">保護者の方へ</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">保護者の方へ</h1>
+            {/* 橋②バトンの着地：生徒が共有したリンク（?from=share）で来た保護者に、結果を文脈付きで提示。
+                useSearchParams を内包するため Suspense で包み、/hogosha は静的（SSG）のまま維持する。
+                見出しの順（h1 → h2）を保つため、h1 の直後に置く（以前は h1 より前で、h2 が先に来ていた）。 */}
+            <Suspense fallback={null}>
+              <ParentShareBanner />
+            </Suspense>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               高校受験は、ご家庭のサポートで結果が大きく変わります。<br />
               <strong>内申点の上げ方</strong>・<strong>塾はいつから</strong>・<strong>費用の目安</strong>を当事者目線で整理しました。
               まずはお子さまの「現在地」を無料の計算ツールで確認してみませんか。
@@ -225,7 +209,7 @@ export default function HogoshaPage() {
           {/* 保護者向けリード（最上部・最高インテント）。
               共有元の県で地域最適化（関西=個別指導キャンパス／関東=森塾）。
               SSG静的HTMLには素のCTA（fallback）が残り、クライアントで地域版に差し替わる＝SEOも担保。 */}
-          <Suspense fallback={<ParentLeadCTA placement="parent-lp" className="mb-10" />}>
+          <Suspense fallback={<ParentLeadCTA placement="parent-lp" className="mb-10" headingLevel="h2" />}>
             <HogoshaLeadCTA className="mb-10" />
           </Suspense>
 
@@ -240,23 +224,17 @@ export default function HogoshaPage() {
 
           {/* 保護者ができる3つのこと */}
           <section className="mb-10">
-            <h2 className="mb-5 text-xl font-bold text-slate-800">保護者ができる3つのこと</h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">保護者ができる3つのこと</h2>
             <div className="grid gap-4 md:grid-cols-3">
-              {PARENT_ACTIONS.map((a) => {
-                const Icon = a.icon;
-                return (
-                  <div
-                    key={a.title}
-                    className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-                  >
-                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="mb-1.5 text-sm font-bold text-slate-800">{a.title}</h3>
-                    <p className="text-sm leading-relaxed text-slate-600">{a.body}</p>
-                  </div>
-                );
-              })}
+              {PARENT_ACTIONS.map((a) => (
+                <div
+                  key={a.title}
+                  className="rounded-lg border border-slate-200 bg-white p-5"
+                >
+                  <h3 className="mb-2 text-[17px] font-bold leading-snug text-slate-900">{a.title}</h3>
+                  <p className="text-sm leading-[1.8] text-slate-600">{a.body}</p>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -284,7 +262,7 @@ export default function HogoshaPage() {
 
           {/* ツール導線 */}
           <section className="mb-10">
-            <h2 className="mb-5 text-xl font-bold text-slate-800">無料で使えるツール</h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">無料で使えるツール</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {TOOLS.map((t) => {
                 const Icon = t.icon;
@@ -292,19 +270,15 @@ export default function HogoshaPage() {
                   <Link
                     key={t.href}
                     href={t.href}
-                    className="group flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
+                    className="group flex min-h-[44px] items-start gap-3 rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:bg-brand-50"
                   >
-                    <div
-                      className={`grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-gradient-to-br ${t.accent} text-white shadow-md`}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-1 font-bold text-slate-800">
+                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1 text-base font-bold text-brand-700 group-hover:underline">
                         {t.title}
-                        <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-0.5" />
+                        <ChevronRight className="h-4 w-4 shrink-0" />
                       </div>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-600">{t.desc}</p>
+                      <p className="mt-1 text-sm leading-[1.8] text-slate-600">{t.desc}</p>
                     </div>
                   </Link>
                 );
@@ -318,27 +292,25 @@ export default function HogoshaPage() {
             heading="お子さまの受験情報を、受験本番まで無料で受け取りませんか？"
             body="内申点アップのコツ・出願スケジュール・志望校の最新情報を、保護者の方へお届けします。LINEまたはメールで、いつでも解除できます。"
             className="mb-10"
+            headingLevel="h2"
           />
 
           {/* 保護者FAQ */}
           <section className="mb-10">
-            <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <MessageCircleQuestion className="h-5 w-5 text-emerald-600" />
-              保護者の方からよくある質問
-            </h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">保護者の方からよくある質問</h2>
             <div className="space-y-3">
               {PARENT_FAQS.map((f) => (
                 <details
                   key={f.question}
-                  className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                  className="group rounded-lg border border-slate-200 bg-white px-5"
                 >
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800 marker:hidden">
-                    <span className="flex items-center justify-between gap-3">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:hidden">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3 py-2">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 flex-shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-600 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="pb-5 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
@@ -352,8 +324,7 @@ export default function HogoshaPage() {
             placement="parent-lp"
           />
 
-          <p className="mt-8 flex items-center justify-center gap-1.5 text-center text-xs text-slate-400">
-            <ShieldCheck className="h-3.5 w-3.5" />
+          <p className="mt-8 text-sm leading-[1.8] text-slate-600">
             掲載の塾・通信教育情報には広告（PR）を含みます。費用や内容は各社の公式サイトでご確認ください。
           </p>
         </div>

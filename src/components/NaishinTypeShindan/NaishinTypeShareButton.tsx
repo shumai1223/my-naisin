@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Share2, Download, Loader2 } from 'lucide-react';
+import { Share2, Download, Loader2 } from '@/components/icons';
 
 import { APP_NAME } from '@/lib/constants';
 import type { NaishinTypeDefinition } from '@/lib/naishin-type-diagnosis';
@@ -72,11 +72,11 @@ export function NaishinTypeShareButton({ type, prefectureName }: NaishinTypeShar
 
   const onShare = React.useCallback(async () => {
     if (typeof navigator === 'undefined' || !navigator.share) {
-      showToast('この端末では共有機能が使えません。「画像を保存」からシェアしてね');
+      showToast('この端末では共有機能が使えません。「保存」から画像を保存して共有してください。');
       return;
     }
     try {
-      const shareData: ShareData = { title: `${APP_NAME}の内申点タイプ診断`, text: `私は「${type.label}」でした！` };
+      const shareData: ShareData = { title: `${APP_NAME}の内申点タイプ診断`, text: `私は「${type.label}」でした。` };
       if (preparedDataUrl) {
         const file = dataUrlToFile(preparedDataUrl, `naishin-type_${type.id}.png`);
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -87,7 +87,7 @@ export function NaishinTypeShareButton({ type, prefectureName }: NaishinTypeShar
       track(EVENTS.NAISHIN_TYPE_SHARE, { type_id: type.id, medium: 'native' });
     } catch (err) {
       if ((err as Error)?.name !== 'AbortError') {
-        showToast('共有できませんでした。「画像を保存」からシェアしてね');
+        showToast('共有できませんでした。「保存」から画像を保存して共有してください。');
       }
     }
   }, [preparedDataUrl, showToast, type.id, type.label]);
@@ -99,7 +99,7 @@ export function NaishinTypeShareButton({ type, prefectureName }: NaishinTypeShar
     a.download = `naishin-type_${type.id}.png`;
     a.click();
     track(EVENTS.NAISHIN_TYPE_SHARE, { type_id: type.id, medium: 'download' });
-    showToast('画像を保存しました！');
+    showToast('画像を保存しました');
   }, [preparedDataUrl, showToast, type.id]);
 
   return (
@@ -109,7 +109,7 @@ export function NaishinTypeShareButton({ type, prefectureName }: NaishinTypeShar
           type="button"
           onClick={onShare}
           disabled={preparing}
-          className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg disabled:opacity-60"
+          className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800 disabled:opacity-60"
         >
           {preparing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Share2 className="h-4 w-4" />}
           友達にシェアする
@@ -118,13 +118,13 @@ export function NaishinTypeShareButton({ type, prefectureName }: NaishinTypeShar
           type="button"
           onClick={onDownload}
           disabled={preparing || !preparedDataUrl}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-600 transition-all hover:bg-slate-50 disabled:opacity-60"
+          className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50 disabled:opacity-60"
         >
           <Download className="h-4 w-4" />
           保存
         </button>
       </div>
-      {toast && <p className="text-center text-xs font-medium text-slate-500">{toast}</p>}
+      {toast && <p className="text-center text-sm text-slate-600">{toast}</p>}
 
       {/* キャプチャ用の隠し要素（画面表示はしない） */}
       <div className="fixed left-[-9999px] top-0 overflow-hidden">

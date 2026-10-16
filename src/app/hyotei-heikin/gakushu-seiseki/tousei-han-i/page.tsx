@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Gauge, ChevronRightSquare, ShieldCheck } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -72,44 +72,57 @@ export default function TouseiHanIPage() {
         steps={HOWTO_STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-emerald-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin" className="hover:text-emerald-600">評定平均計算</Link>
+            <Link href="/hyotei-heikin" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">評定平均計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hyotei-heikin/gakushu-seiseki" className="hover:text-emerald-600">学習成績の状況</Link>
+            <Link href="/hyotei-heikin/gakushu-seiseki" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">学習成績の状況</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">到達可能範囲</span>
+            <span className="text-slate-900">到達可能範囲</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
-              <Gauge className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               到達可能範囲チェック
             </h1>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              高1・高2の実績から、<strong className="text-emerald-700">卒業までに到達し得る範囲</strong>を確認できます。
+            <p className="mt-3 text-sm text-slate-600">
+              出典：文部科学省「令和9年度大学入学者選抜実施要項」（
+              <a
+                href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              >
+                原文PDF
+              </a>
+              ）／ 国立教育政策研究所 教育課程研究センター「学習評価の在り方ハンドブック 高等学校編」（
+              <a
+                href="https://www.nier.go.jp/kaihatsu/pdf/gakushuhyouka_R010613-02.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              >
+                原文PDF
+              </a>
+              ）
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              高1・高2の実績から、<strong>卒業までに到達し得る範囲</strong>を確認できます。
               「まだ概評Aに間に合うか」を知りたい高1・高2の方に向けたツールです。
             </p>
           </header>
 
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <p className="text-xs leading-relaxed text-slate-600">
-                残りの評価がすべて最高評価（5）または最低評価（1）だった場合の理論値です。
-                実際の到達値は今後の学習状況によって変わります。あくまで目安としてご利用ください。
-              </p>
-            </div>
+          <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5">
+            <p className="text-sm leading-[1.8] text-slate-600">
+              残りの評価がすべて最高評価（5）または最低評価（1）だった場合の理論値です。
+              実際の到達値は今後の学習状況によって変わります。あくまで目安としてご利用ください。
+            </p>
           </div>
 
           <div id="calculator-section">
@@ -117,32 +130,33 @@ export default function TouseiHanIPage() {
           </div>
 
           {/* なぜ「残りの評価回数」を自分で見積もる必要があるのか */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               なぜ「卒業までの全評定」ではなく「残りの評価回数」を見積もるのか
             </h2>
-            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+            <p className="mb-3 text-base leading-[1.8] text-slate-900">
               総合型選抜は入学願書受付が9月1日以降、学校推薦型選抜は11月1日以降とされており、調査書は
               それより前の時点で高等学校が作成します。そのため、卒業見込みの生徒については高3の全学年分の
               評定が確定する前に調査書を提出することになります。この場合の扱いは実施要項に次のとおり定められています。
             </p>
-            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="rounded-lg border border-slate-200 bg-brand-50 p-4 text-base leading-[1.8] text-slate-900">
+              <span className="mb-1 block font-bold">原文</span>
               「卒業見込みの者で、最終学年の成績が未決定である場合は、当該学年における直近の成績を総合し、
               高等学校として判定した成績を、最終学年の成績として記入すること。」
             </blockquote>
-            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               出典：文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日付け8文科高第318号）
               調査書記入上の注意事項等について7(4)
               <a
                 href="https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
               >
                 原文PDF
               </a>
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
               つまり「高3で最終的にどこまで評定が伸びるか」ではなく「調査書作成の時点までに確定している
               直近の成績」が最終学年分として使われます。この時点・範囲は高等学校が判定するため全国一律の
               日付が定められているわけではありません。このツールが「卒業までの全評価」ではなく「残りの
@@ -151,35 +165,36 @@ export default function TouseiHanIPage() {
           </section>
 
           {/* 残りの評価回数は何で決まるのか（T-N5第2ラウンド・外部一次ソースB） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               「残りの評価」は何で決まるのか
             </h2>
-            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+            <p className="mb-3 text-base leading-[1.8] text-slate-900">
               このツールは「残りの評価回数」を自分で見積もって入力する方式にしています。これは、
               残りの評定が単純な試験の点数だけで決まるわけではないためです。国立教育政策研究所の
               資料によると、各教科の評価は「知識・技能」「思考・判断・表現」「主体的に学習に取り組む態度」
               の3観点をそれぞれA・B・Cで評価し、それらを総括したものが評定になります。
             </p>
-            <blockquote className="border-l-4 border-emerald-400 bg-emerald-50 p-4 text-sm italic leading-relaxed text-slate-700">
+            <blockquote className="rounded-lg border border-slate-200 bg-brand-50 p-4 text-base leading-[1.8] text-slate-900">
+              <span className="mb-1 block font-bold">原文</span>
               「『主体的に学習に取り組む態度』の評価については、①知識及び技能を獲得したり、思考力、
               判断力、表現力等を身に付けたりすることに向けた粘り強い取組を行おうとする側面と、
               ②①の粘り強い取組を行う中で、自らの学習を調整しようとする側面、という二つの側面から
               評価することが求められる。」
             </blockquote>
-            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               出典：国立教育政策研究所 教育課程研究センター「学習評価の在り方ハンドブック 高等学校編」
               （令和元年6月）P9「『主体的に学習に取り組む態度』の評価のイメージ」
               <a
                 href="https://www.nier.go.jp/kaihatsu/pdf/gakushuhyouka_R010613-02.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-1 text-emerald-700 underline"
+                className="ml-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
               >
                 原文PDF
               </a>
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700">
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
               つまり「残りの評価回数」で確定するのはテストの点数だけではなく、知識・技能や
               思考・判断・表現の観点、および上記の2つの側面から見た取組の状況も含まれます。
               このツールが到達可能な最大値・最小値という「幅」で示しているのは、この不確実性を
@@ -187,18 +202,24 @@ export default function TouseiHanIPage() {
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">
               あわせて確認したいツール
             </h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+            <div className="grid gap-x-6 sm:grid-cols-2">
+              <Link
+                href="/hyotei-heikin/gakushu-seiseki"
+                className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700"
+              >
                 学習成績の状況 計算ツール
-                <ChevronRightSquare className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hyotei-heikin/gakushu-seiseki/gaihyou" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+              <Link
+                href="/hyotei-heikin/gakushu-seiseki/gaihyou"
+                className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-3 text-base text-slate-900 hover:text-brand-700"
+              >
                 概評A〜Eまであと何点？境界チェック
-                <ChevronRightSquare className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>

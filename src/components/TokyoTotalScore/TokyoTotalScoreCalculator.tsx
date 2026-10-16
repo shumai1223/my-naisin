@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw } from 'lucide-react';
+import { RotateCcw } from '@/components/icons';
 import { TargetDistancePanel } from '@/components/TotalScore/TargetDistancePanel';
 import { TOKYO_ESAT_GRADES, TOKYO_TOTAL_SCORE_MAX, computeTokyoTotalScore, tokyoRankLabel } from '@/lib/total-score/tokyo';
 
@@ -39,42 +39,31 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
     setTargetInput('');
   };
 
-  const getRankColor = () => {
-    if (total >= 880) return 'text-red-700';
-    if (total >= 800) return 'text-orange-700';
-    if (total >= 720) return 'text-amber-700';
-    if (total >= 640) return 'text-emerald-700';
-    return 'text-blue-700';
-  };
-
   const getRankLabel = () => tokyoRankLabel(total);
 
   return (
-    <div className="rounded-2xl border-2 border-blue-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4">
-        <div className="flex items-center justify-between gap-3 flex-wrap">
-          <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-blue-600" />
-            総合得点を計算
-          </h2>
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+      <div className="border-b border-slate-200 px-5 py-4 md:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-xl font-bold text-slate-900">総合得点を計算</h2>
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center gap-1 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50"
           >
-            <RotateCcw className="h-3.5 w-3.5" />
+            <RotateCcw className="h-4 w-4" />
             リセット
           </button>
         </div>
-        <p className="mt-2 text-xs text-slate-600">5教科の合計点・換算内申・ESAT-J 評価を入力してください</p>
+        <p className="mt-1 text-sm text-slate-600">5教科の合計点・換算内申・ESAT-J 評価を入力してください</p>
       </div>
 
-      <div className="p-6 space-y-5">
+      <div className="space-y-5 px-5 py-6 md:px-6">
         {/* 学力検査 */}
         <div>
-          <label htmlFor="tokyo-total-score-exam" className="block text-sm font-bold text-slate-700 mb-2">
+          <label htmlFor="tokyo-total-score-exam" className="mb-2 block text-sm font-bold text-slate-900">
             5教科 学力検査の合計点
-            <span className="ml-2 text-xs font-normal text-slate-500">（500点満点 / 各教科100点）</span>
+            <span className="ml-2 text-xs font-normal text-slate-600">（500点満点 / 各教科100点）</span>
           </label>
           <input
             id="tokyo-total-score-exam"
@@ -85,20 +74,20 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
             value={scoreInput}
             onChange={(e) => setScoreInput(e.target.value)}
             placeholder="例：420"
-            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+            className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
           {scoreInput && (
-            <div className="mt-2 text-xs text-blue-700">
-              → 700点換算：<strong className="text-base">{academicConverted}点</strong>
+            <div className="mt-2 text-sm text-brand-700">
+              → 700点換算：<strong className="text-base tabular-nums">{academicConverted}点</strong>
             </div>
           )}
         </div>
 
         {/* 調査書点 */}
         <div>
-          <label htmlFor="tokyo-total-score-naishin" className="block text-sm font-bold text-slate-700 mb-2">
+          <label htmlFor="tokyo-total-score-naishin" className="mb-2 block text-sm font-bold text-slate-900">
             換算内申
-            <span className="ml-2 text-xs font-normal text-slate-500">（65点満点 = 5教科の評定 + 実技4教科×2）</span>
+            <span className="ml-2 text-xs font-normal text-slate-600">（65点満点 = 5教科の評定 + 実技4教科×2）</span>
           </label>
           <input
             id="tokyo-total-score-naishin"
@@ -109,23 +98,23 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
             value={naishinInput}
             onChange={(e) => setNaishinInput(e.target.value)}
             placeholder="例：50"
-            className="h-12 w-full rounded-lg border border-slate-200 px-4 text-base outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200"
+            className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
           {naishinInput && (
-            <div className="mt-2 text-xs text-emerald-700">
-              → 300点換算：<strong className="text-base">{naishinConverted}点</strong>
+            <div className="mt-2 text-sm text-brand-700">
+              → 300点換算：<strong className="text-base tabular-nums">{naishinConverted}点</strong>
             </div>
           )}
-          <div className="mt-2 text-xs text-slate-500">
-            <a href="/tokyo/naishin" className="text-blue-600 underline">東京都の内申点計算ツール</a>で換算内申を計算してから入力するとスムーズです
+          <div className="mt-2 text-sm text-slate-600">
+            <a href="/tokyo/naishin" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">東京都の内申点計算ツール</a>で換算内申を計算してから入力するとスムーズです
           </div>
         </div>
 
         {/* ESAT-J */}
         <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">
+          <label className="mb-2 block text-sm font-bold text-slate-900">
             ESAT-J 評価
-            <span className="ml-2 text-xs font-normal text-slate-500">（英語スピーキング・最大20点）</span>
+            <span className="ml-2 text-xs font-normal text-slate-600">（英語スピーキング・最大20点）</span>
           </label>
           <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
             {TOKYO_ESAT_GRADES.map((option) => (
@@ -133,17 +122,18 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
                 key={option.grade}
                 type="button"
                 onClick={() => setEsatGrade(option.grade)}
-                className={`rounded-lg border-2 px-2 py-2 text-center transition-all ${
+                aria-pressed={esatGrade === option.grade}
+                className={`min-h-[44px] rounded border-2 px-2 py-2 text-center transition-colors ${
                   esatGrade === option.grade
-                    ? 'border-amber-500 bg-amber-50 shadow-md'
-                    : 'border-slate-200 bg-white hover:border-amber-200 hover:bg-amber-50/50'
+                    ? 'border-brand-700 bg-brand-50'
+                    : 'border-slate-200 bg-white hover:bg-brand-50'
                 }`}
                 title={option.label}
               >
-                <div className={`text-sm font-black ${esatGrade === option.grade ? 'text-amber-700' : 'text-slate-700'}`}>
+                <div className={`text-sm font-bold ${esatGrade === option.grade ? 'text-brand-800' : 'text-slate-700'}`}>
                   {option.grade}
                 </div>
-                <div className={`text-[10px] ${esatGrade === option.grade ? 'text-amber-600' : 'text-slate-500'}`}>
+                <div className={`text-xs ${esatGrade === option.grade ? 'text-brand-700' : 'text-slate-600'}`}>
                   {option.score}点
                 </div>
               </button>
@@ -154,38 +144,36 @@ export function TokyoTotalScoreCalculator({ onResult }: TokyoTotalScoreCalculato
 
       {/* 結果 */}
       {hasInput && (
-        <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 px-6 py-6 border-t-2 border-blue-200">
-          <div className="text-center">
-            <div className="text-xs font-bold text-slate-600 mb-1">あなたの総合得点</div>
-            <div className={`text-6xl font-black ${getRankColor()}`}>
-              {total}
-              <span className="text-2xl font-bold text-slate-400">/{TOKYO_TOTAL_SCORE_MAX}</span>
-            </div>
-            <div className="mt-2 text-sm font-bold text-slate-700">
-              得点率 {percent.toFixed(1)}%
-            </div>
-            <div className={`mt-3 inline-block rounded-full px-4 py-1 text-sm font-bold ${getRankColor()} bg-white shadow-sm`}>
-              {getRankLabel()}
-            </div>
+        <div className="border-t border-slate-200 bg-brand-50 px-5 py-6 md:px-6">
+          <div className="text-sm font-bold text-slate-700">あなたの総合得点</div>
+          <div className="mt-1 text-5xl font-bold tabular-nums text-slate-900">
+            {total}
+            <span className="ml-1 text-2xl font-bold text-slate-600">/{TOKYO_TOTAL_SCORE_MAX}</span>
+          </div>
+          <div className="mt-2 text-sm font-bold text-slate-700">
+            得点率 {percent.toFixed(1)}%
+          </div>
+          <div className="mt-3 inline-block rounded border border-slate-200 bg-white px-3 py-1 text-sm font-bold text-slate-900">
+            {getRankLabel()}
           </div>
 
-          <div className="mt-6 grid gap-2 sm:grid-cols-3 text-center">
-            <div className="rounded-lg bg-white border border-blue-100 p-3">
-              <div className="text-[10px] font-bold text-blue-600 uppercase">学力検査</div>
-              <div className="text-xl font-black text-blue-700">{academicConverted}</div>
-              <div className="text-[10px] text-slate-500">/700点</div>
+          <dl className="mt-5 grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200">
+            <div className="px-3 py-3 first:pl-0">
+              <dt className="text-xs text-slate-600">学力検査</dt>
+              <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{academicConverted}</dd>
+              <dd className="text-xs text-slate-600">/700点</dd>
             </div>
-            <div className="rounded-lg bg-white border border-emerald-100 p-3">
-              <div className="text-[10px] font-bold text-emerald-600 uppercase">調査書点</div>
-              <div className="text-xl font-black text-emerald-700">{naishinConverted}</div>
-              <div className="text-[10px] text-slate-500">/300点</div>
+            <div className="px-3 py-3">
+              <dt className="text-xs text-slate-600">調査書点</dt>
+              <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{naishinConverted}</dd>
+              <dd className="text-xs text-slate-600">/300点</dd>
             </div>
-            <div className="rounded-lg bg-white border border-amber-100 p-3">
-              <div className="text-[10px] font-bold text-amber-600 uppercase">ESAT-J</div>
-              <div className="text-xl font-black text-amber-700">{esatScore}</div>
-              <div className="text-[10px] text-slate-500">/20点</div>
+            <div className="px-3 py-3">
+              <dt className="text-xs text-slate-600">ESAT-J</dt>
+              <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{esatScore}</dd>
+              <dd className="text-xs text-slate-600">/20点</dd>
             </div>
-          </div>
+          </dl>
 
           <TargetDistancePanel
             targetInput={targetInput}

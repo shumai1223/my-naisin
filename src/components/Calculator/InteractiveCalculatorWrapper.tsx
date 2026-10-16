@@ -8,7 +8,7 @@ const InteractiveCalculator = dynamic(() =>
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-96 items-center justify-center rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="flex h-96 items-center justify-center rounded-lg border border-slate-200 bg-white p-6">
         <Loader variant="inline" message="計算ツールを読み込んでいます..." />
       </div>
     )

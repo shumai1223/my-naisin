@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Send, Check } from 'lucide-react';
+import { Send, Check } from '@/components/icons';
 
 import { track, EVENTS } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -58,23 +58,23 @@ export function SchoolPageParentBridge({ schoolName, prefectureCode, className =
   }, [schoolName, prefectureCode]);
 
   return (
-    <div className={`rounded-2xl border border-indigo-200 bg-indigo-50/60 p-5 shadow-sm ${className}`}>
-      <p className="mb-3 text-sm leading-relaxed text-slate-700">
+    <div className={`rounded-lg border border-slate-200 bg-white p-5 ${className}`}>
+      <p className="mb-4 text-base leading-[1.8] text-slate-900">
         受験の相談は、おうちの人と一緒に。{schoolName}の情報をそのまま共有できます。
       </p>
       <button
         type="button"
         onClick={onShare}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg"
+        className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800 sm:w-auto"
       >
         {copied ? (
           <>
-            <Check className="h-4 w-4" />
+            <Check className="h-5 w-5" />
             リンクをコピーしました
           </>
         ) : (
           <>
-            <Send className="h-4 w-4" />
+            <Send className="h-5 w-5" />
             おうちの人に送る
           </>
         )}

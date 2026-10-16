@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Target, ChevronDown } from 'lucide-react';
+import { ChevronDown } from '@/components/icons';
 
 import type { TotalScoreSystem } from '@/lib/total-score/types';
 import { requiredAcademicRaw } from '@/lib/total-score/engine';
@@ -47,17 +47,14 @@ export function TotalScoreReverseCalculator({ system }: Props) {
           : 'normal';
 
   return (
-    <div className="rounded-2xl border-2 border-indigo-200 bg-white p-5 shadow-lg md:p-6">
-      <div className="mb-4 flex items-center gap-2">
-        <Target className="h-5 w-5 text-indigo-600" />
-        <h2 className="text-base font-bold text-slate-800">
-          目標の総合得点から、必要な学力検査点を逆算
-        </h2>
-      </div>
+    <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+      <h2 className="mb-4 text-xl font-bold text-slate-900">
+        目標の総合得点から、必要な学力検査点を逆算
+      </h2>
 
       {multipleOptions && (
         <div className="mb-4">
-          <label htmlFor="total-score-reverse-ratio" className="mb-2 block text-sm font-bold text-slate-700">
+          <label htmlFor="total-score-reverse-ratio" className="mb-2 block text-sm font-bold text-slate-900">
             志望校の「内申：学力」の比率
           </label>
           <div className="relative">
@@ -68,7 +65,7 @@ export function TotalScoreReverseCalculator({ system }: Props) {
                 onFirstUse();
                 setOptionId(e.target.value);
               }}
-              className="h-11 w-full appearance-none rounded-xl border border-slate-200 bg-white px-3 pr-9 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+              className="h-12 w-full appearance-none rounded border border-slate-300 bg-white px-3 pr-10 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
             >
               {system.ratioOptions.map((opt) => (
                 <option key={opt.id} value={opt.id}>
@@ -76,14 +73,14 @@ export function TotalScoreReverseCalculator({ system }: Props) {
                 </option>
               ))}
             </select>
-            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-600" />
           </div>
         </div>
       )}
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1 block text-xs font-bold text-slate-600">
+          <span className="mb-1 block text-sm font-bold text-slate-900">
             今の内申点（{system.report.rawMax}点満点）
           </span>
           <input
@@ -97,11 +94,11 @@ export function TotalScoreReverseCalculator({ system }: Props) {
               setReportInput(e.target.value);
             }}
             placeholder={`例：${Math.round(system.report.rawMax * 0.75)}`}
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-xs font-bold text-slate-600">目標の総合得点</span>
+          <span className="mb-1 block text-sm font-bold text-slate-900">目標の総合得点</span>
           <input
             type="number"
             inputMode="decimal"
@@ -112,41 +109,37 @@ export function TotalScoreReverseCalculator({ system }: Props) {
               setTargetInput(e.target.value);
             }}
             placeholder="例：志望校の目安点"
-            className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+            className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </label>
       </div>
 
       {status && result && (
         <div
-          className={`mt-5 rounded-xl border-2 p-5 text-center ${
-            status === 'unreachable'
-              ? 'border-rose-200 bg-rose-50/70'
-              : status === 'met'
-                ? 'border-emerald-200 bg-emerald-50/70'
-                : 'border-indigo-200 bg-gradient-to-br from-indigo-50 to-blue-50'
+          className={`mt-5 rounded-lg border p-4 md:p-5 ${
+            status === 'unreachable' ? 'border-red-200 bg-red-50' : 'border-slate-200 bg-brand-50'
           }`}
           role="status"
           aria-live="polite"
         >
           {status === 'met' && (
-            <div className="text-sm font-bold text-emerald-800">
+            <div className="text-base font-bold leading-[1.8] text-brand-800">
               今の内申点だけで、目標の総合得点にすでに届いています。
             </div>
           )}
           {status === 'unreachable' && (
-            <div className="text-sm font-bold text-rose-800">
+            <div className="text-base font-bold leading-[1.8] text-red-800">
               学力検査で満点（{system.academic.rawMax}点）を取っても、目標には届きません。目標総合得点を見直すか、内申点を上げる必要があります。
             </div>
           )}
           {status === 'normal' && (
             <>
-              <div className="text-xs font-bold text-slate-600">学力検査で必要な点数</div>
-              <div className="mt-1 text-4xl font-black text-indigo-700">
+              <div className="text-sm font-bold text-slate-700">学力検査で必要な点数</div>
+              <div className="mt-1 text-4xl font-bold tabular-nums text-brand-700">
                 {Math.round(result.requiredAcademicRaw)}
-                <span className="ml-1 text-base font-bold text-slate-500">/{system.academic.rawMax}点</span>
+                <span className="ml-1 text-base font-bold text-slate-600">/{system.academic.rawMax}点</span>
               </div>
-              <div className="mt-1 text-xs text-slate-500">
+              <div className="mt-1 text-sm tabular-nums text-slate-600">
                 得点率 {((result.requiredAcademicRaw / system.academic.rawMax) * 100).toFixed(1)}%
               </div>
             </>
@@ -154,7 +147,7 @@ export function TotalScoreReverseCalculator({ system }: Props) {
         </div>
       )}
 
-      <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+      <p className="mt-3 text-sm leading-[1.7] text-slate-600">
         ※ 目標の総合得点はご自身で設定した目安です。学校別の合格ボーダーではありません。実際の合否は倍率・他の受験者の得点で変動します。
       </p>
     </div>

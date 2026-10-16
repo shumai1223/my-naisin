@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle, Award } from 'lucide-react';
+import { AlertTriangle, ChevronRight, Home } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -15,6 +15,14 @@ import { AdUnit } from '@/components/AdSlot';
 // ハードコード文字列との乖離(ドリフト)を構造的に防ぐ。フォールバックは万一未設定時の保険。
 const CHIBA_SOURCE_URL =
   getPrefectureByCode('chiba')?.sourceUrl ?? 'https://www.pref.chiba.lg.jp/kyouiku/shidou/koukou/';
+
+// ページ冒頭のメタ行の「制度の最終確認」。値は prefectures.ts の既存データをそのまま表示するだけ（新しい日付は作らない）。
+const CHIBA_PREF = getPrefectureByCode('chiba');
+const formatYearMonth = (iso: string) => {
+  const [y, m] = iso.split('-');
+  return y && m && !Number.isNaN(Number(m)) ? `${y}年${Number(m)}月` : iso;
+};
+const CHIBA_LAST_VERIFIED = CHIBA_PREF?.lastVerified ? formatYearMonth(CHIBA_PREF.lastVerified) : null;
 
 const CHIBA_FAQS = [
   {
@@ -98,99 +106,95 @@ export default function ChibaTotalScorePage() {
       />
       <FAQPageSchema faqItems={CHIBA_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/chiba" className="hover:text-blue-600">千葉県</Link>
+            <Link href="/chiba" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">千葉県</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">調査書点・K値計算</span>
+            <span className="text-slate-900">調査書点・K値計算</span>
           </nav>
 
-          {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-xl">
-              <Calculator className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          {/* ページの頭: h1 → メタ行（年度・出典・最終確認）→ 結論の段落 */}
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               千葉県公立高校 調査書点・K値・総合得点 計算
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-teal-100 px-3 py-1 text-xs font-bold text-teal-700">
-              学力500点＋評定135×K＋学校設定検査・2026年度入試対応
-            </div>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              千葉県公立高校入試の合否は、学力検査（500点）と調査書点（評定135×係数K）などの合計で決まります。<br />
-              わかりにくい「K値」の仕組みを早見表で整理しました。
+            <p className="mt-2 text-sm text-slate-600">
+              学力500点＋評定135×K＋学校設定検査・2026年度入試対応 ／ 出典：
+              <a href={CHIBA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">千葉県教育委員会の公式情報</a>
+              {CHIBA_LAST_VERIFIED && <> ／ 制度の最終確認 {CHIBA_LAST_VERIFIED}</>}
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              千葉県公立高校入試の合否は、学力検査（500点）と調査書点（評定135×係数K）などの合計で決まります。わかりにくい「K値」の仕組みを早見表で整理しました。
             </p>
           </header>
 
           {/* 仕組み */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-teal-500" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               千葉県の総合得点の内訳
             </h2>
-            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               千葉県公立高校入試の総合得点は、次の要素を合計して決まります。配点は高校ごとに異なります。
             </p>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-between rounded-xl border border-teal-200 bg-teal-50 px-4 py-3">
-                <span className="font-bold text-teal-800">① 学力検査（5教科×100）</span>
-                <span className="font-black text-teal-700">500点</span>
+            <dl className="divide-y divide-slate-200 border-y border-slate-200">
+              <div className="flex items-center justify-between gap-4 py-3">
+                <dt className="font-bold text-slate-900">① 学力検査（5教科×100）</dt>
+                <dd className="shrink-0 font-bold tabular-nums text-slate-900">500点</dd>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
-                <span className="font-bold text-emerald-800">② 調査書点（評定135 × K値）</span>
-                <span className="font-black text-emerald-700">67.5〜270点</span>
+              <div className="flex items-center justify-between gap-4 py-3">
+                <dt className="font-bold text-slate-900">② 調査書点（評定135 × K値）</dt>
+                <dd className="shrink-0 font-bold tabular-nums text-slate-900">67.5〜270点</dd>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                <span className="font-bold text-slate-700">③ 調査書のその他</span>
-                <span className="font-black text-slate-600">0〜50点</span>
+              <div className="flex items-center justify-between gap-4 py-3">
+                <dt className="font-bold text-slate-900">③ 調査書のその他</dt>
+                <dd className="shrink-0 font-bold tabular-nums text-slate-900">0〜50点</dd>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                <span className="font-bold text-slate-700">④ 学校設定検査（面接・作文・適性検査など）</span>
-                <span className="font-black text-slate-600">10〜150点</span>
+              <div className="flex items-center justify-between gap-4 py-3">
+                <dt className="font-bold text-slate-900">④ 学校設定検査（面接・作文・適性検査など）</dt>
+                <dd className="shrink-0 font-bold tabular-nums text-slate-900">10〜150点</dd>
               </div>
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+            </dl>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               特徴は<strong>「K値」</strong>。調査書の評定（最大135点）に各高校が定めた係数K（0.5〜2）を掛けて、内申の比重を調整します。同じ評定でも、志望校のK値で調査書点が大きく変わります。
             </p>
           </section>
 
           {/* B-4: 実数入力の総合得点計算機（結果連動の名簿導線つき） */}
-          <div className="mb-8">
+          <div className="mb-10">
             <ChibaTotalScoreResultFlow />
           </div>
 
           {/* K値 早見表 */}
-          <section className="mb-8 rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50/40 to-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-emerald-500" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               K値 早見表（評定合計 × K ＝ 調査書点）
             </h2>
-            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               評定合計（中1〜中3の9教科、最大135）に志望校のK値を掛けた値が調査書点です。自分の評定合計と志望校のK値が交わるマスを見れば、調査書点がすぐわかります。
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-emerald-600 text-white text-left">
-                    <th className="border border-emerald-400 px-3 py-2 font-bold">評定合計＼K値</th>
+                  <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                    <th className="px-3 py-2 font-bold">評定合計＼K値</th>
                     {K_VALUES.map((kv) => (
-                      <th key={kv.k} className="border border-emerald-400 px-3 py-2 font-bold text-right">K={kv.k}</th>
+                      <th key={kv.k} className="px-3 py-2 text-right font-bold">K={kv.k}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
+                <tbody className="divide-y divide-slate-200 text-slate-900">
                   {HYOTEI_ROWS.map((sum) => (
-                    <tr key={sum} className="odd:bg-white even:bg-slate-50">
-                      <td className="border border-slate-200 px-3 py-2 font-bold">{sum}</td>
+                    <tr key={sum}>
+                      <td className="px-3 py-2 font-bold tabular-nums">{sum}</td>
                       {K_VALUES.map((kv) => (
-                        <td key={kv.k} className="border border-slate-200 px-3 py-2 text-right">
+                        <td key={kv.k} className="px-3 py-2 text-right tabular-nums">
                           {fmt(Number(sum) * kv.mul)}
                         </td>
                       ))}
@@ -199,7 +203,7 @@ export default function ChibaTotalScorePage() {
                 </tbody>
               </table>
             </div>
-            <div className="mt-3 grid gap-1 text-[11px] text-slate-500 sm:grid-cols-2">
+            <div className="mt-3 grid gap-1 text-sm text-slate-600 sm:grid-cols-2">
               {K_VALUES.map((kv) => (
                 <div key={kv.k}>K={kv.k}：{kv.label}</div>
               ))}
@@ -207,29 +211,24 @@ export default function ChibaTotalScorePage() {
           </section>
 
           {/* 計算例 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-teal-500" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               総合得点の計算例
             </h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-teal-200 bg-teal-50 p-4">
-                <h3 className="font-bold text-teal-900 mb-1">例：評定合計108・学力検査380点</h3>
-                <ul className="text-teal-900 text-xs space-y-1 ml-4 list-disc">
-                  <li>進学校（K=0.5）：調査書点 ＝ 108 × 0.5 ＝ 54。総合 ＝ 380 ＋ 54 ＝ <strong>434点</strong>（＋学校設定検査）</li>
-                  <li>標準（K=1.0）：調査書点 ＝ 108。総合 ＝ 380 ＋ 108 ＝ <strong>488点</strong>（＋学校設定検査）</li>
-                  <li>内申重視（K=2.0）：調査書点 ＝ 216。総合 ＝ 380 ＋ 216 ＝ <strong>596点</strong>（＋学校設定検査）</li>
-                </ul>
-              </div>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                同じ評定・同じ当日点でも、志望校のK値で総合得点の構成が大きく変わります。当日点が強い人はK=0.5の進学校、内申が強い人はK=1.5〜2の高校が相対的に有利になりやすいです。
-              </p>
-            </div>
+            <h3 className="mb-2 text-[17px] font-bold text-slate-900">例：評定合計108・学力検査380点</h3>
+            <ul className="list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
+              <li>進学校（K=0.5）：調査書点 ＝ 108 × 0.5 ＝ 54。総合 ＝ 380 ＋ 54 ＝ <strong>434点</strong>（＋学校設定検査）</li>
+              <li>標準（K=1.0）：調査書点 ＝ 108。総合 ＝ 380 ＋ 108 ＝ <strong>488点</strong>（＋学校設定検査）</li>
+              <li>内申重視（K=2.0）：調査書点 ＝ 216。総合 ＝ 380 ＋ 216 ＝ <strong>596点</strong>（＋学校設定検査）</li>
+            </ul>
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
+              同じ評定・同じ当日点でも、志望校のK値で総合得点の構成が大きく変わります。当日点が強い人はK=0.5の進学校、内申が強い人はK=1.5〜2の高校が相対的に有利になりやすいです。
+            </p>
           </section>
 
           {/* 保護者向けリード（旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}
           <ParentLeadCTA
-            className="mb-8"
+            className="mb-10"
             placement="prefecture"
             heading="千葉の志望校、K値に合った対策ができていますか？"
             body="志望校のK値で必要な内申・当日点のバランスは変わります。お子さまに合った対策を、塾の無料体験で具体的に確認できます（費用はかかりません）。"
@@ -239,49 +238,58 @@ export default function ChibaTotalScorePage() {
           />
 
           {/* よくある質問 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="space-y-5">
               {CHIBA_FAQS.map((faq, i) => (
                 <div key={i}>
-                  <div className="font-bold text-slate-800 text-sm">Q. {faq.question}</div>
-                  <p className="mt-1 text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
+                  <h3 className="text-[17px] font-bold text-slate-900">Q. {faq.question}</h3>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 注意 */}
-          <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
-            <div className="flex items-start gap-2">
-              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-              <p className="text-xs text-amber-800 leading-relaxed">
-                各高校のK値・学校設定検査の配点・選抜方法は学校ごと・年度ごとに異なります。志望校の正確な配点は各高校の発表および<a href={CHIBA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">千葉県教育委員会の公式情報</a>でご確認ください。
-              </p>
-            </div>
+          <div className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="flex items-center gap-1.5 text-sm font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-sm leading-[1.8] text-amber-900">
+              各高校のK値・学校設定検査の配点・選抜方法は学校ごと・年度ごとに異なります。志望校の正確な配点は各高校の発表および<a href={CHIBA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">千葉県教育委員会の公式情報</a>でご確認ください。
+            </p>
           </div>
 
           {/* 関連リンク */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/chiba/naishin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">千葉県の内申点を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/chiba" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">千葉県の入試制度ガイド</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">5教科の偏差値を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/reverse?pref=chiba" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">志望校から逆算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-            </div>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">関連ツール・コンテンツ</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/chiba/naishin" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">千葉県の内申点を計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/chiba" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">千葉県の入試制度ガイド</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hensachi" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">5教科の偏差値を計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/reverse?pref=chiba" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">志望校から逆算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
 
           {/* T-ADS1 AdSense PAGE_BOTTOM: ページ最下部（フッターの前）。保護者リードCTAより後ろ。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}

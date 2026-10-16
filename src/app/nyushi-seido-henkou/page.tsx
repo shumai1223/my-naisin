@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Bell, ExternalLink } from 'lucide-react';
+import { Home, ChevronRight, ExternalLink } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -137,6 +137,11 @@ export const metadata: Metadata = {
   },
 };
 
+// 要約文の中の **強調** を太字で表示する（記号の「**」そのものは画面に出さない）。
+function emphasize(text: string) {
+  return text.split('**').map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part));
+}
+
 export default function NyushiSeidoHenkouPage() {
   return (
     <>
@@ -155,148 +160,152 @@ export default function NyushiSeidoHenkouPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link
+              href="/"
+              className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
+            >
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">入試制度変更点まとめ</span>
+            <span className="text-slate-900">入試制度変更点まとめ</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl">
-              <Bell className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               公立高校入試 制度変更点まとめ
             </h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+            <p className="mt-2 text-sm text-slate-600">
+              出典：各都道府県教育委員会の公表資料（項目ごとに出典と確認日を記載）
+            </p>
+            <p className="mt-3 max-w-2xl text-base leading-[1.8] text-slate-900">
               各都道府県教育委員会が公式発表した入試制度の変更予告を集約した、随時更新のページです。
               一次ソースを明記し、噂・推測は掲載しません。
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-6">
-            <p className="text-sm leading-relaxed text-amber-900">
+          <section className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="text-sm leading-[1.8] text-amber-900">
+              <strong>注意：</strong>
               現時点で本サイトが把握している変更予告は{UPCOMING_CHANGES.length}件です。教育委員会の新しい
               発表を確認でき次第、追記していきます。掲載していない都道府県に変更がないとは限りません。
             </p>
           </section>
 
-          <section className="mb-8 space-y-4">
+          <section className="mb-10 space-y-4">
             {UPCOMING_CHANGES.map((c) => (
-              <div key={c.prefCode} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div key={c.prefCode} className="rounded-lg border border-slate-200 bg-white p-5">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-700">
+                  <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-bold text-slate-900">
                     {c.prefName}
                   </span>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                  <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                     {c.effectiveYear}〜
                   </span>
                 </div>
-                <h2 className="mb-2 text-lg font-bold text-slate-800">{c.headline}</h2>
-                <p className="mb-3 text-sm leading-relaxed text-slate-600">{c.detail}</p>
-                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
+                <h2 className="mb-2 text-[17px] font-bold text-slate-900">{c.headline}</h2>
+                <p className="mb-3 text-base leading-[1.8] text-slate-900">{emphasize(c.detail)}</p>
+                <div className="flex flex-wrap items-center gap-x-4 text-sm text-slate-600">
                   <a
                     href={c.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-indigo-600 hover:underline"
+                    className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
                   >
-                    出典: {c.sourceTitle} <ExternalLink className="h-3 w-3" />
+                    出典: {c.sourceTitle} <ExternalLink className="h-4 w-4 shrink-0" />
                   </a>
                   <span>確認日: {c.confirmedDate}</span>
                 </div>
                 <Link
                   href={`/${c.prefCode}/naishin`}
-                  className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline"
+                  className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
                 >
-                  {c.prefName}の現行制度を確認する <ChevronRight className="h-3 w-3" />
+                  {c.prefName}の現行制度を確認する <ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
             ))}
           </section>
 
-          <section className="mb-8">
+          <section className="mb-10">
             <h2 className="mb-1 text-xl font-bold text-slate-900">過去の制度変更履歴（過去5年分）</h2>
-            <p className="mb-4 text-sm text-slate-500">
+            <p className="mb-4 text-sm text-slate-600">
               内申点の算出方法（配点・学年比率・実技傾斜等）に実際に影響した過去の制度変更を集めています。「今後の変更予告」とは異なり、既に選抜へ反映済みの変更のみを対象とします。
             </p>
             <div className="space-y-4">
               {PAST_SYSTEM_CHANGES.map((c, i) => (
-                <div key={`${c.prefCode}-${i}`} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div key={`${c.prefCode}-${i}`} className="rounded-lg border border-slate-200 bg-white p-5">
                   <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">
+                    <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-bold text-slate-900">
                       {c.prefName}
                     </span>
-                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                    <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                       {c.effectiveYear}〜
                     </span>
                   </div>
-                  <h3 className="mb-2 text-lg font-bold text-slate-800">{c.headline}</h3>
-                  <p className="mb-3 text-sm leading-relaxed text-slate-600">{c.detail}</p>
-                  <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
+                  <h3 className="mb-2 text-[17px] font-bold text-slate-900">{c.headline}</h3>
+                  <p className="mb-3 text-base leading-[1.8] text-slate-900">{emphasize(c.detail)}</p>
+                  <div className="flex flex-wrap items-center gap-x-4 text-sm text-slate-600">
                     <a
                       href={c.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-indigo-600 hover:underline"
+                      className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
                     >
-                      出典: {c.sourceTitle} <ExternalLink className="h-3 w-3" />
+                      出典: {c.sourceTitle} <ExternalLink className="h-4 w-4 shrink-0" />
                     </a>
                     <span>確認日: {c.confirmedDate}</span>
                   </div>
                   <Link
                     href={`/${c.prefCode}/naishin`}
-                    className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline"
+                    className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
                   >
-                    {c.prefName}の現行制度を確認する <ChevronRight className="h-3 w-3" />
+                    {c.prefName}の現行制度を確認する <ChevronRight className="h-4 w-4" />
                   </Link>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mb-10">
             <ParentLeadCTA placement="prefecture" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
+          <section className="rounded-lg border border-slate-200 bg-white p-5">
             <p className="mb-3 text-sm text-slate-600">
               都道府県別の内申点計算方法や制度の違いをもっと詳しく知りたい方はこちら
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap gap-2">
               <Link
                 href="/naishin-kakusa"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-4 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50"
               >
                 内申点格差レポート
               </Link>
               <Link
                 href="/report/2026"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-4 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50"
               >
                 内申点白書2026
               </Link>
               <Link
                 href="/"
-                className="rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold text-indigo-700 hover:bg-indigo-50"
+                className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-4 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50"
               >
                 内申点を計算する
               </Link>

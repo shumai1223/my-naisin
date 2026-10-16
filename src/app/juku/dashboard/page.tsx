@@ -24,9 +24,9 @@ export const dynamic = 'force-dynamic';
 
 function Gate() {
   return (
-    <div className="mx-auto max-w-md px-4 py-20 text-center">
-      <h1 className="text-lg font-bold text-slate-800">招待トークンが必要です</h1>
-      <p className="mt-2 text-sm text-slate-500">
+    <div className="mx-auto max-w-md px-4 py-20">
+      <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">招待トークンが必要です</h1>
+      <p className="mt-3 text-base leading-[1.8] text-slate-900">
         このページは招待された塾専用です。<code>?token=</code> に正しい招待トークンを付けてアクセスしてください。
       </p>
     </div>

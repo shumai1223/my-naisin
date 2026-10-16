@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ClipboardList, HelpCircle, AlertTriangle, ChevronRightSquare, CheckCircle2 } from 'lucide-react';
+import { Home, ChevronRight, AlertTriangle, ChevronRightSquare } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -74,62 +74,56 @@ export default function GoukakuHappyoPage() {
         totalTime="P14D"
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">合格発表後の手続き</span>
+            <span className="text-slate-900">合格発表後の手続き</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">合格発表後の手続き</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">合格発表後の手続き</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               合格発表の後、入学までにやることを一般的な流れでまとめました。学校ごとの正式な手続き・期限は、学校から渡される案内が最優先です。
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
-              <p className="text-sm leading-relaxed text-amber-900">
-                入学手続きの方法・必要書類・期限は学校ごとに大きく異なります。このページは一般的な流れの目安であり、正式な手続きは必ず学校から渡される案内に従ってください。
-              </p>
-            </div>
+          <section className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="flex items-center gap-1.5 text-sm font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-base leading-[1.8] text-amber-900">
+              入学手続きの方法・必要書類・期限は学校ごとに大きく異なります。このページは一般的な流れの目安であり、正式な手続きは必ず学校から渡される案内に従ってください。
+            </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-blue-500 pl-3 text-lg font-bold text-slate-800">
-              <ClipboardList className="h-5 w-5 text-blue-500" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               合格後の一般的な流れ
             </h2>
-            <div className="space-y-4">
+            <ol className="space-y-5">
               {PASSED_STEPS.map((s, i) => (
-                <div key={s.title} className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
-                      {i + 1}
-                    </div>
-                    {i < PASSED_STEPS.length - 1 && <div className="mt-1 h-full w-px flex-1 bg-emerald-100" />}
+                <li key={s.title} className="flex gap-3">
+                  <span className="w-6 shrink-0 text-base font-bold tabular-nums text-brand-700">{i + 1}.</span>
+                  <div>
+                    <h3 className="text-[17px] font-bold text-slate-900">{s.title}</h3>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.body}</p>
                   </div>
-                  <div className="pb-2">
-                    <div className="text-sm font-bold text-slate-800">{s.title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
-                  </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-slate-400 pl-3 text-lg font-bold text-slate-800">
-              <CheckCircle2 className="h-5 w-5 text-slate-500" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               思うような結果でなかったときは
             </h2>
-            <div className="space-y-3 text-sm leading-relaxed text-slate-600">
+            <div className="space-y-3 text-base leading-[1.8] text-slate-900">
               <p>
                 第一志望に届かなかった場合でも、多くの都道府県で公立高校の欠員募集（二次募集）や、私立高校の追加募集が実施されることがあります。実施の有無・日程は年度や地域によって異なるため、まずは担任の先生や志望校へ早めに相談することが大切です。
               </p>
@@ -139,50 +133,59 @@ export default function GoukakuHappyoPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 flex items-start gap-1.5 text-sm font-bold text-slate-800">
-                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">
                     Q. {f.question}
                   </h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mb-10">
             <ParentLeadCTA placement="hiyou" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/jikosaiten" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                自己採点のやり方
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/juken-toujitsu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                受験当日の持ち物・タイムライン
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/heigan-yuugu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                併願優遇の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/koukou-hiyou" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                高校費用シミュレーター
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/naishin-kakusa" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                都道府県別 内申点格差レポート
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/jikosaiten" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">自己採点のやり方</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/juken-toujitsu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">受験当日の持ち物・タイムライン</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/heigan-yuugu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">併願優遇の仕組み</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/koukou-hiyou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">高校費用シミュレーター</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/naishin-kakusa" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">都道府県別 内申点格差レポート</span>
+                  <ChevronRightSquare className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { MessageCircle, X, BellRing } from 'lucide-react';
+import { MessageCircle, X } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
@@ -12,6 +12,8 @@ import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
  * 重要な設計（SEO安全・非侵入）：
  *  - 「入口」ではなく「退出」トリガーのみ（Googleの intrusive interstitial ペナルティは入口型が対象）。
  *  - 着地直後は出さない（ENGAGE_MS 経過＋一定スクロール後のみアーム）。
+ *  - トリガーは「PCでページ上端からマウスが出る」と「タブが隠れる（visibilitychange）」だけ。
+ *    スマホで上へスクロールを戻しただけでは出さない（2026-10-16 👤決定・読書の妨げにしない）。
  *  - 1端末あたり frequency cap（既定10日に1回）＋同一セッション1回。閉じたら当面出さない。
  *  - 全画面で本文を覆わない控えめなボトムシート／カード。閉じるは大きく明示。
  *  - 広告ではなく“資産形成（名簿）”なので AdSense密度リスクには当たらない。
@@ -76,20 +78,9 @@ export function ExitIntentLineModal() {
       if (e.clientY <= 0 && !e.relatedTarget) trigger();
     };
 
-    // モバイル：下に読み進めた後の“上方向スクロール反転”（戻る/読み終わりの前兆）。
-    // 閾値を緩和（velUp 1.2→0.8 / y<600→900）。モバイルでは「読み終えて上に戻す」動作が離脱の主要シグナル。
-    let lastY = window.scrollY;
-    let lastT = Date.now();
-    const onScrollMobile = () => {
-      const y = window.scrollY;
-      const t = Date.now();
-      const dy = y - lastY;
-      const dt = t - lastT || 1;
-      const velUp = -dy / dt; // 上方向の速度（px/ms）
-      if (velUp > 0.8 && y < 900 && scrolledRef.current) trigger();
-      lastY = y;
-      lastT = t;
-    };
+    // 2026-10-16 👤決定: スマホの「上方向スクロール反転」では出さない。
+    // スクロールの不具合（window.scrollY が常に0だった）を直したことで、読んでいる最中に上へ戻しただけで
+    // モーダルが出るようになってしまうため（保護者の読書を邪魔しない）。スマホの離脱は下の visibilitychange で捕捉する。
 
     // モバイル最重要：タブ切替/ホームボタン/画面ロック/タブを閉じる＝visibilitychange→hidden。
     // mouseout が発火しないモバイル(全体の71%)での離脱を確実に捕捉する。モーダルは復帰時に見える。
@@ -100,14 +91,12 @@ export function ExitIntentLineModal() {
     armedRef.current = true;
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('mouseout', onMouseOut);
-    window.addEventListener('scroll', onScrollMobile, { passive: true });
     document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       window.clearTimeout(engageTimer);
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('mouseout', onMouseOut);
-      window.removeEventListener('scroll', onScrollMobile);
       document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
@@ -132,26 +121,22 @@ export function ExitIntentLineModal() {
       onClick={close}
     >
       <div
-        className="w-full max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl"
+        className="w-full max-w-md overflow-hidden rounded-lg border border-slate-200 bg-white shadow-overlay"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 px-5 py-5">
+        <div className="relative bg-brand-50 px-5 py-5">
           <button
             type="button"
             onClick={close}
             aria-label="閉じる"
-            className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/80 text-slate-500 hover:bg-white hover:text-slate-700"
+            className="absolute right-1 top-1 rounded p-3 text-slate-600 hover:bg-white hover:text-slate-900"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200">
-            <BellRing className="h-3.5 w-3.5" />
-            お見逃しなく
-          </div>
-          <h3 className="text-lg font-bold leading-snug text-slate-900">
+          <h3 className="pr-10 text-lg font-bold leading-snug text-slate-900">
             受験情報・内申点アップのコツをLINEで受け取りませんか？
           </h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">
             出願日程や対策のタイミングを、必要なときにLINEでお知らせします。登録は無料・数秒、いつでも解除できます。
           </p>
         </div>
@@ -161,16 +146,16 @@ export function ExitIntentLineModal() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={onLineClick}
-            className="flex items-center justify-center gap-2 rounded-xl bg-[#06C755] px-5 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99]"
+            className="flex items-center justify-center gap-2 rounded bg-[#06C755] px-5 py-3 text-base font-bold text-white transition-colors hover:bg-[#05b34c]"
           >
             <MessageCircle className="h-5 w-5" />
             LINEで友だち追加（無料）
           </a>
-          <p className="text-center text-[11px] leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
+          <p className="text-center text-sm leading-relaxed text-slate-600">{LINE_UNFRIEND_HELP_TEXT}</p>
           <button
             type="button"
             onClick={close}
-            className="text-center text-xs font-medium text-slate-400 hover:text-slate-600"
+            className="min-h-[44px] text-center text-sm text-slate-600 underline underline-offset-2 hover:text-slate-900"
           >
             あとで
           </button>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, FileText, ListChecks, Scale, HelpCircle, PenLine, Calculator, NotebookPen } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -53,7 +53,6 @@ export const metadata: Metadata = {
 
 const CONTENTS = [
   {
-    icon: ListChecks,
     title: '調査書に書かれる4つの内容',
     items: [
       ['学習の記録（各教科の評定）', '9教科の5段階評定。入試で点数化される中心部分（＝内申点）。'],
@@ -75,23 +74,20 @@ export default function ChousashoPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">調査書とは</span>
+            <span className="text-slate-900">調査書とは</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
-              <FileText className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">調査書とは？</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">調査書とは？</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               高校受験で中学校が作成・提出する「調査書」について、<strong>内申点との違い</strong>・<strong>記載内容</strong>・
               <strong>いつの成績が対象か</strong>を、当事者目線でわかりやすく整理しました。
             </p>
@@ -106,362 +102,356 @@ export default function ChousashoPage() {
           </AnswerBox>
 
           {/* 大学受験(学習成績の状況)との混同を避ける導線 */}
-          <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+          <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm leading-[1.8] text-slate-900">
             このページは<strong>高校受験（中学生）向け</strong>の調査書の解説です。
             大学受験の調査書（学習成績の状況）をシミュレーションしたい場合は
-            <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="font-bold underline">
+            <Link href="/hyotei-heikin/gakushu-seiseki/chousasho" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
               大学受験用の調査書シミュレーター
             </Link>
             をご利用ください。
           </div>
 
           {/* 記載内容 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ListChecks className="h-5 w-5 text-blue-600" />
-              調査書に書かれる内容
-            </h2>
-            <div className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">調査書に書かれる内容</h2>
+            <div className="divide-y divide-slate-200">
               {CONTENTS[0].items.map(([t, d]) => (
-                <div key={t} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                  <div className="text-sm font-bold text-slate-800">{t}</div>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{d}</p>
+                <div key={t} className="py-4 first:pt-0 last:pb-0">
+                  <div className="text-base font-bold text-slate-900">{t}</div>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">{d}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-xs text-slate-500">
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               ※ 入試で点数化される中心は「学習の記録（評定）」です。特別活動・行動・出欠の扱いは都道府県・学校で異なります。
             </p>
           </section>
 
           {/* 都道府県による記載事項の違い（一次ソース確認済みの実例のみ） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <NotebookPen className="h-5 w-5 text-blue-600" />
-              調査書の記載事項は都道府県によって変わることがある
-            </h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">調査書の記載事項は都道府県によって変わることがある</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               上記の4項目は全国共通の基本形（文部科学省 別紙様式1）ですが、実際の様式は教育委員会ごとに
               項目名や構成が異なることがあります。<strong>教育委員会が公式に公表している資料で確認できた
               実例</strong>のみ、以下に記載します（未確認の都道府県については記載しません）。
             </p>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">愛知県（令和9年度入試〜）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">愛知県（令和9年度入試〜）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「性別」「行動の記録」「出欠の記録」の3項目を削除。学習の記録（評定）の欄・内申点の
                   計算方法自体には変更なし。
                 </p>
-                <a href="https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.aichi.jp/soshiki/kotogakko/0000027366.html" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 愛知県教育委員会「調査書情報の変更点」（令和8年4月発行）
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">埼玉県（令和9年度入試〜）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">埼玉県（令和9年度入試〜）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「特別活動等の記録」「出欠の記録」等を除き、学習の記録（9教科5段階の評定）を基本とする
                   形に整理。あわせて全受検生対象の面接と「自己評価資料」（採点はせず面接資料として使用）
                   を新設。学習の記録自体の項目・学年比率の仕組みには変更なし。
                 </p>
-                <a href="https://www.pref.saitama.lg.jp/documents/258788/news2024092601.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.saitama.lg.jp/documents/258788/news2024092601.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 埼玉県教育委員会「令和9年度埼玉県公立高等学校入学者選抜実施基本方針」（令和6年9月26日）
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">千葉県（令和8年度入試〜・既に実施済み）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">千葉県（令和8年度入試〜・既に実施済み）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「総合的な学習の時間の記録」「出欠の記録」「行動の記録（第3学年）」「総合所見」の
                   4項目を削除。学習の記録（評定）・調査書点の算出方法自体には変更なし。
                 </p>
-                <a href="https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2024/koukou/r8kaizenten.html" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.chiba.lg.jp/kyouiku/shidou/press/2024/koukou/r8kaizenten.html" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 千葉県教育委員会「千葉県公立高等学校入学者選抜の改善点について」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">東京都（様式10・令和8年度入試）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">東京都（様式10・令和8年度入試）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「1 成績一覧表の番号・提出の有無」「2 学籍の記録」「3 各教科の学習の記録」
                   「4 総合的な学習の時間の内容及び評価」「5 諸活動の記録（特別活動等・ESAT-J結果）」
                   「6 海外帰国生徒対象等との併願」の6項目で構成。「行動の記録」「出欠の記録」
                   「総合所見」という項目名は単独では使われておらず、特別活動等の記録は
                   「諸活動の記録」に統合されています。
                 </p>
-                <a href="https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/20251201_tyousasho_sakusei" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.kyoiku.metro.tokyo.lg.jp/documents/d/kyoiku/20251201_tyousasho_sakusei" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 東京都教育委員会「令和8年度東京都立高等学校入学者選抜の調査書の作成について」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">大阪府（オンライン出願・令和8年度入試）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">大阪府（オンライン出願・令和8年度入試）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   紙の様式ではなく、中学校長が府教育委員会指定の「調査書作成ソフト」でデータを作成し
                   オンライン出願システムに登録する方式。「活動/行動の記録」欄は他県のような固定区分では
                   なく単一の自由記述欄で、「項目の立て方及び数については、特に定めていません」と
                   明記されています（学校ごとに項目を自由に設定）。
                 </p>
-                <a href="https://www.pref.osaka.lg.jp/documents/118149/40_r08_tebiki_tyousasyotou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.osaka.lg.jp/documents/118149/40_r08_tebiki_tyousasyotou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 大阪府教育委員会「調査書情報、成績一覧表及び推薦書情報（手引き）」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">神奈川県</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">神奈川県</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   学籍の記録・各教科の学習の記録・総合的な学習の時間の記録に加えて、「総合所見及び
                   諸活動の記録欄」の中に特別活動等の記録（学級活動・生徒会活動・学校行事等・部活動）と
                   「行動の記録及び所見欄」を持つ構成。東京都・大阪府とは異なり、「行動の記録」を
                   （所見と一体化した形で）独立した項目として保持しています。
                 </p>
-                <a href="https://www.pref.kanagawa.jp/documents/63604/14_chuui1.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.kanagawa.jp/documents/63604/14_chuui1.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 神奈川県教育委員会「調査書作成上の注意」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">福岡県（様式5）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">福岡県（様式5）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   学籍の記録・各教科の学習の記録に加えて、特別活動の記録（生徒会活動等）、
                   「自主・自律」「創意工夫」「勤労・奉仕」「公共心・公徳心」「基本的な生活習慣」
                   といった行動面の評価区分、総合所見、そして「欠席日数」を明示的に持つ様式です。
                 </p>
-                <a href="https://www.pref.fukuoka.lg.jp/uploaded/attachment/268335.xls" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.fukuoka.lg.jp/uploaded/attachment/268335.xls" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 福岡県教育委員会「調査書（様式５）」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">愛媛県（国の標準形にほぼ忠実）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">愛媛県（国の標準形にほぼ忠実）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   出欠の記録・各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録
                   （学級活動/生徒会活動/学校行事）・行動の記録（基本的な生活習慣など10項目）・
                   総合所見という構成で、他県のような項目の削減・統合・自由記述化は見られず、
                   国の基本4区分をほぼそのまま保持しています。
                 </p>
-                <a href="https://ehime-kyoiku.esnet.ed.jp/file/2088" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://ehime-kyoiku.esnet.ed.jp/file/2088" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 愛媛県教育委員会「県立高等学校入学志願者調査書」様式
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">北海道（個人調査書・別記様式3）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">北海道（個人調査書・別記様式3）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   学籍の記録・各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録に加え、
                   「行動の記録」（基本的な生活習慣など10項目）は<strong>第3学年のみ</strong>を対象に
                   記載。出欠の記録は学年別の欠席日数だけでなく「欠席の主な理由」まで記載する欄を
                   持ち、確認した中で最も詳細な様式でした。
                 </p>
-                <a href="https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/2/5/1/0/0/9/0/_/01-3_R8%E3%80%90%E8%A8%98%E5%85%A5%E4%BE%8B%E3%80%91%E5%88%A5%E8%A8%98%E6%A7%98%E5%BC%8F3%20%E5%80%8B%E4%BA%BA%E8%AA%BF%E6%9F%BB%E6%9B%B8.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.dokyoi.pref.hokkaido.lg.jp/fs/1/2/5/1/0/0/9/0/_/01-3_R8%E3%80%90%E8%A8%98%E5%85%A5%E4%BE%8B%E3%80%91%E5%88%A5%E8%A8%98%E6%A7%98%E5%BC%8F3%20%E5%80%8B%E4%BA%BA%E8%AA%BF%E6%9F%BB%E6%9B%B8.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 北海道教育委員会「個人調査書（別記様式３）記入例」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">兵庫県（個人の調査書様式は非公開）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">兵庫県（個人の調査書様式は非公開）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   公表されている様式集には、個人の調査書そのものの様式は含まれていません。
                   公開されているのは学校単位の評定人数分布表（様式1）と、評定判定が困難な
                   例外ケース用の書類（様式2）のみで、個人の調査書はオンラインシステムへの
                   直接入力で作成されるとみられます（大阪府と同系統の方式）。
                 </p>
-                <a href="https://www2.hyogo-c.ed.jp/hpe/koko/nyuushi/senbatsuyoukou_r8/" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www2.hyogo-c.ed.jp/hpe/koko/nyuushi/senbatsuyoukou_r8/" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 兵庫県教育委員会「入学者選抜要綱・様式集」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">長野県（最も簡素な構成）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">長野県（最も簡素な構成）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「各教科の学習の記録／総合的な学習の時間の記録／特別活動の記録（学級活動・
                   生徒会活動・学校行事）／総合所見及び特記事項」の構成で、「行動の記録」
                   「出欠の記録」に相当する独立項目は確認できませんでした。確認した中で
                   最も簡素な基本形です。
                 </p>
-                <a href="https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8_tyosasho_tebiki.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.nagano.lg.jp/kyoiku/koko/saiyo-nyuushi/shiken/ko/r8/documents/r8_tyosasho_tebiki.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 長野県教育委員会「調査書作成の手引」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">京都府（「報告書」という呼び方）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">京都府（「報告書」という呼び方）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「調査書」ではなく「報告書」という名称を使います。特別活動の記録は独立項目に
                   せず総合所見に統合。特筆すべき点として、様式の注記に「授業日数、出席日数の
                   記載があっても入学者選抜には用いません」と明記されており、出欠情報は記録
                   されるものの選考には使わないと公式に宣言しています。
                 </p>
-                <a href="https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/12/01-R8yousiki1-1.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.kyoto-be.ne.jp/koukyou/cms/wp-content/uploads/2025/12/01-R8yousiki1-1.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 京都府教育委員会「入学者選抜に関する諸様式（報告書等）」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">茨城県（部活動を独立項目に）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">茨城県（部活動を独立項目に）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科の学習の記録・総合的な学習の時間の記録・特別活動に関する事実及び所見・
                   欠席日数・その他の事項に加えて、<strong>「部活動・特技等の記録」を特別活動とは
                   別の独立項目</strong>としています。これまで確認した県の中では初めての区分方法です。
                 </p>
-                <a href="https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2025/11/b945a5295b800e8d45f790a23bf6eda9.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2025/11/b945a5295b800e8d45f790a23bf6eda9.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 茨城県教育委員会「調査書、成績及び諸活動等の記録通知書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">滋賀県（「個人調査報告書」＋独自項目）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">滋賀県（「個人調査報告書」＋独自項目）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「各教科の学習の記録／総合的な学習の時間の記録／総合所見および特別活動等
                   （行動の記録は独立項目ではなく、特筆すべき点があれば総合所見内に任意で
                   記入する扱い）／卒業後の進路状況」という構成。「卒業後の進路状況」は
                   他県では確認できなかった滋賀県独自の項目です。
                 </p>
-                <a href="https://www.pref.shiga.lg.jp/file/attachment/5571771.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.shiga.lg.jp/file/attachment/5571771.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 滋賀県教育委員会「個人調査報告書（４号の１）」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">岐阜県（「学校内外における諸活動の記録」）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">岐阜県（「学校内外における諸活動の記録」）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   A4縦1ページの構成で「学籍の記録／各教科の学習の記録／特別活動の記録（学級活動・
                   生徒会活動・学校行事）／学校内外における諸活動の記録／特記事項」となっています。
                   <strong>「学校内外における諸活動の記録」</strong>は他県では確認できなかった呼称で、
                   校内の部活動だけでなく校外活動もまとめて記載する設計とみられます。
                 </p>
-                <a href="https://www.pref.gifu.lg.jp/uploaded/attachment/504000.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.gifu.lg.jp/uploaded/attachment/504000.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 岐阜県教育委員会「調査書（別記第1号様式）」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">三重県（「健康の状況」欄・行動の記録は第3学年のみ）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">三重県（「健康の状況」欄・行動の記録は第3学年のみ）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録及び行動の記録
                   （基本的な生活習慣等10項目・十分満足できる項目に○印）に加えて、
                   「出欠・健康の記録」欄に欠席日数・欠席理由と並んで<strong>「健康の状況」</strong>
                   という欄が独立して存在します。<strong>行動の記録は第3学年のみが対象</strong>です。
                 </p>
-                <a href="https://www.pref.mie.lg.jp/common/content/001220075.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.mie.lg.jp/common/content/001220075.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 三重県教育委員会「様式4　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">奈良県（「行動の記録」が単独の項目）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">奈良県（「行動の記録」が単独の項目）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科の学習成績の表に続き、「学習活動の記録／特別活動の記録／行動の記録／
                   スポーツ・文化活動等の記録」という4段の欄が縦に並ぶ構成です。
                   <strong>「行動の記録」が総合所見や特別活動に統合されず単独の項目として存在する点</strong>、
                   部活動等に相当する項目が「スポーツ・文化活動等の記録」という名称である点が特徴的です。
                 </p>
-                <a href="https://www.pref.nara.lg.jp/documents/18782/b01_r8_tyosasyo.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.nara.lg.jp/documents/18782/b01_r8_tyosasyo.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 奈良県教育委員会「様式1（令和8年度入学志願者調査書）」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">和歌山県（「校内外の活動」を3欄に細分化）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">和歌山県（「校内外の活動」を3欄に細分化）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科等の学習の記録・総合的な学習の時間の記録・欠席等の状況・健康の状況に
                   関する特記事項・総合所見・特別活動に関する特記事項に加え、
                   <strong>「校内外の活動等に関する特記事項」を「部活動等」「ボランティア活動等」
                   「資格・特技等」の3つの独立した欄に細分化</strong>しています。これまで確認した
                   県の中では初めての区分方法です。
                 </p>
-                <a href="https://www.pref.wakayama.lg.jp/prefg/500200/d00220765_d/fil/tyousasyo_7gou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.wakayama.lg.jp/prefg/500200/d00220765_d/fil/tyousasyo_7gou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 和歌山県教育委員会「別記第7号様式　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">鳥取県（部分確認：旧形式ファイルのため詳細な配置は未確定）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">鳥取県（部分確認：旧形式ファイルのため詳細な配置は未確定）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   様式は旧形式のExcelファイル（.xls）で配布されており、記載項目に関する文字列として
                   「総合的な学習の時間の記録」「特別活動等の記録（学級活動・生徒会活動を含む）」
                   「体育・文化・奉仕活動等」に加え、国の指導要録標準10区分の一部と一致する
                   「思いやり・協力」「勤労・奉仕」等の文字列が確認できました。ただし正式な見出し名や
                   厳密な配置までは復元できていません。
                 </p>
-                <a href="https://www.pref.tottori.lg.jp/secure/1405973/R08_01_chousasyo_R04_03_ikousotsugyou.xls" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.tottori.lg.jp/secure/1405973/R08_01_chousasyo_R04_03_ikousotsugyou.xls" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 鳥取県教育委員会「様式第１号　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">島根県（「個人調査報告書」・オンライン入力方式）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">島根県（「個人調査報告書」・オンライン入力方式）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   個人の調査書そのものの様式は公開されておらず、オンラインシステムへの直接入力で
                   作成されるとみられます（大阪府・兵庫県と同系統）。例外時に使う「校長副申書」の
                   文面から、島根県では個人の調査書を<strong>「個人調査報告書」</strong>と呼称し
                   （滋賀県と同じ呼称）、「学習の記録」「総合的な学習の時間の記録」「特別活動の記録」
                   の3種で構成されることが確認できました。
                 </p>
-                <a href="https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/yousiki_R8-16.docx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.shimane.lg.jp/education/kyoiku/senbatsu/senbatsu_info/index.data/yousiki_R8-16.docx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 島根県教育委員会「様式第16号　校長副申書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">岡山県（国の標準4区分＋「卒業後の動向」を併記）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">岡山県（国の標準4区分＋「卒業後の動向」を併記）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「学習の記録／総合的な学習の時間の記録／行動の記録（国の指導要録標準10区分）／
                   特別活動の記録」という国の標準4区分をすべて独立した見出しのまま保持しつつ、
                   「欠席日数・主な欠席理由」に加えて<strong>「卒業後の動向」</strong>まで併記する
                   構成です。これまで確認した県の中で最も国の標準形に近く、かつ充実した項目数です。
                 </p>
-                <a href="https://www.pref.okayama.jp/uploaded/attachment/398006.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.okayama.jp/uploaded/attachment/398006.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 岡山県教育委員会「様式５　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">広島県（部分確認：秋季入学選抜用の様式のみ）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">広島県（部分確認：秋季入学選抜用の様式のみ）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   実施要項ページで「調査書」の語を含む独立様式として見つかったのは秋季入学のため
                   の選抜専用の様式（様式第15号）のみで、内容は「学習の記録」（各教科の評定表・
                   合計225点満点）のみで構成されていました。通常の一般選抜（春季入学）用の調査書が
                   同一様式かどうかは確認できていないため、この様式について確認できた事実のみを
                   記載しています。
                 </p>
-                <a href="https://www.pref.hiroshima.lg.jp/uploaded/attachment/597722.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.hiroshima.lg.jp/uploaded/attachment/597722.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 広島県教育委員会「様式第15号　調査書（秋季入学のための選抜）」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">山口県（「学習及び行動の記録集計表」を別文書化）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">山口県（「学習及び行動の記録集計表」を別文書化）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   個人の調査書そのものの様式は公開されていませんが、実施大綱に「選抜の資料」として
                   「調査書」とは別に<strong>「学習及び行動の記録集計表」</strong>という独立した書類が
                   明記されています。これまで確認した県の中では初めての二文書構成です。また、
                   「調査書の『学習の記録』と学力検査の成績は同等に取り扱う」との明記もありました。
                 </p>
-                <a href="https://www.pref.yamaguchi.lg.jp/uploaded/life/310448_591730_misc.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.yamaguchi.lg.jp/uploaded/life/310448_591730_misc.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 山口県教育委員会「令和8年度山口県公立高等学校入学者選抜〈実施大綱〉」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">徳島県（国の標準区分＋出欠の記録を全て保持）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">徳島県（国の標準区分＋出欠の記録を全て保持）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「志願者・保護者の欄／出欠の記録／行動の記録／観点別学習状況／各教科の学習の
                   記録／特別活動の記録／総合的な学習の時間の記録／特記事項の欄」という8項目が
                   明記されており、国の指導要録標準4区分に加えて出欠の記録・特記事項の欄まで
                   全て独立項目のまま保持する構成です。評定が記載できない場合は校長が副申書
                   （様式第13号）を提出する規定もあります。
                 </p>
-                <a href="https://www.pref.tokushima.lg.jp/file/attachment/937096.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.tokushima.lg.jp/file/attachment/937096.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 徳島県教育委員会「公立高等学校生徒募集選抜要項」別記１
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">高知県（出欠の記録に「遅刻・早退を含む」と明記）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">高知県（出欠の記録に「遅刻・早退を含む」と明記）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科の学習の記録・特別活動の記録・行動の記録（国の指導要録標準10区分）・
                   総合的な学習の時間の記録・出欠の記録・総合所見という構成で、国の標準区分を
                   全て独立項目のまま保持しています。特に出欠の記録の特記事項欄に
                   <strong>「遅刻・早退を含む」</strong>と明記されている点は、これまで確認した
                   県の中で最も粒度の細かい記載でした。
                 </p>
-                <a href="https://www.pref.kochi.lg.jp/doc/r8_youshiki/file_contents/r8_youshiki_6-1-1.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.kochi.lg.jp/doc/r8_youshiki/file_contents/r8_youshiki_6-1-1.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 高知県教育委員会「様式第６号の１－１　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">佐賀県（A4判1枚両面・「受検上配慮すべき事項」）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">佐賀県（A4判1枚両面・「受検上配慮すべき事項」）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   A4判1枚の両面印刷という構成で、表面に出欠の記録・行動の記録（国の指導要録
                   標準10区分）・特別活動の記録・受検上配慮すべき事項・学校内外での活動等の記録、
                   裏面に各教科の学習の記録・総合的な学習の時間に関する記録を配置しています。
                   <strong>「受検上配慮すべき事項」という項目が独立して存在する点</strong>は、
                   これまで確認した県の中では初めてです。
                 </p>
-                <a href="https://www.pref.saga.lg.jp/kyouiku/kiji003115881/3_115881_367477_up_3yi7gn60.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.saga.lg.jp/kyouiku/kiji003115881/3_115881_367477_up_3yi7gn60.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 佐賀県教育委員会「様式３　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">長崎県（各観点の「Aの数」を集計する欄）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">長崎県（各観点の「Aの数」を集計する欄）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科の記録・総合的な学習の時間の記録・特別活動の記録・行動の記録（国の指導
                   要録標準10区分）・出欠の記録（欠席日数・欠席の主な理由・健康の状況）・参考と
                   なる諸事項という構成です。特に、各教科の観点別学習状況について
@@ -469,77 +459,77 @@ export default function ChousashoPage() {
                   取り組む態度のAの数」</strong>という、3観点それぞれのA評価の個数を集計する
                   欄が設けられている点は、これまで確認した県の中では初めてです。
                 </p>
-                <a href="https://www.pref.nagasaki.jp/shared/uploads/2025/09/1757561092.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.nagasaki.jp/shared/uploads/2025/09/1757561092.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 長崎県教育委員会「（様式６－１）調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">熊本県（「健康の記録」を出欠と別欄に独立）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">熊本県（「健康の記録」を出欠と別欄に独立）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   総合的な学習の時間の記録・特別活動の記録・行動の記録・総合所見及び指導上参考と
                   なる諸事項に加えて、<strong>「健康の記録」が「出欠の記録」から完全に独立した
                   別の欄</strong>として存在します。これまで確認した県の多くは出欠と健康を1つの
                   欄にまとめており、区分方法としては初めてです。「編入学、転入学、転学・退学等の
                   記録」という項目も独立して存在します。
                 </p>
-                <a href="https://www.pref.kumamoto.jp/uploaded/life/244675_716277_misc.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.kumamoto.jp/uploaded/life/244675_716277_misc.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 熊本県教育委員会「様式6　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">大分県（A3判・健康の状況が独立項目）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">大分県（A3判・健康の状況が独立項目）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   <strong>「日本産業規格A3」判という指定</strong>があり、これまで確認した25県で
                   A4判が主流だった中でA3判は初めてです。各教科等の学習の記録・特別活動の記録・
                   行動の記録（国の指導要録標準10区分）に加えて「健康の状況」が「出欠の記録」から
                   独立した項目である点は熊本県に次いで2例目の確認でした。
                 </p>
-                <a href="https://www.pref.oita.jp/uploaded/attachment/2254513.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.oita.jp/uploaded/attachment/2254513.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 大分県教育委員会「（様式９号）調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">宮崎県（部分確認：遅刻・早退「年3回以上」の閾値）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">宮崎県（部分確認：遅刻・早退「年3回以上」の閾値）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   様式は旧形式のExcelファイル（.xls）で配布されており、記載項目に関する文字列
                   として「各教科の学習の記録」「行動の記録」「出欠の記録」「健康診断の記録」に
                   加えて、出欠の記録の注記に<strong>「遅刻・早退がそれぞれ年間3回以上ある場合は
                   その回数と理由を記入」</strong>という具体的な回数の閾値が確認できました。
                   ただし正式な見出し名や厳密な配置までは復元できていません。
                 </p>
-                <a href="https://www.pref.miyazaki.lg.jp/documents/99874/99874_20250930113553-1.zip" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.miyazaki.lg.jp/documents/99874/99874_20250930113553-1.zip" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 宮崎県教育委員会「様式２　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">鹿児島県（「特別活動の記録」に相当する項目が無い）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">鹿児島県（「特別活動の記録」に相当する項目が無い）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   A4縦1ページに「学習の記録／行動の記録（国の指導要録標準10区分）／出欠の記録／
                   総合所見及び指導上参考となる諸事項」の4区分が収まる構成です。
                   <strong>「特別活動の記録」（学級活動・生徒会活動・学校行事）に相当する独立項目が
                   一切存在しません</strong>。これまで確認した27県のほぼ全てにあった区分が鹿児島県
                   では見当たらない、初めての事例でした。
                 </p>
-                <a href="https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r7/documents/123883_20251027171132-1.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r7/documents/123883_20251027171132-1.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 鹿児島県教育委員会「（様式４－１）調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">沖縄県（「健康所見」が独立項目・3例目）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">沖縄県（「健康所見」が独立項目・3例目）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科の学習の記録・特別活動の記録・行動の記録（国の指導要録標準10区分）・
                   総合所見・出欠の記録に加えて、<strong>「健康所見」（疾病及び健康に配慮を要する
                   事項・「特に所見なし／所見あり」の選択式で疾病名記入欄あり）が独立した番号付き
                   項目</strong>として存在します。健康関連の記録を出欠から独立させる構成は熊本県・
                   大分県に次いで3例目の確認でした。
                 </p>
-                <a href="https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/035/054/08chosasyo.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/035/054/08chosasyo.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 沖縄県教育委員会「第４号様式　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">青森県（「行動の記録」が独立せず総合所見に統合）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">青森県（「行動の記録」が独立せず総合所見に統合）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科の学習の記録・特別活動等の記録（部活動・地域クラブ活動等を含む）・資格
                   特技・総合的な学習の時間の記録・欠席の状況・健康等に関する特記すべき事項という
                   構成です。<strong>国の指導要録標準10区分に相当する「行動の記録」という独立項目
@@ -547,51 +537,51 @@ export default function ChousashoPage() {
                   また「特別の教科　道徳」の評価は合否判定に使わないため記入しないとの明記も
                   ありました。
                 </p>
-                <a href="https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/nyuugakusyasenbatsuyoukou2026.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.aomori.lg.jp/soshiki/kyoiku/e-gakyo/files/nyuugakusyasenbatsuyoukou2026.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 青森県教育委員会「令和8年度青森県立高等学校入学者選抜要項」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">岩手県（「行動の記録」に代えて「その他参考となる記録」）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">岩手県（「行動の記録」に代えて「その他参考となる記録」）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   出欠の記録・各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録に加えて、
                   <strong>「行動の記録」（国の指導要録標準10区分）に相当する項目が存在せず、代わりに
                   「その他参考となる記録」という漠然とした見出しに置き換わっています</strong>。
                   「総合所見」という明示的な見出しも確認できませんでした。
                 </p>
-                <a href="https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/069/713/r8_c-2_chousasyo.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/069/713/r8_c-2_chousasyo.xlsx" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 岩手県教育委員会「様式中－２　調査書」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">宮城県（ウェブ出願システムへの直接入力方式）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">宮城県（ウェブ出願システムへの直接入力方式）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   出願書類一覧表に「調査書」の備考欄が「ウェブ出願システムに登録」と明記されて
                   おり、大阪府・兵庫県・島根県と同様、個人の調査書はオンラインシステムへの直接
                   入力方式で公開されている紙の様式は見当たりませんでした。「調査書の記載内容等に
                   ついて特別な事情がある場合は、副申書を添付することができる」という制度もあり
                   ます。
                 </p>
-                <a href="https://www.pref.miyagi.jp/documents/55299/r8_sennbatsuyoko_all.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.miyagi.jp/documents/55299/r8_sennbatsuyoko_all.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 宮城県教育委員会「令和8年度宮城県公立高等学校入学者選抜要項」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">秋田県（換算式を反映した「調整評定値欄」）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">秋田県（換算式を反映した「調整評定値欄」）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   個人の調査書はWEB出願システムで作成・提出され印刷様式は公開されていませんが、
                   「調査書及び学習成績一覧表作成要領」に構成が明記されています。
                   <strong>各教科の学習の記録に「調整評定値欄」があり、「5教科の小計に4教科の小計を
                   2倍して加えた値とする」と選抜の換算式そのものを反映した集計欄が組み込まれて
                   います</strong>。「行動の記録」に相当する独立項目は確認できませんでした。
                 </p>
-                <a href="https://www.pref.akita.lg.jp/uploads/public/archive_0000091551_00/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%85%AC%E7%AB%8B%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%E5%85%A5%E5%AD%A6%E8%80%85%E9%81%B8%E6%8A%9C%E5%AE%9F%E6%96%BD%E8%A6%81%E9%A0%85_%EF%BC%88PDF%E7%89%88%EF%BC%89.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.akita.lg.jp/uploads/public/archive_0000091551_00/%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%85%AC%E7%AB%8B%E9%AB%98%E7%AD%89%E5%AD%A6%E6%A0%A1%E5%85%A5%E5%AD%A6%E8%80%85%E9%81%B8%E6%8A%9C%E5%AE%9F%E6%96%BD%E8%A6%81%E9%A0%85_%EF%BC%88PDF%E7%89%88%EF%BC%89.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 秋田県教育委員会「令和8年度秋田県公立高等学校入学者選抜実施要項」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">山形県（エクセルの「フォーマットファイル」に直接入力）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">山形県（エクセルの「フォーマットファイル」に直接入力）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   個人の調査書は紙の様式でなく<strong>「フォーマットファイル（エクセルファイル）」に
                   直接入力する</strong>方式で、記入項目は「各教科の学習の記録」「総合的な学習の時間の
                   記録」「特別活動等の記録（学級活動・生徒会活動・学校行事・部活動等）」「校外活動の
@@ -601,39 +591,39 @@ export default function ChousashoPage() {
                   要録標準区分に相当する見出しへの言及が見当たりません</strong>でしたが、記入方法の
                   注意事項を列挙したものであり、該当欄自体が無いと断定はできません。
                 </p>
-                <a href="https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.yamagata.jp/documents/42443/r8kouritsukoutougakkounyuugakusyasennbatsujissiyoukou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 山形県教育委員会「令和8年度山形県公立高等学校入学者選抜実施要項」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">福島県（「行動の記録」が無く「長所・特技等の記録」を併設）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">福島県（「行動の記録」が無く「長所・特技等の記録」を併設）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   様式1号の調査書は、各教科の学習の記録・総合的な学習の時間の記録・特別活動等の
                   記録（学級活動・生徒会活動・学校行事・その他の活動）・出欠の記録という構成に
                   加えて<strong>「長所・特技等の記録」という欄が独立して設けられている</strong>
                   一方、<strong>「行動の記録」（国の指導要録標準10区分）に相当する独立項目は
                   存在しません</strong>。
                 </p>
-                <a href="https://www.pref.fukushima.lg.jp/uploaded/attachment/709972.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.fukushima.lg.jp/uploaded/attachment/709972.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 福島県教育委員会「令和8年度福島県立高等学校入学者選抜実施要綱」様式1号
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">栃木県（「行動の記録」「出欠の記録」は第3学年分のみ記入）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">栃木県（「行動の記録」「出欠の記録」は第3学年分のみ記入）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   「調査書作成の要領」によると、各教科の学習の記録・総合的な学習の時間の記録・
                   特別活動の記録・行動の記録・文化活動やスポーツ活動等の記録・出欠の記録・健康
                   状況という構成です。<strong>「行動の記録」と「出欠の記録」はいずれも記入要領に
                   「第3学年について」と明記されており、第3学年分のみを記入する運用</strong>で、
                   1〜3年分をすべて記入する構成とは異なります。
                 </p>
-                <a href="https://www.pref.tochigi.lg.jp/m04/r08/documents/20251001165237.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.tochigi.lg.jp/m04/r08/documents/20251001165237.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 栃木県教育委員会「令和8年度栃木県立高等学校入学者選抜」別記「調査書作成の要領」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">群馬県（国の標準区分がすべて揃う構成）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">群馬県（国の標準区分がすべて揃う構成）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   全日制課程等はWEB出願システムから出力したエクセルデータで調査書を作成する方式
                   ですが、実施要項の別記に記載項目の説明があり、学籍の記録・各教科の学習の記録・
                   総合的な学習の時間の記録・特別活動の記録・行動の記録・出欠の記録・参考となる
@@ -641,64 +631,64 @@ export default function ChousashoPage() {
                   「出欠の記録」が全部または一部（学年限定）欠けていたのに対し、群馬県は国の
                   指導要録標準区分に相当する項目がすべて揃っています</strong>。
                 </p>
-                <a href="https://www.pref.gunma.jp/uploaded/attachment/671251.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.gunma.jp/uploaded/attachment/671251.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 群馬県教育委員会「令和8年度群馬県公立高等学校入学者選抜実施要項」別記3
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">新潟県（各教科の学習の記録のみで構成）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">新潟県（各教科の学習の記録のみで構成）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   様式1の調査書は、志願者氏名・生年月日・卒業年月と<strong>各教科の学習の記録
                   （1〜3年の評定）のみ</strong>で構成されており、記入要領（全9項目）もこの構成と
                   完全に対応していました。<strong>総合的な学習の時間の記録・特別活動の記録・
                   行動の記録・出欠の記録・特記事項に相当する項目が様式そのものに一切存在しません
                   </strong>——これまでに確認した40県の中で最も項目数が少ない様式でした。
                 </p>
-                <a href="https://www.pref.niigata.lg.jp/uploaded/attachment/472931.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.niigata.lg.jp/uploaded/attachment/472931.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 新潟県教育委員会「令和8年度新潟県公立高等学校入学者選抜要項」様式1
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">富山県（「趣味・特技」「備考」など項目数が多い部類）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">富山県（「趣味・特技」「備考」など項目数が多い部類）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   学籍・欠席・総合的な学習の時間・特別活動・部活動等・行動の記録・
                   <strong>趣味・特技</strong>・学習の記録・<strong>備考</strong>・学校所在地・
                   過年度卒業者についてという構成でした。国の指導要録標準区分がすべて揃うだけで
                   なく、趣味・特技や備考といった追加項目もあり、これまでに確認した41県の中でも
                   記載項目数が多い部類の調査書でした。
                 </p>
-                <a href="https://www.pref.toyama.jp/documents/47208/r08youryounew.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.toyama.jp/documents/47208/r08youryounew.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 富山県教育委員会「令和8年度富山県立高等学校入学者選抜実施要領」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">石川県（「学校内外における優れた諸活動等の記録」を併設）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">石川県（「学校内外における優れた諸活動等の記録」を併設）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   出欠の記録・特別活動の記録・行動の記録・総合的な学習の時間の記録・学習の記録
                   という国の指導要録標準区分がすべて揃うだけでなく、
                   <strong>「学校内外における優れた諸活動等の記録」という独立欄（奉仕活動・研究・
                   社会参加・表彰・部活動・特技・資格等を事実のみ記載）</strong>も設けられて
                   います。
                 </p>
-                <a href="https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.ishikawa.lg.jp/kyoiku/gakkou/senbatu/documents/r8bosyuyoko.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 石川県教育委員会「令和8年度石川県公立高等学校入学者募集要綱」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">福井県（様式そのものは非公開・本文からの確認事項のみ）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">福井県（様式そのものは非公開・本文からの確認事項のみ）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   調査書（様式第1号）そのものを掲載した様式集や記入要領は公式サイトに見当たら
                   ず、実施要項の本文から「学習の記録」の「評定」・「観点別学習状況」・「身体上の
                   特記事項」という項目の存在が確認できました。行動の記録・出欠の記録・特別活動
                   の記録等の個別項目の有無までは実施要項本文からは確認できませんでした。
                 </p>
-                <a href="https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r08youkou_d/fil/R08youkou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.fukui.lg.jp/doc/koukou/nyugaku/r08youkou_d/fil/R08youkou.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 福井県教育委員会「令和8年度福井県立高等学校入学者選抜実施要項」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">山梨県（学校ごとに評定の傾斜倍率が異なる・様式そのものは非公開）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">山梨県（学校ごとに評定の傾斜倍率が異なる・様式そのものは非公開）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   調査書は中学校3年間の活動すべてが記録され、「所見」（学習活動及び生活状況に
                   関する中学校長のA/B/C評価）は調査書とは別の独立した提出書類でした。
                   <strong>調査書の「学習の記録」の評定について、学校ごとに評価対象学年や教科の
@@ -707,25 +697,25 @@ export default function ChousashoPage() {
                   用いない「特別選抜」も実施されています。行動の記録・出欠の記録・特別活動の
                   記録等の個別項目一覧までは確認できませんでした。
                 </p>
-                <a href="https://www.pref.yamanashi.jp/documents/84777/r8koritsukihonziko.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.yamanashi.jp/documents/84777/r8koritsukihonziko.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 山梨県教育委員会「令和8年度山梨県公立高等学校入学者選抜の基本事項」
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">静岡県（「新体力テストの総合得点」という独自項目）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">静岡県（「新体力テストの総合得点」という独自項目）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   各教科の評定・観点別学習状況・総合的な学習の時間・特別活動の記録・行動の記録
                   ・出欠等の状況・諸活動の記録という構成に加えて、
                   <strong>「新体力テストの総合得点」という項目が独立して設けられています</strong>
                   ——これまでに確認した44県のいずれにも見られなかった静岡県独自の項目です。
                 </p>
-                <a href="https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/07.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/072/279/07.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 静岡県教育委員会「令和8年度静岡県公立高等学校入学者選抜実施要領」様式第1号
                 </a>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <div className="font-bold text-slate-800">香川県（「新体力テストの結果」は「その他の活動の記録」欄に含む）</div>
-                <p className="mt-1 leading-relaxed text-slate-600">
+              <div className="py-4">
+                <div className="text-base font-bold text-slate-900">香川県（「新体力テストの結果」は「その他の活動の記録」欄に含む）</div>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   学籍の記録・各教科の学習の記録・総合的な学習の時間の記録・特別活動の記録・行動の
                   記録・出欠の記録・その他の活動の記録・人物や適性等に関する所見という構成でした。
                   <strong>「その他の活動の記録」欄には第3学年に実施した新体力テストの結果や部活動
@@ -733,109 +723,90 @@ export default function ChousashoPage() {
                   だった新体力テストの結果を、香川県では既存の欄の記載事項の一つとして扱っている
                   点が対照的でした。
                 </p>
-                <a href="https://www.pref.kagawa.lg.jp/documents/15096/saimoku8.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-block text-xs text-blue-600 underline">
+                <a href="https://www.pref.kagawa.lg.jp/documents/15096/saimoku8.pdf" target="_blank" rel="noopener noreferrer nofollow" className="mt-1 inline-flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   出典: 香川県教育委員会「令和8年度香川県公立高等学校入学者選抜実施細目」
                 </a>
               </div>
             </div>
-            <p className="mt-4 text-xs text-slate-500">
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               ※ いずれも記載事項（様式）の整理であり、入試の合否判定に使う内申点（調査書点）の
               計算方法自体は変更されていません。他の都道府県の最新の制度変更は
-              <Link href="/nyushi-seido-henkou" className="font-bold underline">入試制度の変更点まとめ</Link>
+              <Link href="/nyushi-seido-henkou" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">入試制度の変更点まとめ</Link>
               で確認できます。
             </p>
           </section>
 
           {/* 調査書 vs 内申点 vs 通知表 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Scale className="h-5 w-5 text-blue-600" />
-              「調査書」「内申点」「通知表」の関係
-            </h2>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">「調査書」「内申点」「通知表」の関係</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-slate-100 text-left">
-                    <th className="border border-slate-200 px-3 py-2 font-bold">用語</th>
-                    <th className="border border-slate-200 px-3 py-2 font-bold">何を指すか</th>
-                    <th className="border border-slate-200 px-3 py-2 font-bold">誰が見る／使う</th>
+                  <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                    <th scope="col" className="px-3 py-2 font-bold">用語</th>
+                    <th scope="col" className="px-3 py-2 font-bold">何を指すか</th>
+                    <th scope="col" className="px-3 py-2 font-bold">誰が見る／使う</th>
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
-                  <tr>
-                    <td className="border border-slate-200 px-3 py-2 font-bold">通知表</td>
-                    <td className="border border-slate-200 px-3 py-2">学期ごとの成績表（評定・所見）。家庭で受け取る。</td>
-                    <td className="border border-slate-200 px-3 py-2">生徒・保護者</td>
+                <tbody className="text-slate-900">
+                  <tr className="border-b border-slate-200 align-top">
+                    <td className="px-3 py-3 font-bold">通知表</td>
+                    <td className="px-3 py-3">学期ごとの成績表（評定・所見）。家庭で受け取る。</td>
+                    <td className="px-3 py-3">生徒・保護者</td>
                   </tr>
-                  <tr>
-                    <td className="border border-slate-200 px-3 py-2 font-bold">調査書</td>
-                    <td className="border border-slate-200 px-3 py-2">入試用に学校が作る書類（評定＋活動＋出欠など）。厳封で高校へ。</td>
-                    <td className="border border-slate-200 px-3 py-2">高校（出願先）</td>
+                  <tr className="border-b border-slate-200 align-top">
+                    <td className="px-3 py-3 font-bold">調査書</td>
+                    <td className="px-3 py-3">入試用に学校が作る書類（評定＋活動＋出欠など）。厳封で高校へ。</td>
+                    <td className="px-3 py-3">高校（出願先）</td>
                   </tr>
-                  <tr>
-                    <td className="border border-slate-200 px-3 py-2 font-bold">内申点（調査書点）</td>
-                    <td className="border border-slate-200 px-3 py-2">調査書の評定を都道府県方式で点数化した数値。</td>
-                    <td className="border border-slate-200 px-3 py-2">合否判定（学力検査と合算）</td>
+                  <tr className="border-b border-slate-200 align-top">
+                    <td className="px-3 py-3 font-bold">内申点（調査書点）</td>
+                    <td className="px-3 py-3">調査書の評定を都道府県方式で点数化した数値。</td>
+                    <td className="px-3 py-3">合否判定（学力検査と合算）</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               同じ「評定」が、家庭では通知表、入試では調査書という形になり、点数化されると内申点になります。素内申と換算内申の違いは
-              <Link href="/blog/kansan-naishin-vs-su-naishin" className="font-bold text-blue-600 hover:underline">こちらの記事</Link>で図解しています。
+              <Link href="/blog/kansan-naishin-vs-su-naishin" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">こちらの記事</Link>で図解しています。
             </p>
           </section>
 
           {/* 子ページ導線 */}
-          <section className="mt-8 grid gap-3 sm:grid-cols-2">
-            <Link href="/chousasho/kakikata" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md">
-                <PenLine className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-blue-700">調査書の書き方・発行の流れ<ChevronRight className="h-4 w-4 text-slate-400" /></span>
-                <span className="mt-1 block text-sm leading-relaxed text-slate-600">いつ・誰に・どう依頼するか。出願校数の伝え方と注意点。</span>
-              </span>
+          <section className="mt-10 grid gap-3 sm:grid-cols-2">
+            <Link href="/chousasho/kakikata" className="group block rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:bg-brand-50">
+              <span className="flex items-center justify-between gap-2 text-base font-bold text-slate-900 group-hover:text-brand-700">調査書の書き方・発行の流れ<ChevronRight className="h-4 w-4 shrink-0 text-slate-500" /></span>
+              <span className="mt-1 block text-sm leading-[1.8] text-slate-600">いつ・誰に・どう依頼するか。出願校数の伝え方と注意点。</span>
             </Link>
-            <Link href="/chousasho/hyoutei" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-md">
-                <Calculator className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-blue-700">調査書と内申点・評定平均の連動<ChevronRight className="h-4 w-4 text-slate-400" /></span>
-                <span className="mt-1 block text-sm leading-relaxed text-slate-600">評定→内申点→調査書点へ。総合得点での合否の仕組み。</span>
-              </span>
+            <Link href="/chousasho/hyoutei" className="group block rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:bg-brand-50">
+              <span className="flex items-center justify-between gap-2 text-base font-bold text-slate-900 group-hover:text-brand-700">調査書と内申点・評定平均の連動<ChevronRight className="h-4 w-4 shrink-0 text-slate-500" /></span>
+              <span className="mt-1 block text-sm leading-[1.8] text-slate-600">評定→内申点→調査書点へ。総合得点での合否の仕組み。</span>
             </Link>
-            <Link href="/chousasho/reibun" className="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md">
-                <NotebookPen className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="flex items-center gap-1 font-bold text-slate-800 group-hover:text-blue-700">活動報告書の書き方例文・依頼マナー<ChevronRight className="h-4 w-4 text-slate-400" /></span>
-                <span className="mt-1 block text-sm leading-relaxed text-slate-600">部活動・検定・委員会別の例文と、先生への依頼マナー・期限チェックリスト。</span>
-              </span>
+            <Link href="/chousasho/reibun" className="group block rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:bg-brand-50">
+              <span className="flex items-center justify-between gap-2 text-base font-bold text-slate-900 group-hover:text-brand-700">活動報告書の書き方例文・依頼マナー<ChevronRight className="h-4 w-4 shrink-0 text-slate-500" /></span>
+              <span className="mt-1 block text-sm leading-[1.8] text-slate-600">部活動・検定・委員会別の例文と、先生への依頼マナー・期限チェックリスト。</span>
             </Link>
           </section>
 
           {/* ツール導線 */}
-          <section className="mt-8 rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 text-center shadow-sm">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">調査書の評定を「内申点」に換算してみる</h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">調査書の評定を「内申点」に換算してみる</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               調査書の中心は各教科の評定です。お住まいの都道府県の方式で、評定を内申点（調査書点）に無料で換算できます。
             </p>
-            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
-              <Link href="/" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700">
-                <Calculator className="h-4 w-4" />
+            <div className="flex flex-col items-stretch gap-3 sm:flex-row">
+              <Link href="/" className="inline-flex min-h-[44px] items-center justify-center rounded bg-brand-700 px-5 py-3 text-center text-base font-bold text-white transition-colors text-balance hover:bg-brand-800">
                 内申点を計算する（47都道府県対応）
               </Link>
-              <Link href="/total-score" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-blue-700 ring-1 ring-blue-200 transition-colors hover:bg-blue-50">
+              <Link href="/total-score" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-5 py-3 text-center text-base font-bold text-brand-700 transition-colors text-balance hover:bg-brand-50">
                 総合得点（内申＋当日点）で合否を見る
               </Link>
             </div>
           </section>
 
           {/* 保護者リード（調査書＝三者面談・出願の文脈。家庭教師の無料体験＝live） */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA
               placement="mendan"
               heading="調査書（評定）で志望校に届くか、早めに見極めを"
@@ -844,48 +815,45 @@ export default function ChousashoPage() {
           </div>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-blue-600" />
-              調査書 よくある質問
-            </h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">調査書 よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white">
+                  <summary className="cursor-pointer list-none p-4 text-base font-bold text-slate-900 marker:content-none">
                     <span className="flex items-center justify-between gap-3">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="px-4 pb-4 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
           {/* 調査書の「次のステップ」（推薦＝調査書で勝負／不登校＝出欠の文脈） */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">調査書の次のステップ</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">調査書の次のステップ</h2>
+            <div className="grid gap-x-6 sm:grid-cols-2">
               {[
                 { href: '/suisen-nyuushi', title: '推薦入試とは？（調査書で勝負する入試）', desc: '指定校・公募・総合型の違いと、調査書・評定の準備' },
                 { href: '/hyouka-kijun', title: '観点別評価の仕組み（評定がどう決まる）', desc: '3観点で何が評価され、調査書の評定になるか' },
                 { href: '/futoukou', title: '不登校と内申点（出欠の記録と受験）', desc: '欠席日数は調査書にどう書かれ、合否にどう影響するか' },
                 { href: '/mendan', title: '三者面談で調査書・評定を確認する', desc: '面談で聞くこと・今の評定の把握' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="group flex items-start justify-between gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-100 transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="group flex items-start justify-between gap-3 border-b border-slate-200 py-4 transition-colors">
                   <span>
-                    <span className="block text-sm font-bold text-slate-800 group-hover:text-blue-700">{c.title}</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{c.desc}</span>
+                    <span className="block text-base font-bold text-slate-900 group-hover:text-brand-700">{c.title}</span>
+                    <span className="mt-1 block text-sm leading-[1.8] text-slate-600">{c.desc}</span>
                   </span>
-                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                  <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-slate-500" />
                 </Link>
               ))}
             </div>
           </section>
 
-          <ToolClusterNav current="naishin" className="mt-8" />
+          <ToolClusterNav current="naishin" className="mt-10" />
         </div>
       </div>
     </>

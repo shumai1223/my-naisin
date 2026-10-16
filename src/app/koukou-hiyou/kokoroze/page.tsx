@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, School, HelpCircle, Wallet } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { AnswerBox } from '@/components/AnswerBox';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
 import { KoukouKokorozeCalculator } from '@/components/KoukouKokorozeCalculator';
+import { MEXT_GAKUSHUHI_SOURCE, MEXT_SHUGAKU_SHIEN_SOURCE } from '@/lib/education-cost/data';
 import { SITE_URL } from '@/lib/naishin-dataset';
 
 const FAQS = [
@@ -59,24 +60,32 @@ export default function KokorozePage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hiyou" className="hover:text-blue-600">お金・費用まとめ</Link>
+            <Link href="/hiyou" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">お金・費用まとめ</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/koukou-hiyou" className="hover:text-blue-600">高校の費用</Link>
+            <Link href="/koukou-hiyou" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">高校の費用</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">公立vs私立 3年総額</span>
+            <span className="text-slate-900">公立vs私立 3年総額</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
-              <School className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">公立vs私立 高校3年間の費用はいくら違う？</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">公立vs私立 高校3年間の費用はいくら違う？</h1>
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
+              出典：
+              <a href={MEXT_GAKUSHUHI_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                {MEXT_GAKUSHUHI_SOURCE.docTitle}
+              </a>
+              （最終確認 {MEXT_GAKUSHUHI_SOURCE.lastChecked}）、
+              <a href={MEXT_SHUGAKU_SHIEN_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                {MEXT_SHUGAKU_SHIEN_SOURCE.docTitle}
+              </a>
+              （最終確認 {MEXT_SHUGAKU_SHIEN_SOURCE.lastChecked}）
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               高校無償化（就学支援金）を<strong>世帯年収で反映</strong>して、公立・私立の3年間の<strong>実質負担</strong>を比較します。
               文部科学省データに基づく無料シミュレーターです。
             </p>
@@ -104,11 +113,8 @@ export default function KokorozePage() {
           </div>
 
           {/* 回遊 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Wallet className="h-5 w-5 text-emerald-600" />
-              関連する費用ツール
-            </h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">関連する費用ツール</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
                 { href: '/koukou-hiyou', title: '高校の費用シミュレーター', desc: '公立・私立の3年間の学費・教材費・通学費の総額' },
@@ -116,26 +122,26 @@ export default function KokorozePage() {
                 { href: '/shinro-hiyou', title: '高校〜大学の教育費（進路別）', desc: '大学進学まで含めた総額を就学支援金込みで概算' },
                 { href: '/juken-ryou', title: '受験料・模試代シミュレーター', desc: '受験シーズンに出ていくお金の目安' },
               ].map((c) => (
-                <Link key={c.href} href={c.href} className="group flex items-start justify-between gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-100 transition-shadow hover:shadow-md">
+                <Link key={c.href} href={c.href} className="group flex min-h-[44px] items-start justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-brand-50">
                   <span>
-                    <span className="block text-sm font-bold text-slate-800 group-hover:text-emerald-700">{c.title}</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{c.desc}</span>
+                    <span className="block text-base font-bold text-brand-700 group-hover:underline">{c.title}</span>
+                    <span className="mt-1 block text-sm leading-[1.8] text-slate-600">{c.desc}</span>
                   </span>
-                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                  <ChevronRight className="mt-1.5 h-4 w-4 shrink-0 text-slate-500" />
                 </Link>
               ))}
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-emerald-600" />よくある質問</h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" /></span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>

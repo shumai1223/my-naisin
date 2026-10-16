@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { List } from 'lucide-react';
 
 interface TocItem {
   id: string;
@@ -74,13 +73,10 @@ export function BlogStickyTOC({ rootSelector = '.blog-content' }: BlogStickyTOCP
       aria-label="目次"
       className="hidden xl:block sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto"
     >
-      <div className="rounded-2xl border border-gray-200/70 bg-white/80 backdrop-blur p-5 shadow-sm">
-        <div className="mb-3 flex items-center gap-2 border-b border-gray-100 pb-3">
-          <List className="h-4 w-4 text-blue-500" />
-          <h2 className="text-sm font-bold text-gray-800">目次</h2>
-        </div>
+      <div className="rounded-lg border border-slate-200 bg-white p-5">
+        <h2 className="mb-2 border-b border-slate-200 pb-3 text-sm font-bold text-slate-900">目次</h2>
         <nav>
-          <ul className="space-y-1 text-sm">
+          <ul className="text-sm">
             {items.map((item) => {
               const isActive = item.id === activeId;
               return (
@@ -88,12 +84,12 @@ export function BlogStickyTOC({ rootSelector = '.blog-content' }: BlogStickyTOCP
                   <a
                     href={`#${item.id}`}
                     onClick={(e) => handleClick(e, item.id)}
-                    className={`block rounded-md py-1.5 px-2 leading-snug transition-colors ${
-                      item.level === 3 ? 'pl-5 text-xs' : ''
+                    className={`flex min-h-[44px] items-center rounded px-2 leading-snug transition-colors duration-150 ${
+                      item.level === 3 ? 'pl-5' : ''
                     } ${
                       isActive
-                        ? 'bg-blue-50 text-blue-700 font-semibold border-l-2 border-blue-500'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-2 border-transparent'
+                        ? 'bg-brand-50 font-bold text-brand-800'
+                        : `${item.level === 3 ? 'text-slate-600' : 'text-slate-900'} hover:bg-slate-50 hover:text-brand-800`
                     }`}
                   >
                     {item.text}

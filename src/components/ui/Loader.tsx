@@ -1,6 +1,6 @@
 'use client';
 
-import { CSSProperties, useId } from 'react';
+import { CSSProperties } from 'react';
 
 export interface LoaderProps {
   variant?: 'fullscreen' | 'inline' | 'spinner';
@@ -16,8 +16,6 @@ const SIZE_MAP: Record<NonNullable<LoaderProps['size']>, number> = {
 };
 
 function CoreSpinner({ px }: { px: number }) {
-  const reactId = useId();
-  const gid = `naishin-loader-grad-${reactId.replace(/:/g, '')}`;
   const stroke = Math.max(2, Math.round(px * 0.1));
   const r = (px - stroke) / 2;
   const c = px / 2;
@@ -39,21 +37,12 @@ function CoreSpinner({ px }: { px: number }) {
         aria-hidden="true"
         focusable="false"
       >
-        <defs>
-          <linearGradient id={gid} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3b82f6" />
-            <stop offset="55%" stopColor="#6366f1" />
-            <stop offset="100%" stopColor="#8b5cf6" />
-          </linearGradient>
-        </defs>
-
         <circle
           className="naishin-spinner__track"
           cx={c}
           cy={c}
           r={r}
-          stroke="#c7d2fe"
-          strokeOpacity={0.55}
+          stroke="#cddad3"
           strokeWidth={stroke}
           style={{ transformOrigin: 'center' }}
         />
@@ -63,7 +52,7 @@ function CoreSpinner({ px }: { px: number }) {
           cx={c}
           cy={c}
           r={r}
-          stroke={`url(#${gid})`}
+          stroke="#17543e"
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={`${arc} ${gap}`}
@@ -90,7 +79,7 @@ export default function Loader({
       >
         <CoreSpinner px={SIZE_MAP[size]} />
         {message ? (
-          <span className="ml-2 text-sm font-medium text-slate-500">
+          <span className="ml-2 text-sm text-slate-600">
             {message}
           </span>
         ) : null}
@@ -109,7 +98,7 @@ export default function Loader({
       >
         <CoreSpinner px={40} />
         {message ? (
-          <p className="animate-pulse-subtle text-center text-sm font-medium text-slate-500">
+          <p className="text-center text-sm text-slate-600">
             {message}
           </p>
         ) : (
@@ -124,23 +113,19 @@ export default function Loader({
       role="status"
       aria-live="assertive"
       aria-label={message ?? '読み込み中'}
-      className={`mesh-gradient fixed inset-0 z-[60] flex items-center justify-center backdrop-blur-sm ${className}`}
+      className={`fixed inset-0 z-[60] flex items-center justify-center bg-paper ${className}`}
     >
-      <div className="naishin-loader-card glass-card mx-4 flex w-full max-w-xs flex-col items-center gap-6 rounded-2xl px-8 py-10 shadow-2xl">
+      <div className="naishin-loader-card mx-4 flex w-full max-w-xs flex-col items-center gap-6 rounded-lg border border-slate-200 bg-white px-8 py-10">
         <div className="relative flex items-center justify-center">
-          <span
-            className="glow-pulse absolute inset-0 -m-3 rounded-full border border-indigo-200/60"
-            aria-hidden="true"
-          />
           <CoreSpinner px={56} />
         </div>
 
         <div className="flex flex-col items-center gap-1.5">
-          <p className="gradient-text text-lg font-bold tracking-tight">
+          <p className="text-lg font-bold tracking-tight text-brand-800">
             My-naishin
           </p>
           {message ? (
-            <p className="animate-pulse-subtle text-center text-sm font-medium text-slate-500">
+            <p className="text-center text-sm text-slate-600">
               {message}
             </p>
           ) : (

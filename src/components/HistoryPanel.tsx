@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { History, Trash2, Clock, ChevronDown, ChevronUp, LineChart, ArrowRight } from 'lucide-react';
+import { Trash2, ChevronDown, ChevronUp, ArrowRight } from '@/components/icons';
 
 import { readHistory, clearHistory } from '@/lib/persistence';
 import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -50,35 +50,31 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
       <button
         type="button"
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex w-full items-center justify-between gap-3 px-5 py-4"
+        aria-expanded={isExpanded}
+        className="flex min-h-11 w-full items-center justify-between gap-3 px-5 py-4 text-left hover:bg-brand-50"
       >
-        <div className="flex items-center gap-3">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-slate-500 to-slate-600 shadow-sm">
-            <History className="h-4 w-4 text-white" />
-          </div>
-          <div className="text-left">
-            <div className="text-sm font-bold text-slate-800">計算履歴</div>
-            <div className="text-xs text-slate-500">{history.length}件の記録</div>
-          </div>
+        <div>
+          <div className="text-base font-bold text-slate-900">計算履歴</div>
+          <div className="text-sm text-slate-600">{history.length}件の記録</div>
         </div>
         {isExpanded ? (
-          <ChevronUp className="h-5 w-5 text-slate-400" />
+          <ChevronUp className="h-5 w-5 shrink-0 text-slate-600" />
         ) : (
-          <ChevronDown className="h-5 w-5 text-slate-400" />
+          <ChevronDown className="h-5 w-5 shrink-0 text-slate-600" />
         )}
       </button>
 
       {isExpanded && (
-        <div className="border-t border-slate-100 px-5 py-4">
+        <div className="border-t border-slate-200 px-5 py-4">
           {series.length >= 2 && (
-            <div className="mb-4 rounded-xl border border-slate-100 bg-slate-50 p-3">
+            <div className="mb-4">
               <div className="mb-1.5 flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-600">達成率の推移</span>
-                <span className="text-xs font-bold text-blue-600">最新 {series[series.length - 1]}%</span>
+                <span className="text-sm font-bold text-slate-900">達成率の推移</span>
+                <span className="text-sm font-bold tabular-nums text-brand-700">最新 {series[series.length - 1]}%</span>
               </div>
               <Sparkline values={series} />
             </div>
@@ -87,12 +83,9 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
           {/* 製品ループ：保存→ダッシュボードで中1→中3の推移を継続トラッキング */}
           <Link
             href="/dashboard"
-            className="mb-4 flex items-center justify-between gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-bold text-blue-700 transition-colors hover:bg-blue-100"
+            className="mb-4 flex min-h-11 items-center justify-between gap-2 rounded border border-brand-700 bg-white px-4 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50"
           >
-            <span className="flex items-center gap-2">
-              <LineChart className="h-4 w-4" />
-              ダッシュボードで推移グラフを見る
-            </span>
+            ダッシュボードで推移グラフを見る
             <ArrowRight className="h-4 w-4" />
           </Link>
           <div className="space-y-2">
@@ -108,26 +101,25 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
                   key={entry.id}
                   type="button"
                   onClick={() => handleLoadEntry(entry)}
-                  className="w-full rounded-xl border border-slate-100 bg-slate-50 p-3 text-left transition-colors hover:border-blue-200 hover:bg-blue-50"
+                  className="w-full rounded-lg border border-slate-200 bg-white p-3 text-left hover:border-brand-700 hover:bg-brand-50"
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <div className="text-lg font-bold text-slate-800">
-                        {total}<span className="text-sm text-slate-400">/{max}</span>
+                      <div className="text-lg font-bold tabular-nums text-slate-900">
+                        {total}<span className="text-sm font-normal text-slate-600">/{max}</span>
                       </div>
-                      <div className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
+                      <div className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs tabular-nums text-slate-700">
                         {Math.round(percent)}%
                       </div>
                     </div>
-                    <div className="text-xs text-slate-400">{prefCode}</div>
+                    <div className="text-xs text-slate-600">{prefCode}</div>
                   </div>
                   <div className="mt-1 flex items-center gap-2">
-                    <Clock className="h-3 w-3 text-slate-400" />
-                    <span className="text-xs text-slate-500">
+                    <span className="text-sm tabular-nums text-slate-600">
                       {date.toLocaleDateString('ja-JP')} {date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                     </span>
                     {entry.memo && (
-                      <span className="truncate text-xs text-slate-600">• {entry.memo}</span>
+                      <span className="truncate text-sm text-slate-600">• {entry.memo}</span>
                     )}
                   </div>
                 </button>
@@ -136,7 +128,7 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
           </div>
 
           {history.length > 10 && (
-            <div className="mt-3 text-center text-xs text-slate-400">
+            <div className="mt-3 text-center text-sm text-slate-600">
               他{history.length - 10}件の履歴があります
             </div>
           )}
@@ -144,7 +136,7 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
           <button
             type="button"
             onClick={handleClearHistory}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-100"
+            className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded border border-red-200 bg-red-50 px-4 py-2 text-sm font-bold text-red-800 hover:bg-red-100"
           >
             <Trash2 className="h-4 w-4" />
             履歴をクリア
@@ -155,7 +147,7 @@ export function HistoryPanel({ onLoadEntry }: HistoryPanelProps) {
   );
 }
 
-/** 達成率の推移を見せる軽量な自前SVGスパークライン（recharts非依存・§12）。 */
+/** 達成率の推移を見せる軽量な自前SVGスパークライン（recharts非依存・§12）。単色（深緑）で描く。 */
 function Sparkline({ values }: { values: number[] }) {
   const W = 280;
   const H = 56;
@@ -167,17 +159,16 @@ function Sparkline({ values }: { values: number[] }) {
   const area = `${P},${H - P} ${line} ${W - P},${H - P}`;
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full" role="img" aria-label="達成率の推移グラフ">
-      <defs>
-        <linearGradient id="sparkArea" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.25} />
-          <stop offset="100%" stopColor="#3b82f6" stopOpacity={0} />
-        </linearGradient>
-      </defs>
-      <polygon points={area} fill="url(#sparkArea)" />
-      <polyline points={line} fill="none" stroke="#3b82f6" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      className="block h-auto w-full max-w-xl text-brand-700"
+      role="img"
+      aria-label="達成率の推移グラフ"
+    >
+      <polygon points={area} fill="currentColor" fillOpacity={0.1} />
+      <polyline points={line} fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
       {values.map((v, i) => (
-        <circle key={i} cx={x(i)} cy={y(v)} r={2.5} fill="#3b82f6">
+        <circle key={i} cx={x(i)} cy={y(v)} r={2.5} fill="currentColor">
           <title>{`${v}%`}</title>
         </circle>
       ))}

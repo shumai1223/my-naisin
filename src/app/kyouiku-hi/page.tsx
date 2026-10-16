@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, BookCheck, HelpCircle, TrendingUp, GraduationCap } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { EducationCostCalculator } from '@/components/EducationCostCalculator';
 import { AnswerBox } from '@/components/AnswerBox';
@@ -11,7 +11,7 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
-import { LEARNING_COST_ANNUAL, UNIVERSITY_ESTIMATE } from '@/lib/education-cost/data';
+import { LEARNING_COST_ANNUAL, UNIVERSITY_ESTIMATE, MEXT_GAKUSHUHI_SOURCE } from '@/lib/education-cost/data';
 import { toManYen, highSchoolTotal } from '@/lib/education-cost/engine';
 
 const FAQS = [
@@ -87,22 +87,26 @@ export default function KyouikuHiPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">教育費シミュレーター</span>
+            <span className="text-slate-900">教育費シミュレーター</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-xl">
-              <Wallet className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">中学〜高校卒業まで、教育費はいくら？</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 [text-wrap:balance] md:text-[28px]">中学〜高校卒業まで、教育費はいくら？</h1>
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
+              出典：
+              <a href={MEXT_GAKUSHUHI_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
+              </a>
+              <span className="whitespace-nowrap">（最終確認 {MEXT_GAKUSHUHI_SOURCE.lastChecked}）</span>
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               現在の<strong>学年・進学先（公立/私立）・塾の形態</strong>を選ぶだけで、高校卒業までにかかる教育費の総額を
               内訳つきで概算します。数値は<strong>文部科学省「子供の学習費調査」</strong>の一次データに準拠します。
             </p>
@@ -117,54 +121,49 @@ export default function KyouikuHiPage() {
           </div>
 
           <section className="mb-8">
+            <h2 className="sr-only">教育費シミュレーター</h2>
             <EducationCostCalculator />
           </section>
 
           {/* 保護者リード（最高インテント＝お金を計算した直後） */}
-          <ParentLeadCTA placement="hiyou" className="mb-10" />
+          <ParentLeadCTA placement="hiyou" className="mb-10" headingLevel="h2" />
 
           {/* 進路別ざっくり比較（engine算出・捏造ゼロ） */}
           <section className="mb-10">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <TrendingUp className="h-5 w-5 text-indigo-600" />
-              進路別・高校3年間の費用の目安
-            </h2>
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">進路別・高校3年間の費用の目安</h2>
+            <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="bg-indigo-600 text-white">
-                    <th className="px-4 py-3 text-left font-bold">進路</th>
-                    <th className="px-4 py-3 text-left font-bold">高校3年間の総額（準備費込み）</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th scope="col" className="px-4 py-3 text-left font-bold">進路</th>
+                    <th scope="col" className="px-4 py-3 text-right font-bold [text-wrap:balance]">高校3年間の総額（準備費込み）</th>
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
+                <tbody className="text-slate-900">
                   {COMPARE.map((c) => (
-                    <tr key={c.route} className="odd:bg-white even:bg-slate-50">
+                    <tr key={c.route} className="border-b border-slate-200 last:border-b-0">
                       <td className="px-4 py-3 font-bold">{c.route}</td>
-                      <td className="px-4 py-3">{toManYen(highSchoolTotal(c.high))}（{c.high === 'public' ? '公立高校' : '私立高校'}）</td>
+                      <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">{toManYen(highSchoolTotal(c.high))}（{c.high === 'public' ? '公立高校' : '私立高校'}）</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-xs text-slate-500">
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">
               ※ 文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」の学習費総額（公立高校 約{toManYen(LEARNING_COST_ANNUAL.koukou.public)}/年・私立高校 約{toManYen(LEARNING_COST_ANNUAL.koukou.private)}/年）＋入学準備費の概算。塾代・大学費用は含みません。
             </p>
           </section>
 
           {/* 都道府県独自の上乗せ制度への橋渡し（Y-9・私立は国の支援金だけで判断しない） */}
-          <section className="mb-10 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-6">
-            <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-emerald-900">
-              <Wallet className="h-5 w-5 text-emerald-600" />
-              私立を検討中なら、都道府県独自の上乗せ制度も確認を
-            </h2>
-            <p className="text-sm leading-relaxed text-slate-700">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-5">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">私立を検討中なら、都道府県独自の上乗せ制度も確認を</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               上の試算は国の就学支援金までを含んでいます。多くの都道府県は<strong>私立高校の授業料差額を独自に補助する制度</strong>を
               別途持っており、実際の負担はさらに軽くなる場合があります。
             </p>
             <Link
               href="/shougakukin#pref-subsidy"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 hover:text-emerald-800"
+              className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-base font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
               都道府県別の上乗せ制度を確認する
               <ChevronRight className="h-4 w-4" />
@@ -172,24 +171,21 @@ export default function KyouikuHiPage() {
           </section>
 
           {/* 大学進学の橋渡し（姉妹サイト My Shingaku へ） */}
-          <section className="mb-10 rounded-2xl border border-violet-200 bg-violet-50/50 p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-violet-900">
-              <GraduationCap className="h-5 w-5 text-violet-600" />
-              大学進学まで考えると（概算の目安）
-            </h2>
-            <ul className="space-y-1.5 text-sm leading-relaxed text-slate-700">
-              <li>・{UNIVERSITY_ESTIMATE.national.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.national.fourYear)}（{UNIVERSITY_ESTIMATE.national.note}）</li>
-              <li>・{UNIVERSITY_ESTIMATE.privateHumanities.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.privateHumanities.fourYear)} 前後</li>
-              <li>・{UNIVERSITY_ESTIMATE.privateScience.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.privateScience.fourYear)} 前後</li>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">大学進学まで考えると（概算の目安）</h2>
+            <ul className="list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900 marker:text-slate-500">
+              <li>{UNIVERSITY_ESTIMATE.national.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.national.fourYear)}（{UNIVERSITY_ESTIMATE.national.note}）</li>
+              <li>{UNIVERSITY_ESTIMATE.privateHumanities.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.privateHumanities.fourYear)} 前後</li>
+              <li>{UNIVERSITY_ESTIMATE.privateScience.label}：4年間で {toManYen(UNIVERSITY_ESTIMATE.privateScience.fourYear)} 前後</li>
             </ul>
-            <p className="mt-3 text-xs text-slate-500">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               ※ 大学費用は学部・大学で大きく異なります。一人暮らしの場合は別途生活費がかかります。
             </p>
             <Link
               href="https://my-shingaku.com/gakuhi"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-violet-700 hover:text-violet-800"
+              className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-base font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
               大学進学の費用を詳しく見る（姉妹サイト My Shingaku）
               <ChevronRight className="h-4 w-4" />
@@ -197,23 +193,20 @@ export default function KyouikuHiPage() {
           </section>
 
           {/* 出典 */}
-          <div className="mb-10 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-            <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-              <BookCheck className="h-3.5 w-3.5 text-indigo-600" />
-              出典・参考データ（一次情報）
-            </div>
-            <ul className="space-y-1.5 text-xs leading-relaxed">
+          <div className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <div className="mb-2 text-sm font-bold text-slate-900">出典・参考データ（一次情報）</div>
+            <ul className="space-y-2 text-sm leading-[1.8]">
               <li>
-                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
                 </a>
-                <span className="text-slate-400"> — 中学・高校の学習費総額（公立/私立）</span>
+                <span className="text-slate-600"> — 中学・高校の学習費総額（公立/私立）</span>
               </li>
               <li>
-                <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「高校生等への修学支援（就学支援金）」
                 </a>
-                <span className="text-slate-400"> — 授業料の軽減制度</span>
+                <span className="text-slate-600"> — 授業料の軽減制度</span>
               </li>
             </ul>
           </div>
@@ -224,24 +217,23 @@ export default function KyouikuHiPage() {
               source="home"
               heading="教育費と受験情報を、無料で受け取りませんか？"
               body="学費の備え方・就学支援金・志望校選びのコツを、LINEまたはメールでお届けします。いつでも解除できます。"
+              headingLevel="h2"
             />
           </div>
 
           {/* FAQ */}
           <section className="mb-10">
-            <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-indigo-600" />よくある質問
-            </h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white px-5">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3 py-2">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-600 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="pb-5 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>

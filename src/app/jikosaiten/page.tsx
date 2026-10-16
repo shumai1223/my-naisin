@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, PenLine, ListChecks, HelpCircle, AlertTriangle, ChevronRightSquare, Calculator } from 'lucide-react';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -86,100 +86,86 @@ export default function JikosaitenPage() {
         totalTime="P1D"
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">自己採点のやり方</span>
+            <span className="text-slate-900">自己採点のやり方</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100">
-              学力検査 当日〜合格発表まで
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校受験の自己採点のやり方</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">高校受験の自己採点のやり方</h1>
+            <p className="mt-2 text-sm text-slate-600">学力検査 当日〜合格発表まで</p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               学力検査が終わったら、合格発表を待つ前に自己採点で「今回の総合得点がどのくらいになりそうか」を確認できます。試験中の準備から、採点後に総合得点の目安を出すところまでの一般的な流れをまとめました。
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
-              <p className="text-sm leading-relaxed text-amber-900">
-                自己採点はあくまで目安です。記述式の部分点や採点基準の詳細は公表されないことが多く、実際の得点とズレが生じることがあります。断定的に合否を判断せず、参考情報として活用してください。
-              </p>
-            </div>
+          <section className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="flex items-center gap-1.5 text-sm font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-base leading-[1.8] text-amber-900">
+              自己採点はあくまで目安です。記述式の部分点や採点基準の詳細は公表されないことが多く、実際の得点とズレが生じることがあります。断定的に合否を判断せず、参考情報として活用してください。
+            </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 border-l-4 border-blue-500 pl-3 text-lg font-bold text-slate-800">
-              <ListChecks className="h-5 w-5 text-blue-500" />
-              自己採点の5ステップ
-            </h2>
-            <div className="space-y-4">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">自己採点の5ステップ</h2>
+            <ol className="space-y-5">
               {STEPS.map((s, i) => (
-                <div key={s.title} className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
-                      {i + 1}
-                    </div>
-                    {i < STEPS.length - 1 && <div className="mt-1 h-full w-px flex-1 bg-blue-100" />}
+                <li key={s.title} className="flex gap-3">
+                  <span className="w-6 shrink-0 text-base font-bold tabular-nums text-brand-700">{i + 1}.</span>
+                  <div>
+                    <h3 className="text-[17px] font-bold text-slate-900">{s.title}</h3>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{s.body}</p>
                   </div>
-                  <div className="pb-2">
-                    <div className="text-sm font-bold text-slate-800">{s.title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
-                  </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </section>
 
-          <section className="mb-8 rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 text-center shadow-sm">
-            <div className="mb-3 flex items-center justify-center gap-2 text-slate-800">
-              <PenLine className="h-5 w-5 text-blue-600" />
-              <h2 className="text-lg font-bold">自己採点したら、総合得点の目安を確認</h2>
-            </div>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">自己採点したら、総合得点の目安を確認</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               自己採点で出した学力検査の得点と、内申点を合わせると、志望校の総合得点方式での目安がその場で分かります。目標点を入力すれば「あと何点」も表示されます。
             </p>
             <Link
               href="/total-score"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800"
             >
-              <Calculator className="h-4 w-4" />
               都道府県別の総合得点を計算する
             </Link>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-indigo-500 pl-3 text-lg font-bold text-slate-800">
-              <AlertTriangle className="h-5 w-5 text-indigo-500" />
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               内申点と当日点、どちらが重い？ 県によって違う「配点比率」
             </h2>
-            <p className="mb-3 text-sm leading-relaxed text-slate-600">
+            <p className="mb-3 text-base leading-[1.8] text-slate-900">
               自己採点した当日点が、総合得点にどれだけ効いてくるかは都道府県・学校によって大きく異なります。
               一部の都道府県は比率が制度として明確に決まっています。
             </p>
-            <ul className="mb-3 space-y-2 text-sm leading-relaxed text-slate-700">
+            <ul className="mb-3 list-disc space-y-2 pl-5 text-base leading-[1.8] text-slate-900">
               <li>
-                ・<strong>東京都</strong>: 内申点70：学力検査30の比率が制度として定められています（ESAT-Jスピーキングテストの得点を含む）。
+                <strong>東京都</strong>: 内申点70：学力検査30の比率が制度として定められています（ESAT-Jスピーキングテストの得点を含む）。
               </li>
               <li>
-                ・<strong>大阪府</strong>: 「タイプⅠ〜Ⅴ」の5段階があり、学校・学科ごとに内申点の比重が30%〜70%の範囲で公式に決まっています。
+                <strong>大阪府</strong>: 「タイプⅠ〜Ⅴ」の5段階があり、学校・学科ごとに内申点の比重が30%〜70%の範囲で公式に決まっています。
               </li>
               <li>
-                ・<strong>埼玉県</strong>: 学年ごとの内申点の重み（中1:中2:中3）は1:1:2が標準ですが、学校によって1:1:3など異なるモデルを採用する場合があります。
+                <strong>埼玉県</strong>: 学年ごとの内申点の重み（中1:中2:中3）は1:1:2が標準ですが、学校によって1:1:3など異なるモデルを採用する場合があります。
               </li>
             </ul>
-            <p className="text-sm leading-relaxed text-slate-600">
+            <p className="text-base leading-[1.8] text-slate-900">
               上記以外の多くの都道府県では、内申点と当日点の比率は志望校・学科ごとの募集要項で個別に定められており、
               全県共通の公式比率は公表されていません。当サイトの
-              <Link href="/total-score" className="mx-1 font-bold text-indigo-700 underline">
+              <Link href="/total-score" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 都道府県別の総合得点計算
               </Link>
               では、比率が公式に確認できない県について目安の初期値（多くの県で内申4:当日6）を設定していますが、
@@ -187,50 +173,59 @@ export default function JikosaitenPage() {
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 flex items-start gap-1.5 text-sm font-bold text-slate-800">
-                    <HelpCircle className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">
                     Q. {f.question}
                   </h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mb-10">
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/juken-toujitsu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                受験当日の持ち物・タイムライン
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/reverse" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                志望校から逆算（必要な当日点）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/tarinai-taisaku" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                内申・当日点が足りない冬の対策
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/koukou-bairitsu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                高校入試の倍率計算
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/goukaku-happyo" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                合格発表後の手続き
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/juken-toujitsu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">受験当日の持ち物・タイムライン</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/reverse" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">志望校から逆算（必要な当日点）</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/tarinai-taisaku" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">内申・当日点が足りない冬の対策</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/koukou-bairitsu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">高校入試の倍率計算</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/goukaku-happyo" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">合格発表後の手続き</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

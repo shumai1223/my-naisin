@@ -6,8 +6,6 @@ import {
   BookOpen,
   Calendar,
   Clock,
-  Tag,
-  Sparkles,
   ArrowRight,
   Search,
   X,
@@ -16,8 +14,7 @@ import {
   GraduationCap,
   MapPin,
   Edit3,
-  Filter,
-} from 'lucide-react';
+} from '@/components/icons';
 
 export interface BlogListItem {
   slug: string;
@@ -36,13 +33,14 @@ interface BlogListClientProps {
 
 const PAGE_SIZE = 12;
 
+// カテゴリ見出しの横に置く単色アイコン（箱には入れない・色は見出し側で1色）
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
-  guide: <BookMarked className="h-6 w-6 text-blue-600" />,
-  基礎知識: <BookOpen className="h-6 w-6 text-indigo-600" />,
-  '対策・実践': <Target className="h-6 w-6 text-emerald-600" />,
-  '進路・受験': <GraduationCap className="h-6 w-6 text-violet-600" />,
-  都道府県別: <MapPin className="h-6 w-6 text-rose-600" />,
-  教科別: <Edit3 className="h-6 w-6 text-amber-600" />,
+  guide: <BookMarked className="h-5 w-5" />,
+  基礎知識: <BookOpen className="h-5 w-5" />,
+  '対策・実践': <Target className="h-5 w-5" />,
+  '進路・受験': <GraduationCap className="h-5 w-5" />,
+  都道府県別: <MapPin className="h-5 w-5" />,
+  教科別: <Edit3 className="h-5 w-5" />,
 };
 
 function normalize(text: string): string {
@@ -112,48 +110,46 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
   return (
     <div>
       {/* Search & Filter Bar */}
-      <div className="mt-10 mb-10 rounded-2xl bg-white border border-gray-200/60 p-5 sm:p-6 shadow-sm">
-        <div className="flex items-center gap-2 mb-4">
-          <Filter className="h-4 w-4 text-gray-500" />
-          <h2 className="text-sm font-bold text-gray-700">記事を探す</h2>
-        </div>
+      <div className="mt-10 mb-10 rounded-lg border border-slate-200 bg-white p-5 sm:p-6">
+        <h2 className="mb-4 text-base font-bold text-slate-900">記事を探す</h2>
 
         {/* Search input */}
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-600" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="キーワード・タイトル・タグで検索"
             aria-label="記事を検索"
-            className="w-full rounded-xl border border-gray-200 bg-gray-50/50 pl-11 pr-10 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-blue-400 focus:bg-white focus:ring-2 focus:ring-blue-100 transition"
+            className={`w-full text-ellipsis rounded border border-slate-300 bg-white py-3 pl-10 text-base text-slate-900 placeholder:text-slate-500 [&::-webkit-search-cancel-button]:hidden ${
+              query ? 'pr-12' : 'pr-3'
+            }`}
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery('')}
               aria-label="検索をクリア"
-              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700"
+              className="absolute inset-y-0 right-0 flex w-11 items-center justify-center text-slate-600 transition-colors duration-150 hover:text-slate-900"
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="h-4 w-4" />
             </button>
           )}
         </div>
 
-        {/* Tag pills */}
+        {/* Tag filter */}
         {tagCounts.length > 0 && (
-          <div className="mt-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Tag className="h-3.5 w-3.5 text-gray-400" />
-              <span className="text-xs font-medium text-gray-500">人気のタグ</span>
+          <div className="mt-5">
+            <div className="mb-2 flex items-center gap-2">
+              <span className="text-sm text-slate-600">記事数の多いタグ</span>
               {activeTag && (
                 <button
                   type="button"
                   onClick={() => setActiveTag(null)}
-                  className="ml-auto inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-700"
+                  className="ml-auto inline-flex min-h-[44px] items-center gap-1 text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800"
                 >
-                  <X className="h-3 w-3" />
+                  <X className="h-3.5 w-3.5" />
                   タグ解除
                 </button>
               )}
@@ -165,17 +161,18 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
                   <button
                     key={tag}
                     type="button"
+                    aria-pressed={isActive}
                     onClick={() => setActiveTag(isActive ? null : tag)}
-                    className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
+                    className={`inline-flex min-h-[44px] items-center gap-1.5 rounded border px-3 text-sm transition-colors duration-150 ${
                       isActive
-                        ? 'bg-blue-600 text-white shadow-sm'
-                        : 'bg-gray-50 text-gray-600 ring-1 ring-gray-200 hover:bg-blue-50 hover:text-blue-600 hover:ring-blue-200'
+                        ? 'border-brand-700 bg-brand-700 text-white'
+                        : 'border-slate-300 bg-white text-slate-700 hover:bg-brand-50 hover:text-brand-800'
                     }`}
                   >
                     {tag}
                     <span
-                      className={`text-[10px] font-bold ${
-                        isActive ? 'text-blue-100' : 'text-gray-400'
+                      className={`text-xs font-bold tabular-nums ${
+                        isActive ? 'text-brand-100' : 'text-slate-600'
                       }`}
                     >
                       {count}
@@ -187,7 +184,7 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
                 <button
                   type="button"
                   onClick={() => setShowAllTags(true)}
-                  className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-blue-600 ring-1 ring-blue-200 hover:bg-blue-50"
+                  className="inline-flex min-h-[44px] items-center gap-1 rounded border border-brand-700 bg-white px-3 text-sm font-bold text-brand-700 transition-colors duration-150 hover:bg-brand-50"
                 >
                   すべて表示（+{tagCounts.length - 14}）
                 </button>
@@ -196,7 +193,7 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
                 <button
                   type="button"
                   onClick={() => setShowAllTags(false)}
-                  className="inline-flex min-h-[44px] items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-gray-500 ring-1 ring-gray-200 hover:bg-gray-50"
+                  className="inline-flex min-h-[44px] items-center gap-1 rounded border border-slate-300 bg-white px-3 text-sm text-slate-700 transition-colors duration-150 hover:bg-slate-50"
                 >
                   折りたたむ
                 </button>
@@ -208,29 +205,27 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
 
       {/* Filtered Results */}
       {isFiltering ? (
-        <div className="pb-24">
-          <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-xl font-bold text-gray-900">
+        <div className="pb-14">
+          <div className="mb-6 flex items-center justify-between gap-3">
+            <h2 className="text-xl font-bold text-slate-900">
               検索結果
-              <span className="ml-2 text-sm font-medium text-gray-500">
+              <span className="ml-2 text-sm font-normal tabular-nums text-slate-600">
                 {filteredPosts.length}件
               </span>
             </h2>
             {activeTag && (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600 ring-1 ring-blue-100">
-                <Tag className="h-3 w-3" />
+              <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                 {activeTag}
               </span>
             )}
           </div>
 
           {filteredPosts.length === 0 ? (
-            <div className="rounded-2xl border border-gray-200 bg-white p-12 text-center">
-              <Search className="mx-auto h-10 w-10 text-gray-300" />
-              <p className="mt-4 text-base font-medium text-gray-700">
+            <div className="rounded-lg border border-slate-200 bg-white p-8 text-center sm:p-12">
+              <p className="text-base font-bold text-slate-900">
                 該当する記事が見つかりませんでした
               </p>
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-slate-600">
                 キーワードやタグを変えてもう一度お試しください。
               </p>
               <button
@@ -239,7 +234,7 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
                   setQuery('');
                   setActiveTag(null);
                 }}
-                className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors duration-150 hover:bg-brand-800"
               >
                 すべての記事を見る
               </button>
@@ -257,10 +252,10 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
                   <button
                     type="button"
                     onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
-                    className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-7 py-3 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-xl"
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 font-bold text-brand-700 transition-colors duration-150 hover:bg-brand-50"
                   >
                     もっと見る
-                    <span className="text-xs font-medium text-gray-400">
+                    <span className="text-xs font-normal tabular-nums text-slate-600">
                       （残り {filteredPosts.length - visibleCount}件）
                     </span>
                   </button>
@@ -273,52 +268,33 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
         <>
           {/* Featured Posts */}
           {featuredPosts.length > 0 && (
-            <div className="mb-20">
-              <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-amber-500" />
-                注目の記事
+            <div className="mb-14">
+              <h2 className="mb-6 text-xl font-bold text-slate-900">
+                新着の記事
               </h2>
               <div className="grid gap-6 md:grid-cols-3">
-                {featuredPosts.map((post, i) => (
+                {featuredPosts.map((post) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className={`group relative overflow-hidden rounded-2xl bg-white border border-gray-200/60 p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-blue-100 ${
-                      i === 0
-                        ? 'md:col-span-2 md:row-span-2 flex flex-col justify-between'
-                        : 'flex flex-col'
-                    }`}
+                    className="group flex flex-col rounded-lg border border-slate-200 bg-white p-5 transition-colors duration-150 hover:border-brand-700"
                   >
-                    <div>
-                      <div className="mb-4 flex flex-wrap items-center gap-3">
-                        <span className="inline-block rounded-md bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-200/50">
-                          {post.category}
-                        </span>
-                        <span className="flex items-center gap-1.5 text-xs text-gray-400 font-medium">
-                          <Calendar className="h-3.5 w-3.5" />
-                          {new Date(post.date).toLocaleDateString('ja-JP')}
-                        </span>
-                      </div>
-                      <h3
-                        className={`font-bold text-gray-900 transition-colors group-hover:text-blue-600 ${
-                          i === 0
-                            ? 'text-2xl sm:text-3xl leading-tight'
-                            : 'text-lg leading-snug'
-                        }`}
-                      >
-                        {post.title}
-                      </h3>
-                      <p
-                        className={`mt-3 text-gray-500 leading-relaxed ${
-                          i === 0
-                            ? 'text-base sm:text-lg line-clamp-3'
-                            : 'text-sm line-clamp-2'
-                        }`}
-                      >
-                        {post.description}
-                      </p>
+                    <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
+                        {post.category}
+                      </span>
+                      <span className="flex items-center gap-1.5 text-xs text-slate-600">
+                        <Calendar className="h-3.5 w-3.5" />
+                        {new Date(post.date).toLocaleDateString('ja-JP')}
+                      </span>
                     </div>
-                    <div className="mt-6 flex items-center gap-2 text-sm font-medium text-blue-600 opacity-0 transform translate-x-[-10px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                    <h3 className="text-[17px] font-bold leading-snug text-slate-900 transition-colors duration-150 group-hover:text-brand-700">
+                      {post.title}
+                    </h3>
+                    <p className="mt-3 line-clamp-3 flex-1 text-sm leading-[1.8] text-slate-600">
+                      {post.description}
+                    </p>
+                    <div className="mt-4 flex items-center gap-1.5 text-sm font-bold text-brand-700">
                       記事を読む
                       <ArrowRight className="h-4 w-4" />
                     </div>
@@ -329,13 +305,13 @@ export function BlogListClient({ posts, initialTag }: BlogListClientProps) {
           )}
 
           {/* Category Sections */}
-          <div className="space-y-24 pb-24">
+          <div className="space-y-14 pb-14">
             {Object.entries(postsByCategory).map(([category, categoryPosts]) => (
               <CategorySection
                 key={category}
                 category={category}
                 posts={categoryPosts}
-                icon={CATEGORY_ICONS[category] || <BookOpen className="h-6 w-6 text-gray-400" />}
+                icon={CATEGORY_ICONS[category] || <BookOpen className="h-5 w-5" />}
               />
             ))}
           </div>
@@ -349,10 +325,10 @@ function PostCard({ post }: { post: BlogListItem }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col rounded-2xl bg-white border border-gray-200/60 p-6 transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-blue-100 hover:-translate-y-0.5"
+      className="group flex flex-col rounded-lg border border-slate-200 bg-white p-5 transition-colors duration-150 hover:border-brand-700"
     >
-      <div className="mb-4 flex items-center gap-3 text-xs font-medium text-gray-400">
-        <span className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-md">
+      <div className="mb-3 flex items-center gap-4 text-xs text-slate-600">
+        <span className="flex items-center gap-1.5">
           <Calendar className="h-3.5 w-3.5" />
           {new Date(post.date).toLocaleDateString('ja-JP')}
         </span>
@@ -361,19 +337,18 @@ function PostCard({ post }: { post: BlogListItem }) {
           {post.readTime}
         </span>
       </div>
-      <h3 className="flex-1 text-base font-bold leading-relaxed text-gray-900 transition-colors group-hover:text-blue-600 line-clamp-2">
+      <h3 className="line-clamp-2 flex-1 text-base font-bold leading-relaxed text-slate-900 transition-colors duration-150 group-hover:text-brand-700">
         {post.title}
       </h3>
-      <p className="mt-3 text-sm leading-relaxed text-gray-500 line-clamp-2">
+      <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-600">
         {post.description}
       </p>
-      <div className="mt-5 flex flex-wrap gap-2">
+      <div className="mt-4 flex flex-wrap gap-2">
         {post.tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="inline-flex items-center gap-1 rounded-md bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-500 transition-colors group-hover:bg-blue-50 group-hover:text-blue-600"
+            className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700"
           >
-            <Tag className="h-3 w-3" />
             {tag}
           </span>
         ))}
@@ -397,14 +372,10 @@ function CategorySection({
 
   return (
     <section className="scroll-mt-24">
-      <div className="mb-8 flex items-center gap-4 border-b border-gray-100 pb-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-50 ring-1 ring-gray-100 shadow-sm">
-          {icon}
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">{category}</h2>
-          <p className="text-sm font-medium text-gray-500 mt-1">{posts.length}件の記事</p>
-        </div>
+      <div className="mb-6 flex items-center gap-3 border-b border-slate-900 pb-3">
+        <span className="text-slate-600">{icon}</span>
+        <h2 className="text-xl font-bold text-slate-900">{category}</h2>
+        <p className="text-sm tabular-nums text-slate-600">{posts.length}件の記事</p>
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((post) => (
@@ -416,7 +387,7 @@ function CategorySection({
           <button
             type="button"
             onClick={() => setExpanded((v) => !v)}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-200 transition-all hover:bg-gray-50 hover:ring-blue-200 hover:text-blue-600"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 font-bold text-brand-700 transition-colors duration-150 hover:bg-brand-50"
           >
             {expanded
               ? '折りたたむ'

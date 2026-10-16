@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Award, Scale, FileText, Percent, Sigma, CalendarClock, HelpCircle } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -59,7 +59,6 @@ const TYPES = [
 
 const STEPS = [
   {
-    icon: Percent,
     title: 'STEP1　評定平均を確認する',
     body: '推薦の出願資格は評定平均で決まります。まず今の評定平均を計算し、志望校・志望大学の基準に届いているかを把握しましょう。',
     href: '/hyotei-heikin',
@@ -67,7 +66,6 @@ const STEPS = [
     sub: { href: '/hyotei-heikin/suisen-kijun', label: '推薦に必要な評定平均の早見表を見る' },
   },
   {
-    icon: FileText,
     title: 'STEP2　調査書を準備する',
     body: '推薦は調査書（評定＋活動の記録）が中心。何が書かれるか、いつ誰に依頼するかを把握し、部活・検定などの実績は早めに担任へ伝えておきます。',
     href: '/chousasho',
@@ -75,7 +73,6 @@ const STEPS = [
     sub: { href: '/chousasho/kakikata', label: '調査書の書き方・発行の流れを見る' },
   },
   {
-    icon: Sigma,
     title: 'STEP3　一般入試の合否も逆算しておく',
     body: '推薦がだめでも一般入試で勝負できるよう、当日点との合算（総合得点）で志望校に届くかを確認。推薦と一般の二段構えが安全です。',
     href: '/total-score',
@@ -95,20 +92,20 @@ export default function SuisenNyuushiPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-amber-50/40 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
+              <Home className="h-4 w-4" />
+              ホーム
+            </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">推薦入試とは</span>
+            <span className="text-slate-900">推薦入試とは</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-xl">
-              <Award className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">推薦入試とは？</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">推薦入試とは？</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               指定校推薦・公募推薦・総合型選抜の<strong>違い</strong>、必要な<strong>評定平均</strong>、<strong>調査書</strong>の準備までを一気に整理。
               「推薦＝評定（調査書）で勝負する入試」の全体像と、いま何をすべきかがわかります。
             </p>
@@ -125,96 +122,108 @@ export default function SuisenNyuushiPage() {
           </AnswerBox>
 
           {/* 3種類の違い */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Scale className="h-5 w-5 text-amber-600" />
-              指定校推薦・公募推薦・総合型選抜の違い
-            </h2>
-            <div className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">指定校推薦・公募推薦・総合型選抜の違い</h2>
+            <div className="mt-2 divide-y divide-slate-200">
               {TYPES.map((t) => (
-                <div key={t.name} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <div key={t.name} className="py-4">
                   <div className="mb-1 flex flex-wrap items-center gap-2">
-                    <span className="text-sm font-bold text-slate-800">{t.name}</span>
-                    <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-[10px] font-bold text-amber-700">{t.tag}</span>
+                    <h3 className="text-[17px] font-bold text-slate-900">{t.name}</h3>
+                    <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">{t.tag}</span>
                   </div>
-                  <p className="text-sm leading-relaxed text-slate-600">{t.desc}</p>
-                  <p className="mt-1 text-xs font-bold text-amber-700">{t.emphasis}</p>
+                  <p className="text-base leading-[1.8] text-slate-900">{t.desc}</p>
+                  <p className="mt-1 text-sm font-bold text-slate-900">{t.emphasis}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-xs text-slate-500">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               ※ 高校受験では「単願（専願）推薦」「併願優遇」「特色化選抜」など地域独自の呼び方があります。詳細な評定基準は
-              <Link href="/hyotei-heikin/suisen-kijun" className="font-bold text-amber-600 hover:underline">推薦の評定基準ページ</Link>で確認できます。
+              <Link href="/hyotei-heikin/suisen-kijun" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">推薦の評定基準ページ</Link>で確認できます。
             </p>
           </section>
 
           {/* 準備3STEP（3ピラーの合流点＝送客の中心） */}
-          <section className="mt-8 space-y-4">
-            <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-              <CalendarClock className="h-5 w-5 text-amber-600" />
-              推薦に向けて、いまやること（3STEP）
-            </h2>
-            {STEPS.map((s) => {
-              const Icon = s.icon;
-              return (
-                <div key={s.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h3 className="mb-2 flex items-center gap-2 text-base font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-amber-50 text-amber-600"><Icon className="h-5 w-5" /></span>
-                    {s.title}
-                  </h3>
-                  <p className="mb-3 text-sm leading-relaxed text-slate-600">{s.body}</p>
-                  <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-                    <Link href={s.href} className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-amber-700 sm:w-auto">
-                      {s.cta}<ChevronRight className="h-4 w-4" />
+          <section className="mt-10">
+            <h2 className="text-xl font-bold text-slate-900">推薦に向けて、いまやること（3STEP）</h2>
+            <div className="mt-4 space-y-4">
+              {STEPS.map((s) => (
+                <div key={s.title} className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+                  <h3 className="text-[17px] font-bold text-slate-900">{s.title}</h3>
+                  <p className="mt-2 text-base leading-[1.8] text-slate-900">{s.body}</p>
+                  <div className="mt-4 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-4">
+                    <Link
+                      href={s.href}
+                      className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800 sm:w-auto"
+                    >
+                      {s.cta}
+                      <ChevronRight className="h-4 w-4" />
                     </Link>
-                    <Link href={s.sub.href} className="inline-flex items-center justify-center gap-1 text-xs font-bold text-amber-700 hover:underline">
+                    <Link
+                      href={s.sub.href}
+                      className="inline-flex min-h-[44px] items-center justify-center gap-1 text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                    >
                       {s.sub.label}
                     </Link>
                   </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </section>
 
           {/* 保護者リード（推薦＝大学進学→教育費。FP無料相談＝live・権限ズレ0） */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="suisen" />
           </div>
 
           {/* 大学受験の推薦・総合型は姉妹サイトへ */}
-          <section className="mt-8 overflow-hidden rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-violet-50/60 to-white p-6 shadow-sm">
-            <h2 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">大学の推薦・総合型選抜を詳しく知りたい方へ</h2>
-            <p className="mb-5 text-sm leading-relaxed text-slate-700">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="text-xl font-bold leading-snug text-slate-900">大学の推薦・総合型選抜を詳しく知りたい方へ</h2>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
               大学進学者の半数以上が推薦・総合型で進む時代。評定平均で出願できる大学のレンジ、学費・奨学金の目安は、大学受験専門の姉妹サイトでまとめて調べられます。
             </p>
-            <div className="flex flex-col items-stretch gap-2 sm:flex-row">
-              <Link href="/sougou-gata-senbatsu" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-violet-700 sm:w-auto">
-                総合型選抜とは？評定の目安・準備時期<ChevronRight className="h-4 w-4" />
+            <div className="mt-5 flex flex-col items-stretch gap-2 sm:flex-row">
+              <Link
+                href="/sougou-gata-senbatsu"
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800 sm:w-auto"
+              >
+                総合型選抜とは？評定の目安・準備時期
+                <ChevronRight className="h-4 w-4" />
               </Link>
-              <Link href="/shutsugan-junbi" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-violet-700 ring-1 ring-violet-200 transition-colors hover:bg-violet-50 sm:w-auto">
+              <Link
+                href="/shutsugan-junbi"
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50 sm:w-auto"
+              >
                 出願準備チェックリストを見る
               </Link>
-              <a href="https://my-shingaku.com/sougou-suisen" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 transition-colors hover:bg-indigo-50 sm:w-auto">
+              <a
+                href="https://my-shingaku.com/sougou-suisen"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50 sm:w-auto"
+              >
                 大学の総合型選抜・学校推薦型選抜を見る（My Shingaku）
               </a>
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-amber-600" />よくある質問</h2>
-            <div className="space-y-3">
+          <section className="mt-10">
+            <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="mt-4 space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-4">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
+                      {f.question}
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
+                    </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
-          <ToolClusterNav current="hyotei-heikin" className="mt-8" />
+          <ToolClusterNav current="hyotei-heikin" className="mt-10" />
         </div>
       </div>
     </>

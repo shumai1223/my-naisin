@@ -17,28 +17,28 @@ const HTML = `<!DOCTYPE html>
 <title>偏差値 計算ツール | My Naishin</title>
 <style>
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#fff;color:#0f172a;-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#fff;color:#17231d;-webkit-text-size-adjust:100%}
   .wrap{max-width:480px;margin:0 auto;padding:16px}
   .hd{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-  .logo{width:34px;height:34px;border-radius:8px;display:block;box-shadow:0 1px 3px rgba(15,23,42,.15);flex:0 0 auto}
-  .ttl{font-size:14px;font-weight:800;line-height:1.3;color:#0f172a}
-  .sub{font-size:11px;color:#64748b;margin-top:2px}
-  .list{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden}
+  .logo{width:34px;height:34px;border-radius:6px;display:block;flex:0 0 auto}
+  .ttl{font-size:14px;font-weight:700;line-height:1.3;color:#17231d}
+  .sub{font-size:12px;color:#4f6158;margin-top:2px}
+  .list{border:1px solid #cddad3;border-radius:8px;overflow:hidden}
   .row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 12px}
-  .row+.row{border-top:1px solid #f1f5f9}
-  .row:nth-child(even){background:#f8fafc}
-  .lab{font-size:13px;font-weight:600;color:#334155;white-space:nowrap;flex:0 0 auto}
+  .row+.row{border-top:1px solid #e9efeb}
+  .row:nth-child(even){background:#f4f7f5}
+  .lab{font-size:13px;font-weight:700;color:#17231d;white-space:nowrap;flex:0 0 auto}
   .inputs{display:flex;gap:6px}
-  .inputs input{width:56px;height:30px;border-radius:8px;border:1px solid #e2e8f0;color:#334155;font-weight:700;font-size:13px;text-align:center;-webkit-appearance:none;appearance:none}
-  .inputs input:focus{outline:none;border-color:#a78bfa;box-shadow:0 0 0 2px rgba(167,139,250,.25)}
-  .ph{font-size:9px;color:#94a3b8;text-align:center;margin-top:1px}
-  .out{margin-top:14px;text-align:center;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px}
-  .num{font-size:38px;font-weight:900;line-height:1;color:#6d28d9}
-  .lbl{font-size:11px;font-weight:700;margin-top:6px;color:#475569}
-  .cta{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;text-align:center;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;text-decoration:none;padding:12px;border-radius:12px;font-weight:800;font-size:13px;box-shadow:0 4px 12px rgba(124,58,237,.3)}
-  .cta:hover{filter:brightness(1.05)}
-  .pw{margin-top:10px;text-align:center;font-size:11px;color:#94a3b8}
-  .pw a{color:#7c3aed;text-decoration:none;font-weight:700}
+  .inputs input{width:56px;height:30px;border-radius:6px;border:1px solid #cddad3;color:#17231d;font-weight:700;font-size:13px;text-align:center;-webkit-appearance:none;appearance:none}
+  .inputs input:focus{outline:2px solid #17543e;border-color:#17543e;}
+  .ph{font-size:12px;color:#4f6158;text-align:center;margin-top:1px}
+  .out{margin-top:14px;text-align:center;background:#f0f6f3;border:1px solid #cddad3;border-radius:8px;padding:16px}
+  .num{font-size:38px;font-weight:700;line-height:1;color:#17543e}
+  .lbl{font-size:12px;font-weight:700;margin-top:6px;color:#4f6158}
+  .cta{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;text-align:center;background:#17543e;color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-weight:700;font-size:13px;}
+  .cta:hover{background:#123f2f}
+  .pw{margin-top:10px;text-align:center;font-size:12px;color:#4f6158}
+  .pw a{color:#17543e;text-decoration:none;font-weight:700}
 </style>
 </head>
 <body>

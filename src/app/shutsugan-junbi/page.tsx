@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, CalendarClock, ClipboardList, ChevronRightSquare, HelpCircle } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -102,41 +102,35 @@ export default function ShutsuganJunbiPage() {
         steps={TIMELINE.map((t) => ({ name: `${t.period}：${t.title}`, text: t.desc }))}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-violet-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">出願準備チェックリスト</span>
+            <span className="text-slate-900">出願準備チェックリスト</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-xl">
-              <ClipboardList className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">学校推薦型・総合型選抜の出願準備チェックリスト</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">学校推薦型・総合型選抜の出願準備チェックリスト</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               出願までにやることを、<strong>一般的な準備タイムライン</strong>と<strong>必要書類チェックリスト</strong>でまとめました。
               大学・学部ごとの個別基準は書かず、制度の一般論のみを解説します。必ず志望大学の最新の募集要項で確認してください。
             </p>
           </header>
 
           {/* タイムライン */}
-          <section className="rounded-2xl border-2 border-violet-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <CalendarClock className="h-5 w-5 text-violet-600" />
-              準備タイムライン（一般的な目安）
-            </h2>
-            <ol className="space-y-4">
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">準備タイムライン（一般的な目安）</h2>
+            <ol className="divide-y divide-slate-200 border-y border-slate-200">
               {TIMELINE.map((t) => (
-                <li key={t.period} className="flex gap-4 border-l-4 border-violet-200 pl-4">
-                  <div className="w-20 shrink-0 pt-0.5 text-sm font-black text-violet-700">{t.period}</div>
+                <li key={t.period} className="flex flex-col gap-1 py-4 sm:flex-row sm:gap-4">
+                  <div className="shrink-0 text-base font-bold text-brand-700 sm:w-32">{t.period}</div>
                   <div>
-                    <div className="text-sm font-bold text-slate-800">{t.title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{t.desc}</p>
+                    <h3 className="text-[17px] font-bold text-slate-900">{t.title}</h3>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">{t.desc}</p>
                   </div>
                 </li>
               ))}
@@ -144,82 +138,92 @@ export default function ShutsuganJunbiPage() {
           </section>
 
           {/* 書類チェックリスト */}
-          <section className="mt-8 rounded-2xl border-2 border-violet-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <ClipboardList className="h-5 w-5 text-violet-600" />
-              必要書類チェックリスト（一般的な一覧）
-            </h2>
-            <ul className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">必要書類チェックリスト（一般的な一覧）</h2>
+            <ul className="divide-y divide-slate-200 border-y border-slate-200">
               {DOCUMENT_CHECKLIST.map((d) => (
-                <li key={d.item} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3">
-                  <input type="checkbox" aria-label={`${d.item}の準備チェック`} className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 text-violet-600" />
-                  <div>
-                    <div className="text-sm font-bold text-slate-800">{d.item}</div>
-                    <div className="mt-0.5 text-xs leading-relaxed text-slate-500">{d.note}</div>
-                  </div>
+                <li key={d.item}>
+                  <label className="flex min-h-[44px] cursor-pointer items-start gap-3 py-3">
+                    <input type="checkbox" aria-label={`${d.item}の準備チェック`} className="mt-0.5 h-5 w-5 shrink-0 rounded border-slate-300 text-brand-700 accent-brand-700" />
+                    <span>
+                      <span className="block text-base font-bold text-slate-900">{d.item}</span>
+                      <span className="mt-0.5 block text-sm leading-[1.8] text-slate-600">{d.note}</span>
+                    </span>
+                  </label>
                 </li>
               ))}
             </ul>
-            <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
               ※ 必要書類は大学・学部・入試方式によって異なります。上記は一般的に求められることが多い書類の一覧であり、
               志望大学の募集要項に記載の必要書類を必ず確認してください。
             </p>
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="suisen" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/shutsugan-junbi/shibou-riyuusho" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
-                志望理由書の書き方・構成
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/shutsugan-junbi/kounai-senkou" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
-                校内選考とは？
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/suisen-nyuushi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
-                推薦入試の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/sougou-gata-senbatsu" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
-                総合型選抜の仕組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/hyotei-heikin/suisen-kijun" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
-                推薦・併願優遇の評定平均ガイド
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/hyotei-heikin/gyakusan" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-violet-200 hover:bg-violet-50/50">
-                残りで必要な評定平均を逆算する
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <a
-                href="https://my-shingaku.com/sougou-suisen"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between gap-2 rounded-xl border border-indigo-100 bg-indigo-50/50 p-4 text-sm font-bold text-indigo-700 hover:border-indigo-200 hover:bg-indigo-50"
-              >
-                大学の総合型・学校推薦型選抜を調べる（My Shingaku）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-indigo-400" />
-              </a>
-            </div>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/shutsugan-junbi/shibou-riyuusho" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">志望理由書の書き方・構成</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/shutsugan-junbi/kounai-senkou" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">校内選考とは？</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/suisen-nyuushi" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">推薦入試の仕組み</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/sougou-gata-senbatsu" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">総合型選抜の仕組み</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hyotei-heikin/suisen-kijun" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">推薦・併願優遇の評定平均ガイド</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hyotei-heikin/gyakusan" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">残りで必要な評定平均を逆算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://my-shingaku.com/sougou-suisen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800"
+                >
+                  <span className="underline underline-offset-2">大学の総合型・学校推薦型選抜を調べる（My Shingaku）</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </a>
+              </li>
+            </ul>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-violet-600" />
-              よくある質問
-            </h2>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="border-b border-slate-200 pb-4 last:border-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

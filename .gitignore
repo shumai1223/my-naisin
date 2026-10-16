@@ -153,3 +153,6 @@ ops/baselines/**/*.pdf
 ops/baselines/**/*.png
 ops/baselines/**/*.jpg
 ops/baselines/**/__pycache__/
+
+# UI改修の作業用（スクリーンショット等）
+/tmp/

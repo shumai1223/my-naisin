@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChevronRight, Home, BookOpen, AlertCircle, ExternalLink, Info, Network, ListOrdered, HelpCircle, CheckCircle2 } from 'lucide-react';
+import { ChevronRight, Home, AlertCircle } from '@/components/icons';
 
 import type { TotalScoreExplainer } from '@/lib/total-score/types';
 import { selectLeadOffer } from '@/lib/lead-config';
@@ -41,54 +41,63 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
         <FAQPageSchema faqItems={e.faqs.map((f) => ({ question: f.q, answer: f.a }))} />
       )}
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link
+              href="/"
+              className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
+            >
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href={`/${e.code}`} className="hover:text-blue-600">
+            <Link
+              href={`/${e.code}`}
+              className="inline-flex min-h-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800"
+            >
               {e.name}
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">総合得点・合否の仕組み</span>
+            <span className="text-slate-900">総合得点・合否の仕組み</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-700 text-white shadow-xl">
-              <Network className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               {e.name}公立高校 総合得点・合否の仕組み
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-violet-100 px-3 py-1 text-xs font-bold text-violet-700">
-              {METHOD_LABEL[e.method]}・{e.fiscalYear}年度（令和8年度）入試対応
-            </div>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
-              {e.name}の公立高校入試（{e.localTerm}）は、内申点と当日点を単純に足し算して合否が決まる方式ではありません。
+            <p className="mt-2 text-sm leading-[1.7] text-slate-600">
+              {METHOD_LABEL[e.method]}・{e.fiscalYear}年度（令和8年度）入試対応 ／ 出典：
+              <a
+                href={e.source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              >
+                {e.source.docTitle}
+              </a>
+              {' '}／ 最終確認：{e.source.lastChecked}
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              {e.name}の公立高校入試（{e.localTerm}）は、<strong>内申点と当日点を単純に足し算して合否が決まる方式ではありません。</strong>
               <br />
               このページでは、配点と「どう合否が決まるか」を一次情報に基づいて正確に解説します。
             </p>
           </header>
 
           {/* 制度概要（本文・SEO/GEO） */}
-          <section className="mb-8 rounded-2xl border border-violet-100 bg-violet-50/40 p-6">
-            <p className="leading-loose text-slate-700">{e.overview}</p>
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <p className="text-base leading-[1.8] text-slate-900">{e.overview}</p>
           </section>
 
           {/* なぜ計算機が無いか（正直な説明＝信頼の堀） */}
-          <section className="mb-8 rounded-2xl border-2 border-violet-200 bg-violet-50/60 p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Info className="h-5 w-5 text-violet-500" />
-              なぜ「合計点」で合否が出ないのか
-            </h2>
-            <p className="leading-relaxed text-slate-700">{e.composition}</p>
-            <p className="mt-3 rounded-lg border border-violet-100 bg-white p-3 text-sm text-slate-600">
-              <strong className="text-violet-700">判定：</strong>
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">なぜ「合計点」で合否が出ないのか</h2>
+            <p className="text-base leading-[1.8] text-slate-900">{e.composition}</p>
+            <p className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm leading-[1.8] text-slate-900">
+              <strong>判定：</strong>
               {e.tier2Reason}
               <br />
               そのため当サイトでは、不正確な合計点で誤解を与えないよう、{e.name}は計算機ではなく仕組みの解説を提供しています。
@@ -96,15 +105,12 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
           </section>
 
           {/* 配点の内訳 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-blue-500" />
-              {e.name}の配点
-            </h2>
-            <div className="space-y-4 text-sm">
+          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">{e.name}の配点</h2>
+            <div className="space-y-5">
               <div>
-                <h3 className="mb-1 font-bold text-slate-800">学力検査（当日点）</h3>
-                <p className="leading-relaxed text-slate-700">
+                <h3 className="mb-1 text-[17px] font-bold text-slate-900">学力検査（当日点）</h3>
+                <p className="text-base leading-[1.8] text-slate-900">
                   {e.academic.subjects}教科
                   {e.academic.rawMax ? `・${e.academic.rawMax}点満点` : ''}
                   {e.academic.perSubjectMax ? `（各${e.academic.perSubjectMax}点）` : ''}
@@ -112,14 +118,17 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
                 </p>
               </div>
               <div>
-                <h3 className="mb-1 font-bold text-slate-800">内申点（調査書）</h3>
-                <p className="leading-relaxed text-slate-700">
+                <h3 className="mb-1 text-[17px] font-bold text-slate-900">内申点（調査書）</h3>
+                <p className="text-base leading-[1.8] text-slate-900">
                   対象：中{e.report.targetGrades.join('・中')}年
                   {e.report.rawMax ? `・${e.report.rawMax}点満点` : ''}。{e.report.note}
                 </p>
-                <p className="mt-2 text-xs text-slate-500">
+                <p className="mt-2 text-sm leading-[1.7] text-slate-600">
                   内申点そのものは
-                  <Link href={`/${e.code}/naishin`} className="font-bold text-blue-600 underline">
+                  <Link
+                    href={`/${e.code}/naishin`}
+                    className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                  >
                     {e.name}の内申点計算ツール
                   </Link>
                   で正確に算出できます。
@@ -127,13 +136,13 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
               </div>
               {e.others && (
                 <div>
-                  <h3 className="mb-1 font-bold text-slate-800">その他の検査</h3>
-                  <p className="leading-relaxed text-slate-700">{e.others}</p>
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">その他の検査</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">{e.others}</p>
                 </div>
               )}
             </div>
             {e.caveat && (
-              <p className="mt-4 rounded-lg border border-amber-100 bg-amber-50 p-3 text-xs text-amber-800">
+              <p className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-[1.8] text-amber-900">
                 ※ {e.caveat}
               </p>
             )}
@@ -141,18 +150,12 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
 
           {/* 合否決定の流れ（番号付きフロー＝独自コンテンツ） */}
           {e.flow.length > 0 && (
-            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <ListOrdered className="h-5 w-5 text-violet-500" />
-                {e.name}の合否が決まるまでの流れ
-              </h2>
-              <ol className="space-y-3">
+            <section className="mb-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="mb-4 text-xl font-bold text-slate-900">{e.name}の合否が決まるまでの流れ</h2>
+              <ol className="list-decimal space-y-3 pl-6 text-base leading-[1.8] text-slate-900 marker:font-bold marker:text-slate-900">
                 {e.flow.map((step, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-600 text-sm font-bold text-white">
-                      {i + 1}
-                    </span>
-                    <span className="pt-0.5 text-sm leading-relaxed text-slate-700">{step}</span>
+                  <li key={i} className="pl-1">
+                    {step}
                   </li>
                 ))}
               </ol>
@@ -161,16 +164,12 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
 
           {/* 受験生が今できること */}
           {e.whatToDo && e.whatToDo.length > 0 && (
-            <section className="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-6">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-                合計点が出せない代わりに、今できること
-              </h2>
-              <ul className="space-y-2">
+            <section className="mb-8 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+              <h2 className="mb-4 text-xl font-bold text-slate-900">合計点が出せない代わりに、今できること</h2>
+              <ul className="list-disc space-y-2 pl-6 text-base leading-[1.8] text-slate-900 marker:text-brand-700">
                 {e.whatToDo.map((item, i) => (
-                  <li key={i} className="flex gap-2 text-sm leading-relaxed text-slate-700">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                    <span>{item}</span>
+                  <li key={i} className="pl-1">
+                    {item}
                   </li>
                 ))}
               </ul>
@@ -203,14 +202,18 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
           />
 
           {/* 出典 */}
-          <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
-              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-              <p className="text-xs leading-relaxed text-amber-800">
+              <AlertCircle className="mt-1 h-4 w-4 shrink-0 text-amber-700" />
+              <p className="text-sm leading-[1.8] text-amber-900">
                 本ページの内容は{e.source.docTitle}に基づきます。比重・配点は学校・学科・年度により異なります。学校別の合格ボーダーは掲載していません。最新の情報は
-                <a href={e.source.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 font-bold text-amber-900 underline">
+                <a
+                  href={e.source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-amber-900 underline underline-offset-2"
+                >
                   {e.name}教育委員会の公式情報
-                  <ExternalLink className="h-3 w-3" />
                 </a>
                 でご確認ください（最終確認：{e.source.lastChecked}）。
               </p>
@@ -219,20 +222,17 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
 
           {/* よくある質問（FAQ・県固有） */}
           {e.faqs.length > 0 && (
-            <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-                <HelpCircle className="h-5 w-5 text-violet-500" />
-                {e.name}の入試 よくある質問
-              </h2>
-              <div className="space-y-4">
+            <section className="mt-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="mb-2 text-xl font-bold text-slate-900">{e.name}の入試 よくある質問</h2>
+              <div className="divide-y divide-slate-200">
                 {e.faqs.map((f, i) => (
-                  <div key={i} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                    <h3 className="mb-2 flex gap-2 text-sm font-bold text-slate-800">
-                      <span className="text-violet-600">Q.</span>
+                  <div key={i} className="py-4">
+                    <h3 className="mb-2 flex gap-2 text-[17px] font-bold leading-snug text-slate-900">
+                      <span className="shrink-0 text-brand-700">Q.</span>
                       {f.q}
                     </h3>
-                    <p className="flex gap-2 text-sm leading-relaxed text-slate-600">
-                      <span className="font-bold text-emerald-600">A.</span>
+                    <p className="flex gap-2 text-base leading-[1.8] text-slate-900">
+                      <span className="shrink-0 font-bold text-brand-700">A.</span>
                       <span>{f.a}</span>
                     </p>
                   </div>
@@ -242,26 +242,46 @@ export function TotalScoreExplainerView({ explainer: e }: { explainer: TotalScor
           )}
 
           {/* 関連リンク */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href={`/${e.code}/naishin`} className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">{e.name}の内申点を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href={`/${e.code}`} className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">{e.name}の入試制度ガイド</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">偏差値を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">評定平均を自動計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-            </div>
+          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">関連ツール・コンテンツ</h2>
+            <ul className="border-t border-slate-200">
+              <li>
+                <Link
+                  href={`/${e.code}/naishin`}
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 px-1 py-2 text-base text-slate-900 hover:bg-brand-50"
+                >
+                  <span>{e.name}の内申点を計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${e.code}`}
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 px-1 py-2 text-base text-slate-900 hover:bg-brand-50"
+                >
+                  <span>{e.name}の入試制度ガイド</span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hensachi"
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 px-1 py-2 text-base text-slate-900 hover:bg-brand-50"
+                >
+                  <span>偏差値を計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hyotei-heikin"
+                  className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 px-1 py-2 text-base text-slate-900 hover:bg-brand-50"
+                >
+                  <span>評定平均を自動計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

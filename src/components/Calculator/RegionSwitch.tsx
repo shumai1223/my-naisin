@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { MapPin } from "lucide-react";
+import { MapPin } from "@/components/icons";
 
 interface RegionSwitchProps {
   prefectureCode: string;
@@ -20,13 +20,13 @@ export function RegionSwitch({ prefectureCode, className }: RegionSwitchProps) {
   return (
     <div
       className={
-        "flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm " +
+        "flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 " +
         (className ?? "")
       }
     >
-      <MapPin className="h-4 w-4 text-slate-500" />
+      <MapPin className="h-4 w-4 text-slate-600" />
       <span>選択中: {prefectureCode}</span>
-      <span className="text-xs text-slate-400">(切替は下の都道府県セレクターで)</span>
+      <span className="text-xs text-slate-600">(切替は下の都道府県セレクターで)</span>
     </div>
   );
 }

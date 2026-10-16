@@ -12,7 +12,7 @@ export function SidebarAd({ className, variant = 'vertical', ...props }: Sidebar
   return (
     <div
       className={cn(
-        'rounded-2xl border border-dashed border-slate-200 bg-slate-50/50',
+        'rounded-lg border border-dashed border-slate-200 bg-slate-50',
         variant === 'vertical' ? 'min-h-[300px]' : 'aspect-square',
         className
       )}
@@ -20,7 +20,7 @@ export function SidebarAd({ className, variant = 'vertical', ...props }: Sidebar
     >
       <div className="flex h-full items-center justify-center p-4">
         <div className="text-center">
-          <div className="text-xs text-slate-400">広告準備中</div>
+          <div className="text-xs text-slate-600">広告準備中</div>
         </div>
       </div>
     </div>

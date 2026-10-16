@@ -2,13 +2,12 @@
 
 import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Download, Share2, X, Loader2, CheckCircle, Sparkles, Smartphone } from 'lucide-react';
+import { Download, Share2, X, Loader2, CheckCircle } from '@/components/icons';
 // canvas-confetti / html2canvas は重い（html2canvas は約150KB+）。共有モーダルを開いて
 // 実際に使う瞬間まで読み込まないよう、ハンドラ内の動的 import に寄せて初期バンドルから外す。
 
 import { APP_NAME } from '@/lib/constants';
 import type { ResultData, Scores } from '@/lib/types';
-import { cn } from '@/lib/utils';
 
 import { ShareCard } from '@/components/Result/ShareCard';
 
@@ -33,15 +32,18 @@ function dataUrlToFile(dataUrl: string, filename: string) {
   return new File([array], filename, { type: mime });
 }
 
+// 演出は控えめにする（少量・ブランド色と緑みの灰のみ・動きを減らす設定の端末では出さない）。
 async function burstConfetti() {
   const confetti = (await import('canvas-confetti')).default;
   confetti({
-    particleCount: 120,
-    spread: 80,
-    startVelocity: 40,
-    ticks: 250,
-    scalar: 1,
-    origin: { y: 0.5 }
+    particleCount: 24,
+    spread: 40,
+    startVelocity: 20,
+    ticks: 90,
+    scalar: 0.8,
+    origin: { y: 0.5 },
+    colors: ['#17543e', '#4f6158', '#cddad3'],
+    disableForReducedMotion: true
   });
 }
 
@@ -115,7 +117,7 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
       const dataUrl = preparedDataUrl ?? (await generatePngWithHtml2Canvas());
       if (!dataUrl) {
         setSaveStatus('error');
-        showToast('画像生成に失敗…もう一回試してね');
+        showToast('画像の生成に失敗しました。もう一度お試しください');
         return;
       }
       const a = document.createElement('a');
@@ -124,11 +126,11 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
       a.click();
       burstConfetti();
       setSaveStatus('success');
-      showToast('🎉 画像を保存しました！');
+      showToast('画像を保存しました');
       setTimeout(() => setSaveStatus('idle'), 2500);
     } catch {
       setSaveStatus('error');
-      showToast('画像生成に失敗…もう一回試してね');
+      showToast('画像の生成に失敗しました。もう一度お試しください');
     } finally {
       setBusy(false);
     }
@@ -155,11 +157,11 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
       }
       await navigator.share(shareData);
       burstConfetti();
-      showToast('🎉 共有しました！');
+      showToast('共有しました');
     } catch (err) {
       // AbortError＝ユーザーがキャンセル（正常）なので無視。それ以外は保存導線へ誘導。
       if ((err as Error)?.name !== 'AbortError') {
-        showToast('共有できませんでした。「画像を保存」からシェアしてね');
+        showToast('共有できませんでした。「画像を保存」から共有してください');
       }
     }
   }, [preparedDataUrl, result.rank.code, shareUrl, shareText, showToast]);
@@ -173,14 +175,6 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open, onClose]);
 
-  const rankColors: Record<string, { gradient: string; glow: string }> = {
-    S: { gradient: 'from-violet-500 via-purple-500 to-fuchsia-500', glow: 'shadow-purple-500/25' },
-    A: { gradient: 'from-blue-500 via-indigo-500 to-violet-500', glow: 'shadow-indigo-500/25' },
-    B: { gradient: 'from-cyan-500 via-blue-500 to-indigo-500', glow: 'shadow-blue-500/25' },
-    C: { gradient: 'from-slate-400 via-slate-500 to-slate-600', glow: 'shadow-slate-500/25' },
-  };
-  const colors = rankColors[result.rank.code] || rankColors.C;
-
   return (
     <AnimatePresence>
       {open ? (
@@ -189,9 +183,10 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
         >
           <motion.div
-            className="fixed inset-0 bg-gradient-to-br from-slate-900/60 via-slate-800/50 to-slate-900/60 backdrop-blur-md"
+            className="fixed inset-0 bg-slate-900/60"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -199,73 +194,48 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
           />
 
           <div className="relative mx-auto flex min-h-full w-full max-w-2xl items-center justify-center px-4 py-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="w-full"
-            >
-              <div className="overflow-hidden rounded-3xl bg-white shadow-2xl">
-                {/* Header with gradient */}
-                <div className={cn('relative bg-gradient-to-r p-6 text-white', colors.gradient)}>
-                  <div className="absolute inset-0 bg-white/5" />
-                  <div className="relative flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white/20 backdrop-blur-sm">
-                        <Sparkles className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h2 className="text-lg font-bold">おうちの人に送る</h2>
-                        <p className="mt-0.5 text-sm text-white/80">結果を見せて、受験の相談をはじめよう</p>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={onClose}
-                      className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-white/80 backdrop-blur-sm transition-all hover:bg-white/20 hover:text-white"
-                      aria-label="閉じる"
-                    >
-                      <X className="h-5 w-5" />
-                    </button>
+            <div className="w-full" role="dialog" aria-modal="true" aria-label="おうちの人に送る">
+              <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-overlay">
+                {/* Header */}
+                <div className="flex items-start justify-between gap-4 border-b border-slate-200 p-5 sm:p-6">
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-900">おうちの人に送る</h2>
+                    <p className="mt-1 text-sm text-slate-600">結果を見せて、受験の相談をはじめよう</p>
                   </div>
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="grid h-11 w-11 shrink-0 place-items-center text-slate-600 transition-colors hover:text-slate-900"
+                    aria-label="閉じる"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-5 sm:p-6">
                   <div className="grid gap-6 md:grid-cols-[200px_1fr] md:items-start">
                     {/* Preview */}
                     <div className="mx-auto w-full max-w-[200px]">
-                      <div className={cn(
-                        'aspect-[9/16] w-full overflow-hidden rounded-2xl border-2 border-slate-100 bg-white shadow-xl',
-                        colors.glow
-                      )}>
+                      <div className="aspect-[9/16] w-full overflow-hidden rounded-lg border border-slate-200 bg-white">
                         <div className="h-full w-full origin-top-left scale-[0.533]">
                           {/* プレビュー表示専用（キャプチャ対象は下部の隠し要素1つに統一） */}
                           <ShareCard result={result} scores={scores} />
                         </div>
                       </div>
-                      <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-slate-400">
-                        <Smartphone className="h-3.5 w-3.5" />
-                        <span>スマホ縦長サイズ (9:16)</span>
+                      <div className="mt-3 text-center text-xs text-slate-600">
+                        スマホ縦長サイズ (9:16)
                       </div>
                     </div>
 
                     {/* Actions */}
                     <div className="space-y-4">
                       {/* Tips */}
-                      <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
-                        <div className="flex items-start gap-3">
-                          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-blue-100">
-                            <Sparkles className="h-4 w-4 text-blue-600" />
-                          </div>
-                          <div>
-                            <div className="text-sm font-semibold text-blue-900">おうちの人に見せると、相談がはじめやすい</div>
-                            <p className="mt-1 text-xs leading-relaxed text-blue-700">
-                              「端末の共有機能」からLINEで送るのが一番カンタン。リンクから保護者の方が「今からできる対策」を確認できます。
-                            </p>
-                          </div>
-                        </div>
+                      <div className="rounded-lg border border-slate-200 bg-brand-50 p-4">
+                        <div className="text-sm font-bold text-slate-900">おうちの人に見せると、相談がはじめやすい</div>
+                        <p className="mt-1 text-sm leading-relaxed text-slate-900">
+                          「端末の共有機能」からLINEで送ると手軽です。リンクから保護者の方が「今からできる対策」を確認できます。
+                        </p>
                       </div>
 
                       {/* Buttons */}
@@ -274,57 +244,48 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
                           type="button"
                           onClick={onDownload}
                           disabled={busy}
-                          className={cn(
-                            'group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r py-4 text-white shadow-lg transition-all hover:shadow-xl disabled:opacity-70',
-                            colors.gradient,
-                            colors.glow
-                          )}
+                          className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800 disabled:opacity-70"
                         >
-                          <div className="absolute inset-0 bg-white/0 transition-all group-hover:bg-white/10" />
-                          <div className="relative flex items-center justify-center gap-2 font-semibold">
-                            {saveStatus === 'generating' ? (
-                              <>
-                                <Loader2 className="h-5 w-5 animate-spin" />
-                                <span>生成中...</span>
-                              </>
-                            ) : saveStatus === 'success' ? (
-                              <>
-                                <CheckCircle className="h-5 w-5" />
-                                <span>保存完了！</span>
-                              </>
-                            ) : (
-                              <>
-                                <Download className="h-5 w-5" />
-                                <span>画像を保存</span>
-                              </>
-                            )}
-                          </div>
+                          {saveStatus === 'generating' ? (
+                            <>
+                              <Loader2 className="h-5 w-5 animate-spin" />
+                              <span>生成中...</span>
+                            </>
+                          ) : saveStatus === 'success' ? (
+                            <>
+                              <CheckCircle className="h-5 w-5" />
+                              <span>保存しました</span>
+                            </>
+                          ) : (
+                            <>
+                              <Download className="h-5 w-5" />
+                              <span>画像を保存</span>
+                            </>
+                          )}
                         </button>
 
                         <button
                           type="button"
                           onClick={onNativeShare}
                           disabled={preparing}
-                          className="group w-full rounded-2xl border-2 border-slate-200 bg-white py-3.5 text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50 disabled:opacity-70"
+                          className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50 disabled:opacity-70"
                         >
-                          <div className="flex items-center justify-center gap-2 font-medium">
-                            {preparing ? (
-                              <>
-                                <Loader2 className="h-4 w-4 animate-spin text-slate-500" />
-                                <span>画像を準備中…</span>
-                              </>
-                            ) : (
-                              <>
-                                <Share2 className="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-600" />
-                                <span>LINEなどで送る</span>
-                              </>
-                            )}
-                          </div>
+                          {preparing ? (
+                            <>
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              <span>画像を準備中…</span>
+                            </>
+                          ) : (
+                            <>
+                              <Share2 className="h-4 w-4" />
+                              <span>LINEなどで送る</span>
+                            </>
+                          )}
                         </button>
                       </div>
 
                       {/* Hint */}
-                      <p className="text-center text-xs text-slate-400">
+                      <p className="text-xs text-slate-600">
                         ※ 共有機能はスマホ・タブレットで利用できます
                       </p>
                     </div>
@@ -336,18 +297,18 @@ export function ShareModal({ open, onClose, result, scores, shareUrl, shareText 
               <AnimatePresence>
                 {toast && (
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="pointer-events-none absolute inset-x-0 bottom-[-60px] flex justify-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="pointer-events-none fixed inset-x-4 bottom-6 flex justify-center"
                   >
-                    <div className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-xl">
+                    <div className="rounded bg-slate-900 px-4 py-3 text-sm text-white shadow-overlay">
                       {toast}
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           </div>
 
           {/* Hidden capture element */}

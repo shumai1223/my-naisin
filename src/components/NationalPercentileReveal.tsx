@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { TrendingUp } from 'lucide-react';
 
 import { trackEvent, EVENTS } from '@/lib/track';
 import type { StatsMetric } from '@/lib/stats-aggregation';
@@ -85,53 +84,53 @@ export function NationalPercentileReveal({
 
   const prefLabel = prefectureName ? `${prefectureName}内` : '県内';
 
+  // 見た目（やさしい学習帳）: 薄いブランド面＋罫線の注釈。ラベルは普通の太字（丸薬・アイコンなし）。
   return (
-    <section className={`overflow-hidden rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50/60 to-white p-6 shadow-sm md:p-7 ${className}`}>
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200">
-        <TrendingUp className="h-3.5 w-3.5" />
-        全国統計（先行閲覧・解放済み）
+    <section className={`overflow-hidden rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6 ${className}`}>
+      <div className="mb-3 text-sm font-bold text-brand-700">
+        全国統計
       </div>
 
-      {state === 'loading' && <p className="text-sm text-slate-500">集計中…</p>}
+      {state === 'loading' && <p className="text-sm text-slate-600">集計中…</p>}
 
       {state === 'ready' && !national && !prefecture && (
-        <p className="text-sm leading-relaxed text-slate-600">
+        <p className="text-base leading-[1.8] text-slate-900">
           この{metricLabel}についてはまだ協力者のデータが十分に集まっていません。匿名統計への協力者が増えると、ここに立ち位置が表示されます。
         </p>
       )}
 
       {state === 'ready' && national && (
         <div>
-          <p className="text-sm leading-relaxed text-slate-700">
+          <p className="text-base leading-[1.8] text-slate-900">
             あなたの{metricLabel}は、匿名で協力してくれた全国{national.count}件のデータの中で
           </p>
-          <p className="mt-1 text-3xl font-black tracking-tight text-emerald-700">
+          <p className="mt-1 text-3xl font-bold tabular-nums text-brand-700">
             上位 {Math.max(1, 100 - national.percentile)}%
           </p>
         </div>
       )}
 
       {state === 'ready' && prefectureCode && prefecture && (
-        <div className={national ? 'mt-4 border-t border-emerald-100 pt-4' : ''}>
-          <p className="text-sm leading-relaxed text-slate-700">
+        <div className={national ? 'mt-4 border-t border-slate-200 pt-4' : ''}>
+          <p className="text-base leading-[1.8] text-slate-900">
             {prefLabel}の協力者{prefecture.count}件の中では
           </p>
-          <p className="mt-1 text-2xl font-black tracking-tight text-teal-700">
+          <p className="mt-1 text-2xl font-bold tabular-nums text-brand-700">
             上位 {Math.max(1, 100 - prefecture.percentile)}%相当
           </p>
         </div>
       )}
 
       {state === 'ready' && prefectureCode && !prefecture && national && (
-        <div className="mt-4 border-t border-emerald-100 pt-4">
-          <p className="text-xs leading-relaxed text-slate-500">
+        <div className="mt-4 border-t border-slate-200 pt-4">
+          <p className="text-sm leading-relaxed text-slate-600">
             {prefLabel}の協力者データはまだ十分に集まっていません（全国集計のみ表示中）。
           </p>
         </div>
       )}
 
       {(national || prefecture) && (
-        <p className="mt-3 text-xs text-slate-500">
+        <p className="mt-3 text-xs text-slate-600">
           ※氏名等を含まない匿名の任意提出データ（協力者内での相対値）。学校の成績順位とは異なります。
         </p>
       )}

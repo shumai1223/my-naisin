@@ -38,7 +38,7 @@ export function JukuPartnerInviteButton({ jukuPartnerId, token }: { jukuPartnerI
   if (issuedToken) {
     const dashboardUrl = `/juku/matching/dashboard?token=${encodeURIComponent(issuedToken)}`;
     return (
-      <div className="mt-1 rounded-md bg-emerald-50 p-2 text-[11px] text-emerald-700">
+      <div className="mt-1 rounded-md bg-brand-50 p-2 text-xs text-brand-700">
         発行済み(この画面でしか表示されません): <code className="break-all">{dashboardUrl}</code>
       </div>
     );
@@ -50,11 +50,11 @@ export function JukuPartnerInviteButton({ jukuPartnerId, token }: { jukuPartnerI
         type="button"
         onClick={issue}
         disabled={pending}
-        className="rounded-md bg-slate-600 px-2 py-0.5 text-xs font-medium text-white disabled:opacity-50"
+        className="rounded-md bg-slate-600 px-2 py-0.5 text-xs text-white disabled:opacity-50"
       >
         {pending ? '発行中…' : '招待トークン発行'}
       </button>
-      {error && <p className="mt-1 text-xs text-rose-600">{error}</p>}
+      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
     </div>
   );
 }

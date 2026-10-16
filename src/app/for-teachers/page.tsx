@@ -1,34 +1,30 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, GraduationCap, Users, Code2, Database, ChevronRightSquare, HelpCircle, Printer } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 
 const USE_CASES = [
   {
-    icon: Users,
     title: '三者面談・進路指導での活用',
     desc: '生徒・保護者が面談前に自分で内申点・偏差値・志望校との差を計算しておくと、面談時間を「数値の確認」でなく「対策の相談」に使えます。面談準備チェックリスト（印刷対応）をそのまま案内できます。',
     href: '/mendan',
     cta: '三者面談準備パックを見る',
   },
   {
-    icon: Printer,
     title: '授業・学級通信での配布（A4印刷対応）',
     desc: '都道府県別の内申点計算方法・注意点・出典をまとめたページはA4印刷を想定したレイアウトになっており、「印刷する」ボタンでそのまま学級通信・進路指導資料として配布いただけます。無料・登録不要です。',
     href: '/pref/tokyo',
     cta: '印刷対応ページの例（東京都）を見る',
   },
   {
-    icon: Code2,
     title: '学校サイト・ブログへの埋め込み',
     desc: '内申点・偏差値・評定平均の計算ツールを、iframeコードのコピペで学校のWebサイトや進路指導ブログに埋め込めます。生徒が学校サイト内でそのまま計算できます。',
     href: '/embed',
     cta: '埋め込みウィジェットを見る',
   },
   {
-    icon: Database,
     title: 'データ連携・システム開発（API）',
     desc: '47都道府県の内申点計算ロジックをAPI・MCPで提供しています。校内システムや進路指導ツールに内申点計算機能を組み込みたい場合にご利用いただけます。',
     href: '/developers',
@@ -79,79 +75,67 @@ export default function ForTeachersPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">先生・進路指導のご担当者様へ</span>
+            <span className="text-slate-900">先生・進路指導のご担当者様へ</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
-              <GraduationCap className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">学校の先生・進路指導のご担当者様へ</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">学校の先生・進路指導のご担当者様へ</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               内申点・偏差値・評定平均の無料計算ツールを、<strong>三者面談の準備・授業や学級通信での配布・学校サイトへの埋め込み・校内システムへのデータ連携</strong>に活用いただけます。
               47都道府県の教育委員会が公表する入学者選抜要綱を一次情報として実装しています。
             </p>
           </header>
 
           <section className="space-y-4">
-            {USE_CASES.map((u) => {
-              const Icon = u.icon;
-              return (
-                <div key={u.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h2 className="mb-2 flex items-center gap-2 text-base font-bold text-slate-800">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600"><Icon className="h-5 w-5" /></span>
-                    {u.title}
-                  </h2>
-                  <p className="mb-3 text-sm leading-relaxed text-slate-600">{u.desc}</p>
-                  <Link href={u.href} className="inline-flex items-center gap-1 text-sm font-bold text-blue-600 hover:underline">
-                    {u.cta}
-                    <ChevronRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              );
-            })}
+            {USE_CASES.map((u) => (
+              <div key={u.title} className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+                <h2 className="mb-2 text-xl font-bold text-slate-900">{u.title}</h2>
+                <p className="mb-3 text-base leading-[1.8] text-slate-900">{u.desc}</p>
+                <Link href={u.href} className="inline-flex min-h-[44px] items-center gap-1 text-base font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                  {u.cta}
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+              </div>
+            ))}
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/quality" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/quality" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50">
                 情報の信頼性への取り組み
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/about/editor-profile" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/about/editor-profile" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50">
                 運営者プロフィール
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/prefectures" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/prefectures" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50">
                 47都道府県の入試制度ページ
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/partner" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
+              <Link href="/partner" className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50">
                 塾・教育事業者様向けパートナー案内
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-blue-600" />
-              よくある質問
-            </h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

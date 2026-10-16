@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Home, ChevronRight, Calculator, AlertTriangle } from 'lucide-react';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -110,74 +110,75 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
       />
       <FAQPageSchema faqItems={faqItems} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/naishin-oru" className="hover:text-blue-600">オール3・4・5の内申点は何点？</Link>
+            <Link href="/naishin-oru" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">オール3・4・5の内申点は何点？</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">{label}</span>
+            <span className="text-slate-900">{label}</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">{label}の内申点は何点になる？</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header>
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">{label}の内申点は何点になる？</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               9教科すべての評定が{grade}だった場合の内申点を、都道府県ごとの計算方式で実際に計算した一覧です。都道府県によって満点も計算式（学年別の重み付け・実技教科の倍率）も異なるため、同じ{label}でも点数と満点に対する割合は変わります。
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
-              <p className="text-sm leading-relaxed text-amber-900">
-                「{label}で行ける高校」を検索する方が多いですが、学校ごとの合格基準（ボーダー）は年度・倍率で毎年変動し、公表されている一次情報がないため、このページで特定の学校名は挙げていません。ここで確認できるのは「{label}の内申点が実際に何点になるか」という計算結果のみです。志望校の正確な合格基準は、その高校や都道府県教育委員会の入試情報で確認してください。
-                {grade === 3 && (
-                  <>
-                    {' '}
-                    地域ごとの偏差値レンジの目安（学校名の断定なし）は
-                    <Link href="/blog/all-3-high-school-options-2026-update" className="font-bold text-blue-700 hover:underline">
-                      オール3で行ける高校一覧の記事
-                    </Link>
-                    でも紹介しています。私立高校の併願優遇については、学校の公式サイトで内申基準を確認できた例を
-                    <Link href="/heigan-yuugu/tokyo" className="font-bold text-blue-700 hover:underline">
-                      東京都の併願優遇 公式基準まとめ
-                    </Link>
-                    で紹介しています。
-                  </>
-                )}
-              </p>
-            </div>
+          <section className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="flex items-center gap-1.5 font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-sm leading-[1.8] text-amber-900">
+              「{label}で行ける高校」を検索する方が多いですが、学校ごとの合格基準（ボーダー）は年度・倍率で毎年変動し、公表されている一次情報がないため、このページで特定の学校名は挙げていません。ここで確認できるのは「{label}の内申点が実際に何点になるか」という計算結果のみです。志望校の正確な合格基準は、その高校や都道府県教育委員会の入試情報で確認してください。
+              {grade === 3 && (
+                <>
+                  {' '}
+                  地域ごとの偏差値レンジの目安（学校名の断定なし）は
+                  <Link href="/blog/all-3-high-school-options-2026-update" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                    オール3で行ける高校一覧の記事
+                  </Link>
+                  でも紹介しています。私立高校の併願優遇については、学校の公式サイトで内申基準を確認できた例を
+                  <Link href="/heigan-yuugu/tokyo" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                    東京都の併願優遇 公式基準まとめ
+                  </Link>
+                  で紹介しています。
+                </>
+              )}
+            </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 border-l-4 border-blue-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">
               主要都道府県の{label}の内申点
             </h2>
-            <div className="overflow-x-auto">
+            <div className="mt-3 overflow-x-auto">
               <table className="w-full min-w-[420px] text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 text-left text-xs text-slate-500">
-                    <th scope="col" className="py-2 pr-3 font-bold">都道府県</th>
-                    <th scope="col" className="py-2 pr-3 font-bold">{label}の内申点</th>
-                    <th scope="col" className="py-2 font-bold">満点に対する割合</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th scope="col" className="py-2 pr-3 text-left font-bold">都道府県</th>
+                    <th scope="col" className="py-2 pr-3 text-right font-bold">{label}の内申点</th>
+                    <th scope="col" className="py-2 text-right font-bold">満点に対する割合</th>
                   </tr>
                 </thead>
                 <tbody>
                   {highlighted.map((e) => (
-                    <tr key={e.code} className="border-b border-slate-100 last:border-0">
-                      <td className="py-2 pr-3">
-                        <Link href={`/${e.code}/naishin`} className="font-bold text-blue-700 hover:underline">
+                    <tr key={e.code} className="border-b border-slate-200 last:border-0">
+                      <td className="pr-3">
+                        <Link href={`/${e.code}/naishin`} className="inline-flex min-h-[44px] items-center font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
                           {e.name}
                         </Link>
                       </td>
-                      <td className="py-2 pr-3 tabular-nums">
+                      <td className="py-2 pr-3 text-right tabular-nums text-slate-900">
                         {e.score}点 / {e.maxScore}点満点
                       </td>
-                      <td className="py-2 tabular-nums">{e.percentage}%</td>
+                      <td className="py-2 text-right tabular-nums text-slate-900">{e.percentage}%</td>
                     </tr>
                   ))}
                 </tbody>
@@ -185,29 +186,29 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             </div>
           </section>
 
-          <details className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <summary className="cursor-pointer text-sm font-bold text-slate-700">47都道府県すべての{label}の内申点を見る</summary>
-            <div className="mt-4 overflow-x-auto">
+          <details className="mt-10 rounded-lg border border-slate-200 bg-white">
+            <summary className="min-h-[44px] cursor-pointer px-5 py-3 text-base font-bold text-slate-900 md:px-6">47都道府県すべての{label}の内申点を見る</summary>
+            <div className="overflow-x-auto px-5 pb-5 md:px-6 md:pb-6">
               <table className="w-full min-w-[420px] text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 text-left text-xs text-slate-500">
-                    <th scope="col" className="py-2 pr-3 font-bold">都道府県</th>
-                    <th scope="col" className="py-2 pr-3 font-bold">{label}の内申点</th>
-                    <th scope="col" className="py-2 font-bold">満点に対する割合</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th scope="col" className="py-2 pr-3 text-left font-bold">都道府県</th>
+                    <th scope="col" className="py-2 pr-3 text-right font-bold">{label}の内申点</th>
+                    <th scope="col" className="py-2 text-right font-bold">満点に対する割合</th>
                   </tr>
                 </thead>
                 <tbody>
                   {examples.map((e) => (
-                    <tr key={e.code} className="border-b border-slate-100 last:border-0">
-                      <td className="py-2 pr-3">
-                        <Link href={`/${e.code}/naishin`} className="font-bold text-blue-700 hover:underline">
+                    <tr key={e.code} className="border-b border-slate-200 last:border-0">
+                      <td className="pr-3">
+                        <Link href={`/${e.code}/naishin`} className="inline-flex min-h-[44px] items-center font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
                           {e.name}
                         </Link>
                       </td>
-                      <td className="py-2 pr-3 tabular-nums">
+                      <td className="py-2 pr-3 text-right tabular-nums text-slate-900">
                         {e.score}点 / {e.maxScore}点満点
                       </td>
-                      <td className="py-2 tabular-nums">{e.percentage}%</td>
+                      <td className="py-2 text-right tabular-nums text-slate-900">{e.percentage}%</td>
                     </tr>
                   ))}
                 </tbody>
@@ -215,21 +216,20 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             </div>
           </details>
 
-          <section className="mb-8 rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/40 p-6 text-center shadow-sm">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">9教科すべてが{grade}とは限らない方へ</h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">9教科すべてが{grade}とは限らない方へ</h2>
+            <p className="mt-2 text-base leading-[1.8] text-slate-900">
               実際は教科ごとに評定が違うことがほとんどです。教科ごとの評定を入力すれば、あなたの正確な内申点をその場で計算できます。
             </p>
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+              className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800"
             >
-              <Calculator className="h-4 w-4" />
               自分の内申点を計算する（47都道府県）
             </Link>
           </section>
 
-          <div className="mb-8">
+          <div className="mt-10">
             <ParentLeadCTA
               placement="naishin-up"
               heading={`${label}前後から、志望校との距離を正しく把握しませんか`}
@@ -237,37 +237,42 @@ export default async function NaishinOruGradePage({ params }: PageProps) {
             />
           </div>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="mt-1 divide-y divide-slate-200">
               {faqItems.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">他の評定パターンを見る</h2>
-            <div className="flex flex-wrap gap-2">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">他の評定パターンを見る</h2>
+            <ul className="mt-2 divide-y divide-slate-200">
               {ORU_GRADES.filter((g) => g !== grade).map((g) => (
-                <Link
-                  key={g}
-                  href={`/naishin-oru/${g}`}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
-                >
-                  {ORU_GRADE_LABEL[g]}
-                </Link>
+                <li key={g}>
+                  <Link
+                    href={`/naishin-oru/${g}`}
+                    className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline"
+                  >
+                    {ORU_GRADE_LABEL[g]}
+                    <ChevronRight className="h-4 w-4 shrink-0" />
+                  </Link>
+                </li>
               ))}
-              <Link
-                href="/naishin-age-kata"
-                className="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-xs font-bold text-blue-700 transition-colors hover:bg-blue-100"
-              >
-                内申点の上げ方（学年別）へ
-              </Link>
-            </div>
+              <li>
+                <Link
+                  href="/naishin-age-kata"
+                  className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline"
+                >
+                  内申点の上げ方（学年別）へ
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

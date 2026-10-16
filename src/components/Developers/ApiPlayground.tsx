@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Play, Loader2, Gauge } from 'lucide-react';
+import { Play, Loader2, Gauge } from '@/components/icons';
 import { PREFECTURES } from '@/lib/prefectures';
 
 /**
@@ -46,14 +46,14 @@ export function ApiPlayground() {
   }
 
   return (
-    <div className="rounded-2xl border-2 border-indigo-200 bg-indigo-50/30 p-6">
-      <div className="mb-4 grid gap-3 sm:grid-cols-3">
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
+      <div className="mb-4 grid gap-4 sm:grid-cols-3 sm:items-end">
         <label className="block">
-          <span className="text-xs font-bold text-slate-600">都道府県</span>
+          <span className="text-sm font-bold text-slate-700">都道府県</span>
           <select
             value={prefCode}
             onChange={(e) => setPrefCode(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
+            className="mt-1 h-11 w-full rounded border border-slate-300 bg-white px-3 text-base text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-700"
           >
             {PREFECTURES.map((p) => (
               <option key={p.code} value={p.code}>
@@ -63,24 +63,24 @@ export function ApiPlayground() {
           </select>
         </label>
         <label className="block">
-          <span className="text-xs font-bold text-slate-600">目標の内申点（任意）</span>
+          <span className="text-sm font-bold text-slate-700">目標の内申点（任意）</span>
           <input
             type="number"
             value={target}
             onChange={(e) => setTarget(e.target.value)}
             placeholder="例: 180"
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
+            className="mt-1 h-11 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
           />
         </label>
         <label className="block">
-          <span className="text-xs font-bold text-slate-600">現在の内申点（任意・目標入力時のみ）</span>
+          <span className="text-sm font-bold text-slate-700">現在の内申点（任意・目標入力時のみ）</span>
           <input
             type="number"
             value={current}
             onChange={(e) => setCurrent(e.target.value)}
             placeholder="例: 140"
             disabled={!target.trim()}
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm disabled:bg-slate-100"
+            className="mt-1 h-11 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700 disabled:bg-slate-100"
           />
         </label>
       </div>
@@ -88,41 +88,41 @@ export function ApiPlayground() {
       <button
         onClick={run}
         disabled={loading}
-        className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-indigo-700 disabled:opacity-60"
+        className="inline-flex h-12 items-center gap-2 rounded bg-brand-700 px-5 text-base font-bold text-white transition-colors enabled:hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}
         実際にAPIを呼び出す
       </button>
 
       {requestUrl && (
-        <p className="mt-3 text-xs text-slate-500">
-          リクエスト: <code className="rounded bg-slate-100 px-1.5 py-0.5">GET {requestUrl}</code>
+        <p className="mt-3 text-sm text-slate-600">
+          リクエスト: <code className="break-all rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-xs text-slate-900">GET {requestUrl}</code>
         </p>
       )}
 
       {response && (
         <div className="mt-4">
-          <div className="mb-2 flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-600">
-              レスポンス {status !== null && <span className={status === 200 ? 'text-emerald-600' : 'text-amber-600'}>({status})</span>}
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+            <span className="text-sm font-bold text-slate-700">
+              レスポンス {status !== null && <span className={status === 200 ? 'text-brand-700' : 'text-amber-800'}>({status})</span>}
             </span>
             {remaining !== null && (
-              <span className="flex items-center gap-1 text-xs text-slate-500">
-                <Gauge className="h-3 w-3" />
+              <span className="flex items-center gap-1.5 text-sm text-slate-600">
+                <Gauge className="h-4 w-4" />
                 残り{remaining}回（この端末からの匿名枠・30回/分）
               </span>
             )}
           </div>
-          <pre className="max-h-96 overflow-auto rounded-xl bg-slate-900 p-4 text-xs leading-relaxed text-emerald-300">
+          <pre className="max-h-96 overflow-auto rounded-lg border border-slate-200 bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">
             {response}
           </pre>
         </div>
       )}
 
-      <p className="mt-3 text-xs leading-relaxed text-slate-500">
+      <p className="mt-4 text-sm leading-relaxed text-slate-600">
         このプレイグラウンドはお使いのブラウザから同一オリジンで実際のAPIを呼び出します（匿名利用枠30回/分の範囲内）。
         大量アクセスや自動テストには
-        <a href="#pricing" className="mx-1 font-semibold text-indigo-700 underline">
+        <a href="#pricing" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
           APIキー
         </a>
         の発行をご利用ください。

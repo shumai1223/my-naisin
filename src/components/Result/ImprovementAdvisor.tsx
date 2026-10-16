@@ -1,12 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import { TrendingUp, Target, Lightbulb, ChevronUp } from 'lucide-react';
+import { ChevronUp } from '@/components/icons';
 
 import { SUBJECTS, RANK_DEFINITIONS } from '@/lib/constants';
 import { getPrefectureByCode } from '@/lib/prefectures';
 import type { Scores, SubjectKey } from '@/lib/types';
-import { cn, calculateTotalScore, calculateMaxScore, calculatePercent, getRankForPercent } from '@/lib/utils';
+import { calculateTotalScore, calculateMaxScore, calculatePercent, getRankForPercent } from '@/lib/utils';
 
 interface ImprovementAdvisorProps {
   scores: Scores;
@@ -25,25 +25,32 @@ interface SubjectAnalysis {
   improvementRoom: number;
 }
 
+// 優先度は色ではなく文字でも示す
+const PRIORITY_LABEL: Record<SubjectAnalysis['priority'], string> = {
+  high: '高',
+  medium: '中',
+  low: '低',
+};
+
 export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: ImprovementAdvisorProps) {
   const prefecture = getPrefectureByCode(prefectureCode);
-  
+
   // 現在のスコアと達成率を計算
   const currentTotal = calculateTotalScore(scores, prefectureCode);
   const maxScore = calculateMaxScore(prefectureCode);
   const currentPercent = calculatePercent(currentTotal, maxScore);
   const currentRank = getRankForPercent(currentPercent);
-  
+
   // 次のランクまでの計算
   const nextRankInfo = React.useMemo(() => {
     const currentRankIndex = RANK_DEFINITIONS.findIndex(r => r.code === currentRank.code);
     if (currentRankIndex <= 0) return null; // すでに最高ランク
-    
+
     const nextRank = RANK_DEFINITIONS[currentRankIndex - 1];
     const targetPercentForNextRank = nextRank.minPercent;
     const targetScoreForNextRank = Math.ceil((targetPercentForNextRank / 100) * maxScore);
     const pointsNeeded = targetScoreForNextRank - currentTotal;
-    
+
     return {
       nextRank,
       targetScore: targetScoreForNextRank,
@@ -56,8 +63,8 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
 
     const results: SubjectAnalysis[] = SUBJECTS.map((subject) => {
       const currentScore = scores[subject.key];
-      const multiplier = subject.category === 'core' 
-        ? prefecture.coreMultiplier 
+      const multiplier = subject.category === 'core'
+        ? prefecture.coreMultiplier
         : prefecture.practicalMultiplier;
       const maxScore = 5;
       const improvementRoom = maxScore - currentScore;
@@ -96,121 +103,97 @@ export function ImprovementAdvisor({ scores, prefectureCode, targetPercent }: Im
 
   if (analysis.length === 0) {
     return (
-      <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-green-50 p-6 text-center">
-        <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-emerald-100">
-          <Target className="h-6 w-6 text-emerald-600" />
-        </div>
-        <div className="text-lg font-bold text-emerald-800">完璧なスコア！</div>
-        <div className="mt-1 text-sm text-emerald-600">
+      <div className="rounded-lg border border-slate-200 bg-brand-50 p-5">
+        <h3 className="text-[17px] font-bold text-slate-900">満点です</h3>
+        <p className="mt-1 text-sm text-slate-600">
           各教科で満点を達成しています
-        </div>
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4 flex items-center gap-3">
-        <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500">
-          <Lightbulb className="h-5 w-5 text-white" />
-        </div>
-        <div>
-          <h3 className="font-bold text-slate-800">成績アップ優先度アドバイス</h3>
-          <p className="text-xs text-slate-500">効率的に内申点を上げるための提案</p>
-        </div>
-      </div>
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
+      <h3 className="text-[17px] font-bold text-slate-900">成績アップ優先度アドバイス</h3>
+      <p className="mt-1 text-sm text-slate-600">効率的に内申点を上げるための提案</p>
 
-      {/* 次のランクまで */}
-      {nextRankInfo && nextRankInfo.pointsNeeded > 0 && (
-        <div className="mb-4 rounded-xl bg-gradient-to-r from-purple-50 to-fuchsia-50 p-4 border border-purple-100">
-          <div className="flex items-center justify-between">
-            <div className="text-sm font-medium text-purple-700">
+      <dl className="mt-4 divide-y divide-slate-200 border-y border-slate-200">
+        {/* 次のランクまで */}
+        {nextRankInfo && nextRankInfo.pointsNeeded > 0 && (
+          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
+            <dt className="text-sm text-slate-900">
               次のランク「{nextRankInfo.nextRank.code}」まで
-            </div>
-            <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-purple-600">あと{nextRankInfo.pointsNeeded}</span>
-              <span className="text-sm text-purple-500">点</span>
-            </div>
+            </dt>
+            <dd className="flex items-baseline gap-1">
+              <span className="text-2xl font-bold tabular-nums text-slate-900">あと{nextRankInfo.pointsNeeded}</span>
+              <span className="text-sm text-slate-600">点</span>
+            </dd>
+            {topRecommendations[0] && (
+              <dd className="basis-full text-sm text-slate-600">
+                「{topRecommendations[0].label}」を1点上げれば +{topRecommendations[0].multiplier}点
+                {nextRankInfo.pointsNeeded <= topRecommendations[0].multiplier && (
+                  <span className="ml-1 font-bold text-slate-900">→ ランクアップ可能です</span>
+                )}
+              </dd>
+            )}
           </div>
-          {topRecommendations[0] && (
-            <div className="mt-2 text-xs text-purple-600">
-              💡 「{topRecommendations[0].label}」を1点上げれば +{topRecommendations[0].multiplier}点
-              {nextRankInfo.pointsNeeded <= topRecommendations[0].multiplier && (
-                <span className="ml-1 font-bold">→ ランクアップ可能！</span>
-              )}
-            </div>
-          )}
-        </div>
-      )}
+        )}
 
-      {/* 総合ポテンシャル */}
-      <div className="mb-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-slate-600">伸びしろ合計</div>
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-blue-600">+{totalPotentialGain}</span>
-            <span className="text-sm text-slate-500">点</span>
-          </div>
+        {/* 総合ポテンシャル */}
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
+          <dt className="text-sm text-slate-900">伸びしろ合計</dt>
+          <dd className="flex items-baseline gap-1">
+            <span className="text-2xl font-bold tabular-nums text-brand-700">+{totalPotentialGain}</span>
+            <span className="text-sm text-slate-600">点</span>
+          </dd>
+          <dd className="basis-full text-sm text-slate-600">
+            全教科を満点にした場合の上昇幅
+          </dd>
         </div>
-        <div className="mt-2 text-xs text-slate-500">
-          全教科を満点にした場合の上昇幅
-        </div>
-      </div>
+      </dl>
 
       {/* 優先度高い教科 */}
-      <div className="mb-3 text-sm font-semibold text-slate-700">優先的に取り組む教科</div>
-      <div className="space-y-2">
+      <h4 className="mt-5 text-sm font-bold text-slate-900">優先的に取り組む教科</h4>
+      <ol className="mt-2 divide-y divide-slate-200 border-y border-slate-200">
         {topRecommendations.map((item, index) => (
-          <div
-            key={item.key}
-            className={cn(
-              'flex items-center gap-3 rounded-xl p-3 transition-colors',
-              item.priority === 'high' && 'bg-red-50 border border-red-100',
-              item.priority === 'medium' && 'bg-amber-50 border border-amber-100',
-              item.priority === 'low' && 'bg-slate-50 border border-slate-100'
-            )}
-          >
-            <div className={cn(
-              'grid h-8 w-8 shrink-0 place-items-center rounded-lg text-sm font-bold text-white',
-              item.priority === 'high' && 'bg-red-500',
-              item.priority === 'medium' && 'bg-amber-500',
-              item.priority === 'low' && 'bg-slate-400'
-            )}>
+          <li key={item.key} className="flex items-center gap-3 py-3">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded border border-slate-300 text-sm font-bold tabular-nums text-slate-900">
               {index + 1}
-            </div>
+            </span>
 
             <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-slate-800">{item.label}</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-bold text-slate-900">{item.label}</span>
                 {item.multiplier > 1 && (
-                  <span className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-semibold text-blue-600">
+                  <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs tabular-nums text-slate-700">
                     ×{item.multiplier}
                   </span>
                 )}
+                <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
+                  優先度 {PRIORITY_LABEL[item.priority]}
+                </span>
               </div>
-              <div className="mt-0.5 text-xs text-slate-500">
+              <div className="mt-0.5 text-sm tabular-nums text-slate-600">
                 現在 {item.currentScore} → 5にすると +{item.potentialGain}点
               </div>
             </div>
 
-            <div className="flex shrink-0 items-center gap-1 text-emerald-600">
+            <div className="flex shrink-0 items-center gap-1 text-brand-700">
               <ChevronUp className="h-4 w-4" />
-              <span className="text-sm font-bold">+{item.potentialGain}</span>
+              <span className="text-sm font-bold tabular-nums">+{item.potentialGain}</span>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
 
       {/* アドバイス */}
-      <div className="mt-4 rounded-xl bg-slate-50 p-3">
-        <div className="flex items-start gap-2">
-          <TrendingUp className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
-          <p className="text-xs leading-relaxed text-slate-600">
-            {topRecommendations[0]?.multiplier > 1
-              ? `「${topRecommendations[0]?.label}」は倍率が高いため、1点上げるだけで${topRecommendations[0]?.multiplier}点分の効果があります。`
-              : `「${topRecommendations[0]?.label}」を優先的に改善することで、効率よく内申点を上げられます。`}
-          </p>
-        </div>
+      <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+        <p className="text-sm font-bold text-slate-900">ポイント</p>
+        <p className="mt-1 text-sm leading-relaxed text-slate-900">
+          {topRecommendations[0]?.multiplier > 1
+            ? `「${topRecommendations[0]?.label}」は倍率が高いため、1点上げるだけで${topRecommendations[0]?.multiplier}点分の効果があります。`
+            : `「${topRecommendations[0]?.label}」を優先的に改善することで、効率よく内申点を上げられます。`}
+        </p>
       </div>
     </div>
   );

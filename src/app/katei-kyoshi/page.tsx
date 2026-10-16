@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Users, ChevronRightSquare, CheckCircle, HelpCircle } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -58,60 +58,54 @@ export default function KateiKyoshiPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">家庭教師の選び方比較</span>
+            <span className="text-slate-900">家庭教師の選び方比較</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-xl">
-              <Users className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">家庭教師の選び方比較</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">家庭教師の選び方比較</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               家庭教師・オンライン家庭教師・個別指導塾の違いと料金相場を整理し、お子さまに合う選び方をまとめました。
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <CheckCircle className="h-5 w-5 text-indigo-500" />
-              指導形態ごとの違い
-            </h2>
-            <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4">
-                <div className="text-sm font-bold text-indigo-900">訪問型 家庭教師</div>
-                <p className="mt-1 text-xs leading-relaxed text-indigo-800">
+          <section className="mb-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">指導形態ごとの違い</h2>
+            <div className="divide-y divide-slate-200 rounded-lg border border-slate-200 bg-white">
+              <div className="p-5">
+                <h3 className="text-[17px] font-bold text-slate-900">訪問型 家庭教師</h3>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   指導者が自宅に来て1対1で指導。移動不要・自分のペースで質問しやすい。料金はやや高め（1回3,000〜8,000円目安）。
                 </p>
               </div>
-              <div className="rounded-xl border border-violet-100 bg-violet-50 p-4">
-                <div className="text-sm font-bold text-violet-900">オンライン家庭教師</div>
-                <p className="mt-1 text-xs leading-relaxed text-violet-800">
+              <div className="p-5">
+                <h3 className="text-[17px] font-bold text-slate-900">オンライン家庭教師</h3>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   ビデオ通話で1対1指導。地方在住でも都市部の指導者に習えることが多く、料金はやや抑えめ（1回2,000〜5,000円目安）。
                 </p>
               </div>
-              <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
-                <div className="text-sm font-bold text-emerald-900">個別指導塾</div>
-                <p className="mt-1 text-xs leading-relaxed text-emerald-800">
+              <div className="p-5">
+                <h3 className="text-[17px] font-bold text-slate-900">個別指導塾</h3>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
                   教室に通い1〜3対1で指導。自習室・複数講師・進路指導のノウハウが強み。教室により料金体系は様々。
                 </p>
               </div>
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-slate-500">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               ※料金は一般的な目安であり、指導者の経験（大学生／プロ）や地域・会社によって幅があります。正確な料金は各社の無料体験・資料請求でご確認ください。
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">選び方のポイント</h2>
-            <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
+          <section className="mb-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">選び方のポイント</h2>
+            <ul className="space-y-2 rounded-lg border border-slate-200 bg-white p-5 text-base leading-[1.8] text-slate-900">
               <li>① まずはお子さまの内申点・偏差値を数値で把握し、志望校との差を確認する。</li>
               <li>② 苦手教科をピンポイントで伸ばしたいか、幅広く進路指導も含めて任せたいかを整理する。</li>
               <li>③ 無料体験・資料請求で複数社を比較し、指導者との相性を確認してから決める。</li>
@@ -122,11 +116,11 @@ export default function KateiKyoshiPage() {
           <ParentLeadCTA
             placement="naishin-up"
             heading={`まずは${bestOfferName}の無料体験で相性を確認`}
-            body="お子さまに合う指導者かどうかは、実際の体験授業で確認するのが一番確実です。費用はかからず、その場で契約を迫られることはありません。"
+            body="お子さまに合う指導者かどうかは、実際の体験授業で確認できます。費用はかからず、その場で契約を迫られることはありません。"
             affiliateId={bestOfferId}
             ctaText="無料体験・相談をする"
             note={`【${bestOfferName}】の無料体験（PR）`}
-            className="mb-8"
+            className="mb-10"
           />
 
           <SaveResultCTA
@@ -136,30 +130,27 @@ export default function KateiKyoshiPage() {
             className="mb-10"
           />
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/juku-hiyou" className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+          <section className="mb-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/juku-hiyou" className="flex min-h-[44px] items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-4 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 塾代の相場を確認する
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0" />
               </Link>
-              <Link href="/naishin-age-kata" className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50">
+              <Link href="/naishin-age-kata" className="flex min-h-[44px] items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-4 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 内申点の上げ方（学年別）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0" />
               </Link>
             </div>
           </section>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-indigo-500" />
-              よくある質問
-            </h2>
-            <div className="space-y-4">
+          <section>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 rounded-lg border border-slate-200 bg-white">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="p-5">
+                  <h3 className="text-[17px] font-bold leading-snug text-slate-900">Q. {f.question}</h3>
+                  <p className="mt-2 text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

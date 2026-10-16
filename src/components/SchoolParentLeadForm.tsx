@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Mail, Loader2, Check } from 'lucide-react';
+import { Mail, Loader2, Check } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { isValidEmail, openLeadMailtoFallback, submitLead, type LeadPayload } from '@/lib/lead';
@@ -107,30 +107,30 @@ export function SchoolParentLeadForm({ prefectureCode, prefectureName, schoolNam
   const done = status === 'success' || status === 'fallback';
 
   return (
-    <section className={`rounded-2xl border-2 border-sky-200 bg-sky-50/60 p-5 shadow-sm md:p-6 ${className}`}>
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-3 py-1 text-xs font-bold text-white">
+    <section className={`rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6 ${className}`}>
+      <div className="mb-3 inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-bold text-slate-700">
         {SCHOOL_LEAD_AUDIENCE_LABEL}
       </div>
-      <h3 className="mb-2 text-base font-bold text-slate-900 md:text-lg">
+      <h3 className="mb-2 text-[17px] font-bold text-slate-900">
         この学校の入試情報を無料で受け取る
       </h3>
-      <p className="mb-4 text-sm leading-relaxed text-slate-700">
+      <p className="mb-4 text-base leading-[1.8] text-slate-900">
         入試日程・内申点対策の情報をメールでお届けします。配信はいつでも解除できます。
       </p>
 
       {done ? (
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+        <div className="text-base text-slate-900">
           <div className="flex items-center gap-2 font-bold">
-            <Check className="h-4 w-4" />
+            <Check className="h-5 w-5" />
             登録ありがとうございます
           </div>
           {status === 'fallback' && (
             <>
-              <p className="mt-2">確実にお届けするため、メールアプリが開きます。そのまま送信してください。</p>
+              <p className="mt-2 leading-[1.8]">確実にお届けするため、メールアプリが開きます。そのまま送信してください。</p>
               <button
                 type="button"
                 onClick={() => openLeadMailtoFallback(payload)}
-                className="mt-1 text-xs font-semibold text-emerald-700 underline"
+                className="mt-1 inline-flex min-h-[44px] items-center text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
               >
                 メールアプリが開かない場合はこちら
               </button>
@@ -152,12 +152,12 @@ export function SchoolParentLeadForm({ prefectureCode, prefectureName, schoolNam
               onFocus={onFormStart}
               placeholder="保護者の方のメールアドレス"
               aria-label="メールアドレス"
-              className="h-11 flex-1 rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
+              className="h-12 w-full rounded border border-slate-300 bg-white px-3 text-base placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700 sm:min-w-0 sm:flex-1"
             />
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-sky-700 hover:shadow-lg active:scale-95 disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded bg-brand-700 px-5 text-base font-bold text-white transition-colors hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {status === 'submitting' ? (
                 <>
@@ -173,43 +173,45 @@ export function SchoolParentLeadForm({ prefectureCode, prefectureName, schoolNam
             </button>
           </div>
 
-          <label className="flex cursor-pointer items-start gap-2 text-xs leading-relaxed text-slate-500">
+          <label className="flex min-h-[44px] cursor-pointer items-start gap-3 py-2 text-sm leading-[1.7] text-slate-700">
             <input
               type="checkbox"
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
-              className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+              className="mt-0.5 h-5 w-5 shrink-0 accent-brand-700"
             />
             <span>
               受験情報の受け取りに同意します（
-              <Link href="/privacy" className="font-semibold text-slate-600 underline">
+              <Link href="/privacy" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 プライバシーポリシー
               </Link>
               ）。配信はいつでも解除できます。
             </span>
           </label>
 
-          <label className="flex cursor-pointer items-start gap-2 text-xs leading-relaxed text-slate-500">
+          <label className="flex min-h-[44px] cursor-pointer items-start gap-3 py-2 text-sm leading-[1.7] text-slate-700">
             <input
               type="checkbox"
               checked={jukuOptin}
               onChange={(e) => setJukuOptin(e.target.checked)}
               aria-label="学習塾への提供に同意する（任意）"
-              className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+              className="mt-0.5 h-5 w-5 shrink-0 accent-brand-700"
             />
             <span>{SCHOOL_LEAD_JUKU_OPTIN_LABEL}</span>
           </label>
 
-          <p className="text-[11px] leading-relaxed text-slate-400">
+          <p className="text-sm leading-[1.7] text-slate-600">
             {SCHOOL_LEAD_PURPOSE_NOTICE}
             {' '}
-            <Link href="/contact" className="underline">
+            <Link href="/contact" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
               お問い合わせ
             </Link>
             はこちら。
           </p>
 
-          {error && <p className="text-xs font-semibold text-rose-600">{error}</p>}
+          {error && (
+            <p className="rounded border border-red-200 bg-red-50 p-3 text-sm font-bold text-red-800">{error}</p>
+          )}
         </form>
       )}
     </section>

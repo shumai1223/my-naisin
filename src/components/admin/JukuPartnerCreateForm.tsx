@@ -55,11 +55,11 @@ export function JukuPartnerCreateForm({ token }: { token: string }) {
         type="button"
         onClick={submit}
         disabled={pending}
-        className="rounded-md bg-blue-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
+        className="rounded-md bg-brand-600 px-3 py-1 text-xs font-bold text-white disabled:opacity-50"
       >
         {pending ? '処理中…' : '提携塾を登録'}
       </button>
-      {error && <p className="text-xs text-rose-600">{error}</p>}
+      {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, FileSpreadsheet, ChevronRightSquare, ShieldCheck } from 'lucide-react';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -70,40 +70,36 @@ export default function KakomonJisaitenPage() {
         steps={HOWTO_STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-emerald-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">過去問自己採点×総合得点</span>
+            <span className="text-slate-900">過去問自己採点×総合得点</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
-              <FileSpreadsheet className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               過去問自己採点 × 内申点 → 総合得点
             </h1>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              過去問を解いた点数と内申点を入力すると、<strong className="text-emerald-700">都道府県が公表している方式</strong>で
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              過去問を解いた点数と内申点を入力すると、<strong>都道府県が公表している方式</strong>で
               総合得点を計算します。
             </p>
           </header>
 
-          <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-5">
-            <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-100 text-amber-700">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <p className="text-xs leading-relaxed text-amber-900">
-                <strong>合格ライン（ボーダー）は表示しません。</strong>
-                このツールが出すのは都道府県公表の算出方式に基づく総合得点の数値のみです。合否判定・ボーダーラインの推定は一切行いません。
-              </p>
-            </div>
+          <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="flex items-center gap-1.5 text-sm font-bold text-amber-900">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              注意
+            </p>
+            <p className="mt-1 text-base leading-[1.8] text-amber-900">
+              <strong>合格ライン（ボーダー）は表示しません。</strong>
+              このツールが出すのは都道府県公表の算出方式に基づく総合得点の数値のみです。合否判定・ボーダーラインの推定は一切行いません。
+            </p>
           </div>
 
           <div id="calculator-section">
@@ -111,49 +107,55 @@ export default function KakomonJisaitenPage() {
           </div>
 
           {/* 総合得点方式が県ごとに違う理由 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               なぜ都道府県によって計算方法が違うのか
             </h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-700">
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               内申点と学力検査点（当日点）をどう合算するかは都道府県ごとに教育委員会が独自に定めており、
               全国共通の方式は存在しません。同じ「自己採点300点・内申点35」でも、志望する都道府県によって
               総合得点の出方はまったく異なります。実際に公表されている方式の中でも特徴的な3例を紹介します。
             </p>
-            <div className="space-y-4 text-sm leading-relaxed text-slate-700">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <div className="mb-1 font-bold text-slate-800">大阪府：学校が選んだ配点タイプで決まる</div>
-                学力検査と内申点それぞれに倍率をかけて900点満点にしますが、その倍率は「学力7：内申3」から
-                「学力3：内申7」までのタイプⅠ〜Ⅴの5パターンがあり、<strong>どのタイプを採用するかは受験する
-                高校・学科ごとに異なります</strong>。同じ大阪府内でも高校によって内申点の重みが大きく変わります。
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
+              <div className="py-4">
+                <h3 className="text-[17px] font-bold text-slate-900">大阪府：学校が選んだ配点タイプで決まる</h3>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
+                  学力検査と内申点それぞれに倍率をかけて900点満点にしますが、その倍率は「学力7：内申3」から
+                  「学力3：内申7」までのタイプⅠ〜Ⅴの5パターンがあり、<strong>どのタイプを採用するかは受験する
+                  高校・学科ごとに異なります</strong>。同じ大阪府内でも高校によって内申点の重みが大きく変わります。
+                </p>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <div className="mb-1 font-bold text-slate-800">東京都：スピーキングテスト込みで固定比率</div>
-                換算内申300点：学力検査700点（うちESAT-J＝英語スピーキングテスト20点分を含む）で
-                内申30%：学力70%の比率が全校共通です。実技4教科の内申は2倍換算されるなど、
-                内申点の内部計算も独自の方式を採ります。
+              <div className="py-4">
+                <h3 className="text-[17px] font-bold text-slate-900">東京都：スピーキングテスト込みで固定比率</h3>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
+                  換算内申300点：学力検査700点（うちESAT-J＝英語スピーキングテスト20点分を含む）で
+                  内申30%：学力70%の比率が全校共通です。実技4教科の内申は2倍換算されるなど、
+                  内申点の内部計算も独自の方式を採ります。
+                </p>
               </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <div className="mb-1 font-bold text-slate-800">埼玉県：学年比重が学校によって変わる</div>
-                内申点の算出自体が「中1:中2:中3＝1:1:2」を基本としつつ、高校によって1:1:3や1:2:3などの
-                比重を採用する場合があります。総合得点に占める内申の割合も学力7:内申3から学力6:内申4程度まで
-                幅があり、県内で一律の正解値はありません。
+              <div className="py-4">
+                <h3 className="text-[17px] font-bold text-slate-900">埼玉県：学年比重が学校によって変わる</h3>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
+                  内申点の算出自体が「中1:中2:中3＝1:1:2」を基本としつつ、高校によって1:1:3や1:2:3などの
+                  比重を採用する場合があります。総合得点に占める内申の割合も学力7:内申3から学力6:内申4程度まで
+                  幅があり、県内で一律の正解値はありません。
+                </p>
               </div>
             </div>
-            <p className="mt-4 text-xs text-slate-500 leading-relaxed">
-              出典：<Link href="/tokyo/total-score" className="text-emerald-700 underline">東京都の総合得点方式</Link>・
-              <Link href="/osaka/total-score" className="text-emerald-700 underline">大阪府の総合得点方式</Link>・
-              <Link href="/pref/saitama" className="text-emerald-700 underline">埼玉県の内申点計算</Link>
+            <p className="mt-4 text-sm leading-[1.8] text-slate-600">
+              出典：<Link href="/tokyo/total-score" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">東京都の総合得点方式</Link>・
+              <Link href="/osaka/total-score" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">大阪府の総合得点方式</Link>・
+              <Link href="/pref/saitama" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">埼玉県の内申点計算</Link>
               （各ページに教育委員会の一次資料リンクあり）
             </p>
           </section>
 
           {/* 自己採点の注意点 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               自己採点を使う上での注意点
             </h2>
-            <p className="text-sm leading-relaxed text-slate-700">
+            <p className="text-base leading-[1.8] text-slate-900">
               自己採点は、記述式の解答（部分点の有無）や配点の非公開部分によって、実際に高等学校側が
               採点する点数と一致しない場合があります。特に国語・数学・英語の記述問題は、模範解答と表現が
               異なるだけで採点が割れることがあります。このツールが示す総合得点は「自己採点どおりに採点され
@@ -162,20 +164,24 @@ export default function KakomonJisaitenPage() {
             </p>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800 border-l-4 border-emerald-500 pl-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">
               あわせて確認したいツール
             </h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/total-score" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
-                総合得点方式の一覧（47都道府県）
-                <ChevronRightSquare className="h-4 w-4" />
-              </Link>
-              <Link href="/hyotei-heikin/gakushu-seiseki" className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
-                大学入試の過去問を使う場合はこちら
-                <ChevronRightSquare className="h-4 w-4" />
-              </Link>
-            </div>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
+              <li>
+                <Link href="/total-score" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">総合得点方式の一覧（47都道府県）</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hyotei-heikin/gakushu-seiseki" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">大学入試の過去問を使う場合はこちら</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Wallet, BookCheck, HelpCircle, TrendingUp, GraduationCap, PiggyBank } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { EducationPathSimulator } from '@/components/EducationPathSimulator';
 import { AnswerBox } from '@/components/AnswerBox';
@@ -11,6 +11,7 @@ import { WebApplicationSchema } from '@/components/StructuredData/WebApplication
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
+import { MEXT_GAKUSHUHI_SOURCE, MEXT_SHUGAKU_SHIEN_SOURCE, JFC_AWAY_COST_SOURCE } from '@/lib/education-cost/data';
 import { simulateHighToUniversity, toManYen } from '@/lib/education-cost/engine';
 import type { CourseType, UniversityType, Residence } from '@/lib/education-cost/types';
 
@@ -90,22 +91,34 @@ export default function ShinroHiyouPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">高校〜大学の教育費シミュレーター</span>
+            <span className="text-slate-900">高校〜大学の教育費シミュレーター</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-xl">
-              <PiggyBank className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校〜大学卒業まで、教育費はいくら？</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">高校〜大学卒業まで、教育費はいくら？</h1>
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
+              出典：
+              <a href={MEXT_GAKUSHUHI_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
+              </a>
+              （最終確認 {MEXT_GAKUSHUHI_SOURCE.lastChecked}）、
+              <a href={MEXT_SHUGAKU_SHIEN_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                文部科学省「高校生等への修学支援（就学支援金）」
+              </a>
+              （最終確認 {MEXT_SHUGAKU_SHIEN_SOURCE.lastChecked}）、
+              <a href={JFC_AWAY_COST_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                日本政策金融公庫「教育費負担の実態調査結果」
+              </a>
+              （最終確認 {JFC_AWAY_COST_SOURCE.lastChecked}）
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               <strong>高校（公立/私立）・世帯年収・大学の種別・自宅か下宿か</strong>を選ぶだけで、
               高校入学から大学卒業までの教育費総額を<strong>就学支援金込み</strong>で概算します。
               数値は<strong>文部科学省「子供の学習費調査」</strong>と<strong>日本政策金融公庫</strong>の一次データに準拠します。
@@ -121,6 +134,7 @@ export default function ShinroHiyouPage() {
           </div>
 
           <section className="mb-8">
+            <h2 className="sr-only">高校〜大学の教育費シミュレーター</h2>
             <EducationPathSimulator />
           </section>
 
@@ -129,60 +143,54 @@ export default function ShinroHiyouPage() {
 
           {/* 代表的な進路の総額比較（engine算出・捏造ゼロ） */}
           <section className="mb-10">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <TrendingUp className="h-5 w-5 text-indigo-600" />
-              代表的な進路の総額の目安（世帯年収 590〜910万円の場合）
-            </h2>
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">代表的な進路の総額の目安（世帯年収 590〜910万円の場合）</h2>
+            <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="bg-indigo-600 text-white">
-                    <th className="px-4 py-3 text-left font-bold">進路</th>
-                    <th className="px-4 py-3 text-right font-bold">高校〜大学の総額（就学支援金込み）</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th scope="col" className="px-4 py-3 text-left font-bold">進路</th>
+                    <th scope="col" className="px-4 py-3 text-right font-bold">高校〜大学の総額（就学支援金込み）</th>
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
+                <tbody className="text-slate-900">
                   {PATHS.map((p) => {
                     const r = simulateHighToUniversity({ highCourse: p.high, incomeBracket: 'under910', universityType: p.uni, residence: p.res });
                     return (
-                      <tr key={p.label} className="odd:bg-white even:bg-slate-50">
+                      <tr key={p.label} className="border-b border-slate-200 last:border-b-0">
                         <td className="px-4 py-3 font-bold">{p.label}</td>
-                        <td className="px-4 py-3 text-right font-bold text-indigo-700">{toManYen(r.total)}</td>
+                        <td className="px-4 py-3 text-right font-bold tabular-nums">{toManYen(r.total)}</td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-xs text-slate-500">
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">
               ※ 高校＝文科省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」、大学＝学費の概算、下宿＝日本政策金融公庫の自宅外通学費用。塾代は含みません。
             </p>
           </section>
 
           {/* 出典 */}
-          <div className="mb-10 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-            <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-              <BookCheck className="h-3.5 w-3.5 text-indigo-600" />
-              出典・参考データ（一次情報）
-            </div>
-            <ul className="space-y-1.5 text-xs leading-relaxed">
+          <div className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <div className="mb-2 text-sm font-bold text-slate-900">出典・参考データ（一次情報）</div>
+            <ul className="space-y-2 text-sm leading-[1.8]">
               <li>
-                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/b_menu/toukei/chousa03/gakushuuhi/1268091.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「子供の学習費調査（令和5年度・令和8年1月16日訂正版）」
                 </a>
-                <span className="text-slate-400"> — 高校の学習費総額（公立/私立）</span>
+                <span className="text-slate-600"> — 高校の学習費総額（公立/私立）</span>
               </li>
               <li>
-                <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「高校生等への修学支援（就学支援金）」
                 </a>
-                <span className="text-slate-400"> — 高校授業料の軽減制度</span>
+                <span className="text-slate-600"> — 高校授業料の軽減制度</span>
               </li>
               <li>
-                <a href="https://www.jfc.go.jp/n/findings/" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.jfc.go.jp/n/findings/" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   日本政策金融公庫「教育費負担の実態調査結果」
                 </a>
-                <span className="text-slate-400"> — 自宅外通学の費用・仕送り</span>
+                <span className="text-slate-600"> — 自宅外通学の費用・仕送り</span>
               </li>
             </ul>
           </div>
@@ -198,19 +206,17 @@ export default function ShinroHiyouPage() {
 
           {/* FAQ */}
           <section className="mb-10">
-            <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-indigo-600" />よくある質問
-            </h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
@@ -226,8 +232,7 @@ export default function ShinroHiyouPage() {
               { href: 'https://my-shingaku.com/gakuhi', title: '大学進学の費用（姉妹サイト）', desc: '学費・一人暮らし・奨学金の目安（My Shingaku）', external: true },
             ]}
           />
-          <p className="mt-6 flex items-center gap-1.5 text-center text-xs text-slate-400">
-            <GraduationCap className="h-3.5 w-3.5" />
+          <p className="mt-6 text-sm leading-[1.8] text-slate-600">
             大学費用の詳しい内訳は姉妹サイト My Shingaku が担当します。
           </p>
         </div>

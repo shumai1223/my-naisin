@@ -32,7 +32,7 @@ export function KanagawaResultFlow() {
         prefectureName="神奈川県"
       />
 
-      <ParentCostBridge prefectureName="神奈川県" className="mb-6" />
+      <ParentCostBridge prefectureName="神奈川県" className="mt-6 mb-6" />
 
       <div id="save-result" className="scroll-mt-24">
         <SaveResultCTA

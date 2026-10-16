@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Share2, Check, QrCode } from 'lucide-react';
+import { Share2, Check, QrCode } from '@/components/icons';
 import { toDataURL as qrToDataURL } from 'qrcode';
 
 import { EVENTS, track } from '@/lib/track';
@@ -220,7 +220,7 @@ export function ParentShareLinkButton({
       <button
         type="button"
         onClick={onShare}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 transition-all hover:border-emerald-300 hover:bg-emerald-100"
+        className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50"
       >
         {copied ? (
           <>
@@ -238,14 +238,14 @@ export function ParentShareLinkButton({
         <button
           type="button"
           onClick={onShareLine}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#06C755] bg-[#06C755]/10 px-3 py-2 text-xs font-bold text-[#06C755] transition-colors hover:bg-[#06C755]/20"
+          className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-900 hover:bg-slate-50"
         >
           LINEで送る
         </button>
         <button
           type="button"
           onClick={onShareX}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-100"
+          className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-900 hover:bg-slate-50"
         >
           Xで共有
         </button>
@@ -253,16 +253,17 @@ export function ParentShareLinkButton({
       <button
         type="button"
         onClick={onToggleQr}
-        className="mt-2 inline-flex w-full items-center justify-center gap-1.5 text-xs font-bold text-emerald-700 underline decoration-emerald-300 underline-offset-2 hover:text-emerald-800"
+        aria-expanded={qrUrl !== null}
+        className="mt-2 inline-flex min-h-[44px] w-full items-center justify-center gap-1.5 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
       >
-        <QrCode className="h-3.5 w-3.5" />
+        <QrCode className="h-4 w-4" />
         {qrUrl ? 'QRコードを閉じる' : '今、そばにいるなら：QRコードで見せる'}
       </button>
       {qrUrl && (
-        <div className="mt-3 flex flex-col items-center gap-2 rounded-xl border border-emerald-100 bg-emerald-50/50 p-4">
+        <div className="mt-3 flex flex-col items-center gap-2 rounded-lg border border-slate-200 bg-white p-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={qrUrl} alt="保護者のスマホで読み取るQRコード" width={160} height={160} className="rounded-lg bg-white p-2 shadow-sm" />
-          <p className="text-center text-[11px] text-slate-500">保護者のスマホのカメラで読み取ると、この結果がそのまま開きます</p>
+          <img src={qrUrl} alt="保護者のスマホで読み取るQRコード" width={160} height={160} className="rounded bg-white p-2" />
+          <p className="text-center text-sm text-slate-600">保護者のスマホのカメラで読み取ると、この結果がそのまま開きます</p>
         </div>
       )}
     </div>

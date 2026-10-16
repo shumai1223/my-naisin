@@ -1,8 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
-import { Flame, Calendar, Trophy, Star, Zap, Target, Award } from 'lucide-react';
 
 const STREAK_KEY = 'my-naishin:streak';
 const LAST_VISIT_KEY = 'my-naishin:last-visit';
@@ -31,46 +29,46 @@ function updateStreak(): StreakData {
   if (typeof window === 'undefined') {
     return { current: 0, longest: 0, totalDays: 0, lastDate: '' };
   }
-  
+
   const today = new Date().toISOString().split('T')[0];
   const data = getStreakData();
-  
+
   if (data.lastDate === today) {
     return data;
   }
-  
+
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   const yesterdayStr = yesterday.toISOString().split('T')[0];
-  
+
   let newCurrent = 1;
   if (data.lastDate === yesterdayStr) {
     newCurrent = data.current + 1;
   }
-  
+
   const newData: StreakData = {
     current: newCurrent,
     longest: Math.max(data.longest, newCurrent),
     totalDays: data.totalDays + 1,
     lastDate: today,
   };
-  
+
   try {
     localStorage.setItem(STREAK_KEY, JSON.stringify(newData));
   } catch {
     // ignore
   }
-  
+
   return newData;
 }
 
 const MILESTONES = [
-  { days: 3, icon: Zap, label: '3日連続', color: 'text-yellow-500', bg: 'bg-yellow-50' },
-  { days: 7, icon: Star, label: '1週間', color: 'text-orange-500', bg: 'bg-orange-50' },
-  { days: 14, icon: Target, label: '2週間', color: 'text-rose-500', bg: 'bg-rose-50' },
-  { days: 30, icon: Trophy, label: '1ヶ月', color: 'text-purple-500', bg: 'bg-purple-50' },
-  { days: 60, icon: Award, label: '2ヶ月', color: 'text-indigo-500', bg: 'bg-indigo-50' },
-  { days: 100, icon: Flame, label: '100日', color: 'text-red-500', bg: 'bg-red-50' },
+  { days: 3, label: '3日連続' },
+  { days: 7, label: '1週間' },
+  { days: 14, label: '2週間' },
+  { days: 30, label: '1ヶ月' },
+  { days: 60, label: '2ヶ月' },
+  { days: 100, label: '100日' },
 ];
 
 export function StudyStreakCard() {
@@ -81,9 +79,9 @@ export function StudyStreakCard() {
     const oldStreak = getStreakData();
     const newStreak = updateStreak();
     setStreak(newStreak);
-    
+
     // Check if we hit a milestone
-    const hitMilestone = MILESTONES.find(m => 
+    const hitMilestone = MILESTONES.find(m =>
       newStreak.current === m.days && oldStreak.current < m.days
     );
     if (hitMilestone) {
@@ -96,159 +94,115 @@ export function StudyStreakCard() {
   const progressToNext = nextMilestone ? (streak.current / nextMilestone.days) * 100 : 100;
   const achievedMilestones = MILESTONES.filter(m => streak.current >= m.days);
 
-  const getStreakEmoji = () => {
-    if (streak.current >= 100) return '🏆';
-    if (streak.current >= 30) return '🔥';
-    if (streak.current >= 14) return '⭐';
-    if (streak.current >= 7) return '✨';
-    if (streak.current >= 3) return '💪';
-    return '🌱';
-  };
-
   const getStreakMessage = () => {
-    if (streak.current >= 100) return '伝説の勉強家！継続は力なり！';
-    if (streak.current >= 60) return '素晴らしい！あなたは本物の努力家です！';
-    if (streak.current >= 30) return '1ヶ月達成！この調子で頑張ろう！';
-    if (streak.current >= 14) return '2週間突破！習慣が身についてきた！';
-    if (streak.current >= 7) return '1週間達成！良いリズムができてきた！';
-    if (streak.current >= 3) return '3日連続！この調子で続けよう！';
-    if (streak.current >= 1) return '今日も頑張ってるね！続けることが大切！';
-    return '今日から始めよう！毎日の積み重ねが大切！';
+    if (streak.current >= 3) return `${streak.current}日連続で記録しています。`;
+    if (streak.current >= 1) return '今日の分を記録しました。続けることが大切です。';
+    return '今日から始めましょう。毎日の積み重ねが大切です。';
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
-    >
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 p-5 text-white relative overflow-hidden">
-        {showCelebration && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-10"
-          >
-            <div className="text-center">
-              <div className="text-4xl mb-2">🎉</div>
-              <div className="text-lg font-bold">マイルストーン達成！</div>
-            </div>
-          </motion.div>
-        )}
-        
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/20 backdrop-blur-sm">
-              <Flame className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold">{getStreakEmoji()} 学習ストリーク</h3>
-              <p className="text-sm text-white/80">毎日の継続が力になる！</p>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-3xl font-black">{streak.current}</div>
-            <div className="text-xs text-white/80">日連続</div>
-          </div>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 className="text-[17px] font-bold text-slate-900">学習ストリーク</h3>
+          <p className="mt-1 text-sm text-slate-600">毎日の継続が力になる</p>
+        </div>
+        <div className="shrink-0 text-right">
+          <div className="text-3xl font-bold tabular-nums text-slate-900">{streak.current}</div>
+          <div className="text-xs text-slate-600">日連続</div>
         </div>
       </div>
 
-      <div className="p-5">
-        {/* Motivation message */}
-        <div className="rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 p-4 mb-4 border border-amber-200">
-          <p className="text-sm font-medium text-amber-800 text-center">
-            {getStreakMessage()}
-          </p>
+      {/* Message（節目の日は枠線を濃くして一言添える。表示は3秒） */}
+      <p
+        className={`mt-4 rounded-lg border p-4 text-sm leading-relaxed text-slate-900 ${
+          showCelebration ? 'border-brand-700 bg-brand-100' : 'border-slate-200 bg-brand-50'
+        }`}
+      >
+        {showCelebration && <span className="mr-2 font-bold">節目の日数です。</span>}
+        {getStreakMessage()}
+      </p>
+
+      {/* Stats */}
+      <dl className="mt-4 grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200">
+        <div className="px-3 py-3 text-center">
+          <dt className="text-xs text-slate-600">現在の連続</dt>
+          <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{streak.current}</dd>
         </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 mb-4">
-          <div className="rounded-xl bg-slate-50 p-3 text-center">
-            <div className="text-2xl font-bold text-orange-500">{streak.current}</div>
-            <div className="text-[10px] font-medium text-slate-500">現在の連続</div>
-          </div>
-          <div className="rounded-xl bg-slate-50 p-3 text-center">
-            <div className="text-2xl font-bold text-amber-500">{streak.longest}</div>
-            <div className="text-[10px] font-medium text-slate-500">最長記録</div>
-          </div>
-          <div className="rounded-xl bg-slate-50 p-3 text-center">
-            <div className="text-2xl font-bold text-yellow-600">{streak.totalDays}</div>
-            <div className="text-[10px] font-medium text-slate-500">累計日数</div>
-          </div>
+        <div className="px-3 py-3 text-center">
+          <dt className="text-xs text-slate-600">最長記録</dt>
+          <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{streak.longest}</dd>
         </div>
+        <div className="px-3 py-3 text-center">
+          <dt className="text-xs text-slate-600">累計日数</dt>
+          <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{streak.totalDays}</dd>
+        </div>
+      </dl>
 
-        {/* Progress to next milestone */}
-        {nextMilestone && streak.current < nextMilestone.days && (
-          <div className="mb-4">
-            <div className="flex items-center justify-between text-xs mb-1">
-              <span className="text-slate-500">次のマイルストーン</span>
-              <span className="font-bold text-amber-600">{nextMilestone.label}まであと{nextMilestone.days - streak.current}日</span>
-            </div>
-            <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${Math.min(progressToNext, 100)}%` }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="h-full bg-gradient-to-r from-orange-400 to-amber-400 rounded-full"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Achieved milestones */}
-        {achievedMilestones.length > 0 && (
-          <div>
-            <div className="text-xs font-bold text-slate-600 mb-2">🏅 達成したマイルストーン</div>
-            <div className="flex flex-wrap gap-2">
-              {achievedMilestones.map((milestone) => {
-                const Icon = milestone.icon;
-                return (
-                  <div
-                    key={milestone.days}
-                    className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 ${milestone.bg} border border-slate-200`}
-                  >
-                    <Icon className={`h-3.5 w-3.5 ${milestone.color}`} />
-                    <span className="text-xs font-medium text-slate-700">{milestone.label}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Week calendar */}
+      {/* Progress to next milestone */}
+      {nextMilestone && streak.current < nextMilestone.days && (
         <div className="mt-4">
-          <div className="text-xs font-bold text-slate-600 mb-2">📅 今週の記録</div>
-          <div className="grid grid-cols-7 gap-1">
-            {Array.from({ length: 7 }).map((_, i) => {
-              const date = new Date();
-              date.setDate(date.getDate() - (6 - i));
-              const dateStr = date.toISOString().split('T')[0];
-              const isToday = i === 6;
-              const isActive = dateStr <= streak.lastDate && 
-                (streak.current > (6 - i) || dateStr === streak.lastDate);
-              
-              return (
-                <div
-                  key={i}
-                  className={`aspect-square rounded-lg flex flex-col items-center justify-center text-[10px] ${
-                    isToday 
-                      ? 'bg-gradient-to-br from-orange-400 to-amber-400 text-white font-bold'
-                      : isActive
-                        ? 'bg-amber-100 text-amber-700'
-                        : 'bg-slate-50 text-slate-400'
-                  }`}
-                >
-                  <span>{['日', '月', '火', '水', '木', '金', '土'][date.getDay()]}</span>
-                  <span className="font-bold">{date.getDate()}</span>
-                </div>
-              );
-            })}
+          <div className="mb-1 flex items-center justify-between gap-3 text-sm">
+            <span className="text-slate-600">次の節目</span>
+            <span className="font-bold tabular-nums text-slate-900">{nextMilestone.label}まであと{nextMilestone.days - streak.current}日</span>
+          </div>
+          <div className="h-2 overflow-hidden rounded-full bg-slate-200">
+            <div
+              className="h-full rounded-full bg-brand-700"
+              style={{ width: `${Math.min(progressToNext, 100)}%` }}
+            />
           </div>
         </div>
+      )}
+
+      {/* Achieved milestones */}
+      {achievedMilestones.length > 0 && (
+        <div className="mt-4">
+          <h4 className="mb-2 text-sm font-bold text-slate-900">到達した節目</h4>
+          <ul className="flex flex-wrap gap-2">
+            {achievedMilestones.map((milestone) => (
+              <li
+                key={milestone.days}
+                className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-1 text-sm text-slate-700"
+              >
+                {milestone.label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Week calendar */}
+      <div className="mt-4">
+        <h4 className="mb-2 text-sm font-bold text-slate-900">今週の記録</h4>
+        <div className="grid grid-cols-7 gap-1">
+          {Array.from({ length: 7 }).map((_, i) => {
+            const date = new Date();
+            date.setDate(date.getDate() - (6 - i));
+            const dateStr = date.toISOString().split('T')[0];
+            const isToday = i === 6;
+            const isActive = dateStr <= streak.lastDate &&
+              (streak.current > (6 - i) || dateStr === streak.lastDate);
+
+            return (
+              <div
+                key={i}
+                className={`flex aspect-square flex-col items-center justify-center rounded border text-xs ${
+                  isToday
+                    ? 'border-brand-700 bg-brand-700 font-bold text-white'
+                    : isActive
+                      ? 'border-brand-700 bg-brand-50 text-brand-800'
+                      : 'border-slate-200 bg-white text-slate-600'
+                }`}
+              >
+                <span>{['日', '月', '火', '水', '木', '金', '土'][date.getDay()]}</span>
+                <span className="font-bold tabular-nums">{date.getDate()}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

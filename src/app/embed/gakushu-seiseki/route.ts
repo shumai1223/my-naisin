@@ -24,34 +24,34 @@ function buildHtml(): string {
 <title>学習成績の状況（大学受験の評定平均）計算ツール | My Naishin</title>
 <style>
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#fff;color:#0f172a;-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#fff;color:#17231d;-webkit-text-size-adjust:100%}
   .wrap{max-width:480px;margin:0 auto;padding:16px}
   .hd{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-  .logo{width:34px;height:34px;border-radius:8px;display:block;box-shadow:0 1px 3px rgba(15,23,42,.15);flex:0 0 auto}
-  .ttl{font-size:13px;font-weight:800;line-height:1.3;color:#0f172a}
-  .sub{font-size:11px;color:#64748b;margin-top:2px}
-  .list{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden}
+  .logo{width:34px;height:34px;border-radius:6px;display:block;flex:0 0 auto}
+  .ttl{font-size:13px;font-weight:700;line-height:1.3;color:#17231d}
+  .sub{font-size:12px;color:#4f6158;margin-top:2px}
+  .list{border:1px solid #cddad3;border-radius:8px;overflow:hidden}
   .row{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:6px 10px}
-  .row+.row{border-top:1px solid #f1f5f9}
-  .row:nth-child(even){background:#f8fafc}
-  .lab{font-size:11px;font-weight:600;color:#334155}
+  .row+.row{border-top:1px solid #e9efeb}
+  .row:nth-child(even){background:#f4f7f5}
+  .lab{font-size:12px;font-weight:700;color:#17231d}
   .seg{display:inline-flex;gap:3px}
-  .seg button{width:26px;height:26px;border-radius:7px;border:1px solid #e2e8f0;background:#fff;color:#64748b;font-weight:700;font-size:12px;cursor:pointer;-webkit-appearance:none;appearance:none;transition:background .12s,color .12s,border-color .12s,box-shadow .12s}
-  .seg button:hover{border-color:#6ee7b7;color:#059669}
-  .seg button.on{background:linear-gradient(135deg,#059669,#0d9488);border-color:transparent;color:#fff;box-shadow:0 2px 6px rgba(5,150,105,.35)}
+  .seg button{width:26px;height:26px;border-radius:6px;border:1px solid #cddad3;background:#fff;color:#4f6158;font-weight:700;font-size:12px;cursor:pointer;-webkit-appearance:none;appearance:none;transition:background .12s,color .12s,border-color .12s,box-shadow .12s}
+  .seg button:hover{border-color:#cddad3;color:#17543e}
+  .seg button.on{background:#17543e;border-color:transparent;color:#fff;}
   .out{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .card{border-radius:14px;padding:13px;text-align:center}
-  .c1{background:#ecfdf5;border:1px solid #a7f3d0}
-  .c2{background:#eff6ff;border:1px solid #bfdbfe}
-  .num{font-size:28px;font-weight:900;line-height:1}
-  .c1 .num{color:#047857}
-  .c2 .num{color:#1d4ed8}
-  .lbl{font-size:10px;font-weight:700;margin-top:6px;color:#475569}
-  .cta{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;text-align:center;background:linear-gradient(135deg,#059669,#0d9488);color:#fff;text-decoration:none;padding:12px;border-radius:12px;font-weight:800;font-size:12px;box-shadow:0 4px 12px rgba(5,150,105,.3)}
-  .cta:hover{filter:brightness(1.05)}
-  .pw{margin-top:10px;text-align:center;font-size:11px;color:#94a3b8}
-  .pw a{color:#059669;text-decoration:none;font-weight:700}
-  .note{margin-top:8px;text-align:center;font-size:10px;color:#94a3b8;line-height:1.5}
+  .card{border-radius:8px;padding:13px;text-align:center}
+  .c1{background:#f0f6f3;border:1px solid #cddad3}
+  .c2{background:#f0f6f3;border:1px solid #cddad3}
+  .num{font-size:28px;font-weight:700;line-height:1}
+  .c1 .num{color:#17543e}
+  .c2 .num{color:#17543e}
+  .lbl{font-size:12px;font-weight:700;margin-top:6px;color:#4f6158}
+  .cta{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;text-align:center;background:#17543e;color:#fff;text-decoration:none;padding:12px;border-radius:8px;font-weight:700;font-size:12px;}
+  .cta:hover{background:#123f2f}
+  .pw{margin-top:10px;text-align:center;font-size:12px;color:#4f6158}
+  .pw a{color:#17543e;text-decoration:none;font-weight:700}
+  .note{margin-top:8px;text-align:center;font-size:12px;color:#4f6158;line-height:1.5}
 </style>
 </head>
 <body>

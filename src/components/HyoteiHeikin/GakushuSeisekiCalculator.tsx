@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, RotateCcw, Plus, Trash2 } from 'lucide-react';
+import { RotateCcw, Plus, Trash2 } from '@/components/icons';
 
 import { track, funnel } from '@/lib/track';
 import { calcKyokaStatus, calcOverallStatus, toGaihyou, type Kamoku } from '@/lib/gakushu-seiseki';
@@ -38,14 +38,6 @@ function nextRowId(): string {
 function emptyRow(): Row {
   return { id: nextRowId(), kyoka: KYOKA_LIST[0], kamoku: '', gakunen: 1, hyotei: 3 };
 }
-
-const GAIHYOU_STYLE: Record<string, string> = {
-  A: 'text-red-700',
-  B: 'text-orange-700',
-  C: 'text-amber-700',
-  D: 'text-blue-700',
-  E: 'text-slate-600',
-};
 
 interface GakushuSeisekiCalculatorProps {
   onResult?: (overall: number | null) => void;
@@ -87,25 +79,22 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
   }, [overall, onResult]);
 
   return (
-    <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
-        <div className="flex items-center justify-between gap-3 flex-wrap">
-          <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Calculator className="h-5 w-5 text-emerald-600" />
-            科目ごとの評定を入力
-          </h2>
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+      <div className="border-b border-slate-200 px-5 py-4 md:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-xl font-bold text-slate-900">科目ごとの評定を入力</h2>
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center gap-1 rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 hover:bg-brand-50"
           >
-            <RotateCcw className="h-3.5 w-3.5" />
+            <RotateCcw className="h-4 w-4" />
             リセット
           </button>
         </div>
-        <p className="mt-2 text-xs text-slate-600">
+        <p className="mt-2 text-sm text-slate-600">
           教科・科目名・学年・評定（5段階）を入力してください。
-          <strong className="text-emerald-700">修得単位数は入力欄がありません</strong>
+          <strong className="font-bold text-brand-700">修得単位数は入力欄がありません</strong>
           （文部科学省の計算例では単位数の大小にかかわらず評定数1として数えるため。詳しくは下記の「なぜ単位数を入れないのか」参照）。
         </p>
       </div>
@@ -115,12 +104,12 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
           {rows.map((row) => (
             <div
               key={row.id}
-              className="grid grid-cols-1 gap-2 rounded-xl border border-slate-100 bg-slate-50 p-3 sm:grid-cols-[1fr_1fr_auto_auto_auto] sm:items-center"
+              className="grid grid-cols-1 gap-2 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[1fr_1fr_auto_auto_auto] md:items-center"
             >
               <select
                 value={row.kyoka}
                 onChange={(e) => updateRow(row.id, { kyoka: e.target.value })}
-                className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm"
+                className="h-11 rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
                 aria-label="教科"
               >
                 {KYOKA_LIST.map((k) => (
@@ -134,13 +123,13 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
                 value={row.kamoku}
                 onChange={(e) => updateRow(row.id, { kamoku: e.target.value })}
                 placeholder="科目名（例: 物理基礎）"
-                className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm"
+                className="h-11 rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
                 aria-label="科目名"
               />
               <select
                 value={row.gakunen}
                 onChange={(e) => updateRow(row.id, { gakunen: Number(e.target.value) as Kamoku['gakunen'] })}
-                className="rounded-lg border border-slate-200 bg-white px-2 py-2 text-sm"
+                className="h-11 rounded border border-slate-300 bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
                 aria-label="学年"
               >
                 {GAKUNEN_LIST.map((g) => (
@@ -149,16 +138,17 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
                   </option>
                 ))}
               </select>
-              <div className="flex gap-1 justify-center">
+              <div className="flex justify-center gap-1">
                 {RATING_OPTIONS.map((r) => (
                   <button
                     key={r}
                     type="button"
                     onClick={() => updateRow(row.id, { hyotei: r })}
-                    className={`h-9 w-9 rounded-lg text-sm font-bold transition-all ${
+                    aria-pressed={row.hyotei === r}
+                    className={`h-11 w-11 rounded border text-base font-bold tabular-nums transition-colors ${
                       row.hyotei === r
-                        ? 'bg-emerald-600 text-white shadow-md scale-110'
-                        : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-emerald-50'
+                        ? 'border-brand-700 bg-brand-700 text-white'
+                        : 'border-slate-300 bg-white text-slate-700 hover:bg-brand-50'
                     }`}
                     aria-label={`評定${r}`}
                   >
@@ -169,10 +159,10 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
               <button
                 type="button"
                 onClick={() => removeRow(row.id)}
-                className="justify-self-end rounded-lg p-2 text-slate-400 hover:bg-red-50 hover:text-red-600 sm:justify-self-center"
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center justify-self-end rounded text-slate-600 hover:bg-red-50 hover:text-red-700 md:justify-self-center"
                 aria-label="この科目を削除"
               >
-                <Trash2 className="h-4 w-4" />
+                <Trash2 className="h-5 w-5" />
               </button>
             </div>
           ))}
@@ -180,38 +170,38 @@ export function GakushuSeisekiCalculator({ onResult }: GakushuSeisekiCalculatorP
         <button
           type="button"
           onClick={addRow}
-          className="mt-3 inline-flex items-center gap-1 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-100"
+          className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 hover:bg-brand-50"
         >
-          <Plus className="h-3.5 w-3.5" />
+          <Plus className="h-4 w-4" />
           科目を追加
         </button>
       </div>
 
       {overall !== null && gaihyou !== null && (
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200" role="status" aria-live="polite">
+        <div className="border-t border-slate-200 bg-brand-50 px-5 py-6 md:px-6" role="status" aria-live="polite">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="text-center">
-              <div className="text-xs font-bold text-slate-600 mb-1">全体の学習成績の状況</div>
-              <div className="text-5xl font-black text-emerald-700">{overall.toFixed(1)}</div>
-              <div className="text-xs text-slate-500 mt-1">/ 5.0（旧称：評定平均）</div>
+              <div className="mb-1 text-sm text-slate-600">全体の学習成績の状況</div>
+              <div className="text-5xl font-bold tabular-nums text-brand-700">{overall.toFixed(1)}</div>
+              <div className="mt-1 text-sm text-slate-600">/ 5.0（旧称：評定平均）</div>
             </div>
             <div className="text-center">
-              <div className="text-xs font-bold text-slate-600 mb-1">学習成績概評</div>
-              <div className={`text-5xl font-black ${GAIHYOU_STYLE[gaihyou]}`}>{gaihyou}</div>
-              <div className="text-xs text-slate-500 mt-1">A〜Eの5段階</div>
+              <div className="mb-1 text-sm text-slate-600">学習成績概評</div>
+              <div className="text-5xl font-bold text-brand-700">{gaihyou}</div>
+              <div className="mt-1 text-sm text-slate-600">A〜Eの5段階</div>
             </div>
           </div>
 
           {Object.keys(kyokaStatus).length > 0 && (
             <div className="mt-5">
-              <div className="mb-2 text-xs font-bold text-slate-600">教科ごとの学習成績の状況</div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+              <div className="mb-2 text-sm font-bold text-slate-900">教科ごとの学習成績の状況</div>
+              <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+                <table className="w-full border-collapse text-sm">
                   <tbody>
                     {Object.entries(kyokaStatus).map(([kyoka, value]) => (
-                      <tr key={kyoka} className="odd:bg-white even:bg-emerald-50/40">
-                        <td className="border border-slate-200 px-3 py-1.5 font-bold text-slate-700">{kyoka}</td>
-                        <td className="border border-slate-200 px-3 py-1.5 text-right font-mono text-emerald-800">
+                      <tr key={kyoka} className="border-b border-slate-200 last:border-b-0">
+                        <td className="px-3 py-2 font-bold text-slate-900">{kyoka}</td>
+                        <td className="px-3 py-2 text-right font-bold tabular-nums text-slate-900">
                           {value.toFixed(1)}
                         </td>
                       </tr>

@@ -39,10 +39,10 @@ export const post: BlogPost = {
   <p>本記事では、中学生の保護者が「評定平均と推薦入試」について最低限知っておくべき知識と、家庭で子どもをサポートするための具体的なアクションを、2026年度（令和8年度）入試に対応した最新情報で徹底解説します。</p>
 </div>
 
-<div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 16px;">
-  <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #92400e;">📊 子どもの評定平均、把握できていますか？</p>
-  <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #78350f; line-height: 1.6;">通知表の9教科の評定を入れるだけで、評定平均と素内申を瞬時に算出。志望校の出願基準と現状のギャップを家族で共有しましょう。</p>
-  <p style="margin: 0;"><a href="/hyotei-heikin" style="display: inline-block; padding: 0.5rem 1.25rem; background: #d97706; color: #fff; font-weight: 700; border-radius: 9999px; text-decoration: none;">▶ 評定平均を計算する（無料）</a></p>
+<div class="cta-box" style="margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: #f0f6f3; border: 1px solid #cddad3; border-radius: 8px;">
+  <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #17231d;">子どもの評定平均、把握できていますか？</p>
+  <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #4f6158; line-height: 1.6;">通知表の9教科の評定を入れるだけで、評定平均と素内申を瞬時に算出。志望校の出願基準と現状のギャップを家族で共有しましょう。</p>
+  <p style="margin: 0;"><a href="/hyotei-heikin" style="display: inline-block; padding: 0.5rem 1.25rem; background: #17543e; color: #fff; font-weight: 700; border-radius: 6px; text-decoration: none;">▶ 評定平均を計算する（無料）</a></p>
 </div>
 
 <hr>

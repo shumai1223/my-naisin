@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, Network, HelpCircle, MapPin, Info } from 'lucide-react';
+import { ChevronRight, Home } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -36,19 +36,17 @@ export const metadata: Metadata = {
   alternates: { canonical: `${BASE}/total-score` },
 };
 
-function PrefCard({ href, name, term, kind }: { href: string; name: string; term: string; kind: string }) {
-  const calc = kind === 'calculator';
+function PrefCard({ href, name, term }: { href: string; name: string; term: string; kind: string }) {
   return (
     <Link
       href={href}
-      className="flex items-center justify-between gap-2 rounded-xl border bg-white p-4 shadow-sm transition-all hover:shadow-md"
-      style={{ borderColor: calc ? '#bfdbfe' : '#ddd6fe' }}
+      className="flex min-h-[44px] items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-brand-50"
     >
       <div className="min-w-0">
-        <div className="font-bold text-slate-800">{name}</div>
-        <div className="truncate text-xs text-slate-500">{term}</div>
+        <div className="font-bold text-slate-900">{name}</div>
+        <div className="truncate text-xs text-slate-600">{term}</div>
       </div>
-      <ChevronRight className={`h-4 w-4 shrink-0 ${calc ? 'text-blue-400' : 'text-violet-400'}`} />
+      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
     </Link>
   );
 }
@@ -82,30 +80,27 @@ export default function TotalScoreHubPage() {
         }}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-5xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">都道府県別 総合得点の仕組み</span>
+            <span className="text-slate-900">都道府県別 総合得点の仕組み</span>
           </nav>
 
-          {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-violet-700 text-white shadow-xl">
-              <MapPin className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          {/* 頭: h1 → メタ行（年度）→ 結論の段落 */}
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               都道府県別 公立高校 総合得点・合否の仕組み
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-700">
+            <p className="mt-2 text-sm text-slate-600">
               全{HUB_ALL.length}都道府県・令和8年度（2026年度）入試対応
-            </div>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               公立高校入試の合否は、内申点（調査書点）と当日の学力検査をどう合わせるかで決まります。
               <br />
               その方法は都道府県ごとに大きく異なります。あなたの県を選んで、総合得点の計算や合否の仕組みを確認してください。
@@ -113,52 +108,48 @@ export default function TotalScoreHubPage() {
           </header>
 
           {/* 概要 */}
-          <section className="mb-8 rounded-2xl border border-blue-100 bg-blue-50/40 p-6">
-            <p className="leading-loose text-slate-700">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <p className="text-base leading-[1.8] text-slate-900">
               内申点と当日点を単純に足し算できる県もあれば、相関図・相関表・割合方式・学校別比重・段階選抜など、
               足し算では合否が出ない県も多くあります。当サイトでは、満点・配点・換算式が一次情報で確認できる県には
-              <strong className="text-blue-700">自動計算ツール</strong>を、足し算で出ない県には
-              <strong className="text-violet-700">仕組みの正確な解説</strong>を用意しています。
+              <strong>自動計算ツール</strong>を、足し算で出ない県には
+              <strong>仕組みの正確な解説</strong>を用意しています。
               すべて県教育委員会の令和8年度（2026年度）入試要項に準拠し、学校別の合格ボーダーは扱いません。
             </p>
           </section>
 
           {/* 主要6都府県クイックアクセス（ZZ-8b・内部リンク強化。専用計算機を持つ都府県への直接リンク） */}
-          <section className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <MapPin className="h-5 w-5 text-blue-600" />
-              主要都府県からすぐ計算する
-            </h2>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-              <Link href="/tokyo/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">主要都府県からすぐ計算する</h2>
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+              <Link href="/tokyo/total-score" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-3 py-2 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 東京都
               </Link>
-              <Link href="/osaka/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+              <Link href="/osaka/total-score" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-3 py-2 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 大阪府
               </Link>
-              <Link href="/aichi/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+              <Link href="/aichi/total-score" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-3 py-2 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 愛知県
               </Link>
-              <Link href="/saitama/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+              <Link href="/saitama/total-score" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-3 py-2 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 埼玉県
               </Link>
-              <Link href="/chiba/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+              <Link href="/chiba/total-score" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-3 py-2 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 千葉県
               </Link>
-              <Link href="/fukuoka/total-score" className="rounded-xl border border-blue-100 bg-blue-50/50 px-3 py-2 text-center text-sm font-bold text-blue-700 hover:bg-blue-100">
+              <Link href="/fukuoka/total-score" className="inline-flex min-h-[44px] items-center justify-center rounded border border-brand-700 bg-white px-3 py-2 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 福岡県
               </Link>
             </div>
-            <p className="mt-3 text-xs text-slate-400">その他の都道府県は下の一覧からお選びください。</p>
+            <p className="mt-3 text-sm text-slate-600">その他の都道府県は下の一覧からお選びください。</p>
           </section>
 
           {/* 計算機がある県 */}
           <section className="mb-10">
-            <h2 className="mb-1 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <Calculator className="h-6 w-6 text-blue-600" />
+            <h2 className="mb-1 text-xl font-bold text-slate-900">
               総合得点を計算できる県（{HUB_CALCULATORS.length}県）
             </h2>
-            <p className="mb-4 text-sm text-slate-500">
+            <p className="mb-4 text-sm text-slate-600">
               内申点と当日点を入力すると、総合得点を自動計算します。
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -170,11 +161,10 @@ export default function TotalScoreHubPage() {
 
           {/* 解説の県 */}
           <section className="mb-10">
-            <h2 className="mb-1 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <Network className="h-6 w-6 text-violet-600" />
+            <h2 className="mb-1 text-xl font-bold text-slate-900">
               合否の仕組みを解説している県（{HUB_EXPLAINERS.length}県）
             </h2>
-            <p className="mb-4 text-sm text-slate-500">
+            <p className="mb-4 text-sm text-slate-600">
               相関図・相関表・割合方式など、内申点と当日点の単純合計では合否が出ない県。配点と合否の決まり方を正確に解説します。
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -185,12 +175,9 @@ export default function TotalScoreHubPage() {
           </section>
 
           {/* なぜ2種類あるか */}
-          <section className="mb-10 rounded-2xl border-2 border-violet-200 bg-violet-50/50 p-6">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Info className="h-5 w-5 text-violet-500" />
-              「計算できる県」と「解説の県」がある理由
-            </h2>
-            <p className="leading-relaxed text-slate-700">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">「計算できる県」と「解説の県」がある理由</h2>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
               総合得点が内申点と当日点の足し算で再現できるのは、実は少数派です。多くの県は相関図（2軸グラフ）・相関表・
               割合方式・学校別比重・段階選抜などを使い、座標や区分線で合否を決めます。当サイトは、不正確な数字で
               受験生を誤解させないために、足し算で出せない県を無理に計算機にせず、仕組みを正直に解説する方針を取っています。
@@ -201,20 +188,17 @@ export default function TotalScoreHubPage() {
           <HensachiPromo className="mb-10" />
 
           {/* FAQ */}
-          <section className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-blue-500" />
-              よくある質問
-            </h2>
-            <div className="space-y-4">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="mt-1 divide-y divide-slate-200">
               {FAQS.map((f, i) => (
-                <div key={i} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                  <h3 className="mb-2 flex gap-2 text-sm font-bold text-slate-800">
-                    <span className="text-blue-600">Q.</span>
+                <div key={i} className="py-4">
+                  <h3 className="flex gap-2 text-[17px] font-bold text-slate-900">
+                    <span className="text-brand-700">Q.</span>
                     {f.q}
                   </h3>
-                  <p className="flex gap-2 text-sm leading-relaxed text-slate-600">
-                    <span className="font-bold text-emerald-600">A.</span>
+                  <p className="mt-2 flex gap-2 text-base leading-[1.8] text-slate-900">
+                    <span className="font-bold text-brand-700">A.</span>
                     <span>{f.a}</span>
                   </p>
                 </div>
@@ -223,43 +207,57 @@ export default function TotalScoreHubPage() {
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mb-10">
             <ParentLeadCTA placement="prefecture" />
           </div>
 
           {/* 関連リンク */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">内申点を計算する（都道府県別）</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">偏差値を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/hyotei-heikin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">評定平均を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/tools" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">すべての受験ツールを見る</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/total-score/mantenkan" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">得点を1000点満点に換算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/naishin-kakusa" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">都道府県別 内申点格差レポートを見る</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-              <Link href="/kakomon-jisaiten" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
-                <span className="text-sm font-medium text-slate-700">過去問の自己採点から総合得点を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
-              </Link>
-            </div>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">関連ツール</h2>
+            <ul className="mt-2 grid sm:grid-cols-2 sm:gap-x-8">
+              <li className="border-b border-slate-200">
+                <Link href="/" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  内申点を計算する（都道府県別）
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li className="border-b border-slate-200">
+                <Link href="/hensachi" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  偏差値を計算する
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li className="border-b border-slate-200">
+                <Link href="/hyotei-heikin" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  評定平均を計算する
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li className="border-b border-slate-200">
+                <Link href="/tools" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  すべての受験ツールを見る
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li className="border-b border-slate-200">
+                <Link href="/total-score/mantenkan" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  得点を1000点満点に換算する
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li className="border-b border-slate-200">
+                <Link href="/naishin-kakusa" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  都道府県別 内申点格差レポートを見る
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li className="border-b border-slate-200">
+                <Link href="/kakomon-jisaiten" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  過去問の自己採点から総合得点を計算する
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
         </div>
       </div>

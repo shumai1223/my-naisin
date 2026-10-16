@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, LineChart } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -69,25 +69,22 @@ export default function DashboardPage() {
       />
       <FAQPageSchema faqItems={DASHBOARD_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500 print:hidden">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600 print:hidden">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">成績の記録</span>
+            <span className="text-slate-900">成績の記録</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
-              <LineChart className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">成績の記録ダッシュボード</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">成績の記録ダッシュボード</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               計算した内申点を保存して、<strong>中1→中3の伸び</strong>を推移グラフで見える化。
               <br className="hidden sm:block" />
               学期ごとに記録すれば、そのまま三者面談の資料になります。
@@ -98,37 +95,46 @@ export default function DashboardPage() {
 
           {/* よくある質問（可視・FAQと一致） */}
           <section className="mt-10">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-3">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 rounded-lg border border-slate-200 bg-white px-4 md:px-5">
               {DASHBOARD_FAQS.map((faq) => (
-                <details
-                  key={faq.question}
-                  className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
-                >
-                  <summary className="cursor-pointer list-none font-bold text-slate-800">
+                <details key={faq.question}>
+                  <summary className="cursor-pointer py-3 text-base font-bold text-slate-900">
                     {faq.question}
                   </summary>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{faq.answer}</p>
+                  <p className="pb-4 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
           {/* 関連ツール（内部リンク） */}
-          <nav className="mt-10 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm print:hidden">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">関連ツール</h2>
-            <ul className="grid gap-2 text-sm sm:grid-cols-2">
+          <nav className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6 print:hidden">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">関連ツール</h2>
+            <ul className="grid gap-x-8 sm:grid-cols-2">
               <li>
-                <Link href="/" className="text-blue-600 hover:underline">内申点を計算する（全国対応）</Link>
+                <Link href="/" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">内申点を計算する（全国対応）</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
               </li>
               <li>
-                <Link href="/reverse" className="text-blue-600 hover:underline">志望校から逆算する</Link>
+                <Link href="/reverse" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">志望校から逆算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
               </li>
               <li>
-                <Link href="/hensachi" className="text-blue-600 hover:underline">偏差値を計算する</Link>
+                <Link href="/hensachi" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">偏差値を計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
               </li>
               <li>
-                <Link href="/hyotei-heikin" className="text-blue-600 hover:underline">評定平均を計算する</Link>
+                <Link href="/hyotei-heikin" className="flex min-h-[44px] items-center justify-between gap-3 border-b border-slate-200 py-2 text-brand-700 hover:text-brand-800">
+                  <span className="underline underline-offset-2">評定平均を計算する</span>
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
               </li>
             </ul>
           </nav>

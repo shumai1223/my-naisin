@@ -9,7 +9,7 @@
  * 同意していない・値が無い場合は何も送信しない（見せかけの機能にしない設計を維持）。
  */
 import { useEffect, useRef, useState } from 'react';
-import { BarChart3, ShieldCheck } from 'lucide-react';
+import { Check } from '@/components/icons';
 
 import { readStatsConsent, grantStatsConsent, revokeStatsConsent } from '@/lib/stats-consent';
 import { submitStatsResult } from '@/lib/stats-submit-client';
@@ -109,10 +109,10 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
 
   return (
     <div
-      className={`rounded-2xl border-2 p-4 shadow-sm transition-colors ${
+      className={`rounded-lg border p-4 transition-colors duration-100 ${
         granted
-          ? 'border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50'
-          : 'border-sky-300 bg-gradient-to-br from-sky-50 to-cyan-50'
+          ? 'border-brand-300 bg-brand-50'
+          : 'border-slate-200 bg-white'
       } ${className}`}
     >
       <label className="flex cursor-pointer items-start gap-3">
@@ -120,20 +120,15 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
           type="checkbox"
           checked={granted}
           onChange={handleToggle}
-          className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded border-sky-400 accent-sky-600"
+          className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded border-brand-400 accent-brand-700"
         />
         <span>
-          <span className="flex items-center gap-2 text-[15px] font-bold text-slate-900">
-            <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${granted ? 'bg-emerald-100' : 'bg-sky-100'}`}>
-              <BarChart3 className={`h-4 w-4 ${granted ? 'text-emerald-600' : 'text-sky-600'}`} />
-            </span>
-            {heading}
-          </span>
-          <span className="mt-1.5 block text-xs leading-relaxed text-slate-600">
+          <span className="block text-base font-bold text-slate-900">{heading}</span>
+          <span className="mt-1.5 block text-sm leading-relaxed text-slate-600">
             {body ?? (
               <>
                 協力が増えるほど、あなたと同じ都道府県・学年の分布データが正確になります。送られるのは
-                <strong className="text-slate-800">計算結果の数値のみ</strong>
+                <strong className="font-bold text-slate-900">計算結果の数値のみ</strong>
                 ——氏名など個人を特定できる情報は一切収集しません。同意はいつでも撤回できます。
               </>
             )}
@@ -141,8 +136,8 @@ export function StatsOptIn({ className = '', metric, value, maxValue, prefecture
         </span>
       </label>
       {granted && consentedAt && (
-        <p className="mt-2 flex items-center gap-1 text-xs font-medium text-emerald-700">
-          <ShieldCheck className="h-4 w-4" />
+        <p className="mt-2 flex items-center gap-1.5 text-sm text-brand-700">
+          <Check className="h-4 w-4 shrink-0" />
           ご協力ありがとうございます（{new Date(consentedAt).toLocaleDateString('ja-JP')}に同意済み）
         </p>
       )}

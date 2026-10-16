@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ChevronRightSquare, Map as MapIcon } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -83,118 +83,130 @@ export default function NaishinMapPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-indigo-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/naishin-kakusa" className="hover:text-indigo-600">
+            <Link href="/naishin-kakusa" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">
               内申点格差レポート
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">内申点の日本地図</span>
+            <span className="text-slate-900">内申点の日本地図</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-700 text-white shadow-xl">
-              <MapIcon className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          {/* 頭: h1 → メタ行（出典・最終更新）→ 結論の段落 */}
+          <header>
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               内申点の日本地図
             </h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+            <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-600">
+              <span>出典：各都道府県教育委員会の公式発表（入学者選抜実施要項・実施要領）</span>
+              <span>最終更新 2026年7月20日</span>
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               47都道府県の内申点の重み付けを、色分けされた日本地図で一目比較。
               各都道府県をタップすると、その県の詳しい解説に移動します。
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">都道府県別マップ</h2>
-            <NaishinMapGrid />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">都道府県別マップ</h2>
+            <div className="mt-4">
+              <NaishinMapGrid />
+            </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">この地図の読み方</h2>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">この地図の読み方</h2>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
               上の指標切替ボタンで「実技傾斜」「中3偏重度」「満点」の3つを切り替えられます。
               いずれも47都道府県すべての実測値を5段階の濃淡で色分けしており、色が濃いほど値が大きいことを表します。
               地図は実際の都道府県境の形をもとにしていますが、離島・境界線の細部までは再現していない簡略化データです。
               指標ごとの詳しい分析（実技傾斜がなぜ鹿児島県で突出しているか等）は
-              <Link href="/naishin-kakusa" className="font-bold text-indigo-700 hover:underline">
+              <Link href="/naishin-kakusa" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 内申点格差レポート
               </Link>
               で解説しています。
             </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">自分の県の内申点を計算する</h2>
-            <p className="mb-4 text-xs text-slate-500">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">自分の県の内申点を計算する</h2>
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               47都道府県すべてで、実際の成績を入れて内申点を計算できます。
             </p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+            <ul className="mt-3 grid grid-cols-2 gap-x-4 sm:grid-cols-3 md:grid-cols-4">
               {PREFECTURES.map((pref) => (
-                <Link
-                  key={pref.code}
-                  href={`/${pref.code}/naishin`}
-                  className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm font-medium text-indigo-800 shadow-sm transition-colors hover:bg-indigo-50 hover:text-indigo-900"
-                >
-                  <span className="truncate">{pref.name}</span>
-                  <ChevronRightSquare className="h-3 w-3 shrink-0 opacity-60" />
-                </Link>
+                <li key={pref.code}>
+                  <Link
+                    href={`/${pref.code}/naishin`}
+                    className="flex min-h-[44px] items-center text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                  >
+                    {pref.name}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link
-                href="/naishin-kakusa"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
-              >
-                内申点格差レポートを読む
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link
-                href="/total-score"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
-              >
-                都道府県別の総合得点の仕組みを見る
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link
-                href="/developers"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
-              >
-                このデータをAPIで使う
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link
-                href="/press"
-                className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/50"
-              >
-                取材・掲載についてのご案内
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="mt-2 divide-y divide-slate-200">
+              <li>
+                <Link
+                  href="/naishin-kakusa"
+                  className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline"
+                >
+                  内申点格差レポートを読む
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/total-score"
+                  className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline"
+                >
+                  都道府県別の総合得点の仕組みを見る
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/developers"
+                  className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline"
+                >
+                  このデータをAPIで使う
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/press"
+                  className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline"
+                >
+                  取材・掲載についてのご案内
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="prefecture" />
           </div>
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="mt-1 divide-y divide-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

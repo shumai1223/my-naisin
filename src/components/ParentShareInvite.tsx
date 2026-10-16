@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { MessageCircle, Share2, Check } from 'lucide-react';
+import { MessageCircle, Share2, Check } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -93,8 +93,8 @@ export function ParentShareInvite({
   const hasCard = isNum(shareCtx.max);
 
   return (
-    <section className={`rounded-2xl border border-slate-200 bg-slate-50/70 p-4 md:p-5 ${className}`}>
-      <p className="mb-3 text-sm leading-relaxed text-slate-600">
+    <section className={`rounded-lg border border-slate-200 bg-white p-4 md:p-5 ${className}`}>
+      <p className="mb-3 text-base leading-[1.8] text-slate-900">
         この結果は、おうちの人に共有できます。保護者向けのLINEでは、費用や進路の情報もお届けしています。
       </p>
       <div className="grid gap-2 sm:grid-cols-2">
@@ -104,7 +104,7 @@ export function ParentShareInvite({
           <button
             type="button"
             onClick={onPlainShare}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700 transition-all hover:border-emerald-300 hover:bg-emerald-100"
+            className="inline-flex w-full items-center justify-center gap-2 rounded border border-brand-700 bg-white px-4 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50"
           >
             {copied ? (
               <>
@@ -124,7 +124,7 @@ export function ParentShareInvite({
           target="_blank"
           rel="noopener noreferrer"
           onClick={onLineClick}
-          className="flex items-center justify-center gap-2 rounded-xl border-2 border-[#06C755] bg-[#06C755] px-4 py-3 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md active:scale-[0.99]"
+          className="flex items-center justify-center gap-2 rounded bg-brand-700 px-4 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800"
         >
           <MessageCircle className="h-4 w-4" />
           保護者向けLINEに登録する

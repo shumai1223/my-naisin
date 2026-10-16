@@ -2,11 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import {
-  Calculator,
-  ChevronRight,
-  Sparkles
-} from 'lucide-react';
+import { ChevronRight } from '@/components/icons';
 
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { calculateMaxScore, calculateTotalScore, calculatePercent, getRankForPercent, encodeScoresQuery } from '@/lib/utils';
@@ -72,49 +68,44 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
   };
 
   return (
-    <section className="rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 p-6 shadow-lg">
-      <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg">
-          <Sparkles className="h-6 w-6" />
-        </div>
-        <div>
-          <h2 className="text-xl font-bold text-slate-800">
-            {prefectureName}の内申点を計算する
-          </h2>
-          <p className="text-sm text-slate-500">
-            下記に成績を入力すると、{maxScore}点満点で計算されます
-          </p>
-        </div>
-      </div>
+    <div className="space-y-6">
+      <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+        <h2 className="text-xl font-bold text-slate-900">
+          {prefectureName}の内申点を計算する
+        </h2>
+        <p className="mt-1 text-sm text-slate-600">
+          下記に成績を入力すると、{maxScore}点満点で計算されます
+        </p>
 
-      <div className="rounded-xl bg-white p-4 shadow-sm">
-        <InputForm
-          prefectureCode={prefectureCode}
-          scores={scores}
-          onChange={handleScoreChange}
-          maxGrade={5}
-        />
-        
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={handleCalculate}
-            className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-3 text-lg font-bold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105"
-          >
-            内申点を計算する
-          </button>
+        <div className="mt-5">
+          <InputForm
+            prefectureCode={prefectureCode}
+            scores={scores}
+            onChange={handleScoreChange}
+            maxGrade={5}
+          />
+
+          <div className="mt-6 flex justify-center">
+            <button
+              onClick={handleCalculate}
+              className="inline-flex min-h-[44px] w-full items-center justify-center rounded bg-brand-700 px-8 py-3 text-base font-bold text-white transition-colors duration-100 hover:bg-brand-800 sm:w-auto"
+            >
+              内申点を計算する
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
 
       {showResult && (
-        <div id="result" className="mt-6 rounded-xl bg-white p-6 shadow-sm" role="status" aria-live="polite">
-          <h3 className="mb-4 text-center text-lg font-bold text-slate-800">
+        <div id="result" className="rounded-lg border border-slate-200 bg-white p-5 md:p-6" role="status" aria-live="polite">
+          <h3 className="mb-4 text-center text-[17px] font-bold text-slate-900">
             あなたの{prefectureName}での内申点
           </h3>
           <div className="flex flex-col items-center gap-6 md:flex-row md:justify-center">
             <ScoreGauge percent={percent} total={total} max={max} />
             <div className="text-center md:text-left">
-              <div className="text-4xl font-bold text-blue-600">{total}点</div>
-              <div className="text-sm text-slate-500">/ {max}点満点（達成率 {percent}%）</div>
+              <div className="text-4xl font-bold tabular-nums text-brand-700">{total}点</div>
+              <div className="text-sm tabular-nums text-slate-600">/ {max}点満点（達成率 {percent}%）</div>
               <div className="mt-2">
                 <RankCard result={{ prefectureCode, total, max, percent, rank }} />
               </div>
@@ -122,55 +113,53 @@ export function InteractiveCalculator({ prefectureCode, prefectureName, maxScore
           </div>
 
           {prefectureCode === 'kanagawa' && (
-            <div className="mt-4 rounded-xl border border-indigo-200 bg-indigo-50 p-4">
-              <div className="text-sm font-bold text-indigo-700">A（評定合計）と a値</div>
-              <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-slate-700">
+            <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+              <div className="text-sm font-bold text-slate-900">A（評定合計）と a値</div>
+              <div className="mt-2 flex flex-wrap items-center gap-4 text-sm tabular-nums text-slate-900">
                 <span>A（評定合計）: <strong>{total}点</strong></span>
                 <span>a値（100点換算）: <strong>{Math.round((total / max) * 100)}点</strong></span>
               </div>
-              <p className="mt-2 text-xs text-slate-500">a値はAを100点満点に換算した値です。</p>
+              <p className="mt-2 text-sm text-slate-600">a値はAを100点満点に換算した値です。</p>
             </div>
           )}
-          
+
           {/* 2026-08-08 Cowork実地監査: 直下のNextActionButtonsの「志望校配点で逆算する」ボタンと
               遷移先(/reverse?pref=X&current=Y)が完全に重複していた「逆算機能への誘導」カードを削除。
               結果画面に逆算への導線が3つ連続で並び、うち2つの遷移先がほぼ同じという指摘への対応。 */}
-          <NextActionButtons
-            prefectureCode={prefectureCode}
-            scores={scores}
-            totalScore={total}
-            maxScore={max}
-          />
+          <div className="mt-4">
+            <NextActionButtons
+              prefectureCode={prefectureCode}
+              scores={scores}
+              totalScore={total}
+              maxScore={max}
+            />
+          </div>
 
-          <PDFExportButton 
-            prefectureCode={prefectureCode}
-            scores={scores}
-            totalScore={total}
-            maxScore={max}
-          />
+          <div className="mt-4">
+            <PDFExportButton
+              prefectureCode={prefectureCode}
+              scores={scores}
+              totalScore={total}
+              maxScore={max}
+            />
+          </div>
 
-          <div className="mt-4 rounded-xl border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-5">
-            <div className="flex items-start gap-3">
-              <Sparkles className="h-6 w-6 flex-shrink-0 text-blue-600 mt-1" />
-              <div className="flex-1">
-                <h4 className="mb-2 font-bold text-slate-800">さらに詳しい分析をご希望の方へ</h4>
-                <p className="mb-3 text-sm leading-relaxed text-slate-600">
-                  メインページでは、成績推移グラフ、教科別の詳細分析、目標設定機能、勉強タイマーなど、より充実した機能をご利用いただけます。
-                  {prefectureName}・入力済みの評定はそのまま引き継がれます。
-                </p>
-                <Link
-                  href={`/?pref=${prefectureCode}&scores=${encodeScoresQuery(scores)}`}
-                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
-                >
-                  <Calculator className="h-4 w-4" />
-                  詳細な分析・計算はこちら
-                  <ChevronRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
+          <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-5">
+            <h4 className="mb-2 text-base font-bold text-slate-900">さらに詳しい分析をご希望の方へ</h4>
+            <p className="mb-4 text-sm leading-[1.8] text-slate-700">
+              メインページでは、成績推移グラフ、教科別の詳細分析、目標設定機能、勉強タイマーなど、より充実した機能をご利用いただけます。
+              {prefectureName}・入力済みの評定はそのまま引き継がれます。
+            </p>
+            <Link
+              href={`/?pref=${prefectureCode}&scores=${encodeScoresQuery(scores)}`}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors duration-100 hover:bg-brand-800"
+            >
+              詳細な分析・計算はこちら
+              <ChevronRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 }

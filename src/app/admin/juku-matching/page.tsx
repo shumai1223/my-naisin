@@ -37,18 +37,18 @@ function Gate() {
 
 function ReferralCard({ referral, token }: { referral: ReferralWithPartner; token: string }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="text-xs font-bold text-slate-500">
           #{referral.id} ・ {referral.jukuPartnerName}
         </span>
-        <span className="text-[11px] text-slate-400">{referral.sentAt}</span>
+        <span className="text-xs text-slate-400">{referral.sentAt}</span>
       </div>
       <p className="mt-2 text-sm text-slate-700">
         {referral.studentRef}（{referral.prefectureCode ?? '地域未指定'} ・ {referral.format ?? '形式未指定'}）
       </p>
       <div className="mt-2 flex items-center justify-between gap-2">
-        <span className="text-[11px] font-medium text-slate-500">status: {referral.status}</span>
+        <span className="text-xs text-slate-500">status: {referral.status}</span>
         <JukuReferralActions referralId={referral.id} currentStatus={referral.status} token={token} />
       </div>
     </div>
@@ -88,7 +88,7 @@ export default async function AdminJukuMatchingPage({
           <h2 className="mb-3 text-sm font-bold text-slate-700">提携塾（{partners.length}）</h2>
           <div className="space-y-2">
             {partners.map((p) => (
-              <div key={p.id} className="rounded-xl border border-slate-200 bg-white p-3 text-sm">
+              <div key={p.id} className="rounded-lg border border-slate-200 bg-white p-3 text-sm">
                 <div>
                   #{p.id} {p.name} ・ take-rate {(p.commissionRateBps / 100).toFixed(1)}% ・ status: {p.status}
                 </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Printer } from 'lucide-react';
+import { Printer } from '@/components/icons';
 
 import { Button } from '@/components/ui/Button';
 

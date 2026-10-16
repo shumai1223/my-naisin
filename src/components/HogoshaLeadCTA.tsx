@@ -14,6 +14,9 @@ import { parseParentShare } from '@/lib/share';
  *
  * useSearchParams を内包するため <Suspense> 必須。fallback には素の ParentLeadCTA を置けば
  * 静的HTML（SSG/SEO）にもCTAが残り、クライアントで地域版に差し替わる。
+ *
+ * 見出しは /hogosha の fallback（headingLevel="h2"）と同じ h2 にそろえる。既定の h3 のままだと、
+ * クライアントで差し替わったあとに h1 → h3 と階層が飛び、見出しの大きさも変わってしまう。
  */
 export function HogoshaLeadCTA({ className }: { className?: string }) {
   const sp = useSearchParams();
@@ -26,6 +29,11 @@ export function HogoshaLeadCTA({ className }: { className?: string }) {
   }, [sp]);
 
   return (
-    <ParentLeadCTA placement="parent-lp" prefectureCode={share.prefectureCode} className={className} />
+    <ParentLeadCTA
+      placement="parent-lp"
+      prefectureCode={share.prefectureCode}
+      className={className}
+      headingLevel="h2"
+    />
   );
 }

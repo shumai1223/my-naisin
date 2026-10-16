@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Search } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -74,25 +74,22 @@ export default function JukuShindanPage() {
       />
       <FAQPageSchema faqItems={SHINDAN_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">塾診断</span>
+            <span className="text-slate-900">塾診断</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
-              <Search className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">塾診断｜結果に合う塾を無料で診断</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">塾診断｜結果に合う塾を無料で診断</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               都道府県・学年・<strong>志望校の目標との差</strong>・希望する形態・お子さまの状況を選ぶだけ。
               提携中の塾・家庭教師の中から、<strong>条件に合うものだけ</strong>を表示します。無料体験・無料相談のみで、費用はかかりません。
             </p>
@@ -103,17 +100,17 @@ export default function JukuShindanPage() {
 
           {/* FAQ */}
           <section className="mt-10">
-            <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {SHINDAN_FAQS.map((faq) => (
-                <details key={faq.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                <details key={faq.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {faq.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{faq.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </details>
               ))}
             </div>

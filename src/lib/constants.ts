@@ -21,29 +21,29 @@ export const RANK_DEFINITIONS: ReadonlyArray<RankDefinition> = [
     code: 'S',
     minPercent: 85,
     maxPercent: 100,
-    title: '神（カミ）',
-    message: '強すぎ。ゲームなら最初からラスボス側。今すぐスクショ案件。'
+    title: '高い水準',
+    message: '高い水準です。この成績を維持していきましょう。'
   },
   {
     code: 'A',
     minPercent: 70,
     maxPercent: 84,
-    title: 'エース',
-    message: '十分強い！あとちょいでS、ここからが一番伸びるゾーン。'
+    title: '十分な水準',
+    message: 'Sランクまであと少しです。伸ばせる教科を探してみましょう。'
   },
   {
     code: 'B',
     minPercent: 55,
     maxPercent: 69,
-    title: '伸びしろ',
-    message: 'ここからが育成タイム。どれか1教科上げると世界変わる。'
+    title: '伸ばせる余地あり',
+    message: '伸びしろがあります。まず1教科、評定を上げることを目指しましょう。'
   },
   {
     code: 'C',
     minPercent: 0,
     maxPercent: 54,
-    title: 'もっと伸びる',
-    message: '大丈夫。今は"伸びしろ"が最大値。まずはBを目指そう！'
+    title: '伸びしろが大きい',
+    message: '今は伸ばせる余地が大きい段階です。まずBランクを目指しましょう。'
   }
 ];
 

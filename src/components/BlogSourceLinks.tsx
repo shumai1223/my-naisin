@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ExternalLink, FileText, GraduationCap, Shield } from 'lucide-react';
+import { ExternalLink } from '@/components/icons';
 
 interface BlogSourceLinksProps {
   prefectureCode?: string;
@@ -9,27 +9,25 @@ interface BlogSourceLinksProps {
   hasCalculationMethod?: boolean;
 }
 
-export function BlogSourceLinks({ 
-  prefectureCode, 
-  hasEvaluationPoints = false, 
-  hasCalculationMethod = false 
+export function BlogSourceLinks({
+  prefectureCode,
+  hasEvaluationPoints = false,
+  hasCalculationMethod = false
 }: BlogSourceLinksProps) {
   return (
-    <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
-      <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-blue-800">
-        <Shield className="h-5 w-5" />
+    <div className="rounded-lg border border-slate-200 bg-white p-6">
+      <h3 className="mb-4 text-xl font-bold text-slate-900">
         根拠リンク（一次情報）
       </h3>
-      
-      <div className="space-y-4">
+
+      <div className="space-y-6">
         {/* 教育委員会の公式資料 */}
         {prefectureCode && (
           <div>
-            <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-blue-700">
-              <FileText className="h-4 w-4" />
+            <h4 className="mb-2 text-sm font-bold text-slate-900">
               教育委員会の公式資料
             </h4>
-            <div className="space-y-2">
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               <SourceLink
                 href={getPrefectureOfficialUrl(prefectureCode)}
                 title={`${getPrefectureName(prefectureCode)}教育委員会 - 入学者選抜要綱`}
@@ -47,11 +45,10 @@ export function BlogSourceLinks({
         {/* 文部科学省の学習指導要領 */}
         {hasEvaluationPoints && (
           <div>
-            <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-blue-700">
-              <GraduationCap className="h-4 w-4" />
+            <h4 className="mb-2 text-sm font-bold text-slate-900">
               文部科学省の学習指導要領
             </h4>
-            <div className="space-y-2">
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               <SourceLink
                 href="https://www.mext.go.jp/a_menu/shotou/new-cs/1384661.htm"
                 title="文部科学省 - 中学校学習指導要領（平成29年告示）"
@@ -69,11 +66,10 @@ export function BlogSourceLinks({
         {/* 計算方法の根拠 */}
         {hasCalculationMethod && (
           <div>
-            <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-blue-700">
-              <FileText className="h-4 w-4" />
+            <h4 className="mb-2 text-sm font-bold text-slate-900">
               計算方法の根拠資料
             </h4>
-            <div className="space-y-2">
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               <SourceLink
                 href="https://www.mext.go.jp/a_menu/shotou/youryou/sinro.html"
                 title="文部科学省 - 内申点と調査書点の関係"
@@ -90,11 +86,10 @@ export function BlogSourceLinks({
 
         {/* 一般的な根拠 */}
         <div>
-          <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-blue-700">
-            <FileText className="h-4 w-4" />
+          <h4 className="mb-2 text-sm font-bold text-slate-900">
             一般的な根拠資料
           </h4>
-          <div className="space-y-2">
+          <div className="divide-y divide-slate-200 border-y border-slate-200">
             <SourceLink
               href="https://www.mext.go.jp/a_menu/shotou/youryou/index.html"
               title="文部科学省 - 学習指導要領ポータル"
@@ -109,8 +104,8 @@ export function BlogSourceLinks({
         </div>
       </div>
 
-      <div className="mt-4 rounded-lg border border-blue-300 bg-blue-100 p-3">
-        <p className="text-xs text-blue-700">
+      <div className="mt-6 rounded-lg border border-slate-200 bg-brand-50 p-4">
+        <p className="text-sm leading-[1.8] text-slate-900">
           <strong>注記：</strong>これらのリンクは国や教育委員会の公式資料（一次情報）です。
           制度は年度によって変更される場合があるため、最新情報は各公式サイトでご確認ください。
         </p>
@@ -125,13 +120,13 @@ function SourceLink({ href, title, description }: { href: string; title: string;
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="block rounded-lg border border-blue-200 bg-white p-3 transition-colors hover:border-blue-300 hover:bg-blue-50"
+      className="group block px-1 py-3 transition-colors duration-150 hover:bg-brand-50"
     >
       <div className="flex items-start gap-2">
-        <ExternalLink className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-500" />
+        <ExternalLink className="mt-1 h-4 w-4 shrink-0 text-slate-600" />
         <div className="min-w-0 flex-1">
-          <h5 className="text-sm font-medium text-blue-800 hover:text-blue-900">{title}</h5>
-          <p className="mt-1 text-xs text-blue-600">{description}</p>
+          <h5 className="text-sm font-bold text-brand-700 underline underline-offset-2 group-hover:text-brand-800">{title}</h5>
+          <p className="mt-1 text-sm text-slate-600">{description}</p>
         </div>
       </div>
     </a>

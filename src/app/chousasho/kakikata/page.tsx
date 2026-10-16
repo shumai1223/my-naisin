@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, PenLine, CalendarClock, HelpCircle, AlertCircle } from 'lucide-react';
+import { Home, ChevronRight, AlertCircle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -77,22 +77,19 @@ export default function ChousashoKakikataPage() {
         steps={STEPS}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600"><Home className="h-4 w-4" />ホーム</Link>
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline"><Home className="h-4 w-4" />ホーム</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/chousasho" className="hover:text-blue-600">調査書とは</Link>
+            <Link href="/chousasho" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">調査書とは</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">書き方・発行の流れ</span>
+            <span className="text-slate-900">書き方・発行の流れ</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl">
-              <PenLine className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">調査書の書き方・発行の流れ</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">調査書の書き方・発行の流れ</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               調査書を<strong>いつ・誰に・どう依頼するか</strong>を時系列で整理。出願で慌てないための準備手順と注意点です。
             </p>
           </header>
@@ -106,18 +103,15 @@ export default function ChousashoKakikataPage() {
           </AnswerBox>
 
           {/* 手順 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <CalendarClock className="h-5 w-5 text-blue-600" />
-              発行〜出願までの4ステップ
-            </h2>
-            <ol className="space-y-3">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">発行〜出願までの4ステップ</h2>
+            <ol className="divide-y divide-slate-200">
               {STEPS.map((s, i) => (
-                <li key={s.name} className="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-blue-600 text-xs font-black text-white">{i + 1}</span>
+                <li key={s.name} className="flex gap-3 py-4 first:pt-0 last:pb-0">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded border border-slate-300 text-sm font-bold tabular-nums text-slate-700">{i + 1}</span>
                   <span>
-                    <span className="block text-sm font-bold text-slate-800">{s.name}</span>
-                    <span className="mt-0.5 block text-sm leading-relaxed text-slate-600">{s.text}</span>
+                    <span className="block text-base font-bold leading-7 text-slate-900">{s.name}</span>
+                    <span className="mt-1 block text-base leading-[1.8] text-slate-900">{s.text}</span>
                   </span>
                 </li>
               ))}
@@ -125,24 +119,24 @@ export default function ChousashoKakikataPage() {
           </section>
 
           {/* 注意 */}
-          <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
-            <h2 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-900">
-              <AlertCircle className="h-4 w-4" />
+          <section className="mt-10 rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-900">
+            <h2 className="flex items-center gap-2 text-base font-bold">
+              <AlertCircle className="h-5 w-5 shrink-0" />
               よくある“出願直前のつまずき”
             </h2>
-            <ul className="space-y-1.5 text-sm leading-relaxed text-amber-900">
-              <li>・併願校の調査書を頼み忘れる → 出願校が決まった時点で必要枚数を学校に伝える。</li>
-              <li>・活動実績の申告漏れ → 検定・表彰・部活の役職は様式で早めに申告。</li>
-              <li>・発行に時間がかかる → 学校の締切と必要日数（数日〜1週間）を先に確認。</li>
-              <li>・学校ごと・高校ごとに様式や提出方法（Web/窓口/郵送）が違う → 募集要項を必ず確認。</li>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-[1.8]">
+              <li>併願校の調査書を頼み忘れる → 出願校が決まった時点で必要枚数を学校に伝える。</li>
+              <li>活動実績の申告漏れ → 検定・表彰・部活の役職は様式で早めに申告。</li>
+              <li>発行に時間がかかる → 学校の締切と必要日数（数日〜1週間）を先に確認。</li>
+              <li>学校ごと・高校ごとに様式や提出方法（Web/窓口/郵送）が違う → 募集要項を必ず確認。</li>
             </ul>
-            <p className="mt-2 text-xs text-amber-800">
+            <p className="mt-3 text-sm leading-[1.8]">
               ※ 具体的な締切・様式は中学校／受験校により異なります。必ず在籍校の進路指導と各高校の募集要項でご確認ください。
             </p>
           </section>
 
           {/* 回遊 */}
-          <section className="mt-8 grid gap-3 sm:grid-cols-2">
+          <section className="mt-10 grid gap-3 sm:grid-cols-2">
             {[
               { href: '/chousasho', title: '調査書とは？（記載内容・内申点との違い）' },
               { href: '/chousasho/hyoutei', title: '調査書と内申点・評定平均の連動' },
@@ -150,27 +144,27 @@ export default function ChousashoKakikataPage() {
               { href: '/mendan', title: '三者面談の準備（先生に聞くこと）' },
               { href: '/juken-schedule', title: '受験スケジュール・出願時期' },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm font-medium text-slate-700 shadow-sm transition-shadow hover:shadow-md">
+              <Link key={c.href} href={c.href} className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 transition-colors hover:bg-brand-50">
                 {c.title}
-                <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             ))}
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="home" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800"><HelpCircle className="h-5 w-5 text-blue-600" />よくある質問</h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" /></span>
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white">
+                  <summary className="cursor-pointer list-none p-4 text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex items-center justify-between gap-3">{f.question}<ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" /></span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="px-4 pb-4 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>

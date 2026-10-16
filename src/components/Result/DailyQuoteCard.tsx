@@ -1,8 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
-import { Quote, RefreshCw, Heart, Share2 } from 'lucide-react';
+import { RefreshCw, Heart, Share2 } from '@/components/icons';
 
 const QUOTES = [
   { text: '努力した者が全て報われるとは限らない。しかし、成功した者は皆すべからく努力している。', author: 'ベートーヴェン' },
@@ -64,59 +63,44 @@ export function DailyQuoteCard() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.15 }}
-      className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-50 shadow-sm overflow-hidden"
-    >
+    <div className="rounded-lg border border-slate-200 bg-white">
       <div className="p-5">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600">
-              <Quote className="h-4 w-4 text-white" />
-            </div>
-            <span className="text-sm font-bold text-slate-700">💭 今日の名言</span>
-          </div>
-          <div className="flex items-center gap-1">
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <span className="text-sm font-bold text-slate-900">今日の名言</span>
+          <div className="flex items-center">
             <button
               onClick={() => setLiked(!liked)}
-              className={`p-2 rounded-full transition-all ${liked ? 'text-rose-500 bg-rose-50' : 'text-slate-400 hover:text-rose-400 hover:bg-slate-100'}`}
+              aria-label="いいね"
+              aria-pressed={liked}
+              className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded transition-colors duration-100 hover:bg-slate-100 ${liked ? 'text-brand-700' : 'text-slate-600 hover:text-slate-900'}`}
             >
-              <Heart className={`h-4 w-4 ${liked ? 'fill-current' : ''}`} />
+              <Heart className="h-5 w-5" weight={liked ? 'fill' : 'regular'} />
             </button>
             <button
               onClick={shareQuote}
-              className="p-2 rounded-full text-slate-400 hover:text-blue-500 hover:bg-slate-100 transition-all"
+              aria-label="この名言を共有"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded text-slate-600 transition-colors duration-100 hover:bg-slate-100 hover:text-slate-900"
             >
-              <Share2 className="h-4 w-4" />
+              <Share2 className="h-5 w-5" />
             </button>
             <button
               onClick={refreshQuote}
-              className="p-2 rounded-full text-slate-400 hover:text-violet-500 hover:bg-slate-100 transition-all"
+              aria-label="別の名言を表示"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded text-slate-600 transition-colors duration-100 hover:bg-slate-100 hover:text-slate-900"
             >
-              <RefreshCw className={`h-4 w-4 transition-transform ${showRefresh ? 'rotate-180' : ''}`} />
+              <RefreshCw className={`h-5 w-5 transition-transform duration-150 ${showRefresh ? 'rotate-180' : ''}`} />
             </button>
           </div>
         </div>
 
-        <motion.div
-          key={quote.text}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative"
-        >
-          <div className="absolute -left-1 -top-2 text-4xl text-violet-200 font-serif">&quot;</div>
-          <p className="text-sm text-slate-700 leading-relaxed pl-4 pr-2 italic">
-            {quote.text}
-          </p>
-          <div className="absolute -right-1 bottom-0 text-4xl text-violet-200 font-serif rotate-180">&quot;</div>
-        </motion.div>
+        <p className="text-base leading-[1.8] text-slate-900">
+          {quote.text}
+        </p>
 
-        <div className="mt-3 text-right">
-          <span className="text-xs text-slate-500">— {quote.author}</span>
+        <div className="mt-2 text-right">
+          <span className="text-sm text-slate-600">— {quote.author}</span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

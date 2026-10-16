@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ArrowLeftRight, ChevronRightSquare } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { WebApplicationSchema } from '@/components/StructuredData/WebApplicationSchema';
@@ -58,34 +58,31 @@ export default function TotalScoreMantenkanPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav aria-label="パンくず" className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/total-score" className="hover:text-blue-600">都道府県別 総合得点の仕組み</Link>
+            <Link href="/total-score" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">都道府県別 総合得点の仕組み</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">満点換算</span>
+            <span className="text-slate-900">満点換算</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl">
-              <ArrowLeftRight className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">得点を100点・1000点など好きな満点に換算する計算機</h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">得点を100点・1000点など好きな満点に換算する計算機</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               内申点・学力検査・模試など、<strong>満点がバラバラな得点</strong>を100点満点・1000点満点（または任意の満点）にそろえて比較できます。
             </p>
           </header>
 
           <ScaleScoreCalculator />
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">なぜ「1000点満点」に換算するの？</h2>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">なぜ「1000点満点」に換算するの？</h2>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
               満点が違う得点どうしは、そのままでは大小を比べられません。そこで「得点 ÷ 満点 × 1000」の比例計算で、
               どんな満点の得点も同じ1000点満点の物差しに揃えます。実際に新潟県の公立高校一般選抜では、
               満点135点の調査書（内申）と満点500点の学力検査を、それぞれ1000点満点に換算してから
@@ -97,27 +94,31 @@ export default function TotalScoreMantenkanPage() {
               NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
           <AdUnit unit="RESULT_BELOW" />
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/total-score" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                都道府県別 総合得点の仕組みを見る
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-              <Link href="/hensachi/mantenkan" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50/50">
-                満点変換つき偏差値計算はこちら
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
-              </Link>
-            </div>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">あわせて確認</h2>
+            <ul className="mt-2 divide-y divide-slate-200">
+              <li>
+                <Link href="/total-score" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  都道府県別 総合得点の仕組みを見る
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/hensachi/mantenkan" className="flex min-h-[44px] items-center justify-between gap-2 py-3 font-bold text-brand-700 hover:text-brand-800 hover:underline">
+                  満点変換つき偏差値計算はこちら
+                  <ChevronRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </li>
+            </ul>
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="mt-1 divide-y divide-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

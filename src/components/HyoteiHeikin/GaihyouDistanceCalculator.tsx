@@ -1,19 +1,10 @@
 'use client';
 
 import * as React from 'react';
-import { Target } from 'lucide-react';
 
 import { track, funnel } from '@/lib/track';
 import { toGaihyou, type GakushuSeihyou } from '@/lib/gakushu-seiseki';
 import { calcRequiredAverageForTarget } from '@/lib/hyotei-heikin';
-
-const GAIHYOU_STYLE: Record<GakushuSeihyou, string> = {
-  A: 'text-red-700',
-  B: 'text-orange-700',
-  C: 'text-amber-700',
-  D: 'text-blue-700',
-  E: 'text-slate-600',
-};
 
 /** 1つ上の概評に上がるために必要な「全体の学習成績の状況」の下限値。既にAなら次はない。 */
 const NEXT_RANK: Record<GakushuSeihyou, { rank: GakushuSeihyou; threshold: number } | null> = {
@@ -62,16 +53,13 @@ export function GaihyouDistanceCalculator() {
   }, [valid, currentValue]);
 
   return (
-    <div className="rounded-2xl border-2 border-emerald-200 bg-white shadow-lg overflow-hidden">
-      <div className="border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4">
-        <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
-          <Target className="h-5 w-5 text-emerald-600" />
-          現在の全体の学習成績の状況を入力
-        </h2>
+    <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+      <div className="border-b border-slate-200 px-5 py-4 md:px-6">
+        <h2 className="text-xl font-bold text-slate-900">現在の全体の学習成績の状況を入力</h2>
       </div>
 
-      <div className="px-6 py-4">
-        <label className="mb-1 block text-xs font-bold text-slate-600">全体の学習成績の状況（1.0〜5.0）</label>
+      <div className="px-5 py-4 md:px-6">
+        <label className="mb-1 block text-sm font-bold text-slate-900">全体の学習成績の状況（1.0〜5.0）</label>
         <input
           type="number"
           inputMode="decimal"
@@ -82,28 +70,28 @@ export function GaihyouDistanceCalculator() {
           onChange={(e) => onChangeCurrent(e.target.value)}
           placeholder="例: 3.4"
           aria-label="全体の学習成績の状況"
-          className="w-full max-w-[10rem] rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+          className="h-11 w-full max-w-[10rem] rounded border border-slate-300 bg-white px-3 text-base tabular-nums focus-visible:outline-2 focus-visible:outline-brand-700"
         />
       </div>
 
       {valid && gaihyou && (
-        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 px-6 py-6 border-t-2 border-emerald-200" role="status" aria-live="polite">
+        <div className="border-t border-slate-200 bg-brand-50 px-5 py-6 md:px-6" role="status" aria-live="polite">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="text-center">
-              <div className="text-xs font-bold text-slate-600 mb-1">現在の学習成績概評</div>
-              <div className={`text-5xl font-black ${GAIHYOU_STYLE[gaihyou]}`}>{gaihyou}</div>
+              <div className="mb-1 text-sm text-slate-600">現在の学習成績概評</div>
+              <div className="text-5xl font-bold text-brand-700">{gaihyou}</div>
             </div>
             <div className="text-center">
               {next ? (
                 <>
-                  <div className="text-xs font-bold text-slate-600 mb-1">
+                  <div className="mb-1 text-sm text-slate-600">
                     {next.rank}まであと
                   </div>
-                  <div className="text-5xl font-black text-emerald-700">{distance !== null ? distance.toFixed(1) : '—'}</div>
-                  <div className="text-xs text-slate-500 mt-1">全体の学習成績の状況を上げる必要</div>
+                  <div className="text-5xl font-bold tabular-nums text-brand-700">{distance !== null ? distance.toFixed(1) : '—'}</div>
+                  <div className="mt-1 text-sm text-slate-600">全体の学習成績の状況を上げる必要</div>
                 </>
               ) : (
-                <div className="text-sm font-bold text-emerald-700">
+                <div className="text-base font-bold text-brand-700">
                   すでに最上位の概評Aです
                 </div>
               )}
@@ -111,11 +99,11 @@ export function GaihyouDistanceCalculator() {
           </div>
 
           {next && (
-            <div className="mt-6 rounded-xl border border-emerald-200 bg-white p-4">
-              <div className="mb-2 text-xs font-bold text-slate-600">残りの科目数から逆算する（任意）</div>
-              <div className="grid gap-2 sm:grid-cols-2">
+            <div className="mt-6 rounded-lg border border-slate-200 bg-white p-4">
+              <div className="mb-2 text-sm font-bold text-slate-900">残りの科目数から逆算する（任意）</div>
+              <div className="grid gap-3 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1 block text-[11px] text-slate-500">現在までの評定数</label>
+                  <label className="mb-1 block text-sm text-slate-600">現在までの評定数</label>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -124,11 +112,11 @@ export function GaihyouDistanceCalculator() {
                     onChange={(e) => setCurrentCount(e.target.value)}
                     placeholder="例: 20"
                     aria-label="現在までの評定数"
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+                    className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums focus-visible:outline-2 focus-visible:outline-brand-700"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-[11px] text-slate-500">残りの評価回数</label>
+                  <label className="mb-1 block text-sm text-slate-600">残りの評価回数</label>
                   <input
                     type="number"
                     inputMode="numeric"
@@ -137,23 +125,23 @@ export function GaihyouDistanceCalculator() {
                     onChange={(e) => setRemainingCount(e.target.value)}
                     placeholder="例: 10"
                     aria-label="残りの評価回数"
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm"
+                    className="h-11 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums focus-visible:outline-2 focus-visible:outline-brand-700"
                   />
                 </div>
               </div>
               {projection && (
                 <div className="mt-3 text-center">
                   {projection.alreadyAchieved ? (
-                    <div className="text-sm font-bold text-emerald-700">すでに{next.rank}に必要な水準に達しています</div>
+                    <div className="text-base font-bold text-brand-700">すでに{next.rank}に必要な水準に達しています</div>
                   ) : (
                     <>
-                      <div className="text-xs text-slate-600">
+                      <div className="text-sm text-slate-600">
                         {next.rank}（{next.threshold.toFixed(1)}以上）に届かせるには、残りの評価で平均
                       </div>
-                      <div className="text-3xl font-black text-emerald-700">
+                      <div className="text-3xl font-bold tabular-nums text-brand-700">
                         {projection.requiredAverageForRemaining.toFixed(2)}
                       </div>
-                      <div className="text-xs text-slate-600">
+                      <div className="text-sm text-slate-600">
                         が必要です{!projection.achievable && '（5段階評価では理論上届きません）'}
                       </div>
                     </>

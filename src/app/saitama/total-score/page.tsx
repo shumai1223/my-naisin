@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Calculator, ChevronRight, Home, BookOpen, AlertCircle } from 'lucide-react';
+import { ChevronRight, Home, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -98,126 +98,130 @@ export default function SaitamaTotalScorePage() {
       />
       <FAQPageSchema faqItems={SAITAMA_FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link
+              href="/"
+              className="inline-flex min-h-[44px] items-center gap-1 text-brand-700 underline underline-offset-2 hover:text-brand-800"
+            >
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/saitama" className="hover:text-blue-600">埼玉県</Link>
+            <Link
+              href="/saitama"
+              className="inline-flex min-h-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800"
+            >
+              埼玉県
+            </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">調査書点・学年比率計算</span>
+            <span className="text-slate-900">調査書点・学年比率計算</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-xl">
-              <Calculator className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               埼玉県公立高校 調査書点・学年比率 計算
             </h1>
-            <div className="mt-2 inline-block rounded-full bg-violet-100 px-3 py-1 text-xs font-bold text-violet-700">
-              学力500点＋調査書（学年比率）・2026年度入試対応
-            </div>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-2 text-sm text-slate-600">
+              学力500点＋調査書（学年比率）・2026年度入試対応 ／ 出典：
+              <a
+                href={SAITAMA_SOURCE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              >
+                埼玉県教育委員会
+              </a>
+            </p>
+            <p className="mt-3 max-w-2xl text-base leading-[1.8] text-slate-900">
               埼玉県公立高校入試は、学力検査（500点）と調査書点（中1〜中3の評定を学年比率で重み付け）の合計で決まります。<br />
               わかりにくい「学年比率」と各学年の比重を早見表で整理しました。
             </p>
           </header>
 
           {/* 仕組み */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <BookOpen className="h-5 w-5 text-violet-500" />
-              埼玉県の総合得点の内訳（約900点）
-            </h2>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-between rounded-xl border border-violet-200 bg-violet-50 px-4 py-3">
-                <span className="font-bold text-violet-800">① 学力検査（5教科×100）</span>
-                <span className="font-black text-violet-700">500点</span>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">埼玉県の総合得点の内訳（約900点）</h2>
+            <dl className="divide-y divide-slate-200 border-y border-slate-200 text-base">
+              <div className="flex items-center justify-between gap-4 py-3">
+                <dt className="font-bold text-slate-900">① 学力検査（5教科×100）</dt>
+                <dd className="shrink-0 font-bold tabular-nums text-slate-900">500点</dd>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-purple-200 bg-purple-50 px-4 py-3">
-                <span className="font-bold text-purple-800">② 調査書点（評定の学年比率換算）</span>
-                <span className="font-black text-purple-700">高校が設定</span>
+              <div className="flex items-center justify-between gap-4 py-3">
+                <dt className="font-bold text-slate-900">② 調査書点（評定の学年比率換算）</dt>
+                <dd className="shrink-0 font-bold text-slate-900">高校が設定</dd>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                <span className="font-bold text-slate-700">③ 特別活動等の記録（生徒会・部活・行事）</span>
-                <span className="font-black text-slate-600">高校が設定</span>
+              <div className="flex items-center justify-between gap-4 py-3">
+                <dt className="font-bold text-slate-900">③ 特別活動等の記録（生徒会・部活・行事）</dt>
+                <dd className="shrink-0 font-bold text-slate-900">高校が設定</dd>
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                <span className="font-bold text-slate-700">④ その他（英検などの資格・特技）・出欠</span>
-                <span className="font-black text-slate-600">高校が設定</span>
+              <div className="flex items-center justify-between gap-4 py-3">
+                <dt className="font-bold text-slate-900">④ その他（英検などの資格・特技）・出欠</dt>
+                <dd className="shrink-0 font-bold text-slate-900">高校が設定</dd>
               </div>
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+            </dl>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               特徴は<strong>調査書の「学年比率」</strong>。中1〜中3の評定（各9教科×5＝45点）を、中1：中2：中3＝「1：1：2」「1：1：3」「1：2：3」などの比率で重み付けします。<strong>多くの高校で中3の比重が最大</strong>です。
             </p>
           </section>
 
           {/* 学年比率 早見表 */}
-          <section className="mb-8 rounded-2xl border border-purple-100 bg-gradient-to-br from-purple-50/40 to-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-purple-500" />
-              学年比率 → 各学年の比重（％）早見表
-            </h2>
-            <p className="text-sm text-slate-600 leading-relaxed mb-4">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">学年比率 → 各学年の比重（％）早見表</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               「中3はどれくらい重いの？」を比重（％）で示しました。志望校の学年比率を当てはめると、どの学年の評定が合否に効くかが一目でわかります。
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-purple-600 text-white text-left">
-                    <th className="border border-purple-400 px-3 py-2 font-bold">学年比率（中1:中2:中3）</th>
-                    <th className="border border-purple-400 px-3 py-2 font-bold text-right">中1の比重</th>
-                    <th className="border border-purple-400 px-3 py-2 font-bold text-right">中2の比重</th>
-                    <th className="border border-purple-400 px-3 py-2 font-bold text-right">中3の比重</th>
+                  <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
+                    <th className="px-3 py-2 font-bold">学年比率（中1:中2:中3）</th>
+                    <th className="px-3 py-2 text-right font-bold">中1の比重</th>
+                    <th className="px-3 py-2 text-right font-bold">中2の比重</th>
+                    <th className="px-3 py-2 text-right font-bold">中3の比重</th>
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
+                <tbody className="text-slate-900">
                   {RATIO_PATTERNS.map((p) => {
                     const total = p.w[0] + p.w[1] + p.w[2];
                     return (
-                      <tr key={p.ratio} className="odd:bg-white even:bg-slate-50">
-                        <td className="border border-slate-200 px-3 py-2 font-bold">{p.ratio}</td>
-                        <td className="border border-slate-200 px-3 py-2 text-right">{pct(p.w[0], total)}</td>
-                        <td className="border border-slate-200 px-3 py-2 text-right">{pct(p.w[1], total)}</td>
-                        <td className="border border-slate-200 px-3 py-2 text-right font-bold text-purple-700">{pct(p.w[2], total)}</td>
+                      <tr key={p.ratio} className="border-b border-slate-200">
+                        <td className="px-3 py-2 font-bold tabular-nums">{p.ratio}</td>
+                        <td className="px-3 py-2 text-right tabular-nums">{pct(p.w[0], total)}</td>
+                        <td className="px-3 py-2 text-right tabular-nums">{pct(p.w[1], total)}</td>
+                        <td className="px-3 py-2 text-right font-bold tabular-nums">{pct(p.w[2], total)}</td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-xs text-slate-500">
+            <p className="mt-3 text-sm text-slate-600">
               ※ 比重＝その学年の重み÷重みの合計。例：1:1:3なら中3が60%を占めます。実際の調査書満点・配点は高校ごとに異なります。
             </p>
           </section>
 
           {/* 総合得点計算機・結果連動（S-3①） */}
-          <div className="mb-8">
+          <div className="mb-10">
             <SaitamaResultFlow />
           </div>
 
           {/* 計算例 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Calculator className="h-5 w-5 text-violet-500" />
-              評定の重み付けイメージ
-            </h2>
-            <div className="space-y-3 text-sm">
-              <div className="rounded-xl border border-violet-200 bg-violet-50 p-4">
-                <h3 className="font-bold text-violet-900 mb-1">例：中1=32・中2=34・中3=40（各45満点）</h3>
-                <ul className="text-violet-900 text-xs space-y-1 ml-4 list-disc">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">評定の重み付けイメージ</h2>
+            <div className="space-y-3">
+              <div className="rounded-lg border border-slate-200 bg-brand-50 p-4">
+                <h3 className="mb-2 text-[17px] font-bold text-slate-900">例：中1=32・中2=34・中3=40（各45満点）</h3>
+                <ul className="ml-4 list-disc space-y-1 text-sm leading-[1.8] text-slate-900">
                   <li>学年比率1:1:2：(32×1 ＋ 34×1 ＋ 40×2) ＝ <strong>146</strong>（重み合計4）→ 中3が約55%を占める</li>
                   <li>学年比率1:1:3：(32×1 ＋ 34×1 ＋ 40×3) ＝ <strong>186</strong>（重み合計5）→ 中3が約65%を占める</li>
                 </ul>
-                <p className="mt-2 text-[11px] text-violet-700">※ この加重合計を各高校が定める調査書満点に換算します（換算方法は高校により異なる）。</p>
+                <p className="mt-2 text-sm text-slate-600">※ この加重合計を各高校が定める調査書満点に換算します（換算方法は高校により異なる）。</p>
               </div>
-              <p className="text-xs text-slate-500 leading-relaxed">
+              <p className="text-base leading-[1.8] text-slate-900">
                 ポイントは「中3の伸びが最も効く」こと。学年比率が中3重視の高校ほど、中3での挽回が合否に直結します。
               </p>
             </div>
@@ -225,7 +229,7 @@ export default function SaitamaTotalScorePage() {
 
           {/* 保護者向けリード（旧Z会/サプリ¥1.5-5.4/clickブロックは低EVで撤去） */}
           <ParentLeadCTA
-            className="mb-8"
+            className="mb-10"
             placement="prefecture"
             heading="埼玉の志望校、学年比率に合った対策ができていますか？"
             body="志望校の学年比率で、どの学年の成績が効くかは変わります。お子さまに合った対策を、塾の無料体験で具体的に確認できます（費用はかかりません）。"
@@ -235,47 +239,48 @@ export default function SaitamaTotalScorePage() {
           />
 
           {/* よくある質問 */}
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-4">
               {SAITAMA_FAQS.map((faq, i) => (
                 <div key={i}>
-                  <div className="font-bold text-slate-800 text-sm">Q. {faq.question}</div>
-                  <p className="mt-1 text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
+                  <div className="font-bold text-slate-900">Q. {faq.question}</div>
+                  <p className="mt-1 text-base leading-[1.8] text-slate-900">{faq.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 注意 */}
-          <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4">
             <div className="flex items-start gap-2">
-              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-              <p className="text-xs text-amber-800 leading-relaxed">
-                埼玉県は学年比率・調査書の各項目の配点・学力検査と調査書の比率・第1次/第2次選抜の比率が高校・学科ごとに異なります。志望校の正確な選抜基準は<a href={SAITAMA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-amber-900 underline font-bold">埼玉県教育委員会の公式情報</a>でご確認ください。
+              <AlertTriangle className="mt-1 h-4 w-4 shrink-0 text-amber-900" />
+              <p className="text-sm leading-[1.8] text-amber-900">
+                <strong>注意：</strong>
+                埼玉県は学年比率・調査書の各項目の配点・学力検査と調査書の比率・第1次/第2次選抜の比率が高校・学科ごとに異なります。志望校の正確な選抜基準は<a href={SAITAMA_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-amber-900 underline underline-offset-2">埼玉県教育委員会の公式情報</a>でご確認ください。
               </p>
             </div>
           </div>
 
           {/* 関連リンク */}
-          <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">関連ツール・コンテンツ</h2>
+          <section>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">関連ツール・コンテンツ</h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/saitama/naishin" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">埼玉県の内申点を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/saitama/naishin" className="flex min-h-[44px] items-center justify-between rounded-lg border border-slate-200 bg-white p-4 hover:bg-brand-50">
+                <span className="text-base text-slate-900">埼玉県の内申点を計算する</span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
               </Link>
-              <Link href="/saitama" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">埼玉県の入試制度ガイド</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/saitama" className="flex min-h-[44px] items-center justify-between rounded-lg border border-slate-200 bg-white p-4 hover:bg-brand-50">
+                <span className="text-base text-slate-900">埼玉県の入試制度ガイド</span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">5教科の偏差値を計算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/hensachi" className="flex min-h-[44px] items-center justify-between rounded-lg border border-slate-200 bg-white p-4 hover:bg-brand-50">
+                <span className="text-base text-slate-900">5教科の偏差値を計算する</span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
               </Link>
-              <Link href="/reverse?pref=saitama" className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-sm font-medium text-slate-700">志望校から逆算する</span>
-                <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/reverse?pref=saitama" className="flex min-h-[44px] items-center justify-between rounded-lg border border-slate-200 bg-white p-4 hover:bg-brand-50">
+                <span className="text-base text-slate-900">志望校から逆算する</span>
+                <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
               </Link>
             </div>
           </section>

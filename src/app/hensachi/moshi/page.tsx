@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, BarChart3, Calculator, LineChart, User, ShieldCheck, Calendar, FileCheck, AlertTriangle, TrendingUp } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -57,147 +57,130 @@ export default function HensachiMoshiPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">模試の偏差値の見方</span>
+            <span className="text-slate-900">模試の偏差値の見方</span>
           </nav>
 
-          {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
-              <BarChart3 className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">模試の偏差値の見方</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          {/* Header: パンくず → h1 → メタ行（運営者・更新日・定義）→ 結論の段落 */}
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">模試の偏差値の見方</h1>
+            <ul className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600">
+              <li className="flex flex-wrap items-center gap-2">
+                監修・運営：ないしんパンダ
+                <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
+                  2026年度受験生
+                </span>
+              </li>
+              <li>最終更新：2026年6月12日</li>
+              <li>偏差値＝平均50・標準偏差10の正規分布</li>
+            </ul>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               「<strong>模試によって偏差値が違う</strong>」「<strong>回を重ねたら偏差値が下がった</strong>」——その理由と、
               偏差値の正しい<strong>見方・比べ方・推移の追い方</strong>を中学生向けに解説します。
             </p>
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
+              偏差値の定義（母集団内の位置）と数式から、模試の偏差値の読み方を解説します。特定模試の換算は扱いません。
+            </p>
           </header>
 
-          {/* E-E-A-T カード */}
-          <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-start gap-4">
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-md">
-                <User className="h-6 w-6" />
-              </div>
-              <div className="flex-1">
-                <div className="mb-1 flex flex-wrap items-center gap-2">
-                  <div className="text-sm font-bold text-slate-800">監修・運営：ないしんパンダ</div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700 ring-1 ring-emerald-200">
-                    <ShieldCheck className="h-3 w-3" />
-                    2026年度受験生
-                  </span>
-                </div>
-                <p className="text-xs leading-relaxed text-slate-600">
-                  偏差値の定義（母集団内の位置）と数式から、模試の偏差値の読み方を解説します。特定模試の換算は扱いません。
-                </p>
-                <div className="mt-2 flex flex-wrap gap-3 text-[10px] text-slate-500">
-                  <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />最終更新：2026年6月12日</span>
-                  <span className="flex items-center gap-1"><FileCheck className="h-3 w-3" />偏差値＝平均50・標準偏差10の正規分布</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* なぜ模試で偏差値が違う */}
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               模試によって偏差値が違うのはなぜ？
             </h2>
-            <p className="text-sm leading-relaxed text-slate-600">
+            <p className="text-base leading-[1.8] text-slate-900">
               偏差値は「<strong>その模試を受けた集団（母集団）の中で、自分がどの位置にいるか</strong>」を表す数字です。
               だから、母集団が違えば<strong>同じ学力でも偏差値は変わります</strong>。難関校志望者が多く集まる模試では、同じ点数でも偏差値は低めに出ます。
             </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
-                <div className="text-sm font-bold text-blue-900">受験者層がハイレベルな模試</div>
-                <p className="mt-1 text-xs leading-relaxed text-blue-800">上位層が多い→平均点が高い→同じ点数でも偏差値は低め。難関校の判定向き。</p>
+            <div className="mt-4 grid divide-y divide-slate-200 border-y border-slate-200 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+              <div className="py-4 sm:pr-4">
+                <h3 className="mb-1 text-[17px] font-bold text-slate-900">受験者層がハイレベルな模試</h3>
+                <p className="text-base leading-[1.8] text-slate-900">上位層が多い→平均点が高い→同じ点数でも偏差値は低め。難関校の判定向き。</p>
               </div>
-              <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
-                <div className="text-sm font-bold text-emerald-900">幅広い層が受ける模試</div>
-                <p className="mt-1 text-xs leading-relaxed text-emerald-800">基礎層も含む→平均点が下がる→同じ点数でも偏差値は高め。全体での位置確認向き。</p>
+              <div className="py-4 sm:pl-4">
+                <h3 className="mb-1 text-[17px] font-bold text-slate-900">幅広い層が受ける模試</h3>
+                <p className="text-base leading-[1.8] text-slate-900">基礎層も含む→平均点が下がる→同じ点数でも偏差値は高め。全体での位置確認向き。</p>
               </div>
             </div>
-            <p className="mt-3 text-xs leading-relaxed text-slate-500">
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               つまり「A模試の偏差値60」と「B模試の偏差値60」は、<strong>同じ学力を意味しません</strong>。比べるなら同じ模試どうしで。
             </p>
           </section>
 
           {/* 回次別・推移の見方 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 border-l-4 border-indigo-500 pl-3 text-lg font-bold text-slate-800">
-              <LineChart className="h-5 w-5 text-indigo-500" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">
               回次別・偏差値の推移の見方
             </h2>
-            <ul className="space-y-2 text-sm leading-relaxed text-slate-600">
-              <li>・<strong>1回の偏差値で判断しない。</strong>体調・出題分野の相性で数ポイントは普通に動きます。</li>
-              <li>・<strong>同じ模試の同じシリーズで時系列に見る。</strong>これが一番正確な「伸びているか」の指標です。</li>
-              <li>・<strong>学年が上がると母集団が本格化</strong>し、同じ実力でも偏差値が下がって見えることがあります（落ち込みすぎ注意）。</li>
-              <li>・志望校判定は、模試が出す<strong>合格判定（A〜E）</strong>も併せて見ると精度が上がります。</li>
+            <ul className="list-disc space-y-2 pl-5 text-base leading-[1.8] text-slate-900">
+              <li><strong>1回の偏差値で判断しない。</strong>体調・出題分野の相性で数ポイントは普通に動きます。</li>
+              <li><strong>同じ模試の同じシリーズで時系列に見る。</strong>これが一番正確な「伸びているか」の指標です。</li>
+              <li><strong>学年が上がると母集団が本格化</strong>し、同じ実力でも偏差値が下がって見えることがあります（落ち込みすぎ注意）。</li>
+              <li>志望校判定は、模試が出す<strong>合格判定（A〜E）</strong>も併せて見ると精度が上がります。</li>
             </ul>
-            <div className="mt-4 rounded-xl border border-indigo-100 bg-indigo-50 p-4">
-              <p className="text-xs leading-relaxed text-indigo-800">
+            <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+              <p className="text-base leading-[1.8] text-slate-900">
                 偏差値や内申点の<strong>推移をグラフで記録</strong>しておくと、三者面談でも説得力が増します。
-                <Link href="/dashboard" className="ml-1 font-bold text-indigo-700 hover:underline">成績の記録ダッシュボードで推移を見える化 →</Link>
+                <Link href="/dashboard" className="ml-1 text-brand-700 underline underline-offset-2 hover:text-brand-800">成績の記録ダッシュボードで推移を見える化 →</Link>
               </p>
             </div>
           </section>
 
           {/* レベル別・偏差値を上げるのに必要な点数 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-2 flex items-center gap-2 border-l-4 border-rose-500 pl-3 text-lg font-bold text-slate-800">
-              <TrendingUp className="h-5 w-5 text-rose-500" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">
               偏差値を「◯上げる」のに必要な点数の目安
             </h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               偏差値を上げるのに必要な点数は<strong>「上げたい偏差値 ÷ 10 × 標準偏差」</strong>で概算できます（平均点が一定の場合）。
               標準偏差15のテストでの目安は次のとおり。
             </p>
             <div className="overflow-x-auto">
-              <table className="min-w-full text-xs md:text-sm">
+              <table className="min-w-full text-base">
                 <thead>
-                  <tr className="bg-rose-600 text-white">
-                    <th className="border border-rose-400 px-3 py-2 text-left font-bold">上げたい偏差値</th>
-                    <th className="border border-rose-400 px-3 py-2 text-center font-bold">必要な点数アップの目安</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th scope="col" className="py-2 pr-4 text-left font-bold">上げたい偏差値</th>
+                    <th scope="col" className="py-2 pl-4 text-right font-bold">必要な点数アップの目安</th>
                   </tr>
                 </thead>
                 <tbody>
                   {RAISE_ROWS.map((r) => (
-                    <tr key={r.delta} className="odd:bg-white even:bg-slate-50">
-                      <td className="border border-slate-200 px-3 py-2 font-bold text-slate-800">偏差値 +{r.delta}</td>
-                      <td className="border border-slate-200 px-3 py-2 text-center text-slate-700">約 +{r.points}点</td>
+                    <tr key={r.delta} className="border-b border-slate-200">
+                      <td className="py-2 pr-4 font-bold tabular-nums text-slate-900">偏差値 +{r.delta}</td>
+                      <td className="py-2 pl-4 text-right tabular-nums text-slate-900">約 +{r.points}点</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-xs leading-relaxed text-slate-500">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               ※周りも伸びると偏差値は上がりにくいので、<strong>苦手教科＝伸びしろの大きい教科</strong>から取り組むのが効率的です。
-              具体的な手順は<Link href="/hensachi/agekata" className="font-bold text-rose-600 hover:underline">偏差値の上げ方</Link>へ。
+              具体的な手順は<Link href="/hensachi/agekata" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">偏差値の上げ方</Link>へ。
             </p>
           </section>
 
           {/* 主要な地域模試ガイドへの導線 */}
-          <section className="mt-8 rounded-2xl border-2 border-purple-200 bg-purple-50/30 p-6 shadow-sm">
-            <h2 className="mb-2 text-sm font-bold text-slate-800">Vもぎ・北辰テストなど、地域の模試について知りたい方へ</h2>
-            <p className="mb-3 text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">Vもぎ・北辰テストなど、地域の模試について知りたい方へ</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               志望校がある都道府県ごとに主流の模試が異なります。Vもぎ・Wもぎ・北辰テスト・五ツ木模試・新教研の運営会社や対象地域を整理しました。
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/hensachi/moshi/ichiran" className="inline-flex items-center gap-1.5 rounded-full bg-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-purple-700">
+              <Link href="/hensachi/moshi/ichiran" className="inline-flex items-center gap-1.5 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800">
                 主要な地域模試ガイドを見る
                 <ChevronRight className="h-4 w-4" />
               </Link>
-              <Link href="/hensachi/moshi/nittei" className="inline-flex items-center gap-1.5 rounded-full border-2 border-purple-600 bg-white px-5 py-2.5 text-sm font-bold text-purple-700 transition-all hover:bg-purple-50">
+              <Link href="/hensachi/moshi/nittei" className="inline-flex items-center gap-1.5 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50">
                 公式日程一覧を見る
                 <ChevronRight className="h-4 w-4" />
               </Link>
@@ -205,7 +188,7 @@ export default function HensachiMoshiPage() {
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA
               placement="hensachi"
               heading="模試の判定が伸び悩んでいる…保護者の方へ"
@@ -217,18 +200,18 @@ export default function HensachiMoshiPage() {
           </div>
 
           {/* クラスタナビ */}
-          <div className="mt-8">
+          <div className="mt-10">
             <HensachiClusterNav current="moshi" />
           </div>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

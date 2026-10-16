@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Home, ChevronRight, Sparkles } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -55,86 +55,83 @@ export default async function PurposeShindanPage({ params }: PageProps) {
       />
       <FAQPageSchema faqItems={faqItems} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-blue-600">偏差値計算</Link>
+            <Link href="/hensachi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi/shindan" className="hover:text-blue-600">偏差値診断</Link>
+            <Link href="/hensachi/shindan" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">偏差値診断</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">{content.label}</span>
+            <span className="text-slate-900">{content.label}</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-purple-700 ring-1 ring-purple-100">
-              <Sparkles className="h-3.5 w-3.5" />
-              {content.badge}
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               {content.label}のための偏差値診断
             </h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">{content.lead}</p>
+            <p className="mt-3 text-sm text-slate-600">{content.badge}</p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">{content.lead}</p>
           </header>
 
           {/* 診断ツール本体（Q5をあらかじめ選択済みで表示） */}
           <ShindanResultFlow defaultConcern={content.concern} />
 
           {/* この目的ならではの使い方 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               {content.label}で診断結果をどう使うか
             </h2>
-            <div className="space-y-4">
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {content.useCase.map((u, i) => (
-                <div key={u.title} className="rounded-xl border border-purple-100 bg-purple-50/50 p-4">
-                  <h3 className="mb-1 text-sm font-bold text-purple-900">{i + 1}. {u.title}</h3>
-                  <p className="text-sm leading-relaxed text-purple-800">{u.body}</p>
+                <div key={u.title} className="py-4">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">{i + 1}. {u.title}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">{u.body}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 偏差値クラスタのハブ */}
-          <div className="mt-8">
+          <div className="mt-10">
             <HensachiClusterNav current="shindan" />
           </div>
 
           {/* FAQ */}
           <section className="mt-10">
-            <h2 className="mb-5 text-xl font-bold text-slate-800">よくある質問</h2>
+            <h2 className="mb-5 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {content.faqs.map((f) => (
-                <div key={f.question} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="rounded-lg border border-slate-200 bg-white p-5">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* 他の目的への導線 */}
-          <section className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">他の目的の偏差値診断</h2>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-[17px] font-bold text-slate-900">他の目的の偏差値診断</h2>
             <div className="flex flex-wrap gap-2">
               {SHINDAN_PURPOSE_CONTENTS.filter((p) => p.slug !== content.slug).map((p) => (
                 <Link
                   key={p.slug}
                   href={`/hensachi/shindan/mokuteki/${p.slug}`}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-bold text-slate-700 transition-colors hover:border-purple-300 hover:bg-purple-50 hover:text-purple-700"
+                  className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
                 >
                   {p.label}
                 </Link>
               ))}
               <Link
                 href="/hensachi/shindan"
-                className="rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-100"
+                className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
               >
                 目的を選ばず診断する
               </Link>
@@ -142,14 +139,14 @@ export default async function PurposeShindanPage({ params }: PageProps) {
           </section>
 
           {/* 学年別診断への導線（S-2⑤：目的軸↔学年軸のクロスリンク） */}
-          <section className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">学年で診断したい場合はこちら</h2>
+          <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-[17px] font-bold text-slate-900">学年で診断したい場合はこちら</h2>
             <div className="flex flex-wrap gap-2">
               {SHINDAN_GRADE_CONTENTS.map((g) => (
                 <Link
                   key={g.slug}
                   href={`/hensachi/shindan/${g.slug}`}
-                  className="rounded-full border border-purple-200 bg-white px-4 py-2 text-xs font-bold text-purple-700 transition-colors hover:bg-purple-50"
+                  className="inline-flex min-h-[44px] items-center rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
                 >
                   {g.label}向け診断
                 </Link>

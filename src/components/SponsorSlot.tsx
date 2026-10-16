@@ -20,14 +20,14 @@ export function SponsorSlot({ placement, prefectureCode, className = '' }: Spons
   if (!sponsor) return null;
 
   return (
-    <div className={`rounded-xl border border-slate-200 bg-slate-50 p-3 ${className}`}>
-      <div className="mb-1 text-[10px] font-medium text-slate-400">広告</div>
+    <div className={`rounded-lg border border-slate-200 bg-white p-4 ${className}`}>
+      <div className="mb-1 text-xs text-slate-600">広告</div>
       <a
         href={sponsor.href}
         rel="nofollow sponsored noopener"
         target="_blank"
         data-sponsor-id={sponsor.id}
-        className="font-bold text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-700"
+        className="inline-flex min-h-[44px] items-center font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
         onClick={() => track(EVENTS.SPONSOR_CLICK, { placement, pref: prefectureCode ?? 'none', program: sponsor.id })}
       >
         {sponsor.text}

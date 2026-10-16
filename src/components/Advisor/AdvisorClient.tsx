@@ -2,13 +2,17 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Sparkles, Send } from 'lucide-react';
+import { Send } from '@/components/icons';
 
 import { InputForm } from '@/components/Calculator/InputForm';
 import { DEFAULT_SCORES } from '@/lib/constants';
 import { PREFECTURES, DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
 import { renderAdvisorAnswer, type AdvisorAnswer } from '@/lib/advisor/render';
 import type { Scores } from '@/lib/types';
+
+/** 入力欄の共通の見た目（DESIGN-SYSTEM §3 入力・押す面は44px以上）。 */
+const FIELD_CLASS =
+  'w-full rounded border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700';
 
 /** render.tsが返すテキスト（**太字**・[リンク](href)・段落区切り\n\n）を安全にJSXへ変換する。 */
 function renderInline(text: string): React.ReactNode[] {
@@ -21,7 +25,7 @@ function renderInline(text: string): React.ReactNode[] {
     if (m.index > lastIndex) nodes.push(text.slice(lastIndex, m.index));
     if (m[1] !== undefined) {
       nodes.push(
-        <Link key={key++} href={m[2]} className="font-bold text-blue-600 underline">
+        <Link key={key++} href={m[2]} className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
           {m[1]}
         </Link>
       );
@@ -40,7 +44,7 @@ function renderInline(text: string): React.ReactNode[] {
 
 function renderMarkdownLite(text: string): React.ReactNode {
   return text.split('\n\n').map((para, pi) => (
-    <p key={pi} className="mb-3 text-sm leading-relaxed text-slate-700 last:mb-0">
+    <p key={pi} className="mb-3 text-base leading-[1.8] text-slate-900 last:mb-0">
       {renderInline(para)}
     </p>
   ));
@@ -95,9 +99,9 @@ export function AdvisorClient() {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <form onSubmit={onSubmit} className="space-y-4 rounded-lg border border-slate-200 bg-white p-5">
         <div>
-          <label htmlFor="advisor-question" className="mb-1 block text-sm font-bold text-slate-700">
+          <label htmlFor="advisor-question" className="mb-1 block text-sm font-bold text-slate-900">
             質問を入力してください
           </label>
           <textarea
@@ -106,19 +110,19 @@ export function AdvisorClient() {
             onChange={(e) => setRaw(e.target.value)}
             rows={3}
             placeholder="例：東京都の内申点を計算して／偏差値を計算して／目標まであと何点か教えて"
-            className="w-full rounded-xl border border-slate-200 p-3 text-sm focus:border-blue-400 focus:outline-none"
+            className={FIELD_CLASS}
           />
         </div>
 
         <div>
-          <label htmlFor="advisor-pref" className="mb-1 block text-xs font-bold text-slate-600">
+          <label htmlFor="advisor-pref" className="mb-1 block text-sm font-bold text-slate-900">
             都道府県（内申点・総合得点・逆算・制度説明の質問で使用）
           </label>
           <select
             id="advisor-pref"
             value={prefectureCode}
             onChange={(e) => setPrefectureCode(e.target.value)}
-            className="w-full rounded-xl border border-slate-200 p-2.5 text-sm"
+            className={FIELD_CLASS}
           >
             {PREFECTURES.map((p) => (
               <option key={p.code} value={p.code}>
@@ -128,39 +132,39 @@ export function AdvisorClient() {
           </select>
         </div>
 
-        <details className="rounded-xl border border-slate-100 bg-slate-50 p-3">
-          <summary className="cursor-pointer text-xs font-bold text-slate-600">9教科の評定（内申点・総合得点・逆算の質問で使用）</summary>
-          <div className="mt-3">
+        <details className="border-t border-slate-200 pt-1">
+          <summary className="cursor-pointer py-3 text-sm font-bold text-slate-900">9教科の評定（内申点・総合得点・逆算の質問で使用）</summary>
+          <div className="pb-2 pt-1">
             <InputForm prefectureCode={prefectureCode} scores={scores} onChange={onScoreChange} />
           </div>
         </details>
 
-        <details className="rounded-xl border border-slate-100 bg-slate-50 p-3">
-          <summary className="cursor-pointer text-xs font-bold text-slate-600">詳細オプション（総合得点・偏差値・逆算・県比較）</summary>
-          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <label className="text-xs text-slate-600">
+        <details className="border-t border-slate-200 pt-1">
+          <summary className="cursor-pointer py-3 text-sm font-bold text-slate-900">詳細オプション（総合得点・偏差値・逆算・県比較）</summary>
+          <div className="grid grid-cols-1 gap-4 pb-2 pt-1 sm:grid-cols-2">
+            <label className="block text-sm text-slate-700">
               当日点（総合得点用）
-              <input type="number" value={academicRaw} onChange={(e) => setAcademicRaw(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 p-2 text-sm" />
+              <input type="number" value={academicRaw} onChange={(e) => setAcademicRaw(e.target.value)} className={`mt-1 ${FIELD_CLASS}`} />
             </label>
-            <label className="text-xs text-slate-600">
+            <label className="block text-sm text-slate-700">
               目標総合得点（逆算用）
-              <input type="number" value={targetTotal} onChange={(e) => setTargetTotal(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 p-2 text-sm" />
+              <input type="number" value={targetTotal} onChange={(e) => setTargetTotal(e.target.value)} className={`mt-1 ${FIELD_CLASS}`} />
             </label>
-            <label className="text-xs text-slate-600">
+            <label className="block text-sm text-slate-700">
               偏差値：自分の点数
-              <input type="number" value={hensachiScore} onChange={(e) => setHensachiScore(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 p-2 text-sm" />
+              <input type="number" value={hensachiScore} onChange={(e) => setHensachiScore(e.target.value)} className={`mt-1 ${FIELD_CLASS}`} />
             </label>
-            <label className="text-xs text-slate-600">
+            <label className="block text-sm text-slate-700">
               偏差値：平均点
-              <input type="number" value={hensachiAverage} onChange={(e) => setHensachiAverage(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 p-2 text-sm" />
+              <input type="number" value={hensachiAverage} onChange={(e) => setHensachiAverage(e.target.value)} className={`mt-1 ${FIELD_CLASS}`} />
             </label>
-            <label className="text-xs text-slate-600">
+            <label className="block text-sm text-slate-700">
               偏差値：標準偏差
-              <input type="number" value={hensachiStdDev} onChange={(e) => setHensachiStdDev(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 p-2 text-sm" />
+              <input type="number" value={hensachiStdDev} onChange={(e) => setHensachiStdDev(e.target.value)} className={`mt-1 ${FIELD_CLASS}`} />
             </label>
-            <label className="text-xs text-slate-600">
+            <label className="block text-sm text-slate-700">
               比較したい都道府県（県比較用）
-              <select value={compareWithPrefectureCode} onChange={(e) => setCompareWithPrefectureCode(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 p-2 text-sm">
+              <select value={compareWithPrefectureCode} onChange={(e) => setCompareWithPrefectureCode(e.target.value)} className={`mt-1 ${FIELD_CLASS}`}>
                 <option value="">（指定なし）</option>
                 {PREFECTURES.map((p) => (
                   <option key={p.code} value={p.code}>
@@ -174,7 +178,7 @@ export function AdvisorClient() {
 
         <button
           type="submit"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:shadow-xl"
+          className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors duration-100 hover:bg-brand-800"
         >
           <Send className="h-4 w-4" />
           質問する
@@ -182,11 +186,8 @@ export function AdvisorClient() {
       </form>
 
       {answer && (
-        <div id="advisor-answer" className="scroll-mt-24 rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-sm">
-          <div className="mb-3 flex items-center gap-1.5 text-xs font-bold text-blue-600">
-            <Sparkles className="h-3.5 w-3.5" />
-            回答
-          </div>
+        <div id="advisor-answer" className="scroll-mt-24 rounded-lg border border-slate-200 bg-brand-50 p-5">
+          <div className="mb-3 text-sm font-bold text-brand-700">回答</div>
           {renderMarkdownLite(answer.text)}
         </div>
       )}

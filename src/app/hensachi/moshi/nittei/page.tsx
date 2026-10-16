@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Calendar, ExternalLink, ChevronRightSquare, AlertTriangle } from 'lucide-react';
+import { Home, ChevronRight, ExternalLink, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
@@ -59,63 +59,65 @@ export default function MockExamScheduleDbPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi/moshi" className="hover:text-purple-600">模試の偏差値の見方</Link>
+            <Link href="/hensachi/moshi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">模試の偏差値の見方</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">主要模試 公式日程一覧</span>
+            <span className="text-slate-900">主要模試 公式日程一覧</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
-              <Calendar className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">主要模試 公式日程一覧</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          {/* Header: パンくず → h1 → メタ行（年度・出典）→ 結論の段落 */}
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">主要模試 公式日程一覧</h1>
+            <ul className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600">
+              <li>2026年度</li>
+              <li>出典：各社の公式サイト</li>
+            </ul>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               Vもぎ・Wもぎ・北辰テスト・五ツ木模試・新教研の実施日程を、各社の公式サイトで実在確認できた範囲でまとめました。
             </p>
           </header>
 
-          <div className="mb-8 flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
-            <AlertTriangle className="h-5 w-5 shrink-0 text-amber-600" />
-            <p className="text-xs leading-relaxed text-amber-800">
+          <div className="mb-8 flex gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-900">
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
+            <p className="text-sm leading-[1.8]">
               日程は申込締切や会場都合で更新される場合があります。実際の申込前には必ず各社の公式サイトで最新情報をご確認ください。
               公式サイトで日付が確認できなかった回は掲載せず、「公式サイトで確認」とご案内しています。
             </p>
           </div>
 
-          <section className="space-y-5">
+          <section className="space-y-4">
             {MOCK_EXAMS.map((exam) => (
-              <div key={exam.key} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                  <h2 className="text-lg font-bold text-slate-900">{exam.name}</h2>
-                  <span className="rounded-full bg-purple-50 px-2.5 py-0.5 text-[11px] font-bold text-purple-700 ring-1 ring-purple-100">
+              <div key={exam.key} className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                  <h2 className="text-xl font-bold text-slate-900">{exam.name}</h2>
+                  <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                     {exam.regions.join('・')}
                   </span>
                 </div>
 
                 {exam.scheduleRounds && exam.scheduleRounds.length > 0 && (
                   <div className="overflow-x-auto">
-                    <table className="w-full text-left text-sm">
+                    <table className="w-full text-left text-base">
                       <thead>
-                        <tr className="border-b border-slate-200 text-xs text-slate-500">
-                          <th className="py-2 pr-4">回</th>
-                          <th className="py-2">実施日</th>
+                        <tr className="border-b border-slate-900 text-xs text-slate-600">
+                          <th scope="col" className="py-2 pr-4 text-left font-bold">回</th>
+                          <th scope="col" className="py-2 text-left font-bold">実施日</th>
                         </tr>
                       </thead>
                       <tbody>
                         {exam.scheduleRounds.map((r) => (
-                          <tr key={r.round} className="border-b border-slate-100 last:border-0">
-                            <td className="py-2 pr-4 font-medium text-slate-800">{r.round}</td>
-                            <td className="py-2 text-slate-600">{r.date}</td>
+                          <tr key={r.round} className="border-b border-slate-200 last:border-0">
+                            <td className="py-2 pr-4 text-slate-900">{r.round}</td>
+                            <td className="py-2 tabular-nums text-slate-900">{r.date}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -124,65 +126,65 @@ export default function MockExamScheduleDbPage() {
                 )}
 
                 {exam.scheduleNote && (
-                  <p className="mt-3 text-xs leading-relaxed text-slate-500">{exam.scheduleNote}</p>
+                  <p className="mt-3 text-sm leading-[1.8] text-slate-600">{exam.scheduleNote}</p>
                 )}
 
-                <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
-                  <span className="text-[11px] text-slate-400">実在確認日: {exam.scheduleVerifiedDate}</span>
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-slate-200 pt-3">
+                  <span className="text-sm text-slate-600">実在確認日: {exam.scheduleVerifiedDate}</span>
                   <a
                     href={exam.scheduleSourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs font-bold text-indigo-700 hover:underline"
+                    className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
                   >
                     公式サイトで確認
-                    <ExternalLink className="h-3 w-3" />
+                    <ExternalLink className="h-4 w-4" />
                   </a>
                 </div>
               </div>
             ))}
           </section>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/hensachi/moshi/ichiran" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
-                主要な地域模試ガイド（運営会社・対象地域）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <div className="divide-y divide-slate-200">
+              <Link href="/hensachi/moshi/ichiran" className="group flex min-h-[44px] items-center gap-3 py-3 text-base text-slate-900 hover:text-brand-700">
+                <span className="group-hover:underline">主要な地域模試ガイド（運営会社・対象地域）</span>
+                <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hensachi/moshi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
-                模試の偏差値の見方（母集団・推移の解説）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <Link href="/hensachi/moshi" className="group flex min-h-[44px] items-center gap-3 py-3 text-base text-slate-900 hover:text-brand-700">
+                <span className="group-hover:underline">模試の偏差値の見方（母集団・推移の解説）</span>
+                <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/juken-schedule" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
-                入試全体のスケジュールを見る
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <Link href="/juken-schedule" className="group flex min-h-[44px] items-center gap-3 py-3 text-base text-slate-900 hover:text-brand-700">
+                <span className="group-hover:underline">入試全体のスケジュールを見る</span>
+                <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
-                偏差値を計算する（無料）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <Link href="/hensachi" className="group flex min-h-[44px] items-center gap-3 py-3 text-base text-slate-900 hover:text-brand-700">
+                <span className="group-hover:underline">偏差値を計算する（無料）</span>
+                <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="hensachi" />
           </div>
 
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
-          <div className="mt-8">
+          <div className="mt-10">
             <HensachiClusterNav current="moshi" />
           </div>
         </div>

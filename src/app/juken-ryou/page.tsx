@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Receipt, HelpCircle, Wallet } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -58,36 +58,33 @@ export default function JukenRyouPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hiyou" className="hover:text-blue-600">お金・費用まとめ</Link>
+            <Link href="/hiyou" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">お金・費用まとめ</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">受験料・模試代</span>
+            <span className="text-slate-900">受験料・模試代</span>
           </nav>
 
           {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
-              <Receipt className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校受験の受験料・模試代はいくら？</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">高校受験の受験料・模試代はいくら？</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               受験シーズンに実際に出ていくお金（公立の選抜手数料・私立の受験料・模試代・入学初期費用）を、
               <strong>併願校数と模試回数から</strong>その場で試算できます。すべて無料・登録不要です。
             </p>
           </header>
 
           {/* 答え先出し（GEO/AnswerBox 的に要点を冒頭で） */}
-          <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-5">
-            <h2 className="mb-2 text-sm font-bold text-emerald-900">先に結論（費用の目安）</h2>
-            <ul className="space-y-1 text-sm leading-relaxed text-emerald-900">
+          <div className="mb-6 rounded-lg border border-slate-200 bg-brand-50 p-5">
+            <h2 className="mb-2 text-base font-bold text-slate-900">先に結論（費用の目安）</h2>
+            <ul className="space-y-1 text-base leading-[1.8] text-slate-900">
               <li>・公立高校の選抜手数料：<strong>2,200円前後</strong>（自治体による）</li>
               <li>・私立高校の受験料：<strong>1校あたり15,000〜23,000円</strong>（併願校数ぶん）</li>
               <li>・公開模試：<strong>1回あたり4,400〜6,000円</strong>（中3で年4〜8回が目安）</li>
@@ -108,11 +105,8 @@ export default function JukenRyouPage() {
           </div>
 
           {/* 学費クラスタへの回遊 */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <Wallet className="h-5 w-5 text-emerald-600" />
-              入学後のお金もまとめて把握する
-            </h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">入学後のお金もまとめて把握する</h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
                 { href: '/koukou-hiyou', title: '高校の費用シミュレーター', desc: '公立・私立の3年間の学費・教材費・通学費の総額' },
@@ -123,40 +117,37 @@ export default function JukenRyouPage() {
                 <Link
                   key={c.href}
                   href={c.href}
-                  className="group flex items-start justify-between gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-100 transition-shadow hover:shadow-md"
+                  className="group flex items-start justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:bg-brand-50"
                 >
                   <span>
-                    <span className="block text-sm font-bold text-slate-800 group-hover:text-emerald-700">{c.title}</span>
-                    <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{c.desc}</span>
+                    <span className="block text-base font-bold text-brand-700 group-hover:underline">{c.title}</span>
+                    <span className="mt-1 block text-sm leading-[1.8] text-slate-600">{c.desc}</span>
                   </span>
-                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                  <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-slate-500" />
                 </Link>
               ))}
             </div>
           </section>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-emerald-600" />
-              よくある質問
-            </h2>
+          <section className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-xl border border-slate-200 bg-slate-50/40 p-4">
-                  <summary className="cursor-pointer list-none text-sm font-bold text-slate-800">
-                    <span className="flex items-center justify-between gap-3">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
           </section>
 
-          <ToolClusterNav current="hiyou" className="mt-8" />
+          <ToolClusterNav current="hiyou" className="mt-10" />
         </div>
       </div>
     </>

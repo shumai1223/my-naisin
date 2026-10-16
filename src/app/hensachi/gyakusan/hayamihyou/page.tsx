@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, Undo2, AlertTriangle, Calculator } from 'lucide-react';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -79,54 +79,55 @@ export default function HensachiGyakusanHayamihyouPage() {
       />
       <FAQPageSchema faqItems={faqItems} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi/gyakusan" className="hover:text-purple-600">逆算計算機</Link>
+            <Link href="/hensachi/gyakusan" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">逆算計算機</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">早見表</span>
+            <span className="text-slate-900">早見表</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">偏差値↔点数 早見表</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">偏差値↔点数 早見表</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               「250点は偏差値いくつ？」「偏差値40は5教科何点？」のどちらの疑問にも、一般的な仮定（5教科合計{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点・平均{GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE}点・標準偏差{GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV}点）で答えた早見表です。下の表は「偏差値」列でも「目安点数」列でも探せます。
             </p>
           </header>
 
-          <section className="mb-8 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
-              <p className="text-sm leading-relaxed text-amber-900">
-                この表の点数は「よくある平均点・標準偏差」を仮定した目安であり、あなたが受けたテストの正確な点数ではありません。実際の平均点・標準偏差はテストごとに異なるため、正確な点数が知りたい場合は下の逆算計算機に自分のテストの数値を入力してください。
-              </p>
-            </div>
+          <section className="mb-10 rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-900">
+            <p className="flex items-center gap-2 text-base font-bold">
+              <AlertTriangle className="h-5 w-5 shrink-0" />
+              注意
+            </p>
+            <p className="mt-2 text-sm leading-[1.8]">
+              この表の点数は「よくある平均点・標準偏差」を仮定した目安であり、あなたが受けたテストの正確な点数ではありません。実際の平均点・標準偏差はテストごとに異なるため、正確な点数が知りたい場合は下の逆算計算機に自分のテストの数値を入力してください。
+            </p>
           </section>
 
-          <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 border-l-4 border-purple-500 pl-3 text-lg font-bold text-slate-800">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">
               偏差値↔点数 対応表（{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点）
             </h2>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[280px] text-sm">
+            <div className="max-w-md overflow-x-auto">
+              <table className="w-full min-w-[280px] text-base">
                 <thead>
-                  <tr className="border-b border-slate-200 text-left text-xs text-slate-500">
+                  <tr className="border-b border-slate-900 text-left text-xs text-slate-600">
                     <th scope="col" className="py-2 pr-3 font-bold">偏差値</th>
-                    <th scope="col" className="py-2 font-bold">目安点数</th>
+                    <th scope="col" className="py-2 text-right font-bold">目安点数</th>
                   </tr>
                 </thead>
                 <tbody>
                   {table.map((row) => (
-                    <tr key={row.hensachi} className="border-b border-slate-100 last:border-0">
-                      <td className="py-1.5 pr-3 tabular-nums">{row.hensachi}</td>
-                      <td className="py-1.5 tabular-nums">
+                    <tr key={row.hensachi} className="border-b border-slate-200">
+                      <td className="py-1.5 pr-3 tabular-nums text-slate-900">{row.hensachi}</td>
+                      <td className="py-1.5 text-right tabular-nums text-slate-900">
                         {row.requiredScore}点 / {GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点
                       </td>
                     </tr>
@@ -136,41 +137,39 @@ export default function HensachiGyakusanHayamihyouPage() {
             </div>
           </section>
 
-          <section className="mb-8 rounded-2xl border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-indigo-50/40 p-6 text-center shadow-sm">
-            <h2 className="mb-2 text-lg font-bold text-slate-800">自分のテストで正確な点数を出す</h2>
-            <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">自分のテストで正確な点数を出す</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               過去問・模試の平均点・標準偏差が分かれば、あなたの状況に合った正確な「あと何点」を計算できます。
             </p>
             <Link
               href="/hensachi/gyakusan"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-purple-700"
+              className="inline-flex min-h-[44px] items-center justify-center rounded bg-brand-700 px-5 py-3 text-center text-base font-bold text-white transition-colors text-balance hover:bg-brand-800"
             >
-              <Undo2 className="h-4 w-4" />
               目標偏差値まであと何点？逆算計算機へ
             </Link>
             <div className="mt-3">
-              <Link href="/hensachi" className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-purple-700 hover:underline">
-                <Calculator className="h-3.5 w-3.5" />
+              <Link href="/hensachi" className="inline-flex min-h-[44px] items-center text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 通常の偏差値計算（点数から算出）はこちら
               </Link>
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mb-8">
+          <div className="mb-10">
             <ParentLeadCTA placement="hensachi" />
           </div>
 
           {/* T-ADS1 AdSense RESULT_BELOW: 答え（対応表）の後・保護者CTAより下。NEXT_PUBLIC_ADSENSE_ENABLED=1 まで描画0。 */}
           <AdUnit unit="RESULT_BELOW" />
 
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200">
               {faqItems.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4 first:pt-0 last:pb-0">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

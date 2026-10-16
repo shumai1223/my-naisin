@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, MapPin, Building2, AlertTriangle, ChevronRightSquare } from 'lucide-react';
+import { Home, ChevronRight, AlertTriangle } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
@@ -54,29 +54,26 @@ export default function MockExamIchiranPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-purple-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi" className="hover:text-purple-600">偏差値計算</Link>
+            <Link href="/hensachi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">偏差値計算</Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/hensachi/moshi" className="hover:text-purple-600">模試の偏差値の見方</Link>
+            <Link href="/hensachi/moshi" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">模試の偏差値の見方</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">主要な地域模試ガイド</span>
+            <span className="text-slate-900">主要な地域模試ガイド</span>
           </nav>
 
-          {/* Header */}
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl">
-              <MapPin className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">主要な地域模試ガイド</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          {/* Header: パンくず → h1 → 結論の段落 */}
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">主要な地域模試ガイド</h1>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               高校受験では、志望校がある<strong>都道府県ごとに主流の模試</strong>が異なります。
               Vもぎ・Wもぎ・北辰テスト・五ツ木模試・新教研の運営会社・対象地域・特徴を整理しました。
             </p>
@@ -85,85 +82,83 @@ export default function MockExamIchiranPage() {
           {/* 模試一覧 */}
           <section className="space-y-4">
             {MOCK_EXAMS.map((exam) => (
-              <div key={exam.key} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div key={exam.key} className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
-                  <h2 className="text-lg font-bold text-slate-900">{exam.name}</h2>
-                  <span className="rounded-full bg-purple-50 px-2.5 py-0.5 text-[11px] font-bold text-purple-700 ring-1 ring-purple-100">
+                  <h2 className="text-xl font-bold text-slate-900">{exam.name}</h2>
+                  <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                     {exam.regions.join('・')}
                   </span>
                 </div>
-                <div className="mb-2 flex flex-wrap items-center gap-3 text-xs text-slate-500">
-                  <span className="flex items-center gap-1"><Building2 className="h-3.5 w-3.5" />運営：{exam.operator}</span>
+                <div className="mb-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600">
+                  <span>運営：{exam.operator}</span>
                   <span>対象：{exam.grade}</span>
                 </div>
-                <p className="text-sm leading-relaxed text-slate-600">{exam.summary}</p>
+                <p className="text-base leading-[1.8] text-slate-900">{exam.summary}</p>
               </div>
             ))}
           </section>
 
-          {/* 換算の考え方 */}
-          <section className="mt-8 rounded-2xl border-2 border-amber-200 bg-amber-50/50 p-6 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-              <AlertTriangle className="h-5 w-5 text-amber-600" />
+          {/* 換算の考え方（注意） */}
+          <section className="mt-10 rounded-lg border border-amber-200 bg-amber-50 p-5 text-amber-900 md:p-6">
+            <h2 className="mb-3 flex items-start gap-2 text-xl font-bold">
+              <AlertTriangle className="mt-1 h-5 w-5 shrink-0" />
               模試どうしの偏差値、どう比べればいい？
             </h2>
-            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+            <p className="mb-3 text-base leading-[1.8]">
               偏差値は「その模試を受けた集団（母集団）の中での位置」を表す数値です。運営会社が異なれば受験者層（母集団）も異なるため、
               <strong>「Vもぎで偏差値60」と「北辰テストで偏差値60」が同じ学力を意味するとは限りません</strong>。
             </p>
-            <p className="mb-3 text-sm leading-relaxed text-slate-700">
+            <p className="mb-4 text-base leading-[1.8]">
               各社は模試間の数値換算表を公式には公表していません。ネット上に非公式な換算表が出回っていることがありますが、
               根拠が不確かなものも多いため、当サイトでは換算表を作成・掲載しません。
             </p>
-            <div className="rounded-xl bg-white p-4">
-              <div className="mb-1 text-sm font-bold text-slate-800">正確に立ち位置を知るには</div>
-              <ul className="space-y-1.5 text-sm leading-relaxed text-slate-600">
-                <li>・志望校がある地域の模試を<strong>継続して</strong>受ける（同じ模試内の推移が最も正確）</li>
-                <li>・模試を乗り換えた直後は、偏差値の変動を「学力の変化」と早合点しない</li>
-                <li>・志望校の合否判定は、その模試が出す<strong>合格判定（A〜E判定など）</strong>も併せて確認する</li>
-              </ul>
-            </div>
+            <h3 className="mb-1 text-[17px] font-bold">正確に立ち位置を知るには</h3>
+            <ul className="list-disc space-y-1.5 pl-5 text-base leading-[1.8]">
+              <li>志望校がある地域の模試を<strong>継続して</strong>受ける（同じ模試内の推移が最も正確）</li>
+              <li>模試を乗り換えた直後は、偏差値の変動を「学力の変化」と早合点しない</li>
+              <li>志望校の合否判定は、その模試が出す<strong>合格判定（A〜E判定など）</strong>も併せて確認する</li>
+            </ul>
           </section>
 
           {/* 内部リンク */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-sm font-bold text-slate-700">あわせて確認</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Link href="/hensachi/moshi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
-                模試の偏差値の見方（母集団・推移の解説）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">あわせて確認</h2>
+            <div className="divide-y divide-slate-200">
+              <Link href="/hensachi/moshi" className="group flex min-h-[44px] items-center gap-3 py-3 text-base text-slate-900 hover:text-brand-700">
+                <span className="group-hover:underline">模試の偏差値の見方（母集団・推移の解説）</span>
+                <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hensachi/moshi/nittei" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
-                各模試の公式日程一覧を見る
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <Link href="/hensachi/moshi/nittei" className="group flex min-h-[44px] items-center gap-3 py-3 text-base text-slate-900 hover:text-brand-700">
+                <span className="group-hover:underline">各模試の公式日程一覧を見る</span>
+                <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-slate-500" />
               </Link>
-              <Link href="/hensachi" className="flex items-center justify-between gap-2 rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-purple-200 hover:bg-purple-50/50">
-                偏差値を計算する（無料）
-                <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <Link href="/hensachi" className="group flex min-h-[44px] items-center gap-3 py-3 text-base text-slate-900 hover:text-brand-700">
+                <span className="group-hover:underline">偏差値を計算する（無料）</span>
+                <ChevronRight className="ml-auto h-4 w-4 shrink-0 text-slate-500" />
               </Link>
             </div>
           </section>
 
           {/* 保護者リード */}
-          <div className="mt-8">
+          <div className="mt-10">
             <ParentLeadCTA placement="hensachi" />
           </div>
 
           {/* FAQ */}
-          <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="mb-1 text-[17px] font-bold text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* クラスタナビ */}
-          <div className="mt-8">
+          <div className="mt-10">
             <HensachiClusterNav current="moshi" />
           </div>
         </div>

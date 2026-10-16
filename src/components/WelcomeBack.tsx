@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Sparkles, X, TrendingUp } from 'lucide-react';
+import { X } from '@/components/icons';
 
 const LAST_VISIT_KEY = 'naishin-last-visit';
 
@@ -37,35 +37,27 @@ export function WelcomeBack() {
   }, []);
 
   const getMessage = () => {
-    if (daysSince === 1) return 'おかえり！昨日ぶりだね';
-    if (daysSince <= 3) return `おかえり！${daysSince}日ぶりだね`;
-    if (daysSince <= 7) return 'おかえり！また来てくれて嬉しい！';
-    return 'おかえり！久しぶり！';
+    if (daysSince === 1) return '前回のご利用は昨日です';
+    return `前回のご利用は${daysSince}日前です`;
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed left-1/2 top-4 z-50 -translate-x-1/2 animate-fade-in">
-          <div className="flex items-center gap-3 rounded-2xl border border-indigo-200 bg-gradient-to-r from-indigo-50 to-violet-50 px-4 py-3 shadow-lg shadow-indigo-100/50">
-            <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 shadow-md">
-              <Sparkles className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <div className="text-sm font-bold text-indigo-800">{getMessage()}</div>
-              <div className="flex items-center gap-1 text-xs text-indigo-600">
-                <TrendingUp className="h-3 w-3" />
-                前回の成績が復元されています
-              </div>
-            </div>
-            <button
-              onClick={() => setIsVisible(false)}
-              className="ml-2 grid h-6 w-6 place-items-center rounded-lg text-indigo-400 transition-colors hover:bg-indigo-100 hover:text-indigo-600"
-              aria-label="閉じる"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
+    <div className="fixed inset-x-4 top-4 z-50 mx-auto w-fit motion-safe:animate-fade-in">
+      <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white py-2 pl-4 pr-2 shadow-overlay">
+        <div>
+          <div className="text-sm font-bold text-slate-900">{getMessage()}</div>
+          <div className="text-sm text-slate-600">前回の成績が復元されています</div>
+        </div>
+        <button
+          onClick={() => setIsVisible(false)}
+          className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded text-slate-600 transition-colors hover:bg-brand-50 hover:text-slate-900"
+          aria-label="閉じる"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
     </div>
   );
 }

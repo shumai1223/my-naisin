@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Info, ExternalLink, Calendar, BookOpen, AlertTriangle } from 'lucide-react';
+import { Info, ExternalLink, AlertTriangle } from '@/components/icons';
 
 import { getPrefectureByCode, resolvePrefectureConfig } from '@/lib/prefectures';
 import { sourceTrustLabel } from '@/lib/source-trust';
@@ -39,47 +39,52 @@ export function CalculationBasis({ prefectureCode, variantCode, total, max }: Ca
     : `中学${targetGrades.join('・')}年`;
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
       <div className="mb-3 flex items-center gap-2">
-        <Info className="h-4 w-4 text-blue-500" />
-        <span className="text-sm font-bold text-slate-700">この計算の根拠</span>
+        <Info className="h-4 w-4 text-brand-700" />
+        <span className="text-base font-bold text-slate-900">この計算の根拠</span>
       </div>
 
-      <div className="grid gap-3 text-sm md:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-lg bg-white p-3 shadow-sm">
-          <div className="mb-1 text-xs font-medium text-slate-500">対象学年</div>
-          <div className="font-bold text-slate-800">{gradeText}</div>
+      <dl className="grid border-t border-slate-200 sm:grid-cols-2 sm:gap-x-8">
+        <div className="flex items-baseline justify-between gap-4 border-b border-slate-200 py-2.5">
+          <dt className="text-sm text-slate-600">対象学年</dt>
+          <dd className="text-right text-sm font-bold text-slate-900">{gradeText}</dd>
         </div>
 
-        <div className="rounded-lg bg-white p-3 shadow-sm">
-          <div className="mb-1 text-xs font-medium text-slate-500">倍率・配点</div>
-          <div className="font-bold text-slate-800">{multiplierInfo}</div>
+        <div className="flex items-baseline justify-between gap-4 border-b border-slate-200 py-2.5">
+          <dt className="text-sm text-slate-600">倍率・配点</dt>
+          <dd className="text-right text-sm font-bold text-slate-900">{multiplierInfo}</dd>
         </div>
 
-        <div className="rounded-lg bg-white p-3 shadow-sm">
-          <div className="mb-1 text-xs font-medium text-slate-500">満点</div>
-          <div className="font-bold text-slate-800">{max}点</div>
-          {prefecture.simplifiedCalc && typeof prefecture.actualMaxScore === 'number' && (
-            <div className="mt-0.5 text-[11px] font-medium text-amber-600">
-              実選抜換算 {prefecture.actualMaxScore}点
-            </div>
-          )}
+        <div className="flex items-baseline justify-between gap-4 border-b border-slate-200 py-2.5">
+          <dt className="text-sm text-slate-600">満点</dt>
+          <dd className="text-right text-sm font-bold tabular-nums text-slate-900">
+            {max}点
+            {prefecture.simplifiedCalc && typeof prefecture.actualMaxScore === 'number' && (
+              <span className="mt-0.5 block text-xs font-normal text-amber-800">
+                実選抜換算 {prefecture.actualMaxScore}点
+              </span>
+            )}
+          </dd>
         </div>
 
-        <div className="rounded-lg bg-white p-3 shadow-sm">
-          <div className="mb-1 text-xs font-medium text-slate-500">あなたの得点率</div>
-          <div className="font-bold text-slate-800">{Math.round((total / max) * 100)}%</div>
+        <div className="flex items-baseline justify-between gap-4 border-b border-slate-200 py-2.5">
+          <dt className="text-sm text-slate-600">あなたの得点率</dt>
+          <dd className="text-right text-sm font-bold tabular-nums text-slate-900">{Math.round((total / max) * 100)}%</dd>
         </div>
-      </div>
+      </dl>
 
       {prefecture.note && (
-        <div className="mt-3 flex items-start gap-2 rounded-lg bg-amber-50 p-3">
-          <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-500" />
-          <p className="text-xs text-amber-700">{prefecture.note}</p>
+        <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-amber-900">
+          <p className="flex items-center gap-1.5 text-sm font-bold">
+            <AlertTriangle className="h-4 w-4 shrink-0" />
+            注意
+          </p>
+          <p className="mt-1 text-sm leading-relaxed">{prefecture.note}</p>
         </div>
       )}
 
-      <div className="mt-3 flex flex-wrap items-center gap-3 border-t border-slate-100 pt-3">
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
         {prefecture.sourceUrl && (() => {
           const trust = sourceTrustLabel(prefecture);
           const official = trust?.badge === '公式';
@@ -88,13 +93,9 @@ export function CalculationBasis({ prefectureCode, variantCode, total, max }: Ca
               href={prefecture.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
-                official
-                  ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
-                  : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
-              }`}
+              className="inline-flex min-h-11 items-center gap-1.5 rounded border border-slate-200 bg-white px-3 text-sm text-brand-700 transition-colors hover:bg-brand-50"
             >
-              <ExternalLink className="h-3 w-3" />
+              <ExternalLink className="h-4 w-4" />
               {official
                 ? `${prefecture.name}教育委員会（公式）`
                 : `出典を見る（${trust?.badge ?? '一次照合中'}）`}
@@ -102,21 +103,15 @@ export function CalculationBasis({ prefectureCode, variantCode, total, max }: Ca
           );
         })()}
 
-        <div className="flex items-center gap-1.5 text-xs text-slate-500">
-          <Calendar className="h-3 w-3" />
-          <span>最終確認日：{prefecture.fiscalYear ?? '2025'}年度版</span>
-        </div>
+        <span className="text-sm text-slate-600">最終確認日：{prefecture.fiscalYear ?? '2025'}年度版</span>
 
-        <div className="flex items-center gap-1.5 text-xs text-slate-500">
-          <BookOpen className="h-3 w-3" />
-          <span>計算式は各都道府県の公式資料に基づく</span>
-        </div>
+        <span className="text-sm text-slate-600">計算式は各都道府県の公式資料に基づく</span>
       </div>
 
       {(() => {
         const trust = sourceTrustLabel(prefecture);
         return trust?.note ? (
-          <p className="mt-2 text-[11px] leading-relaxed text-slate-400">{trust.note}</p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">{trust.note}</p>
         ) : null;
       })()}
     </div>

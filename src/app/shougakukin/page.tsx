@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, HandCoins, BookCheck, HelpCircle, ShieldCheck, Landmark } from 'lucide-react';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { ShugakuShienEstimator } from '@/components/ShugakuShienEstimator';
 import { PrefectureTuitionSubsidyTable } from '@/components/PrefectureTuitionSubsidyTable';
@@ -11,7 +11,7 @@ import { RelatedToolsSection } from '@/components/RelatedToolsSection';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { FAQPageSchema } from '@/components/StructuredData/FAQPageSchema';
 import { SITE_URL } from '@/lib/naishin-dataset';
-import { SHUGAKU_SHIEN_TIERS } from '@/lib/education-cost/data';
+import { SHUGAKU_SHIEN_TIERS, MEXT_SHUGAKU_SHIEN_SOURCE } from '@/lib/education-cost/data';
 import { formatYen, toManYen, highSchoolRealCost } from '@/lib/education-cost/engine';
 
 const FAQS = [
@@ -75,22 +75,26 @@ export default function ShougakukinPage() {
       />
       <FAQPageSchema faqItems={FAQS} />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-blue-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">高校無償化・就学支援金ガイド</span>
+            <span className="text-slate-900">高校無償化・就学支援金ガイド</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-xl">
-              <HandCoins className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">高校無償化・就学支援金はいくら？</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">高校無償化・就学支援金はいくら？</h1>
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
+              出典：
+              <a href={MEXT_SHUGAKU_SHIEN_SOURCE.url} target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                文部科学省「高校生等への修学支援（就学支援金・奨学給付金）」
+              </a>
+              （最終確認 {MEXT_SHUGAKU_SHIEN_SOURCE.lastChecked}）
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
               高校の授業料を軽減する<strong>「高等学校等就学支援金」</strong>（いわゆる高校無償化）の支援額を、
               進学先と世帯年収の区分から概算できます。私立の上限・授業料以外の支援・大学の奨学金まで、
               <strong>一次情報に基づいて</strong>わかりやすく解説します。
@@ -108,6 +112,7 @@ export default function ShougakukinPage() {
 
           {/* エスティメーター */}
           <section className="mb-8">
+            <h2 className="sr-only">就学支援金の支援額の目安</h2>
             <ShugakuShienEstimator />
           </section>
 
@@ -116,72 +121,66 @@ export default function ShougakukinPage() {
 
           {/* 区分早見表 */}
           <section className="mb-10">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <Landmark className="h-5 w-5 text-emerald-600" />
-              世帯年収の区分別・支援額の目安
-            </h2>
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">世帯年収の区分別・支援額の目安</h2>
+            <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="bg-emerald-600 text-white">
-                    <th className="px-4 py-3 text-left font-bold">世帯年収の区分（目安）</th>
-                    <th className="px-4 py-3 text-left font-bold">公立高校</th>
-                    <th className="px-4 py-3 text-left font-bold">私立高校</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th scope="col" className="px-4 py-3 text-left font-bold">世帯年収の区分（目安）</th>
+                    <th scope="col" className="px-4 py-3 text-right font-bold">公立高校</th>
+                    <th scope="col" className="px-4 py-3 text-right font-bold">私立高校</th>
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
+                <tbody className="text-slate-900">
                   {SHUGAKU_SHIEN_TIERS.map((t) => (
-                    <tr key={t.bracket} className="odd:bg-white even:bg-slate-50">
+                    <tr key={t.bracket} className="border-b border-slate-200 last:border-b-0">
                       <td className="px-4 py-3 font-bold">{t.label}</td>
-                      <td className="px-4 py-3">{t.publicAnnual > 0 ? `${formatYen(t.publicAnnual)}/年` : '対象外'}</td>
-                      <td className="px-4 py-3">{t.privateAnnual > 0 ? `${formatYen(t.privateAnnual)}/年` : '対象外'}</td>
+                      <td className="px-4 py-3 text-right tabular-nums">{t.publicAnnual > 0 ? `${formatYen(t.publicAnnual)}/年` : '対象外'}</td>
+                      <td className="px-4 py-3 text-right tabular-nums">{t.privateAnnual > 0 ? `${formatYen(t.privateAnnual)}/年` : '対象外'}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-xs text-slate-500">
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">
               ※ 公立は授業料相当（年11万8,800円）が実質無償化、私立は区分に応じて年額上限39万6,000円まで。年収は目安で、正確な判定は課税標準額で行われます。
             </p>
           </section>
 
           {/* 公立 vs 私立の「実質負担」比較（就学支援金を差し引いた手出し＝差別化指標） */}
           <section className="mb-10">
-            <h2 className="mb-2 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <Landmark className="h-5 w-5 text-emerald-600" />
-              無償化後の「実質負担」で公立・私立を比べる
-            </h2>
-            <p className="mb-4 text-sm text-slate-600">
+            <h2 className="mb-2 text-xl font-bold text-slate-900">無償化後の「実質負担」で公立・私立を比べる</h2>
+            <p className="mb-4 text-base leading-[1.8] text-slate-900">
               「私立は高い」と決める前に、就学支援金を差し引いた高校3年間の<strong>実質負担の目安</strong>で比べてみましょう。
               低所得の区分では、私立でも公立との差が大きく縮まります。
             </p>
-            <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="bg-emerald-600 text-white">
-                    <th className="px-4 py-3 text-left font-bold">世帯年収の区分（目安）</th>
-                    <th className="px-4 py-3 text-left font-bold">公立高校（3年・実質）</th>
-                    <th className="px-4 py-3 text-left font-bold">私立高校（3年・実質）</th>
-                    <th className="px-4 py-3 text-left font-bold">差</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th scope="col" className="px-4 py-3 text-left font-bold">世帯年収の区分（目安）</th>
+                    <th scope="col" className="px-4 py-3 text-right font-bold">公立高校（3年・実質）</th>
+                    <th scope="col" className="px-4 py-3 text-right font-bold">私立高校（3年・実質）</th>
+                    <th scope="col" className="px-4 py-3 text-right font-bold">差</th>
                   </tr>
                 </thead>
-                <tbody className="text-slate-700">
+                <tbody className="text-slate-900">
                   {SHUGAKU_SHIEN_TIERS.map((t) => {
                     const pub = highSchoolRealCost('public', t.bracket);
                     const pri = highSchoolRealCost('private', t.bracket);
                     return (
-                      <tr key={t.bracket} className="odd:bg-white even:bg-slate-50">
+                      <tr key={t.bracket} className="border-b border-slate-200 last:border-b-0">
                         <td className="px-4 py-3 font-bold">{t.label}</td>
-                        <td className="px-4 py-3">{toManYen(pub)}</td>
-                        <td className="px-4 py-3">{toManYen(pri)}</td>
-                        <td className="px-4 py-3 text-emerald-700">＋{toManYen(pri - pub)}</td>
+                        <td className="px-4 py-3 text-right tabular-nums">{toManYen(pub)}</td>
+                        <td className="px-4 py-3 text-right tabular-nums">{toManYen(pri)}</td>
+                        <td className="px-4 py-3 text-right font-bold tabular-nums">＋{toManYen(pri - pub)}</td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-xs text-slate-500">
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">
               ※ 実質負担＝学習費総額（3年）−就学支援金（3年）の目安。授業料以外（入学金・施設費・教材費・通学費など）も含む総額からの概算で、就学支援金は授業料部分が対象です。私立は学校により学費が大きく異なります。
             </p>
           </section>
@@ -208,22 +207,19 @@ export default function ShougakukinPage() {
           </section>
 
           {/* 出典 */}
-          <div className="mb-10 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-            <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-              <BookCheck className="h-3.5 w-3.5 text-emerald-600" />
-              出典・参考（一次情報）
-            </div>
-            <ul className="space-y-1.5 text-xs leading-relaxed">
+          <div className="mb-10 rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <div className="mb-2 text-sm font-bold text-slate-900">出典・参考（一次情報）</div>
+            <ul className="space-y-2 text-sm leading-[1.8]">
               <li>
-                <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「高校生等への修学支援（就学支援金・奨学給付金）」
                 </a>
               </li>
               <li>
-                <a href="https://www.mext.go.jp/kaikakusuishin/" target="_blank" rel="noopener" className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800">
+                <a href="https://www.mext.go.jp/kaikakusuishin/" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   文部科学省「高等教育の修学支援新制度」
                 </a>
-                <span className="text-slate-400"> — 大学等の授業料減免・給付型奨学金</span>
+                <span className="text-slate-600"> — 大学等の授業料減免・給付型奨学金</span>
               </li>
             </ul>
           </div>
@@ -240,19 +236,17 @@ export default function ShougakukinPage() {
 
           {/* FAQ */}
           <section className="mb-10">
-            <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-slate-800">
-              <HelpCircle className="h-5 w-5 text-emerald-600" />よくある質問
-            </h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
             <div className="space-y-3">
               {FAQS.map((f) => (
-                <details key={f.question} className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <summary className="cursor-pointer list-none font-bold text-slate-800 marker:content-none">
-                    <span className="flex items-center justify-between gap-3">
+                <details key={f.question} className="group rounded-lg border border-slate-200 bg-white p-5">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:content-none">
+                    <span className="flex min-h-[44px] items-center justify-between gap-3">
                       {f.question}
-                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-open:rotate-90" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500 group-open:rotate-90" />
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{f.answer}</p>
+                  <p className="mt-3 text-base leading-[1.8] text-slate-900">{f.answer}</p>
                 </details>
               ))}
             </div>
@@ -276,12 +270,9 @@ export default function ShougakukinPage() {
 
 function SupportCard({ title, body }: { title: string; body: string }) {
   return (
-    <div className="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-5">
-      <div className="mb-2 flex items-center gap-1.5 text-sm font-bold text-emerald-900">
-        <ShieldCheck className="h-4 w-4 text-emerald-600" />
-        {title}
-      </div>
-      <p className="text-xs leading-relaxed text-slate-700">{body}</p>
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
+      <div className="mb-2 text-base font-bold text-slate-900">{title}</div>
+      <p className="text-sm leading-[1.8] text-slate-900">{body}</p>
     </div>
   );
 }

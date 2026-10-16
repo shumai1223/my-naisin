@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { CheckCircle, FileText, Calendar, Calculator, TrendingUp, ShieldCheck, RefreshCw, Search, Award } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { CheckCircle, Home, ChevronRight } from '@/components/icons';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { Metadata } from 'next';
 
@@ -73,84 +72,85 @@ const globalUpdateHistory = [
 
 export default function QualityPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <BreadcrumbSchema 
+    <div className="min-h-screen bg-slate-50">
+      <BreadcrumbSchema
         items={[
           { name: 'ホーム', url: 'https://my-naishin.com/' },
           { name: '品質保証', url: 'https://my-naishin.com/quality' }
         ]}
       />
-      <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
+      <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
+        <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+          <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
+            <Home className="h-4 w-4" />
+            ホーム
+          </Link>
+          <ChevronRight className="h-4 w-4" />
+          <span className="text-slate-900">品質保証</span>
+        </nav>
+
         {/* ヘッダー */}
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 shadow-lg shadow-blue-300/40">
-            <ShieldCheck className="h-8 w-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold text-slate-800 md:text-4xl">
+        <header className="mb-8">
+          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
             品質保証と情報の正確性について
           </h1>
-          <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            「My Naishin」は、単なる便利ツールではありません。
-            受験生の将来を左右する情報を扱うサイトとして、厳格なデータ検証プロセスを設けています。
+          <p className="mt-2 text-sm text-slate-600">
+            令和8年度入試 ／ 出典：各都道府県教育委員会「入学者選抜要綱」（
+            <Link href="/genten-archive" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">一次ソース確認履歴</Link>
+            ） ／ 検証結果の最終更新 {globalUpdateHistory[0].date}
           </p>
-        </div>
+          <p className="mt-4 text-base leading-[1.8] text-slate-900">
+            「My Naishin」は、受験生の進路に関わる情報を扱うサイトとして、データの検証プロセスを設けています。
+          </p>
+        </header>
 
         {/* 信頼の証明セクション */}
-        <div className="grid gap-6 md:grid-cols-2 mb-12">
-          <div className="rounded-2xl border-2 border-blue-100 bg-white p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <Search className="h-6 w-6 text-blue-600" />
-              <h2 className="text-xl font-bold text-slate-800">公式の選抜要綱を主軸にした検証</h2>
-            </div>
-            <p className="text-sm text-slate-600 leading-relaxed">
+        <div className="mb-10 grid gap-4 md:grid-cols-2">
+          <section className="rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">公式の選抜要綱を主軸にした検証</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               当サイトの計算ロジックは、各都道府県教育委員会が発行する<strong>「令和8年度入学者選抜要綱」</strong>などの公式資料を主たる根拠とし、1点1点の重みや端数処理のルールまでプログラムに反映しています。
               県によっては、公式資料に加えて信頼できる教育情報サイトの解説も補助的に参照し、内容を相互に突き合わせて検証しています。
             </p>
-          </div>
-          <div className="rounded-2xl border-2 border-emerald-100 bg-white p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <Calculator className="h-6 w-6 text-emerald-600" />
-              <h2 className="text-xl font-bold text-slate-800">自動テストと目視確認</h2>
-            </div>
-            <p className="text-sm text-slate-600 leading-relaxed">
+          </section>
+          <section className="rounded-lg border border-slate-200 bg-white p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">自動テストと目視確認</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               主要な計算パターンについて、手計算とプログラムの結果が一致するかを検証する自動テストを定期的に実行しています。
               また、制度変更があった際は、代表自らが公式資料とサイトの出力を突き合わせる目視確認を全県で実施しています。
             </p>
-          </div>
+          </section>
         </div>
 
         {/* テスト結果の可視化 */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-            <Award className="h-6 w-6 text-blue-600" />
-            代表的な計算ロジックの検証結果
-          </h2>
-          <div className="grid gap-6">
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-bold text-slate-900">代表的な計算ロジックの検証結果</h2>
+          <div className="grid gap-4">
             {testResults.map((pref, i) => (
-              <div key={i} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                <div className="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
-                  <h3 className="font-bold text-slate-800">{pref.prefecture}：{pref.notes}</h3>
-                  <span className="text-[10px] font-bold text-slate-400">VER: {pref.version}</span>
+              <div key={i} className="rounded-lg border border-slate-200 bg-white p-5">
+                <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-[17px] font-bold leading-snug text-slate-900">{pref.prefecture}：{pref.notes}</h3>
+                  <span className="text-xs text-slate-600">VER: {pref.version}</span>
                 </div>
-                <div className="p-6">
+                <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="text-slate-400 text-xs border-b border-slate-100">
-                        <th className="text-left pb-3 font-medium">テストケース</th>
-                        <th className="text-center pb-3 font-medium">期待される結果</th>
-                        <th className="text-center pb-3 font-medium">ツールの出力</th>
-                        <th className="text-center pb-3 font-medium">ステータス</th>
+                      <tr className="border-b border-slate-900 text-xs text-slate-600">
+                        <th className="whitespace-nowrap pb-2 text-left font-bold">テストケース</th>
+                        <th className="whitespace-nowrap pb-2 pl-2 text-right font-bold sm:pl-4">期待される<br className="sm:hidden" />結果</th>
+                        <th className="whitespace-nowrap pb-2 pl-2 text-right font-bold sm:pl-4">ツールの<br className="sm:hidden" />出力</th>
+                        <th className="whitespace-nowrap pb-2 pl-2 text-left font-bold sm:pl-4">ステータス</th>
                       </tr>
                     </thead>
                     <tbody>
                       {pref.testCases.map((tc, j) => (
-                        <tr key={j} className="border-b border-slate-50 last:border-0">
-                          <td className="py-4 font-medium text-slate-700">{tc.name}</td>
-                          <td className="py-4 text-center text-slate-600 font-mono">{tc.expected}</td>
-                          <td className="py-4 text-center text-slate-600 font-mono">{tc.actual}</td>
-                          <td className="py-4 text-center">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-600">
-                              <CheckCircle className="h-3 w-3" /> PASS
+                        <tr key={j} className="border-b border-slate-200 last:border-0">
+                          <td className="py-3 text-slate-900">{tc.name}</td>
+                          <td className="whitespace-nowrap py-3 pl-2 text-right tabular-nums text-slate-900 sm:pl-4">{tc.expected}</td>
+                          <td className="whitespace-nowrap py-3 pl-2 text-right tabular-nums text-slate-900 sm:pl-4">{tc.actual}</td>
+                          <td className="py-3 pl-2 sm:pl-4">
+                            <span className="inline-flex items-center gap-1 whitespace-nowrap rounded border border-slate-200 bg-white px-1.5 py-0.5 text-xs font-bold text-brand-700 sm:px-2">
+                              <CheckCircle className="h-4 w-4 shrink-0" /> PASS
                             </span>
                           </td>
                         </tr>
@@ -161,73 +161,67 @@ export default function QualityPage() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* 更新履歴 */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-            <RefreshCw className="h-6 w-6 text-slate-600" />
-            アップデート履歴
-          </h2>
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-bold text-slate-900">アップデート履歴</h2>
           <div className="space-y-4">
             {globalUpdateHistory.map((update, i) => (
-              <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-sm font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{update.version}</span>
-                  <span className="text-xs text-slate-400">{update.date}</span>
+              <div key={i} className="rounded-lg border border-slate-200 bg-white p-5">
+                <div className="mb-3 flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-bold text-slate-900">{update.version}</span>
+                  <span className="text-sm tabular-nums text-slate-600">{update.date}</span>
                 </div>
-                <ul className="space-y-2">
+                <ul className="list-disc space-y-2 pl-5 text-base leading-[1.8] text-slate-900">
                   {update.changes.map((change, j) => (
-                    <li key={j} className="flex gap-2 text-sm text-slate-600">
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-slate-400" />
-                      {change}
-                    </li>
+                    <li key={j}>{change}</li>
                   ))}
                 </ul>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* 統計データへの導線＋方法論・限界の開示（TIER N-8・研究/メディア利用向け） */}
-        <div className="mb-16 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
-          <h2 className="mb-2 text-lg font-bold text-slate-800">利用者の匿名データによる統計</h2>
-          <p className="mb-4 text-sm leading-relaxed text-slate-600">
+        <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">利用者の匿名データによる統計</h2>
+          <p className="text-base leading-[1.8] text-slate-900">
             計算機の結果を任意でオプトインいただいた匿名データから、内申点・偏差値・総合得点の分布を集計しています。任意参加の自己選択標本であり、母集団を代表する統計ではありません。個人を特定できる情報は一切含みません。
-            {/* DW-1（2026-08-10）: 投稿の真正性を検証できないことが判明したため、現在は数値の公開を停止している。
-                「公開しています」と書き続けると、このページ自体が信頼性の説明として嘘になる。 */}
-            <br />
-            <span className="mt-2 inline-block font-bold text-emerald-800">
-              ※ 2026-08-10 より、投稿の真正性を検証できないため集計値の公開を停止しています。送信元の検証を実装したうえで再収集します。件数の表示は続けています。
-            </span>
           </p>
-          <Link href="/stats" className="mb-6 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
-            統計データのページを見る →
-          </Link>
-          <br />
-          <Link href="/reliability" className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-emerald-700 hover:underline">
-            データの鮮度・検証履歴・API稼働状況のサマリーを見る →
-          </Link>
+          {/* DW-1（2026-08-10）: 投稿の真正性を検証できないことが判明したため、現在は数値の公開を停止している。
+              「公開しています」と書き続けると、このページ自体が信頼性の説明として嘘になる。 */}
+          <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm font-bold leading-[1.8] text-amber-900">
+            ※ 2026-08-10 より、投稿の真正性を検証できないため集計値の公開を停止しています。送信元の検証を実装したうえで再収集します。件数の表示は続けています。
+          </p>
+          <div className="mt-3 flex flex-col">
+            <Link href="/stats" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+              統計データのページを見る →
+            </Link>
+            <Link href="/reliability" className="inline-flex min-h-[44px] items-center gap-1 text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+              データの鮮度・検証履歴・API稼働状況のサマリーを見る →
+            </Link>
+          </div>
 
-          <div className="mt-4 rounded-xl border border-emerald-200 bg-white p-5">
-            <h3 className="mb-3 text-sm font-bold text-slate-800">研究・メディアの方へ：この統計データの方法論と限界</h3>
-            <ul className="space-y-2.5 text-xs leading-relaxed text-slate-600">
+          <div className="mt-6 border-t border-slate-200 pt-5">
+            <h3 className="mb-3 text-[17px] font-bold leading-snug text-slate-900">研究・メディアの方へ：この統計データの方法論と限界</h3>
+            <ul className="space-y-3 text-sm leading-[1.8] text-slate-900">
               <li>
-                <strong className="text-slate-700">収集方法：</strong>
+                <strong>収集方法：</strong>
                 各計算機ページ（内申点・偏差値・総合得点）で計算した利用者本人が、任意で「匿名で統計に協力する」にオプトインした場合のみ、計算結果（数値と都道府県）を収集します。氏名・メールアドレス・IPアドレス等の個人を特定できる情報は一切収集していません。同意はいつでも撤回できます。
               </li>
               <li>
-                <strong className="text-slate-700">代表性の限界：</strong>
+                <strong>代表性の限界：</strong>
                 本データは全国の中学生から無作為抽出したものではなく、「My Naishinの計算機を使い、かつ統計協力に同意した利用者」に限られる自己選択サンプルです。母集団（全国の中学生）の分布を正確に代表する保証はなく、学術的な統計調査とは性質が異なります。参考値としてご利用ください。
               </li>
               <li>
-                <strong className="text-slate-700">プライバシー保護（k-匿名性）：</strong>
+                <strong>プライバシー保護（k-匿名性）：</strong>
                 個人の値が推測されるリスクを避けるため、サンプルサイズが30件未満のセグメントは集計値を非公開にし、件数のみを表示します（
-                <Link href="/stats" className="font-semibold text-emerald-700 underline">/stats</Link>
+                <Link href="/stats" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">/stats</Link>
                 で「収集中」と表示される項目）。
               </li>
               <li>
-                <strong className="text-slate-700">入手方法：</strong>
+                <strong>入手方法：</strong>
                 JSON API（
                 <code className="rounded bg-slate-100 px-1 py-0.5">/api/stats/distribution</code>
                 ）およびCSV一括ダウンロード（
@@ -235,29 +229,28 @@ export default function QualityPage() {
                 ）で取得できます。引用の際は「出典：My Naishin（https://my-naishin.com/stats）」の明記をお願いします。
               </li>
               <li>
-                <strong className="text-slate-700">お問い合わせ：</strong>
+                <strong>お問い合わせ：</strong>
                 研究・報道での利用にあたり詳細（収集期間・生データの取り扱い等）についてご質問がある場合は、
-                <Link href="/contact" className="font-semibold text-emerald-700 underline">お問い合わせフォーム</Link>
+                <Link href="/contact" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">お問い合わせフォーム</Link>
                 からご連絡ください。
               </li>
             </ul>
           </div>
-        </div>
+        </section>
 
         {/* 誤り報告 */}
-        <div className="rounded-2xl bg-slate-900 p-8 text-white text-center">
-          <h2 className="text-2xl font-bold mb-4">受験生の正確な情報を守るために</h2>
-          <p className="text-slate-400 text-sm mb-8 leading-relaxed max-w-xl mx-auto">
-            情報の誤りは受験生の人生に影響を及ぼす重大な問題だと認識しています。
+        <section className="rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">受験生の正確な情報を守るために</h2>
+          <p className="mb-5 text-base leading-[1.8] text-slate-900">
+            情報の誤りは受験生の進路に影響しうる問題だと認識しています。
             もし制度との齟齬を発見された場合は、教育委員会資料のURL等を添えて下記よりお知らせください。
-            24時間以内に内容を確認し、必要であれば即座に修正プログラムを配信します。
+            24時間以内に内容を確認し、必要であれば速やかに修正を反映します。
           </p>
-          <Link href="/contact">
-            <Button className="bg-white text-slate-900 hover:bg-slate-100 font-bold px-8">誤り報告・お問い合わせ</Button>
+          <Link href="/contact" className="inline-flex min-h-[44px] items-center justify-center rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800">
+            誤り報告・お問い合わせ
           </Link>
-        </div>
+        </section>
       </div>
     </div>
   );
 }
-
