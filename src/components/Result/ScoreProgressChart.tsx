@@ -1,8 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, Minus, Calendar, ChevronDown, ChevronUp, History } from '@/components/icons';
+import { TrendingUp, TrendingDown, Minus, ChevronDown, ChevronUp } from '@/components/icons';
 
 import { readHistory } from '@/lib/persistence';
 import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -57,7 +56,7 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
     // Append current session snapshot (latest state) to reflect immediately without reload
     points.push({
       date: 'current',
-      dateLabel: 'Now',
+      dateLabel: '今回',
       total: currentTotal,
       max: currentMax,
       percent: calculatePercent(currentTotal, currentMax),
@@ -119,200 +118,103 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
 
   if (chartData.length === 0) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="rounded-lg border border-slate-200 bg-white overflow-hidden"
-      >
-        <div className="bg-brand-500 p-5 text-white">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
-              <History className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold">📈 成績推移グラフ</h3>
-              <p className="text-sm text-white/80">記録を続けると成長が見える！</p>
-            </div>
-          </div>
-        </div>
-        <div className="p-6 text-center">
-          <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-slate-100">
-            <TrendingUp className="h-8 w-8 text-slate-400" />
-          </div>
-          <p className="text-sm text-slate-600">まだ十分なデータがありません</p>
-          <p className="mt-1 text-xs text-slate-400">
+      <div className="rounded-lg border border-slate-200 bg-white p-5">
+        <h3 className="text-[17px] font-bold text-slate-900">成績推移グラフ</h3>
+        <p className="mt-1 text-sm text-slate-600">記録が増えると推移を確認できます</p>
+        <div className="mt-4 border-t border-slate-200 pt-4 text-center">
+          <p className="text-sm text-slate-900">まだ十分なデータがありません</p>
+          <p className="mt-1 text-sm text-slate-600">
             2回以上保存すると成績の推移グラフが表示されます
           </p>
-          <p className="mt-1 text-xs text-slate-400">
+          <p className="mt-1 text-sm text-slate-600">
             反映されない場合はページを更新してください
           </p>
         </div>
-      </motion.div>
+      </div>
     );
   }
 
   const TrendIcon = trend.direction === 'up' ? TrendingUp : trend.direction === 'down' ? TrendingDown : Minus;
-  const trendColor = trend.direction === 'up' ? 'text-brand-500' : trend.direction === 'down' ? 'text-red-500' : 'text-slate-400';
-  const trendBg = trend.direction === 'up' ? 'bg-brand-50' : trend.direction === 'down' ? 'bg-red-50' : 'bg-slate-50';
+  const trendColor = trend.direction === 'up' ? 'text-brand-700' : trend.direction === 'down' ? 'text-amber-900' : 'text-slate-700';
+  const trendBg = trend.direction === 'up' ? 'border-brand-200 bg-brand-50' : trend.direction === 'down' ? 'border-amber-200 bg-amber-50' : 'border-slate-200 bg-white';
+
+  // 目盛り線（表示範囲に入るものだけ）
+  const gridLines = [0, 25, 50, 75, 100]
+    .map((pct) => ({
+      pct,
+      y: padding.top + innerHeight - ((pct - yMin) / (yMax - yMin)) * innerHeight,
+    }))
+    .filter(({ y }) => !(y < padding.top - 2 || y > padding.top + innerHeight + 2));
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.3 }}
-      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
-    >
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
       {/* Header */}
-      <div className="w-full bg-brand-500 p-5 text-white">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
-              <History className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold">📈 成績推移グラフ</h3>
-              <p className="text-sm text-white/80">過去{chartData.length}回分の記録</p>
-            </div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 className="text-[17px] font-bold text-slate-900">成績推移グラフ</h3>
+          <p className="mt-1 text-sm text-slate-600">過去{chartData.length}回分の記録</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className={`inline-flex items-center gap-1 rounded border px-2 py-1 text-sm font-bold tabular-nums ${trendBg} ${trendColor}`}>
+            <TrendIcon className="h-4 w-4" />
+            {trend.direction === 'up' && `+${trend.change.toFixed(1)}%`}
+            {trend.direction === 'down' && `${trend.change.toFixed(1)}%`}
+            {trend.direction === 'neutral' && '安定'}
           </div>
-          <div className="flex items-center gap-3">
-            <div className={`rounded-full px-3 py-1 ${trendBg}`}>
-              <div className={`flex items-center gap-1 text-sm font-bold ${trendColor}`}>
-                <TrendIcon className="h-4 w-4" />
-                {trend.direction === 'up' && `+${trend.change.toFixed(1)}%`}
-                {trend.direction === 'down' && `${trend.change.toFixed(1)}%`}
-                {trend.direction === 'neutral' && '安定'}
-              </div>
-            </div>
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-bold text-brand-700 transition"
-            >
-              {expanded ? (
-                <ChevronUp className="h-4 w-4" />
-              ) : (
-                <ChevronDown className="h-4 w-4" />
-              )}
-              {expanded ? '閉じる' : '見る'}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+            className="inline-flex min-h-11 items-center gap-1.5 rounded border border-brand-700 bg-white px-4 py-2 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
+          >
+            {expanded ? (
+              <ChevronUp className="h-4 w-4" />
+            ) : (
+              <ChevronDown className="h-4 w-4" />
+            )}
+            {expanded ? '閉じる' : '見る'}
+          </button>
         </div>
       </div>
 
       {expanded && (
-        <div className="p-5">
-          {/* Chart */}
-          <div className="relative mb-4">
+        <div className="mt-5">
+          {/* Chart（目盛りの文字とデータ点は HTML で重ねる。SVG 内の文字は拡大縮小されて 12px 未満になるため）。
+              数値は下の「記録履歴」にもあるので、読み上げからは外す。 */}
+          <div className="relative mb-4" aria-hidden="true">
             <svg
               viewBox={`0 0 ${chartWidth} ${chartHeight}`}
-              className="w-full"
+              className="block w-full"
               style={{ aspectRatio: '2 / 1' }}
               preserveAspectRatio="xMidYMid meet"
             >
-              {/* Grid lines with Y-axis labels */}
-              {[0, 25, 50, 75, 100].map((pct) => {
-                const y = padding.top + innerHeight - ((pct - yMin) / (yMax - yMin)) * innerHeight;
-                if (y < padding.top - 2 || y > padding.top + innerHeight + 2) return null;
-                return (
-                  <g key={pct}>
-                    <line
-                      x1={padding.left}
-                      y1={y}
-                      x2={padding.left + innerWidth}
-                      y2={y}
-                      stroke="#e2e8f0"
-                      strokeWidth="0.2"
-                      strokeDasharray="1,1"
-                    />
-                    <text
-                      x={padding.left - 2}
-                      y={y + 1}
-                      textAnchor="end"
-                      className="fill-slate-400"
-                      style={{ fontSize: '2.5px' }}
-                    >
-                      {pct}%
-                    </text>
-                  </g>
-                );
-              })}
+              {/* Grid lines */}
+              {gridLines.map(({ pct, y }) => (
+                <line
+                  key={pct}
+                  x1={padding.left}
+                  y1={y}
+                  x2={padding.left + innerWidth}
+                  y2={y}
+                  stroke="#cddad3"
+                  strokeWidth="1"
+                  vectorEffect="non-scaling-stroke"
+                />
+              ))}
 
-              {/* Area fill - ふわっと表示 */}
-              <defs>
-                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.05" />
-                </linearGradient>
-              </defs>
-              <motion.path
-                d={generateAreaPath()}
-                fill="url(#areaGradient)"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              />
+              {/* Area fill（単色・薄く） */}
+              <path d={generateAreaPath()} fill="#17543e" fillOpacity="0.08" />
 
-              {/* Line - 左から右へ描くアニメーション */}
-              <motion.path
+              {/* Line */}
+              <path
                 d={generatePath()}
                 fill="none"
-                stroke="url(#lineGradient)"
-                strokeWidth="0.8"
+                stroke="#17543e"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.5, ease: 'easeInOut', delay: 0.5 }}
+                vectorEffect="non-scaling-stroke"
               />
-              <defs>
-                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#06b6d4" />
-                  <stop offset="50%" stopColor="#14b8a6" />
-                  <stop offset="100%" stopColor="#10b981" />
-                </linearGradient>
-              </defs>
-
-              {/* Data points - 左から順に表示 */}
-              {chartData.map((d, i) => {
-                const x = padding.left + (i / Math.max(chartData.length - 1, 1)) * innerWidth;
-                const y = padding.top + innerHeight - ((d.percent - yMin) / (yMax - yMin)) * innerHeight;
-                return (
-                  <motion.g
-                    key={i}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.5 + i * 0.15 }}
-                  >
-                    <circle
-                      cx={x}
-                      cy={y}
-                      r="1.5"
-                      fill="white"
-                      stroke="#14b8a6"
-                      strokeWidth="0.6"
-                    />
-                  </motion.g>
-                );
-              })}
-
-              {/* X-axis labels */}
-              {chartData.map((d, i) => {
-                const x = padding.left + (i / Math.max(chartData.length - 1, 1)) * innerWidth;
-                // Only show some labels if too many points
-                if (chartData.length > 6 && i % 2 !== 0 && i !== chartData.length - 1) return null;
-                return (
-                  <text
-                    key={i}
-                    x={x}
-                    y={chartHeight - 1}
-                    textAnchor="middle"
-                    className="fill-slate-400"
-                    style={{ fontSize: '2.5px' }}
-                  >
-                    {d.dateLabel}
-                  </text>
-                );
-              })}
 
               {/* Y-axis line */}
               <line
@@ -320,8 +222,9 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
                 y1={padding.top}
                 x2={padding.left}
                 y2={padding.top + innerHeight}
-                stroke="#cbd5e1"
-                strokeWidth="0.3"
+                stroke="#4f6158"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
               />
               {/* X-axis line */}
               <line
@@ -329,83 +232,126 @@ export function ScoreProgressChart({ currentTotal, currentMax, currentPrefecture
                 y1={padding.top + innerHeight}
                 x2={padding.left + innerWidth}
                 y2={padding.top + innerHeight}
-                stroke="#cbd5e1"
-                strokeWidth="0.3"
+                stroke="#4f6158"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
               />
             </svg>
+
+            {/* Y-axis labels */}
+            {gridLines.map(({ pct, y }) => (
+              <span
+                key={pct}
+                className="absolute -translate-y-1/2 text-xs tabular-nums text-slate-600"
+                style={{ top: `${(y / chartHeight) * 100}%`, right: `${100 - (padding.left - 2)}%` }}
+              >
+                {pct}%
+              </span>
+            ))}
+
+            {/* Data points */}
+            {chartData.map((d, i) => {
+              const x = padding.left + (i / Math.max(chartData.length - 1, 1)) * innerWidth;
+              const y = padding.top + innerHeight - ((d.percent - yMin) / (yMax - yMin)) * innerHeight;
+              return (
+                <span
+                  key={i}
+                  className="absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-brand-700 bg-white"
+                  style={{ left: `${(x / chartWidth) * 100}%`, top: `${(y / chartHeight) * 100}%` }}
+                />
+              );
+            })}
+
+            {/* X-axis labels */}
+            {chartData.map((d, i) => {
+              const x = padding.left + (i / Math.max(chartData.length - 1, 1)) * innerWidth;
+              // Only show some labels if too many points（最後の1つ手前は、最後と近すぎて重なるので省く）
+              if (chartData.length > 6 && i !== chartData.length - 1 && (i % 2 !== 0 || i === chartData.length - 2)) return null;
+              return (
+                <span
+                  key={i}
+                  className="absolute -translate-x-1/2 whitespace-nowrap text-xs tabular-nums text-slate-600"
+                  style={{
+                    left: `${(x / chartWidth) * 100}%`,
+                    top: `calc(${((padding.top + innerHeight) / chartHeight) * 100}% + 6px)`,
+                  }}
+                >
+                  {d.dateLabel}
+                </span>
+              );
+            })}
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="rounded-lg bg-slate-50 p-3 text-center">
-              <div className="text-xs text-slate-500">初回</div>
-              <div className="mt-1 text-lg font-bold text-slate-700">{chartData[0]?.percent.toFixed(0)}%</div>
-              <div className="text-xs text-slate-400">{chartData[0]?.total}/{chartData[0]?.max}点</div>
+          <dl className="grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200">
+            <div className="px-3 py-3 text-center">
+              <dt className="text-xs text-slate-600">初回</dt>
+              <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{chartData[0]?.percent.toFixed(0)}%</dd>
+              <dd className="text-xs tabular-nums text-slate-600">{chartData[0]?.total}/{chartData[0]?.max}点</dd>
             </div>
-            <div className="rounded-lg bg-brand-50 p-3 text-center border border-brand-200">
-              <div className="text-xs text-brand-600">最新</div>
-              <div className="mt-1 text-lg font-bold text-brand-700">
+            <div className="px-3 py-3 text-center">
+              <dt className="text-xs text-slate-600">最新</dt>
+              <dd className="mt-1 text-2xl font-bold tabular-nums text-brand-700">
                 {chartData[chartData.length - 1]?.percent.toFixed(0)}%
-              </div>
-              <div className="text-xs text-brand-500">
+              </dd>
+              <dd className="text-xs tabular-nums text-slate-600">
                 {chartData[chartData.length - 1]?.total}/{chartData[chartData.length - 1]?.max}点
-              </div>
+              </dd>
             </div>
-            <div className={`rounded-lg p-3 text-center ${trendBg}`}>
-              <div className="text-xs text-slate-500">変化</div>
-              <div className={`mt-1 text-lg font-bold ${trendColor}`}>
+            <div className="px-3 py-3 text-center">
+              <dt className="text-xs text-slate-600">変化</dt>
+              <dd className={`mt-1 text-2xl font-bold tabular-nums ${trendColor}`}>
                 {trend.change >= 0 ? '+' : ''}{trend.change.toFixed(1)}%
-              </div>
-              <div className="text-xs text-slate-400">
-                {trend.direction === 'up' ? '成長中！' : trend.direction === 'down' ? '要注意' : '安定'}
-              </div>
+              </dd>
+              <dd className="text-xs text-slate-600">
+                {trend.direction === 'up' ? '上昇' : trend.direction === 'down' ? '要注意' : '安定'}
+              </dd>
             </div>
-          </div>
+          </dl>
 
           {/* History list */}
-          <div className="mt-4">
-            <div className="text-xs font-bold text-slate-600 mb-2">📋 記録履歴</div>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
+          <div className="mt-5">
+            <h4 className="mb-2 text-sm font-bold text-slate-900">記録履歴</h4>
+            <ul className="max-h-48 divide-y divide-slate-200 overflow-y-auto border-y border-slate-200">
               {chartData.slice().reverse().map((d, i) => (
-                <div
+                <li
                   key={i}
-                  className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2"
+                  className="flex items-center justify-between gap-3 py-2"
                 >
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-3.5 w-3.5 text-slate-400" />
-                    <span className="text-xs text-slate-600">
-                      {new Date(d.date).toLocaleDateString('ja-JP', {
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="text-sm text-slate-600">
+                      {d.date === 'current'
+                        ? '今回'
+                        : new Date(d.date).toLocaleDateString('ja-JP', {
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })}
                     </span>
                     {d.memo && (
-                      <span className="text-xs text-slate-400 truncate max-w-[100px]">
+                      <span className="max-w-[100px] truncate text-sm text-slate-600">
                         ({d.memo})
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-slate-700">{d.total}点</span>
-                    <span className="text-xs text-slate-400">({d.percent.toFixed(0)}%)</span>
+                  <div className="flex shrink-0 items-center gap-2 tabular-nums">
+                    <span className="text-sm font-bold text-slate-900">{d.total}点</span>
+                    <span className="text-sm text-slate-600">({d.percent.toFixed(0)}%)</span>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          {/* Motivation message */}
-          <div className="mt-4 rounded-lg bg-brand-50 p-3 border border-brand-200">
-            <p className="text-xs text-brand-700 text-center">
-              {trend.direction === 'up' && '🎉 着実に成長しています！この調子で頑張ろう！'}
-              {trend.direction === 'down' && '💪 一時的な下降は成長の一部。諦めずに続けよう！'}
-              {trend.direction === 'neutral' && '📊 安定した成績をキープ中。さらなる高みを目指そう！'}
-            </p>
-          </div>
+          {/* Message */}
+          <p className="mt-5 rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm leading-relaxed text-slate-900">
+            {trend.direction === 'up' && '着実に上昇しています。この調子で続けましょう。'}
+            {trend.direction === 'down' && '一時的な下降は成長の一部です。続けて取り組みましょう。'}
+            {trend.direction === 'neutral' && '安定した成績を保っています。'}
+          </p>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }

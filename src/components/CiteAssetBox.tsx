@@ -28,34 +28,33 @@ export function CiteAssetBox() {
   }, []);
 
   return (
-    <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50/70 p-4">
-      <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-700">
-        <Quote className="h-3.5 w-3.5 text-brand-500" />
+    <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+      <div className="mb-2 text-sm font-bold text-slate-900">
         この一覧表は出典明記で自由に引用・転載できます
       </div>
-      <p className="mb-3 text-xs leading-relaxed text-slate-500">
+      <p className="mb-3 text-sm leading-relaxed text-slate-600">
         ブログ・記事・配布資料などにご活用ください。引用時は下記のクレジット（出典リンク）の併記にご協力ください。
       </p>
 
       <div className="flex flex-col gap-2 sm:flex-row">
-        <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-600">
+        <code className="flex min-h-[44px] min-w-0 flex-1 items-center overflow-x-auto whitespace-nowrap rounded border border-slate-200 bg-white px-3 py-2 text-xs text-slate-700">
           {citeSnippet}
         </code>
-        <div className="flex shrink-0 gap-2">
+        <div className="flex shrink-0 flex-wrap gap-2">
           <button
             type="button"
             onClick={() => copy(citeSnippet, 'cite')}
-            className="inline-flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-brand-700"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded bg-brand-700 px-4 text-sm font-bold text-white transition-colors hover:bg-brand-800"
           >
-            {copied === 'cite' ? <Check className="h-3.5 w-3.5" /> : <Quote className="h-3.5 w-3.5" />}
+            {copied === 'cite' ? <Check className="h-4 w-4" /> : <Quote className="h-4 w-4" />}
             {copied === 'cite' ? 'コピーしました' : '引用クレジットをコピー'}
           </button>
           <button
             type="button"
             onClick={() => copy(url, 'url')}
-            className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-100"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded border border-brand-700 bg-white px-4 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
           >
-            {copied === 'url' ? <Check className="h-3.5 w-3.5" /> : <Link2 className="h-3.5 w-3.5" />}
+            {copied === 'url' ? <Check className="h-4 w-4" /> : <Link2 className="h-4 w-4" />}
             {copied === 'url' ? 'コピー済' : 'URLをコピー'}
           </button>
         </div>

@@ -2,7 +2,7 @@ import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { CtaViewTracker } from '@/components/Affiliate/CtaViewTracker';
 import { isLiveAffiliate, type AffiliateId } from '@/lib/affiliates';
 import { programPreset, selectLeadOffer, selectSecondaryLeadOffer, type LeadPlacement } from '@/lib/lead-config';
-import { ShieldCheck, FileText, Plus } from '@/components/icons';
+import { FileText, Plus } from '@/components/icons';
 
 interface ParentLeadCTAProps {
   /** 見出し（未指定なら出し分けエンジンの解決値）。都道府県名などで文脈最適化できる */
@@ -26,6 +26,8 @@ interface ParentLeadCTAProps {
   secondaryAffiliateId?: AffiliateId;
   /** 副オファーのA/Bバリアント。副オファーのAffiliateAdにdata-variantとして載せ、affiliate_clickの勝敗分解に使う。 */
   secondaryVariant?: string;
+  /** 見出しのレベル（既定 h3）。置かれるページの見出し階層に合わせて呼び出し側が選ぶ。 */
+  headingLevel?: 'h2' | 'h3' | 'h4';
 }
 
 /**
@@ -35,7 +37,7 @@ interface ParentLeadCTAProps {
  * 「契約の意思決定者＝保護者」に向けて、無料資料請求（高単価リード）へ誘導する。
  * 実リンク・トラッキング・rel/PR表記は AffiliateAd に集約してコンプラを担保。
  */
-export function ParentLeadCTA({ heading, body, className = '', affiliateId, note, ctaText, prefectureCode, placement, variant, secondaryAffiliateId, secondaryVariant }: ParentLeadCTAProps) {
+export function ParentLeadCTA({ heading, body, className = '', affiliateId, note, ctaText, prefectureCode, placement, variant, secondaryAffiliateId, secondaryVariant, headingLevel = 'h3' }: ParentLeadCTAProps) {
   // 県×面の出し分けエンジンで既定を解決。明示propは常に最優先（後方互換）。
   const offer = selectLeadOffer({ prefectureCode, placement });
   const resolvedHeading = heading ?? offer.heading;
@@ -60,42 +62,45 @@ export function ParentLeadCTA({ heading, body, className = '', affiliateId, note
   const secondaryBase = secondaryOverride ?? selectSecondaryLeadOffer({ prefectureCode, placement });
   const secondary = secondaryBase && secondaryBase.affiliateId !== resolvedAffiliateId ? secondaryBase : null;
 
+  // 見出しのレベルは呼び出し側が選ぶ（既定 h3）。見た目はレベルに依らず設計書の h2 / h3 の型。
+  const Heading = headingLevel;
+  const headingSize = headingLevel === 'h2' ? 'text-xl' : 'text-[17px]';
+
   return (
     <section
-      className={`overflow-hidden rounded-lg border border-brand-200 bg-brand-50 p-6 md:p-7 ${className}`}
+      className={`rounded-lg border border-slate-200 bg-white p-5 md:p-6 ${className}`}
     >
       <CtaViewTracker placement={placement ?? 'parent-lead'} pref={prefectureCode} program={resolvedAffiliateId} variant={variant} />
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
-        <ShieldCheck className="h-3.5 w-3.5" />
+      <div className="mb-3 inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
         保護者の方へ
       </div>
 
-      <h3 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">
+      <Heading className={`mb-2 ${headingSize} font-bold leading-snug text-slate-900`}>
         {resolvedHeading}
-      </h3>
-      <p className="mb-5 text-sm leading-relaxed text-slate-700">
+      </Heading>
+      <p className="mb-5 text-base leading-[1.8] text-slate-900">
         {resolvedBody}
       </p>
 
-      <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
+      <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
         <AffiliateAd
           id={resolvedAffiliateId}
           ctaText={resolvedCtaText}
           pref={prefectureCode}
           placement={placement}
           variant={variant}
-          linkClassName="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-95 sm:w-auto"
+          linkClassName="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800 sm:w-auto"
         />
-        <span className="inline-flex items-center justify-center gap-1.5 text-xs text-slate-500">
-          <FileText className="h-3.5 w-3.5" />
+        <span className="inline-flex items-center justify-center gap-1.5 text-sm text-slate-600">
+          <FileText className="h-4 w-4 shrink-0" />
           {resolvedNote}
         </span>
       </div>
 
       {secondary && (
-        <div className="mt-4 flex flex-col items-stretch gap-1.5 border-t border-brand-100 pt-4 sm:flex-row sm:items-center sm:gap-3">
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600">
-            <Plus className="h-3.5 w-3.5 text-brand-600" />
+        <div className="mt-4 flex flex-col items-stretch gap-1 border-t border-slate-200 pt-4 sm:flex-row sm:items-center sm:gap-3">
+          <span className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-900">
+            <Plus className="h-4 w-4 shrink-0" />
             あわせて検討したい方はこちら
           </span>
           <AffiliateAd
@@ -104,9 +109,9 @@ export function ParentLeadCTA({ heading, body, className = '', affiliateId, note
             pref={prefectureCode}
             placement={placement}
             variant={secondaryVariant}
-            linkClassName="inline-flex items-center gap-1.5 text-sm font-bold text-brand-700 underline underline-offset-2 transition-colors hover:text-brand-800"
+            linkClassName="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-brand-700 underline underline-offset-2 transition-colors hover:text-brand-800"
           />
-          <span className="text-xs text-slate-400">{secondary.note}</span>
+          <span className="text-sm text-slate-600">{secondary.note}</span>
         </div>
       )}
     </section>

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Check, Code2 } from '@/components/icons';
+import { Check, Copy } from '@/components/icons';
 
 type WidgetKey = 'naishin' | 'hensachi' | 'gakushu_seiseki';
 
@@ -48,8 +48,11 @@ export function EmbedWidgetPicker() {
             key={key}
             type="button"
             onClick={() => setActive(key)}
-            className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
-              active === key ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            aria-pressed={active === key}
+            className={`min-h-[44px] rounded border px-4 py-2 text-sm font-bold transition-colors ${
+              active === key
+                ? 'border-brand-700 bg-brand-700 text-white'
+                : 'border-slate-300 bg-white text-slate-900 hover:bg-brand-50'
             }`}
           >
             {WIDGETS[key].label}
@@ -69,22 +72,21 @@ export function EmbedWidgetPicker() {
         />
       </div>
 
-      <div className="mt-4 rounded-lg border border-slate-200 bg-slate-900 p-4">
-        <div className="mb-2 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-300">
-            <Code2 className="h-3.5 w-3.5" />
+      <div className="mt-4">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <p className="text-sm font-bold text-slate-900">
             埋め込みコード（HTML）— {widget.label}
-          </div>
+          </p>
           <button
             type="button"
             onClick={copy}
-            className="inline-flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-bold text-white transition-colors hover:bg-brand-700"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded bg-brand-700 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-brand-800"
           >
-            {copied ? <Check className="h-3.5 w-3.5" /> : <Code2 className="h-3.5 w-3.5" />}
+            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
             {copied ? 'コピーしました' : 'コードをコピー'}
           </button>
         </div>
-        <pre className="overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-slate-950 p-3 text-xs leading-relaxed text-brand-300">
+        <pre className="overflow-x-auto whitespace-pre-wrap break-all rounded-lg border border-slate-200 bg-white p-3 text-xs leading-relaxed text-slate-900">
           <code>{snippetFor(active)}</code>
         </pre>
       </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { MessageCircle, X, BellRing } from '@/components/icons';
+import { MessageCircle, X } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
@@ -132,7 +132,7 @@ export function ExitIntentLineModal() {
       onClick={close}
     >
       <div
-        className="w-full max-w-md overflow-hidden rounded-lg border border-slate-200 bg-white"
+        className="w-full max-w-md overflow-hidden rounded-lg border border-slate-200 bg-white shadow-overlay"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative bg-brand-50 px-5 py-5">
@@ -140,18 +140,14 @@ export function ExitIntentLineModal() {
             type="button"
             onClick={close}
             aria-label="閉じる"
-            className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/80 text-slate-500 hover:bg-white hover:text-slate-700"
+            className="absolute right-1 top-1 rounded p-3 text-slate-600 hover:bg-white hover:text-slate-900"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
-            <BellRing className="h-3.5 w-3.5" />
-            お見逃しなく
-          </div>
-          <h3 className="text-lg font-bold leading-snug text-slate-900">
+          <h3 className="pr-10 text-lg font-bold leading-snug text-slate-900">
             受験情報・内申点アップのコツをLINEで受け取りませんか？
           </h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-slate-600">
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">
             出願日程や対策のタイミングを、必要なときにLINEでお知らせします。登録は無料・数秒、いつでも解除できます。
           </p>
         </div>
@@ -161,16 +157,16 @@ export function ExitIntentLineModal() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={onLineClick}
-            className="flex items-center justify-center gap-2 rounded-lg bg-[#06C755] px-5 py-3.5 text-sm font-bold text-white transition-all active:scale-[0.99]"
+            className="flex items-center justify-center gap-2 rounded bg-[#06C755] px-5 py-3 text-base font-bold text-white transition-colors hover:bg-[#05b34c]"
           >
             <MessageCircle className="h-5 w-5" />
             LINEで友だち追加（無料）
           </a>
-          <p className="text-center text-xs leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
+          <p className="text-center text-sm leading-relaxed text-slate-600">{LINE_UNFRIEND_HELP_TEXT}</p>
           <button
             type="button"
             onClick={close}
-            className="text-center text-xs text-slate-400 hover:text-slate-600"
+            className="min-h-[44px] text-center text-sm text-slate-600 underline underline-offset-2 hover:text-slate-900"
           >
             あとで
           </button>

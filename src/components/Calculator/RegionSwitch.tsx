@@ -24,9 +24,9 @@ export function RegionSwitch({ prefectureCode, className }: RegionSwitchProps) {
         (className ?? "")
       }
     >
-      <MapPin className="h-4 w-4 text-slate-500" />
+      <MapPin className="h-4 w-4 text-slate-600" />
       <span>選択中: {prefectureCode}</span>
-      <span className="text-xs text-slate-400">(切替は下の都道府県セレクターで)</span>
+      <span className="text-xs text-slate-600">(切替は下の都道府県セレクターで)</span>
     </div>
   );
 }

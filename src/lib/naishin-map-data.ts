@@ -15,11 +15,11 @@ import { PREF_PATHS, MAP_VIEWBOX, OKINAWA_VIEWBOX } from '@/lib/naishin-map-path
 export { PREF_PATHS, MAP_VIEWBOX, OKINAWA_VIEWBOX };
 
 /**
- * データビジュアライゼーション用の検証済みシーケンシャル(単色)5段階ランプ。
- * dataviz skillのvalidate_palette.js --ordinal で白背景(#ffffff)に対して全項目PASS
- * （lightness monotone / adjacent ΔL >= 0.06 / light-end contrast 2.11:1 / hue spread 3°）。
+ * 地図用のシーケンシャル(単色)5段階ランプ。サイトのブランド色（深緑 #17543e）と同じ色相で、
+ * OKLab の明度を 0.76→0.34 へほぼ等間隔に振った（2026-10-16 のUI刷新で青から差し替え）。
+ * 計算値: 隣り合う段の明度差 0.099〜0.112 / 色相のぶれ 0.7° / 最も薄い段と白の対比 2.08:1。
  */
-export const SEQUENTIAL_SCALE = ['#86b6ef', '#5598e7', '#2a78d6', '#1c5cab', '#104281'] as const;
+export const SEQUENTIAL_SCALE = ['#85c0a6', '#639e84', '#427c64', '#245f48', '#05432f'] as const;
 /** 各段の上に載せる文字色（塗りの明度で自動判定・WCAGを大きく割らない安全側の2値のみ）。 */
 export const SEQUENTIAL_SCALE_TEXT = ['#0b0b0b', '#0b0b0b', '#ffffff', '#ffffff', '#ffffff'] as const;
 

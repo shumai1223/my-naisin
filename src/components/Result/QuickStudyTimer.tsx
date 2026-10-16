@@ -1,14 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Timer, Play, Pause, RotateCcw, Coffee, Brain, Zap } from '@/components/icons';
+import { Play, Pause, RotateCcw } from '@/components/icons';
 
 const TIMER_PRESETS = [
-  { label: '5分', seconds: 5 * 60, icon: Zap, color: 'bg-brand-400' },
-  { label: '15分', seconds: 15 * 60, icon: Brain, color: 'bg-brand-400' },
-  { label: '25分', seconds: 25 * 60, icon: Timer, color: 'bg-slate-400' },
-  { label: '休憩5分', seconds: 5 * 60, icon: Coffee, color: 'bg-amber-400', isBreak: true },
+  { label: '5分', seconds: 5 * 60 },
+  { label: '15分', seconds: 15 * 60 },
+  { label: '25分', seconds: 25 * 60 },
+  { label: '休憩5分', seconds: 5 * 60, isBreak: true },
 ];
 
 const TOTAL_STUDY_KEY = 'my-naishin:total-study-time';
@@ -117,103 +116,72 @@ export function QuickStudyTimer() {
     : 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.25 }}
-      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
-    >
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
       {/* Header */}
-      <div className="bg-brand-500 p-5 text-white relative overflow-hidden">
-        <AnimatePresence>
-          {showComplete && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              className="absolute inset-0 flex items-center justify-center bg-brand-500/90 z-10"
-            >
-              <div className="text-center">
-                <div className="text-4xl mb-2">🎉</div>
-                <div className="text-lg font-bold">お疲れ様！</div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
-              <Timer className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold">⏱️ クイック勉強タイマー</h3>
-              <p className="text-sm text-white/80">集中して勉強しよう！</p>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-xs text-white/80">累計勉強時間</div>
-            <div className="text-lg font-bold">{formatTotalTime(totalTime)}</div>
-          </div>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 className="text-[17px] font-bold text-slate-900">クイック勉強タイマー</h3>
+          {/* タイマー終了時は3秒間だけ文言を切り替える（読み上げ対象） */}
+          <p
+            role="status"
+            className={`mt-1 text-sm ${showComplete ? 'font-bold text-slate-900' : 'text-slate-600'}`}
+          >
+            {showComplete ? 'お疲れさまでした' : '集中して勉強しよう'}
+          </p>
+        </div>
+        <div className="shrink-0 text-right">
+          <div className="text-xs text-slate-600">累計勉強時間</div>
+          <div className="text-lg font-bold tabular-nums text-slate-900">{formatTotalTime(totalTime)}</div>
         </div>
       </div>
 
-      <div className="p-5">
+      <div className="mt-4">
         {selectedPreset === null ? (
           <>
             {/* Preset selection */}
             <div className="grid grid-cols-2 gap-3">
-              {TIMER_PRESETS.map((preset, index) => {
-                const Icon = preset.icon;
-                return (
-                  <button
-                    key={index}
-                    onClick={() => startTimer(index)}
-                    className={`flex items-center gap-3 p-4 rounded-lg ${preset.color} text-white transition-all hover:scale-[1.02]`}
-                  >
-                    <Icon className="h-5 w-5" />
-                    <span className="font-bold">{preset.label}</span>
-                  </button>
-                );
-              })}
+              {TIMER_PRESETS.map((preset, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => startTimer(index)}
+                  className="inline-flex min-h-11 items-center justify-center rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50"
+                >
+                  {preset.label}
+                </button>
+              ))}
             </div>
-            
-            <div className="mt-4 text-center text-xs text-slate-500">
-              タイマーを選んでスタート！ポモドーロ法で効率的に勉強しよう
-            </div>
+
+            <p className="mt-4 text-sm text-slate-600">
+              タイマーを選ぶとスタートします。
+            </p>
           </>
         ) : (
           <>
             {/* Timer display */}
-            <div className="relative mb-4">
-              <div className="w-full h-3 rounded-full bg-slate-100 overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  className={`h-full ${TIMER_PRESETS[selectedPreset].color} rounded-full`}
-                />
-              </div>
+            <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200">
+              <div
+                className="h-full rounded-full bg-brand-700"
+                style={{ width: `${progress}%` }}
+              />
             </div>
 
-            <div className="text-center mb-4">
-              <div className="text-5xl font-bold text-slate-800 font-mono">
+            <div className="mt-4 text-center">
+              <div className="font-mono text-5xl font-bold tabular-nums text-slate-900">
                 {formatTime(timeLeft)}
               </div>
-              <div className="text-sm text-slate-500 mt-1">
+              <div className="mt-1 text-sm text-slate-600">
                 {TIMER_PRESETS[selectedPreset].label}
                 {TIMER_PRESETS[selectedPreset].isBreak && ' (休憩中)'}
               </div>
             </div>
 
             {/* Controls */}
-            <div className="flex items-center justify-center gap-4">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
               <button
+                type="button"
                 onClick={toggleTimer}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white transition-all hover:scale-105 ${
-                  isRunning
-                    ? 'bg-amber-500 hover:bg-amber-600'
-                    : 'bg-brand-500 hover:bg-brand-600'
-                }`}
+                className="inline-flex min-h-11 items-center gap-2 rounded bg-brand-700 px-6 py-3 text-base font-bold text-white hover:bg-brand-800"
               >
                 {isRunning ? (
                   <>
@@ -228,8 +196,9 @@ export function QuickStudyTimer() {
                 )}
               </button>
               <button
+                type="button"
                 onClick={resetTimer}
-                className="flex items-center gap-2 px-4 py-3 rounded-lg text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all"
+                className="inline-flex min-h-11 items-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50"
               >
                 <RotateCcw className="h-4 w-4" />
                 リセット
@@ -237,14 +206,15 @@ export function QuickStudyTimer() {
             </div>
           </>
         )}
-
-        {/* Tips */}
-        <div className="mt-4 rounded-lg bg-brand-50 p-3 border border-brand-200">
-          <p className="text-xs text-brand-700 text-center">
-            💡 25分勉強→5分休憩のポモドーロ法で集中力UP！
-          </p>
-        </div>
       </div>
-    </motion.div>
+
+      {/* Tips */}
+      <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+        <p className="text-sm font-bold text-slate-900">ポイント</p>
+        <p className="mt-1 text-sm leading-relaxed text-slate-900">
+          25分勉強→5分休憩を繰り返す「ポモドーロ法」で、区切りをつけて勉強できます。
+        </p>
+      </div>
+    </div>
   );
 }

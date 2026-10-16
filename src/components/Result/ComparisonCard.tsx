@@ -1,8 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
-import { BarChart3 } from '@/components/icons';
 
 import { SUBJECTS } from '@/lib/constants';
 import { DEFAULT_PREFECTURE_CODE } from '@/lib/prefectures';
@@ -42,16 +40,16 @@ function BarRow(props: {
   deltaText?: string;
 }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4">
+    <div className="py-4">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="text-xs font-bold text-slate-700">{props.label}</div>
-          <div className="mt-0.5 text-xs text-slate-500">
+          <div className="text-sm font-bold text-slate-900">{props.label}</div>
+          <div className="mt-0.5 text-sm tabular-nums text-slate-600">
             前回 {props.prevValueText} → 今回 {props.currentValueText}
           </div>
         </div>
         {props.deltaText ? (
-          <div className="rounded-full bg-slate-50 px-3 py-1 text-xs font-bold text-slate-700">
+          <div className="inline-flex shrink-0 items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-sm font-bold tabular-nums text-slate-900">
             {props.deltaText}
           </div>
         ) : null}
@@ -60,14 +58,12 @@ function BarRow(props: {
       <div className="mt-3">
         <div className="relative h-3 overflow-hidden rounded-full bg-slate-200">
           <div
-            className="absolute inset-y-0 left-0 rounded-full bg-slate-400/40"
+            className="absolute inset-y-0 left-0 rounded-full bg-slate-600/40"
             style={{ width: `${Math.max(0, Math.min(100, props.prevPercent))}%` }}
           />
-          <motion.div
-            className="relative h-full rounded-full bg-brand-500"
-            initial={{ width: 0 }}
-            animate={{ width: `${Math.max(0, Math.min(100, props.currentPercent))}%` }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+          <div
+            className="relative h-full rounded-full bg-brand-700"
+            style={{ width: `${Math.max(0, Math.min(100, props.currentPercent))}%` }}
           />
         </div>
       </div>
@@ -137,17 +133,17 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
     }
 
     if (metrics.percentDelta > 0) {
-      lines.push(`前回より達成率が ${formatSigned(metrics.percentDelta)}%！いい感じに伸びてる`);
+      lines.push(`前回より達成率が ${Math.abs(Math.round(metrics.percentDelta))}% 上がっています`);
     } else if (metrics.percentDelta === 0) {
-      lines.push('前回と同じ達成率！安定してるのが強い');
+      lines.push('前回と同じ達成率です');
     } else {
-      lines.push(`今回は達成率が ${formatSigned(metrics.percentDelta)}% だけ変化。ここから取り返せる`);
+      lines.push(`前回より達成率が ${Math.abs(Math.round(metrics.percentDelta))}% 下がっています`);
     }
 
     if (metrics.practicalSumDelta > 0) {
-      lines.push(`実技4教科が ${formatSigned(metrics.practicalSumDelta)} 点アップ！ここ伸びると強い`);
+      lines.push(`実技4教科の評定が合計で ${metrics.practicalSumDelta} 点上がっています`);
     } else if (metrics.coreSumDelta > 0) {
-      lines.push(`5教科が ${formatSigned(metrics.coreSumDelta)} 点アップ！基礎力が上がってる`);
+      lines.push(`5教科の評定が合計で ${metrics.coreSumDelta} 点上がっています`);
     }
 
     const best = SUBJECTS.map((s) => ({
@@ -158,57 +154,46 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
       .sort((a, b) => b.delta - a.delta)[0];
 
     if (best) {
-      lines.push(`特に「${best.label}」が ${formatSigned(best.delta)}！その調子`);
+      lines.push(`最も上がった教科は「${best.label}」（${best.delta} 点）です`);
     }
 
     return lines.slice(0, 3);
   }, [metrics, previous, result.prefectureCode, scores]);
 
   return (
-    <Card className="overflow-hidden">
-      <div className="border-b border-slate-100 bg-brand-50 px-6 py-4">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="grid h-9 w-9 place-items-center rounded-lg bg-brand-500">
-              <BarChart3 className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <div className="text-sm font-bold text-slate-800">前回との比較</div>
-              <div className="text-xs text-slate-500">Progress Comparison</div>
-            </div>
-          </div>
+    <Card className="p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <div className="text-base font-bold text-slate-900">前回との比較</div>
 
-          {previous ? (
-            <div className="rounded-full bg-white/80 px-3 py-1 text-xs text-slate-600">
-              前回：{new Date(previous.savedAt).toLocaleDateString('ja-JP')}
-              {previous.memo ? <span className="ml-2 text-slate-500">「{previous.memo}」</span> : null}
-            </div>
-          ) : null}
-        </div>
+        {previous ? (
+          <div className="text-sm text-slate-600">
+            前回：{new Date(previous.savedAt).toLocaleDateString('ja-JP')}
+            {previous.memo ? <span className="ml-2">「{previous.memo}」</span> : null}
+          </div>
+        ) : null}
       </div>
 
-      <div className="p-6">
+      <div className="mt-4">
         {!previous || !metrics ? (
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-            <div className="text-sm font-bold text-slate-800">まだ比較できるデータがありません</div>
-            <div className="mt-1 text-xs leading-relaxed text-slate-600">
+          <div className="rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <div className="text-sm font-bold text-slate-900">まだ比較できるデータがありません</div>
+            <div className="mt-1 text-sm leading-relaxed text-slate-700">
               {saveEnabled
                 ? '保存をONにした状態で結果を出すと、次回からここに伸びが表示されます。'
                 : '「記録を保存」をONにすると、次回から前回比較ができます。'}
             </div>
           </div>
         ) : (
-          <div className="space-y-3">
-            <BarRow
-              label="達成率"
-              prevValueText={`${metrics.prevPercent}%`}
-              currentValueText={`${metrics.currentPercent}%`}
-              prevPercent={metrics.prevPercent}
-              currentPercent={metrics.currentPercent}
-              deltaText={`${formatSigned(metrics.percentDelta)}%`}
-            />
-
-            <div className="grid gap-3 md:grid-cols-2">
+          <div>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
+              <BarRow
+                label="達成率"
+                prevValueText={`${metrics.prevPercent}%`}
+                currentValueText={`${metrics.currentPercent}%`}
+                prevPercent={metrics.prevPercent}
+                currentPercent={metrics.currentPercent}
+                deltaText={`${formatSigned(metrics.percentDelta)}%`}
+              />
               <BarRow
                 label="5教科（平均）"
                 prevValueText={`${metrics.prevCoreAvg.toFixed(1)}/5`}
@@ -228,11 +213,11 @@ export function ComparisonCard({ result, scores, saveEnabled, lastSavedId }: Com
             </div>
 
             {feedback.length ? (
-              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                <div className="text-xs font-bold text-slate-700">フィードバック</div>
+              <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+                <div className="text-sm font-bold text-slate-900">フィードバック</div>
                 <div className="mt-2 space-y-1">
                   {feedback.map((line, i) => (
-                    <div key={i} className={cn('text-sm leading-relaxed text-slate-700')}>
+                    <div key={i} className={cn('text-sm leading-relaxed text-slate-900')}>
                       {line}
                     </div>
                   ))}

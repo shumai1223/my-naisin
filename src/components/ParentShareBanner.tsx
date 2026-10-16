@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Inbox, Target, PartyPopper, TrendingUp } from '@/components/icons';
+import { Inbox, Target, Check, TrendingUp } from '@/components/icons';
 
 import { EVENTS, track } from '@/lib/track';
 import { beaconParentFunnelEvent } from '@/lib/parent-funnel-beacon';
@@ -90,56 +90,54 @@ export function ParentShareBanner() {
       : null;
 
   return (
-    <section className="mb-8 overflow-hidden rounded-lg border-2 border-brand-200 bg-brand-50 p-6 md:p-7">
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
-        <Inbox className="h-3.5 w-3.5" />
+    <section className="mb-8 overflow-hidden rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+      <div className="mb-3 inline-flex items-center gap-1.5 rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-bold text-slate-700">
+        <Inbox className="h-4 w-4" />
         お子さまから成績レポートが届きました
       </div>
 
-      <h2 className="mb-2 text-xl font-bold leading-snug text-slate-900 md:text-2xl">
+      <h2 className="mb-3 text-xl font-bold leading-snug text-slate-900">
         {prefectureName ? `${prefectureName}の` : ''}{metric}の成績レポートが届きました
       </h2>
 
       {hasScore && (
-        <div className="mb-4 flex flex-wrap items-center gap-3">
-          <div className="rounded-lg border border-slate-200 bg-white px-4 py-2.5">
-            <div className="text-xs font-bold text-slate-500">現在の{metric}</div>
-            <div className="text-2xl font-bold tracking-tight text-slate-800">
+        <dl className="mb-4 grid divide-y divide-slate-200 border-y border-slate-200 sm:auto-cols-fr sm:grid-flow-col sm:divide-x sm:divide-y-0">
+          <div className="px-4 py-3">
+            <dt className="text-xs text-slate-600">現在の{metric}</dt>
+            <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">
               {score}
-              {typeof max === 'number' && <span className="text-base font-bold text-slate-400">/{max}</span>}
-            </div>
+              {typeof max === 'number' && <span className="text-base font-bold text-slate-600">/{max}</span>}
+            </dd>
           </div>
 
           {typeof target === 'number' && (
-            <div
-              className={`flex items-center gap-2 rounded-lg border-2 px-4 py-2.5 ${
-                met ? 'border-brand-200 bg-brand-50/70 text-brand-800' : 'border-amber-200 bg-amber-50/70 text-amber-800'
-              }`}
-            >
-              {met ? <PartyPopper className="h-5 w-5" /> : <Target className="h-5 w-5" />}
-              <div>
-                <div className="text-xs font-bold opacity-80">{targetWord}（{target}）まで</div>
-                <div className="text-lg font-bold">
-                  {met ? `目標を ${Math.abs(gap as number)}点 達成` : `あと ${gap}点`}
-                </div>
-              </div>
+            <div className="px-4 py-3">
+              <dt className="flex items-center gap-1 text-xs text-slate-600">
+                {met ? <Check className="h-4 w-4 shrink-0" /> : <Target className="h-4 w-4 shrink-0" />}
+                <span>{targetWord}（{target}）まで</span>
+              </dt>
+              <dd className="mt-1 text-xl font-bold tabular-nums text-slate-900">
+                {met ? `目標を ${Math.abs(gap as number)}点 達成` : `あと ${gap}点`}
+              </dd>
             </div>
           )}
 
           {/* ②この点数の意味（全国/県内位置）。k-匿名性ガード後の実測値のみ表示・未計測時は出さない。 */}
           {hasPercentile && (
-            <div className="flex items-center gap-2 rounded-lg border-2 border-brand-200 bg-brand-50/70 px-4 py-2.5 text-brand-800">
-              <TrendingUp className="h-5 w-5" />
-              <div>
-                <div className="text-xs font-bold opacity-80">{percentileScopeLabel}での位置</div>
-                <div className="text-lg font-bold">上位 {Math.max(1, 100 - (percentile as number))}%相当</div>
-              </div>
+            <div className="px-4 py-3">
+              <dt className="flex items-center gap-1 text-xs text-slate-600">
+                <TrendingUp className="h-4 w-4 shrink-0" />
+                <span>{percentileScopeLabel}での位置</span>
+              </dt>
+              <dd className="mt-1 text-xl font-bold tabular-nums text-slate-900">
+                上位 {Math.max(1, 100 - (percentile as number))}%相当
+              </dd>
             </div>
           )}
-        </div>
+        </dl>
       )}
 
-      <p className="text-sm leading-relaxed text-slate-700">
+      <p className="text-base leading-[1.8] text-slate-900">
         {met
           ? 'お子さまは目標ラインに到達しています。この力をキープし、さらに伸ばすために、ご家庭でできる対策を無料の資料で確認できます。'
           : `${gradeLead}ここから内申点・偏差値は「今からの伸ばし方」で大きく変わります。お子さまに合った対策を、まずは無料の資料・体験でご確認ください（費用はかかりません）。`}

@@ -1,20 +1,4 @@
-import { 
-  User, 
-  ArrowLeft, 
-  ShieldCheck, 
-  GraduationCap, 
-  Code, 
-  Search, 
-  FileText, 
-  ExternalLink, 
-  Mail, 
-  Award,
-  BookOpen,
-  Calendar,
-  CheckCircle2,
-  Github,
-  Globe
-} from '@/components/icons';
+import { ArrowRight, Check, ChevronRight, Github, Home } from '@/components/icons';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
@@ -76,188 +60,157 @@ export default function EditorProfilePage() {
       />
 
       <div className="min-h-screen bg-slate-50">
-        <div className="mx-auto max-w-4xl px-4 py-12">
-          {/* Back link */}
-          <Link 
-            href="/about" 
-            className="mb-8 inline-flex items-center gap-2 text-sm text-slate-600 hover:text-brand-600 transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            運営者情報に戻る
-          </Link>
+        <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
+          {/* パンくず */}
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
+              <Home className="h-4 w-4" />
+              ホーム
+            </Link>
+            <ChevronRight className="h-4 w-4" />
+            <Link href="/about" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">
+              運営者情報
+            </Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-slate-900">開発者プロフィール</span>
+          </nav>
 
-          {/* Profile Header */}
-          <div className="relative overflow-hidden rounded-lg bg-white p-8 border border-slate-200 md:p-12">
-            <div className="absolute top-0 right-0 h-32 w-32 bg-brand-50 rounded-bl-full -mr-10 -mt-10 opacity-50" />
-            
-            <div className="relative flex flex-col md:flex-row gap-8 items-center md:items-start">
-              <div className="relative">
-                <div className="h-32 w-32 overflow-hidden rounded-lg bg-brand-600 p-1">
-                  <div className="h-full w-full rounded-lg bg-white flex items-center justify-center">
-                    <User className="h-16 w-16 text-slate-300" />
-                  </div>
-                </div>
-                <div className="absolute -bottom-2 -right-2 rounded-full bg-brand-500 p-2 text-white ring-4 ring-white">
-                  <ShieldCheck className="h-5 w-5" />
-                </div>
-              </div>
+          {/* ページの頭 */}
+          <header>
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">ないしんパンダ</h1>
+            <p className="mt-2 text-base text-slate-600">My Naishin 開発責任者 / 現役中学生エンジニア (2026年度受験生)</p>
 
-              <div className="flex-1 text-center md:text-left">
-                <h1 className="text-3xl font-bold text-slate-900">ないしんパンダ</h1>
-                <p className="mt-2 text-xl font-bold text-brand-600">My Naishin 開発責任者 / 現役中学生エンジニア (2026年度受験生)</p>
-                
-                <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-3">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600 border border-slate-200">
-                    <Code className="h-3 w-3" /> TypeScript / Next.js
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600 border border-slate-200">
-                    <Search className="h-3 w-3" /> 資料解析スペシャリスト
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-600 border border-brand-100">
-                    <CheckCircle2 className="h-3 w-3" /> 2026年度入試対応済
-                  </span>
-                </div>
-
-                <div className="mt-4 flex justify-center md:justify-start">
-                  <a
-                    href="https://github.com/shumai1223"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-xs font-bold text-white hover:bg-slate-700 transition-colors"
-                  >
-                    <Github className="h-3.5 w-3.5" />
-                    @shumai1223
-                  </a>
-                </div>
-
-                <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="text-center p-3 rounded-lg bg-slate-50 border border-slate-100">
-                    <div className="text-2xl font-bold text-slate-800">{PREFECTURES.length}</div>
-                    <div className="text-xs font-bold text-slate-500">都道府県解析</div>
-                  </div>
-                  <div className="text-center p-3 rounded-lg bg-slate-50 border border-slate-100">
-                    <div className="text-2xl font-bold text-slate-800">100%</div>
-                    <div className="text-xs font-bold text-slate-500">一次資料準拠</div>
-                  </div>
-                  <div className="text-center p-3 rounded-lg bg-slate-50 border border-slate-100">
-                    <div className="text-2xl font-bold text-slate-800">{CURRENT_FISCAL_YEAR}</div>
-                    <div className="text-xs font-bold text-slate-500">最新対応年度</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {/* Sidebar info */}
-            <div className="space-y-6">
-              <section className="rounded-lg bg-white p-6 border border-slate-200">
-                <h2 className="text-sm font-bold text-slate-400 mb-4">経歴・資格</h2>
-                <ul className="space-y-4">
-                  <li className="flex gap-3">
-                    <Code className="h-5 w-5 text-brand-500 shrink-0" />
-                    <div>
-                      <div className="text-sm font-bold text-slate-800">フルスタック開発</div>
-                      <div className="text-xs text-slate-500">Next.js / Cloudflare Workers等</div>
-                    </div>
-                  </li>
-                </ul>
-              </section>
-
-              <section className="rounded-lg bg-slate-900 p-6 text-white">
-                <h2 className="text-sm font-bold text-slate-400 mb-4">検証プロセス</h2>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-bold text-brand-400">
-                    <CheckCircle2 className="h-3 w-3" /> 公式PDF直接ダウンロード
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-bold text-brand-400">
-                    <CheckCircle2 className="h-3 w-3" /> 数値アルゴリズムの自動テスト
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-bold text-brand-400">
-                    <CheckCircle2 className="h-3 w-3" /> 塾講師へのヒアリング
-                  </div>
-                  <div className="mt-4 text-xs text-slate-400 leading-relaxed">
-                    「My Naishin」のデータは、各教育委員会が発行するPDF（1県あたり平均50ページ超）を全て読み込み、計算ルールを抽出しています。
-                  </div>
-                </div>
-              </section>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
+                TypeScript / Next.js
+              </span>
+              <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
+                資料解析
+              </span>
+              <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
+                2026年度入試対応済
+              </span>
             </div>
 
-            {/* Main Content Area */}
-            <div className="md:col-span-2 space-y-8">
-              <section className="prose prose-slate max-w-none">
-                <h2 className="text-2xl font-bold text-slate-900 border-b-2 border-brand-600 pb-2 inline-block">開発への想い</h2>
-                <p className="mt-4 text-slate-600 leading-relaxed">
-                  「自分の本当の内申点は何点なんだろう？」<br />
-                  中学生にとって、高校受験のシステムはあまりにも複雑です。教育委員会のサイトを開いても、難解な言葉と巨大なPDFが並び、結局自分の立ち位置がわからないまま不安だけが募る。私自身がそうでした。
-                </p>
-                <p className="text-slate-600 leading-relaxed">
-                  「それなら、自分が完璧なツールを作ればいい」<br />
-                  そう考えて、{PREFECTURES.length}都道府県すべての入試要綱（{REIWA_YEAR_LABEL}最新版）を読み解き、1点1点の計算ロジックをプログラムに落とし込みました。
-                </p>
-                <div className="my-8 rounded-lg bg-brand-50 p-6 border border-brand-100">
-                  <h3 className="text-lg font-bold text-brand-900 mt-0">My Naishinの使命</h3>
-                  <p className="text-sm text-brand-800 mb-0">
-                    単なる計算機ではなく、受験生が「あと何点取ればいいか」を正確に把握し、前向きに学習に取り組める環境を作ること。同じ受験生だからこそわかる「使いやすさ」と「情報の正確さ」に、妥協はありません。
-                  </p>
-                </div>
+            <a
+              href="https://github.com/shumai1223"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded border border-brand-700 bg-white px-4 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50"
+            >
+              <Github className="h-4 w-4" />
+              @shumai1223
+            </a>
 
-                <h2 className="text-2xl font-bold text-slate-900 border-b-2 border-brand-600 pb-2 inline-block">実績と信頼への取り組み</h2>
-                <ul className="mt-6 space-y-4 list-none p-0">
-                  <li className="flex gap-4 p-4 rounded-lg bg-white border border-slate-100">
-                    <Search className="h-6 w-6 text-brand-500 shrink-0" />
-                    <div>
-                      <h4 className="font-bold text-slate-800 m-0">47都道府県の資料を完全解析</h4>
-                      <p className="text-sm text-slate-600 m-0 mt-1">
-                        各教育委員会の一次情報を毎月巡回。制度変更や微細な計算ルールの変更（端数処理の桁数など）まで、すべてコードに反映させています。
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex gap-4 p-4 rounded-lg bg-white border border-slate-100">
-                    <FileText className="h-6 w-6 text-brand-500 shrink-0" />
-                    <div>
-                      <h4 className="font-bold text-slate-800 m-0">継続的な改善</h4>
-                      <p className="text-sm text-slate-600 m-0 mt-1">
-                        公開から数ヶ月で多くの受験生・保護者・学校関係者にご利用いただいています。日々のフィードバックを元に、毎週のアップデートを継続しています。
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </section>
-
-              {/* 姉妹サイト（R-7：2サイト共通化・運営者の一貫したブランドストーリー） */}
-              <section className="rounded-lg border border-brand-200 bg-brand-50/40 p-6">
-                <h2 className="text-lg font-bold text-slate-900">姉妹サイトについて</h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                  高校受験の内申点・偏差値を扱うMy Naishinに加え、大学受験・進学費用を扱う姉妹サイト
-                  <a
-                    href="https://my-shingaku.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mx-1 font-bold text-brand-700 underline"
-                  >
-                    My Shingaku
-                  </a>
-                  も同じ方針（公的な一次情報のみを根拠にした決定論的な計算エンジン）で運営しています。
-                </p>
-              </section>
-
-              {/* Action */}
-              <div className="flex flex-wrap gap-4 items-center p-8 rounded-lg bg-slate-100 border-2 border-brand-600">
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-slate-900">正確な内申点を知ることから始めましょう</h3>
-                  <p className="text-sm text-slate-600 mt-2">私が作成したアルゴリズムで、あなたの都道府県の正確な内申点を算出します。</p>
-                </div>
-                <Link 
-                  href="/prefectures"
-                  className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 font-bold text-white transition-all hover:bg-brand-700 hover:scale-105"
-                >
-                  計算ツール一覧へ
-                  <ExternalLink className="h-4 w-4" />
-                </Link>
+            <dl className="mt-6 grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200">
+              <div className="px-3 py-4">
+                <dt className="text-xs text-slate-600">都道府県解析</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{PREFECTURES.length}</dd>
               </div>
+              <div className="px-3 py-4">
+                <dt className="text-xs text-slate-600">一次資料準拠</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">100%</dd>
+              </div>
+              <div className="px-3 py-4">
+                <dt className="text-xs text-slate-600">最新対応年度</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{CURRENT_FISCAL_YEAR}</dd>
+              </div>
+            </dl>
+          </header>
+
+          <section className="mt-10">
+            <h2 className="text-xl font-bold text-slate-900">開発への想い</h2>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              「自分の本当の内申点は何点なんだろう？」<br />
+              中学生にとって、高校受験のシステムはあまりにも複雑です。教育委員会のサイトを開いても、難解な言葉と巨大なPDFが並び、結局自分の立ち位置がわからないまま不安だけが募る。私自身がそうでした。
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              「それなら、自分が正確なツールを作ればいい」<br />
+              そう考えて、{PREFECTURES.length}都道府県すべての入試要綱（{REIWA_YEAR_LABEL}最新版）を読み解き、1点1点の計算ロジックをプログラムに落とし込みました。
+            </p>
+            <div className="mt-6 rounded-lg border border-slate-200 bg-brand-50 p-4 md:p-5">
+              <h3 className="text-[17px] font-bold text-slate-900">My Naishinの使命</h3>
+              <p className="mt-2 text-base leading-[1.8] text-slate-900">
+                単なる計算機ではなく、受験生が「あと何点取ればいいか」を正確に把握し、前向きに学習に取り組める環境を作ること。同じ受験生だからこそわかる「使いやすさ」と「情報の正確さ」を大切にしています。
+              </p>
             </div>
-          </div>
+          </section>
+
+          <section className="mt-10">
+            <h2 className="text-xl font-bold text-slate-900">実績と信頼への取り組み</h2>
+            <ul className="mt-4 divide-y divide-slate-200 rounded-lg border border-slate-200 bg-white px-5">
+              <li className="py-4">
+                <h3 className="text-[17px] font-bold text-slate-900">47都道府県の資料を解析</h3>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
+                  各教育委員会の一次情報を毎月巡回。制度変更や微細な計算ルールの変更（端数処理の桁数など）まで、すべてコードに反映させています。
+                </p>
+              </li>
+              <li className="py-4">
+                <h3 className="text-[17px] font-bold text-slate-900">継続的な改善</h3>
+                <p className="mt-1 text-base leading-[1.8] text-slate-900">
+                  公開から数ヶ月で多くの受験生・保護者・学校関係者にご利用いただいています。日々のフィードバックを元に、毎週のアップデートを継続しています。
+                </p>
+              </li>
+            </ul>
+          </section>
+
+          <section className="mt-10">
+            <h2 className="text-xl font-bold text-slate-900">検証プロセス</h2>
+            <ul className="mt-4 space-y-1">
+              <li className="flex items-center gap-2 text-base text-slate-900">
+                <Check className="h-4 w-4 shrink-0 text-brand-700" /> 公式PDF直接ダウンロード
+              </li>
+              <li className="flex items-center gap-2 text-base text-slate-900">
+                <Check className="h-4 w-4 shrink-0 text-brand-700" /> 数値アルゴリズムの自動テスト
+              </li>
+              <li className="flex items-center gap-2 text-base text-slate-900">
+                <Check className="h-4 w-4 shrink-0 text-brand-700" /> 塾講師へのヒアリング
+              </li>
+            </ul>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              「My Naishin」のデータは、各教育委員会が発行するPDF（1県あたり平均50ページ超）を全て読み込み、計算ルールを抽出しています。
+            </p>
+          </section>
+
+          <section className="mt-10">
+            <h2 className="text-xl font-bold text-slate-900">経歴・資格</h2>
+            <dl className="mt-4 divide-y divide-slate-200 border-y border-slate-200">
+              <div className="py-3">
+                <dt className="text-base font-bold text-slate-900">フルスタック開発</dt>
+                <dd className="text-sm text-slate-600">Next.js / Cloudflare Workers等</dd>
+              </div>
+            </dl>
+          </section>
+
+          {/* 姉妹サイト（R-7：2サイト共通化・運営者の一貫したブランドストーリー） */}
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">姉妹サイトについて</h2>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
+              高校受験の内申点・偏差値を扱うMy Naishinに加え、大学受験・進学費用を扱う姉妹サイト
+              <a
+                href="https://my-shingaku.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              >
+                My Shingaku
+              </a>
+              も同じ方針（公的な一次情報のみを根拠にした決定論的な計算エンジン）で運営しています。
+            </p>
+          </section>
+
+          {/* Action */}
+          <section className="mt-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="text-xl font-bold text-slate-900">正確な内申点を知ることから始めましょう</h2>
+            <p className="mt-2 text-base leading-[1.8] text-slate-900">私が作成したアルゴリズムで、あなたの都道府県の正確な内申点を算出します。</p>
+            <Link
+              href="/prefectures"
+              className="mt-4 inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800"
+            >
+              計算ツール一覧へ
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </section>
         </div>
       </div>
     </>

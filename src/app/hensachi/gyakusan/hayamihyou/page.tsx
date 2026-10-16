@@ -20,7 +20,7 @@ const FAQ_HENSACHI_VALUES = [40, 45, 50, 55, 60, 65, 70];
 const FAQ_SCORE_VALUES = [130, 160, 190, 220, 250, 280, 340, 370];
 
 export const metadata: Metadata = {
-  title: '偏差値と点数の早見表【5教科500点満点】点数から偏差値もわかる | My Naishin',
+  title: '偏差値↔点数 早見表【5教科500点満点】点数から偏差値もわかる | My Naishin',
   description:
     '「250点は偏差値いくつ？」「偏差値40は5教科何点？」のどちらも一発でわかる早見表（500点満点・平均250・標準偏差75の一般的な仮定）。実際のテストで正確な値を出すには、平均点・標準偏差を入力する逆算計算機を使えます。',
   keywords: [
@@ -74,7 +74,7 @@ export default function HensachiGyakusanHayamihyouPage() {
           { name: 'ホーム', url: `${SITE_URL}/` },
           { name: '偏差値計算', url: `${SITE_URL}/hensachi` },
           { name: '目標偏差値まであと何点？逆算', url: `${SITE_URL}/hensachi/gyakusan` },
-          { name: '偏差値と点数の早見表', url },
+          { name: '偏差値↔点数 早見表', url },
         ]}
       />
       <FAQPageSchema faqItems={faqItems} />
@@ -95,7 +95,7 @@ export default function HensachiGyakusanHayamihyouPage() {
           </nav>
 
           <header className="mb-8">
-            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">偏差値と点数の早見表</h1>
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">偏差値↔点数 早見表</h1>
             <p className="mt-4 text-base leading-[1.8] text-slate-900">
               「250点は偏差値いくつ？」「偏差値40は5教科何点？」のどちらの疑問にも、一般的な仮定（5教科合計{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点・平均{GYAKUSAN_HAYAMIHYOU_ASSUMED_AVERAGE}点・標準偏差{GYAKUSAN_HAYAMIHYOU_ASSUMED_STDDEV}点）で答えた早見表です。下の表は「偏差値」列でも「目安点数」列でも探せます。
             </p>
@@ -113,7 +113,7 @@ export default function HensachiGyakusanHayamihyouPage() {
 
           <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
             <h2 className="mb-4 text-xl font-bold text-slate-900">
-              偏差値と点数の対応表（{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点）
+              偏差値↔点数 対応表（{GYAKUSAN_HAYAMIHYOU_ASSUMED_FULL_SCORE}点満点）
             </h2>
             <div className="max-w-md overflow-x-auto">
               <table className="w-full min-w-[280px] text-base">

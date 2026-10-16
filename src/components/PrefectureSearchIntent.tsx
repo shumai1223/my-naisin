@@ -1,5 +1,3 @@
-import { AlertTriangle, HelpCircle, Calendar, BookOpen, TrendingUp, Star, Lightbulb, CheckCircle2 } from '@/components/icons';
-
 interface PrefectureSearchIntentProps {
   prefectureCode: string;
   className?: string;
@@ -109,82 +107,49 @@ export function PrefectureSearchIntent({ prefectureCode, className = '' }: Prefe
   const intent = searchIntents[prefectureCode] || searchIntents.default;
 
   return (
-    <div className={`rounded-lg border border-brand-200 bg-brand-50/80 p-6 ${className}`}>
-      <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-600 text-white">
-          <Star className="h-6 w-6" />
-        </div>
-        <div>
-          <h3 className="text-xl font-bold text-slate-800">
-            {prefectureNames[prefectureCode] || 'この県'}の入試を勝ち抜く戦略
-          </h3>
-          <p className="text-sm text-slate-500">受験生が陥りやすい罠と逆転のヒント</p>
-        </div>
-      </div>
+    <div className={className}>
+      <h3 className="text-[17px] font-bold text-slate-900">
+        {prefectureNames[prefectureCode] || 'この県'}の入試のポイント
+      </h3>
+      <p className="mt-1 text-sm text-slate-600">受験生がつまずきやすい点と、逆転のヒント</p>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
         {/* よくある勘違い */}
-        <div className="rounded-lg border border-red-100 bg-red-50/50 p-5">
-          <h4 className="mb-3 flex items-center gap-2 font-bold text-red-800">
-            <AlertTriangle className="h-5 w-5" />
-            よくある勘違い
-          </h4>
-          <ul className="space-y-3">
+        <div className="rounded-lg border border-slate-200 bg-white p-5">
+          <h4 className="mb-3 font-bold text-slate-900">よくある勘違い</h4>
+          <ul className="list-disc space-y-2 pl-5 text-base leading-[1.8] text-slate-900">
             {intent.commonMistakes.map((mistake, index) => (
-              <li key={index} className="flex items-start gap-2 text-sm text-red-900/80 leading-snug">
-                <span className="font-bold text-red-500">×</span>
-                {mistake}
-              </li>
+              <li key={index}>{mistake}</li>
             ))}
           </ul>
         </div>
 
-        {/* 逆転合格の秘策 */}
-        <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-5">
-          <h4 className="mb-3 flex items-center gap-2 font-bold text-brand-800">
-            <Lightbulb className="h-5 w-5" />
-            逆転合格のヒント
-          </h4>
-          <p className="text-sm leading-relaxed text-brand-900/80">
-            {intent.reversalStrategy}
-          </p>
-          <div className="mt-4 flex items-center gap-2 rounded-lg bg-white/60 p-2 text-xs text-brand-700">
-            <CheckCircle2 className="h-4 w-4 shrink-0" />
-            <span>この戦略で「内申点への不安」を解消しましょう。</span>
-          </div>
+        {/* 逆転合格のヒント */}
+        <div className="rounded-lg border border-slate-200 bg-white p-5">
+          <h4 className="mb-3 font-bold text-slate-900">逆転合格のヒント</h4>
+          <p className="text-base leading-[1.8] text-slate-900">{intent.reversalStrategy}</p>
         </div>
 
         {/* いつの成績が使われるか */}
-        <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-5">
-          <h4 className="mb-3 flex items-center gap-2 font-bold text-brand-800">
-            <Calendar className="h-5 w-5" />
-            対象となる成績
-          </h4>
-          <div className="text-sm leading-relaxed text-brand-900/80" dangerouslySetInnerHTML={{ __html: intent.targetGrades }} />
+        <div className="rounded-lg border border-slate-200 bg-white p-5">
+          <h4 className="mb-3 font-bold text-slate-900">対象となる成績</h4>
+          <div className="text-base leading-[1.8] text-slate-900" dangerouslySetInnerHTML={{ __html: intent.targetGrades }} />
         </div>
 
         {/* 特記事項 */}
-        <div className="rounded-lg border border-slate-100 bg-slate-50/50 p-5">
-          <h4 className="mb-3 flex items-center gap-2 font-bold text-slate-800">
-            <BookOpen className="h-5 w-5" />
-            2026年度の特記事項
-          </h4>
-          <ul className="space-y-2">
+        <div className="rounded-lg border border-slate-200 bg-white p-5">
+          <h4 className="mb-3 font-bold text-slate-900">2026年度の特記事項</h4>
+          <ul className="list-disc space-y-2 pl-5 text-base leading-[1.8] text-slate-900">
             {intent.specialNotes.map((note, index) => (
-              <li key={index} className="flex items-start gap-2 text-sm text-slate-700 leading-snug">
-                <span className="text-brand-500">•</span>
-                {note}
-              </li>
+              <li key={index}>{note}</li>
             ))}
           </ul>
         </div>
       </div>
-      
-      <div className="mt-6 text-center">
-        <p className="text-xs text-slate-400">
-          ※上記は2026年度（令和8年度）入試予測・要綱に基づいています。最終的な判断は各学校の募集要項をご確認ください。
-        </p>
-      </div>
+
+      <p className="mt-4 text-sm text-slate-600">
+        ※上記は2026年度（令和8年度）入試予測・要綱に基づいています。最終的な判断は各学校の募集要項をご確認ください。
+      </p>
     </div>
   );
 }

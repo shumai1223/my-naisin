@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Mail, ArrowLeft, Send, MessageCircle, Github, Bug, AlertCircle } from '@/components/icons';
+import { Mail, Send, MessageCircle, Github, Bug, Info, Check, Home, ChevronRight } from '@/components/icons';
 import Link from 'next/link';
 
 import { CONTACT_EMAIL, submitContact, openMailtoFallback } from '@/lib/contact';
@@ -80,39 +80,35 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-3xl px-4 py-12">
-        {/* Back link */}
-        <Link 
-          href="/" 
-          className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm text-slate-600 transition-all hover:bg-slate-50"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          トップに戻る
-        </Link>
+      <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
+        {/* パンくず */}
+        <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+          <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
+            <Home className="h-4 w-4" />
+            ホーム
+          </Link>
+          <ChevronRight className="h-4 w-4" />
+          <span className="text-slate-900">お問い合わせ</span>
+        </nav>
 
-        {/* Header */}
-        <div className="mb-8 flex items-center gap-4">
-          <div className="grid h-14 w-14 place-items-center rounded-lg bg-slate-500">
-            <Mail className="h-7 w-7 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-slate-800">お問い合わせ</h1>
-            <p className="text-sm text-slate-500">Contact Us</p>
-          </div>
-        </div>
+        {/* ページの頭 */}
+        <header className="mb-8">
+          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">お問い合わせ</h1>
+        </header>
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Contact Form */}
-          <div className="rounded-lg border border-slate-200 bg-white p-6">
+          <div className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
             {/* Form Type Toggle */}
             <div className="mb-4 flex gap-2">
               <button
                 type="button"
                 onClick={() => { setFormType('general'); setSubmitted(false); setMailtoMode(false); }}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm transition-all ${
+                aria-pressed={formType === 'general'}
+                className={`flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded border px-4 py-3 text-sm font-bold transition-colors ${
                   formType === 'general'
-                    ? 'bg-slate-100 text-slate-700 ring-2 ring-slate-200'
-                    : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
+                    ? 'border-brand-700 bg-brand-50 text-brand-700'
+                    : 'border-slate-300 bg-white text-slate-900 hover:bg-slate-50'
                 }`}
               >
                 <MessageCircle className="h-4 w-4" />
@@ -121,10 +117,11 @@ export default function ContactPage() {
               <button
                 type="button"
                 onClick={() => { setFormType('bug'); setSubmitted(false); setMailtoMode(false); }}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm transition-all ${
+                aria-pressed={formType === 'bug'}
+                className={`flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded border px-4 py-3 text-sm font-bold transition-colors ${
                   formType === 'bug'
-                    ? 'bg-red-100 text-red-700 ring-2 ring-red-200'
-                    : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
+                    ? 'border-brand-700 bg-brand-50 text-brand-700'
+                    : 'border-slate-300 bg-white text-slate-900 hover:bg-slate-50'
                 }`}
               >
                 <Bug className="h-4 w-4" />
@@ -133,24 +130,24 @@ export default function ContactPage() {
             </div>
 
             {submitted ? (
-              <div className="rounded-lg bg-brand-50 p-6 text-center">
-                <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-brand-100">
-                  <Send className="h-6 w-6 text-brand-600" />
-                </div>
+              <div role="status" className="rounded-lg border border-slate-200 bg-brand-50 p-5">
                 {mailtoMode ? (
                   <>
-                    <p className="font-bold text-brand-700">メールアプリを開きました 📩</p>
-                    <p className="mt-1 text-sm text-brand-600">
+                    <p className="font-bold text-slate-900">メールアプリを開きました</p>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">
                       入力内容を下書きしました。<strong>そのまま送信</strong>してください。<br />
                       メールアプリが開かない場合は、お手数ですが
-                      <a href={`mailto:${CONTACT_EMAIL}`} className="font-bold underline">{CONTACT_EMAIL}</a>
+                      <a href={`mailto:${CONTACT_EMAIL}`} className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">{CONTACT_EMAIL}</a>
                       まで直接お送りください。
                     </p>
                   </>
                 ) : (
                   <>
-                    <p className="font-bold text-brand-700">送信完了！</p>
-                    <p className="mt-1 text-sm text-brand-600">
+                    <p className="flex items-center gap-2 font-bold text-slate-900">
+                      <Check className="h-5 w-5 shrink-0 text-brand-700" />
+                      送信が完了しました
+                    </p>
+                    <p className="mt-1 text-base leading-[1.8] text-slate-900">
                       {formType === 'bug' ? '不具合報告' : 'お問い合わせ'}ありがとうございます。<br />
                       内容を確認次第、対応いたします。
                     </p>
@@ -159,7 +156,7 @@ export default function ContactPage() {
                 <button
                   type="button"
                   onClick={() => { setSubmitted(false); setMailtoMode(false); }}
-                  className="mt-4 text-sm text-brand-600 underline hover:text-brand-700"
+                  className="mt-3 inline-flex min-h-[44px] items-center text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
                 >
                   別のお問い合わせをする
                 </button>
@@ -168,7 +165,7 @@ export default function ContactPage() {
               /* General Contact Form */
               <form onSubmit={handleGeneralSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="contact-general-name" className="mb-1 block text-xs text-slate-600">
+                  <label htmlFor="contact-general-name" className="mb-1 block text-sm font-bold text-slate-900">
                     お名前（ニックネーム可）
                   </label>
                   <input
@@ -176,13 +173,13 @@ export default function ContactPage() {
                     type="text"
                     name="name"
                     required
-                    className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-slate-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-100"
+                    className="min-h-[44px] w-full rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
                     placeholder="例: たろう"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="contact-general-email" className="mb-1 block text-xs text-slate-600">
+                  <label htmlFor="contact-general-email" className="mb-1 block text-sm font-bold text-slate-900">
                     メールアドレス
                   </label>
                   <input
@@ -190,27 +187,28 @@ export default function ContactPage() {
                     type="email"
                     name="email"
                     required
-                    className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-slate-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-100"
+                    className="min-h-[44px] w-full rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
                     placeholder="example@email.com"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-xs text-slate-600">
+                  <label htmlFor="contact-general-message" className="mb-1 block text-sm font-bold text-slate-900">
                     お問い合わせ内容
                   </label>
                   <textarea
+                    id="contact-general-message"
                     name="message"
                     required
                     rows={4}
-                    className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-slate-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-100"
+                    className="w-full resize-none rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
                     placeholder="ご質問・ご要望をお書きください"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-500 px-6 py-3 text-sm font-bold text-white transition-all"
+                  className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800"
                 >
                   <Send className="h-4 w-4" />
                   送信する
@@ -219,10 +217,10 @@ export default function ContactPage() {
             ) : (
               /* Bug Report Form */
               <form onSubmit={handleBugSubmit} className="space-y-4">
-                <div className="rounded-lg border border-red-200 bg-red-50 p-3">
+                <div className="rounded-lg border border-slate-200 bg-brand-50 p-3">
                   <div className="flex items-start gap-2">
-                    <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />
-                    <p className="text-xs leading-relaxed text-red-700">
+                    <Info className="mt-1 h-4 w-4 shrink-0 text-brand-700" />
+                    <p className="text-sm leading-[1.8] text-slate-900">
                       不具合を報告する際は、できるだけ詳しく状況を教えていただけると助かります。
                     </p>
                   </div>
@@ -230,7 +228,7 @@ export default function ContactPage() {
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="contact-bug-device" className="mb-1 block text-xs text-slate-600">
+                    <label htmlFor="contact-bug-device" className="mb-1 block text-sm font-bold text-slate-900">
                       使用端末
                     </label>
                     <select
@@ -238,7 +236,7 @@ export default function ContactPage() {
                       required
                       value={bugDetails.device}
                       onChange={(e) => setBugDetails(prev => ({ ...prev, device: e.target.value }))}
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-red-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-100"
+                      className="min-h-[44px] w-full rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-700"
                     >
                       <option value="">選択してください</option>
                       <option value="iphone">iPhone</option>
@@ -251,7 +249,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-bug-browser" className="mb-1 block text-xs text-slate-600">
+                    <label htmlFor="contact-bug-browser" className="mb-1 block text-sm font-bold text-slate-900">
                       ブラウザ
                     </label>
                     <select
@@ -259,7 +257,7 @@ export default function ContactPage() {
                       required
                       value={bugDetails.browser}
                       onChange={(e) => setBugDetails(prev => ({ ...prev, browser: e.target.value }))}
-                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-red-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-100"
+                      className="min-h-[44px] w-full rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 focus-visible:outline-2 focus-visible:outline-brand-700"
                     >
                       <option value="">選択してください</option>
                       <option value="chrome">Chrome</option>
@@ -272,34 +270,36 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-xs text-slate-600">
-                    不具合の内容 <span className="text-red-500">*</span>
+                  <label htmlFor="contact-bug-description" className="mb-1 block text-sm font-bold text-slate-900">
+                    不具合の内容 <span className="text-red-700">*</span>
                   </label>
                   <textarea
+                    id="contact-bug-description"
                     required
                     rows={3}
                     value={bugDetails.description}
                     onChange={(e) => setBugDetails(prev => ({ ...prev, description: e.target.value }))}
-                    className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-red-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-100"
+                    className="w-full resize-none rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
                     placeholder="何がおかしいですか？（例: 計算結果が表示されない）"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-xs text-slate-600">
+                  <label htmlFor="contact-bug-steps" className="mb-1 block text-sm font-bold text-slate-900">
                     再現手順（任意）
                   </label>
                   <textarea
+                    id="contact-bug-steps"
                     rows={3}
                     value={bugDetails.steps}
                     onChange={(e) => setBugDetails(prev => ({ ...prev, steps: e.target.value }))}
-                    className="w-full resize-none rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-red-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-100"
+                    className="w-full resize-none rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
                     placeholder="1. ○○をクリック&#10;2. △△を入力&#10;3. エラーが発生"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="contact-bug-email" className="mb-1 block text-xs text-slate-600">
+                  <label htmlFor="contact-bug-email" className="mb-1 block text-sm font-bold text-slate-900">
                     メールアドレス（任意・返信希望の場合）
                   </label>
                   <input
@@ -307,14 +307,14 @@ export default function ContactPage() {
                     type="email"
                     value={bugDetails.email}
                     onChange={(e) => setBugDetails(prev => ({ ...prev, email: e.target.value }))}
-                    className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm transition-colors focus:border-red-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-100"
+                    className="min-h-[44px] w-full rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
                     placeholder="example@email.com"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-500 px-6 py-3 text-sm font-bold text-white transition-all"
+                  className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800"
                 >
                   <Bug className="h-4 w-4" />
                   不具合を報告する
@@ -324,59 +324,59 @@ export default function ContactPage() {
           </div>
 
           {/* Other Contact Methods */}
-          <div className="space-y-4">
-            <div className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="mb-4 text-lg font-bold text-slate-800">その他の連絡方法</h2>
-              
-              <div className="space-y-3">
+          <div className="space-y-6">
+            <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="text-xl font-bold text-slate-900">その他の連絡方法</h2>
+
+              <div className="mt-3 divide-y divide-slate-200 border-y border-slate-200">
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="flex items-center gap-3 rounded-lg bg-slate-50 p-4 transition-colors hover:bg-slate-100"
+                  className="flex min-h-[44px] items-center gap-3 py-3 transition-colors hover:bg-brand-50"
                 >
-                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-slate-100">
-                    <Mail className="h-5 w-5 text-slate-600" />
-                  </div>
+                  <Mail className="h-5 w-5 shrink-0 text-brand-700" />
                   <div className="min-w-0">
-                    <div className="text-sm font-bold text-slate-700">メール</div>
-                    <div className="truncate text-xs text-slate-500">{CONTACT_EMAIL}</div>
+                    <div className="text-sm font-bold text-slate-900">メール</div>
+                    <div className="truncate text-sm text-slate-600">{CONTACT_EMAIL}</div>
                   </div>
                 </a>
                 <a
                   href="https://github.com/shumai1223/my-naisin"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-lg bg-slate-50 p-4 transition-colors hover:bg-slate-100"
+                  className="flex min-h-[44px] items-center gap-3 py-3 transition-colors hover:bg-brand-50"
                 >
-                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-slate-200">
-                    <Github className="h-5 w-5 text-slate-700" />
-                  </div>
+                  <Github className="h-5 w-5 shrink-0 text-brand-700" />
                   <div>
-                    <div className="text-sm font-bold text-slate-700">GitHub</div>
-                    <div className="text-xs text-slate-500">Issue報告はこちら</div>
+                    <div className="text-sm font-bold text-slate-900">GitHub</div>
+                    <div className="text-sm text-slate-600">Issue報告はこちら</div>
                   </div>
                 </a>
               </div>
-            </div>
+            </section>
 
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-              <h3 className="mb-2 text-sm font-bold text-slate-700">よくある質問</h3>
-              <ul className="space-y-2 text-xs text-slate-600">
-                <li className="flex gap-2">
-                  <span className="text-slate-500">Q:</span>
-                  計算結果が学校と違う場合は？
-                </li>
-                <li className="pl-4 text-slate-500">
-                  → 地域・学校で計算方法が異なります。目安としてご利用ください。
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-slate-500">Q:</span>
-                  データは保存される？
-                </li>
-                <li className="pl-4 text-slate-500">
-                  → ブラウザ内のみ。サーバーには送信されません。
-                </li>
-              </ul>
-            </div>
+            <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+              <h2 className="text-xl font-bold text-slate-900">よくある質問</h2>
+              <dl className="mt-3 space-y-4">
+                <div>
+                  <dt className="text-base font-bold text-slate-900">
+                    <span className="mr-2 text-slate-600">Q:</span>
+                    計算結果が学校と違う場合は？
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-600">
+                    → 地域・学校で計算方法が異なります。目安としてご利用ください。
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-base font-bold text-slate-900">
+                    <span className="mr-2 text-slate-600">Q:</span>
+                    データは保存される？
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-600">
+                    → ブラウザ内のみ。サーバーには送信されません。
+                  </dd>
+                </div>
+              </dl>
+            </section>
           </div>
         </div>
       </div>

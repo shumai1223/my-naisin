@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Rocket, Loader2, AlertCircle } from '@/components/icons';
+import { Loader2, Info } from '@/components/icons';
 
 /**
  * Pro / Enterprise へのアップグレード導線（堀B／Stripeループの入口）。
@@ -47,15 +47,15 @@ export function UpgradeButton({
 
   return (
     <div>
-      <label className="mb-2 flex items-start gap-2 text-xs text-slate-600">
+      <label className="mb-2 flex min-h-11 items-center gap-3 text-sm text-slate-900">
         <input
           type="checkbox"
           checked={agreed}
           onChange={(e) => setAgreed(e.target.checked)}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300"
+          className="h-5 w-5 shrink-0 rounded border-slate-300 accent-brand-700"
         />
         <span>
-          <a href="/terms" target="_blank" rel="noreferrer" className="font-bold text-brand-600 underline">
+          <a href="/terms" target="_blank" rel="noreferrer" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
             利用規約
           </a>
           に同意します
@@ -65,18 +65,20 @@ export function UpgradeButton({
         type="button"
         onClick={go}
         disabled={loading || !agreed}
-        className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white transition-all disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex min-h-12 items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-center text-base font-bold text-white transition-colors enabled:hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Rocket className="h-4 w-4" />}
+        {loading && <Loader2 className="h-4 w-4 shrink-0 animate-spin" />}
         {label}
       </button>
       {info && (
-        <p className="mt-2 flex items-start gap-2 rounded-lg bg-slate-50 p-3 text-xs leading-relaxed text-slate-600">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
-          {info}{' '}
-          <a href="/contact" className="font-bold text-brand-600 underline">
-            お問い合わせ
-          </a>
+        <p className="mt-3 flex items-start gap-2 rounded-lg border border-slate-200 bg-brand-50 p-3 text-sm leading-relaxed text-slate-900">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />
+          <span>
+            {info}{' '}
+            <a href="/contact" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+              お問い合わせ
+            </a>
+          </span>
         </p>
       )}
     </div>

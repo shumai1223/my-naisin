@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, BookMarked, ChevronRightSquare } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -73,57 +73,75 @@ export default async function Report2026PrefecturePage({ params }: PageProps) {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <Link href="/report/2026" className="hover:text-brand-600">
+            <Link href="/report/2026" className="inline-flex min-h-[44px] items-center hover:text-brand-700 hover:underline">
               内申点白書2026
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">{prefecture.name}版</span>
+            <span className="text-slate-900">{prefecture.name}版</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-800 text-white">
-              <BookMarked className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">
               {prefecture.name}版 内申点白書2026ダイジェスト
             </h1>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-slate-600">{entry.highlight}</p>
+            <p className="mt-2 text-sm text-slate-600">
+              対象年度: 2026年度入試 ／ 出典：
+              {row!.sourceUrl ? (
+                <a
+                  href={row!.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                >
+                  {prefecture.name}教育委員会
+                </a>
+              ) : (
+                '各都道府県教育委員会'
+              )}
+              {' '}／ 発行日: 2026年7月23日
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">{entry.highlight}</p>
           </header>
 
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">この県の位置づけ</h2>
-            <p className="text-sm leading-relaxed text-slate-600">{entry.context}</p>
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">この県の位置づけ</h2>
+            <p className="text-base leading-[1.8] text-slate-900">{entry.context}</p>
           </section>
 
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">全国47都道府県中の順位</h2>
-            <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-lg bg-slate-50 p-4 text-center">
-                <div className="text-xs font-bold text-slate-500">実技傾斜倍率</div>
-                <div className="mt-1 text-xl font-bold text-brand-700">{row!.practicalSkew}倍</div>
-                <div className="mt-1 text-xs text-slate-400">全国{practicalRank}位</div>
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">全国47都道府県中の順位</h2>
+            <dl className="grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200">
+              <div className="px-3 py-3 md:px-4">
+                <dt className="text-xs text-slate-600">実技傾斜倍率</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{row!.practicalSkew}倍</dd>
+                <dd className="mt-1 text-xs text-slate-600">全国{practicalRank}位</dd>
               </div>
-              <div className="rounded-lg bg-slate-50 p-4 text-center">
-                <div className="text-xs font-bold text-slate-500">中3の重み</div>
-                <div className="mt-1 text-xl font-bold text-brand-700">{row!.grade3WeightPct}%</div>
-                <div className="mt-1 text-xs text-slate-400">全国{grade3Rank}位</div>
+              <div className="px-3 py-3 md:px-4">
+                <dt className="text-xs text-slate-600">中3の重み</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{row!.grade3WeightPct}%</dd>
+                <dd className="mt-1 text-xs text-slate-600">全国{grade3Rank}位</dd>
               </div>
-              <div className="rounded-lg bg-slate-50 p-4 text-center">
-                <div className="text-xs font-bold text-slate-500">満点</div>
-                <div className="mt-1 text-xl font-bold text-brand-700">{row!.maxScore}点</div>
-                <div className="mt-1 text-xs text-slate-400">全国{maxScoreRank}位</div>
+              <div className="px-3 py-3 md:px-4">
+                <dt className="text-xs text-slate-600">満点</dt>
+                <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{row!.maxScore}点</dd>
+                <dd className="mt-1 text-xs text-slate-600">全国{maxScoreRank}位</dd>
               </div>
-            </div>
-            <p className="mt-3 text-xs text-slate-400">
+            </dl>
+            <p className="mt-3 text-xs text-slate-600">
               順位は{REPORT_2026_ROWS.length}都道府県中（同値は同順位）。出典：
               {row!.sourceUrl ? (
-                <a href={row!.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="text-brand-600 underline">
+                <a
+                  href={row!.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                >
                   {prefecture.name}教育委員会
                 </a>
               ) : (
@@ -132,30 +150,30 @@ export default async function Report2026PrefecturePage({ params }: PageProps) {
             </p>
           </section>
 
-          <section className="mb-8 grid gap-2 sm:grid-cols-2">
+          <section className="mt-10 grid gap-3 sm:grid-cols-2">
             <Link
               href="/report/2026"
-              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
+              className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50"
             >
               白書2026（47都道府県全件版）を見る
-              <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
             </Link>
             <Link
               href={`/${code}/naishin`}
-              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
+              className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50"
             >
               {prefecture.name}の内申点を計算する
-              <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
             </Link>
           </section>
 
-          <section className="rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {entry.faqs.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="mb-1 text-[17px] font-bold leading-snug text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

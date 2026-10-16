@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { FileText, Download, Calendar, ExternalLink } from '@/components/icons';
+import { FileText } from '@/components/icons';
 import { Button } from '@/components/ui/Button';
 import { getPrefectureByCode } from '@/lib/prefectures';
 
@@ -29,92 +29,92 @@ export function PDFExportButton({
         <head>
           <title>内申点計算結果 - ${prefecture?.name}</title>
           <style>
-            body { 
+            body {
               font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
               line-height: 1.6;
-              color: #333;
+              color: #17231d;
               max-width: 800px;
               margin: 0 auto;
               padding: 20px;
             }
-            .header { 
-              text-align: center; 
-              border-bottom: 2px solid #3b82f6; 
-              padding-bottom: 20px; 
-              margin-bottom: 30px; 
+            .header {
+              text-align: center;
+              border-bottom: 2px solid #17543e;
+              padding-bottom: 20px;
+              margin-bottom: 30px;
             }
-            .title { 
-              font-size: 24px; 
-              font-weight: bold; 
-              color: #1e40af; 
-              margin-bottom: 10px; 
+            .title {
+              font-size: 24px;
+              font-weight: bold;
+              color: #17543e;
+              margin-bottom: 10px;
             }
-            .subtitle { 
-              font-size: 14px; 
-              color: #6b7280; 
-              margin-bottom: 5px; 
+            .subtitle {
+              font-size: 14px;
+              color: #4f6158;
+              margin-bottom: 5px;
             }
-            .section { 
-              margin-bottom: 30px; 
-              padding: 20px; 
-              border: 1px solid #e5e7eb; 
-              border-radius: 8px; 
+            .section {
+              margin-bottom: 30px;
+              padding: 20px;
+              border: 1px solid #cddad3;
+              border-radius: 8px;
             }
-            .section-title { 
-              font-size: 18px; 
-              font-weight: bold; 
-              color: #1f2937; 
-              margin-bottom: 15px; 
-              border-bottom: 1px solid #e5e7eb; 
-              padding-bottom: 10px; 
+            .section-title {
+              font-size: 18px;
+              font-weight: bold;
+              color: #17231d;
+              margin-bottom: 15px;
+              border-bottom: 1px solid #cddad3;
+              padding-bottom: 10px;
             }
-            .scores-grid { 
-              display: grid; 
-              grid-template-columns: repeat(3, 1fr); 
-              gap: 10px; 
-              margin-bottom: 20px; 
+            .scores-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 10px;
+              margin-bottom: 20px;
             }
-            .score-item { 
-              display: flex; 
-              justify-content: space-between; 
-              padding: 8px 12px; 
-              background: #f9fafb; 
-              border-radius: 4px; 
-              font-size: 14px; 
+            .score-item {
+              display: flex;
+              justify-content: space-between;
+              padding: 8px 12px;
+              background: #f4f7f5;
+              border-radius: 4px;
+              font-size: 14px;
             }
-            .score-label { 
-              font-weight: 500; 
-              color: #374151; 
+            .score-label {
+              font-weight: normal;
+              color: #3a4a42;
             }
-            .score-value { 
-              font-weight: bold; 
-              color: #1f2937; 
+            .score-value {
+              font-weight: bold;
+              color: #17231d;
             }
-            .result-highlight { 
-              font-size: 20px; 
-              font-weight: bold; 
-              color: #059669; 
-              text-align: center; 
-              margin: 20px 0; 
-              padding: 15px; 
-              background: #ecfdf5; 
-              border-radius: 8px; 
+            .result-highlight {
+              font-size: 20px;
+              font-weight: bold;
+              color: #17543e;
+              text-align: center;
+              margin: 20px 0;
+              padding: 15px;
+              background: #f0f6f3;
+              border-radius: 8px;
             }
-            .evidence { 
-              font-size: 12px; 
-              color: #6b7280; 
-              margin-top: 20px; 
-              padding: 15px; 
-              background: #f9fafb; 
-              border-radius: 8px; 
+            .evidence {
+              font-size: 12px;
+              color: #4f6158;
+              margin-top: 20px;
+              padding: 15px;
+              background: #f4f7f5;
+              border-radius: 8px;
             }
-            .footer { 
-              margin-top: 40px; 
-              padding-top: 20px; 
-              border-top: 1px solid #e5e7eb; 
-              font-size: 12px; 
-              color: #6b7280; 
-              text-align: center; 
+            .footer {
+              margin-top: 40px;
+              padding-top: 20px;
+              border-top: 1px solid #cddad3;
+              font-size: 12px;
+              color: #4f6158;
+              text-align: center;
             }
             @media print {
               body { margin: 0; padding: 10px; }
@@ -174,7 +174,7 @@ export function PDFExportButton({
             <div class="section-title">計算結果</div>
             <div class="result-highlight">
               内申点: ${totalScore}点 / ${maxScore}点満点
-              <div style="font-size: 16px; font-weight: normal; color: #6b7280; margin-top: 5px;">
+              <div style="font-size: 16px; font-weight: normal; color: #4f6158; margin-top: 5px;">
                 達成率: ${Math.round((totalScore / maxScore) * 100)}%
               </div>
             </div>

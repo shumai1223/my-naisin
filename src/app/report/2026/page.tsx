@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Home, ChevronRight, ChevronRightSquare, BookMarked } from '@/components/icons';
+import { Home, ChevronRight } from '@/components/icons';
 
 import { BreadcrumbSchema } from '@/components/StructuredData/BreadcrumbSchema';
 import { ArticleSchema } from '@/components/StructuredData/ArticleSchema';
@@ -126,36 +126,40 @@ export default async function Report2026Page() {
 
       <div className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="flex items-center gap-1 hover:text-brand-600">
+          <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
               <Home className="h-4 w-4" />
               ホーム
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-700">内申点白書2026</span>
+            <span className="text-slate-900">内申点白書2026</span>
           </nav>
 
-          <header className="mb-8 text-center">
-            <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-lg bg-slate-800 text-white">
-              <BookMarked className="h-8 w-8" />
-            </div>
-            <h1 className="text-3xl font-bold text-slate-900 md:text-4xl">内申点白書2026</h1>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
-              47都道府県の内申点算出方式を、各教育委員会の公式データに基づいて横断比較した年次白書です。
-              報道・研究目的での引用・転載は、出典明記のみで自由に行っていただけます。
-            </p>
-            <p className="mt-2 text-xs text-slate-400">
-              発行: My Naishin ／ 発行日: 2026年7月 ／ 対象年度: 2026年度入試 ／{' '}
-              <Link href="/report/2026/en" className="font-bold text-brand-700 underline">
+          <header className="mb-8">
+            <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">内申点白書2026</h1>
+            <p className="mt-2 text-sm text-slate-600">
+              発行: My Naishin ／ 発行日: 2026年7月 ／ 対象年度: 2026年度入試 ／ 出典：
+              <a href="#sources" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                各都道府県教育委員会
+              </a>
+              {' '}／{' '}
+              <Link
+                href="/report/2026/en"
+                className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
+              >
                 English summary
               </Link>
+            </p>
+            <p className="mt-4 text-base leading-[1.8] text-slate-900">
+              47都道府県の内申点算出方式を、各教育委員会の公式データに基づいて横断比較した年次白書です。
+              報道・研究目的での引用・転載は、出典明記のみで自由に行っていただけます。
             </p>
           </header>
 
           {/* ① エグゼクティブサマリー */}
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">① エグゼクティブサマリー</h2>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section className="rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">① エグゼクティブサマリー</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               日本の公立高校入試における「内申点」は、都道府県ごとに教育委員会が独自の算出方式を定めており、
               全国共通の基準は存在しません。同じ「オール5」「オール3」の成績であっても、対象学年・教科の重み付け・
               満点設計の違いにより、入試の合否判定に占める実質的な重みは県ごとに大きく異なります。本白書は、
@@ -168,89 +172,92 @@ export default async function Report2026Page() {
           </section>
 
           {/* ③ 構造的発見トップ5（先に提示し、後段の全件表で裏付ける構成） */}
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">② 構造的発見トップ5</h2>
-            <ol className="space-y-4 text-sm leading-relaxed text-slate-600">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">② 構造的発見トップ5</h2>
+            <ol className="space-y-4 text-base leading-[1.8] text-slate-900">
               <li>
-                <strong className="text-slate-800">1. 鹿児島県の実技傾斜倍率は全国唯一の「ケタ違い」。</strong>
+                <strong>1. 鹿児島県の実技傾斜倍率は全国唯一の「ケタ違い」。</strong>
                 {' '}実技4教科の倍率が主要5教科の{TOP_SKEW.practicalSkew}倍に設定されており、次点（宮城・秋田・福島・東京・京都・鳥取・岡山・徳島など2倍の県）から5倍の差がある唯一の外れ値です。
               </li>
               <li>
-                <strong className="text-slate-800">
+                <strong>
                   2. {GRADE3_ONLY.length}都道府県（{Math.round((GRADE3_ONLY.length / ROWS.length) * 100)}%）が中学3年生の成績のみで合否判定。
                 </strong>
                 {' '}{GRADE3_ONLY.map((r) => r.name).join('・')}では、中1・中2の内申点は入試の合否に一切使われません。
               </li>
               <li>
-                <strong className="text-slate-800">
+                <strong>
                   3. 内申点の満点設計は{MIN_MAX_SCORE.maxScore}点（{MIN_MAX_SCORE.name}等）〜{MAX_MAX_SCORE.maxScore}点（{MAX_MAX_SCORE.name}）と最大{Math.round((MAX_MAX_SCORE.maxScore / MIN_MAX_SCORE.maxScore) * 10) / 10}倍の開き。
                 </strong>
                 {' '}満点の大小自体は有利不利を意味しませんが、都道府県間で内申点の素点をそのまま比較することの危険性を示す実例です。
               </li>
               <li>
-                <strong className="text-slate-800">
+                <strong>
                   4. {NO_SKEW_COUNT}/{ROWS.length}都道府県（{Math.round((NO_SKEW_COUNT / ROWS.length) * 100)}%）は実技教科に重み付けをしていません。
                 </strong>
                 {' '}実技科目の入試における重要度は、自治体の制度設計次第で「対等」から「10倍」まで大きく揺れ動きます。
               </li>
               <li>
-                <strong className="text-slate-800">5. 神奈川県・富山県は中2:中3の2学年制という比較的珍しい設計。</strong>
+                <strong>5. 神奈川県・富山県は中2:中3の2学年制という比較的珍しい設計。</strong>
                 {' '}多くの県が中1〜中3の3学年、または中3のみの1学年制を採る中、中2からのみ判定を始める2学年制は少数派です。
               </li>
             </ol>
-            <p className="mt-4 text-xs text-slate-400">
+            <p className="mt-4 text-sm text-slate-600">
               全て src/lib/prefectures.ts（各都道府県教育委員会の公式発表）からの機械的な集計値であり、新規の推測・断定は含みません。
             </p>
           </section>
 
           {/* ② 47都道府県比較表 */}
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">③ 47都道府県 比較表（全件）</h2>
-            <p className="mb-4 text-xs text-slate-500">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">③ 47都道府県 比較表（全件）</h2>
+            <p className="mb-4 text-sm text-slate-600">
               実技傾斜倍率（実技4教科÷主要5教科）の降順。出典URLは各都道府県教育委員会の公式ページです。
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs md:text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 text-xs text-slate-500">
-                    <th className="py-2 pr-2">都道府県</th>
-                    <th className="py-2 pr-2">地域</th>
-                    <th className="py-2 pr-2">実技傾斜</th>
-                    <th className="py-2 pr-2">中3の重み</th>
-                    <th className="py-2 pr-2">対象学年数</th>
-                    <th className="py-2 pr-2">満点</th>
-                    <th className="py-2">出典</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th scope="col" className="py-2 pr-3 font-bold">都道府県</th>
+                    <th scope="col" className="py-2 pr-3 font-bold">地域</th>
+                    <th scope="col" className="py-2 pr-3 text-right font-bold">実技傾斜</th>
+                    <th scope="col" className="py-2 pr-3 text-right font-bold">中3の重み</th>
+                    <th scope="col" className="py-2 pr-3 text-right font-bold">対象学年数</th>
+                    <th scope="col" className="py-2 pr-3 text-right font-bold">満点</th>
+                    <th scope="col" className="py-2 font-bold">出典</th>
                   </tr>
                 </thead>
                 <tbody>
                   {ROWS.map((r) => (
-                    <tr key={r.code} className="border-b border-slate-100 last:border-0">
-                      <td className="py-1.5 pr-2 text-slate-800">
+                    <tr key={r.code} className="h-11 border-b border-slate-200 last:border-0">
+                      <td className="py-0 pr-3 text-slate-900">
                         {REPORT_2026_DIGEST_CODES.includes(r.code) ? (
-                          <Link href={`/report/2026/${r.code}`} className="text-brand-700 underline decoration-dotted hover:text-brand-900">
+                          <Link
+                            href={`/report/2026/${r.code}`}
+                            className="inline-flex min-h-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                          >
                             {r.name}
                           </Link>
                         ) : (
                           r.name
                         )}
                       </td>
-                      <td className="py-1.5 pr-2 text-slate-500">{r.region}</td>
-                      <td className="py-1.5 pr-2 font-bold text-brand-700">{r.practicalSkew}倍</td>
-                      <td className="py-1.5 pr-2 text-slate-600">{r.grade3WeightPct}%</td>
-                      <td className="py-1.5 pr-2 text-slate-600">{r.gradeCount}学年</td>
-                      <td className="py-1.5 pr-2 text-slate-600">{r.maxScore}点</td>
-                      <td className="py-1.5">
+                      <td className="py-1.5 pr-3 text-slate-600">{r.region}</td>
+                      <td className="py-1.5 pr-3 text-right font-bold tabular-nums text-slate-900">{r.practicalSkew}倍</td>
+                      <td className="py-1.5 pr-3 text-right tabular-nums text-slate-900">{r.grade3WeightPct}%</td>
+                      <td className="py-1.5 pr-3 text-right tabular-nums text-slate-900">{r.gradeCount}学年</td>
+                      <td className="py-1.5 pr-3 text-right tabular-nums text-slate-900">{r.maxScore}点</td>
+                      <td className="py-0">
                         {r.sourceUrl ? (
                           <a
                             href={r.sourceUrl}
                             target="_blank"
                             rel="noopener noreferrer nofollow"
-                            className="text-brand-600 underline hover:text-brand-800"
+                            className="inline-flex min-h-[44px] min-w-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800"
                           >
                             教委
                           </a>
                         ) : (
-                          <span className="text-slate-300">—</span>
+                          <span className="text-slate-600">—</span>
                         )}
                       </td>
                     </tr>
@@ -261,69 +268,69 @@ export default async function Report2026Page() {
           </section>
 
           {/* ④ 匿名統計サマリー（/statsと同一データソース・n≥30の指標のみ） */}
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">④ 匿名統計サマリー</h2>
-            <p className="mb-4 text-xs text-slate-500">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">④ 匿名統計サマリー</h2>
+            <p className="mb-4 text-sm leading-[1.8] text-slate-600">
               各計算機ページで「匿名で統計に協力する」に任意でオプトインした利用者の実測データです（個人を特定できる情報は一切含みません）。
               サンプルサイズが{STATS_MIN_SAMPLE_SIZE}件未満の指標は、個人の値の推測を防ぐため(k-匿名性)非表示にしています。
               このページを開くたびに最新値を再集計します。
             </p>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <dl className="grid divide-y divide-slate-200 border-y border-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
               {liveStats.map(({ metric, aggregate, count, suppressed }) => (
-                <div key={metric} className="rounded-lg bg-slate-50 p-4">
-                  <div className="text-xs font-bold text-slate-500">{METRIC_LABEL[metric]}</div>
+                <div key={metric} className="px-4 py-3">
+                  <dt className="text-xs text-slate-600">{METRIC_LABEL[metric]}</dt>
                   {aggregate ? (
                     <>
-                      <div className="mt-1 text-xl font-bold text-brand-700">平均{aggregate.mean.toFixed(1)}</div>
-                      <div className="mt-1 text-xs text-slate-400">
+                      <dd className="mt-1 text-2xl font-bold tabular-nums text-slate-900">平均{aggregate.mean.toFixed(1)}</dd>
+                      <dd className="mt-1 text-xs text-slate-600">
                         最小{formatStatValue(aggregate.min)}〜最大{formatStatValue(aggregate.max)}（n={aggregate.count}）
-                      </div>
+                      </dd>
                     </>
                   ) : (
-                    <div className="mt-1 text-xs text-slate-400">
+                    <dd className="mt-1 text-sm text-slate-600">
                       {suppressed?.code === 'insufficient_sample' ? `現在${count}件収集中` : suppressed?.message}
-                    </div>
+                    </dd>
                   )}
                 </div>
               ))}
-            </div>
-            <p className="mt-3 text-xs text-slate-400">
-              詳細な分布・API・CSVダウンロードは<Link href="/stats" className="text-brand-600 underline">全国統計データページ</Link>をご覧ください。
+            </dl>
+            <p className="mt-3 text-sm text-slate-600">
+              詳細な分布・API・CSVダウンロードは<Link href="/stats" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">全国統計データページ</Link>をご覧ください。
             </p>
           </section>
 
           {/* ⑤ 出典・方法論 */}
-          <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">⑤ 出典・方法論</h2>
-            <p className="text-sm leading-relaxed text-slate-600">
+          <section id="sources" className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">⑤ 出典・方法論</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               都道府県別の制度データは、各都道府県教育委員会が公式に発表する入学者選抜実施要項・実施要領を一次情報源とし、
               本サイトの計算エンジンが用いる設定値（学年別倍率・実技教科倍率・満点）をそのまま集計しています。
               個別の出典URLは上表の「教委」リンク、または各都道府県の内申点計算ページに掲載しています。
               実際の選抜では高校・学科ごとにさらに詳細な傾斜配点が設定される場合があるため、
               個別校の合否判定には必ず志望校・教育委員会の最新発表もあわせてご確認ください。
-              匿名統計セクションの方法論は<Link href="/quality" className="text-brand-600 underline">データの品質・出典について</Link>で公開しています。
+              匿名統計セクションの方法論は<Link href="/quality" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">データの品質・出典について</Link>で公開しています。
             </p>
           </section>
 
           {/* ⑥ 引用・転載ガイドライン */}
-          <section className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
-            <h2 className="mb-3 text-lg font-bold text-slate-800">⑥ 引用・転載ガイドライン</h2>
-            <p className="text-sm leading-relaxed text-slate-700">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">⑥ 引用・転載ガイドライン</h2>
+            <p className="text-base leading-[1.8] text-slate-900">
               本白書のデータ・図表は、「出典: My Naishin（{url}）」の形でクレジットいただければ、
               報道・教育・研究目的での引用・転載を自由に行っていただけます。事前のご連絡は不要です。
               個別高校の合否可能性の断定や、学校別ボーダーラインとしての再利用はお控えください
               （本サイトはその種のデータを保持・提供していません）。データ提供・追加集計軸のご相談は
-              <Link href="/contact" className="text-brand-600 underline">お問い合わせページ</Link>からご連絡ください。
+              <Link href="/contact" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">お問い合わせページ</Link>からご連絡ください。
             </p>
           </section>
 
           {REPORT_2026_DIGEST_CODES.length > 0 && (
-            <section className="mb-8 rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="mb-3 text-lg font-bold text-slate-800">都道府県別ダイジェスト版</h2>
-              <p className="mb-4 text-xs text-slate-500">
+            <section className="mt-10">
+              <h2 className="mb-3 text-xl font-bold text-slate-900">都道府県別ダイジェスト版</h2>
+              <p className="mb-4 text-sm text-slate-600">
                 白書全体でなく、特定の県だけを1ページに凝縮したミニレポートです（執筆済みの県のみ順次公開）。
               </p>
-              <div className="grid gap-2 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {REPORT_2026_DIGEST_CODES.map((code) => {
                   const pref = getPrefectureByCode(code);
                   if (!pref) return null;
@@ -331,10 +338,10 @@ export default async function Report2026Page() {
                     <Link
                       key={code}
                       href={`/report/2026/${code}`}
-                      className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
+                      className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50"
                     >
                       {pref.name}版ダイジェスト
-                      <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
                     </Link>
                   );
                 })}
@@ -342,44 +349,44 @@ export default async function Report2026Page() {
             </section>
           )}
 
-          <section className="mb-8 grid gap-2 sm:grid-cols-2">
+          <section className="mt-10 grid gap-3 sm:grid-cols-2">
             <Link
               href="/naishin-kakusa"
-              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
+              className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50"
             >
               平易な解説版（内申点格差レポート）を読む
-              <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
             </Link>
             <Link
               href="/naishin-map"
-              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
+              className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50"
             >
               内申点の日本地図で見る
-              <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
             </Link>
             <Link
               href="/developers"
-              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
+              className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50"
             >
               このデータをAPIで使う
-              <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
             </Link>
             <Link
               href="/press"
-              className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-white p-4 text-sm font-bold text-slate-700 hover:border-brand-200 hover:bg-brand-50/50"
+              className="flex min-h-[44px] items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 text-base text-slate-900 hover:bg-brand-50"
             >
               取材・掲載用の媒体資料を見る
-              <ChevronRightSquare className="h-4 w-4 shrink-0 text-slate-400" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-slate-500" />
             </Link>
           </section>
 
-          <section className="rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-bold text-slate-800">よくある質問</h2>
-            <div className="space-y-4">
+          <section className="mt-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-bold text-slate-900">よくある質問</h2>
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {FAQS.map((f) => (
-                <div key={f.question} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">Q. {f.question}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">A. {f.answer}</p>
+                <div key={f.question} className="py-4">
+                  <h3 className="mb-1 text-[17px] font-bold leading-snug text-slate-900">Q. {f.question}</h3>
+                  <p className="text-base leading-[1.8] text-slate-900">A. {f.answer}</p>
                 </div>
               ))}
             </div>

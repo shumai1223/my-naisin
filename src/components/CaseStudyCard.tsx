@@ -36,24 +36,20 @@ const ORG_TYPE_LABEL: Record<CaseStudyOrganizationType, string> = {
  */
 export function CaseStudyCard({ data, icon: Icon, className = '' }: { data: CaseStudyData; icon?: LucideIcon; className?: string }) {
   return (
-    <div className={`rounded-lg border border-slate-200 bg-white p-6 ${className}`}>
+    <div className={`rounded-lg border border-slate-200 bg-white p-5 ${className}`}>
       <div className="mb-3 flex items-center gap-3">
-        {Icon && (
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-600">
-            <Icon className="h-5 w-5" />
-          </span>
-        )}
+        {Icon && <Icon className="h-5 w-5 shrink-0 text-brand-700" />}
         <div>
-          <div className="text-sm font-bold text-slate-800">{data.organizationLabel}</div>
-          <div className="text-xs text-slate-500">{ORG_TYPE_LABEL[data.organizationType]} ／ {data.useCaseSummary}</div>
+          <div className="text-base font-bold text-slate-900">{data.organizationLabel}</div>
+          <div className="text-sm text-slate-600">{ORG_TYPE_LABEL[data.organizationType]} ／ {data.useCaseSummary}</div>
         </div>
       </div>
-      <blockquote className="flex gap-2 rounded-lg bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
-        <Quote className="h-4 w-4 shrink-0 text-slate-300" />
+      <blockquote className="flex gap-2 text-base leading-[1.8] text-slate-900">
+        <Quote className="mt-1.5 h-4 w-4 shrink-0 text-slate-600" />
         <span>{data.quote}</span>
       </blockquote>
       {data.quoteAttribution && (
-        <p className="mt-2 text-right text-xs text-slate-500">— {data.quoteAttribution}</p>
+        <p className="mt-2 text-right text-sm text-slate-600">— {data.quoteAttribution}</p>
       )}
     </div>
   );

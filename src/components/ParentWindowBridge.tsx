@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { CalendarClock, Users, MessageCircle, ChevronRight } from '@/components/icons';
+import { Users, MessageCircle, ChevronRight } from '@/components/icons';
 
 import {
   activeParentWindow,
@@ -32,6 +32,8 @@ interface ParentWindowBridgeProps {
   prefectureCode?: string;
   prefectureName?: string;
   className?: string;
+  /** 見出しのレベル（既定 h3）。置かれるページの見出し階層に合わせて呼び出し側が選ぶ。 */
+  headingLevel?: 'h2' | 'h3' | 'h4';
 }
 
 const PLACEMENT = 'mendan-bridge';
@@ -62,6 +64,7 @@ export function ParentWindowBridge({
   prefectureCode,
   prefectureName,
   className = '',
+  headingLevel = 'h3',
 }: ParentWindowBridgeProps) {
   const [windowId, setWindowId] = React.useState<ParentWindowId | null>(null);
   const [isSpikeDay, setIsSpikeDay] = React.useState(false);
@@ -90,27 +93,30 @@ export function ParentWindowBridge({
     beaconParentFunnelEvent('mendan_bridge_click', { prefectureCode });
   }
 
+  // 見出しのレベルは呼び出し側が選ぶ（既定 h3）。見た目はレベルに依らず設計書の h2 / h3 の型。
+  const Heading = headingLevel;
+  const headingSize = headingLevel === 'h2' ? 'text-xl' : 'text-[17px]';
+
   return (
     <section
-      className={`overflow-hidden rounded-lg border border-brand-200 bg-brand-50 p-6 md:p-7 ${className}`}
+      className={`rounded-lg border border-slate-200 bg-white p-5 md:p-6 ${className}`}
     >
       <CtaViewTracker placement={PLACEMENT} pref={prefectureCode} />
 
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
-        <CalendarClock className="h-3.5 w-3.5" />
+      <div className="mb-3 inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
         {copy.badge}
       </div>
 
-      <h3 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">{copy.heading}</h3>
-      <p className="mb-4 text-sm leading-relaxed text-slate-700">
+      <Heading className={`mb-2 ${headingSize} font-bold leading-snug text-slate-900`}>{copy.heading}</Heading>
+      <p className="mb-4 text-base leading-[1.8] text-slate-900">
         {copy.intro}
         {isSpikeDay && <span className="mt-1 block font-bold text-brand-700">{END_OF_TERM_SPIKE_DAY_NOTE}</span>}
       </p>
 
       {/* ① 現在地サマリ（結果値入り）。数値が無い面では見出しだけの現在地カードにフォールバック。 */}
       {hasScore && (
-        <div className="mb-4 rounded-lg border border-brand-100 bg-white/80 p-4">
-          <div className="text-xs font-bold text-slate-500">面談に持って行く「現在地」</div>
+        <div className="mb-4 border-y border-slate-200 py-3">
+          <div className="text-xs text-slate-600">面談に持って行く「現在地」</div>
           <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <span className="text-sm text-slate-600">
               {prefectureName ? `${prefectureName}・` : ''}
@@ -118,10 +124,10 @@ export function ParentWindowBridge({
             </span>
             <span className="text-2xl font-bold tabular-nums text-brand-700">
               {Math.round(score as number)}
-              {isNum(max) && <span className="ml-0.5 text-sm font-bold text-slate-400">/{Math.round(max)}</span>}
+              {isNum(max) && <span className="ml-0.5 text-sm font-bold text-slate-600">/{Math.round(max)}</span>}
             </span>
             {gapAhead !== null && (
-              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700">
+              <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-bold text-slate-900">
                 目標まであと{gapAhead}点
               </span>
             )}
@@ -129,33 +135,34 @@ export function ParentWindowBridge({
         </div>
       )}
 
-      <div className="grid gap-2 sm:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-2">
         {/* ② 三者面談の準備へ（/mendan＝面談面。ここに家庭教師の無料体験が結線済み） */}
         <Link
           href="/mendan"
           onClick={onMendanLinkClick}
-          className="group flex items-center justify-between gap-2 rounded-lg bg-brand-600 px-4 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-[0.99]"
+          className="flex min-h-[44px] items-center justify-between gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800"
         >
           <span className="flex items-center gap-2">
-            <Users className="h-4 w-4" />
+            <Users className="h-5 w-5 shrink-0" />
             三者面談の準備をする
           </span>
-          <ChevronRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
+          <ChevronRight className="h-5 w-5 shrink-0" />
         </Link>
 
-        {/* ③ 保護者向けLINE（分離アカウント）。友だち追加で面談・出願の情報を保護者に直接届ける。 */}
+        {/* ③ 保護者向けLINE（分離アカウント）。友だち追加で面談・出願の情報を保護者に直接届ける。
+            LINEボタンだけは LINE公式の緑（設計書の例外）。形は主ボタンと同じ。 */}
         <a
           href={lineAddUrl('parent')}
           target="_blank"
           rel="noopener noreferrer"
           onClick={onLineClick}
-          className="flex items-center justify-between gap-2 rounded-lg border-2 border-[#06C755] bg-[#06C755] px-4 py-3.5 text-sm font-bold text-white transition-all active:scale-[0.99]"
+          className="flex min-h-[44px] items-center justify-between gap-2 rounded bg-[#06C755] px-5 py-3 text-base font-bold text-white transition-colors hover:bg-[#05b34c]"
         >
           <span className="flex items-center gap-2">
-            <MessageCircle className="h-4 w-4" />
+            <MessageCircle className="h-5 w-5 shrink-0" />
             保護者にLINEで届ける
           </span>
-          <span className="rounded-lg bg-white/20 px-2 py-0.5 text-xs font-bold">無料</span>
+          <span className="rounded bg-white px-2 py-0.5 text-xs font-bold text-slate-900">無料</span>
         </a>
       </div>
 

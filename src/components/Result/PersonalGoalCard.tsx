@@ -1,8 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
-import { Target, Check, Plus, Trash2, Edit3, Save, Star, Flame } from '@/components/icons';
+import { Check, Plus, Trash2, Edit3, Save } from '@/components/icons';
 
 const GOALS_KEY = 'my-naishin:personal-goals';
 
@@ -116,181 +115,165 @@ export function PersonalGoalCard() {
   const completionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.4 }}
-      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
-    >
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
       {/* Header */}
-      <div className="bg-slate-500 p-5 text-white">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
-              <Target className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-base font-bold">🎯 マイ目標</h3>
-              <p className="text-sm text-white/80">自分だけの目標を設定しよう</p>
-            </div>
-          </div>
-          {totalCount > 0 && (
-            <div className="text-right">
-              <div className="text-2xl font-bold">{completionRate}%</div>
-              <div className="text-xs text-white/80">{completedCount}/{totalCount} 達成</div>
-            </div>
-          )}
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 className="text-[17px] font-bold text-slate-900">マイ目標</h3>
+          <p className="mt-1 text-sm text-slate-600">自分だけの目標を設定しよう</p>
         </div>
-      </div>
-
-      <div className="p-5">
-        {/* Progress bar */}
         {totalCount > 0 && (
-          <div className="mb-4">
-            <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${completionRate}%` }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="h-full bg-slate-400 rounded-full"
-              />
-            </div>
+          <div className="shrink-0 text-right">
+            <div className="text-2xl font-bold tabular-nums text-slate-900">{completionRate}%</div>
+            <div className="text-xs tabular-nums text-slate-600">{completedCount}/{totalCount} 達成</div>
           </div>
         )}
+      </div>
 
-        {/* Goals list */}
-        <div className="space-y-2 mb-4 max-h-64 overflow-y-auto">
+      {/* Progress bar */}
+      {totalCount > 0 && (
+        <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-200">
+          <div
+            className="h-full rounded-full bg-brand-700"
+            style={{ width: `${completionRate}%` }}
+          />
+        </div>
+      )}
+
+      {/* Goals list */}
+      {goals.length > 0 && (
+        <ul className="mt-4 max-h-64 divide-y divide-slate-200 overflow-y-auto border-y border-slate-200">
           {goals.map((goal) => (
-            <motion.div
-              key={goal.id}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              className={`flex items-center gap-3 rounded-lg p-3 border transition-all ${
-                goal.completed
-                  ? 'bg-brand-50 border-brand-200'
-                  : 'bg-slate-50 border-slate-200'
-              }`}
-            >
+            <li key={goal.id} className="flex items-center gap-1">
               <button
+                type="button"
                 onClick={() => toggleGoal(goal.id)}
-                className={`grid h-6 w-6 shrink-0 place-items-center rounded-full border-2 transition-all ${
-                  goal.completed
-                    ? 'bg-brand-500 border-brand-500 text-white'
-                    : 'border-slate-300 hover:border-brand-400'
-                }`}
+                aria-label={`「${goal.text}」を達成済みにする`}
+                aria-pressed={goal.completed}
+                className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center"
               >
-                {goal.completed && <Check className="h-3.5 w-3.5" />}
+                <span
+                  className={`grid h-6 w-6 place-items-center rounded border-2 ${
+                    goal.completed
+                      ? 'border-brand-700 bg-brand-700 text-white'
+                      : 'border-slate-400 bg-white'
+                  }`}
+                >
+                  {goal.completed && <Check className="h-4 w-4" />}
+                </span>
               </button>
-              
+
               {editingId === goal.id ? (
-                <div className="flex-1 flex items-center gap-2">
+                <div className="flex min-w-0 flex-1 items-center gap-1 py-1">
                   <input
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
                     aria-label="目標を編集"
-                    className="flex-1 text-sm bg-white border border-slate-300 rounded-lg px-2 py-1 outline-none focus:border-red-400"
+                    className="min-h-11 min-w-0 flex-1 rounded border border-slate-300 bg-white px-3 py-2 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
                     autoFocus
                   />
                   <button
+                    type="button"
                     onClick={() => saveEdit(goal.id)}
-                    className="p-1 text-brand-500 hover:bg-brand-50 rounded"
+                    aria-label="編集内容を保存"
+                    className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded text-brand-700 hover:bg-brand-50"
                   >
-                    <Save className="h-4 w-4" />
+                    <Save className="h-5 w-5" />
                   </button>
                 </div>
               ) : (
                 <>
-                  <span className={`flex-1 text-sm ${goal.completed ? 'text-slate-400 line-through' : 'text-slate-700'}`}>
+                  <span className={`min-w-0 flex-1 py-3 text-sm ${goal.completed ? 'text-slate-600 line-through' : 'text-slate-900'}`}>
                     {goal.text}
                   </span>
-                  <div className="flex items-center gap-1">
+                  <div className="flex shrink-0 items-center">
                     <button
+                      type="button"
                       onClick={() => startEdit(goal)}
-                      className="p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded"
+                      aria-label={`「${goal.text}」を編集する`}
+                      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     >
-                      <Edit3 className="h-3.5 w-3.5" />
+                      <Edit3 className="h-4 w-4" />
                     </button>
                     <button
+                      type="button"
                       onClick={() => deleteGoal(goal.id)}
-                      className="p-1 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded"
+                      aria-label={`「${goal.text}」を削除する`}
+                      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded text-slate-600 hover:bg-red-50 hover:text-red-800"
                     >
-                      <Trash2 className="h-3.5 w-3.5" />
+                      <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
                 </>
               )}
-            </motion.div>
+            </li>
           ))}
-        </div>
+        </ul>
+      )}
 
-        {/* Add goal */}
-        {isAdding ? (
-          <div className="flex items-center gap-2 mb-4">
-            <input
-              value={newGoal}
-              onChange={(e) => setNewGoal(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && addGoal(newGoal)}
-              aria-label="新しい目標を入力"
-              placeholder="目標を入力..."
-              className="flex-1 text-sm border border-slate-300 rounded-lg px-3 py-2 outline-none focus:border-red-400 focus:ring-2 focus:ring-red-100"
-              autoFocus
-            />
-            <button
-              onClick={() => addGoal(newGoal)}
-              className="px-4 py-2 bg-red-500 text-white text-sm font-bold rounded-lg hover:bg-red-600 transition-colors"
-            >
-              追加
-            </button>
-            <button
-              onClick={() => setIsAdding(false)}
-              className="px-3 py-2 text-slate-500 text-sm rounded-lg hover:bg-slate-100"
-            >
-              キャンセル
-            </button>
-          </div>
-        ) : (
+      {/* Add goal */}
+      {isAdding ? (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <input
+            value={newGoal}
+            onChange={(e) => setNewGoal(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && addGoal(newGoal)}
+            aria-label="新しい目標を入力"
+            placeholder="目標を入力..."
+            className="min-h-11 min-w-[12rem] flex-1 rounded border border-slate-300 bg-white px-3 py-2 text-base focus-visible:outline-2 focus-visible:outline-brand-700"
+            autoFocus
+          />
           <button
-            onClick={() => setIsAdding(true)}
-            className="w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-slate-200 rounded-lg text-slate-500 hover:border-red-300 hover:text-red-500 transition-colors"
+            type="button"
+            onClick={() => addGoal(newGoal)}
+            className="inline-flex min-h-11 items-center justify-center rounded bg-brand-700 px-5 py-3 text-base font-bold text-white hover:bg-brand-800"
           >
-            <Plus className="h-4 w-4" />
-            <span className="text-sm">新しい目標を追加</span>
+            追加
           </button>
-        )}
+          <button
+            type="button"
+            onClick={() => setIsAdding(false)}
+            className="inline-flex min-h-11 items-center justify-center rounded px-3 text-base text-brand-700 underline underline-offset-2 hover:text-brand-800"
+          >
+            キャンセル
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setIsAdding(true)}
+          className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50"
+        >
+          <Plus className="h-4 w-4" />
+          新しい目標を追加
+        </button>
+      )}
 
-        {/* Suggested goals */}
-        {goals.length < 3 && (
-          <div className="mt-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Star className="h-4 w-4 text-amber-500" />
-              <span className="text-xs font-bold text-slate-600">おすすめ目標</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {SUGGESTED_GOALS.slice(0, 4).map((suggestion, i) => (
-                <button
-                  key={i}
-                  onClick={() => addGoal(suggestion)}
-                  className="text-xs bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full border border-amber-200 hover:bg-amber-100 transition-colors"
-                >
-                  + {suggestion}
-                </button>
-              ))}
-            </div>
+      {/* Suggested goals */}
+      {goals.length < 3 && (
+        <div className="mt-5">
+          <h4 className="mb-2 text-sm font-bold text-slate-900">おすすめ目標</h4>
+          <div className="flex flex-wrap gap-2">
+            {SUGGESTED_GOALS.slice(0, 4).map((suggestion, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => addGoal(suggestion)}
+                className="inline-flex min-h-11 items-center rounded border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-900 hover:bg-brand-50"
+              >
+                + {suggestion}
+              </button>
+            ))}
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Motivation */}
-        {completedCount > 0 && (
-          <div className="mt-4 rounded-lg bg-slate-50 p-3 border border-red-200">
-            <div className="flex items-center gap-2 justify-center">
-              <Flame className="h-4 w-4 text-red-500" />
-              <p className="text-xs text-red-700 text-center">
-                {completedCount}個の目標達成おめでとう！この調子で頑張ろう！
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-    </motion.div>
+      {/* Progress note */}
+      {completedCount > 0 && (
+        <p className="mt-4 text-sm text-slate-600">
+          {completedCount}個の目標を達成しています
+        </p>
+      )}
+    </div>
   );
 }

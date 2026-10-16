@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { MapPin, ArrowRight, Info } from '@/components/icons';
+import { ChevronDown, ChevronUp } from '@/components/icons';
 
 import { PREFECTURES, getPrefectureByCode } from '@/lib/prefectures';
 import type { Scores } from '@/lib/types';
@@ -29,7 +29,7 @@ export function PrefectureComparison({ scores, currentPrefectureCode }: Prefectu
       const total = calculateTotalScore(scores, pref.code);
       const max = calculateMaxScore(pref.code);
       const percent = calculatePercent(total, max);
-      
+
       return {
         code: pref.code,
         name: pref.name,
@@ -47,110 +47,81 @@ export function PrefectureComparison({ scores, currentPrefectureCode }: Prefectu
   const currentPrefecture = getPrefectureByCode(currentPrefectureCode);
   const displayedComparisons = showAll ? comparisons : comparisons.slice(0, 5);
 
-  const getPercentColor = (percent: number) => {
-    if (percent >= 90) return 'text-brand-600 bg-brand-50';
-    if (percent >= 75) return 'text-brand-600 bg-brand-50';
-    if (percent >= 60) return 'text-amber-600 bg-amber-50';
-    return 'text-slate-600 bg-slate-50';
-  };
-
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-5">
-      <div className="mb-4 flex items-center gap-3">
-        <div className="grid h-10 w-10 place-items-center rounded-lg bg-brand-400">
-          <MapPin className="h-5 w-5 text-white" />
-        </div>
-        <div>
-          <h3 className="font-bold text-slate-800">都道府県別スコア比較</h3>
-          <p className="text-xs text-slate-500">同じ成績でも地域で点数が変わります</p>
-        </div>
-      </div>
+      <h3 className="text-[17px] font-bold text-slate-900">都道府県別スコア比較</h3>
+      <p className="mt-1 text-sm text-slate-600">同じ成績でも地域で点数が変わります</p>
 
       {/* 現在の都道府県の順位 */}
-      <div className="mb-4 rounded-lg bg-brand-50 p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="text-xs text-slate-500">現在の選択</div>
-            <div className="mt-0.5 font-bold text-slate-800">{currentPrefecture?.name}</div>
-          </div>
-          <div className="text-right">
-            <div className="text-xs text-slate-500">全国順位</div>
-            <div className="mt-0.5 flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-brand-600">{currentRank}</span>
-              <span className="text-sm text-slate-500">/ 47位</span>
-            </div>
-          </div>
+      <dl className="mt-4 grid grid-cols-2 divide-x divide-slate-200 border-y border-slate-200">
+        <div className="py-3 pr-4">
+          <dt className="text-xs text-slate-600">現在の選択</dt>
+          <dd className="mt-1 text-base font-bold text-slate-900">{currentPrefecture?.name}</dd>
         </div>
-      </div>
+        <div className="py-3 pl-4 text-right">
+          <dt className="text-xs text-slate-600">全国順位</dt>
+          <dd className="mt-1 flex items-baseline justify-end gap-1 tabular-nums">
+            <span className="text-2xl font-bold text-slate-900">{currentRank}</span>
+            <span className="text-sm text-slate-600">/ 47位</span>
+          </dd>
+        </div>
+      </dl>
 
       {/* 比較リスト */}
-      <div className="space-y-2">
+      <ol className="mt-4 divide-y divide-slate-200 border-y border-slate-200">
         {displayedComparisons.map((item, index) => (
-          <div
+          <li
             key={item.code}
             className={cn(
-              'flex items-center gap-3 rounded-lg p-3 transition-colors',
-              item.isCurrent 
-                ? 'bg-brand-50 border-2 border-brand-200' 
-                : 'bg-slate-50 border border-transparent'
+              'flex items-center gap-3 px-3 py-3',
+              item.isCurrent && 'bg-brand-50'
             )}
           >
-            <div className={cn(
-              'grid h-7 w-7 shrink-0 place-items-center rounded-lg text-xs font-bold',
-              index < 3 ? 'bg-amber-100 text-amber-700' : 'bg-slate-200 text-slate-600'
-            )}>
+            <span className="w-6 shrink-0 text-sm font-bold tabular-nums text-slate-600">
               {index + 1}
-            </div>
+            </span>
 
             <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <span className={cn(
-                  'text-sm',
-                  item.isCurrent ? 'font-bold text-brand-700' : 'text-slate-700'
-                )}>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className={cn('text-sm text-slate-900', item.isCurrent && 'font-bold')}>
                   {item.name}
                 </span>
                 {item.isCurrent && (
-                  <span className="rounded bg-brand-100 px-1.5 py-0.5 text-xs font-bold text-brand-600">
+                  <span className="inline-flex items-center rounded border border-brand-700 bg-white px-2 py-0.5 text-xs font-bold text-brand-700">
                     現在
                   </span>
                 )}
               </div>
-              <div className="mt-0.5 text-xs text-slate-500">
+              <div className="mt-0.5 text-xs tabular-nums text-slate-600">
                 {item.total}点 / {item.max}点満点
               </div>
             </div>
 
-            <div className={cn(
-              'shrink-0 rounded-lg px-2 py-1 text-sm font-bold',
-              getPercentColor(item.percent)
-            )}>
+            <div className="shrink-0 text-base font-bold tabular-nums text-slate-900">
               {item.percent}%
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
 
       {/* もっと見るボタン */}
       {comparisons.length > 5 && (
         <button
           type="button"
           onClick={() => setShowAll(!showAll)}
-          className="mt-3 flex w-full items-center justify-center gap-1 rounded-lg bg-slate-100 py-2.5 text-sm text-slate-600 transition-colors hover:bg-slate-200"
+          aria-expanded={showAll}
+          className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-1 rounded border border-brand-700 bg-white px-5 py-3 text-sm font-bold text-brand-700 hover:bg-brand-50"
         >
           {showAll ? '閉じる' : `他${comparisons.length - 5}件を表示`}
-          <ArrowRight className={cn('h-4 w-4 transition-transform', showAll && 'rotate-90')} />
+          {showAll ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </button>
       )}
 
       {/* 補足情報 */}
-      <div className="mt-4 flex items-start gap-2 rounded-lg bg-slate-50 p-3">
-        <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
-        <p className="text-xs leading-relaxed text-slate-500">
-          各都道府県で計算方法（倍率）が異なるため、同じ成績でも内申点が変わります。
-          引っ越しや私立受験の参考にしてください。
-        </p>
-      </div>
+      <p className="mt-4 border-t border-slate-200 pt-3 text-sm leading-relaxed text-slate-600">
+        各都道府県で計算方法（倍率）が異なるため、同じ成績でも内申点が変わります。
+        引っ越しや私立受験の参考にしてください。
+      </p>
     </div>
   );
 }

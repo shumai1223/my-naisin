@@ -1,4 +1,3 @@
-import { Sparkles } from '@/components/icons';
 import type { ReactNode } from 'react';
 
 /**
@@ -10,16 +9,14 @@ import type { ReactNode } from 'react';
  *
  * 内容は検証済みデータ（prefectures / total-score / education-cost エンジン）由来のみ＝捏造ゼロ。
  * 装飾は最小・テキスト主体（AIが本文として抽出しやすい）。
+ * 見た目は「やさしい学習帳」の注釈の型（薄いブランド面＋太字ラベル・アイコンなし）。
  */
 export function AnswerBox({ question, children }: { question: string; children: ReactNode }) {
   return (
-    <section className="rounded-lg border border-brand-200 bg-brand-50 p-5">
-      <div className="mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700">
-        <Sparkles className="h-3.5 w-3.5" />
-        30秒でわかる答え
-      </div>
-      <p className="text-sm font-bold text-slate-700">{question}</p>
-      <div className="mt-1.5 text-sm leading-relaxed text-slate-800">{children}</div>
+    <section className="rounded-lg border border-slate-200 bg-brand-50 p-4">
+      <p className="text-sm font-bold text-brand-700">要点</p>
+      <p className="mt-1 text-base font-bold leading-[1.8] text-slate-900">{question}</p>
+      <div className="mt-1 text-base leading-[1.8] text-slate-900">{children}</div>
     </section>
   );
 }

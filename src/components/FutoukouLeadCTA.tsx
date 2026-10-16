@@ -1,7 +1,6 @@
 import { AffiliateAd } from '@/components/Affiliate/AffiliateAd';
 import { CtaViewTracker } from '@/components/Affiliate/CtaViewTracker';
 import { selectLeadOffer } from '@/lib/lead-config';
-import { Heart, Home, Sparkles } from '@/components/icons';
 
 /**
  * 不登校クラスタ専用の保護者リード（もしも・審査なし live／2026-06-15結線）。
@@ -19,61 +18,61 @@ import { Heart, Home, Sparkles } from '@/components/icons';
  * 経由に切り替え、EVランキングが変わった際に自動追従＋監査カバレッジ対象化する（表示は現状不変＝
  * futoukou placementの解決先は既にmoshimo-tintoruと一致）。副枠（クラスジャパン）は文言差異が大きいため
  * 据え置きのAffiliateAdハードコードのまま残す（完全統合は別タスク）。
+ *
+ * 見た目（やさしい学習帳）: 薄いブランド面＋罫線の1枠。2案件は同じ見た目の主ボタンで並べ、内側にカードは作らない
+ * （PCは縦罫線、スマホは横罫線で区切る）。赤・丸薬・拡大縮小は使わない。
  */
 export function FutoukouLeadCTA({ className = '' }: { className?: string }) {
   const tintoruOffer = selectLeadOffer({ placement: 'futoukou' });
 
   return (
     <section
-      className={`overflow-hidden rounded-lg border border-red-200 bg-red-50 p-6 md:p-7 ${className}`}
+      className={`overflow-hidden rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6 ${className}`}
     >
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-red-600 ring-1 ring-red-200">
-        <Heart className="h-3.5 w-3.5" />
+      <div className="mb-3 inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
         不登校のお子さま・保護者の方へ
       </div>
 
-      <h3 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">
+      <h3 className="mb-2 text-[17px] font-bold leading-snug text-slate-900 md:text-xl">
         「学校に行けない」を、進路の不利にしない選択肢があります
       </h3>
-      <p className="mb-5 text-sm leading-relaxed text-slate-700">
+      <p className="mb-5 text-base leading-[1.8] text-slate-900">
         在宅で学べて、出席扱い・内申を問わない学びの場が増えています。気になるものは、まず無料の資料請求・体験で雰囲気を確かめてみてください（費用はかからず、その場で契約を迫られることはありません）。
       </p>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2 md:gap-0">
         {/* クラスジャパン小中学園：オンラインフリースクール（出席扱い・無料資料請求） */}
-        <div className="relative rounded-lg border border-red-100 bg-white p-4">
+        <div className="relative md:pr-6">
           <CtaViewTracker placement="blog" program="moshimo-classjapan" />
-          <div className="mb-2 flex items-center gap-2 text-sm font-bold text-red-900">
-            <Home className="h-4 w-4 text-red-500" />
+          <h4 className="mb-2 text-base font-bold text-slate-900">
             自宅で「出席扱い」を目指す
-          </div>
-          <p className="mb-3 text-xs leading-relaxed text-red-800/90">
+          </h4>
+          <p className="mb-3 text-sm leading-[1.8] text-slate-900">
             クラスジャパン小中学園は、自宅から参加できるオンラインのフリースクール。在籍校と連携して「出席扱い」を目指せるのが特長です。
           </p>
           <AffiliateAd placement="blog"
             id="moshimo-classjapan"
             hideLabel
-            linkClassName="block w-full rounded-lg bg-red-600 px-5 py-3 text-center text-sm font-bold text-white transition-all hover:bg-red-700 active:scale-95"
+            linkClassName="block w-full rounded bg-brand-700 px-5 py-3 text-center text-base font-bold text-white transition-colors hover:bg-brand-800"
           />
-          <div className="mt-2 text-center text-xs text-slate-400">無料で資料を取り寄せる（PR）</div>
+          <div className="mt-2 text-center text-sm text-slate-600">無料で資料を取り寄せる（PR）</div>
         </div>
 
         {/* 主枠（S1-4: selectLeadOffer({placement:'futoukou'})経由・現状はティントルに解決） */}
-        <div className="relative rounded-lg border border-slate-100 bg-white p-4">
+        <div className="relative border-t border-slate-200 pt-5 md:border-l md:border-t-0 md:pl-6 md:pt-0">
           <CtaViewTracker placement="futoukou" program={tintoruOffer.affiliateId} />
-          <div className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-900">
-            <Sparkles className="h-4 w-4 text-slate-500" />
+          <h4 className="mb-2 text-base font-bold text-slate-900">
             一人ひとりに合わせた個別指導
-          </div>
-          <p className="mb-3 text-xs leading-relaxed text-slate-800/90">
+          </h4>
+          <p className="mb-3 text-sm leading-[1.8] text-slate-900">
             ティントルは不登校専門のオンライン個別指導。学び直しから受験対策まで、お子さまのペースに合わせて先生がマンツーマンで伴走します。
           </p>
           <AffiliateAd placement="futoukou"
             id={tintoruOffer.affiliateId}
             hideLabel
-            linkClassName="block w-full rounded-lg bg-slate-600 px-5 py-3 text-center text-sm font-bold text-white transition-all hover:bg-slate-700 active:scale-95"
+            linkClassName="block w-full rounded bg-brand-700 px-5 py-3 text-center text-base font-bold text-white transition-colors hover:bg-brand-800"
           />
-          <div className="mt-2 text-center text-xs text-slate-400">無料体験を申し込む（PR）</div>
+          <div className="mt-2 text-center text-sm text-slate-600">無料体験を申し込む（PR）</div>
         </div>
       </div>
     </section>

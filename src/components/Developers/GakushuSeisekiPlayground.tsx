@@ -46,18 +46,18 @@ export function GakushuSeisekiPlayground() {
   }
 
   return (
-    <div className="rounded-lg border-2 border-brand-200 bg-brand-50/30 p-6">
-      <p className="mb-3 text-xs text-slate-600">
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
+      <p className="mb-3 text-sm text-slate-600">
         送信するリクエストボディ（文部科学省の公式計算例: 理科3科目）：
       </p>
-      <pre className="mb-4 overflow-auto rounded-lg bg-slate-900 p-4 text-xs leading-relaxed text-brand-300">
+      <pre className="mb-4 overflow-auto rounded-lg border border-slate-200 bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">
         {`POST /api/gakushu-seiseki\n${JSON.stringify(SAMPLE_BODY, null, 2)}`}
       </pre>
 
       <button
         onClick={run}
         disabled={loading}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-brand-700 disabled:opacity-60"
+        className="inline-flex h-12 items-center gap-2 rounded bg-brand-700 px-5 text-base font-bold text-white transition-colors enabled:hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}
         実際にAPIを呼び出す
@@ -65,18 +65,18 @@ export function GakushuSeisekiPlayground() {
 
       {response && (
         <div className="mt-4">
-          <div className="mb-2 flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-600">
-              レスポンス {status !== null && <span className={status === 200 ? 'text-brand-600' : 'text-amber-600'}>({status})</span>}
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+            <span className="text-sm font-bold text-slate-700">
+              レスポンス {status !== null && <span className={status === 200 ? 'text-brand-700' : 'text-amber-800'}>({status})</span>}
             </span>
             {remaining !== null && (
-              <span className="flex items-center gap-1 text-xs text-slate-500">
-                <Gauge className="h-3 w-3" />
+              <span className="flex items-center gap-1.5 text-sm text-slate-600">
+                <Gauge className="h-4 w-4" />
                 残り{remaining}回（この端末からの匿名枠）
               </span>
             )}
           </div>
-          <pre className="max-h-96 overflow-auto rounded-lg bg-slate-900 p-4 text-xs leading-relaxed text-brand-300">
+          <pre className="max-h-96 overflow-auto rounded-lg border border-slate-200 bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">
             {response}
           </pre>
         </div>

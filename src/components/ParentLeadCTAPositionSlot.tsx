@@ -42,6 +42,11 @@ interface ParentLeadCTAPositionSlotProps {
   placement?: LeadPlacement;
   prefectureCode?: string;
   className?: string;
+  /**
+   * CTA の見出しレベル。/hogosha では上下どちらのスロットも h2 の節と同じ階層に置くため、
+   * 既定は h2（ParentLeadCTA 自体の既定は h3）。
+   */
+  headingLevel?: 'h2' | 'h3' | 'h4';
 }
 
 export function ParentLeadCTAPositionSlot({
@@ -50,6 +55,7 @@ export function ParentLeadCTAPositionSlot({
   placement,
   prefectureCode,
   className,
+  headingLevel = 'h2',
 }: ParentLeadCTAPositionSlotProps) {
   const variant = React.useContext(PositionVariantContext);
   const shouldRenderHere = variant === 'above-fold' ? slot === 'above-fold' : slot === 'article-end';
@@ -61,6 +67,7 @@ export function ParentLeadCTAPositionSlot({
       placement={placement}
       prefectureCode={prefectureCode}
       className={className}
+      headingLevel={headingLevel}
     />
   );
 }

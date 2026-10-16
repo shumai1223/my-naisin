@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Target, Send, ChevronRight, TrendingUp, PartyPopper, Wallet, Info } from '@/components/icons';
+import { Send, ChevronRight, Info } from '@/components/icons';
 
 import { Card } from '@/components/ui/Card';
 import { ParentLeadCTA } from '@/components/ParentLeadCTA';
@@ -89,19 +89,16 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
   }
 
   return (
-    <Card className="overflow-hidden" variant="elevated">
-      <div className="border-b border-slate-100/80 bg-brand-50/80 px-6 py-5">
-        <div className="flex items-center gap-2">
-          <Target className="h-5 w-5 text-brand-600" />
-          <div className="text-base font-bold text-slate-800">志望校・目標までの距離</div>
-        </div>
-        <div className="mt-1 text-xs text-slate-500">
-          あなたの内申 <span className="font-bold text-slate-700">{result.total}</span>
-          <span className="text-slate-400">/{result.max}</span>。目標を決めると「あと何点」が分かります。
+    <Card variant="elevated">
+      <div className="border-b border-slate-200 px-5 py-4">
+        <div className="text-base font-bold text-slate-900">志望校・目標までの距離</div>
+        <div className="mt-1 text-sm text-slate-600">
+          あなたの内申 <span className="font-bold tabular-nums text-slate-900">{result.total}</span>
+          <span className="tabular-nums">/{result.max}</span>。目標を決めると「あと何点」が分かります。
         </div>
       </div>
 
-      <div className="space-y-4 p-6">
+      <div className="space-y-4 p-5">
         {/* ⛔ E-0（2026-08-11）: 「主要校の目安から選ぶ」チップを削除した。
             チップの数値は PREFECTURE_HIGH_SCHOOL_DATA の avgNaishin ＝ 学校別の合格ボーダーの推定で、
             source: 400行のうち教委を出典に持つ行は0・226行が「推計 2026年度」＝自社推定だった。
@@ -112,7 +109,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
 
         <div className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-end">
           <div>
-            <label htmlFor="gap-target" className="text-xs font-bold text-slate-600">
+            <label htmlFor="gap-target" className="block text-sm font-bold text-slate-700">
               目標の内申点を直接入れる（0〜{result.max}）
             </label>
             <input
@@ -124,37 +121,28 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
               value={targetLabel === 'あなたの目標' && target != null ? target : ''}
               onChange={(e) => setManual(Number(e.target.value))}
               placeholder={`例：${Math.min(result.max, Math.round(result.max * 0.85))}`}
-              className="mt-1 h-11 w-full rounded-lg border border-slate-200 bg-white px-4 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              className="mt-1 h-11 w-full rounded border border-slate-300 bg-white px-3 text-base tabular-nums text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
             />
           </div>
-          <div className="text-xs text-slate-400 sm:pb-3">志望校の目標内申がわかる方はこちら</div>
+          <div className="text-sm text-slate-600 sm:pb-3">志望校の目標内申がわかる方はこちら</div>
         </div>
 
         {/* ギャップ提示 ＋ 状態別の取引 */}
         {state && gap != null && (
           <div className="space-y-4 pt-1">
             {/* ギャップの数字（発火力のある一行・語尾でヘッジ） */}
-            <div
-              className={`rounded-lg border-2 p-4 text-center ${
-                state === 'far'
-                  ? 'border-red-200 bg-red-50/70'
-                  : state === 'close'
-                    ? 'border-amber-200 bg-amber-50/70'
-                    : 'border-brand-200 bg-brand-50/70'
-              }`}
-            >
+            <div className="rounded-lg border border-slate-200 bg-brand-50 p-4 text-center">
               {state === 'met' ? (
                 <div className="flex items-center justify-center gap-2 text-brand-800">
-                  <PartyPopper className="h-5 w-5" />
-                  <span className="text-base font-bold">
+                  <span className="text-base font-bold tabular-nums">
                     {targetLabel}（{target}）を {Math.abs(gap)}点 上回っています
                   </span>
                 </div>
               ) : (
-                <div className={state === 'far' ? 'text-red-800' : 'text-amber-800'}>
-                  <div className="text-xs font-bold opacity-80">{targetLabel}（{target}）まで</div>
-                  <div className="text-2xl font-bold tracking-tight">
-                    目安まであと <span className="text-3xl">{gap}</span> 点
+                <div className="text-slate-900">
+                  <div className="text-sm font-bold tabular-nums text-slate-600">{targetLabel}（{target}）まで</div>
+                  <div className="text-2xl font-bold">
+                    目安まであと <span className="text-3xl tabular-nums text-brand-700">{gap}</span> 点
                   </div>
                 </div>
               )}
@@ -163,7 +151,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
             {/* 状態別ブロック */}
             {state === 'far' && (
               <>
-                <div className="text-sm font-bold text-slate-800">
+                <div className="text-sm font-bold text-slate-900">
                   合格圏まで、目安であと{gap}点。今からでも巻き返せます。
                 </div>
                 <ParentLeadCTA
@@ -178,12 +166,12 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
 
             {state === 'close' && (
               <>
-                <div className="text-sm font-bold text-slate-800">
-                  目安まであと{gap}点。合否を分けるゾーンです。
+                <div className="text-sm font-bold text-slate-900">
+                  目安まであと{gap}点。この差が合否に影響する場合もあります。
                 </div>
                 <ParentLeadCTA
-                  heading="あと数点で、選べる高校が変わります"
-                  body="この時期のあと数点は合否を直接左右します。今から何を積めば届くのか、お子さまに必要な対策をオンライン個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
+                  heading="あと数点で、選べる高校が変わることがあります"
+                  body="この時期のあと数点は合否に影響することがあります。今から何を積めば届くのか、お子さまに必要な対策をオンライン個別指導の無料体験で具体的に確認できます（費用はかかりません）。"
                   affiliateId="sora-juku-text"
                   ctaText="無料体験を申し込む（そら塾）"
                   note="【そら塾】オンライン個別指導の無料体験（PR）"
@@ -192,19 +180,16 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
             )}
 
             {state === 'met' && (
-              <div className="rounded-lg border border-brand-200 bg-brand-50 p-5">
-                <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-brand-700 ring-1 ring-brand-200">
-                  <Wallet className="h-3.5 w-3.5" />
-                  合格圏が見えたら、次の備え
-                </div>
-                <h3 className="mb-2 text-lg font-bold text-slate-900">高校3年間でいくらかかる？</h3>
-                <p className="mb-4 text-sm leading-relaxed text-slate-700">
+              <div className="rounded-lg border border-slate-200 bg-brand-50 p-5">
+                <p className="mb-1 text-sm font-bold text-brand-800">合格圏が見えたら、次の備え</p>
+                <h3 className="mb-2 text-[17px] font-bold text-slate-900">高校3年間でいくらかかる？</h3>
+                <p className="mb-4 text-base leading-[1.8] text-slate-900">
                   目標に届いたら、次に気になるのが進学後の費用です。公立・私立それぞれの3年間の学費を、いまのうちに把握しておきましょう。
                 </p>
                 <Link
                   href="/koukou-hiyou"
                   onClick={() => track('met_bridge_click', { pref: prefectureCode, to: 'koukou-hiyou' })}
-                  className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800"
                 >
                   高校の費用をシミュレーションする
                   <ChevronRight className="h-4 w-4" />
@@ -216,30 +201,30 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
             <button
               type="button"
               onClick={shareToParent}
-              className="group flex w-full items-center justify-between rounded-lg border-2 border-brand-200 bg-brand-50 px-5 py-4 text-left transition-all hover:border-brand-400"
+              className="flex w-full items-center justify-between gap-4 rounded-lg border border-brand-700 bg-white px-5 py-4 text-left transition-colors duration-100 hover:bg-brand-50"
             >
               <div>
-                <div className="flex items-center gap-2 text-sm font-bold text-brand-900">
+                <div className="flex items-center gap-2 text-base font-bold text-brand-800">
                   <Send className="h-4 w-4" />
                   この結果を保護者に送る
                 </div>
-                <div className="mt-0.5 text-xs text-brand-700">
+                <div className="mt-0.5 text-sm text-slate-600">
                   「あと{state === 'met' ? '0' : gap}点」を画像にして共有。進路の相談がはじめやすくなります。
                 </div>
               </div>
-              <div className="flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-2 text-sm font-bold text-white transition-all group-hover:bg-brand-700">
+              <div className="flex shrink-0 items-center gap-1 text-sm font-bold text-brand-700">
                 共有
-                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ChevronRight className="h-4 w-4" />
               </div>
             </button>
 
             {/* ヘッジ（信頼の堀を守る語尾） */}
-            <div className="flex items-start gap-2 rounded-lg bg-slate-50 px-4 py-3 text-xs leading-relaxed text-slate-500">
-              <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-400" />
+            <div className="flex items-start gap-2 rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm leading-relaxed text-slate-700">
+              <Info className="mt-1 h-4 w-4 shrink-0 text-slate-600" />
               <span>
                 {HEDGE_NOTE}
                 {prefectureName ? `（${prefectureName}の` : '（'}
-                <Link href={`/${prefectureCode}/naishin`} className="font-bold text-slate-600 underline">
+                <Link href={`/${prefectureCode}/naishin`} className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
                   計算根拠・出典ページ
                 </Link>
                 でご確認ください）
@@ -249,8 +234,7 @@ export function GapToTarget({ result, prefectureCode, prefectureName, onShareOpe
         )}
 
         {!state && (
-          <div className="flex items-center gap-2 rounded-lg bg-brand-50/60 px-4 py-3 text-xs text-brand-700">
-            <TrendingUp className="h-4 w-4 shrink-0" />
+          <div className="rounded-lg border border-slate-200 bg-brand-50 px-4 py-3 text-sm text-slate-700">
             目標を選ぶ／入れると、合格目安まで「あと何点」かが表示されます。
           </div>
         )}

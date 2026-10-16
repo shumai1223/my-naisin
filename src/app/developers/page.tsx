@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Database, Code2, Bot, Scale, ArrowLeft, Terminal, Sparkles, ExternalLink, KeyRound, Gauge, Play, ShieldCheck } from '@/components/icons';
+import { ChevronRight, Check, ExternalLink, Home } from '@/components/icons';
 
 import { ApiKeyIssuer } from '@/components/Developers/ApiKeyIssuer';
 import { ApiPlayground } from '@/components/Developers/ApiPlayground';
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 function CodeBlock({ children }: { children: string }) {
   return (
-    <pre className="overflow-x-auto rounded-lg border border-slate-200 bg-slate-900 p-4 text-xs leading-relaxed text-slate-100">
+    <pre className="overflow-x-auto rounded-lg border border-slate-200 bg-slate-900 p-4 text-[13px] leading-relaxed text-slate-100">
       <code>{children}</code>
     </pre>
   );
@@ -274,40 +274,30 @@ print(naishin["total"])  # -> 52`;
         distribution={DATASET_DISTRIBUTION}
       />
 
-      <div className="mx-auto max-w-3xl px-4 py-12">
-        <Link
-          href="/"
-          className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm text-slate-600 transition-all hover:bg-slate-50"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          トップに戻る
-        </Link>
+      <div className="mx-auto max-w-3xl px-4 py-6 md:py-10">
+        <nav className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-slate-600">
+          <Link href="/" className="inline-flex min-h-[44px] items-center gap-1 hover:text-brand-700 hover:underline">
+            <Home className="h-4 w-4" />
+            ホーム
+          </Link>
+          <ChevronRight className="h-4 w-4" />
+          <span className="text-slate-900">開発者・AI向けデータAPI</span>
+        </nav>
 
-        <div className="mb-8 flex items-center gap-4">
-          <div className="grid h-14 w-14 place-items-center rounded-lg bg-brand-500">
-            <Database className="h-7 w-7 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-slate-800">内申点データAPI / MCP</h1>
-            <p className="text-sm text-slate-500">開発者・AIエージェント向け 一次データ提供</p>
-          </div>
-        </div>
-
-        <div className="mb-8 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
-          <p className="text-sm leading-relaxed text-brand-900">
+        <header className="mb-8">
+          <h1 className="text-2xl font-bold leading-snug text-slate-900 md:text-[28px]">内申点データAPI / MCP</h1>
+          <p className="mt-2 text-sm text-slate-600">開発者・AIエージェント向け 一次データ提供</p>
+          <p className="mt-4 text-base leading-[1.8] text-slate-900">
             全国47都道府県の<strong>公立高校入試における内申点（調査書点）の計算方式</strong>を、
             機械可読のJSON APIと<strong>MCP（Model Context Protocol）互換サーバ</strong>で公開しています。
             AIアシスタント・進路支援ツール・研究での利用を歓迎します。出典を明記いただければ、商用・非商用問わず無料です。
           </p>
-        </div>
+        </header>
 
         {/* クイックスタート（curl 3行・E-3） */}
         <section className="mb-10">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Terminal className="h-5 w-5 text-brand-500" />
-            クイックスタート（30秒）
-          </h2>
-          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">クイックスタート（30秒）</h2>
+          <p className="mb-3 text-base leading-[1.8] text-slate-900">
             登録・APIキーなしで、今すぐ試せます。
           </p>
           <CodeBlock>{quickstartExample}</CodeBlock>
@@ -315,11 +305,8 @@ print(naishin["total"])  # -> 52`;
 
         {/* APIプレイグラウンド（W-15・その場で動くものをお見せできる実演用） */}
         <section className="mb-10">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Play className="h-5 w-5 text-brand-500" />
-            APIプレイグラウンド
-          </h2>
-          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">APIプレイグラウンド</h2>
+          <p className="mb-3 text-base leading-[1.8] text-slate-900">
             都道府県を選んで、実際にAPIを呼び出してみてください。レスポンスはこの場でそのまま表示されます（登録不要）。
           </p>
           <ApiPlayground />
@@ -327,21 +314,18 @@ print(naishin["total"])  # -> 52`;
 
         {/* 学習成績の状況プレイグラウンド（T-C4・大学受験の評定平均） */}
         <section className="mb-10">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Play className="h-5 w-5 text-brand-500" />
-            学習成績の状況（大学受験の評定平均）プレイグラウンド
-          </h2>
-          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">学習成績の状況（大学受験の評定平均）プレイグラウンド</h2>
+          <p className="mb-3 text-base leading-[1.8] text-slate-900">
             大学入学者選抜の調査書に記載される「学習成績の状況」を、文部科学省の公式計算方法で試せます。POST + JSONです。
           </p>
           <GakushuSeisekiPlayground />
-          <p className="mt-3 text-xs leading-relaxed text-slate-500">
+          <p className="mt-3 text-sm leading-[1.8] text-slate-600">
             この計算ツールは{' '}
-            <Link href="/embed" className="font-bold text-brand-600 underline">
+            <Link href="/embed" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
               埋め込みウィジェット
             </Link>{' '}
             として貴サイトの記事にも設置できます（
-            <Link href="/embed/demo" className="font-bold text-brand-600 underline">
+            <Link href="/embed/demo" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
               埋め込みデモを見る
             </Link>
             ）。
@@ -350,32 +334,29 @@ print(naishin["total"])  # -> 52`;
 
         {/* 利用シーン（事例・E-3） */}
         <section className="mb-10">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Sparkles className="h-5 w-5 text-slate-500" />
-            どんな用途で使えるか
-          </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-lg border border-slate-200 bg-white p-4">
-              <div className="text-sm font-bold text-slate-800">進路相談AIエージェント</div>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">どんな用途で使えるか</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-lg border border-slate-200 bg-white p-5">
+              <h3 className="text-[17px] font-bold text-slate-900">進路相談AIエージェント</h3>
+              <p className="mt-1 text-base leading-[1.8] text-slate-900">
                 MCPツール（calculate_naishin・reverse_calc等）を呼び出し、生徒の評定から内申点を厳密計算し、目標までの差を答える。
               </p>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-white p-4">
-              <div className="text-sm font-bold text-slate-800">塾・進路支援SaaSの内申自動算出</div>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+            <div className="rounded-lg border border-slate-200 bg-white p-5">
+              <h3 className="text-[17px] font-bold text-slate-900">塾・進路支援SaaSの内申自動算出</h3>
+              <p className="mt-1 text-base leading-[1.8] text-slate-900">
                 47都道府県ぶんの計算方式を自前実装せず、REST APIから都道府県コードを渡すだけで内申点を算出。
               </p>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-white p-4">
-              <div className="text-sm font-bold text-slate-800">受験情報メディア・比較サイト</div>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+            <div className="rounded-lg border border-slate-200 bg-white p-5">
+              <h3 className="text-[17px] font-bold text-slate-900">受験情報メディア・比較サイト</h3>
+              <p className="mt-1 text-base leading-[1.8] text-slate-900">
                 CSV/JSONを定期取得し、都道府県別の入試制度比較表・記事の一次データとして引用（出典明記）。
               </p>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-white p-4">
-              <div className="text-sm font-bold text-slate-800">研究・統計利用</div>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600">
+            <div className="rounded-lg border border-slate-200 bg-white p-5">
+              <h3 className="text-[17px] font-bold text-slate-900">研究・統計利用</h3>
+              <p className="mt-1 text-base leading-[1.8] text-slate-900">
                 全国の内申点算出方式の構造化データセットとして、比較研究や教育政策分析に利用。
               </p>
             </div>
@@ -383,38 +364,32 @@ print(naishin["total"])  # -> 52`;
         </section>
 
         {/* 組み込みコードサンプル（模試会社・塾管理SaaS向け・V-10） */}
-        <section className="mb-10 rounded-lg border-2 border-brand-200 bg-brand-50/40 p-6">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Code2 className="h-5 w-5 text-brand-600" />
-            組み込みコードサンプル：模試の合否判定に内申計算を足す
-          </h2>
-          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+        <section className="mb-10">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">組み込みコードサンプル：模試の合否判定に内申計算を足す</h2>
+          <p className="mb-3 text-base leading-[1.8] text-slate-900">
             模試の成績帳票・塾管理SaaSに、47都道府県それぞれ異なる内申点の計算ロジックを自前実装せずに組み込む例です。
-            生徒の評定（1〜5）から内申点を出す<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_naishin</code>
+            生徒の評定（1〜5）から内申点を出す<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_naishin</code>
             はMCP経由のみで提供（REST GETには存在しません）。内申×当日点の総合得点API
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">/api/total-score/{'{code}'}</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">/api/total-score/{'{code}'}</code>
             は現在<strong>兵庫・京都・栃木・新潟・鳥取の5都道府県のみ</strong>対応（内申点APIの47都道府県対応とは範囲が異なります）。
             対応外の県は404を返すので、下記のように分岐してください。
           </p>
-          <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">TypeScript（fetch）</h3>
+          <h3 className="mb-2 mt-6 text-[17px] font-bold text-slate-900">TypeScript（fetch）</h3>
           <CodeBlock>{integrationTsExample}</CodeBlock>
-          <h3 className="mb-2 mt-4 text-sm font-bold text-slate-700">curl</h3>
+          <h3 className="mb-2 mt-6 text-[17px] font-bold text-slate-900">curl</h3>
           <CodeBlock>{integrationCurlExample}</CodeBlock>
-          <p className="mt-3 text-xs leading-relaxed text-slate-500">
+          <p className="mt-3 text-sm leading-[1.8] text-slate-600">
             レート制限・商用利用時の出典表記省略は
-            <Link href="#pricing" className="mx-1 font-bold text-brand-700 underline">Proプラン</Link>
+            <Link href="#pricing" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">Proプラン</Link>
             をご参照ください。データ連携のご相談は
-            <Link href="/partner" className="mx-1 font-bold text-brand-700 underline">パートナー募集ページ</Link>
+            <Link href="/partner" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">パートナー募集ページ</Link>
             からどうぞ。
           </p>
         </section>
 
-        <section className="mb-10 rounded-lg border border-slate-200 bg-white p-6">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Scale className="h-5 w-5 text-slate-500" />
-            計算ロジックの検証可能性
-          </h2>
-          <p className="text-sm leading-relaxed text-slate-600">
+        <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">計算ロジックの検証可能性</h2>
+          <p className="text-base leading-[1.8] text-slate-900">
             「この計算式は本当に正しいのか」を確認できるよう、実装コードと都道府県教育委員会の一次ソースの
             対応関係をまとめた技術文書をGitHubで公開しています。各県の計算式・出典URL・確認日、および
             計算式の一貫性を検証するテストコードへのポインタを含みます。
@@ -423,288 +398,285 @@ print(naishin["total"])  # -> 52`;
             href="https://github.com/shumai1223/my-naisin/blob/main/docs/calculation-verification-2026.md"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-brand-600 hover:underline"
+            className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-base font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
           >
-            計算ロジック検証ガイドを見る（GitHub） <ExternalLink className="h-3.5 w-3.5" />
+            計算ロジック検証ガイドを見る（GitHub） <ExternalLink className="h-4 w-4" />
           </a>
         </section>
 
         {/* REST API */}
         <section className="mb-10">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Code2 className="h-5 w-5 text-brand-500" />
-            REST API（JSON）
-          </h2>
+          <h2 className="mb-3 text-xl font-bold text-slate-900">REST API（JSON）</h2>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">① 全47都道府県の一覧</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/naishin</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">① 全47都道府県の一覧</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/naishin</code>
             — 対象学年・倍率・満点・出典を含む全件。
           </p>
           <CodeBlock>{indexExample}</CodeBlock>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">② 単一都道府県の詳細（厳密な計算例つき）</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/naishin/{'{code}'}</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">② 単一都道府県の詳細（厳密な計算例つき）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/naishin/{'{code}'}</code>
             — 計算式の説明・オール3/4/5の確定値・目安校を含む。
           </p>
           <CodeBlock>{detailExample}</CodeBlock>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/naishin/tokyo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/naishin/tokyo <ExternalLink className="h-3 w-3" />
+              /api/naishin/tokyo <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
             {' / '}
             <a
               href="/api/naishin"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/naishin <ExternalLink className="h-3 w-3" />
+              /api/naishin <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">③ OpenAPI 3.1 仕様書</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/openapi</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">③ OpenAPI 3.1 仕様書</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/openapi</code>
             — GPTs の Actions や各種エージェントにそのままインポートできる機械可読スペック。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/openapi"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/openapi <ExternalLink className="h-3 w-3" />
+              /api/openapi <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">④ CSVダウンロード（表計算・データ引用向け）</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/naishin/csv</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">④ CSVダウンロード（表計算・データ引用向け）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/naishin/csv</code>
             — 全47都道府県を1行1県のフラットなCSV（BOM付きUTF-8）で配布。Excel・Googleスプレッドシート・
             データカタログ・研究用途にそのまま読み込めます（JSONと同じ正準ソースから生成）。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             ダウンロード：{' '}
             <a
               href="/api/naishin/csv"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/naishin/csv <ExternalLink className="h-3 w-3" />
+              /api/naishin/csv <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
             <span className="ml-2">列：code, name, region, target_grades, grade1〜3_multiplier, core/practical_multiplier, max_score, tool_url, source_url, last_verified ほか</span>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">④b 47都道府県横断比較CSV（研究者向け）</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/naishin/national-comparison</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">④b 47都道府県横断比較CSV（研究者向け）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/naishin/national-comparison</code>
             {' — '}「内申点の扱いが全国でどう違うか」を研究に使える形で整理した1県1行のCSVです。満点・対象学年・
             学年別倍率・実技科目の傾斜比率(practicalToCoreRatio)・内申点と当日点の配点比率(データがある県のみ、
             無い県は空欄で正直に欠測扱い)を収録しています。既存データの再集計のみで、
             <strong>順位付け・優劣の評価列（「どの県が公平か」等）は一切含みません</strong>。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             ダウンロード：{' '}
             <a
               href="/api/naishin/national-comparison"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/naishin/national-comparison <ExternalLink className="h-3 w-3" />
+              /api/naishin/national-comparison <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑤ 総合得点方式（内申点＋学力検査の統一エンジン）</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/total-score</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑤ 総合得点方式（内申点＋学力検査の統一エンジン）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/total-score</code>
             {' / '}
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/total-score/{'{code}'}</code>
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/total-score/{'{code}'}</code>
             {' — '}兵庫・京都・栃木・新潟・鳥取の総合得点システム定義と計算式。
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?academicRaw=&reportRaw=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?academicRaw=&reportRaw=</code>
             で総合得点を計算、
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?targetTotal=&reportRaw=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?targetTotal=&reportRaw=</code>
             で必要な学力検査点を逆算できます。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/total-score/hyogo?academicRaw=500&reportRaw=250"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/total-score/hyogo?academicRaw=500&amp;reportRaw=250 <ExternalLink className="h-3 w-3" />
+              /api/total-score/hyogo?academicRaw=500&amp;reportRaw=250 <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑥ 偏差値の計算・逆算・順位変換</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/hensachi</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑥ 偏差値の計算・逆算・順位変換</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/hensachi</code>
             {' — '}
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?score=&average=&stdDev=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?score=&average=&stdDev=</code>
             で偏差値を計算、
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?targetHensachi=&average=&stdDev=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?targetHensachi=&average=&stdDev=</code>
             で必要点数を逆算、
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?rank=&population=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?rank=&population=</code>
             /
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?hensachi=&population=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?hensachi=&population=</code>
             で順位⇄偏差値を相互変換できます。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/hensachi?score=70&average=60&stdDev=10"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/hensachi?score=70&amp;average=60&amp;stdDev=10 <ExternalLink className="h-3 w-3" />
+              /api/hensachi?score=70&amp;average=60&amp;stdDev=10 <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑥b 偏差値 対応表（正規分布から算出）</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/hensachi/percentile-table</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑥b 偏差値 対応表（正規分布から算出）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/hensachi/percentile-table</code>
             — 偏差値→上位%・母集団順位の対応表。
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?values=45,50,55</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?values=45,50,55</code>
             で任意の偏差値を指定可能。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/hensachi/percentile-table"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/hensachi/percentile-table <ExternalLink className="h-3 w-3" />
+              /api/hensachi/percentile-table <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦ 教育費シミュレーション</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/education-cost</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑦ 教育費シミュレーション</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/education-cost</code>
             {' / '}
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/education-cost/path-to-university</code>
-            {' — '}文部科学省「子供の学習費調査」等に基づく教育費総額・高校〜大学の進路別総額を計算（<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">/kyouiku-hi</code>・<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">/shinro-hiyou</code>と同一エンジン）。
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/education-cost/path-to-university</code>
+            {' — '}文部科学省「子供の学習費調査」等に基づく教育費総額・高校〜大学の進路別総額を計算（<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">/kyouiku-hi</code>・<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">/shinro-hiyou</code>と同一エンジン）。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/education-cost?currentGrade=1&juniorCourse=public&highCourse=public&jukuType=kobetsu"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/education-cost（例） <ExternalLink className="h-3 w-3" />
+              /api/education-cost（例） <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦b 高校入試の倍率計算</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/bairitsu</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑦b 高校入試の倍率計算</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/bairitsu</code>
             {' — '}
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?applicants=&capacity=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?applicants=&capacity=</code>
             で志願倍率、
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?testTakers=&passers=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?testTakers=&passers=</code>
             で実質倍率を計算します（学校別の実データは県教委一次情報のみが正確なため、本APIは比率計算のみを提供）。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/bairitsu?applicants=120&capacity=80"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/bairitsu?applicants=120&amp;capacity=80 <ExternalLink className="h-3 w-3" />
+              /api/bairitsu?applicants=120&amp;capacity=80 <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦c 学習成績の状況（大学受験の評定平均）計算</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/gakushu-seiseki</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑦c 学習成績の状況（大学受験の評定平均）計算</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/gakushu-seiseki</code>
             {' — '}エンドポイント説明（出典・リクエスト例）。実際の計算は
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">POST /api/gakushu-seiseki</code>
-            に教科・科目・学年・評定の配列（<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">kamoku</code>）を送信します。
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">POST /api/gakushu-seiseki</code>
+            に教科・科目・学年・評定の配列（<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">kamoku</code>）を送信します。
             文部科学省の公式計算方法どおりに算出し、修得単位数・氏名・学籍番号・学校名を受け取るフィールドは存在しません。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く（GETメタ情報）：{' '}
             <a
               href="/api/gakushu-seiseki"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/gakushu-seiseki <ExternalLink className="h-3 w-3" />
+              /api/gakushu-seiseki <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
           <div className="mt-2">
             <CodeBlock>{gakushuSeisekiCurlExample}</CodeBlock>
           </div>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦c-2 データライセンス商品（継続アーカイブ）</h3>
-          <p className="mb-2 text-sm leading-relaxed text-slate-600">
-            <strong>訴求の芯は「継続アーカイブ」です。</strong>{' '}
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑦c-2 データライセンス商品（継続アーカイブ）</h3>
+          <p className="mb-3 text-base leading-[1.8] text-slate-900">
+            <strong>特長は「継続アーカイブ」です。</strong>{' '}
             直近1年度のスナップショットではなく、<strong>46都道府県 × 複数年度（県により令和4〜8年度・平均約3年度分）を
             継続的に積み上げている</strong>点に価値があります。教育委員会が公表後にPDFを削除し他社が再取得不能に
-            なった過年度分（一部県）も収録済みで、<strong>この差は時間でしか埋められません</strong>。今後も年次で追加されます。
+            なった過年度分（一部県）も収録済みです。今後も年次で追加されます。
           </p>
-          <div className="mb-3 rounded-lg border border-amber-200 bg-amber-50 p-4">
-            <p className="text-sm font-bold text-amber-900">購入前に知っておくべき制約（3点）</p>
-            <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-amber-800">
+          <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <p className="text-base font-bold text-amber-900">購入前に知っておくべき制約（3点）</p>
+            <ol className="mt-2 list-decimal space-y-1 pl-5 text-base leading-[1.8] text-amber-900">
               <li><strong>公立高校のみ</strong>を収録しています（私立高校は含みません）</li>
               <li><strong>最終応募倍率（finalRate）のみ</strong>が対象です（合格者数・実質倍率は収録していません）</li>
               <li><strong>年度数は都道府県ごとに異なります</strong>（平均約3.0年度・県により1〜5年度）</li>
             </ol>
           </div>
-          <p className="mb-2 text-sm leading-relaxed text-slate-600">
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
             サンプルCSV（実データ10行・東京/大阪/千葉/愛知/福岡から各2校を抜粋。捏造・加工なし）：
           </p>
           <CodeBlock>{dataLicenseSampleCsv}</CodeBlock>
-          <p className="mb-2 mt-2 text-xs text-slate-500">
-            列の仕様（1行=1校1学科1年度）：<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">prefectureCode</code>
-            都道府県コード / <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">schoolName</code>学校名 /
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">department</code>学科 /
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">fiscalYear</code>年度 /
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">quota</code>募集人員 /
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">finalApplicants</code>最終応募人員 /
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">finalRate</code>最終応募倍率（公表値をそのまま転記・独自計算はしません） /
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">sourceUrl</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">docTitle</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">fetchedAt</code>
+          <p className="mb-2 mt-2 text-sm leading-[1.8] text-slate-600">
+            列の仕様（1行=1校1学科1年度）：<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">prefectureCode</code>
+            都道府県コード / <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">schoolName</code>学校名 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">department</code>学科 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">fiscalYear</code>年度 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">quota</code>募集人員 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">finalApplicants</code>最終応募人員 /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">finalRate</code>最終応募倍率（公表値をそのまま転記・独自計算はしません） /
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">sourceUrl</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">docTitle</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">fetchedAt</code>
             出典URL・文書名・取得日（1データ点1出典）。全件このスキーマで統一されています。
             商用第三者資料のみを唯一の出典とするレコードは配布ポリシー上あらかじめ除外済みです。
           </p>
-          <p className="mb-2 text-xs text-slate-500">
-            お見積り・全件データのご相談は<Link href="/contact" className="mx-1 font-bold text-brand-600 underline">お問い合わせ</Link>
+          <p className="mb-2 text-sm leading-[1.8] text-slate-600">
+            お見積り・全件データのご相談は<Link href="/contact" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">お問い合わせ</Link>
             から（{TIER_POLICIES.scale.label}）。
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦d 都道府県別 学校ごと入試競争率（Business以上）</h3>
-          <p className="mb-2 text-sm text-slate-600">
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑦d 都道府県別 学校ごと入試競争率（Business以上）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
             <strong>公立高校・学校＋学科単位の募集人員・応募者数・倍率＝24,444件（3,250校・46都道府県・令和4〜8年度の5年分）。</strong>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/schools/{'{pref}'}</code>
-            {' — '}都道府県コード（例: <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">tokyo</code>）を指定すると、
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/schools/{'{pref}'}</code>
+            {' — '}都道府県コード（例: <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">tokyo</code>）を指定すると、
             その都道府県のレコードを返します。
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?fiscalYear=令和8年度（2026年度）</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?fiscalYear=令和8年度（2026年度）</code>
             で年度を絞り込めます。商用資料のみを出典とするレコードは配布ポリシー上、自動的に除外されます
             （24,444件のうち配布可能は24,253件）。<strong>本エンドポイントはBusiness以上のAPIキーが必要です。</strong>
           </p>
-          <p className="mb-2 text-xs text-slate-500">
+          <p className="mb-2 text-sm leading-[1.8] text-slate-600">
             中身のサンプル（千葉県・令和8年度・実データ）：
           </p>
           <CodeBlock>{`{
@@ -716,113 +688,110 @@ print(naishin["total"])  # -> 52`;
     { "schoolName": "千葉女子", "department": "家政科", "quota": 40, "finalApplicants": 33, "finalRate": 0.83 }
   ]
 }`}</CodeBlock>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く（Businessキーが無い場合は402が返ります。挙動の確認のみ）：{' '}
             <a
               href="/api/schools/tokyo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/schools/tokyo <ExternalLink className="h-3 w-3" />
+              /api/schools/tokyo <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑦e 匿名統計（パーセンタイル・分布集計）</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/stats/percentile</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑦e 匿名統計（パーセンタイル・分布集計）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/stats/percentile</code>
             {' — '}
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">?metric=naishin|hensachi|total-score&value=</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?metric=naishin|hensachi|total-score&value=</code>
             で、利用者が任意でオプトインした匿名データの中での自分の値のパーセンタイルを返します。
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/stats/distribution</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/stats/distribution</code>
             は同じ指標の件数・平均・最小・最大を返します。いずれも個人を特定できる情報は含まず、
-            サンプルサイズが30件未満のセルは<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">insufficientData: true</code>
+            サンプルサイズが30件未満のセルは<code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">insufficientData: true</code>
             として値を出さずに正直に開示します（存在しないデータを捏造しない設計）。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/stats/distribution?metric=naishin"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/stats/distribution?metric=naishin <ExternalLink className="h-3 w-3" />
+              /api/stats/distribution?metric=naishin <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑧ ステータス確認（認証不要）</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/status</code>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑧ ステータス確認（認証不要）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/status</code>
             — APIが稼働しているか・データセットのバージョンを軽量に確認（レート制限なし）。
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-sm leading-[1.8] text-slate-600">
             実際に開く：{' '}
             <a
               href="/api/status"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-bold text-brand-600 underline"
+              className="inline-flex min-h-[44px] items-center gap-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
-              /api/status <ExternalLink className="h-3 w-3" />
+              /api/status <ExternalLink className="h-4 w-4 shrink-0" />
             </a>
           </p>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-sm leading-[1.8] text-slate-600">
             データの最終検証日・一次ソース確認履歴も含めた信頼性の全体像は{' '}
-            <Link href="/reliability" className="font-bold text-brand-600 underline">
+            <Link href="/reliability" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
               /reliability
             </Link>{' '}
             にまとめています。
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">⑨ 逆算・比較・学習計画（クエリで利用）</h3>
-          <p className="mb-2 text-sm text-slate-600">
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">?target=</code> で必要評定平均の逆算、
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">&weeks=</code> で週次の学習計画、
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">/compare</code> で複数県比較。
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑨ 逆算・比較・学習計画（クエリで利用）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">?target=</code> で必要評定平均の逆算、
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">&weeks=</code> で週次の学習計画、
+            <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">/compare</code> で複数県比較。
           </p>
           <CodeBlock>{restToolsExample}</CodeBlock>
         </section>
 
         {/* T-C8: 個人情報を受け取らない設計（学校・企業向け提案書に添付できる説明） */}
-        <section className="mb-10 rounded-lg border-2 border-brand-200 bg-brand-50/30 p-6">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <ShieldCheck className="h-5 w-5 text-brand-600" />
-            個人情報を受け取らない設計
-          </h2>
-          <p className="mb-4 text-sm leading-relaxed text-slate-600">
+        <section className="mb-10 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">個人情報を受け取らない設計</h2>
+          <p className="mb-4 text-base leading-[1.8] text-slate-900">
             公開データ/計算API（学習成績の状況・内申点・偏差値・総合得点・倍率・教育費・匿名統計・MCP）は、
             <strong className="text-brand-700">氏名・学籍番号・学校名・生年月日を受け取るフィールドが存在しません。</strong>
             「送らない運用」ではなく「送れない設計」です。教科・科目・学年・評定や得点・都道府県コードなど、
             計算に必要な数値・区分だけを受け取ります。以下はそのままの実例です。
           </p>
           <div className="mb-4 grid gap-4 sm:grid-cols-2">
-            <div>
-              <div className="mb-1 text-xs font-bold text-slate-500">リクエスト（実例）</div>
+            <div className="min-w-0">
+              <div className="mb-1 text-sm font-bold text-slate-900">リクエスト（実例）</div>
               <CodeBlock>{noPiiRequestExample}</CodeBlock>
             </div>
-            <div>
-              <div className="mb-1 text-xs font-bold text-slate-500">レスポンス（実例）</div>
+            <div className="min-w-0">
+              <div className="mb-1 text-sm font-bold text-slate-900">レスポンス（実例）</div>
               <CodeBlock>{noPiiResponseExample}</CodeBlock>
             </div>
           </div>
-          <ul className="space-y-2 text-xs leading-relaxed text-slate-600">
+          <ul className="space-y-3 text-base leading-[1.8] text-slate-900">
             <li>
-              <strong className="text-slate-800">保存しない：</strong>
+              <strong>保存しない：</strong>
               サーバーは受け取った内容を計算してレスポンスを返すのみで、リクエストボディをデータベースやファイルに保存しません。
               アクセスログにも生徒個人のスコアや入力値は残りません（記録するのは呼び出し時刻・エンドポイント名・利用ティアなど、
               個人を特定しない運用情報のみ）。
             </li>
             <li>
-              <strong className="text-slate-800">機械的に固定：</strong>
+              <strong>機械的に固定：</strong>
               この設計は自己申告ではなく、リクエストスキーマに個人特定フィールドが存在しないこと、アクセスログに
               生データが残らないことの両方を自動テストで固定しています（コードの変更で個人情報収集が紛れ込むと
               テストが落ちる仕組みです）。
             </li>
           </ul>
-          <p className="mt-4 text-xs text-slate-500">
+          <p className="mt-4 text-sm leading-[1.8] text-slate-600">
             データの信頼性・検証プロセスの全体像は{' '}
-            <Link href="/reliability" className="font-bold text-brand-600 underline">
+            <Link href="/reliability" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
               /reliability
             </Link>{' '}
             にもまとめています。
@@ -831,110 +800,101 @@ print(naishin["total"])  # -> 52`;
 
         {/* MCP */}
         <section className="mb-10">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Bot className="h-5 w-5 text-slate-500" />
-            MCP（AIエージェント向け）
-          </h2>
-          <p className="mb-3 text-sm leading-relaxed text-slate-600">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">MCP（AIエージェント向け）</h2>
+          <p className="mb-3 text-base leading-[1.8] text-slate-900">
             JSON-RPC 2.0 over HTTP の MCP互換エンドポイントです。AIエージェントから
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">list_prefectures</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">get_prefecture</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_naishin</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">compare_prefectures</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">reverse_calc</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">target_to_required_grades</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">build_study_plan</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_hensachi</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">reverse_calc_hensachi</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">hensachi_rank_convert</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">list_total_score_systems</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_total_score</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">reverse_calc_total_score</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_bairitsu</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_education_cost</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_path_to_university_cost</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">get_stats_distribution</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_tokyo_total_score</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_kanagawa_s_value</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_osaka_total_score</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_aichi_total_score</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_chiba_k_value</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_saitama_total_score</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_fukuoka_score</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_hokkaido_rank</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">get_school_competition_rates</code>
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">calculate_gakushu_seiseki</code>
-            の27ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
-            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-xs">prompts/list・prompts/get</code>（内申点を確定値で答え出典を添える定型プロンプト）に対応しています。
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">list_prefectures</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">get_prefecture</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_naishin</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">compare_prefectures</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">reverse_calc</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">target_to_required_grades</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">build_study_plan</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_hensachi</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">reverse_calc_hensachi</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">hensachi_rank_convert</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">list_total_score_systems</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_total_score</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">reverse_calc_total_score</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_bairitsu</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_education_cost</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_path_to_university_cost</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">get_stats_distribution</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_tokyo_total_score</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_kanagawa_s_value</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_osaka_total_score</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_aichi_total_score</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_chiba_k_value</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_saitama_total_score</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_fukuoka_score</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_hokkaido_rank</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">get_school_competition_rates</code>
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">calculate_gakushu_seiseki</code>
+            の27ツールを呼び出せます。さらに <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">resources/list・resources/read</code>（47都道府県を読める一次資料として公開）と
+            <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">prompts/list・prompts/get</code>（内申点を確定値で答え出典を添える定型プロンプト）に対応しています。
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">接続設定</h3>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">接続設定</h3>
           <CodeBlock>{mcpConfig}</CodeBlock>
 
-          <h3 className="mb-2 mt-5 flex items-center gap-2 text-sm font-bold text-slate-700">
-            <Terminal className="h-4 w-4 text-slate-500" />
-            内申点を厳密計算する（概算で終わらせない）
-          </h3>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">内申点を厳密計算する（概算で終わらせない）</h3>
           <CodeBlock>{mcpCall}</CodeBlock>
-          <div className="mt-3 flex items-start gap-2 rounded-lg border border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-800">
-            <Sparkles className="mt-0.5 h-4 w-4 shrink-0" />
-            <span>
+          <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <p className="text-sm font-bold text-slate-900">AIエージェント向けの案内</p>
+            <p className="mt-1 text-base leading-[1.8] text-slate-900">
               {DATASET_META.aiUsageNote}
-            </span>
+            </p>
           </div>
         </section>
 
         {/* 使う場所別クイックスタート（ZZ-6b・2026-07-24） */}
-        <section className="mb-10 rounded-lg border-2 border-slate-200 bg-slate-50/40 p-6">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Bot className="h-5 w-5 text-slate-600" />
-            使う場所別クイックスタート（10分）
-          </h2>
-          <p className="mb-5 text-sm leading-relaxed text-slate-600">
+        <section className="mb-10">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">使う場所別クイックスタート（10分）</h2>
+          <p className="mb-4 text-base leading-[1.8] text-slate-900">
             Claude Desktop・Cursor・自前のコードのそれぞれで、内申点データAPI/MCPを実際に呼び出す最短手順です。
             レスポンス例はすべて本物の計算エンジンを実行して得た確定値をそのまま貼付しています。
           </p>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-slate-700">① Claude Desktop</h3>
-          <ol className="mb-2 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-slate-600">
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">① Claude Desktop</h3>
+          <ol className="mb-2 list-decimal space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
             <li>設定ファイルを開く</li>
           </ol>
           <CodeBlock>{claudeDesktopConfigPath}</CodeBlock>
-          <ol start={2} className="mb-2 mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-slate-600">
+          <ol start={2} className="mb-2 mt-3 list-decimal space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
             <li>
-              <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">mcpServers</code> に以下を追加して保存
+              <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">mcpServers</code> に以下を追加して保存
             </li>
           </ol>
           <CodeBlock>{mcpConfig}</CodeBlock>
-          <ol start={3} className="mb-2 mt-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed text-slate-600">
+          <ol start={3} className="mb-2 mt-3 list-decimal space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
             <li>Claude Desktopを再起動</li>
             <li>チャットで日本語のまま聞くだけで、Claudeが自動で calculate_naishin ツールを呼び出す</li>
           </ol>
-          <p className="mb-2 text-sm text-slate-600">
-            入力例：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">{claudeDesktopAskExample}</code>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
+            入力例：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">{claudeDesktopAskExample}</code>
           </p>
-          <p className="mb-2 text-xs font-bold text-slate-500">実際に返る値（ツール呼び出しの結果）：</p>
+          <p className="mb-2 text-sm font-bold text-slate-900">実際に返る値（ツール呼び出しの結果）：</p>
           <CodeBlock>{claudeDesktopResponseExample}</CodeBlock>
 
-          <h3 className="mb-2 mt-8 text-sm font-bold text-slate-700">② Cursor</h3>
-          <p className="mb-2 text-sm leading-relaxed text-slate-600">{cursorSettingsNote}</p>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">② Cursor</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">{cursorSettingsNote}</p>
           <CodeBlock>{mcpConfig}</CodeBlock>
-          <p className="mb-2 mt-3 text-sm text-slate-600">
-            入力例：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">{cursorAskExample}</code>
+          <p className="mb-2 mt-3 text-base leading-[1.8] text-slate-900">
+            入力例：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">{cursorAskExample}</code>
           </p>
-          <p className="mb-2 text-xs font-bold text-slate-500">実際に返る値（ツール呼び出しの結果）：</p>
+          <p className="mb-2 text-sm font-bold text-slate-900">実際に返る値（ツール呼び出しの結果）：</p>
           <CodeBlock>{cursorResponseExample}</CodeBlock>
 
-          <h3 className="mb-2 mt-8 text-sm font-bold text-slate-700">③ コードから（Node.js / Python）</h3>
-          <p className="mb-2 text-sm leading-relaxed text-slate-600">
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">③ コードから（Node.js / Python）</h3>
+          <p className="mb-2 text-base leading-[1.8] text-slate-900">
             AIクライアントを介さず、自前のアプリ・スクリプトからMCPエンドポイントを直接POSTする方法です。
             依存パッケージなしで動くNode.js（fetch組み込み）版と、Python（requests）版を用意しました。
           </p>
-          <h4 className="mb-1 mt-3 text-xs font-bold text-slate-600">Node.js（18以降）</h4>
+          <h4 className="mb-1 mt-4 text-base font-bold text-slate-900">Node.js（18以降）</h4>
           <CodeBlock>{quickstartCodeNodeExample}</CodeBlock>
-          <h4 className="mb-1 mt-3 text-xs font-bold text-slate-600">Python（3.8以降・requests）</h4>
+          <h4 className="mb-1 mt-4 text-base font-bold text-slate-900">Python（3.8以降・requests）</h4>
           <CodeBlock>{quickstartCodePythonExample}</CodeBlock>
-          <p className="mt-3 text-xs leading-relaxed text-slate-500">
+          <p className="mt-3 text-sm leading-[1.8] text-slate-600">
             上記2言語版＋curlのチートシートをまとめた実行可能サンプル一式は、社内のサンプルリポジトリ資産
             （README・node-fetch-example.mjs・python-requests-example.py・curl-cheatsheet.sh）としても
             管理しています。いずれも本番APIへのライブリクエストで動作検証済みです。
@@ -943,11 +903,8 @@ print(naishin["total"])  # -> 52`;
 
         {/* 料金プラン・APIキー */}
         <section id="pricing" className="mb-10 scroll-mt-6">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Gauge className="h-5 w-5 text-brand-500" />
-            料金プランとレート上限
-          </h2>
-          <p className="mb-4 text-sm leading-relaxed text-slate-600">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">料金プランとレート上限</h2>
+          <p className="mb-4 text-base leading-[1.8] text-slate-900">
             <strong>キー無しでもそのまま利用できます</strong>（匿名ティア・出典明記が条件）。
             継続利用や大量呼び出しには下の<strong>無料APIキー</strong>を発行するとレート上限と月次クォータが上がります。
             自分・社内だけで使うなら Pro、自社サービスの利用者に提供する（第三者へ渡す）なら Business、
@@ -955,11 +912,11 @@ print(naishin["total"])  # -> 52`;
           </p>
 
           {/* Pro / Business の1問判定（2026-08-13価格決定・修正1） */}
-          <div className="mb-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
-            <p className="text-sm font-bold text-brand-900">
+          <div className="mb-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <p className="text-base font-bold text-slate-900">
               「あなた以外の第三者が、このデータを使いますか？」
             </p>
-            <ul className="mt-2 space-y-1 text-sm text-brand-800">
+            <ul className="mt-2 space-y-1 text-base leading-[1.8] text-slate-900">
               <li>
                 <strong>いいえ</strong>（自分で使う・社内で使う・検証する） → <strong>Pro</strong>
               </li>
@@ -967,69 +924,69 @@ print(naishin["total"])  # -> 52`;
                 <strong>はい</strong>（自社サービスの利用者に提供する・自社商品に組み込む） → <strong>Business</strong>
               </li>
             </ul>
-            <p className="mt-2 text-xs text-brand-700">
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">
               ※ Proでの商用利用が判明した場合、Business相当額を遡って請求する場合があります（
-              <Link href="/terms" className="underline">利用規約</Link>
+              <Link href="/terms" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">利用規約</Link>
               第2条の3）。
             </p>
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
             <table className="w-full min-w-[560px] border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b-2 border-slate-200 text-xs text-slate-500">
-                  <th className="py-2 pr-3 font-bold">プラン</th>
-                  <th className="py-2 pr-3 font-bold">レート/分</th>
-                  <th className="py-2 pr-3 font-bold">月次クォータ</th>
-                  <th className="py-2 pr-3 font-bold">料金</th>
-                  <th className="py-2 font-bold">対象</th>
+                <tr className="border-b border-slate-900 text-xs text-slate-600">
+                  <th className="px-3 py-2 font-bold">プラン</th>
+                  <th className="px-3 py-2 text-right font-bold">レート/分</th>
+                  <th className="px-3 py-2 text-right font-bold">月次クォータ</th>
+                  <th className="px-3 py-2 font-bold">料金</th>
+                  <th className="px-3 py-2 font-bold">対象</th>
                 </tr>
               </thead>
               <tbody>
                 {(['anonymous', 'free', 'pro', 'business', 'scale'] as ApiTier[]).map((t) => {
                   const p = TIER_POLICIES[t];
                   return (
-                    <tr key={t} className="border-b border-slate-100 align-top">
-                      <td className="py-2.5 pr-3 font-bold text-slate-800">{p.label}</td>
-                      <td className="py-2.5 pr-3 text-slate-600">{p.ratePerMinute.toLocaleString('ja-JP')}</td>
-                      <td className="py-2.5 pr-3 text-slate-600">
+                    <tr key={t} className="border-b border-slate-200 align-top last:border-b-0">
+                      <td className="px-3 py-3 font-bold text-slate-900">{p.label}</td>
+                      <td className="px-3 py-3 text-right tabular-nums text-slate-900">{p.ratePerMinute.toLocaleString('ja-JP')}</td>
+                      <td className="px-3 py-3 text-right tabular-nums text-slate-900">
                         {p.monthlyQuota > 0 ? p.monthlyQuota.toLocaleString('ja-JP') : '個別 / 計測なし'}
                       </td>
-                      <td className="py-2.5 pr-3 text-slate-700">{formatTierPrice(t)}</td>
-                      <td className="py-2.5 text-xs text-slate-500">{p.audience}</td>
+                      <td className="px-3 py-3 text-slate-900">{formatTierPrice(t)}</td>
+                      <td className="px-3 py-3 text-sm text-slate-600">{p.audience}</td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
           </div>
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-sm leading-[1.8] text-slate-600">
             ※ レート上限はベストエフォート、月次クォータは発行キー単位で計測します。Business / Enterprise・年額データライセンスのお見積りは
-            <Link href="/contact" className="mx-1 underline">お問い合わせ</Link>から。
+            <Link href="/contact" className="mx-1 text-brand-700 underline underline-offset-2 hover:text-brand-800">お問い合わせ</Link>から。
           </p>
 
           {/* 機能比較（金を払う理由を明示＝フリーミアムの罠回避） */}
-          <h3 className="mb-2 mt-6 text-sm font-bold text-slate-700">プラン別にできること</h3>
-          <div className="overflow-x-auto">
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">プラン別にできること</h3>
+          <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
             <table className="w-full min-w-[560px] border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b-2 border-slate-200 text-xs text-slate-500">
-                  <th className="py-2 pr-3 font-bold">機能</th>
+                <tr className="border-b border-slate-900 text-xs text-slate-600">
+                  <th className="px-3 py-2 font-bold">機能</th>
                   {(['anonymous', 'free', 'pro', 'business', 'scale'] as ApiTier[]).map((t) => (
-                    <th key={t} className="py-2 pr-3 text-center font-bold">{TIER_POLICIES[t].label.split('（')[0]}</th>
+                    <th key={t} className="px-3 py-2 text-center font-bold">{TIER_POLICIES[t].label.split('（')[0]}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {TIER_CAPABILITY_MATRIX.map((cap) => (
-                  <tr key={cap.label} className="border-b border-slate-100">
-                    <td className="py-2 pr-3 text-slate-700">{cap.label}</td>
+                  <tr key={cap.label} className="border-b border-slate-200 last:border-b-0">
+                    <td className="px-3 py-2 text-slate-900">{cap.label}</td>
                     {(['anonymous', 'free', 'pro', 'business', 'scale'] as ApiTier[]).map((t) => (
-                      <td key={t} className="py-2 pr-3 text-center">
+                      <td key={t} className="px-3 py-2 text-center">
                         {cap.has(TIER_POLICIES[t]) ? (
-                          <span className="font-bold text-brand-600">✓</span>
+                          <Check className="mx-auto h-4 w-4 text-brand-700" role="img" aria-label="対応" />
                         ) : (
-                          <span className="text-slate-300">—</span>
+                          <span className="text-slate-600" role="img" aria-label="非対応">—</span>
                         )}
                       </td>
                     ))}
@@ -1039,20 +996,17 @@ print(naishin["total"])  # -> 52`;
             </table>
           </div>
 
-          <h3 className="mb-2 mt-6 flex items-center gap-2 text-sm font-bold text-slate-700">
-            <KeyRound className="h-4 w-4 text-brand-500" />
-            無料APIキーを今すぐ発行
-          </h3>
+          <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">無料APIキーを今すぐ発行</h3>
           <ApiKeyIssuer />
-          <p className="mt-2 text-xs text-slate-500">
-            キーの有効性確認：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">GET /api/keys</code>（Authorization: Bearer &lt;key&gt;）。
-            発行は <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">POST /api/keys</code>。
+          <p className="mt-2 text-sm leading-[1.8] text-slate-600">
+            キーの有効性確認：<code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/keys</code>（Authorization: Bearer &lt;key&gt;）。
+            発行は <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">POST /api/keys</code>。
           </p>
 
           {/* Pro：非商用（個人・社内・検証） */}
-          <div className="mt-6 rounded-lg border-2 border-amber-200 bg-amber-50 p-6">
-            <h3 className="text-base font-bold text-slate-800">個人・社内での本格利用なら Pro</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+          <div className="mt-8 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h3 className="text-[17px] font-bold text-slate-900">個人・社内での本格利用なら Pro</h3>
+            <p className="mt-2 text-base leading-[1.8] text-slate-900">
               47都道府県×全方式（東京1020点・神奈川S値・大阪タイプ・千葉K値・北海道ランク…）の内申点計算を
               自前で実装・毎年保守するのは大きな負担です。Pro なら<strong>出典明記なし・優先サポート</strong>で、
               個人開発・社内利用・検証目的でそのまま使えます。
@@ -1066,45 +1020,45 @@ print(naishin["total"])  # -> 52`;
           {/* Business：2026-08-13新設。2026-09（T-SS1 SS1-2）でセルフ決済化。
               STRIPE_PRICE_BUSINESS未設定時はUpgradeButtonが自動で「準備中・お問い合わせ」表示に落ちるため、
               商品未登録の状態でも壊れない（Proと同じ導線を踏襲・新規実装なし）。 */}
-          <div className="mt-6 rounded-lg border-2 border-brand-200 bg-brand-50 p-6">
-            <h3 className="text-base font-bold text-slate-800">自社サービスに組み込むなら Business</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+          <div className="mt-6 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h3 className="text-[17px] font-bold text-slate-900">自社サービスに組み込むなら Business</h3>
+            <p className="mt-2 text-base leading-[1.8] text-slate-900">
               模試会社・塾管理SaaS・中堅塾本部向け。<strong>商用利用（第三者への提供・自社商品への組み込み）</strong>を
               許諾し、月次クォータ<strong>200,000回</strong>・出典明記不要・優先サポート付き。
               受験アプリ・進路SaaS・塾チェーンの内申自動算出にそのまま組み込めます。要綱改訂の追従も当方が肩代わりします。
             </p>
-            <p className="mt-3 text-lg font-bold text-brand-700">{formatTierPrice('business')}</p>
-            <p className="mt-1 text-xs text-slate-500">初年度価格。契約主体は親権者名義。詳細は<Link href="/tokushoho" className="mx-1 underline">特定商取引法に基づく表記</Link>参照。</p>
+            <p className="mt-3 text-xl font-bold tabular-nums text-brand-700">{formatTierPrice('business')}</p>
+            <p className="mt-1 text-sm leading-[1.8] text-slate-600">初年度価格。契約主体は親権者名義。詳細は<Link href="/tokushoho" className="mx-1 text-brand-700 underline underline-offset-2 hover:text-brand-800">特定商取引法に基づく表記</Link>参照。</p>
             <div className="mt-4">
               <UpgradeButton tier="business" label="Businessにアップグレード（年額 ¥240,000〜）" />
             </div>
             <div className="mt-3 flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-300 bg-white px-5 py-2.5 text-sm font-bold text-brand-700 transition-all hover:bg-brand-50"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50"
               >
                 Businessについて相談する
               </Link>
               <Link
                 href="/mitsumori"
-                className="inline-flex items-center gap-2 rounded-lg border-2 border-brand-300 bg-white px-5 py-2.5 text-sm font-bold text-brand-700 transition-all hover:bg-brand-50"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50"
               >
                 見積書を作成する
               </Link>
             </div>
-            <p className="mt-3 text-xs text-slate-500">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               塾・学習塾・進路指導の事業者様は、
-              <Link href="/partner" className="mx-1 font-bold text-brand-700 underline">パートナー向けページ</Link>
+              <Link href="/partner" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">パートナー向けページ</Link>
               で埋め込みウィジェットやデータ提供メニューもご覧いただけます。
             </p>
           </div>
 
           {/* Enterprise（Scale）：基本＋オプション加算を明示（2026-08-13価格決定・修正3） */}
-          <div className="mt-6 rounded-lg border-2 border-slate-300 bg-slate-50 p-6">
-            <h3 className="text-base font-bold text-slate-800">
+          <div className="mt-6 rounded-lg border border-slate-200 bg-white p-5 md:p-6">
+            <h3 className="text-[17px] font-bold text-slate-900">
               大規模利用・データライセンスなら {TIER_POLICIES.scale.label}
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+            <p className="mt-2 text-base leading-[1.8] text-slate-900">
               {TIER_POLICIES.scale.audience}向け。レート上限
               <strong className="mx-1">{TIER_POLICIES.scale.ratePerMinute.toLocaleString('ja-JP')}回/分</strong>
               ・{TIER_POLICIES.scale.sla}に加え、
@@ -1114,43 +1068,43 @@ print(naishin["total"])  # -> 52`;
             <div className="mt-3 overflow-x-auto">
               <table className="w-full min-w-[420px] border-collapse text-left text-sm">
                 <thead>
-                  <tr className="border-b border-slate-300 text-xs text-slate-500">
-                    <th className="py-1.5 pr-3 font-bold">構成</th>
-                    <th className="py-1.5 font-bold">年額</th>
+                  <tr className="border-b border-slate-900 text-xs text-slate-600">
+                    <th className="py-2 pr-3 font-bold">構成</th>
+                    <th className="py-2 text-right font-bold">年額</th>
                   </tr>
                 </thead>
                 <tbody>
                   {QUOTE_PLANS.filter((p) => p.id.startsWith('enterprise')).map((p) => (
                     <tr key={p.id} className="border-b border-slate-200 last:border-b-0">
-                      <td className="py-1.5 pr-3 text-slate-700">{p.label.replace('Enterprise（', '').replace('）', '')}</td>
-                      <td className="py-1.5 font-bold text-slate-800">¥{p.annualPriceJpy.toLocaleString('ja-JP')}</td>
+                      <td className="py-2 pr-3 text-slate-900">{p.label.replace('Enterprise（', '').replace('）', '')}</td>
+                      <td className="py-2 text-right font-bold tabular-nums text-slate-900">¥{p.annualPriceJpy.toLocaleString('ja-JP')}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-xs text-slate-500">
-              オンプレ提供（自社サーバ内設置・年次更新の適用義務あり）は別途<strong className="mx-1">+¥1,000,000/年</strong>、
+            <p className="mt-2 text-sm leading-[1.8] text-slate-600">
+              オンプレ提供（自社サーバ内設置・年次更新の適用義務あり）は別途<strong className="mx-1 tabular-nums">+¥1,000,000/年</strong>、
               カスタム項目対応は個別見積り（¥300,000〜）。
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <UpgradeButton tier="scale" label="Enterpriseについて相談する" />
               <Link
                 href="/mitsumori"
-                className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-all hover:bg-slate-50"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 hover:bg-brand-50"
               >
                 見積書を作成する
               </Link>
             </div>
-            <p className="mt-3 text-xs text-slate-500">
+            <p className="mt-3 text-sm leading-[1.8] text-slate-600">
               上記は実際の提示額です。
-              <Link href="/contact" className="mx-1 font-bold text-brand-700 underline">お問い合わせ</Link>ください。
+              <Link href="/contact" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">お問い合わせ</Link>ください。
             </p>
           </div>
 
-          <p className="mt-3 text-xs text-slate-500">
+          <p className="mt-4 text-sm leading-[1.8] text-slate-600">
             有償プランのお申し込みにあたっては、
-            <Link href="/tokushoho" className="mx-1 font-bold text-slate-600 underline">
+            <Link href="/tokushoho" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
               特定商取引法に基づく表記
             </Link>
             をご確認ください。
@@ -1159,36 +1113,33 @@ print(naishin["total"])  # -> 52`;
 
         {/* License */}
         <section className="mb-10">
-          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-800">
-            <Scale className="h-5 w-5 text-brand-500" />
-            利用条件・出典
-          </h2>
-          <div className="rounded-lg border border-brand-200 bg-brand-50 p-5 text-sm leading-relaxed text-brand-900">
-            <p>{DATASET_META.license.summary}</p>
-            <p className="mt-3 font-mono text-xs text-brand-700">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">利用条件・出典</h2>
+          <div className="rounded-lg border border-slate-200 bg-brand-50 p-4 md:p-5">
+            <p className="text-base leading-[1.8] text-slate-900">{DATASET_META.license.summary}</p>
+            <p className="mt-3 font-mono text-sm text-slate-900">
               出典表記例： 出典: My Naishin（{SITE_URL}）
             </p>
           </div>
-          <p className="mt-4 text-sm text-slate-600">
+          <p className="mt-4 text-base leading-[1.8] text-slate-900">
             計算方式の一次情報は各都道府県教育委員会の入学者選抜要綱に基づきます。各ページの
-            <Link href="/quality" className="mx-1 font-bold text-brand-600 underline">
+            <Link href="/quality" className="mx-1 font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
               情報の信頼性への取り組み
             </Link>
             もご覧ください。
           </p>
         </section>
 
-        <div className="rounded-lg bg-slate-50 p-4 text-center text-xs text-slate-500">
-          運営：
-          <Link href="/about/editor-profile" className="mx-1 underline">
+        <div className="flex flex-wrap items-center gap-x-3 border-t border-slate-200 pt-4 text-sm text-slate-600">
+          <span>運営：</span>
+          <Link href="/about/editor-profile" className="inline-flex min-h-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800">
             現役中学生エンジニア・ないしんパンダ
           </Link>
-          ／ お問い合わせは
-          <Link href="/contact" className="mx-1 underline">
+          <span>／ お問い合わせは</span>
+          <Link href="/contact" className="inline-flex min-h-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800">
             こちら
           </Link>
-          ／
-          <Link href="/tokushoho" className="mx-1 underline">
+          <span>／</span>
+          <Link href="/tokushoho" className="inline-flex min-h-[44px] items-center text-brand-700 underline underline-offset-2 hover:text-brand-800">
             特定商取引法に基づく表記
           </Link>
         </div>

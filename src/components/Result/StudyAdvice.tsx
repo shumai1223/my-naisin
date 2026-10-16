@@ -1,28 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Lightbulb, 
-  Clock, 
-  BookOpen, 
-  Target,
-  Brain,
-  CheckCircle2,
-  ArrowUpRight,
-  Flame,
-  Star,
-  TrendingUp,
-  Zap,
-  Coffee,
-  Moon,
-  Sun,
-  Heart,
-  MessageCircle,
-  Sparkles,
-  Trophy,
-  AlertCircle
-} from '@/components/icons';
 
 import type { Scores, ResultData } from '@/lib/types';
 import { SUBJECTS } from '@/lib/constants';
@@ -33,7 +11,6 @@ interface StudyAdviceProps {
 }
 
 interface AdviceItem {
-  icon: React.ElementType;
   title: string;
   description: string;
   detail?: string;
@@ -43,24 +20,24 @@ interface AdviceItem {
 // Study tips database
 const STUDY_TIPS = {
   general: [
-    { icon: Clock, title: 'ポモドーロ・テクニック', desc: '25分集中→5分休憩のサイクルで効率UP！' },
-    { icon: Moon, title: '睡眠は最高の勉強法', desc: '7-8時間の睡眠で記憶が定着します' },
-    { icon: Coffee, title: '朝型学習のすすめ', desc: '朝は集中力が高く、暗記に最適な時間帯' },
-    { icon: MessageCircle, title: '教えることで学ぶ', desc: '友達に説明すると理解が深まります' },
-    { icon: BookOpen, title: '復習のゴールデンタイム', desc: '学んだその日のうちに復習すると記憶定着率UP' },
-    { icon: Target, title: 'ミニゴール設定', desc: '「英単語20個」など小さな目標で達成感を積み上げよう' },
-    { icon: Brain, title: 'アウトプット学習', desc: '問題を解く→説明するを繰り返すと理解が一気に深まる' },
-    { icon: Sparkles, title: 'ごほうびルール', desc: '目標達成後に小さなごほうびを設定してやる気を維持' },
-    { icon: Sun, title: '1日の作戦タイム', desc: '朝5分で「今日やること3つ」を決めると迷いが減る' },
-    { icon: Flame, title: '毎日5分の積み上げ', desc: '短くても毎日続けると記憶が定着しやすい' },
-    { icon: Heart, title: 'できたことメモ', desc: '達成できたことを1行記録すると自己肯定感が上がる' },
-    { icon: BookOpen, title: '教科書の言い換え', desc: '用語を自分の言葉で説明できると理解度が上がる' },
-    { icon: CheckCircle2, title: '間違いノートを作る', desc: '同じミスを繰り返さないために、間違えた問題を記録' },
-    { icon: TrendingUp, title: '週末振り返り', desc: '土日に1週間の学習を振り返ると定着率が上がる' },
-    { icon: Star, title: '得意科目から始める', desc: '得意科目で勢いをつけてから苦手に挑戦' },
-    { icon: Zap, title: '立って音読', desc: '眠い時は立って音読すると目が覚める' },
-    { icon: Trophy, title: '小テスト満点チャレンジ', desc: '小テストを全力で取ると内申点に直結' },
-    { icon: ArrowUpRight, title: '1教科集中週間', desc: '1週間1教科に集中すると効率的に伸びる' },
+    { title: 'ポモドーロ・テクニック', desc: '25分集中→5分休憩のサイクルで効率UP' },
+    { title: '睡眠をしっかりとる', desc: '7-8時間の睡眠で記憶が定着します' },
+    { title: '朝型学習のすすめ', desc: '朝は集中力が高く、暗記に最適な時間帯' },
+    { title: '教えることで学ぶ', desc: '友達に説明すると理解が深まります' },
+    { title: '復習のゴールデンタイム', desc: '学んだその日のうちに復習すると記憶定着率UP' },
+    { title: 'ミニゴール設定', desc: '「英単語20個」など小さな目標で達成感を積み上げよう' },
+    { title: 'アウトプット学習', desc: '問題を解く→説明するを繰り返すと理解が一気に深まる' },
+    { title: 'ごほうびルール', desc: '目標達成後に小さなごほうびを設定してやる気を維持' },
+    { title: '1日の作戦タイム', desc: '朝5分で「今日やること3つ」を決めると迷いが減る' },
+    { title: '毎日5分の積み上げ', desc: '短くても毎日続けると記憶が定着しやすい' },
+    { title: 'できたことメモ', desc: '達成できたことを1行記録すると自己肯定感が上がる' },
+    { title: '教科書の言い換え', desc: '用語を自分の言葉で説明できると理解度が上がる' },
+    { title: '間違いノートを作る', desc: '同じミスを繰り返さないために、間違えた問題を記録' },
+    { title: '週末振り返り', desc: '土日に1週間の学習を振り返ると定着率が上がる' },
+    { title: '得意科目から始める', desc: '得意科目で勢いをつけてから苦手に挑戦' },
+    { title: '立って音読', desc: '眠い時は立って音読すると目が覚める' },
+    { title: '小テストに力を入れる', desc: '小テストを全力で取ると内申点に直結' },
+    { title: '1教科集中週間', desc: '1週間1教科に集中すると効率的に伸びる' },
   ],
   motivation: [
     '小さな目標を立てて、達成する喜びを積み重ねよう',
@@ -74,14 +51,14 @@ const STUDY_TIPS = {
     '焦らず昨日より1問多く解ければ十分',
     '習慣は才能を超える。続けた人だけが伸びる',
     'ミスは伸びるサイン。気づいた時点で前進している',
-    '完璧を狙うより「続ける」ことが最強',
+    '完璧を狙うより「続ける」ことが大切',
     '短い時間でも積み重ねれば大きな力になる',
-    '自分のペースで進めばいい。止まらなければ必ず伸びる',
+    '自分のペースで進めばいい。止まらなければ少しずつ伸びる',
     '今この瞬間が、未来の自分を作っている',
     '努力は裏切らない。続けた先に結果がある',
     '苦手は伸びしろ。克服すれば大きな武器になる',
     '1日1歩でも365日で365歩進める',
-    '諦めなければ、必ず道は開ける',
+    '諦めずに続けることが力になる',
     '今日の頑張りが明日の自信になる',
   ],
   actionTips: [
@@ -97,14 +74,14 @@ const STUDY_TIPS = {
 // Subject-specific advice (using correct keys: japanese, math, english, science, social, music, art, pe, tech)
 const SUBJECT_ADVICE: Record<string, { weak: string; improve: string; strong: string }> = {
   japanese: {
-    weak: '毎日10分の読書習慣をつけましょう。漫画でもOK！語彙力が自然とつきます',
+    weak: '毎日10分の読書習慣をつけましょう。漫画でもOKです。語彙力が自然とつきます',
     improve: '記述問題の練習を増やしましょう。自分の言葉で説明する力が点数に直結します',
     strong: '古文・漢文の深堀りや、文学作品の背景知識を増やすと更に伸びます',
   },
   math: {
     weak: '計算ミスをなくすことから始めましょう。基礎計算を毎日5問解く習慣を',
     improve: '公式を「なぜそうなるか」まで理解すると応用が効きます',
-    strong: '発展問題や入試過去問にチャレンジ！思考力を鍛えましょう',
+    strong: '発展問題や入試過去問にチャレンジしましょう。思考力を鍛えましょう',
   },
   english: {
     weak: '単語を毎日5個ずつ覚えましょう。アプリを活用すると効率的です',
@@ -163,7 +140,7 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
 
   // Safely get percent
   const percent = Math.floor(result?.percent || 0);
-  
+
   // Find weak subjects (score < 3)
   const weakSubjects = SUBJECTS.filter(s => scores[s.key] < 3);
   // Find subjects that can improve (score 3-4)
@@ -172,7 +149,7 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
   const strongSubjects = SUBJECTS.filter(s => scores[s.key] === 5);
 
   // Find the worst subject for priority advice
-  const worstSubject = SUBJECTS.reduce((min, s) => 
+  const worstSubject = SUBJECTS.reduce((min, s) =>
     scores[s.key] < scores[min.key] ? s : min
   , SUBJECTS[0]);
 
@@ -187,8 +164,7 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     const criticalSubjects = SUBJECTS.filter(s => scores[s.key] === 1);
     if (criticalSubjects.length > 0) {
       advice.push({
-        icon: AlertCircle,
-        title: `🚨 ${criticalSubjects[0].label}を最優先で対策！`,
+        title: `${criticalSubjects[0].label}を最優先で対策`,
         description: '1がついている科目は早急な対策が必要です',
         detail: SUBJECT_ADVICE[criticalSubjects[0].key]?.weak || '基礎から丁寧に復習しましょう',
         priority: 'critical',
@@ -199,7 +175,6 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     if (weakSubjects.length > 0 && weakSubjects[0].key !== criticalSubjects[0]?.key) {
       const subject = weakSubjects[0];
       advice.push({
-        icon: Target,
         title: `${subject.label}の基礎固め`,
         description: `まずは${subject.label}を平均レベルまで引き上げましょう`,
         detail: SUBJECT_ADVICE[subject.key]?.weak || '基礎問題を繰り返し解きましょう',
@@ -211,15 +186,13 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     if (bestImprovable) {
       if (scores[bestImprovable.key] >= 4) {
         advice.push({
-          icon: Star,
-          title: `${bestImprovable.label}で満点を狙う！`,
-          description: 'あと1点で5！最も効率よく点数を伸ばせます',
+          title: `${bestImprovable.label}で満点を狙う`,
+          description: 'あと1点で5です。最も効率よく点数を伸ばせます',
           detail: SUBJECT_ADVICE[bestImprovable.key]?.improve || '応用問題にチャレンジしましょう',
           priority: 'medium',
         });
       } else if (scores[bestImprovable.key] === 3) {
         advice.push({
-          icon: TrendingUp,
           title: `${bestImprovable.label}を4へ引き上げる`,
           description: '基礎が固まっているので、あと一歩で評定UP',
           detail: SUBJECT_ADVICE[bestImprovable.key]?.improve || '解き直しと原因分析で伸びます',
@@ -231,32 +204,28 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     // Advice based on overall performance
     if (percent >= 90) {
       advice.push({
-        icon: Trophy,
         title: 'トップを維持する秘訣',
-        description: '素晴らしい成績です！この調子で維持しましょう',
+        description: '達成率は90%以上です。この調子で維持しましょう',
         detail: '難関校の過去問や発展教材にチャレンジしてみては？',
         priority: 'low',
       });
     } else if (percent >= 70) {
       advice.push({
-        icon: TrendingUp,
-        title: 'あと少しで上位層！',
+        title: 'あと少しで上位層',
         description: '苦手科目を1つ克服するだけで大きく変わります',
-        detail: '毎日30分の計画的な学習で確実にレベルアップできます',
+        detail: '毎日30分の計画的な学習で着実にレベルアップできます',
         priority: 'medium',
       });
     } else if (percent >= 50) {
       advice.push({
-        icon: Flame,
-        title: '伸びしろ十分！',
+        title: '伸びしろ十分',
         description: '基礎を固めれば大幅アップが期待できます',
-        detail: '教科書の例題を完璧にすることから始めましょう',
+        detail: '教科書の例題を解けるようにすることから始めましょう',
         priority: 'medium',
       });
     } else {
       advice.push({
-        icon: Zap,
-        title: '今日から変わろう！',
+        title: '今日から変わろう',
         description: '1日15分から始めて、少しずつ習慣をつけましょう',
         detail: 'まずは得意になれそうな1教科に絞って集中しましょう',
         priority: 'high',
@@ -266,7 +235,6 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     // Strong subject advice
     if (strongSubjects.length > 0) {
       advice.push({
-        icon: Sparkles,
         title: `得意な${strongSubjects[0].label}を活かす`,
         description: '得意科目の勉強法を他の科目にも応用しましょう',
         detail: SUBJECT_ADVICE[strongSubjects[0].key]?.strong || '更なる高みを目指しましょう',
@@ -276,7 +244,6 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
 
     if (secondImprovable && secondImprovable.key !== bestImprovable?.key && secondImprovable.key !== weakSubjects[0]?.key) {
       advice.push({
-        icon: ArrowUpRight,
         title: `${secondImprovable.label}を次の得点源に`,
         description: '安定して4を取れる科目を増やすと内申点が伸びやすい',
         detail: SUBJECT_ADVICE[secondImprovable.key]?.improve || '基本問題の取りこぼしを減らそう',
@@ -285,7 +252,6 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     }
 
     advice.push({
-      icon: Brain,
       title: '1週間の学習ルーティンを作る',
       description: '曜日ごとに教科を固定すると迷わず続けられます',
       detail: '例：月・木は英語、火・金は数学、水は理社の整理',
@@ -296,8 +262,7 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     if (randomIndices) {
       const actionTip = STUDY_TIPS.actionTips[randomIndices.actionTip];
       advice.push({
-        icon: CheckCircle2,
-        title: `🎯 今日のアクション：${actionTip.title}`,
+        title: `今日のアクション：${actionTip.title}`,
         description: actionTip.desc,
         priority: 'tip',
       });
@@ -307,7 +272,6 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     if (weakSubjects.length >= 2) {
       const secondWeak = weakSubjects[1];
       advice.push({
-        icon: AlertCircle,
         title: `${secondWeak.label}も要注意`,
         description: '複数の苦手科目がある場合は、1つずつ順番に克服しよう',
         detail: SUBJECT_ADVICE[secondWeak.key]?.weak || '基礎から丁寧に取り組みましょう',
@@ -318,8 +282,7 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     // Add strong subject leverage advice
     if (strongSubjects.length >= 2) {
       advice.push({
-        icon: Trophy,
-        title: `得意科目が${strongSubjects.length}つ！`,
+        title: `得意科目が${strongSubjects.length}つ`,
         description: '得意科目の勉強法を他教科にも応用してみよう',
         detail: '同じ学習パターンで苦手科目も攻略できるかも',
         priority: 'low',
@@ -330,7 +293,6 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     if (randomIndices) {
       const randomTip = STUDY_TIPS.general[randomIndices.generalTip];
       advice.push({
-        icon: randomTip.icon,
         title: randomTip.title,
         description: randomTip.desc,
         priority: 'tip',
@@ -339,7 +301,6 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
       const secondTip = STUDY_TIPS.general[randomIndices.secondGeneralTip];
       if (secondTip.title !== randomTip.title) {
         advice.push({
-          icon: secondTip.icon,
           title: secondTip.title,
           description: secondTip.desc,
           priority: 'tip',
@@ -357,141 +318,102 @@ export function StudyAdvice({ scores, result }: StudyAdviceProps) {
     ? STUDY_TIPS.motivation[randomIndices.motivation]
     : STUDY_TIPS.motivation[0];
 
+  // 優先度の見せ方: 文字ラベル＋四角いタグ。色は 危険=赤・注意=琥珀 だけ、それ以外は灰の枠線
   const priorityConfig = {
-    critical: { 
-      bg: 'bg-red-50', 
-      border: 'border-red-300',
+    critical: {
       label: '最優先',
-      labelBg: 'bg-red-500',
-      icon: 'text-red-600'
+      tag: 'border-red-200 bg-red-50 text-red-800',
     },
-    high: { 
-      bg: 'bg-red-50', 
-      border: 'border-red-200',
+    high: {
       label: '重要',
-      labelBg: 'bg-red-500',
-      icon: 'text-red-600'
+      tag: 'border-amber-200 bg-amber-50 text-amber-900',
     },
-    medium: { 
-      bg: 'bg-amber-50', 
-      border: 'border-amber-200',
+    medium: {
       label: 'おすすめ',
-      labelBg: 'bg-amber-500',
-      icon: 'text-amber-600'
+      tag: 'border-slate-200 bg-white text-slate-700',
     },
-    low: { 
-      bg: 'bg-brand-50', 
-      border: 'border-brand-200',
+    low: {
       label: '維持',
-      labelBg: 'bg-brand-500',
-      icon: 'text-brand-600'
+      tag: 'border-slate-200 bg-white text-slate-700',
     },
-    tip: { 
-      bg: 'bg-brand-50', 
-      border: 'border-brand-200',
+    tip: {
       label: 'ヒント',
-      labelBg: 'bg-brand-500',
-      icon: 'text-brand-600'
+      tag: 'border-slate-200 bg-white text-slate-700',
     },
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.4 }}
-      className="rounded-lg border border-slate-200 bg-white overflow-hidden"
-    >
+    <div className="rounded-lg border border-slate-200 bg-white">
       {/* Header */}
-      <div className="bg-slate-500 p-5 text-white">
-        <div className="flex items-center gap-3">
-          <div className="grid h-12 w-12 place-items-center rounded-lg bg-white">
-            <Lightbulb className="h-6 w-6 text-white" />
-          </div>
-          <div>
-            <h3 className="text-base font-bold">💡 パーソナル学習アドバイス</h3>
-            <p className="text-sm text-white/80">あなたの成績に合わせた具体的なアドバイス</p>
-          </div>
-        </div>
-        
+      <div className="p-5">
+        <h3 className="text-[17px] font-bold text-slate-900">パーソナル学習アドバイス</h3>
+        <p className="mt-1 text-sm text-slate-600">あなたの成績に合わせた具体的なアドバイス</p>
+
         {/* Motivation quote */}
-        <div className="mt-4 rounded-lg bg-white p-3">
-          <div className="flex items-center gap-2">
-            <Heart className="h-4 w-4 text-slate-300" />
-            <p className="text-sm text-white/90">{motivation}</p>
-          </div>
-        </div>
+        <p className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm leading-relaxed text-slate-900">
+          {motivation}
+        </p>
       </div>
 
       {/* Summary Stats */}
-      <div className="grid grid-cols-3 border-b border-slate-100">
-        <div className="border-r border-slate-100 p-4 text-center">
-          <div className="text-2xl font-bold text-red-500">{weakSubjects.length}</div>
-          <div className="text-xs text-slate-500">要改善</div>
-          <div className="mt-1 h-1 rounded-full bg-slate-100 overflow-hidden">
-            <div className="h-full bg-red-400" style={{ width: `${(weakSubjects.length / 9) * 100}%` }} />
-          </div>
-        </div>
-        <div className="border-r border-slate-100 p-4 text-center">
-          <div className="text-2xl font-bold text-amber-500">{improvableSubjects.length}</div>
-          <div className="text-xs text-slate-500">伸びしろ</div>
-          <div className="mt-1 h-1 rounded-full bg-slate-100 overflow-hidden">
-            <div className="h-full bg-amber-400" style={{ width: `${(improvableSubjects.length / 9) * 100}%` }} />
-          </div>
+      <dl className="grid grid-cols-3 divide-x divide-slate-200 border-y border-slate-200">
+        <div className="p-4 text-center">
+          <dt className="text-xs text-slate-600">要改善</dt>
+          <dd className="mt-1">
+            <span className="block text-2xl font-bold tabular-nums text-slate-900">{weakSubjects.length}</span>
+            <div className="mt-2 h-1 overflow-hidden rounded-full bg-slate-200">
+              <div className="h-full bg-brand-700" style={{ width: `${(weakSubjects.length / 9) * 100}%` }} />
+            </div>
+          </dd>
         </div>
         <div className="p-4 text-center">
-          <div className="text-2xl font-bold text-brand-500">{strongSubjects.length}</div>
-          <div className="text-xs text-slate-500">得意科目</div>
-          <div className="mt-1 h-1 rounded-full bg-slate-100 overflow-hidden">
-            <div className="h-full bg-brand-400" style={{ width: `${(strongSubjects.length / 9) * 100}%` }} />
-          </div>
+          <dt className="text-xs text-slate-600">伸びしろ</dt>
+          <dd className="mt-1">
+            <span className="block text-2xl font-bold tabular-nums text-slate-900">{improvableSubjects.length}</span>
+            <div className="mt-2 h-1 overflow-hidden rounded-full bg-slate-200">
+              <div className="h-full bg-brand-700" style={{ width: `${(improvableSubjects.length / 9) * 100}%` }} />
+            </div>
+          </dd>
         </div>
-      </div>
+        <div className="p-4 text-center">
+          <dt className="text-xs text-slate-600">得意科目</dt>
+          <dd className="mt-1">
+            <span className="block text-2xl font-bold tabular-nums text-slate-900">{strongSubjects.length}</span>
+            <div className="mt-2 h-1 overflow-hidden rounded-full bg-slate-200">
+              <div className="h-full bg-brand-700" style={{ width: `${(strongSubjects.length / 9) * 100}%` }} />
+            </div>
+          </dd>
+        </div>
+      </dl>
 
       {/* Advice List */}
-      <div className="p-5 space-y-3">
+      <ul className="divide-y divide-slate-200 px-5">
         {advice.map((item, index) => {
-          const Icon = item.icon;
           const config = priorityConfig[item.priority];
           return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 * index + 0.3 }}
-              className={`rounded-lg border ${config.border} ${config.bg} p-4`}
-            >
-              <div className="flex items-start gap-3">
-                <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white ${config.icon}`}>
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-bold text-slate-800">{item.title}</span>
-                    <span className={`rounded-full px-2 py-0.5 text-xs font-bold text-white ${config.labelBg}`}>
-                      {config.label}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-xs text-slate-600">{item.description}</p>
-                  {item.detail && (
-                    <p className="mt-2 text-xs text-slate-500 bg-white/50 rounded-lg px-3 py-2">
-                      💡 {item.detail}
-                    </p>
-                  )}
-                </div>
+            <li key={index} className="py-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-base font-bold text-slate-900">{item.title}</span>
+                <span className={`inline-flex items-center rounded border px-2 py-0.5 text-xs ${config.tag}`}>
+                  {config.label}
+                </span>
               </div>
-            </motion.div>
+              <p className="mt-1 text-sm text-slate-900">{item.description}</p>
+              {item.detail && (
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  <span className="mr-2 font-bold text-slate-900">ポイント</span>
+                  {item.detail}
+                </p>
+              )}
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       {/* Action prompt */}
-      <div className="border-t border-slate-100 bg-slate-50 p-4">
-        <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
-          <CheckCircle2 className="h-4 w-4 text-brand-500" />
-          <span>今日から1つでも実践してみよう！</span>
-        </div>
+      <div className="border-t border-slate-200 p-4 text-sm text-slate-600">
+        今日から1つでも実践してみよう
       </div>
-    </motion.div>
+    </div>
   );
 }

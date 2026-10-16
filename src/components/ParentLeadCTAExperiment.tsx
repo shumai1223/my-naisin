@@ -12,6 +12,8 @@ interface ParentLeadCTAExperimentProps {
   placement?: LeadPlacement;
   prefectureCode?: string;
   className?: string;
+  /** 見出しのレベル（ParentLeadCTA へそのまま渡す。既定 h3）。 */
+  headingLevel?: 'h2' | 'h3' | 'h4';
 }
 
 /** レジストリに無い実験IDでも壊さないためのフォールバック（旧 control/urgent コピーA/B）。 */
@@ -36,6 +38,7 @@ export function ParentLeadCTAExperiment({
   placement,
   prefectureCode,
   className,
+  headingLevel,
 }: ParentLeadCTAExperimentProps) {
   const def = getExperiment(experimentId);
   const arms = def?.arms?.length ? def.arms : FALLBACK_ARMS;
@@ -66,6 +69,7 @@ export function ParentLeadCTAExperiment({
       ctaText={ctaText}
       className={className}
       variant={variantId}
+      headingLevel={headingLevel}
     />
   );
 }

@@ -30,6 +30,7 @@ const WIDTHS = opt('--widths', '390,1280').split(',').map(Number);
 const SLICES = Number(opt('--slices', '3'));
 const SLICE_H = Number(opt('--slice-h', '1000'));
 const KEEP_ADS = flag('--keep-ads');
+const NO_DISMISS = flag('--no-dismiss'); // Cookie同意バナーを閉じずに撮る（バナー自体の確認用）
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -73,7 +74,7 @@ for (const w of WIDTHS) {
       row.status = resp ? resp.status() : null;
       await page.waitForTimeout(2500);
       const btn = page.getByText('必須のみ許可');
-      if (await btn.count()) { await btn.first().click({ timeout: 3000 }).catch(() => {}); await page.waitForTimeout(500); }
+      if (!NO_DISMISS && (await btn.count())) { await btn.first().click({ timeout: 3000 }).catch(() => {}); await page.waitForTimeout(500); }
       if (!KEEP_ADS) {
         await page.addStyleTag({ content: '.google-auto-placed, ins.adsbygoogle, [id^="aswift"], iframe[id^="google_ads"], iframe[src*="googlesyndication"], iframe[src*="netstar"]{display:none!important}' });
       }

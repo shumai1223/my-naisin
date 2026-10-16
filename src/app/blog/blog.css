@@ -195,17 +195,19 @@
 .blog-content .toc li {
   font-size: 0.9375rem;
   border: none;
-  padding: 0.35rem 0;
+  padding: 0;
   margin: 0;
   line-height: 1.5;
 }
 
+/* 押す面は縦44px以上（スマホで指が当たりやすい） */
 .blog-content .toc a {
   text-decoration: none;
   color: var(--blog-text-sub);
   transition: color 0.15s;
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  min-height: 44px;
   gap: 0.5rem;
 }
 

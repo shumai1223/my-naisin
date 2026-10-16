@@ -36,7 +36,8 @@ export function inUiScope(relPath) {
 
 /** gating(エラー扱い)から外すもの: 内部用ページ */
 export function isInternalPage(relPath) {
-  return /^src\/app\/(admin|interim-bulletin-preview|partner-demo)\//.test(relPath) || /^src\/components\/admin\//.test(relPath);
+  // api/contact と api/lead は運営者の受信箱に届く通知メールの件名（画面ではない）
+  return /^src\/app\/(admin|interim-bulletin-preview|partner-demo|api\/(contact|lead))\//.test(relPath) || /^src\/components\/admin\//.test(relPath);
 }
 
 export function parse(file, text) {

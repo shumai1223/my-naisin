@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { ArrowRight, TrendingUp, AlertTriangle, Target } from '@/components/icons';
+import { TrendingUp, AlertTriangle, Target } from '@/components/icons';
 import { Button } from '@/components/ui/Button';
 import { getPrefectureByCode } from '@/lib/prefectures';
 
@@ -95,11 +95,11 @@ export function NextActionButtons({ prefectureCode, scores, totalScore, maxScore
   return (
     <div className="space-y-4">
       {/* アクションボタン */}
-      <div className="grid gap-3 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         {/* 逆算へ */}
         <Link href={`/reverse?pref=${prefectureCode}&current=${totalScore}`}>
-          <Button 
-            variant="primary" 
+          <Button
+            variant="primary"
             className="w-full h-14 text-base font-bold"
             leftIcon={<Target className="h-5 w-5" />}
           >
@@ -109,39 +109,39 @@ export function NextActionButtons({ prefectureCode, scores, totalScore, maxScore
 
         {/* 教科別伸び代ランキング */}
         <div className="group relative">
-          <Button 
-            variant="secondary" 
-            className="w-full h-14 text-base font-bold border-2 border-brand-200 hover:border-brand-300 hover:bg-brand-50"
+          <Button
+            variant="secondary"
+            className="w-full h-14 text-base font-bold"
             leftIcon={<TrendingUp className="h-5 w-5" />}
           >
             どの教科を上げると効率いい？
           </Button>
-          
-          {/* ホバー時に表示するランキング */}
-          <div className="absolute top-full left-0 right-0 z-50 mt-2 hidden group-hover:block">
-            <div className="bg-white border border-slate-200 rounded-lg p-4 max-h-64 overflow-y-auto">
-              <h4 className="font-bold text-slate-800 mb-3 text-sm">教科別の伸び代ランキング</h4>
+
+          {/* ホバー（またはキーボードのフォーカス）時に表示するランキング。ボタンとの隙間もホバー範囲に含めるため pt-2 */}
+          <div className="absolute top-full left-0 right-0 z-50 hidden pt-2 group-hover:block group-focus-within:block">
+            <div className="max-h-64 overflow-y-auto rounded-lg border border-slate-200 bg-white p-4 shadow-overlay">
+              <p className="mb-3 text-sm font-bold text-slate-900">教科別の伸び代ランキング</p>
               <div className="space-y-2">
                 {subjectImprovements.slice(0, 5).map((subject, index) => (
                   <div key={subject.key} className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600">
-                        {index + 1}
+                      <span className="w-6 text-right font-bold tabular-nums text-slate-600">
+                        {index + 1}.
                       </span>
-                      <span className="text-slate-700">{subject.name}</span>
+                      <span className="text-slate-900">{subject.name}</span>
                       {subject.efficiency === 'high' && (
-                        <span className="text-xs bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full">2倍</span>
+                        <span className="inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">2倍</span>
                       )}
                     </div>
                     <div className="text-right">
-                      <div className="font-bold text-slate-800">+{subject.improvement}</div>
-                      <div className="text-xs text-slate-500">({subject.value}点分)</div>
+                      <div className="font-bold tabular-nums text-slate-900">+{subject.improvement}</div>
+                      <div className="text-xs tabular-nums text-slate-600">({subject.value}点分)</div>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-3 pt-3 border-t border-slate-200 text-xs text-slate-500">
-                {prefecture?.practicalMultiplier === 2 
+              <div className="mt-3 border-t border-slate-200 pt-3 text-xs text-slate-600">
+                {prefecture?.practicalMultiplier === 2
                   ? '実技4教科は2倍換算のため効率が高いです'
                   : 'すべての教科が同じ配点です'
                 }
@@ -152,21 +152,16 @@ export function NextActionButtons({ prefectureCode, scores, totalScore, maxScore
       </div>
 
       {/* 県の注意点 */}
-      <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-4">
-        <div className="flex items-start gap-3">
-          <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5" />
-          <div>
-            <h4 className="font-bold text-amber-800 mb-2 text-sm">この県の注意点</h4>
-            <ul className="space-y-1 text-sm text-amber-700">
-              {prefectureNotes.map((note, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-amber-500 mt-1.5" />
-                  <span>{note}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+      <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
+        <h3 className="mb-2 flex items-center gap-2 text-base font-bold text-amber-900">
+          <AlertTriangle className="h-4 w-4 shrink-0" />
+          この県の注意点
+        </h3>
+        <ul className="list-disc space-y-1 pl-5 text-sm text-amber-900">
+          {prefectureNotes.map((note, index) => (
+            <li key={index}>{note}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );

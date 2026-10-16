@@ -1,5 +1,3 @@
-import { Hexagon } from '@/components/icons';
-
 import type { Scores } from '@/lib/types';
 import { SUBJECTS } from '@/lib/constants';
 
@@ -9,10 +7,17 @@ export interface RadarChartProps {
 }
 
 // ── 自前SVGレーダー（recharts依存を排除＝結果ページのバンドル/LCP/INP改善, §12）──
-const CX = 120;
+// 色はブランド色と緑みの灰だけ（DESIGN-SYSTEM.md）。
+const BRAND = '#17543e';
+const GRID = '#cddad3';
+const LABEL = '#4f6158';
+
+const VIEW_W = 280;
+const VIEW_H = 240;
+const CX = 140;
 const CY = 120;
-const R = 80; // データ半径
-const LABEL_R = 100; // ラベル配置半径
+const R = 78; // データ半径
+const LABEL_R = 92; // ラベル配置半径
 const LEVELS = [1, 2, 3, 4, 5];
 
 function point(index: number, total: number, radius: number): [number, number] {
@@ -41,112 +46,97 @@ export function RadarChart({ scores }: RadarChartProps) {
   const dataPoints = polygon(n, R, valueAt);
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white">
+    <div className="rounded-lg border border-slate-200 bg-white p-5">
       {/* Header */}
-      <div className="relative border-b border-slate-100 bg-brand-50 px-5 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-lg bg-brand-500">
-              <Hexagon className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <h3 className="text-sm font-bold text-slate-800">教科バランス</h3>
-              <p className="text-xs text-slate-500">Subject Balance Chart</p>
-            </div>
-          </div>
-          <div className="rounded-lg bg-white/80 px-4 py-2">
-            <div className="text-xs text-slate-500">平均</div>
-            <div className="text-lg font-bold text-brand-600">{average}</div>
-          </div>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 className="text-[17px] font-bold text-slate-900">教科バランス</h3>
+          <p className="mt-1 text-sm text-slate-600">9教科の評定（1〜5）</p>
+        </div>
+        <div className="shrink-0 text-right">
+          <div className="text-xs text-slate-600">平均</div>
+          <div className="text-2xl font-bold tabular-nums text-slate-900">{average}</div>
         </div>
       </div>
 
       {/* Chart（純SVG） */}
-      <div className="relative p-4">
-        <svg
-          viewBox="0 0 240 240"
-          className="mx-auto block h-auto w-full max-w-[300px]"
-          role="img"
-          aria-label={`教科バランスのレーダーチャート（9教科の評定、平均${average}）`}
-        >
-          <defs>
-            <linearGradient id="radarGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#6366f1" stopOpacity={0.8} />
-              <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.4} />
-            </linearGradient>
-            <linearGradient id="radarStroke" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#6366f1" />
-              <stop offset="100%" stopColor="#8b5cf6" />
-            </linearGradient>
-          </defs>
+      <svg
+        viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+        className="mx-auto mt-2 block h-auto w-full max-w-[300px]"
+        role="img"
+        aria-label={`教科バランスのレーダーチャート（9教科の評定、平均${average}）`}
+      >
+        {/* グリッド（同心ポリゴン。満点の5だけ濃い線） */}
+        {LEVELS.map((level) => (
+          <polygon
+            key={level}
+            points={polygon(n, R, () => level / 5)}
+            fill="none"
+            stroke={level === 5 ? LABEL : GRID}
+            strokeWidth={1}
+          />
+        ))}
 
-          {/* グリッド（同心ポリゴン） */}
-          {LEVELS.map((level) => (
-            <polygon
-              key={level}
-              points={polygon(n, R, () => level / 5)}
-              fill="none"
-              stroke="#e2e8f0"
-              strokeWidth={1}
-            />
-          ))}
+        {/* 軸スポーク＋ラベル */}
+        {subjects.map((s, i) => {
+          const [ax, ay] = point(i, n, R);
+          const [lx, ly] = point(i, n, LABEL_R);
+          const anchor = Math.abs(lx - CX) < 8 ? 'middle' : lx > CX ? 'start' : 'end';
+          return (
+            <g key={s.key}>
+              <line x1={CX} y1={CY} x2={ax} y2={ay} stroke={GRID} strokeWidth={1} />
+              <text
+                x={lx}
+                y={ly}
+                textAnchor={anchor}
+                dominantBaseline="middle"
+                fontSize={13}
+                fontWeight={700}
+                fill={LABEL}
+              >
+                {s.label}
+              </text>
+            </g>
+          );
+        })}
 
-          {/* 軸スポーク＋ラベル */}
-          {subjects.map((s, i) => {
-            const [ax, ay] = point(i, n, R);
-            const [lx, ly] = point(i, n, LABEL_R);
-            const anchor = Math.abs(lx - CX) < 8 ? 'middle' : lx > CX ? 'start' : 'end';
-            return (
-              <g key={s.key}>
-                <line x1={CX} y1={CY} x2={ax} y2={ay} stroke="#e2e8f0" strokeWidth={1} />
-                <text
-                  x={lx}
-                  y={ly}
-                  textAnchor={anchor}
-                  dominantBaseline="middle"
-                  fontSize={9}
-                  fontWeight={600}
-                  fill="#475569"
-                >
-                  {s.label}
-                </text>
-              </g>
-            );
-          })}
+        {/* データポリゴン */}
+        <polygon
+          points={dataPoints}
+          fill={BRAND}
+          fillOpacity={0.15}
+          stroke={BRAND}
+          strokeWidth={2}
+          strokeLinejoin="round"
+        />
 
-          {/* データポリゴン */}
-          <polygon points={dataPoints} fill="url(#radarGradient)" stroke="url(#radarStroke)" strokeWidth={2.5} />
+        {/* 頂点ドット（<title>でホバー説明） */}
+        {subjects.map((s, i) => {
+          const [x, y] = point(i, n, R * valueAt(i));
+          return (
+            <circle key={s.key} cx={x} cy={y} r={4} fill={BRAND}>
+              <title>{`${s.label}: ${scores[s.key]}/5`}</title>
+            </circle>
+          );
+        })}
+      </svg>
 
-          {/* 頂点ドット（<title>でホバー説明） */}
-          {subjects.map((s, i) => {
-            const [x, y] = point(i, n, R * valueAt(i));
-            return (
-              <circle key={s.key} cx={x} cy={y} r={3.5} fill="#6366f1" stroke="#fff" strokeWidth={2}>
-                <title>{`${s.label}: ${scores[s.key]}/5`}</title>
-              </circle>
-            );
-          })}
-        </svg>
-
-        {/* Legend */}
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <div className="h-3 w-3 rounded-full bg-brand-500" />
-            <span className="text-xs text-slate-600">あなたの成績</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="h-3 w-3 rounded-full border-2 border-slate-300 bg-white" />
-            <span className="text-xs text-slate-500">満点(5)</span>
-          </div>
+      {/* Legend */}
+      <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
+        <div className="flex items-center gap-1.5">
+          <span className="h-3 w-3 rounded-full bg-brand-700" />
+          <span className="text-xs text-slate-600">あなたの成績</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="h-3 w-3 rounded-full border-2 border-slate-600 bg-white" />
+          <span className="text-xs text-slate-600">満点(5)</span>
         </div>
       </div>
 
       {/* Bottom tip */}
-      <div className="border-t border-slate-100 bg-slate-50/50 px-4 py-3">
-        <p className="text-center text-xs text-slate-500">
-          📊 バランスの取れた成績を目指しましょう！苦手科目を克服すると内申点が大きく伸びます
-        </p>
-      </div>
+      <p className="mt-3 text-sm leading-relaxed text-slate-600">
+        バランスの取れた成績を目指しましょう。苦手科目を克服すると内申点が上がります。
+      </p>
     </div>
   );
 }

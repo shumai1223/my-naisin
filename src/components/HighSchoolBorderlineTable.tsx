@@ -1,13 +1,4 @@
-import { 
-  Trophy, 
-  Target, 
-  Info, 
-  ArrowRight, 
-  ExternalLink,
-  ChevronRight,
-  TrendingUp,
-  Award
-} from '@/components/icons';
+import { Info } from '@/components/icons';
 import { classifyHighSchoolSourceTier, PREFECTURE_HIGH_SCHOOL_DATA } from '@/lib/prefecture-high-school-data';
 
 interface HighSchoolBorderlineTableProps {
@@ -17,99 +8,76 @@ interface HighSchoolBorderlineTableProps {
 
 export function HighSchoolBorderlineTable({ prefectureCode, prefectureName }: HighSchoolBorderlineTableProps) {
   const data = PREFECTURE_HIGH_SCHOOL_DATA[prefectureCode];
-  
+
   if (!data || data.topHighSchools.length === 0) {
     return (
-      <div className="rounded-lg border border-slate-200 bg-white p-8 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-50 text-slate-400">
-          <Info className="h-6 w-6" />
-        </div>
-        <h3 className="mt-4 text-lg font-bold text-slate-800">{prefectureName}の高校データは現在更新中です</h3>
-        <p className="mt-2 text-sm text-slate-500">最新の入試結果を元に、順次データを追加しています。しばらくお待ちください。</p>
+      <div className="rounded-lg border border-slate-200 bg-white p-6 text-center">
+        <h3 className="text-[17px] font-bold text-slate-900">{prefectureName}の高校データは現在更新中です</h3>
+        <p className="mt-2 text-sm text-slate-600">最新の入試結果を元に、順次データを追加しています。しばらくお待ちください。</p>
       </div>
     );
   }
 
   return (
     <section className="space-y-8">
-      {/* 導入 */}
-      <div className="rounded-lg border border-brand-100 bg-brand-50 p-8">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="rounded-lg bg-brand-600 p-2 text-white">
-            <Trophy className="h-6 w-6" />
-          </div>
-          <h2 className="text-2xl font-bold text-slate-800">
-            {prefectureName}主要高校の合格ボーダーライン
-          </h2>
-        </div>
-        
-        <p className="text-slate-600 leading-relaxed">
+      {/* 導入（見出し→メタ行→結論の段落） */}
+      <div>
+        <h2 className="text-xl font-bold text-slate-900">
+          {prefectureName}主要高校の合格ボーダーライン
+        </h2>
+        <p className="mt-1 text-sm text-slate-600">
+          2026年度（令和8年度）入試結果・追跡調査に基づくデータ
+        </p>
+        <p className="mt-3 text-base leading-[1.8] text-slate-900">
           {prefectureName}の公立高校入試における、主要校の合格目標ライン（ボーダー）の一覧です。
           内申点と当日点のバランスを確認し、志望校選びの参考にしてください。
         </p>
-        <div className="mt-4 flex items-center gap-2 text-xs font-bold text-brand-600 bg-brand-100/50 w-fit px-3 py-1.5 rounded-full">
-          <Award className="h-3.5 w-3.5" />
-          2026年度（令和8年度）入試結果・追跡調査に基づくデータ
-        </div>
       </div>
 
       {/* 出典バッジはスマホ幅(390px)だと横スクロールしないと見えない列にある。
           2026-08-08 Cowork実地監査: 数字だけ見えて「非公式・参考情報」の但し書きが
           隠れるのは最悪の並びと指摘されたため、表の直上に独立した1行として常時表示する。 */}
-      <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs font-bold text-amber-800">
-        <Info className="h-3.5 w-3.5 shrink-0" />
+      <div className="flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-900">
+        <Info className="mt-0.5 h-4 w-4 shrink-0" />
         以下の数値は塾・受験情報サイトの推定です（教育委員会の公表値ではありません）
       </div>
 
       {/* テーブル本体 */}
       <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full border-collapse text-left">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200">
-                <th className="px-6 py-4 text-xs font-bold text-slate-500">順位</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500">高校名・学科</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 text-center">目標内申</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 text-center">目標当日点</th>
-                <th className="px-6 py-4 text-xs font-bold text-slate-500 text-right">出典</th>
+              <tr className="border-b border-slate-900">
+                <th className="px-4 py-3 text-xs font-bold text-slate-600">順位</th>
+                <th className="px-4 py-3 text-xs font-bold text-slate-600">高校名・学科</th>
+                <th className="px-4 py-3 text-right text-xs font-bold text-slate-600">目標内申</th>
+                <th className="px-4 py-3 text-right text-xs font-bold text-slate-600">目標当日点</th>
+                <th className="px-4 py-3 text-xs font-bold text-slate-600">出典</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-200">
               {data.topHighSchools.map((school, i) => (
-                <tr key={i} className="hover:bg-brand-50/30 transition-colors group">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
-                      school.rank === 1 ? 'bg-amber-100 text-amber-700' :
-                      school.rank === 2 ? 'bg-slate-100 text-slate-600' :
-                      school.rank === 3 ? 'bg-amber-100 text-amber-700' :
-                      'bg-slate-50 text-slate-400'
-                    }`}>
-                      {school.rank}
-                    </span>
+                <tr key={i}>
+                  <td className="whitespace-nowrap px-4 py-3 text-sm font-bold tabular-nums text-slate-900">
+                    {school.rank}
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="font-bold text-slate-800 group-hover:text-brand-700 transition-colors">{school.name}</div>
-                    <div className="text-xs text-slate-400 font-bold">{school.department}</div>
+                  <td className="px-4 py-3">
+                    <div className="font-bold text-slate-900">{school.name}</div>
+                    <div className="text-xs text-slate-600">{school.department}</div>
                   </td>
-                  <td className="px-6 py-4 text-center">
-                    <div className="inline-flex items-center gap-1.5 rounded-lg bg-brand-50 px-3 py-1 text-sm font-bold text-brand-700 border border-brand-100">
-                      <Target className="h-3.5 w-3.5" />
-                      {school.avgNaishin}
-                    </div>
+                  <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-slate-900">
+                    {school.avgNaishin}
                   </td>
-                  <td className="px-6 py-4 text-center">
-                    <div className="inline-flex items-center gap-1.5 rounded-lg bg-brand-50 px-3 py-1 text-sm font-bold text-brand-700 border border-brand-100">
-                      <TrendingUp className="h-3.5 w-3.5" />
-                      {school.avgScore}
-                    </div>
+                  <td className="whitespace-nowrap px-4 py-3 text-right font-bold tabular-nums text-slate-900">
+                    {school.avgScore}
                   </td>
-                  <td className="px-6 py-4 text-right">
-                    <div className="flex flex-col items-end gap-1">
-                      <div className="text-xs font-bold text-slate-600 bg-slate-50 px-2 py-1 rounded inline-block">
+                  <td className="px-4 py-3">
+                    <div className="flex flex-col items-start gap-1">
+                      <div className="inline-block rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                         {school.source}
                       </div>
                       {classifyHighSchoolSourceTier(school.source) === 'secondary' && (
-                        <span className="text-xs font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">
+                        <span className="rounded border border-amber-200 bg-amber-50 px-2 py-0.5 text-xs font-bold text-amber-900">
                           非公式・参考情報
                         </span>
                       )}
@@ -124,40 +92,37 @@ export function HighSchoolBorderlineTable({ prefectureCode, prefectureName }: Hi
 
       {/* 制度解説カード */}
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-lg border border-slate-200 bg-white p-6">
-          <h3 className="mb-4 flex items-center gap-2 font-bold text-slate-800">
-            <Info className="h-5 w-5 text-brand-500" />
+        <div className="rounded-lg border border-slate-200 bg-white p-5">
+          <h3 className="mb-3 text-[17px] font-bold text-slate-900">
             この県の配点ルール
           </h3>
-          <ul className="space-y-3">
+          <ul className="space-y-2">
             {data.rules.uniqueRules.map((rule, index) => (
-              <li key={index} className="flex items-start gap-2 text-sm text-slate-600">
-                <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-brand-400" />
+              <li key={index} className="flex items-start gap-2 text-sm leading-relaxed text-slate-900">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-700" aria-hidden="true" />
                 <span>{rule}</span>
               </li>
             ))}
           </ul>
         </div>
-        
-        <div className="rounded-lg border border-brand-100 bg-brand-50/50 p-6">
-          <h3 className="mb-4 flex items-center gap-2 font-bold text-brand-900">
-            <Target className="h-5 w-5 text-brand-600" />
-            逆転合格のアドバイス
+
+        <div className="rounded-lg border border-slate-200 bg-brand-50 p-5">
+          <h3 className="mb-3 text-[17px] font-bold text-slate-900">
+            内申点が足りない場合のアドバイス
           </h3>
-          <div className="text-sm text-brand-800 leading-relaxed">
+          <div className="text-sm leading-relaxed text-slate-900">
             <p>{prefectureName}では、{data.rules.targetGrades}が内申対象となります。</p>
             <p className="mt-2">
               内申点が目標に届かない場合は、当日点でカバーできる「当日点重視」の高校を選ぶ戦略が有効です。
-              特に、実技教科の倍率が{data.rules.practicalMultiplier}倍となっているため、副教科の成績アップが最も効率的な逆転方法となります。
+              特に、実技教科の倍率が{data.rules.practicalMultiplier}倍となっているため、副教科の成績アップが有効な方法の一つとなります。
             </p>
           </div>
         </div>
       </div>
 
       {/* 出典と注意書き */}
-      <div className="rounded-lg bg-slate-100 p-4 text-xs text-slate-500 leading-relaxed">
-        <div className="flex items-center gap-2 mb-2">
-          <ExternalLink className="h-3 w-3" />
+      <div className="rounded-lg border border-slate-200 bg-brand-50 p-4 text-sm leading-relaxed text-slate-600">
+        <div className="mb-2 font-bold text-slate-900">
           データ引用・信頼性について
         </div>
         <p>

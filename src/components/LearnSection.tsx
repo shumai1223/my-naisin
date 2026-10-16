@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { BookOpen, MapPin, ArrowLeft, ArrowRight, FileText, ExternalLink } from '@/components/icons';
+import { ArrowLeft, ArrowRight } from '@/components/icons';
 
 import { PREFECTURES } from '@/lib/prefectures';
 import { Button } from '@/components/ui/Button';
@@ -45,16 +45,11 @@ export function LearnSection({ onBack }: LearnSectionProps) {
   return (
     <div className="space-y-4">
       <Card className="overflow-hidden">
-        <div className="border-b border-slate-100/80 bg-amber-50/80 px-5 py-5 md:px-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="grid h-12 w-12 place-items-center rounded-lg bg-amber-500">
-                <BookOpen className="h-6 w-6 text-white" />
-              </div>
-              <div>
-                <div className="text-xl font-bold tracking-tight text-slate-800">制度を理解する</div>
-                <div className="text-sm text-slate-500">都道府県別の計算方法・コラム</div>
-              </div>
+        <div className="border-b border-slate-200 px-5 py-4 md:px-6">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h2 className="text-xl font-bold text-slate-900">制度を理解する</h2>
+              <div className="text-sm text-slate-600">都道府県別の計算方法・コラム</div>
             </div>
             <Button variant="ghost" onClick={onBack} leftIcon={<ArrowLeft className="h-4 w-4" />}>
               戻る
@@ -63,20 +58,20 @@ export function LearnSection({ onBack }: LearnSectionProps) {
         </div>
 
         <div className="p-5 md:p-6">
-          <div className="mb-6">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-slate-800">
-              <MapPin className="h-5 w-5 text-amber-500" />
+          <div className="mb-8">
+            <h3 className="mb-3 text-[17px] font-bold text-slate-900">
               都道府県から探す
             </h3>
             <div className="flex flex-wrap gap-2">
               {REGIONS.map((region) => (
                 <button
                   key={region.name}
+                  aria-pressed={selectedRegion === region.name}
                   onClick={() => setSelectedRegion(selectedRegion === region.name ? null : region.name)}
-                  className={`rounded-full px-4 py-2 text-sm transition-all ${
+                  className={`min-h-[44px] rounded border px-4 py-2 text-sm transition-colors ${
                     selectedRegion === region.name
-                      ? 'bg-amber-500 text-white'
-                      : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
+                      ? 'border-brand-700 bg-brand-700 font-bold text-white'
+                      : 'border-slate-300 bg-white text-slate-900 hover:bg-brand-50'
                   }`}
                 >
                   {region.name}
@@ -85,73 +80,70 @@ export function LearnSection({ onBack }: LearnSectionProps) {
             </div>
 
             {selectedRegion && (
-              <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50/50 p-4">
-                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-                  {REGIONS.find((r) => r.name === selectedRegion)?.codes.map((code) => {
-                    const pref = PREFECTURES.find((p) => p.code === code);
-                    if (!pref) return null;
-                    return (
-                      <Link
-                        key={code}
-                        href={`/${code}/naishin`}
-                        className="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-sm text-slate-700 transition-all hover:bg-amber-50"
-                      >
-                        <span>{pref.name}</span>
-                        <ArrowRight className="h-3 w-3 text-slate-400" />
-                      </Link>
-                    );
-                  })}
-                </div>
+              <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                {REGIONS.find((r) => r.name === selectedRegion)?.codes.map((code) => {
+                  const pref = PREFECTURES.find((p) => p.code === code);
+                  if (!pref) return null;
+                  return (
+                    <Link
+                      key={code}
+                      href={`/${code}/naishin`}
+                      className="flex min-h-[44px] items-center gap-2 rounded border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 transition-colors hover:bg-brand-50"
+                    >
+                      <span>{pref.name}</span>
+                      <ArrowRight className="h-4 w-4 text-slate-600" />
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
 
-          <div className="mb-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold text-slate-800">
-              <FileText className="h-5 w-5 text-brand-500" />
+          <div className="mb-8">
+            <h3 className="mb-3 text-[17px] font-bold text-slate-900">
               人気のコラム
             </h3>
-            <div className="space-y-2">
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
               {POPULAR_ARTICLES.map((article) => (
                 <Link
                   key={article.slug}
                   href={`/blog/${article.slug}`}
-                  className="group flex items-center justify-between rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
+                  className="group flex min-h-[44px] items-center justify-between gap-3 py-3 transition-colors hover:bg-brand-50"
                 >
                   <div>
-                    <span className="mb-1 inline-block rounded-full bg-brand-100 px-2 py-0.5 text-xs text-brand-700">
+                    <span className="mb-1 inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
                       {article.category}
                     </span>
-                    <div className="text-sm text-slate-700 group-hover:text-brand-700">
+                    <div className="text-base text-slate-900 group-hover:text-brand-700">
                       {article.title}
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-1 group-hover:text-brand-500" />
+                  <ArrowRight className="h-4 w-4 shrink-0 text-slate-600" />
                 </Link>
               ))}
             </div>
             <Link
               href="/blog"
-              className="mt-3 flex items-center justify-center gap-1 text-sm text-brand-600 hover:text-brand-700"
+              className="mt-2 flex min-h-[44px] items-center justify-center gap-1 text-sm text-brand-700 underline underline-offset-2 hover:text-brand-800"
             >
               すべてのコラムを見る
-              <ExternalLink className="h-3 w-3" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="rounded-lg border border-brand-200 bg-brand-50 p-4">
-            <h3 className="mb-2 text-base font-bold text-brand-800">📌 ポイント</h3>
-            <ul className="space-y-2 text-sm text-brand-700">
+          <div className="rounded-lg border border-slate-200 bg-brand-50 p-4">
+            <h3 className="mb-2 text-base font-bold text-slate-900">ポイント</h3>
+            <ul className="space-y-2 text-base leading-[1.8] text-slate-900">
               <li className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-500" />
+                <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-700" aria-hidden="true" />
                 内申点の計算方法は都道府県によって大きく異なります
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-500" />
+                <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-700" aria-hidden="true" />
                 実技4教科の配点が高い地域が多いです
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-500" />
+                <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-700" aria-hidden="true" />
                 最新の入試情報は各都道府県教育委員会で確認しましょう
               </li>
             </ul>

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { BookOpen, ChevronRight, ExternalLink, FileText, RotateCcw, Send, Share2, Sparkles, BarChart3, GraduationCap } from '@/components/icons';
+import { BookOpen, ChevronRight, Send, Share2 } from '@/components/icons';
 
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -204,13 +204,11 @@ export function ResultSection({
       {
         id: 'key',
         label: '重要な情報',
-        icon: <Sparkles className="h-5 w-5" />,
         description: 'スコア・計算根拠・保存'
       },
       {
         id: 'detail',
         label: '詳しく分析',
-        icon: <BarChart3 className="h-5 w-5" />,
         badge: '15+',
         description: 'グラフ・アドバイス・目標設定'
       }
@@ -222,19 +220,19 @@ export function ResultSection({
     <section id="result" className="space-y-4" aria-label="計算結果">
       {/* スコア概要は常にトップに表示 */}
       <Card className="overflow-hidden" variant="elevated">
-        <div className="border-b border-slate-100/80 bg-brand-50/80 px-6 py-5">
-          <div className="text-lg font-bold text-slate-800">🎉 あなたの内申点</div>
+        <div className="border-b border-slate-200 px-5 py-4 md:px-6">
+          <h2 className="text-xl font-bold text-slate-900">あなたの内申点</h2>
         </div>
-        <div className="p-6">
+        <div className="p-5 md:p-6">
           <div className="flex flex-col items-center gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-6">
               <ScoreGauge percent={result.percent} total={result.total} max={result.max} />
               <div>
-                <div className="mt-1 text-4xl font-bold tracking-tight text-slate-800">
+                <div className="mt-1 text-4xl font-bold tabular-nums tracking-tight text-slate-900">
                   {result.total}
-                  <span className="text-xl font-bold text-slate-400">/{result.max}</span>
+                  <span className="text-xl font-bold text-slate-600">/{result.max}</span>
                 </div>
-                <div className="mt-2 text-sm text-slate-500">
+                <div className="mt-2 text-sm text-slate-600">
                   {selectedPrefecture?.description ?? '9教科 × 5点 = 45点満点'}
                 </div>
               </div>
@@ -246,13 +244,13 @@ export function ResultSection({
               <button
                 type="button"
                 onClick={onSendToParent}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 py-3.5 text-sm font-bold text-white transition-all active:scale-95 md:w-auto"
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white outline-none transition-colors duration-100 hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 md:w-auto"
               >
                 <Send className="h-4 w-4" />
                 成績レポートをおうちの人に送る
-                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ChevronRight className="h-4 w-4" />
               </button>
-              <p className="text-xs leading-snug text-slate-500 md:text-right">
+              <p className="text-sm text-slate-600 md:text-right">
                 受験の相談用に、結果をまとめて共有できます
               </p>
               <div className="flex w-full gap-2 md:w-auto">
@@ -301,20 +299,15 @@ export function ResultSection({
           <Link
             href={`/pref/${prefectureCode}`}
             onClick={onSchoolPageBridgeClick}
-            className="group flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 transition-all hover:border-brand-300"
+            className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 transition-colors duration-100 hover:border-brand-700 hover:bg-brand-50"
           >
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
-                <GraduationCap className="h-5 w-5" />
-              </div>
-              <div>
-                <div className="text-sm font-bold text-slate-800">この点数で狙える高校を見る</div>
-                <div className="mt-0.5 text-xs text-slate-500">
-                  {selectedPrefecture?.name ?? 'この県'}の高校別の募集人員・志願者数・倍率を確認できます
-                </div>
+            <div className="min-w-0">
+              <div className="text-base font-bold text-slate-900">この点数で狙える高校を見る</div>
+              <div className="mt-0.5 text-sm text-slate-600">
+                {selectedPrefecture?.name ?? 'この県'}の高校別の募集人員・志願者数・倍率を確認できます
               </div>
             </div>
-            <ChevronRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-500" />
+            <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
           </Link>
 
           {/* T-ADS1 AdSense RESULT_BELOW（2026-09-25 位置を引き上げ）: 保護者CTA(GapToTarget/ParentCostBridge)と
@@ -329,137 +322,128 @@ export function ResultSection({
 
           {/* 内申点計算後の関連ツール導線（/hyotei-heikin・/hensachi の被リンク強化＋ユーザー回遊性アップ） */}
           <Card className="overflow-hidden">
-            <div className="border-b border-slate-100/80 bg-brand-50/80 px-6 py-5">
-              <div className="text-base font-bold text-slate-800">🧮 関連する無料ツール</div>
-              <div className="mt-1 text-sm text-slate-500">
+            <div className="border-b border-slate-200 px-5 py-5 md:px-6">
+              <h2 className="text-xl font-bold text-slate-900">関連する無料ツール</h2>
+              <p className="mt-1 text-sm text-slate-600">
                 内申点と合わせて確認しておきたい指標を、専用ツールで瞬時に算出できます。
-              </div>
+              </p>
             </div>
-            <div className="grid gap-3 p-6 md:grid-cols-2">
-              <Link
-                href="/hyotei-heikin"
-                className="group flex items-start gap-3 rounded-lg border border-brand-200 bg-brand-50/50 p-4 transition-all hover:border-brand-400"
-              >
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
-                  <BarChart3 className="h-5 w-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-bold text-slate-800 group-hover:text-brand-700">
-                    評定平均 計算サイト
-                  </div>
-                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                    通知表の評定（1〜5）から評定平均と素内申を瞬時に算出。私立併願優遇・推薦入試の基準確認に。
-                  </p>
-                </div>
-                <ChevronRight className="mt-3 h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
-              </Link>
-
-              <Link
-                href="/hensachi"
-                className="group flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50/50 p-4 transition-all hover:border-slate-400"
-              >
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-slate-500 text-white">
-                  <Sparkles className="h-5 w-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-bold text-slate-800 group-hover:text-slate-700">
-                    偏差値計算サイト（5教科）
-                  </div>
-                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                    模試・定期テストの点数と平均点から偏差値を瞬時に算出。志望校との距離を確認できます。
-                  </p>
-                </div>
-                <ChevronRight className="mt-3 h-4 w-4 text-slate-500 transition-transform group-hover:translate-x-1" />
-              </Link>
-
-              {TOTAL_SCORE_PROMOTIONS[prefectureCode] && (
+            <ul className="divide-y divide-slate-200">
+              <li>
                 <Link
-                  href={TOTAL_SCORE_PROMOTIONS[prefectureCode].href}
-                  className="group flex items-start gap-3 rounded-lg border border-brand-200 bg-brand-50/50 p-4 transition-all hover:border-brand-400 md:col-span-2"
+                  href="/hyotei-heikin"
+                  className="flex min-h-11 items-center justify-between gap-3 px-5 py-4 hover:bg-brand-50 md:px-6"
                 >
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
-                    <FileText className="h-5 w-5" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-bold text-slate-800 group-hover:text-brand-700">
-                      {TOTAL_SCORE_PROMOTIONS[prefectureCode].title}
-                    </div>
-                    <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                      {TOTAL_SCORE_PROMOTIONS[prefectureCode].description}
-                    </p>
-                  </div>
-                  <ChevronRight className="mt-3 h-4 w-4 text-brand-500 transition-transform group-hover:translate-x-1" />
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-slate-900">評定平均 計算サイト</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-slate-600">
+                      通知表の評定（1〜5）から評定平均と素内申を瞬時に算出。私立併願優遇・推薦入試の基準確認に。
+                    </span>
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                 </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hensachi"
+                  className="flex min-h-11 items-center justify-between gap-3 px-5 py-4 hover:bg-brand-50 md:px-6"
+                >
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-slate-900">偏差値計算サイト（5教科）</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-slate-600">
+                      模試・定期テストの点数と平均点から偏差値を瞬時に算出。志望校との距離を確認できます。
+                    </span>
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
+                </Link>
+              </li>
+              {TOTAL_SCORE_PROMOTIONS[prefectureCode] && (
+                <li>
+                  <Link
+                    href={TOTAL_SCORE_PROMOTIONS[prefectureCode].href}
+                    className="flex min-h-11 items-center justify-between gap-3 px-5 py-4 hover:bg-brand-50 md:px-6"
+                  >
+                    <span className="min-w-0">
+                      <span className="block text-base font-bold text-slate-900">
+                        {TOTAL_SCORE_PROMOTIONS[prefectureCode].title}
+                      </span>
+                      <span className="mt-1 block text-sm leading-relaxed text-slate-600">
+                        {TOTAL_SCORE_PROMOTIONS[prefectureCode].description}
+                      </span>
+                    </span>
+                    <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
+                  </Link>
+                </li>
               )}
-            </div>
+            </ul>
           </Card>
 
           {prefectureCode === 'kanagawa' && (
             <Card className="overflow-hidden">
-              <div className="border-b border-slate-100/80 bg-brand-50/80 px-6 py-5">
-                <div className="text-base font-bold text-slate-800">神奈川は学校別比率で決まる</div>
-                <div className="mt-1 text-sm text-slate-500">
+              <div className="border-b border-slate-200 px-5 py-5 md:px-6">
+                <h2 className="text-xl font-bold text-slate-900">神奈川は学校別比率で決まる</h2>
+                <div className="mt-1 text-sm text-slate-600">
                   内申:学力の比率は 4:6 / 5:5 / 3:7 など学校ごとに異なります。
-                  <span className="text-xs text-slate-400">（よくある例）</span>
+                  <span>（よくある例）</span>
                 </div>
-                <div className="mt-1 text-xs text-slate-400">
+                <div className="mt-1 text-sm text-slate-600">
                   学校・学科ごとに異なる（2:8〜8:2）。各2以上・合計10、特色検査は最大5。
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-5 md:p-6">
                 <div className="flex flex-wrap gap-2">
                   {['4-6', '5-5', '3-7'].map((ratio) => (
                     <Link
                       key={ratio}
                       href={`/reverse?pref=kanagawa&ratio=${ratio}`}
-                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-bold text-slate-700 hover:border-slate-300"
+                      className="inline-flex min-h-11 items-center rounded border border-slate-300 bg-white px-4 text-sm font-bold tabular-nums text-slate-900 hover:bg-brand-50"
                     >
                       {ratio.replace('-', ':')}
                     </Link>
                   ))}
                   <Link
                     href="/reverse?pref=kanagawa"
-                    className="rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white hover:bg-brand-700"
+                    className="inline-flex min-h-11 items-center rounded bg-brand-700 px-5 text-sm font-bold text-white hover:bg-brand-800"
                   >
                     S1値を計算する
                   </Link>
                 </div>
-                <p className="mt-2 text-xs text-slate-400">比率は合計10、各2以上の整数が基本です。</p>
+                <p className="mt-3 text-sm text-slate-600">比率は合計10、各2以上の整数が基本です。</p>
               </div>
             </Card>
           )}
 
           <Card className="overflow-hidden">
-            <div className="border-b border-slate-100/80 bg-slate-50/80 px-6 py-5">
+            <div className="border-b border-slate-200 px-5 py-5 md:px-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="text-base font-bold text-slate-800">📁 記録を保存</div>
-                  <div className="mt-1 text-sm text-slate-500">この端末のみに保存（外部に送信されません）</div>
+                  <h2 className="text-xl font-bold text-slate-900">記録を保存</h2>
+                  <p className="mt-1 text-sm text-slate-600">この端末のみに保存（外部に送信されません）</p>
                 </div>
-                <Switch checked={saveEnabled} onCheckedChange={onSaveEnabledChange} />
+                <Switch checked={saveEnabled} onCheckedChange={onSaveEnabledChange} aria-label="記録を保存" />
               </div>
             </div>
-            <div className="p-6">
+            <div className="p-5 md:p-6">
               <div className="mb-3 text-sm text-slate-600">
                 成績は自動的に保存されています。任意で名前を付けることができます。
               </div>
               <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-end">
                 <div>
-                  <div className="text-xs font-bold text-slate-700">記録に名前を付ける（任意）</div>
+                  <div className="text-sm font-bold text-slate-900">記録に名前を付ける（任意）</div>
                   <input
                     value={saveMemo}
                     onChange={(e) => onSaveMemoChange(e.target.value)}
                     disabled={!saveEnabled}
                     aria-label="記録に名前を付ける（任意）"
                     placeholder="例：1学期中間、模試前 など"
-                    className="mt-1 h-11 w-full rounded-lg border border-slate-200 bg-white px-4 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 disabled:bg-slate-50 disabled:text-slate-400"
+                    className="mt-1 h-11 w-full rounded border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:bg-slate-50 disabled:text-slate-500"
                   />
                 </div>
                 <Button variant="secondary" onClick={onSaveNow} disabled={!saveEnabled} className="h-11 w-full md:w-auto">
                   名前を追加
                 </Button>
               </div>
-              <div className="mt-3 text-xs text-slate-500">
+              <div className="mt-3 text-sm text-slate-600">
                 {lastSaved ? (
                   <>最終保存：{new Date(lastSaved.savedAt).toLocaleString('ja-JP')}</>
                 ) : (
@@ -470,21 +454,20 @@ export function ResultSection({
           </Card>
 
           <Card className="overflow-hidden">
-            <div className="border-b border-slate-100/80 bg-brand-50/80 px-6 py-5">
-              <div className="flex items-start justify-between gap-4">
+            <div className="px-5 py-5 md:px-6">
+              <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <div className="text-base font-bold text-slate-800">
-                    📍 {getPrefectureByCode(prefectureCode)?.name}の詳しい情報
-                  </div>
-                  <div className="mt-1 text-sm text-slate-500">計算根拠・FAQ・公式資料</div>
+                  <h2 className="text-xl font-bold text-slate-900">
+                    {getPrefectureByCode(prefectureCode)?.name}の詳しい情報
+                  </h2>
+                  <p className="mt-1 text-sm text-slate-600">計算根拠・FAQ・公式資料</p>
                 </div>
                 <Link
                   href={`/${prefectureCode}/naishin`}
-                  className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm text-white transition-colors hover:bg-brand-700"
+                  className="inline-flex min-h-11 items-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors duration-100 hover:bg-brand-800"
                 >
                   <BookOpen className="h-4 w-4" />
                   計算根拠ページへ
-                  <ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
@@ -493,19 +476,19 @@ export function ResultSection({
           <button
             type="button"
             onClick={() => setActiveTab('detail')}
-            className="group flex w-full items-center justify-between rounded-lg border-2 border-brand-200 bg-brand-50 px-5 py-4 text-left transition-all duration-200 hover:border-brand-400"
+            className="group flex w-full items-center justify-between gap-4 rounded-lg border border-slate-200 bg-brand-50 px-5 py-4 text-left transition-colors duration-100 hover:border-brand-700"
           >
             <div>
-              <div className="text-sm font-bold text-brand-800">
-                📊 もっと詳しく分析する
+              <div className="text-base font-bold text-slate-900">
+                もっと詳しく分析する
               </div>
-              <div className="mt-0.5 text-xs text-brand-600">
+              <div className="mt-0.5 text-sm text-slate-600">
                 レーダーチャート・成績推移・アドバイスなど15項目以上
               </div>
             </div>
-            <div className="flex items-center gap-1 rounded-lg bg-brand-600 px-3 py-2 text-sm font-bold text-white transition-all group-hover:bg-brand-700">
+            <div className="flex shrink-0 items-center gap-1 rounded bg-brand-700 px-4 py-2 text-sm font-bold text-white transition-colors duration-100 group-hover:bg-brand-800">
               詳しく見る
-              <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <ChevronRight className="h-4 w-4" />
             </div>
           </button>
 
@@ -525,55 +508,59 @@ export function ResultSection({
 
 
           <Card className="overflow-hidden">
-            <div className="border-b border-slate-100/80 bg-brand-50/80 px-6 py-5">
-              <div className="text-base font-bold text-slate-800 mb-4">🎯 受験対策の完全ガイド</div>
-              <div className="grid gap-3 sm:grid-cols-2">
+            <div className="border-b border-slate-200 px-5 py-5 md:px-6">
+              <h2 className="text-xl font-bold text-slate-900">受験対策のガイド</h2>
+            </div>
+            <ul className="divide-y divide-slate-200">
+              <li>
                 <Link
                   href="/blog"
-                  className="flex items-center gap-3 rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
+                  className="flex min-h-11 items-center justify-between gap-3 px-5 py-4 hover:bg-brand-50 md:px-6"
                 >
-                  <BookOpen className="h-5 w-5 text-brand-600" />
-                  <div className="text-left">
-                    <div className="text-sm text-slate-800">内申点コラム</div>
-                    <div className="text-xs text-slate-500">基礎知識から実践まで</div>
-                  </div>
-                  <ChevronRight className="h-4 w-4 text-slate-400 ml-auto" />
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-slate-900">内申点コラム</span>
+                    <span className="block text-sm text-slate-600">基礎知識から実践まで</span>
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                 </Link>
+              </li>
+              <li>
                 <Link
                   href="/guide"
-                  className="flex items-center gap-3 rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
+                  className="flex min-h-11 items-center justify-between gap-3 px-5 py-4 hover:bg-brand-50 md:px-6"
                 >
-                  <FileText className="h-5 w-5 text-brand-600" />
-                  <div className="text-left">
-                    <div className="text-sm text-slate-800">制度を理解する</div>
-                    <div className="text-xs text-slate-500">都道府県別の違い</div>
-                  </div>
-                  <ChevronRight className="h-4 w-4 text-slate-400 ml-auto" />
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-slate-900">制度を理解する</span>
+                    <span className="block text-sm text-slate-600">都道府県別の違い</span>
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                 </Link>
+              </li>
+              <li>
                 <Link
                   href="/tools"
-                  className="flex items-center gap-3 rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
+                  className="flex min-h-11 items-center justify-between gap-3 px-5 py-4 hover:bg-brand-50 md:px-6"
                 >
-                  <RotateCcw className="h-5 w-5 text-brand-600" />
-                  <div className="text-left">
-                    <div className="text-sm text-slate-800">ツール一覧</div>
-                    <div className="text-xs text-slate-500">計算・逆算・比較</div>
-                  </div>
-                  <ChevronRight className="h-4 w-4 text-slate-400 ml-auto" />
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-slate-900">ツール一覧</span>
+                    <span className="block text-sm text-slate-600">計算・逆算・比較</span>
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                 </Link>
+              </li>
+              <li>
                 <Link
                   href="/about"
-                  className="flex items-center gap-3 rounded-lg bg-white p-3 transition-all hover:bg-brand-50"
+                  className="flex min-h-11 items-center justify-between gap-3 px-5 py-4 hover:bg-brand-50 md:px-6"
                 >
-                  <ExternalLink className="h-5 w-5 text-brand-600" />
-                  <div className="text-left">
-                    <div className="text-sm text-slate-800">運営者情報</div>
-                    <div className="text-xs text-slate-500">信頼性と透明性</div>
-                  </div>
-                  <ChevronRight className="h-4 w-4 text-slate-400 ml-auto" />
+                  <span className="min-w-0">
+                    <span className="block text-base font-bold text-slate-900">運営者情報</span>
+                    <span className="block text-sm text-slate-600">信頼性と透明性</span>
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-600" />
                 </Link>
-              </div>
-            </div>
+              </li>
+            </ul>
           </Card>
 
           <ScoreImprovementAnalysis currentScores={scores} prefectureCode={prefectureCode} />

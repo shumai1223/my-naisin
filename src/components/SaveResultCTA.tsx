@@ -4,15 +4,10 @@ import * as React from 'react';
 import Link from 'next/link';
 import {
   MessageCircle,
-  Mail,
-  BellRing,
   Check,
   Loader2,
-  ShieldCheck,
-  Bookmark,
   Download,
   Send,
-  Sparkles,
   ChevronRight,
 } from '@/components/icons';
 
@@ -55,6 +50,8 @@ interface SaveResultCTAProps {
   /** 名簿の対象（生徒/保護者）。保護者面では 'parent' を渡すと保護者用LINEアカウントへ分離。既定 'student'。 */
   audience?: LineAudience;
   className?: string;
+  /** 見出しのレベル（既定 h3）。置かれるページの見出し階層に合わせて呼び出し側が選ぶ。 */
+  headingLevel?: 'h2' | 'h3' | 'h4';
 }
 
 type Status = 'idle' | 'submitting' | 'success' | 'fallback' | 'error';
@@ -83,6 +80,7 @@ export function SaveResultCTA({
   body,
   audience = 'student',
   className = '',
+  headingLevel = 'h3',
 }: SaveResultCTAProps) {
   const LINE_ADD_URL = lineAddUrl(audience);
   const [email, setEmail] = React.useState('');
@@ -248,36 +246,34 @@ export function SaveResultCTA({
   const lineBlock = LINE_ADD_URL && (
     <div
       aria-hidden={!lineVisible}
-      className={`transition-opacity duration-300 ${lineVisible ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+      className={`transition-opacity duration-200 motion-reduce:transition-none ${lineVisible ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
     >
+      {/* LINEボタンだけは LINE公式の緑（設計書の例外）。形は主ボタンと同じ。 */}
       <a
         href={LINE_ADD_URL}
         target="_blank"
         rel="noopener noreferrer"
         onClick={onLineClick}
         tabIndex={lineVisible ? 0 : -1}
-        className="flex items-center justify-between gap-3 rounded-lg border-2 border-[#06C755] bg-[#06C755] px-5 py-3.5 text-left text-white transition-all active:scale-[0.99]"
+        className="flex min-h-[44px] items-center justify-between gap-3 rounded bg-[#06C755] px-5 py-3 text-left text-white transition-colors hover:bg-[#05b34c]"
       >
         <span className="flex items-center gap-2.5">
-          <MessageCircle className="h-5 w-5" />
+          <MessageCircle className="h-5 w-5 shrink-0" />
           <span>
-            <span className="block text-sm font-bold">LINEで受験情報を受け取る</span>
-            <span className="block text-xs text-white/85">{lineSubtitle}</span>
+            <span className="block text-base font-bold">LINEで受験情報を受け取る</span>
+            <span className="block text-sm">{lineSubtitle}</span>
           </span>
         </span>
-        <span className="rounded-lg bg-white/20 px-2.5 py-1 text-xs font-bold">無料</span>
+        <span className="rounded bg-white px-2 py-0.5 text-xs font-bold text-slate-900">無料</span>
       </a>
-      <p className="mt-1.5 text-xs leading-relaxed text-slate-400">{LINE_UNFRIEND_HELP_TEXT}</p>
+      <p className="mt-2 text-xs leading-relaxed text-slate-600">{LINE_UNFRIEND_HELP_TEXT}</p>
     </div>
   );
 
   // 受け皿2：メール（会員化の入口・文脈付きセグメント名簿）。
   const emailBlock = (
     <form onSubmit={onSubmit} className="space-y-3">
-      <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
-        <Mail className="h-3.5 w-3.5 text-brand-600" />
-        メールで受け取る
-      </div>
+      <div className="text-sm font-bold text-slate-900">メールで受け取る</div>
       <div className="flex flex-col gap-2 sm:flex-row">
         <input
           type="email"
@@ -291,12 +287,12 @@ export function SaveResultCTA({
           onFocus={onFormStart}
           placeholder="メールアドレス"
           aria-label="メールアドレス"
-          className="h-11 flex-1 rounded-lg border border-slate-200 bg-white px-4 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+          className="min-h-[44px] flex-1 rounded border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-brand-700"
         />
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-brand-600 px-6 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-70"
+          className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === 'submitting' ? (
             <>
@@ -304,31 +300,32 @@ export function SaveResultCTA({
               送信中…
             </>
           ) : (
-            <>
-              <BellRing className="h-4 w-4" />
-              {submitLabel}
-            </>
+            <>{submitLabel}</>
           )}
         </button>
       </div>
 
-      <label className="flex cursor-pointer items-start gap-2 text-xs leading-relaxed text-slate-500">
+      <label className="flex min-h-[44px] cursor-pointer items-start gap-3 text-sm leading-relaxed text-slate-600">
         <input
           type="checkbox"
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+          className="mt-1 h-5 w-5 shrink-0 cursor-pointer accent-brand-700"
         />
         <span>
           受験情報・内申対策の受け取りに同意します（
-          <Link href="/privacy" className="font-bold text-slate-600 underline">
+          <Link href="/privacy" className="font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800">
             プライバシーポリシー
           </Link>
           ）。配信はいつでも解除できます。
         </span>
       </label>
 
-      {error && <p className="text-xs font-bold text-red-600">{error}</p>}
+      {error && (
+        <p role="alert" className="rounded border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-800">
+          {error}
+        </p>
+      )}
     </form>
   );
 
@@ -377,47 +374,45 @@ export function SaveResultCTA({
   const onNextMagnetClick = () =>
     track(EVENTS.LEAD_MAGNET_NEXT, { source, pref: prefectureCode ?? 'none', to: leadMagnet.nextStep.href, variant: actionPlanVariant });
 
+  // 見出しのレベルは呼び出し側が選ぶ（既定 h3）。見た目はレベルに依らず設計書の h2 / h3 の型。
+  const Heading = headingLevel;
+  const headingSize = headingLevel === 'h2' ? 'text-xl' : 'text-[17px]';
+
   return (
     <section
       ref={sectionRef}
-      className={`relative overflow-hidden rounded-lg border-2 border-brand-300 bg-brand-50 p-6 md:p-7 ${className}`}
+      className={`rounded-lg border border-slate-200 bg-brand-50 p-5 md:p-6 ${className}`}
     >
-      {/* 視線を止めるアクセント光（2026-07-14: 淡色カードの連続で名簿CTAが埋没する👤指摘への強調。
-          UnlockGateと同じ「報酬カード」の視覚言語＝濃縁+塗りバッジ+強影で結果直下の主役に格上げ） */}
-      <div className="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full bg-brand-300/30 blur-2xl" />
-
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white">
-        <Bookmark className="h-3.5 w-3.5" />
+      {/* 結果直下の主役（名簿CTA）。強調は薄い緑の面（bg-brand-50）だけで行う。 */}
+      <div className="mb-3 inline-flex items-center rounded border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
         結果を保存・受け取る
       </div>
 
-      <h3 className="mb-2 text-lg font-bold leading-snug text-slate-900 md:text-xl">
+      <Heading className={`mb-2 ${headingSize} font-bold leading-snug text-slate-900`}>
         {heading ?? 'この結果と「あと何点」を、忘れないうちに受け取りませんか？'}
-      </h3>
-      <p className="mb-5 text-sm leading-relaxed text-slate-700">
+      </Heading>
+      <p className="mb-5 text-base leading-[1.8] text-slate-900">
         {body ??
           '内申点アップのコツ・出願までのスケジュール・志望校の最新情報を、受験本番まで無料でお届けします。受け取り方法は2つ。いつでも解除できます。'}
       </p>
 
       {done ? (
-        <div className="space-y-4">
+        <div className="space-y-5">
           {/* 確認＋登録の見返りの見出し（何が手に入ったかを名指し） */}
-          <div className="flex items-start gap-3 rounded-lg border border-brand-200 bg-brand-50 p-4">
-            <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-500 text-white">
-              <Check className="h-4 w-4" />
-            </div>
-            <div className="text-sm leading-relaxed text-brand-900">
+          <div className="flex items-start gap-3">
+            <Check className="mt-1 h-5 w-5 shrink-0 text-brand-700" />
+            <div className="text-base leading-[1.8] text-slate-900">
               <div className="font-bold">{leadMagnet.headline}</div>
-              <p className="mt-1 text-brand-800">{leadMagnet.subline}</p>
+              <p className="mt-1">{leadMagnet.subline}</p>
               {status === 'fallback' && (
                 <>
-                  <p className="mt-2 text-brand-800">
+                  <p className="mt-2">
                     確実にお届けするため、メールアプリが開きます。そのまま送信してください。
                   </p>
                   <button
                     type="button"
                     onClick={() => openLeadMailtoFallback(payload)}
-                    className="mt-1 text-xs font-bold text-brand-700 underline"
+                    className="mt-1 inline-flex min-h-[44px] items-center text-sm font-bold text-brand-700 underline underline-offset-2 hover:text-brand-800"
                   >
                     メールアプリが開かない場合はこちら
                   </button>
@@ -428,36 +423,35 @@ export function SaveResultCTA({
 
           {/* 見返り①：成績カード（画像）。score+max が揃ったときだけ。登録の互恵性の核。 */}
           {leadMagnet.cardPath && (
-            <div className="rounded-lg border border-slate-200 bg-white p-4">
-              <div className="mb-2 flex items-center gap-1.5 text-xs font-bold text-slate-600">
-                <Sparkles className="h-3.5 w-3.5 text-brand-600" />
+            <div className="border-t border-slate-200 pt-5">
+              <div className="mb-2 text-sm font-bold text-slate-900">
                 あなたの成績カードができました
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={leadMagnet.cardPath}
                 alt="あなたの成績カード"
-                className="w-full rounded-lg border border-slate-100"
+                className="w-full rounded-lg border border-slate-200"
                 loading="lazy"
               />
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 <a
                   href={leadMagnet.cardPath}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onCardClick}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-200 bg-white px-4 py-3 text-sm font-bold text-brand-700 transition-all hover:border-brand-400 hover:bg-brand-50 active:scale-[0.99]"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-brand-700 bg-white px-5 py-3 text-base font-bold text-brand-700 transition-colors hover:bg-brand-50"
                 >
-                  <Download className="h-4 w-4" />
+                  <Download className="h-5 w-5 shrink-0" />
                   画像を保存する
                 </a>
                 {leadMagnet.parentSharePath && (
                   <Link
                     href={leadMagnet.parentSharePath}
                     onClick={onParentMagnetClick}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700 active:scale-[0.99]"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-brand-700 px-5 py-3 text-base font-bold text-white transition-colors hover:bg-brand-800"
                   >
-                    <Send className="h-4 w-4" />
+                    <Send className="h-5 w-5 shrink-0" />
                     おうちの人に送る
                   </Link>
                 )}
@@ -469,23 +463,23 @@ export function SaveResultCTA({
           <Link
             href={leadMagnet.nextStep.href}
             onClick={onNextMagnetClick}
-            className="group flex items-center justify-between gap-3 rounded-lg border-2 border-brand-200 bg-brand-50 px-5 py-4 transition-all hover:border-brand-400"
+            className="group flex min-h-[44px] items-center justify-between gap-3 border-t border-slate-200 pt-5"
           >
             <div>
-              <div className="text-sm font-bold text-brand-900">{leadMagnet.nextStep.label}</div>
-              <div className="mt-0.5 text-xs text-brand-700">{leadMagnet.nextStep.description}</div>
+              <div className="text-base font-bold text-brand-700 underline underline-offset-2 group-hover:text-brand-800">{leadMagnet.nextStep.label}</div>
+              <div className="mt-1 text-sm text-slate-600">{leadMagnet.nextStep.description}</div>
             </div>
-            <ChevronRight className="h-5 w-5 shrink-0 text-brand-500 transition-transform group-hover:translate-x-0.5" />
+            <ChevronRight className="h-5 w-5 shrink-0 text-brand-700" />
           </Link>
         </div>
       ) : (
         <div className="space-y-4">
           {/* 追加する“理由”を具体化（友だち追加の動機づけ＝名簿velocityのKPI施策）。
               「受験情報」では曖昧なので、受け取れる中身を3つ明示する。 */}
-          <ul className="grid gap-1.5 sm:grid-cols-3">
+          <ul className="grid gap-2 sm:grid-cols-3">
             {LIST_BENEFITS.map((b) => (
-              <li key={b} className="flex items-start gap-1.5 rounded-lg bg-white/70 px-2.5 py-2 text-xs text-slate-600 ring-1 ring-brand-100">
-                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-500" />
+              <li key={b} className="flex items-start gap-2 text-sm leading-relaxed text-slate-900">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />
                 {b}
               </li>
             ))}
@@ -504,10 +498,9 @@ export function SaveResultCTA({
             </>
           )}
 
-          <div className="flex items-center gap-1.5 text-xs text-slate-400">
-            <ShieldCheck className="h-3.5 w-3.5" />
+          <p className="text-xs text-slate-600">
             登録は無料。メールアドレスは受験情報の配信にのみ使用します。
-          </div>
+          </p>
         </div>
       )}
     </section>
