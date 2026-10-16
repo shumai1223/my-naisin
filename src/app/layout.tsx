@@ -133,7 +133,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             本文中の手動ユニットは AdSlot（NEXT_PUBLIC_ADSENSE_ENABLED=1 かつ実ユニットID）で別途点火＝ops/tasks/T-ADS1。
             afterInteractive: 本文の描画後に読み込み、LCPを邪魔しない。
             2026-10-16: URLにトークン・成績が載るページ（/admin・/juku/・/hogosha など）では読み込まない（AdSenseScript・lib/adsense-paths.ts）。
-            Cookie同意画面の選択には連動していない（GA4だけが同意で制御される）。プライバシーポリシーにもその旨を書いてある。 */}
+            Cookie同意画面の選択に連動する（AdSenseScript.tsx・lib/adsense-consent.ts）: 「すべて許可」のときだけパーソナライズ広告を求め、
+            それ以外（必須のみ・未選択・保存領域なし）は非パーソナライズ広告を求める。広告そのものはこの選択にかかわらず表示される。
+            GA4はConsent Modeで別途制御。プライバシーポリシーにもその旨を書いてある。 */}
         <AdSenseScript />
       </body>
     </html>

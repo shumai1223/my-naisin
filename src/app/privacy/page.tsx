@@ -5,7 +5,7 @@ import { APP_NAME } from '@/lib/constants';
 import { LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
 
 export default function PrivacyPage() {
-  const lastUpdated = '2026年10月16日';
+  const lastUpdated = '2026年10月17日';
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           <ul className="list-disc space-y-2 pl-5 text-base leading-[1.8] text-slate-900">
             <li><strong>ツール利用時：</strong>個人情報を収集しません（端末内のみ保存）</li>
             <li><strong>お問い合わせ・受け取り登録時：</strong>返信・配信のためメールアドレス等を取得します（任意）</li>
-            <li><strong>広告：</strong>アフィリエイト広告と、Google AdSenseによる広告を掲載しています。Googleなどの第三者配信事業者が、Cookieを使って過去のアクセス情報に基づく広告を表示することがあります（パーソナライズ広告は、Googleの広告設定でオフにできます）</li>
+            <li><strong>広告：</strong>アフィリエイト広告と、Google AdSenseによる広告を掲載しています。閲覧履歴に基づく広告（パーソナライズ広告）は、Cookie同意画面で「すべて許可」を選んだ場合だけ求めます（Googleの広告設定でもオフにできます）</li>
             <li><strong>データ利用：</strong>Google等のサービスが利用データを収集・分析します</li>
           </ul>
         </section>
@@ -278,9 +278,9 @@ export default function PrivacyPage() {
                   広告Cookie（サードパーティ）
                 </h4>
                 <p className="mt-2 text-sm leading-[1.8] text-slate-900">
-                  Google AdSenseを通じて、Googleおよび広告配信パートナーが使用するCookieです。広告の配信・表示回数の計測・不正なクリックの防止のほか、
-                  ユーザーのこれまでのアクセス情報に基づく広告（パーソナライズ広告）の表示に使われることがあります。
-                  このCookieは、Cookie同意画面で「必須のみ許可」を選んだ場合でも、広告の表示にともなって使用されることがあります。
+                  Google AdSenseを通じて、Googleおよび広告配信パートナーが使用するCookieです。広告の配信・表示回数の制限・集計などのために使われます。
+                  Cookie同意画面で「すべて許可」を選んだ場合に限り、ユーザーのこれまでのアクセス情報に基づく広告（パーソナライズ広告）の表示にも使われます。
+                  「必須のみ許可」を選んだ場合（または、まだ選んでいない場合）は、パーソナライズしない広告を求めますが、広告の表示にともなって、上記の目的のCookieは使われることがあります。
                   アフィリエイト広告（ASP）の計測については「5.」をご覧ください。
                 </p>
               </div>
@@ -292,7 +292,7 @@ export default function PrivacyPage() {
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
               <li>
-                <strong>当サイトのCookie設定：</strong>サイト初回訪問時に表示されるCookie同意画面で設定を選択（この設定で変わるのはアクセス解析のCookieです。Google AdSenseの広告の表示は、この選択にかかわらず行われます）
+                <strong>当サイトのCookie設定：</strong>サイト初回訪問時に表示されるCookie同意画面で設定を選択。選び直したいときは、ページ下部の「Cookie設定」から（この設定で変わるのは、アクセス解析のCookieと、広告のパーソナライズです。広告そのものは、この選択にかかわらず表示されます）
               </li>
               <li>
                 <strong>ブラウザ設定：</strong>各ブラウザの設定画面からCookieの受け入れ・拒否を設定
@@ -316,7 +316,8 @@ export default function PrivacyPage() {
               稼働しており、AffiliateAd.tsx のトラッキングピクセルが外部ドメインへリクエストを発生させている。
               「掲載していない」と書き続けることは、このサイトの拠り所である「公表値のみ・捏造ゼロ」に反する。
               2026-10-16: Google AdSense は 2026-09-25 から稼働している（layout.tsx で adsbygoogle.js を全ページに読み込み。
-              Cookie同意画面の選択にかかわらず読み込まれる＝GA4だけが同意で制御される）。「利用していません」「パーソナライズ広告は配信していません」
+              Cookie同意画面の選択にかかわらず読み込まれるが、2026-10-17に「すべて許可」のときだけパーソナライズ広告を求めるよう連動させた
+              ＝lib/adsense-consent.ts・AdSenseScript.tsx）。「利用していません」「パーソナライズ広告は配信していません」
               という記述が事実と違っていたため、AdSenseを利用していることと、利用者ができる設定（Google広告設定）を明記した。 */}
           <section>
             <h2 className="mb-3 text-xl font-bold text-slate-900">5. 広告（Google AdSense・アフィリエイト）と第三者Cookieについて</h2>
@@ -367,6 +368,14 @@ export default function PrivacyPage() {
                 Googleが広告Cookieを使用することにより、Googleやそのパートナーは、当サイトや他のサイトへのアクセス情報に基づく広告をユーザーに表示できます。
               </li>
               <li>
+                <strong>当サイトでは、こうしたパーソナライズ広告を求めるのは、Cookie同意画面で「すべて許可」を選んだ場合だけです。</strong>
+                「必須のみ許可」を選んだ場合や、まだ選んでいない場合は、Googleにパーソナライズしない広告（非パーソナライズ広告）を求めます。
+                選んだ内容は、お使いのブラウザに保存されます。
+                なお、パーソナライズしない広告でも、広告の表示回数の制限・集計などのために、CookieなどがGoogleによって使われることがあります。
+                選び直したいときは、ページ下部の「Cookie設定」を押してください（広告への反映は、ページを読み込み直したときからです）。
+                なお、欧州経済領域・英国・スイスからのアクセスでは、Googleの要件により、「すべて許可」を選んでもパーソナライズ広告が配信されないことがあります。
+              </li>
+              <li>
                 広告の配信にあたり、IPアドレス・閲覧しているページのURL・端末やブラウザの情報・Cookie等の識別子などがGoogleに送信されます。
                 URLに内申点・目標点などの数値が含まれるページ（結果の共有リンク、計算結果を引き継ぐリンクなど）を開いた場合は、
                 その数値を含むURLもGoogleに送信されます（氏名・メールアドレスは含まれません）。
@@ -399,6 +408,11 @@ export default function PrivacyPage() {
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
               <li>
+                Cookie同意画面で「必須のみ許可」を選ぶ（パーソナライズしない広告を求めます。広告は表示されます）。
+                まだ選んでいない間も、パーソナライズしない広告を求めています。
+                一度選んだ内容は、ページ下部の「Cookie設定」から選び直せます
+              </li>
+              <li>
                 Googleの
                 <a
                   href="https://adssettings.google.com/"
@@ -428,9 +442,9 @@ export default function PrivacyPage() {
             </ul>
             <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="text-sm leading-[1.8] text-amber-900">
-                <strong>ご注意：</strong>Cookie同意画面の「必須のみ許可」を選ぶと、Google AnalyticsはCookieを使わなくなります
-                （Cookieを使わない簡易的な通信がGoogleに送られることがあります）。
-                Google AdSenseの広告表示は、この選択にかかわらず行われます（当サイトは、AdSenseの読み込みを同意画面の選択に連動させていません）。
+                <strong>ご注意：</strong>Cookie同意画面の選択は、Google Analytics（「必須のみ許可」ではCookieを使わなくなります。
+                Cookieを使わない簡易的な通信がGoogleに送られることがあります）と、Google AdSenseのパーソナライズ
+                （「すべて許可」のときだけ求めます）に反映されます。広告そのものは、どちらを選んでも表示されます。
                 広告Cookieを無効にしても、当サイトの基本機能はご利用いただけます。ただし、広告の関連性が低下する場合があります。
               </p>
             </div>
@@ -449,7 +463,8 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <strong>保護者同意の注意喚起：</strong>13歳未満のお子様がご利用される場合は、保護者の方の同意と監督をお願いします。
-                  あわせて、Googleの広告設定でパーソナライズ広告をオフにすることをご検討ください（方法は「5.2」をご覧ください）
+                  当サイトは、Cookie同意画面で「すべて許可」を選ばない限りパーソナライズ広告を求めません。
+                  お子様がご利用になるときは「必須のみ許可」を選ぶか、Googleの広告設定でパーソナライズ広告をオフにしてください（方法は「5.2」をご覧ください）
                 </li>
                 <li>
                   <strong>広告の選択：</strong>Google AdSenseの広告はGoogleが決めて配信します。当サイトが、個人の年齢や閲覧履歴にもとづいて広告を選ぶことはありません
@@ -490,7 +505,7 @@ export default function PrivacyPage() {
             </p>
             <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
               <p className="text-sm leading-[1.8] text-slate-900">
-                <strong>広告について：</strong>アフィリエイト広告（塾・通信教育・FP無料相談等の紹介リンク）と、Google AdSenseによる広告を掲載しています。Google AdSenseでは、Googleなどの第三者配信事業者がCookieを使って、過去のアクセス情報に基づく広告を表示することがあります。Amazonアソシエイトは利用していません。詳しくは「5. 広告（Google AdSense・アフィリエイト）と第三者Cookieについて」をご覧ください。
+                <strong>広告について：</strong>アフィリエイト広告（塾・通信教育・FP無料相談等の紹介リンク）と、Google AdSenseによる広告を掲載しています。Google AdSenseでは、Googleなどの第三者配信事業者がCookieを使って、過去のアクセス情報に基づく広告を表示することがあります（当サイトは、Cookie同意画面で「すべて許可」を選んだ場合だけ、そうした広告を求めます）。Amazonアソシエイトは利用していません。詳しくは「5. 広告（Google AdSense・アフィリエイト）と第三者Cookieについて」をご覧ください。
               </p>
             </div>
           </section>
@@ -531,7 +546,7 @@ export default function PrivacyPage() {
                 <strong>削除権：</strong>ブラウザ設定からローカルストレージのデータを削除する権利
               </li>
               <li>
-                <strong>オプトアウト権：</strong>Cookie同意画面で「必須のみ許可」を選択し、分析Cookieを拒否する権利（広告のパーソナライズは、Googleの広告設定で無効にできます）
+                <strong>オプトアウト権：</strong>Cookie同意画面で「必須のみ許可」を選択し、分析Cookieとパーソナライズ広告を拒否する権利（パーソナライズ広告は、Googleの広告設定でも無効にできます）
               </li>
               <li>
                 <strong>情報提供を受ける権利：</strong>データの取り扱いについて説明を求める権利

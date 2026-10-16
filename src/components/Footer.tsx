@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { APP_NAME } from '@/lib/constants';
 import { FISCAL_YEAR_PROVISIONAL_NOTE } from '@/lib/fiscal-year';
 import { SUPPORT_URL } from '@/lib/support-link';
+import { CookieSettingsButton } from '@/components/CookieSettingsButton';
 
 const TOOL_LINKS: { href: string; label: string }[] = [
   { href: '/hensachi', label: '偏差値計算（5教科）' },
@@ -153,6 +154,7 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <Link href="/terms" className="inline-flex min-h-11 items-center text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline">利用規約</Link>
             <Link href="/privacy" className="inline-flex min-h-11 items-center text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline">プライバシーポリシー</Link>
+            <CookieSettingsButton className="inline-flex min-h-11 items-center text-xs text-slate-600 underline-offset-2 hover:text-brand-800 hover:underline" />
             {SUPPORT_URL && (
               /* 応援リンク（T-REV2 R5）: 小さく1つだけ・見返りは約束しない。URL未設定の間は描画しない */
               <a

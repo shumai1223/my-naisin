@@ -14,6 +14,7 @@ import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
  *  - 着地直後は出さない（ENGAGE_MS 経過＋一定スクロール後のみアーム）。
  *  - トリガーは「PCでページ上端からマウスが出る」と「タブが隠れる（visibilitychange）」だけ。
  *    スマホで上へスクロールを戻しただけでは出さない（2026-10-16 👤決定・読書の妨げにしない）。
+ *    リンクをクリックした直後（5秒以内）のタブ切替も出さない（別タブでリンクを開いただけで離脱ではない。広告のタップも含む）。
  *  - 1端末あたり frequency cap（既定10日に1回）＋同一セッション1回。閉じたら当面出さない。
  *  - 全画面で本文を覆わない控えめなボトムシート／カード。閉じるは大きく明示。
  *  - 広告ではなく“資産形成（名簿）”なので AdSense密度リスクには当たらない。
@@ -28,6 +29,23 @@ const ARM_SCROLL = 400; // これ以上スクロールして“読んだ”人�
 export function canShowExitModal(lastShownMs: number | null, now: number): boolean {
   if (lastShownMs === null) return true;
   return now - lastShownMs >= FREQ_MS;
+}
+
+const LINK_CLICK_WINDOW_MS = 5000; // リンクをクリックしてから、この時間内のタブ切替は「離脱」ではなく操作の結果とみなす
+
+/**
+ * 直前（LINK_CLICK_WINDOW_MS 以内）にリンクをクリックしていたか。純粋関数＝テスト可能。
+ * 別タブでリンク（アフィリエイトの /go・LINE追加など）を開いた直後の visibilitychange は、離脱ではない。
+ * そこで出すと、行動の直後に割り込み、頻度上限（10日に1回）も消費してしまう（2026-10-16 👤決定）。
+ * 5秒にしているのは、新しいタブの生成が遅い端末や、同じタブでの遷移（新ページの応答が来てから旧ページが隠れる）でも拾うため。
+ * 誤って1回出さないコストは、誤って割り込むコストより小さい。
+ * 対象は <a href> のクリックと、広告 iframe へのフォーカス移動（広告のタップ）だけ。共有ボタン・navigator.share・
+ * コンテキストメニューの「新しいタブで開く」は対象外。
+ */
+export function isRecentLinkClick(lastLinkClickMs: number | null, now: number): boolean {
+  if (lastLinkClickMs === null) return false;
+  const elapsed = now - lastLinkClickMs;
+  return elapsed >= 0 && elapsed < LINK_CLICK_WINDOW_MS;
 }
 
 export function ExitIntentLineModal() {
@@ -84,19 +102,42 @@ export function ExitIntentLineModal() {
 
     // モバイル最重要：タブ切替/ホームボタン/画面ロック/タブを閉じる＝visibilitychange→hidden。
     // mouseout が発火しないモバイル(全体の71%)での離脱を確実に捕捉する。モーダルは復帰時に見える。
+    // 直前にリンクをクリックしていたら出さない（別タブでリンクを開いた直後は離脱ではない）。
+    let lastLinkClickAt: number | null = null;
+    const onLinkClick = (e: MouseEvent) => {
+      const el = e.target as Element | null;
+      if (el && typeof el.closest === 'function' && el.closest('a[href]')) lastLinkClickAt = Date.now();
+    };
+
+    // 広告（AdSense の iframe）のタップは、別ドキュメントの中で起きるので上の click には届かない。
+    // 代わりに、親ウィンドウの blur のあと、フォーカスが広告の iframe に移っていれば「リンクを押した」とみなす
+    // （タブ切替による blur では document.hasFocus() が false なので、誤って拾わない）。ベストエフォート。
+    const onWindowBlur = () => {
+      window.setTimeout(() => {
+        const a = document.activeElement;
+        if (a && a.tagName === 'IFRAME' && document.hasFocus()) lastLinkClickAt = Date.now();
+      }, 0);
+    };
+
     const onVisibility = () => {
-      if (document.visibilityState === 'hidden') trigger();
+      if (document.visibilityState === 'hidden' && !isRecentLinkClick(lastLinkClickAt, Date.now())) trigger();
     };
 
     armedRef.current = true;
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('blur', onWindowBlur);
     document.addEventListener('mouseout', onMouseOut);
+    document.addEventListener('click', onLinkClick, true);
+    document.addEventListener('auxclick', onLinkClick, true); // 中ボタンクリック（新しいタブで開く）
     document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       window.clearTimeout(engageTimer);
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('blur', onWindowBlur);
       document.removeEventListener('mouseout', onMouseOut);
+      document.removeEventListener('click', onLinkClick, true);
+      document.removeEventListener('auxclick', onLinkClick, true);
       document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);

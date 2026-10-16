@@ -4,21 +4,43 @@ import * as React from 'react';
 import { X } from '@/components/icons';
 import Link from 'next/link';
 
-const COOKIE_CONSENT_KEY = 'cookie-consent-accepted';
+import { COOKIE_CONSENT_KEY, COOKIE_CONSENT_RESET_EVENT, setAdPersonalization } from '@/lib/adsense-consent';
+
+/** localStorage が使えない環境（Cookieを全部ブロックした設定など）でも画面を壊さない */
+function readConsent(): string | null {
+  try {
+    return window.localStorage.getItem(COOKIE_CONSENT_KEY);
+  } catch {
+    return null;
+  }
+}
+function saveConsent(value: string): void {
+  try {
+    window.localStorage.setItem(COOKIE_CONSENT_KEY, value);
+  } catch {
+    /* 保存できなくても、このページの中では選んだ内容を反映する */
+  }
+}
 
 export function CookieConsent() {
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
-    const hasAccepted = localStorage.getItem(COOKIE_CONSENT_KEY);
-    if (!hasAccepted) {
-      const timer = setTimeout(() => setIsVisible(true), 800);
-      return () => clearTimeout(timer);
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    if (!readConsent()) {
+      timer = setTimeout(() => setIsVisible(true), 800);
     }
+    // フッターの「Cookie設定」から、選び直すために同意画面をもう一度出す
+    const onReset = () => setIsVisible(true);
+    window.addEventListener(COOKIE_CONSENT_RESET_EVENT, onReset);
+    return () => {
+      if (timer) clearTimeout(timer);
+      window.removeEventListener(COOKIE_CONSENT_RESET_EVENT, onReset);
+    };
   }, []);
 
   const handleAcceptAll = () => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, 'all');
+    saveConsent('all');
     // GA4 Consent Mode：同一セッションで即時に計測を許可（gtag未ロード時はno-op）
     const w = window as unknown as { gtag?: (...args: unknown[]) => void };
     if (typeof w.gtag === 'function') {
@@ -29,11 +51,14 @@ export function CookieConsent() {
         ad_personalization: 'granted',
       });
     }
+    // AdSense：「すべて許可」を選んだので、以降の広告リクエストはパーソナライズ広告を求める（lib/adsense-consent.ts）
+    setAdPersonalization(window, 'personalized');
     setIsVisible(false);
   };
 
   const handleAcceptEssential = () => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, 'essential');
+    saveConsent('essential');
+    setAdPersonalization(window, 'non-personalized');
     setIsVisible(false);
   };
 
@@ -52,7 +77,7 @@ export function CookieConsent() {
       <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-overlay">
         <div className="flex items-start gap-3">
           <p className="flex-1 text-sm leading-relaxed text-slate-900">
-            品質改善・利用状況の分析のためにCookieを使用します。「必須のみ許可」を選んでも、Google AdSenseの広告表示にともなうCookieは使われることがあります。詳細は
+            品質改善・利用状況の分析・広告配信のためにCookieを使用します。「すべて許可」を選ぶと、閲覧履歴に基づく広告（パーソナライズ広告）とアクセス解析のCookieも使います。「必須のみ許可」でも広告は表示され、広告の表示回数の制限などのCookieは使われることがあります。詳細は
             <Link href="/privacy" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
               プライバシーポリシー
             </Link>
