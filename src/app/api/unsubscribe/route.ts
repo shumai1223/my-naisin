@@ -22,7 +22,7 @@ function page(title: string, body: string): NextResponse {
 <div style="font-size:13px;color:#6366f1;font-weight:700">My Naishin</div>
 <h1 style="font-size:20px;margin:8px 0 12px">${title}</h1>
 <p style="font-size:14px;line-height:1.7;color:#475569">${body}</p>
-<a href="https://my-naishin.com/" style="display:inline-block;margin-top:16px;color:#4f46e5;font-weight:700;text-decoration:none">トップに戻る →</a>
+<a href="https://my-naishin.com/" rel="noreferrer" style="display:inline-block;margin-top:16px;color:#4f46e5;font-weight:700;text-decoration:none">トップに戻る →</a>
 </div></body></html>`;
   return new NextResponse(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 }

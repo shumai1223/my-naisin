@@ -12,6 +12,8 @@ import { lineAddUrl, LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
  * 重要な設計（SEO安全・非侵入）：
  *  - 「入口」ではなく「退出」トリガーのみ（Googleの intrusive interstitial ペナルティは入口型が対象）。
  *  - 着地直後は出さない（ENGAGE_MS 経過＋一定スクロール後のみアーム）。
+ *  - トリガーは「PCでページ上端からマウスが出る」と「タブが隠れる（visibilitychange）」だけ。
+ *    スマホで上へスクロールを戻しただけでは出さない（2026-10-16 👤決定・読書の妨げにしない）。
  *  - 1端末あたり frequency cap（既定10日に1回）＋同一セッション1回。閉じたら当面出さない。
  *  - 全画面で本文を覆わない控えめなボトムシート／カード。閉じるは大きく明示。
  *  - 広告ではなく“資産形成（名簿）”なので AdSense密度リスクには当たらない。
@@ -76,20 +78,9 @@ export function ExitIntentLineModal() {
       if (e.clientY <= 0 && !e.relatedTarget) trigger();
     };
 
-    // モバイル：下に読み進めた後の“上方向スクロール反転”（戻る/読み終わりの前兆）。
-    // 閾値を緩和（velUp 1.2→0.8 / y<600→900）。モバイルでは「読み終えて上に戻す」動作が離脱の主要シグナル。
-    let lastY = window.scrollY;
-    let lastT = Date.now();
-    const onScrollMobile = () => {
-      const y = window.scrollY;
-      const t = Date.now();
-      const dy = y - lastY;
-      const dt = t - lastT || 1;
-      const velUp = -dy / dt; // 上方向の速度（px/ms）
-      if (velUp > 0.8 && y < 900 && scrolledRef.current) trigger();
-      lastY = y;
-      lastT = t;
-    };
+    // 2026-10-16 👤決定: スマホの「上方向スクロール反転」では出さない。
+    // スクロールの不具合（window.scrollY が常に0だった）を直したことで、読んでいる最中に上へ戻しただけで
+    // モーダルが出るようになってしまうため（保護者の読書を邪魔しない）。スマホの離脱は下の visibilitychange で捕捉する。
 
     // モバイル最重要：タブ切替/ホームボタン/画面ロック/タブを閉じる＝visibilitychange→hidden。
     // mouseout が発火しないモバイル(全体の71%)での離脱を確実に捕捉する。モーダルは復帰時に見える。
@@ -100,14 +91,12 @@ export function ExitIntentLineModal() {
     armedRef.current = true;
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('mouseout', onMouseOut);
-    window.addEventListener('scroll', onScrollMobile, { passive: true });
     document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
       window.clearTimeout(engageTimer);
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('mouseout', onMouseOut);
-      window.removeEventListener('scroll', onScrollMobile);
       document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);

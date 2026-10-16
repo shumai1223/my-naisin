@@ -372,7 +372,7 @@ export default function ContactPage() {
                     データは保存される？
                   </dt>
                   <dd className="mt-1 text-sm text-slate-600">
-                    → ブラウザ内のみ。サーバーには送信されません。
+                    → 計算の入力内容や履歴はブラウザ内のみに保存され、サーバーには送信されません（メール登録や匿名統計への協力を選んだ場合を除きます）。
                   </dd>
                 </div>
               </dl>

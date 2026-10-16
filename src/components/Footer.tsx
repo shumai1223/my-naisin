@@ -141,8 +141,9 @@ export function Footer() {
         {/* 広告表記（ステマ規制対応・必須） */}
         <div className="mt-3 rounded-lg border border-slate-200 p-4">
           <p className="text-xs leading-relaxed text-slate-600">
-            <strong className="text-slate-900">広告表記:</strong> 当サイトは、第三者配信のアフィリエイト広告サービスを利用しており、リンクから商品やサービスをお申し込みいただいた場合、運営者が広告主から成果報酬を受け取ることがあります。
-            なお、紹介する商品・サービスは運営者が中立的に評価して選定しています。
+            <strong className="text-slate-900">広告表記:</strong> 当サイトは、第三者配信のアフィリエイト広告サービスとGoogle AdSenseを利用しています。アフィリエイトのリンクから商品やサービスをお申し込みいただいた場合、運営者が広告主から成果報酬を受け取ることがあります。
+            Google AdSenseの広告は、表示やクリックに応じて運営者に収益が入るもので、内容は運営者が選んだものではなく、運営者が推奨するものでもありません。
+            なお、アフィリエイトで紹介する商品・サービスは運営者が中立的に評価して選定しています。
           </p>
         </div>
 

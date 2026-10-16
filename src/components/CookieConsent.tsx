@@ -52,7 +52,7 @@ export function CookieConsent() {
       <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-overlay">
         <div className="flex items-start gap-3">
           <p className="flex-1 text-sm leading-relaxed text-slate-900">
-            品質改善・利用状況の分析・広告配信のためにCookieを使用します。詳細は
+            品質改善・利用状況の分析のためにCookieを使用します。「必須のみ許可」を選んでも、Google AdSenseの広告表示にともなうCookieは使われることがあります。詳細は
             <Link href="/privacy" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
               プライバシーポリシー
             </Link>

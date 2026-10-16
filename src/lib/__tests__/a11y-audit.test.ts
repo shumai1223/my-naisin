@@ -34,7 +34,7 @@ const NO_ACCESSIBLE_NAME_EXEMPT: Record<string, string> = {
  */
 const CLICKABLE_WITHOUT_KEYBOARD_EXEMPT: Record<string, string> = {
   'src/components/CookieConsent.tsx:82': 'モーダル背景クリックで閉じる標準パターン（実操作は別途<button>で提供済み）',
-  'src/components/ExitIntentLineModal.tsx:134': 'モーダル内コンテンツのstopPropagationガード（クリック可能な操作対象ではない）',
+  'src/components/ExitIntentLineModal.tsx:123': 'モーダル内コンテンツのstopPropagationガード（クリック可能な操作対象ではない）',
 };
 
 describe('a11y監査（L-10）: 入力要素のラベル関連付け', () => {

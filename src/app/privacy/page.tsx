@@ -5,7 +5,7 @@ import { APP_NAME } from '@/lib/constants';
 import { LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
 
 export default function PrivacyPage() {
-  const lastUpdated = '2026年8月13日';
+  const lastUpdated = '2026年10月16日';
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           <ul className="list-disc space-y-2 pl-5 text-base leading-[1.8] text-slate-900">
             <li><strong>ツール利用時：</strong>個人情報を収集しません（端末内のみ保存）</li>
             <li><strong>お問い合わせ・受け取り登録時：</strong>返信・配信のためメールアドレス等を取得します（任意）</li>
-            <li><strong>広告：</strong>アフィリエイト広告を掲載しています。閲覧履歴に基づくパーソナライズ広告は配信していません</li>
+            <li><strong>広告：</strong>アフィリエイト広告と、Google AdSenseによる広告を掲載しています。Googleなどの第三者配信事業者が、Cookieを使って過去のアクセス情報に基づく広告を表示することがあります（パーソナライズ広告は、Googleの広告設定でオフにできます）</li>
             <li><strong>データ利用：</strong>Google等のサービスが利用データを収集・分析します</li>
           </ul>
         </section>
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
             </p>
             <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
               <p className="text-sm leading-[1.8] text-slate-900">
-                <strong>対象：</strong>中学生・高校生（主に13歳以上）
+                <strong>対象：</strong>中学生・高校生（主に13歳以上。中学1年生には12歳の方もいます）
               </p>
               <p className="mt-1 text-sm leading-[1.8] text-slate-600">
                 13歳未満の方は保護者の同意のもとご利用ください。
@@ -81,7 +81,8 @@ export default function PrivacyPage() {
             <h3 className="mb-2 mt-6 text-[17px] font-bold leading-snug text-slate-900">2.1 ツール利用時の情報</h3>
             <p className="text-base leading-[1.8] text-slate-900">
               内申点計算ツールをご利用の際、入力された成績データはお使いのブラウザの
-              ローカルストレージにのみ保存され、当サイトのサーバーに送信されることは一切ありません。
+              ローカルストレージにのみ保存され、当サイトのサーバーに送信されることは一切ありません
+              （結果の共有リンクを作る場合、アクセス解析、匿名統計への協力を選んだ場合を除きます。詳しくは2.3・2.5・5.1をご覧ください）。
               個人を特定できる情報（氏名、住所、電話番号等）を収集することはありません。
             </p>
 
@@ -112,12 +113,21 @@ export default function PrivacyPage() {
               <li>オペレーティングシステムの種類</li>
               <li>アクセス日時およびページ閲覧履歴</li>
               <li>リファラー（参照元URL）</li>
-              <li>IPアドレス（匿名化処理を行います）</li>
+              <li>IPアドレス（アクセス解析では匿名化処理を行います。広告配信では下記のとおりGoogleに送信されます）</li>
             </ul>
             <p className="mt-3 text-base leading-[1.8] text-slate-900">
               これらの情報は、アクセス解析ツール（Google Analytics等）を通じて収集され、
               サイトの改善およびユーザー体験の向上のためにのみ使用されます。
               個人を特定するために使用されることはありません。
+            </p>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
+              このほか、計算を完了したときなどに、利用状況を知るための記録（計算が完了したこと、計算結果の数値、
+              都道府県、ボタンのクリックなど）が、Google LLCのGoogle Analyticsに送信されることがあります。
+              氏名・メールアドレスは含まれません。
+            </p>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
+              また、Google AdSenseの広告を表示する際に、IPアドレス・閲覧しているページのURL・
+              端末やブラウザの情報・Cookie等の識別子などがGoogleに送信されます（詳しくは「5. 広告」をご覧ください）。
             </p>
 
             <h3 className="mb-2 mt-6 text-[17px] font-bold leading-snug text-slate-900">2.4 受験情報の受け取り登録（任意）</h3>
@@ -233,7 +243,7 @@ export default function PrivacyPage() {
             <h2 className="mb-3 text-xl font-bold text-slate-900">4. Cookie（クッキー）の使用について</h2>
             <p className="text-base leading-[1.8] text-slate-900">
               Cookie（クッキー）とは、ウェブサイトがお使いのブラウザに保存する小さなテキストファイルです。
-              当サイトでは、サービスの提供・改善のために必要なCookieと、任意の分析Cookieのみを使用しています。
+              当サイトでは、サービスの提供・改善のために必要なCookie、任意の分析Cookie、および広告配信（Google AdSense）のためのCookieを使用しています。
             </p>
 
             <h3 className="mb-2 mt-6 text-[17px] font-bold leading-snug text-slate-900">4.1 使用するCookieの種類</h3>
@@ -246,7 +256,8 @@ export default function PrivacyPage() {
                 </h4>
                 <p className="mt-2 text-sm leading-[1.8] text-slate-900">
                   サイトの基本機能に必要なCookieです。Cookie同意の設定状態や、記録保存機能のON/OFF状態を
-                  記憶するために使用します。これらのCookieを無効にすると、サイトが正常に動作しない場合があります。
+                  記憶するために使用します。また、表示文言を比べるテストのために、端末を見分ける番号（Cookie名 mn_ab_cid、保存期間1年）を保存します。
+                  これらのCookieを無効にすると、サイトが正常に動作しない場合があります。
                 </p>
               </div>
 
@@ -260,6 +271,19 @@ export default function PrivacyPage() {
                   サービス改善に役立てます。収集されるデータには、ページビュー数、滞在時間、参照元などが含まれます。
                 </p>
               </div>
+
+              <div className="rounded-lg border border-slate-200 bg-brand-50 p-4">
+                <h4 className="flex items-baseline gap-2 text-base font-bold text-slate-900">
+                  <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded border border-slate-300 bg-white px-2 py-0.5 text-xs font-normal text-slate-700">広告</span>
+                  広告Cookie（サードパーティ）
+                </h4>
+                <p className="mt-2 text-sm leading-[1.8] text-slate-900">
+                  Google AdSenseを通じて、Googleおよび広告配信パートナーが使用するCookieです。広告の配信・表示回数の計測・不正なクリックの防止のほか、
+                  ユーザーのこれまでのアクセス情報に基づく広告（パーソナライズ広告）の表示に使われることがあります。
+                  このCookieは、Cookie同意画面で「必須のみ許可」を選んだ場合でも、広告の表示にともなって使用されることがあります。
+                  アフィリエイト広告（ASP）の計測については「5.」をご覧ください。
+                </p>
+              </div>
             </div>
 
             <h3 className="mb-2 mt-6 text-[17px] font-bold leading-snug text-slate-900">4.2 Cookieの管理方法</h3>
@@ -268,13 +292,13 @@ export default function PrivacyPage() {
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
               <li>
-                <strong>当サイトのCookie設定：</strong>サイト初回訪問時に表示されるCookie同意画面で設定を選択
+                <strong>当サイトのCookie設定：</strong>サイト初回訪問時に表示されるCookie同意画面で設定を選択（この設定で変わるのはアクセス解析のCookieです。Google AdSenseの広告の表示は、この選択にかかわらず行われます）
               </li>
               <li>
                 <strong>ブラウザ設定：</strong>各ブラウザの設定画面からCookieの受け入れ・拒否を設定
               </li>
               <li>
-                <strong>オプトアウト：</strong>各サービス提供元のオプトアウトページを利用
+                <strong>オプトアウト：</strong>各サービス提供元のオプトアウトページを利用（広告のパーソナライズを止める方法は「5.2」をご覧ください）
               </li>
             </ul>
             <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
@@ -290,71 +314,149 @@ export default function PrivacyPage() {
               旧文は「将来的に広告を掲載する場合があります」「現在、広告は掲載しておりません」だったが、
               実際には src/lib/affiliates.ts の live 案件（A8.net / もしもアフィリエイト / ACCESS TRADE）が
               稼働しており、AffiliateAd.tsx のトラッキングピクセルが外部ドメインへリクエストを発生させている。
-              「掲載していない」と書き続けることは、このサイトの拠り所である「公表値のみ・捏造ゼロ」に反する。 */}
+              「掲載していない」と書き続けることは、このサイトの拠り所である「公表値のみ・捏造ゼロ」に反する。
+              2026-10-16: Google AdSense は 2026-09-25 から稼働している（layout.tsx で adsbygoogle.js を全ページに読み込み。
+              Cookie同意画面の選択にかかわらず読み込まれる＝GA4だけが同意で制御される）。「利用していません」「パーソナライズ広告は配信していません」
+              という記述が事実と違っていたため、AdSenseを利用していることと、利用者ができる設定（Google広告設定）を明記した。 */}
           <section>
-            <h2 className="mb-3 text-xl font-bold text-slate-900">5. 広告（アフィリエイト）と第三者Cookieについて</h2>
+            <h2 className="mb-3 text-xl font-bold text-slate-900">5. 広告（Google AdSense・アフィリエイト）と第三者Cookieについて</h2>
             <p className="text-base leading-[1.8] text-slate-900">
-              当サイトは、運営費をまかなうためにアフィリエイト広告を掲載しています。塾・通信教育・家庭教師・
-              ファイナンシャルプランナーの無料相談など、当サイトの内容に関連するサービスの紹介リンクです。
+              当サイトは、運営費をまかなうために広告を掲載しています。広告は「アフィリエイト広告」と
+              「Google AdSenseによる広告」の2種類です。
+            </p>
+            <p className="mt-3 text-base leading-[1.8] text-slate-900">
+              アフィリエイト広告は、塾・通信教育・家庭教師・ファイナンシャルプランナーの無料相談など、
+              当サイトの内容に関連するサービスの紹介リンクです。
               リンク経由でお申し込みがあった場合、広告主から当サイトに紹介料が支払われることがあります。
               紹介料の有無によって、計算結果や順位・評価を変えることはありません。
             </p>
             <div className="mt-3 rounded-lg border border-slate-200 bg-brand-50 p-4">
               <p className="text-sm font-bold leading-[1.8] text-slate-900">利用しているサービスと外部への送信</p>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-[1.8] text-slate-900">
-                <li>利用しているASP（広告仲介事業者）：A8.net、もしもアフィリエイト、ACCESS TRADE</li>
+                <li>
+                  広告配信サービス：<strong>Google AdSense</strong>（Google LLC）。広告の配信・表示に利用しています
+                  （詳しくは「5.1 Google AdSenseについて」）。
+                </li>
+                <li>
+                  利用しているASP（広告仲介事業者）：A8.net（株式会社ファンコミュニケーションズ）、
+                  もしもアフィリエイト（株式会社もしも）、ACCESS TRADE（株式会社インタースペース）
+                </li>
                 <li>
                   広告リンクをクリックすると、当サイトの計測用URL（/go）を経由して広告主のサイトへ移動します。
                   その際、どの広告がクリックされたかを当サイト内に記録します（氏名・メールアドレス等は含みません）。
                 </li>
                 <li>
                   一部の広告では、ASPが提供する計測用の画像（トラッキングピクセル）を読み込むため、
-                  広告の表示時にASPのドメインへ通信が発生します。
+                  広告を表示したページのURL・IPアドレス・端末やブラウザの情報などが、各ASPに送信されます。
+                  目的は、広告の表示と、お申し込み（成果）の計測・成果報酬の確定です。
                 </li>
                 <li>各ASPのCookie・個人情報の取り扱いは、それぞれの事業者のプライバシーポリシーが適用されます。</li>
-                <li>Google AdSense・Amazonアソシエイトは<strong>利用していません</strong>（パーソナライズ広告の配信は行っていません）。</li>
+                <li>Amazonアソシエイトは<strong>利用していません</strong>。</li>
               </ul>
             </div>
 
-            <h3 className="mb-2 mt-6 text-[17px] font-bold leading-snug text-slate-900">5.1 広告に関わる通信を止めたい場合</h3>
+            <h3 className="mb-2 mt-6 text-[17px] font-bold leading-snug text-slate-900">5.1 Google AdSenseについて</h3>
             <p className="text-base leading-[1.8] text-slate-900">
-              当サイトはパーソナライズ広告（閲覧履歴に基づく広告）を配信していないため、
-              広告のために利用者を追跡する仕組みは使っていません。それでも通信を減らしたい場合は次の方法があります：
+              当サイトは、第三者配信の広告サービス「Google AdSense」を利用しています。
+              広告は、本文の途中、画面の端（スマホでは上下に固定表示されることがあります。PCでは左右に出ることがあります）、
+              ページを移動するときの全画面表示などで表示されます。
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
-              <li>広告リンクをクリックしない（クリックしなければ広告主・ASPへの遷移は発生しません）</li>
+              <li>
+                Googleなどの第三者配信事業者は、Cookieを使用して、ユーザーが当サイトや他のサイトに過去にアクセスした際の情報に基づいて広告を配信することがあります。
+                Googleが広告Cookieを使用することにより、Googleやそのパートナーは、当サイトや他のサイトへのアクセス情報に基づく広告をユーザーに表示できます。
+              </li>
+              <li>
+                広告の配信にあたり、IPアドレス・閲覧しているページのURL・端末やブラウザの情報・Cookie等の識別子などがGoogleに送信されます。
+                URLに内申点・目標点などの数値が含まれるページ（結果の共有リンク、計算結果を引き継ぐリンクなど）を開いた場合は、
+                その数値を含むURLもGoogleに送信されます（氏名・メールアドレスは含まれません）。
+                当サイトのサーバーに保存したメールアドレス・お問い合わせ内容・LINEの登録内容などを、広告のためにGoogleへ渡すことはありません。
+              </li>
+              <li>
+                Google AdSenseの広告はGoogleが決めて配信します。当サイトが、個人の年齢や閲覧履歴にもとづいて広告を選ぶことはありません。
+                なお、「塾診断」では、利用者ご自身が入力した条件（学年・地域・希望の受け方など）に合う塾を、アフィリエイト広告（PR）として表示します。
+                アフィリエイト広告は保護者の方が見るページに、そのページの内容・都道府県・時期に合わせて載せており、
+                表示文言を比べるテストのために、端末ごとに表示を変えることがあります。
+              </li>
+              <li>
+                Googleによるデータの取り扱いは、
+                <a
+                  href="https://policies.google.com/technologies/partner-sites?hl=ja"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                >
+                  Googleのサービスを使用するサイトやアプリからのデータの使用
+                  <ExternalLink className="ml-1 inline h-4 w-4 align-text-bottom" />
+                </a>
+                に説明されています。
+              </li>
+            </ul>
+
+            <h3 className="mb-2 mt-6 text-[17px] font-bold leading-snug text-slate-900">5.2 広告に関わる通信やパーソナライズを止めたい場合</h3>
+            <p className="text-base leading-[1.8] text-slate-900">
+              広告のパーソナライズや、広告に関わる通信・Cookieを減らしたい場合は、次の方法があります：
+            </p>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-base leading-[1.8] text-slate-900">
+              <li>
+                Googleの
+                <a
+                  href="https://adssettings.google.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                >
+                  広告設定
+                  <ExternalLink className="ml-1 inline h-4 w-4 align-text-bottom" />
+                </a>
+                で、パーソナライズ広告をオフにする（広告は表示されますが、アクセス履歴に基づかない広告になります）。
+                第三者配信事業者によるパーソナライズ広告のためのCookieの使用は、米国の業界団体のツールである
+                <a
+                  href="https://optout.aboutads.info/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-700 underline underline-offset-2 hover:text-brand-800"
+                >
+                  aboutads.info
+                  <ExternalLink className="ml-1 inline h-4 w-4 align-text-bottom" />
+                </a>
+                でも停止できます
+              </li>
               <li>ブラウザの設定で「サードパーティCookie」を無効にする</li>
               <li>広告ブロック拡張機能を使う（当サイトの計算機は広告をブロックした状態でも通常どおり動作します）</li>
+              <li>アフィリエイト広告のリンクをクリックしない（クリックしなければ広告主・ASPへの遷移は発生しません）</li>
             </ul>
             <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="text-sm leading-[1.8] text-amber-900">
-                <strong>ご注意：</strong>広告Cookieを無効にしても、当サイトの基本機能はご利用いただけます。
-                ただし、広告の関連性が低下する場合があります。
+                <strong>ご注意：</strong>Cookie同意画面の「必須のみ許可」を選ぶと、Google AnalyticsはCookieを使わなくなります
+                （Cookieを使わない簡易的な通信がGoogleに送られることがあります）。
+                Google AdSenseの広告表示は、この選択にかかわらず行われます（当サイトは、AdSenseの読み込みを同意画面の選択に連動させていません）。
+                広告Cookieを無効にしても、当サイトの基本機能はご利用いただけます。ただし、広告の関連性が低下する場合があります。
               </p>
             </div>
 
             {/* 子ども向け扱いに関する注意 */}
             <div className="mt-6 rounded-lg border border-slate-200 bg-brand-50 p-4">
-              <p className="text-sm font-bold leading-[1.8] text-slate-900">13歳未満のユーザーに関する特別な配慮</p>
+              <p className="text-sm font-bold leading-[1.8] text-slate-900">5.3 13歳未満の方へ</p>
               <p className="mt-2 text-sm leading-[1.8] text-slate-900">
-                当サイトは中学生・高校生を主な利用者として想定していますが、Googleのポリシーでは13歳未満のユーザーに対するパーソナライズ広告は特に注意が必要です。
+                当サイトは中学生・高校生（主に13歳以上。中学1年生には12歳の方もいます）を主な利用者として想定しています。
+                13歳未満の方への広告のパーソナライズには、Googleのポリシー上も制限があります。
               </p>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-[1.8] text-slate-900">
                 <li>
-                  <strong>非パーソナライズ広告を基本：</strong>広告を導入する場合、いきなり強いパーソナライズ広告を狙わず、年齢に関わらない一般的な広告を基本とします
+                  <strong>年齢を特定する情報を取得しない：</strong>氏名・学校名・生年月日などは取得しません
+                  （学年は、塾診断や共有リンクで利用者ご自身が選んだ場合に使うことがあります）
                 </li>
                 <li>
-                  <strong>年齢を特定する情報を取得しない：</strong>氏名、学校名、学年、生年月日などの個人情報は一切収集しません
+                  <strong>保護者同意の注意喚起：</strong>13歳未満のお子様がご利用される場合は、保護者の方の同意と監督をお願いします。
+                  あわせて、Googleの広告設定でパーソナライズ広告をオフにすることをご検討ください（方法は「5.2」をご覧ください）
                 </li>
                 <li>
-                  <strong>保護者同意の注意喚起：</strong>13歳未満のお子様がご利用される場合は、保護者の方の同意と監督をお願いします
-                </li>
-                <li>
-                  <strong>パーソナライズ広告は不使用：</strong>当サイトは閲覧履歴に基づくパーソナライズ広告を一切配信していません。掲載しているのは、ページの内容に応じて選ばれるアフィリエイト広告のみです
+                  <strong>広告の選択：</strong>Google AdSenseの広告はGoogleが決めて配信します。当サイトが、個人の年齢や閲覧履歴にもとづいて広告を選ぶことはありません
                 </li>
               </ul>
               <p className="mt-3 text-sm leading-[1.8] text-slate-900">
-                <strong>運営者の姿勢：</strong>個人運営として、子どものプライバシー保護を最優先し、安全性を高く設定して運営します。
+                <strong>運営者の姿勢：</strong>個人運営として、子どものプライバシー保護を優先し、取得する個人情報を必要最小限にとどめます。
               </p>
             </div>
           </section>
@@ -364,7 +466,7 @@ export default function PrivacyPage() {
             <h2 className="mb-3 text-xl font-bold text-slate-900">6. アクセス解析ツールについて</h2>
             <p className="text-base leading-[1.8] text-slate-900">
               当サイトでは、サービス向上およびユーザー体験の改善を目的として、
-              Googleアナリティクス（GA4）を導入しています。
+              Googleアナリティクス（GA4・Google LLC提供）を導入しています。
               このツールはトラフィックデータを収集するためにCookieを使用しますが、
               このデータは匿名で収集され、個人を特定するものではありません。
             </p>
@@ -388,7 +490,7 @@ export default function PrivacyPage() {
             </p>
             <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
               <p className="text-sm leading-[1.8] text-slate-900">
-                <strong>広告について：</strong>アフィリエイト広告（塾・通信教育・FP無料相談等の紹介リンク）を掲載しています。閲覧履歴に基づくパーソナライズ広告は配信しておらず、Google AdSense・Amazonアソシエイトは利用していません。詳しくは「5. 広告（アフィリエイト）と第三者Cookieについて」をご覧ください。
+                <strong>広告について：</strong>アフィリエイト広告（塾・通信教育・FP無料相談等の紹介リンク）と、Google AdSenseによる広告を掲載しています。Google AdSenseでは、Googleなどの第三者配信事業者がCookieを使って、過去のアクセス情報に基づく広告を表示することがあります。Amazonアソシエイトは利用していません。詳しくは「5. 広告（Google AdSense・アフィリエイト）と第三者Cookieについて」をご覧ください。
               </p>
             </div>
           </section>
@@ -405,7 +507,7 @@ export default function PrivacyPage() {
             <p className="mt-3 text-base leading-[1.8] text-slate-900">
               当サイトは、未成年者のプライバシー保護を特に重視しています。
               13歳未満のお子様から意図的に個人情報を収集することはありません。
-              当サイトは個人を特定できる情報を直接収集しませんが、アクセス解析において
+              当サイトは個人を特定できる情報を直接収集しませんが、アクセス解析および広告配信において
               Cookieが使用される場合があります。
             </p>
             <p className="mt-3 text-base leading-[1.8] text-slate-900">
@@ -429,7 +531,7 @@ export default function PrivacyPage() {
                 <strong>削除権：</strong>ブラウザ設定からローカルストレージのデータを削除する権利
               </li>
               <li>
-                <strong>オプトアウト権：</strong>Cookie同意画面で「必須のみ許可」を選択し、分析Cookieを拒否する権利
+                <strong>オプトアウト権：</strong>Cookie同意画面で「必須のみ許可」を選択し、分析Cookieを拒否する権利（広告のパーソナライズは、Googleの広告設定で無効にできます）
               </li>
               <li>
                 <strong>情報提供を受ける権利：</strong>データの取り扱いについて説明を求める権利

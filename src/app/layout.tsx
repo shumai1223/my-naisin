@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { BIZ_UDPGothic, Noto_Sans_JP } from 'next/font/google';
 import type { ReactNode } from 'react';
-import Script from 'next/script';
 
 import './globals.css';
 
+import { AdSenseScript } from '@/components/AdSenseScript';
 import { CookieConsent } from '@/components/CookieConsent';
 import { GlobalHeaderBridge } from '@/components/GlobalHeaderBridge';
 import { Header } from '@/components/Header';
@@ -131,14 +131,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             支払いの住所確認PINは収益$10到達で届くため、自動広告（アンカー・Vignette）を先に動かす目的で読み込む。
             どの形式を出すかはAdSense管理画面の「自動広告」設定で決まる（👤: アンカーON・位置は上／VignetteON／ページ内広告OFF）。
             本文中の手動ユニットは AdSlot（NEXT_PUBLIC_ADSENSE_ENABLED=1 かつ実ユニットID）で別途点火＝ops/tasks/T-ADS1。
-            afterInteractive: 本文の描画後に読み込み、LCPを邪魔しない。 */}
-        <Script
-          id="adsbygoogle-js"
-          async
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7817682248719138"
-        />
+            afterInteractive: 本文の描画後に読み込み、LCPを邪魔しない。
+            2026-10-16: URLにトークン・成績が載るページ（/admin・/juku/・/hogosha など）では読み込まない（AdSenseScript・lib/adsense-paths.ts）。
+            Cookie同意画面の選択には連動していない（GA4だけが同意で制御される）。プライバシーポリシーにもその旨を書いてある。 */}
+        <AdSenseScript />
       </body>
     </html>
   );
