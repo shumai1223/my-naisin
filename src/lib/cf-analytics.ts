@@ -7,7 +7,8 @@
  *   空のままなら何も読み込まず、プライバシーポリシーにも載せない（読み込む場合だけ載せる）。
  * - URLにトークン・成績が載るページでは読み込まない（lib/adsense-paths.ts と同じ考え方。/privacy・/contact は数える）。
  */
-export const CF_BEACON_TOKEN: string = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN || '';
+// 公開値（HTMLに出る非機密）なので、GA4の測定IDと同様に既定値として焼き込み、env で上書きできるようにする（2026-10-18 発行）。
+export const CF_BEACON_TOKEN: string = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN || '381514d0c68e4c0ab8df6acd234f6312';
 
 const EXCLUDED_PREFIXES = ['/admin', '/juku', '/hogosha', '/api'];
 

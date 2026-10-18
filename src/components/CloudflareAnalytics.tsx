@@ -15,7 +15,7 @@ export function CloudflareAnalytics() {
   return (
     <Script
       id="cf-web-analytics"
-      defer
+      type="module"
       strategy="afterInteractive"
       src="https://static.cloudflareinsights.com/beacon.min.js"
       data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN, spa: true })}
