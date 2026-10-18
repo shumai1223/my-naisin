@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import './globals.css';
 
 import { AdSenseScript } from '@/components/AdSenseScript';
+import { CloudflareAnalytics } from '@/components/CloudflareAnalytics';
 import { CookieConsent } from '@/components/CookieConsent';
 import { GlobalHeaderBridge } from '@/components/GlobalHeaderBridge';
 import { Header } from '@/components/Header';
@@ -137,6 +138,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             それ以外（必須のみ・未選択・保存領域なし）は非パーソナライズ広告を求める。広告そのものはこの選択にかかわらず表示される。
             GA4はConsent Modeで別途制御。プライバシーポリシーにもその旨を書いてある。 */}
         <AdSenseScript />
+        {/* Cloudflare Web Analytics: Cookieなし・個人を追跡しない全数計測（GA4は同意者しか数えられないため）。トークンが空なら何も出ない。lib/cf-analytics.ts */}
+        <CloudflareAnalytics />
       </body>
     </html>
   );

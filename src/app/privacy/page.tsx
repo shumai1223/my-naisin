@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { APP_NAME } from '@/lib/constants';
 import { LINE_UNFRIEND_HELP_TEXT } from '@/lib/line';
+import { CF_BEACON_TOKEN } from '@/lib/cf-analytics';
 
 export default function PrivacyPage() {
   const lastUpdated = '2026年10月17日';
@@ -503,6 +504,14 @@ export default function PrivacyPage() {
               </a>
               をブラウザにインストールしてください。
             </p>
+            {CF_BEACON_TOKEN && (
+              <p className="mt-3 text-base leading-[1.8] text-slate-900">
+                あわせて、Cloudflare, Inc.の「Cloudflare Web Analytics」を利用して、訪問数を集計しています。
+                このツールは、Cookieやローカルストレージを使わず、個人を識別・追跡しません。
+                集計に使う情報は、ページのURL、参照元、ブラウザや端末の種類、国・地域、ページの表示速度などです。
+                Cookieを使わないため、この集計は、Cookie同意画面の選択に関係なく集計されます。
+              </p>
+            )}
             <div className="mt-4 rounded-lg border border-slate-200 bg-brand-50 p-4">
               <p className="text-sm leading-[1.8] text-slate-900">
                 <strong>広告について：</strong>アフィリエイト広告（塾・通信教育・FP無料相談等の紹介リンク）と、Google AdSenseによる広告を掲載しています。Google AdSenseでは、Googleなどの第三者配信事業者がCookieを使って、過去のアクセス情報に基づく広告を表示することがあります（当サイトは、Cookie同意画面で「すべて許可」を選んだ場合だけ、そうした広告を求めます）。Amazonアソシエイトは利用していません。詳しくは「5. 広告（Google AdSense・アフィリエイト）と第三者Cookieについて」をご覧ください。
