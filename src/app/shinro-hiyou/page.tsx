@@ -29,7 +29,7 @@ const FAQS = [
   {
     question: '就学支援金で高校の費用はどれくらい軽くなりますか？',
     answer:
-      '高等学校等就学支援金では、公立高校は授業料相当（年11万8,800円）が実質無償化され、私立高校は世帯年収の目安に応じて年額上限39万6,000円まで支援されます。世帯年収が約590万円未満の目安なら私立の授業料の大部分がまかなわれる場合があります。当シミュレーターは世帯年収区分を選ぶと支援額を差し引いた「実質負担」を表示します。',
+      '高等学校等就学支援金では、公立高校は授業料相当（年11万8,800円）が実質無償化され、私立高校（全日制）も、2026年度（令和8年度）から所得制限が撤廃され、年額上限45万7,200円まで支援されます。私立の授業料の大部分がまかなわれる場合があります。当シミュレーターは支援額を差し引いた「実質負担」を表示します。',
   },
   {
     question: '教育費の準備は、いつから・どう始めればよいですか？',
@@ -143,7 +143,7 @@ export default function ShinroHiyouPage() {
 
           {/* 代表的な進路の総額比較（engine算出・捏造ゼロ） */}
           <section className="mb-10">
-            <h2 className="mb-4 text-xl font-bold text-slate-900">代表的な進路の総額の目安（世帯年収 590〜910万円の場合）</h2>
+            <h2 className="mb-4 text-xl font-bold text-slate-900">代表的な進路の総額の目安（令和8年度以降に入学する場合）</h2>
             <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
               <table className="min-w-full text-sm">
                 <thead>

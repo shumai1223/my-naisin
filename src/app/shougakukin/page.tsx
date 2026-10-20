@@ -18,12 +18,12 @@ const FAQS = [
   {
     question: '高校無償化とは何ですか？私立高校も無償になりますか？',
     answer:
-      '「高校無償化」とは、国の高等学校等就学支援金制度で授業料の負担を軽減する仕組みのことです。公立高校は授業料が実質無償化されています。私立高校は世帯年収の目安に応じて、年額上限39万6,000円まで支援され、授業料の大部分がまかなわれる場合があります。ただし授業料以外（入学金・施設費・教材費・通学費など）は対象外で、完全に無料になるわけではありません。近年は所得制限の見直しや自治体独自の上乗せもあり、最新の内容は文部科学省・お住まいの都道府県でご確認ください。',
+      '「高校無償化」とは、国の高等学校等就学支援金制度で授業料の負担を軽減する仕組みのことです。2026年度（令和8年度）から所得制限が撤廃され、公立高校は授業料相当（年11万8,800円）が実質無償化、私立高校（全日制）も世帯年収にかかわらず年額上限45万7,200円まで支援されます。授業料の大部分がまかなわれる場合があります。ただし授業料以外（入学金・施設費・教材費・通学費など）は対象外で、完全に無料になるわけではありません。自治体独自の上乗せもあり、最新の内容は文部科学省・お住まいの都道府県でご確認ください。',
   },
   {
     question: '就学支援金は世帯年収いくらまでもらえますか？',
     answer:
-      '目安として、世帯年収 約910万円未満で授業料相当（年11万8,800円）が支援され、私立高校で約590万円未満の区分はさらに上乗せされ年額上限39万6,000円まで支援されます。ただし「年収」はあくまで目安で、正確には世帯の「市町村民税の課税標準額×6%−調整控除額」で判定されます。共働きや家族構成によって基準額の見え方が変わるため、最終的には学校・自治体の案内で確認してください。',
+      '2026年度（令和8年度）から所得制限が撤廃されたため、令和8年度以降に入学する生徒は、世帯年収にかかわらず対象です（公立は年11万8,800円、私立の全日制は年額上限45万7,200円）。令和8年3月31日以前から在学している生徒には経過措置があり、所得に応じて従来と同等の水準の支援を受けます。認定は申請手続きで行われるため、最終的には学校・自治体の案内で確認してください。',
   },
   {
     question: '授業料以外の費用（教材費・通学費など）の支援はありますか？',
@@ -38,14 +38,14 @@ const FAQS = [
   {
     question: '就学支援金を受け取るには手続きが必要ですか？',
     answer:
-      '必要です。高校入学後に学校を通じて申請（オンライン申請システム e-Shien など）を行い、マイナンバー等で世帯の所得を確認します。申請しないと支援が受けられないため、入学時の案内を必ず確認しましょう。在学中も毎年度の届出（収入状況の確認）が必要です。',
+      '必要です。高校入学後に学校を通じて申請（オンライン申請システム e-Shien など）を行います。申請しないと支援が受けられないため、入学時の案内を必ず確認しましょう。在学中の届出の要否は、学校の案内で確認してください。',
   },
 ];
 
 export const metadata: Metadata = {
   title: '高校無償化・就学支援金はいくら？年収の目安と私立の支援額【2026年】| My Naishin',
   description:
-    '高校無償化（高等学校等就学支援金）はいくらもらえる？公立・私立別の支援額、世帯年収の目安、私立の上限39.6万円、授業料以外を補助する奨学給付金、大学の奨学金まで、教育費の支援制度を一次情報に基づき解説。世帯年収の区分を選ぶと支援額の目安が分かります。',
+    '高校無償化（高等学校等就学支援金）はいくらもらえる？2026年度から所得制限が撤廃。公立は年11万8,800円、私立（全日制）は年額上限45万7,200円。授業料以外を補助する奨学給付金、大学の奨学金まで、教育費の支援制度を一次情報に基づき解説。進学先を選ぶと支援額の目安が分かります。',
   keywords: [
     '高校無償化 年収',
     '就学支援金 いくら',
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${SITE_URL}/shougakukin` },
   openGraph: {
     title: '高校無償化・就学支援金はいくら？年収の目安と私立の支援額【2026年】| My Naishin',
-    description: '公立・私立別の支援額、世帯年収の目安、私立の上限39.6万円、奨学給付金まで一次情報で解説。',
+    description: '2026年度から所得制限なし。公立・私立別の支援額、私立の上限45.7万円、奨学給付金まで一次情報で解説。',
     url: `${SITE_URL}/shougakukin`,
     type: 'website',
   },
@@ -96,7 +96,7 @@ export default function ShougakukinPage() {
             </p>
             <p className="mt-4 text-base leading-[1.8] text-slate-900">
               高校の授業料を軽減する<strong>「高等学校等就学支援金」</strong>（いわゆる高校無償化）の支援額を、
-              進学先と世帯年収の区分から概算できます。私立の上限・授業料以外の支援・大学の奨学金まで、
+              進学先から概算できます（世帯年収の区分は、都道府県の上乗せや在校生の経過措置を確認するためのものです）。私立の上限・授業料以外の支援・大学の奨学金まで、
               <strong>一次情報に基づいて</strong>わかりやすく解説します。
             </p>
           </header>
@@ -104,9 +104,9 @@ export default function ShougakukinPage() {
           {/* 答え先出し（GEO/AI引用） */}
           <div className="mb-8">
             <AnswerBox question="高校無償化（就学支援金）はいくら？私立も無償？">
-              公立高校は授業料相当（年11万8,800円）が実質無償化されます。<strong>私立高校は世帯年収の目安に応じて年額上限39万6,000円まで</strong>支援され、
-              年収約590万円未満の区分では授業料の大部分がまかなわれる場合があります。授業料以外（入学金・施設費・教材費など）は対象外で完全無料にはなりません。
-              下のツールで世帯年収の区分と進学先を選ぶと、支援額と実質負担の目安が分かります。
+              公立高校は授業料相当（年11万8,800円）が実質無償化されます。<strong>2026年度（令和8年度）から所得制限が撤廃され、私立高校（全日制）も世帯年収にかかわらず年額上限45万7,200円まで</strong>支援されます。
+              授業料の大部分がまかなわれる場合があります。授業料以外（入学金・施設費・教材費など）は対象外で完全無料にはなりません。令和8年3月31日以前から在学している生徒は経過措置で、所得に応じて従来と同等の水準です。
+              下のツールで進学先を選ぶと、支援額と実質負担の目安が分かります。
             </AnswerBox>
           </div>
 
@@ -132,9 +132,9 @@ export default function ShougakukinPage() {
                   </tr>
                 </thead>
                 <tbody className="text-slate-900">
-                  {SHUGAKU_SHIEN_TIERS.map((t) => (
+                  {SHUGAKU_SHIEN_TIERS.slice(0, 1).map((t) => (
                     <tr key={t.bracket} className="border-b border-slate-200 last:border-b-0">
-                      <td className="px-4 py-3 font-bold">{t.label}</td>
+                      <td className="px-4 py-3 font-bold">世帯年収にかかわらず（令和8年度以降の入学者）</td>
                       <td className="px-4 py-3 text-right tabular-nums">{t.publicAnnual > 0 ? `${formatYen(t.publicAnnual)}/年` : '対象外'}</td>
                       <td className="px-4 py-3 text-right tabular-nums">{t.privateAnnual > 0 ? `${formatYen(t.privateAnnual)}/年` : '対象外'}</td>
                     </tr>
@@ -143,7 +143,7 @@ export default function ShougakukinPage() {
               </table>
             </div>
             <p className="mt-2 text-sm leading-[1.8] text-slate-600">
-              ※ 公立は授業料相当（年11万8,800円）が実質無償化、私立は区分に応じて年額上限39万6,000円まで。年収は目安で、正確な判定は課税標準額で行われます。
+              ※ 令和8年度（2026年度）以降に入学する生徒は、所得制限がなく、区分によらず同額です（公立は授業料相当の年11万8,800円、私立全日制は年額上限45万7,200円）。区分は、都道府県の上乗せ（下の表）や在校生の経過措置を見るために残しています。在校生の経過措置は、所得に応じて従来と同等の水準です。
             </p>
           </section>
 
@@ -152,7 +152,7 @@ export default function ShougakukinPage() {
             <h2 className="mb-2 text-xl font-bold text-slate-900">無償化後の「実質負担」で公立・私立を比べる</h2>
             <p className="mb-4 text-base leading-[1.8] text-slate-900">
               「私立は高い」と決める前に、就学支援金を差し引いた高校3年間の<strong>実質負担の目安</strong>で比べてみましょう。
-              低所得の区分では、私立でも公立との差が大きく縮まります。
+              就学支援金は世帯年収にかかわらず同額なので、私立でも授業料の多くがまかなわれ、公立との差は縮まります。
             </p>
             <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
               <table className="min-w-full text-sm">
@@ -165,12 +165,12 @@ export default function ShougakukinPage() {
                   </tr>
                 </thead>
                 <tbody className="text-slate-900">
-                  {SHUGAKU_SHIEN_TIERS.map((t) => {
+                  {SHUGAKU_SHIEN_TIERS.slice(0, 1).map((t) => {
                     const pub = highSchoolRealCost('public', t.bracket);
                     const pri = highSchoolRealCost('private', t.bracket);
                     return (
                       <tr key={t.bracket} className="border-b border-slate-200 last:border-b-0">
-                        <td className="px-4 py-3 font-bold">{t.label}</td>
+                        <td className="px-4 py-3 font-bold">世帯年収にかかわらず（令和8年度以降の入学者）</td>
                         <td className="px-4 py-3 text-right tabular-nums">{toManYen(pub)}</td>
                         <td className="px-4 py-3 text-right tabular-nums">{toManYen(pri)}</td>
                         <td className="px-4 py-3 text-right font-bold tabular-nums">＋{toManYen(pri - pub)}</td>
@@ -194,7 +194,7 @@ export default function ShougakukinPage() {
           <section className="mb-10 grid gap-4 sm:grid-cols-3">
             <SupportCard
               title="① 就学支援金（国）"
-              body="高校の授業料を軽減。公立は実質無償、私立は世帯年収の区分で上限39.6万円まで。入学後に学校経由で申請。"
+              body="高校の授業料を軽減。公立は実質無償、私立は上限45.7万円まで（所得制限なし）。入学後に学校経由で申請。"
             />
             <SupportCard
               title="② 奨学給付金（都道府県）"

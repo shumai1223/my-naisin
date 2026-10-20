@@ -25,7 +25,7 @@ const FAQS = [
   {
     question: '就学支援金で授業料は無料になりますか？',
     answer:
-      '高等学校等就学支援金により、公立高校の授業料は実質無償化されています。私立高校も世帯年収の目安910万円未満で年額39万6,000円を上限に支援され、授業料負担が大きく軽減されます。本ツールの初期値は支援後の実支出に近い学習費総額を用いています。',
+      '高等学校等就学支援金により、公立高校の授業料は実質無償化されています。2026年度（令和8年度）からは所得制限が撤廃され、私立高校（全日制）も世帯年収にかかわらず年額45万7,200円を上限に支援されます。本ツールの初期値は支援後の実支出に近い学習費総額を用いています。',
   },
 ];
 
@@ -115,7 +115,7 @@ export default function KoukouHiyouPage() {
               <a href="https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm" target="_blank" rel="noopener" className="text-brand-700 underline underline-offset-2 hover:text-brand-800">
                 文部科学省「高校生等への修学支援（就学支援金）」
               </a>
-              <span className="text-slate-600"> — 公立は授業料実質無償、私立は上限39.6万円/年の支援</span>
+              <span className="text-slate-600"> — 公立は授業料実質無償、私立は上限45.7万円/年の支援（所得制限なし）</span>
             </li>
           </ul>
         </div>

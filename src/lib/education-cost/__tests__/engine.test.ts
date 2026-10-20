@@ -24,12 +24,14 @@ describe('education-cost data', () => {
     });
   });
 
-  it('就学支援金の私立支援は年収が低い区分ほど手厚い（単調性）', () => {
+  it('就学支援金は、令和8年度以降の入学者は所得制限がなく、区分によらず同額（文科省Q&A Q2）', () => {
     const u590 = SHUGAKU_SHIEN_TIERS.find((t) => t.bracket === 'under590')!;
     const u910 = SHUGAKU_SHIEN_TIERS.find((t) => t.bracket === 'under910')!;
     const o910 = SHUGAKU_SHIEN_TIERS.find((t) => t.bracket === 'over910')!;
-    expect(u590.privateAnnual).toBeGreaterThanOrEqual(u910.privateAnnual);
-    expect(u910.privateAnnual).toBeGreaterThanOrEqual(o910.privateAnnual);
+    expect(u590.privateAnnual).toBe(457200);
+    expect(u910.privateAnnual).toBe(u590.privateAnnual);
+    expect(o910.privateAnnual).toBe(u590.privateAnnual);
+    expect(o910.publicAnnual).toBe(u590.publicAnnual);
   });
 });
 
@@ -100,27 +102,28 @@ describe('simulateEducationCost', () => {
 });
 
 describe('就学支援金', () => {
-  it('公立は授業料相当が支援され、年収高区分は0', () => {
+  it('公立は授業料相当（年118,800円）が全区分で支援される（所得制限なし）', () => {
     expect(shugakuShienAnnual('public', 'under590')).toBe(118800);
-    expect(shugakuShienAnnual('public', 'over910')).toBe(0);
+    expect(shugakuShienAnnual('public', 'over910')).toBe(118800);
   });
-  it('私立の低所得区分は上限39.6万円', () => {
-    expect(shugakuShienAnnual('private', 'under590')).toBe(396000);
+  it('私立（全日制）は全区分で上限45万7,200円（令和8年度・所得制限なし）', () => {
+    expect(shugakuShienAnnual('private', 'under590')).toBe(457200);
+    expect(shugakuShienAnnual('private', 'over910')).toBe(457200);
   });
   it('3年分の軽減目安は年額×3', () => {
-    expect(highSchoolSupportOver3Years('private', 'under590')).toBe(396000 * 3);
+    expect(highSchoolSupportOver3Years('private', 'under590')).toBe(457200 * 3);
   });
 });
 
 describe('highSchoolRealCost（就学支援金を差し引いた実質負担）', () => {
   it('= 学習費総額 − 支援額（3年）', () => {
-    expect(highSchoolRealCost('private', 'under590')).toBe(highSchoolTotal('private') - 396000 * 3);
+    expect(highSchoolRealCost('private', 'under590')).toBe(highSchoolTotal('private') - 457200 * 3);
     expect(highSchoolRealCost('public', 'under590')).toBe(highSchoolTotal('public') - 118800 * 3);
   });
-  it('高所得区分（支援なし）は実質負担＝総額', () => {
-    expect(highSchoolRealCost('private', 'over910')).toBe(highSchoolTotal('private'));
+  it('高所得区分でも（所得制限なし）実質負担は低所得区分と同じ', () => {
+    expect(highSchoolRealCost('private', 'over910')).toBe(highSchoolRealCost('private', 'under590'));
   });
-  it('低所得区分では私立の実質負担が総額より大きく下がる', () => {
+  it('私立の実質負担は総額より下がる', () => {
     expect(highSchoolRealCost('private', 'under590')).toBeLessThan(highSchoolTotal('private'));
   });
   it('実質負担は0未満にならない', () => {

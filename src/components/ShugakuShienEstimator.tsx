@@ -58,6 +58,9 @@ export function ShugakuShienEstimator() {
       </div>
 
       <span className="mt-6 block text-sm font-bold text-slate-900">世帯年収の区分（目安）</span>
+      <p className="mt-1 text-sm leading-[1.8] text-slate-600">
+        令和8年度（2026年度）以降に入学する場合、国の就学支援金は区分によらず同額です。区分は、令和8年3月31日以前から在学している場合の経過措置や、都道府県の上乗せを見るためのものです。
+      </p>
       <div className="mt-2 grid gap-2">
         {SHUGAKU_SHIEN_TIERS.map((t) => (
           <button

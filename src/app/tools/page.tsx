@@ -273,7 +273,7 @@ const TOOL_GROUPS: { id: string; heading: string; tools: Tool[] }[] = [
       {
         title: '高校無償化・就学支援金ガイド',
         description: '公立・私立別の支援額、世帯年収の目安、奨学給付金・大学の奨学金まで解説',
-        features: ['年収区分で支援額', '私立 上限39.6万円', '奨学給付金', '大学の奨学金'],
+        features: ['年収区分で支援額', '私立 上限45.7万円', '奨学給付金', '大学の奨学金'],
         href: '/shougakukin',
       },
     ],
