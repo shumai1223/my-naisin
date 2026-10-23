@@ -6,8 +6,10 @@
  * フラット化し、CSV/JSON化・年次差分（R7→R8）を作る。ページ・APIへの露出は行わない
  * （このモジュールは純粋なデータ整形のみ・出力先はビルドスクリプト側の責務）。
  */
+// 令和8年度で固定した納品物（R7→R8差分・件数固定）なので、新年度オーバーレイ後の公開用マップではなく
+// R8固定のマップを使う（T-PV2 A-4: 令和9年度を登録しても納品物の中身が変わらないようにする）。
 import {
-  COMPETITION_RATE_BY_PREFECTURE,
+  COMPETITION_RATE_R8_BY_PREFECTURE as COMPETITION_RATE_BY_PREFECTURE,
 } from '@/data/competition-rates';
 import type { PrefectureCompetitionRateFile, CompetitionRateRecord } from './competition-rate';
 import { licensableRecords, resolveRecordSourceIndex } from './competition-rate';

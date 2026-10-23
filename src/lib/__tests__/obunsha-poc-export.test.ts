@@ -1,4 +1,4 @@
-import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import { COMPETITION_RATE_R8_BY_PREFECTURE as COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 import { licensableRecords } from '../competition-rate';
 import { buildFullExportRecords, buildYearOverYearDiff, toCsv } from '../obunsha-poc-export';
 

@@ -10,7 +10,8 @@ import {
   type CompetitionRateSource,
   type OfficialSubtotal,
 } from '../competition-rate';
-import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+// 令和8年度の実データ（出典ロケータのバックフィル等）を検証するテストなので、新年度オーバーレイの影響を受けないR8固定マップを使う。
+import { COMPETITION_RATE_R8_BY_PREFECTURE as COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
 import { WAKAYAMA_COMPETITION_RATES } from '@/data/competition-rates/wakayama';
 
 const RECORDS: CompetitionRateRecord[] = [

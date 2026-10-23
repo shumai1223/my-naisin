@@ -105,6 +105,10 @@ const COMPETITION_RATE_BASE_BY_PREFECTURE: Partial<Record<string, PrefectureComp
   hokkaido: HOKKAIDO_COMPETITION_RATES,
 };
 
+// 令和8年度で固定した納品物（旺文社PoC v0等）用。新年度オーバーレイの影響を受けない。
+export const COMPETITION_RATE_R8_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> =
+  omitPublicationRefused<PrefectureCompetitionRateFile>(COMPETITION_RATE_BASE_BY_PREFECTURE);
+
 // 掲載拒否県は合成の後で必ず外す（新年度ファイルがあっても公開面に出さない）。
 export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> =
   omitPublicationRefused<PrefectureCompetitionRateFile>(

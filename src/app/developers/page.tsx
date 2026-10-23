@@ -11,6 +11,7 @@ import { DatasetSchema } from '@/components/StructuredData/DatasetSchema';
 import { DATASET_DISTRIBUTION, DATASET_META, SITE_URL } from '@/lib/naishin-dataset';
 import { TIER_POLICIES, TIER_CAPABILITY_MATRIX, formatTierPrice, type ApiTier } from '@/lib/api-tiers';
 import { QUOTE_PLANS } from '@/lib/quote-plans';
+import { computeCompetitionRateStats } from '@/lib/competition-rate-stats';
 
 export const metadata: Metadata = {
   title: '内申点データAPI / MCP（開発者・AI向け）| My Naishin',
@@ -35,6 +36,8 @@ function CodeBlock({ children }: { children: string }) {
 }
 
 export default function DevelopersPage() {
+  // 掲載件数は実データから計算する（新年度を載せるたびに手で直さない・書き忘れて嘘にならない）。
+  const stats = computeCompetitionRateStats();
   const indexExample = `GET ${SITE_URL}/api/naishin
 
 {
@@ -631,7 +634,7 @@ print(naishin["total"])  # -> 52`;
           <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑦c-2 データライセンス商品（継続アーカイブ）</h3>
           <p className="mb-3 text-base leading-[1.8] text-slate-900">
             <strong>特長は「継続アーカイブ」です。</strong>{' '}
-            直近1年度のスナップショットではなく、<strong>46都道府県 × 複数年度（県により令和4〜8年度・平均約3年度分）を
+            直近1年度のスナップショットではなく、<strong>{stats.prefectureCount}都道府県 × 複数年度（県により令和{stats.firstReiwa}〜{stats.lastReiwa}年度・平均約{stats.averageYearsPerPrefecture}年度分）を
             継続的に積み上げている</strong>点に価値があります。教育委員会が公表後にPDFを削除し他社が再取得不能に
             なった過年度分（一部県）も収録済みです。今後も年次で追加されます。
           </p>
@@ -668,13 +671,13 @@ print(naishin["total"])  # -> 52`;
 
           <h3 className="mb-2 mt-8 text-[17px] font-bold text-slate-900">⑦d 都道府県別 学校ごと入試競争率（Business以上）</h3>
           <p className="mb-2 text-base leading-[1.8] text-slate-900">
-            <strong>公立高校・学校＋学科単位の募集人員・応募者数・倍率＝24,444件（3,250校・46都道府県・令和4〜8年度の5年分）。</strong>
+            <strong>公立高校・学校＋学科単位の募集人員・応募者数・倍率＝{stats.totalRecords.toLocaleString('en-US')}件（{stats.uniqueSchoolCount.toLocaleString('en-US')}校・{stats.prefectureCount}都道府県・令和{stats.firstReiwa}〜{stats.lastReiwa}年度の{stats.distinctYearCount}年分）。</strong>
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">GET /api/schools/{'{pref}'}</code>
             {' — '}都道府県コード（例: <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">tokyo</code>）を指定すると、
             その都道府県のレコードを返します。
             <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm">?fiscalYear=令和8年度（2026年度）</code>
             で年度を絞り込めます。商用資料のみを出典とするレコードは配布ポリシー上、自動的に除外されます
-            （24,444件のうち配布可能は24,253件）。<strong>本エンドポイントはBusiness以上のAPIキーが必要です。</strong>
+            （{stats.totalRecords.toLocaleString('en-US')}件のうち配布可能は{stats.totalLicensable.toLocaleString('en-US')}件）。<strong>本エンドポイントはBusiness以上のAPIキーが必要です。</strong>
           </p>
           <p className="mb-2 text-sm leading-[1.8] text-slate-600">
             中身のサンプル（千葉県・令和8年度・実データ）：

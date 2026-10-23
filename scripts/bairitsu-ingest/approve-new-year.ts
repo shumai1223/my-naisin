@@ -28,7 +28,8 @@ import { validateNextYearFile } from '@/lib/competition-rate-overlay';
 import { ROOT, extractPageGeometry, loadBaseFile, printVerification, runNewYearVerification } from './lib/new-year-io';
 
 const DEFAULT_YEAR_LABEL = '令和9年度（2027年度）';
-const JEST_PATTERNS = ['competition-rate-overlay', 'school-page', 'publication-refused', 'schools-route', 'nendomatsu-pack', 'obunsha-poc'];
+// jest は「公開用マップ(competition-rates/index.ts)・登録簿・合成関数に（推移的にでも）依存する全テスト」を回す。
+const JEST_SCOPE_LABEL = '公開用マップに依存する全テスト(--findRelatedTests)';
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(name);
@@ -253,7 +254,7 @@ function main(): number {
       return false;
     }
   };
-  const jestOk = timed('5 jest', () => runLogged('jest', npx, ['jest', ...JEST_PATTERNS, '--silent'], `approve-${prefectureCode}-jest.log`));
+  const jestOk = timed('5 jest', () => runLogged('jest', npx, ['jest', '--findRelatedTests', 'src/data/competition-rates/index.ts', 'src/data/competition-rates-next/index.ts', 'src/lib/competition-rate-overlay.ts', '--silent'],`approve-${prefectureCode}-jest.log`));
   if (!jestOk) return fail('jestが不合格');
 
   // 6 tsc
@@ -269,7 +270,7 @@ function main(): number {
     `- 件数: ${rows.length}件 / 募集${v.result.sums.quota} / 志願${v.result.sums.finalApplicants}`,
     `- 合計行の一致: ${v.result.matchedLine?.line}`,
     `- ${summaryComment}`,
-    `- 検算: 4確認+倍率の丸め 全て合格 / jest ${JEST_PATTERNS.join('・')} 緑 / tsc ${skipTsc ? '省略(予行)' : '実exit0'}`,
+    `- 検算: 4確認+倍率の丸め 全て合格 / jest(${JEST_SCOPE_LABEL}) 緑 / tsc ${skipTsc ? '省略(予行)' : '実exit0'}`,
     `- 出典: ${sourceUrl}（公表日 ${published}・SHA-256 ${sha256.slice(0, 12)}…）`,
   ].join('\n');
 

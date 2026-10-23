@@ -9,6 +9,7 @@ import {
   buildAnnualUpdateQueue,
 } from '../annual-update-queue';
 import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import { COMPETITION_RATE_NEXT_BY_PREFECTURE } from '@/data/competition-rates-next';
 
 describe('parseReiwaYear', () => {
   it('「令和N年度（YYYY年度）」からNを抽出する', () => {
@@ -92,7 +93,9 @@ describe('buildAnnualUpdateQueue（架空データでの境界値検証）', () 
     const registeredCount = Object.keys(COMPETITION_RATE_BY_PREFECTURE).length;
     expect(queue.length).toBe(registeredCount);
     for (const e of queue) {
-      expect(e.gap).toBeGreaterThanOrEqual(2);
+      // 新年度（令和9年度）を登録した県は1年分ギャップが縮む（T-PV2 A-4）。
+      const minGap = COMPETITION_RATE_NEXT_BY_PREFECTURE[e.prefectureCode] ? 1 : 2;
+      expect(e.gap).toBeGreaterThanOrEqual(minGap);
     }
     // ギャップ降順であること
     const gaps = queue.map((e) => e.gap);
