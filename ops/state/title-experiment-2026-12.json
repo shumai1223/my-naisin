@@ -1,0 +1,235 @@
+{
+  "designedAt": "2026-10-24",
+  "treatment": "titleに年号(2027年度)を入れる(descriptionの年号更新は全県共通)",
+  "pairs": [
+    {
+      "pair": 1,
+      "treated": "fukuoka",
+      "control": "osaka",
+      "imprT": 1102,
+      "imprC": 1066
+    },
+    {
+      "pair": 2,
+      "treated": "mie",
+      "control": "hyogo",
+      "imprT": 843,
+      "imprC": 1043
+    },
+    {
+      "pair": 3,
+      "treated": "hokkaido",
+      "control": "chiba",
+      "imprT": 719,
+      "imprC": 800
+    },
+    {
+      "pair": 4,
+      "treated": "okinawa",
+      "control": "niigata",
+      "imprT": 679,
+      "imprC": 673
+    },
+    {
+      "pair": 5,
+      "treated": "nara",
+      "control": "gifu",
+      "imprT": 521,
+      "imprC": 408
+    },
+    {
+      "pair": 6,
+      "treated": "kumamoto",
+      "control": "miyagi",
+      "imprT": 366,
+      "imprC": 407
+    },
+    {
+      "pair": 7,
+      "treated": "ibaraki",
+      "control": "shiga",
+      "imprT": 348,
+      "imprC": 315
+    },
+    {
+      "pair": 8,
+      "treated": "fukushima",
+      "control": "toyama",
+      "imprT": 285,
+      "imprC": 287
+    },
+    {
+      "pair": 9,
+      "treated": "kyoto",
+      "control": "yamanashi",
+      "imprT": 248,
+      "imprC": 278
+    },
+    {
+      "pair": 10,
+      "treated": "yamaguchi",
+      "control": "hiroshima",
+      "imprT": 197,
+      "imprC": 229
+    },
+    {
+      "pair": 11,
+      "treated": "kagoshima",
+      "control": "fukui",
+      "imprT": 157,
+      "imprC": 161
+    },
+    {
+      "pair": 12,
+      "treated": "nagasaki",
+      "control": "akita",
+      "imprT": 155,
+      "imprC": 154
+    },
+    {
+      "pair": 13,
+      "treated": "ishikawa",
+      "control": "oita",
+      "imprT": 148,
+      "imprC": 150
+    },
+    {
+      "pair": 14,
+      "treated": "kagawa",
+      "control": "tottori",
+      "imprT": 148,
+      "imprC": 138
+    },
+    {
+      "pair": 15,
+      "treated": "yamagata",
+      "control": "aomori",
+      "imprT": 129,
+      "imprC": 132
+    },
+    {
+      "pair": 16,
+      "treated": "iwate",
+      "control": "okayama",
+      "imprT": 103,
+      "imprC": 122
+    }
+  ],
+  "excluded": [
+    {
+      "code": "kanagawa",
+      "reason": "外れ値(28日クリック99＝全体の約2割・単独で結果を支配する)。観察のみ"
+    },
+    {
+      "code": "tokyo",
+      "reason": "外れ値(平均順位15.8で他県と条件が違う)。観察のみ"
+    },
+    {
+      "code": "aichi",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "miyazaki",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "gunma",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "saitama",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "shizuoka",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "tochigi",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "kochi",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "saga",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "tokushima",
+      "reason": "表示100回未満(28日)。小さすぎて測れない。観察のみ"
+    },
+    {
+      "code": "wakayama",
+      "reason": "掲載を断られた県(非公開)。対象外"
+    },
+    {
+      "code": "nagano",
+      "reason": "28日の上位100行に出ず(クリック0・表示少)。観察のみ"
+    },
+    {
+      "code": "shimane",
+      "reason": "28日の上位100行に出ず(クリック0・表示少)。観察のみ"
+    },
+    {
+      "code": "ehime",
+      "reason": "28日の上位100行に出ず(クリック0・表示少)。観察のみ"
+    }
+  ],
+  "summary": {
+    "basis": "GSC 2026-09-22〜2026-10-19(28日)・/{県}/naishin",
+    "eligibleCount": 32,
+    "pairCount": 16,
+    "treated": {
+      "prefectures": [
+        "fukuoka",
+        "mie",
+        "hokkaido",
+        "okinawa",
+        "nara",
+        "kumamoto",
+        "ibaraki",
+        "fukushima",
+        "kyoto",
+        "yamaguchi",
+        "kagoshima",
+        "nagasaki",
+        "ishikawa",
+        "kagawa",
+        "yamagata",
+        "iwate"
+      ],
+      "impressions": 6148,
+      "clicks": 165,
+      "ctr": 0.026837996096291478,
+      "avgPosition": 7.684059856864022
+    },
+    "control": {
+      "prefectures": [
+        "osaka",
+        "hyogo",
+        "chiba",
+        "niigata",
+        "gifu",
+        "miyagi",
+        "shiga",
+        "toyama",
+        "yamanashi",
+        "hiroshima",
+        "fukui",
+        "akita",
+        "oita",
+        "tottori",
+        "aomori",
+        "okayama"
+      ],
+      "impressions": 6363,
+      "clicks": 152,
+      "ctr": 0.023888103096023888,
+      "avgPosition": 8.411425428257111
+    },
+    "mdeRelative28d": 0.31479215187735,
+    "mdeRelative56d": 0.2225916652567797
+  }
+}
