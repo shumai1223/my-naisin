@@ -56,10 +56,16 @@ function extractRelevantLinks(html, baseUrl) {
     const hrefRaw = match[1];
     const text = match[2].replace(/<[^>]+>/g, '').trim();
     const pathOnly = stripQueryAndHash(hrefRaw);
-    if (!RELEVANT_EXTENSION_RE.test(pathOnly)) continue;
+    // 拡張子付き(pdf/xlsx/html)に加え、拡張子の無いURL（秋田の /pages/archive/99375 のようなCMS）も対象にする。
+    // （2026-10-23 T-PV2 A-2: 秋田のハブは拡張子なしのため、これまで1件も拾えなかった）
+    const lastSegment = pathOnly.split('/').pop() ?? '';
+    if (!RELEVANT_EXTENSION_RE.test(pathOnly) && lastSegment.includes('.')) continue;
 
     const hrefDecoded = safeDecodeUriComponent(hrefRaw);
-    const hasKeyword = RELEVANT_LINK_KEYWORDS.some((k) => text.includes(k) || hrefDecoded.includes(k));
+    // 全角数字（令和９年度）も同じ語として扱う（秋田は全角で表記する）。
+    const textN = text.normalize('NFKC');
+    const hrefN = hrefDecoded.normalize('NFKC');
+    const hasKeyword = RELEVANT_LINK_KEYWORDS.some((k) => textN.includes(k) || hrefN.includes(k));
     if (!hasKeyword) continue;
 
     let absoluteUrl;

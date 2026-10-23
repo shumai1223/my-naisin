@@ -10,6 +10,9 @@
  * ⚠️ `hubUrl`が判明しない県は`null`のまま置く（Y-0: 推測でURLを作らない）。
  *    2026-09-07時点でHEAD/GETによる実在確認まで済んでいるのは
  *    chiba/saitama/kagoshima/miyagi の4県のみ（F-2初回スコープ）。
+ *    2026-10-23(T-PV2 A-2): akita/ibaraki/tochigi/gifu/kagawa/okinawa/fukuoka の7県を追加。各ページを
+ *    実際にGETして200と令和9年度の項目が並ぶことを確認した（沖縄は実施年度で命名するため志願状況・合格状況の
+ *    一覧を登録）。nagano/ishikawa は県サイトがbot的アクセスに403を返し未確認のため null のまま。
  * ⚠️ `r8Evidence`は`ops/raw/bairitsu-r8-source-urls.json`（既存・A-2/E-1で検証済み）から
  *    機械転記した参考情報であり、ハブとは無関係にA-2が既に監視している。
  */
@@ -40,12 +43,12 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'akita',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://www.pref.akita.lg.jp/pages/genre/15415',
+    hubKind: 'index',
     r8Evidence:
       'https://www.pref.akita.lg.jp/uploads/public/archive_0000093860_00/20260212_%EF%BC%91%E6%AC%A1%E5%8B%9F%E9%9B%86%E3%80%80%E5%BF%97%E9%A1%98%E8%80%85%E6%95%B0%EF%BC%88%E5%BF%97%E9%A1%98%E5%85%88%E5%A4%89%E6%9B%B4%E5%BE%8C%EF%BC%89%EF%BC%88%E5%85%AC%E2%80%95%EF%BC%92%EF%BC%89.pdf',
     r9Url: null,
-    lastVerifiedAt: null,
+    lastVerifiedAt: '2026-10-23',
   },
   {
     prefecture: 'aomori',
@@ -81,11 +84,11 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'fukuoka',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://www.pref.fukuoka.lg.jp/site/kyouiku/list183-820.html',
+    hubKind: 'index',
     r8Evidence: 'https://www.pref.fukuoka.lg.jp/site/kyouiku/nyushi8.html',
     r9Url: null,
-    lastVerifiedAt: null,
+    lastVerifiedAt: '2026-10-23',
   },
   {
     prefecture: 'fukushima',
@@ -97,11 +100,11 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'gifu',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://www.pref.gifu.lg.jp/site/edu/61428.html',
+    hubKind: 'index',
     r8Evidence: 'https://www.pref.gifu.lg.jp/uploaded/attachment/485854.pdf',
     r9Url: null,
-    lastVerifiedAt: null,
+    lastVerifiedAt: '2026-10-23',
   },
   {
     prefecture: 'gunma',
@@ -137,11 +140,11 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'ibaraki',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://kyoiku.pref.ibaraki.jp/gakko/nyushi/highschool/',
+    hubKind: 'index',
     r8Evidence: 'https://kyoiku.pref.ibaraki.jp/wp-content/uploads/2026/02/shigansha20260218.pdf',
     r9Url: null,
-    lastVerifiedAt: null,
+    lastVerifiedAt: '2026-10-23',
   },
   {
     prefecture: 'ishikawa',
@@ -161,11 +164,11 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'kagawa',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://www.pref.kagawa.lg.jp/kenkyoui/kokokyoiku/nyushi/chugaku-koko/examination02.html',
+    hubKind: 'index',
     r8Evidence: 'https://www.pref.kagawa.lg.jp/documents/15096/syutugan8-3-2.pdf',
     r9Url: null,
-    lastVerifiedAt: null,
+    lastVerifiedAt: '2026-10-23',
   },
   {
     prefecture: 'kagoshima',
@@ -282,11 +285,11 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'okinawa',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://www.pref.okinawa.jp/kyoiku/gakko/1008883/1008887/1008890/index.html',
+    hubKind: 'index',
     r8Evidence: 'https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/038/168/r07saisyu.pdf',
     r9Url: null,
-    lastVerifiedAt: null,
+    lastVerifiedAt: '2026-10-23',
   },
   {
     prefecture: 'osaka',
@@ -339,11 +342,11 @@ export const PUBLICATION_HUBS: PublicationHub[] = [
   },
   {
     prefecture: 'tochigi',
-    hubUrl: null,
-    hubKind: 'unknown',
+    hubUrl: 'https://www.pref.tochigi.lg.jp/m04/r09/r09kenritukoutougakkounyuugakushasennbatunikannsuruosirase.html',
+    hubKind: 'year-page',
     r8Evidence: 'https://www.pref.tochigi.lg.jp/m04/r08/documents/r8zennitiseiippansenbatsusyutsuganhenkojokyo.pdf',
     r9Url: null,
-    lastVerifiedAt: null,
+    lastVerifiedAt: '2026-10-23',
   },
   {
     prefecture: 'tokushima',

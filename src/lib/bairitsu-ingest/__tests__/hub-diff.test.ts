@@ -16,6 +16,19 @@ describe('extractRelevantLinks', () => {
     expect(links[0].text).toBe('令和9年度募集定員');
   });
 
+  it('2026-10-23(T-PV2 A-2): 拡張子の無いCMSのURL(秋田 /pages/archive/99375)と全角「令和９年度」も拾う。無関係な画像や拡張子付き非対象は拾わない', () => {
+    const html = `
+      <a href="/pages/archive/99375">令和９年度秋田県公立高等学校入学者選抜実施要項（PDF版）</a>
+      <a href="/pages/archive/99000">お問い合わせ</a>
+      <a href="/img/banner.jpg">令和9年度 募集バナー</a>
+      <a href="/pages/archive/93860">令和８年度秋田県公立高等学校入学者選抜志願・合格状況等</a>
+    `;
+    const links = extractRelevantLinks(html, 'https://www.pref.akita.lg.jp/pages/genre/15415');
+    expect(links.map((l) => l.href)).toEqual([
+      'https://www.pref.akita.lg.jp/pages/archive/99375',
+      'https://www.pref.akita.lg.jp/pages/archive/93860',
+    ]);
+  });
   it('2026-09-07実測(4県共通パターン): ハブが直接PDFでなく「令和9年度」を含む年度ページ(.html)へリンクする場合も拾う', () => {
     const html = `
       <a href="/r9/index.html">令和9年度高等学校入学者選抜情報</a>
