@@ -26,6 +26,8 @@ import { harvestPrefecture } from '@/lib/bairitsu-ingest/harvest-prefecture';
 import type { PdfPageGeometry } from '@/lib/bairitsu-ingest/parse-table-pdf';
 import type { OfficialSubtotal } from '@/lib/competition-rate';
 
+import { printVerification, runNewYearVerification } from './lib/new-year-io';
+
 const EXTRACT_SCRIPT_PATH = resolve(__dirname, 'extract-pdf-geometry.py');
 
 function extractPageGeometry(pdfPath: string, pageNo: number): PdfPageGeometry {
@@ -62,14 +64,21 @@ function main(): number {
 
   const geometries = pageNumbers.map((pageNo) => extractPageGeometry(pdfPath, pageNo));
 
+  // --new-year: 令和9年度の実PDFを取り込むとき。検算の基準を「現行ファイル(=令和8年度)」から読むと、
+  // 件数も合計も違うので正しいデータでも必ずNGになる（T-PV2予行F1）。そこで基準なしでパースし、
+  // 合否は新PDF本文の合計行との一致（verify-new-year）で判定する。
+  const newYear = process.argv.includes('--new-year');
+
   let officialSubtotals: OfficialSubtotal[] = [];
   let expectedRecordCount: number | undefined;
-  try {
-    const loaded = loadCompetitionRatesModule(prefectureCode);
-    officialSubtotals = loaded.officialSubtotals;
-    expectedRecordCount = loaded.recordCount;
-  } catch (error) {
-    console.log(`⚠️  ${prefectureCode}: competition-ratesモジュール読み込み失敗（${(error as Error).message}）。検算は公表小計無しで実行する。`);
+  if (!newYear) {
+    try {
+      const loaded = loadCompetitionRatesModule(prefectureCode);
+      officialSubtotals = loaded.officialSubtotals;
+      expectedRecordCount = loaded.recordCount;
+    } catch (error) {
+      console.log(`⚠️  ${prefectureCode}: competition-ratesモジュール読み込み失敗（${(error as Error).message}）。検算は公表小計無しで実行する。`);
+    }
   }
 
   const result = harvestPrefecture({ prefectureCode, geometries, officialSubtotals, expectedRecordCount });
@@ -84,6 +93,14 @@ function main(): number {
       console.log(`     [${issue.check}] ${issue.message}`);
     }
     return 1;
+  }
+  if (newYear) {
+    const v = runNewYearVerification(prefectureCode, pdfPath, result.parsed);
+    printVerification(prefectureCode, result.parsed.length, v);
+    if (!v.result.ok) {
+      console.log(`❌ ${prefectureCode}: 新年度の検算NG（数字を合わせにいかない）。emitしない`);
+      return 1;
+    }
   }
   console.log(`✅ ${prefectureCode}: ${result.parsed.length}件抽出・検算OK`);
   const emitIdx = process.argv.indexOf('--emit');

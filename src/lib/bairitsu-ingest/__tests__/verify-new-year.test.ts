@@ -48,6 +48,12 @@ describe('findTotalLineMatch', () => {
     expect(findTotalLineMatch('公立 合計 100 110 1.10', { quota: 100, finalApplicants: 10 })).toBeNull();
   });
 
+  it('定時制・通信制を含む「総合計」の行とだけ一致する場合は採らない（定時制の頁を混ぜた誤りを通さない）', () => {
+    const text = '公立全日制   合計   29,040   28,880   32,008   1.11\n県立定時制       合計    1,360    1,237      821   0.66\n総 合 計     30,400   30,117   32,829   1.09';
+    expect(findTotalLineMatch(text.replace(/\n/g, '\n'), { quota: 30117, finalApplicants: 32829 })).toBeNull();
+    expect(findTotalLineMatch(text.replace(/\n/g, '\n'), { quota: 28880, finalApplicants: 32008 })?.lineNo).toBe(1);
+  });
+
   it('全角数字・全角スペースの合計行も読む', () => {
     const m = findTotalLineMatch('全日制　合計　１，２００　１，３４５', { quota: 1200, finalApplicants: 1345 });
     expect(m).not.toBeNull();

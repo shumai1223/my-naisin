@@ -32,6 +32,9 @@ function integersIn(line: string): number[] {
   return out;
 }
 
+/** 取り込み範囲（全日制）より広い合計行の目印。 */
+const WIDE_SCOPE_TOTAL = /定\s*時|通\s*信|総\s*合\s*計/;
+
 /**
  * PDF本文（pdftotext -layout の出力）から、機械集計の2数値が同じ行に現れる「合計」行を探す。
  * 行のラベルは「合計」「総計」を含むものに限る（学校別の「計」行との偶然の一致を避ける）。
@@ -44,6 +47,9 @@ export function findTotalLineMatch(pdfText: string, sums: VerifySums): TotalLine
       .replace(/[０-９，]/g, (c) => (c === '，' ? ',' : String.fromCharCode(c.charCodeAt(0) - 0xfee0)))
       .replace(/　/g, ' ');
     if (!/合\s*計|総\s*計/.test(normalized)) continue;
+    // 定時制・通信制を含む「総合計」は、取り込み範囲（全日制）を超えた合計。誤って定時制のページまで
+    // 含めたときに、その総合計と偶然一致して通ってしまう（千葉の予行で実際に起きた）ので採らない。
+    if (WIDE_SCOPE_TOTAL.test(normalized)) continue;
     const nums = integersIn(normalized);
     if (nums.includes(sums.quota) && nums.includes(sums.finalApplicants)) {
       return { line: lines[i].trim().replace(/\s+/g, ' '), lineNo: i + 1 };

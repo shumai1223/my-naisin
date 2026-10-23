@@ -23,8 +23,7 @@
 2. **県の入試ハブページ**を毎朝開く（下の表の「前年の置き場」＝令和8年度の資料のURL。同じ階層に令和9年度が並ぶ。千葉は `watch-hubs.mjs` が使える）。
 3. 地方紙・教育委員会の報道発表（記事が出た日＝公表日の目安）。
 
-**推奨（👤の判断・未登録）**: 1/25〜3/20 は `node scripts/bairitsu-ingest/watch-hubs.mjs`（ハブ判明県のみ・現在は千葉）を毎朝回す。タスクスケジューラへの登録は👤が行う:
-`schtasks /Create /SC DAILY /ST 07:50 /TN "MyNaishin-HubWatch" /TR "cmd /c cd /d C:\Users\E24054\my-naisin && set NODE_TLS_REJECT_UNAUTHORIZED=0 && node scripts\bairitsu-ingest\watch-hubs.mjs"`（**loopは登録していない**）。
+**推奨（👤の判断・登録は👤）**: ハブ監視 `watch-hubs.mjs` を毎日回す。**登録手順は `ops/runbooks/hub-watch-schedule.md` の1枚**（`scripts/bairitsu-ingest/hub-watch-daily.bat` を 07:50 に毎日実行・動作確認済み・2026-10-23）。監視できるのはハブURL特定済みの6県（千葉・群馬・鹿児島・宮城・埼玉・滋賀）だけ。今から回して基準を作っておく。
 通知の見方: `docs/daily-brief.md` の「倍率公表資料の更新監視」節（毎朝7:30の朝ブリーフィングが更新）／`C:\Users\E24054\competition-updates-check.log`（文字化けするときは `Get-Content -Encoding UTF8`）／`ops/state/hub-events.json`（`watch-hubs.mjs` の新規リンク）。
 
 ### 9県の確認表（`npx tsx scripts/td1-delivery-ledger.ts` の元データから）
@@ -58,9 +57,12 @@ sha256sum ops/raw/bairitsu-pdf-archive/td1-r9/<県コード>/r9-<公表日>.pdf
 
 ## 3. パース→検算（1本のコマンド）
 
+⚠️ **2026-10-23訂正（T-PV2予行）: 令和9年度のPDFには必ず `--new-year` を付ける。** 付けないと検算の基準が「現行ファイル＝令和8年度」になり、正しいデータでも件数・合計が合わず必ずNGになる。`--new-year` を付けると、基準を**新PDF本文の「合計」行**（機械集計の募集人員・志願者数が同じ行に現れるか）に切り替え、掲載拒否県・有償パック許諾・倍率の丸め・title年号も一緒に判定する（定時制・通信制を含む「総合計」の行とだけ一致した場合は不合格＝定時制のページを混ぜた誤りを通さない）。不合格なら `--emit` しない。
+サイト反映（新年度オーバーレイ）は `npx tsx scripts/bairitsu-ingest/approve-new-year.ts`（下の§9）。
+
 ```
 # 表のあるページ(0始まり・カンマ区切り)を指定。令和8年度の表のページ数は 千葉5・岐阜5・長野4・沖縄4・茨城3・栃木3・秋田2・石川2・香川1（表紙・注記ページは除く）
-NODE_TLS_REJECT_UNAUTHORIZED=0 npx tsx scripts/bairitsu-ingest/harvest-prefecture.ts <県コード> ops/raw/bairitsu-pdf-archive/td1-r9/<県コード>/r9-<公表日>.pdf 0,1,2 --emit ops/raw/bairitsu-pdf-archive/td1-r9/<県コード>/parsed.json
+NODE_TLS_REJECT_UNAUTHORIZED=0 npx tsx scripts/bairitsu-ingest/harvest-prefecture.ts <県コード> ops/raw/bairitsu-pdf-archive/td1-r9/<県コード>/r9-<公表日>.pdf 0,1,2 --new-year --emit ops/raw/bairitsu-pdf-archive/td1-r9/<県コード>/parsed.json
 ```
 
 - 出力 `✅ <県>: N件抽出・検算OK` なら次へ。`❌ ... 検算NG` なら **数字を合わせにいかず**、`ops/BAIRITSU-INGEST-RUNBOOK.md`「検算が落ちたときに何を人間に上げるか」に従う。原因が特定できないときは**その県は納品を遅らせ**、相手に連絡する。
@@ -110,3 +112,15 @@ NODE_TLS_REJECT_UNAUTHORIZED=0 npx tsx scripts/td1-build-delivery.ts <県コー�
 3. テスト: `NODE_OPTIONS=--max-old-space-size=4096 npx jest src/lib/__tests__/nendomatsu-pack.test.ts src/app/nendomatsu-pack`（価格が1か所であること・未確定なら何も置換しないこと）。
 4. ONE-PAGER・SPEC・TERMS を PDF 化（`ops/deliverables/nendomatsu-pack-sample/drafts/README.md` の「PDFにする」）。ONE-PAGER は `pdfinfo` で Pages: 1 を確認。
 5. フォーム窓口: `ops/cowork/COWORK-TASK-td1-nendomatsu-forms.md` を Cowork へ。メール窓口: `drafts/README.md` の手順4（1晩10〜15社まで）。**送信は👤。**
+
+## 9. サイトに載せる（新年度オーバーレイ・承認は👤の1回）
+
+2026-10-23（T-PV2 A-4）。令和8年度のファイルは書き換えず、新年度は `src/data/competition-rates-next/<県>.ts` に置く。登録した県だけ「新年度＝今季・令和8年度＝前年」として公開される。外せば元に戻る。
+
+```
+npx tsx scripts/bairitsu-ingest/approve-new-year.ts <県コード> <PDF> <ページ,...> --source-url <PDFのURL> --doc-title <資料名> --published <公表日YYYY-MM-DD>
+```
+
+- 流れ: パース→検算（§3と同じ判定）→新年度ファイル生成と登録→形式チェック→jest（公開マップに依存する全テスト）→tsc→**commitまで**。どこで落ちても書いたファイルを巻き戻す。最後に「このコミットをpushしてよいか」の要約（件数・合計行の一致・前年差分・出典）を出して止まる。**pushは👤が承認してから。**
+- `--dry-run` で予行（最後に巻き戻す）。**所要時間の目安: 取得1秒・抽出と検算36秒・jest数分・tsc約7分（このPC）。1県ごとに約10分**。メモリが少ないと強制停止される（2026-10-23に実際に発生）ので、他のアプリを閉じてから回す。強制停止した場合は `git status` で `competition-rates-next` の残骸（`<県>.ts` と登録簿の2行）を巻き戻してから再実行。
+- 2月のpushは緊急pushの例外（令和9年度の倍率を載せるpushのみ・1日1回の枠外）。複数県を1回のpushにまとめられるなら、まとめる（1push≒14分のビルド）。
