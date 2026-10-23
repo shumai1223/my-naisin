@@ -3,6 +3,9 @@ import { join, resolve, dirname } from 'node:path';
 import { existsSync } from 'node:fs';
 
 // T-Y11 A-2: 47都道府県の倍率公表資料（令和8年度・一次ソース）の更新検知。
+// ⚠️ T-PV2 A-5（2026-10-23）: このスクリプトが見るのは「各県ファイルの最新年度＝令和8年度」のURLだけ。令和9年度の資料は別URLで出る県が多く、
+//    ここでは検知できない（永久にokのまま）。令和9年度の出現はハブ監視（scripts/bairitsu-ingest/watch-hubs.mjs・
+//    登録手順 ops/runbooks/hub-watch-schedule.md）が担う。このスクリプトは「令和8年度資料の差し替え・訂正」の検知用。
 //
 // 判定ロジック（shouldFetch/evaluateFetch/buildFingerprint）は src/lib/competition-rate-watch.ts に
 // 純関数として実装されテスト済み。このスクリプトはNode単体実行のためTSを直接importできず
