@@ -14,7 +14,7 @@
 ## 作業項目
 
 - [x] I-1 ✅2026-10-24 `ops/baselines/ai-referral-baseline-2026-10.md`（AI系52セッション/908＝約5.7%・ai_referralイベント67件・週8〜15セッションで増加中・着地は偏差値/内申/ツール中心。別件=サイト内utm_sourceが85セッション[約9%]の流入元を汚している疑い）。元の指示: **ベースライン**: GA4の `ai_referral` と流入元「AI Assistant」を、期間・流入元・着地ページ別に記録する（`ops/baselines/ai-referral-baseline-2026-10.md`）。GA4は同意した人だけの下限値であることを明記する。
-- [ ] I-2 **構造の点検**: `llms.txt`・Dataset・MCP・OpenAPIが本番で正しく返るか確認し、古い記述（年度・県数・掲載範囲）を洗い出す。直すのは古い記述だけ。
+- [x] I-2 ✅2026-10-24 `ops/baselines/ai-structure-audit-2026-10-24.md`（本番llms.txtはリポジトリとバイト一致・MCP27ツール一致・和歌山404。古い記述3か所を文言のみ修正[学校別実数は非掲載→掲載/全47→46]・robotsで/api/competition-ratesが*に非許可＝報告のみ）。元の指示: **構造の点検**: `llms.txt`・Dataset・MCP・OpenAPIが本番で正しく返るか確認し、古い記述（年度・県数・掲載範囲）を洗い出す。直すのは古い記述だけ。
 - [ ] I-3 **見出しと要約の点検**: 流入の多い10ページ程度の、見出しの階層・冒頭の要約・出典表記が、引用しやすい形かを確認する。報告だけ。変更は①の判断（👤）のあとで。
 - [ ] I-4 Cloudflare Web Analyticsが全数を出せるようになったら、参照元（chatgpt.com・perplexity.ai・gemini など）を週次（T-WK1）に加える。
 
