@@ -4,6 +4,8 @@
  */
 import { omitPublicationRefused } from '@/lib/publication-refused-prefectures';
 import type { PrefectureCompetitionRateFile } from '@/lib/competition-rate';
+import { mergeNextYearOverlays } from '@/lib/competition-rate-overlay';
+import { COMPETITION_RATE_NEXT_BY_PREFECTURE } from '../competition-rates-next';
 import { HOKKAIDO_COMPETITION_RATES } from './hokkaido';
 import { TOKYO_COMPETITION_RATES } from './tokyo';
 import { KANAGAWA_COMPETITION_RATES } from './kanagawa';
@@ -52,7 +54,8 @@ import { SHIMANE_COMPETITION_RATES } from './shimane';
 import { SHIGA_COMPETITION_RATES } from './shiga';
 import { FUKUSHIMA_COMPETITION_RATES } from './fukushima';
 
-export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = omitPublicationRefused<PrefectureCompetitionRateFile>({
+// 令和8年度の旧ファイル（書き換えない）。新年度ファイルがある県だけ、下で重ねて「新年度＝今季」にする。
+const COMPETITION_RATE_BASE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> = {
   tokyo: TOKYO_COMPETITION_RATES,
   kanagawa: KANAGAWA_COMPETITION_RATES,
   osaka: OSAKA_COMPETITION_RATES,
@@ -100,7 +103,13 @@ export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCo
   shiga: SHIGA_COMPETITION_RATES,
   fukushima: FUKUSHIMA_COMPETITION_RATES,
   hokkaido: HOKKAIDO_COMPETITION_RATES,
-});
+};
+
+// 掲載拒否県は合成の後で必ず外す（新年度ファイルがあっても公開面に出さない）。
+export const COMPETITION_RATE_BY_PREFECTURE: Partial<Record<string, PrefectureCompetitionRateFile>> =
+  omitPublicationRefused<PrefectureCompetitionRateFile>(
+    mergeNextYearOverlays(COMPETITION_RATE_BASE_BY_PREFECTURE, COMPETITION_RATE_NEXT_BY_PREFECTURE)
+  );
 
 export const COMPETITION_RATE_FILES: PrefectureCompetitionRateFile[] = Object.values(
   COMPETITION_RATE_BY_PREFECTURE
