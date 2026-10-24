@@ -52,8 +52,8 @@
     "ga4:mcp": "node --use-system-ca scripts/ga4-mcp.mjs",
     "ga4:weekly": "node --use-system-ca scripts/ga4-weekly.mjs",
     "test:e2e": "playwright test",
-    "preview": "opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion && opennextjs-cloudflare deploy",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "gsc:auth": "node --use-system-ca scripts/gsc-auth.mjs",
     "gsc:mcp": "node --use-system-ca scripts/gsc-mcp.mjs",
     "gsc": "node --use-system-ca scripts/gsc.mjs",
@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "@googleapis/searchconsole": "^6.0.1",
-    "@opennextjs/cloudflare": "^1.16.5",
+    "@opennextjs/cloudflare": "1.20.13",
     "@phosphor-icons/react": "2.1.10",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/qrcode": "^1.5.6",
@@ -112,6 +112,6 @@
     "ts-jest": "^29.1.2",
     "tsx": "^4.7.0",
     "typescript": "^5.9.3",
-    "wrangler": "^4.59.2"
+    "wrangler": "4.148.0"
   }
 }
