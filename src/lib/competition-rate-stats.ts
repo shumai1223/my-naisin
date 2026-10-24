@@ -18,6 +18,11 @@ export interface CompetitionRateStats {
   distinctYearCount: number;
   /** 県ごとの収録年度数の平均（切り捨て。「約◯年度分」と書くとき過大にならないようにする）。 */
   averageYearsPerPrefecture: number;
+  /** 県ごとの収録年度数の平均（小数1桁の文字列。「平均約◯.◯年度」と書くとき用）。 */
+  averageYearsPerPrefectureText: string;
+  /** 県ごとの収録年度数の最小・最大（「県により◯〜◯年度」と書くとき用）。 */
+  minYearsPerPrefecture: number;
+  maxYearsPerPrefecture: number;
 }
 
 function reiwaOf(fiscalYear: string): number | null {
@@ -34,6 +39,8 @@ export function computeCompetitionRateStats(
   const schools = new Set<string>();
   const allYears = new Set<number>();
   let yearsPerPrefSum = 0;
+  let minYears = Infinity;
+  let maxYears = 0;
   for (const code of codes) {
     const file = byPrefecture[code]!;
     totalRecords += file.records.length;
@@ -48,6 +55,8 @@ export function computeCompetitionRateStats(
       }
     }
     yearsPerPrefSum += yearsOfPref.size;
+    minYears = Math.min(minYears, yearsOfPref.size);
+    maxYears = Math.max(maxYears, yearsOfPref.size);
   }
   const years = [...allYears];
   return {
@@ -59,5 +68,8 @@ export function computeCompetitionRateStats(
     lastReiwa: Math.max(...years),
     distinctYearCount: allYears.size,
     averageYearsPerPrefecture: codes.length > 0 ? Math.floor(yearsPerPrefSum / codes.length) : 0,
+    averageYearsPerPrefectureText: codes.length > 0 ? (yearsPerPrefSum / codes.length).toFixed(1) : '0.0',
+    minYearsPerPrefecture: codes.length > 0 ? minYears : 0,
+    maxYearsPerPrefecture: maxYears,
   };
 }

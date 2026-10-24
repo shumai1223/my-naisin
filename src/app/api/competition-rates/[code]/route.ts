@@ -22,7 +22,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ code
         error: 'not_found',
         message:
           `都道府県コード「${code}」は再配布許諾済みデータバンクに収録されていません。` +
-          `一覧は /api/competition-rates を参照してください。全47都道府県版はBusiness以上のAPIキーで /api/schools/${code} から取得できます。`,
+          `一覧は /api/competition-rates を参照してください。掲載対象の全都道府県版（和歌山県は県の意向により非掲載）はBusiness以上のAPIキーで /api/schools/${code} から取得できます。`,
         index: 'https://my-naishin.com/api/competition-rates',
       },
       { status: 404, cacheSeconds: 300, headers: gate.headers }

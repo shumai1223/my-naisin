@@ -643,7 +643,7 @@ print(naishin["total"])  # -> 52`;
             <ol className="mt-2 list-decimal space-y-1 pl-5 text-base leading-[1.8] text-amber-900">
               <li><strong>公立高校のみ</strong>を収録しています（私立高校は含みません）</li>
               <li><strong>最終応募倍率（finalRate）のみ</strong>が対象です（合格者数・実質倍率は収録していません）</li>
-              <li><strong>年度数は都道府県ごとに異なります</strong>（平均約3.0年度・県により1〜5年度）</li>
+              <li><strong>年度数は都道府県ごとに異なります</strong>（平均約{stats.averageYearsPerPrefectureText}年度・県により{stats.minYearsPerPrefecture}〜{stats.maxYearsPerPrefecture}年度）</li>
             </ol>
           </div>
           <p className="mb-2 text-base leading-[1.8] text-slate-900">

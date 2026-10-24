@@ -39,6 +39,11 @@ describe('/developers 掲載件数の実データ整合性', () => {
     expect(pageSrc).toContain('stats.uniqueSchoolCount');
     // 件数の手書き（例: 24,444件）が復活していない
     expect(pageSrc).not.toMatch(/[0-9]{2},[0-9]{3}件/);
+    // 「購入前に知っておくべき制約」の年度数も計算値で、同じページ内の「平均約◯年度分」と矛盾しない（手書きの 3.0・1〜5 が復活していない）
+    expect(pageSrc).toContain('stats.averageYearsPerPrefectureText');
+    expect(pageSrc).toContain('stats.minYearsPerPrefecture');
+    expect(pageSrc).toContain('stats.maxYearsPerPrefecture');
+    expect(pageSrc).not.toContain('平均約3.0年度');
   });
 
   it('計算値が独立の再集計と一致する', () => {
@@ -72,6 +77,9 @@ describe('/developers 掲載件数の実データ整合性', () => {
       lastReiwa: 8,
       distinctYearCount: 5,
       averageYearsPerPrefecture: 4, // 旧文言の「約3」は手書きで実態より低かった。計算値（切り捨て）に置き換えた
+      averageYearsPerPrefectureText: '4.4',
+      minYearsPerPrefecture: 2,
+      maxYearsPerPrefecture: 5,
     });
   });
 });
