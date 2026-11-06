@@ -30,11 +30,11 @@
 
 ## 作業項目
 
-- [ ] S-1 基準データの保存: `ops/baselines/school-serp-baseline-2026-11.json` に、学校ページ別の表示・クリック・順位（基準期間）を保存。取得手順（`scripts/gsc-pull.mjs --dimensions page`）を併記。`ls` で実在確認。
-- [ ] S-2 割り当てと型の決定: 上の設計どおり。対象数・各群の数・各群の基準CTRを記録。群間の基準CTRが近いこと（層別の効果）を確認。
-- [ ] S-3 実装: `generateMetadata` を、割り当て表から型を出し分ける形に（現行群は変更なし）。単体テスト: 全対象校で title に「校名」「倍率」が残る／年度が収録データの年度と一致する／掲載拒否県・noindex県に影響しない。tsc・jestは実exitをファイルに出して別行で確認。**commitまで。**
-- [ ] S-4 判断ルールの固定: 採用・不採用・検出力不足の閾値を `ops/baselines/school-serp-decision-rules-2026-11.md` に書く（結果を見る前）。
-- [ ] S-5 push後の運用手順: 週次（T-WK1と同じ月曜）に、群別のCTR・順位を `ops/baselines/weekly/` に追記する手順を書く。中止条件の確認を含む。
+- [x] S-1 ✅2026-11-06 `ops/baselines/school-serp-baseline-2026-11.json`（学校ページ2,871・表示121,728・クリック2,443。取得: `node scripts/gsc-pull.mjs --start 2026-10-08 --end 2026-11-03 --dimensions page --limit 25000`）。
+- [x] S-2 ✅2026-11-06 割り当て表=`src/data/school-serp-experiment-2026-11.json`（`node scripts/make-school-serp-assignment.mjs`・決定的）。基準期間に表示20以上のindex済み1,506校を、表示数で層別に3群へ（A/B/C=502/502/502・基準表示 36,448/36,454/36,622・基準CTR 1.90%/1.93%/2.05%）。型の案は「B=titleに収録年度」「C=descriptionから倍率の数値を外す」の2つに絞った（Cは「年度別推移」など、全校には無い内容を謳わない）。
+- [x] S-3 ✅2026-11-06 `src/lib/school-serp-experiment.ts`＋`src/app/pref/[code]/school/[schoolCode]/page.tsx` の `generateMetadata`。テスト=`src/lib/__tests__/school-serp-experiment.test.ts`（A群/割り当てなしが従来の文言と1文字も違わない・Bはtitleに校名と倍率が残る・Cは数値が消える・割り当て全件が実在校・掲載拒否県を含まない・B群は年度が読める）。jest 4スイート105件緑（exit 0）・tsc実exit 0（⚠️このPCは既定ヒープでOOM[exit 134]。`NODE_OPTIONS=--max-old-space-size=3072` で通った）。
+- [x] S-4 ✅2026-11-06 `ops/baselines/school-serp-decision-rules-2026-11.md`（採用=CTRの差の差+8%以上かつ97.5%区間の下限>0・順位悪化0.5位以内・表示数−5%より悪くない／不採用=−8%以下で区間の上限<0／それ以外は「判定不能」で、「差なし」とは書かない）。
+- [x] S-5 ✅2026-11-06 読み出し=`scripts/school-serp-readout.mjs`（差の差・学校単位ブートストラップ。基準=実験期間のとき差0%になることを確認）。週次（T-WK1と同じ月曜）に、D+10日以降の安全確認（−20%以下で戻す提案）を出す。手順は判断ルールに記載。**反映日Dは判断ルールに追記する。**
 - [ ] S-6（結果が出たら）勝った型を全校へ展開する差分を作り、2月の山の前（1月）のpushに載せる準備をする。展開と同時に、令和9年度の数字を載せた県から年度表記を更新する手順（T-PV3・T-PV2）と矛盾しないことを確認。
 
 ## 完了の定義

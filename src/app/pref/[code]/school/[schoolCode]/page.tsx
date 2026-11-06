@@ -7,6 +7,8 @@ import { getPrefectureByCode } from '@/lib/prefectures';
 import { COMPETITION_RATE_HISTORY_BY_PREFECTURE } from '@/data/competition-rate-history';
 import { selectNearbySchools, getSchoolCategoryTrends, groupSchoolHistoryByDepartment, computeSchoolHistoryYoy } from '@/lib/school-page-data';
 import { getPrefectureSchoolPageData, INDEXED_SCHOOL_PAGE_PREFECTURE_CODES } from '@/lib/school-page-lookup';
+import { COMPETITION_RATE_BY_PREFECTURE } from '@/data/competition-rates';
+import { buildSchoolSerpText, extractReiwaLabel, getSchoolSerpArm } from '@/lib/school-serp-experiment';
 import { getSchoolTeijiRecords } from '@/lib/school-teiji-lookup';
 import { shortenSchoolName } from '@/lib/school-name-short-form';
 import { buildSchoolFaqItems } from '@/lib/school-page-faq';
@@ -75,8 +77,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const shortName = SHORT_FORM_ENABLED ? shortenSchoolName(school.schoolName) : null;
   const displayName = shortName ? `${school.schoolName}（${shortName}）` : school.schoolName;
 
-  const title = `${displayName}の入試倍率・募集人員 | My Naishin`;
-  const description = `${displayName}(${prefecture.name})の今季入試倍率${school.overallRate}倍・募集人員${school.totalQuota}名・応募者数${school.totalApplicants}名。教育委員会公表の一次データに基づく。`;
+  // T-SC1（2026-11）: SERP実験。割り当てのない学校・A群は従来と同じ文言。
+  const { title, description } = buildSchoolSerpText({
+    arm: getSchoolSerpArm(code, schoolCode),
+    displayName,
+    prefectureName: prefecture.name,
+    overallRate: school.overallRate,
+    totalQuota: school.totalQuota,
+    totalApplicants: school.totalApplicants,
+    fiscalLabel: extractReiwaLabel(COMPETITION_RATE_BY_PREFECTURE[code]?.sources[0]?.fiscalYear),
+  });
 
   const isIndexed = INDEXED_SCHOOL_PAGE_PREFECTURE_CODES.includes(code);
 
