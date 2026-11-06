@@ -66,11 +66,14 @@ push（`git push`）は1回も行われていなかった**（push頻度制限�
 **毎晩、👤が寝ている間（目安 23:00〜6:30）に回す。起動の1行は `ops/NIGHT-LOOP.md` にある。**
 
 主食の順（上から1つずつ。新しい主食を発明しない）:
-1. **T-PV3** 倍率の「発表→掲載」を47県に広げる（`ops/tasks/T-PV3-bairitsu-all-prefectures.md`）。T-PV2の続き。2月の山に直結。**最優先。**
-2. **T-PV4** 12月・3月の通知表の山に向けた整備（`ops/tasks/T-PV4-december-peak-prep.md`）。
-3. **T-PV5** UI刷新後の回遊・ツール利用の低下の切り分け（`ops/tasks/T-PV5-engagement-diagnosis.md`）。報告が中心。
-4. **T-WK1** 週次の測定は**毎週月曜**に `ops/baselines/weekly/YYYY-MM-DD.md` を1枚。`ls` で実在を確認する。測定は黙って飛ばされるので、毎晩の最初に「今週分があるか」を見る。
-5. T-AI1・引き継ぎ整備（ops台帳）。1〜4が全て手詰まりのときだけ。
+1. **T-SC1** 学校ページ（クリックの約3割）のSERP実験（`ops/tasks/T-SC1-school-page-serp-experiment.md`）。**山（2月）の前に結果を読む必要があり、開始が遅れるほど価値が下がる**ため最優先。夜はS-1〜S-5（commitまで）。実験の開始（push）は👤。
+2. **T-PV3** 倍率の「発表→掲載」を47県に広げる（`ops/tasks/T-PV3-bairitsu-all-prefectures.md`）。T-PV2の続き。2月の山に直結。
+3. **T-PV4** 12月・3月の通知表の山に向けた整備（`ops/tasks/T-PV4-december-peak-prep.md`）。**T-SC1の割り当て表と干渉しないこと**（学校ページのtitleはT-SC1が担当）。
+4. **T-PV5** UI刷新後の回遊・ツール利用の低下の切り分け（`ops/tasks/T-PV5-engagement-diagnosis.md`）。報告が中心。
+5. **T-WK1** 週次の測定は**毎週月曜**に `ops/baselines/weekly/YYYY-MM-DD.md` を1枚。`ls` で実在を確認する。測定は黙って飛ばされるので、毎晩の最初に「今週分があるか」を見る。
+6. **T-PAR1** 保護者向け実質負担のパイロット（`ops/tasks/T-PAR1-parent-cost-pilot.md`）。夜はP1-1（診断・報告のみ）まで。作るのは診断の結果を👤が見てから。
+7. **T-SC2** 県別 倍率ハブ（`ops/tasks/T-SC2-prefecture-bairitsu-hub.md`）。**👤のGoが出るまで設計書（S2-1）だけ。**
+8. T-AI1・引き継ぎ整備（ops台帳）。1〜7が全て手詰まりのときだけ。
 
 夜間の禁止事項（破らない）:
 - **pushしない**（夜はcommitまで。pushは朝以降に👤が承認した1回だけ）。
