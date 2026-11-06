@@ -11,6 +11,8 @@ rem  Register (the owner does this, once): see ops\runbooks\hub-watch-schedule.m
 rem ============================================================
 cd /d "%~dp0..\.."
 set "NODE_TLS_REJECT_UNAUTHORIZED=0"
+rem  stagger 180s so tasks started together (catch-up after the PC was off) do not collide
+ping -n 181 127.0.0.1 >nul
 echo [%date% %time%] hub-watch start >>"%USERPROFILE%\hub-watch.log"
 node scripts\bairitsu-ingest\watch-hubs.mjs>>"%USERPROFILE%\hub-watch.log" 2>&1
 echo [%date% %time%] hub-watch exit=%errorlevel% >>"%USERPROFILE%\hub-watch.log"

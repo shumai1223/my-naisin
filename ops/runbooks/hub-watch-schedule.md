@@ -29,3 +29,9 @@ schtasks /Create /SC DAILY /ST 07:50 /TN "MyNaishin-HubWatch" /TR "C:\Users\E240
 
 ## 増やすには(A-2・loop側の作業)
 ハブURLが特定できた県から `publication-hubs.ts` に実際に開いて確認したURLを登録する。登録すれば、このタスクが自動で見に行く。
+
+## 登録済み（2026-11-06・👤の許可「A3やって」で実行）
+- `Register-ScheduledTask` で `MyNaishin-HubWatch`（毎日 7:50・バッテリーでも実行・予定を逃したら起動後に実行・実行時間の上限2時間）を登録した（schtasksの1行と同じ内容）。
+- 既存の `MyNaishin-DailyBrief`(7:30)・`MyNaishin-CompetitionUpdateCheck`(7:45) も、同じ設定（バッテリーでも実行・逃したら起動後に実行）に直した。原因は「バッテリー駆動のとき開始しない」設定と「逃したら実行しない」設定だった。
+- `competition-updates-check.bat`（リポジトリ外 C:\Users\E24054\）は `npm run` をやめて同じコマンドを `node` で直接呼ぶ形に変更（スケジューラ経由のとき `npm run` が直後に強制終了された）。起動が同時になっても巻き込まれないよう、倍率チェックに90秒・ハブ監視に180秒の待ち（`ping -n`）を入れた。
+- ⚠️ 未解決: Claude の作業中に3つを同時起動すると、結果コード 0xC000013A（中断）で終わることがある。「ログオンの有無にかかわらず実行」への変更は管理者権限が必要で拒否された。翌朝の定刻実行（7:30/7:45/7:50）で成功するかを確認すること。確認: `docs/daily-brief.md` の更新時刻・`C:\Users\E24054\hub-watch.log`・`C:\Users\E24054\competition-updates-check.log`。
